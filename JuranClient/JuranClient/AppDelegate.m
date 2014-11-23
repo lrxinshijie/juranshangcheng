@@ -44,6 +44,7 @@
     
     DesignerViewController *des = [[DesignerViewController alloc] init];
     UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
+    desNav.delegate = self;
     
     WikiViewController *wiki = [[WikiViewController alloc] init];
     UINavigationController *wikiNav = [Public navigationControllerFromRootViewController:wiki];

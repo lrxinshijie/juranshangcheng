@@ -20,5 +20,6 @@
 
 @protocol JRSegmentControlDelegate <NSObject>
 
+- (void)segmentControl:(JRSegmentControl*) segment changedSelectedIndex:(NSInteger) index;
 
 @end

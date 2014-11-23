@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		141C564D1A23613900A57971 /* TATopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 141C564B1A23613900A57971 /* TATopicCell.m */; };
+		141C564E1A23613900A57971 /* TATopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 141C564C1A23613900A57971 /* TATopicCell.xib */; };
+		1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */; };
+		1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */; };
+		1476DA8A1A21DAF30006E9E0 /* JRDesigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA891A21DAF30006E9E0 /* JRDesigner.m */; };
+		1476DA8D1A21DB1E0006E9E0 /* JRSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA8C1A21DB1E0006E9E0 /* JRSegmentControl.m */; };
+		1476DA911A21DB850006E9E0 /* DesignerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA8F1A21DB850006E9E0 /* DesignerCell.m */; };
+		1476DA921A21DB850006E9E0 /* DesignerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA901A21DB850006E9E0 /* DesignerCell.xib */; };
+		1476DA961A21DFBE0006E9E0 /* SelfIntrodutionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA941A21DFBE0006E9E0 /* SelfIntrodutionCell.m */; };
+		1476DA971A21DFBE0006E9E0 /* SelfIntrodutionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA951A21DFBE0006E9E0 /* SelfIntrodutionCell.xib */; };
 		A971BC951A20825800C018D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A971BC941A20825800C018D6 /* Foundation.framework */; };
 		A971BC971A20825800C018D6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A971BC961A20825800C018D6 /* CoreGraphics.framework */; };
 		A971BC991A20825800C018D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A971BC981A20825800C018D6 /* UIKit.framework */; };
@@ -110,6 +120,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		141C564A1A23613900A57971 /* TATopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATopicCell.h; sourceTree = "<group>"; };
+		141C564B1A23613900A57971 /* TATopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATopicCell.m; sourceTree = "<group>"; };
+		141C564C1A23613900A57971 /* TATopicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TATopicCell.xib; sourceTree = "<group>"; };
+		1476DA831A21DAC50006E9E0 /* DesignerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DesignerDetailViewController.h; sourceTree = "<group>"; };
+		1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DesignerDetailViewController.m; sourceTree = "<group>"; };
+		1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DesignerDetailViewController.xib; sourceTree = "<group>"; };
+		1476DA881A21DAF30006E9E0 /* JRDesigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRDesigner.h; sourceTree = "<group>"; };
+		1476DA891A21DAF30006E9E0 /* JRDesigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRDesigner.m; sourceTree = "<group>"; };
+		1476DA8B1A21DB1E0006E9E0 /* JRSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSegmentControl.h; sourceTree = "<group>"; };
+		1476DA8C1A21DB1E0006E9E0 /* JRSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSegmentControl.m; sourceTree = "<group>"; };
+		1476DA8E1A21DB850006E9E0 /* DesignerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DesignerCell.h; sourceTree = "<group>"; };
+		1476DA8F1A21DB850006E9E0 /* DesignerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DesignerCell.m; sourceTree = "<group>"; };
+		1476DA901A21DB850006E9E0 /* DesignerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DesignerCell.xib; sourceTree = "<group>"; };
+		1476DA931A21DFBE0006E9E0 /* SelfIntrodutionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfIntrodutionCell.h; sourceTree = "<group>"; };
+		1476DA941A21DFBE0006E9E0 /* SelfIntrodutionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfIntrodutionCell.m; sourceTree = "<group>"; };
+		1476DA951A21DFBE0006E9E0 /* SelfIntrodutionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelfIntrodutionCell.xib; sourceTree = "<group>"; };
 		A971BC911A20825800C018D6 /* JuranClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JuranClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A971BC941A20825800C018D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A971BC961A20825800C018D6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -399,6 +425,9 @@
 				A987EE4A1A20987800CED7CD /* DesignerViewController.h */,
 				A987EE4B1A20987800CED7CD /* DesignerViewController.m */,
 				A987EE4C1A20987800CED7CD /* DesignerViewController.xib */,
+				1476DA831A21DAC50006E9E0 /* DesignerDetailViewController.h */,
+				1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */,
+				1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */,
 				A987EE4F1A2098AF00CED7CD /* WikiViewController.h */,
 				A987EE501A2098AF00CED7CD /* WikiViewController.m */,
 				A987EE511A2098AF00CED7CD /* WikiViewController.xib */,
@@ -412,6 +441,8 @@
 		A987ED6C1A20920500CED7CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1476DA881A21DAF30006E9E0 /* JRDesigner.h */,
+				1476DA891A21DAF30006E9E0 /* JRDesigner.m */,
 				A987ED6D1A20920500CED7CD /* Public.h */,
 				A987ED6E1A20920500CED7CD /* Public.m */,
 				A987EE591A209E6100CED7CD /* JRCase.h */,
@@ -573,6 +604,8 @@
 				A987EDCF1A20920500CED7CD /* Cells */,
 				A987EDD01A20920500CED7CD /* GlobalPopupAlert.h */,
 				A987EDD11A20920500CED7CD /* GlobalPopupAlert.m */,
+				1476DA8B1A21DB1E0006E9E0 /* JRSegmentControl.h */,
+				1476DA8C1A21DB1E0006E9E0 /* JRSegmentControl.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -580,9 +613,18 @@
 		A987EDCF1A20920500CED7CD /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				1476DA8E1A21DB850006E9E0 /* DesignerCell.h */,
+				1476DA8F1A21DB850006E9E0 /* DesignerCell.m */,
+				1476DA901A21DB850006E9E0 /* DesignerCell.xib */,
 				A987EE5C1A209E7900CED7CD /* CaseCell.h */,
 				A987EE5D1A209E7900CED7CD /* CaseCell.m */,
 				A987EE5E1A209E7900CED7CD /* CaseCell.xib */,
+				1476DA931A21DFBE0006E9E0 /* SelfIntrodutionCell.h */,
+				1476DA941A21DFBE0006E9E0 /* SelfIntrodutionCell.m */,
+				1476DA951A21DFBE0006E9E0 /* SelfIntrodutionCell.xib */,
+				141C564A1A23613900A57971 /* TATopicCell.h */,
+				141C564B1A23613900A57971 /* TATopicCell.m */,
+				141C564C1A23613900A57971 /* TATopicCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -716,14 +758,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				A987EE491A20986100CED7CD /* CaseViewController.xib in Resources */,
+				1476DA971A21DFBE0006E9E0 /* SelfIntrodutionCell.xib in Resources */,
 				A987EE531A2098AF00CED7CD /* WikiViewController.xib in Resources */,
 				A987EE581A2098BA00CED7CD /* ProfileViewController.xib in Resources */,
+				1476DA921A21DB850006E9E0 /* DesignerCell.xib in Resources */,
 				A987EE3F1A20980400CED7CD /* Images.xcassets in Resources */,
 				A971BC9F1A20825800C018D6 /* InfoPlist.strings in Resources */,
 				A987EE4E1A20987800CED7CD /* DesignerViewController.xib in Resources */,
 				A987EE361A2093C900CED7CD /* MJRefresh.bundle in Resources */,
 				A987EE601A209E7900CED7CD /* CaseCell.xib in Resources */,
+				1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */,
 				A987EE441A20984200CED7CD /* HomeViewController.xib in Resources */,
+				141C564E1A23613900A57971 /* TATopicCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -748,10 +794,12 @@
 				A987EDEB1A20920500CED7CD /* UIImage+ASCategory.m in Sources */,
 				A987EDF01A20920500CED7CD /* UIProgressView+ASCategory.m in Sources */,
 				A987EDDB1A20920500CED7CD /* ASPlaceholderTextView.m in Sources */,
+				1476DA8A1A21DAF30006E9E0 /* JRDesigner.m in Sources */,
 				A987EDD61A20920500CED7CD /* ALWebView.m in Sources */,
 				A987EDFE1A20920500CED7CD /* UIImageView+WebCache.m in Sources */,
 				A987EE3C1A2093C900CED7CD /* UIScrollView+MJRefresh.m in Sources */,
 				A987EDEE1A20920500CED7CD /* UINavigationBar+ASCategory.m in Sources */,
+				1476DA911A21DB850006E9E0 /* DesignerCell.m in Sources */,
 				A987EDE41A20920500CED7CD /* NSString+ASCategory.m in Sources */,
 				A987EDF71A20920500CED7CD /* MBProgressHUD.m in Sources */,
 				A987EE381A2093C900CED7CD /* MJRefreshConst.m in Sources */,
@@ -770,6 +818,7 @@
 				A987EE241A20928B00CED7CD /* Reachability.m in Sources */,
 				A987EDE91A20920500CED7CD /* UIColor+ASCategory.m in Sources */,
 				A987EDE71A20920500CED7CD /* UIAlertView+Blocks.m in Sources */,
+				1476DA8D1A21DB1E0006E9E0 /* JRSegmentControl.m in Sources */,
 				A987EDD31A20920500CED7CD /* UIViewController+HUD.m in Sources */,
 				A987EDDE1A20920500CED7CD /* NSArray+ASCategory.m in Sources */,
 				A987EE3B1A2093C900CED7CD /* UIScrollView+MJExtension.m in Sources */,
@@ -780,6 +829,7 @@
 				A987EDF81A20920500CED7CD /* SDImageCache.m in Sources */,
 				A987EDD41A20920500CED7CD /* Public.m in Sources */,
 				A987EE221A20928B00CED7CD /* MKNetworkEngine.m in Sources */,
+				1476DA961A21DFBE0006E9E0 /* SelfIntrodutionCell.m in Sources */,
 				A987EE1B1A20928B00CED7CD /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				A987EDF41A20920500CED7CD /* UIViewController+ASCategory.m in Sources */,
 				A987EE5F1A209E7900CED7CD /* CaseCell.m in Sources */,
@@ -800,6 +850,7 @@
 				A987EDF51A20920500CED7CD /* LeveyTabBar.m in Sources */,
 				A987EDF31A20920500CED7CD /* UIView+ASCategory.m in Sources */,
 				A987EDFC1A20920500CED7CD /* SDWebImagePrefetcher.m in Sources */,
+				1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */,
 				A987EE3A1A2093C900CED7CD /* MJRefreshHeaderView.m in Sources */,
 				A987EDDD1A20920500CED7CD /* MKMapView+ASCategory.m in Sources */,
 				A987EDE31A20920500CED7CD /* NSObject+ASCategory.m in Sources */,
@@ -815,6 +866,7 @@
 				A987EDDC1A20920500CED7CD /* CLLocation+ASCategory.m in Sources */,
 				A987EE481A20986100CED7CD /* CaseViewController.m in Sources */,
 				A987EDE81A20920500CED7CD /* UIButton+ASCategory.m in Sources */,
+				141C564D1A23613900A57971 /* TATopicCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

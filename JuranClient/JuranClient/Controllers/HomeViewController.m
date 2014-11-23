@@ -8,7 +8,9 @@
 
 #import "HomeViewController.h"
 
-@interface HomeViewController ()
+@interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
 
@@ -30,7 +32,35 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"navbar_leftbtn_logo"] leftBarButtonItemAction:nil];
+    
+    [self setupView];
 }
+
+- (void)setupView{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+    view.backgroundColor = [UIColor yellowColor];
+//    _tableView.tableHeaderView = view;
+    _tableView.tableFooterView = [[UIView alloc] init];
+}
+
+#pragma mark - UITableViewDataSource/Delegate
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 10;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    return cell;
+}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 22;
+//}
 
 - (void)didReceiveMemoryWarning
 {

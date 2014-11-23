@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SelfIntroductionCellDelegate;
+
 @interface SelfIntrodutionCell : UITableViewCell
+
+@property (nonatomic, strong) NSString *content;
+@property (nonatomic) BOOL isClose;
+@property (nonatomic, weak) id<SelfIntroductionCellDelegate> delegate;
+
+@end
+
+@protocol SelfIntroductionCellDelegate <NSObject>
+
+- (void)heightChanged:(SelfIntrodutionCell*) cell;
 
 @end
