@@ -22,6 +22,7 @@
     // Configure the view for the selected state
 }
 
+<<<<<<< HEAD
 - (void)setDatas:(id)sender
 {
     _topicContentLabel.text = @"\"平房座北潮南的说法的\"";
@@ -76,4 +77,6 @@
 //    
 //}
 
+=======
+>>>>>>> df547689a7ab6ae67e00e50cdb38b811d67aff75
 @end

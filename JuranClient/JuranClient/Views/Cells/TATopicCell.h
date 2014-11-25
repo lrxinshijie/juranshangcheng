@@ -10,6 +10,7 @@
 
 @interface TATopicCell : UITableViewCell
 
+<<<<<<< HEAD
 @property (nonatomic, weak) IBOutlet UILabel *topicLabel;
 @property (nonatomic, weak) IBOutlet UILabel *topicContentLabel;
 @property (nonatomic, weak) IBOutlet UILabel *ideaLabel;
@@ -20,4 +21,6 @@
 
 - (void)setDatas:(id)sender;
 
+=======
+>>>>>>> df547689a7ab6ae67e00e50cdb38b811d67aff75
 @end
