@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		141C564D1A23613900A57971 /* TATopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 141C564B1A23613900A57971 /* TATopicCell.m */; };
 		1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1453C8C31A24A74200D817BC /* TATopicCell.xib */; };
+		145E3D021A276B6000AA952F /* PersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D001A276B6000AA952F /* PersonalDataViewController.m */; };
+		145E3D031A276B6000AA952F /* PersonalDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145E3D011A276B6000AA952F /* PersonalDataViewController.xib */; };
+		145E3D071A2781F400AA952F /* PersonalDatasMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D051A2781F400AA952F /* PersonalDatasMoreViewController.m */; };
+		145E3D081A2781F400AA952F /* PersonalDatasMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145E3D061A2781F400AA952F /* PersonalDatasMoreViewController.xib */; };
 		1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */; };
 		1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */; };
 		1476DA8A1A21DAF30006E9E0 /* JRDesigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA891A21DAF30006E9E0 /* JRDesigner.m */; };
@@ -123,6 +127,12 @@
 		141C564A1A23613900A57971 /* TATopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATopicCell.h; sourceTree = "<group>"; };
 		141C564B1A23613900A57971 /* TATopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATopicCell.m; sourceTree = "<group>"; };
 		1453C8C31A24A74200D817BC /* TATopicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TATopicCell.xib; sourceTree = "<group>"; };
+		145E3CFF1A276B6000AA952F /* PersonalDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDataViewController.h; sourceTree = "<group>"; };
+		145E3D001A276B6000AA952F /* PersonalDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDataViewController.m; sourceTree = "<group>"; };
+		145E3D011A276B6000AA952F /* PersonalDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalDataViewController.xib; sourceTree = "<group>"; };
+		145E3D041A2781F400AA952F /* PersonalDatasMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDatasMoreViewController.h; sourceTree = "<group>"; };
+		145E3D051A2781F400AA952F /* PersonalDatasMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDatasMoreViewController.m; sourceTree = "<group>"; };
+		145E3D061A2781F400AA952F /* PersonalDatasMoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalDatasMoreViewController.xib; sourceTree = "<group>"; };
 		1476DA831A21DAC50006E9E0 /* DesignerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DesignerDetailViewController.h; sourceTree = "<group>"; };
 		1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DesignerDetailViewController.m; sourceTree = "<group>"; };
 		1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DesignerDetailViewController.xib; sourceTree = "<group>"; };
@@ -434,6 +444,12 @@
 				A987EE541A2098BA00CED7CD /* ProfileViewController.h */,
 				A987EE551A2098BA00CED7CD /* ProfileViewController.m */,
 				A987EE561A2098BA00CED7CD /* ProfileViewController.xib */,
+				145E3CFF1A276B6000AA952F /* PersonalDataViewController.h */,
+				145E3D001A276B6000AA952F /* PersonalDataViewController.m */,
+				145E3D011A276B6000AA952F /* PersonalDataViewController.xib */,
+				145E3D041A2781F400AA952F /* PersonalDatasMoreViewController.h */,
+				145E3D051A2781F400AA952F /* PersonalDatasMoreViewController.m */,
+				145E3D061A2781F400AA952F /* PersonalDatasMoreViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -761,7 +777,9 @@
 				1476DA971A21DFBE0006E9E0 /* SelfIntrodutionCell.xib in Resources */,
 				A987EE531A2098AF00CED7CD /* WikiViewController.xib in Resources */,
 				A987EE581A2098BA00CED7CD /* ProfileViewController.xib in Resources */,
+				145E3D031A276B6000AA952F /* PersonalDataViewController.xib in Resources */,
 				1476DA921A21DB850006E9E0 /* DesignerCell.xib in Resources */,
+				145E3D081A2781F400AA952F /* PersonalDatasMoreViewController.xib in Resources */,
 				A987EE3F1A20980400CED7CD /* Images.xcassets in Resources */,
 				A971BC9F1A20825800C018D6 /* InfoPlist.strings in Resources */,
 				A987EE4E1A20987800CED7CD /* DesignerViewController.xib in Resources */,
@@ -856,9 +874,11 @@
 				A987EDE31A20920500CED7CD /* NSObject+ASCategory.m in Sources */,
 				A987EDEC1A20920500CED7CD /* UIImageView+ASCategory.m in Sources */,
 				A987EDD91A20920500CED7CD /* ASGeometry.m in Sources */,
+				145E3D021A276B6000AA952F /* PersonalDataViewController.m in Sources */,
 				A987EE571A2098BA00CED7CD /* ProfileViewController.m in Sources */,
 				A987EDFF1A20920500CED7CD /* GlobalPopupAlert.m in Sources */,
 				A987EDEA1A20920500CED7CD /* UIDevice+ASCategory.m in Sources */,
+				145E3D071A2781F400AA952F /* PersonalDatasMoreViewController.m in Sources */,
 				A987EE1A1A20928B00CED7CD /* ALEngine.m in Sources */,
 				A987EDF61A20920500CED7CD /* LeveyTabBarController.m in Sources */,
 				A987EE5B1A209E6100CED7CD /* JRCase.m in Sources */,
