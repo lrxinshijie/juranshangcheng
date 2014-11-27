@@ -161,10 +161,10 @@
 
 + (UINavigationController *)navigationControllerFromRootViewController:(UIViewController *)viewController{
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    [navigationController.navigationBar setBackgroundImageWithColor:kNavigationBarBackgroundColor];
+    [navigationController.navigationBar setBackgroundImageWithColor:[UIColor whiteColor]];
 //    if (SystemVersionGreaterThanOrEqualTo7) {
 //        [navigationController.navigationBar setBackgroundImageWithColor:kNavigationBarBackgroundColor];
-        [navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor whiteColor]}];
+//        [navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor whiteColor]}];
 //    }
     
     return navigationController;
