@@ -12,8 +12,9 @@
 
 @interface CaseViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, assign) NSInteger currentPage;
 
 @end
 
@@ -36,12 +37,58 @@
     
     self.navigationItem.title = @"案例";
     
-    _tableView.tableFooterView = [[UIView alloc] init];
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
     
-    [self loadData];
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    _tableView.tableFooterView = [[UIView alloc] init];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:_tableView];
+    
+    __weak typeof(self) weakSelf = self;
+    [_tableView addHeaderWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView addFooterWithCallback:^{
+        weakSelf.currentPage++;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView headerBeginRefreshing];
+    
+}
+
+- (void)onSearch{
+    if (![self checkLogin]) {
+        return;
+    }
 }
 
 - (void)loadData{
+    NSDictionary *param = @{@"projectStyle": @"",
+                            @"roomType": @"",
+                            @"houseArea" : @"",
+                            @"order": @"",
+                            @"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
+                            @"onePageCount": @"20"};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_PROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSArray *projectList = [data objectForKey:@"projectList"];
+            NSMutableArray *rows = [JRCase buildUpWithValue:projectList];
+            if (_currentPage > 1) {
+                [_datas addObjectsFromArray:rows];
+            }else{
+                self.datas = [JRCase buildUpWithValue:projectList];
+            }
+            
+            [_tableView reloadData];
+        }
+        [_tableView headerEndRefreshing];
+        [_tableView footerEndRefreshing];
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

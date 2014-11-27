@@ -96,12 +96,12 @@
                                httpMethod:method];
     }
     
-    [op addHeader:@"Accept-Encoding" withValue:@"gzip"];
-    
+    [op setPostDataEncoding:MKNKPostDataEncodingTypeJSON];
+//    [op addHeader:@"Accept-Encoding" withValue:@"gzip"];
+//    [op addHeader:@"Content-Type" withValue:@"application/json"];
 //    if ([User isLogin]) {
 //        [op setHeader:@"member_id" withValue:[NSString stringWithFormat:@"%d",[User currentUser].member_id]];
 //    }
-    [op setHeader:@"token" withValue:@"kXg7C5oXKZT3I"];
     
     if (delegate) {
         op.className = NSStringFromClass([delegate class]);
@@ -121,15 +121,22 @@
                 return;
             }
             if ([result isKindOfClass:[NSDictionary class]]) {
-                id data = [result objectForKey:kNetworkDataKey];
-                if ([[result objectForKey:@"success"] boolValue]) {
-                    completionBlock(data);
+                NSDictionary *body = [result objectForKey:@"respBody"];
+                NSDictionary *header = [result objectForKey:@"respHead"];
+                if (header && [header isKindOfClass:[NSDictionary class]]) {
+                    if ([[[header objectForKey:@"respCode"] uppercaseString] isEqualToString:@"OK"]) {
+                        completionBlock(body);
+                    }else{
+                        NSError *err = [[NSError alloc] initWithDomain:@"" code:100 userInfo:@{NSLocalizedDescriptionKey:[header objectForKey:@"respShow"]}];
+                        errorBlock(err);
+                    }
                 }else{
-                    NSError *err = [[NSError alloc] initWithDomain:@"" code:[[result objectForKey:@"retcode"] intValue] userInfo:@{NSLocalizedDescriptionKey:[result objectForKey:@"msg"]}];
+                    NSError *err = [[NSError alloc] initWithDomain:@"" code:99 userInfo:@{NSLocalizedDescriptionKey:@""}];
                     errorBlock(err);
                 }
+                
             }else{
-                NSError *err = [[NSError alloc] initWithDomain:@"" code:[[result objectForKey:@"retcode"] intValue] userInfo:@{NSLocalizedDescriptionKey:@""}];
+                NSError *err = [[NSError alloc] initWithDomain:@"" code:99 userInfo:@{NSLocalizedDescriptionKey:@""}];
                 errorBlock(err);
             }
             
