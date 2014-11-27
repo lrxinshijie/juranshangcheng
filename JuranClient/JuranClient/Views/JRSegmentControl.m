@@ -35,7 +35,7 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag = kButtonTag+i;
         btn.frame = frame;
-        btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        btn.titleLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
         [btn setTitle:title forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(onSelected:) forControlEvents:UIControlEventTouchUpInside];
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -62,6 +62,9 @@
             [(UIButton*)[self viewWithTag:kButtonTag+_selectedIndex] setSelected:NO];
             [btn setSelected:YES];
             _selectedIndex = index;
+            if ([self.delegate respondsToSelector:@selector(segmentControl:changedSelectedIndex:)]) {
+                [self.delegate segmentControl:self changedSelectedIndex:index];
+            }
         }];
     }
 }

@@ -10,4 +10,15 @@
 
 @interface TATopicCell : UITableViewCell
 
+@property (nonatomic, weak) IBOutlet UILabel *topicLabel;
+@property (nonatomic, weak) IBOutlet UILabel *topicContentLabel;
+@property (nonatomic, weak) IBOutlet UILabel *ideaLabel;
+@property (nonatomic, weak) IBOutlet UILabel *ideaContentLabel;
+@property (nonatomic, weak) IBOutlet UILabel *timeLabel;
+@property (nonatomic, weak) IBOutlet UIView *backView;
+@property (nonatomic, strong) NSMutableArray *imageViews;
+
+- (void)setDatas:(id)sender;
+
+
 @end
