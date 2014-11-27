@@ -52,7 +52,21 @@
     UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
     
     self.tabBarController = [[LeveyTabBarController alloc] initWithViewControllers:@[homeNav,csNav,desNav,wikiNav,profileNav]
-                                                                        imageArray:@[@{@"Default": @"tabbar_case", @"Highlighted": @"tabbar_case_hl",@"Seleted": @"tabbar_case_hl"},@{@"Default": @"tabbar_case", @"Highlighted": @"tabbar_case_hl",@"Seleted": @"tabbar_case_hl"},@{@"Default": @"tabbar_case", @"Highlighted": @"tabbar_case_hl",@"Seleted": @"tabbar_case_hl"},@{@"Default": @"tabbar_case", @"Highlighted": @"tabbar_case_hl",@"Seleted": @"tabbar_case_hl"},@{@"Default": @"tabbar_case", @"Highlighted": @"tabbar_case_hl",@"Seleted": @"tabbar_case_hl"}]];
+                                                                        imageArray:@[@{@"Default": @"nav-home-default",
+                                                                                       @"Highlighted": @"nav-home-active",
+                                                                                       @"Seleted": @"nav-home-active"},
+  @{@"Default": @"nav-case-default",
+    @"Highlighted": @"nav-case-active",
+    @"Seleted": @"nav-case-active"},
+  @{@"Default": @"nav-designer-default",
+    @"Highlighted": @"nav-designer-active",
+    @"Seleted": @"nav-designer-active"},
+  @{@"Default": @"nav-wiki-default",
+    @"Highlighted": @"nav-wiki-active",
+    @"Seleted": @"nav-wiki-active"},
+  @{@"Default": @"nav-user-default",
+    @"Highlighted": @"nav-user-active",
+    @"Seleted": @"nav-user-active"}]];
 	_tabBarController.tabBar.backgroundColor = kTabBarBackgroundColor;
 	[_tabBarController setTabBarTransparent:YES];
     self.window.rootViewController = _tabBarController;

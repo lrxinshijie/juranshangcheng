@@ -21,5 +21,8 @@
     #import "NetworkConfiguration.h"
     #import "ALEngine.h"
     #import "UIViewController+HUD.h"
-
+    #import "JRUser.h"
+    #import "UIViewController+Login.h"
+    #import "UIImageView+WebCache.h"
+    #import "MJRefresh.h"
 #endif

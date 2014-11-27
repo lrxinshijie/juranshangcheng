@@ -13,7 +13,7 @@
 @implementation UIViewController (HUD)
 
 - (void)showHUD{
-    [self showHUDFromTitle:@"Loading..."];
+    [self showHUDFromTitle:@"加载中..."];
 }
 
 - (void)showTip:(NSString *)tip{
