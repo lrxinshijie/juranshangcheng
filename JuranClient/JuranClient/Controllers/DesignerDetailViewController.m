@@ -10,14 +10,20 @@
 #import "JRSegmentControl.h"
 #import "SelfIntrodutionCell.h"
 #import "TATopicCell.h"
+#import "CaseCell.h"
+#import "JRDesigner.h"
+#import "JRDesignerDetail.h"
+#import "JRUser.h"
 
 @interface DesignerDetailViewController ()<UITableViewDataSource, UITableViewDelegate, JRSegmentControlDelegate, SelfIntroductionCellDelegate>
 {
     NSArray *personDatas;
 }
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, weak) IBOutlet JRSegmentControl *segment;
 @property (nonatomic, weak) IBOutlet UIImageView *headImageView;
+@property (nonatomic, weak) IBOutlet UIView *headView;
+@property (nonatomic, weak) IBOutlet UILabel *fansCountLabel;
 @property (nonatomic, strong) SelfIntrodutionCell *introductionCell;
 @property (nonatomic, strong) TATopicCell *topicCell;
 
@@ -39,24 +45,52 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.hidesBottomBarWhenPushed = YES;
-    [self setupView];
-    [self setupDatas];
+    self.navigationItem.title = _designer.userName;
+    
+    personDatas = @[@"毕业院校", @"量房费", @"设计费用", @"从业年限", @"擅长风格"];
+    [self setupUI];
+    [self loadData];
 }
 
-- (void)setupView{
+- (void)setupUI{
     [_segment setTitleList:@[@"作品案例", @"个人资料", @"TA参与的话题"]];
     _segment.delegate = self;
     
     _headImageView.layer.masksToBounds = YES;
     _headImageView.layer.cornerRadius = _headImageView.frame.size.height/2.f;
-    _tableView.backgroundColor = [UIColor colorWithRed:245/255.f green:245/255.f blue:245/255.f alpha:1.0f];
     
-    [_tableView registerNib:[UINib nibWithNibName:@"TATopicCell" bundle:nil] forCellReuseIdentifier:@"TATopicCell"];
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    _tableView.tableFooterView = [[UIView alloc] init];
+    _tableView.tableHeaderView = _headView;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.backgroundColor = [UIColor colorWithRed:245/255.f green:245/255.f blue:245/255.f alpha:1.0f];
+    [self.view addSubview:_tableView];
 }
 
-- (void)setupDatas{
-    personDatas = @[@"毕业院校", @"量房费", @"设计费用", @"从业年限", @"擅长风格"];
+
+- (void)reloadData{
+    _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.fansCount];
+    
+    [_tableView reloadData];
 }
+
+- (void)loadData{
+    NSDictionary *param = @{@"userId": [NSString stringWithFormat:@"%i", _designer.userId]};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_DESIGNERDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                _designerDetail = [[JRDesignerDetail alloc] initWithDictionary:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self reloadData];
+                });
+            }
+        }
+    }];
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -72,7 +106,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (0 == _segment.selectedIndex) {
-        return 0;
+        return 10;
     }else if (1 == _segment.selectedIndex){
         return 6;
     }else{
@@ -83,7 +117,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (0 == _segment.selectedIndex) {
-        return 0;
+        return 275;
     }else if (1 == _segment.selectedIndex){
         if (indexPath.row == 0) {
             return self.introductionCell.frame.size.height;
@@ -101,10 +135,22 @@
     static NSString *personalDataStr = @"personalDataCell";
     UITableViewCell *cell = nil;
     if (0 == _segment.selectedIndex) {
+        static NSString *caseIdentifier = @"CaseCell";
+        cell = (CaseCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:caseIdentifier];
+        if (!cell) {
+            NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:caseIdentifier owner:self options:nil];
+            cell = (CaseCell *)[nibs firstObject];
+        }
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+//        JRCase *c = [_datas objectAtIndex:indexPath.row];
+//        [cell fillCellWithCase:c];
+        
+        return cell;
     }else if (1 == _segment.selectedIndex){
         if (0 == indexPath.row) {
-            [self.introductionCell setContent:@"深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大"];
+            [self.introductionCell setContent:_designer.selfIntroduction];
             cell = self.introductionCell;
         }else{
             cell = [tableView dequeueReusableCellWithIdentifier:personalDataStr];
@@ -150,7 +196,14 @@
             }
         }
     }else{
-        cell = [_tableView dequeueReusableCellWithIdentifier:@"TATopicCell"];
+        static NSString *taTopicIdentifier = @"TATopicCell";
+        cell = (TATopicCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:taTopicIdentifier];
+        if (!cell) {
+            NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:taTopicIdentifier owner:self options:nil];
+            cell = (TATopicCell *)[nibs firstObject];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [(TATopicCell*)cell setDatas:nil];
     }
     return cell;

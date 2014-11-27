@@ -16,7 +16,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *ideaContentLabel;
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property (nonatomic, weak) IBOutlet UIView *backView;
-@property (nonatomic, strong) NSMutableArray *imageViews;
+@property (nonatomic, weak) IBOutlet UIImageView *relateImageView;
 
 - (void)setDatas:(id)sender;
 

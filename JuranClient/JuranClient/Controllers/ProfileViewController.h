@@ -8,7 +8,10 @@
 
 #import "ALViewController.h"
 
+@class JRProfileData;
+
 @interface ProfileViewController : ALViewController
 
+@property (nonatomic, strong) JRProfileData *profileData;
 
 @end

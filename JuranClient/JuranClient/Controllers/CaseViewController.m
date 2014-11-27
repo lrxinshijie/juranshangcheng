@@ -9,6 +9,7 @@
 #import "CaseViewController.h"
 #import "JRCase.h"
 #import "CaseCell.h"
+#import "CaseDetailViewController.h"
 
 @interface CaseViewController () <UITableViewDataSource, UITableViewDelegate>
 
