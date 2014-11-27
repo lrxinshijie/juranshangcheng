@@ -8,7 +8,12 @@
 
 #import "PersonalDatasMoreViewController.h"
 
-@interface PersonalDatasMoreViewController ()
+@interface PersonalDatasMoreViewController ()<UITableViewDataSource, UITableViewDelegate>
+{
+    NSArray *titles;
+    NSArray *keys;
+}
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
 
@@ -27,6 +32,41 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    
+    self.navigationItem.title = @"更多资料";
+    [self setupDatas];
+    [self setupView];
+}
+
+- (void)setupDatas{
+    titles = @[@"生日", @"详细地址", @"固定电话", @"证件信息", @"QQ", @"微信", @"所学专业", @"专业类型", @"证书与奖项"];
+    keys = @[@"生日", @"详细地址", @"固定电话", @"证件信息", @"QQ", @"微信", @"所学专业", @"专业类型", @"证书与奖项"];
+}
+
+- (void)setupView{
+    _tableView.tableFooterView = [[UIView alloc] init];
+}
+
+#pragma mark - UITableViewDataSource/Delegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return titles.count;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellIdentifier = @"personalDataMore";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:kSmallSystemFontSize];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    cell.textLabel.text = titles[indexPath.row];
+    cell.detailTextLabel.text = keys[indexPath.row];
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning
