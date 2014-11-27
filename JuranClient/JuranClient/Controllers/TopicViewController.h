@@ -1,5 +1,5 @@
 //
-//  CaseDetailViewController.h
+//  TopicViewController.h
 //  JuranClient
 //
 //  Created by 李 久龙 on 14/11/28.
@@ -8,9 +8,6 @@
 
 #import "ALViewController.h"
 
-@class JRCase;
-@interface CaseDetailViewController : ALViewController
-
-@property (nonatomic, strong) JRCase *jrCase;
+@interface TopicViewController : ALViewController
 
 @end

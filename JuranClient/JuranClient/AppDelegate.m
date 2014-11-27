@@ -7,16 +7,15 @@
 //
 
 #import "AppDelegate.h"
-#import "LeveyTabBarController.h"
-#import "HomeViewController.h"
 #import "CaseViewController.h"
 #import "DesignerViewController.h"
-#import "WikiViewController.h"
 #import "ProfileViewController.h"
+#import "PublishDesignViewController.h"
+#import "TopicViewController.h"
 
 @interface AppDelegate () <UINavigationControllerDelegate>
 
-@property (nonatomic, strong) LeveyTabBarController *tabBarController;
+@property (nonatomic, strong) UITabBarController *tabBarController;
 
 @end
 
@@ -36,51 +35,64 @@
 }
 
 - (void)setupTabbar{
-    HomeViewController *home = [[HomeViewController alloc] init];
-    UINavigationController *homeNav = [Public navigationControllerFromRootViewController:home];
-    
     CaseViewController *cs = [[CaseViewController alloc] init];
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
+    [csNav.tabBarItem setTitle:@"案例"];
+    [csNav.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_case_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_case"]];
     
     DesignerViewController *des = [[DesignerViewController alloc] init];
     UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
-    desNav.delegate = self;
+    [desNav.tabBarItem setTitle:@"设计师"];
+    [desNav.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_designer_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_designer"]];
     
-    WikiViewController *wiki = [[WikiViewController alloc] init];
-    UINavigationController *wikiNav = [Public navigationControllerFromRootViewController:wiki];
+    TopicViewController *topic = [[TopicViewController alloc] init];
+    UINavigationController *topicNav = [Public navigationControllerFromRootViewController:topic];
+    [topicNav.tabBarItem setTitle:@"专题"];
+    [topicNav.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_subject_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_subject"]];
+    
+    PublishDesignViewController *publish = [[PublishDesignViewController alloc] init];
+    UINavigationController *publishNav = [Public navigationControllerFromRootViewController:publish];
+    [publishNav.tabBarItem setTitle:@"发布需求"];
+    [publishNav.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_demands_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_demands"]];
     
     ProfileViewController *profile = [[ProfileViewController alloc] init];
     UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
+    [profileNav.tabBarItem setTitle:@"个人中心"];
+    [profileNav.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_personal_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_personal"]];
     
-    self.tabBarController = [[LeveyTabBarController alloc] initWithViewControllers:@[homeNav,csNav,desNav,wikiNav,profileNav]
-                                                                        imageArray:@[@{@"Default": @"nav-home-default",
-                                                                                       @"Highlighted": @"nav-home-active",
-                                                                                       @"Seleted": @"nav-home-active"},
-  @{@"Default": @"nav-case-default",
-    @"Highlighted": @"nav-case-active",
-    @"Seleted": @"nav-case-active"},
-  @{@"Default": @"nav-designer-default",
-    @"Highlighted": @"nav-designer-active",
-    @"Seleted": @"nav-designer-active"},
-  @{@"Default": @"nav-wiki-default",
-    @"Highlighted": @"nav-wiki-active",
-    @"Seleted": @"nav-wiki-active"},
-  @{@"Default": @"nav-user-default",
-    @"Highlighted": @"nav-user-active",
-    @"Seleted": @"nav-user-active"}]];
-	_tabBarController.tabBar.backgroundColor = kTabBarBackgroundColor;
-	[_tabBarController setTabBarTransparent:YES];
+    
+    
+//    self.tabBarController = [[LeveyTabBarController alloc] initWithViewControllers:@[homeNav,csNav,desNav,wikiNav,profileNav]
+//                                                                        imageArray:@[@{@"Default": @"nav-home-default",
+//                                                                                       @"Highlighted": @"nav-home-active",
+//                                                                                       @"Seleted": @"nav-home-active"},
+//  @{@"Default": @"nav-case-default",
+//    @"Highlighted": @"nav-case-active",
+//    @"Seleted": @"nav-case-active"},
+//  @{@"Default": @"nav-designer-default",
+//    @"Highlighted": @"nav-designer-active",
+//    @"Seleted": @"nav-designer-active"},
+//  @{@"Default": @"nav-wiki-default",
+//    @"Highlighted": @"nav-wiki-active",
+//    @"Seleted": @"nav-wiki-active"},
+//  @{@"Default": @"nav-user-default",
+//    @"Highlighted": @"nav-user-active",
+//    @"Seleted": @"nav-user-active"}]];
+//	_tabBarController.tabBar.backgroundColor = kTabBarBackgroundColor;
+//	[_tabBarController setTabBarTransparent:YES];
+    self.tabBarController = [[UITabBarController alloc] init];
+    _tabBarController.viewControllers = @[csNav,topicNav,publishNav,desNav,profileNav];
     self.window.rootViewController = _tabBarController;
     
 }
 
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-    if (viewController.hidesBottomBarWhenPushed){
-        [_tabBarController hidesTabBar:YES animated:YES];
-    }else{
-        [_tabBarController hidesTabBar:NO animated:YES];
-    }
-}
+//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+//    if (viewController.hidesBottomBarWhenPushed){
+//        [_tabBarController hidesTabBar:YES animated:YES];
+//    }else{
+//        [_tabBarController hidesTabBar:NO animated:YES];
+//    }
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
