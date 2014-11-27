@@ -23,7 +23,7 @@ static NSString * const kNetworkErrorCodeKey             = @"errcode";
 
 typedef void (^CompletionBlock)(id data);
 
-typedef void (^ResponseBlock)(NSError* error, id data, NSDictionary *other);
+typedef void (^ResponseBlock)(NSError *error, id data, NSDictionary *other);
 
 - (id)initWithDefaultSettings;
 
