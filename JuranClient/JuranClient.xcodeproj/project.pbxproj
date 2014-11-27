@@ -11,6 +11,10 @@
 		1416C8B91A242FD100FA9999 /* CaseCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1416C8B71A242FD100FA9999 /* CaseCollectionCell.xib */; };
 		141C564D1A23613900A57971 /* TATopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 141C564B1A23613900A57971 /* TATopicCell.m */; };
 		1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1453C8C31A24A74200D817BC /* TATopicCell.xib */; };
+		145E3D191A2792B200AA952F /* PersonalDatasMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */; };
+		145E3D1A1A2792B200AA952F /* PersonalDatasMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */; };
+		145E3D1B1A2792B200AA952F /* PersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D171A2792B200AA952F /* PersonalDataViewController.m */; };
+		145E3D1C1A2792B200AA952F /* PersonalDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145E3D181A2792B200AA952F /* PersonalDataViewController.xib */; };
 		1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */; };
 		1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */; };
 		1476DA8A1A21DAF30006E9E0 /* JRDesigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA891A21DAF30006E9E0 /* JRDesigner.m */; };
@@ -158,6 +162,12 @@
 		141C564A1A23613900A57971 /* TATopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATopicCell.h; sourceTree = "<group>"; };
 		141C564B1A23613900A57971 /* TATopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATopicCell.m; sourceTree = "<group>"; };
 		1453C8C31A24A74200D817BC /* TATopicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TATopicCell.xib; sourceTree = "<group>"; };
+		145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDatasMoreViewController.h; sourceTree = "<group>"; };
+		145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDatasMoreViewController.m; sourceTree = "<group>"; };
+		145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalDatasMoreViewController.xib; sourceTree = "<group>"; };
+		145E3D161A2792B100AA952F /* PersonalDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDataViewController.h; sourceTree = "<group>"; };
+		145E3D171A2792B200AA952F /* PersonalDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDataViewController.m; sourceTree = "<group>"; };
+		145E3D181A2792B200AA952F /* PersonalDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalDataViewController.xib; sourceTree = "<group>"; };
 		1476DA831A21DAC50006E9E0 /* DesignerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DesignerDetailViewController.h; sourceTree = "<group>"; };
 		1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DesignerDetailViewController.m; sourceTree = "<group>"; };
 		1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DesignerDetailViewController.xib; sourceTree = "<group>"; };
@@ -565,6 +575,12 @@
 				A987EE421A20984200CED7CD /* HomeViewController.xib */,
 				A987EE4F1A2098AF00CED7CD /* WikiViewController.h */,
 				A987EE501A2098AF00CED7CD /* WikiViewController.m */,
+				145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */,
+				145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */,
+				145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */,
+				145E3D161A2792B100AA952F /* PersonalDataViewController.h */,
+				145E3D171A2792B200AA952F /* PersonalDataViewController.m */,
+				145E3D181A2792B200AA952F /* PersonalDataViewController.xib */,
 				A987EE511A2098AF00CED7CD /* WikiViewController.xib */,
 				14ABFBEA1A25CFFD00C4AF65 /* UIViewController+Login.h */,
 				14ABFBEB1A25CFFD00C4AF65 /* UIViewController+Login.m */,
@@ -963,13 +979,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A90459E61A27946E00F8CD74 /* PersonalDataViewController.xib in Resources */,
+				145E3D1C1A2792B200AA952F /* PersonalDataViewController.xib in Resources */,
 				A93BF29B1A2633D90070B72A /* SetPasswordViewController.xib in Resources */,
 				A987EE491A20986100CED7CD /* CaseViewController.xib in Resources */,
 				1476DA971A21DFBE0006E9E0 /* SelfIntrodutionCell.xib in Resources */,
 				A987EE531A2098AF00CED7CD /* WikiViewController.xib in Resources */,
 				14ABFBE61A25B63400C4AF65 /* LoginViewController.xib in Resources */,
-				A90459E41A27946E00F8CD74 /* PersonalDatasMoreViewController.xib in Resources */,
+				145E3D1A1A2792B200AA952F /* PersonalDatasMoreViewController.xib in Resources */,
 				A90459D91A278B2D00F8CD74 /* TopicViewController.xib in Resources */,
 				A987EE581A2098BA00CED7CD /* ProfileViewController.xib in Resources */,
 				1476DA921A21DB850006E9E0 /* DesignerCell.xib in Resources */,
@@ -1048,7 +1064,7 @@
 				A987EDDE1A20920500CED7CD /* NSArray+ASCategory.m in Sources */,
 				A987EE3B1A2093C900CED7CD /* UIScrollView+MJExtension.m in Sources */,
 				A987EDF21A20920500CED7CD /* UITextField+ASCategory.m in Sources */,
-				A90459E51A27946E00F8CD74 /* PersonalDataViewController.m in Sources */,
+				145E3D1B1A2792B200AA952F /* PersonalDataViewController.m in Sources */,
 				A9D654B11A27642800A80253 /* JSONModelError.m in Sources */,
 				A987EE3D1A2093C900CED7CD /* UIView+MJExtension.m in Sources */,
 				A9D654B51A27642800A80253 /* JSONModel+networking.m in Sources */,
@@ -1098,7 +1114,7 @@
 				A987EDF61A20920500CED7CD /* LeveyTabBarController.m in Sources */,
 				A9D654B71A27642800A80253 /* JSONValueTransformer.m in Sources */,
 				A987EE5B1A209E6100CED7CD /* JRCase.m in Sources */,
-				A90459E31A27946E00F8CD74 /* PersonalDatasMoreViewController.m in Sources */,
+				145E3D191A2792B200AA952F /* PersonalDatasMoreViewController.m in Sources */,
 				A987EDFD1A20920500CED7CD /* UIButton+WebCache.m in Sources */,
 				A987EDDC1A20920500CED7CD /* CLLocation+ASCategory.m in Sources */,
 				A9D654AE1A27642800A80253 /* JSONModel.m in Sources */,
