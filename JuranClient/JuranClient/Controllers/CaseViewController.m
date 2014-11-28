@@ -120,6 +120,13 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    CaseDetailViewController *cd = [[CaseDetailViewController alloc] init];
+    JRCase *cs = [_datas objectAtIndex:indexPath.row];
+    cd.jrCase = cs;
+    [self.navigationController pushViewController:cd animated:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
