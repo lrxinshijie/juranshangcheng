@@ -9,11 +9,9 @@
 #import "ALViewController.h"
 
 @class JRDesigner;
-@class JRDesignerDetail;
 
 @interface DesignerDetailViewController : ALViewController
 
 @property (nonatomic, strong) JRDesigner *designer;
-@property (nonatomic, strong) JRDesignerDetail *designerDetail;
 
 @end

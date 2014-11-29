@@ -98,7 +98,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
     CGRect bottomViewFrame = CGRectMake(0, screenFrame.size.height, 0, 0);
     UIView *bottomView = [[UIView alloc] initWithFrame:bottomViewFrame];
-    bottomView.backgroundColor = [UIColor yellowColor];
+    bottomView.backgroundColor = [UIColor clearColor];
     [[self view] addSubview:bottomView];
     
     bottomView_ = [bottomView retain];
@@ -255,6 +255,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
     CGRect bounds = [scrollView_ bounds];
     if (SystemVersionGreaterThanOrEqualTo(7)) {
         bounds.origin.y = -64;
+        bounds.size.height = [UIScreen mainScreen].bounds.size.height;
     }else{
         bounds.size.height = [UIScreen mainScreen].bounds.size.height;
     }

@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSString *detailAddress;
 @property (nonatomic, strong) NSString *zipCode;
 @property (nonatomic, strong) NSString *idCardType;
+@property (nonatomic, strong) NSString *idCardNumber;
 @property (nonatomic, strong) NSString *qq;
 @property (nonatomic, strong) NSString *weixin;
 @property (nonatomic, assign) NSInteger useablePoints;
@@ -33,5 +34,8 @@
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 - (NSURL *)headImageURL;
+- (NSString*)locationAddress;
+- (NSString*)idCardInfomation;
+- (NSString*)homeTelForPersonal;
 
 @end

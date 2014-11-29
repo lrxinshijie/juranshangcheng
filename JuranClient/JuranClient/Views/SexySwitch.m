@@ -25,11 +25,17 @@
         self.layer.cornerRadius = 2.f;
         self.backgroundColor = [UIColor greenColor];
         
+        _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 26)];
+        _backgroundView.layer.cornerRadius = 2.0f;
+        _backgroundView.backgroundColor = [UIColor whiteColor];
+        [self addSubview:_backgroundView];
+        
         _maleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _maleBtn.frame = CGRectMake(0, 0, self.frame.size.width/2, self.frame.size.height);
         [_maleBtn setTitle:@"男" forState:UIControlStateNormal];
         [_maleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_maleBtn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+        [_maleBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:kSystemFontSize]];
         [_maleBtn addTarget:self action:@selector(onSelected:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_maleBtn];
         
@@ -38,13 +44,9 @@
         [_femaleBtn setTitle:@"女" forState:UIControlStateNormal];
         [_femaleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_femaleBtn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+        [_femaleBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:kSystemFontSize]];
         [_femaleBtn addTarget:self action:@selector(onSelected:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_femaleBtn];
-        
-        _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 26)];
-        _backgroundView.layer.cornerRadius = 2.0f;
-        _backgroundView.backgroundColor = [UIColor whiteColor];
-        [self addSubview:_backgroundView];
         
         self.selectedIndex = 0;
     }
@@ -62,6 +64,9 @@
         return;
     }
     self.selectedIndex =index;
+    if ([_delegate respondsToSelector:@selector(sexySwitch:valueChange:)]) {
+        [_delegate sexySwitch:self valueChange:_selectedIndex];
+    }
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex{

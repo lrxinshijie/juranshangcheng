@@ -25,12 +25,35 @@
 @property (nonatomic, assign) NSInteger creditRateCount;
 @property (nonatomic, strong) NSString *minisite;
 
+
+//Detail
+@property (nonatomic, strong) NSString *userLevel;
+@property (nonatomic, strong) NSString *userLevelName;
+@property (nonatomic, strong) NSString *realName;
+@property (nonatomic, assign) BOOL isAuth;
+@property (nonatomic, strong) NSString *granuate;
+@property (nonatomic, assign) NSInteger experience;
+@property (nonatomic, strong) NSString *style;
+@property (nonatomic, assign) NSInteger priceMeasure;
+@property (nonatomic, assign) NSInteger designFeeMin;
+@property (nonatomic, assign) NSInteger designFeeMax;
+@property (nonatomic, assign) NSInteger product2DCount;
+@property (nonatomic, assign) NSInteger product3DCount;
+@property (nonatomic, assign) NSInteger followCount;
+@property (nonatomic, assign) NSInteger viewCount;
+@property (nonatomic, assign) BOOL isFollowed;
+
+
 @property (nonatomic, strong) NSMutableArray *projectDtoList;
 
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
+- (id)buildDetailWithDictionary:(NSDictionary *)dict;
 - (NSURL *)imageURL;
-- (NSString*)styleNamesForDesignerList;
+/*
+ * type  0为设计师列表   1为设计师详情  主要是分隔符不一样
+ */
+- (NSString*)styleNamesWithType:(NSInteger)type;
 
 @end

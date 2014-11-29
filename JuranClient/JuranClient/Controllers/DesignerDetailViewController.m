@@ -12,20 +12,28 @@
 #import "TATopicCell.h"
 #import "CaseCell.h"
 #import "JRDesigner.h"
-#import "JRDesignerDetail.h"
 #import "JRUser.h"
+#import "ShareView.h"
 
 @interface DesignerDetailViewController ()<UITableViewDataSource, UITableViewDelegate, JRSegmentControlDelegate, SelfIntroductionCellDelegate>
 {
     NSArray *personDatas;
 }
+@property (nonatomic, weak) IBOutlet UIView *toolBar;
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, weak) IBOutlet JRSegmentControl *segment;
 @property (nonatomic, weak) IBOutlet UIImageView *headImageView;
 @property (nonatomic, weak) IBOutlet UIView *headView;
 @property (nonatomic, weak) IBOutlet UILabel *fansCountLabel;
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *popularityLabel;
+@property (nonatomic, weak) IBOutlet UILabel *pictureCountLabel;
+@property (nonatomic, weak) IBOutlet UILabel *diyProjectCountLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *followImageView;
+@property (nonatomic, weak) IBOutlet UILabel *followTitleLabel;
 @property (nonatomic, strong) SelfIntrodutionCell *introductionCell;
 @property (nonatomic, strong) TATopicCell *topicCell;
+@property (nonatomic, strong) ShareView *shareView;
 
 @end
 
@@ -45,7 +53,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.hidesBottomBarWhenPushed = YES;
-    self.navigationItem.title = _designer.userName;
+    self.navigationItem.title = _designer.nickName;
     
     personDatas = @[@"毕业院校", @"量房费", @"设计费用", @"从业年限", @"擅长风格"];
     [self setupUI];
@@ -66,23 +74,30 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = [UIColor colorWithRed:245/255.f green:245/255.f blue:245/255.f alpha:1.0f];
     [self.view addSubview:_tableView];
+    
+    _toolBar.frame = CGRectMake(0, kWindowHeightWithoutNavigationBar - 49, _toolBar.frame.size.width, _toolBar.frame.size.height);
+    [self.view addSubview:_toolBar];
+    
+    _shareView = [[ShareView alloc] init];
 }
 
 
 - (void)reloadData{
     _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.fansCount];
-    
+    _nameLabel.text = _designer.nickName;
+    _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
+    _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
     [_tableView reloadData];
 }
 
 - (void)loadData{
     NSDictionary *param = @{@"userId": [NSString stringWithFormat:@"%i", _designer.userId]};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_DESIGNERDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_DESIGNERDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
-                _designerDetail = [[JRDesignerDetail alloc] initWithDictionary:data];
+                _designer = [_designer buildDetailWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self reloadData];
                 });
@@ -98,6 +113,44 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Target Action
+
+- (IBAction)doFollow:(id)sender{
+    if (![self checkLogin]) {
+        return;
+    }
+    ASLog(@"关注");
+    NSDictionary *param = @{@"userId": [NSString stringWithFormat:@"%i", _designer.userId]};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_FOLLOWDESIGNER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            
+        }
+    }];
+}
+
+- (void)nextAction{
+    
+}
+
+//预约
+- (IBAction)doMakeAppointment:(id)sender{
+    ASLog(@"预约");
+}
+
+//私信
+- (IBAction)doPrivateLetter:(id)sender{
+    ASLog(@"私信");
+}
+
+//分享
+- (IBAction)doShare:(id)sender{
+    ASLog(@"分享");
+    [_shareView showWithContent:@"" image:@"" title:@"" url:@""];
+}
+
 
 #pragma mark - UITableViewDataSource/Delegate
 
@@ -161,37 +214,38 @@
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(5, 1, 310, 42)];
                 view.backgroundColor = [UIColor whiteColor];
                 [cell.contentView addSubview:view];
-                cell.textLabel.font = [UIFont systemFontOfSize:17];
+                cell.textLabel.font = [UIFont systemFontOfSize:16];
+                cell.textLabel.textColor = RGBColor(24, 24, 24);
                 cell.accessoryView = nil;
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-                cell.detailTextLabel.textColor = [UIColor blackColor];
+                cell.detailTextLabel.textColor = RGBColor(75, 75, 75);
             }
             cell.textLabel.text = personDatas[indexPath.row-1];
             if (1 == indexPath.row) {
-                cell.detailTextLabel.text = @"中央美术学院";
+                cell.detailTextLabel.text = _designer.granuate;
             }else if (4 == indexPath.row){
-                cell.detailTextLabel.text = @"6年";
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%d年", _designer.experience];
             }else if (5 == indexPath.row){
-                cell.detailTextLabel.text = @"现代、中式、欧式";
+                cell.detailTextLabel.text = [_designer styleNamesWithType:1];
             }else if (2 == indexPath.row){
                 CGRect frame = CGRectMake(0, 0, 100, 30);
                 UIView *view = [[UIView alloc] initWithFrame:frame];
                 view.backgroundColor = [UIColor clearColor];
-                UILabel *label = [cell.contentView labelWithFrame:frame text:@"元" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
+                UILabel *label = [cell.contentView labelWithFrame:frame text:@"元" textColor:RGBColor(75, 75, 75) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
                 [view addSubview:label];
                 frame.size.width -= kSystemFontSize;
-                label = [cell.contentView labelWithFrame:frame text:@"300" textColor:[UIColor blueColor] textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
+                label = [cell.contentView labelWithFrame:frame text:[NSString stringWithFormat:@"%d", _designer.priceMeasure] textColor:RGBColor(73, 129, 189) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
                 [view addSubview:label];
                 cell.accessoryView = view;
             }else if (3 == indexPath.row){
                 CGRect frame = CGRectMake(0, 0, 150, 30);
                 UIView *view = [[UIView alloc] initWithFrame:frame];
                 view.backgroundColor = [UIColor clearColor];
-                UILabel *label = [cell.contentView labelWithFrame:frame text:@"元/平方米" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
+                UILabel *label = [cell.contentView labelWithFrame:frame text:@"元/平方米" textColor:RGBColor(75, 75, 75) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
                 [view addSubview:label];
                 frame.size.width -= kSystemFontSize * 4.5f;
-                label = [cell.contentView labelWithFrame:frame text:@"100-300" textColor:[UIColor blueColor] textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
+                label = [cell.contentView labelWithFrame:frame text:[NSString stringWithFormat:@"%d-%d", _designer.designFeeMin, _designer.designFeeMax]  textColor:RGBColor(73, 129, 189) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
                 [view addSubview:label];
                 cell.accessoryView = view;
             }
@@ -233,7 +287,6 @@
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"SelfIntrodutionCell" owner:self options:nil];
         _introductionCell = (SelfIntrodutionCell*)[nibs firstObject];
         _introductionCell.delegate = self;
-        [_introductionCell setContent:@"深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大杰出青年设计师深圳十大"];
     }
     return _introductionCell;
 }

@@ -1,20 +1,18 @@
 //
-//  DesignerViewController.m
+//  MyFollowViewController.m
 //  JuranClient
 //
-//  Created by 李 久龙 on 14-11-22.
+//  Created by song.he on 14-11-30.
 //  Copyright (c) 2014年 Juran. All rights reserved.
 //
 
-#import "DesignerViewController.h"
-#import "DesignerDetailViewController.h"
+#import "MyFollowViewController.h"
+#import "JRUser.h"
+#import "JRDesignerFollowDto.h"
 #import "DesignerCell.h"
-#import "JRDesigner.h"
-#import "JRPhotoScrollViewController.h"
-#import "JRWebImageDataSource.h"
-#import "ShareView.h"
+#import "DesignerDetailViewController.h"
 
-@interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface MyFollowViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -22,7 +20,7 @@
 
 @end
 
-@implementation DesignerViewController
+@implementation MyFollowViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,13 +35,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    self.navigationItem.title = @"设计师";
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
+    self.navigationItem.title = @"我的关注";
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
-    self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
@@ -62,28 +60,19 @@
     [_tableView headerBeginRefreshing];
 }
 
-- (void)onSearch{
-    JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithDataSource:[[JRWebImageDataSource alloc] init] andStartWithPhotoAtIndex:10];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 - (void)loadData{
-    NSDictionary *param = @{@"experience": @"",
-                            @"isRealNameAuth": @"",
-                            @"order": @"0",
-                            @"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"onePageCount": @"20"};
+    NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
+                            @"rowsPerPage": @"20"};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_DESIGNERLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_GETFOLLOWLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *designerList = [data objectForKey:@"searchResultList"];
-            NSMutableArray *rows = [JRDesigner buildUpWithValue:designerList];
+            NSArray *designerList = [data objectForKey:@"designerList"];
+            NSMutableArray *rows = [JRDesignerFollowDto buildUpWithValue:designerList];
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
-                self.datas = [JRDesigner buildUpWithValue:designerList];
+                self.datas = [JRDesignerFollowDto buildUpWithValue:designerList];
             }
             
             [_tableView reloadData];
@@ -116,8 +105,8 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    JRDesigner *d = [_datas objectAtIndex:indexPath.row];
-    [cell fillCellWithDesigner:d];
+    JRDesignerFollowDto *c = [_datas objectAtIndex:indexPath.row];
+    [cell fillCellWithDesignerFollowDto:c];
     
     return cell;
 }
@@ -132,5 +121,6 @@
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
 }
+
 
 @end

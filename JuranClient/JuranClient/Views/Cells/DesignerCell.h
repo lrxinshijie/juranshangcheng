@@ -9,16 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @class JRDesigner;
+@class JRDesignerFollowDto;
 
 @interface DesignerCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UIImageView *headImageView;
 @property (nonatomic, weak) IBOutlet UILabel *styleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *experienceLabel;
-@property (nonatomic, weak) IBOutlet UIButton *productCountButton;
-@property (nonatomic, weak) IBOutlet UIButton *readCountButton;
+@property (nonatomic, weak) IBOutlet UILabel *productCountLabel;
+@property (nonatomic, weak) IBOutlet UILabel *readCountLabel;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UIView *sContentView;
 
 - (void)fillCellWithDesigner:(JRDesigner *)data;
+- (void)fillCellWithDesignerFollowDto:(JRDesignerFollowDto *)data;
 
 @end

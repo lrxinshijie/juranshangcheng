@@ -10,6 +10,7 @@
 #import "PersonalDataViewController.h"
 #import "JRUser.h"
 #import "JRProfileData.h"
+#import "MyFollowViewController.h"
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -51,9 +52,13 @@
     titleArray = @[@"互动", @"我的关注", @"我的收藏", @"订单管理", @"账户管理", @"账户安全"];
     imageArray = @[@"icon_personal_hudong.png", @"icon_personal_guanzhu.png", @"icon_personal_shouchang.png", @"icon_personal_ddgl.png", @"icon_personal_zhgl.png", @"icon_personal_zhaq"];
     [self setupUI];
-    [self loadData];
+   
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self loadData];
+}
 
 - (void)setupUI{
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
@@ -78,11 +83,8 @@
         _userNameLabel.hidden = YES;
         return;
     }
-    NSDictionary *param = @{@"guid": [JRUser currentUser].guid,
-                            @"token": [JRUser currentUser].token,
-                            };
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
@@ -107,11 +109,8 @@
 #pragma mark - Target Action
 
 - (IBAction)doSigned:(id)sender{
-    NSDictionary *param = @{@"guid": [JRUser currentUser].guid,
-                            @"token": [JRUser currentUser].token,
-                            };
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_SIGNIN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_SIGNIN parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             _profileData.isSigned = YES;
@@ -128,6 +127,7 @@
         return;
     }
     PersonalDataViewController *vc = [[PersonalDataViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -173,7 +173,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 2) {
+        if (![self checkLogin]) {
+            return;
+        }
+        MyFollowViewController *vc = [[MyFollowViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning

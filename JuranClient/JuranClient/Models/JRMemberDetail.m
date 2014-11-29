@@ -33,6 +33,7 @@
         self.detailAddress = [dict getStringValueForKey:@"detailAddress" defaultValue:@""];
         self.zipCode = [dict getStringValueForKey:@"zipCode" defaultValue:@""];
         self.idCardType = [dict getStringValueForKey:@"idCardType" defaultValue:@""];
+        self.idCardNumber = [dict getStringValueForKey:@"idCardNumber" defaultValue:@""];
         self.qq = [dict getStringValueForKey:@"qq" defaultValue:@""];
         self.weixin = [dict getStringValueForKey:@"weixin" defaultValue:@""];
         self.useablePoints = [dict getIntValueForKey:@"useablePoints" defaultValue:0];
@@ -44,6 +45,38 @@
 
 - (NSURL *)headImageURL{
     return [NSURL URLWithString:self.headUrl relativeToURL:[NSURL URLWithString:JR_IMAGE_SERVICE]];
+}
+
+- (NSString*)locationAddress{
+    NSString *address = @"";
+    if (self.provinceName && self.provinceName.length > 0) {
+        address = self.provinceName;
+    }
+    if (self.cityName && self.cityName.length > 0) {
+        address = [NSString stringWithFormat:@"%@-%@", address, self.cityName];
+    }
+    if (self.districtName && self.districtName.length > 0) {
+        address = [NSString stringWithFormat:@"%@-%@", address, self.districtName];
+    }
+    if (address.length == 0) {
+        return @"未设置";
+    }
+    return address;
+}
+
+- (NSString*)idCardInfomation{
+    NSArray *arr = @[@"身份证", @"军官证", @"护照"];
+    if (!(self.idCardNumber && self.idCardNumber.length > 0)) {
+        return @"未设置";
+    }
+    return [NSString stringWithFormat:@"%@:%@", arr[self.idCardType.intValue], self.idCardNumber];
+}
+
+- (NSString*)homeTelForPersonal{
+    if (_homeTel.length == 0) {
+        return @"未设置";
+    }
+    return _homeTel;
 }
 
 @end

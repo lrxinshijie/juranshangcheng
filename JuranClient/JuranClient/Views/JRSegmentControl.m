@@ -12,7 +12,7 @@
 
 @interface JRSegmentControl()
 
-@property (nonatomic, strong) UIImageView *selectedImageView;
+@property (nonatomic, strong) UIView *selectedBackgroundView;
 
 @end
 
@@ -35,11 +35,11 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag = kButtonTag+i;
         btn.frame = frame;
-        btn.titleLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
+        btn.titleLabel.font = [UIFont boldSystemFontOfSize:kSystemFontSize+2];
         [btn setTitle:title forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(onSelected:) forControlEvents:UIControlEventTouchUpInside];
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor colorWithRed:65/255.f green:101/255.f blue:174/255.f alpha:1.0f] forState:UIControlStateSelected];
+        [btn setTitleColor:[UIColor colorWithRed:35/255.f green:104/255.f blue:182/255.f alpha:1.0f] forState:UIControlStateSelected];
         [self addSubview:btn];
         i++;
     }
@@ -47,9 +47,10 @@
     UIButton *selectedBtn = (UIButton*)[self viewWithTag:kButtonTag];
     _selectedIndex = 0;
     [selectedBtn setSelected:YES];
-    _selectedImageView = [[UIImageView alloc] initWithFrame:selectedBtn.frame];
-    _selectedImageView.backgroundColor = [UIColor lightGrayColor];
-    [self insertSubview:_selectedImageView atIndex:0];
+    CGRect frame = CGRectMake(0, CGRectGetHeight(self.frame) - 2, CGRectGetWidth(selectedBtn.frame), 2);
+    _selectedBackgroundView = [[UIView alloc] initWithFrame:frame];
+    _selectedBackgroundView.backgroundColor = [UIColor colorWithRed:35/255.f green:104/255.f blue:182/255.f alpha:1.0f];
+    [self insertSubview:_selectedBackgroundView atIndex:0];
 }
 
 - (void)onSelected:(id)sender{
@@ -57,7 +58,9 @@
     NSInteger index = btn.tag - kButtonTag;
     if (index != _selectedIndex) {
         [UIView animateWithDuration:.3f animations:^{
-            _selectedImageView.frame = btn.frame;
+            CGRect frame = _selectedBackgroundView.frame;
+            frame.origin.x = btn.frame.origin.x;
+            _selectedBackgroundView.frame = frame;
         } completion:^(BOOL finished) {
             [(UIButton*)[self viewWithTag:kButtonTag+_selectedIndex] setSelected:NO];
             [btn setSelected:YES];
