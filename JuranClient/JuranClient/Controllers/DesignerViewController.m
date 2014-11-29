@@ -10,6 +10,9 @@
 #import "DesignerDetailViewController.h"
 #import "DesignerCell.h"
 #import "JRDesigner.h"
+#import "JRPhotoScrollViewController.h"
+#import "JRWebImageDataSource.h"
+#import "ShareView.h"
 
 @interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -59,7 +62,8 @@
 }
 
 - (void)onSearch{
-    
+    JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithDataSource:[[JRWebImageDataSource alloc] init] andStartWithPhotoAtIndex:10];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)loadData{
