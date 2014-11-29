@@ -26,6 +26,10 @@
 #define JR_MYCENTERINFO [NSString stringWithFormat:@"%@/member/getMyCenterInfo.json",JR_SERVICE]
 #define JR_SIGNIN [NSString stringWithFormat:@"%@/member/signin.json",JR_SERVICE]
 
+#define JR_GET_TOKEN_FOR_RESET_PWD [NSString stringWithFormat:@"%@/member/getTokenForResetPwd.json",JR_SERVICE]
+#define JR_RESET_PWD [NSString stringWithFormat:@"%@/member/resetPwd.json",JR_SERVICE]
+#define JR_PWD_EMAIL [NSString stringWithFormat:@"%@/member/sendFindLoginPwdEmail.json",JR_SERVICE]
+
 #define kHTTPMethodGet @"GET"
 #define kHTTPMethodPost @"POST"
 
