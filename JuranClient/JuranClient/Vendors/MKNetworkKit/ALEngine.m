@@ -86,6 +86,13 @@
         fromData = [other getBoolValueForKey:kNetworkParamKeyReturnDataFromKey defaultValue:YES];
     }
     
+    if ([JRUser isLogin]) {
+        NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:parameters];
+        [param setValue:[JRUser currentUser].guid forKey:@"guid"];
+        [param setValue:[JRUser currentUser].token forKey:@"token"];
+        parameters = param;
+    }
+    
     if ([URL rangeOfString:@"http"].location == NSNotFound) {
         op = [self operationWithPath:URL
                               params:parameters

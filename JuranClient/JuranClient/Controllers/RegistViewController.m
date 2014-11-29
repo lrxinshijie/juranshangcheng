@@ -94,6 +94,8 @@
 }
 
 - (IBAction)onRegist:(id)sender{
+    [self onHideKeyboard:sender];
+    
     NSString *phone = _phoneTextField.text;
     NSString *code = _codeTextField.text;
     if (phone.length != 11) {

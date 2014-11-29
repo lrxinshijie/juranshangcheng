@@ -8,17 +8,19 @@
 
 #import "PersonalDataViewController.h"
 #import "PersonalDatasMoreViewController.h"
+#import "SexySwitch.h"
 
 @interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
-    NSArray *titleForSection1;
-    NSArray *keyForSection1;
-    NSArray *titleForSection2;
-    NSArray *keyForSection2;
-    NSArray *titleForSection3;
-    NSArray *keyForSection3;
+    NSArray *valuesForSection1;
+    NSArray *keysForSection1;
+    NSArray *valuesForSection2;
+    NSArray *keysForSection2;
+    NSArray *valuesForSection3;
+    NSArray *keysForSection3;
 }
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) SexySwitch *sexySwitch;
 
 @end
 
@@ -48,30 +50,44 @@
     _tableView.tableFooterView = [[UIView alloc] init];
 //    _tableView.tableHeaderView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
+    _sexySwitch = [[SexySwitch alloc] init];
+    _sexySwitch.selectedIndex = 1;
 }
 
 - (void)setupDatas{
-    titleForSection1 = @[@"头像", @"用户名"];
-    titleForSection2 = @[@"昵称", @"性别", @"生日", @"所在地"];
-    titleForSection3 = @[@"从业经验", @"设计费用", @"量房费用", @"擅长风格", @"设计专长", @"毕业院校", @"自我介绍"];
-    keyForSection1 = @[@"头像", @"用户名"];
-    keyForSection2 = @[@"昵称", @"性别", @"生日", @"所在地"];
-    keyForSection3 = @[@"从业经验", @"设计费用", @"量房费用", @"擅长风格", @"设计专长", @"毕业院校", @"自我介绍是老骥伏枥开离开就是离开对方极乐世界进口飞机来上课"];
+    keysForSection1 = @[@"头像", @"用户名"];
+    keysForSection2 = @[@"昵称", @"性别", @"生日", @"所在地", @"详细地址"];
+    keysForSection3 = @[@"固定电话", @"证件信息", @"QQ", @"微信"];
+    valuesForSection1 = @[@"头像", @"用户名"];
+    valuesForSection2 = @[@"昵称", @"性别", @"生日", @"所在地", @"详细地址"];
+    valuesForSection3 = @[@"从业经验", @"设计费用", @"量房费用", @"擅长风格"];
+    
+    /*
+     *   设计师端个人资料
+     *
+     keysForSection1 = @[@"头像", @"用户名"];
+     keysForSection2 = @[@"昵称", @"性别", @"生日", @"所在地"];
+     keysForSection3 = @[@"从业经验", @"设计费用", @"量房费用", @"擅长风格", @"设计专长", @"毕业院校", @"自我介绍是老骥伏枥开离开就是离开对方极乐世界进口飞机来上课"];
+     valuesForSection1 = @[@"头像", @"用户名"];
+     valuesForSection1 = @[@"昵称", @"性别", @"生日", @"所在地"];
+     valuesForSection1 = @[@"从业经验", @"设计费用", @"量房费用", @"擅长风格", @"设计专长", @"毕业院校", @"自我介绍"];
+     */
+    
 }
 
 #pragma mark - UITableViewDataSource/Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 2;
+        return keysForSection1.count;
     }else if (section == 1){
-        return 4;
+        return keysForSection2.count;
     }else if (section == 2){
-        return 7;
+        return keysForSection3.count;
     }else{
         return 1;
     }
@@ -90,10 +106,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    /*
+     *  设计师端
+     if (indexPath.section == 0 && indexPath.row == 0) {
+     return 65;
+     }else if (indexPath.section == 2 && indexPath.row == 6){
+     return 70;
+     }
+     */
     if (indexPath.section == 0 && indexPath.row == 0) {
         return 65;
-    }else if (indexPath.section == 2 && indexPath.row == 6){
-        return 70;
     }
     return 44;
 }
@@ -103,13 +125,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-        cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:kSmallSystemFontSize];
+        cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize+2];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
     }
     cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 16) image:[UIImage imageNamed:@"cellIndicator.png"]];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            cell.textLabel.text = titleForSection1[indexPath.row];
+            cell.textLabel.text = keysForSection1[indexPath.row];
+            
             CGRect frame = CGRectMake(0, 0, 100, 50);
             UIView *view = [[UIView alloc] initWithFrame:frame];
             frame.origin = CGPointMake(frame.size.width - 8, (frame.size.height - 16)/2);
@@ -129,36 +152,47 @@
             cell.accessoryView = view;
             
         }else{
-            cell.textLabel.text = titleForSection1[indexPath.row];
-            cell.detailTextLabel.text = keyForSection1[indexPath.row];
+            cell.textLabel.text = keysForSection1[indexPath.row];
+            cell.detailTextLabel.text = valuesForSection1[indexPath.row];
         }
     }else if (indexPath.section == 1){
-        cell.textLabel.text = titleForSection2[indexPath.row];
-        cell.detailTextLabel.text = keyForSection2[indexPath.row];
-    }else if (indexPath.section == 2){
-        if (indexPath.row == titleForSection3.count - 1) {
-            cell.textLabel.text = titleForSection3[indexPath.row];
+        if (indexPath.row == 1) {
+            cell.textLabel.text = keysForSection2[indexPath.row];
             cell.detailTextLabel.text = @"";
-            CGRect frame = CGRectMake(0, 0, 210, 53);
-            UIView *view = [[UIView alloc] initWithFrame:frame];
-            frame.origin = CGPointMake(frame.size.width - 8, (frame.size.height - 16)/2);
-            frame.size = CGSizeMake(8, 16);
-            UIImageView *arrowImageView = [cell imageViewWithFrame:frame image:[UIImage imageNamed:@"cellIndicator.png"]];
-            [view addSubview:arrowImageView];
-            
-            frame.origin = CGPointMake(view.frame.size.width - frame.size.width - 10 -190, 0);
-            frame.size = CGSizeMake(190, 53);
-            
-            UILabel *label = [cell labelWithFrame:frame text:keyForSection3[indexPath.row] textColor:cell.detailTextLabel.textColor textAlignment:NSTextAlignmentCenter font:cell.detailTextLabel.font];
-            label.numberOfLines = 3;
-            [view addSubview:label];
-            
-            cell.accessoryView = view;
-            
+            cell.accessoryView = _sexySwitch;
         }else{
-            cell.textLabel.text = titleForSection3[indexPath.row];
-            cell.detailTextLabel.text = keyForSection3[indexPath.row];
+            cell.textLabel.text = keysForSection2[indexPath.row];
+            cell.detailTextLabel.text = valuesForSection2[indexPath.row];
         }
+    }else if (indexPath.section == 2){
+        /*
+         *设计师端内容
+         if (indexPath.row == keysForSection3.count - 1) {
+         cell.textLabel.text = valuesForSection3[indexPath.row];
+         cell.detailTextLabel.text = @"";
+         CGRect frame = CGRectMake(0, 0, 210, 53);
+         UIView *view = [[UIView alloc] initWithFrame:frame];
+         frame.origin = CGPointMake(frame.size.width - 8, (frame.size.height - 16)/2);
+         frame.size = CGSizeMake(8, 16);
+         UIImageView *arrowImageView = [cell imageViewWithFrame:frame image:[UIImage imageNamed:@"cellIndicator.png"]];
+         [view addSubview:arrowImageView];
+         
+         frame.origin = CGPointMake(view.frame.size.width - frame.size.width - 10 -190, 0);
+         frame.size = CGSizeMake(190, 53);
+         
+         UILabel *label = [cell labelWithFrame:frame text:valuesForSection3[indexPath.row] textColor:cell.detailTextLabel.textColor textAlignment:NSTextAlignmentCenter font:cell.detailTextLabel.font];
+         label.numberOfLines = 3;
+         [view addSubview:label];
+         
+         cell.accessoryView = view;
+         
+         }else{
+         cell.textLabel.text = keysForSection3[indexPath.row];
+         cell.detailTextLabel.text = valuesForSection3[indexPath.row];
+         }
+         */
+        cell.textLabel.text = keysForSection3[indexPath.row];
+        cell.detailTextLabel.text = valuesForSection3[indexPath.row];
     }else{
         cell.textLabel.text = @"更多资料";
         cell.detailTextLabel.text = @"";
@@ -167,10 +201,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 3) {
-        PersonalDatasMoreViewController *vc = [[PersonalDatasMoreViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    /*
+     *设计师端
+     if (indexPath.section == 3) {
+     PersonalDatasMoreViewController *vc = [[PersonalDatasMoreViewController alloc] init];
+     [self.navigationController pushViewController:vc animated:YES];
+     }
+     */
+    
 }
 
 

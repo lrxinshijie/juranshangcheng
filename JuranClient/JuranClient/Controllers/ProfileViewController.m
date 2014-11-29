@@ -24,6 +24,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *unLoginLabel;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UIImageView *headerImageView;
+@property (nonatomic, weak) IBOutlet UIButton *signedButton;
 
 @end
 
@@ -92,11 +93,10 @@
                     _userNameLabel.hidden = NO;
                     _userNameLabel.text = _profileData.nickName;
                     _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _profileData.account];
-                    _pushMsgCountLabel.hidden = YES;
-                    if (_profileData.newPushMsgCount) {
-                        _pushMsgCountLabel.hidden = NO;
-                        _pushMsgCountLabel.text = [NSString stringWithFormat:@"%i", _profileData.newPushMsgCount];
-                    }
+                    _pushMsgCountLabel.hidden = _profileData.newPushMsgCount?NO:YES;
+                    _pushMsgCountLabel.text = [NSString stringWithFormat:@"%i", _profileData.newPushMsgCount];
+                    _signedButton.enabled = !_profileData.isSigned;
+                    [_signedButton setTitle:_profileData.isSigned?@"已签到":@"签到" forState:UIControlStateNormal];
                 });
             }
         }
@@ -105,6 +105,23 @@
 
 
 #pragma mark - Target Action
+
+- (IBAction)doSigned:(id)sender{
+    NSDictionary *param = @{@"guid": [JRUser currentUser].guid,
+                            @"token": [JRUser currentUser].token,
+                            };
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_SIGNIN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            _profileData.isSigned = YES;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _signedButton.enabled = !_profileData.isSigned;
+                [_signedButton setTitle:_profileData.isSigned?@"已签到":@"签到" forState:UIControlStateNormal];
+            });
+        }
+    }];
+}
 
 - (IBAction)doTouchHeaderView:(id)sender{
     if (![self checkLogin]) {

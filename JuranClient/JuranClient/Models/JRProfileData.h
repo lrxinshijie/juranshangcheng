@@ -17,6 +17,7 @@
 @property (nonatomic, assign) NSInteger newPrivateLetterCount;
 @property (nonatomic, assign) NSInteger newAnswerCount;
 @property (nonatomic, assign) NSInteger newPushMsgCount;
+@property (nonatomic, assign) BOOL isSigned;
 
 
 - (id)initWithDictionary:(NSDictionary *)dict;

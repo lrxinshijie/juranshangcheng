@@ -10,7 +10,7 @@
 
 @interface PersonalDatasMoreViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
-    NSArray *titles;
+    NSArray *values;
     NSArray *keys;
 }
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -41,7 +41,7 @@
 }
 
 - (void)setupDatas{
-    titles = @[@"生日", @"详细地址", @"固定电话", @"证件信息", @"QQ", @"微信", @"所学专业", @"专业类型", @"证书与奖项"];
+    values = @[@"生日", @"详细地址", @"固定电话", @"证件信息", @"QQ", @"微信", @"所学专业", @"专业类型", @"证书与奖项"];
     keys = @[@"生日", @"详细地址", @"固定电话", @"证件信息", @"QQ", @"微信", @"所学专业", @"专业类型", @"证书与奖项"];
 }
 
@@ -52,7 +52,7 @@
 #pragma mark - UITableViewDataSource/Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return titles.count;
+    return keys.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -64,8 +64,8 @@
         cell.detailTextLabel.font = [UIFont systemFontOfSize:kSmallSystemFontSize];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    cell.textLabel.text = titles[indexPath.row];
-    cell.detailTextLabel.text = keys[indexPath.row];
+    cell.textLabel.text = keys[indexPath.row];
+    cell.detailTextLabel.text = values[indexPath.row];
     return cell;
 }
 
