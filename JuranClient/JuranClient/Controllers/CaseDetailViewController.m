@@ -11,6 +11,7 @@
 #import "DesignerCell.h"
 #import "JRDesigner.h"
 #import "JRComment.h"
+#import "CommentCell.h"
 
 @interface CaseDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -119,6 +120,11 @@
         return 130;
     }else if (indexPath.section == 1){
         return 44;
+    }else{
+        JRComment *commnet = [_comments objectAtIndex:indexPath.row];
+        NSString *content = commnet.commentContent;
+        CGFloat height = [content heightWithFont:[UIFont systemFontOfSize:15] constrainedToWidth:290];
+        return 68+height;
     }
     
     return 0;
@@ -153,15 +159,15 @@
         cell.detailTextLabel.text = [_values objectAtIndex:indexPath.row];
         return cell;
     }else{
-        static NSString *CellIdentifier = @"Cell";
-        UITableViewCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+        static NSString *CellIdentifier = @"CommentCell";
+        CommentCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+            NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+            cell = [nibs firstObject];
         }
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.font = [UIFont systemFontOfSize:14];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
+        JRComment *commnet = [_comments objectAtIndex:indexPath.row];
+        [cell fillCellWithComment:commnet];
         
         return cell;
     }

@@ -63,13 +63,13 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"experience": @"",
-                            @"isRealNameAuth": @"",
+    NSDictionary *param = @{@"experience": @"1",
+                            @"isRealNameAuth": @"auth",
                             @"order": @"0",
                             @"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
                             @"onePageCount": @"20"};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_DESIGNERLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_DESIGNERLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             NSArray *designerList = [data objectForKey:@"searchResultList"];

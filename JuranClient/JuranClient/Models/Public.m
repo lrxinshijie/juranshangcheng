@@ -299,4 +299,8 @@
     return language;
 }
 
++ (NSURL *)imageURL:(NSString *)url{
+    return [NSURL URLWithString:url relativeToURL:[NSURL URLWithString:JR_IMAGE_SERVICE]];
+}
+
 @end

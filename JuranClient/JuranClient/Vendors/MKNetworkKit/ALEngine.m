@@ -81,12 +81,14 @@
     MKNetworkOperation *op = nil;
     
     BOOL fromData = YES;
+    BOOL useToken = YES;
     
     if (other) {
         fromData = [other getBoolValueForKey:kNetworkParamKeyReturnDataFromKey defaultValue:YES];
+        useToken = [other getBoolValueForKey:kNetworkParamKeyUseToken defaultValue:YES];
     }
     
-    if ([JRUser isLogin]) {
+    if ([JRUser isLogin] && useToken) {
         NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:parameters];
         [param setValue:[JRUser currentUser].guid forKey:@"guid"];
         [param setValue:[JRUser currentUser].token forKey:@"token"];

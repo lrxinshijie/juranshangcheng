@@ -25,6 +25,7 @@
 #define JR_DESIGNERDETAIL [NSString stringWithFormat:@"%@/member/getDesignerDetail.json",JR_SERVICE]
 #define JR_MYCENTERINFO [NSString stringWithFormat:@"%@/member/getMyCenterInfo.json",JR_SERVICE]
 #define JR_SIGNIN [NSString stringWithFormat:@"%@/member/signin.json",JR_SERVICE]
+#define JR_GETMEMBERDETAIL [NSString stringWithFormat:@"%@/member/getMemberDetail.json",JR_SERVICE]
 
 #define kHTTPMethodGet @"GET"
 #define kHTTPMethodPost @"POST"

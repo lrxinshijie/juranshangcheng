@@ -13,6 +13,7 @@
 		1441A0601A2987FB004A038E /* JRDesignerDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A05D1A2987FB004A038E /* JRDesignerDetail.m */; };
 		1441A0611A2987FB004A038E /* JRProfileData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A05F1A2987FB004A038E /* JRProfileData.m */; };
 		1441A0641A29A447004A038E /* SexySwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A0631A29A447004A038E /* SexySwitch.m */; };
+		1441A1461A29E156004A038E /* JRMemberDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A1451A29E156004A038E /* JRMemberDetail.m */; };
 		1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1453C8C31A24A74200D817BC /* TATopicCell.xib */; };
 		145E3D191A2792B200AA952F /* PersonalDatasMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */; };
 		145E3D1A1A2792B200AA952F /* PersonalDatasMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */; };
@@ -169,6 +170,8 @@
 		1441A05F1A2987FB004A038E /* JRProfileData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRProfileData.m; sourceTree = "<group>"; };
 		1441A0621A29A447004A038E /* SexySwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SexySwitch.h; sourceTree = "<group>"; };
 		1441A0631A29A447004A038E /* SexySwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SexySwitch.m; sourceTree = "<group>"; };
+		1441A1441A29E156004A038E /* JRMemberDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRMemberDetail.h; sourceTree = "<group>"; };
+		1441A1451A29E156004A038E /* JRMemberDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRMemberDetail.m; sourceTree = "<group>"; };
 		1453C8C31A24A74200D817BC /* TATopicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TATopicCell.xib; sourceTree = "<group>"; };
 		145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDatasMoreViewController.h; sourceTree = "<group>"; };
 		145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDatasMoreViewController.m; sourceTree = "<group>"; };
@@ -598,6 +601,8 @@
 		A987ED6C1A20920500CED7CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1441A1441A29E156004A038E /* JRMemberDetail.h */,
+				1441A1451A29E156004A038E /* JRMemberDetail.m */,
 				1441A05C1A2987FB004A038E /* JRDesignerDetail.h */,
 				1441A05D1A2987FB004A038E /* JRDesignerDetail.m */,
 				1441A05E1A2987FB004A038E /* JRProfileData.h */,
@@ -1099,6 +1104,7 @@
 				A987EDE11A20920500CED7CD /* NSMutableArray+ASCategory.m in Sources */,
 				A987EDFA1A20920500CED7CD /* SDWebImageDownloader.m in Sources */,
 				A971BCA11A20825800C018D6 /* main.m in Sources */,
+				1441A1461A29E156004A038E /* JRMemberDetail.m in Sources */,
 				A987EDDF1A20920500CED7CD /* NSDate+ASCategory.m in Sources */,
 				A9D654B21A27642800A80253 /* NSArray+JSONModel.m in Sources */,
 				A93BF2951A262A290070B72A /* ServiceViewController.m in Sources */,
