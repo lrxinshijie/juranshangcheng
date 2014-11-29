@@ -19,6 +19,11 @@
 @property (nonatomic, copy) NSString *account;
 @property (nonatomic, copy) NSString *password;
 
+@property (nonatomic, copy) NSString *headUrl;
+@property (nonatomic, copy) NSString *nickName;
+@property (nonatomic, assign) NSInteger userId;
+@property (nonatomic, copy) NSString *userType;
+
 + (BOOL)isLogin;
 - (void)logout;
 - (NSDictionary *)localUserData;

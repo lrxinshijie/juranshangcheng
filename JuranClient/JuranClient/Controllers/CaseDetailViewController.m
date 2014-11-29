@@ -10,6 +10,7 @@
 #import "JRCase.h"
 #import "DesignerCell.h"
 #import "JRDesigner.h"
+#import "JRComment.h"
 
 @interface CaseDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -33,37 +34,69 @@
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onShare)];
     
     self.keys = @[@"地区", @"楼盘", @"户型", @"风格", @"面积", @"参考", @"描述"];
-    self.values = @[@"地区", @"楼盘", @"户型", @"风格", @"面积", @"参考", @"描述"];
+    self.values = @[@"", @"", @"", @"", @"", @"", @""];
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    _tableView.backgroundColor = RGBColor(237, 237, 237);
     [self.view addSubview:_tableView];
+    self.comments = [NSMutableArray array];
     
-    self.currentPage = 1;
+    __weak typeof(self) weakSelf = self;
+    [_tableView addHeaderWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadData];
+    }];
     
-    [self loadData];
+    [_tableView addFooterWithCallback:^{
+        weakSelf.currentPage++;
+        [weakSelf loadComment];
+    }];
+    
+    [_tableView headerBeginRefreshing];
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"proejctId": _jrCase.projectId,
+    
+    NSDictionary *param = @{@"projectId": _jrCase.projectId};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_PRODETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            self.jrCase = [_jrCase buildDetailWithDictionary:data];
+            self.values = @[[NSString stringWithFormat:@"%@-%@",_jrCase.cityName, _jrCase.districtName],
+                            _jrCase.neighbourhoods,
+                            _jrCase.roomType,
+                            _jrCase.styleString,
+                            [NSString stringWithFormat:@"%d平米",_jrCase.houseArea],
+                            [NSString stringWithFormat:@"￥%d万元",_jrCase.projectPrice],
+                            _jrCase.desc
+                            ];
+        }
+        
+        [self loadComment];
+        [_tableView reloadData];
+    }];
+}
+
+- (void)loadComment{
+    NSDictionary *param = @{@"projectId": _jrCase.projectId,
                             @"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
                             @"onePageCount": @"20"};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_CASE_COMMENT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *projectList = [data objectForKey:@"projectList"];
-            NSMutableArray *rows = [JRCase buildUpWithValue:projectList];
+            NSArray *commentList = [data objectForKey:@"commentList"];
+            NSMutableArray *rows = [JRComment buildUpWithValue:commentList];
             if (_currentPage > 1) {
                 [_comments addObjectsFromArray:rows];
             }else{
-                self.comments = [JRCase buildUpWithValue:projectList];
+                self.comments = [JRCase buildUpWithValue:commentList];
             }
-            
-            
         }
         [_tableView reloadData];
-//        [_tableView headerEndRefreshing];
-//        [_tableView footerEndRefreshing];
+        [_tableView headerEndRefreshing];
+        [_tableView footerEndRefreshing];
     }];
 }
 
@@ -118,7 +151,7 @@
         
         cell.textLabel.text = [_keys objectAtIndex:indexPath.row];
         cell.detailTextLabel.text = [_values objectAtIndex:indexPath.row];
-        cell.contentView.
+
         return cell;
     }else{
         static NSString *CellIdentifier = @"Cell";
@@ -135,6 +168,31 @@
     }
     
     return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section > 0) {
+        return 35;
+    }
+    
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return nil;
+    }
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 35)];
+    headerView.backgroundColor = [UIColor clearColor];
+    UILabel *label = [headerView labelWithFrame:CGRectMake(5, 0, kWindowWidth-10, 35) text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:14]];
+    if (section == 1) {
+        label.text = @"方案描述";
+    }else{
+        label.text = @"评论";
+    }
+    [headerView addSubview:label];
+    return headerView;
 }
 
 - (void)onShare{

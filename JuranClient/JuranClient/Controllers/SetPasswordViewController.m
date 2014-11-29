@@ -8,7 +8,7 @@
 
 #import "SetPasswordViewController.h"
 
-@interface SetPasswordViewController ()
+@interface SetPasswordViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UITextField *phoneTextField;
 @property (nonatomic, strong) IBOutlet UITextField *passwordTextField;
@@ -27,6 +27,7 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
+    _phoneTextField.text = _phone;
 }
 
 - (IBAction)onBack:(id)sender{
@@ -73,6 +74,16 @@
     [_passwordTextField resignFirstResponder];
     [_confirmPasswordTextField resignFirstResponder];
     
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if ([textField isEqual:_passwordTextField]) {
+        [_confirmPasswordTextField becomeFirstResponder];
+    }else{
+        [self onRegist:nil];
+    }
+    
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -23,6 +23,8 @@
         self.visitCount = [dict getIntValueForKey:@"visitCount" defaultValue:0];
         self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
         self.password = [dict getStringValueForKey:@"password" defaultValue:@""];
+        
+        
     }
     return self;
 }
@@ -84,6 +86,8 @@
     JRUser *user = [[JRUser alloc] init];
     user.account = self.account;
     user.password = @"";
+    user.guid = @"";
+    user.token = @"";
     [user saveLocal];
     [user resetCurrentUser];
 }

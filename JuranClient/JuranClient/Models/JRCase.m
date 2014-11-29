@@ -40,6 +40,33 @@
     return self;
 }
 
+- (id)buildDetailWithDictionary:(NSDictionary *)dict{
+    if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+        return self;
+    }
+    
+    self.neighbourhoods = [dict getStringValueForKey:@"neighbourhoods" defaultValue:@""];
+    self.roomType = [dict getStringValueForKey:@"roomType" defaultValue:@""];
+    self.tags = [dict getStringValueForKey:@"tags" defaultValue:@""];
+    self.desc = [dict getStringValueForKey:@"description" defaultValue:@""];
+    self.projectStyle = [dict getStringValueForKey:@"projectStyle" defaultValue:@""];
+    self.houseArea = [dict getIntValueForKey:@"houseArea" defaultValue:0];
+    self.projectPrice = [dict getIntValueForKey:@"projectPrice" defaultValue:0];
+    self.detailImageList = [dict objectForKey:@"detailImageList"];
+    
+    NSDictionary *areaInfo = [dict objectForKey:@"areaInfo"];
+    if (areaInfo && [areaInfo isKindOfClass:[NSDictionary class]]) {
+        self.provinceCode = [areaInfo getStringValueForKey:@"provinceCode" defaultValue:@""];
+        self.provinceName = [areaInfo getStringValueForKey:@"provinceName" defaultValue:@""];
+        self.cityCode = [areaInfo getStringValueForKey:@"cityCode" defaultValue:@""];
+        self.cityName = [areaInfo getStringValueForKey:@"cityName" defaultValue:@""];
+        self.districtCode = [areaInfo getStringValueForKey:@"districtCode" defaultValue:@""];
+        self.districtName = [areaInfo getStringValueForKey:@"districtName" defaultValue:@""];
+    }
+    
+    return self;
+}
+
 + (NSMutableArray *)buildUpWithValue:(id)value{
     NSMutableArray *retVal = [NSMutableArray array];
     
@@ -54,6 +81,26 @@
 
 - (NSURL *)imageURL{
     return [NSURL URLWithString:self.imageUrl relativeToURL:[NSURL URLWithString:JR_IMAGE_SERVICE]];
+}
+
+- (NSString *)styleString{
+    NSDictionary *styles = @{@"mashup": @"混搭风格",
+                             @"european": @"欧式风格",
+                             @"chinese": @"中式风格",
+                             @"newClassical": @"新古典风格",
+                             @"eastSourthAsia": @"东南亚风格",
+                             @"america": @"美式风格",
+                             @"countryside": @"田园风格",
+                             @"mediterranean": @"地中海风格",
+                             @"modern": @"现代风格",
+                             @"other": @"其他",
+                             };
+    NSString *style = [styles objectForKey:self.projectStyle];
+    if (style && style.length > 0) {
+        return style;
+    }
+    
+    return @"其他";
 }
 
 @end

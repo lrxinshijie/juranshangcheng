@@ -119,7 +119,7 @@
 //        ASLog(@"allHeaderFields:%@",[completedOperation.readonlyResponse allHeaderFields]);
         
         NSString *resultString = completedOperation.responseString;
-        NSLog(@"Network Success:\n%@,Result:\n%@",completedOperation.url,resultString);
+        NSLog(@"Network Success:\n%@,Parma:%@,Result:\n%@",completedOperation.url,parameters,resultString);
 
         id result = completedOperation.responseJSON;
         if (result) {

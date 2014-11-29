@@ -124,6 +124,7 @@
     CaseDetailViewController *cd = [[CaseDetailViewController alloc] init];
     JRCase *cs = [_datas objectAtIndex:indexPath.row];
     cd.jrCase = cs;
+    cd.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:cd animated:YES];
 }
 

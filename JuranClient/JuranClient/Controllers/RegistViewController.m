@@ -115,7 +115,8 @@
     }
     
     NSDictionary *param = @{@"mobileNum": phone,
-                            @"smsAuthNo": code};
+                            @"smsAuthNo": code,
+                            @"mobileType": @"P01"};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_VALIDSMS parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

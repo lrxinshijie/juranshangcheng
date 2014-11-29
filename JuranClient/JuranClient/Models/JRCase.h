@@ -27,8 +27,26 @@
 @property (nonatomic, assign) BOOL isFav;
 @property (nonatomic, assign) BOOL isLike;
 
+//Detail
+@property (nonatomic, copy) NSString *neighbourhoods;
+@property (nonatomic, copy) NSString *roomType;
+@property (nonatomic, copy) NSString *projectStyle;
+@property (nonatomic, assign) NSInteger houseArea;
+@property (nonatomic, assign) NSInteger projectPrice;
+@property (nonatomic, copy) NSString *tags;
+@property (nonatomic, strong) NSArray *detailImageList;
+@property (nonatomic, copy) NSString *provinceCode;
+@property (nonatomic, copy) NSString *provinceName;
+@property (nonatomic, copy) NSString *cityCode;
+@property (nonatomic, copy) NSString *cityName;
+@property (nonatomic, copy) NSString *districtCode;
+@property (nonatomic, copy) NSString *districtName;
+
 + (NSMutableArray *)buildUpWithValue:(id)value;
+- (id)buildDetailWithDictionary:(NSDictionary *)dict;
 
 - (NSURL *)imageURL;
+
+- (NSString *)styleString;
 
 @end

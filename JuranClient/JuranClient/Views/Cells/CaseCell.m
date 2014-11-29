@@ -43,10 +43,17 @@
 }
 
 - (IBAction)onLike:(id)sender{
+    if (_jrCase.isLike) {
+        [self.viewController showTip:@"已经点过赞"];
+        return;
+    }
+    
     if ([self.viewController checkLogin]) {
-        [[ALEngine shareEngine] pathURL:JR_GIVEALIKE parameters:@{@"projectId": _jrCase.projectId} HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [[ALEngine shareEngine] pathURL:JR_GIVEALIKE parameters:@{@"projectId": _jrCase.projectId,@"projectType":@"1"} HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
             if (!error) {
-                
+                _jrCase.isLike = YES;
+                _jrCase.likeCount++;
+                [_likeButton setTitle:[NSString stringWithFormat:@" %d", _jrCase.likeCount] forState:UIControlStateNormal];
             }
         }];
     }
