@@ -10,13 +10,11 @@
 		1416C8B81A242FD100FA9999 /* CaseCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1416C8B61A242FD100FA9999 /* CaseCollectionCell.m */; };
 		1416C8B91A242FD100FA9999 /* CaseCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1416C8B71A242FD100FA9999 /* CaseCollectionCell.xib */; };
 		141C564D1A23613900A57971 /* TATopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 141C564B1A23613900A57971 /* TATopicCell.m */; };
-		1441A05B1A2978FD004A038E /* JRProfileData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A05A1A2978FD004A038E /* JRProfileData.m */; };
 		1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1453C8C31A24A74200D817BC /* TATopicCell.xib */; };
 		145E3D191A2792B200AA952F /* PersonalDatasMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */; };
 		145E3D1A1A2792B200AA952F /* PersonalDatasMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */; };
 		145E3D1B1A2792B200AA952F /* PersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D171A2792B200AA952F /* PersonalDataViewController.m */; };
 		145E3D1C1A2792B200AA952F /* PersonalDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145E3D181A2792B200AA952F /* PersonalDataViewController.xib */; };
-		145FD7111A28D74200E118A2 /* JRDesignerDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 145FD7101A28D74200E118A2 /* JRDesignerDetail.m */; };
 		1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */; };
 		1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */; };
 		1476DA8A1A21DAF30006E9E0 /* JRDesigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA891A21DAF30006E9E0 /* JRDesigner.m */; };
@@ -37,6 +35,10 @@
 		A90459D41A278A6100F8CD74 /* PublishDesignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459D21A278A6100F8CD74 /* PublishDesignViewController.xib */; };
 		A90459D81A278B2D00F8CD74 /* TopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459D61A278B2D00F8CD74 /* TopicViewController.m */; };
 		A90459D91A278B2D00F8CD74 /* TopicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459D71A278B2D00F8CD74 /* TopicViewController.xib */; };
+		A90459E31A27946E00F8CD74 /* PersonalDatasMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459DE1A27946E00F8CD74 /* PersonalDatasMoreViewController.m */; };
+		A90459E41A27946E00F8CD74 /* PersonalDatasMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459DF1A27946E00F8CD74 /* PersonalDatasMoreViewController.xib */; };
+		A90459E51A27946E00F8CD74 /* PersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459E11A27946E00F8CD74 /* PersonalDataViewController.m */; };
+		A90459E61A27946E00F8CD74 /* PersonalDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459E21A27946E00F8CD74 /* PersonalDataViewController.xib */; };
 		A93BF2951A262A290070B72A /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93BF2931A262A290070B72A /* ServiceViewController.m */; };
 		A93BF2961A262A290070B72A /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93BF2941A262A290070B72A /* ServiceViewController.xib */; };
 		A93BF29A1A2633D90070B72A /* SetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93BF2981A2633D90070B72A /* SetPasswordViewController.m */; };
@@ -159,8 +161,6 @@
 		1416C8B71A242FD100FA9999 /* CaseCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseCollectionCell.xib; sourceTree = "<group>"; };
 		141C564A1A23613900A57971 /* TATopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATopicCell.h; sourceTree = "<group>"; };
 		141C564B1A23613900A57971 /* TATopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATopicCell.m; sourceTree = "<group>"; };
-		1441A0591A2978FD004A038E /* JRProfileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRProfileData.h; sourceTree = "<group>"; };
-		1441A05A1A2978FD004A038E /* JRProfileData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRProfileData.m; sourceTree = "<group>"; };
 		1453C8C31A24A74200D817BC /* TATopicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TATopicCell.xib; sourceTree = "<group>"; };
 		145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDatasMoreViewController.h; sourceTree = "<group>"; };
 		145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDatasMoreViewController.m; sourceTree = "<group>"; };
@@ -168,8 +168,6 @@
 		145E3D161A2792B100AA952F /* PersonalDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDataViewController.h; sourceTree = "<group>"; };
 		145E3D171A2792B200AA952F /* PersonalDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDataViewController.m; sourceTree = "<group>"; };
 		145E3D181A2792B200AA952F /* PersonalDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalDataViewController.xib; sourceTree = "<group>"; };
-		145FD70F1A28D74200E118A2 /* JRDesignerDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRDesignerDetail.h; sourceTree = "<group>"; };
-		145FD7101A28D74200E118A2 /* JRDesignerDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRDesignerDetail.m; sourceTree = "<group>"; };
 		1476DA831A21DAC50006E9E0 /* DesignerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DesignerDetailViewController.h; sourceTree = "<group>"; };
 		1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DesignerDetailViewController.m; sourceTree = "<group>"; };
 		1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DesignerDetailViewController.xib; sourceTree = "<group>"; };
@@ -202,6 +200,12 @@
 		A90459D51A278B2D00F8CD74 /* TopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicViewController.h; sourceTree = "<group>"; };
 		A90459D61A278B2D00F8CD74 /* TopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicViewController.m; sourceTree = "<group>"; };
 		A90459D71A278B2D00F8CD74 /* TopicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopicViewController.xib; sourceTree = "<group>"; };
+		A90459DD1A27946E00F8CD74 /* PersonalDatasMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDatasMoreViewController.h; sourceTree = "<group>"; };
+		A90459DE1A27946E00F8CD74 /* PersonalDatasMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDatasMoreViewController.m; sourceTree = "<group>"; };
+		A90459DF1A27946E00F8CD74 /* PersonalDatasMoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalDatasMoreViewController.xib; sourceTree = "<group>"; };
+		A90459E01A27946E00F8CD74 /* PersonalDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDataViewController.h; sourceTree = "<group>"; };
+		A90459E11A27946E00F8CD74 /* PersonalDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDataViewController.m; sourceTree = "<group>"; };
+		A90459E21A27946E00F8CD74 /* PersonalDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalDataViewController.xib; sourceTree = "<group>"; };
 		A93BF2921A262A290070B72A /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		A93BF2931A262A290070B72A /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		A93BF2941A262A290070B72A /* ServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceViewController.xib; sourceTree = "<group>"; };
@@ -553,6 +557,12 @@
 		A987ED671A20920500CED7CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A90459DD1A27946E00F8CD74 /* PersonalDatasMoreViewController.h */,
+				A90459DE1A27946E00F8CD74 /* PersonalDatasMoreViewController.m */,
+				A90459DF1A27946E00F8CD74 /* PersonalDatasMoreViewController.xib */,
+				A90459E01A27946E00F8CD74 /* PersonalDataViewController.h */,
+				A90459E11A27946E00F8CD74 /* PersonalDataViewController.m */,
+				A90459E21A27946E00F8CD74 /* PersonalDataViewController.xib */,
 				A90459DC1A278D9D00F8CD74 /* Account */,
 				A90459DB1A278D8800F8CD74 /* Designer */,
 				A90459DA1A278D7E00F8CD74 /* Case */,
@@ -587,12 +597,8 @@
 		A987ED6C1A20920500CED7CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1441A0591A2978FD004A038E /* JRProfileData.h */,
-				1441A05A1A2978FD004A038E /* JRProfileData.m */,
 				1476DA881A21DAF30006E9E0 /* JRDesigner.h */,
 				1476DA891A21DAF30006E9E0 /* JRDesigner.m */,
-				145FD70F1A28D74200E118A2 /* JRDesignerDetail.h */,
-				145FD7101A28D74200E118A2 /* JRDesignerDetail.m */,
 				A987ED6D1A20920500CED7CD /* Public.h */,
 				A987ED6E1A20920500CED7CD /* Public.m */,
 				A987EE591A209E6100CED7CD /* JRCase.h */,
@@ -1026,7 +1032,6 @@
 				A90459CE1A27874800F8CD74 /* CaseDetailViewController.m in Sources */,
 				A987EDFE1A20920500CED7CD /* UIImageView+WebCache.m in Sources */,
 				A987EE3C1A2093C900CED7CD /* UIScrollView+MJRefresh.m in Sources */,
-				1441A05B1A2978FD004A038E /* JRProfileData.m in Sources */,
 				A90459D31A278A6100F8CD74 /* PublishDesignViewController.m in Sources */,
 				A987EDEE1A20920500CED7CD /* UINavigationBar+ASCategory.m in Sources */,
 				1476DA911A21DB850006E9E0 /* DesignerCell.m in Sources */,
@@ -1088,7 +1093,6 @@
 				A987EDF91A20920500CED7CD /* SDWebImageDecoder.m in Sources */,
 				A987EE211A20928B00CED7CD /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				A987EDD71A20920500CED7CD /* ASAlertView.m in Sources */,
-				145FD7111A28D74200E118A2 /* JRDesignerDetail.m in Sources */,
 				A987EDE01A20920500CED7CD /* NSDictionary+ASCategory.m in Sources */,
 				A987EDD81A20920500CED7CD /* ASDataHelper.m in Sources */,
 				A987EDF51A20920500CED7CD /* LeveyTabBar.m in Sources */,

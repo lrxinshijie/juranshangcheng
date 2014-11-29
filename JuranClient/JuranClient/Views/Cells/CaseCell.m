@@ -18,6 +18,10 @@
 @property (nonatomic, strong) IBOutlet UIButton *likeButton;
 @property (nonatomic, strong) IBOutlet UIButton *browseButton;
 
+@property (nonatomic, strong) JRCase *jrCase;
+
+- (IBAction)onLike:(id)sender;
+
 @end
 
 @implementation CaseCell
@@ -38,7 +42,18 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)onLike:(id)sender{
+    if ([self.viewController checkLogin]) {
+        [[ALEngine shareEngine] pathURL:JR_GIVEALIKE parameters:@{@"projectId": _jrCase.projectId} HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            if (!error) {
+                
+            }
+        }];
+    }
+}
+
 - (void)fillCellWithCase:(JRCase *)data{
+    self.jrCase = data;
 //    [_photoImageView setImageWithURL:[data imageURL] placeholderImage:_photoImageView.image];
 //    [_avtarImageView setImageFromURL:[NSURL URLWithString:data.a] placeHolderImage:<#(UIImage *)#>]
     _titleLabel.text = data.title;
