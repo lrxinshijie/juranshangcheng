@@ -13,8 +13,9 @@
 
 @interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, assign) NSInteger currentPage;
 
 @end
 
@@ -36,19 +37,56 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     self.navigationItem.title = @"设计师";
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
     
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
-    [self loadData];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:_tableView];
+    
+    __weak typeof(self) weakSelf = self;
+    [_tableView addHeaderWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView addFooterWithCallback:^{
+        weakSelf.currentPage++;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView headerBeginRefreshing];
+}
+
+- (void)onSearch{
     
 }
 
 - (void)loadData{
-    _datas = [NSMutableArray array];
-    for (NSInteger i = 0; i < 6; i++) {
-        [_datas addObject:[[JRDesigner alloc] init]];
-    }
+    NSDictionary *param = @{@"experience": @"",
+                            @"isRealNameAuth": @"",
+                            @"order": @"0",
+                            @"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
+                            @"onePageCount": @"5"};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_DESIGNERLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSArray *designerList = [data objectForKey:@"searchResultList"];
+            NSMutableArray *rows = [JRDesigner buildUpWithValue:designerList];
+            if (_currentPage > 1) {
+                [_datas addObjectsFromArray:rows];
+            }else{
+                self.datas = [JRDesigner buildUpWithValue:designerList];
+            }
+            
+            [_tableView reloadData];
+        }
+        [_tableView headerEndRefreshing];
+        [_tableView footerEndRefreshing];
+    }];
+    
 }
-
 
 - (void)didReceiveMemoryWarning
 {

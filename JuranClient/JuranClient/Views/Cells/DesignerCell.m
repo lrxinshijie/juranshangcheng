@@ -7,6 +7,10 @@
 //
 
 #import "DesignerCell.h"
+#import "JRDesigner.h"
+#import "JRCase.h"
+
+#define kCaseImageViewTag 1010
 
 @implementation DesignerCell
 
@@ -25,7 +29,22 @@
 }
 
 - (void)fillCellWithDesigner:(JRDesigner *)data{
-    
+    _nameLabel.text = data.nickName;
+    _styleLabel.text = [data styleNamesForDesignerList];
+    _experienceLabel.text =  @"2年";
+    [_productCountButton setTitle:[NSString stringWithFormat:@"  %i", data.projectCount] forState:UIControlStateNormal];
+    [_readCountButton setTitle:[NSString stringWithFormat:@"  %i", data.projectCount] forState:UIControlStateNormal];
+    NSInteger i = 0;
+    for (JRCase *c in data.projectDtoList) {
+        UIImageView *imageView = (UIImageView*)[self.contentView viewWithTag:i + kCaseImageViewTag];
+//        imageView.image = [imageView setImageWithURL:[c imageURL] placeholderImage:nil];
+        imageView.backgroundColor = [UIColor redColor];
+        i++;
+    }
+    for (; i < 4; i++) {
+        UIImageView *imageView = (UIImageView*)[self.contentView viewWithTag:i + kCaseImageViewTag];
+        imageView.backgroundColor = [UIColor greenColor];
+    }
 }
 
 @end

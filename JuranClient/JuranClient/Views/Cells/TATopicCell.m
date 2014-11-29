@@ -27,6 +27,7 @@
     _topicContentLabel.text = @"\"平房座北潮南的说法的\"";
     _ideaContentLabel.text = @"别说是加夫里是雷锋精神了对方极乐世界的法律理发师江东父老手机发了科技实力的什江东父老就是来得及发了快睡觉了；老师的飞机上了";
     _timeLabel.text = @"2014-10-23";
+    _relateImageView.image = [[UIImage alloc] init];
     [self changeFrame];
 }
 
@@ -44,9 +45,21 @@
     frame.size = [self sizeWithText:_ideaContentLabel.text font:_ideaContentLabel.font constrainedToSize:CGSizeMake(CGRectGetWidth(_ideaContentLabel.frame), MAXFLOAT)];
     _ideaContentLabel.frame = frame;
     
-    frame = _timeLabel.frame;
-    frame.origin.y = CGRectGetMaxY(_ideaContentLabel.frame)+5;
-    _timeLabel.frame = frame;
+    if (_relateImageView.image) {
+        _relateImageView.hidden = NO;
+        frame = _relateImageView.frame;
+        frame.origin.y = CGRectGetMaxY(_ideaContentLabel.frame)+10;
+        _relateImageView.frame = frame;
+        
+        frame = _timeLabel.frame;
+        frame.origin.y = CGRectGetMaxY(_relateImageView.frame)+5;
+        _timeLabel.frame = frame;
+    }else{
+        _relateImageView.hidden = YES;
+        frame = _timeLabel.frame;
+        frame.origin.y = CGRectGetMaxY(_ideaContentLabel.frame)+5;
+        _timeLabel.frame = frame;
+    }
     
     frame = self.frame;
     frame.size.height = CGRectGetMaxY(_timeLabel.frame) + 10;
@@ -70,10 +83,8 @@
     return size;
 }
 
-//- (void)layoutSubviews{
+//-(void)layoutSubviews{
 //    [self changeFrame];
-//    [super layoutSubviews];
-//    
 //}
 
 @end

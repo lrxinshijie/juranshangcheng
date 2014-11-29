@@ -7,15 +7,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="SWb-AF-ezH" customClass="TATopicCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+        <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="141" id="SWb-AF-ezH" customClass="TATopicCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SWb-AF-ezH" id="09B-xw-y4J">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
+            <tableViewCellContentView key="contentView" autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SWb-AF-ezH" id="09B-xw-y4J">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" id="MYH-Qi-g9B">
-                        <rect key="frame" x="5" y="5" width="310" height="84"/>
+                        <rect key="frame" x="5" y="5" width="310" height="135"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="话题：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WGB-gV-RCC">
@@ -45,13 +45,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Xx6-eI-ZEx">
-                                <rect key="frame" x="176" y="59" width="129" height="14"/>
+                                <rect key="frame" x="176" y="113" width="129" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="DGD-dR-UJ1">
+                                <rect key="frame" x="10" y="58" width="60" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.58442706769999997" green="1" blue="0.40211347409999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -61,6 +66,7 @@
                 <outlet property="backView" destination="MYH-Qi-g9B" id="DbW-kG-OJi"/>
                 <outlet property="ideaContentLabel" destination="3cn-Lg-34c" id="Ogw-9W-SYK"/>
                 <outlet property="ideaLabel" destination="pRZ-Db-wpe" id="8mB-fm-2rh"/>
+                <outlet property="relateImageView" destination="DGD-dR-UJ1" id="qhV-eN-dLX"/>
                 <outlet property="timeLabel" destination="Xx6-eI-ZEx" id="Ell-nk-Cma"/>
                 <outlet property="topicContentLabel" destination="fHG-NZ-bOa" id="Fa6-Wh-Av9"/>
                 <outlet property="topicLabel" destination="WGB-gV-RCC" id="Ymk-bl-NRg"/>

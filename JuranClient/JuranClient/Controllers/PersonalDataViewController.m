@@ -43,6 +43,11 @@
     self.navigationItem.title = @"个人资料";
     
     [self setupDatas];
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
+    _tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
+    _tableView.tableFooterView = [[UIView alloc] init];
+//    _tableView.tableHeaderView = [[UIView alloc] init];
+    [self.view addSubview:_tableView];
 }
 
 - (void)setupDatas{
@@ -70,6 +75,18 @@
     }else{
         return 1;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return 1;
+    }else{
+        return 9;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

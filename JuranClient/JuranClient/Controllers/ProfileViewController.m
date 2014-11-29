@@ -8,14 +8,21 @@
 
 #import "ProfileViewController.h"
 #import "PersonalDataViewController.h"
+#import "JRUser.h"
+#import "JRProfileData.h"
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *titleArray;
+    NSArray *imageArray;
 }
+@property (nonatomic, weak) IBOutlet UILabel *pushMsgCountLabel;
 @property (nonatomic, weak) IBOutlet UIView *buttonView;
 @property (nonatomic, weak) IBOutlet UIView *headerView;
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UILabel *userNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *loginNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *unLoginLabel;
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UIImageView *headerImageView;
 
 @end
@@ -39,28 +46,70 @@
     
     self.navigationItem.title = @"个人中心";
     
-    [self setupView];
-    [self setupData];
+    
+    titleArray = @[@"互动", @"我的关注", @"我的收藏", @"订单管理", @"账户管理", @"账户安全"];
+    imageArray = @[@"icon_personal_hudong.png", @"icon_personal_guanzhu.png", @"icon_personal_shouchang.png", @"icon_personal_ddgl.png", @"icon_personal_zhgl.png", @"icon_personal_zhaq"];
+    [self setupUI];
+    [self loadData];
 }
 
 
-- (void)setupView{
+- (void)setupUI{
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.tableHeaderView = _headerView;
+    [self.view addSubview:_tableView];
     
     _headerImageView.layer.masksToBounds = YES;
     _headerImageView.layer.cornerRadius = _headerImageView.frame.size.width / 2.f;
     _headerImageView.layer.borderColor = [UIColor whiteColor].CGColor;
     _headerImageView.layer.borderWidth = 1.f;
+    
+    _pushMsgCountLabel.hidden = YES;
+    _pushMsgCountLabel.layer.masksToBounds = YES;
+    _pushMsgCountLabel.layer.cornerRadius = _pushMsgCountLabel.frame.size.width / 2.f;
 }
 
-- (void)setupData{
-    titleArray = @[@"案例管理", @"个人主页", @"我的关注", @"我的收藏", @"订单管理", @"实名认证", @"账户管理", @"账户安全"];
+- (void)loadData{
+    if (![JRUser isLogin]) {
+        _unLoginLabel.hidden = NO;
+        _loginNameLabel.hidden = YES;
+        _userNameLabel.hidden = YES;
+        return;
+    }
+    NSDictionary *param = @{@"guid": [JRUser currentUser].guid,
+                            @"token": [JRUser currentUser].token,
+                            };
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                _profileData = [[JRProfileData alloc] initWithDictionary:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _unLoginLabel.hidden = YES;
+                    _loginNameLabel.hidden = NO;
+                    _userNameLabel.hidden = NO;
+                    _userNameLabel.text = _profileData.nickName;
+                    _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _profileData.account];
+                    _pushMsgCountLabel.hidden = YES;
+                    if (_profileData.newPushMsgCount) {
+                        _pushMsgCountLabel.hidden = NO;
+                        _pushMsgCountLabel.text = [NSString stringWithFormat:@"%i", _profileData.newPushMsgCount];
+                    }
+                });
+            }
+        }
+    }];
 }
+
 
 #pragma mark - Target Action
 
 - (IBAction)doTouchHeaderView:(id)sender{
+    if (![self checkLogin]) {
+        return;
+    }
     PersonalDataViewController *vc = [[PersonalDataViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -72,7 +121,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 9;
+    return titleArray.count + 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -97,10 +146,11 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textLabel.textColor = [UIColor colorWithRed:155/255.f green:155/255.f blue:155/255.f alpha:1.f];
-            cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
+            cell.textLabel.textColor = [UIColor colorWithRed:105/255.f green:105/255.f blue:105/255.f alpha:1.f];
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:kSystemFontSize+3];
         }
         cell.textLabel.text = titleArray[indexPath.row - 1];
+        cell.imageView.image = [UIImage imageNamed:imageArray[indexPath.row - 1]];
     }
     return cell;
 }
