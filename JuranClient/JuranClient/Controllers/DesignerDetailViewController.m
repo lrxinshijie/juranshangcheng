@@ -52,6 +52,7 @@
     [self loadData];
 }
 
+
 - (void)setupUI{
     [_segment setTitleList:@[@"作品案例", @"个人资料", @"TA参与的话题"]];
     _segment.delegate = self;

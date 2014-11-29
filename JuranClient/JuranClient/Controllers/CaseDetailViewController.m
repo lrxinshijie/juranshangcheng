@@ -151,7 +151,6 @@
         
         cell.textLabel.text = [_keys objectAtIndex:indexPath.row];
         cell.detailTextLabel.text = [_values objectAtIndex:indexPath.row];
-
         return cell;
     }else{
         static NSString *CellIdentifier = @"Cell";

@@ -12,6 +12,7 @@
                 <outlet property="headerView" destination="bMK-8u-RNx" id="s1Q-Xn-eL5"/>
                 <outlet property="loginNameLabel" destination="8JS-V7-dFD" id="SHO-8f-xat"/>
                 <outlet property="pushMsgCountLabel" destination="kvi-vl-RN0" id="x46-o0-RIL"/>
+                <outlet property="signedButton" destination="HDb-zq-Ajj" id="G9x-cR-OjG"/>
                 <outlet property="unLoginLabel" destination="bEL-Su-apM" id="qbo-G3-xRV"/>
                 <outlet property="userNameLabel" destination="io3-xD-Jwe" id="79m-Gu-1Oj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -139,6 +140,9 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="doSigned:" destination="-1" eventType="touchUpInside" id="uMi-Os-ipj"/>
+                    </connections>
                 </button>
                 <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="立即登录" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bEL-Su-apM">
                     <rect key="frame" x="123" y="79" width="74" height="21"/>

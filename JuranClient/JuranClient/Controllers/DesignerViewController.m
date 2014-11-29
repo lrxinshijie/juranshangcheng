@@ -67,7 +67,7 @@
                             @"isRealNameAuth": @"",
                             @"order": @"0",
                             @"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"onePageCount": @"5"};
+                            @"onePageCount": @"20"};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_DESIGNERLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
@@ -117,7 +117,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 130;
+    return 130+5;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -24,7 +24,7 @@
         self.newPrivateLetterCount = [dict getIntValueForKey:@"newPrivateLetterCount" defaultValue:0];
         self.newAnswerCount = [dict getIntValueForKey:@"newAnswerCount" defaultValue:0];
         self.newPushMsgCount = [dict getIntValueForKey:@"newPushMsgCount" defaultValue:0];
-        
+        self.isSigned = [dict getBoolValueForKey:@"isSigned" defaultValue:FALSE];
     }
     
     return self;
