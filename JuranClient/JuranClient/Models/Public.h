@@ -70,5 +70,5 @@
 + (NSString *)encodeWithString:(NSString *)password;
 
 + (NSString *)googleLanguageFromLocal;
-
++ (NSURL *)imageURL:(NSString *)url;
 @end

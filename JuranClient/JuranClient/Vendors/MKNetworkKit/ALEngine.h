@@ -11,6 +11,7 @@
 #define kNetworkParamKeyShowErrorDefaultMessage @"showErrorDefaultMessage"
 #define kNetworkParamKeyCancelOperationsFromURL @"CancelOperationsFromURL"
 #define kNetworkParamKeyReturnDataFromKey       @"ReturnDataFromKey"
+#define kNetworkParamKeyUseToken                @"kNetworkParamKeyUseToken"
 
 static NSString * const kNetworkDataKey                  = @"data";
 static NSString * const kNetworkSuccessKey               = @"status";

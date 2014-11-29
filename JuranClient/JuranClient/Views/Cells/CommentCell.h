@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class JRComment;
 @interface CommentCell : UITableViewCell
+
+- (void)fillCellWithComment:(JRComment *)data;
 
 @end

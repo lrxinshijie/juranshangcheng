@@ -44,6 +44,9 @@
                                 <state key="normal" image="case-icon-comment">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onComment:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Mfh-2Z-IeK"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G6l-UQ-UWm">
                                 <rect key="frame" x="58" y="32" width="239" height="15"/>
@@ -64,6 +67,14 @@
                     </view>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="avtarImageView" destination="GrT-kC-9e9" id="vJI-hL-wMX"/>
+                <outlet property="contentLabel" destination="syV-kM-K0K" id="4R8-8k-qDb"/>
+                <outlet property="mainView" destination="5i9-9X-LMP" id="iDY-BZ-QOX"/>
+                <outlet property="nameLabel" destination="4wj-qg-7Pq" id="ALG-v7-G4J"/>
+                <outlet property="timeLabel" destination="G6l-UQ-UWm" id="JAG-nN-qaN"/>
+                <outlet property="typeButton" destination="odz-Xe-hz1" id="lTN-E0-C64"/>
+            </connections>
             <point key="canvasLocation" x="203" y="229"/>
         </tableViewCell>
     </objects>
