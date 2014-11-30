@@ -39,6 +39,35 @@
     return self;
 }
 
+- (id)buildDetailWithDictionary:(NSDictionary *)dict{
+    if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+        return self;
+    }
+    
+    self.userLevel = [dict getStringValueForKey:@"userLevel" defaultValue:@""];
+    self.userLevelName = [dict getStringValueForKey:@"userLevelName" defaultValue:@""];
+    self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
+    self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
+    self.realName = [dict getStringValueForKey:@"realName" defaultValue:@""];
+    self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
+    self.isAuth = [dict getBoolValueForKey:@"isAuth" defaultValue:FALSE];
+    self.granuate = [dict getStringValueForKey:@"granuate" defaultValue:@""];
+    self.experience = [dict getIntValueForKey:@"experience" defaultValue:0];
+    self.style = [dict getStringValueForKey:@"style" defaultValue:@""];
+    self.priceMeasure = [dict getIntValueForKey:@"priceMeasure" defaultValue:0];
+    self.designFeeMin = [dict getIntValueForKey:@"designFeeMin" defaultValue:0];
+    self.designFeeMax = [dict getIntValueForKey:@"designFeeMax" defaultValue:0];
+    self.selfIntroduction = [dict getStringValueForKey:@"selfIntroduction" defaultValue:@""];
+    self.product2DCount = [dict getIntValueForKey:@"product2DCount" defaultValue:0];
+    self.product3DCount = [dict getIntValueForKey:@"product3DCount" defaultValue:0];
+    self.followCount = [dict getIntValueForKey:@"followCount" defaultValue:0];
+    self.viewCount = [dict getIntValueForKey:@"viewCount" defaultValue:0];
+    self.isFollowed = [dict getBoolValueForKey:@"isFollowed" defaultValue:FALSE];
+    
+    return self;
+}
+
+
 + (NSMutableArray *)buildUpWithValue:(id)value{
     NSMutableArray *retVal = [NSMutableArray array];
     
@@ -55,15 +84,17 @@
     return [NSURL URLWithString:self.headUrl relativeToURL:[NSURL URLWithString:JR_IMAGE_SERVICE]];
 }
 
-- (NSString*)styleNamesForDesignerList{
+- (NSString*)styleNamesWithType:(NSInteger)type{
+    //0 为设计师 1 为设计师详情
     NSArray *arr = [self.styleNames componentsSeparatedByString:@","];
     NSString* styleNames = @"";
+    NSString* separateStr = type?@"、":@"｜";
     for (NSInteger i = 0; arr.count; i++) {
         styleNames = [styleNames stringByAppendingString:arr[i]];
         if (i == arr.count - 1) {
             break;
         }
-        styleNames = [styleNames stringByAppendingString:@"｜"];
+        styleNames = [styleNames stringByAppendingString:separateStr];
     }
     return styleNames;
 }

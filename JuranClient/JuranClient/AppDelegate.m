@@ -36,7 +36,6 @@
     [self setupShareSDK];
     [self setupTabbar];
     
-    
     [self.window makeKeyAndVisible];
     return YES;
 }

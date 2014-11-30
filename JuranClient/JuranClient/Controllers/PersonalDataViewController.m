@@ -9,8 +9,9 @@
 #import "PersonalDataViewController.h"
 #import "PersonalDatasMoreViewController.h"
 #import "SexySwitch.h"
+#import "ModifyViewController.h"
 
-@interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, SexySwitchDelegate>
 {
     NSArray *valuesForSection1;
     NSArray *keysForSection1;
@@ -45,22 +46,22 @@
     self.navigationItem.title = @"个人资料";
     
     [self setupDatas];
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
 //    _tableView.tableHeaderView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
     _sexySwitch = [[SexySwitch alloc] init];
     _sexySwitch.selectedIndex = 1;
+    _sexySwitch.delegate = self;
+    
+    [self loadData];
 }
 
 - (void)setupDatas{
     keysForSection1 = @[@"头像", @"用户名"];
     keysForSection2 = @[@"昵称", @"性别", @"生日", @"所在地", @"详细地址"];
     keysForSection3 = @[@"固定电话", @"证件信息", @"QQ", @"微信"];
-    valuesForSection1 = @[@"头像", @"用户名"];
-    valuesForSection2 = @[@"昵称", @"性别", @"生日", @"所在地", @"详细地址"];
-    valuesForSection3 = @[@"从业经验", @"设计费用", @"量房费用", @"擅长风格"];
     
     /*
      *   设计师端个人资料
@@ -72,6 +73,33 @@
      valuesForSection1 = @[@"昵称", @"性别", @"生日", @"所在地"];
      valuesForSection1 = @[@"从业经验", @"设计费用", @"量房费用", @"擅长风格", @"设计专长", @"毕业院校", @"自我介绍"];
      */
+    
+}
+
+- (void)loadData{
+    NSDictionary *param = @{@"guid": [JRUser currentUser].guid,
+                            @"token": [JRUser currentUser].token,
+                            };
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                _memberDetail = [[JRMemberDetail alloc] initWithDictionary:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    valuesForSection1 = @[_memberDetail.headImageURL, _memberDetail.account];
+                    valuesForSection2 = @[_memberDetail.nickName, @"性别", _memberDetail.birthday.length == 0?@"未设置":_memberDetail.birthday, [_memberDetail locationAddress], _memberDetail.detailAddress.length == 0?@"未设置":_memberDetail.detailAddress];
+                    valuesForSection3 = @[[_memberDetail homeTelForPersonal], [_memberDetail idCardInfomation], _memberDetail.qq.length == 0?@"未设置":_memberDetail.qq, _memberDetail.weixin.length == 0?@"未设置":_memberDetail.weixin];
+                    [_tableView reloadData];
+                });
+            }
+        }
+    }];
+}
+
+#pragma mark - SexySwitchDelegate
+
+- (void)sexySwitch:(SexySwitch *)sexySwitch valueChange:(NSInteger)index{
     
 }
 
@@ -132,7 +160,6 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             cell.textLabel.text = keysForSection1[indexPath.row];
-            
             CGRect frame = CGRectMake(0, 0, 100, 50);
             UIView *view = [[UIView alloc] initWithFrame:frame];
             frame.origin = CGPointMake(frame.size.width - 8, (frame.size.height - 16)/2);
@@ -201,6 +228,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     /*
      *设计师端
      if (indexPath.section == 3) {
@@ -208,7 +236,24 @@
      [self.navigationController pushViewController:vc animated:YES];
      }
      */
-    
+    if (indexPath.section == 0) {
+        
+    }else if (indexPath.section == 1){
+        
+    }else if (indexPath.section == 2){
+        switch (indexPath.row) {
+            case 0:
+            {
+                ModifyViewController *vc = [[ModifyViewController alloc] init];
+                vc.title = keysForSection3[indexPath.row];
+                vc.keyboardType = UIKeyboardTypeNumberPad;
+                [self.navigationController pushViewController:vc animated:YES];
+                break;
+            }
+            default:
+                break;
+        }
+    }
 }
 
 

@@ -7,7 +7,10 @@
 //
 
 #import "ALViewController.h"
+#import "JRMemberDetail.h"
 
 @interface PersonalDataViewController : ALViewController
+
+@property (nonatomic, strong) JRMemberDetail *memberDetail;
 
 @end
