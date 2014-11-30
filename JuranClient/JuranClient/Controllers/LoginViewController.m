@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "RegistViewController.h"
+#import "ForgetViewController.h"
 
 @interface LoginViewController () <UITextFieldDelegate>
 
@@ -19,6 +20,7 @@
 - (IBAction)onLogin:(id)sender;
 - (IBAction)onRegist:(id)sender;
 - (IBAction)onHideKeyboard:(id)sender;
+- (IBAction)onForget:(id)sender;
 
 @end
 
@@ -103,6 +105,11 @@
     }
     
     return YES;
+}
+
+- (IBAction)onForget:(id)sender{
+    ForgetViewController *forget = [[ForgetViewController alloc] init];
+    [self.navigationController pushViewController:forget animated:YES];
 }
 
 /*
