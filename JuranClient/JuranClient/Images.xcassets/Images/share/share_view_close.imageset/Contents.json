@@ -7,11 +7,7 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "可选择右侧箭头.png"
-    },
-    {
-      "idiom" : "universal",
-      "unassigned" : true
+      "filename" : "关闭.png"
     }
   ],
   "info" : {

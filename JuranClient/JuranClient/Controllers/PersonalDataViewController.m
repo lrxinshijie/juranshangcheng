@@ -47,9 +47,8 @@
     
     [self setupDatas];
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
-    _tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
+    _tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.tableFooterView = [[UIView alloc] init];
-//    _tableView.tableHeaderView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
     _sexySwitch = [[SexySwitch alloc] init];
     _sexySwitch.selectedIndex = 1;
@@ -156,14 +155,14 @@
         cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize+2];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
     }
-    cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 16) image:[UIImage imageNamed:@"cellIndicator.png"]];
+    cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             cell.textLabel.text = keysForSection1[indexPath.row];
             CGRect frame = CGRectMake(0, 0, 100, 50);
             UIView *view = [[UIView alloc] initWithFrame:frame];
             frame.origin = CGPointMake(frame.size.width - 8, (frame.size.height - 16)/2);
-            frame.size = CGSizeMake(8, 16);
+            frame.size = CGSizeMake(8, 15);
             UIImageView *arrowImageView = [cell imageViewWithFrame:frame image:[UIImage imageNamed:@"cellIndicator.png"]];
             [view addSubview:arrowImageView];
             

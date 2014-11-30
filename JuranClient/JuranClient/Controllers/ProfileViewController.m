@@ -11,13 +11,14 @@
 #import "JRUser.h"
 #import "JRProfileData.h"
 #import "MyFollowViewController.h"
+#import "AccountManageViewController.h"
+#import "AccountSecurityViewController.h"
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *titleArray;
     NSArray *imageArray;
 }
-@property (nonatomic, weak) IBOutlet UILabel *pushMsgCountLabel;
 @property (nonatomic, weak) IBOutlet UIView *buttonView;
 @property (nonatomic, weak) IBOutlet UIView *headerView;
 @property (nonatomic, weak) IBOutlet UILabel *userNameLabel;
@@ -26,6 +27,11 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UIImageView *headerImageView;
 @property (nonatomic, weak) IBOutlet UIButton *signedButton;
+@property (nonatomic, weak) IBOutlet UIView *hasNewBidView;
+@property (nonatomic, weak) IBOutlet UIView *hasNewAnswerView;
+@property (nonatomic, weak) IBOutlet UIView *hasNewPushMsgView;
+@property (nonatomic, weak) IBOutlet UILabel *privateLetterCountLabel;
+
 
 @end
 
@@ -47,7 +53,6 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     self.navigationItem.title = @"个人中心";
-    
     
     titleArray = @[@"互动", @"我的关注", @"我的收藏", @"订单管理", @"账户管理", @"账户安全"];
     imageArray = @[@"icon_personal_hudong.png", @"icon_personal_guanzhu.png", @"icon_personal_shouchang.png", @"icon_personal_ddgl.png", @"icon_personal_zhgl.png", @"icon_personal_zhaq"];
@@ -71,9 +76,25 @@
     _headerImageView.layer.borderColor = [UIColor whiteColor].CGColor;
     _headerImageView.layer.borderWidth = 1.f;
     
-    _pushMsgCountLabel.hidden = YES;
-    _pushMsgCountLabel.layer.masksToBounds = YES;
-    _pushMsgCountLabel.layer.cornerRadius = _pushMsgCountLabel.frame.size.width / 2.f;
+    _privateLetterCountLabel.layer.masksToBounds = YES;
+    _privateLetterCountLabel.layer.cornerRadius = _privateLetterCountLabel.frame.size.width / 2.f;
+    
+    _signedButton.layer.cornerRadius = 2.0f;
+    _hasNewAnswerView.layer.cornerRadius = _hasNewAnswerView.frame.size.height/2.f;
+    _hasNewBidView.layer.cornerRadius = _hasNewBidView.frame.size.height/2.f;
+    _hasNewPushMsgView.layer.cornerRadius = _hasNewPushMsgView.frame.size.height/2.f;
+}
+
+- (void)refreshUI{
+    _unLoginLabel.hidden = YES;
+    _loginNameLabel.hidden = NO;
+    _userNameLabel.hidden = NO;
+    _userNameLabel.text = _profileData.nickName;
+    _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _profileData.account];
+    _privateLetterCountLabel.hidden = _profileData.newPushMsgCount?NO:YES;
+    _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _profileData.newPushMsgCount];
+    _signedButton.enabled = !_profileData.isSigned;
+    [_signedButton setTitle:_profileData.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
 }
 
 - (void)loadData{
@@ -90,15 +111,7 @@
             if ([data isKindOfClass:[NSDictionary class]]) {
                 _profileData = [[JRProfileData alloc] initWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    _unLoginLabel.hidden = YES;
-                    _loginNameLabel.hidden = NO;
-                    _userNameLabel.hidden = NO;
-                    _userNameLabel.text = _profileData.nickName;
-                    _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _profileData.account];
-                    _pushMsgCountLabel.hidden = _profileData.newPushMsgCount?NO:YES;
-                    _pushMsgCountLabel.text = [NSString stringWithFormat:@"%i", _profileData.newPushMsgCount];
-                    _signedButton.enabled = !_profileData.isSigned;
-                    [_signedButton setTitle:_profileData.isSigned?@"已签到":@"签到" forState:UIControlStateNormal];
+                    [self refreshUI];
                 });
             }
         }
@@ -109,6 +122,9 @@
 #pragma mark - Target Action
 
 - (IBAction)doSigned:(id)sender{
+    if (![self checkLogin]) {
+        return;
+    }
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_SIGNIN parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
@@ -166,6 +182,7 @@
             cell.textLabel.textColor = [UIColor colorWithRed:105/255.f green:105/255.f blue:105/255.f alpha:1.f];
             cell.textLabel.font = [UIFont boldSystemFontOfSize:kSystemFontSize+3];
         }
+        cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]];
         cell.textLabel.text = titleArray[indexPath.row - 1];
         cell.imageView.image = [UIImage imageNamed:imageArray[indexPath.row - 1]];
     }
@@ -179,6 +196,20 @@
             return;
         }
         MyFollowViewController *vc = [[MyFollowViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 5){
+        if (![self checkLogin]) {
+            return;
+        }
+        AccountManageViewController *vc = [[AccountManageViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 6){
+        if (![self checkLogin]) {
+            return;
+        }
+        AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }

@@ -17,8 +17,6 @@
 
 @interface ShareView()<ISSViewDelegate>
 
-
-
 @end
 
 @implementation ShareView
@@ -362,7 +360,7 @@
     titleLabel.textColor = [UIColor blackColor];
     [contentView addSubview:titleLabel];
     
-    NSArray *imageNameArr = @[@"sns_icon_22_s.png", @"sns_icon_23_s@2x", @"sns_icon_24_s@2x", @"sns_icon_2_s@2x", @"sns_icon_6_s@2x", @"sns_icon_1_s@2x"];
+    NSArray *imageNameArr = @[@"sns_icon_22_s.png", @"sns_icon_23_s.png", @"sns_icon_24_s.png", @"sns_icon_2_s.png", @"sns_icon_6_s.png", @"sns_icon_1_s.png"];
     NSArray *titleArr = @[@"微信好友", @"微信朋友圈", @"腾讯好友", @"腾讯微博", @"QQ空间", @"新浪微博"];
     for (NSInteger i = 0; i<6; i++) {
         frame.size = CGSizeMake(40, 40);
@@ -388,7 +386,7 @@
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     cancelBtn.frame = frame;
     cancelBtn.center = CGPointMake(150.f, 230);
-    [cancelBtn setImage:[UIImage imageNamed:imageNameArr[0]] forState:UIControlStateNormal];
+    [cancelBtn setImage:[UIImage imageNamed:@"share_view_close.png"] forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(unShow) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:cancelBtn];
 }

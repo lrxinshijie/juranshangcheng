@@ -53,6 +53,10 @@
 		1441A19F1A29E463004A038E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1441A19E1A29E463004A038E /* QuartzCore.framework */; };
 		1441A1A11A29E46B004A038E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1441A1A01A29E46B004A038E /* SystemConfiguration.framework */; };
 		1441A1A41A29E62A004A038E /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A1A31A29E62A004A038E /* ShareView.m */; };
+		14490CA91A2B5D50001CB160 /* AccountManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14490CA71A2B5D50001CB160 /* AccountManageViewController.m */; };
+		14490CAA1A2B5D50001CB160 /* AccountManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14490CA81A2B5D50001CB160 /* AccountManageViewController.xib */; };
+		14490CB31A2B6A19001CB160 /* AccountSecurityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14490CB11A2B6A19001CB160 /* AccountSecurityViewController.m */; };
+		14490CB41A2B6A19001CB160 /* AccountSecurityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14490CB21A2B6A19001CB160 /* AccountSecurityViewController.xib */; };
 		1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1453C8C31A24A74200D817BC /* TATopicCell.xib */; };
 		145E3D191A2792B200AA952F /* PersonalDatasMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */; };
 		145E3D1A1A2792B200AA952F /* PersonalDatasMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */; };
@@ -272,6 +276,12 @@
 		1441A1A01A29E46B004A038E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1441A1A21A29E62A004A038E /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		1441A1A31A29E62A004A038E /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		14490CA61A2B5D50001CB160 /* AccountManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManageViewController.h; sourceTree = "<group>"; };
+		14490CA71A2B5D50001CB160 /* AccountManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManageViewController.m; sourceTree = "<group>"; };
+		14490CA81A2B5D50001CB160 /* AccountManageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountManageViewController.xib; sourceTree = "<group>"; };
+		14490CB01A2B6A19001CB160 /* AccountSecurityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSecurityViewController.h; sourceTree = "<group>"; };
+		14490CB11A2B6A19001CB160 /* AccountSecurityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSecurityViewController.m; sourceTree = "<group>"; };
+		14490CB21A2B6A19001CB160 /* AccountSecurityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountSecurityViewController.xib; sourceTree = "<group>"; };
 		1453C8C31A24A74200D817BC /* TATopicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TATopicCell.xib; sourceTree = "<group>"; };
 		145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDatasMoreViewController.h; sourceTree = "<group>"; };
 		145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDatasMoreViewController.m; sourceTree = "<group>"; };
@@ -728,6 +738,12 @@
 				14ABFBED1A25DADC00C4AF65 /* RegistViewController.h */,
 				14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */,
 				14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */,
+				145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */,
+				145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */,
+				145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */,
+				145E3D161A2792B100AA952F /* PersonalDataViewController.h */,
+				145E3D171A2792B200AA952F /* PersonalDataViewController.m */,
+				145E3D181A2792B200AA952F /* PersonalDataViewController.xib */,
 				A93BF2971A2633D90070B72A /* SetPasswordViewController.h */,
 				A93BF2981A2633D90070B72A /* SetPasswordViewController.m */,
 				A93BF2991A2633D90070B72A /* SetPasswordViewController.xib */,
@@ -746,6 +762,12 @@
 				A9C398471A29D98C006A8AAB /* ResetEmailViewController.h */,
 				A9C398481A29D98C006A8AAB /* ResetEmailViewController.m */,
 				A9C398491A29D98C006A8AAB /* ResetEmailViewController.xib */,
+				14490CA61A2B5D50001CB160 /* AccountManageViewController.h */,
+				14490CA71A2B5D50001CB160 /* AccountManageViewController.m */,
+				14490CA81A2B5D50001CB160 /* AccountManageViewController.xib */,
+				14490CB01A2B6A19001CB160 /* AccountSecurityViewController.h */,
+				14490CB11A2B6A19001CB160 /* AccountSecurityViewController.m */,
+				14490CB21A2B6A19001CB160 /* AccountSecurityViewController.xib */,
 			);
 			name = Account;
 			sourceTree = "<group>";
@@ -848,12 +870,6 @@
 				A987EE421A20984200CED7CD /* HomeViewController.xib */,
 				A987EE4F1A2098AF00CED7CD /* WikiViewController.h */,
 				A987EE501A2098AF00CED7CD /* WikiViewController.m */,
-				145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */,
-				145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */,
-				145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */,
-				145E3D161A2792B100AA952F /* PersonalDataViewController.h */,
-				145E3D171A2792B200AA952F /* PersonalDataViewController.m */,
-				145E3D181A2792B200AA952F /* PersonalDataViewController.xib */,
 				A987EE511A2098AF00CED7CD /* WikiViewController.xib */,
 				14ABFBEA1A25CFFD00C4AF65 /* UIViewController+Login.h */,
 				14ABFBEB1A25CFFD00C4AF65 /* UIViewController+Login.m */,
@@ -1290,6 +1306,7 @@
 				A987EE581A2098BA00CED7CD /* ProfileViewController.xib in Resources */,
 				1441A1751A29E3CD004A038E /* WeiboSDK.bundle in Resources */,
 				1441A1701A29E3CD004A038E /* Resource.bundle in Resources */,
+				14490CB41A2B6A19001CB160 /* AccountSecurityViewController.xib in Resources */,
 				1476DA921A21DB850006E9E0 /* DesignerCell.xib in Resources */,
 				140C46EE1A2A3741003317AD /* MyFollowViewController.xib in Resources */,
 				A987EE3F1A20980400CED7CD /* Images.xcassets in Resources */,
@@ -1306,6 +1323,7 @@
 				A9C398461A29D25F006A8AAB /* ResetPasswordViewController.xib in Resources */,
 				1441A1731A29E3CD004A038E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				1416C8B91A242FD100FA9999 /* CaseCollectionCell.xib in Resources */,
+				14490CAA1A2B5D50001CB160 /* AccountManageViewController.xib in Resources */,
 				A9C3984B1A29D98C006A8AAB /* ResetEmailViewController.xib in Resources */,
 				1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */,
 			);
@@ -1389,6 +1407,7 @@
 				1476DA961A21DFBE0006E9E0 /* SelfIntrodutionCell.m in Sources */,
 				1441A18C1A29E3D5004A038E /* KTPhotoBrowserGlobal.m in Sources */,
 				A987EE1B1A20928B00CED7CD /* NSAlert+MKNetworkKitAdditions.m in Sources */,
+				14490CB31A2B6A19001CB160 /* AccountSecurityViewController.m in Sources */,
 				A9D654B41A27642800A80253 /* JSONHTTPClient.m in Sources */,
 				A987EDF41A20920500CED7CD /* UIViewController+ASCategory.m in Sources */,
 				A987EE5F1A209E7900CED7CD /* CaseCell.m in Sources */,
@@ -1419,6 +1438,7 @@
 				A987EDF51A20920500CED7CD /* LeveyTabBar.m in Sources */,
 				A987EDF31A20920500CED7CD /* UIView+ASCategory.m in Sources */,
 				A987EDFC1A20920500CED7CD /* SDWebImagePrefetcher.m in Sources */,
+				14490CA91A2B5D50001CB160 /* AccountManageViewController.m in Sources */,
 				1441A1891A29E3D5004A038E /* JRPhotoScrollViewController.m in Sources */,
 				A9D654AF1A27642800A80253 /* JSONModelArray.m in Sources */,
 				1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */,

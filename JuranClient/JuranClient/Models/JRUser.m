@@ -23,8 +23,7 @@
         self.visitCount = [dict getIntValueForKey:@"visitCount" defaultValue:0];
         self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
         self.password = [dict getStringValueForKey:@"password" defaultValue:@""];
-        
-        
+
     }
     return self;
 }

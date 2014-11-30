@@ -20,7 +20,7 @@
         self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
          self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
          self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
-        self.hasNewBidCount = [dict getIntValueForKey:@"hasNewBidCount" defaultValue:0];
+        self.hasNewBidCount = [dict getIntValueForKey:@"hasNewBigCount" defaultValue:0];
         self.newPrivateLetterCount = [dict getIntValueForKey:@"newPrivateLetterCount" defaultValue:0];
         self.newAnswerCount = [dict getIntValueForKey:@"newAnswerCount" defaultValue:0];
         self.newPushMsgCount = [dict getIntValueForKey:@"newPushMsgCount" defaultValue:0];
