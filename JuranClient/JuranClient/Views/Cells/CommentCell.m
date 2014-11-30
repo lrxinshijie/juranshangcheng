@@ -29,6 +29,9 @@
     
     _avtarImageView.layer.masksToBounds = YES;
     _avtarImageView.layer.cornerRadius = CGRectGetWidth(_avtarImageView.frame) / 2;
+    
+    _typeButton.layer.masksToBounds = YES;
+    _typeButton.layer.cornerRadius = 5;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

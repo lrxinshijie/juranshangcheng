@@ -121,7 +121,7 @@
 //        ASLog(@"allHeaderFields:%@",[completedOperation.readonlyResponse allHeaderFields]);
         
         NSString *resultString = completedOperation.responseString;
-        NSLog(@"Network Success:\n%@,Parma:%@,Result:\n%@",completedOperation.url,parameters,resultString);
+        NSLog(@"Network Success:\n%@ \n %@ \n%@",completedOperation.url,parameters,resultString);
 
         id result = completedOperation.responseJSON;
         if (result) {
@@ -282,7 +282,7 @@
 - (void)showErrMsg:(NSError *)err{
     NSString *msg = nil;
     if (err == nil || err.localizedDescription.length == 0) {
-        msg = @"Your internet connection is lost";
+        msg = @"网络请求失败";
     }else{
         msg = err.localizedDescription;//[NSString stringWithFormat:@"%d,%@",err.code,err.localizedDescription];
     }

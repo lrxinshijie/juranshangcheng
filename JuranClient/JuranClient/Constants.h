@@ -48,6 +48,11 @@
 #define kNotificationNameEventReloadData @"kNotificationNameEventReloadData"
 
 
+//:@"100543115"
+//appSecret:@"9cc782277d5b8084f073599d72ba08c3"
+#define QQHLSDKAppKey @"100543115"
+#define QQHLSDKAppSecret @"9cc782277d5b8084f073599d72ba08c3"
+
 typedef void (^ModelBlock)(BOOL result);
 
 #endif

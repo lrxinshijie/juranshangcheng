@@ -168,6 +168,7 @@
 		A987EE5B1A209E6100CED7CD /* JRCase.m in Sources */ = {isa = PBXBuildFile; fileRef = A987EE5A1A209E6100CED7CD /* JRCase.m */; };
 		A987EE5F1A209E7900CED7CD /* CaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A987EE5D1A209E7900CED7CD /* CaseCell.m */; };
 		A987EE601A209E7900CED7CD /* CaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A987EE5E1A209E7900CED7CD /* CaseCell.xib */; };
+		A9A2A3FF1A2B1F0900DFA49B /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A2A3FE1A2B1F0900DFA49B /* BannerView.m */; };
 		A9C398371A298047006A8AAB /* JRComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C398361A298047006A8AAB /* JRComment.m */; };
 		A9C3983B1A29842D006A8AAB /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C398391A29842D006A8AAB /* CommentCell.m */; };
 		A9C3983C1A29842D006A8AAB /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9C3983A1A29842D006A8AAB /* CommentCell.xib */; };
@@ -479,6 +480,8 @@
 		A987EE5C1A209E7900CED7CD /* CaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseCell.h; sourceTree = "<group>"; };
 		A987EE5D1A209E7900CED7CD /* CaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseCell.m; sourceTree = "<group>"; };
 		A987EE5E1A209E7900CED7CD /* CaseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseCell.xib; sourceTree = "<group>"; };
+		A9A2A3FD1A2B1F0900DFA49B /* BannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
+		A9A2A3FE1A2B1F0900DFA49B /* BannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
 		A9C398351A298047006A8AAB /* JRComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRComment.h; sourceTree = "<group>"; };
 		A9C398361A298047006A8AAB /* JRComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRComment.m; sourceTree = "<group>"; };
 		A9C398381A29842D006A8AAB /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
@@ -832,13 +835,13 @@
 				A987EE421A20984200CED7CD /* HomeViewController.xib */,
 				A987EE4F1A2098AF00CED7CD /* WikiViewController.h */,
 				A987EE501A2098AF00CED7CD /* WikiViewController.m */,
+				A987EE511A2098AF00CED7CD /* WikiViewController.xib */,
 				145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */,
 				145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */,
 				145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */,
 				145E3D161A2792B100AA952F /* PersonalDataViewController.h */,
 				145E3D171A2792B200AA952F /* PersonalDataViewController.m */,
 				145E3D181A2792B200AA952F /* PersonalDataViewController.xib */,
-				A987EE511A2098AF00CED7CD /* WikiViewController.xib */,
 				14ABFBEA1A25CFFD00C4AF65 /* UIViewController+Login.h */,
 				14ABFBEB1A25CFFD00C4AF65 /* UIViewController+Login.m */,
 				A90459D01A278A6100F8CD74 /* PublishDesignViewController.h */,
@@ -1036,6 +1039,8 @@
 				1441A0631A29A447004A038E /* SexySwitch.m */,
 				1441A1A21A29E62A004A038E /* ShareView.h */,
 				1441A1A31A29E62A004A038E /* ShareView.m */,
+				A9A2A3FD1A2B1F0900DFA49B /* BannerView.h */,
+				A9A2A3FE1A2B1F0900DFA49B /* BannerView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1344,6 +1349,7 @@
 				1441A18A1A29E3D5004A038E /* JRWebImageDataSource.m in Sources */,
 				A987EE371A2093C900CED7CD /* MJRefreshBaseView.m in Sources */,
 				A987EDF11A20920500CED7CD /* UITableView+ASCategory.m in Sources */,
+				A9A2A3FF1A2B1F0900DFA49B /* BannerView.m in Sources */,
 				A987EE1F1A20928B00CED7CD /* NSString+MKNetworkKitAdditions.m in Sources */,
 				14ABFBF01A25DADC00C4AF65 /* RegistViewController.m in Sources */,
 				A987EE241A20928B00CED7CD /* Reachability.m in Sources */,

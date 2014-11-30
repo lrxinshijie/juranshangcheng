@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "RegistViewController.h"
 #import "ForgetViewController.h"
+#import <ShareSDK/ShareSDK.h>
 
 @interface LoginViewController () <UITextFieldDelegate>
 
@@ -16,7 +17,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *passwordTextField;
 
 - (IBAction)onBack:(id)sender;
-- (IBAction)onThirdLogin:(id)sender;
+- (IBAction)onThirdLogin:(UIButton *)btn;
 - (IBAction)onLogin:(id)sender;
 - (IBAction)onRegist:(id)sender;
 - (IBAction)onHideKeyboard:(id)sender;
@@ -47,8 +48,55 @@
     [super back:sender];
 }
 
-- (IBAction)onThirdLogin:(id)sender{
-    [self onHideKeyboard:sender];
+- (IBAction)onThirdLogin:(UIButton *)btn{
+    [self onHideKeyboard:btn];
+    if (btn.tag > 1002) {
+        return;
+    }
+    
+    [self showHUD];
+    ShareType type = ShareTypeQQSpace;
+    NSString *thirdPrevStr = @"qq_";
+    NSString *thirdUserSource = @"qq";
+    if (btn.tag == 1001) {
+        type = ShareTypeSinaWeibo;
+        thirdPrevStr = @"sina_";
+        thirdUserSource = @"sina_microblog";
+    }
+    
+    
+    [ShareSDK getUserInfoWithType:type authOptions:nil result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
+        if (result){
+            
+            NSString *thirdUserId = [[userInfo credential] uid];
+//            NSString *accessToken = [[userInfo credential] token];
+//            NSNumber *thirdSource = @(2);
+            
+            NSDictionary *param = @{@"thirdUserId":thirdUserId,
+//                                         @"accessToken":accessToken,
+                                         @"thirdPrevStr": thirdPrevStr,
+                                         @"thirdUserSource": thirdUserSource,
+                                    @"thirdVisitorId": [NSString stringWithFormat:@"%d", arc4random()%10000],
+                                         };
+            
+            [[ALEngine shareEngine] pathURL:JR_THIRD_LOGIN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                [self hideHUD];
+                if (!error) {
+                    JRUser *user = [[JRUser alloc] initWithDictionary:data];
+//                    user.account = account;
+//                    user.password = password;
+                    [user saveLocal];
+                    [user resetCurrentUser];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self back:nil];
+                    });
+                }
+            }];
+        }else{
+            [self hideHUD];
+        }
+    }];
+    
 }
 
 - (IBAction)onLogin:(id)sender{

@@ -43,6 +43,7 @@
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.backgroundColor = RGBColor(236, 236, 236);
     [self.view addSubview:_tableView];
     
     __weak typeof(self) weakSelf = self;
@@ -101,7 +102,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 275;
+    if (indexPath.row == [_datas count] - 1) {
+        return 275;
+    }
+    
+    return 270;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    cell.backgroundColor = [UIColor clearColor];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
