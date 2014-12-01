@@ -33,7 +33,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *followTitleLabel;
 @property (nonatomic, strong) SelfIntrodutionCell *introductionCell;
 @property (nonatomic, strong) TATopicCell *topicCell;
-@property (nonatomic, strong) ShareView *shareView;
 
 @end
 
@@ -77,8 +76,6 @@
     
     _toolBar.frame = CGRectMake(0, kWindowHeightWithoutNavigationBar - 49, _toolBar.frame.size.width, _toolBar.frame.size.height);
     [self.view addSubview:_toolBar];
-    
-    _shareView = [[ShareView alloc] init];
     
 
     UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
@@ -158,7 +155,7 @@
 //分享
 - (IBAction)doShare:(id)sender{
     ASLog(@"分享");
-    [_shareView showWithContent:@"" image:@"" title:@"" url:@""];
+    [[ShareView sharedView] showWithContent:@"" image:@"" title:@"" url:@""];
 }
 
 - (void)handleSwipes:(UISwipeGestureRecognizer*) gesture{

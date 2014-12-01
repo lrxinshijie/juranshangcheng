@@ -93,38 +93,40 @@
 }
 
 - (void)setupShareSDK{
-    [ShareSDK registerApp:@"api20"];
+    [ShareSDK registerApp:@"477b2576a9ca"];
     
     //添加新浪微博应用 注册网址 http://open.weibo.com
-    [ShareSDK connectSinaWeiboWithAppKey:@"568898243"
-                               appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
-                             redirectUri:@"http://www.sharesdk.cn"];
+    [ShareSDK connectSinaWeiboWithAppKey:@"4218949951"
+                               appSecret:@"444121dbfb4e449ba7caf573b617652c"
+                             redirectUri:@"http://www.sina.com"];
     //当使用新浪微博客户端分享的时候需要按照下面的方法来初始化新浪的平台
-    [ShareSDK  connectSinaWeiboWithAppKey:@"568898243"
-                                appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
-                              redirectUri:@"http://www.sharesdk.cn"
+    [ShareSDK  connectSinaWeiboWithAppKey:@"4218949951"
+                                appSecret:@"444121dbfb4e449ba7caf573b617652c"
+                              redirectUri:@"http://www.sina.com"
                               weiboSDKCls:[WeiboSDK class]];
     
     //添加腾讯微博应用 注册网址 http://dev.t.qq.com
-    [ShareSDK connectTencentWeiboWithAppKey:@"801307650"
-                                  appSecret:@"ae36f4ee3946e1cbb98d6965b0b2ff5c"
+    [ShareSDK connectTencentWeiboWithAppKey:@"801431266"
+                                  appSecret:@"558f8c19eb566dcce87b898461b0cf24"
                                 redirectUri:@"http://www.sharesdk.cn"
                                    wbApiCls:[WeiboApi class]];
     
     //添加QQ空间应用  注册网址  http://connect.qq.com/intro/login/
-    [ShareSDK connectQZoneWithAppKey:@"100371282"
-                           appSecret:@"aed9b0303e3ed1e27bae87c33761161d"
+    [ShareSDK connectQZoneWithAppKey:QQHLSDKAppKey
+                           appSecret:QQHLSDKAppSecret
                    qqApiInterfaceCls:[QQApiInterface class]
                      tencentOAuthCls:[TencentOAuth class]];
     
     
     //添加QQ应用  注册网址  http://open.qq.com/
-    [ShareSDK connectQQWithQZoneAppKey:@"100371282"
+    [ShareSDK connectQQWithQZoneAppKey:QQHLSDKAppKey
                      qqApiInterfaceCls:[QQApiInterface class]
                        tencentOAuthCls:[TencentOAuth class]];
     
+    
+    
     //添加微信应用 注册网址 http://open.weixin.qq.com
-    [ShareSDK connectWeChatWithAppId:@"wx4868b35061f87885"
+    [ShareSDK connectWeChatWithAppId:@"wxbe9895c4d26b95dc"
                            wechatCls:[WXApi class]];
     
 }
@@ -162,6 +164,24 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application
+      handleOpenURL:(NSURL *)url
+{
+    return [ShareSDK handleOpenURL:url
+                        wxDelegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return [ShareSDK handleOpenURL:url
+                 sourceApplication:sourceApplication
+                        annotation:annotation
+                        wxDelegate:self];
 }
 
 @end

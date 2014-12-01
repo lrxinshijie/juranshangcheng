@@ -13,7 +13,7 @@
 #import "JRComment.h"
 #import "CommentCell.h"
 
-@interface CaseDetailViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CaseDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *comments;
@@ -23,9 +23,23 @@
 @property (nonatomic, strong) NSArray *values;
 @property (nonatomic, assign) NSInteger currentPage;
 
+@property (nonatomic, strong) IBOutlet UIView *designerView;
+@property (nonatomic, strong) IBOutlet UIImageView *avtarImageView;
+@property (nonatomic, strong) IBOutlet UILabel *nameLabel;
+@property (nonatomic, strong) IBOutlet UILabel *detailLabel;
+
+@property (nonatomic, strong) IBOutlet UIView *commentView;
+@property (nonatomic, strong) IBOutlet UITextField *commentTextField;
+
+- (IBAction)onSend:(id)sender;
+
 @end
 
 @implementation CaseDetailViewController
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,13 +47,18 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"方案描述";
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onShare)];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
     self.keys = @[@"地区", @"楼盘", @"户型", @"风格", @"面积", @"参考", @"描述"];
     self.values = @[@"", @"", @"", @"", @"", @"", @""];
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(237, 237, 237);
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     [self.view addSubview:_tableView];
+    
     self.comments = [NSMutableArray array];
     
     __weak typeof(self) weakSelf = self;
@@ -52,6 +71,12 @@
         weakSelf.currentPage++;
         [weakSelf loadComment];
     }];
+    
+    CGRect frame = _commentView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame);
+    _commentView.frame = frame;
+    
+    [self.view addSubview:_commentView];
     
     [_tableView headerBeginRefreshing];
 }
@@ -72,6 +97,8 @@
                             [NSString stringWithFormat:@"￥%d万元",_jrCase.projectPrice],
                             _jrCase.desc
                             ];
+            _nameLabel.text = _jrCase.nickName;
+            _detailLabel.text = _jrCase.tags;
         }
         
         [self loadComment];
@@ -92,7 +119,7 @@
             if (_currentPage > 1) {
                 [_comments addObjectsFromArray:rows];
             }else{
-                self.comments = [JRCase buildUpWithValue:commentList];
+                self.comments = rows;
             }
         }
         [_tableView reloadData];
@@ -117,14 +144,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return 130;
+        return 80;
     }else if (indexPath.section == 1){
         return 44;
     }else{
         JRComment *commnet = [_comments objectAtIndex:indexPath.row];
         NSString *content = commnet.commentContent;
         CGFloat height = [content heightWithFont:[UIFont systemFontOfSize:15] constrainedToWidth:290];
-        return 68+height;
+        return 73+height;
     }
     
     return 0;
@@ -133,15 +160,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         static NSString *CellIdentifier = @"DesignerCell";
-        DesignerCell *cell = (DesignerCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+        UITableViewCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
         if (!cell) {
-            NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-            cell = (DesignerCell *)[nibs firstObject];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+            [cell addSubview:_designerView];
         }
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        [cell fillCellWithDesigner:_designer];
         return cell;
         
     }else if (indexPath.section == 1){
@@ -149,6 +174,10 @@
         UITableViewCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+            cell.backgroundColor = [UIColor clearColor];
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(5, 1, 310, 43)];
+            view.backgroundColor = [UIColor whiteColor];
+            [cell.contentView addSubview:view];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -165,6 +194,8 @@
             NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
             cell = [nibs firstObject];
         }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         JRComment *commnet = [_comments objectAtIndex:indexPath.row];
         [cell fillCellWithComment:commnet];
@@ -183,14 +214,20 @@
     return 0;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 2) {
+        cell.backgroundColor = [UIColor clearColor];
+    }
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
         return nil;
     }
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 35)];
-    headerView.backgroundColor = [UIColor clearColor];
-    UILabel *label = [headerView labelWithFrame:CGRectMake(5, 0, kWindowWidth-10, 35) text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:14]];
+    headerView.backgroundColor = _tableView.backgroundColor;
+    UILabel *label = [headerView labelWithFrame:CGRectMake(10, 0, kWindowWidth-20, 35) text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:14]];
     if (section == 1) {
         label.text = @"方案描述";
     }else{
@@ -202,6 +239,63 @@
 
 - (void)onShare{
     
+}
+
+- (IBAction)onSend:(id)sender{
+    [_commentTextField resignFirstResponder];
+    
+    if (![self checkLogin]) {
+        return;
+    }
+    
+    NSString *comment = _commentTextField.text;
+    if (comment.length == 0) {
+        [self showTip:@"评论内容不能为空"];
+        return;
+    }
+    
+    NSDictionary *param = @{@"projectId": _jrCase.projectId,
+                            @"commentContent": comment};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_ADD_COMMENT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            _commentTextField.text = @"";
+            self.currentPage = 1;
+            [self loadComment];
+        }
+    }];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+}
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    [self onSend:nil];
+    
+    return YES;
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification{
+    NSDictionary *info = [notification userInfo];
+    NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
+    CGSize keyboardSize = [value CGRectValue].size;
+    
+    CGRect frame = _commentView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame) - keyboardSize.height;
+    _commentView.frame = frame;
+}
+
+-(void)keyboardWillBeHidden:(NSNotification *)aNotification{
+    
+    CGRect frame = _commentView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame);
+    _commentView.frame = frame;
 }
 
 - (void)didReceiveMemoryWarning {

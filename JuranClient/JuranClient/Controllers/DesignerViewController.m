@@ -12,7 +12,6 @@
 #import "JRDesigner.h"
 #import "JRPhotoScrollViewController.h"
 #import "JRWebImageDataSource.h"
-#import "ShareView.h"
 
 @interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate>
 

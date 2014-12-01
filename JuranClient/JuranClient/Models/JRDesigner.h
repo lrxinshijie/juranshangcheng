@@ -46,7 +46,7 @@
 
 @property (nonatomic, strong) NSMutableArray *projectDtoList;
 
-
+- (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
 - (id)buildDetailWithDictionary:(NSDictionary *)dict;

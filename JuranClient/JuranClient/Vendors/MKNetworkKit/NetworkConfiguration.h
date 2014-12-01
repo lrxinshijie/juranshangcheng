@@ -37,6 +37,61 @@
 #define JR_RESET_PWD [NSString stringWithFormat:@"%@/member/resetPwd.json",JR_SERVICE]
 #define JR_PWD_EMAIL [NSString stringWithFormat:@"%@/member/sendFindLoginPwdEmail.json",JR_SERVICE]
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#define JR_ADD_COMMENT [NSString stringWithFormat:@"%@/design/addComment.json",JR_SERVICE]
+#define JR_GET_BANNER_INFO [NSString stringWithFormat:@"%@/member/getBannerInfo.json",JR_SERVICE]
+#define JR_THIRD_LOGIN [NSString stringWithFormat:@"%@/member/thirdLogin.json",JR_SERVICE]
 #define kHTTPMethodGet @"GET"
 #define kHTTPMethodPost @"POST"
 

@@ -88,9 +88,7 @@
 - (void)configureStatusBar{
     if (SystemVersionGreaterThanOrEqualTo7) {
         self.extendedLayoutIncludesOpaqueBars = NO;
-//        self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        self.edgesForExtendedLayout = UIRectEdgeNone;// UIRectEdgeLeft | UIRectEdgeRight;
-//        self.modalPresentationCapturesStatusBarAppearance = NO;
+        self.edgesForExtendedLayout = UIRectEdgeNone;
     }
 }
 

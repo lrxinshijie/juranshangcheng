@@ -33,6 +33,7 @@
     _avtarImageView.layer.borderColor = [[UIColor whiteColor] CGColor];
     _avtarImageView.layer.borderWidth = 2;
     _avtarImageView.layer.cornerRadius = CGRectGetWidth(_avtarImageView.frame) / 2;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
