@@ -7,11 +7,11 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "icon_personal_hudong@2x.png"
+      "filename" : "个人中心-互动.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "unassigned" : true
     }
   ],
   "info" : {

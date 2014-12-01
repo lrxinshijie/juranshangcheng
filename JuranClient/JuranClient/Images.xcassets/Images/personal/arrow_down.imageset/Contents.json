@@ -7,11 +7,11 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "arrow_down@2x.png"
+      "filename" : "展开-收起-箭头下.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "unassigned" : true
     }
   ],
   "info" : {

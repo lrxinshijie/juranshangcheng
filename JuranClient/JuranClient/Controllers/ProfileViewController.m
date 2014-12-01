@@ -13,6 +13,8 @@
 #import "MyFollowViewController.h"
 #import "AccountManageViewController.h"
 #import "AccountSecurityViewController.h"
+#import "MyDemandViewController.h"
+#import "MyAskOrAnswerViewController.h"
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -132,7 +134,7 @@
             _profileData.isSigned = YES;
             dispatch_async(dispatch_get_main_queue(), ^{
                 _signedButton.enabled = !_profileData.isSigned;
-                [_signedButton setTitle:_profileData.isSigned?@"已签到":@"签到" forState:UIControlStateNormal];
+                [_signedButton setTitle:_profileData.isSigned?@"已签":@"签到" forState:UIControlStateNormal];
             });
         }
     }];
@@ -145,6 +147,37 @@
     PersonalDataViewController *vc = [[PersonalDataViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+//需求
+- (IBAction)doDemand:(id)sender{
+    if (![self checkLogin]) {
+        return;
+    }
+    MyDemandViewController *vc = [[MyDemandViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+//私信
+- (IBAction)doPrivateLetter:(id)sender{
+    
+}
+
+//问答
+- (IBAction)doAskOrAnswer:(id)sender{
+    if (![self checkLogin]) {
+        return;
+    }
+    MyAskOrAnswerViewController *vc = [[MyAskOrAnswerViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
+
+//消息
+- (IBAction)doPushMsg:(id)sender{
+    
 }
 
 #pragma mark - UITableViewDataSource/Delegate
