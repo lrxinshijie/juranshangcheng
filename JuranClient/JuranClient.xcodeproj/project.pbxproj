@@ -73,12 +73,20 @@
 		14ABFBEC1A25CFFD00C4AF65 /* UIViewController+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEB1A25CFFD00C4AF65 /* UIViewController+Login.m */; };
 		14ABFBF01A25DADC00C4AF65 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */; };
 		14ABFBF11A25DADC00C4AF65 /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */; };
+		14C9539A1A2DAD9E00FE6F8D /* EScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C953991A2DAD9E00FE6F8D /* EScrollerView.m */; };
+		14C9539D1A2DAE9B00FE6F8D /* JRAdInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C9539C1A2DAE9B00FE6F8D /* JRAdInfo.m */; };
+		14C953A01A2DBC4600FE6F8D /* UIImageView+Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C9539F1A2DBC4600FE6F8D /* UIImageView+Download.m */; };
+		14C953A91A2DC0E800FE6F8D /* SubjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C953A71A2DC0E800FE6F8D /* SubjectCell.m */; };
+		14C953AA1A2DC0E800FE6F8D /* SubjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C953A81A2DC0E800FE6F8D /* SubjectCell.xib */; };
+		14C953AD1A2DC1B200FE6F8D /* JRSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C953AC1A2DC1B200FE6F8D /* JRSubject.m */; };
+		14C953B21A2DC60B00FE6F8D /* SubjectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C953B01A2DC60B00FE6F8D /* SubjectDetailViewController.m */; };
+		14C953B31A2DC60B00FE6F8D /* SubjectDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C953B11A2DC60B00FE6F8D /* SubjectDetailViewController.xib */; };
 		A90459CE1A27874800F8CD74 /* CaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */; };
 		A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */; };
 		A90459D31A278A6100F8CD74 /* PublishDesignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459D11A278A6100F8CD74 /* PublishDesignViewController.m */; };
 		A90459D41A278A6100F8CD74 /* PublishDesignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459D21A278A6100F8CD74 /* PublishDesignViewController.xib */; };
-		A90459D81A278B2D00F8CD74 /* TopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459D61A278B2D00F8CD74 /* TopicViewController.m */; };
-		A90459D91A278B2D00F8CD74 /* TopicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459D71A278B2D00F8CD74 /* TopicViewController.xib */; };
+		A90459D81A278B2D00F8CD74 /* SubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459D61A278B2D00F8CD74 /* SubjectViewController.m */; };
+		A90459D91A278B2D00F8CD74 /* SubjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459D71A278B2D00F8CD74 /* SubjectViewController.xib */; };
 		A93BF2951A262A290070B72A /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93BF2931A262A290070B72A /* ServiceViewController.m */; };
 		A93BF2961A262A290070B72A /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93BF2941A262A290070B72A /* ServiceViewController.xib */; };
 		A93BF29A1A2633D90070B72A /* SetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93BF2981A2633D90070B72A /* SetPasswordViewController.m */; };
@@ -304,15 +312,29 @@
 		14ABFBED1A25DADC00C4AF65 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
+		14C953981A2DAD9E00FE6F8D /* EScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EScrollerView.h; sourceTree = "<group>"; };
+		14C953991A2DAD9E00FE6F8D /* EScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EScrollerView.m; sourceTree = "<group>"; };
+		14C9539B1A2DAE9B00FE6F8D /* JRAdInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRAdInfo.h; sourceTree = "<group>"; };
+		14C9539C1A2DAE9B00FE6F8D /* JRAdInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRAdInfo.m; sourceTree = "<group>"; };
+		14C9539E1A2DBC4600FE6F8D /* UIImageView+Download.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Download.h"; sourceTree = "<group>"; };
+		14C9539F1A2DBC4600FE6F8D /* UIImageView+Download.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Download.m"; sourceTree = "<group>"; };
+		14C953A61A2DC0E800FE6F8D /* SubjectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectCell.h; sourceTree = "<group>"; };
+		14C953A71A2DC0E800FE6F8D /* SubjectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectCell.m; sourceTree = "<group>"; };
+		14C953A81A2DC0E800FE6F8D /* SubjectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubjectCell.xib; sourceTree = "<group>"; };
+		14C953AB1A2DC1B200FE6F8D /* JRSubject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSubject.h; sourceTree = "<group>"; };
+		14C953AC1A2DC1B200FE6F8D /* JRSubject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSubject.m; sourceTree = "<group>"; };
+		14C953AF1A2DC60B00FE6F8D /* SubjectDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectDetailViewController.h; sourceTree = "<group>"; };
+		14C953B01A2DC60B00FE6F8D /* SubjectDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectDetailViewController.m; sourceTree = "<group>"; };
+		14C953B11A2DC60B00FE6F8D /* SubjectDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubjectDetailViewController.xib; sourceTree = "<group>"; };
 		A90459CB1A27874800F8CD74 /* CaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseDetailViewController.h; sourceTree = "<group>"; };
 		A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseDetailViewController.m; sourceTree = "<group>"; };
 		A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseDetailViewController.xib; sourceTree = "<group>"; };
 		A90459D01A278A6100F8CD74 /* PublishDesignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishDesignViewController.h; sourceTree = "<group>"; };
 		A90459D11A278A6100F8CD74 /* PublishDesignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishDesignViewController.m; sourceTree = "<group>"; };
 		A90459D21A278A6100F8CD74 /* PublishDesignViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublishDesignViewController.xib; sourceTree = "<group>"; };
-		A90459D51A278B2D00F8CD74 /* TopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicViewController.h; sourceTree = "<group>"; };
-		A90459D61A278B2D00F8CD74 /* TopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicViewController.m; sourceTree = "<group>"; };
-		A90459D71A278B2D00F8CD74 /* TopicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopicViewController.xib; sourceTree = "<group>"; };
+		A90459D51A278B2D00F8CD74 /* SubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectViewController.h; sourceTree = "<group>"; };
+		A90459D61A278B2D00F8CD74 /* SubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectViewController.m; sourceTree = "<group>"; };
+		A90459D71A278B2D00F8CD74 /* SubjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubjectViewController.xib; sourceTree = "<group>"; };
 		A93BF2921A262A290070B72A /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		A93BF2931A262A290070B72A /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		A93BF2941A262A290070B72A /* ServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceViewController.xib; sourceTree = "<group>"; };
@@ -693,6 +715,19 @@
 			path = KTPhotoBrowser;
 			sourceTree = "<group>";
 		};
+		14C953AE1A2DC45D00FE6F8D /* Subject */ = {
+			isa = PBXGroup;
+			children = (
+				A90459D51A278B2D00F8CD74 /* SubjectViewController.h */,
+				A90459D61A278B2D00F8CD74 /* SubjectViewController.m */,
+				A90459D71A278B2D00F8CD74 /* SubjectViewController.xib */,
+				14C953AF1A2DC60B00FE6F8D /* SubjectDetailViewController.h */,
+				14C953B01A2DC60B00FE6F8D /* SubjectDetailViewController.m */,
+				14C953B11A2DC60B00FE6F8D /* SubjectDetailViewController.xib */,
+			);
+			name = Subject;
+			sourceTree = "<group>";
+		};
 		A90459DA1A278D7E00F8CD74 /* Case */ = {
 			isa = PBXGroup;
 			children = (
@@ -839,6 +874,7 @@
 		A987ED671A20920500CED7CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				14C953AE1A2DC45D00FE6F8D /* Subject */,
 				A90459DC1A278D9D00F8CD74 /* Account */,
 				A90459DB1A278D8800F8CD74 /* Designer */,
 				A90459DA1A278D7E00F8CD74 /* Case */,
@@ -863,9 +899,6 @@
 				A90459D01A278A6100F8CD74 /* PublishDesignViewController.h */,
 				A90459D11A278A6100F8CD74 /* PublishDesignViewController.m */,
 				A90459D21A278A6100F8CD74 /* PublishDesignViewController.xib */,
-				A90459D51A278B2D00F8CD74 /* TopicViewController.h */,
-				A90459D61A278B2D00F8CD74 /* TopicViewController.m */,
-				A90459D71A278B2D00F8CD74 /* TopicViewController.xib */,
 				140C46EA1A2A3741003317AD /* MyFollowViewController.h */,
 				140C46EB1A2A3741003317AD /* MyFollowViewController.m */,
 				140C46EC1A2A3741003317AD /* MyFollowViewController.xib */,
@@ -892,6 +925,12 @@
 				A9C398361A298047006A8AAB /* JRComment.m */,
 				140C46EF1A2A3D36003317AD /* JRDesignerFollowDto.h */,
 				140C46F01A2A3D36003317AD /* JRDesignerFollowDto.m */,
+				14C9539B1A2DAE9B00FE6F8D /* JRAdInfo.h */,
+				14C9539C1A2DAE9B00FE6F8D /* JRAdInfo.m */,
+				14C9539E1A2DBC4600FE6F8D /* UIImageView+Download.h */,
+				14C9539F1A2DBC4600FE6F8D /* UIImageView+Download.m */,
+				14C953AB1A2DC1B200FE6F8D /* JRSubject.h */,
+				14C953AC1A2DC1B200FE6F8D /* JRSubject.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1049,6 +1088,8 @@
 		A987EDCE1A20920500CED7CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				14C953981A2DAD9E00FE6F8D /* EScrollerView.h */,
+				14C953991A2DAD9E00FE6F8D /* EScrollerView.m */,
 				A987EDCF1A20920500CED7CD /* Cells */,
 				A987EDD01A20920500CED7CD /* GlobalPopupAlert.h */,
 				A987EDD11A20920500CED7CD /* GlobalPopupAlert.m */,
@@ -1067,6 +1108,9 @@
 		A987EDCF1A20920500CED7CD /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				14C953A61A2DC0E800FE6F8D /* SubjectCell.h */,
+				14C953A71A2DC0E800FE6F8D /* SubjectCell.m */,
+				14C953A81A2DC0E800FE6F8D /* SubjectCell.xib */,
 				1476DA8E1A21DB850006E9E0 /* DesignerCell.h */,
 				1476DA8F1A21DB850006E9E0 /* DesignerCell.m */,
 				1476DA901A21DB850006E9E0 /* DesignerCell.xib */,
@@ -1291,9 +1335,10 @@
 				A987EE531A2098AF00CED7CD /* WikiViewController.xib in Resources */,
 				14ABFBE61A25B63400C4AF65 /* LoginViewController.xib in Resources */,
 				145E3D1A1A2792B200AA952F /* PersonalDatasMoreViewController.xib in Resources */,
-				A90459D91A278B2D00F8CD74 /* TopicViewController.xib in Resources */,
+				A90459D91A278B2D00F8CD74 /* SubjectViewController.xib in Resources */,
 				A987EE581A2098BA00CED7CD /* ProfileViewController.xib in Resources */,
 				1441A1751A29E3CD004A038E /* WeiboSDK.bundle in Resources */,
+				14C953AA1A2DC0E800FE6F8D /* SubjectCell.xib in Resources */,
 				1441A1701A29E3CD004A038E /* Resource.bundle in Resources */,
 				1476DA921A21DB850006E9E0 /* DesignerCell.xib in Resources */,
 				140C46EE1A2A3741003317AD /* MyFollowViewController.xib in Resources */,
@@ -1304,6 +1349,7 @@
 				A987EE361A2093C900CED7CD /* MJRefresh.bundle in Resources */,
 				A90459D41A278A6100F8CD74 /* PublishDesignViewController.xib in Resources */,
 				A987EE601A209E7900CED7CD /* CaseCell.xib in Resources */,
+				14C953B31A2DC60B00FE6F8D /* SubjectDetailViewController.xib in Resources */,
 				1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */,
 				A987EE441A20984200CED7CD /* HomeViewController.xib in Resources */,
 				14ABFBF11A25DADC00C4AF65 /* RegistViewController.xib in Resources */,
@@ -1359,7 +1405,8 @@
 				A9D654B31A27642800A80253 /* JSONAPI.m in Sources */,
 				A987EE4D1A20987800CED7CD /* DesignerViewController.m in Sources */,
 				A987EDDA1A20920500CED7CD /* ASMaskdView.m in Sources */,
-				A90459D81A278B2D00F8CD74 /* TopicViewController.m in Sources */,
+				14C953B21A2DC60B00FE6F8D /* SubjectDetailViewController.m in Sources */,
+				A90459D81A278B2D00F8CD74 /* SubjectViewController.m in Sources */,
 				A987EE201A20928B00CED7CD /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				A987EDD21A20920500CED7CD /* ALViewController.m in Sources */,
 				A93BF29A1A2633D90070B72A /* SetPasswordViewController.m in Sources */,
@@ -1367,6 +1414,7 @@
 				A9D654B61A27642800A80253 /* JSONKeyMapper.m in Sources */,
 				A987EDE21A20920500CED7CD /* NSMutableString+ASCategory.m in Sources */,
 				A987EE1E1A20928B00CED7CD /* NSDictionary+RequestEncoding.m in Sources */,
+				14C953A01A2DBC4600FE6F8D /* UIImageView+Download.m in Sources */,
 				A9C3983B1A29842D006A8AAB /* CommentCell.m in Sources */,
 				1441A18A1A29E3D5004A038E /* JRWebImageDataSource.m in Sources */,
 				A987EE371A2093C900CED7CD /* MJRefreshBaseView.m in Sources */,
@@ -1394,6 +1442,7 @@
 				A987EE221A20928B00CED7CD /* MKNetworkEngine.m in Sources */,
 				1476DA961A21DFBE0006E9E0 /* SelfIntrodutionCell.m in Sources */,
 				1441A18C1A29E3D5004A038E /* KTPhotoBrowserGlobal.m in Sources */,
+				14C9539A1A2DAD9E00FE6F8D /* EScrollerView.m in Sources */,
 				A987EE1B1A20928B00CED7CD /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				A9D654B41A27642800A80253 /* JSONHTTPClient.m in Sources */,
 				A987EDF41A20920500CED7CD /* UIViewController+ASCategory.m in Sources */,
@@ -1413,13 +1462,16 @@
 				A987EDEF1A20920500CED7CD /* UINavigationController+ASCategory.m in Sources */,
 				1441A1A41A29E62A004A038E /* ShareView.m in Sources */,
 				A987EE521A2098AF00CED7CD /* WikiViewController.m in Sources */,
+				14C953A91A2DC0E800FE6F8D /* SubjectCell.m in Sources */,
 				A987EE1C1A20928B00CED7CD /* NSData+MKBase64.m in Sources */,
+				14C9539D1A2DAE9B00FE6F8D /* JRAdInfo.m in Sources */,
 				A987EE231A20928B00CED7CD /* MKNetworkOperation.m in Sources */,
 				A987EDF91A20920500CED7CD /* SDWebImageDecoder.m in Sources */,
 				A987EE211A20928B00CED7CD /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				140C46F11A2A3D36003317AD /* JRDesignerFollowDto.m in Sources */,
 				A987EDD71A20920500CED7CD /* ASAlertView.m in Sources */,
 				A987EDE01A20920500CED7CD /* NSDictionary+ASCategory.m in Sources */,
+				14C953AD1A2DC1B200FE6F8D /* JRSubject.m in Sources */,
 				A987EDD81A20920500CED7CD /* ASDataHelper.m in Sources */,
 				140C46E81A2A296A003317AD /* ModifyViewController.m in Sources */,
 				A987EDF51A20920500CED7CD /* LeveyTabBar.m in Sources */,

@@ -257,9 +257,14 @@
     tableView.delegate = delegate;
     tableView.backgroundColor = [UIColor whiteColor];
     
-    if (SystemVersionGreaterThanOrEqualTo7) {
-        tableView.separatorInset = UIEdgeInsetsZero;
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
     }
+    
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
     tableView.tableFooterView = [[UIView alloc] init];
     
     return tableView;

@@ -11,7 +11,7 @@
 #import "DesignerViewController.h"
 #import "ProfileViewController.h"
 #import "PublishDesignViewController.h"
-#import "TopicViewController.h"
+#import "SubjectViewController.h"
 #import <ShareSDK/ShareSDK.h>
 #import "WeiboSDK.h"
 #import "WeiboApi.h"
@@ -40,31 +40,34 @@
     return YES;
 }
 
+- (UITabBarItem *)setupTabbarItemTitle:(NSString *)title image:(NSString *)image selected:(NSString *)imageSel{
+    UIImage *caseImage = [UIImage imageNamed:image];
+    UIImage *caseImageSel = [UIImage imageNamed:imageSel];
+    caseImage = [caseImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    caseImageSel = [caseImageSel imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return [[UITabBarItem alloc] initWithTitle:title image:caseImage selectedImage:caseImageSel];
+}
+
 - (void)setupTabbar{
     CaseViewController *cs = [[CaseViewController alloc] init];
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
-    [csNav.tabBarItem setTitle:@"案例"];
-    [csNav.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_case_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_case"]];
+    csNav.tabBarItem = [self setupTabbarItemTitle:@"案例" image:@"tabbar_case" selected:@"tabbar_case_hl"];
     
     DesignerViewController *des = [[DesignerViewController alloc] init];
     UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
-    [desNav.tabBarItem setTitle:@"设计师"];
-    [desNav.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_designer_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_designer"]];
+    desNav.tabBarItem = [self setupTabbarItemTitle:@"设计师" image:@"tabbar_designer" selected:@"tabbar_designer_hl"];
     
-    TopicViewController *topic = [[TopicViewController alloc] init];
+    SubjectViewController *topic = [[SubjectViewController alloc] init];
     UINavigationController *topicNav = [Public navigationControllerFromRootViewController:topic];
-    [topicNav.tabBarItem setTitle:@"专题"];
-    [topicNav.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_subject_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_subject"]];
+    topicNav.tabBarItem = [self setupTabbarItemTitle:@"专题" image:@"tabbar_subject" selected:@"tabbar_subject_hl"];
     
     PublishDesignViewController *publish = [[PublishDesignViewController alloc] init];
     UINavigationController *publishNav = [Public navigationControllerFromRootViewController:publish];
-    [publishNav.tabBarItem setTitle:@"发布需求"];
-    [publishNav.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_demands_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_demands"]];
+    publishNav.tabBarItem = [self setupTabbarItemTitle:@"发布需求" image:@"tabbar_demands" selected:@"tabbar_demands_hl"];
     
     ProfileViewController *profile = [[ProfileViewController alloc] init];
     UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
-    [profileNav.tabBarItem setTitle:@"个人中心"];
-    [profileNav.tabBarItem setFinishedSelectedImage:[UIImage imageNamed:@"tabbar_personal_hl"] withFinishedUnselectedImage:[UIImage imageNamed:@"tabbar_personal"]];
+    profileNav.tabBarItem = [self setupTabbarItemTitle:@"个人中心" image:@"tabbar_personal" selected:@"tabbar_personal_hl"];
     
     
     

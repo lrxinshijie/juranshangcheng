@@ -71,4 +71,5 @@
 
 + (NSString *)googleLanguageFromLocal;
 + (NSURL *)imageURL:(NSString *)url;
++ (NSURL *)imageURL:(NSString *)url Width:(NSInteger)width Height:(NSInteger)height;
 @end

@@ -11,7 +11,7 @@
 
 /* Interface */
 
-#define JR_IMAGE_SERVICE  @"http://124.207.66.50:10005"
+#define JR_IMAGE_SERVICE  @"http://124.207.66.50:8081"
 #define JR_SERVICE  @"http://124.207.66.50:10005"
 #define JR_LOGIN [NSString stringWithFormat:@"%@/member/login.json",JR_SERVICE]
 #define JR_REGIST_SENDSMS [NSString stringWithFormat:@"%@/member/sendSmsAuth.json",JR_SERVICE]
@@ -89,6 +89,10 @@
 #define JR_ADD_COMMENT [NSString stringWithFormat:@"%@/design/addComment.json",JR_SERVICE]
 #define JR_GET_BANNER_INFO [NSString stringWithFormat:@"%@/member/getBannerInfo.json",JR_SERVICE]
 #define JR_THIRD_LOGIN [NSString stringWithFormat:@"%@/member/thirdLogin.json",JR_SERVICE]
+#define JR_SUBJECT_LIST [NSString stringWithFormat:@"%@/info/get_subject_list.json",JR_SERVICE]
+#define JR_SUBJECT_DETAIL [NSString stringWithFormat:@"%@/info/get_subject_detail.json",JR_SERVICE]
+
+
 #define kHTTPMethodGet @"GET"
 #define kHTTPMethodPost @"POST"
 
