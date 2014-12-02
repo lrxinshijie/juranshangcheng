@@ -21,7 +21,7 @@
 }
 @property (nonatomic, weak) IBOutlet UIView *toolBar;
 @property (nonatomic, strong)  UITableView *tableView;
-@property (nonatomic, weak) IBOutlet JRSegmentControl *segment;
+@property (nonatomic, strong) IBOutlet JRSegmentControl *segment;
 @property (nonatomic, weak) IBOutlet UIImageView *headImageView;
 @property (nonatomic, weak) IBOutlet UIView *headView;
 @property (nonatomic, weak) IBOutlet UILabel *fansCountLabel;
@@ -33,7 +33,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *followTitleLabel;
 @property (nonatomic, strong) SelfIntrodutionCell *introductionCell;
 @property (nonatomic, strong) TATopicCell *topicCell;
-@property (nonatomic, strong) ShareView *shareView;
 
 @end
 
@@ -78,7 +77,15 @@
     _toolBar.frame = CGRectMake(0, kWindowHeightWithoutNavigationBar - 49, _toolBar.frame.size.width, _toolBar.frame.size.height);
     [self.view addSubview:_toolBar];
     
-    _shareView = [[ShareView alloc] init];
+
+    UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
+    UISwipeGestureRecognizer *rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
+    
+    leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [_tableView addGestureRecognizer: leftSwipeGestureRecognizer];
+    [_tableView addGestureRecognizer: rightSwipeGestureRecognizer];
 }
 
 
@@ -148,9 +155,27 @@
 //分享
 - (IBAction)doShare:(id)sender{
     ASLog(@"分享");
-    [_shareView showWithContent:@"" image:@"" title:@"" url:@""];
+    [[ShareView sharedView] showWithContent:@"" image:@"" title:@"" url:@""];
 }
 
+- (void)handleSwipes:(UISwipeGestureRecognizer*) gesture{
+    NSInteger index = _segment.selectedIndex;
+    if (gesture.direction == UISwipeGestureRecognizerDirectionLeft)
+    {
+        if (index + 1 >= _segment.numberOfSegments) {
+            return;
+        }else{
+            _segment.selectedIndex = index+1;
+        }
+    }else if (gesture.direction == UISwipeGestureRecognizerDirectionRight)
+    {
+        if (index - 1 < 0) {
+            return;
+        }else{
+            _segment.selectedIndex = index-1;
+        }
+    }
+}
 
 #pragma mark - UITableViewDataSource/Delegate
 
@@ -168,6 +193,19 @@
     }
 }
 
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return _segment;
+    }
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return 40;
+    }
+    return 0;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (0 == _segment.selectedIndex) {

@@ -7,11 +7,11 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "icon_personal_shouchang@2x.png"
+      "filename" : "我的收藏.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "unassigned" : true
     }
   ],
   "info" : {

@@ -12,8 +12,9 @@
 
 @interface SelfIntrodutionCell()
 @property (nonatomic, weak) IBOutlet UILabel *contentLabel;
-@property (nonatomic, weak) IBOutlet UIButton *hiddenButton;
+@property (nonatomic, weak) IBOutlet UIImageView *arrowImageView;
 @property (nonatomic, weak) IBOutlet UIView *backView;
+@property (nonatomic, weak) IBOutlet UIButton *backgroundButton;
 
 @end
 
@@ -23,6 +24,7 @@
 {
     // Initialization code
     _isClose = YES;
+    [_backgroundButton addTarget:self action:@selector(doClose:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -49,7 +51,7 @@
     CGRect frame = _contentLabel.frame;
     _contentLabel.numberOfLines = 0;
     if (_isClose) {
-        [_hiddenButton setImage:[UIImage imageNamed:@"arrow_down.png"] forState:UIControlStateNormal];
+        _arrowImageView.image = [UIImage imageNamed:@"arrow_down.png"];
         if (_content.length < kContentLengthForClose) {
             _contentLabel.text = _content;
         }else{
@@ -57,7 +59,7 @@
         }
         frame.size.height = 32;
     }else{
-        [_hiddenButton setImage:[UIImage imageNamed:@"arrow_up.png"] forState:UIControlStateNormal];
+        _arrowImageView.image = [UIImage imageNamed:@"arrow_up.png"];
         if (_content.length < kContentLengthForClose) {
             _contentLabel.text = _content;
         }else{
@@ -80,9 +82,10 @@
     frame = _backView.frame;
     frame.size.height = self.frame.size.height - 10;
     _backView.frame = frame;
-    frame = _hiddenButton.frame;
-    frame.origin.y = _backView.frame.size.height - 23;
-    _hiddenButton.frame = frame;
+    _backgroundButton.frame = _backView.frame;
+    frame = _arrowImageView.frame;
+    frame.origin.y = _backView.frame.size.height - 18;
+    _arrowImageView.frame = frame;
 }
 
 @end

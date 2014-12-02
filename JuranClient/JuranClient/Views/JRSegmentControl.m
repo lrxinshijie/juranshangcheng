@@ -72,6 +72,16 @@
     }
 }
 
+- (void)setSelectedIndex:(NSInteger)selectedIndex{
+    if (selectedIndex < _titleList.count && selectedIndex >= 0) {
+        [self onSelected:[self viewWithTag:kButtonTag + selectedIndex]];
+    }
+}
+
+- (NSInteger)numberOfSegments{
+    return _titleList.count;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

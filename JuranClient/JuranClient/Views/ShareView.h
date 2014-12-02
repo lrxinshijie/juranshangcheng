@@ -17,6 +17,9 @@
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *imagePath;
 
++ (ShareView *)sharedView;
+
+
 - (void)showWithContent:(NSString *)content
         // defaultContent:(NSString *)defaultContent
                   image:(NSString *)imagePath

@@ -15,6 +15,7 @@
 @property (nonatomic, weak) id<JRSegmentControlDelegate> delegate;
 @property (nonatomic, strong) NSArray *titleList;
 @property (nonatomic, assign) NSInteger selectedIndex;
+@property(nonatomic, readonly) NSInteger numberOfSegments;
 
 @end
 

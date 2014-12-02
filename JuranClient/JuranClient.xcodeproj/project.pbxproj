@@ -14,6 +14,10 @@
 		140C46F11A2A3D36003317AD /* JRDesignerFollowDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 140C46F01A2A3D36003317AD /* JRDesignerFollowDto.m */; };
 		1416C8B81A242FD100FA9999 /* CaseCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1416C8B61A242FD100FA9999 /* CaseCollectionCell.m */; };
 		1416C8B91A242FD100FA9999 /* CaseCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1416C8B71A242FD100FA9999 /* CaseCollectionCell.xib */; };
+		141A1D3B1A2CC09600C073C5 /* AskOrAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 141A1D391A2CC09600C073C5 /* AskOrAnswerCell.m */; };
+		141A1D3C1A2CC09600C073C5 /* AskOrAnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 141A1D3A1A2CC09600C073C5 /* AskOrAnswerCell.xib */; };
+		141A1D3F1A2CCDE200C073C5 /* JRQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 141A1D3E1A2CCDE200C073C5 /* JRQuestion.m */; };
+		141A1D421A2CCDFA00C073C5 /* JRAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 141A1D411A2CCDFA00C073C5 /* JRAnswer.m */; };
 		141C564D1A23613900A57971 /* TATopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 141C564B1A23613900A57971 /* TATopicCell.m */; };
 		1441A0611A2987FB004A038E /* JRProfileData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A05F1A2987FB004A038E /* JRProfileData.m */; };
 		1441A0641A29A447004A038E /* SexySwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A0631A29A447004A038E /* SexySwitch.m */; };
@@ -53,6 +57,10 @@
 		1441A19F1A29E463004A038E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1441A19E1A29E463004A038E /* QuartzCore.framework */; };
 		1441A1A11A29E46B004A038E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1441A1A01A29E46B004A038E /* SystemConfiguration.framework */; };
 		1441A1A41A29E62A004A038E /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A1A31A29E62A004A038E /* ShareView.m */; };
+		14490CA91A2B5D50001CB160 /* AccountManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14490CA71A2B5D50001CB160 /* AccountManageViewController.m */; };
+		14490CAA1A2B5D50001CB160 /* AccountManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14490CA81A2B5D50001CB160 /* AccountManageViewController.xib */; };
+		14490CB31A2B6A19001CB160 /* AccountSecurityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14490CB11A2B6A19001CB160 /* AccountSecurityViewController.m */; };
+		14490CB41A2B6A19001CB160 /* AccountSecurityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14490CB21A2B6A19001CB160 /* AccountSecurityViewController.xib */; };
 		1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1453C8C31A24A74200D817BC /* TATopicCell.xib */; };
 		145E3D191A2792B200AA952F /* PersonalDatasMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */; };
 		145E3D1A1A2792B200AA952F /* PersonalDatasMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */; };
@@ -67,6 +75,12 @@
 		1476DA921A21DB850006E9E0 /* DesignerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA901A21DB850006E9E0 /* DesignerCell.xib */; };
 		1476DA961A21DFBE0006E9E0 /* SelfIntrodutionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA941A21DFBE0006E9E0 /* SelfIntrodutionCell.m */; };
 		1476DA971A21DFBE0006E9E0 /* SelfIntrodutionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA951A21DFBE0006E9E0 /* SelfIntrodutionCell.xib */; };
+		14A3FDC11A2C9EB7002BEFF4 /* MyDemandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A3FDBF1A2C9EB7002BEFF4 /* MyDemandViewController.m */; };
+		14A3FDC21A2C9EB7002BEFF4 /* MyDemandViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14A3FDC01A2C9EB7002BEFF4 /* MyDemandViewController.xib */; };
+		14A3FDC61A2C9EDF002BEFF4 /* DemandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A3FDC41A2C9EDF002BEFF4 /* DemandCell.m */; };
+		14A3FDC71A2C9EDF002BEFF4 /* DemandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14A3FDC51A2C9EDF002BEFF4 /* DemandCell.xib */; };
+		14A3FDCB1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A3FDC91A2CBA95002BEFF4 /* MyAskOrAnswerViewController.m */; };
+		14A3FDCC1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14A3FDCA1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.xib */; };
 		14ABFBE51A25B63400C4AF65 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBE31A25B63400C4AF65 /* LoginViewController.m */; };
 		14ABFBE61A25B63400C4AF65 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14ABFBE41A25B63400C4AF65 /* LoginViewController.xib */; };
 		14ABFBE91A25C7F400C4AF65 /* JRUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBE81A25C7F400C4AF65 /* JRUser.m */; };
@@ -225,6 +239,13 @@
 		1416C8B51A242FD000FA9999 /* CaseCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseCollectionCell.h; sourceTree = "<group>"; };
 		1416C8B61A242FD100FA9999 /* CaseCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseCollectionCell.m; sourceTree = "<group>"; };
 		1416C8B71A242FD100FA9999 /* CaseCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseCollectionCell.xib; sourceTree = "<group>"; };
+		141A1D381A2CC09600C073C5 /* AskOrAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AskOrAnswerCell.h; sourceTree = "<group>"; };
+		141A1D391A2CC09600C073C5 /* AskOrAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AskOrAnswerCell.m; sourceTree = "<group>"; };
+		141A1D3A1A2CC09600C073C5 /* AskOrAnswerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AskOrAnswerCell.xib; sourceTree = "<group>"; };
+		141A1D3D1A2CCDE200C073C5 /* JRQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRQuestion.h; sourceTree = "<group>"; };
+		141A1D3E1A2CCDE200C073C5 /* JRQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRQuestion.m; sourceTree = "<group>"; };
+		141A1D401A2CCDFA00C073C5 /* JRAnswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRAnswer.h; sourceTree = "<group>"; };
+		141A1D411A2CCDFA00C073C5 /* JRAnswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRAnswer.m; sourceTree = "<group>"; };
 		141C564A1A23613900A57971 /* TATopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATopicCell.h; sourceTree = "<group>"; };
 		141C564B1A23613900A57971 /* TATopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATopicCell.m; sourceTree = "<group>"; };
 		1441A05E1A2987FB004A038E /* JRProfileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRProfileData.h; sourceTree = "<group>"; };
@@ -281,6 +302,12 @@
 		1441A1A01A29E46B004A038E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		1441A1A21A29E62A004A038E /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		1441A1A31A29E62A004A038E /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		14490CA61A2B5D50001CB160 /* AccountManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManageViewController.h; sourceTree = "<group>"; };
+		14490CA71A2B5D50001CB160 /* AccountManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManageViewController.m; sourceTree = "<group>"; };
+		14490CA81A2B5D50001CB160 /* AccountManageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountManageViewController.xib; sourceTree = "<group>"; };
+		14490CB01A2B6A19001CB160 /* AccountSecurityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSecurityViewController.h; sourceTree = "<group>"; };
+		14490CB11A2B6A19001CB160 /* AccountSecurityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSecurityViewController.m; sourceTree = "<group>"; };
+		14490CB21A2B6A19001CB160 /* AccountSecurityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountSecurityViewController.xib; sourceTree = "<group>"; };
 		1453C8C31A24A74200D817BC /* TATopicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TATopicCell.xib; sourceTree = "<group>"; };
 		145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDatasMoreViewController.h; sourceTree = "<group>"; };
 		145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDatasMoreViewController.m; sourceTree = "<group>"; };
@@ -302,6 +329,15 @@
 		1476DA931A21DFBE0006E9E0 /* SelfIntrodutionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfIntrodutionCell.h; sourceTree = "<group>"; };
 		1476DA941A21DFBE0006E9E0 /* SelfIntrodutionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfIntrodutionCell.m; sourceTree = "<group>"; };
 		1476DA951A21DFBE0006E9E0 /* SelfIntrodutionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelfIntrodutionCell.xib; sourceTree = "<group>"; };
+		14A3FDBE1A2C9EB7002BEFF4 /* MyDemandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDemandViewController.h; sourceTree = "<group>"; };
+		14A3FDBF1A2C9EB7002BEFF4 /* MyDemandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDemandViewController.m; sourceTree = "<group>"; };
+		14A3FDC01A2C9EB7002BEFF4 /* MyDemandViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyDemandViewController.xib; sourceTree = "<group>"; };
+		14A3FDC31A2C9EDF002BEFF4 /* DemandCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemandCell.h; sourceTree = "<group>"; };
+		14A3FDC41A2C9EDF002BEFF4 /* DemandCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemandCell.m; sourceTree = "<group>"; };
+		14A3FDC51A2C9EDF002BEFF4 /* DemandCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemandCell.xib; sourceTree = "<group>"; };
+		14A3FDC81A2CBA95002BEFF4 /* MyAskOrAnswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAskOrAnswerViewController.h; sourceTree = "<group>"; };
+		14A3FDC91A2CBA95002BEFF4 /* MyAskOrAnswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAskOrAnswerViewController.m; sourceTree = "<group>"; };
+		14A3FDCA1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyAskOrAnswerViewController.xib; sourceTree = "<group>"; };
 		14ABFBE21A25B63400C4AF65 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		14ABFBE31A25B63400C4AF65 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		14ABFBE41A25B63400C4AF65 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -766,6 +802,12 @@
 				14ABFBED1A25DADC00C4AF65 /* RegistViewController.h */,
 				14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */,
 				14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */,
+				145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */,
+				145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */,
+				145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */,
+				145E3D161A2792B100AA952F /* PersonalDataViewController.h */,
+				145E3D171A2792B200AA952F /* PersonalDataViewController.m */,
+				145E3D181A2792B200AA952F /* PersonalDataViewController.xib */,
 				A93BF2971A2633D90070B72A /* SetPasswordViewController.h */,
 				A93BF2981A2633D90070B72A /* SetPasswordViewController.m */,
 				A93BF2991A2633D90070B72A /* SetPasswordViewController.xib */,
@@ -784,6 +826,12 @@
 				A9C398471A29D98C006A8AAB /* ResetEmailViewController.h */,
 				A9C398481A29D98C006A8AAB /* ResetEmailViewController.m */,
 				A9C398491A29D98C006A8AAB /* ResetEmailViewController.xib */,
+				14490CA61A2B5D50001CB160 /* AccountManageViewController.h */,
+				14490CA71A2B5D50001CB160 /* AccountManageViewController.m */,
+				14490CA81A2B5D50001CB160 /* AccountManageViewController.xib */,
+				14490CB01A2B6A19001CB160 /* AccountSecurityViewController.h */,
+				14490CB11A2B6A19001CB160 /* AccountSecurityViewController.m */,
+				14490CB21A2B6A19001CB160 /* AccountSecurityViewController.xib */,
 			);
 			name = Account;
 			sourceTree = "<group>";
@@ -902,6 +950,12 @@
 				140C46EA1A2A3741003317AD /* MyFollowViewController.h */,
 				140C46EB1A2A3741003317AD /* MyFollowViewController.m */,
 				140C46EC1A2A3741003317AD /* MyFollowViewController.xib */,
+				14A3FDBE1A2C9EB7002BEFF4 /* MyDemandViewController.h */,
+				14A3FDBF1A2C9EB7002BEFF4 /* MyDemandViewController.m */,
+				14A3FDC01A2C9EB7002BEFF4 /* MyDemandViewController.xib */,
+				14A3FDC81A2CBA95002BEFF4 /* MyAskOrAnswerViewController.h */,
+				14A3FDC91A2CBA95002BEFF4 /* MyAskOrAnswerViewController.m */,
+				14A3FDCA1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -931,6 +985,10 @@
 				14C9539F1A2DBC4600FE6F8D /* UIImageView+Download.m */,
 				14C953AB1A2DC1B200FE6F8D /* JRSubject.h */,
 				14C953AC1A2DC1B200FE6F8D /* JRSubject.m */,
+				141A1D3D1A2CCDE200C073C5 /* JRQuestion.h */,
+				141A1D3E1A2CCDE200C073C5 /* JRQuestion.m */,
+				141A1D401A2CCDFA00C073C5 /* JRAnswer.h */,
+				141A1D411A2CCDFA00C073C5 /* JRAnswer.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1129,6 +1187,12 @@
 				A9C398381A29842D006A8AAB /* CommentCell.h */,
 				A9C398391A29842D006A8AAB /* CommentCell.m */,
 				A9C3983A1A29842D006A8AAB /* CommentCell.xib */,
+				14A3FDC31A2C9EDF002BEFF4 /* DemandCell.h */,
+				14A3FDC41A2C9EDF002BEFF4 /* DemandCell.m */,
+				14A3FDC51A2C9EDF002BEFF4 /* DemandCell.xib */,
+				141A1D381A2CC09600C073C5 /* AskOrAnswerCell.h */,
+				141A1D391A2CC09600C073C5 /* AskOrAnswerCell.m */,
+				141A1D3A1A2CC09600C073C5 /* AskOrAnswerCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1325,7 +1389,9 @@
 				140C46E91A2A296A003317AD /* ModifyViewController.xib in Resources */,
 				145E3D1C1A2792B200AA952F /* PersonalDataViewController.xib in Resources */,
 				A93BF29B1A2633D90070B72A /* SetPasswordViewController.xib in Resources */,
+				14A3FDC71A2C9EDF002BEFF4 /* DemandCell.xib in Resources */,
 				1441A16F1A29E3CD004A038E /* ShareSDKLocalizable.strings in Resources */,
+				14A3FDCC1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.xib in Resources */,
 				145EF9451A2B0E33001CC76B /* JRPhotoScrollViewController.xib in Resources */,
 				1441A18B1A29E3D5004A038E /* KTPhotoBrowser.bundle in Resources */,
 				A987EE491A20986100CED7CD /* CaseViewController.xib in Resources */,
@@ -1340,11 +1406,13 @@
 				1441A1751A29E3CD004A038E /* WeiboSDK.bundle in Resources */,
 				14C953AA1A2DC0E800FE6F8D /* SubjectCell.xib in Resources */,
 				1441A1701A29E3CD004A038E /* Resource.bundle in Resources */,
+				14490CB41A2B6A19001CB160 /* AccountSecurityViewController.xib in Resources */,
 				1476DA921A21DB850006E9E0 /* DesignerCell.xib in Resources */,
 				140C46EE1A2A3741003317AD /* MyFollowViewController.xib in Resources */,
 				A987EE3F1A20980400CED7CD /* Images.xcassets in Resources */,
 				A971BC9F1A20825800C018D6 /* InfoPlist.strings in Resources */,
 				A987EE4E1A20987800CED7CD /* DesignerViewController.xib in Resources */,
+				141A1D3C1A2CC09600C073C5 /* AskOrAnswerCell.xib in Resources */,
 				A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */,
 				A987EE361A2093C900CED7CD /* MJRefresh.bundle in Resources */,
 				A90459D41A278A6100F8CD74 /* PublishDesignViewController.xib in Resources */,
@@ -1357,8 +1425,10 @@
 				A9C398461A29D25F006A8AAB /* ResetPasswordViewController.xib in Resources */,
 				1441A1731A29E3CD004A038E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				1416C8B91A242FD100FA9999 /* CaseCollectionCell.xib in Resources */,
+				14490CAA1A2B5D50001CB160 /* AccountManageViewController.xib in Resources */,
 				A9C3984B1A29D98C006A8AAB /* ResetEmailViewController.xib in Resources */,
 				1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */,
+				14A3FDC21A2C9EB7002BEFF4 /* MyDemandViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1392,11 +1462,13 @@
 				1441A0641A29A447004A038E /* SexySwitch.m in Sources */,
 				A987EDFE1A20920500CED7CD /* UIImageView+WebCache.m in Sources */,
 				A987EE3C1A2093C900CED7CD /* UIScrollView+MJRefresh.m in Sources */,
+				14A3FDC11A2C9EB7002BEFF4 /* MyDemandViewController.m in Sources */,
 				1441A0611A2987FB004A038E /* JRProfileData.m in Sources */,
 				A90459D31A278A6100F8CD74 /* PublishDesignViewController.m in Sources */,
 				A9C398371A298047006A8AAB /* JRComment.m in Sources */,
 				A987EDEE1A20920500CED7CD /* UINavigationBar+ASCategory.m in Sources */,
 				1476DA911A21DB850006E9E0 /* DesignerCell.m in Sources */,
+				141A1D421A2CCDFA00C073C5 /* JRAnswer.m in Sources */,
 				A987EDE41A20920500CED7CD /* NSString+ASCategory.m in Sources */,
 				A987EDF71A20920500CED7CD /* MBProgressHUD.m in Sources */,
 				A987EE381A2093C900CED7CD /* MJRefreshConst.m in Sources */,
@@ -1444,6 +1516,7 @@
 				1441A18C1A29E3D5004A038E /* KTPhotoBrowserGlobal.m in Sources */,
 				14C9539A1A2DAD9E00FE6F8D /* EScrollerView.m in Sources */,
 				A987EE1B1A20928B00CED7CD /* NSAlert+MKNetworkKitAdditions.m in Sources */,
+				14490CB31A2B6A19001CB160 /* AccountSecurityViewController.m in Sources */,
 				A9D654B41A27642800A80253 /* JSONHTTPClient.m in Sources */,
 				A987EDF41A20920500CED7CD /* UIViewController+ASCategory.m in Sources */,
 				A987EE5F1A209E7900CED7CD /* CaseCell.m in Sources */,
@@ -1455,6 +1528,7 @@
 				1441A1461A29E156004A038E /* JRMemberDetail.m in Sources */,
 				A987EDDF1A20920500CED7CD /* NSDate+ASCategory.m in Sources */,
 				A9D654B21A27642800A80253 /* NSArray+JSONModel.m in Sources */,
+				141A1D3B1A2CC09600C073C5 /* AskOrAnswerCell.m in Sources */,
 				A93BF2951A262A290070B72A /* ServiceViewController.m in Sources */,
 				A9D654B01A27642800A80253 /* JSONModelClassProperty.m in Sources */,
 				1441A18F1A29E3D5004A038E /* KTPhotoView.m in Sources */,
@@ -1475,12 +1549,16 @@
 				A987EDD81A20920500CED7CD /* ASDataHelper.m in Sources */,
 				140C46E81A2A296A003317AD /* ModifyViewController.m in Sources */,
 				A987EDF51A20920500CED7CD /* LeveyTabBar.m in Sources */,
+				14A3FDCB1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.m in Sources */,
 				A987EDF31A20920500CED7CD /* UIView+ASCategory.m in Sources */,
 				A987EDFC1A20920500CED7CD /* SDWebImagePrefetcher.m in Sources */,
+				14490CA91A2B5D50001CB160 /* AccountManageViewController.m in Sources */,
 				1441A1891A29E3D5004A038E /* JRPhotoScrollViewController.m in Sources */,
 				A9D654AF1A27642800A80253 /* JSONModelArray.m in Sources */,
 				1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */,
 				A987EE3A1A2093C900CED7CD /* MJRefreshHeaderView.m in Sources */,
+				14A3FDC61A2C9EDF002BEFF4 /* DemandCell.m in Sources */,
+				141A1D3F1A2CCDE200C073C5 /* JRQuestion.m in Sources */,
 				A987EDDD1A20920500CED7CD /* MKMapView+ASCategory.m in Sources */,
 				A987EDE31A20920500CED7CD /* NSObject+ASCategory.m in Sources */,
 				A987EDEC1A20920500CED7CD /* UIImageView+ASCategory.m in Sources */,

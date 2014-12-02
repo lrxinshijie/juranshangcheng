@@ -37,7 +37,7 @@
     
     self.navigationItem.title = @"更多资料";
     [self setupDatas];
-    [self setupView];
+    [self setupUI];
 }
 
 - (void)setupDatas{
@@ -45,7 +45,7 @@
     keys = @[@"生日", @"详细地址", @"固定电话", @"证件信息", @"QQ", @"微信", @"所学专业", @"专业类型", @"证书与奖项"];
 }
 
-- (void)setupView{
+- (void)setupUI{
     _tableView.tableFooterView = [[UIView alloc] init];
 }
 

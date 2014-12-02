@@ -60,7 +60,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cellIndicator" id="tHG-4M-60P">
-                                <rect key="frame" x="300" y="10" width="8" height="16"/>
+                                <rect key="frame" x="300" y="10" width="8" height="15"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView hidden="YES" userInteractionEnabled="NO" tag="1020" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_isauth" id="qW8-0g-vhD">
@@ -134,7 +134,7 @@
         </button>
     </objects>
     <resources>
-        <image name="cellIndicator" width="11" height="23"/>
+        <image name="cellIndicator" width="8" height="15"/>
         <image name="icon_isauth" width="16" height="12"/>
         <image name="icon_xunzhang_1" width="9" height="12"/>
         <image name="icon_xunzhang_2" width="8" height="12"/>
