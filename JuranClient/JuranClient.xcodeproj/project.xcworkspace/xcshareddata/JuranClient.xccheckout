@@ -10,31 +10,31 @@
 	<string>JuranClient</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>7CE94EC3-C00C-4682-BD88-499C93F2340C</key>
-		<string>http://gitlab.sephplus.com/sephplus/juran-iphone.git</string>
+		<key>FFC224A6FD9564F16445B169890FAAAFE2D7E2E8</key>
+		<string>gitlab.sephplus.com:sephplus/juran-iphone.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>JuranClient/JuranClient.xcodeproj/project.xcworkspace</string>
+	<string>JuranClient/JuranClient.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7CE94EC3-C00C-4682-BD88-499C93F2340C</key>
+		<key>FFC224A6FD9564F16445B169890FAAAFE2D7E2E8</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>http://gitlab.sephplus.com/sephplus/juran-iphone.git</string>
+	<string>gitlab.sephplus.com:sephplus/juran-iphone.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7CE94EC3-C00C-4682-BD88-499C93F2340C</string>
+	<string>FFC224A6FD9564F16445B169890FAAAFE2D7E2E8</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7CE94EC3-C00C-4682-BD88-499C93F2340C</string>
+			<string>FFC224A6FD9564F16445B169890FAAAFE2D7E2E8</string>
 			<key>IDESourceControlWCCName</key>
-			<string>workspaces</string>
+			<string>juran</string>
 		</dict>
 	</array>
 </dict>

@@ -87,12 +87,6 @@
 		14ABFBEC1A25CFFD00C4AF65 /* UIViewController+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEB1A25CFFD00C4AF65 /* UIViewController+Login.m */; };
 		14ABFBF01A25DADC00C4AF65 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */; };
 		14ABFBF11A25DADC00C4AF65 /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */; };
-		14C855341A2DFBDD00A15ED9 /* InteractionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855321A2DFBDD00A15ED9 /* InteractionCell.m */; };
-		14C855351A2DFBDD00A15ED9 /* InteractionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C855331A2DFBDD00A15ED9 /* InteractionCell.xib */; };
-		14C855391A2E003300A15ED9 /* InteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855371A2E003300A15ED9 /* InteractionViewController.m */; };
-		14C8553A1A2E003300A15ED9 /* InteractionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C855381A2E003300A15ED9 /* InteractionViewController.xib */; };
-		14C8553E1A2E0AF800A15ED9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C8553C1A2E0AF800A15ED9 /* SettingsViewController.m */; };
-		14C8553F1A2E0AF800A15ED9 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C8553D1A2E0AF800A15ED9 /* SettingsViewController.xib */; };
 		14C9539A1A2DAD9E00FE6F8D /* EScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C953991A2DAD9E00FE6F8D /* EScrollerView.m */; };
 		14C9539D1A2DAE9B00FE6F8D /* JRAdInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C9539C1A2DAE9B00FE6F8D /* JRAdInfo.m */; };
 		14C953A01A2DBC4600FE6F8D /* UIImageView+Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C9539F1A2DBC4600FE6F8D /* UIImageView+Download.m */; };
@@ -354,15 +348,6 @@
 		14ABFBED1A25DADC00C4AF65 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
-		14C855311A2DFBDD00A15ED9 /* InteractionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractionCell.h; sourceTree = "<group>"; };
-		14C855321A2DFBDD00A15ED9 /* InteractionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractionCell.m; sourceTree = "<group>"; };
-		14C855331A2DFBDD00A15ED9 /* InteractionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InteractionCell.xib; sourceTree = "<group>"; };
-		14C855361A2E003300A15ED9 /* InteractionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractionViewController.h; sourceTree = "<group>"; };
-		14C855371A2E003300A15ED9 /* InteractionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractionViewController.m; sourceTree = "<group>"; };
-		14C855381A2E003300A15ED9 /* InteractionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InteractionViewController.xib; sourceTree = "<group>"; };
-		14C8553B1A2E0AF800A15ED9 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		14C8553C1A2E0AF800A15ED9 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		14C8553D1A2E0AF800A15ED9 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		14C953981A2DAD9E00FE6F8D /* EScrollerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EScrollerView.h; sourceTree = "<group>"; };
 		14C953991A2DAD9E00FE6F8D /* EScrollerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EScrollerView.m; sourceTree = "<group>"; };
 		14C9539B1A2DAE9B00FE6F8D /* JRAdInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRAdInfo.h; sourceTree = "<group>"; };
@@ -766,14 +751,6 @@
 			path = KTPhotoBrowser;
 			sourceTree = "<group>";
 		};
-		14C855401A2E0B0100A15ED9 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				14C8553B1A2E0AF800A15ED9 /* SettingsViewController.h */,
-				14C8553C1A2E0AF800A15ED9 /* SettingsViewController.m */,
-				14C8553D1A2E0AF800A15ED9 /* SettingsViewController.xib */,
-			);
-			name = Settings;
 		14C953AE1A2DC45D00FE6F8D /* Subject */ = {
 			isa = PBXGroup;
 			children = (
@@ -949,7 +926,6 @@
 				A90459DC1A278D9D00F8CD74 /* Account */,
 				A90459DB1A278D8800F8CD74 /* Designer */,
 				A90459DA1A278D7E00F8CD74 /* Case */,
-				14C855401A2E0B0100A15ED9 /* Settings */,
 				A987ED681A20920500CED7CD /* ALViewController.h */,
 				A987ED691A20920500CED7CD /* ALViewController.m */,
 				A987ED6A1A20920500CED7CD /* UIViewController+HUD.h */,
@@ -980,9 +956,6 @@
 				14A3FDC81A2CBA95002BEFF4 /* MyAskOrAnswerViewController.h */,
 				14A3FDC91A2CBA95002BEFF4 /* MyAskOrAnswerViewController.m */,
 				14A3FDCA1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.xib */,
-				14C855361A2E003300A15ED9 /* InteractionViewController.h */,
-				14C855371A2E003300A15ED9 /* InteractionViewController.m */,
-				14C855381A2E003300A15ED9 /* InteractionViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1220,9 +1193,6 @@
 				141A1D381A2CC09600C073C5 /* AskOrAnswerCell.h */,
 				141A1D391A2CC09600C073C5 /* AskOrAnswerCell.m */,
 				141A1D3A1A2CC09600C073C5 /* AskOrAnswerCell.xib */,
-				14C855311A2DFBDD00A15ED9 /* InteractionCell.h */,
-				14C855321A2DFBDD00A15ED9 /* InteractionCell.m */,
-				14C855331A2DFBDD00A15ED9 /* InteractionCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1442,7 +1412,6 @@
 				A987EE3F1A20980400CED7CD /* Images.xcassets in Resources */,
 				A971BC9F1A20825800C018D6 /* InfoPlist.strings in Resources */,
 				A987EE4E1A20987800CED7CD /* DesignerViewController.xib in Resources */,
-				14C8553A1A2E003300A15ED9 /* InteractionViewController.xib in Resources */,
 				141A1D3C1A2CC09600C073C5 /* AskOrAnswerCell.xib in Resources */,
 				A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */,
 				A987EE361A2093C900CED7CD /* MJRefresh.bundle in Resources */,
@@ -1451,9 +1420,7 @@
 				14C953B31A2DC60B00FE6F8D /* SubjectDetailViewController.xib in Resources */,
 				1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */,
 				A987EE441A20984200CED7CD /* HomeViewController.xib in Resources */,
-				14C855351A2DFBDD00A15ED9 /* InteractionCell.xib in Resources */,
 				14ABFBF11A25DADC00C4AF65 /* RegistViewController.xib in Resources */,
-				14C8553F1A2E0AF800A15ED9 /* SettingsViewController.xib in Resources */,
 				A93BF2961A262A290070B72A /* ServiceViewController.xib in Resources */,
 				A9C398461A29D25F006A8AAB /* ResetPasswordViewController.xib in Resources */,
 				1441A1731A29E3CD004A038E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
@@ -1517,7 +1484,6 @@
 				A93BF29A1A2633D90070B72A /* SetPasswordViewController.m in Sources */,
 				A987EDE51A20920500CED7CD /* UIActionSheet+Blocks.m in Sources */,
 				A9D654B61A27642800A80253 /* JSONKeyMapper.m in Sources */,
-				14C8553E1A2E0AF800A15ED9 /* SettingsViewController.m in Sources */,
 				A987EDE21A20920500CED7CD /* NSMutableString+ASCategory.m in Sources */,
 				A987EE1E1A20928B00CED7CD /* NSDictionary+RequestEncoding.m in Sources */,
 				14C953A01A2DBC4600FE6F8D /* UIImageView+Download.m in Sources */,
@@ -1535,7 +1501,6 @@
 				A987EDD31A20920500CED7CD /* UIViewController+HUD.m in Sources */,
 				14ABFBE51A25B63400C4AF65 /* LoginViewController.m in Sources */,
 				A987EDDE1A20920500CED7CD /* NSArray+ASCategory.m in Sources */,
-				14C855391A2E003300A15ED9 /* InteractionViewController.m in Sources */,
 				A987EE3B1A2093C900CED7CD /* UIScrollView+MJExtension.m in Sources */,
 				A987EDF21A20920500CED7CD /* UITextField+ASCategory.m in Sources */,
 				145E3D1B1A2792B200AA952F /* PersonalDataViewController.m in Sources */,
@@ -1611,7 +1576,6 @@
 				A987EE5B1A209E6100CED7CD /* JRCase.m in Sources */,
 				145E3D191A2792B200AA952F /* PersonalDatasMoreViewController.m in Sources */,
 				A987EDFD1A20920500CED7CD /* UIButton+WebCache.m in Sources */,
-				14C855341A2DFBDD00A15ED9 /* InteractionCell.m in Sources */,
 				A987EDDC1A20920500CED7CD /* CLLocation+ASCategory.m in Sources */,
 				A9D654AE1A27642800A80253 /* JSONModel.m in Sources */,
 				A987EE481A20986100CED7CD /* CaseViewController.m in Sources */,
