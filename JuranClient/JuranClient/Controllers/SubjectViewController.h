@@ -8,6 +8,6 @@
 
 #import "ALViewController.h"
 
-@interface TopicViewController : ALViewController
+@interface SubjectViewController : ALViewController
 
 @end

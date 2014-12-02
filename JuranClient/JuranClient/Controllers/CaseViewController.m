@@ -10,12 +10,16 @@
 #import "JRCase.h"
 #import "CaseCell.h"
 #import "CaseDetailViewController.h"
+#import "JRAdInfo.h"
+#import "EScrollerView.h"
 
-@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, strong) NSMutableArray *adInfos;
 @property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, strong) EScrollerView *bannerView;
 
 @end
 
@@ -49,7 +53,7 @@
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
-        [weakSelf loadData];
+        [weakSelf loadAd];
     }];
     
     [_tableView addFooterWithCallback:^{
@@ -65,6 +69,25 @@
     if (![self checkLogin]) {
         return;
     }
+}
+
+- (void)loadAd{
+    NSDictionary *param = @{@"adCode": @"app_consumer_index_roll",
+                            @"areaCode": @""};
+    [self showHUD];
+    
+    [[ALEngine shareEngine] pathURL:JR_GET_BANNER_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSArray *bannerList = [data objectForKey:@"bannerList"];
+            self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
+            [_adInfos addObjectsFromArray:_adInfos];
+            self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos];
+            _bannerView.delegate = self;
+            self.tableView.tableHeaderView = _bannerView;
+        }
+        [self loadData];
+    }];
 }
 
 - (void)loadData{
@@ -135,6 +158,10 @@
     cd.jrCase = cs;
     cd.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:cd animated:YES];
+}
+
+- (void)EScrollerViewDidClicked:(NSUInteger)index{
+    
 }
 
 - (void)didReceiveMemoryWarning

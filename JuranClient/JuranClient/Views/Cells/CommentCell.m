@@ -41,7 +41,7 @@
 }
 
 - (void)fillCellWithComment:(JRComment *)data{
-    [_avtarImageView setImageWithURL:[Public imageURL:data.headUrl]];
+    [_avtarImageView setImageWithURLString:data.headUrl];
     _nameLabel.text = data.nickName;
     _timeLabel.text = data.commentTime;
     NSString *content = data.commentContent;

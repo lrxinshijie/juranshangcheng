@@ -300,7 +300,13 @@
 }
 
 + (NSURL *)imageURL:(NSString *)url{
-    return [NSURL URLWithString:url relativeToURL:[NSURL URLWithString:JR_IMAGE_SERVICE]];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@",JR_IMAGE_SERVICE,url];
+    return [NSURL URLWithString:urlString];
+}
+
++ (NSURL *)imageURL:(NSString *)url Width:(NSInteger)width Height:(NSInteger)height{
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@_%d_%d.img",JR_IMAGE_SERVICE,url, width,height];
+    return [NSURL URLWithString:urlString];
 }
 
 @end

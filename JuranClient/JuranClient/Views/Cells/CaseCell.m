@@ -62,8 +62,10 @@
 
 - (void)fillCellWithCase:(JRCase *)data{
     self.jrCase = data;
-//    [_photoImageView setImageWithURL:[data imageURL] placeholderImage:_photoImageView.image];
-//    [_avtarImageView setImageFromURL:[NSURL URLWithString:data.a] placeHolderImage:<#(UIImage *)#>]
+    
+    [_photoImageView setImageWithURLString:data.imageUrl];
+    [_avtarImageView setImageWithURLString:data.headUrl];
+    
     _titleLabel.text = data.title;
     _avtarLabel.text = data.nickName;
     [_likeButton setTitle:[NSString stringWithFormat:@" %d", data.likeCount] forState:UIControlStateNormal];

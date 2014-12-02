@@ -47,7 +47,7 @@
 #define kNotificationNameCalendarReloadData @"kNotificationNameCalendarReloadData"
 #define kNotificationNameEventReloadData @"kNotificationNameEventReloadData"
 
-
+#define kBlueColor RGBColor(15, 82, 167)
 //:@"100543115"
 //appSecret:@"9cc782277d5b8084f073599d72ba08c3"
 #define QQHLSDKAppKey @"100543115"
