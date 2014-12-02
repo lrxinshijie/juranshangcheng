@@ -91,7 +91,10 @@
 
 - (void)reloadData{
     _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.fansCount];
-    _nameLabel.text = _designer.nickName;
+    _popularityLabel.text = [NSString stringWithFormat:@"%i", _designer.viewCount];
+    _pictureCountLabel.text = [NSString stringWithFormat:@"%i", _designer.product2DCount];
+    _diyProjectCountLabel.text = [NSString stringWithFormat:@"%i", _designer.product3DCount];
+    _nameLabel.text = _designer.nickName.length?_designer.nickName:_designer.userName;
     _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
     _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
     [_tableView reloadData];
@@ -130,12 +133,21 @@
     ASLog(@"关注");
     NSDictionary *param = @{@"userId": [NSString stringWithFormat:@"%i", _designer.userId]};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_FOLLOWDESIGNER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
-        if (!error) {
-            
-        }
-    }];
+    if (!_designer.isFollowed) {
+        [[ALEngine shareEngine] pathURL:JR_FOLLOWDESIGNER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            [self hideHUD];
+            if (!error) {
+                _designer.isFollowed = YES;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
+                    _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
+                });
+            }
+        }];
+    }else{
+        
+    }
+    
 }
 
 - (void)nextAction{

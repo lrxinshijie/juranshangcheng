@@ -38,7 +38,7 @@
 }
 
 - (void)fillCellWithDesigner:(JRDesigner *)data{
-    _nameLabel.text = data.nickName;
+    _nameLabel.text = data.nickName.length?data.nickName:data.userName;
     _styleLabel.text = [data styleNamesWithType:0];
     _experienceLabel.text =  @"2年";
     _productCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];

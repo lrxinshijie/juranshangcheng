@@ -15,6 +15,7 @@
 #import "AccountSecurityViewController.h"
 #import "MyDemandViewController.h"
 #import "MyAskOrAnswerViewController.h"
+#import "InteractionViewController.h"
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -55,11 +56,16 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     self.navigationItem.title = @"个人中心";
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSettings)];
     
     titleArray = @[@"互动", @"我的关注", @"我的收藏", @"订单管理", @"账户管理", @"账户安全"];
     imageArray = @[@"icon_personal_hudong.png", @"icon_personal_guanzhu.png", @"icon_personal_shouchang.png", @"icon_personal_ddgl.png", @"icon_personal_zhgl.png", @"icon_personal_zhaq"];
     [self setupUI];
    
+}
+
+- (void)onSettings{
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -229,6 +235,13 @@
             return;
         }
         MyFollowViewController *vc = [[MyFollowViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 1){
+        if (![self checkLogin]) {
+            return;
+        }
+        InteractionViewController *vc = [[InteractionViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 5){

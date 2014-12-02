@@ -5,11 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyAskOrAnswerViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InteractionViewController">
             <connections>
-                <outlet property="headView" destination="Kri-C0-UK8" id="8uc-0c-IaM"/>
-                <outlet property="noDatasView" destination="XXN-l0-ia4" id="GhW-kw-y5x"/>
-                <outlet property="segment" destination="1lv-Ij-s6O" id="scC-yT-jnt"/>
+                <outlet property="headView" destination="Z4T-dx-elX" id="bYN-EG-kuO"/>
+                <outlet property="noDatasView" destination="dJm-Fu-xFa" id="49R-sD-Z7i"/>
+                <outlet property="segment" destination="mRp-RQ-ELh" id="6A4-L8-lMK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,40 +21,40 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
-        <view contentMode="scaleToFill" id="Kri-C0-UK8">
+        <view contentMode="scaleToFill" id="Z4T-dx-elX">
             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="1lv-Ij-s6O">
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="mRp-RQ-ELh">
                     <rect key="frame" x="5" y="11" width="310" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <segments>
-                        <segment title="我的提问"/>
-                        <segment title="我的回答"/>
+                        <segment title="作品案例"/>
+                        <segment title="话题"/>
                     </segments>
-                    <color key="tintColor" red="0.10196079313755035" green="0.41176474094390869" blue="0.68627452850341797" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="tintColor" red="0.1019607931" green="0.41176474089999998" blue="0.68627452850000004" alpha="1" colorSpace="deviceRGB"/>
                     <connections>
-                        <action selector="segmentValueChange:" destination="-1" eventType="valueChanged" id="KZq-s4-XN9"/>
+                        <action selector="segmentValueChange:" destination="-1" eventType="valueChanged" id="OO0-At-zdF"/>
                     </connections>
                 </segmentedControl>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.90980398654937744" green="0.90980398654937744" blue="0.90980398654937744" alpha="1" colorSpace="deviceRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
-        <view contentMode="scaleToFill" id="XXN-l0-ia4">
+        <view contentMode="scaleToFill" id="dJm-Fu-xFa">
             <rect key="frame" x="0.0" y="0.0" width="192" height="128"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data" id="VLc-35-IM2">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data" id="FMU-3D-Bb9">
                     <rect key="frame" x="49" y="0.0" width="94" height="92"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无数据" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ID5-RI-v4R">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无数据" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="59E-qX-Lln">
                     <rect key="frame" x="49" y="107" width="94" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                    <color key="textColor" red="0.61176472902297974" green="0.61176472902297974" blue="0.61176472902297974" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="textColor" red="0.61176472900000001" green="0.61176472900000001" blue="0.61176472900000001" alpha="1" colorSpace="deviceRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
