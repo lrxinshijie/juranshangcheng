@@ -18,7 +18,7 @@
                         <rect key="frame" x="5" y="0.0" width="310" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample-user-avatar" id="GrT-kC-9e9">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avtar_default" id="GrT-kC-9e9">
                                 <rect key="frame" x="10" y="10" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -92,8 +92,8 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="avtar_default" width="60" height="60"/>
         <image name="case-icon-comment" width="22" height="21"/>
-        <image name="sample-user-avatar" width="100" height="100"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

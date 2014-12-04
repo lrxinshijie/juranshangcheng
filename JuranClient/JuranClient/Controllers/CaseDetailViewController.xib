@@ -67,7 +67,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample-user-avatar" id="AfU-HH-zrJ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avtar_default" id="AfU-HH-zrJ">
                     <rect key="frame" x="10" y="10" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -93,9 +93,9 @@
         </view>
     </objects>
     <resources>
+        <image name="avtar_default" width="60" height="60"/>
         <image name="case-detail-send" width="62" height="39"/>
         <image name="case-detail-text" width="242" height="39"/>
-        <image name="sample-user-avatar" width="100" height="100"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
