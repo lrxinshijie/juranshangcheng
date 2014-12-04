@@ -72,4 +72,10 @@
     [_browseButton setTitle:[NSString stringWithFormat:@" %d", data.viewCount] forState:UIControlStateNormal];
 }
 
+- (void)fillCellInDesignerDetailWithCase:(JRCase *)data{
+    [self fillCellWithCase:data];
+    _avtarImageView.hidden = YES;
+    _avtarLabel.hidden = YES;
+}
+
 @end

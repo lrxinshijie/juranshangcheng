@@ -70,6 +70,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (value.length > kPasswordMaxNumber) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+
 /*
 #pragma mark - Navigation
 

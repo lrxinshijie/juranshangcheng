@@ -19,6 +19,7 @@
 		141A1D3F1A2CCDE200C073C5 /* JRQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 141A1D3E1A2CCDE200C073C5 /* JRQuestion.m */; };
 		141A1D421A2CCDFA00C073C5 /* JRAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 141A1D411A2CCDFA00C073C5 /* JRAnswer.m */; };
 		141C564D1A23613900A57971 /* TATopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 141C564B1A23613900A57971 /* TATopicCell.m */; };
+		1437F2B81A30B09B00E7C077 /* JRTopic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1437F2B71A30B09B00E7C077 /* JRTopic.m */; };
 		1441A0611A2987FB004A038E /* JRProfileData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A05F1A2987FB004A038E /* JRProfileData.m */; };
 		1441A0641A29A447004A038E /* SexySwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A0631A29A447004A038E /* SexySwitch.m */; };
 		1441A1461A29E156004A038E /* JRMemberDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A1451A29E156004A038E /* JRMemberDetail.m */; };
@@ -254,6 +255,8 @@
 		141A1D411A2CCDFA00C073C5 /* JRAnswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRAnswer.m; sourceTree = "<group>"; };
 		141C564A1A23613900A57971 /* TATopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATopicCell.h; sourceTree = "<group>"; };
 		141C564B1A23613900A57971 /* TATopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATopicCell.m; sourceTree = "<group>"; };
+		1437F2B61A30B09B00E7C077 /* JRTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRTopic.h; sourceTree = "<group>"; };
+		1437F2B71A30B09B00E7C077 /* JRTopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRTopic.m; sourceTree = "<group>"; };
 		1441A05E1A2987FB004A038E /* JRProfileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRProfileData.h; sourceTree = "<group>"; };
 		1441A05F1A2987FB004A038E /* JRProfileData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRProfileData.m; sourceTree = "<group>"; };
 		1441A0621A29A447004A038E /* SexySwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SexySwitch.h; sourceTree = "<group>"; };
@@ -817,12 +820,6 @@
 				14ABFBED1A25DADC00C4AF65 /* RegistViewController.h */,
 				14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */,
 				14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */,
-				145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */,
-				145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */,
-				145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */,
-				145E3D161A2792B100AA952F /* PersonalDataViewController.h */,
-				145E3D171A2792B200AA952F /* PersonalDataViewController.m */,
-				145E3D181A2792B200AA952F /* PersonalDataViewController.xib */,
 				A93BF2971A2633D90070B72A /* SetPasswordViewController.h */,
 				A93BF2981A2633D90070B72A /* SetPasswordViewController.m */,
 				A93BF2991A2633D90070B72A /* SetPasswordViewController.xib */,
@@ -1010,6 +1007,8 @@
 				141A1D3E1A2CCDE200C073C5 /* JRQuestion.m */,
 				141A1D401A2CCDFA00C073C5 /* JRAnswer.h */,
 				141A1D411A2CCDFA00C073C5 /* JRAnswer.m */,
+				1437F2B61A30B09B00E7C077 /* JRTopic.h */,
+				1437F2B71A30B09B00E7C077 /* JRTopic.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1475,6 +1474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A987EE391A2093C900CED7CD /* MJRefreshFooterView.m in Sources */,
+				1437F2B81A30B09B00E7C077 /* JRTopic.m in Sources */,
 				14ABFBEC1A25CFFD00C4AF65 /* UIViewController+Login.m in Sources */,
 				A987EDD51A20920500CED7CD /* ALLoadingView.m in Sources */,
 				A987EDFB1A20920500CED7CD /* SDWebImageManager.m in Sources */,

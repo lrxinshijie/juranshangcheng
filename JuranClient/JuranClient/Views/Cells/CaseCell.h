@@ -13,5 +13,6 @@
 @interface CaseCell : UITableViewCell
 
 - (void)fillCellWithCase:(JRCase *)data;
+- (void)fillCellInDesignerDetailWithCase:(JRCase *)data;
 
 @end

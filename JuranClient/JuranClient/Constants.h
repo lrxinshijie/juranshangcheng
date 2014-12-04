@@ -53,6 +53,11 @@
 #define QQHLSDKAppKey @"100543115"
 #define QQHLSDKAppSecret @"9cc782277d5b8084f073599d72ba08c3"
 
+#define kPasswordMaxNumber 20
+#define kAccountMaxNumber 24
+#define kPhoneMaxNumber 11
+#define kCodeMaxNumber 6
+
 typedef void (^ModelBlock)(BOOL result);
 
 #endif

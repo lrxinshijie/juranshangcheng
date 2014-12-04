@@ -46,5 +46,6 @@
 - (void)toggleChromeDisplay;
 - (void)setBottomView;
 - (void)setCurrentIndex:(NSInteger)newIndex;
+- (void)setScrollViewContentSize;
 
 @end

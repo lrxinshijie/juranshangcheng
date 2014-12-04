@@ -10,13 +10,16 @@
 #import "KTPhotoBrowserDataSource.h"
 #import "KTPhotoBrowserGlobal.h"
 #import "KTPhotoView.h"
+#import "CaseDetailViewController.h"
 
 @interface JRPhotoScrollViewController ()<KTPhotoBrowserDataSource>
-
+{
+}
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *indexLabel;
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) IBOutlet UIView *toolBar;
+@property (nonatomic, strong) UILabel *lastPageLabel;
 
 @end
 
@@ -25,7 +28,7 @@
 - (id)initWithJRCase:(JRCase*)c andStartWithPhotoAtIndex:(NSUInteger)index{
     self = [self initWithDataSource:self andStartWithPhotoAtIndex:index];
     if (self) {
-        
+        self.jrCase = c;
     }
     return self;
 }
@@ -46,11 +49,13 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImageWithColor:RGBAColor(0, 0, 0, .5f)];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setBackgroundImageWithColor:[UIColor whiteColor]];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)viewDidLoad
@@ -58,6 +63,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"case_icon_share_white.png"] rightBarButtonItemAction:@selector(doShare)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self.view buttonWithFrame:CGRectZero target:self action:@selector(back:) image:[UIImage imageNamed:@"nav_backbtn_white"]]];
+}
+
+- (void)setScrollViewContentSize{
+    [super setScrollViewContentSize];
+    if (!_lastPageLabel) {
+        CGSize contentSize = scrollView_.contentSize;
+        _lastPageLabel = [scrollView_ labelWithFrame:CGRectMake(contentSize.width-10, contentSize.height/2, 80, 20) text:@"最后一张" textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:18]];
+        [scrollView_ addSubview:_lastPageLabel];
+    }
+    CGPoint center = _lastPageLabel.center;
+    center.y = scrollView_.bounds.size.height/2;
+    _lastPageLabel.center = center;
 }
 
 - (void)setBottomView{
@@ -74,7 +92,7 @@
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 220, 50)];
     _titleLabel.numberOfLines = 0;
     _titleLabel.textAlignment = NSTextAlignmentLeft;
-    _titleLabel.font = [UIFont systemFontOfSize:14];
+    _titleLabel.font = [UIFont systemFontOfSize:16];
     _titleLabel.textColor = [UIColor whiteColor];
     [_titleView addSubview:_titleLabel];
     
@@ -118,6 +136,7 @@
 - (void)adjustBottomViewFrame{
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
     CGFloat height = [_titleLabel.text heightWithFont:_titleLabel.font constrainedToWidth:_titleLabel.frame.size.width];
+    height = height == 0? 16: height;
     CGRect frame = _titleLabel.frame;
     frame.size.height = height;
     _titleLabel.frame = frame;
@@ -154,7 +173,9 @@
 }
 
 - (IBAction)doDetail:(id)sender{
-    
+    CaseDetailViewController *cd = [[CaseDetailViewController alloc] init];
+    cd.jrCase = _jrCase;
+    [self.navigationController pushViewController:cd animated:YES];
 }
 
 - (IBAction)doPraise:(id)sender{
@@ -177,28 +198,20 @@
 #pragma mark KTPhotoBrowserDataSource
 
 - (NSInteger)numberOfPhotos {
-    return 0;
+    return _jrCase.detailImageList.count;
 }
 
-/*
+
 
 - (NSString*)titleAtIndex:(NSInteger)index{
-    NSDictionary *imageDic = [images_ objectAtIndex:index];
-    NSString *title = imageDic[@"title"];
-    return title;
-}
-
-- (NSInteger)numberOfPhotos {
-    NSInteger count = [images_ count];
-    return count;
+    return _jrCase.desc;
 }
 
 - (void)imageAtIndex:(NSInteger)index photoView:(KTPhotoView *)photoView {
-    NSDictionary *imageDic = [images_ objectAtIndex:index];
-    NSString *url = imageDic[@"url"];
-    [photoView setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"photoDefault.png"]];
+    NSString *imageStr = [_jrCase.detailImageList objectAtIndex:index];
+    [photoView setImageWithURL:[Public imageURL:imageStr] placeholderImage:[UIImage imageNamed:@"sample-case-list.png"]];
 }
 
-*/
+
 
 @end

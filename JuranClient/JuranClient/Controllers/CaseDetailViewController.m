@@ -79,6 +79,9 @@
     [self.view addSubview:_commentView];
     
     [_tableView headerBeginRefreshing];
+    
+    _avtarImageView.layer.masksToBounds = YES;
+    _avtarImageView.layer.cornerRadius = CGRectGetWidth(_avtarImageView.frame) / 2;
 }
 
 - (void)loadData{
@@ -99,6 +102,7 @@
                             ];
             _nameLabel.text = _jrCase.nickName;
             _detailLabel.text = _jrCase.tags;
+            [_avtarImageView setImageWithURLString:_jrCase.headUrl];
         }
         
         [self loadComment];

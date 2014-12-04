@@ -7,6 +7,7 @@
 //
 
 #import "TATopicCell.h"
+#import "JRTopic.h"
 
 @implementation TATopicCell
 
@@ -20,6 +21,17 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)fillCellWithTopic:(JRTopic *)data
+{
+    _topicContentLabel.text = [NSString stringWithFormat: @"\"%@\"", data.title];
+    _ideaContentLabel.text = data.content;
+    _timeLabel.text = data.commentDate;
+    if (data.commentImageUrlList.count > 0) {
+        [_relateImageView setImageWithURLString:data.commentImageUrlList[0]];
+    }
+    [self changeFrame];
 }
 
 - (void)setDatas:(id)sender

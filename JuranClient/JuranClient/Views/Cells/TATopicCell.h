@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class JRTopic;
+
 @interface TATopicCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *topicLabel;
@@ -18,7 +20,7 @@
 @property (nonatomic, weak) IBOutlet UIView *backView;
 @property (nonatomic, weak) IBOutlet UIImageView *relateImageView;
 
-- (void)setDatas:(id)sender;
+- (void)fillCellWithTopic:(JRTopic *)data;
 
 
 @end

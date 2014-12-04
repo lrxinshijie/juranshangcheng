@@ -63,7 +63,6 @@
 @property (nonatomic, assign) NSInteger projectType;
 @property (nonatomic, assign) NSInteger authorId;
 
-
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (id)buildDetailWithDictionary:(NSDictionary *)dict;
 - (id)buildDtoWithDictionary:(NSDictionary *)dict;
@@ -71,5 +70,7 @@
 - (NSURL *)imageURL;
 
 - (NSString *)styleString;
+
+- (void)loadDetail:(void (^) (BOOL result))finished;
 
 @end

@@ -14,6 +14,9 @@
 #import "JRDesigner.h"
 #import "JRUser.h"
 #import "ShareView.h"
+#import "JRCase.h"
+#import "JRTopic.h"
+#import "JRPhotoScrollViewController.h"
 
 @interface DesignerDetailViewController ()<UITableViewDataSource, UITableViewDelegate, JRSegmentControlDelegate, SelfIntroductionCellDelegate>
 {
@@ -33,6 +36,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *followTitleLabel;
 @property (nonatomic, strong) SelfIntrodutionCell *introductionCell;
 @property (nonatomic, strong) TATopicCell *topicCell;
+@property (nonatomic, assign) NSInteger caseCurrentPage;
+@property (nonatomic, assign) NSInteger topicCurrentPage;
 
 @end
 
@@ -55,6 +60,8 @@
     self.navigationItem.title = _designer.nickName;
     
     personDatas = @[@"毕业院校", @"量房费", @"设计费用", @"从业年限", @"擅长风格"];
+    _caseCurrentPage = 1;
+    _topicCurrentPage = 1;
     [self setupUI];
     [self loadData];
 }
@@ -73,6 +80,15 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = [UIColor colorWithRed:245/255.f green:245/255.f blue:245/255.f alpha:1.0f];
     [self.view addSubview:_tableView];
+    
+    __weak typeof(self) weakSelf = self;
+    [_tableView addHeaderWithCallback:^{
+        [weakSelf refreshData];
+    }];
+    
+    [_tableView addFooterWithCallback:^{
+        [weakSelf loadMoreData];
+    }];
     
     _toolBar.frame = CGRectMake(0, kWindowHeightWithoutNavigationBar - 49, _toolBar.frame.size.width, _toolBar.frame.size.height);
     [self.view addSubview:_toolBar];
@@ -100,6 +116,30 @@
     [_tableView reloadData];
 }
 
+- (void)refreshData{
+    if (_segment.selectedIndex == 0) {
+        _caseCurrentPage = 1;
+        [self loadDesignerProject];
+    }else if (_segment.selectedIndex == 1) {
+        [self reloadData];
+    }else if (_segment.selectedIndex == 2) {
+        _topicCurrentPage = 1;
+        [self loadTopic];
+    }
+}
+
+- (void)loadMoreData{
+    if (_segment.selectedIndex == 0) {
+        _caseCurrentPage++;
+        [self loadDesignerProject];
+    }else if (_segment.selectedIndex == 1) {
+        
+    }else if (_segment.selectedIndex == 2) {
+        _topicCurrentPage++;
+        [self loadTopic];
+    }
+}
+
 - (void)loadData{
     NSDictionary *param = @{@"userId": [NSString stringWithFormat:@"%i", _designer.userId]};
     [self showHUD];
@@ -109,14 +149,62 @@
             if ([data isKindOfClass:[NSDictionary class]]) {
                 _designer = [_designer buildDetailWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self reloadData];
+                    [self loadDesignerProject];
                 });
             }
         }
     }];
-    
 }
 
+
+- (void)loadDesignerProject{
+    NSDictionary *param = @{@"designerId": [NSString stringWithFormat:@"%i", _designer.userId],
+                            @"pageNo":[NSString stringWithFormat:@"%d", _caseCurrentPage],
+                            @"rowsPerPage":@"10"};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_GETDEDESIGNERPROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSArray *list = [data objectForKey:@"deProjectList"];
+            NSMutableArray *rows = [JRCase buildUpWithValue:list];
+            if (_caseCurrentPage > 1) {
+                [_caseDatas addObjectsFromArray:rows];
+            }else{
+                self.caseDatas = [JRCase buildUpWithValue:list];
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self reloadData];
+        });
+        [_tableView headerEndRefreshing];
+        [_tableView footerEndRefreshing];
+    }];
+}
+
+
+- (void)loadTopic{
+    NSDictionary *param = @{@"designerId": [NSString stringWithFormat:@"%i", _designer.userId],
+                            @"pageNo":[NSString stringWithFormat:@"%d", _topicCurrentPage],
+                            @"rowsPerPage":@"10"};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_GET_DE_MYTOPIC parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSArray *list = [data objectForKey:@"deTopicCommentMeList"];
+            NSMutableArray *rows = [JRTopic buildUpWithValue:list];
+            if (_topicCurrentPage > 1) {
+                [_topicDatas addObjectsFromArray:rows];
+            }else{
+                self.topicDatas = [JRTopic buildUpWithValue:list];
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self reloadData];
+        });
+        [_tableView headerEndRefreshing];
+        [_tableView footerEndRefreshing];
+    }];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -149,6 +237,7 @@
     }
     
 }
+
 
 - (void)nextAction{
     
@@ -197,11 +286,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (0 == _segment.selectedIndex) {
-        return 10;
+        return _caseDatas.count;
     }else if (1 == _segment.selectedIndex){
         return 6;
     }else{
-        return 13;
+        return _topicDatas.count;
     }
 }
 
@@ -229,7 +318,7 @@
             return 44;
         }
     }else{
-        [self.topicCell setDatas:nil];
+        [self.topicCell fillCellWithTopic:_topicDatas[indexPath.row]];
         return self.topicCell.frame.size.height;
     }
 }
@@ -248,8 +337,8 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-//        JRCase *c = [_datas objectAtIndex:indexPath.row];
-//        [cell fillCellWithCase:c];
+        JRCase *c = [_caseDatas objectAtIndex:indexPath.row];
+        [(CaseCell*)cell fillCellInDesignerDetailWithCase:c];
         
         return cell;
     }else if (1 == _segment.selectedIndex){
@@ -309,16 +398,41 @@
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [(TATopicCell*)cell setDatas:nil];
+        JRTopic *topic = _topicDatas[indexPath.row];
+        [(TATopicCell*)cell fillCellWithTopic:topic];
     }
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (_segment.selectedIndex == 0) {
+        JRCase *cs = [_caseDatas objectAtIndex:indexPath.row];
+        
+        [self showHUD];
+        [cs loadDetail:^(BOOL result) {
+            [self hideHUD];
+            if (result) {
+                JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+
+    }else if (_segment.selectedIndex == 2){
+        
+    }
+}
 
 #pragma mark - JRSegmentControlDelegate
 
 - (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
-    [_tableView reloadData];
+    [_tableView setHeaderHidden:NO];
+    [_tableView setFooterHidden:NO];
+    if (index == 1) {
+        [_tableView setHeaderHidden:YES];
+        [_tableView setFooterHidden:YES];
+    }
+    [self refreshData];
 }
 
 #pragma mark - SelfIntroductionCellDelegate

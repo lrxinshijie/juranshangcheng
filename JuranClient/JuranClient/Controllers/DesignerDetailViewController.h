@@ -13,5 +13,6 @@
 @interface DesignerDetailViewController : ALViewController
 
 @property (nonatomic, strong) JRDesigner *designer;
-
+@property (nonatomic, strong) NSMutableArray *caseDatas;
+@property (nonatomic, strong) NSMutableArray *topicDatas;
 @end

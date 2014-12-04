@@ -69,15 +69,23 @@
         if (result){
             
             NSString *thirdUserId = [[userInfo credential] uid];
+            NSString *nickName = [userInfo nickname];
 //            NSString *accessToken = [[userInfo credential] token];
 //            NSNumber *thirdSource = @(2);
+            NSNumber *thirdSource = @(0);
+            if (type == ShareTypeSinaWeibo) {
+                thirdSource = @(1);
+            } else if (type == ShareType163Weibo) {
+                thirdSource = @(3);
+            } else if (type == ShareTypeQQSpace) {
+                thirdSource = @(2);
+            }
             
-            NSDictionary *param = @{@"thirdUserId":thirdUserId,
-//                                         @"accessToken":accessToken,
-                                         @"thirdPrevStr": thirdPrevStr,
-                                         @"thirdUserSource": thirdUserSource,
-                                    @"thirdVisitorId": [NSString stringWithFormat:@"%d", arc4random()%10000],
-                                         };
+            NSDictionary *param = @{@"userType": @"member",
+                                    @"thirdUserId":thirdUserId,
+                                    @"thirdSource": thirdSource,
+                                    @"nickName": nickName,
+                                    @"deviceInfo":@{@"appType":@"iphone",@"version":@"1.0",@"deviceType":@"iphone",@"osVersion":@"8.0"}};
             
             [[ALEngine shareEngine] pathURL:JR_THIRD_LOGIN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
                 [self hideHUD];
@@ -109,6 +117,11 @@
         [self showTip:@"帐户或密码不能为空"];
         return;
     }
+    if (password.length < 6) {
+        [self showTip:@"密码需要大于6位"];
+        return;
+    }
+    
     NSDictionary *param = @{@"account": account,
                             @"password": [NSString stringWithFormat:@"%@", password]
 //                            @"pushID": @"1111",
@@ -158,6 +171,17 @@
 - (IBAction)onForget:(id)sender{
     ForgetViewController *forget = [[ForgetViewController alloc] init];
     [self.navigationController pushViewController:forget animated:YES];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if ([textField isEqual:_accountTextField] && value.length > kAccountMaxNumber) {
+        return NO;
+    }else if ([textField isEqual:_passwordTextField] && value.length > kPasswordMaxNumber){
+        return NO;
+    }
+    
+    return YES;
 }
 
 /*
