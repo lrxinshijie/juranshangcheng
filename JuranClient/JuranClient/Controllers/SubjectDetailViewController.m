@@ -15,6 +15,10 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, strong) IBOutlet UIView *headerView;
+@property (nonatomic, strong) IBOutlet UIImageView *photoImageView;
+@property (nonatomic, strong) IBOutlet UILabel *contentLabel;
 
 @end
 
@@ -36,6 +40,12 @@
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView addFooterWithCallback:^{
+        weakSelf.currentPage++;
         [weakSelf loadData];
     }];
     
@@ -46,12 +56,34 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"id": [NSString stringWithFormat:@"%d",_subject.key]};
+    NSDictionary *param = @{@"id": [NSString stringWithFormat:@"%d",_subject.key],
+                            @"pageCount": [NSString stringWithFormat:@"%d", _currentPage],
+                            @"pageSize": @"20"};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_SUBJECT_DETAIL parameters:param HTTPMethod:kHTTPMethodGet otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_SUBJECT_DETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            
+            NSDictionary *info = [data objectForKey:@"infoSubjectDetailResp"];
+            NSMutableArray *rows = [JRCase buildUpWithValue:[info objectForKey:@"projectList"]];
+            if (_currentPage == 1) {
+                self.datas = rows;
+                NSString *subjectName = [info objectForKey:@"subjectName"];
+                NSString *subjectUrl = [info objectForKey:@"subjectUrl"];
+                NSString *subjectContent = [info objectForKey:@"subjectContent"];
+                self.navigationItem.title = subjectName;
+                [_photoImageView setImageWithURLString:subjectUrl];
+                _contentLabel.text = subjectContent;
+                CGRect frame = _contentLabel.frame;
+                frame.size.height = [subjectContent heightWithFont:_contentLabel.font constrainedToWidth:CGRectGetWidth(frame)];
+                _contentLabel.frame = frame;
+                frame = _headerView.frame;
+                frame.size.height = CGRectGetMaxY(_contentLabel.frame) + 10;
+                _headerView.frame = frame;
+                self.tableView.tableHeaderView = _headerView;
+                
+            }else{
+                [_datas addObjectsFromArray:rows];
+            }
             
             [_tableView reloadData];
         }

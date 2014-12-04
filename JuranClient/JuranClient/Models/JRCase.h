@@ -49,4 +49,6 @@
 
 - (NSString *)styleString;
 
+- (void)loadDetail:(void (^) (BOOL result))finished;
+
 @end

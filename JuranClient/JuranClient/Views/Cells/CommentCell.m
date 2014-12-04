@@ -42,7 +42,16 @@
 
 - (void)fillCellWithComment:(JRComment *)data{
     [_avtarImageView setImageWithURLString:data.headUrl];
-    _nameLabel.text = data.nickName;
+    NSString *nickName = data.nickName;
+    _nameLabel.text = nickName;
+    
+    _typeButton.hidden = YES;
+    if ([[data.userType lowercaseString] isEqualToString:@"designer"]) {
+        _typeButton.hidden = NO;
+        CGRect frame = _typeButton.frame;
+        frame.origin.x = CGRectGetMinX(_nameLabel.frame) + [nickName widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)] + 5;
+        _typeButton.frame = frame;
+    }
     _timeLabel.text = data.commentTime;
     NSString *content = data.commentContent;
     _contentLabel.text = content;

@@ -84,7 +84,7 @@
                     <rect key="frame" x="35" y="72" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入手机号/用户名" minimumFontSize="17" clearButtonMode="whileEditing" id="Khf-pk-rTx">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入手机号/邮箱/用户名" minimumFontSize="17" clearButtonMode="whileEditing" id="Khf-pk-rTx">
                     <rect key="frame" x="65" y="68" width="224" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

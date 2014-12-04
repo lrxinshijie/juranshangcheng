@@ -10,6 +10,7 @@
 #import "KTPhotoBrowserDataSource.h"
 #import "KTPhotoBrowserGlobal.h"
 #import "KTPhotoView.h"
+#import "CaseDetailViewController.h"
 
 @interface JRPhotoScrollViewController ()<KTPhotoBrowserDataSource>
 
@@ -25,7 +26,7 @@
 - (id)initWithJRCase:(JRCase*)c andStartWithPhotoAtIndex:(NSUInteger)index{
     self = [self initWithDataSource:self andStartWithPhotoAtIndex:index];
     if (self) {
-        
+        self.jrCase = c;
     }
     return self;
 }
@@ -46,11 +47,13 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImageWithColor:RGBAColor(0, 0, 0, .5f)];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setBackgroundImageWithColor:[UIColor whiteColor]];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)viewDidLoad
@@ -58,6 +61,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"case_icon_share_white.png"] rightBarButtonItemAction:@selector(doShare)];
+    
+    
+}
+
+- (void)loadData{
 }
 
 - (void)setBottomView{
@@ -110,7 +118,7 @@
 }
 
 - (void)setTitleAndIndex:(NSInteger)newIndex{
-    _titleLabel.text = [dataSource_ titleAtIndex:newIndex];
+//    _titleLabel.text = [dataSource_ titleAtIndex:newIndex];
     _indexLabel.text = [NSString stringWithFormat:@"%i/%i", newIndex+1,[dataSource_ numberOfPhotos]];
     [self adjustBottomViewFrame];
 }
@@ -154,7 +162,9 @@
 }
 
 - (IBAction)doDetail:(id)sender{
-    
+    CaseDetailViewController *cd = [[CaseDetailViewController alloc] init];
+    cd.jrCase = _jrCase;
+    [self.navigationController pushViewController:cd animated:YES];
 }
 
 - (IBAction)doPraise:(id)sender{

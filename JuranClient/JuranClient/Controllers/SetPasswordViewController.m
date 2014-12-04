@@ -28,6 +28,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     _phoneTextField.text = _phone;
+    _phoneTextField.enabled = NO;
 }
 
 - (IBAction)onBack:(id)sender{
@@ -89,6 +90,15 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (value.length > kPasswordMaxNumber) {
+        return NO;
+    }
+    
+    return YES;
 }
 
 /*

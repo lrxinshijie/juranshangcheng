@@ -32,7 +32,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-//    [[JRUser currentUser] logout];
+    [[JRUser currentUser] logout];
     [self setupShareSDK];
     [self setupTabbar];
     
@@ -101,11 +101,11 @@
     //添加新浪微博应用 注册网址 http://open.weibo.com
     [ShareSDK connectSinaWeiboWithAppKey:@"4218949951"
                                appSecret:@"444121dbfb4e449ba7caf573b617652c"
-                             redirectUri:@"http://www.sina.com"];
+                             redirectUri:@"http://demo.juran.cn/member/sinalogin.htm"];
     //当使用新浪微博客户端分享的时候需要按照下面的方法来初始化新浪的平台
     [ShareSDK  connectSinaWeiboWithAppKey:@"4218949951"
                                 appSecret:@"444121dbfb4e449ba7caf573b617652c"
-                              redirectUri:@"http://www.sina.com"
+                              redirectUri:@"http://demo.juran.cn/member/sinalogin.htm"
                               weiboSDKCls:[WeiboSDK class]];
     
     //添加腾讯微博应用 注册网址 http://dev.t.qq.com

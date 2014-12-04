@@ -12,6 +12,7 @@
 #import "CaseDetailViewController.h"
 #import "JRAdInfo.h"
 #import "EScrollerView.h"
+#import "JRPhotoScrollViewController.h"
 
 @interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate>
 
@@ -153,11 +154,25 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    CaseDetailViewController *cd = [[CaseDetailViewController alloc] init];
+
     JRCase *cs = [_datas objectAtIndex:indexPath.row];
-    cd.jrCase = cs;
-    cd.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:cd animated:YES];
+    
+    [self showHUD];
+    [cs loadDetail:^(BOOL result) {
+        [self hideHUD];
+        if (result) {
+            JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }];
+    
+    
+//    CaseDetailViewController *cd = [[CaseDetailViewController alloc] init];
+
+//    cd.jrCase = cs;
+//    cd.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:cd animated:YES];
 }
 
 - (void)EScrollerViewDidClicked:(NSUInteger)index{

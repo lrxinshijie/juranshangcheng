@@ -145,6 +145,17 @@
     [_codeTextField resignFirstResponder];
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if ([textField isEqual:_phoneTextField] && value.length > kPhoneMaxNumber) {
+        return NO;
+    }else if ([textField isEqual:_codeTextField] && value.length > kCodeMaxNumber){
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

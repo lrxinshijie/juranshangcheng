@@ -35,7 +35,7 @@
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
-    self.photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(225, 12, 60, 45)];
+    self.photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(220, 12, 60, 45)];
     _photoImageView.image = [UIImage imageNamed:@"publish_image_default"];
     
     self.keys = @[@"姓名",@"联系电话",@"户型",@"装修预算",@"房屋面积",@"风格",@"项目地址",@"小区名称",@"户型",@"户型图上传"];

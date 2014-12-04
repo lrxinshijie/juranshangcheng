@@ -172,6 +172,12 @@
 - (IBAction)onEmailSubmit:(id)sender{
     [self onHideKeyBoard:sender];
     NSString *email = _emailTextField.text;
+    
+    if (email.length == 0) {
+        [self showTip:@"邮箱不能为空"];
+        return;
+    }
+    
     if (![email validateEmail]) {
         [self showTip:@"邮箱格式不正确"];
         return;
@@ -199,6 +205,19 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if ([textField isEqual:_phoneTextField] && value.length > kPhoneMaxNumber) {
+        return NO;
+    }else if ([textField isEqual:_codeTextField] && value.length > kCodeMaxNumber){
+        return NO;
+    }else if ([textField isEqual:_emailTextField] && value.length > kAccountMaxNumber){
+        return NO;
+    }
+    
     return YES;
 }
 

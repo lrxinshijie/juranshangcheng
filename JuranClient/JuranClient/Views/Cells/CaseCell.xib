@@ -18,7 +18,7 @@
                         <rect key="frame" x="5" y="5" width="310" height="265"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample-case-list" id="gex-9Q-tsk">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="gex-9Q-tsk">
                                 <rect key="frame" x="0.0" y="0.0" width="310" height="239"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -84,7 +84,6 @@
     <resources>
         <image name="icon-eye" width="14" height="8"/>
         <image name="icon-zan-ro" width="13" height="13"/>
-        <image name="sample-case-list" width="320" height="240"/>
         <image name="sample-user-avatar" width="100" height="100"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
