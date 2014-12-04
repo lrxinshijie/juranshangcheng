@@ -8,6 +8,7 @@
 
 #import "CommentCell.h"
 #import "JRComment.h"
+#import "ReplyView.h"
 
 @interface CommentCell ()
 
@@ -17,8 +18,11 @@
 @property (nonatomic, strong) IBOutlet UILabel *timeLabel;
 @property (nonatomic, strong) IBOutlet UIButton *typeButton;
 @property (nonatomic, strong) IBOutlet UILabel *contentLabel;
+@property (nonatomic, strong) ReplyView *replyView;
+@property (nonatomic, strong) IBOutlet UIButton *replyButton;
 
 - (IBAction)onComment:(id)sender;
+- (IBAction)onReply:(id)sender;
 
 @end
 
@@ -32,6 +36,16 @@
     
     _typeButton.layer.masksToBounds = YES;
     _typeButton.layer.cornerRadius = 5;
+    
+    self.replyView = [[ReplyView alloc] initWithFrame:CGRectMake(10, 0, 290, 0)];
+    [_mainView addSubview:_replyView];
+}
+
+- (IBAction)onReply:(id)sender{
+    _comment.unfold = !_comment.unfold;
+    if ([_delegate respondsToSelector:@selector(clickCellUnfold:)]) {
+        [_delegate clickCellUnfold:self];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -41,6 +55,10 @@
 }
 
 - (void)fillCellWithComment:(JRComment *)data{
+    self.comment = data;
+    
+    _replyView.replys = _comment.replyList;
+    
     [_avtarImageView setImageWithURLString:data.headUrl];
     NSString *nickName = data.nickName;
     _nameLabel.text = nickName;
@@ -60,12 +78,33 @@
     frame.size.height = [content heightWithFont:_contentLabel.font constrainedToWidth:CGRectGetWidth(frame)];
     _contentLabel.frame = frame;
     
+    frame = _replyView.frame;
+    frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;
+    _replyView.frame = frame;
+    
+    frame.size.height = _comment.unfold ? _replyView.height : 0;
+    _replyView.frame = frame;
+    
+    [_replyButton setTitle:_comment.unfold ? @"收起回复" : @"展开回复" forState:UIControlStateNormal];
+    
+    _replyButton.hidden = _comment.replyList.count == 0;
+    _replyView.hidden = !_comment.unfold;
+    
+    frame = _replyButton.frame;
+    frame.origin.y = CGRectGetMaxY(_replyView.frame) + 5;
+    _replyButton.frame = frame;
+    
     frame = _mainView.frame;
-    frame.size.height = CGRectGetMaxY(_contentLabel.frame) + 10;
+    frame.size.height = (_comment.replyList.count == 0 ? CGRectGetMaxY(_replyView.frame) :  CGRectGetMaxY(_replyButton.frame)) + 10;
     _mainView.frame = frame;
+    
+    
 }
 
 - (IBAction)onComment:(id)sender{
+    if ([_delegate respondsToSelector:@selector(clickCellComment:)]) {
+        [_delegate clickCellComment:self];
+    }
 }
 
 @end

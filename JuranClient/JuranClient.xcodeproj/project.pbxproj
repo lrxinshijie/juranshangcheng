@@ -116,6 +116,8 @@
 		A971BCB01A20825800C018D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A971BC981A20825800C018D6 /* UIKit.framework */; };
 		A971BCB81A20825800C018D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A971BCB61A20825800C018D6 /* InfoPlist.strings */; };
 		A971BCBA1A20825800C018D6 /* JuranClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A971BCB91A20825800C018D6 /* JuranClientTests.m */; };
+		A977F8421A309783008682B3 /* ReplyView.m in Sources */ = {isa = PBXBuildFile; fileRef = A977F8411A309783008682B3 /* ReplyView.m */; };
+		A977F8461A3099E5008682B3 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A977F8451A3099E5008682B3 /* TTTAttributedLabel.m */; };
 		A987EDD21A20920500CED7CD /* ALViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A987ED691A20920500CED7CD /* ALViewController.m */; };
 		A987EDD31A20920500CED7CD /* UIViewController+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A987ED6B1A20920500CED7CD /* UIViewController+HUD.m */; };
 		A987EDD41A20920500CED7CD /* Public.m in Sources */ = {isa = PBXBuildFile; fileRef = A987ED6E1A20920500CED7CD /* Public.m */; };
@@ -392,6 +394,10 @@
 		A971BCB51A20825800C018D6 /* JuranClientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JuranClientTests-Info.plist"; sourceTree = "<group>"; };
 		A971BCB71A20825800C018D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A971BCB91A20825800C018D6 /* JuranClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JuranClientTests.m; sourceTree = "<group>"; };
+		A977F8401A309783008682B3 /* ReplyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyView.h; sourceTree = "<group>"; };
+		A977F8411A309783008682B3 /* ReplyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyView.m; sourceTree = "<group>"; };
+		A977F8441A3099E5008682B3 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		A977F8451A3099E5008682B3 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		A987ED681A20920500CED7CD /* ALViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALViewController.h; sourceTree = "<group>"; };
 		A987ED691A20920500CED7CD /* ALViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALViewController.m; sourceTree = "<group>"; };
 		A987ED6A1A20920500CED7CD /* UIViewController+HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HUD.h"; sourceTree = "<group>"; };
@@ -802,12 +808,6 @@
 				14ABFBED1A25DADC00C4AF65 /* RegistViewController.h */,
 				14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */,
 				14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */,
-				145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */,
-				145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */,
-				145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */,
-				145E3D161A2792B100AA952F /* PersonalDataViewController.h */,
-				145E3D171A2792B200AA952F /* PersonalDataViewController.m */,
-				145E3D181A2792B200AA952F /* PersonalDataViewController.xib */,
 				A93BF2971A2633D90070B72A /* SetPasswordViewController.h */,
 				A93BF2981A2633D90070B72A /* SetPasswordViewController.m */,
 				A93BF2991A2633D90070B72A /* SetPasswordViewController.xib */,
@@ -919,6 +919,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A977F8431A3099E5008682B3 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				A977F8441A3099E5008682B3 /* TTTAttributedLabel.h */,
+				A977F8451A3099E5008682B3 /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
 		A987ED671A20920500CED7CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -996,6 +1005,7 @@
 		A987ED6F1A20920500CED7CD /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				A977F8431A3099E5008682B3 /* TTTAttributedLabel */,
 				1441A1791A29E3D5004A038E /* JRPhotoBrowser */,
 				1441A1471A29E3CD004A038E /* ShareSDK */,
 				A9D654941A27642800A80253 /* JSONModel */,
@@ -1146,9 +1156,9 @@
 		A987EDCE1A20920500CED7CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A987EDCF1A20920500CED7CD /* Cells */,
 				14C953981A2DAD9E00FE6F8D /* EScrollerView.h */,
 				14C953991A2DAD9E00FE6F8D /* EScrollerView.m */,
-				A987EDCF1A20920500CED7CD /* Cells */,
 				A987EDD01A20920500CED7CD /* GlobalPopupAlert.h */,
 				A987EDD11A20920500CED7CD /* GlobalPopupAlert.m */,
 				1476DA8B1A21DB1E0006E9E0 /* JRSegmentControl.h */,
@@ -1159,6 +1169,8 @@
 				1441A1A31A29E62A004A038E /* ShareView.m */,
 				A9A2A3FD1A2B1F0900DFA49B /* BannerView.h */,
 				A9A2A3FE1A2B1F0900DFA49B /* BannerView.m */,
+				A977F8401A309783008682B3 /* ReplyView.h */,
+				A977F8411A309783008682B3 /* ReplyView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1466,6 +1478,7 @@
 				1441A0611A2987FB004A038E /* JRProfileData.m in Sources */,
 				A90459D31A278A6100F8CD74 /* PublishDesignViewController.m in Sources */,
 				A9C398371A298047006A8AAB /* JRComment.m in Sources */,
+				A977F8461A3099E5008682B3 /* TTTAttributedLabel.m in Sources */,
 				A987EDEE1A20920500CED7CD /* UINavigationBar+ASCategory.m in Sources */,
 				1476DA911A21DB850006E9E0 /* DesignerCell.m in Sources */,
 				141A1D421A2CCDFA00C073C5 /* JRAnswer.m in Sources */,
@@ -1525,6 +1538,7 @@
 				A987EDE11A20920500CED7CD /* NSMutableArray+ASCategory.m in Sources */,
 				A987EDFA1A20920500CED7CD /* SDWebImageDownloader.m in Sources */,
 				A971BCA11A20825800C018D6 /* main.m in Sources */,
+				A977F8421A309783008682B3 /* ReplyView.m in Sources */,
 				1441A1461A29E156004A038E /* JRMemberDetail.m in Sources */,
 				A987EDDF1A20920500CED7CD /* NSDate+ASCategory.m in Sources */,
 				A9D654B21A27642800A80253 /* NSArray+JSONModel.m in Sources */,

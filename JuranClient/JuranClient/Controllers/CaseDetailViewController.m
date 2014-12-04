@@ -12,8 +12,10 @@
 #import "JRDesigner.h"
 #import "JRComment.h"
 #import "CommentCell.h"
+#import "DesignerDetailViewController.h"
+#import "ShareView.h"
 
-@interface CaseDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface CaseDetailViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, CommentCellDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *comments;
@@ -30,6 +32,8 @@
 
 @property (nonatomic, strong) IBOutlet UIView *commentView;
 @property (nonatomic, strong) IBOutlet UITextField *commentTextField;
+
+@property (nonatomic, strong) JRComment *selectComment;
 
 - (IBAction)onSend:(id)sender;
 
@@ -64,7 +68,7 @@
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
-        [weakSelf loadData];
+        [weakSelf loadComment];
     }];
     
     [_tableView addFooterWithCallback:^{
@@ -78,6 +82,18 @@
     
     [self.view addSubview:_commentView];
     
+    self.values = @[[NSString stringWithFormat:@"%@-%@",_jrCase.cityName, _jrCase.districtName],
+                    _jrCase.neighbourhoods,
+                    _jrCase.roomType,
+                    _jrCase.styleString,
+                    [NSString stringWithFormat:@"%d平米",_jrCase.houseArea],
+                    [NSString stringWithFormat:@"￥%d万元",_jrCase.projectPrice],
+                    _jrCase.desc
+                    ];
+    _nameLabel.text = _jrCase.nickName;
+    _detailLabel.text = _jrCase.tags;
+    [_avtarImageView setImageWithURLString:_jrCase.headUrl];
+    
     [_tableView headerBeginRefreshing];
     
     _avtarImageView.layer.masksToBounds = YES;
@@ -86,28 +102,28 @@
 
 - (void)loadData{
     
-    NSDictionary *param = @{@"projectId": _jrCase.projectId};
-    [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_PRODETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
-        if (!error) {
-            self.jrCase = [_jrCase buildDetailWithDictionary:data];
-            self.values = @[[NSString stringWithFormat:@"%@-%@",_jrCase.cityName, _jrCase.districtName],
-                            _jrCase.neighbourhoods,
-                            _jrCase.roomType,
-                            _jrCase.styleString,
-                            [NSString stringWithFormat:@"%d平米",_jrCase.houseArea],
-                            [NSString stringWithFormat:@"￥%d万元",_jrCase.projectPrice],
-                            _jrCase.desc
-                            ];
-            _nameLabel.text = _jrCase.nickName;
-            _detailLabel.text = _jrCase.tags;
-            [_avtarImageView setImageWithURLString:_jrCase.headUrl];
-        }
-        
-        [self loadComment];
-        [_tableView reloadData];
-    }];
+//    NSDictionary *param = @{@"projectId": _jrCase.projectId};
+//    [self showHUD];
+//    [[ALEngine shareEngine] pathURL:JR_PRODETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+//        [self hideHUD];
+//        if (!error) {
+//            self.jrCase = [_jrCase buildDetailWithDictionary:data];
+//            self.values = @[[NSString stringWithFormat:@"%@-%@",_jrCase.cityName, _jrCase.districtName],
+//                            _jrCase.neighbourhoods,
+//                            _jrCase.roomType,
+//                            _jrCase.styleString,
+//                            [NSString stringWithFormat:@"%d平米",_jrCase.houseArea],
+//                            [NSString stringWithFormat:@"￥%d万元",_jrCase.projectPrice],
+//                            _jrCase.desc
+//                            ];
+//            _nameLabel.text = _jrCase.nickName;
+//            _detailLabel.text = _jrCase.tags;
+//            [_avtarImageView setImageWithURLString:_jrCase.headUrl];
+//        }
+//        
+//        [self loadComment];
+//        [_tableView reloadData];
+//    }];
 }
 
 - (void)loadComment{
@@ -152,9 +168,25 @@
     }else if (indexPath.section == 1){
         return 44;
     }else{
-        JRComment *commnet = [_comments objectAtIndex:indexPath.row];
-        NSString *content = commnet.commentContent;
+        JRComment *comment = [_comments objectAtIndex:indexPath.row];
+        NSString *content = comment.commentContent;
         CGFloat height = [content heightWithFont:[UIFont systemFontOfSize:15] constrainedToWidth:290];
+        
+        if (comment.replyList.count > 0) {
+            CGFloat replyHeight = 25;
+            if (comment.unfold) {
+                replyHeight = 35;
+                for (JRComment *reply in comment.replyList) {
+                    NSString *name = [NSString stringWithFormat:@"%@：", reply.nickName];
+                    NSString *content = [NSString stringWithFormat:@"%@%@", name, reply.replyContent];
+                    replyHeight += [content heightWithFont:[UIFont systemFontOfSize:15] constrainedToWidth:290];
+                    replyHeight += 30;
+                }
+            }
+            height += replyHeight;
+        }
+        
+        
         return 73+height;
     }
     
@@ -200,7 +232,7 @@
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+        cell.delegate = self;
         JRComment *commnet = [_comments objectAtIndex:indexPath.row];
         [cell fillCellWithComment:commnet];
         
@@ -242,7 +274,7 @@
 }
 
 - (void)onShare{
-    
+    [[ShareView sharedView] showWithContent:_jrCase.desc image:[[Public imageURL:_jrCase.imageUrl] absoluteString] title:_jrCase.title url:@""];
 }
 
 - (IBAction)onSend:(id)sender{
@@ -260,6 +292,12 @@
     
     NSDictionary *param = @{@"projectId": _jrCase.projectId,
                             @"commentContent": comment};
+    if (_selectComment) {
+        param = @{@"projectId": _jrCase.projectId,
+                  @"commentContent": comment,
+                  @"commentId": [NSString stringWithFormat:@"%d", _selectComment.commentId]
+                  };
+    }
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_ADD_COMMENT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
@@ -267,14 +305,40 @@
             _commentTextField.text = @"";
             self.currentPage = 1;
             [self loadComment];
+            self.selectComment = nil;
         }
+
     }];
+}
+
+- (void)clickCellComment:(CommentCell *)cell{
+    self.selectComment = cell.comment;
+    [_commentTextField becomeFirstResponder];
+}
+
+- (void)clickCellUnfold:(CommentCell *)cell{
+    [_tableView reloadData];
+}
+
+- (void)setSelectComment:(JRComment *)selectComment{
+    _selectComment = selectComment;
+    if (_selectComment) {
+        _commentTextField.placeholder = [NSString stringWithFormat:@"回复%@:", _selectComment.nickName];
+    }else{
+        _commentTextField.placeholder = @"写评论";
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
+    if (indexPath.section == 0) {
+        DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
+        JRDesigner *designer = [[JRDesigner alloc] init];
+        designer.userId = _jrCase.userId;
+        detailVC.designer = designer;
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
 }
 
 
@@ -283,6 +347,12 @@
     [self onSend:nil];
     
     return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if (_selectComment && textField.text.length == 0) {
+        self.selectComment = nil;
+    }
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification{
