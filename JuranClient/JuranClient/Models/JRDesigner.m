@@ -32,13 +32,8 @@
         self.fansCount = [dict getIntValueForKey:@"fansCount" defaultValue:0];
         self.creditRateCount = [dict getIntValueForKey:@"creditRateCount" defaultValue:0];
         self.minisite = [dict getStringValueForKey:@"minisite" defaultValue:@""];
-        
-        NSArray *list =dict[@"projectDtoList"];
-        self.projectDtoList = [JRCase buildUpWithValue:list];
-        for (NSInteger i = 0; i < list.count; i++) {
-            JRCase *c = self.projectDtoList[i];
-            [c buildDtoWithDictionary:list[i]];
-        }
+        NSString *urls = [dict getStringValueForKey:@"frontImgUrl"defaultValue:@""];
+        _frontImageUrlList = [urls componentsSeparatedByString:@","];
     }
     
     return self;

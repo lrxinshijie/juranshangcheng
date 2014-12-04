@@ -44,7 +44,7 @@
 @property (nonatomic, assign) BOOL isFollowed;
 
 
-@property (nonatomic, strong) NSMutableArray *projectDtoList;
+@property (nonatomic, strong) NSArray *frontImageUrlList;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;

@@ -133,10 +133,10 @@
                 NSDictionary *body = [result objectForKey:@"respBody"];
                 NSDictionary *header = [result objectForKey:@"respHead"];
                 if (header && [header isKindOfClass:[NSDictionary class]]) {
-                    if ([[[header objectForKey:@"respCode"] uppercaseString] isEqualToString:@"OK"]) {
+                    if ([[[header getStringValueForKey:@"respCode" defaultValue:@""] uppercaseString] isEqualToString:@"OK"]) {
                         completionBlock(body);
                     }else{
-                        NSError *err = [[NSError alloc] initWithDomain:@"" code:100 userInfo:@{NSLocalizedDescriptionKey:[header objectForKey:@"respShow"]}];
+                        NSError *err = [[NSError alloc] initWithDomain:@"" code:100 userInfo:@{NSLocalizedDescriptionKey:[header getStringValueForKey:@"respShow" defaultValue:@""]}];
                         errorBlock(err);
                     }
                 }else{

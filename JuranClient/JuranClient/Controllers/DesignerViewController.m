@@ -77,7 +77,7 @@
     [[ALEngine shareEngine] pathURL:JR_DESIGNERLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *designerList = [data objectForKey:@"searchResultList"];
+            NSArray *designerList = [data objectForKey:@"easyHomeDesignDtotList"];
             NSMutableArray *rows = [JRDesigner buildUpWithValue:designerList];
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
