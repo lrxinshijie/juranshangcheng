@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="155" height="116"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="mLL-YF-SQa">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avtar_default" id="mLL-YF-SQa">
                         <rect key="frame" x="10" y="101" width="30" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -40,6 +40,9 @@
             <point key="canvasLocation" x="185.5" y="297.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="avtar_default" width="60" height="60"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

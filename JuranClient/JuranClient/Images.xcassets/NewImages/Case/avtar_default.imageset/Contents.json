@@ -7,15 +7,11 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "个人中心－消息.png"
+      "filename" : "avtar_default@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x"
-    },
-    {
-      "idiom" : "universal",
-      "unassigned" : true
     }
   ],
   "info" : {

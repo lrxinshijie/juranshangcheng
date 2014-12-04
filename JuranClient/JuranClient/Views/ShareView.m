@@ -51,10 +51,10 @@
 }
 
 - (void)showWithContent:(NSString *)content
-// defaultContent:(NSString *)defaultContent
                   image:(NSString *)imagePath
                   title:(NSString *)title
                     url:(NSString *)url{
+    
     _content = content;
     _title = title;
     _url = url;
@@ -71,11 +71,11 @@
 - (void)onShare:(id)sender{
     UIButton *btn = (UIButton*)sender;
     id<ISSContent> publishContent = [ShareSDK content:_content
-                                       defaultContent:nil
+                                       defaultContent:_content
                                                 image:[ShareSDK imageWithUrl:_imagePath]
                                                 title:_title
                                                   url:_url
-                                          description:NSLocalizedString(@"TEXT_TEST_MSG", @"这是一条测试信息")
+                                          description:_content
                                             mediaType:SSPublishContentMediaTypeNews];
     ShareType shareType;
     

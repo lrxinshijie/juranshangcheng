@@ -24,6 +24,7 @@
 @property (nonatomic, copy) NSString *replyContent;
 @property (nonatomic, copy) NSString *replyTime;
 @property (nonatomic, assign) NSInteger replyId;
+@property (nonatomic, assign) BOOL unfold;
 
 + (NSMutableArray *)buildUpWithValue:(id)value;;
 

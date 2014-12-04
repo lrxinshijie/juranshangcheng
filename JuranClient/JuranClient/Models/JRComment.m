@@ -37,6 +37,8 @@
         if (replyList && [replyList isKindOfClass:[NSArray class]]) {
             self.replyList = [JRComment buildUpWithValue:replyList];
         }
+        
+        self.unfold = YES;
     }
     
     return self;
