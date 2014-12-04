@@ -33,7 +33,12 @@
         self.creditRateCount = [dict getIntValueForKey:@"creditRateCount" defaultValue:0];
         self.minisite = [dict getStringValueForKey:@"minisite" defaultValue:@""];
         
-        self.projectDtoList = [JRCase buildUpWithValue:dict[@"projectDtoList"]];
+        NSArray *list =dict[@"projectDtoList"];
+        self.projectDtoList = [JRCase buildUpWithValue:list];
+        for (NSInteger i = 0; i < list.count; i++) {
+            JRCase *c = self.projectDtoList[i];
+            [c buildDtoWithDictionary:list[i]];
+        }
     }
     
     return self;

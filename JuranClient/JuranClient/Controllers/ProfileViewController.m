@@ -16,6 +16,7 @@
 #import "MyDemandViewController.h"
 #import "MyAskOrAnswerViewController.h"
 #import "InteractionViewController.h"
+#import "SettingsViewController.h"
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -65,7 +66,9 @@
 }
 
 - (void)onSettings{
-    
+    SettingsViewController *vc = [[SettingsViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -98,11 +101,15 @@
     _loginNameLabel.hidden = NO;
     _userNameLabel.hidden = NO;
     _userNameLabel.text = _profileData.nickName;
+    [_headerImageView setImageWithURLString:_profileData.headUrl];
     _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _profileData.account];
     _privateLetterCountLabel.hidden = _profileData.newPushMsgCount?NO:YES;
     _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _profileData.newPushMsgCount];
     _signedButton.enabled = !_profileData.isSigned;
     [_signedButton setTitle:_profileData.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
+    _hasNewAnswerView.hidden = _profileData.newAnswerCount?NO:YES;
+    _hasNewBidView.hidden = _profileData.hasNewBidCount?NO:YES;
+    _hasNewPushMsgView.hidden = _profileData.newPushMsgCount?NO:YES;
 }
 
 - (void)loadData{

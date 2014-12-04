@@ -31,7 +31,7 @@
 #define JR_UNFOLLOWDESIGNER [NSString stringWithFormat:@"%@/member/unfollowDesigner.json",JR_SERVICE]
 #define JR_MYQUESTION [NSString stringWithFormat:@"%@/QA/myQuestion.json",JR_SERVICE]
 #define JR_MYANSWER [NSString stringWithFormat:@"%@/QA/getMyAnswer.json",JR_SERVICE]
-
+#define JR_APPLYMEASUER [NSString stringWithFormat:@"%@/trade/applyMeasure.json",JR_SERVICE]
 
 #define JR_GET_TOKEN_FOR_RESET_PWD [NSString stringWithFormat:@"%@/member/getTokenForResetPwd.json",JR_SERVICE]
 #define JR_RESET_PWD [NSString stringWithFormat:@"%@/member/resetPwd.json",JR_SERVICE]

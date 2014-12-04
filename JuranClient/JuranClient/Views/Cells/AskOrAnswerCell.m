@@ -40,15 +40,17 @@
 }
 
 - (void)fillCellWithAnswer:(JRAnswer *)data{
-    _contentLabel.text = data.title;
-    _statusLabel.text = @"已解决";
-    _timeLabel.text = @"回答：5  |  2014-9-20";
+    _contentLabel.text = data.content;
+    _statusLabel.text = data.isResolved?@"已解决":@"未解决";
+    _statusImageView.image = [UIImage imageNamed:data.isResolved?@"question_unresolved":@"answer_wati_accept.png"];
+    _timeLabel.text = data.commitTime;
+    _redPointView.hidden = YES;
     [self adjustFrame];
 }
 - (void)fillCellWithQuestion:(JRQuestion *)data{
     _contentLabel.text = data.title;
     _statusLabel.text = @"已解决";
-    _timeLabel.text = @"回答：5  |  2014-9-20";
+    _timeLabel.text = [NSString stringWithFormat:@"回答：%d  |  %@", data.answerCount, data.publishTime];
     [self adjustFrame];
 }
 

@@ -72,7 +72,7 @@
                             @"isRealNameAuth": @"",
                             @"order": @"0",
                             @"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"onePageCount": @"20"};
+                            @"onePageCount": @"10"};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_DESIGNERLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

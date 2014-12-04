@@ -42,8 +42,31 @@
 @property (nonatomic, copy) NSString *districtCode;
 @property (nonatomic, copy) NSString *districtName;
 
+//ProjectDto
+@property (nonatomic, copy) NSString *designerInfoDto;
+@property (nonatomic, copy) NSString *constructionTeamDto;
+@property (nonatomic, copy) NSString *projectVerifyDto;
+@property (nonatomic, copy) NSString *frontImgUrl;
+@property (nonatomic, assign) NSInteger imgCount;
+@property (nonatomic, assign) NSInteger editMemCount;
+@property (nonatomic, assign) BOOL shadeFlag;
+@property (nonatomic, assign) BOOL adoptFlag;
+@property (nonatomic, copy) NSString *comReplyId;
+@property (nonatomic, copy) NSString *communityCodeName;
+@property (nonatomic, assign) BOOL isFavFlag;
+@property (nonatomic, assign) BOOL isLikeFlag;
+@property (nonatomic, copy) NSString *diyHelpId;
+@property (nonatomic, strong) NSArray *projectPictureDtoList;
+@property (nonatomic, copy) NSString *isShow;
+@property (nonatomic, copy) NSString *showTime;
+@property (nonatomic, assign) NSInteger projectDtoId;
+@property (nonatomic, assign) NSInteger projectType;
+@property (nonatomic, assign) NSInteger authorId;
+
+
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (id)buildDetailWithDictionary:(NSDictionary *)dict;
+- (id)buildDtoWithDictionary:(NSDictionary *)dict;
 
 - (NSURL *)imageURL;
 

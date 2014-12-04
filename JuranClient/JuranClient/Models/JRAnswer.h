@@ -15,7 +15,9 @@
 @property (nonatomic, assign) NSInteger questionType;
 @property (nonatomic, strong) NSString *content;
 @property (nonatomic, strong) NSString *commitTime;
+@property (nonatomic, strong) NSString *status;
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
+- (BOOL)isResolved;
 
 @end

@@ -8,7 +8,16 @@
 
 #import "SettingsViewController.h"
 
-@interface SettingsViewController ()
+@interface SettingsViewController ()<UITableViewDelegate, UITableViewDataSource>
+{
+    NSArray *keysForImageSet;
+    NSArray *keysForOthers;
+    BOOL isLow;
+}
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) IBOutlet UIView *footerView;
+@property (nonatomic, strong) UISwitch *intelligentModeSwitch;
+@property (nonatomic, strong) IBOutlet UIButton *exitLoginButton;
 
 @end
 
@@ -27,12 +36,125 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    
+    self.navigationItem.title = @"设置";
+    
+    keysForImageSet = @[@"智能模式", @"高质量（适合WIFI环境）", @"普通（适合2G或3G模式）"];
+    keysForOthers = @[@"问题反馈", @"版本信息", @"给我打分", @"其他APP推荐"];
+    
+    _intelligentModeSwitch = [[UISwitch alloc] init];
+    _exitLoginButton.layer.cornerRadius = 2.0f;
+    
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    [self.view addSubview:_tableView];
+    _tableView.backgroundColor = RGBColor(241, 241, 241);
+    _tableView.tableFooterView = _footerView;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UITableViewDataSource/Delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        return 10;
+    }
+    return 30;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 1) {
+        return 10;
+    }
+    return 0;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc] init];
+    v.frame = CGRectMake(0, 0, kWindowWidth, 30);
+    v.backgroundColor = RGBColor(232, 232, 232);
+    UILabel *label = [v labelWithFrame:CGRectMake(15, 0, 200, 30) text:@"" textColor:RGBColor(102, 102, 102) textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
+    [v addSubview:label];
+    if (section == 0) {
+        label.text = @"图片质量";
+    }else if (section == 2) {
+        label.text = @"其他";
+    }else if (section == 1){
+        v.backgroundColor = RGBColor(241, 241, 241);
+    }
+    return v;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc] init];
+    v.frame = CGRectMake(0, 0, kWindowWidth, 30);
+    v.backgroundColor = RGBColor(241, 241, 241);
+    return v;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (section == 0) {
+        return keysForImageSet.count;
+    }else if (section == 1){
+        return 1;
+    }else{
+        return keysForOthers.count;
+    }
+}
+
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellIdentifier = @"SettingsCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        cell.textLabel.textColor = RGBColor(79, 79, 79);
+        cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize+2];
+        cell.detailTextLabel.textColor = RGBColor(143, 143, 143);
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]];
+    cell.detailTextLabel.text = @"";
+    if (indexPath.section == 0) {
+        cell.textLabel.text = keysForImageSet[indexPath.row];
+        if (indexPath.row == 0) {
+            cell.accessoryView = _intelligentModeSwitch;
+        }else if (indexPath.row == 1){
+            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:isLow?@"image_quality_unselected":@"image_quality_selected"]];
+        }else{
+            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:isLow?@"image_quality_selected":@"image_quality_unselected"]];
+        }
+    }else if (indexPath.section == 1){
+        cell.textLabel.text = @"清除缓存";
+        cell.detailTextLabel.text = @"小于50M";
+    }else{
+        cell.textLabel.text = keysForOthers[indexPath.row];
+        if (indexPath.row == 1) {
+            cell.detailTextLabel.text = @"1.0.1";
+        }
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        isLow = NO;
+        [_tableView reloadData];
+    }else if (indexPath.section == 0 && indexPath.row == 2) {
+        isLow = YES;
+        [_tableView reloadData];
+    }
 }
 
 @end

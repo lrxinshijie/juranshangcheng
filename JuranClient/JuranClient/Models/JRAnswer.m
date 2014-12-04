@@ -22,6 +22,7 @@
         self.questionType = [dict getIntValueForKey:@"questionType" defaultValue:0];
         self.content = [dict getStringValueForKey:@"content" defaultValue:@""];
         self.commitTime = [dict getStringValueForKey:@"commitTime" defaultValue:@""];
+        self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
     }
     
     return self;
@@ -39,5 +40,12 @@
     return retVal;
 }
 
+- (BOOL)isResolved{
+    BOOL flag = NO;
+    if ([_status isEqualToString:@"resolved"]){
+        flag = YES;
+    }
+    return flag;
+}
 
 @end

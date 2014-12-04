@@ -67,6 +67,14 @@
     return self;
 }
 
+- (id)buildDtoWithDictionary:(NSDictionary *)dict{
+    if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+        return self;
+    }
+    self.frontImgUrl = [dict getStringValueForKey:@"frontImgUrl" defaultValue:@""];
+    return self;
+}
+
 + (NSMutableArray *)buildUpWithValue:(id)value{
     NSMutableArray *retVal = [NSMutableArray array];
     

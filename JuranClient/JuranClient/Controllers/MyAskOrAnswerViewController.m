@@ -71,7 +71,7 @@
 
 - (void)loadData{
     NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"onePageCount": @"20"};
+                            @"onePageCount": @"10"};
     [self showHUD];
     NSString *url = _segment.selectedSegmentIndex == 0?JR_MYQUESTION:JR_MYANSWER;
     [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -147,7 +147,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *content = @"厨房装修布局应该怎么样才好？厨房装修布局应该怎么样才好？";
+    NSString *content = nil;
+    if (_segment.selectedSegmentIndex == 0) {
+        JRQuestion *q = _questionDatas[indexPath.row];
+        content = q.title;
+    }else{
+        JRAnswer *a = _answerDatas[indexPath.row];
+        content = a.content;
+    }
     return 53 + [content heightWithFont:[UIFont systemFontOfSize:kSystemFontSize] constrainedToWidth:290];
 }
 

@@ -11,7 +11,7 @@
     },
     {
       "idiom" : "universal",
-      "unassigned" : true
+      "scale" : "3x"
     }
   ],
   "info" : {

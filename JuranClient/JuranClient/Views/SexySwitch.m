@@ -23,7 +23,7 @@
     if (self) {
         self.layer.masksToBounds = YES;
         self.layer.cornerRadius = 2.f;
-        self.backgroundColor = [UIColor greenColor];
+        self.backgroundColor = RGBColor(101, 210, 117);
         
         _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 26)];
         _backgroundView.layer.cornerRadius = 2.0f;
@@ -34,7 +34,7 @@
         _maleBtn.frame = CGRectMake(0, 0, self.frame.size.width/2, self.frame.size.height);
         [_maleBtn setTitle:@"男" forState:UIControlStateNormal];
         [_maleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_maleBtn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+        [_maleBtn setTitleColor:RGBColor(101, 210, 117) forState:UIControlStateSelected];
         [_maleBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:kSystemFontSize]];
         [_maleBtn addTarget:self action:@selector(onSelected:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_maleBtn];
@@ -43,7 +43,7 @@
         _femaleBtn.frame = CGRectMake(self.frame.size.width/2, 0, self.frame.size.width/2, self.frame.size.height);
         [_femaleBtn setTitle:@"女" forState:UIControlStateNormal];
         [_femaleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_femaleBtn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+        [_femaleBtn setTitleColor:RGBColor(101, 210, 117) forState:UIControlStateSelected];
         [_femaleBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:kSystemFontSize]];
         [_femaleBtn addTarget:self action:@selector(onSelected:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_femaleBtn];
@@ -76,13 +76,9 @@
     [UIView animateWithDuration:.3f animations:^{
         _backgroundView.center = btn.center;
     } completion:^(BOOL finished) {
-        if (finished) {
-            [btn setSelected:YES];
-            [otherBtn setSelected:NO];
-        }
     }];
-    
-    
+    [btn setSelected:YES];
+    [otherBtn setSelected:NO];
 }
 
 - (id)initWithFrame:(CGRect)frame

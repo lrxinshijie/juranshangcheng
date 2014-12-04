@@ -169,12 +169,11 @@
             frame.origin = CGPointMake(view.frame.size.width - frame.size.width - 10 -50, 0);
             frame.size = CGSizeMake(50, 50);
             
-            UIImageView *iconImageView = [cell imageViewWithFrame:frame image:nil];
-            iconImageView.backgroundColor = [UIColor redColor];
+            UIImageView *iconImageView = [cell imageViewWithFrame:frame image:[UIImage imageNamed:@"unlogin_head.png"]];
             iconImageView.layer.masksToBounds = YES;
             iconImageView.layer.cornerRadius = iconImageView.frame.size.height/2;
             [view addSubview:iconImageView];
-            
+            [iconImageView setImageWithURLString:_memberDetail.headUrl];
             cell.accessoryView = view;
             
         }else{

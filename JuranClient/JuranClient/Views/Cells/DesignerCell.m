@@ -39,14 +39,23 @@
 
 - (void)fillCellWithDesigner:(JRDesigner *)data{
     _nameLabel.text = data.nickName.length?data.nickName:data.userName;
+    if (data.headUrl.length > 0) {
+        [_headImageView setImageWithURLString:data.headUrl];
+    }else{
+        _headImageView.image = [UIImage imageNamed:@"unlogin_head.png"];
+    }
+    
     _styleLabel.text = [data styleNamesWithType:0];
     _experienceLabel.text =  @"2年";
     _productCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];
     _readCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];
     NSInteger i = 0;
     for (JRCase *c in data.projectDtoList) {
+        if (i == 4) {
+            break;
+        }
         UIImageView *imageView = (UIImageView*)[self.contentView viewWithTag:i + kCaseImageViewTag];
-        imageView.image = [UIImage imageNamed:@"case_pic_exa.png"]; //[imageView setImageWithURL:[c imageURL] placeholderImage:nil];
+        [imageView setImageWithURLString:c.frontImgUrl];
         i++;
     }
     for (; i < 4; i++) {
