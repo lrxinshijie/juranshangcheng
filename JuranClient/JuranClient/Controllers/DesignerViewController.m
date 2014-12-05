@@ -70,6 +70,7 @@
 - (void)loadData{
     NSDictionary *param = @{@"experience": @"",
                             @"isRealNameAuth": @"",
+                            @"style": @"",
                             @"order": @"0",
                             @"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
                             @"onePageCount": @"10"};

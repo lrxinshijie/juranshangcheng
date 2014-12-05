@@ -46,9 +46,9 @@
     }
     
     _styleLabel.text = [data styleNamesWithType:0];
-    _experienceLabel.text =  @"2年";
+    _experienceLabel.text =  [NSString stringWithFormat:@"%@年", data.designExperience];
     _productCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];
-    _readCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];
+    _readCountLabel.text = [NSString stringWithFormat:@"%i", data.fansCount];
     NSInteger i = 0;
     for (NSString *url in data.frontImageUrlList) {
         UIImageView *imageView = (UIImageView*)[self.contentView viewWithTag:i + kCaseImageViewTag];

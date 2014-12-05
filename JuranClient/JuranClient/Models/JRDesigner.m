@@ -32,8 +32,14 @@
         self.fansCount = [dict getIntValueForKey:@"fansCount" defaultValue:0];
         self.creditRateCount = [dict getIntValueForKey:@"creditRateCount" defaultValue:0];
         self.minisite = [dict getStringValueForKey:@"minisite" defaultValue:@""];
+        self.designExperience = [dict getStringValueForKey:@"designExperience" defaultValue:@"0"];
         NSString *urls = [dict getStringValueForKey:@"frontImgUrl"defaultValue:@""];
-        _frontImageUrlList = [urls componentsSeparatedByString:@","];
+        if (urls.length == 0) {
+            _frontImageUrlList = @[];
+        }else{
+            _frontImageUrlList = [urls componentsSeparatedByString:@","];
+
+        }
     }
     
     return self;
@@ -63,7 +69,8 @@
     self.followCount = [dict getIntValueForKey:@"followCount" defaultValue:0];
     self.viewCount = [dict getIntValueForKey:@"viewCount" defaultValue:0];
     self.isFollowed = [dict getBoolValueForKey:@"isFollowed" defaultValue:FALSE];
-    
+    self.followId = [dict getStringValueForKey:@"followId" defaultValue:@"0"];
+
     return self;
 }
 
