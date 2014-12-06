@@ -24,7 +24,8 @@
 @property (nonatomic, assign) NSInteger fansCount;
 @property (nonatomic, assign) NSInteger creditRateCount;
 @property (nonatomic, strong) NSString *minisite;
-
+@property (nonatomic, strong) NSArray *frontImageUrlList;
+@property (nonatomic, strong) NSString *designExperience;
 
 //Detail
 @property (nonatomic, strong) NSString *userLevel;
@@ -42,9 +43,10 @@
 @property (nonatomic, assign) NSInteger followCount;
 @property (nonatomic, assign) NSInteger viewCount;
 @property (nonatomic, assign) BOOL isFollowed;
+@property (nonatomic, strong) NSString *followId;
 
 
-@property (nonatomic, strong) NSMutableArray *projectDtoList;
+
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;

@@ -46,16 +46,13 @@
     }
     
     _styleLabel.text = [data styleNamesWithType:0];
-    _experienceLabel.text =  @"2年";
+    _experienceLabel.text =  [NSString stringWithFormat:@"%@年", data.designExperience];
     _productCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];
-    _readCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];
+    _readCountLabel.text = [NSString stringWithFormat:@"%i", data.fansCount];
     NSInteger i = 0;
-    for (JRCase *c in data.projectDtoList) {
-        if (i == 4) {
-            break;
-        }
+    for (NSString *url in data.frontImageUrlList) {
         UIImageView *imageView = (UIImageView*)[self.contentView viewWithTag:i + kCaseImageViewTag];
-        [imageView setImageWithURLString:c.frontImgUrl];
+        [imageView setImageWithURLString:url];
         i++;
     }
     for (; i < 4; i++) {

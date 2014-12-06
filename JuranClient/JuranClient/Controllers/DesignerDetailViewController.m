@@ -57,7 +57,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.hidesBottomBarWhenPushed = YES;
-    self.navigationItem.title = _designer.nickName;
+    self.navigationItem.title = _designer.nickName.length?_designer.nickName:_designer.userName;
     
     personDatas = @[@"毕业院校", @"量房费", @"设计费用", @"从业年限", @"擅长风格"];
     _caseCurrentPage = 1;
@@ -219,13 +219,14 @@
         return;
     }
     ASLog(@"关注");
-    NSDictionary *param = @{@"userId": [NSString stringWithFormat:@"%i", _designer.userId]};
     [self showHUD];
     if (!_designer.isFollowed) {
+        NSDictionary *param = @{@"userId": [NSString stringWithFormat:@"%i", _designer.userId]};
         [[ALEngine shareEngine] pathURL:JR_FOLLOWDESIGNER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
             [self hideHUD];
             if (!error) {
                 _designer.isFollowed = YES;
+                _designer.followId = data[@"followId"];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
                     _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
@@ -233,7 +234,18 @@
             }
         }];
     }else{
-        
+        NSDictionary *param = @{@"followId": _designer.followId};
+        [[ALEngine shareEngine] pathURL:JR_UNFOLLOWDESIGNER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            [self hideHUD];
+            if (!error) {
+                _designer.isFollowed = NO;
+                _designer.followId = @"";
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
+                    _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
+                });
+            }
+        }];
     }
     
 }

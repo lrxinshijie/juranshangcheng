@@ -36,7 +36,7 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    self.navigationItem.title = @"我的关注";
+    self.navigationItem.title = @"我的需求";
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = RGBColor(241, 241, 241);

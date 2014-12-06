@@ -32,12 +32,13 @@
         self.fansCount = [dict getIntValueForKey:@"fansCount" defaultValue:0];
         self.creditRateCount = [dict getIntValueForKey:@"creditRateCount" defaultValue:0];
         self.minisite = [dict getStringValueForKey:@"minisite" defaultValue:@""];
-        
-        NSArray *list =dict[@"projectDtoList"];
-        self.projectDtoList = [JRCase buildUpWithValue:list];
-        for (NSInteger i = 0; i < list.count; i++) {
-            JRCase *c = self.projectDtoList[i];
-            [c buildDtoWithDictionary:list[i]];
+        self.designExperience = [dict getStringValueForKey:@"designExperience" defaultValue:@"0"];
+        NSString *urls = [dict getStringValueForKey:@"frontImgUrl"defaultValue:@""];
+        if (urls.length == 0) {
+            _frontImageUrlList = @[];
+        }else{
+            _frontImageUrlList = [urls componentsSeparatedByString:@","];
+
         }
     }
     
@@ -68,7 +69,8 @@
     self.followCount = [dict getIntValueForKey:@"followCount" defaultValue:0];
     self.viewCount = [dict getIntValueForKey:@"viewCount" defaultValue:0];
     self.isFollowed = [dict getBoolValueForKey:@"isFollowed" defaultValue:FALSE];
-    
+    self.followId = [dict getStringValueForKey:@"followId" defaultValue:@"0"];
+
     return self;
 }
 
