@@ -41,6 +41,7 @@
 @property (nonatomic, copy) NSString *cityName;
 @property (nonatomic, copy) NSString *districtCode;
 @property (nonatomic, copy) NSString *districtName;
+@property (nonatomic, copy) NSString *stylesName;
 
 //ProjectDto
 @property (nonatomic, copy) NSString *designerInfoDto;
@@ -72,5 +73,7 @@
 - (NSString *)styleString;
 
 - (void)loadDetail:(void (^) (BOOL result))finished;
+- (void)like:(void (^) (BOOL result))finished;
+- (void)favorite:(void (^) (BOOL result))finished;
 
 @end

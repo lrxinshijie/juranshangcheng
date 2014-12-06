@@ -22,9 +22,9 @@
     [self configureLeftBarButtonUniformly];
     self.view.backgroundColor = kViewBackgroundColor;
     
-    if (SystemVersionGreaterThanOrEqualTo7) {
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    }
+//    if (SystemVersionGreaterThanOrEqualTo7) {
+//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//    }
 }
 
 //- (void)viewWillDisappear:(BOOL)animated {

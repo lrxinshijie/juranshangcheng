@@ -56,12 +56,8 @@
     
     [self showHUD];
     ShareType type = ShareTypeQQSpace;
-    NSString *thirdPrevStr = @"qq_";
-    NSString *thirdUserSource = @"qq";
     if (btn.tag == 1001) {
         type = ShareTypeSinaWeibo;
-        thirdPrevStr = @"sina_";
-        thirdUserSource = @"sina_microblog";
     }
     
     

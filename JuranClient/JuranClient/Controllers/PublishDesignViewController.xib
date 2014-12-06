@@ -8,11 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PublishDesignViewController">
             <connections>
                 <outlet property="headerView" destination="o3b-0b-KX2" id="SJN-hr-LQC"/>
-                <outlet property="titleLabel1" destination="vV3-7c-qdj" id="hVa-1v-mhM"/>
-                <outlet property="titleLabel2" destination="NxX-59-FtL" id="xYA-cf-rbA"/>
-                <outlet property="titleLabel3" destination="8Eb-tR-bfY" id="3J4-Cv-VqT"/>
-                <outlet property="titleLabel4" destination="e9O-wJ-FnK" id="a6k-yj-BLC"/>
-                <outlet property="titleLabel5" destination="Lxd-aQ-hSl" id="YnK-jb-3Eo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,11 +24,11 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_line_selected" id="bdr-09-UXh">
-                    <rect key="frame" x="43" y="91" width="48" height="3"/>
+                    <rect key="frame" x="27" y="91" width="48" height="3"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Fxk-nO-z7C">
-                    <rect key="frame" x="28" y="85" width="15" height="15"/>
+                    <rect key="frame" x="12" y="85" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <state key="normal" title="1" backgroundImage="publish_point_selected">
@@ -41,7 +36,7 @@
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="e4E-E0-yvZ">
-                    <rect key="frame" x="90" y="85" width="15" height="15"/>
+                    <rect key="frame" x="74" y="85" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <state key="normal" title="2" backgroundImage="publish_point_default">
@@ -50,11 +45,11 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_line_default" id="oT7-5M-2Vz">
-                    <rect key="frame" x="105" y="91" width="48" height="3"/>
+                    <rect key="frame" x="89" y="91" width="48" height="3"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Mxr-q0-A8P">
-                    <rect key="frame" x="152" y="85" width="15" height="15"/>
+                    <rect key="frame" x="136" y="85" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <state key="normal" title="3" backgroundImage="publish_point_default">
@@ -63,11 +58,11 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_line_default" id="ZjL-nu-X5n">
-                    <rect key="frame" x="167" y="91" width="48" height="3"/>
+                    <rect key="frame" x="151" y="91" width="48" height="3"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="usd-Nb-ZdM">
-                    <rect key="frame" x="214" y="85" width="15" height="15"/>
+                    <rect key="frame" x="198" y="85" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <state key="normal" title="4" backgroundImage="publish_point_default">
@@ -76,11 +71,11 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_line_default" id="9uI-hn-oMS">
-                    <rect key="frame" x="229" y="91" width="48" height="3"/>
+                    <rect key="frame" x="213" y="91" width="48" height="3"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0eO-aO-V0t">
-                    <rect key="frame" x="276" y="85" width="15" height="15"/>
+                    <rect key="frame" x="260" y="85" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <state key="normal" title="5" backgroundImage="publish_point_default">
@@ -88,41 +83,10 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="免费发布需求" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vV3-7c-qdj">
-                    <rect key="frame" x="8" y="37" width="87" height="14"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_designer_top" id="ELy-pi-ewO">
+                    <rect key="frame" x="14" y="11" width="295" height="67"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="居然平台审核" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NxX-59-FtL">
-                    <rect key="frame" x="71" y="37" width="86" height="14"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设计师投标" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Eb-tR-bfY">
-                    <rect key="frame" x="134" y="37" width="86" height="14"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选定设计师" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e9O-wJ-FnK">
-                    <rect key="frame" x="197" y="37" width="86" height="14"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="签定合同" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lxd-aQ-hSl">
-                    <rect key="frame" x="260" y="37" width="86" height="14"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -132,6 +96,7 @@
         </view>
     </objects>
     <resources>
+        <image name="publish_designer_top" width="295" height="67"/>
         <image name="publish_line_default" width="47" height="3"/>
         <image name="publish_line_selected" width="47" height="3"/>
         <image name="publish_point_default" width="15" height="15"/>
