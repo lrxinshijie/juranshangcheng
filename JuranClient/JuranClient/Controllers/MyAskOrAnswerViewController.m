@@ -10,6 +10,7 @@
 #import "AskOrAnswerCell.h"
 #import "JRQuestion.h"
 #import "JRAnswer.h"
+#import "AskDetailViewController.h"
 
 @interface MyAskOrAnswerViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -181,10 +182,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    //    DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
-    //    detailVC.designer = _datas[indexPath.row];
-    //    detailVC.hidesBottomBarWhenPushed = YES;
-    //    [self.navigationController pushViewController:detailVC animated:YES];
+    if (_segment.selectedSegmentIndex == 1) {
+        AskDetailViewController *vc = [[AskDetailViewController alloc] init];
+        vc.question = _answerDatas[indexPath.row];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }else{
+        
+    }
 }
 
 

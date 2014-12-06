@@ -1,15 +1,14 @@
 //
-//  JRTopic.m
+//  JRDemand.m
 //  JuranClient
 //
-//  Created by song.he on 14-12-4.
+//  Created by song.he on 14-12-6.
 //  Copyright (c) 2014年 Juran. All rights reserved.
 //
 
-#import "JRTopic.h"
+#import "JRDemand.h"
 
-@implementation JRTopic
-
+@implementation JRDemand
 
 - (id)initWithDictionary:(NSDictionary *)dict{
     if (self=[self init]) {
@@ -18,17 +17,12 @@
             return self;
         }
         
+        self.designReqId = [dict getIntValueForKey:@"designReqId" defaultValue:0];
         self.title = [dict getStringValueForKey:@"title" defaultValue:@""];
-        self.topicId = [dict getStringValueForKey:@"topicId" defaultValue:@""];
-        self.content = [dict getStringValueForKey:@"content" defaultValue:@""];
-        self.commentDate = [dict getStringValueForKey:@"commentDate" defaultValue:@""];
-        id obj = dict[@"commentImageUrlList"];
-        if ([obj isKindOfClass:[NSNull class]]) {
-            self.commentImageUrlList = @[];
-        }else{
-            self.commentImageUrlList = obj;
-        }
-        
+        self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
+        self.houseType = [dict getStringValueForKey:@"houseType" defaultValue:@""];
+        self.renovationBudget = [dict getIntValueForKey:@"renovationBudget" defaultValue:0];
+        self.bidNums = [dict getIntValueForKey:@"bidNums" defaultValue:0];
     }
     
     return self;
@@ -39,7 +33,7 @@
     
     if ([value isKindOfClass:[NSArray class]]) {
         for (NSDictionary *item in value) {
-            JRTopic *t = [[JRTopic alloc] initWithDictionary:item];
+            JRDemand *t = [[JRDemand alloc] initWithDictionary:item];
             [retVal addObject:t];
         }
     }

@@ -34,18 +34,9 @@
     [self changeFrame];
 }
 
-- (void)setDatas:(id)sender
-{
-    _topicContentLabel.text = @"\"平房座北潮南的说法的\"";
-    _ideaContentLabel.text = @"别说是加夫里是雷锋精神了对方极乐世界的法律理发师江东父老手机发了科技实力的什江东父老就是来得及发了快睡觉了；老师的飞机上了";
-    _timeLabel.text = @"2014-10-23";
-    _relateImageView.image = [[UIImage alloc] init];
-    [self changeFrame];
-}
-
 - (void)changeFrame{
     CGRect frame = _topicContentLabel.frame;
-    frame.size = [self sizeWithText:_topicContentLabel.text font:_topicContentLabel.font constrainedToSize:CGSizeMake(CGRectGetWidth(_topicContentLabel.frame), MAXFLOAT)];
+    frame.size.height = [_topicContentLabel.text heightWithFont:_topicContentLabel.font constrainedToWidth:_topicContentLabel.frame.size.width];
     _topicContentLabel.frame = frame;
     
     frame = _ideaLabel.frame;
@@ -54,7 +45,7 @@
     
     frame = _ideaContentLabel.frame;
     frame.origin.y = _ideaLabel.frame.origin.y;
-    frame.size = [self sizeWithText:_ideaContentLabel.text font:_ideaContentLabel.font constrainedToSize:CGSizeMake(CGRectGetWidth(_ideaContentLabel.frame), MAXFLOAT)];
+    frame.size.height = [_ideaContentLabel.text heightWithFont:_ideaContentLabel.font constrainedToWidth:_ideaContentLabel.frame.size.width];
     _ideaContentLabel.frame = frame;
     
     if (_relateImageView.image) {
@@ -84,16 +75,7 @@
     self.backView.frame = frame;
 }
 
-- (CGSize)sizeWithText:(NSString*)text font:(UIFont*)font constrainedToSize:(CGSize)sz{
-    CGSize size;
-    if (SystemVersionGreaterThanOrEqualTo7) {
-        size = [text sizeWithFont:font constrainedToSize:sz lineBreakMode:NSLineBreakByCharWrapping];
-    }else{
-        NSDictionary *attribute = @{NSFontAttributeName: font};
-        size = [text boundingRectWithSize:sz options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
-    }
-    return size;
-}
+
 
 //-(void)layoutSubviews{
 //    [self changeFrame];

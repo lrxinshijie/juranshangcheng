@@ -17,6 +17,7 @@
 #import "MyAskOrAnswerViewController.h"
 #import "InteractionViewController.h"
 #import "SettingsViewController.h"
+#import "PushMessageViewController.h"
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -190,7 +191,12 @@
 
 //消息
 - (IBAction)doPushMsg:(id)sender{
-    
+    if (![self checkLogin]) {
+        return;
+    }
+    PushMessageViewController *vc = [[PushMessageViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITableViewDataSource/Delegate

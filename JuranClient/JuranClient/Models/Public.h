@@ -72,4 +72,13 @@
 + (NSString *)googleLanguageFromLocal;
 + (NSURL *)imageURL:(NSString *)url;
 + (NSURL *)imageURL:(NSString *)url Width:(NSInteger)width Height:(NSInteger)height;
+
+//图片质量 0为普通 1为高质量
++ (NSNumber*)imageQuality;
++ (void)setImageQuality:(NSNumber*)number;
+
+//图片质量智能模式 0为不是智能模式  1为智能模式
++ (NSNumber*)intelligentModeForImageQuality;
++ (void)setIntelligentModeForImageQuality:(NSNumber*)number;
+
 @end
