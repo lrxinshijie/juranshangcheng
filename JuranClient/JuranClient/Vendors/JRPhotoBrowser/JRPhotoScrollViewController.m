@@ -11,7 +11,6 @@
 #import "KTPhotoBrowserGlobal.h"
 #import "KTPhotoView.h"
 #import "CaseDetailViewController.h"
-#import "ShareView.h"
 
 @interface JRPhotoScrollViewController ()<KTPhotoBrowserDataSource>
 {
@@ -52,6 +51,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImageWithColor:RGBAColor(0, 0, 0, .5f)];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -97,11 +97,8 @@
 
 - (void)setScrollViewContentSize{
     [super setScrollViewContentSize];
-    
-    CGRect lastImageFrame = [self frameForPageAtIndex:[self numberOfPhotos] - 1];
     CGSize contentSize = scrollView_.contentSize;
-    CGFloat y = lastImageFrame.origin.y + lastImageFrame.size.height/2;
-    CGRect frame = CGRectMake(contentSize.width-10, y, 80, 20);
+    CGRect frame = CGRectMake(contentSize.width-10, contentSize.height/2, 80, 20);
     self.lastPageLabel.frame = frame;
 }
 
@@ -196,7 +193,7 @@
 #pragma mark - Target Action
 
 - (void)doShare{
-    [[ShareView sharedView] showWithContent:[self titleAtIndex:currentIndex_] image:[Public imageURLString:_jrCase.detailImageList[currentIndex_]] title:_jrCase.title url:@""];
+
 }
 
 - (IBAction)doDetail:(id)sender{

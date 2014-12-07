@@ -76,7 +76,7 @@
                                                 title:_title
                                                   url:_url
                                           description:_content
-                                            mediaType:SSPublishContentMediaTypeVideo];
+                                            mediaType:SSPublishContentMediaTypeNews];
     ShareType shareType;
     
     switch (btn.tag - kButtonTag) {
@@ -103,7 +103,7 @@
         case 4:
         {
             shareType = ShareTypeQQSpace;
-            [publishContent addQQSpaceUnitWithTitle:INHERIT_VALUE
+            [publishContent addQQSpaceUnitWithTitle:NSLocalizedString(@"TEXT_HELLO_QZONE", @"Hello QQ空间")
                                                 url:INHERIT_VALUE
                                                site:nil
                                             fromUrl:nil

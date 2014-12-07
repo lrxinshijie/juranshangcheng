@@ -276,7 +276,7 @@
 //分享
 - (IBAction)doShare:(id)sender{
     ASLog(@"分享");
-    [[ShareView sharedView] showWithContent:_designer.selfIntroduction image:[Public imageURLString:_designer.headUrl] title:_designer.nickName.length?_designer.nickName:_designer.account url:@""];
+    [[ShareView sharedView] showWithContent:@"" image:@"" title:@"" url:@""];
 }
 
 - (void)handleSwipes:(UISwipeGestureRecognizer*) gesture{

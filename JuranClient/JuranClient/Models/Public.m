@@ -299,11 +299,6 @@
     return language;
 }
 
-+ (NSString *)imageURLString:(NSString *)url{
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@",JR_IMAGE_SERVICE,url];
-    return urlString;
-}
-
 + (NSURL *)imageURL:(NSString *)url{
     NSString *urlString = [NSString stringWithFormat:@"%@/%@",JR_IMAGE_SERVICE,url];
     return [NSURL URLWithString:urlString];

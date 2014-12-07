@@ -438,7 +438,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
     
     if ( ! [self isStatusbarHidden] ) {
         if ([[UIApplication sharedApplication] respondsToSelector:@selector(setStatusBarHidden:withAnimation:)]) {
-            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
+            [[UIApplication sharedApplication] setStatusBarHidden:hide withAnimation:NO];
         } else {  // Deprecated in iOS 3.2+.
             id sharedApp = [UIApplication sharedApplication];  // Get around deprecation warnings.
             [sharedApp setStatusBarHidden:hide animated:NO];
