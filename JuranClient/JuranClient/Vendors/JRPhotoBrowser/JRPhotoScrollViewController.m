@@ -44,6 +44,7 @@
 
 - (void)loadView{
     [super loadView];
+    [self loadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -66,16 +67,35 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self.view buttonWithFrame:CGRectZero target:self action:@selector(back:) image:[UIImage imageNamed:@"nav_backbtn_white"]]];
 }
 
-- (void)setScrollViewContentSize{
-    [super setScrollViewContentSize];
+- (void)loadData{
+    [self showHUD];
+    NSDictionary *param = @{@"projectId": self.jrCase.projectId};
+    [[ALEngine shareEngine] pathURL:JR_PRODETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            [self.jrCase buildDetailWithDictionary:data];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self viewDidLoad];
+                [self viewWillAppear:YES];
+            });
+        }
+    }];
+}
+
+- (UILabel*)lastPageLabel{
     if (!_lastPageLabel) {
         CGSize contentSize = scrollView_.contentSize;
         _lastPageLabel = [scrollView_ labelWithFrame:CGRectMake(contentSize.width-10, contentSize.height/2, 80, 20) text:@"最后一张" textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:18]];
         [scrollView_ addSubview:_lastPageLabel];
     }
-    CGPoint center = _lastPageLabel.center;
-    center.y = scrollView_.bounds.size.height/2;
-    _lastPageLabel.center = center;
+    return _lastPageLabel;
+}
+
+- (void)setScrollViewContentSize{
+    [super setScrollViewContentSize];
+    CGSize contentSize = scrollView_.contentSize;
+    CGRect frame = CGRectMake(contentSize.width-10, contentSize.height/2, 80, 20);
+    self.lastPageLabel.frame = frame;
 }
 
 - (void)setBottomView{
@@ -209,7 +229,7 @@
 
 - (void)imageAtIndex:(NSInteger)index photoView:(KTPhotoView *)photoView {
     NSString *imageStr = [_jrCase.detailImageList objectAtIndex:index];
-    [photoView setImageWithURL:[Public imageURL:imageStr] placeholderImage:[UIImage imageNamed:@"sample-case-list.png"]];
+    [photoView setImageWithURL:[Public imageURL:imageStr] placeholderImage:[UIImage imageNamed:@"case_default_image.png"]];
 }
 
 

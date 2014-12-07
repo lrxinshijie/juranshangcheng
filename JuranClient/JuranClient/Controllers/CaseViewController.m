@@ -157,9 +157,7 @@
 
     JRCase *cs = [_datas objectAtIndex:indexPath.row];
     
-    [self showHUD];
     [cs loadDetail:^(BOOL result) {
-        [self hideHUD];
         if (result) {
             JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
             vc.hidesBottomBarWhenPushed = YES;

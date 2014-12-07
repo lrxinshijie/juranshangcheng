@@ -10,6 +10,8 @@
 #import "PersonalDatasMoreViewController.h"
 #import "SexySwitch.h"
 #import "ModifyViewController.h"
+#import "BaseAddressViewController.h"
+
 
 @interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, SexySwitchDelegate, ModifyViewControllerDelegate>
 {
@@ -19,6 +21,8 @@
     NSArray *keysForSection2;
     NSArray *valuesForSection3;
     NSArray *keysForSection3;
+    NSDictionary *param;
+    NSArray *typesForSection3;
 }
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) SexySwitch *sexySwitch;
@@ -57,11 +61,20 @@
     [self loadData];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (_memberDetail) {
+        [self reSetData];
+        [_tableView reloadData];
+    }
+}
+
 - (void)setupDatas{
     keysForSection1 = @[@"头像", @"用户名"];
     keysForSection2 = @[@"昵称", @"性别", @"生日", @"所在地", @"详细地址"];
     keysForSection3 = @[@"固定电话", @"证件信息", @"QQ", @"微信"];
     
+    typesForSection3 = @[@(ModifyCVTypeHomeTel), @(ModifyCVTypeIdType),@(ModifyCVTypeQQ),@(ModifyCVTypeWeiXin)];
     /*
      *   设计师端个人资料
      *
@@ -83,7 +96,7 @@
 
 - (void)loadData{
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_GETMEMBERDETAIL parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
@@ -98,7 +111,7 @@
 }
 
 - (void)modifyMemberDetail{
-    NSDictionary *param = @{@"nickName": _memberDetail.nickName,
+    NSDictionary *param11 = @{@"nickName": _memberDetail.nickName,
                             @"birthday": _memberDetail.birthday,
                             @"homeTel": _memberDetail.homeTel,
                             @"provinceCode": _memberDetail.provinceCode,
@@ -138,7 +151,8 @@
 #pragma mark - SexySwitchDelegate
 
 - (void)sexySwitch:(SexySwitch *)sexySwitch valueChange:(NSInteger)index{
-    
+    param = @{@"sex": [NSString stringWithFormat:@"%d", index]};
+    [self modifyMemberDetail];
 }
 
 #pragma mark - UITableViewDataSource/Delegate
@@ -223,6 +237,7 @@
         if (indexPath.row == 1) {
             cell.textLabel.text = keysForSection2[indexPath.row];
             cell.detailTextLabel.text = @"";
+            _sexySwitch.selectedIndex = _memberDetail.sex;
             cell.accessoryView = _sexySwitch;
         }else{
             cell.textLabel.text = keysForSection2[indexPath.row];
@@ -276,23 +291,31 @@
     if (indexPath.section == 0 && indexPath.row == 1) {
         ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_memberDetail type:ModifyCVTypeUserName];
         vc.title = keysForSection1[indexPath.row];
-        vc.keyboardType = UIKeyboardTypeNumberPad;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.section == 1){
-        
-    }else if (indexPath.section == 2){
         switch (indexPath.row) {
             case 0:
             {
-                ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_memberDetail type:ModifyCVTypeHomeTel];
-                vc.title = keysForSection3[indexPath.row];
-                vc.keyboardType = UIKeyboardTypeNumberPad;
+                ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_memberDetail type:ModifyCVTypeNickName];
+                vc.title = keysForSection2[indexPath.row];
+                [self.navigationController pushViewController:vc animated:YES];
+                break;
+            }
+            case 3:
+            {
+                BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
+                vc.memberDetail = _memberDetail;
                 [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
             default:
                 break;
         }
+    }else if (indexPath.section == 2){
+        ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_memberDetail type:[typesForSection3[indexPath.row] integerValue]];
+        vc.title = keysForSection3[indexPath.row];
+        vc.keyboardType = UIKeyboardTypeNumberPad;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

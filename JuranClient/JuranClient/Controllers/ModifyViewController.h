@@ -13,7 +13,10 @@
 typedef NS_ENUM(NSInteger, ModifyCVType ) {
     ModifyCVTypeUserName,
     ModifyCVTypeHomeTel,
-    ModifyCVTypeIdType
+    ModifyCVTypeIdType,
+    ModifyCVTypeQQ,
+    ModifyCVTypeWeiXin,
+    ModifyCVTypeNickName
 };
 
 @protocol ModifyViewControllerDelegate <NSObject>

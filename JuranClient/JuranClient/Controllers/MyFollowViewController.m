@@ -45,7 +45,6 @@
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
-    self.tableView.editing = YES;
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -121,7 +120,6 @@
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.editing = YES;
     
     JRDesigner *c = [_datas objectAtIndex:indexPath.row];
     [cell fillCellWithDesigner:c];
@@ -141,12 +139,6 @@
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_datas removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-}
 
 
 @end

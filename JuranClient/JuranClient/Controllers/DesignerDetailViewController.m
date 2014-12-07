@@ -56,8 +56,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.hidesBottomBarWhenPushed = YES;
-    self.navigationItem.title = _designer.nickName.length?_designer.nickName:_designer.userName;
+    _nameLabel.text = _designer.nickName.length?_designer.nickName:_designer.account;
+    self.navigationItem.title = _designer.nickName.length?_designer.nickName:_designer.account;
     
     personDatas = @[@"毕业院校", @"量房费", @"设计费用", @"从业年限", @"擅长风格"];
     _caseCurrentPage = 1;
@@ -104,14 +104,13 @@
     [_tableView addGestureRecognizer: rightSwipeGestureRecognizer];
 }
 
-
 - (void)reloadData{
+    
     [_headImageView setImageWithURLString:_designer.headUrl];
     _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.fansCount];
     _popularityLabel.text = [NSString stringWithFormat:@"%i", _designer.viewCount];
     _pictureCountLabel.text = [NSString stringWithFormat:@"%i", _designer.product2DCount];
     _diyProjectCountLabel.text = [NSString stringWithFormat:@"%i", _designer.product3DCount];
-    _nameLabel.text = _designer.nickName.length?_designer.nickName:_designer.userName;
     _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
     _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
     [_tableView reloadData];
@@ -259,7 +258,7 @@
 
 
 - (void)nextAction{
-    
+        [self loadData];
 }
 
 //预约
@@ -329,7 +328,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (0 == _segment.selectedIndex) {
-        return 275;
+        return 270;
     }else if (1 == _segment.selectedIndex){
         if (indexPath.row == 0) {
             return self.introductionCell.frame.size.height;
@@ -352,6 +351,7 @@
         if (!cell) {
             NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:caseIdentifier owner:self options:nil];
             cell = (CaseCell *)[nibs firstObject];
+            cell.backgroundColor = [UIColor clearColor];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

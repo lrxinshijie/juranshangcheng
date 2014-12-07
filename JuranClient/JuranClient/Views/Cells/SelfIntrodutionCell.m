@@ -50,10 +50,12 @@
 - (void)changeLabelHeight{
     CGRect frame = _contentLabel.frame;
     _contentLabel.numberOfLines = 0;
+    _arrowImageView.hidden = NO;
     if (_isClose) {
         _arrowImageView.image = [UIImage imageNamed:@"arrow_down.png"];
         if (_content.length < kContentLengthForClose) {
             _contentLabel.text = _content;
+            _arrowImageView.hidden = YES;
         }else{
             _contentLabel.text = [NSString stringWithFormat:@"%@...", [_content substringToIndex:kContentLengthForClose]];
         }
@@ -62,6 +64,7 @@
         _arrowImageView.image = [UIImage imageNamed:@"arrow_up.png"];
         if (_content.length < kContentLengthForClose) {
             _contentLabel.text = _content;
+            _arrowImageView.hidden = YES;
         }else{
             _contentLabel.text = _content;
             CGSize size;

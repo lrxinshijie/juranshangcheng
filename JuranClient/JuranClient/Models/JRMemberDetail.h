@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSString *idCardNumber;
 @property (nonatomic, strong) NSString *qq;
 @property (nonatomic, strong) NSString *weixin;
+@property (nonatomic, assign) NSInteger sex;
 @property (nonatomic, assign) NSInteger useablePoints;
 @property (nonatomic, assign) NSInteger useableExp;
 

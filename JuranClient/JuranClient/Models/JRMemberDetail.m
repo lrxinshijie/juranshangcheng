@@ -36,6 +36,7 @@
         self.idCardNumber = [dict getStringValueForKey:@"idCardNumber" defaultValue:@""];
         self.qq = [dict getStringValueForKey:@"qq" defaultValue:@""];
         self.weixin = [dict getStringValueForKey:@"weixin" defaultValue:@""];
+        self.sex = [dict getIntValueForKey:@"sex" defaultValue:0];
         self.useablePoints = [dict getIntValueForKey:@"useablePoints" defaultValue:0];
         self.useableExp = [dict getIntValueForKey:@"useableExp" defaultValue:0];
     }

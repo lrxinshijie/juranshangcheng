@@ -9,10 +9,11 @@
 #import "ModifyViewController.h"
 #import "JRMemberDetail.h"
 
-@interface ModifyViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface ModifyViewController ()<UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 {
     NSArray *idTypes;
     NSInteger idCardType;
+    NSDictionary *param;
 }
 @property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, strong) UITableView *tableView;
@@ -72,14 +73,37 @@
         {
             _textField.text = _memberDetail.homeTel;
             _tipLabel.text = @"";
+            _textField.placeholder = @"请输入固定电话";
             break;
         }
         case ModifyCVTypeIdType:
         {
             _textField.text = _memberDetail.idCardNumber;
             _tipLabel.text = @"";
-            idTypes = @[@"身份证", @"军官证", @"护照"];
+            _textField.placeholder = @"输入证件号码";
+            idTypes = @[@"  身份证", @"  军官证", @"  护照"];
             idCardType = _memberDetail.idCardNumber.length == 0?-1:_memberDetail.idCardNumber.integerValue;
+            break;
+        }
+        case ModifyCVTypeQQ:
+        {
+            _textField.text = _memberDetail.qq;
+            _tipLabel.text = @"";
+            _textField.placeholder = @"请输入QQ号码";
+            break;
+        }
+        case ModifyCVTypeWeiXin:
+        {
+            _textField.text = _memberDetail.weixin;
+            _tipLabel.text = @"";
+            _textField.placeholder = @"请输入微信账号";
+            break;
+        }
+        case ModifyCVTypeNickName:
+        {
+            _textField.text = _memberDetail.nickName;
+            _tipLabel.text = @"";
+            _textField.placeholder = @"请输入昵称";
             break;
         }
         default:
@@ -99,18 +123,37 @@
                 //未修改
                 return;
             }
-            _memberDetail.account = _textField.text;
+            param = @{@"account":_textField.text};
             break;
         }
         case ModifyCVTypeHomeTel:
         {
-            _memberDetail.homeTel = _textField.text;
+            param = @{@"homeTel": _memberDetail.homeTel};
             break;
         }
         case ModifyCVTypeIdType:
         {
-            _memberDetail.idCardNumber = _textField.text;
-            _memberDetail.idCardType = [NSString stringWithFormat:@"%d",idCardType];
+            if (idCardType == -1) {
+                [self showTip:@"请选择证件类型"];
+                return;
+            }
+            param = @{@"idCardType":[NSString stringWithFormat:@"%d",idCardType],
+                      @"idCardNum":_textField.text};
+            break;
+        }
+        case ModifyCVTypeQQ:
+        {
+            param = @{@"qq": _textField.text};
+            break;
+        }
+        case ModifyCVTypeWeiXin:
+        {
+            param = @{@"weixin": _textField.text};
+            break;
+        }
+        case ModifyCVTypeNickName:
+        {
+            param = @{@"nickName": _memberDetail.nickName};
             break;
         }
         default:
@@ -121,25 +164,45 @@
 }
 
 - (void)modifyMemberDetail{
-    NSDictionary *param = @{@"nickName": _memberDetail.nickName,
-                            @"birthday": _memberDetail.birthday,
-                            @"homeTel": _memberDetail.homeTel,
-                            @"provinceCode": _memberDetail.provinceCode,
-                            @"cityCode": _memberDetail.cityCode,
-                            @"districtCode": _memberDetail.districtCode,
-                            @"detailAddress": _memberDetail.detailAddress,
-                            @"zipCode": _memberDetail.zipCode,
-                            @"idCardType": _memberDetail.idCardType,
-                            @"idCardNum": _memberDetail.idCardNumber,
-                            @"qq": _memberDetail.qq,
-                            @"weixin": _memberDetail.weixin,
-                            @"account": _memberDetail.account,
-                            @"sex": @"1"
-                            };
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
+            switch (_type) {
+                case ModifyCVTypeNickName:
+                {
+                    _memberDetail.nickName = _textField.text;
+                    break;
+                }
+                case ModifyCVTypeWeiXin:
+                {
+                    _memberDetail.weixin = _textField.text;
+                    break;
+                }
+                case ModifyCVTypeQQ:
+                {
+                    _memberDetail.qq = _textField.text;
+                    break;
+                }
+                case ModifyCVTypeHomeTel:
+                {
+                    _memberDetail.homeTel = _textField.text;
+                    break;
+                }
+                case ModifyCVTypeUserName:
+                {
+                    _memberDetail.account = _textField.text;
+                    break;
+                }
+                case ModifyCVTypeIdType:
+                {
+                    _memberDetail.idCardType = [NSString stringWithFormat:@"%d", idCardType];
+                    _memberDetail.idCardNumber = _textField.text;
+                    break;
+                }
+                default:
+                    break;
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([_delegate respondsToSelector:@selector(modifyCommit:)]) {
                     [_delegate modifyCommit:self];
@@ -162,10 +225,11 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
     }
     if (_type == ModifyCVTypeIdType) {
         if (indexPath.row == 0) {
-            cell.textLabel.text = idCardType == -1?@"选择证件类型":idTypes[idCardType];
+            cell.textLabel.text = idCardType == -1?@"  选择证件类型":idTypes[idCardType];
         }else{
             cell.accessoryView = _textField;
         }
@@ -178,7 +242,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_type == ModifyCVTypeIdType && indexPath.row == 0) {
-        
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择证件类型" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:idTypes[0], idTypes[1], idTypes[2], nil];
+        [actionSheet showInView:self.view];
     }
 }
 
@@ -186,6 +251,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 3) {
+        return;
+    }
+    idCardType = buttonIndex;
+    [_tableView reloadData];
 }
 
 @end

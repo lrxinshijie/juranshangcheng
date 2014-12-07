@@ -18,6 +18,9 @@
 		141A1D3F1A2CCDE200C073C5 /* JRQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 141A1D3E1A2CCDE200C073C5 /* JRQuestion.m */; };
 		141A1D421A2CCDFA00C073C5 /* JRAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 141A1D411A2CCDFA00C073C5 /* JRAnswer.m */; };
 		141C564D1A23613900A57971 /* TATopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 141C564B1A23613900A57971 /* TATopicCell.m */; };
+		14361E551A343F5F00F9BD94 /* BaseAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14361E531A343F5F00F9BD94 /* BaseAddressViewController.m */; };
+		14361E561A343F5F00F9BD94 /* BaseAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14361E541A343F5F00F9BD94 /* BaseAddressViewController.xib */; };
+		14361E5A1A344E6100F9BD94 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 14361E581A344E6100F9BD94 /* pinyin.c */; };
 		1437F2B81A30B09B00E7C077 /* JRTopic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1437F2B71A30B09B00E7C077 /* JRTopic.m */; };
 		1441A0611A2987FB004A038E /* JRProfileData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A05F1A2987FB004A038E /* JRProfileData.m */; };
 		1441A0641A29A447004A038E /* SexySwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A0631A29A447004A038E /* SexySwitch.m */; };
@@ -264,6 +267,11 @@
 		141A1D411A2CCDFA00C073C5 /* JRAnswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRAnswer.m; sourceTree = "<group>"; };
 		141C564A1A23613900A57971 /* TATopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATopicCell.h; sourceTree = "<group>"; };
 		141C564B1A23613900A57971 /* TATopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATopicCell.m; sourceTree = "<group>"; };
+		14361E521A343F5F00F9BD94 /* BaseAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAddressViewController.h; sourceTree = "<group>"; };
+		14361E531A343F5F00F9BD94 /* BaseAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseAddressViewController.m; sourceTree = "<group>"; };
+		14361E541A343F5F00F9BD94 /* BaseAddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseAddressViewController.xib; sourceTree = "<group>"; };
+		14361E581A344E6100F9BD94 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
+		14361E591A344E6100F9BD94 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		1437F2B61A30B09B00E7C077 /* JRTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRTopic.h; sourceTree = "<group>"; };
 		1437F2B71A30B09B00E7C077 /* JRTopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRTopic.m; sourceTree = "<group>"; };
 		1441A05E1A2987FB004A038E /* JRProfileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRProfileData.h; sourceTree = "<group>"; };
@@ -683,6 +691,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14361E571A344E6100F9BD94 /* PinYin */ = {
+			isa = PBXGroup;
+			children = (
+				14361E581A344E6100F9BD94 /* pinyin.c */,
+				14361E591A344E6100F9BD94 /* pinyin.h */,
+			);
+			path = PinYin;
+			sourceTree = "<group>";
+		};
 		1441A1471A29E3CD004A038E /* ShareSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -1018,6 +1035,9 @@
 				14D9738C1A334C4F00E771ED /* PushMessageViewController.h */,
 				14D9738D1A334C4F00E771ED /* PushMessageViewController.m */,
 				14D9738E1A334C4F00E771ED /* PushMessageViewController.xib */,
+				14361E521A343F5F00F9BD94 /* BaseAddressViewController.h */,
+				14361E531A343F5F00F9BD94 /* BaseAddressViewController.m */,
+				14361E541A343F5F00F9BD94 /* BaseAddressViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1062,6 +1082,7 @@
 		A987ED6F1A20920500CED7CD /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				14361E571A344E6100F9BD94 /* PinYin */,
 				A977F8431A3099E5008682B3 /* TTTAttributedLabel */,
 				1441A1791A29E3D5004A038E /* JRPhotoBrowser */,
 				1441A1471A29E3CD004A038E /* ShareSDK */,
@@ -1511,6 +1532,7 @@
 				14490CAA1A2B5D50001CB160 /* AccountManageViewController.xib in Resources */,
 				A9C3984B1A29D98C006A8AAB /* ResetEmailViewController.xib in Resources */,
 				1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */,
+				14361E561A343F5F00F9BD94 /* BaseAddressViewController.xib in Resources */,
 				14D973901A334C4F00E771ED /* PushMessageViewController.xib in Resources */,
 				14A3FDC21A2C9EB7002BEFF4 /* MyDemandViewController.xib in Resources */,
 				14D973831A32CAE400E771ED /* AskDetailViewController.xib in Resources */,
@@ -1595,6 +1617,7 @@
 				A9D654B11A27642800A80253 /* JSONModelError.m in Sources */,
 				A987EE3D1A2093C900CED7CD /* UIView+MJExtension.m in Sources */,
 				A9D654B51A27642800A80253 /* JSONModel+networking.m in Sources */,
+				14361E5A1A344E6100F9BD94 /* pinyin.c in Sources */,
 				A987EE431A20984200CED7CD /* HomeViewController.m in Sources */,
 				A987EDE61A20920500CED7CD /* UIAlertView+ASCategory.m in Sources */,
 				A987EDF81A20920500CED7CD /* SDImageCache.m in Sources */,
@@ -1672,6 +1695,7 @@
 				145E3D191A2792B200AA952F /* PersonalDatasMoreViewController.m in Sources */,
 				A987EDFD1A20920500CED7CD /* UIButton+WebCache.m in Sources */,
 				A987EDDC1A20920500CED7CD /* CLLocation+ASCategory.m in Sources */,
+				14361E551A343F5F00F9BD94 /* BaseAddressViewController.m in Sources */,
 				A9D654AE1A27642800A80253 /* JSONModel.m in Sources */,
 				A987EE481A20986100CED7CD /* CaseViewController.m in Sources */,
 				A987EDE81A20920500CED7CD /* UIButton+ASCategory.m in Sources */,
@@ -1806,6 +1830,7 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yongda Xie (4S2HS5YB3Q)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Connection",

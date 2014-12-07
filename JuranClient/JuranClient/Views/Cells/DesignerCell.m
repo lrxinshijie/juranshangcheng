@@ -37,7 +37,7 @@
 }
 
 - (void)fillCellWithDesigner:(JRDesigner *)data{
-    _nameLabel.text = data.nickName.length?data.nickName:data.userName;
+    _nameLabel.text = data.nickName.length?data.nickName:data.account;
     if (data.headUrl.length > 0) {
         [_headImageView setImageWithURLString:data.headUrl];
     }else{

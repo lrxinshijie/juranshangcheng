@@ -37,7 +37,6 @@
 @property (nonatomic, weak) IBOutlet UIView *hasNewPushMsgView;
 @property (nonatomic, weak) IBOutlet UILabel *privateLetterCountLabel;
 
-
 @end
 
 @implementation ProfileViewController
@@ -63,7 +62,7 @@
     titleArray = @[@"互动", @"我的关注", @"我的收藏", @"订单管理", @"账户管理", @"账户安全"];
     imageArray = @[@"icon_personal_hudong.png", @"icon_personal_guanzhu.png", @"icon_personal_shouchang.png", @"icon_personal_ddgl.png", @"icon_personal_zhgl.png", @"icon_personal_zhaq"];
     [self setupUI];
-   
+    
 }
 
 - (void)onSettings{
@@ -95,6 +94,10 @@
     _hasNewAnswerView.layer.cornerRadius = _hasNewAnswerView.frame.size.height/2.f;
     _hasNewBidView.layer.cornerRadius = _hasNewBidView.frame.size.height/2.f;
     _hasNewPushMsgView.layer.cornerRadius = _hasNewPushMsgView.frame.size.height/2.f;
+    
+    _unLoginLabel.hidden = NO;
+    _loginNameLabel.hidden = YES;
+    _userNameLabel.hidden = YES;
 }
 
 - (void)refreshUI{
@@ -104,8 +107,8 @@
     _userNameLabel.text = _profileData.nickName;
     [_headerImageView setImageWithURLString:_profileData.headUrl];
     _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _profileData.account];
-    _privateLetterCountLabel.hidden = _profileData.newPushMsgCount?NO:YES;
     _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _profileData.newPushMsgCount];
+    _privateLetterCountLabel.hidden = _profileData.newPushMsgCount?NO:YES;
     _signedButton.enabled = !_profileData.isSigned;
     [_signedButton setTitle:_profileData.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
     _hasNewAnswerView.hidden = _profileData.newAnswerCount?NO:YES;
@@ -148,7 +151,7 @@
             _profileData.isSigned = YES;
             dispatch_async(dispatch_get_main_queue(), ^{
                 _signedButton.enabled = !_profileData.isSigned;
-                [_signedButton setTitle:_profileData.isSigned?@"已签":@"签到" forState:UIControlStateNormal];
+                [_signedButton setTitle:_profileData.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
             });
         }
     }];
