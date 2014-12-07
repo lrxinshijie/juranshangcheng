@@ -47,5 +47,6 @@
 - (void)setBottomView;
 - (void)setCurrentIndex:(NSInteger)newIndex;
 - (void)setScrollViewContentSize;
+- (CGRect)frameForPageAtIndex:(NSUInteger)index;
 
 @end
