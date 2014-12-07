@@ -11,7 +11,7 @@
 #import "SexySwitch.h"
 #import "ModifyViewController.h"
 
-@interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, SexySwitchDelegate>
+@interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, SexySwitchDelegate, ModifyViewControllerDelegate>
 {
     NSArray *valuesForSection1;
     NSArray *keysForSection1;
@@ -20,7 +20,7 @@
     NSArray *valuesForSection3;
     NSArray *keysForSection3;
 }
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) SexySwitch *sexySwitch;
 
 @end
@@ -75,25 +75,64 @@
     
 }
 
+- (void)reSetData{
+    valuesForSection1 = @[_memberDetail.headImageURL, _memberDetail.account];
+    valuesForSection2 = @[_memberDetail.nickName, @"性别", _memberDetail.birthday.length == 0?@"未设置":_memberDetail.birthday, [_memberDetail locationAddress], _memberDetail.detailAddress.length == 0?@"未设置":_memberDetail.detailAddress];
+    valuesForSection3 = @[[_memberDetail homeTelForPersonal], [_memberDetail idCardInfomation], _memberDetail.qq.length == 0?@"未设置":_memberDetail.qq, _memberDetail.weixin.length == 0?@"未设置":_memberDetail.weixin];
+}
+
 - (void)loadData{
-    NSDictionary *param = @{@"guid": [JRUser currentUser].guid,
-                            @"token": [JRUser currentUser].token,
-                            };
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
                 _memberDetail = [[JRMemberDetail alloc] initWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    valuesForSection1 = @[_memberDetail.headImageURL, _memberDetail.account];
-                    valuesForSection2 = @[_memberDetail.nickName, @"性别", _memberDetail.birthday.length == 0?@"未设置":_memberDetail.birthday, [_memberDetail locationAddress], _memberDetail.detailAddress.length == 0?@"未设置":_memberDetail.detailAddress];
-                    valuesForSection3 = @[[_memberDetail homeTelForPersonal], [_memberDetail idCardInfomation], _memberDetail.qq.length == 0?@"未设置":_memberDetail.qq, _memberDetail.weixin.length == 0?@"未设置":_memberDetail.weixin];
+                    [self reSetData];
                     [_tableView reloadData];
                 });
             }
         }
     }];
+}
+
+- (void)modifyMemberDetail{
+    NSDictionary *param = @{@"nickName": _memberDetail.nickName,
+                            @"birthday": _memberDetail.birthday,
+                            @"homeTel": _memberDetail.homeTel,
+                            @"provinceCode": _memberDetail.provinceCode,
+                            @"cityCode": _memberDetail.cityCode,
+                            @"districtCode": _memberDetail.districtCode,
+                            @"detailAddress": _memberDetail.detailAddress,
+                            @"zipCode": _memberDetail.zipCode,
+                            @"idCardType": _memberDetail.idCardType,
+                            @"idCardNum": _memberDetail.idCardNumber,
+                            @"qq": _memberDetail.qq,
+                            @"weixin": _memberDetail.weixin,
+                            @"account": _memberDetail.account,
+                            @"sex": @"1"
+                            };
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                _memberDetail = [[JRMemberDetail alloc] initWithDictionary:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self reSetData];
+                    [_tableView reloadData];
+                });
+            }
+        }
+    }];
+}
+
+#pragma mark - ModifyViewControllerDelegate
+
+- (void)modifyCommit:(ModifyViewController *)vc{
+    [self reSetData];
+    [_tableView reloadData];
 }
 
 #pragma mark - SexySwitchDelegate
@@ -234,15 +273,18 @@
      [self.navigationController pushViewController:vc animated:YES];
      }
      */
-    if (indexPath.section == 0) {
-        
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_memberDetail type:ModifyCVTypeUserName];
+        vc.title = keysForSection1[indexPath.row];
+        vc.keyboardType = UIKeyboardTypeNumberPad;
+        [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.section == 1){
         
     }else if (indexPath.section == 2){
         switch (indexPath.row) {
             case 0:
             {
-                ModifyViewController *vc = [[ModifyViewController alloc] init];
+                ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_memberDetail type:ModifyCVTypeHomeTel];
                 vc.title = keysForSection3[indexPath.row];
                 vc.keyboardType = UIKeyboardTypeNumberPad;
                 [self.navigationController pushViewController:vc animated:YES];

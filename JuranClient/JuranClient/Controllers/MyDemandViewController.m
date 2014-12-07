@@ -55,15 +55,15 @@
         [weakSelf loadData];
     }];
     
-//    [_tableView headerBeginRefreshing];
+    [_tableView headerBeginRefreshing];
     
 }
 
 - (void)loadData{
     NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"rowsPerPage": @"20"};
+                            @"onePageCount": @"10"};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_GETFOLLOWLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_GET_MYREQUESTLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
 //            NSArray *designerList = [data objectForKey:@"designerList"];

@@ -25,7 +25,8 @@
 @property (nonatomic, assign) NSInteger creditRateCount;
 @property (nonatomic, strong) NSString *minisite;
 @property (nonatomic, strong) NSArray *frontImageUrlList;
-@property (nonatomic, strong) NSString *designExperience;
+@property (nonatomic, assign) NSInteger experienceCount;
+@property (nonatomic, assign) NSInteger browseCount;
 
 //Detail
 @property (nonatomic, strong) NSString *userLevel;
@@ -45,13 +46,25 @@
 @property (nonatomic, assign) BOOL isFollowed;
 @property (nonatomic, strong) NSString *followId;
 
-
+//MyFollow
+@property (nonatomic, strong) NSString *followUserId;
+@property (nonatomic, strong) NSString *remark;
+@property (nonatomic, strong) NSString *gmtCreate;
+@property (nonatomic, strong) NSString *weight;
+@property (nonatomic, strong) NSString *evaluationCount;
+@property (nonatomic, strong) NSString *tradeCount;
+@property (nonatomic, strong) NSString *realNameAuth;
 
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
+//构造设计师详情数据
 - (id)buildDetailWithDictionary:(NSDictionary *)dict;
+
+//构造我的关注列表数据
++ (NSMutableArray *)buildUpFollowDesignerListWithValue:(id)value;
+
 - (NSURL *)imageURL;
 /*
  * type  0为设计师列表   1为设计师详情  主要是分隔符不一样

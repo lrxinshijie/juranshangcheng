@@ -106,6 +106,7 @@
 
 
 - (void)reloadData{
+    [_headImageView setImageWithURLString:_designer.headUrl];
     _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.fansCount];
     _popularityLabel.text = [NSString stringWithFormat:@"%i", _designer.viewCount];
     _pictureCountLabel.text = [NSString stringWithFormat:@"%i", _designer.product2DCount];
@@ -231,6 +232,9 @@
                     _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
                     _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
                 });
+                if ([_delegate respondsToSelector:@selector(changeFollowStatus:withDesigner:status:)]) {
+                    [_delegate changeFollowStatus:self withDesigner:_designer status:YES];
+                }
             }
         }];
     }else{
@@ -244,6 +248,9 @@
                     _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
                     _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
                 });
+                if ([_delegate respondsToSelector:@selector(changeFollowStatus:withDesigner:status:)]) {
+                    [_delegate changeFollowStatus:self withDesigner:_designer status:NO];
+                }
             }
         }];
     }
@@ -390,7 +397,7 @@
                 [view addSubview:label];
                 cell.accessoryView = view;
             }else if (3 == indexPath.row){
-                CGRect frame = CGRectMake(0, 0, 150, 30);
+                CGRect frame = CGRectMake(0, 0, 200, 30);
                 UIView *view = [[UIView alloc] initWithFrame:frame];
                 view.backgroundColor = [UIColor clearColor];
                 UILabel *label = [cell.contentView labelWithFrame:frame text:@"元/平方米" textColor:RGBColor(75, 75, 75) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
@@ -409,7 +416,7 @@
             cell = (TATopicCell *)[nibs firstObject];
         }
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         JRTopic *topic = _topicDatas[indexPath.row];
         [(TATopicCell*)cell fillCellWithTopic:topic];
     }

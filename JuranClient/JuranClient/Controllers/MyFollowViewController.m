@@ -8,11 +8,11 @@
 
 #import "MyFollowViewController.h"
 #import "JRUser.h"
-#import "JRDesignerFollowDto.h"
+#import "JRDesigner.h"
 #import "DesignerCell.h"
 #import "DesignerDetailViewController.h"
 
-@interface MyFollowViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface MyFollowViewController ()<UITableViewDelegate, UITableViewDataSource, DesignerDetailViewControllerDelegate>
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -45,6 +45,7 @@
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
+    self.tableView.editing = YES;
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -68,11 +69,11 @@
         [self hideHUD];
         if (!error) {
             NSArray *designerList = [data objectForKey:@"designerList"];
-            NSMutableArray *rows = [JRDesignerFollowDto buildUpWithValue:designerList];
+            NSMutableArray *rows = [JRDesigner buildUpFollowDesignerListWithValue:designerList];
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
-                self.datas = [JRDesignerFollowDto buildUpWithValue:designerList];
+                self.datas = [JRDesigner buildUpFollowDesignerListWithValue:designerList];
             }
             
             [_tableView reloadData];
@@ -89,7 +90,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma makr - UITableViewDataSource/Delegate
+#pragma mark - DesignerDetailViewControllerDelegate
+
+- (void)changeFollowStatus:(DesignerDetailViewController *)vc withDesigner:(JRDesigner *)designer status:(BOOL)isFollow{
+    if (!isFollow) {
+        NSInteger row = [_datas indexOfObject:designer];
+        [_datas removeObject:designer];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+        [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else{
+        NSInteger row = _datas.count;
+        [_datas addObject:designer];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+        [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation: UITableViewRowAnimationAutomatic];
+    }
+}
+
+#pragma mark - UITableViewDataSource/Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _datas.count;
@@ -104,9 +121,10 @@
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.editing = YES;
     
-    JRDesignerFollowDto *c = [_datas objectAtIndex:indexPath.row];
-    [cell fillCellWithDesignerFollowDto:c];
+    JRDesigner *c = [_datas objectAtIndex:indexPath.row];
+    [cell fillCellWithDesigner:c];
     
     return cell;
 }
@@ -117,9 +135,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
+    detailVC.delegate = self;
     detailVC.designer = _datas[indexPath.row];
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [_datas removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 

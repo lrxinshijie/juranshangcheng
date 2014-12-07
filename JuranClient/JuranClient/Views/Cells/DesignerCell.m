@@ -8,7 +8,6 @@
 
 #import "DesignerCell.h"
 #import "JRDesigner.h"
-#import "JRDesignerFollowDto.h"
 #import "JRCase.h"
 
 #define kCaseImageViewTag 1010
@@ -46,9 +45,9 @@
     }
     
     _styleLabel.text = [data styleNamesWithType:0];
-    _experienceLabel.text =  [NSString stringWithFormat:@"%@年", data.designExperience];
+    _experienceLabel.text =  [NSString stringWithFormat:@"%d年", data.experienceCount];
     _productCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];
-    _readCountLabel.text = [NSString stringWithFormat:@"%i", data.fansCount];
+    _readCountLabel.text = [NSString stringWithFormat:@"%i", data.browseCount];
     NSInteger i = 0;
     for (NSString *url in data.frontImageUrlList) {
         UIImageView *imageView = (UIImageView*)[self.contentView viewWithTag:i + kCaseImageViewTag];
@@ -58,19 +57,6 @@
     for (; i < 4; i++) {
         UIImageView *imageView = (UIImageView*)[self.contentView viewWithTag:i + kCaseImageViewTag];
         imageView.image = [UIImage imageNamed:@"designer_no_pic.png"];
-    }
-}
-
-- (void)fillCellWithDesignerFollowDto:(JRDesignerFollowDto *)data{
-    _nameLabel.text = data.nickName;
-//    _styleLabel.text = [data styleNamesForDesignerList];
-    _experienceLabel.text = @"2年"; ;
-//    [_productCountButton setTitle:[NSString stringWithFormat:@"  %i", data.projectCount] forState:UIControlStateNormal];
-//    [_readCountButton setTitle:[NSString stringWithFormat:@"  %i", data.projectCount] forState:UIControlStateNormal];
-    NSInteger i = 0;
-    for (; i < 4; i++) {
-        UIImageView *imageView = (UIImageView*)[self.contentView viewWithTag:i + kCaseImageViewTag];
-        imageView.backgroundColor = [UIColor greenColor];
     }
 }
 

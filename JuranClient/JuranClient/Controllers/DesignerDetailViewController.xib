@@ -31,7 +31,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userpho" id="gM7-2K-AQC">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlogin_head" id="gM7-2K-AQC">
                     <rect key="frame" x="10" y="10" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -217,7 +217,7 @@
         <image name="menu_icon_guanzhu" width="21" height="21"/>
         <image name="menu_icon_sixin" width="22" height="16"/>
         <image name="menu_icon_yuyue" width="29" height="24"/>
-        <image name="userpho" width="190" height="170"/>
+        <image name="unlogin_head" width="60" height="60"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

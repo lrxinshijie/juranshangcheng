@@ -12,7 +12,8 @@
 {
     NSArray *keysForImageSet;
     NSArray *keysForOthers;
-    BOOL isLow;
+    NSNumber *imageQuality;
+    NSNumber *intelligentMode;
 }
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *footerView;
@@ -44,7 +45,12 @@
     keysForImageSet = @[@"智能模式", @"高质量（适合WIFI环境）", @"普通（适合2G或3G模式）"];
     keysForOthers = @[@"问题反馈", @"版本信息", @"给我打分", @"其他APP推荐"];
     
+    intelligentMode = [Public intelligentModeForImageQuality];
+    imageQuality = [Public imageQuality];
+    
     _intelligentModeSwitch = [[UISwitch alloc] init];
+    _intelligentModeSwitch.on = intelligentMode.integerValue;
+    [_intelligentModeSwitch addTarget:self action:@selector(changeIntelligentMode:) forControlEvents:UIControlEventValueChanged];
     _exitLoginButton.layer.cornerRadius = 2.0f;
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
@@ -57,6 +63,17 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)doLogout:(id)sender{
+    [[JRUser currentUser] logout];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)changeIntelligentMode:(id)sender{
+    intelligentMode = @(_intelligentModeSwitch.on);
+    [Public setIntelligentModeForImageQuality:intelligentMode];
+    [_tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource/Delegate
@@ -104,7 +121,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return keysForImageSet.count;
+        return intelligentMode.integerValue?1:keysForImageSet.count;
     }else if (section == 1){
         return 1;
     }else{
@@ -131,9 +148,9 @@
         if (indexPath.row == 0) {
             cell.accessoryView = _intelligentModeSwitch;
         }else if (indexPath.row == 1){
-            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:isLow?@"image_quality_unselected":@"image_quality_selected"]];
+            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:imageQuality.integerValue?@"image_quality_selected":@"image_quality_unselected"]];
         }else{
-            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:isLow?@"image_quality_selected":@"image_quality_unselected"]];
+            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:imageQuality.integerValue?@"image_quality_unselected":@"image_quality_selected"]];
         }
     }else if (indexPath.section == 1){
         cell.textLabel.text = @"清除缓存";
@@ -149,10 +166,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 1) {
-        isLow = NO;
+        imageQuality = @1;
+        [Public setImageQuality:imageQuality];
         [_tableView reloadData];
     }else if (indexPath.section == 0 && indexPath.row == 2) {
-        isLow = YES;
+        imageQuality = @0;
+        [Public setImageQuality:imageQuality];
         [_tableView reloadData];
     }
 }

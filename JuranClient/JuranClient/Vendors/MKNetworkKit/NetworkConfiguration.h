@@ -39,14 +39,10 @@
 
 #define JR_GETDEDESIGNERPROLIST [NSString stringWithFormat:@"%@/design/getDeDesignerProjectList.json",JR_SERVICE]
 #define JR_GET_DE_MYTOPIC [NSString stringWithFormat:@"%@/topic/getDeMyTopic.json",JR_SERVICE]
-
-
-
-
-
-
-
-
+#define JR_EDIT_MEMBERINFO [NSString stringWithFormat:@"%@/member/editMemberInfo.json",JR_SERVICE]
+#define JR_GET_MYREQUESTLIST [NSString stringWithFormat:@"%@/design/getMyRequestList.json",JR_SERVICE]
+#define JR_GET_QUESTIONDETAIL [NSString stringWithFormat:@"%@/QA/getQuestionDetail.json",JR_SERVICE]
+#define JR_GET_MSG_INFO [NSString stringWithFormat:@"%@/info/get_msg_info.json",JR_SERVICE]
 
 
 

@@ -309,4 +309,22 @@
     return [NSURL URLWithString:urlString];
 }
 
++ (NSNumber*)imageQuality{
+    NSNumber *number = [kUD objectForKey:@"kImageQuality"];
+    return number?number:@0;
+}
+
++ (void)setImageQuality:(NSNumber*)number{
+    [kUD setObject:number forKey:@"kImageQuality"];
+}
+
++ (NSNumber*)intelligentModeForImageQuality{
+    NSNumber *number = [kUD objectForKey:@"kIntelligentModeForImageQuality"];
+    return number?number:@1;
+}
+
++ (void)setIntelligentModeForImageQuality:(NSNumber*)number{
+    [kUD setObject:number forKey:@"kIntelligentModeForImageQuality"];
+}
+
 @end

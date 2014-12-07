@@ -22,6 +22,9 @@
 @property (nonatomic, assign) NSInteger answerCount;
 @property (nonatomic, assign) NSInteger viewCount;
 
+//questionDetail
+
+
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
 @end

@@ -11,7 +11,6 @@
 		140C46E91A2A296A003317AD /* ModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 140C46E71A2A296A003317AD /* ModifyViewController.xib */; };
 		140C46ED1A2A3741003317AD /* MyFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 140C46EB1A2A3741003317AD /* MyFollowViewController.m */; };
 		140C46EE1A2A3741003317AD /* MyFollowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 140C46EC1A2A3741003317AD /* MyFollowViewController.xib */; };
-		140C46F11A2A3D36003317AD /* JRDesignerFollowDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 140C46F01A2A3D36003317AD /* JRDesignerFollowDto.m */; };
 		1416C8B81A242FD100FA9999 /* CaseCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1416C8B61A242FD100FA9999 /* CaseCollectionCell.m */; };
 		1416C8B91A242FD100FA9999 /* CaseCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1416C8B71A242FD100FA9999 /* CaseCollectionCell.xib */; };
 		141A1D3B1A2CC09600C073C5 /* AskOrAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 141A1D391A2CC09600C073C5 /* AskOrAnswerCell.m */; };
@@ -102,6 +101,16 @@
 		14C953AD1A2DC1B200FE6F8D /* JRSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C953AC1A2DC1B200FE6F8D /* JRSubject.m */; };
 		14C953B21A2DC60B00FE6F8D /* SubjectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C953B01A2DC60B00FE6F8D /* SubjectDetailViewController.m */; };
 		14C953B31A2DC60B00FE6F8D /* SubjectDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C953B11A2DC60B00FE6F8D /* SubjectDetailViewController.xib */; };
+		14D973821A32CAE400E771ED /* AskDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D973801A32CAE400E771ED /* AskDetailViewController.m */; };
+		14D973831A32CAE400E771ED /* AskDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14D973811A32CAE400E771ED /* AskDetailViewController.xib */; };
+		14D973871A32CBC000E771ED /* AnswerDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D973851A32CBC000E771ED /* AnswerDetailCell.m */; };
+		14D973881A32CBC000E771ED /* AnswerDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14D973861A32CBC000E771ED /* AnswerDetailCell.xib */; };
+		14D9738B1A33138900E771ED /* JRDemand.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D9738A1A33138900E771ED /* JRDemand.m */; };
+		14D9738F1A334C4F00E771ED /* PushMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D9738D1A334C4F00E771ED /* PushMessageViewController.m */; };
+		14D973901A334C4F00E771ED /* PushMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14D9738E1A334C4F00E771ED /* PushMessageViewController.xib */; };
+		14D973941A334DFC00E771ED /* PushMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D973921A334DFC00E771ED /* PushMessageCell.m */; };
+		14D973951A334DFC00E771ED /* PushMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14D973931A334DFC00E771ED /* PushMessageCell.xib */; };
+		14D973981A33545000E771ED /* JRPushInfoMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D973971A33545000E771ED /* JRPushInfoMsg.m */; };
 		A90459CE1A27874800F8CD74 /* CaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */; };
 		A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */; };
 		A90459D31A278A6100F8CD74 /* PublishDesignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459D11A278A6100F8CD74 /* PublishDesignViewController.m */; };
@@ -243,8 +252,6 @@
 		140C46EA1A2A3741003317AD /* MyFollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFollowViewController.h; sourceTree = "<group>"; };
 		140C46EB1A2A3741003317AD /* MyFollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFollowViewController.m; sourceTree = "<group>"; };
 		140C46EC1A2A3741003317AD /* MyFollowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyFollowViewController.xib; sourceTree = "<group>"; };
-		140C46EF1A2A3D36003317AD /* JRDesignerFollowDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRDesignerFollowDto.h; sourceTree = "<group>"; };
-		140C46F01A2A3D36003317AD /* JRDesignerFollowDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRDesignerFollowDto.m; sourceTree = "<group>"; };
 		1416C8B51A242FD000FA9999 /* CaseCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseCollectionCell.h; sourceTree = "<group>"; };
 		1416C8B61A242FD100FA9999 /* CaseCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseCollectionCell.m; sourceTree = "<group>"; };
 		1416C8B71A242FD100FA9999 /* CaseCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseCollectionCell.xib; sourceTree = "<group>"; };
@@ -382,6 +389,22 @@
 		14C953AF1A2DC60B00FE6F8D /* SubjectDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectDetailViewController.h; sourceTree = "<group>"; };
 		14C953B01A2DC60B00FE6F8D /* SubjectDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectDetailViewController.m; sourceTree = "<group>"; };
 		14C953B11A2DC60B00FE6F8D /* SubjectDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubjectDetailViewController.xib; sourceTree = "<group>"; };
+		14D9737F1A32CAE400E771ED /* AskDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AskDetailViewController.h; sourceTree = "<group>"; };
+		14D973801A32CAE400E771ED /* AskDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AskDetailViewController.m; sourceTree = "<group>"; };
+		14D973811A32CAE400E771ED /* AskDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AskDetailViewController.xib; sourceTree = "<group>"; };
+		14D973841A32CBC000E771ED /* AnswerDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerDetailCell.h; sourceTree = "<group>"; };
+		14D973851A32CBC000E771ED /* AnswerDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerDetailCell.m; sourceTree = "<group>"; };
+		14D973861A32CBC000E771ED /* AnswerDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnswerDetailCell.xib; sourceTree = "<group>"; };
+		14D973891A33138900E771ED /* JRDemand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRDemand.h; sourceTree = "<group>"; };
+		14D9738A1A33138900E771ED /* JRDemand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRDemand.m; sourceTree = "<group>"; };
+		14D9738C1A334C4F00E771ED /* PushMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMessageViewController.h; sourceTree = "<group>"; };
+		14D9738D1A334C4F00E771ED /* PushMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMessageViewController.m; sourceTree = "<group>"; };
+		14D9738E1A334C4F00E771ED /* PushMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PushMessageViewController.xib; sourceTree = "<group>"; };
+		14D973911A334DFC00E771ED /* PushMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMessageCell.h; sourceTree = "<group>"; };
+		14D973921A334DFC00E771ED /* PushMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMessageCell.m; sourceTree = "<group>"; };
+		14D973931A334DFC00E771ED /* PushMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PushMessageCell.xib; sourceTree = "<group>"; };
+		14D973961A33545000E771ED /* JRPushInfoMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRPushInfoMsg.h; sourceTree = "<group>"; };
+		14D973971A33545000E771ED /* JRPushInfoMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRPushInfoMsg.m; sourceTree = "<group>"; };
 		A90459CB1A27874800F8CD74 /* CaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseDetailViewController.h; sourceTree = "<group>"; };
 		A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseDetailViewController.m; sourceTree = "<group>"; };
 		A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseDetailViewController.xib; sourceTree = "<group>"; };
@@ -989,6 +1012,12 @@
 				14C855441A2E196B00A15ED9 /* SettingsViewController.h */,
 				14C855451A2E196B00A15ED9 /* SettingsViewController.m */,
 				14C855461A2E196B00A15ED9 /* SettingsViewController.xib */,
+				14D9737F1A32CAE400E771ED /* AskDetailViewController.h */,
+				14D973801A32CAE400E771ED /* AskDetailViewController.m */,
+				14D973811A32CAE400E771ED /* AskDetailViewController.xib */,
+				14D9738C1A334C4F00E771ED /* PushMessageViewController.h */,
+				14D9738D1A334C4F00E771ED /* PushMessageViewController.m */,
+				14D9738E1A334C4F00E771ED /* PushMessageViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1010,8 +1039,6 @@
 				14ABFBE81A25C7F400C4AF65 /* JRUser.m */,
 				A9C398351A298047006A8AAB /* JRComment.h */,
 				A9C398361A298047006A8AAB /* JRComment.m */,
-				140C46EF1A2A3D36003317AD /* JRDesignerFollowDto.h */,
-				140C46F01A2A3D36003317AD /* JRDesignerFollowDto.m */,
 				14C9539B1A2DAE9B00FE6F8D /* JRAdInfo.h */,
 				14C9539C1A2DAE9B00FE6F8D /* JRAdInfo.m */,
 				14C9539E1A2DBC4600FE6F8D /* UIImageView+Download.h */,
@@ -1024,6 +1051,10 @@
 				141A1D411A2CCDFA00C073C5 /* JRAnswer.m */,
 				1437F2B61A30B09B00E7C077 /* JRTopic.h */,
 				1437F2B71A30B09B00E7C077 /* JRTopic.m */,
+				14D973891A33138900E771ED /* JRDemand.h */,
+				14D9738A1A33138900E771ED /* JRDemand.m */,
+				14D973961A33545000E771ED /* JRPushInfoMsg.h */,
+				14D973971A33545000E771ED /* JRPushInfoMsg.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1234,6 +1265,12 @@
 				141A1D381A2CC09600C073C5 /* AskOrAnswerCell.h */,
 				141A1D391A2CC09600C073C5 /* AskOrAnswerCell.m */,
 				141A1D3A1A2CC09600C073C5 /* AskOrAnswerCell.xib */,
+				14D973841A32CBC000E771ED /* AnswerDetailCell.h */,
+				14D973851A32CBC000E771ED /* AnswerDetailCell.m */,
+				14D973861A32CBC000E771ED /* AnswerDetailCell.xib */,
+				14D973911A334DFC00E771ED /* PushMessageCell.h */,
+				14D973921A334DFC00E771ED /* PushMessageCell.m */,
+				14D973931A334DFC00E771ED /* PushMessageCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1435,6 +1472,7 @@
 				14A3FDCC1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.xib in Resources */,
 				145EF9451A2B0E33001CC76B /* JRPhotoScrollViewController.xib in Resources */,
 				1441A18B1A29E3D5004A038E /* KTPhotoBrowser.bundle in Resources */,
+				14D973881A32CBC000E771ED /* AnswerDetailCell.xib in Resources */,
 				A987EE491A20986100CED7CD /* CaseViewController.xib in Resources */,
 				A9C3983C1A29842D006A8AAB /* CommentCell.xib in Resources */,
 				1476DA971A21DFBE0006E9E0 /* SelfIntrodutionCell.xib in Resources */,
@@ -1459,6 +1497,7 @@
 				A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */,
 				14C8554F1A2E1A1600A15ED9 /* InteractionCell.xib in Resources */,
 				A987EE361A2093C900CED7CD /* MJRefresh.bundle in Resources */,
+				14D973951A334DFC00E771ED /* PushMessageCell.xib in Resources */,
 				A90459D41A278A6100F8CD74 /* PublishDesignViewController.xib in Resources */,
 				A987EE601A209E7900CED7CD /* CaseCell.xib in Resources */,
 				14C953B31A2DC60B00FE6F8D /* SubjectDetailViewController.xib in Resources */,
@@ -1472,7 +1511,9 @@
 				14490CAA1A2B5D50001CB160 /* AccountManageViewController.xib in Resources */,
 				A9C3984B1A29D98C006A8AAB /* ResetEmailViewController.xib in Resources */,
 				1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */,
+				14D973901A334C4F00E771ED /* PushMessageViewController.xib in Resources */,
 				14A3FDC21A2C9EB7002BEFF4 /* MyDemandViewController.xib in Resources */,
+				14D973831A32CAE400E771ED /* AskDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1566,14 +1607,17 @@
 				14490CB31A2B6A19001CB160 /* AccountSecurityViewController.m in Sources */,
 				A9D654B41A27642800A80253 /* JSONHTTPClient.m in Sources */,
 				A987EDF41A20920500CED7CD /* UIViewController+ASCategory.m in Sources */,
+				14D9738B1A33138900E771ED /* JRDemand.m in Sources */,
 				A987EE5F1A209E7900CED7CD /* CaseCell.m in Sources */,
 				A9C3984A1A29D98C006A8AAB /* ResetEmailViewController.m in Sources */,
 				A987EE1D1A20928B00CED7CD /* NSDate+RFC1123.m in Sources */,
 				A987EDE11A20920500CED7CD /* NSMutableArray+ASCategory.m in Sources */,
 				A987EDFA1A20920500CED7CD /* SDWebImageDownloader.m in Sources */,
+				14D973941A334DFC00E771ED /* PushMessageCell.m in Sources */,
 				A971BCA11A20825800C018D6 /* main.m in Sources */,
 				A977F8421A309783008682B3 /* ReplyView.m in Sources */,
 				1441A1461A29E156004A038E /* JRMemberDetail.m in Sources */,
+				14D973981A33545000E771ED /* JRPushInfoMsg.m in Sources */,
 				A987EDDF1A20920500CED7CD /* NSDate+ASCategory.m in Sources */,
 				14C8554E1A2E1A1600A15ED9 /* InteractionCell.m in Sources */,
 				A9D654B21A27642800A80253 /* NSArray+JSONModel.m in Sources */,
@@ -1591,7 +1635,7 @@
 				A987EE231A20928B00CED7CD /* MKNetworkOperation.m in Sources */,
 				A987EDF91A20920500CED7CD /* SDWebImageDecoder.m in Sources */,
 				A987EE211A20928B00CED7CD /* UIImageView+MKNetworkKitAdditions.m in Sources */,
-				140C46F11A2A3D36003317AD /* JRDesignerFollowDto.m in Sources */,
+				14D973821A32CAE400E771ED /* AskDetailViewController.m in Sources */,
 				A987EDD71A20920500CED7CD /* ASAlertView.m in Sources */,
 				A987EDE01A20920500CED7CD /* NSDictionary+ASCategory.m in Sources */,
 				14C953AD1A2DC1B200FE6F8D /* JRSubject.m in Sources */,
@@ -1608,6 +1652,7 @@
 				1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */,
 				A987EE3A1A2093C900CED7CD /* MJRefreshHeaderView.m in Sources */,
 				14A3FDC61A2C9EDF002BEFF4 /* DemandCell.m in Sources */,
+				14D973871A32CBC000E771ED /* AnswerDetailCell.m in Sources */,
 				141A1D3F1A2CCDE200C073C5 /* JRQuestion.m in Sources */,
 				A987EDDD1A20920500CED7CD /* MKMapView+ASCategory.m in Sources */,
 				A987EDE31A20920500CED7CD /* NSObject+ASCategory.m in Sources */,
@@ -1630,6 +1675,7 @@
 				A9D654AE1A27642800A80253 /* JSONModel.m in Sources */,
 				A987EE481A20986100CED7CD /* CaseViewController.m in Sources */,
 				A987EDE81A20920500CED7CD /* UIButton+ASCategory.m in Sources */,
+				14D9738F1A334C4F00E771ED /* PushMessageViewController.m in Sources */,
 				141C564D1A23613900A57971 /* TATopicCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
