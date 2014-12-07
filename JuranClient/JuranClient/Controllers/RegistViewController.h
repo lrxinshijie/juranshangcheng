@@ -10,4 +10,6 @@
 
 @interface RegistViewController : ALViewController
 
+@property (nonatomic, copy) VoidBlock block;
+
 @end

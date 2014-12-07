@@ -9,14 +9,19 @@
 #import "UIViewController+Login.h"
 #import "LoginViewController.h"
 
+@interface UIViewController ()
+
+@end
+
 @implementation UIViewController (Login)
 
-- (BOOL)checkLogin{
+- (BOOL)checkLogin:(VoidBlock)finished{
     if ([JRUser isLogin]) {
         return YES;
     }
     
     LoginViewController *login = [[LoginViewController alloc] init];
+    login.block = finished;
     UINavigationController *loginNav = [Public navigationControllerFromRootViewController:login];
     [self presentViewController:loginNav animated:YES completion:^{
         
@@ -25,8 +30,8 @@
     return NO;
 }
 
-- (void)nextAction{
-    
+- (BOOL)checkLogin{
+    return [self checkLogin:nil];
 }
 
 @end

@@ -90,7 +90,9 @@
 #define JR_THIRD_LOGIN [NSString stringWithFormat:@"%@/member/thirdLogin.json",JR_SERVICE]
 #define JR_SUBJECT_LIST [NSString stringWithFormat:@"%@/info/get_subject_list.json",JR_SERVICE]
 #define JR_SUBJECT_DETAIL [NSString stringWithFormat:@"%@/info/get_subject_detail.json",JR_SERVICE]
-
+#define JR_CASE_LIKE [NSString stringWithFormat:@"%@/design/givealike.json",JR_SERVICE]
+#define JR_CASE_FAVORITE [NSString stringWithFormat:@"%@/design/addprjfavorite.json",JR_SERVICE]
+#define JR_CASE_UNFAVORITE [NSString stringWithFormat:@"%@/design/removeprjfavorite.json",JR_SERVICE]
 
 #define kHTTPMethodGet @"GET"
 #define kHTTPMethodPost @"POST"

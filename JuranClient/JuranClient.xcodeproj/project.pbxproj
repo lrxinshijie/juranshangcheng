@@ -216,6 +216,9 @@
 		A987EE5B1A209E6100CED7CD /* JRCase.m in Sources */ = {isa = PBXBuildFile; fileRef = A987EE5A1A209E6100CED7CD /* JRCase.m */; };
 		A987EE5F1A209E7900CED7CD /* CaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A987EE5D1A209E7900CED7CD /* CaseCell.m */; };
 		A987EE601A209E7900CED7CD /* CaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A987EE5E1A209E7900CED7CD /* CaseCell.xib */; };
+		A9902CA21A3421B400F08DA1 /* FilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9902CA11A3421B400F08DA1 /* FilterView.m */; };
+		A9902CA61A3432A500F08DA1 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9902CA41A3432A500F08DA1 /* FilterViewController.m */; };
+		A9902CA71A3432A500F08DA1 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9902CA51A3432A500F08DA1 /* FilterViewController.xib */; };
 		A9A2A3FF1A2B1F0900DFA49B /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A2A3FE1A2B1F0900DFA49B /* BannerView.m */; };
 		A9C398371A298047006A8AAB /* JRComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C398361A298047006A8AAB /* JRComment.m */; };
 		A9C3983B1A29842D006A8AAB /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C398391A29842D006A8AAB /* CommentCell.m */; };
@@ -605,6 +608,11 @@
 		A987EE5C1A209E7900CED7CD /* CaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseCell.h; sourceTree = "<group>"; };
 		A987EE5D1A209E7900CED7CD /* CaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseCell.m; sourceTree = "<group>"; };
 		A987EE5E1A209E7900CED7CD /* CaseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseCell.xib; sourceTree = "<group>"; };
+		A9902CA01A3421B400F08DA1 /* FilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterView.h; sourceTree = "<group>"; };
+		A9902CA11A3421B400F08DA1 /* FilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterView.m; sourceTree = "<group>"; };
+		A9902CA31A3432A500F08DA1 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		A9902CA41A3432A500F08DA1 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		A9902CA51A3432A500F08DA1 /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
 		A9A2A3FD1A2B1F0900DFA49B /* BannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
 		A9A2A3FE1A2B1F0900DFA49B /* BannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
 		A9C398351A298047006A8AAB /* JRComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRComment.h; sourceTree = "<group>"; };
@@ -1038,6 +1046,9 @@
 				14361E521A343F5F00F9BD94 /* BaseAddressViewController.h */,
 				14361E531A343F5F00F9BD94 /* BaseAddressViewController.m */,
 				14361E541A343F5F00F9BD94 /* BaseAddressViewController.xib */,
+				A9902CA31A3432A500F08DA1 /* FilterViewController.h */,
+				A9902CA41A3432A500F08DA1 /* FilterViewController.m */,
+				A9902CA51A3432A500F08DA1 /* FilterViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1249,6 +1260,8 @@
 				A9A2A3FE1A2B1F0900DFA49B /* BannerView.m */,
 				A977F8401A309783008682B3 /* ReplyView.h */,
 				A977F8411A309783008682B3 /* ReplyView.m */,
+				A9902CA01A3421B400F08DA1 /* FilterView.h */,
+				A9902CA11A3421B400F08DA1 /* FilterView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1495,6 +1508,7 @@
 				1441A18B1A29E3D5004A038E /* KTPhotoBrowser.bundle in Resources */,
 				14D973881A32CBC000E771ED /* AnswerDetailCell.xib in Resources */,
 				A987EE491A20986100CED7CD /* CaseViewController.xib in Resources */,
+				A9902CA71A3432A500F08DA1 /* FilterViewController.xib in Resources */,
 				A9C3983C1A29842D006A8AAB /* CommentCell.xib in Resources */,
 				1476DA971A21DFBE0006E9E0 /* SelfIntrodutionCell.xib in Resources */,
 				A9C398411A29BC24006A8AAB /* ForgetViewController.xib in Resources */,
@@ -1622,6 +1636,7 @@
 				A987EDE61A20920500CED7CD /* UIAlertView+ASCategory.m in Sources */,
 				A987EDF81A20920500CED7CD /* SDImageCache.m in Sources */,
 				A987EDD41A20920500CED7CD /* Public.m in Sources */,
+				A9902CA61A3432A500F08DA1 /* FilterViewController.m in Sources */,
 				A987EE221A20928B00CED7CD /* MKNetworkEngine.m in Sources */,
 				1476DA961A21DFBE0006E9E0 /* SelfIntrodutionCell.m in Sources */,
 				1441A18C1A29E3D5004A038E /* KTPhotoBrowserGlobal.m in Sources */,
@@ -1639,6 +1654,7 @@
 				14D973941A334DFC00E771ED /* PushMessageCell.m in Sources */,
 				A971BCA11A20825800C018D6 /* main.m in Sources */,
 				A977F8421A309783008682B3 /* ReplyView.m in Sources */,
+				A9902CA21A3421B400F08DA1 /* FilterView.m in Sources */,
 				1441A1461A29E156004A038E /* JRMemberDetail.m in Sources */,
 				14D973981A33545000E771ED /* JRPushInfoMsg.m in Sources */,
 				A987EDDF1A20920500CED7CD /* NSDate+ASCategory.m in Sources */,

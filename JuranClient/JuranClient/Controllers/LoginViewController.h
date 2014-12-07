@@ -10,4 +10,6 @@
 
 @interface LoginViewController : ALViewController
 
+@property (nonatomic, copy) VoidBlock block;
+
 @end

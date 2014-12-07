@@ -91,7 +91,7 @@
                     _jrCase.desc
                     ];
     _nameLabel.text = _jrCase.nickName;
-    _detailLabel.text = _jrCase.tags;
+    _detailLabel.text = _jrCase.stylesName;
     [_avtarImageView setImageWithURLString:_jrCase.headUrl];
     
     [_tableView headerBeginRefreshing];
@@ -280,7 +280,7 @@
 - (IBAction)onSend:(id)sender{
     [_commentTextField resignFirstResponder];
     
-    if (![self checkLogin]) {
+    if (![self checkLogin:nil]) {
         return;
     }
     

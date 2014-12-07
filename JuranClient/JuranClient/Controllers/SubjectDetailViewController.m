@@ -10,6 +10,7 @@
 #import "CaseCell.h"
 #import "JRSubject.h"
 #import "JRCase.h"
+#import "JRPhotoScrollViewController.h"
 
 @interface SubjectDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -130,6 +131,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    JRCase *cs = [_datas objectAtIndex:indexPath.row];
+    
+    [self showHUD];
+    [cs loadDetail:^(BOOL result) {
+        [self hideHUD];
+        if (result) {
+            JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

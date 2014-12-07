@@ -14,11 +14,6 @@
 @property (nonatomic, strong) NSArray *keys;
 @property (nonatomic, strong) NSArray *values;
 @property (nonatomic, strong) UIImageView *photoImageView;
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel1;
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel2;
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel3;
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel4;
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel5;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 
 
@@ -46,12 +41,6 @@
     [self.view addSubview:_tableView];
     
     _tableView.tableHeaderView = _headerView;
-    
-    _titleLabel1.transform = CGAffineTransformMakeRotation(-M_PI/3.2);
-    _titleLabel2.transform = CGAffineTransformMakeRotation(-M_PI/3.2);
-    _titleLabel3.transform = CGAffineTransformMakeRotation(-M_PI/3.2);
-    _titleLabel4.transform = CGAffineTransformMakeRotation(-M_PI/3.2);
-    _titleLabel5.transform = CGAffineTransformMakeRotation(-M_PI/3.2);
 }
 
 - (void)onSubmit{

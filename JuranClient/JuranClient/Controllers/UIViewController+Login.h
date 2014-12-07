@@ -10,8 +10,7 @@
 
 @interface UIViewController (Login)
 
+- (BOOL)checkLogin:(VoidBlock)finished;
 - (BOOL)checkLogin;
-
-- (void)nextAction;
 
 @end

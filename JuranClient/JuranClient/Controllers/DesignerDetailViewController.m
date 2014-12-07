@@ -215,7 +215,9 @@
 #pragma mark - Target Action
 
 - (IBAction)doFollow:(id)sender{
-    if (![self checkLogin]) {
+    if (![self checkLogin:^{
+        [self loadData];
+    }]) {
         return;
     }
     ASLog(@"关注");

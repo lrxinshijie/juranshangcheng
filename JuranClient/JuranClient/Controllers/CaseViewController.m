@@ -13,14 +13,18 @@
 #import "JRAdInfo.h"
 #import "EScrollerView.h"
 #import "JRPhotoScrollViewController.h"
+#import "FilterView.h"
 
-@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate>
+@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, strong) NSMutableArray *adInfos;
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) EScrollerView *bannerView;
+@property (nonatomic, strong) FilterView *filterView;
+@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) NSMutableDictionary *filterData;
 
 @end
 
@@ -67,9 +71,9 @@
 }
 
 - (void)onSearch{
-    if (![self checkLogin]) {
-        return;
-    }
+    [self checkLogin:^{
+        [_tableView headerBeginRefreshing];
+    }];
 }
 
 - (void)loadAd{
@@ -83,21 +87,31 @@
             NSArray *bannerList = [data objectForKey:@"bannerList"];
             self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
             [_adInfos addObjectsFromArray:_adInfos];
-            self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos];
-            _bannerView.delegate = self;
-            self.tableView.tableHeaderView = _bannerView;
+            
+            if (!_headerView) {
+                UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 165+44)];
+                
+                self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCase defaultData:_filterData];
+                _filterView.delegate = self;
+                [headerView addSubview:_filterView];
+                
+                self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 44, kWindowWidth, 165) ImageArray:_adInfos];
+                _bannerView.delegate = self;
+                [headerView addSubview:_bannerView];
+                self.headerView = headerView;
+                
+                self.tableView.tableHeaderView = _headerView;
+            }
+            
         }
         [self loadData];
     }];
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"projectStyle": @"",
-                            @"roomType": @"",
-                            @"houseArea" : @"",
-                            @"order": @"",
-                            @"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"onePageCount": @"20"};
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": @"20"}];
+    [param addEntriesFromDictionary:self.filterData];
+    
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_PROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
@@ -114,7 +128,30 @@
         }
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
+        
+        if (_currentPage == 1) {
+            _tableView.contentOffset = CGPointMake(0, CGRectGetHeight(_filterView.frame));
+        }
+        
     }];
+}
+
+- (NSMutableDictionary *)filterData{
+    if (!_filterData) {
+        _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"projectStyle": @"",
+                        @"roomType": @"",
+                        @"houseArea" : @"",
+                        @"order": @""}];
+    }
+    return _filterData;
+}
+
+- (void)clickFilterView:(FilterView *)view actionType:(FilterViewAction)action returnData:(NSDictionary *)data{
+    [data.allKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
+        [_filterData setObject:data[key] forKey:key];
+    }];
+    
+    [_tableView headerBeginRefreshing];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -164,13 +201,6 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
     }];
-    
-    
-//    CaseDetailViewController *cd = [[CaseDetailViewController alloc] init];
-
-//    cd.jrCase = cs;
-//    cd.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:cd animated:YES];
 }
 
 - (void)EScrollerViewDidClicked:(NSUInteger)index{

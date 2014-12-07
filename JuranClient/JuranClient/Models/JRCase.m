@@ -53,7 +53,7 @@
     self.houseArea = [dict getIntValueForKey:@"houseArea" defaultValue:0];
     self.projectPrice = [dict getIntValueForKey:@"projectPrice" defaultValue:0];
     self.detailImageList = [dict objectForKey:@"detailImageList"];
-    
+    self.stylesName = [dict getStringValueForKey:@"stylesName" defaultValue:@""];
     NSDictionary *areaInfo = [dict objectForKey:@"areaInfo"];
     if (areaInfo && [areaInfo isKindOfClass:[NSDictionary class]]) {
         self.provinceCode = [areaInfo getStringValueForKey:@"provinceCode" defaultValue:@""];
@@ -113,5 +113,40 @@
 //    }];
     finished(YES);
 }
+
+- (void)like:(void (^) (BOOL result))finished{
+    if (self.isLike) {
+        [Public alertOK:nil Message:@"已经点过赞"];
+        return;
+    }
+    
+    [[ALEngine shareEngine] pathURL:JR_GIVEALIKE parameters:@{@"projectId": self.projectId,@"projectType":@"1"} HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            self.isLike = YES;
+            self.likeCount++;
+        }
+        finished(!error);
+    }];
+}
+
+- (void)favorite:(void (^) (BOOL result))finished{
+    
+    NSDictionary *param = @{@"projectId": self.projectId};
+    if (!self.isFav) {
+        param = @{@"projectId": self.projectId,
+                  @"projectType": @"01"
+                  };
+    }
+    [[ALEngine shareEngine] pathURL:self.isFav ? JR_CASE_UNFAVORITE : JR_CASE_FAVORITE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            self.isFav = !_isFav;
+        }
+        finished(!error);
+    }];
+}
+
+
+
+
 
 @end

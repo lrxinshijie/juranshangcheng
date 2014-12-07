@@ -26,6 +26,8 @@
 
 #define kNavigationBarBackgroundColor kTabBarBackgroundColor
 
+#define CELLDICTIONARYBUILT(a,b) @{@"k":a,@"v":b}
+
 #define kContentBackgroundColor  [UIColor colorWithRed:234.0/255 green:247.0/255 blue:252.0/255 alpha:1]
 #define kDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 
@@ -48,7 +50,7 @@
 #define kNotificationNameEventReloadData @"kNotificationNameEventReloadData"
 
 #define kBlueColor RGBColor(15, 82, 167)
-//:@"100543115"
+//:@"100543115"8
 //appSecret:@"9cc782277d5b8084f073599d72ba08c3"
 #define QQHLSDKAppKey @"100543115"
 #define QQHLSDKAppSecret @"9cc782277d5b8084f073599d72ba08c3"
@@ -58,6 +60,17 @@
 #define kPhoneMaxNumber 11
 #define kCodeMaxNumber 6
 
-typedef void (^ModelBlock)(BOOL result);
+typedef void (^BOOLBlock)(BOOL result);
+typedef void (^VoidBlock)(void);
+
+typedef enum : NSUInteger {
+    FilterViewTypeCase,
+    FilterViewTypeDesigner,
+} FilterViewType;
+
+typedef enum : NSUInteger {
+    FilterViewActionSort,
+    FilterViewActionFilter,
+} FilterViewAction;
 
 #endif

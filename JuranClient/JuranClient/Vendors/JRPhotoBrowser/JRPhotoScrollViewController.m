@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UILabel *indexLabel;
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) IBOutlet UIView *toolBar;
+@property (nonatomic, strong) IBOutlet UIImageView *favImageView;
 @property (nonatomic, strong) UILabel *lastPageLabel;
 
 @end
@@ -56,6 +57,8 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setBackgroundImageWithColor:[UIColor whiteColor]];
+    [self.navigationController setNavigationBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
@@ -65,6 +68,7 @@
     // Do any additional setup after loading the view.
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"case_icon_share_white.png"] rightBarButtonItemAction:@selector(doShare)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self.view buttonWithFrame:CGRectZero target:self action:@selector(back:) image:[UIImage imageNamed:@"nav_backbtn_white"]]];
+    _favImageView.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
 }
 
 - (void)loadData{
@@ -199,11 +203,27 @@
 }
 
 - (IBAction)doPraise:(id)sender{
+    if (![self checkLogin]) {
+        return;
+    }
     
+    [_jrCase like:^(BOOL result) {
+        if (result) {
+            [self showTip:@"点赞成功"];
+        }
+    }];
 }
 
 - (IBAction)doCollect:(id)sender{
+    if (![self checkLogin]) {
+        return;
+    }
     
+    [_jrCase favorite:^(BOOL result) {
+        if (result) {
+            _favImageView.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
+        }
+    }];
 }
 
 - (IBAction)doMakeAppointment:(id)sender{
