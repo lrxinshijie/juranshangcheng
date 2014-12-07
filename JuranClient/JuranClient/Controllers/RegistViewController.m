@@ -123,6 +123,7 @@
         if (!error) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 SetPasswordViewController *st = [[SetPasswordViewController alloc] init];
+                st.block = _block;
                 st.phone = phone;
                 st.code = code;
                 [self.navigationController pushViewController:st animated:YES];

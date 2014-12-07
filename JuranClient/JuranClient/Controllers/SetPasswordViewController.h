@@ -10,6 +10,7 @@
 
 @interface SetPasswordViewController : ALViewController
 
+@property (nonatomic, copy) VoidBlock block;
 @property (nonatomic, strong) NSString *phone;
 @property (nonatomic, strong) NSString *code;
 

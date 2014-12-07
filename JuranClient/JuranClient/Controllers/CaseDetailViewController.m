@@ -280,7 +280,7 @@
 - (IBAction)onSend:(id)sender{
     [_commentTextField resignFirstResponder];
     
-    if (![self checkLogin]) {
+    if (![self checkLogin:nil]) {
         return;
     }
     

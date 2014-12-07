@@ -34,7 +34,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-//    [[JRUser currentUser] logout];
+    [[JRUser currentUser] logout];
     [self setupShareSDK];
     [self setupTabbar];
     

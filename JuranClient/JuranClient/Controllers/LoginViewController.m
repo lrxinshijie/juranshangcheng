@@ -91,6 +91,8 @@
 //                    user.password = password;
                     [user saveLocal];
                     [user resetCurrentUser];
+                    _block();
+                    
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [self back:nil];
                     });
@@ -136,6 +138,9 @@
             user.password = password;
             [user saveLocal];
             [user resetCurrentUser];
+            
+            _block();
+            
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self back:nil];
             });
@@ -146,6 +151,7 @@
 - (IBAction)onRegist:(id)sender{
     [self onHideKeyboard:sender];
     RegistViewController *rv = [[RegistViewController alloc] init];
+    rv.block = _block;
     [self.navigationController pushViewController:rv animated:YES];
 }
 

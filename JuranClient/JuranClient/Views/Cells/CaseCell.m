@@ -46,7 +46,7 @@
 - (IBAction)onLike:(id)sender{
     
     
-    if ([self.viewController checkLogin]) {
+    if ([self.viewController checkLogin:nil]) {
         [_jrCase like:^(BOOL result) {
             [_likeButton setTitle:[NSString stringWithFormat:@" %d", _jrCase.likeCount] forState:UIControlStateNormal];
         }];

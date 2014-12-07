@@ -12,12 +12,16 @@
 #import "JRDesigner.h"
 #import "JRPhotoScrollViewController.h"
 #import "JRWebImageDataSource.h"
+#import "FilterView.h"
 
-@interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate>
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, strong) FilterView *filterView;
+@property (nonatomic, strong) NSMutableDictionary *filterData;
+
 
 @end
 
@@ -58,6 +62,28 @@
         [weakSelf loadData];
     }];
     
+    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeDesigner defaultData:_filterData];
+    _filterView.delegate = self;
+    _tableView.tableHeaderView = _filterView;
+    
+    [_tableView headerBeginRefreshing];
+}
+
+- (NSMutableDictionary *)filterData{
+    if (!_filterData) {
+        _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"experience": @"",
+                                                                      @"isRealNameAuth": @"",
+                                                                      @"style" : @"",
+                                                                      @"order": @""}];
+    }
+    return _filterData;
+}
+
+- (void)clickFilterView:(FilterView *)view actionType:(FilterViewAction)action returnData:(NSDictionary *)data{
+    [data.allKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
+        [_filterData setObject:data[key] forKey:key];
+    }];
+    
     [_tableView headerBeginRefreshing];
 }
 
@@ -68,12 +94,9 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"experience": @"",
-                            @"isRealNameAuth": @"",
-                            @"style": @"",
-                            @"order": @"0",
-                            @"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"onePageCount": @"10"};
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": @"10"}];
+    [param addEntriesFromDictionary:self.filterData];
+    
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_DESIGNERLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
@@ -90,6 +113,10 @@
         }
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
+        if (_currentPage == 1) {
+            _tableView.contentOffset = CGPointMake(0, CGRectGetHeight(_filterView.frame));
+        }
+        
     }];
     
 }
