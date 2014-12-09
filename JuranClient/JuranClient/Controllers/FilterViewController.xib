@@ -17,7 +17,7 @@
             <subviews>
                 <view contentMode="scaleToFill" id="ZST-OJ-Hec">
                     <rect key="frame" x="0.0" y="455" width="320" height="49"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="a0p-I3-XrB">
                             <rect key="frame" x="250" y="5" width="62" height="39"/>
