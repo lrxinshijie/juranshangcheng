@@ -94,26 +94,22 @@
     _hasNewAnswerView.layer.cornerRadius = _hasNewAnswerView.frame.size.height/2.f;
     _hasNewBidView.layer.cornerRadius = _hasNewBidView.frame.size.height/2.f;
     _hasNewPushMsgView.layer.cornerRadius = _hasNewPushMsgView.frame.size.height/2.f;
-    
-    _unLoginLabel.hidden = NO;
-    _loginNameLabel.hidden = YES;
-    _userNameLabel.hidden = YES;
 }
 
 - (void)refreshUI{
-    _unLoginLabel.hidden = YES;
-    _loginNameLabel.hidden = NO;
-    _userNameLabel.hidden = NO;
+    _unLoginLabel.hidden = [JRUser isLogin];
+    _loginNameLabel.hidden = ![JRUser isLogin];
+    _userNameLabel.hidden = ![JRUser isLogin];
     _userNameLabel.text = _profileData.nickName;
     [_headerImageView setImageWithURLString:_profileData.headUrl];
     _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _profileData.account];
     _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _profileData.newPushMsgCount];
-    _privateLetterCountLabel.hidden = _profileData.newPushMsgCount?NO:YES;
+    _privateLetterCountLabel.hidden = [JRUser isLogin] && _profileData.newPushMsgCount?NO:YES;
     _signedButton.enabled = !_profileData.isSigned;
     [_signedButton setTitle:_profileData.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
-    _hasNewAnswerView.hidden = _profileData.newAnswerCount?NO:YES;
-    _hasNewBidView.hidden = _profileData.hasNewBidCount?NO:YES;
-    _hasNewPushMsgView.hidden = _profileData.newPushMsgCount?NO:YES;
+    _hasNewAnswerView.hidden = [JRUser isLogin] && _profileData.newAnswerCount?NO:YES;
+    _hasNewBidView.hidden = [JRUser isLogin] && _profileData.hasNewBidCount?NO:YES;
+    _hasNewPushMsgView.hidden = [JRUser isLogin] && _profileData.newPushMsgCount?NO:YES;
 }
 
 - (void)loadData{

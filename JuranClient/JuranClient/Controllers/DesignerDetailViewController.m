@@ -349,7 +349,7 @@
     UITableViewCell *cell = nil;
     if (0 == _segment.selectedIndex) {
         static NSString *caseIdentifier = @"CaseCell";
-        cell = (CaseCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:caseIdentifier];
+        cell = (CaseCell *)[tableView dequeueReusableCellWithIdentifier:caseIdentifier];
         if (!cell) {
             NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:caseIdentifier owner:self options:nil];
             cell = (CaseCell *)[nibs firstObject];
@@ -412,7 +412,7 @@
         }
     }else{
         static NSString *taTopicIdentifier = @"TATopicCell";
-        cell = (TATopicCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:taTopicIdentifier];
+        cell = (TATopicCell *)[tableView dequeueReusableCellWithIdentifier:taTopicIdentifier];
         if (!cell) {
             NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:taTopicIdentifier owner:self options:nil];
             cell = (TATopicCell *)[nibs firstObject];

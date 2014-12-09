@@ -118,13 +118,25 @@
 
 + (NSMutableArray *)buildUpFollowDesignerListWithValue:(id)value{
     NSMutableArray *retVal = [NSMutableArray array];
-    
-    if ([value isKindOfClass:[NSArray class]]) {
-        for (NSDictionary *item in value) {
-            JRDesigner *d = [[JRDesigner alloc] init];
-            d = [d buildFollowDesignerWithDictionary:item];
-            [retVal addObject:d];
+    if ([value isKindOfClass:[NSDictionary class]]) {
+        id designerList = value[@"designerList"];
+        NSDictionary *frontImgDic = value[@"frontImgUrlMap"];
+        NSDictionary *designExperienceDic = value[@"designExperience"];
+        if ([designerList isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *item in designerList) {
+                JRDesigner *d = [[JRDesigner alloc] init];
+                d = [d buildFollowDesignerWithDictionary:item];
+                NSString *urls = [frontImgDic getStringValueForKey:[NSString stringWithFormat:@"%i", d.userId] defaultValue:@""];
+                if (urls.length == 0) {
+                    d.frontImageUrlList = @[];
+                }else{
+                    d.frontImageUrlList = [urls componentsSeparatedByString:@","];
+                }
+                d.experienceCount = [designExperienceDic getIntValueForKey:[NSString stringWithFormat:@"%i", d.userId] defaultValue:0];
+                [retVal addObject:d];
+            }
         }
+        
     }
     return retVal;
 }

@@ -58,7 +58,7 @@
     [[ALEngine shareEngine] pathURL:JR_GET_MSG_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *list = [data objectForKey:@"easyHomeDesignDtotList"];
+            NSArray *list = [data objectForKey:@"webMessageList"];
             NSMutableArray *rows = [JRPushInfoMsg buildUpWithValue:list];
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
@@ -114,7 +114,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"PushMessageCell";
-    PushMessageCell *cell = (PushMessageCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+    PushMessageCell *cell = (PushMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (PushMessageCell *)[nibs firstObject];

@@ -154,7 +154,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"InteractionCell";
-    InteractionCell *cell = (InteractionCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+    InteractionCell *cell = (InteractionCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (InteractionCell *)[nibs firstObject];
