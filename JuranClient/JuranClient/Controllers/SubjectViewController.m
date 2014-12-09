@@ -82,7 +82,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"SubjectCell";
-    SubjectCell *cell = (SubjectCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+    SubjectCell *cell = (SubjectCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (SubjectCell *)[nibs firstObject];

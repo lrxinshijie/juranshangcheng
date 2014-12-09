@@ -162,7 +162,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"AskOrAnswerCell";
-    AskOrAnswerCell *cell = (AskOrAnswerCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+    AskOrAnswerCell *cell = (AskOrAnswerCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (AskOrAnswerCell *)[nibs firstObject];

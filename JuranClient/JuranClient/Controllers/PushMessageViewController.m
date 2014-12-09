@@ -114,7 +114,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"PushMessageCell";
-    PushMessageCell *cell = (PushMessageCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+    PushMessageCell *cell = (PushMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (PushMessageCell *)[nibs firstObject];

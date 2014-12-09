@@ -14,6 +14,7 @@
 #import "EScrollerView.h"
 #import "JRPhotoScrollViewController.h"
 #import "FilterView.h"
+#import "SearchViewController.h"
 
 @interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate>
 
@@ -71,9 +72,9 @@
 }
 
 - (void)onSearch{
-    [self checkLogin:^{
-        [_tableView headerBeginRefreshing];
-    }];
+    SearchViewController *vc = [[SearchViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)loadAd{
@@ -176,7 +177,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"CaseCell";
-    CaseCell *cell = (CaseCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+    CaseCell *cell = (CaseCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (CaseCell *)[nibs firstObject];

@@ -196,7 +196,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         static NSString *CellIdentifier = @"DesignerCell";
-        UITableViewCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             [cell addSubview:_designerView];
@@ -207,7 +207,7 @@
         
     }else if (indexPath.section == 1){
         static NSString *CellIdentifier = @"Cell";
-        UITableViewCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.backgroundColor = [UIColor clearColor];
@@ -225,7 +225,7 @@
         return cell;
     }else{
         static NSString *CellIdentifier = @"CommentCell";
-        CommentCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+        CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
             NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
             cell = [nibs firstObject];
