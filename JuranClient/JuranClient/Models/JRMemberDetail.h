@@ -38,5 +38,6 @@
 - (NSString*)locationAddress;
 - (NSString*)idCardInfomation;
 - (NSString*)homeTelForPersonal;
+- (NSString*)mobileNumForBindPhone;
 
 @end

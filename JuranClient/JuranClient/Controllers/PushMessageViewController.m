@@ -60,28 +60,28 @@
         if (!error) {
             NSArray *list = [data objectForKey:@"easyHomeDesignDtotList"];
             NSMutableArray *rows = [JRPushInfoMsg buildUpWithValue:list];
-//            if (_currentPage > 1) {
-//                [_datas addObjectsFromArray:rows];
-//            }else{
-//                self.datas = [JRPushInfoMsg buildUpWithValue:list];
-//            }
-//            
-//            [_tableView reloadData];
+            if (_currentPage > 1) {
+                [_datas addObjectsFromArray:rows];
+            }else{
+                self.datas = [JRPushInfoMsg buildUpWithValue:list];
+            }
+            
+            [_tableView reloadData];
         }
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
     }];
     
-    _datas = [NSMutableArray array];
-    for (NSInteger i = 0; i < 4; i++) {
-        JRPushInfoMsg *msg = [[JRPushInfoMsg alloc] init];
-        msg.isUnread = YES;
-        msg.gmtCreate = @"2014-09-20";
-        msg.msgTitle = @"了深刻的减肥了快速的减肥了空间受到了空间罚款了数据的";
-        msg.msgAbstract = @"地方可接受接受了顺路收到了放假了快速减肥了就是浪费快递解放路口设计的法律框架上来看对方就两款手机的弗兰克对方就两款手机的法律框架上来的快放假快乐暑假的开发监考老师的减肥接受了顺路收到了放假了快速减肥了就是浪费快递解放路口设计的法律框架上来看对方就两款手机的弗兰克对方就两款手机的法律框架上来的快放假快乐暑假的开发监考老师的减肥接受了顺路收到了放假了快速减肥了就是浪费快递解放路口设计的法律框架上来看对方就两款手机的弗兰克对方就两款手机的法律框架上来的快放假快乐暑假的开发监考老师的减肥接受了顺路收到了放假了快速减肥了就是浪费快递解放路口设计的法律框架上来看对方就两款手机的弗兰克对方就两款手机的法律框架上来的快放假快乐暑假的开发监考老师的减肥了顺路收到了放假了快速减肥了就是浪费快递解放路口设计的法律框架上来看对方就两款手机的弗兰克对方就两款手机的法律框架上来的快放假快乐暑假的开发监考老师的减肥";
-        [_datas addObject:msg];
-    }
-    [_tableView reloadData];
+//    _datas = [NSMutableArray array];
+//    for (NSInteger i = 0; i < 4; i++) {
+//        JRPushInfoMsg *msg = [[JRPushInfoMsg alloc] init];
+//        msg.isUnread = YES;
+//        msg.gmtCreate = @"2014-09-20";
+//        msg.msgTitle = @"了深刻的减肥了快速的减肥了空间受到了空间罚款了数据的";
+//        msg.msgAbstract = @"地方可接受接受了顺路收到了放假了快速减肥了就是浪费快递解放路口设计的法律框架上来看对方就两款手机的弗兰克对方就两款手机的法律框架上来的快放假快乐暑假的开发监考老师的减肥接受了顺路收到了放假了快速减肥了就是浪费快递解放路口设计的法律框架上来看对方就两款手机的弗兰克对方就两款手机的法律框架上来的快放假快乐暑假的开发监考老师的减肥接受了顺路收到了放假了快速减肥了就是浪费快递解放路口设计的法律框架上来看对方就两款手机的弗兰克对方就两款手机的法律框架上来的快放假快乐暑假的开发监考老师的减肥接受了顺路收到了放假了快速减肥了就是浪费快递解放路口设计的法律框架上来看对方就两款手机的弗兰克对方就两款手机的法律框架上来的快放假快乐暑假的开发监考老师的减肥了顺路收到了放假了快速减肥了就是浪费快递解放路口设计的法律框架上来看对方就两款手机的弗兰克对方就两款手机的法律框架上来的快放假快乐暑假的开发监考老师的减肥";
+//        [_datas addObject:msg];
+//    }
+//    [_tableView reloadData];
 }
 
 - (void)setAllReaded:(id)sender{

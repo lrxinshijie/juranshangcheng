@@ -65,6 +65,14 @@
 		14490CB31A2B6A19001CB160 /* AccountSecurityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14490CB11A2B6A19001CB160 /* AccountSecurityViewController.m */; };
 		14490CB41A2B6A19001CB160 /* AccountSecurityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14490CB21A2B6A19001CB160 /* AccountSecurityViewController.xib */; };
 		1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1453C8C31A24A74200D817BC /* TATopicCell.xib */; };
+		14587E101A35D5E300D41236 /* DetailAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14587E0E1A35D5E300D41236 /* DetailAddressViewController.m */; };
+		14587E111A35D5E300D41236 /* DetailAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14587E0F1A35D5E300D41236 /* DetailAddressViewController.xib */; };
+		14587E151A35DC9000D41236 /* ModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14587E131A35DC9000D41236 /* ModifyPasswordViewController.m */; };
+		14587E161A35DC9000D41236 /* ModifyPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14587E141A35DC9000D41236 /* ModifyPasswordViewController.xib */; };
+		14587E1A1A35DD2600D41236 /* BindPhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14587E181A35DD2600D41236 /* BindPhoneNumberViewController.m */; };
+		14587E1B1A35DD2600D41236 /* BindPhoneNumberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14587E191A35DD2600D41236 /* BindPhoneNumberViewController.xib */; };
+		14587E1F1A35DD4300D41236 /* BindMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14587E1D1A35DD4300D41236 /* BindMailViewController.m */; };
+		14587E201A35DD4300D41236 /* BindMailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14587E1E1A35DD4300D41236 /* BindMailViewController.xib */; };
 		145E3D191A2792B200AA952F /* PersonalDatasMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */; };
 		145E3D1A1A2792B200AA952F /* PersonalDatasMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */; };
 		145E3D1B1A2792B200AA952F /* PersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D171A2792B200AA952F /* PersonalDataViewController.m */; };
@@ -338,6 +346,18 @@
 		14490CB11A2B6A19001CB160 /* AccountSecurityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSecurityViewController.m; sourceTree = "<group>"; };
 		14490CB21A2B6A19001CB160 /* AccountSecurityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountSecurityViewController.xib; sourceTree = "<group>"; };
 		1453C8C31A24A74200D817BC /* TATopicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TATopicCell.xib; sourceTree = "<group>"; };
+		14587E0D1A35D5E300D41236 /* DetailAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailAddressViewController.h; sourceTree = "<group>"; };
+		14587E0E1A35D5E300D41236 /* DetailAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailAddressViewController.m; sourceTree = "<group>"; };
+		14587E0F1A35D5E300D41236 /* DetailAddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailAddressViewController.xib; sourceTree = "<group>"; };
+		14587E121A35DC9000D41236 /* ModifyPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPasswordViewController.h; sourceTree = "<group>"; };
+		14587E131A35DC9000D41236 /* ModifyPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPasswordViewController.m; sourceTree = "<group>"; };
+		14587E141A35DC9000D41236 /* ModifyPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyPasswordViewController.xib; sourceTree = "<group>"; };
+		14587E171A35DD2600D41236 /* BindPhoneNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindPhoneNumberViewController.h; sourceTree = "<group>"; };
+		14587E181A35DD2600D41236 /* BindPhoneNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindPhoneNumberViewController.m; sourceTree = "<group>"; };
+		14587E191A35DD2600D41236 /* BindPhoneNumberViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneNumberViewController.xib; sourceTree = "<group>"; };
+		14587E1C1A35DD4300D41236 /* BindMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindMailViewController.h; sourceTree = "<group>"; };
+		14587E1D1A35DD4300D41236 /* BindMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindMailViewController.m; sourceTree = "<group>"; };
+		14587E1E1A35DD4300D41236 /* BindMailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindMailViewController.xib; sourceTree = "<group>"; };
 		145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDatasMoreViewController.h; sourceTree = "<group>"; };
 		145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDatasMoreViewController.m; sourceTree = "<group>"; };
 		145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalDatasMoreViewController.xib; sourceTree = "<group>"; };
@@ -898,6 +918,15 @@
 				14490CB01A2B6A19001CB160 /* AccountSecurityViewController.h */,
 				14490CB11A2B6A19001CB160 /* AccountSecurityViewController.m */,
 				14490CB21A2B6A19001CB160 /* AccountSecurityViewController.xib */,
+				14587E121A35DC9000D41236 /* ModifyPasswordViewController.h */,
+				14587E131A35DC9000D41236 /* ModifyPasswordViewController.m */,
+				14587E141A35DC9000D41236 /* ModifyPasswordViewController.xib */,
+				14587E171A35DD2600D41236 /* BindPhoneNumberViewController.h */,
+				14587E181A35DD2600D41236 /* BindPhoneNumberViewController.m */,
+				14587E191A35DD2600D41236 /* BindPhoneNumberViewController.xib */,
+				14587E1C1A35DD4300D41236 /* BindMailViewController.h */,
+				14587E1D1A35DD4300D41236 /* BindMailViewController.m */,
+				14587E1E1A35DD4300D41236 /* BindMailViewController.xib */,
 			);
 			name = Account;
 			sourceTree = "<group>";
@@ -1049,6 +1078,9 @@
 				A9902CA31A3432A500F08DA1 /* FilterViewController.h */,
 				A9902CA41A3432A500F08DA1 /* FilterViewController.m */,
 				A9902CA51A3432A500F08DA1 /* FilterViewController.xib */,
+				14587E0D1A35D5E300D41236 /* DetailAddressViewController.h */,
+				14587E0E1A35D5E300D41236 /* DetailAddressViewController.m */,
+				14587E0F1A35D5E300D41236 /* DetailAddressViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1508,6 +1540,7 @@
 				1441A18B1A29E3D5004A038E /* KTPhotoBrowser.bundle in Resources */,
 				14D973881A32CBC000E771ED /* AnswerDetailCell.xib in Resources */,
 				A987EE491A20986100CED7CD /* CaseViewController.xib in Resources */,
+				14587E201A35DD4300D41236 /* BindMailViewController.xib in Resources */,
 				A9902CA71A3432A500F08DA1 /* FilterViewController.xib in Resources */,
 				A9C3983C1A29842D006A8AAB /* CommentCell.xib in Resources */,
 				1476DA971A21DFBE0006E9E0 /* SelfIntrodutionCell.xib in Resources */,
@@ -1516,6 +1549,7 @@
 				14ABFBE61A25B63400C4AF65 /* LoginViewController.xib in Resources */,
 				145E3D1A1A2792B200AA952F /* PersonalDatasMoreViewController.xib in Resources */,
 				A90459D91A278B2D00F8CD74 /* SubjectViewController.xib in Resources */,
+				14587E111A35D5E300D41236 /* DetailAddressViewController.xib in Resources */,
 				A987EE581A2098BA00CED7CD /* ProfileViewController.xib in Resources */,
 				1441A1751A29E3CD004A038E /* WeiboSDK.bundle in Resources */,
 				14C953AA1A2DC0E800FE6F8D /* SubjectCell.xib in Resources */,
@@ -1531,7 +1565,9 @@
 				141A1D3C1A2CC09600C073C5 /* AskOrAnswerCell.xib in Resources */,
 				A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */,
 				14C8554F1A2E1A1600A15ED9 /* InteractionCell.xib in Resources */,
+				14587E161A35DC9000D41236 /* ModifyPasswordViewController.xib in Resources */,
 				A987EE361A2093C900CED7CD /* MJRefresh.bundle in Resources */,
+				14587E1B1A35DD2600D41236 /* BindPhoneNumberViewController.xib in Resources */,
 				14D973951A334DFC00E771ED /* PushMessageCell.xib in Resources */,
 				A90459D41A278A6100F8CD74 /* PublishDesignViewController.xib in Resources */,
 				A987EE601A209E7900CED7CD /* CaseCell.xib in Resources */,
@@ -1588,6 +1624,7 @@
 				1441A0611A2987FB004A038E /* JRProfileData.m in Sources */,
 				A90459D31A278A6100F8CD74 /* PublishDesignViewController.m in Sources */,
 				A9C398371A298047006A8AAB /* JRComment.m in Sources */,
+				14587E151A35DC9000D41236 /* ModifyPasswordViewController.m in Sources */,
 				A977F8461A3099E5008682B3 /* TTTAttributedLabel.m in Sources */,
 				A987EDEE1A20920500CED7CD /* UINavigationBar+ASCategory.m in Sources */,
 				1476DA911A21DB850006E9E0 /* DesignerCell.m in Sources */,
@@ -1658,11 +1695,13 @@
 				1441A1461A29E156004A038E /* JRMemberDetail.m in Sources */,
 				14D973981A33545000E771ED /* JRPushInfoMsg.m in Sources */,
 				A987EDDF1A20920500CED7CD /* NSDate+ASCategory.m in Sources */,
+				14587E101A35D5E300D41236 /* DetailAddressViewController.m in Sources */,
 				14C8554E1A2E1A1600A15ED9 /* InteractionCell.m in Sources */,
 				A9D654B21A27642800A80253 /* NSArray+JSONModel.m in Sources */,
 				141A1D3B1A2CC09600C073C5 /* AskOrAnswerCell.m in Sources */,
 				A93BF2951A262A290070B72A /* ServiceViewController.m in Sources */,
 				A9D654B01A27642800A80253 /* JSONModelClassProperty.m in Sources */,
+				14587E1A1A35DD2600D41236 /* BindPhoneNumberViewController.m in Sources */,
 				1441A18F1A29E3D5004A038E /* KTPhotoView.m in Sources */,
 				140C46ED1A2A3741003317AD /* MyFollowViewController.m in Sources */,
 				A987EDEF1A20920500CED7CD /* UINavigationController+ASCategory.m in Sources */,
@@ -1715,6 +1754,7 @@
 				A9D654AE1A27642800A80253 /* JSONModel.m in Sources */,
 				A987EE481A20986100CED7CD /* CaseViewController.m in Sources */,
 				A987EDE81A20920500CED7CD /* UIButton+ASCategory.m in Sources */,
+				14587E1F1A35DD4300D41236 /* BindMailViewController.m in Sources */,
 				14D9738F1A334C4F00E771ED /* PushMessageViewController.m in Sources */,
 				141C564D1A23613900A57971 /* TATopicCell.m in Sources */,
 			);

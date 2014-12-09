@@ -24,12 +24,13 @@
         self.email = [dict getStringValueForKey:@"email" defaultValue:@""];
         self.birthday = [dict getStringValueForKey:@"birthday" defaultValue:@""];
         self.homeTel = [dict getStringValueForKey:@"homeTel" defaultValue:@""];
-        self.provinceCode = [dict getStringValueForKey:@"provinceCode" defaultValue:@""];
-        self.provinceName = [dict getStringValueForKey:@"provinceName" defaultValue:@""];
-        self.cityCode = [dict getStringValueForKey:@"cityCode" defaultValue:@""];
-        self.cityName = [dict getStringValueForKey:@"cityName" defaultValue:@""];
-        self.districtCode = [dict getStringValueForKey:@"districtCode" defaultValue:@""];
-        self.districtName = [dict getStringValueForKey:@"districtName" defaultValue:@""];
+        NSDictionary *areaDic = dict[@"areaInfo"];
+        self.provinceCode = [areaDic getStringValueForKey:@"provinceCode" defaultValue:@""];
+        self.provinceName = [areaDic getStringValueForKey:@"provinceName" defaultValue:@""];
+        self.cityCode = [areaDic getStringValueForKey:@"cityCode" defaultValue:@""];
+        self.cityName = [areaDic getStringValueForKey:@"cityName" defaultValue:@""];
+        self.districtCode = [areaDic getStringValueForKey:@"districtCode" defaultValue:@""];
+        self.districtName = [areaDic getStringValueForKey:@"districtName" defaultValue:@""];
         self.detailAddress = [dict getStringValueForKey:@"detailAddress" defaultValue:@""];
         self.zipCode = [dict getStringValueForKey:@"zipCode" defaultValue:@""];
         self.idCardType = [dict getStringValueForKey:@"idCardType" defaultValue:@""];
@@ -78,6 +79,13 @@
         return @"未设置";
     }
     return _homeTel;
+}
+
+- (NSString*)mobileNumForBindPhone{
+    if (_mobileNum && _mobileNum.length > 0) {
+        return [NSString stringWithFormat:@"%@****%@", [_mobileNum substringToIndex:3], [_mobileNum substringFromIndex:7]];
+    }
+    return @"";
 }
 
 @end

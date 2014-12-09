@@ -8,11 +8,16 @@
 
 #import "AccountSecurityViewController.h"
 #import "JRMemberDetail.h"
+#import "ModifyPasswordViewController.h"
+#import "BindPhoneNumberViewController.h"
+#import "BindMailViewController.h"
 
 @interface AccountSecurityViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *keys;
     NSArray *values;
+    NSString *mail;
+    NSString *phone;
 }
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -55,7 +60,9 @@
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
                 _memberDetail = [[JRMemberDetail alloc] initWithDictionary:data];
-                values = @[@"", _memberDetail.mobileNum.length == 0?@"未绑定":_memberDetail.mobileNum, _memberDetail.email.length == 0?@"未绑定":_memberDetail.email];
+                values = @[@"",
+                           _memberDetail.mobileNum.length == 0?@"未绑定":[_memberDetail mobileNumForBindPhone],
+                           _memberDetail.email.length == 0?@"未绑定":_memberDetail.email];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [_tableView reloadData];
                 });
@@ -81,13 +88,30 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         cell.textLabel.textColor = RGBColor(108, 108, 108);
-        cell.detailTextLabel.textColor = RGBColor(69, 118, 187);
+//        cell.detailTextLabel.textColor = RGBColor(69, 118, 187);
         cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
     }
     cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]];
     cell.textLabel.text = keys[indexPath.row];
     cell.detailTextLabel.text = values[indexPath.row];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0) {
+        ModifyPasswordViewController *vc = [[ModifyPasswordViewController alloc] init];
+        vc.memberDetail = _memberDetail;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else if (indexPath.row == 1) {
+        BindPhoneNumberViewController *vc = [[BindPhoneNumberViewController alloc] init];
+        vc.memberDetail = _memberDetail;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 2) {
+        BindMailViewController *vc = [[BindMailViewController alloc] init];
+        vc.memberDetail = _memberDetail;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -44,7 +44,7 @@
 #define JR_GET_QUESTIONDETAIL [NSString stringWithFormat:@"%@/QA/getQuestionDetail.json",JR_SERVICE]
 #define JR_GET_MSG_INFO [NSString stringWithFormat:@"%@/info/get_msg_info.json",JR_SERVICE]
 #define JR_GET_ALLAREA_INFO [NSString stringWithFormat:@"%@/location/getAllAreaInfo.json",JR_SERVICE]
-
+#define JR_CHANGE_PWD [NSString stringWithFormat:@"%@/member/changePwd.json",JR_SERVICE]
 
 
 
