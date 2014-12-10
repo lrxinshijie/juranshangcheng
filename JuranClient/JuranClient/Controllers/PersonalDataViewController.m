@@ -12,7 +12,7 @@
 #import "ModifyViewController.h"
 #import "BaseAddressViewController.h"
 #import "DetailAddressViewController.h"
-
+#import "JRAreaInfo.h"
 
 @interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, SexySwitchDelegate, ModifyViewControllerDelegate>
 {
@@ -119,9 +119,9 @@
     NSDictionary *param11 = @{@"nickName": _memberDetail.nickName,
                             @"birthday": _memberDetail.birthday,
                             @"homeTel": _memberDetail.homeTel,
-                            @"provinceCode": _memberDetail.provinceCode,
-                            @"cityCode": _memberDetail.cityCode,
-                            @"districtCode": _memberDetail.districtCode,
+                            @"provinceCode": _memberDetail.areaInfo.provinceCode,
+                            @"cityCode": _memberDetail.areaInfo.cityCode,
+                            @"districtCode": _memberDetail.areaInfo.districtCode,
                             @"detailAddress": _memberDetail.detailAddress,
                             @"zipCode": _memberDetail.zipCode,
                             @"idCardType": _memberDetail.idCardType,
@@ -309,7 +309,7 @@
             case 3:
             {
                 BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
-                vc.memberDetail = _memberDetail;
+                vc.areaInfo = _memberDetail.areaInfo;
                 [self.navigationController pushViewController:vc animated:YES];
                 break;
             }

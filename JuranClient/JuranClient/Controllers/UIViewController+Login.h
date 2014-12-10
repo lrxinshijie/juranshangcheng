@@ -13,4 +13,8 @@
 - (BOOL)checkLogin:(VoidBlock)finished;
 - (BOOL)checkLogin;
 
+
+- (void)configureMenu;
+- (void)showMenu;
+
 @end

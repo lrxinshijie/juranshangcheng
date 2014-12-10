@@ -7,6 +7,7 @@
 //
 
 #import "JRMemberDetail.h"
+#import "JRAreaInfo.h"
 
 @implementation JRMemberDetail
 
@@ -25,12 +26,7 @@
         self.birthday = [dict getStringValueForKey:@"birthday" defaultValue:@""];
         self.homeTel = [dict getStringValueForKey:@"homeTel" defaultValue:@""];
         NSDictionary *areaDic = dict[@"areaInfo"];
-        self.provinceCode = [areaDic getStringValueForKey:@"provinceCode" defaultValue:@""];
-        self.provinceName = [areaDic getStringValueForKey:@"provinceName" defaultValue:@""];
-        self.cityCode = [areaDic getStringValueForKey:@"cityCode" defaultValue:@""];
-        self.cityName = [areaDic getStringValueForKey:@"cityName" defaultValue:@""];
-        self.districtCode = [areaDic getStringValueForKey:@"districtCode" defaultValue:@""];
-        self.districtName = [areaDic getStringValueForKey:@"districtName" defaultValue:@""];
+        self.areaInfo = [[JRAreaInfo alloc] initWithDictionary:areaDic];
         self.detailAddress = [dict getStringValueForKey:@"detailAddress" defaultValue:@""];
         self.zipCode = [dict getStringValueForKey:@"zipCode" defaultValue:@""];
         self.idCardType = [dict getStringValueForKey:@"idCardType" defaultValue:@""];
@@ -51,14 +47,14 @@
 
 - (NSString*)locationAddress{
     NSString *address = @"";
-    if (self.provinceName && self.provinceName.length > 0) {
-        address = self.provinceName;
+    if (self.areaInfo.provinceName && self.areaInfo.provinceName.length > 0) {
+        address = self.areaInfo.provinceName;
     }
-    if (self.cityName && self.cityName.length > 0) {
-        address = [NSString stringWithFormat:@"%@-%@", address, self.cityName];
+    if (self.areaInfo.cityName && self.areaInfo.cityName.length > 0) {
+        address = [NSString stringWithFormat:@"%@-%@", address, self.areaInfo.cityName];
     }
-    if (self.districtName && self.districtName.length > 0) {
-        address = [NSString stringWithFormat:@"%@-%@", address, self.districtName];
+    if (self.areaInfo.districtName && self.areaInfo.districtName.length > 0) {
+        address = [NSString stringWithFormat:@"%@-%@", address, self.areaInfo.districtName];
     }
     if (address.length == 0) {
         return @"未设置";

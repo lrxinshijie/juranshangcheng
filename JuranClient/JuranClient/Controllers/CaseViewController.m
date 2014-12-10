@@ -46,7 +46,7 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    self.navigationItem.title = @"案例";
+    [self configureMenu];
     
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
     
@@ -195,13 +195,15 @@
 
     JRCase *cs = [_datas objectAtIndex:indexPath.row];
     
-    [cs loadDetail:^(BOOL result) {
-        if (result) {
-            JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-    }];
+    JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+//    [cs loadDetail:^(BOOL result) {
+//        if (result) {
+//            
+//        }
+//    }];
 }
 
 - (void)EScrollerViewDidClicked:(NSUInteger)index{

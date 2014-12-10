@@ -36,7 +36,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChangeNotification:) name:UITextFieldTextDidChangeNotification object:nil];
     searchOptions = @[@"在设计师中搜索", @"在作品案例中搜索", @"在答疑解惑中搜索"];
-    self.navigationItem.title = @"搜索";
+    self.navigationItem.title = @"系统消息";
     step = 1;
     [self setupUI];
 }
@@ -88,25 +88,6 @@
         _tableView.tableFooterView = _clearHistoryView;
     }
     [_tableView reloadData];
-}
-
-- (void)searchResult{
-    NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"rowsPerPage": @"10"};
-    [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_GET_MSG_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
-        if (!error) {
-            NSArray *list = [data objectForKey:@"webMessageList"];
-            NSMutableArray *rows = [JRPushInfoMsg buildUpWithValue:list];
-            if (_currentPage > 1) {
-                [_datas addObjectsFromArray:rows];
-            }else{
-                self.datas = [JRPushInfoMsg buildUpWithValue:list];
-            }
-            
-        }
-    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -187,10 +168,6 @@
         cell.textLabel.text = step == 2?searchHistorys[indexPath.row]:searchOptions[indexPath.row];
     }
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

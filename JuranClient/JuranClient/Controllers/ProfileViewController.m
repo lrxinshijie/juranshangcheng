@@ -18,6 +18,8 @@
 #import "InteractionViewController.h"
 #import "SettingsViewController.h"
 #import "PushMessageViewController.h"
+#import "CaseCollectViewController.h"
+#import "PrivateMessageViewController.h"
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -57,6 +59,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     self.navigationItem.title = @"个人中心";
+    [self configureMenu];
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSettings)];
     
     titleArray = @[@"互动", @"我的关注", @"我的收藏", @"订单管理", @"账户管理", @"账户安全"];
@@ -180,7 +183,13 @@
 
 //私信
 - (IBAction)doPrivateLetter:(id)sender{
+    if (![self checkLogin]) {
+        return;
+    }
     
+    PrivateMessageViewController *pv = [[PrivateMessageViewController alloc] init];
+    pv.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:pv animated:YES];
 }
 
 //问答
@@ -286,6 +295,13 @@
             return;
         }
         AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 3){
+        if (![self checkLogin]) {
+            return;
+        }
+        CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }

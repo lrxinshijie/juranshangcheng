@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+
+@class JRAreaInfo;
 @interface JRDemand : NSObject
 
 @property (nonatomic, assign) NSInteger designReqId;
@@ -25,6 +27,20 @@
 @property (nonatomic, assign) BOOL isBidded;
 
 - (NSString*)statusString;
+
+
+@property (nonatomic, copy) NSString *contactsName;
+@property (nonatomic, copy) NSString *contactsMobile;
+@property (nonatomic, copy) NSString *budget;
+@property (nonatomic, copy) NSString *budgetUnit;
+@property (nonatomic, copy) NSString *renovationStyle;
+@property (nonatomic, copy) NSString *neighbourhoods;
+@property (nonatomic, copy) NSString *roomNum;
+
+@property (nonatomic, strong) JRAreaInfo *areaInfo;
+
+- (NSString *)houseTypeString;
+- (NSString *)renovationStyleString;
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 

@@ -31,6 +31,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <size key="customSize" width="227" height="139"/>
             <connections>
                 <outlet property="avtarImageView" destination="mLL-YF-SQa" id="dJh-vc-e5t"/>

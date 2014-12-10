@@ -21,8 +21,6 @@
 
 @interface AppDelegate () <UINavigationControllerDelegate>
 
-@property (nonatomic, strong) UITabBarController *tabBarController;
-
 @end
 
 @implementation AppDelegate
@@ -34,7 +32,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-//    [[JRUser currentUser] logout];
+    [JRUser refreshToken:nil];
+    
     [self setupShareSDK];
     [self setupTabbar];
     

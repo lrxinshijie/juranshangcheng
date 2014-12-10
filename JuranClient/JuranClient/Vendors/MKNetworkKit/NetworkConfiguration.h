@@ -93,6 +93,10 @@
 #define JR_CASE_LIKE [NSString stringWithFormat:@"%@/design/givealike.json",JR_SERVICE]
 #define JR_CASE_FAVORITE [NSString stringWithFormat:@"%@/design/addprjfavorite.json",JR_SERVICE]
 #define JR_CASE_UNFAVORITE [NSString stringWithFormat:@"%@/design/removeprjfavorite.json",JR_SERVICE]
+#define JR_PUBLISH_DESIGN [NSString stringWithFormat:@"%@/design/publishDesign.json",JR_SERVICE]
+#define JR_FAV_PROJECT [NSString stringWithFormat:@"%@/design/getMyFavProject.json",JR_SERVICE]
+#define JR_PRIVATE_LIST [NSString stringWithFormat:@"%@/member/getPrivateLetterList.json",JR_SERVICE]
+#define JR_PRIVATE_DETAIL [NSString stringWithFormat:@"%@/member/getPrivateLetterDetailList.json",JR_SERVICE]
 
 #define kHTTPMethodGet @"GET"
 #define kHTTPMethodPost @"POST"

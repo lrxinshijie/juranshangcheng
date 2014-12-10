@@ -95,4 +95,30 @@
     return [JRUser currentUser].guid.length > 0;
 }
 
++ (void)refreshToken:(VoidBlock)finished{
+    
+    NSString *account = [JRUser currentUser].account;
+    NSString *password = [JRUser currentUser].password;
+    if (account.length == 0 || password.length == 0) {
+        return;
+    }
+    
+    NSDictionary *param = @{@"account": account,
+                            @"password": password};
+    [[ALEngine shareEngine] pathURL:JR_LOGIN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyShowErrorDefaultMessage:@"NO",kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            JRUser *user = [[JRUser alloc] initWithDictionary:data];
+            user.account = account;
+            user.password = password;
+            [user saveLocal];
+            [user resetCurrentUser];
+            if (finished) {
+                finished();
+            }
+        }else{
+            [[JRUser currentUser] logout];
+        }
+    }];
+}
+
 @end

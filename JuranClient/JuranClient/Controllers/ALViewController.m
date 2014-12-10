@@ -14,6 +14,10 @@
 
 @implementation ALViewController
 
+- (void)dealloc{
+    [ALEngine cancelOperationsWithClass:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
