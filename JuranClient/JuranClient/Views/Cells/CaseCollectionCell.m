@@ -7,6 +7,7 @@
 //
 
 #import "CaseCollectionCell.h"
+#import "JRCase.h"
 
 @interface CaseCollectionCell ()
 
@@ -28,6 +29,9 @@
 }
 
 - (void)fillCellWithCase:(JRCase *)data{
+    [_photoImageView setImageWithURLString:data.imageUrl];
+    [_avtarImageView setImageWithURLString:data.headUrl];
+    _nameLabel.text = data.nickName;
 }
 
 @end

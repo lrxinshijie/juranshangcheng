@@ -36,6 +36,9 @@
     // Configure the view for the selected state
 }
 
+- (void)fillCellWithDesignerFollowDto:(JRDesignerFollowDto *)data{
+}
+
 - (void)fillCellWithDesigner:(JRDesigner *)data{
     _nameLabel.text = data.nickName.length?data.nickName:data.account;
     if (data.headUrl.length > 0) {

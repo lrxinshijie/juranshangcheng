@@ -44,6 +44,21 @@
 }
 
 - (void)onSubmit{
+    NSDictionary *param = @{@"contactsName": @"Brian80s",
+                            @"houseType": @"residential",
+                            @"contactsMobile": @"18681508253",
+                            @"houseArea": @"100",
+                            @"budget": @"100",
+                            @"budgetUnit": @"million",
+                            @"renovationStyle": @"mashup",
+                            @"neighbourhoods": @"xxxx",
+                            @"roomNum":@"2"
+                            };
+    [[ALEngine shareEngine] pathURL:JR_PUBLISH_DESIGN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            
+        }
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

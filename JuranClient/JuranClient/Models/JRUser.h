@@ -31,4 +31,5 @@
 - (void)resetCurrentUser;
 + (JRUser *)currentUser;
 - (id)initWithDictionary:(NSDictionary*)dict;
++ (void)refreshToken:(VoidBlock)finished;
 @end

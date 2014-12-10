@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import "AppDelegate.h"
 
 @interface SettingsViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
@@ -67,6 +68,7 @@
 
 - (IBAction)doLogout:(id)sender{
     [[JRUser currentUser] logout];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

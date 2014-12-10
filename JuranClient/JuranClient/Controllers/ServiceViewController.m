@@ -10,6 +10,8 @@
 
 @interface ServiceViewController ()
 
+@property (nonatomic, strong) IBOutlet UIWebView *webView;
+
 @end
 
 @implementation ServiceViewController
@@ -19,6 +21,11 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"注册协议";
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"service" ofType:@"html"];
+    NSString *html = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    [_webView loadHTMLString:html baseURL:nil];
+    _webView.scrollView.bounces = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
