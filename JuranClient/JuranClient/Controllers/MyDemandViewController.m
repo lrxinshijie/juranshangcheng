@@ -8,6 +8,7 @@
 
 #import "MyDemandViewController.h"
 #import "DemandCell.h"
+#import "JRDemand.h"
 
 @interface MyDemandViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -66,13 +67,13 @@
     [[ALEngine shareEngine] pathURL:JR_GET_MYREQUESTLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-//            NSArray *designerList = [data objectForKey:@"designerList"];
-//            NSMutableArray *rows = [JRDesignerFollowDto buildUpWithValue:designerList];
-//            if (_currentPage > 1) {
-//                [_datas addObjectsFromArray:rows];
-//            }else{
-//                self.datas = [JRDesignerFollowDto buildUpWithValue:designerList];
-//            }
+            NSArray *designReqList = [data objectForKey:@"designReqList"];
+            NSMutableArray *rows = [JRDemand buildUpWithValue:designReqList];
+            if (_currentPage > 1) {
+                [_datas addObjectsFromArray:rows];
+            }else{
+                self.datas = [JRDemand buildUpWithValue:designReqList];
+            }
             
             [_tableView reloadData];
         }
@@ -92,12 +93,12 @@
 #pragma makr - UITableViewDataSource/Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return _datas.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"DemandCell";
-    DemandCell *cell = (DemandCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+    DemandCell *cell = (DemandCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (DemandCell *)[nibs firstObject];
@@ -105,14 +106,14 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-//    JRDesignerFollowDto *c = [_datas objectAtIndex:indexPath.row];
-//    [cell fillCellWithDesignerFollowDto:c];
+    JRDemand *d = [_datas objectAtIndex:indexPath.row];
+    [cell fillCellWithDemand:d];
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 170;
+    return 175;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

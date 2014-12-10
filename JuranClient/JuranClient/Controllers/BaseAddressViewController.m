@@ -18,6 +18,7 @@
     NSDictionary *cityDic;
     NSDictionary *districtDic;
     NSString *provinceCode;
+    NSString *provinceName;
     NSString *cityCode;
     NSString *districtCode;
 }
@@ -68,19 +69,24 @@
 }
 
 - (void)modifyMemberDetail{
-    NSDictionary *param = @{@"provinceCode": _memberDetail.provinceCode,
-                              @"cityCode": _memberDetail.cityCode,
-                              @"districtCode": _memberDetail.districtCode
-                              };
+    NSDictionary *param = @{@"areaInfo": @{@"provinceCode": provinceCode,
+                              @"cityCode": cityCode,
+                              @"districtCode": districtCode
+                              }};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            if ([data isKindOfClass:[NSDictionary class]]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.navigationController popViewControllerAnimated:YES];
-                });
-            }
+            _memberDetail.provinceCode = provinceCode;
+            _memberDetail.provinceName = provinceName;
+            _memberDetail.cityCode = cityCode;
+            _memberDetail.cityName = cityDic[cityCode];
+            _memberDetail.districtCode = districtCode;
+            _memberDetail.districtName = districtDic[districtCode];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
         }
     }];
 }
@@ -162,7 +168,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"BaseAddressCell";
-    UITableViewCell *cell = [tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
@@ -187,20 +193,16 @@
     if (type == 0) {
         NSMutableArray *datas = provinceDic[sortedProvinceKeys[indexPath.section]];
         NSDictionary *dic = datas[indexPath.row];
-        _memberDetail.provinceCode = provinceCode = dic.allKeys.firstObject;
-        _memberDetail.provinceName = dic.allValues.firstObject;
+        provinceCode = dic.allKeys.firstObject;
+        provinceName = dic.allValues.firstObject;
         type = 1;
         [self loadData];
     }else if (type == 1){
         cityCode = cityDic.allKeys[indexPath.row];
-        _memberDetail.cityCode = cityCode;
-        _memberDetail.cityName = cityDic.allValues[indexPath.row];
         type = 2;
         [self loadData];
     }else{
         districtCode = districtDic.allKeys[indexPath.row];
-        _memberDetail.districtCode = districtCode;
-        _memberDetail.districtName = districtDic.allValues[indexPath.row];
         [self modifyMemberDetail];
     }
 }

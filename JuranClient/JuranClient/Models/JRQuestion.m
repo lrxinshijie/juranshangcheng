@@ -39,5 +39,11 @@
     return retVal;
 }
 
+- (BOOL)isResolved{
+    BOOL flag = NO;
+    
+    return flag;
+}
+
 
 @end

@@ -324,6 +324,7 @@
 
 + (void)setImageQuality:(NSNumber*)number{
     [kUD setObject:number forKey:@"kImageQuality"];
+    [kUD synchronize];
 }
 
 + (NSNumber*)intelligentModeForImageQuality{
@@ -333,6 +334,34 @@
 
 + (void)setIntelligentModeForImageQuality:(NSNumber*)number{
     [kUD setObject:number forKey:@"kIntelligentModeForImageQuality"];
+    [kUD synchronize];
 }
+
++ (NSArray*)searchHistorys{
+    id historys = [kUD objectForKey:@"keywordsForSearchHistory"];
+    if (historys && [historys isKindOfClass:[NSArray class]]) {
+        return (NSArray*)historys;
+    }else{
+        return @[];
+    }
+}
+
++ (void)addSearchHistory:(NSString*)keyword{
+    NSMutableArray *historys = [NSMutableArray arrayWithArray:[self searchHistorys]];
+    for (NSString *str in historys) {
+        if ([str isEqualToString:keyword]) {
+            return;
+        }
+    }
+    [historys addObject:keyword];
+    [kUD setObject:historys forKey:@"keywordsForSearchHistory"];
+    [kUD synchronize];
+}
+
++ (void)removeAllSearchHistory{
+    [kUD setObject:@[] forKey:@"keywordsForSearchHistory"];
+    [kUD synchronize];
+}
+
 
 @end

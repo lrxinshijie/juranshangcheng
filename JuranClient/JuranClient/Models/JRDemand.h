@@ -18,6 +18,15 @@
 @property (nonatomic, strong) NSString *houseType;
 @property (nonatomic, assign) NSInteger renovationBudget;
 @property (nonatomic, assign) NSInteger bidNums;
+@property (nonatomic, strong) NSString *publishTime;
+@property (nonatomic, strong) NSString *houseAddress;
+@property (nonatomic, assign) NSInteger houseArea;
+@property (nonatomic, strong) NSString *style;
+@property (nonatomic, strong) NSString *deadline;
+@property (nonatomic, assign) NSInteger newBidNums;
+@property (nonatomic, assign) BOOL isBidded;
+
+- (NSString*)statusString;
 
 
 @property (nonatomic, copy) NSString *contactsName;

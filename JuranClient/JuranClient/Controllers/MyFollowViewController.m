@@ -67,15 +67,16 @@
     [[ALEngine shareEngine] pathURL:JR_GETFOLLOWLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *designerList = [data objectForKey:@"designerList"];
-            NSMutableArray *rows = [JRDesigner buildUpFollowDesignerListWithValue:designerList];
-            if (_currentPage > 1) {
-                [_datas addObjectsFromArray:rows];
-            }else{
-                self.datas = [JRDesigner buildUpFollowDesignerListWithValue:designerList];
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                NSMutableArray *rows = [JRDesigner buildUpFollowDesignerListWithValue:data];
+                if (_currentPage > 1) {
+                    [_datas addObjectsFromArray:rows];
+                }else{
+                    self.datas = [JRDesigner buildUpFollowDesignerListWithValue:data];
+                }
+                
+                [_tableView reloadData];
             }
-            
-            [_tableView reloadData];
         }
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
@@ -113,7 +114,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"DesignerCell";
-    DesignerCell *cell = (DesignerCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+    DesignerCell *cell = (DesignerCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (DesignerCell *)[nibs firstObject];

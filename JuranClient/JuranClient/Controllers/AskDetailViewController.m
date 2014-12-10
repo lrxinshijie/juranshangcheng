@@ -77,7 +77,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"AnswerDetailCell";
-    AnswerDetailCell *cell = (AnswerDetailCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+    AnswerDetailCell *cell = (AnswerDetailCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (AnswerDetailCell *)[nibs firstObject];

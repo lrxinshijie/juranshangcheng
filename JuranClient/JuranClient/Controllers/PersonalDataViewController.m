@@ -11,6 +11,7 @@
 #import "SexySwitch.h"
 #import "ModifyViewController.h"
 #import "BaseAddressViewController.h"
+#import "DetailAddressViewController.h"
 
 
 @interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, SexySwitchDelegate, ModifyViewControllerDelegate>
@@ -90,7 +91,11 @@
 
 - (void)reSetData{
     valuesForSection1 = @[_memberDetail.headImageURL, _memberDetail.account];
-    valuesForSection2 = @[_memberDetail.nickName, @"性别", _memberDetail.birthday.length == 0?@"未设置":_memberDetail.birthday, [_memberDetail locationAddress], _memberDetail.detailAddress.length == 0?@"未设置":_memberDetail.detailAddress];
+    valuesForSection2 = @[_memberDetail.nickName,
+                          @"性别",
+                          _memberDetail.birthday.length == 0?@"未设置":_memberDetail.birthday,
+                          [_memberDetail locationAddress],
+                          _memberDetail.detailAddress.length == 0?@"未设置":_memberDetail.detailAddress];
     valuesForSection3 = @[[_memberDetail homeTelForPersonal], [_memberDetail idCardInfomation], _memberDetail.qq.length == 0?@"未设置":_memberDetail.qq, _memberDetail.weixin.length == 0?@"未设置":_memberDetail.weixin];
 }
 
@@ -304,6 +309,13 @@
             case 3:
             {
                 BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
+                vc.memberDetail = _memberDetail;
+                [self.navigationController pushViewController:vc animated:YES];
+                break;
+            }
+            case 4:
+            {
+                DetailAddressViewController *vc = [[DetailAddressViewController alloc] init];
                 vc.memberDetail = _memberDetail;
                 [self.navigationController pushViewController:vc animated:YES];
                 break;

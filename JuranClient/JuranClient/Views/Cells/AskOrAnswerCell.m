@@ -29,7 +29,7 @@
     // Initialization code
     _redPointView.layer.masksToBounds = YES;
     _redPointView.layer.cornerRadius = _redPointView.frame.size.height/2;
-    _redPointView.hidden = NO;
+    _redPointView.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -50,6 +50,7 @@
 - (void)fillCellWithQuestion:(JRQuestion *)data{
     _contentLabel.text = data.title;
     _statusLabel.text = @"已解决";
+    _statusImageView.image = [UIImage imageNamed:data.isResolved?@"question_unresolved":@"answer_wati_accept.png"];
     _timeLabel.text = [NSString stringWithFormat:@"回答：%d  |  %@", data.answerCount, data.publishTime];
     [self adjustFrame];
 }

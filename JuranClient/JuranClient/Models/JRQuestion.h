@@ -27,4 +27,6 @@
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
+- (BOOL)isResolved;
+
 @end

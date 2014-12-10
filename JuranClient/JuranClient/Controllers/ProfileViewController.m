@@ -65,7 +65,7 @@
     titleArray = @[@"互动", @"我的关注", @"我的收藏", @"订单管理", @"账户管理", @"账户安全"];
     imageArray = @[@"icon_personal_hudong.png", @"icon_personal_guanzhu.png", @"icon_personal_shouchang.png", @"icon_personal_ddgl.png", @"icon_personal_zhgl.png", @"icon_personal_zhaq"];
     [self setupUI];
-    
+    [self loadData];
 }
 
 - (void)onSettings{
@@ -76,7 +76,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self loadData];
+    [self refreshUI];
 }
 
 - (void)setupUI{
@@ -97,26 +97,22 @@
     _hasNewAnswerView.layer.cornerRadius = _hasNewAnswerView.frame.size.height/2.f;
     _hasNewBidView.layer.cornerRadius = _hasNewBidView.frame.size.height/2.f;
     _hasNewPushMsgView.layer.cornerRadius = _hasNewPushMsgView.frame.size.height/2.f;
-    
-    _unLoginLabel.hidden = NO;
-    _loginNameLabel.hidden = YES;
-    _userNameLabel.hidden = YES;
 }
 
 - (void)refreshUI{
-    _unLoginLabel.hidden = YES;
-    _loginNameLabel.hidden = NO;
-    _userNameLabel.hidden = NO;
+    _unLoginLabel.hidden = [JRUser isLogin];
+    _loginNameLabel.hidden = ![JRUser isLogin];
+    _userNameLabel.hidden = ![JRUser isLogin];
     _userNameLabel.text = _profileData.nickName;
     [_headerImageView setImageWithURLString:_profileData.headUrl];
     _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _profileData.account];
     _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _profileData.newPushMsgCount];
-    _privateLetterCountLabel.hidden = _profileData.newPushMsgCount?NO:YES;
+    _privateLetterCountLabel.hidden = [JRUser isLogin] && _profileData.newPushMsgCount?NO:YES;
     _signedButton.enabled = !_profileData.isSigned;
     [_signedButton setTitle:_profileData.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
-    _hasNewAnswerView.hidden = _profileData.newAnswerCount?NO:YES;
-    _hasNewBidView.hidden = _profileData.hasNewBidCount?NO:YES;
-    _hasNewPushMsgView.hidden = _profileData.newPushMsgCount?NO:YES;
+    _hasNewAnswerView.hidden = [JRUser isLogin] && _profileData.newAnswerCount?NO:YES;
+    _hasNewBidView.hidden = [JRUser isLogin] && _profileData.hasNewBidCount?NO:YES;
+    _hasNewPushMsgView.hidden = [JRUser isLogin] && _profileData.newPushMsgCount?NO:YES;
 }
 
 - (void)loadData{
@@ -144,7 +140,9 @@
 #pragma mark - Target Action
 
 - (IBAction)doSigned:(id)sender{
-    if (![self checkLogin]) {
+    if (![self checkLogin:^{
+        [self loadData];
+    }]) {
         return;
     }
     [self showHUD];
@@ -161,7 +159,9 @@
 }
 
 - (IBAction)doTouchHeaderView:(id)sender{
-    if (![self checkLogin]) {
+    if (![self checkLogin:^{
+        [self loadData];
+    }]) {
         return;
     }
     PersonalDataViewController *vc = [[PersonalDataViewController alloc] init];
@@ -171,7 +171,9 @@
 
 //需求
 - (IBAction)doDemand:(id)sender{
-    if (![self checkLogin]) {
+    if (![self checkLogin:^{
+        [self loadData];
+    }]) {
         return;
     }
     MyDemandViewController *vc = [[MyDemandViewController alloc] init];
@@ -192,7 +194,9 @@
 
 //问答
 - (IBAction)doAskOrAnswer:(id)sender{
-    if (![self checkLogin]) {
+    if (![self checkLogin:^{
+        [self loadData];
+    }]) {
         return;
     }
     MyAskOrAnswerViewController *vc = [[MyAskOrAnswerViewController alloc] init];
@@ -203,7 +207,9 @@
 
 //消息
 - (IBAction)doPushMsg:(id)sender{
-    if (![self checkLogin]) {
+    if (![self checkLogin:^{
+        [self loadData];
+    }]) {
         return;
     }
     PushMessageViewController *vc = [[PushMessageViewController alloc] init];
@@ -256,28 +262,36 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 2) {
-        if (![self checkLogin]) {
+        if (![self checkLogin:^{
+            [self loadData];
+        }]) {
             return;
         }
         MyFollowViewController *vc = [[MyFollowViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 1){
-        if (![self checkLogin]) {
+        if (![self checkLogin:^{
+            [self loadData];
+        }]) {
             return;
         }
         InteractionViewController *vc = [[InteractionViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 5){
-        if (![self checkLogin]) {
+        if (![self checkLogin:^{
+            [self loadData];
+        }]) {
             return;
         }
         AccountManageViewController *vc = [[AccountManageViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 6){
-        if (![self checkLogin]) {
+        if (![self checkLogin:^{
+            [self loadData];
+        }]) {
             return;
         }
         AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];

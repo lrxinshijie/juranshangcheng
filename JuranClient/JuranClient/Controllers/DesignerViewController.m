@@ -13,6 +13,7 @@
 #import "JRPhotoScrollViewController.h"
 #import "JRWebImageDataSource.h"
 #import "FilterView.h"
+#import "SearchViewController.h"
 
 @interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate>
 
@@ -88,7 +89,7 @@
 }
 
 - (void)onSearch{
-    JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithDataSource:[[JRWebImageDataSource alloc] init] andStartWithPhotoAtIndex:10];
+    SearchViewController *vc = [[SearchViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -135,7 +136,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"DesignerCell";
-    DesignerCell *cell = (DesignerCell *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:CellIdentifier];
+    DesignerCell *cell = (DesignerCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (DesignerCell *)[nibs firstObject];
