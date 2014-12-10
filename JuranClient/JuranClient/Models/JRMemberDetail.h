@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class JRAreaInfo;
 @interface JRMemberDetail : NSObject
 
 @property (nonatomic, strong) NSString *account;
@@ -17,12 +18,13 @@
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) NSString *birthday;
 @property (nonatomic, strong) NSString *homeTel;
-@property (nonatomic, strong) NSString *provinceCode;
-@property (nonatomic, strong) NSString *provinceName;
-@property (nonatomic, strong) NSString *cityCode;
-@property (nonatomic, strong) NSString *cityName;
-@property (nonatomic, strong) NSString *districtCode;
-@property (nonatomic, strong) NSString *districtName;
+//@property (nonatomic, strong) NSString *provinceCode;
+//@property (nonatomic, strong) NSString *provinceName;
+//@property (nonatomic, strong) NSString *cityCode;
+//@property (nonatomic, strong) NSString *cityName;
+//@property (nonatomic, strong) NSString *districtCode;
+//@property (nonatomic, strong) NSString *districtName;
+@property (nonatomic, strong) JRAreaInfo *areaInfo;
 @property (nonatomic, strong) NSString *detailAddress;
 @property (nonatomic, strong) NSString *zipCode;
 @property (nonatomic, strong) NSString *idCardType;

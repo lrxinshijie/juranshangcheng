@@ -12,9 +12,30 @@
 
 - (instancetype)init{
     if (self = [super init]) {
-        
+        self.cityCode = @"";
+        self.cityName = @"";
+        self.districtCode = @"";
+        self.districtName = @"";
+        self.provinceCode = @"";
+        self.provinceName = @"";
     }
-    
+    return self;
+}
+
+- (id)initWithDictionary:(NSDictionary *)dict{
+    if (self=[self init]) {
+        
+        if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+            return self;
+        }
+        
+        self.provinceCode = [dict getStringValueForKey:@"provinceCode" defaultValue:@""];
+        self.provinceName = [dict getStringValueForKey:@"provinceName" defaultValue:@""];
+        self.cityCode = [dict getStringValueForKey:@"cityCode" defaultValue:@""];
+        self.cityName = [dict getStringValueForKey:@"cityName" defaultValue:@""];
+        self.districtCode = [dict getStringValueForKey:@"districtCode" defaultValue:@""];
+        self.districtName = [dict getStringValueForKey:@"districtName" defaultValue:@""];
+    }
     return self;
 }
 

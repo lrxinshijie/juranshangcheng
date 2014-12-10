@@ -7,8 +7,31 @@
 //
 
 #import "JRDemand.h"
+#import "JRAreaInfo.h"
 
 @implementation JRDemand
+
+- (instancetype)init{
+    if (self = [super init]) {
+        self.areaInfo = [[JRAreaInfo alloc] init];
+        self.status = @"";
+        self.title = @"";
+        self.houseType = @"";
+        self.publishTime = @"";
+        self.houseAddress = @"";
+        self.style = @"";
+        self.deadline = @"";
+        self.contactsName = @"";
+        self.contactsMobile = @"";
+        self.budget = @"";
+        self.budgetUnit = @"";
+        self.renovationStyle = @"";
+        self.neighbourhoods = @"";
+        self.roomNum = @"";
+    }
+    
+    return self;
+}
 
 - (id)initWithDictionary:(NSDictionary *)dict{
     if (self=[self init]) {
@@ -45,6 +68,14 @@
         }
     }
     return retVal;
+}
+
+- (NSString *)houseTypeString{
+    return @"";
+}
+
+- (NSString *)renovationStyleString{
+    return @"";
 }
 
 - (NSString*)statusString{

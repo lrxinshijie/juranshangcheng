@@ -183,6 +183,8 @@
 		A90459D41A278A6100F8CD74 /* PublishDesignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459D21A278A6100F8CD74 /* PublishDesignViewController.xib */; };
 		A90459D81A278B2D00F8CD74 /* SubjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459D61A278B2D00F8CD74 /* SubjectViewController.m */; };
 		A90459D91A278B2D00F8CD74 /* SubjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459D71A278B2D00F8CD74 /* SubjectViewController.xib */; };
+		A907F2B61A38884A00DEB8EA /* DemandEditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A907F2B41A38884A00DEB8EA /* DemandEditTextViewController.m */; };
+		A907F2B71A38884A00DEB8EA /* DemandEditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A907F2B51A38884A00DEB8EA /* DemandEditTextViewController.xib */; };
 		A93BF2951A262A290070B72A /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93BF2931A262A290070B72A /* ServiceViewController.m */; };
 		A93BF2961A262A290070B72A /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93BF2941A262A290070B72A /* ServiceViewController.xib */; };
 		A93BF29A1A2633D90070B72A /* SetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93BF2981A2633D90070B72A /* SetPasswordViewController.m */; };
@@ -575,6 +577,9 @@
 		A90459D51A278B2D00F8CD74 /* SubjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectViewController.h; sourceTree = "<group>"; };
 		A90459D61A278B2D00F8CD74 /* SubjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectViewController.m; sourceTree = "<group>"; };
 		A90459D71A278B2D00F8CD74 /* SubjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubjectViewController.xib; sourceTree = "<group>"; };
+		A907F2B31A38884A00DEB8EA /* DemandEditTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemandEditTextViewController.h; sourceTree = "<group>"; };
+		A907F2B41A38884A00DEB8EA /* DemandEditTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemandEditTextViewController.m; sourceTree = "<group>"; };
+		A907F2B51A38884A00DEB8EA /* DemandEditTextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemandEditTextViewController.xib; sourceTree = "<group>"; };
 		A93BF2921A262A290070B72A /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		A93BF2931A262A290070B72A /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		A93BF2941A262A290070B72A /* ServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceViewController.xib; sourceTree = "<group>"; };
@@ -1152,6 +1157,19 @@
 			name = Account;
 			sourceTree = "<group>";
 		};
+		A907F2AD1A3887F600DEB8EA /* Demand */ = {
+			isa = PBXGroup;
+			children = (
+				A90459D01A278A6100F8CD74 /* PublishDesignViewController.h */,
+				A90459D11A278A6100F8CD74 /* PublishDesignViewController.m */,
+				A90459D21A278A6100F8CD74 /* PublishDesignViewController.xib */,
+				A907F2B31A38884A00DEB8EA /* DemandEditTextViewController.h */,
+				A907F2B41A38884A00DEB8EA /* DemandEditTextViewController.m */,
+				A907F2B51A38884A00DEB8EA /* DemandEditTextViewController.xib */,
+			);
+			name = Demand;
+			sourceTree = "<group>";
+		};
 		A971BC881A20825800C018D6 = {
 			isa = PBXGroup;
 			children = (
@@ -1248,6 +1266,7 @@
 		A987ED671A20920500CED7CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A907F2AD1A3887F600DEB8EA /* Demand */,
 				14C953AE1A2DC45D00FE6F8D /* Subject */,
 				A90459DC1A278D9D00F8CD74 /* Account */,
 				A90459DB1A278D8800F8CD74 /* Designer */,
@@ -1270,9 +1289,6 @@
 				145E3D181A2792B200AA952F /* PersonalDataViewController.xib */,
 				14ABFBEA1A25CFFD00C4AF65 /* UIViewController+Login.h */,
 				14ABFBEB1A25CFFD00C4AF65 /* UIViewController+Login.m */,
-				A90459D01A278A6100F8CD74 /* PublishDesignViewController.h */,
-				A90459D11A278A6100F8CD74 /* PublishDesignViewController.m */,
-				A90459D21A278A6100F8CD74 /* PublishDesignViewController.xib */,
 				140C46EA1A2A3741003317AD /* MyFollowViewController.h */,
 				140C46EB1A2A3741003317AD /* MyFollowViewController.m */,
 				140C46EC1A2A3741003317AD /* MyFollowViewController.xib */,
@@ -1811,6 +1827,7 @@
 				14C953AA1A2DC0E800FE6F8D /* SubjectCell.xib in Resources */,
 				14FE2E421A38542700B31FBA /* bubble-square-outgoing@2x.png in Resources */,
 				14C8554A1A2E196B00A15ED9 /* SettingsViewController.xib in Resources */,
+				A907F2B71A38884A00DEB8EA /* DemandEditTextViewController.xib in Resources */,
 				1441A1701A29E3CD004A038E /* Resource.bundle in Resources */,
 				14490CB41A2B6A19001CB160 /* AccountSecurityViewController.xib in Resources */,
 				14FE2DE31A382FCB00B31FBA /* PrivateMessageViewController.xib in Resources */,
@@ -1903,6 +1920,7 @@
 				14A3FDC11A2C9EB7002BEFF4 /* MyDemandViewController.m in Sources */,
 				1441A0611A2987FB004A038E /* JRProfileData.m in Sources */,
 				A90459D31A278A6100F8CD74 /* PublishDesignViewController.m in Sources */,
+				A907F2B61A38884A00DEB8EA /* DemandEditTextViewController.m in Sources */,
 				A9C398371A298047006A8AAB /* JRComment.m in Sources */,
 				14587E151A35DC9000D41236 /* ModifyPasswordViewController.m in Sources */,
 				A977F8461A3099E5008682B3 /* TTTAttributedLabel.m in Sources */,

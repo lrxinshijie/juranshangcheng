@@ -8,10 +8,11 @@
 
 #import "ALViewController.h"
 
-@class JRMemberDetail;
-
+//@class JRMemberDetail;
+@class JRAreaInfo;
 @interface BaseAddressViewController : ALViewController
 
-@property (nonatomic, strong) JRMemberDetail *memberDetail;
+//@property (nonatomic, strong) JRMemberDetail *memberDetail;
+@property (nonatomic, strong) JRAreaInfo *areaInfo;
 
 @end

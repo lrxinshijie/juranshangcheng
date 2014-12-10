@@ -115,6 +115,8 @@
             if (finished) {
                 finished();
             }
+        }else{
+            [[JRUser currentUser] logout];
         }
     }];
 }

@@ -61,7 +61,7 @@
                             @"pageCount": [NSString stringWithFormat:@"%d", _currentPage],
                             @"pageSize": @"20"};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_SUBJECT_DETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_SUBJECT_DETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             NSDictionary *info = [data objectForKey:@"infoSubjectDetailResp"];
@@ -133,15 +133,15 @@
     
     JRCase *cs = [_datas objectAtIndex:indexPath.row];
     
-    [self showHUD];
-    [cs loadDetail:^(BOOL result) {
-        [self hideHUD];
-        if (result) {
+//    [self showHUD];
+//    [cs loadDetail:^(BOOL result) {
+//        [self hideHUD];
+//        if (result) {
             JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
-        }
-    }];
+//        }
+//    }];
 }
 
 - (void)didReceiveMemoryWarning {

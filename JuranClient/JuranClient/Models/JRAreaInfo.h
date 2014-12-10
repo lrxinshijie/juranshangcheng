@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSString *districtCode;
 @property (nonatomic, copy) NSString *cityCode;
 
+- (id)initWithDictionary:(NSDictionary *)dict;
 - (NSDictionary *)dictionaryValue;
 
 @end

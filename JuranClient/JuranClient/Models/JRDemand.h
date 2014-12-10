@@ -31,13 +31,16 @@
 
 @property (nonatomic, copy) NSString *contactsName;
 @property (nonatomic, copy) NSString *contactsMobile;
-@property (nonatomic, copy) NSString *houseArea;
 @property (nonatomic, copy) NSString *budget;
 @property (nonatomic, copy) NSString *budgetUnit;
 @property (nonatomic, copy) NSString *renovationStyle;
 @property (nonatomic, copy) NSString *neighbourhoods;
 @property (nonatomic, copy) NSString *roomNum;
+
 @property (nonatomic, strong) JRAreaInfo *areaInfo;
+
+- (NSString *)houseTypeString;
+- (NSString *)renovationStyleString;
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 

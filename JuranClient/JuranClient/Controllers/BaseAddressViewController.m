@@ -9,6 +9,7 @@
 #import "BaseAddressViewController.h"
 #import "pinyin.h"
 #import "JRMemberDetail.h"
+#import "JRAreaInfo.h"
 
 @interface BaseAddressViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -77,12 +78,19 @@
     [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            _memberDetail.provinceCode = provinceCode;
-            _memberDetail.provinceName = provinceName;
-            _memberDetail.cityCode = cityCode;
-            _memberDetail.cityName = cityDic[cityCode];
-            _memberDetail.districtCode = districtCode;
-            _memberDetail.districtName = districtDic[districtCode];
+//            _memberDetail.provinceCode = provinceCode;
+//            _memberDetail.provinceName = provinceName;
+//            _memberDetail.cityCode = cityCode;
+//            _memberDetail.cityName = cityDic[cityCode];
+//            _memberDetail.districtCode = districtCode;
+//            _memberDetail.districtName = districtDic[districtCode];
+            
+            _areaInfo.provinceCode = provinceCode;
+            _areaInfo.provinceName = provinceName;
+            _areaInfo.cityCode = cityCode;
+            _areaInfo.cityName = cityDic[cityCode];
+            _areaInfo.districtCode = districtCode;
+            _areaInfo.districtName = districtDic[districtCode];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];

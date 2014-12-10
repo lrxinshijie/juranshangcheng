@@ -7,6 +7,9 @@
 //
 
 #import "PublishDesignViewController.h"
+#import "JRDemand.h"
+#import "JRAreaInfo.h"
+#import "BaseAddressViewController.h"
 
 @interface PublishDesignViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -14,6 +17,7 @@
 @property (nonatomic, strong) NSArray *keys;
 @property (nonatomic, strong) NSArray *values;
 @property (nonatomic, strong) UIImageView *photoImageView;
+@property (nonatomic, strong) JRDemand *demand;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 
 
@@ -35,7 +39,7 @@
     
     self.keys = @[@"姓名",@"联系电话",@"户型",@"装修预算",@"房屋面积",@"风格",@"项目地址",@"小区名称",@"户型",@"户型图上传"];
     self.values = @[@"请填写您的姓名",@"必须是11位数字",@"两居室", @"必须是整数",@"必须是数字(平方米)",@"地中海",@"石家庄",@"2-32个汉字",@"三室一厅一卫",@"可选"];
-    
+    self.demand = [[JRDemand alloc] init];
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     
     [self.view addSubview:_tableView];
@@ -43,16 +47,31 @@
     _tableView.tableHeaderView = _headerView;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self reloadData];
+}
+
+- (void)reloadData{
+    self.values = @[_demand.contactsName,_demand.contactsMobile, _demand.houseTypeString, _demand.budget,[NSString stringWithFormat:@"%d",_demand.houseArea],_demand.renovationStyleString,_demand.areaInfo.cityName ? _demand.areaInfo.cityName : @"",_demand.neighbourhoods,_demand.roomNum,@"可选"];
+    [_tableView reloadData];
+}
+
 - (void)onSubmit{
-    NSDictionary *param = @{@"contactsName": @"Brian80s",
-                            @"houseType": @"residential",
-                            @"contactsMobile": @"18681508253",
-                            @"houseArea": @"100",
-                            @"budget": @"100",
+    if (![self checkLogin]) {
+        return;
+    }
+    
+    NSDictionary *param = @{@"contactsName": _demand.contactsName,
+                            @"houseType": _demand.houseType,
+                            @"contactsMobile": _demand.contactsMobile,
+                            @"houseArea": [NSString stringWithFormat:@"%d", _demand.houseArea],
+                            @"budget": _demand.budget,
                             @"budgetUnit": @"million",
-                            @"renovationStyle": @"mashup",
-                            @"neighbourhoods": @"xxxx",
-                            @"roomNum":@"2"
+                            @"renovationStyle": _demand.renovationStyle,
+                            @"neighbourhoods": _demand.neighbourhoods,
+                            @"roomNum":_demand.roomNum,
+                            @"areaInfo": [_demand.areaInfo dictionaryValue]
                             };
     [[ALEngine shareEngine] pathURL:JR_PUBLISH_DESIGN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
@@ -88,6 +107,10 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
+    if (indexPath.row == [_keys count]-1) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ImageCell"];
+    }
+    
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -100,7 +123,6 @@
     cell.textLabel.text = [_keys objectAtIndex:indexPath.row];
     cell.detailTextLabel.text = [_values objectAtIndex:indexPath.row];
     if (indexPath.row == 9) {
-//        cell.detailTextLabel.text = @"可选";
         [_photoImageView removeFromSuperview];
         [cell addSubview:_photoImageView];
     }
@@ -111,7 +133,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
+    if (indexPath.row == 6) {
+        BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
+        vc.areaInfo = _demand.areaInfo;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 -(void)viewDidLayoutSubviews
