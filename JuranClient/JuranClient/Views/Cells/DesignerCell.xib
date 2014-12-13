@@ -117,6 +117,7 @@
                 <outlet property="sContentView" destination="ZwF-Np-ISJ" id="cQh-wW-QAl"/>
                 <outlet property="styleLabel" destination="7hj-Mt-uvD" id="h9p-tE-Uid"/>
             </connections>
+            <point key="canvasLocation" x="183" y="148.5"/>
         </tableViewCell>
     </objects>
     <resources>

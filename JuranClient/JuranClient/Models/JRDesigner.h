@@ -62,6 +62,8 @@
 //构造设计师详情数据
 - (id)buildDetailWithDictionary:(NSDictionary *)dict;
 
++ (NSMutableArray *)buildUpSearchDesignerWithValue:(id)value;
+
 //构造我的关注列表数据
 + (NSMutableArray *)buildUpFollowDesignerListWithValue:(id)value;
 

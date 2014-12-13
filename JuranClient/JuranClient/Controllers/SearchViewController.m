@@ -7,6 +7,7 @@
 //
 
 #import "SearchViewController.h"
+#import "DesignerViewController.h"
 
 #define kKeywordsButtonTag 3330
 
@@ -15,7 +16,10 @@
     NSInteger step;
     NSArray *searchHistorys;
     NSArray *searchOptions;
+    NSArray *hotWords;
 }
+@property (nonatomic, strong) NSString *searchKeyWord;
+
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
@@ -39,11 +43,30 @@
     self.navigationItem.title = @"系统消息";
     step = 1;
     [self setupUI];
+    [self loadData];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self reloadData];
+}
+
+- (void)loadData{
+    NSDictionary *param = @{@"guid":@"", @"token":@""};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_GET_HOTWORDS parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                NSString *hotWordStr = data[@"hotWords"];
+                if (hotWordStr && hotWordStr.length > 0) {
+                    hotWords = [hotWordStr componentsSeparatedByString:@","];
+                }
+            }
+            [self reloadData];
+        }
+    }];
 }
 
 - (void)setupUI{
@@ -80,7 +103,7 @@
         _tableView.tableHeaderView = _keywordsFooterView;
         _tableView.tableFooterView = [[UIView alloc] init];
     }else if (step == 2) {
-        searchHistorys = [Public searchHistorys];
+        searchHistorys = [Public searchHistorysWithSearchType:_type];
         _tableView.tableHeaderView = nil;
         _tableView.tableFooterView = [searchHistorys.count? _clearHistoryView:[UIView alloc]init];
     }else if (step == 3){
@@ -95,10 +118,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)doSearch{
+    if (_type == SearchTypeDesigner) {
+        DesignerViewController *vc = [[DesignerViewController alloc] init];
+        vc.searchKeyWord = _searchKeyWord;
+        vc.isSearchResult = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (_type == SearchTypeCase){
+        
+    }
+}
+
 #pragma mark - Target Action
 
 - (IBAction)clearSearchHistor:(id)sender{
-    [Public removeAllSearchHistory];
+    [Public removeAllSearchHistoryWithSearchType:_type];
     [self reloadData];
 }
 
@@ -107,7 +141,9 @@
         [self showTip:@"请输入搜索关键字"];
         return;
     }
-    [Public addSearchHistory:_textField.text];
+    _searchKeyWord = _textField.text;
+    [Public addSearchHistory:_textField.text searchType:_type];
+    [self doSearch];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -170,11 +206,23 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (step == 2) {
+        _searchKeyWord = searchHistorys[indexPath.row];
+        [self doSearch];
+    }
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [_textField resignFirstResponder];
 }
 
 #pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self onSearch:nil];
+    return YES;
+}
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     if (!(_textField.text && _textField.text.length > 0)) {
@@ -193,9 +241,6 @@
 - (void)textFieldTextDidChangeNotification:(NSNotification*)notification{
     if (!(_textField.text && _textField.text.length > 0)) {
         step = 2;
-        [self reloadData];
-    }else{
-        step = 3;
         [self reloadData];
     }
 }

@@ -8,6 +8,10 @@
 
 #import "ALViewController.h"
 
+@class JRDemand;
+
 @interface DemandDetailViewController : ALViewController
+
+@property (nonatomic, strong) JRDemand *demand;
 
 @end

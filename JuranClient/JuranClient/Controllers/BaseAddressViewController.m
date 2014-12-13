@@ -18,13 +18,10 @@
     NSMutableDictionary *provinceDic;
     NSDictionary *cityDic;
     NSDictionary *districtDic;
-    NSString *provinceCode;
-    NSString *provinceName;
-    NSString *cityCode;
-    NSString *districtCode;
 }
 @property (nonatomic, strong) UITableView *tableView;
 
+@property (nonatomic, strong) JRAreaInfo *areaInfo;
 
 @end
 
@@ -39,8 +36,8 @@
     self.navigationItem.title = @"地区";
 
     type = 0;
-    provinceCode = @"";
-    cityCode = @"";
+    _areaInfo.provinceCode = @"";
+    _areaInfo.cityCode = @"";
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
@@ -51,8 +48,8 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"provinceCode": provinceCode,
-                            @"cityCode": cityCode};
+    NSDictionary *param = @{@"provinceCode": _areaInfo.provinceCode,
+                            @"cityCode": _areaInfo.cityCode};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_ALLAREA_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"No"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
@@ -69,6 +66,7 @@
     }];
 }
 
+/*
 - (void)modifyMemberDetail{
     NSDictionary *param = @{@"areaInfo": @{@"provinceCode": provinceCode,
                               @"cityCode": cityCode,
@@ -97,6 +95,19 @@
             });
         }
     }];
+}*/
+
+
+- (void)setAreaInfo:(JRAreaInfo *)areaInfo andAddressSelected:(AddressSelected)finish{
+    _areaInfo = areaInfo;
+    _block = finish;
+}
+
+- (void)commit{
+    if (_block) {
+        [self.navigationController popViewControllerAnimated:YES];
+        _block(_areaInfo);
+    }
 }
 
 - (void)parseProvince:(NSDictionary*)dic{
@@ -125,11 +136,11 @@
         [super back:sender];
     }else if (type == 1){
         type = 0;
-        provinceCode = @"";
+        _areaInfo.provinceCode = @"";
         [_tableView reloadData];
     }else{
         type = 1;
-        cityCode = @"";
+        _areaInfo.cityCode = @"";
         [_tableView reloadData];
     }
 }
@@ -201,17 +212,19 @@
     if (type == 0) {
         NSMutableArray *datas = provinceDic[sortedProvinceKeys[indexPath.section]];
         NSDictionary *dic = datas[indexPath.row];
-        provinceCode = dic.allKeys.firstObject;
-        provinceName = dic.allValues.firstObject;
+        _areaInfo.provinceCode = dic.allKeys.firstObject;
+        _areaInfo.provinceName = dic.allValues.firstObject;
         type = 1;
         [self loadData];
     }else if (type == 1){
-        cityCode = cityDic.allKeys[indexPath.row];
+        _areaInfo.cityCode = cityDic.allKeys[indexPath.row];
+        _areaInfo.cityName = cityDic.allValues[indexPath.row];
         type = 2;
         [self loadData];
     }else{
-        districtCode = districtDic.allKeys[indexPath.row];
-        [self modifyMemberDetail];
+        _areaInfo.districtCode = districtDic.allKeys[indexPath.row];
+        _areaInfo.districtName = districtDic.allValues[indexPath.row];
+        [self commit];
     }
 }
 

@@ -9,12 +9,15 @@
 #import "AskDetailViewController.h"
 #import "JRQuestion.h"
 #import "AnswerDetailCell.h"
+#import "JRAnswer.h"
 
-@interface AskDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface AskDetailViewController ()<UITableViewDataSource, UITableViewDelegate, AnswerDetailCellDelegate>
 
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *answerView;
+@property (nonatomic, strong) AnswerDetailCell *answerDetailCell;
+
 
 @end
 
@@ -28,41 +31,47 @@
     
     self.navigationItem.title = @"我的提问";
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:_isMyQuestion? kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.tableHeaderView = _headerView;
     [self.view addSubview:_tableView];
     
-    [self.view addSubview:_answerView];
-    CGRect frame = _answerView.frame;
-    frame.origin.y = CGRectGetMaxY(_tableView.frame);
-    _answerView.frame = frame;
+    if (!_isMyQuestion) {
+        [self.view addSubview:_answerView];
+        CGRect frame = _answerView.frame;
+        frame.origin.y = CGRectGetMaxY(_tableView.frame);
+        _answerView.frame = frame;
+    }
+    [self loadData];
 }
 
 - (void)loadData{
-    NSDictionary *param = @{//@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"rowsPerPage": @"20"};
+    NSDictionary *param = @{@"questionId": [NSString stringWithFormat:@"%d", _question.questionId]};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_GETFOLLOWLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_GET_DEQUESTIONDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            //            NSArray *designerList = [data objectForKey:@"designerList"];
-            //            NSMutableArray *rows = [JRDesignerFollowDto buildUpWithValue:designerList];
-            //            if (_currentPage > 1) {
-            //                [_datas addObjectsFromArray:rows];
-            //            }else{
-            //                self.datas = [JRDesignerFollowDto buildUpWithValue:designerList];
-            //            }
-            
-            [_tableView reloadData];
+            [_question buildUpMyQuestionDetailWithValue:data];
         }
-        [_tableView headerEndRefreshing];
-        [_tableView footerEndRefreshing];
+        [_tableView reloadData];
     }];
-    
 }
 
+- (void)setBestAnswer:(JRAnswer*) answer{
+    NSDictionary *param = @{@"questionId": [NSString stringWithFormat:@"%d", _question.questionId],
+                            @"answerId": [NSString stringWithFormat:@"%d", answer.answerId]};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_SET_BESTANSWER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            answer.bestAnswerFlag = YES;
+            _question.status = @"resolved";
+        }
+        [_tableView reloadData];
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -72,26 +81,42 @@
 #pragma makr - UITableViewDataSource/Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    if (_isMyQuestion) {
+        return _question.otherAnswers.count;
+    }
+    return 0;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIdentifier = @"AnswerDetailCell";
-    AnswerDetailCell *cell = (AnswerDetailCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-        cell = (AnswerDetailCell *)[nibs firstObject];
+    if (_isMyQuestion) {
+        static NSString *CellIdentifier = @"AnswerDetailCell";
+        AnswerDetailCell *cell = (AnswerDetailCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+            cell = (AnswerDetailCell *)[nibs firstObject];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        JRAnswer *answer = [_question.otherAnswers objectAtIndex:indexPath.row];
+        cell.delegate = nil;
+        if (!_question.isResolved) {
+            cell.delegate = self;
+        }
+        [cell fillCellWithAnswer:answer type:_question.isResolved?1:0];
+        
+        return cell;
+    }else{
+        return nil;
     }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    //    JRDesignerFollowDto *c = [_datas objectAtIndex:indexPath.row];
-    //    [cell fillCellWithDesignerFollowDto:c];
-    
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (_isMyQuestion) {
+        JRAnswer *answer = [_question.otherAnswers objectAtIndex:indexPath.row];
+        [self.answerDetailCell fillCellWithAnswer:answer type:_question.isResolved?1:0];
+        return self.answerDetailCell.contentView.frame.size.height;
+    }
     return 170;
 }
 
@@ -102,6 +127,16 @@
     //    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
+- (AnswerDetailCell*)answerDetailCell{
+    if (!_answerDetailCell) {
+        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"AnswerDetailCell" owner:self options:nil];
+        _answerDetailCell = (AnswerDetailCell *)[nibs firstObject];
+    }
+    return _answerDetailCell;
+}
 
+- (void)answerDetailCell:(AnswerDetailCell *)cell adoptAnswer:(JRAnswer *)answer{
+    [self setBestAnswer:answer];
+}
 
 @end
