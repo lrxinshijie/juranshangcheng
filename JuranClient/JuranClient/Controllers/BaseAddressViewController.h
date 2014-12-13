@@ -10,9 +10,12 @@
 
 //@class JRMemberDetail;
 @class JRAreaInfo;
+
 @interface BaseAddressViewController : ALViewController
 
 //@property (nonatomic, strong) JRMemberDetail *memberDetail;
-@property (nonatomic, strong) JRAreaInfo *areaInfo;
+@property (nonatomic, copy) AddressSelected block;
+
+- (void)setAreaInfo:(JRAreaInfo *)areaInfo andAddressSelected:(AddressSelected)finish;
 
 @end

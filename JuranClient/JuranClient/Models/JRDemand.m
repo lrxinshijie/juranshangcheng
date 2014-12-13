@@ -71,7 +71,22 @@
 }
 
 - (NSString *)houseTypeString{
-    return @"";
+    NSDictionary *dic =  @{@"residential" : @"住宅空间",
+                           @"catering": @"餐饮空间",
+                           @"office": @"办公空间",
+                           @"hotel": @"酒店空间",
+                           @"commercial": @"商业展示",
+                           @"entertainment": @"娱乐空间",
+                           @"leisure": @"休闲场所",
+                           @"culture": @"文化空间",
+                           @"medical": @"医疗机构",
+                           @"salescenter": @"售楼中心",
+                           @"financial": @"金融场所",
+                           @"movement": @"运动场所",
+                           @"education": @"教育机构",
+                           @"other": @"其他"};
+    
+    return dic[_houseType];
 }
 
 - (NSString *)renovationStyleString{

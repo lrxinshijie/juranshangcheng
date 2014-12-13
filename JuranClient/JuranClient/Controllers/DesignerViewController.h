@@ -10,4 +10,7 @@
 
 @interface DesignerViewController : ALViewController
 
+@property (nonatomic, copy) NSString *searchKeyWord;
+@property (nonatomic, assign) BOOL isSearchResult;
+
 @end

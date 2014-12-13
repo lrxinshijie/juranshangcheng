@@ -70,6 +70,11 @@
     [_tableView headerBeginRefreshing];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self reloadData];
+}
+
 - (void)loadData{
     NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
                             @"onePageCount": @"10"};
@@ -182,9 +187,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (_segment.selectedSegmentIndex == 1) {
+    if (_segment.selectedSegmentIndex == 0) {
         AskDetailViewController *vc = [[AskDetailViewController alloc] init];
-        vc.question = _answerDatas[indexPath.row];
+        vc.isMyQuestion = YES;
+        JRQuestion *q = _questionDatas[indexPath.row];
+        vc.question = q;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
 

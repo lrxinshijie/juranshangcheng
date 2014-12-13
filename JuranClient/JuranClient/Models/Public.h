@@ -82,8 +82,8 @@
 + (NSNumber*)intelligentModeForImageQuality;
 + (void)setIntelligentModeForImageQuality:(NSNumber*)number;
 
-+ (NSArray*)searchHistorys;
-+ (void)addSearchHistory:(NSString*)keyword;
-+ (void)removeAllSearchHistory;
++ (NSArray*)searchHistorysWithSearchType:(SearchType)type;
++ (void)addSearchHistory:(NSString*)keyword searchType:(SearchType)type;
++ (void)removeAllSearchHistoryWithSearchType:(SearchType)type;
 
 @end

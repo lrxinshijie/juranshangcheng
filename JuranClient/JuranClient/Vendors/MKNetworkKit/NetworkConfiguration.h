@@ -45,14 +45,14 @@
 #define JR_GET_MSG_INFO [NSString stringWithFormat:@"%@/info/get_msg_info.json",JR_SERVICE]
 #define JR_GET_ALLAREA_INFO [NSString stringWithFormat:@"%@/location/getAllAreaInfo.json",JR_SERVICE]
 #define JR_CHANGE_PWD [NSString stringWithFormat:@"%@/member/changePwd.json",JR_SERVICE]
-
-
-
-
-
-
-
-
+#define JR_GET_QUESTIONLIST [NSString stringWithFormat:@"%@/QA/getQuestionList.json",JR_SERVICE]
+#define JR_GET_DEQUESTIONDETAIL [NSString stringWithFormat:@"%@/QA/getDeQuestionDetail.json",JR_SERVICE]
+#define JR_PUBLISHQUESTION [NSString stringWithFormat:@"%@/QA/publishQuestion.json",JR_SERVICE]
+#define JR_ANSWER_QUESTION [NSString stringWithFormat:@"%@/QA/answerQuestion.json",JR_SERVICE]
+#define JR_SET_BESTANSWER [NSString stringWithFormat:@"%@/QA/setBestAnswer.json",JR_SERVICE]
+#define JR_GET_HOTWORDS [NSString stringWithFormat:@"%@/search/getHotwords.json",JR_SERVICE]
+#define JR_SEARCH_DESIGNER [NSString stringWithFormat:@"%@/search/searchDesigner.json",JR_SERVICE]
+#define JR_GET_MYDEMANDDETAIL [NSString stringWithFormat:@"%@/design/getMyDesignReqDetailInfo.json",JR_SERVICE]
 
 
 

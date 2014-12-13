@@ -50,7 +50,7 @@
     _titleLabel.text = demand.title;
     _addressLabel.text = demand.houseAddress;
     _sizeLabel.text = [NSString stringWithFormat:@"%d平方米", demand.houseArea];
-    _styleLabel.text = demand.houseType;
+    _styleLabel.text = [demand houseTypeString];
     _priceLabel.text = [NSString stringWithFormat:@"￥%d", demand.renovationBudget];
     _bidNumberLabel.text = [NSString stringWithFormat:@"投标人数：%d人", demand.bidNums];
     _bidNumberView.hidden = demand.newBidNums?NO:YES;

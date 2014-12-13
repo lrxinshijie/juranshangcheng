@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class JRAreaInfo;
 
 @interface JRUser : NSObject
 
@@ -24,6 +25,29 @@
 @property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, copy) NSString *userType;
 
+//ProfileData
+@property (nonatomic, assign) NSInteger hasNewBidCount;
+@property (nonatomic, assign) NSInteger newPrivateLetterCount;
+@property (nonatomic, assign) NSInteger newAnswerCount;
+@property (nonatomic, assign) NSInteger newPushMsgCount;
+@property (nonatomic, assign) BOOL isSigned;
+
+//MemberDetail
+@property (nonatomic, strong) NSString *mobileNum;
+@property (nonatomic, strong) NSString *email;
+@property (nonatomic, strong) NSString *birthday;
+@property (nonatomic, strong) NSString *homeTel;
+@property (nonatomic, strong) JRAreaInfo *areaInfo;
+@property (nonatomic, strong) NSString *detailAddress;
+@property (nonatomic, strong) NSString *zipCode;
+@property (nonatomic, strong) NSString *idCardType;
+@property (nonatomic, strong) NSString *idCardNumber;
+@property (nonatomic, strong) NSString *qq;
+@property (nonatomic, strong) NSString *weixin;
+@property (nonatomic, assign) NSInteger sex;
+@property (nonatomic, assign) NSInteger useablePoints;
+@property (nonatomic, assign) NSInteger useableExp;
+
 + (BOOL)isLogin;
 - (void)logout;
 - (NSDictionary *)localUserData;
@@ -32,4 +56,15 @@
 + (JRUser *)currentUser;
 - (id)initWithDictionary:(NSDictionary*)dict;
 + (void)refreshToken:(VoidBlock)finished;
+
+//ProfileData
+- (void)buildUpProfileDataWithDictionary:(NSDictionary*)dict;
+
+//memberDetail
+- (void)buildUpMemberDetailWithDictionary:(NSDictionary*)dict;
+- (NSString*)locationAddress;
+- (NSString*)idCardInfomation;
+- (NSString*)homeTelForPersonal;
+- (NSString*)mobileNumForBindPhone;
+
 @end

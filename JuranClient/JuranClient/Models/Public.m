@@ -337,8 +337,9 @@
     [kUD synchronize];
 }
 
-+ (NSArray*)searchHistorys{
-    id historys = [kUD objectForKey:@"keywordsForSearchHistory"];
+
++ (NSArray*)searchHistorysWithSearchType:(SearchType)type{
+    id historys = [kUD objectForKey:[NSString stringWithFormat:@"keywordsForSearchHistory%d", type]];
     if (historys && [historys isKindOfClass:[NSArray class]]) {
         return (NSArray*)historys;
     }else{
@@ -346,20 +347,20 @@
     }
 }
 
-+ (void)addSearchHistory:(NSString*)keyword{
-    NSMutableArray *historys = [NSMutableArray arrayWithArray:[self searchHistorys]];
++ (void)addSearchHistory:(NSString*)keyword searchType:(SearchType)type{
+    NSMutableArray *historys = [NSMutableArray arrayWithArray:[self searchHistorysWithSearchType:type]];
     for (NSString *str in historys) {
         if ([str isEqualToString:keyword]) {
             return;
         }
     }
     [historys addObject:keyword];
-    [kUD setObject:historys forKey:@"keywordsForSearchHistory"];
+    [kUD setObject:historys forKey:[NSString stringWithFormat:@"keywordsForSearchHistory%d", type]];
     [kUD synchronize];
 }
 
-+ (void)removeAllSearchHistory{
-    [kUD setObject:@[] forKey:@"keywordsForSearchHistory"];
++ (void)removeAllSearchHistoryWithSearchType:(SearchType)type{
+    [kUD setObject:@[] forKey:[NSString stringWithFormat:@"keywordsForSearchHistory%d", type]];
     [kUD synchronize];
 }
 
