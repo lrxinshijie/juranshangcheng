@@ -7,13 +7,16 @@
 //
 
 #import "FeedBackViewController.h"
+#import "ALGetPhoto.h"
+#import "CanRemoveImageView.h"
 
-@interface FeedBackViewController ()
+@interface FeedBackViewController ()<CanRemoveImageViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UIView *inputView;
 @property (nonatomic, strong) IBOutlet UIView *contactView;
 @property (nonatomic, strong) IBOutlet ASPlaceholderTextView *contentTextView;
 @property (nonatomic, strong) IBOutlet UITextField *contactTextField;
+@property (nonatomic, strong) IBOutlet UIView *chooseView;
 
 @end
 
@@ -52,8 +55,21 @@
 }
 
 - (IBAction)doChoosseImage:(id)sender{
-    
+    [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+        _chooseView.hidden = YES;
+        CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:_chooseView.frame];
+        imageView.delegate = self;
+        [imageView setImage:images[0]];
+        [_inputView addSubview:imageView];
+    }];
 }
+
+#pragma CanRemoveImageView
+
+- (void)deleteCanRemoveImageView:(CanRemoveImageView *)view{
+    _chooseView.hidden = NO;
+}
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];

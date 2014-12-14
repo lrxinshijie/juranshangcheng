@@ -7,8 +7,11 @@
 //
 
 #import "NewQuestionViewController.h"
+#import "JRQuestion.h"
+#import "ALGetPhoto.h"
+#import "CanRemoveImageView.h"
 
-@interface NewQuestionViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface NewQuestionViewController ()<UITableViewDataSource, UITableViewDelegate, CanRemoveImageViewDelegate>
 {
     NSInteger step;
     NSArray *typeKeys;
@@ -22,6 +25,7 @@
 @property (nonatomic, strong) IBOutlet ASPlaceholderTextView *contentTextView;
 @property (nonatomic, strong) IBOutlet UITextField *titleTextField;
 @property (nonatomic, strong) IBOutlet UIView *commitedView;
+@property (nonatomic, strong) IBOutlet UIView *chooseView;
 
 @end
 
@@ -85,15 +89,27 @@
             return;
         }
         if (!(_contentTextView.text && _contentTextView.text.length > 0)) {
-            [self showTip:@"请输入问题标题"];
+            [self showTip:@"请输入问题内容"];
             return;
         }
         step = 2;
-        [self reloadData];
+        [UIView animateWithDuration:.5 animations:^{
+            [self reloadData];
+        }];
     }else if (step == 2){
         [self commit];
     }
     
+}
+
+- (IBAction)onChooseImage:(id)sender{
+    [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+        _chooseView.hidden = YES;
+        CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:_chooseView.frame];
+        imageView.delegate = self;
+        [imageView setImage:images[0]];
+        [_contentView addSubview:imageView];
+    }];
 }
 
 - (void)back:(id)sender{
@@ -120,9 +136,18 @@
         if (!error) {
             step = 3;
             [self reloadData];
+            if (_delegate && [_delegate respondsToSelector:@selector(newQuestionViewController:)]) {
+                [_delegate newQuestionViewController:self];
+            }
         }
 
     }];
+}
+
+#pragma CanRemoveImageView
+
+- (void)deleteCanRemoveImageView:(CanRemoveImageView *)view{
+    _chooseView.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

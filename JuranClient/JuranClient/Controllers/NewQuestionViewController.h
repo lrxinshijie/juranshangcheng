@@ -8,6 +8,16 @@
 
 #import "ALViewController.h"
 
+@class NewQuestionViewController;
+
+@protocol NewQuestionViewControllerDelegate <NSObject>
+
+- (void)newQuestionViewController:(NewQuestionViewController*) vc ;
+
+@end
+
 @interface NewQuestionViewController : ALViewController
+
+@property (nonatomic, weak) id<NewQuestionViewControllerDelegate> delegate;
 
 @end

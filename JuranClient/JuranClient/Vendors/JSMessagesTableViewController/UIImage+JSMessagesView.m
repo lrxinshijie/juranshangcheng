@@ -154,7 +154,8 @@
 
 + (UIImage *)bubbleDefaultIncomingGreen
 {
-    return [[UIImage imageNamed:@"bubble-default-incoming-green"] makeStretchableDefaultIncoming];
+//    return [[UIImage imageNamed:@"bubble-default-incoming-green"] makeStretchableDefaultIncoming];
+    return [[UIImage imageNamed:@"bubble-me"] makeStretchableDefaultIncoming];
 }
 
 + (UIImage *)bubbleSquareIncoming
@@ -180,7 +181,8 @@
 
 + (UIImage *)bubbleDefaultOutgoingGreen
 {
-    return [[UIImage imageNamed:@"bubble-default-outgoing-green"] makeStretchableDefaultOutgoing];
+    return [[UIImage imageNamed:@"bubble-other"] makeStretchableDefaultOutgoing];
+//    return [[UIImage imageNamed:@"bubble-default-outgoing-green"] makeStretchableDefaultOutgoing];
 }
 
 + (UIImage *)bubbleSquareOutgoing

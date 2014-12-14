@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VersionInfoViewController">
             <connections>
+                <outlet property="iconImageView" destination="sRf-d7-HVj" id="HOH-6S-tZH"/>
                 <outlet property="tableHeaderView" destination="aTz-fc-O5K" id="2j7-D9-pnC"/>
                 <outlet property="versionLabel" destination="MZG-2m-atu" id="uVI-f3-AKg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -23,7 +24,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="243"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="sRf-d7-HVj">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-juran" id="sRf-d7-HVj">
                     <rect key="frame" x="115" y="53" width="90" height="89"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -41,6 +42,9 @@
             <point key="canvasLocation" x="511" y="256.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon-juran" width="60" height="60"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

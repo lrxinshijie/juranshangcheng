@@ -8,6 +8,8 @@
 
 #import "SearchViewController.h"
 #import "DesignerViewController.h"
+#import "CaseViewController.h"
+#import "QuestionViewController.h"
 
 #define kKeywordsButtonTag 3330
 
@@ -56,9 +58,8 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"guid":@"", @"token":@""};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_GET_HOTWORDS parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_GET_HOTWORDS parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
@@ -152,7 +153,14 @@
         vc.isSearchResult = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (_type == SearchTypeCase){
-        
+        CaseViewController *vc = [[CaseViewController alloc] init];
+        vc.searchKey = _searchKeyWord;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (_type == SearchTypeQuestion){
+        QuestionViewController *vc = [[QuestionViewController alloc] init];
+        vc.searchKeyWord = _searchKeyWord;
+        vc.isSearchResult = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

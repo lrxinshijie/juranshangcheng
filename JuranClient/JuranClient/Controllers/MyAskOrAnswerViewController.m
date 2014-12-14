@@ -154,14 +154,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *content = nil;
+    CGFloat height = 53;
     if (_segment.selectedSegmentIndex == 0) {
         JRQuestion *q = _questionDatas[indexPath.row];
         content = q.title;
+        height += (indexPath.row == (_questionDatas.count - 1))?5:0;
     }else{
         JRAnswer *a = _answerDatas[indexPath.row];
         content = a.content;
+        height += (indexPath.row == (_answerDatas.count - 1))?5:0;
     }
-    return 53 + [content heightWithFont:[UIFont systemFontOfSize:kSystemFontSize] constrainedToWidth:290];
+    return height + [content heightWithFont:[UIFont systemFontOfSize:kSystemFontSize] constrainedToWidth:290];
 }
 
 

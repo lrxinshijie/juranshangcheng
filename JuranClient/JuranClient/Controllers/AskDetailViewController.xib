@@ -7,7 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AskDetailViewController">
             <connections>
-                <outlet property="answerView" destination="k1U-4c-UJH" id="lEb-AO-7Ow"/>
+                <outlet property="answerTextField" destination="akh-VV-nGL" id="e7Y-aJ-t0U"/>
+                <outlet property="answerView" destination="tiy-hd-yce" id="g2S-dY-XqF"/>
                 <outlet property="contentLabel" destination="w6o-Cx-mgs" id="GEH-c5-tDF"/>
                 <outlet property="headerView" destination="zyT-fC-cYY" id="QIn-gr-kXd"/>
                 <outlet property="timeAndTypeBgView" destination="gcJ-Ao-JfR" id="LRi-v8-Xmk"/>
@@ -60,48 +61,58 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-56" y="212"/>
         </view>
-        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="k1U-4c-UJH">
+        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="tiy-hd-yce">
             <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case-detail-text" id="PSI-ZS-dDf">
-                    <rect key="frame" x="45" y="5" width="203" height="39"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1hB-4L-udg">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8eg-Fw-vd3">
                     <rect key="frame" x="253" y="5" width="62" height="39"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="发送" backgroundImage="case-detail-send">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="onSend:" destination="-1" eventType="touchUpInside" id="slh-cF-QUu"/>
+                    </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="写评论" minimumFontSize="17" id="T4o-bO-gug">
-                    <rect key="frame" x="85" y="10" width="155" height="30"/>
+                <view tag="2201" contentMode="scaleToFill" id="FRq-JQ-wpO">
+                    <rect key="frame" x="48" y="5" width="200" height="39"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="send"/>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dq1-XZ-ZSa">
-                    <rect key="frame" x="5" y="7" width="35" height="35"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="在此输入您的回答" minimumFontSize="17" id="akh-VV-nGL">
+                            <rect key="frame" x="8" y="5" width="184" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="send"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="462-ZP-yp8"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" tag="2200" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="elt-wh-Oph">
+                    <rect key="frame" x="8" y="8" width="32" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="img">
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" image="icon_camera3">
                         <color key="titleColor" red="0.17254902420000001" green="0.4274510145" blue="0.7019608021" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.90196084976196289" green="0.92156869173049927" blue="0.93725496530532837" alpha="1" colorSpace="deviceRGB"/>
+            <color key="backgroundColor" red="0.90196084980000002" green="0.9215686917" blue="0.93725496529999996" alpha="1" colorSpace="deviceRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="400" y="245.5"/>
+            <point key="canvasLocation" x="513" y="-408.5"/>
         </view>
     </objects>
     <resources>
         <image name="case-detail-send" width="62" height="39"/>
-        <image name="case-detail-text" width="242" height="39"/>
+        <image name="icon_camera3" width="16" height="14"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

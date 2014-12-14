@@ -330,7 +330,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (0 == _segment.selectedIndex) {
-        return 270;
+        return 270 + (indexPath.row == (_caseDatas.count - 1)?5:0);
     }else if (1 == _segment.selectedIndex){
         if (indexPath.row == 0) {
             return self.introductionCell.frame.size.height;
@@ -339,7 +339,7 @@
         }
     }else{
         [self.topicCell fillCellWithTopic:_topicDatas[indexPath.row]];
-        return self.topicCell.frame.size.height;
+        return self.topicCell.frame.size.height + (indexPath.row == (_topicDatas.count - 1)?5:0);
     }
 }
 
@@ -429,15 +429,15 @@
     if (_segment.selectedIndex == 0) {
         JRCase *cs = [_caseDatas objectAtIndex:indexPath.row];
         
-        [self showHUD];
-        [cs loadDetail:^(BOOL result) {
-            [self hideHUD];
-            if (result) {
+//        [self showHUD];
+//        [cs loadDetail:^(BOOL result) {
+//            [self hideHUD];
+//            if (result) {
                 JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
                 vc.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:vc animated:YES];
-            }
-        }];
+//            }
+//        }];
 
     }else if (_segment.selectedIndex == 2){
         

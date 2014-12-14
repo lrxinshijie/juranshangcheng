@@ -7,8 +7,11 @@
 //
 
 #import "DemandEditTextViewController.h"
+#import "JRDemand.h"
 
-@interface DemandEditTextViewController ()
+@interface DemandEditTextViewController () <UITextFieldDelegate>
+
+@property (nonatomic, strong) IBOutlet UITextField *valueTextField;
 
 @end
 
@@ -20,15 +23,94 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave) title:@"确认发布" backgroundImage:nil];
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave) title:@"保存" backgroundImage:nil];
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.title = @"编辑需求";
+    self.view.backgroundColor = RGBColor(237, 237, 237);
+    NSString *placeholder = @"";
+    NSString *value = @"";
+    UIKeyboardType keyboardType = UIKeyboardTypeDefault;
+    switch (_editType) {
+        case DemandEditContactsName:
+            placeholder = @"请填写您的姓名";
+            value = _demand.contactsName;
+            keyboardType = UIKeyboardTypeDefault;
+            break;
+        case DemandEditContactsMobile:
+            placeholder = @"必须是11位数字";
+            value = _demand.contactsMobile;
+            keyboardType = UIKeyboardTypeNumberPad;
+            break;
+        case DemandEditNeighbourhoods:
+            placeholder = @"请填写您的小区名称";
+            value = _demand.neighbourhoods;
+            keyboardType = UIKeyboardTypeDefault;
+            break;
+        case DemandEditBudget:
+            placeholder = @"装修预算(万)";
+            value = _demand.budget;
+            keyboardType = UIKeyboardTypeNumberPad;
+            break;
+        case DemandEditHouseArea:
+            placeholder = @"房屋面积(平方米)";
+            value = [NSString stringWithFormat:@"%d", _demand.houseArea];
+            keyboardType = UIKeyboardTypeNumberPad;
+            break;
+        default:
+            placeholder = @"";
+            value = @"";
+            keyboardType = UIKeyboardTypeDefault;
+            break;
+    }
     
+    _valueTextField.placeholder = placeholder;
+    _valueTextField.text = value;
+    _valueTextField.keyboardType = keyboardType;
+    [_valueTextField becomeFirstResponder];
 }
 
 - (void)onSave{
+    NSString *text = [_valueTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    switch (_editType) {
+        case DemandEditContactsName:
+            _demand.contactsName = text;
+            break;
+        case DemandEditContactsMobile:
+            if (![Public validateMobile:text]) {
+                [self showTip:@"手机号码不合法"];
+                return;
+            }
+            _demand.contactsMobile = text;
+            break;
+        case DemandEditHouseArea:
+            _demand.houseArea = [text integerValue];
+            break;
+        case DemandEditBudget:
+            _demand.budget = text;
+            break;
+        case DemandEditNeighbourhoods:
+            _demand.neighbourhoods = text;
+            break;
+        default:
+            break;
+    }
+    
+    [super back:nil];
     
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (_editType == DemandEditContactsMobile && value.length > kPhoneMaxNumber) {
+        return NO;
+    }else if (_editType == DemandEditContactsMobile && value.length > 32){
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

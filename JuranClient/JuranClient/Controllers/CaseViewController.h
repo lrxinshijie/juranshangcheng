@@ -10,6 +10,8 @@
 
 @interface CaseViewController : ALViewController
 
+@property (nonatomic, copy) NSString *searchKey;
+
 
 
 @end

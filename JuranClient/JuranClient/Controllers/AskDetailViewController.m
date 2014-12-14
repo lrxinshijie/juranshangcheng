@@ -11,11 +11,13 @@
 #import "AnswerDetailCell.h"
 #import "JRAnswer.h"
 
-@interface AskDetailViewController ()<UITableViewDataSource, UITableViewDelegate, AnswerDetailCellDelegate>
+@interface AskDetailViewController ()<UITableViewDataSource, UITableViewDelegate, AnswerDetailCellDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *answerView;
+@property (nonatomic, strong) IBOutlet UITextField *answerTextField;
+
 @property (nonatomic, strong) AnswerDetailCell *answerDetailCell;
 
 @property (nonatomic, strong) IBOutlet UILabel *contentLabel;
@@ -27,6 +29,10 @@
 
 @implementation AskDetailViewController
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -34,6 +40,9 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     self.navigationItem.title = @"我的提问";
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
     self.tableView = [self.view tableViewWithFrame:_isMyQuestion? kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -43,10 +52,12 @@
     [self.view addSubview:_tableView];
     
     if (!_isMyQuestion) {
-        [self.view addSubview:_answerView];
+        [self setupAnswerView];
+        
         CGRect frame = _answerView.frame;
         frame.origin.y = CGRectGetMaxY(_tableView.frame);
         _answerView.frame = frame;
+        [self.view addSubview:_answerView];
     }
     [self loadData];
 }
@@ -68,6 +79,19 @@
         [self reloadData];
     }];
 }
+
+- (void)setupAnswerView{
+    UIView *view = [_answerView viewWithTag:2200];
+    view.layer.cornerRadius = view.frame.size.height/2;
+    view.layer.borderWidth = 1;
+    view.layer.borderColor = RGBColor(151, 161, 166).CGColor;
+    
+    view = [_answerView viewWithTag:2201];
+    view.layer.cornerRadius = 3;
+    view.layer.borderWidth = 1;
+    view.layer.borderColor = RGBColor(151, 161, 166).CGColor;
+}
+
 
 - (void)setupHeaderView{
     _contentLabel.text = _question.questionContent;
@@ -107,6 +131,39 @@
     }];
 }
 
+- (IBAction)onSend:(id)sender{
+    if (!(_answerTextField.text && _answerTextField.text.length > 0))
+    {
+        [self showTip:@"回答内容不能为空"];
+        return;
+    }
+    [_answerTextField resignFirstResponder];
+    NSDictionary *param = @{@"questionId": [NSString stringWithFormat:@"%d", _question.questionId],
+                            @"content": _answerTextField.text
+                            };
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_ANSWER_QUESTION parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            JRUser *user = [JRUser currentUser];
+            JRAnswer *answer = [[JRAnswer alloc] init];
+            answer.userId = user.userId;
+            answer.userType = user.userType.integerValue;
+            answer.account = user.account;
+            answer.nickName = user.nickName;
+            answer.imageUrl = @"";
+            answer.headUrl = user.headUrl;
+            answer.content = _answerTextField.text;
+            answer.commitTime = [[NSDate date] timestamp];
+            [_question.otherAnswers insertObject:answer atIndex:0];
+            _answerTextField.text = @"";
+            [self reloadData];
+        }
+        
+    }];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -138,8 +195,6 @@
     }else{
         [cell fillCellWithAnswer:answer type:1];
     }
-    
-    
     return cell;
 }
 
@@ -147,11 +202,11 @@
     if (_isMyQuestion) {
         JRAnswer *answer = [_question.otherAnswers objectAtIndex:indexPath.row];
         [self.answerDetailCell fillCellWithAnswer:answer type:_question.isResolved?1:0];
-        return self.answerDetailCell.contentView.frame.size.height;
+        return self.answerDetailCell.contentView.frame.size.height + ((indexPath.row == _question.otherAnswers.count - 1)?5:0);
     }else{
         JRAnswer *answer = [_question.otherAnswers objectAtIndex:indexPath.row];
         [self.answerDetailCell fillCellWithAnswer:answer type:1];
-        return self.answerDetailCell.contentView.frame.size.height;
+        return self.answerDetailCell.contentView.frame.size.height + ((indexPath.row == _question.otherAnswers.count - 1)?5:0);
     }
 }
 
@@ -173,5 +228,38 @@
 - (void)answerDetailCell:(AnswerDetailCell *)cell adoptAnswer:(JRAnswer *)answer{
     [self setBestAnswer:answer];
 }
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    [self onSend:nil];
+    
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    //    if (_selectComment && textField.text.length == 0) {
+    //        self.selectComment = nil;
+    //    }
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification{
+    NSDictionary *info = [notification userInfo];
+    NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
+    CGSize keyboardSize = [value CGRectValue].size;
+    
+    CGRect frame = _answerView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame) - keyboardSize.height;
+    _answerView.frame = frame;
+}
+
+-(void)keyboardWillBeHidden:(NSNotification *)aNotification{
+    
+    CGRect frame = _answerView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame);
+    _answerView.frame = frame;
+}
+
 
 @end
