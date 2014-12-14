@@ -110,7 +110,7 @@
 }
 
 - (void)loadData{
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": @"20"}];
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": @"10"}];
     [param addEntriesFromDictionary:self.filterData];
     
     [self showHUD];
@@ -198,12 +198,6 @@
     JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
-    
-//    [cs loadDetail:^(BOOL result) {
-//        if (result) {
-//            
-//        }
-//    }];
 }
 
 - (void)EScrollerViewDidClicked:(NSUInteger)index{

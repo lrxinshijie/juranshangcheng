@@ -66,6 +66,7 @@ typedef void (^VoidBlock)(void);
 typedef enum : NSUInteger {
     FilterViewTypeCase,
     FilterViewTypeDesigner,
+    FilterViewTypeQuestion,
 } FilterViewType;
 
 typedef enum : NSUInteger {

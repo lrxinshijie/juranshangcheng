@@ -162,13 +162,15 @@
 - (NSArray *)sorts{
     if (!_sorts) {
         if (_type == FilterViewTypeCase) {
-            _sorts = @[CELLDICTIONARYBUILT(@"默认排序", @""),
-                       CELLDICTIONARYBUILT(@"按点赞总数降序", @"2"),
-                       CELLDICTIONARYBUILT(@"按点赞总数升序", @"6"),
-                       CELLDICTIONARYBUILT(@"按浏览量降序", @"4"),
-                       CELLDICTIONARYBUILT(@"按浏览量升序", @"7")];
-        }else{
-            _sorts = @[CELLDICTIONARYBUILT(@"默认排序", @"1"),CELLDICTIONARYBUILT(@"作品数从高到低排序", @"2"),CELLDICTIONARYBUILT(@"人气从高到低排序", @"3")];
+            _sorts = @[CELLDICTIONARYBUILT(@"人气量降序", @"11"),
+                       CELLDICTIONARYBUILT(@"点赞量", @"10"),
+                       CELLDICTIONARYBUILT(@"默认", @"0")];
+        }else if (_type == FilterViewTypeDesigner){
+            _sorts = @[CELLDICTIONARYBUILT(@"人气（浏览量）", @"1"),
+                       CELLDICTIONARYBUILT(@"作品量", @"0"),
+                       CELLDICTIONARYBUILT(@"默认", @"0")];
+        }else if (_type == FilterViewTypeQuestion){
+            
         }
         
     }

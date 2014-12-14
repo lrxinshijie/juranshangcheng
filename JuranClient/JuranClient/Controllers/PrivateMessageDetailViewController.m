@@ -32,7 +32,7 @@
     self.dataSource = self;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+
     __weak typeof(self) weakSelf = self;
     [self.tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;

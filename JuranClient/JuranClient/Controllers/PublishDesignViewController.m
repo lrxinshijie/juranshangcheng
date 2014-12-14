@@ -37,7 +37,7 @@
     self.photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(220, 12, 60, 45)];
     _photoImageView.image = [UIImage imageNamed:@"publish_image_default"];
     
-    self.keys = @[@"姓名",@"联系电话",@"户型",@"装修预算",@"房屋面积",@"风格",@"项目地址",@"小区名称",@"户型",@"户型图上传"];
+    self.keys = @[@"姓名",@"联系电话",@"房屋类型",@"装修预算",@"房屋面积",@"风格",@"项目地址",@"小区名称",@"户型",@"户型图上传"];
     self.values = @[@"请填写您的姓名",@"必须是11位数字",@"两居室", @"必须是整数",@"必须是数字(平方米)",@"地中海",@"石家庄",@"2-32个汉字",@"三室一厅一卫",@"可选"];
     self.demand = [[JRDemand alloc] init];
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
@@ -138,6 +138,8 @@
         vc.areaInfo = _demand.areaInfo;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 0 || indexPath.row == 1){
+        
     }
 }
 
