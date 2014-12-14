@@ -37,13 +37,13 @@ typedef void (^ResponseBlock)(NSError *error, id data, NSDictionary *other);
                       delegate:(id)delegate
             responseHandler:(ResponseBlock)responseBlock;
 
-- (MKNetworkOperation *) pathURL:(NSString*) URL
-                      parameters:(NSDictionary *) parameters
-                      HTTPMethod:(NSString *) method
-                 otherParameters:(NSDictionary *)other
-                        delegate:(id)delegate
-                      imageDatas:(NSArray *)imageDatas
-                 responseHandler:(ResponseBlock)responseBlock;
+-(MKNetworkOperation *) pathURL:(NSString*) URL
+                     parameters:(NSDictionary *) parameters
+                     HTTPMethod:(NSString *)method
+                otherParameters:(NSDictionary *)other
+                       delegate:(id)delegate
+                      imageDict:(NSDictionary *)imageDict
+                responseHandler:(ResponseBlock)responseBlock;
 
 + (void) cancelOperationsWithClass:(id)Class;
 

@@ -46,7 +46,33 @@
                       delegate:(id)delegate
                responseHandler:(ResponseBlock)responseBlock{
     
-    return [self pathURL:URL parameters:parameters HTTPMethod:method otherParameters:other delegate:delegate completionHandler:^(id data) {
+    return [self pathURL:URL parameters:parameters HTTPMethod:method otherParameters:other delegate:delegate imageDict:nil completionHandler:^(id data) {
+        responseBlock(nil,data,nil);
+    } errorHandler:^(NSError *error) {
+        if (other) {
+            BOOL isShow = [other getBoolValueForKey:kNetworkParamKeyShowErrorDefaultMessage defaultValue:YES];
+            if (isShow) {
+                [self showErrMsg:error];
+            }
+        }else{
+            [self showErrMsg:error];
+        }
+        
+        
+        responseBlock(error,nil,nil);
+    }];
+    
+}
+
+-(MKNetworkOperation *) pathURL:(NSString*) URL
+                     parameters:(NSDictionary *) parameters
+                     HTTPMethod:(NSString *)method
+                otherParameters:(NSDictionary *)other
+                       delegate:(id)delegate
+                    imageDict:(NSDictionary *)imageDict
+                responseHandler:(ResponseBlock)responseBlock{
+    
+    return [self pathURL:URL parameters:parameters HTTPMethod:method otherParameters:other delegate:delegate imageDict:imageDict completionHandler:^(id data) {
         responseBlock(nil,data,nil);
     } errorHandler:^(NSError *error) {
         if (other) {
@@ -75,6 +101,7 @@
                     HTTPMethod:(NSString *) method
                otherParameters:(NSDictionary *) other
                       delegate:(id)delegate
+                imageDict:(NSDictionary *)imageDict
              completionHandler:(CompletionBlock) completionBlock
                   errorHandler:(MKNKErrorBlock) errorBlock{
     
@@ -106,11 +133,18 @@
     }
     
     [op setPostDataEncoding:MKNKPostDataEncodingTypeJSON];
-//    [op addHeader:@"Accept-Encoding" withValue:@"gzip"];
-//    [op addHeader:@"Content-Type" withValue:@"application/json"];
-//    if ([User isLogin]) {
-//        [op setHeader:@"member_id" withValue:[NSString stringWithFormat:@"%d",[User currentUser].member_id]];
-//    }
+
+    
+    [imageDict.allKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
+        
+        id data = [imageDict objectForKey:key];
+        if ([data isKindOfClass:[NSData class]]) {
+            [op addData:data forKey:key mimeType:@"image/jpeg" fileName:[NSString stringWithFormat:@"%@.jpg",key]];
+        }else if ([data isKindOfClass:[UIImage class]]){
+            [op addData:UIImageJPEGRepresentation(data, 1.0) forKey:key mimeType:@"image/jpeg" fileName:[NSString stringWithFormat:@"%@.jpg",key]];
+        }
+        
+    }];
     
     if (delegate) {
         op.className = NSStringFromClass([delegate class]);

@@ -31,6 +31,10 @@
 
 @implementation CaseViewController
 
+- (void)dealloc{
+
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -86,6 +90,13 @@
     
     [_tableView headerBeginRefreshing];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if ([_filterView isShow]) {
+        [_filterView showSort];
+    }
 }
 
 - (void)onSearch{

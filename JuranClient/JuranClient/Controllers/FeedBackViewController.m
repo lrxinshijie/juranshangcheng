@@ -34,6 +34,8 @@
     [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
+    
+    
     _contentTextView.placeholder = @"请输入详细的描述";
     _inputView.layer.cornerRadius = 3;
     _contactView.layer.cornerRadius = 3;

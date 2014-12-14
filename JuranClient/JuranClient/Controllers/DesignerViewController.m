@@ -73,6 +73,13 @@
     [_tableView headerBeginRefreshing];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if ([_filterView isShow]) {
+        [_filterView showSort];
+    }
+}
+
 - (NSMutableDictionary *)filterData{
     if (!_filterData) {
         if (!_isSearchResult) {

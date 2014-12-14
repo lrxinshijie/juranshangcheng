@@ -61,6 +61,10 @@
         [_filterButton setTitleColor:kBlueColor forState:UIControlStateSelected];
         [_filterButton setImage:[UIImage imageNamed:@"menu_shaixuan"] forState:UIControlStateSelected];
         [self addSubview:_filterButton];
+        
+        UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(160, 0, 1, 44)];
+        lineImageView.backgroundColor = RGBColor(213, 213, 213);
+        [self addSubview:lineImageView];
     }
     
     

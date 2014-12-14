@@ -72,6 +72,51 @@
         return;
     }
     
+    if (_demand.contactsName.length == 0) {
+        [self showTip:@"姓名不能为空"];
+        return;
+    }
+    
+    if (_demand.contactsMobile.length == 0) {
+        [self showTip:@"联系电话不能为空"];
+        return;
+    }
+    
+    if (_demand.houseType.length == 0) {
+        [self showTip:@"房室类型不能为空"];
+        return;
+    }
+    
+    if (_demand.budget.length == 0) {
+        [self showTip:@"装修预算不能为空"];
+        return;
+    }
+    
+    if (_demand.houseArea == 0) {
+        [self showTip:@"房屋面积不能为空"];
+        return;
+    }
+    
+    if (_demand.renovationStyle.length == 0) {
+        [self showTip:@"风格不能为空"];
+        return;
+    }
+    
+    if (_demand.areaInfo.cityCode.length == 0) {
+        [self showTip:@"项目地址不能为空"];
+        return;
+    }
+    
+    if (_demand.neighbourhoods.length == 0) {
+        [self showTip:@"小区名称不能为空"];
+        return;
+    }
+    
+    if (_demand.roomNumString.length == 0) {
+        [self showTip:@"户型名称不能为空"];
+        return;
+    }
+    
     [self showHUD];
     NSDictionary *param = @{@"contactsName": _demand.contactsName,
                             @"houseType": _demand.houseType,
@@ -82,11 +127,15 @@
                             @"renovationStyle": _demand.renovationStyle,
                             @"neighbourhoods": _demand.neighbourhoods,
                             @"roomNum":_demand.roomNum,
-                            @"livingroomCount":_demand.livingroomCount,
-                            @"bathroomCount":_demand.bathroomCount,
+//                            @"livingRoomCount":_demand.livingroomCount,
+//                            @"bathroomCount":_demand.bathroomCount,
                             @"areaInfo": [_demand.areaInfo dictionaryValue]
                             };
-    [[ALEngine shareEngine] pathURL:JR_PUBLISH_DESIGN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    NSDictionary *fileDict = nil;
+    if (_fileImage) {
+        fileDict = @{@"roomImageInfo": _fileImage};
+    }
+    [[ALEngine shareEngine] pathURL:JR_PUBLISH_DESIGN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:fileDict responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             [self showTip:@"发布需求成功"];
