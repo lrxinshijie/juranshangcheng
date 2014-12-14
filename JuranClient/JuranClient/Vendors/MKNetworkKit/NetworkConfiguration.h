@@ -97,6 +97,7 @@
 #define JR_FAV_PROJECT [NSString stringWithFormat:@"%@/design/getMyFavProject.json",JR_SERVICE]
 #define JR_PRIVATE_LIST [NSString stringWithFormat:@"%@/member/getPrivateLetterList.json",JR_SERVICE]
 #define JR_PRIVATE_DETAIL [NSString stringWithFormat:@"%@/member/getPrivateLetterDetailList.json",JR_SERVICE]
+#define JR_SEARCH_CASE [NSString stringWithFormat:@"%@/search/searchProject2d.json",JR_SERVICE]
 
 #define kHTTPMethodGet @"GET"
 #define kHTTPMethodPost @"POST"

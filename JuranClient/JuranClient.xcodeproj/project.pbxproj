@@ -305,6 +305,20 @@
 		A9902CA21A3421B400F08DA1 /* FilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9902CA11A3421B400F08DA1 /* FilterView.m */; };
 		A9902CA61A3432A500F08DA1 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9902CA41A3432A500F08DA1 /* FilterViewController.m */; };
 		A9902CA71A3432A500F08DA1 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9902CA51A3432A500F08DA1 /* FilterViewController.xib */; };
+		A9A067131A3D76DA0059D73B /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A067031A3D76DA0059D73B /* AbstractActionSheetPicker.m */; };
+		A9A067141A3D76DA0059D73B /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A067051A3D76DA0059D73B /* ActionSheetCustomPicker.m */; };
+		A9A067151A3D76DA0059D73B /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A067081A3D76DA0059D73B /* ActionSheetDatePicker.m */; };
+		A9A067161A3D76DA0059D73B /* ActionSheetDistancePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A0670A1A3D76DA0059D73B /* ActionSheetDistancePicker.m */; };
+		A9A067171A3D76DA0059D73B /* ActionSheetLocalePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A0670C1A3D76DA0059D73B /* ActionSheetLocalePicker.m */; };
+		A9A067181A3D76DA0059D73B /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A0670E1A3D76DA0059D73B /* ActionSheetStringPicker.m */; };
+		A9A067191A3D76DA0059D73B /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A067101A3D76DA0059D73B /* DistancePickerView.m */; };
+		A9A0671A1A3D76DA0059D73B /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A067121A3D76DA0059D73B /* SWActionSheet.m */; };
+		A9A0671C1A3D782B0059D73B /* DefaultData.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9A0671B1A3D782B0059D73B /* DefaultData.plist */; };
+		A9A0671F1A3D79A10059D73B /* DefaultData.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A0671E1A3D79A10059D73B /* DefaultData.m */; };
+		A9A067221A3D82C20059D73B /* ActionSheetMultiPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A067211A3D82C20059D73B /* ActionSheetMultiPicker.m */; };
+		A9A067251A3D92EB0059D73B /* ALGetPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A067241A3D92EB0059D73B /* ALGetPhoto.m */; };
+		A9A0672A1A3D92F70059D73B /* ZYQAssetPicker.Bundle in Resources */ = {isa = PBXBuildFile; fileRef = A9A067271A3D92F70059D73B /* ZYQAssetPicker.Bundle */; };
+		A9A0672B1A3D92F70059D73B /* ZYQAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A067291A3D92F70059D73B /* ZYQAssetPickerController.m */; };
 		A9A2A3FF1A2B1F0900DFA49B /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A2A3FE1A2B1F0900DFA49B /* BannerView.m */; };
 		A9B4EB791A371F120091AAAF /* CaseCollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B4EB771A371F120091AAAF /* CaseCollectViewController.m */; };
 		A9B4EB7A1A371F120091AAAF /* CaseCollectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B4EB781A371F120091AAAF /* CaseCollectViewController.xib */; };
@@ -820,6 +834,33 @@
 		A9902CA31A3432A500F08DA1 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		A9902CA41A3432A500F08DA1 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		A9902CA51A3432A500F08DA1 /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
+		A9A067021A3D76DA0059D73B /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
+		A9A067031A3D76DA0059D73B /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
+		A9A067041A3D76DA0059D73B /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
+		A9A067051A3D76DA0059D73B /* ActionSheetCustomPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetCustomPicker.m; sourceTree = "<group>"; };
+		A9A067061A3D76DA0059D73B /* ActionSheetCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPickerDelegate.h; sourceTree = "<group>"; };
+		A9A067071A3D76DA0059D73B /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDatePicker.h; sourceTree = "<group>"; };
+		A9A067081A3D76DA0059D73B /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDatePicker.m; sourceTree = "<group>"; };
+		A9A067091A3D76DA0059D73B /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDistancePicker.h; sourceTree = "<group>"; };
+		A9A0670A1A3D76DA0059D73B /* ActionSheetDistancePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDistancePicker.m; sourceTree = "<group>"; };
+		A9A0670B1A3D76DA0059D73B /* ActionSheetLocalePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetLocalePicker.h; sourceTree = "<group>"; };
+		A9A0670C1A3D76DA0059D73B /* ActionSheetLocalePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetLocalePicker.m; sourceTree = "<group>"; };
+		A9A0670D1A3D76DA0059D73B /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetStringPicker.h; sourceTree = "<group>"; };
+		A9A0670E1A3D76DA0059D73B /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetStringPicker.m; sourceTree = "<group>"; };
+		A9A0670F1A3D76DA0059D73B /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistancePickerView.h; sourceTree = "<group>"; };
+		A9A067101A3D76DA0059D73B /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
+		A9A067111A3D76DA0059D73B /* SWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActionSheet.h; sourceTree = "<group>"; };
+		A9A067121A3D76DA0059D73B /* SWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActionSheet.m; sourceTree = "<group>"; };
+		A9A0671B1A3D782B0059D73B /* DefaultData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultData.plist; sourceTree = "<group>"; };
+		A9A0671D1A3D79A10059D73B /* DefaultData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultData.h; sourceTree = "<group>"; };
+		A9A0671E1A3D79A10059D73B /* DefaultData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultData.m; sourceTree = "<group>"; };
+		A9A067201A3D82C20059D73B /* ActionSheetMultiPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetMultiPicker.h; sourceTree = "<group>"; };
+		A9A067211A3D82C20059D73B /* ActionSheetMultiPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetMultiPicker.m; sourceTree = "<group>"; };
+		A9A067231A3D92EB0059D73B /* ALGetPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALGetPhoto.h; sourceTree = "<group>"; };
+		A9A067241A3D92EB0059D73B /* ALGetPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALGetPhoto.m; sourceTree = "<group>"; };
+		A9A067271A3D92F70059D73B /* ZYQAssetPicker.Bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZYQAssetPicker.Bundle; sourceTree = "<group>"; };
+		A9A067281A3D92F70059D73B /* ZYQAssetPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYQAssetPickerController.h; sourceTree = "<group>"; };
+		A9A067291A3D92F70059D73B /* ZYQAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYQAssetPickerController.m; sourceTree = "<group>"; };
 		A9A2A3FD1A2B1F0900DFA49B /* BannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
 		A9A2A3FE1A2B1F0900DFA49B /* BannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
 		A9B4EB761A371F120091AAAF /* CaseCollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseCollectViewController.h; sourceTree = "<group>"; };
@@ -1338,6 +1379,7 @@
 				A971BCA31A20825800C018D6 /* AppDelegate.h */,
 				A971BCA41A20825800C018D6 /* AppDelegate.m */,
 				A971BC9B1A20825800C018D6 /* Supporting Files */,
+				A9A0671B1A3D782B0059D73B /* DefaultData.plist */,
 			);
 			path = JuranClient;
 			sourceTree = "<group>";
@@ -1433,6 +1475,8 @@
 		A987ED6C1A20920500CED7CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A9A067231A3D92EB0059D73B /* ALGetPhoto.h */,
+				A9A067241A3D92EB0059D73B /* ALGetPhoto.m */,
 				1441A1441A29E156004A038E /* JRMemberDetail.h */,
 				1441A1451A29E156004A038E /* JRMemberDetail.m */,
 				1441A05E1A2987FB004A038E /* JRProfileData.h */,
@@ -1467,6 +1511,10 @@
 				14555D331A36EB4100E36339 /* JRAreaInfo.m */,
 				14FE2DE91A38338800B31FBA /* PrivateMessage.h */,
 				14FE2DEA1A38338800B31FBA /* PrivateMessage.m */,
+				A9A0671D1A3D79A10059D73B /* DefaultData.h */,
+				A9A0671E1A3D79A10059D73B /* DefaultData.m */,
+				A9A067201A3D82C20059D73B /* ActionSheetMultiPicker.h */,
+				A9A067211A3D82C20059D73B /* ActionSheetMultiPicker.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1474,6 +1522,8 @@
 		A987ED6F1A20920500CED7CD /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				A9A067261A3D92F70059D73B /* ZYQAssetPickerController */,
+				A9A067011A3D76DA0059D73B /* ActionSheetPicker */,
 				14FE2DEE1A38542700B31FBA /* JSMessagesTableViewController */,
 				14361E571A344E6100F9BD94 /* PinYin */,
 				A977F8431A3099E5008682B3 /* TTTAttributedLabel */,
@@ -1758,6 +1808,40 @@
 			path = MJRefresh;
 			sourceTree = "<group>";
 		};
+		A9A067011A3D76DA0059D73B /* ActionSheetPicker */ = {
+			isa = PBXGroup;
+			children = (
+				A9A067021A3D76DA0059D73B /* AbstractActionSheetPicker.h */,
+				A9A067031A3D76DA0059D73B /* AbstractActionSheetPicker.m */,
+				A9A067041A3D76DA0059D73B /* ActionSheetCustomPicker.h */,
+				A9A067051A3D76DA0059D73B /* ActionSheetCustomPicker.m */,
+				A9A067061A3D76DA0059D73B /* ActionSheetCustomPickerDelegate.h */,
+				A9A067071A3D76DA0059D73B /* ActionSheetDatePicker.h */,
+				A9A067081A3D76DA0059D73B /* ActionSheetDatePicker.m */,
+				A9A067091A3D76DA0059D73B /* ActionSheetDistancePicker.h */,
+				A9A0670A1A3D76DA0059D73B /* ActionSheetDistancePicker.m */,
+				A9A0670B1A3D76DA0059D73B /* ActionSheetLocalePicker.h */,
+				A9A0670C1A3D76DA0059D73B /* ActionSheetLocalePicker.m */,
+				A9A0670D1A3D76DA0059D73B /* ActionSheetStringPicker.h */,
+				A9A0670E1A3D76DA0059D73B /* ActionSheetStringPicker.m */,
+				A9A0670F1A3D76DA0059D73B /* DistancePickerView.h */,
+				A9A067101A3D76DA0059D73B /* DistancePickerView.m */,
+				A9A067111A3D76DA0059D73B /* SWActionSheet.h */,
+				A9A067121A3D76DA0059D73B /* SWActionSheet.m */,
+			);
+			path = ActionSheetPicker;
+			sourceTree = "<group>";
+		};
+		A9A067261A3D92F70059D73B /* ZYQAssetPickerController */ = {
+			isa = PBXGroup;
+			children = (
+				A9A067271A3D92F70059D73B /* ZYQAssetPicker.Bundle */,
+				A9A067281A3D92F70059D73B /* ZYQAssetPickerController.h */,
+				A9A067291A3D92F70059D73B /* ZYQAssetPickerController.m */,
+			);
+			path = ZYQAssetPickerController;
+			sourceTree = "<group>";
+		};
 		A9D654941A27642800A80253 /* JSONModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1869,6 +1953,7 @@
 						DevelopmentTeam = 726366T28C;
 					};
 					A971BCAB1A20825800C018D6 = {
+						DevelopmentTeam = K7N89S4ZM6;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -1962,7 +2047,9 @@
 				14FE2DE81A38313800B31FBA /* PrivateMessageCell.xib in Resources */,
 				14FE2E351A38542700B31FBA /* bubble-default-outgoing-green.png in Resources */,
 				A987EE361A2093C900CED7CD /* MJRefresh.bundle in Resources */,
+				A9A0672A1A3D92F70059D73B /* ZYQAssetPicker.Bundle in Resources */,
 				14FE2E481A38542700B31FBA /* input-field@2x.png in Resources */,
+				A9A0671C1A3D782B0059D73B /* DefaultData.plist in Resources */,
 				14587E161A35DC9000D41236 /* ModifyPasswordViewController.xib in Resources */,
 				A987EE361A2093C900CED7CD /* MJRefresh.bundle in Resources */,
 				14587E1B1A35DD2600D41236 /* BindPhoneNumberViewController.xib in Resources */,
@@ -2028,15 +2115,18 @@
 				A987EDD51A20920500CED7CD /* ALLoadingView.m in Sources */,
 				A987EDFB1A20920500CED7CD /* SDWebImageManager.m in Sources */,
 				A987EDEB1A20920500CED7CD /* UIImage+ASCategory.m in Sources */,
+				A9A067221A3D82C20059D73B /* ActionSheetMultiPicker.m in Sources */,
 				A987EDF01A20920500CED7CD /* UIProgressView+ASCategory.m in Sources */,
 				A9C398401A29BC24006A8AAB /* ForgetViewController.m in Sources */,
 				A987EDDB1A20920500CED7CD /* ASPlaceholderTextView.m in Sources */,
 				1476DA8A1A21DAF30006E9E0 /* JRDesigner.m in Sources */,
 				A987EDD61A20920500CED7CD /* ALWebView.m in Sources */,
+				A9A0672B1A3D92F70059D73B /* ZYQAssetPickerController.m in Sources */,
 				A90459CE1A27874800F8CD74 /* CaseDetailViewController.m in Sources */,
 				1441A18E1A29E3D5004A038E /* KTPhotoView+SDWebImage.m in Sources */,
 				145471DC1A38A53000428BCB /* NewQuestionViewController.m in Sources */,
 				1441A0641A29A447004A038E /* SexySwitch.m in Sources */,
+				A9A067151A3D76DA0059D73B /* ActionSheetDatePicker.m in Sources */,
 				A987EDFE1A20920500CED7CD /* UIImageView+WebCache.m in Sources */,
 				A987EE3C1A2093C900CED7CD /* UIScrollView+MJRefresh.m in Sources */,
 				14A3FDC11A2C9EB7002BEFF4 /* MyDemandViewController.m in Sources */,
@@ -2046,6 +2136,7 @@
 				A9C398371A298047006A8AAB /* JRComment.m in Sources */,
 				14587E151A35DC9000D41236 /* ModifyPasswordViewController.m in Sources */,
 				A977F8461A3099E5008682B3 /* TTTAttributedLabel.m in Sources */,
+				A9A067251A3D92EB0059D73B /* ALGetPhoto.m in Sources */,
 				A987EDEE1A20920500CED7CD /* UINavigationBar+ASCategory.m in Sources */,
 				1476DA911A21DB850006E9E0 /* DesignerCell.m in Sources */,
 				141A1D421A2CCDFA00C073C5 /* JRAnswer.m in Sources */,
@@ -2081,10 +2172,12 @@
 				A9A2A3FF1A2B1F0900DFA49B /* BannerView.m in Sources */,
 				14555D341A36EB4100E36339 /* JRAreaInfo.m in Sources */,
 				A987EE1F1A20928B00CED7CD /* NSString+MKNetworkKitAdditions.m in Sources */,
+				A9A067181A3D76DA0059D73B /* ActionSheetStringPicker.m in Sources */,
 				14ABFBF01A25DADC00C4AF65 /* RegistViewController.m in Sources */,
 				14610C6D1A39D2F9008A52C7 /* QuestionDetailViewController.m in Sources */,
 				14FE2E501A38542700B31FBA /* UIColor+JSMessagesView.m in Sources */,
 				A987EE241A20928B00CED7CD /* Reachability.m in Sources */,
+				A9A067131A3D76DA0059D73B /* AbstractActionSheetPicker.m in Sources */,
 				14FE2E511A38542700B31FBA /* UIImage+JSMessagesView.m in Sources */,
 				A987EDE91A20920500CED7CD /* UIColor+ASCategory.m in Sources */,
 				A987EDE71A20920500CED7CD /* UIAlertView+Blocks.m in Sources */,
@@ -2092,6 +2185,7 @@
 				A987EDD31A20920500CED7CD /* UIViewController+HUD.m in Sources */,
 				14555D371A36FE1F00E36339 /* MenuView.m in Sources */,
 				14ABFBE51A25B63400C4AF65 /* LoginViewController.m in Sources */,
+				A9A067141A3D76DA0059D73B /* ActionSheetCustomPicker.m in Sources */,
 				A987EDDE1A20920500CED7CD /* NSArray+ASCategory.m in Sources */,
 				A987EE3B1A2093C900CED7CD /* UIScrollView+MJExtension.m in Sources */,
 				A987EDF21A20920500CED7CD /* UITextField+ASCategory.m in Sources */,
@@ -2121,6 +2215,7 @@
 				A9C3984A1A29D98C006A8AAB /* ResetEmailViewController.m in Sources */,
 				A987EE1D1A20928B00CED7CD /* NSDate+RFC1123.m in Sources */,
 				A987EDE11A20920500CED7CD /* NSMutableArray+ASCategory.m in Sources */,
+				A9A0671F1A3D79A10059D73B /* DefaultData.m in Sources */,
 				A987EDFA1A20920500CED7CD /* SDWebImageDownloader.m in Sources */,
 				14D973941A334DFC00E771ED /* PushMessageCell.m in Sources */,
 				A971BCA11A20825800C018D6 /* main.m in Sources */,
@@ -2132,12 +2227,15 @@
 				14587E101A35D5E300D41236 /* DetailAddressViewController.m in Sources */,
 				14C8554E1A2E1A1600A15ED9 /* InteractionCell.m in Sources */,
 				A9D654B21A27642800A80253 /* NSArray+JSONModel.m in Sources */,
+				A9A067171A3D76DA0059D73B /* ActionSheetLocalePicker.m in Sources */,
 				141A1D3B1A2CC09600C073C5 /* AskOrAnswerCell.m in Sources */,
 				A93BF2951A262A290070B72A /* ServiceViewController.m in Sources */,
 				14EDB3921A3B519000E5AC77 /* VersionInfoViewController.m in Sources */,
+				A9A0671A1A3D76DA0059D73B /* SWActionSheet.m in Sources */,
 				A9D654B01A27642800A80253 /* JSONModelClassProperty.m in Sources */,
 				14FE2E2E1A38542700B31FBA /* NSString+JSMessagesView.m in Sources */,
 				14587E1A1A35DD2600D41236 /* BindPhoneNumberViewController.m in Sources */,
+				A9A067191A3D76DA0059D73B /* DistancePickerView.m in Sources */,
 				1441A18F1A29E3D5004A038E /* KTPhotoView.m in Sources */,
 				140C46ED1A2A3741003317AD /* MyFollowViewController.m in Sources */,
 				A987EDEF1A20920500CED7CD /* UINavigationController+ASCategory.m in Sources */,
@@ -2173,6 +2271,7 @@
 				145471CB1A3887A400428BCB /* NewestTopicViewController.m in Sources */,
 				14A3FDC61A2C9EDF002BEFF4 /* DemandCell.m in Sources */,
 				14D973871A32CBC000E771ED /* AnswerDetailCell.m in Sources */,
+				A9A067161A3D76DA0059D73B /* ActionSheetDistancePicker.m in Sources */,
 				141A1D3F1A2CCDE200C073C5 /* JRQuestion.m in Sources */,
 				145471C61A3885DB00428BCB /* DemandDetailViewController.m in Sources */,
 				A987EDDD1A20920500CED7CD /* MKMapView+ASCategory.m in Sources */,
@@ -2353,7 +2452,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2b24e78a-088f-4c6a-b596-97ed5fe67368";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2387,7 +2486,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2b24e78a-088f-4c6a-b596-97ed5fe67368";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

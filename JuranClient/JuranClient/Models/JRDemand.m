@@ -28,6 +28,8 @@
         self.renovationStyle = @"";
         self.neighbourhoods = @"";
         self.roomNum = @"";
+        self.livingroomCount = @"";
+        self.bathroomCount = @"";
     }
     
     return self;
@@ -71,28 +73,63 @@
 }
 
 - (NSString *)houseTypeString{
-    NSDictionary *dic =  @{@"residential" : @"住宅空间",
-                           @"catering": @"餐饮空间",
-                           @"office": @"办公空间",
-                           @"hotel": @"酒店空间",
-                           @"commercial": @"商业展示",
-                           @"entertainment": @"娱乐空间",
-                           @"leisure": @"休闲场所",
-                           @"culture": @"文化空间",
-                           @"medical": @"医疗机构",
-                           @"salescenter": @"售楼中心",
-                           @"financial": @"金融场所",
-                           @"movement": @"运动场所",
-                           @"education": @"教育机构",
-                           @"other": @"其他"};
     if (_houseType.length == 0) {
         return @"";
     }
-    return dic[_houseType];
+    NSArray *houseType = [[DefaultData sharedData] houseType];
+    for (int i = 0; i<[houseType count]; i++) {
+        NSDictionary *row = [houseType objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.houseType]) {
+            return [row objectForKey:@"k"];
+        }
+    }
+    
+    return @"";
 }
 
 - (NSString *)renovationStyleString{
+    if (self.renovationStyle.length == 0) {
+        return @"";
+    }
+    NSArray *renovationStyle = [[DefaultData sharedData] renovationStyle];
+    for (int i = 0; i<[renovationStyle count]; i++) {
+        NSDictionary *row = [renovationStyle objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.renovationStyle]) {
+            return [row objectForKey:@"k"];
+        }
+    }
+    
     return @"";
+}
+
+- (NSString *)roomNumString{
+    NSMutableArray *retVals = [NSMutableArray array];
+    
+    NSArray *roomNum = [[DefaultData sharedData] roomNum];
+    for (int i = 0; i<[roomNum count]; i++) {
+        NSDictionary *row = [roomNum objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.roomNum]) {
+            [retVals addObject:[row objectForKey:@"k"]];
+        }
+    }
+    
+    NSArray *livingroomCount = [[DefaultData sharedData] livingroomCount];
+    for (int i = 0; i<[livingroomCount count]; i++) {
+        NSDictionary *row = [livingroomCount objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.livingroomCount]) {
+            [retVals addObject:[row objectForKey:@"k"]];
+        }
+    }
+    
+    NSArray *bathroomCount = [[DefaultData sharedData] bathroomCount];
+    for (int i = 0; i<[bathroomCount count]; i++) {
+        NSDictionary *row = [bathroomCount objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.bathroomCount]) {
+            [retVals addObject:[row objectForKey:@"k"]];
+        }
+    }
+    
+    return [retVals componentsJoinedByString:@""];
 }
 
 - (NSString*)statusString{

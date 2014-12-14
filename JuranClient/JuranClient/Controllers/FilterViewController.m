@@ -136,7 +136,6 @@
             _rows = @[
                       @[@{@"k":@"混搭",@"v":@"mashup"},
                         @{@"k":@"欧式",@"v":@"european"},
-                        @{@"k":@"混搭",@"v":@"mashup"},
                         @{@"k":@"中式",@"v":@"chinese"},
                         @{@"k":@"新古典",@"v":@"newClassical"},
                         @{@"k":@"东南亚",@"v":@"eastSourthAsia"},

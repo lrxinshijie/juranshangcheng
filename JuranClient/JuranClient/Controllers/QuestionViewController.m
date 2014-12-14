@@ -54,7 +54,7 @@
         [weakSelf loadData];
     }];
     
-    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeDesigner defaultData:_filterData];
+    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeQuestion defaultData:_filterData];
     _filterView.delegate = self;
     _tableView.tableHeaderView = _filterView;
     

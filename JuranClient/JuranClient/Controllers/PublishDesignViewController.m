@@ -10,6 +10,10 @@
 #import "JRDemand.h"
 #import "JRAreaInfo.h"
 #import "BaseAddressViewController.h"
+#import "DemandEditTextViewController.h"
+#import "ActionSheetStringPicker.h"
+#import "ActionSheetMultiPicker.h"
+#import "ALGetPhoto.h"
 
 @interface PublishDesignViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -19,6 +23,7 @@
 @property (nonatomic, strong) UIImageView *photoImageView;
 @property (nonatomic, strong) JRDemand *demand;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
+@property (nonatomic, strong) UIImage *fileImage;
 
 
 @end
@@ -53,7 +58,12 @@
 }
 
 - (void)reloadData{
-    self.values = @[_demand.contactsName,_demand.contactsMobile, _demand.houseTypeString, _demand.budget,[NSString stringWithFormat:@"%d",_demand.houseArea],_demand.renovationStyleString,_demand.areaInfo.cityName ? _demand.areaInfo.cityName : @"",_demand.neighbourhoods,_demand.roomNum,@"可选"];
+    self.values = @[_demand.contactsName,_demand.contactsMobile, _demand.houseTypeString, _demand.budget,[NSString stringWithFormat:@"%d",_demand.houseArea],_demand.renovationStyleString,_demand.areaInfo.cityName ? _demand.areaInfo.cityName : @"",_demand.neighbourhoods,_demand.roomNumString,@"可选"];
+    
+    if (_fileImage) {
+        _photoImageView.image = _fileImage;
+    }
+    
     [_tableView reloadData];
 }
 
@@ -62,6 +72,7 @@
         return;
     }
     
+    [self showHUD];
     NSDictionary *param = @{@"contactsName": _demand.contactsName,
                             @"houseType": _demand.houseType,
                             @"contactsMobile": _demand.contactsMobile,
@@ -71,11 +82,16 @@
                             @"renovationStyle": _demand.renovationStyle,
                             @"neighbourhoods": _demand.neighbourhoods,
                             @"roomNum":_demand.roomNum,
+                            @"livingroomCount":_demand.livingroomCount,
+                            @"bathroomCount":_demand.bathroomCount,
                             @"areaInfo": [_demand.areaInfo dictionaryValue]
                             };
     [[ALEngine shareEngine] pathURL:JR_PUBLISH_DESIGN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
         if (!error) {
-            
+            [self showTip:@"发布需求成功"];
+            self.demand = [[JRDemand alloc] init];
+            [self reloadData];
         }
     }];
 }
@@ -140,8 +156,105 @@
         }];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 0 || indexPath.row == 1){
+    }else if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 7){
+        DemandEditTextViewController *vc = [[DemandEditTextViewController alloc] init];
+        vc.demand = _demand;
+        vc.editType = indexPath.row;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 2 || indexPath.row == 5){
+        NSMutableArray *rows = [NSMutableArray array];
+        __block NSInteger ind = 0;
+        if (indexPath.row == 2) {
+            NSArray *houseType = [[DefaultData sharedData] houseType];
+            [houseType enumerateObjectsUsingBlock:^(NSDictionary *row, NSUInteger idx, BOOL *stop) {
+                [rows addObject:[row objectForKey:@"k"]];
+                if ([[row objectForKey:@"v"] isEqualToString:_demand.houseType]) {
+                    ind = idx;
+                }
+            }];
+        }else if (indexPath.row == 5){
+            NSArray *renovationStyle = [[DefaultData sharedData] renovationStyle];
+            [renovationStyle enumerateObjectsUsingBlock:^(NSDictionary *row, NSUInteger idx, BOOL *stop) {
+                [rows addObject:[row objectForKey:@"k"]];
+                if ([[row objectForKey:@"v"] isEqualToString:_demand.renovationStyle]) {
+                    ind = idx;
+                }
+            }];
+        }
         
+        [ActionSheetStringPicker showPickerWithTitle:nil rows:rows initialSelection:ind doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+            if (indexPath.row == 2) {
+                NSArray *houseType = [[DefaultData sharedData] houseType];
+                _demand.houseType = [[houseType objectAtIndex:selectedIndex] objectForKey:@"v"];
+            }else if (indexPath.row == 5){
+                NSArray *renovationStyle = [[DefaultData sharedData] renovationStyle];
+                _demand.renovationStyle = [[renovationStyle objectAtIndex:selectedIndex] objectForKey:@"v"];
+            }
+            
+            
+            [self reloadData];
+        } cancelBlock:^(ActionSheetStringPicker *picker) {
+            
+        } origin:[UIApplication sharedApplication].keyWindow];
+    }else if (indexPath.row == 8){
+        NSMutableArray *rows = [NSMutableArray array];
+        NSMutableArray *selects = [NSMutableArray array];
+        
+        NSMutableArray *datas = [NSMutableArray array];
+        __block NSInteger ind = 0;
+        NSArray *roomNum = [[DefaultData sharedData] roomNum];
+        [roomNum enumerateObjectsUsingBlock:^(NSDictionary *row, NSUInteger idx, BOOL *stop) {
+            [datas addObject:[row objectForKey:@"k"]];
+            if ([[row objectForKey:@"v"] isEqualToString:_demand.roomNum]) {
+                ind = idx;
+            }
+        }];
+        [rows addObject:datas];
+        [selects addObject:@(ind)];
+        
+        ind = 0;
+        NSArray *livingroomCount = [[DefaultData sharedData] livingroomCount];
+        datas = [NSMutableArray array];
+        [livingroomCount enumerateObjectsUsingBlock:^(NSDictionary *row, NSUInteger idx, BOOL *stop) {
+            [datas addObject:[row objectForKey:@"k"]];
+            if ([[row objectForKey:@"v"] isEqualToString:_demand.livingroomCount]) {
+                ind = idx;
+            }
+        }];
+        [rows addObject:datas];
+        [selects addObject:@(ind)];
+        
+        ind = 0;
+        NSArray *bathroomCount = [[DefaultData sharedData] bathroomCount];
+        datas = [NSMutableArray array];
+        [bathroomCount enumerateObjectsUsingBlock:^(NSDictionary *row, NSUInteger idx, BOOL *stop) {
+            [datas addObject:[row objectForKey:@"k"]];
+            if ([[row objectForKey:@"v"] isEqualToString:_demand.bathroomCount]) {
+                ind = idx;
+            }
+        }];
+        [rows addObject:datas];
+        [selects addObject:@(ind)];
+        
+        [ActionSheetMultiPicker showPickerWithTitle:nil rows:rows initialSelection:selects doneBlock:^(ActionSheetMultiPicker *picker, NSArray *selectedIndexs, NSArray *selectedValues) {
+            NSArray *roomNum = [[DefaultData sharedData] roomNum];
+            _demand.roomNum = [[roomNum objectAtIndex:[selectedIndexs[0] integerValue]] objectForKey:@"v"];
+            
+            NSArray *livingroomCount = [[DefaultData sharedData] livingroomCount];
+            _demand.livingroomCount = [[livingroomCount objectAtIndex:[selectedIndexs[1] integerValue]] objectForKey:@"v"];
+            
+            NSArray *bathroomCount = [[DefaultData sharedData] bathroomCount];
+            _demand.bathroomCount = [[bathroomCount objectAtIndex:[selectedIndexs[2] integerValue]] objectForKey:@"v"];
+            
+            [self reloadData];
+        } cancelBlock:^(ActionSheetMultiPicker *picker) {
+            
+        } origin:[UIApplication sharedApplication].keyWindow];
+    }else if (indexPath.row == 9){
+        [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+            self.fileImage = [images firstObject];
+            [self reloadData];
+        }];
     }
 }
 
