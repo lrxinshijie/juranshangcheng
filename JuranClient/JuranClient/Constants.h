@@ -76,8 +76,8 @@ typedef enum : NSUInteger {
 } FilterViewAction;
 
 typedef enum : NSUInteger {
+    SearchTypeDesigner = 0,
     SearchTypeCase,
-    SearchTypeDesigner,
     SearchTypeQuestion,
 } SearchType;
 

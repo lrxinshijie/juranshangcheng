@@ -44,6 +44,8 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChangeNotification:) name:UITextFieldTextDidChangeNotification object:nil];
+    
     searchOptions = @[@"在设计师中搜索", @"在作品案例中搜索", @"在答疑解惑中搜索"];
     self.navigationItem.title = @"搜索";
     step = 1;
@@ -120,8 +122,7 @@
         _keywordsFooterView.hidden = NO;
     }else if (step == 2) {
         _keywordsFooterView.hidden = YES;
-        searchHistorys = [Public searchHistorysWithSearchType:_type];
-        _tableView.tableHeaderView = nil;
+        searchHistorys = [Public searchHistorys];
         //判断历史记录是否为0
         if (searchHistorys.count > 0) {
             _tableView.tableFooterView = _clearHistoryView;
@@ -132,11 +133,17 @@
             }
             _tableView.frame = frame;
         }else{
-            _tableView.tableFooterView = [[UIView alloc]init];
+            _tableView.tableFooterView = [[UIView alloc] init];
             CGRect frame = _tableView.frame;
             frame.size.height = 0;
             _tableView.frame = frame;
         }
+    }else if (step == 3){
+        _keywordsFooterView.hidden = YES;
+        _tableView.tableFooterView = [[UIView alloc] init];
+        CGRect frame = _tableView.frame;
+        frame.size.height = 35 * searchOptions.count;
+        _tableView.frame = frame;
     }
     [_tableView reloadData];
 }
@@ -169,11 +176,12 @@
 - (void)onHotWordSearch:(id)sender{
     UIButton *btn = (UIButton*)sender;
     _searchKeyWord = btn.titleLabel.text;
-    [self doSearch];
+    _textField.text = _searchKeyWord;
+    [_textField becomeFirstResponder];
 }
 
 - (IBAction)clearSearchHistor:(id)sender{
-    [Public removeAllSearchHistoryWithSearchType:_type];
+    [Public removeAllSearchHistory];
     [self reloadData];
 }
 
@@ -184,16 +192,11 @@
     }
     _searchKeyWord = _textField.text;
     [_textField resignFirstResponder];
-    [Public addSearchHistory:_textField.text searchType:_type];
+    [Public addSearchHistory:_textField.text];
     [self doSearch];
 }
 
 - (void)handleTap:(id)sender{
-    [_textField resignFirstResponder];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    [super touchesBegan:touches withEvent:event];
     [_textField resignFirstResponder];
 }
 
@@ -255,6 +258,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (step == 2) {
         _textField.text = searchHistorys[indexPath.row];
+        [self textFieldTextDidChangeNotification:nil];
+    }else if (step == 3){
+        _type = (SearchType)indexPath.row;
+        [self onSearch:nil];
     }
 }
 
@@ -266,13 +273,29 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    step = 2;
-    [self reloadData];
+    if (!(_textField.text && _textField.text.length > 0)) {
+        step = 2;
+        [self reloadData];
+    }else{
+        step = 3;
+        [self reloadData];
+    }
+    
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     step = 1;
     [self reloadData];
+}
+
+- (void)textFieldTextDidChangeNotification:(NSNotification*)notification{
+    if (!(_textField.text && _textField.text.length > 0)) {
+        step = 2;
+        [self reloadData];
+    }else{
+        step = 3;
+        [self reloadData];
+    }
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification{

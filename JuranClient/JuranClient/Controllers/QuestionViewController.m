@@ -38,16 +38,18 @@
         self.navigationItem.title = _searchKeyWord;
     }
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:_isSearchResult? kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     
-    CGRect frame = _askView.frame;
-    frame.origin.y = CGRectGetMaxY(_tableView.frame);
-    _askView.frame = frame;
-    [self.view addSubview:_askView];
+    if (!_isSearchResult) {
+        CGRect frame = _askView.frame;
+        frame.origin.y = CGRectGetMaxY(_tableView.frame);
+        _askView.frame = frame;
+        [self.view addSubview:_askView];
+    }
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
