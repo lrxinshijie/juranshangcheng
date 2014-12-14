@@ -22,4 +22,7 @@
 
 -(id)initWithType:(FilterViewType)type defaultData:(NSDictionary *)defaultData;
 
+- (void)showSort;
+- (BOOL)isShow;
+
 @end
