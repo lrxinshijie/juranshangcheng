@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *tableHeaderView;
 @property (nonatomic, strong) IBOutlet UILabel *versionLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *iconImageView;
 
 @end
 
@@ -23,6 +24,9 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     self.navigationItem.title = @"版本信息";
+    
+    _iconImageView.layer.masksToBounds = YES;
+    _iconImageView.layer.cornerRadius = 15.f;
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     [self.view addSubview:_tableView];

@@ -46,20 +46,37 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    [self configureMenu];
+    if (_searchKey.length == 0) {
+        [self configureMenu];
+        
+        [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
+    }else{
+        self.navigationItem.title = _searchKey;
+    }
     
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:_searchKey.length > 0 ? kContentFrameWithoutNavigationBar : kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = RGBColor(236, 236, 236);
     [self.view addSubview:_tableView];
     
+    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    
+    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCase defaultData:_filterData];
+    _filterView.delegate = self;
+    [_headerView addSubview:_filterView];
+    _tableView.tableHeaderView = _headerView;
+    
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
-        [weakSelf loadAd];
+        if (weakSelf.searchKey.length > 0) {
+            [weakSelf loadData];
+        }else{
+            [weakSelf loadAd];
+        }
+        
     }];
     
     [_tableView addFooterWithCallback:^{
@@ -89,32 +106,28 @@
             self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
             [_adInfos addObjectsFromArray:_adInfos];
             
-            if (!_headerView) {
-                UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 165+44)];
-                
-                self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCase defaultData:_filterData];
-                _filterView.delegate = self;
-                [headerView addSubview:_filterView];
-                
-                self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 44, kWindowWidth, 165) ImageArray:_adInfos];
-                _bannerView.delegate = self;
-                [headerView addSubview:_bannerView];
-                self.headerView = headerView;
-                
-                self.tableView.tableHeaderView = _headerView;
-            }
+            CGRect frame = _headerView.frame;
+            frame.size.height = 165 + 44;
+            _headerView.frame = frame;
             
+            self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 44, kWindowWidth, 165) ImageArray:_adInfos];
+            _bannerView.delegate = self;
+            [_headerView addSubview:_bannerView];
         }
         [self loadData];
     }];
 }
 
 - (void)loadData{
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": @"20"}];
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": @"10"}];
     [param addEntriesFromDictionary:self.filterData];
     
+    if (_searchKey.length > 0) {
+        [param setObject:_searchKey forKey:@"keyword"];
+    }
+    
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_PROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:_searchKey.length > 0 ? JR_SEARCH_CASE : JR_PROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             NSArray *projectList = [data objectForKey:@"projectList"];
@@ -198,12 +211,6 @@
     JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
-    
-//    [cs loadDetail:^(BOOL result) {
-//        if (result) {
-//            
-//        }
-//    }];
 }
 
 - (void)EScrollerViewDidClicked:(NSUInteger)index{

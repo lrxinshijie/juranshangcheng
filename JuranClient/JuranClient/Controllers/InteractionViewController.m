@@ -108,12 +108,12 @@
         if (_segment.selectedSegmentIndex == 0) {
             _noDatasView.hidden = YES;
             if (_caseDatas.count == 0) {
-                _noDatasView.hidden = NO;
+//                _noDatasView.hidden = NO;
             }
         }else{
             _noDatasView.hidden = YES;
             if (_topicDatas.count == 0) {
-                _noDatasView.hidden = NO;
+//                _noDatasView.hidden = NO;
             }
         }
     });
@@ -148,7 +148,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 145;
+    return 145 + (indexPath.row == 4?5:0);
 }
 
 

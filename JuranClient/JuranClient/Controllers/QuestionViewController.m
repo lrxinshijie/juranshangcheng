@@ -13,7 +13,7 @@
 #import "QuestionCell.h"
 #import "QuestionDetailViewController.h"
 
-@interface QuestionViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate>
+@interface QuestionViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate, NewQuestionViewControllerDelegate>
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -54,7 +54,7 @@
         [weakSelf loadData];
     }];
     
-    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeDesigner defaultData:_filterData];
+    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeQuestion defaultData:_filterData];
     _filterView.delegate = self;
     _tableView.tableHeaderView = _filterView;
     
@@ -137,7 +137,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     JRQuestion *q = [_datas objectAtIndex:indexPath.row];
     [self.questionCell fillCellWithQuestion:q];
-    return self.questionCell.contentView.frame.size.height;
+    return self.questionCell.contentView.frame.size.height + ((indexPath.row == _datas.count - 1)?5:0);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -160,6 +160,12 @@
         _questionCell = (QuestionCell *)[nibs firstObject];
     }
     return _questionCell;
+}
+
+#pragma mark - NewQuestionViewControllerDelegate
+
+- (void)newQuestionViewController:(NewQuestionViewController *)vc{
+    [_tableView headerBeginRefreshing];
 }
 
 @end

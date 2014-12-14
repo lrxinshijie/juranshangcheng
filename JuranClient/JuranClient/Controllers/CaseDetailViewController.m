@@ -34,6 +34,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *commentTextField;
 
 @property (nonatomic, strong) JRComment *selectComment;
+@property (nonatomic, strong) UITapGestureRecognizer *tapHide;
 
 - (IBAction)onSend:(id)sender;
 
@@ -53,7 +54,7 @@
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onShare)];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
-    
+    self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard)];
     self.keys = @[@"地区", @"楼盘", @"户型", @"风格", @"面积", @"参考", @"描述"];
     self.values = @[@"", @"", @"", @"", @"", @"", @""];
     
@@ -349,10 +350,28 @@
     return YES;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [_tableView addGestureRecognizer:_tapHide];
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
+    [_tableView removeGestureRecognizer:_tapHide];
+    
     if (_selectComment && textField.text.length == 0) {
         self.selectComment = nil;
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (text.length > 200) {
+        return NO;
+    }
+    return YES;
+}
+
+- (void)hideKeyBoard{
+    [_commentTextField resignFirstResponder];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification{

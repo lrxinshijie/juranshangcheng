@@ -158,7 +158,7 @@
         }
     }else if (indexPath.section == 1){
         cell.textLabel.text = @"清除缓存";
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", [[SDImageCache sharedImageCache] getMemorySize]];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f M", [[SDImageCache sharedImageCache] getMemorySize]/1024.f/1024.f];
     }else{
         cell.textLabel.text = keysForOthers[indexPath.row];
         if (indexPath.row == 1) {

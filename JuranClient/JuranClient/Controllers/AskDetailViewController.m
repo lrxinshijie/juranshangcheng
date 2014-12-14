@@ -138,8 +138,6 @@
     }else{
         [cell fillCellWithAnswer:answer type:1];
     }
-    
-    
     return cell;
 }
 
@@ -147,11 +145,11 @@
     if (_isMyQuestion) {
         JRAnswer *answer = [_question.otherAnswers objectAtIndex:indexPath.row];
         [self.answerDetailCell fillCellWithAnswer:answer type:_question.isResolved?1:0];
-        return self.answerDetailCell.contentView.frame.size.height;
+        return self.answerDetailCell.contentView.frame.size.height + ((indexPath.row == _question.otherAnswers.count - 1)?5:0);
     }else{
         JRAnswer *answer = [_question.otherAnswers objectAtIndex:indexPath.row];
         [self.answerDetailCell fillCellWithAnswer:answer type:1];
-        return self.answerDetailCell.contentView.frame.size.height;
+        return self.answerDetailCell.contentView.frame.size.height + ((indexPath.row == _question.otherAnswers.count - 1)?5:0);
     }
 }
 

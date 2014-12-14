@@ -20,7 +20,7 @@
     _headImageView.layer.masksToBounds = YES;
     _headImageView.layer.cornerRadius = _headImageView.frame.size.width/2.f;
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(2, 5, self.frame.size.width - 4, self.frame.size.height - 5)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(5, 5, self.frame.size.width - 10, self.frame.size.height - 5)];
     view.backgroundColor = [UIColor whiteColor];
     [self.contentView insertSubview:view atIndex:0];
     

@@ -9,10 +9,11 @@
 #import "ALViewController.h"
 
 typedef enum : NSUInteger {
-    DemandEditContactsName,
-    DemandEditContactsMobile,
-    DemandEditBudget,
-    DemandEditNeighbourhoods,
+    DemandEditContactsName = 0,
+    DemandEditContactsMobile = 1,
+    DemandEditBudget = 3,
+    DemandEditNeighbourhoods = 7,
+    DemandEditHouseArea = 4
 } DemandEdit;
 
 @class JRDemand;

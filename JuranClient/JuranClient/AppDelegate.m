@@ -114,6 +114,7 @@
                                   appSecret:@"558f8c19eb566dcce87b898461b0cf24"
                                 redirectUri:@"http://www.sharesdk.cn"
                                    wbApiCls:[WeiboApi class]];
+    [ShareSDK connect163WeiboWithAppKey:@"w2sMmVpSmY4zXCIX" appSecret:@"UGqxcqJQglAZkYd57nDGmJ5z8bh5TL9A" redirectUri:@"http://demo.juran.cn/member/sinalogin.htm"];
     
     //添加QQ空间应用  注册网址  http://connect.qq.com/intro/login/
     [ShareSDK connectQZoneWithAppKey:QQHLSDKAppKey

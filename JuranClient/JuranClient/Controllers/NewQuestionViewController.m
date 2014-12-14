@@ -7,6 +7,7 @@
 //
 
 #import "NewQuestionViewController.h"
+#import "JRQuestion.h"
 
 @interface NewQuestionViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -85,11 +86,13 @@
             return;
         }
         if (!(_contentTextView.text && _contentTextView.text.length > 0)) {
-            [self showTip:@"请输入问题标题"];
+            [self showTip:@"请输入问题内容"];
             return;
         }
         step = 2;
-        [self reloadData];
+        [UIView animateWithDuration:.5 animations:^{
+            [self reloadData];
+        }];
     }else if (step == 2){
         [self commit];
     }
@@ -120,6 +123,9 @@
         if (!error) {
             step = 3;
             [self reloadData];
+            if (_delegate && [_delegate respondsToSelector:@selector(newQuestionViewController:)]) {
+                [_delegate newQuestionViewController:self];
+            }
         }
 
     }];

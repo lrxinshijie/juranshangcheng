@@ -36,11 +36,14 @@
 @property (nonatomic, copy) NSString *renovationStyle;
 @property (nonatomic, copy) NSString *neighbourhoods;
 @property (nonatomic, copy) NSString *roomNum;
+@property (nonatomic, copy) NSString *livingroomCount;
+@property (nonatomic, copy) NSString *bathroomCount;
 
 @property (nonatomic, strong) JRAreaInfo *areaInfo;
 
 - (NSString *)houseTypeString;
 - (NSString *)renovationStyleString;
+- (NSString *)roomNumString;
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 

@@ -67,7 +67,11 @@
                           @"goods": @"商品选购",
                           @"diy": @"DIY工具使用困境",
                           @"other": @"其他"};
-    return dic[_questionType];
+    NSString *s = dic[_questionType];
+    if (!(s && s.length > 0)) {
+        s = @"其他";
+    }
+    return s;
 }
 
 - (void)buildUpDetailWithValue:(id)value{

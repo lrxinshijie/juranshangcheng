@@ -39,7 +39,7 @@
     keys = @[@"账户余额", @"积分", @"经验值"];
     values = @[@"￥0.00", @"2000", @"800"];
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     [self.view addSubview:_tableView];

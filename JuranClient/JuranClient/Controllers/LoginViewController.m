@@ -50,17 +50,18 @@
 
 - (IBAction)onThirdLogin:(UIButton *)btn{
     [self onHideKeyboard:btn];
-    if (btn.tag > 1002) {
-        return;
-    }
     
     [self showHUD];
+    
+    
     ShareType type = ShareTypeQQSpace;
     if (btn.tag == 1001) {
         type = ShareTypeSinaWeibo;
+    }else if (btn.tag == 1003){
+        type = ShareType163Weibo;
     }
     
-    
+    [ShareSDK cancelAuthWithType:type];
     [ShareSDK getUserInfoWithType:type authOptions:nil result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
         if (result){
             

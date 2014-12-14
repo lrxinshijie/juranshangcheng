@@ -110,13 +110,19 @@
 - (NSArray *)sections{
     if (!_sections) {
         if (_type == FilterViewTypeCase) {
-            _sections = @[CELLDICTIONARYBUILT(@"风格", @"projectStyle"),
+            _sections = @[CELLDICTIONARYBUILT(@"擅长风格", @"style"),
                           CELLDICTIONARYBUILT(@"户型", @"roomType"),
                           CELLDICTIONARYBUILT(@"面积", @"houseArea")];
-        }else{
-            _sections = @[CELLDICTIONARYBUILT(@"从业年限", @"experience"),
-                          CELLDICTIONARYBUILT(@"擅长风格", @"style"),
-                          CELLDICTIONARYBUILT(@"快速索引", @"isRealNameAuth")];
+        }else if (_type == FilterViewTypeDesigner) {
+            _sections = @[CELLDICTIONARYBUILT(@"擅长风格", @"style"),
+                          CELLDICTIONARYBUILT(@"从业年限", @"experience"),
+                          CELLDICTIONARYBUILT(@"实名认证", @"isRealNameAuth"),
+                          CELLDICTIONARYBUILT(@"设计师称号", @"levelCode")
+                          ];
+        }else if (_type == FilterViewTypeQuestion){
+            _sections = @[CELLDICTIONARYBUILT(@"问题分类", @"questionType"),
+                          CELLDICTIONARYBUILT(@"是否回答", @"status")
+                          ];
         }
         
     }
@@ -128,9 +134,7 @@
     if (!_rows) {
         if (_type == FilterViewTypeCase) {
             _rows = @[
-                      @[@{@"k":@"日式",@"v":@"japanese"},
-                        @{@"k":@"韩式",@"v":@"kora"},
-                        @{@"k":@"混搭",@"v":@"mashup"},
+                      @[@{@"k":@"混搭",@"v":@"mashup"},
                         @{@"k":@"欧式",@"v":@"european"},
                         @{@"k":@"中式",@"v":@"chinese"},
                         @{@"k":@"新古典",@"v":@"newClassical"},
@@ -138,41 +142,60 @@
                         @{@"k":@"美式",@"v":@"america"},
                         @{@"k":@"田园",@"v":@"countryside"},
                         @{@"k":@"地中海",@"v":@"mediterranean"},
+                        @{@"k":@"韩式",@"v":@"kora"},
+                        @{@"k":@"日式",@"v":@"japanese"},
                         @{@"k":@"现代",@"v":@"modern"},
                         @{@"k":@"其他",@"v":@"other"}],
-                      @[@{@"k":@"一居室",@"v":@"R_1"},
-                        @{@"k":@"两居室",@"v":@"R_2"},
-                        @{@"k":@"三居室",@"v":@"R_3"},
-                        @{@"k":@"四居室",@"v":@"R_4"},
-                        @{@"k":@"五居室",@"v":@"R_5"},
-                        @{@"k":@"loft",@"v":@"R_loft"},
-                        @{@"k":@"复式",@"v":@"R_complex"},
-                        @{@"k":@"别墅",@"v":@"R_villadom"},
-                        @{@"k":@"小户型",@"v":@"R_little"},
-                        @{@"k":@"其他",@"v":@"R_other"}],
-                      @[@{@"k":@"60m2以下",@"v":@"0,60"},
-                        @{@"k":@"60-80m2",@"v":@"60,80"},
-                        @{@"k":@"80-120m2",@"v":@"80,120"},
-                        @{@"k":@"120m2以上",@"v":@"120,"}]
+                      @[@{@"k":@"一室",@"v":@"1"},
+                        @{@"k":@"两室",@"v":@"2"},
+                        @{@"k":@"三室",@"v":@"3"},
+                        @{@"k":@"四室",@"v":@"4"},
+                        @{@"k":@"五室",@"v":@"5"},
+                        @{@"k":@"LOFT",@"v":@"loft"},
+                        @{@"k":@"别墅",@"v":@"villadom"},
+                        @{@"k":@"其他",@"v":@"other"},
+                        @{@"k":@"小户型",@"v":@"little"}],
+                      @[@{@"k":@"60m2以下",@"v":@"AREA_0"},
+                        @{@"k":@"60-80m2",@"v":@"AREA_60"},
+                        @{@"k":@"80-120m2",@"v":@"AREA_80"},
+                        @{@"k":@"120m2以上",@"v":@"AREA_120"}]
                       ];
-        }else{
-            _rows = @[
+        }else if (_type == FilterViewTypeDesigner){
+            _rows = @[@[@{@"k":@"混搭",@"v":@"mashup"},
+                        @{@"k":@"欧式",@"v":@"european"},
+                        @{@"k":@"中式",@"v":@"chinese"},
+                        @{@"k":@"新古典",@"v":@"newClassical"},
+                        @{@"k":@"东南亚",@"v":@"eastSourthAsia"},
+                        @{@"k":@"美式",@"v":@"america"},
+                        @{@"k":@"田园",@"v":@"countryside"},
+                        @{@"k":@"地中海",@"v":@"mediterranean"},
+                        @{@"k":@"韩式",@"v":@"kora"},
+                        @{@"k":@"日式",@"v":@"japanese"},
+                        @{@"k":@"现代",@"v":@"modern"},
+                        @{@"k":@"其他",@"v":@"other"},],
                       @[@{@"k":@"2年以下",@"v":@"0,2"},
                       @{@"k":@"2-5年",@"v":@"2,5"},
                       @{@"k":@"6-10年",@"v":@"6,10"},
                         @{@"k":@"10年以上",@"v":@"10"}],
-                      @[@{@"k":@"混搭风格",@"v":@"mashup"},
-                        @{@"k":@"欧式风格",@"v":@"european"},
-                        @{@"k":@"中式风格",@"v":@"chinese"},
-                        @{@"k":@"新古典风格",@"v":@"newClassical"},
-                        @{@"k":@"东南亚风格",@"v":@"eastSourthAsia"},
-                        @{@"k":@"美式风格",@"v":@"america"},
-                        @{@"k":@"田园风格",@"v":@"countryside"},
-                        @{@"k":@"地中海风格",@"v":@"mediterranean"},
-                        @{@"k":@"现代风格",@"v":@"modern"},
-                        @{@"k":@"其他",@"v":@"other"},],
                       @[@{@"k":@"已实名认证",@"v":@"auth"},
-                        @{@"k":@"未实名认证",@"v":@"unauth"}]
+                        @{@"k":@"未实名认证",@"v":@"unauth"}],
+                      @[@{@"k":@"优秀",@"v":@"design_one"},
+                        @{@"k":@"普通",@"v":@"design_two"},
+                        @{@"k":@"资深",@"v":@"design_three"},
+                        @{@"k":@"首席",@"v":@"design_four"},
+                        @{@"k":@"主任",@"v":@"design_five"},
+                        ]
+                      ];
+        }else if (_type == FilterViewTypeQuestion){
+            _rows = @[@[@{@"k":@"账户管理",@"v":@"account"},
+                        @{@"k":@"设计疑惑",@"v":@"design"},
+                        @{@"k":@"装修前后",@"v":@"decoration"},
+                        @{@"k":@"商品选购",@"v":@"goods"},
+                        @{@"k":@"DIY工具使用困境",@"v":@"diy"},
+                        @{@"k":@"其他",@"v":@"other"}],
+                      @[@{@"k":@"默认",@"v":@""},
+                        @{@"k":@"未解决",@"v":@"unresolved"},
+                        @{@"k":@"已解决",@"v":@"resolved"}]
                       ];
         }
         

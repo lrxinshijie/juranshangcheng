@@ -187,6 +187,7 @@
         [self showTip:@"回答内容不能为空"];
         return;
     }
+    [_answerTextField resignFirstResponder];
     NSDictionary *param = @{@"questionId": [NSString stringWithFormat:@"%d", _question.questionId],
                             @"content": _answerTextField.text
                             };
@@ -204,9 +205,8 @@
             answer.headUrl = user.headUrl;
             answer.content = _answerTextField.text;
             answer.commitTime = [[NSDate date] timestamp];
-            [_question.otherAnswers addObject:answer];
+            [_question.otherAnswers insertObject:answer atIndex:0];
             _answerTextField.text = @"";
-            [_answerTextField resignFirstResponder];
             [self reloadData];
         }
         
@@ -227,6 +227,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (_isResolved) {
+        if (section == 0 && _question.adoptedAnswer == nil) {
+            return 0;
+        }
         return section == 0?1:_question.otherAnswers.count;
     }else{
         return _question.otherAnswers.count;
@@ -274,6 +277,12 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (_isResolved) {
+        if (section == 0 && _question.adoptedAnswer == nil) {
+            return nil;
+        }
+        if (section == 1 && _question.otherAnswers == 0) {
+            return nil;
+        }
         return section == 0?_resolvedAdoptedHeaderView:_resolvedUnAdoptedHeaderView;
     }else{
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1)];
