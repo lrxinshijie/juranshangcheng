@@ -56,13 +56,18 @@
 }
 
 - (NSString*)descriptionForCell{
+    
+    return [NSString stringWithFormat:@"%@ | %@", _nickName.length?_nickName:_account, [self questionTypeString]];
+}
+
+- (NSString*)questionTypeString{
     NSDictionary *dic = @{@"account": @"账户管理",
                           @"design": @"设计疑惑",
                           @"decoration": @"装修前后",
                           @"goods": @"商品选购",
                           @"diy": @"DIY工具使用困境",
                           @"other": @"其他"};
-    return [NSString stringWithFormat:@"%@ | %@", _nickName.length?_nickName:_account, dic[_questionType]];
+    return dic[_questionType];
 }
 
 - (void)buildUpDetailWithValue:(id)value{

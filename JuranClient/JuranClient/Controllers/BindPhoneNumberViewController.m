@@ -7,7 +7,6 @@
 //
 
 #import "BindPhoneNumberViewController.h"
-#import "JRMemberDetail.h"
 
 @interface BindPhoneNumberViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -32,7 +31,7 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [self setupUI];
-    if (_memberDetail.mobileNum && _memberDetail.mobileNum.length > 0) {
+    if (_user.mobileNum && _user.mobileNum.length > 0) {
         step = 1;
         self.navigationItem.title = @"安全验证";
     }else{
@@ -47,7 +46,7 @@
         self.navigationItem.title = @"安全验证";
         _phoneTextField.hidden = YES;
         _oldPhoneLabel.hidden = NO;
-        _oldPhoneLabel.text = [_memberDetail mobileNumForBindPhone];
+        _oldPhoneLabel.text = [_user mobileNumForBindPhone];
         [_commiteButton setTitle:@"验证" forState:UIControlStateNormal];
     }else{
         self.navigationItem.title = @"绑定手机号码";
@@ -81,7 +80,7 @@
 - (IBAction)getCaptcha:(id)sender{
     NSDictionary *param = nil;
     if (step == 1) {
-        param = @{@"mobileNum": _memberDetail.mobileNum,
+        param = @{@"mobileNum": _user.mobileNum,
                   @"mobileType": @"P04"
                   };
     }else if (step == 2){

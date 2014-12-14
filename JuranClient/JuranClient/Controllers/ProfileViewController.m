@@ -59,6 +59,8 @@
     
     [self configureMenu];
     
+    _user = [JRUser currentUser];
+    
     titleArray = @[@"互动", @"我的关注", @"我的收藏", @"订单管理", @"账户管理", @"账户安全"];
     imageArray = @[@"icon_personal_hudong.png", @"icon_personal_guanzhu.png", @"icon_personal_shouchang.png", @"icon_personal_ddgl.png", @"icon_personal_zhgl.png", @"icon_personal_zhaq"];
     [self setupUI];
@@ -94,16 +96,16 @@
     _unLoginLabel.hidden = [JRUser isLogin];
     _loginNameLabel.hidden = ![JRUser isLogin];
     _userNameLabel.hidden = ![JRUser isLogin];
-    _userNameLabel.text = _profileData.nickName;
-    [_headerImageView setImageWithURLString:_profileData.headUrl];
-    _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _profileData.account];
-    _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _profileData.newPushMsgCount];
-    _privateLetterCountLabel.hidden = [JRUser isLogin] && _profileData.newPushMsgCount?NO:YES;
-    _signedButton.enabled = !_profileData.isSigned;
-    [_signedButton setTitle:_profileData.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
-    _hasNewAnswerView.hidden = [JRUser isLogin] && _profileData.newAnswerCount?NO:YES;
-    _hasNewBidView.hidden = [JRUser isLogin] && _profileData.hasNewBidCount?NO:YES;
-    _hasNewPushMsgView.hidden = [JRUser isLogin] && _profileData.newPushMsgCount?NO:YES;
+    _userNameLabel.text = _user.nickName;
+    [_headerImageView setImageWithURLString:_user.headUrl];
+    _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _user.account];
+    _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _user.newPushMsgCount];
+    _privateLetterCountLabel.hidden = [JRUser isLogin] && _user.newPushMsgCount?NO:YES;
+    _signedButton.enabled = !_user.isSigned;
+    [_signedButton setTitle:_user.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
+    _hasNewAnswerView.hidden = [JRUser isLogin] && _user.newAnswerCount?NO:YES;
+    _hasNewBidView.hidden = [JRUser isLogin] && _user.hasNewBidCount?NO:YES;
+    _hasNewPushMsgView.hidden = [JRUser isLogin] && _user.newPushMsgCount?NO:YES;
 }
 
 - (void)loadData{
@@ -118,7 +120,7 @@
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
-                _profileData = [[JRProfileData alloc] initWithDictionary:data];
+                [_user buildUpProfileDataWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self refreshUI];
                 });
@@ -140,10 +142,10 @@
     [[ALEngine shareEngine] pathURL:JR_SIGNIN parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            _profileData.isSigned = YES;
+            _user.isSigned = YES;
             dispatch_async(dispatch_get_main_queue(), ^{
-                _signedButton.enabled = !_profileData.isSigned;
-                [_signedButton setTitle:_profileData.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
+                _signedButton.enabled = !_user.isSigned;
+                [_signedButton setTitle:_user.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
             });
         }
     }];

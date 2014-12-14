@@ -11,8 +11,9 @@
 @interface NewQuestionViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     NSInteger step;
-    NSArray *types;
-    NSInteger selectedType;
+    NSArray *typeKeys;
+    NSArray *typeValues;
+    NSString *selectedType;
 }
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) UIButton *rightButton;
@@ -30,8 +31,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    
-    types = @[@"DIY技巧", @"设计&搭配", @"施工&装修", @"商品&选购"];
+
+    typeKeys = @[@"account", @"design", @"decoration", @"goods", @"diy", @"other"];
+    typeValues = @[@"账户管理", @"设计疑惑", @"装修前后", @"商品选购", @"DIY技巧", @"其他"];
     
     _rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onRightButton:) title:@"下一步" backgroundImage:nil];
     [_rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
@@ -62,6 +64,7 @@
         _tableView.tableFooterView = _contentView;
     }else if (step == 2){
         self.navigationItem.title = @"为问题选择分类";
+        selectedType = typeKeys[0];
         [_rightButton setTitle:@"提交" forState:UIControlStateNormal];
         _tableView.tableHeaderView = nil;
         _tableView.tableFooterView = [[UIView alloc] init];
@@ -103,7 +106,7 @@
 }
 
 - (void)commit{
-    NSDictionary *param = @{@"questionType": [NSString stringWithFormat:@"%d", selectedType],
+    NSDictionary *param = @{@"questionType": selectedType,
                             @"title": _titleTextField.text,
                             @"content": _contentTextView.text
 //                            @"imageInfo": @""
@@ -130,7 +133,7 @@
 #pragma makr - UITableViewDataSource/Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  step == 2?types.count:0;
+    return  step == 2?typeKeys.count:0;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -141,18 +144,18 @@
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.text = types[indexPath.row];
-    cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:selectedType == indexPath.row?@"question_type_selected":@"question_type_unselected"]];
+    cell.textLabel.text = typeValues[indexPath.row];
+    cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[selectedType isEqualToString:typeKeys[indexPath.row]]?@"question_type_selected":@"question_type_unselected"]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (step == 2) {
-        if (selectedType == indexPath.row) {
+        if ([selectedType isEqualToString:typeKeys[indexPath.row]]) {
             return;
         }
-        selectedType = indexPath.row;
+        selectedType = typeKeys[indexPath.row];
         [_tableView reloadData];
     }
 }

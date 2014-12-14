@@ -92,7 +92,7 @@
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
-                self.datas = [JRQuestion buildUpWithValue:designerList];
+                self.datas = rows;
             }
             
             [_tableView reloadData];

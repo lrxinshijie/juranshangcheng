@@ -73,6 +73,8 @@
     frame = self.contentView.frame;
     frame.size.height = CGRectGetHeight(_backView.frame) + 1;
     self.contentView.frame = frame;
+    
+    
 }
 
 @end

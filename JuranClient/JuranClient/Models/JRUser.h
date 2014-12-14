@@ -66,5 +66,6 @@
 - (NSString*)idCardInfomation;
 - (NSString*)homeTelForPersonal;
 - (NSString*)mobileNumForBindPhone;
+- (NSURL *)headImageURL;
 
 @end

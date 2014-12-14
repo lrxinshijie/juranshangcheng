@@ -8,10 +8,8 @@
 
 #import "ALViewController.h"
 
-@class JRMemberDetail;
-
 @interface DetailAddressViewController : ALViewController
 
-@property (nonatomic, strong) JRMemberDetail *memberDetail;
+@property (nonatomic, strong) JRUser *user;
 
 @end

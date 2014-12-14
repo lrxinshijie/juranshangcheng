@@ -8,7 +8,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AskDetailViewController">
             <connections>
                 <outlet property="answerView" destination="k1U-4c-UJH" id="lEb-AO-7Ow"/>
+                <outlet property="contentLabel" destination="w6o-Cx-mgs" id="GEH-c5-tDF"/>
                 <outlet property="headerView" destination="zyT-fC-cYY" id="QIn-gr-kXd"/>
+                <outlet property="timeAndTypeBgView" destination="gcJ-Ao-JfR" id="LRi-v8-Xmk"/>
+                <outlet property="timeLabel" destination="2PA-1Y-9HP" id="u5U-2r-IPv"/>
+                <outlet property="typeLabel" destination="Oqw-4b-yAc" id="9Fn-X6-I6g"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,7 +23,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="237" y="50"/>
         </view>
-        <view contentMode="scaleToFill" id="zyT-fC-cYY">
+        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="zyT-fC-cYY">
             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>

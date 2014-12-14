@@ -196,7 +196,13 @@
         [self.navigationController pushViewController:vc animated:YES];
 
     }else{
-        
+        AskDetailViewController *vc = [[AskDetailViewController alloc] init];
+        vc.isMyQuestion = NO;
+        JRQuestion *q = [[JRQuestion alloc] init];
+        q.questionId = 1275;
+        vc.question = q;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

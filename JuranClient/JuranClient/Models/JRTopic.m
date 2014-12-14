@@ -48,7 +48,7 @@
         self.contentUrl = [dict getStringValueForKey:@"contentUrl" defaultValue:@""];
         self.viewCount = [dict getIntValueForKey:@"viewCount" defaultValue:0];
         self.commentCount = [dict getIntValueForKey:@"commentCount" defaultValue:0];
-        self.commentImageUrlList = [JRComment buildUpWithValue:dict[@"commitList"]];
+        self.commitList = [JRComment buildUpWithValue:dict[@"commitList"]];
     }
     
     return self;
@@ -60,6 +60,18 @@
     if ([value isKindOfClass:[NSArray class]]) {
         for (NSDictionary *item in value) {
             JRTopic *t = [[JRTopic alloc] initWithDictionary:item];
+            [retVal addObject:t];
+        }
+    }
+    return retVal;
+}
+
++ (NSMutableArray *)buildUpDetailWithValue:(id)value{
+    NSMutableArray *retVal = [NSMutableArray array];
+    
+    if ([value isKindOfClass:[NSArray class]]) {
+        for (NSDictionary *item in value) {
+            JRTopic *t = [[JRTopic alloc] initWithDictionaryForDetail:item];
             [retVal addObject:t];
         }
     }

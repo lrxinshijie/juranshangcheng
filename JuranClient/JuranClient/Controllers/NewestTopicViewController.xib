@@ -7,7 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewestTopicViewController">
             <connections>
-                <outlet property="commentCountLabel" destination="dH1-bH-Y5m" id="RVF-1B-Z6p"/>
+                <outlet property="bottomView" destination="Pwg-Fp-k3R" id="M1A-kk-Pw4"/>
+                <outlet property="commentCountLabel" destination="dH1-bH-Y5m" id="vi9-gi-Jhf"/>
+                <outlet property="commentTextField" destination="e4b-wP-FHA" id="ju1-NG-s4G"/>
+                <outlet property="commentView" destination="XHb-Cr-83b" id="jKM-5V-KlH"/>
                 <outlet property="headerView" destination="t43-hW-djg" id="hdS-bg-Jr0"/>
                 <outlet property="tableHeaderView" destination="FKs-2z-9fY" id="Gxy-5f-zx3"/>
                 <outlet property="timeLabel" destination="x6r-o0-ddZ" id="uer-Iq-4yc"/>
@@ -17,7 +20,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -95,10 +98,90 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="500" y="265.5"/>
         </view>
+        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="XHb-Cr-83b">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case-detail-text" id="M8M-yo-bXf">
+                    <rect key="frame" x="8" y="5" width="240" height="39"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="r7V-58-CPO">
+                    <rect key="frame" x="253" y="5" width="62" height="39"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="发送" backgroundImage="case-detail-send">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onSend:" destination="-1" eventType="touchUpInside" id="ior-B9-vtk"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="写评论" minimumFontSize="17" id="e4b-wP-FHA">
+                    <rect key="frame" x="50" y="10" width="190" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="send"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="XsA-jy-Acu"/>
+                    </connections>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="493" y="349.5"/>
+        </view>
+        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="Pwg-Fp-k3R">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6xM-mO-gKy">
+                    <rect key="frame" x="0.0" y="0.0" width="159" height="49"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="  分享" image="menu_icon_fenxiang">
+                        <color key="titleColor" red="0.61176472900000001" green="0.61568629740000003" blue="0.62352943419999995" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onShare:" destination="-1" eventType="touchUpInside" id="T2g-0e-Xo2"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" id="H4v-nr-Gtn">
+                    <rect key="frame" x="158" y="17" width="1" height="15"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.85882359743118286" green="0.85882359743118286" blue="0.85882359743118286" alpha="1" colorSpace="deviceRGB"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3nn-nA-tDw">
+                    <rect key="frame" x="161" y="0.0" width="159" height="49"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="  评论" image="case-icon-comment">
+                        <color key="titleColor" red="0.61176472902297974" green="0.61568629741668701" blue="0.62352943420410156" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onComment:" destination="-1" eventType="touchUpInside" id="6kj-ez-tNt"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="493" y="443.5"/>
+        </view>
     </objects>
     <resources>
+        <image name="case-detail-send" width="62" height="39"/>
+        <image name="case-detail-text" width="242" height="39"/>
         <image name="case-icon-comment" width="22" height="21"/>
         <image name="look_count" width="17" height="10"/>
+        <image name="menu_icon_fenxiang" width="17" height="19"/>
         <image name="sample-case-list" width="320" height="240"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

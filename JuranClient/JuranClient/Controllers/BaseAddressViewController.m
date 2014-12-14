@@ -8,7 +8,6 @@
 
 #import "BaseAddressViewController.h"
 #import "pinyin.h"
-#import "JRMemberDetail.h"
 #import "JRAreaInfo.h"
 
 @interface BaseAddressViewController ()<UITableViewDataSource, UITableViewDelegate>

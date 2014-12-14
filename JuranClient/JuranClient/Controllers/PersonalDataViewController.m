@@ -64,7 +64,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if (_memberDetail) {
+    if (_user) {
         [self reSetData];
         [_tableView reloadData];
     }
@@ -90,13 +90,13 @@
 }
 
 - (void)reSetData{
-    valuesForSection1 = @[_memberDetail.headImageURL, _memberDetail.account];
-    valuesForSection2 = @[_memberDetail.nickName,
+    valuesForSection1 = @[@"", _user.account];
+    valuesForSection2 = @[_user.nickName,
                           @"性别",
-                          _memberDetail.birthday.length == 0?@"未设置":_memberDetail.birthday,
-                          [_memberDetail locationAddress],
-                          _memberDetail.detailAddress.length == 0?@"未设置":_memberDetail.detailAddress];
-    valuesForSection3 = @[[_memberDetail homeTelForPersonal], [_memberDetail idCardInfomation], _memberDetail.qq.length == 0?@"未设置":_memberDetail.qq, _memberDetail.weixin.length == 0?@"未设置":_memberDetail.weixin];
+                          _user.birthday.length == 0?@"未设置":_user.birthday,
+                          [_user locationAddress],
+                          _user.detailAddress.length == 0?@"未设置":_user.detailAddress];
+    valuesForSection3 = @[[_user homeTelForPersonal], [_user idCardInfomation], _user.qq.length == 0?@"未设置":_user.qq, _user.weixin.length == 0?@"未设置":_user.weixin];
 }
 
 - (void)loadData{
@@ -105,7 +105,8 @@
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
-                _memberDetail = [[JRMemberDetail alloc] initWithDictionary:data];
+                _user = [JRUser currentUser];
+                [_user buildUpMemberDetailWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self reSetData];
                     [_tableView reloadData];
@@ -116,27 +117,29 @@
 }
 
 - (void)modifyMemberDetail{
-    NSDictionary *param11 = @{@"nickName": _memberDetail.nickName,
-                            @"birthday": _memberDetail.birthday,
-                            @"homeTel": _memberDetail.homeTel,
-                            @"provinceCode": _memberDetail.areaInfo.provinceCode,
-                            @"cityCode": _memberDetail.areaInfo.cityCode,
-                            @"districtCode": _memberDetail.areaInfo.districtCode,
-                            @"detailAddress": _memberDetail.detailAddress,
-                            @"zipCode": _memberDetail.zipCode,
-                            @"idCardType": _memberDetail.idCardType,
-                            @"idCardNum": _memberDetail.idCardNumber,
-                            @"qq": _memberDetail.qq,
-                            @"weixin": _memberDetail.weixin,
-                            @"account": _memberDetail.account,
+    /*
+    NSDictionary *param11 = @{@"nickName": _user.nickName,
+                            @"birthday": _user.birthday,
+                            @"homeTel": _user.homeTel,
+                            @"provinceCode": _user.areaInfo.provinceCode,
+                            @"cityCode": _user.areaInfo.cityCode,
+                            @"districtCode": _user.areaInfo.districtCode,
+                            @"detailAddress": _user.detailAddress,
+                            @"zipCode": _user.zipCode,
+                            @"idCardType": _user.idCardType,
+                            @"idCardNum": _user.idCardNumber,
+                            @"qq": _user.qq,
+                            @"weixin": _user.weixin,
+                            @"account": _user.account,
                             @"sex": @"1"
-                            };
+                        };
+    */
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
-                _memberDetail = [[JRMemberDetail alloc] initWithDictionary:data];
+                [_user buildUpMemberDetailWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self reSetData];
                     [_tableView reloadData];
@@ -231,7 +234,7 @@
             iconImageView.layer.masksToBounds = YES;
             iconImageView.layer.cornerRadius = iconImageView.frame.size.height/2;
             [view addSubview:iconImageView];
-            [iconImageView setImageWithURLString:_memberDetail.headUrl];
+            [iconImageView setImageWithURLString:_user.headUrl];
             cell.accessoryView = view;
             
         }else{
@@ -242,7 +245,7 @@
         if (indexPath.row == 1) {
             cell.textLabel.text = keysForSection2[indexPath.row];
             cell.detailTextLabel.text = @"";
-            _sexySwitch.selectedIndex = _memberDetail.sex;
+            _sexySwitch.selectedIndex = _user.sex;
             cell.accessoryView = _sexySwitch;
         }else{
             cell.textLabel.text = keysForSection2[indexPath.row];
@@ -294,14 +297,14 @@
      }
      */
     if (indexPath.section == 0 && indexPath.row == 1) {
-        ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_memberDetail type:ModifyCVTypeUserName];
+        ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeUserName];
         vc.title = keysForSection1[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.section == 1){
         switch (indexPath.row) {
             case 0:
             {
-                ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_memberDetail type:ModifyCVTypeNickName];
+                ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeNickName];
                 vc.title = keysForSection2[indexPath.row];
                 [self.navigationController pushViewController:vc animated:YES];
                 break;
@@ -309,7 +312,7 @@
             case 3:
             {
                 BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
-                [vc setAreaInfo:_memberDetail.areaInfo andAddressSelected:^(id data) {
+                [vc setAreaInfo:_user.areaInfo andAddressSelected:^(id data) {
                     JRAreaInfo *areaInfo = (JRAreaInfo*)data;
                     param = @{@"areaInfo": @{@"provinceCode": areaInfo.provinceCode,
                                              @"cityCode": areaInfo.cityCode,
@@ -323,7 +326,7 @@
             case 4:
             {
                 DetailAddressViewController *vc = [[DetailAddressViewController alloc] init];
-                vc.memberDetail = _memberDetail;
+                vc.user = _user;
                 [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
@@ -331,7 +334,7 @@
                 break;
         }
     }else if (indexPath.section == 2){
-        ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_memberDetail type:[typesForSection3[indexPath.row] integerValue]];
+        ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:[typesForSection3[indexPath.row] integerValue]];
         vc.title = keysForSection3[indexPath.row];
         vc.keyboardType = UIKeyboardTypeNumberPad;
         [self.navigationController pushViewController:vc animated:YES];

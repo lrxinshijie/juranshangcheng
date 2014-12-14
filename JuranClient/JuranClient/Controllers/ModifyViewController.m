@@ -24,10 +24,9 @@
 
 @implementation ModifyViewController
 
-- (id)initWithMemberDetail:(JRMemberDetail*)memberDetail type:(ModifyCVType)type{
-    self = [self init];
+- (id)initWithMemberDetail:(JRUser*)user type:(ModifyCVType)type{    self = [self init];
     if (self) {
-        self.memberDetail = memberDetail;
+        self.user = user;
         self.type = type;
     }
     return self;
@@ -65,43 +64,43 @@
     switch (_type) {
         case ModifyCVTypeUserName:
         {
-            _textField.text = _memberDetail.account;
+            _textField.text = _user.account;
             _tipLabel.text = @"注：用户名仅限修改一次";
             break;
         }
         case ModifyCVTypeHomeTel:
         {
-            _textField.text = _memberDetail.homeTel;
+            _textField.text = _user.homeTel;
             _tipLabel.text = @"";
             _textField.placeholder = @"请输入固定电话";
             break;
         }
         case ModifyCVTypeIdType:
         {
-            _textField.text = _memberDetail.idCardNumber;
+            _textField.text = _user.idCardNumber;
             _tipLabel.text = @"";
             _textField.placeholder = @"输入证件号码";
             idTypes = @[@"  身份证", @"  军官证", @"  护照"];
-            idCardType = _memberDetail.idCardNumber.length == 0?-1:_memberDetail.idCardNumber.integerValue;
+            idCardType = _user.idCardNumber.length == 0?-1:_user.idCardNumber.integerValue;
             break;
         }
         case ModifyCVTypeQQ:
         {
-            _textField.text = _memberDetail.qq;
+            _textField.text = _user.qq;
             _tipLabel.text = @"";
             _textField.placeholder = @"请输入QQ号码";
             break;
         }
         case ModifyCVTypeWeiXin:
         {
-            _textField.text = _memberDetail.weixin;
+            _textField.text = _user.weixin;
             _tipLabel.text = @"";
             _textField.placeholder = @"请输入微信账号";
             break;
         }
         case ModifyCVTypeNickName:
         {
-            _textField.text = _memberDetail.nickName;
+            _textField.text = _user.nickName;
             _tipLabel.text = @"";
             _textField.placeholder = @"请输入昵称";
             break;
@@ -119,7 +118,7 @@
     switch (_type) {
         case ModifyCVTypeUserName:
         {
-            if ([_textField.text isEqualToString:_memberDetail.account]) {
+            if ([_textField.text isEqualToString:_user.account]) {
                 //未修改
                 return;
             }
@@ -128,7 +127,7 @@
         }
         case ModifyCVTypeHomeTel:
         {
-            param = @{@"homeTel": _memberDetail.homeTel};
+            param = @{@"homeTel": _user.homeTel};
             break;
         }
         case ModifyCVTypeIdType:
@@ -153,7 +152,7 @@
         }
         case ModifyCVTypeNickName:
         {
-            param = @{@"nickName": _memberDetail.nickName};
+            param = @{@"nickName": _user.nickName};
             break;
         }
         default:
@@ -171,33 +170,33 @@
             switch (_type) {
                 case ModifyCVTypeNickName:
                 {
-                    _memberDetail.nickName = _textField.text;
+                    _user.nickName = _textField.text;
                     break;
                 }
                 case ModifyCVTypeWeiXin:
                 {
-                    _memberDetail.weixin = _textField.text;
+                    _user.weixin = _textField.text;
                     break;
                 }
                 case ModifyCVTypeQQ:
                 {
-                    _memberDetail.qq = _textField.text;
+                    _user.qq = _textField.text;
                     break;
                 }
                 case ModifyCVTypeHomeTel:
                 {
-                    _memberDetail.homeTel = _textField.text;
+                    _user.homeTel = _textField.text;
                     break;
                 }
                 case ModifyCVTypeUserName:
                 {
-                    _memberDetail.account = _textField.text;
+                    _user.account = _textField.text;
                     break;
                 }
                 case ModifyCVTypeIdType:
                 {
-                    _memberDetail.idCardType = [NSString stringWithFormat:@"%d", idCardType];
-                    _memberDetail.idCardNumber = _textField.text;
+                    _user.idCardType = [NSString stringWithFormat:@"%d", idCardType];
+                    _user.idCardNumber = _textField.text;
                     break;
                 }
                 default:

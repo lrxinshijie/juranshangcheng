@@ -7,7 +7,10 @@
 //
 
 #import "ALViewController.h"
+@class JRTopic;
 
 @interface NewestTopicViewController : ALViewController
+
+@property (nonatomic, strong) JRTopic *topic;
 
 @end

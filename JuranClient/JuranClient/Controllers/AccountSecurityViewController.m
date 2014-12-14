@@ -59,10 +59,10 @@
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
-                _memberDetail = [[JRMemberDetail alloc] initWithDictionary:data];
+                [_user buildUpMemberDetailWithDictionary:data];
                 values = @[@"",
-                           _memberDetail.mobileNum.length == 0?@"未绑定":[_memberDetail mobileNumForBindPhone],
-                           _memberDetail.email.length == 0?@"未绑定":_memberDetail.email];
+                           _user.mobileNum.length == 0?@"未绑定":[_user mobileNumForBindPhone],
+                           _user.email.length == 0?@"未绑定":_user.email];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [_tableView reloadData];
                 });
@@ -100,16 +100,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         ModifyPasswordViewController *vc = [[ModifyPasswordViewController alloc] init];
-        vc.memberDetail = _memberDetail;
+        vc.user = _user;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.row == 1) {
         BindPhoneNumberViewController *vc = [[BindPhoneNumberViewController alloc] init];
-        vc.memberDetail = _memberDetail;
+        vc.user = _user;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 2) {
         BindMailViewController *vc = [[BindMailViewController alloc] init];
-        vc.memberDetail = _memberDetail;
+        vc.user = _user;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

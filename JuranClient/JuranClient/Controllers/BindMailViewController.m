@@ -7,7 +7,6 @@
 //
 
 #import "BindMailViewController.h"
-#import "JRMemberDetail.h"
 
 @interface BindMailViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -30,7 +29,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [self setupUI];
     
-    if (_memberDetail.email && _memberDetail.email.length>0) {
+    if (_user.email && _user.email.length>0) {
         step = 1;
     }else{
         step = 2;
@@ -103,7 +102,7 @@
         
     }else if (indexPath.row == 1) {
         if (step == 1) {
-            cell.textLabel.text = _memberDetail.email;
+            cell.textLabel.text = _user.email;
         }else if (step == 2){
             cell.accessoryView = _mailTextField;
         }

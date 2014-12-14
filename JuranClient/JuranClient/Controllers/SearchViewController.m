@@ -17,6 +17,7 @@
     NSArray *searchHistorys;
     NSArray *searchOptions;
     NSArray *hotWords;
+    CGSize keyboardSize;
 }
 @property (nonatomic, strong) NSString *searchKeyWord;
 
@@ -31,19 +32,21 @@
 @implementation SearchViewController
 
 - (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChangeNotification:) name:UITextFieldTextDidChangeNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+    
     searchOptions = @[@"在设计师中搜索", @"在作品案例中搜索", @"在答疑解惑中搜索"];
-    self.navigationItem.title = @"系统消息";
+    self.navigationItem.title = @"搜索";
     step = 1;
     [self setupUI];
-    [self loadData];
+//    [self loadData];
     
 }
 
@@ -70,29 +73,39 @@
 }
 
 - (void)setupUI{
+    self.view.backgroundColor = RGBColor(241, 241, 241);
+    
+    UIButton *btn = [self.view buttonWithFrame:kContentFrameWithoutNavigationBar target:self action:@selector(handleTap:) image:nil];
+    [self.view addSubview:btn];
     
     CGRect frame = _headerView.frame;
     frame.origin = CGPointMake(0, 0);
     _headerView.frame = frame;
     [self.view addSubview:_headerView];
     
+    frame = _keywordsFooterView.frame;
+    frame.origin.y = CGRectGetMaxY(_headerView.frame);
+    _keywordsFooterView.frame = frame;
+    [self.view addSubview:_keywordsFooterView];
+    
     frame = kContentFrameWithoutNavigationBar;
     frame.origin.y = CGRectGetMaxY(_headerView.frame);
-    frame.size.height -= CGRectGetHeight(_headerView.frame);
+    frame.size.height = 0;
     
     self.tableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
-    self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
+    self.tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.tableHeaderView = [[UIView alloc] init];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     
-    UIButton *btn = (UIButton*)[_clearHistoryView viewWithTag:3320];
+    btn = (UIButton*)[_clearHistoryView viewWithTag:3320];
     btn.layer.masksToBounds = YES;
     btn.layer.cornerRadius = 2.f;
     
     for (NSInteger i = 0; i < 9; i++) {
         btn = (UIButton*)[_keywordsFooterView viewWithTag:kKeywordsButtonTag + i];
+        [btn addTarget:self action:@selector(onHotWordSearch:) forControlEvents:UIControlEventTouchUpInside];
         btn.layer.masksToBounds = YES;
         btn.layer.cornerRadius = 2.f;
     }
@@ -100,15 +113,29 @@
 
 - (void)reloadData{
     if (step == 1) {
-        _tableView.tableHeaderView = _keywordsFooterView;
-        _tableView.tableFooterView = [[UIView alloc] init];
+        CGRect frame = _tableView.frame;
+        frame.size.height = 0;
+        _tableView.frame = frame;
+        _keywordsFooterView.hidden = NO;
     }else if (step == 2) {
+        _keywordsFooterView.hidden = YES;
         searchHistorys = [Public searchHistorysWithSearchType:_type];
         _tableView.tableHeaderView = nil;
-        _tableView.tableFooterView = [searchHistorys.count? _clearHistoryView:[UIView alloc]init];
-    }else if (step == 3){
-        _tableView.tableHeaderView = nil;
-        _tableView.tableFooterView = _clearHistoryView;
+        //判断历史记录是否为0
+        if (searchHistorys.count > 0) {
+            _tableView.tableFooterView = _clearHistoryView;
+            CGRect frame = _tableView.frame;
+            frame.size.height = CGRectGetHeight(_clearHistoryView.frame) + 35 * searchHistorys.count;
+            if (frame.size.height > kWindowHeightWithoutNavigationBar - CGRectGetHeight(_headerView.frame) - keyboardSize.height) {
+                frame.size.height = kWindowHeightWithoutNavigationBar - CGRectGetHeight(_headerView.frame)- keyboardSize.height;
+            }
+            _tableView.frame = frame;
+        }else{
+            _tableView.tableFooterView = [[UIView alloc]init];
+            CGRect frame = _tableView.frame;
+            frame.size.height = 0;
+            _tableView.frame = frame;
+        }
     }
     [_tableView reloadData];
 }
@@ -131,6 +158,12 @@
 
 #pragma mark - Target Action
 
+- (void)onHotWordSearch:(id)sender{
+    UIButton *btn = (UIButton*)sender;
+    _searchKeyWord = btn.titleLabel.text;
+    [self doSearch];
+}
+
 - (IBAction)clearSearchHistor:(id)sender{
     [Public removeAllSearchHistoryWithSearchType:_type];
     [self reloadData];
@@ -142,8 +175,13 @@
         return;
     }
     _searchKeyWord = _textField.text;
+    [_textField resignFirstResponder];
     [Public addSearchHistory:_textField.text searchType:_type];
     [self doSearch];
+}
+
+- (void)handleTap:(id)sender{
+    [_textField resignFirstResponder];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -208,13 +246,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (step == 2) {
-        _searchKeyWord = searchHistorys[indexPath.row];
-        [self doSearch];
+        _textField.text = searchHistorys[indexPath.row];
     }
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [_textField resignFirstResponder];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -225,25 +258,25 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    if (!(_textField.text && _textField.text.length > 0)) {
-        step = 2;
-        [self reloadData];
-    }
+    step = 2;
+    [self reloadData];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    if (!(_textField.text && _textField.text.length > 0)) {
-        step = 1;
-        [self reloadData];
-    }
+    step = 1;
+    [self reloadData];
 }
 
-- (void)textFieldTextDidChangeNotification:(NSNotification*)notification{
-    if (!(_textField.text && _textField.text.length > 0)) {
-        step = 2;
-        [self reloadData];
+- (void)keyboardWillShow:(NSNotification *)notification{
+    NSDictionary *info = [notification userInfo];
+    NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
+    keyboardSize = [value CGRectValue].size;
+    
+    CGRect frame = _tableView.frame;
+    if (frame.size.height > kWindowHeightWithoutNavigationBar - CGRectGetHeight(_headerView.frame) - keyboardSize.height) {
+        frame.size.height = kWindowHeightWithoutNavigationBar - CGRectGetHeight(_headerView.frame)- keyboardSize.height;
+         _tableView.frame = frame;
     }
 }
-
 
 @end

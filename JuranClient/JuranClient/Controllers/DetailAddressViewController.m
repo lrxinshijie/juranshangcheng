@@ -7,7 +7,6 @@
 //
 
 #import "DetailAddressViewController.h"
-#import "JRMemberDetail.h"
 
 @interface DetailAddressViewController ()
 
@@ -45,7 +44,7 @@
     [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            _memberDetail.detailAddress = _textVeiw.text;
+            _user.detailAddress = _textVeiw.text;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });

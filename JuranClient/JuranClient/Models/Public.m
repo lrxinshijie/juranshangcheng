@@ -354,7 +354,7 @@
             return;
         }
     }
-    [historys addObject:keyword];
+    [historys insertObject:keyword atIndex:0];
     [kUD setObject:historys forKey:[NSString stringWithFormat:@"keywordsForSearchHistory%d", type]];
     [kUD synchronize];
 }

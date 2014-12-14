@@ -26,5 +26,6 @@
 
 - (id)initWithDictionaryForDetail:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
++ (NSMutableArray *)buildUpDetailWithValue:(id)value;
 
 @end

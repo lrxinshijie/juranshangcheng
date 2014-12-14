@@ -30,10 +30,12 @@
 @property (nonatomic, strong) NSString *imageUrl;
 @property (nonatomic, strong) NSString *questionContent;
 
+- (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
 - (BOOL)isResolved;
 - (NSString*)descriptionForCell;
+- (NSString*)questionTypeString;
 
 - (void)buildUpDetailWithValue:(id)value;
 - (void)buildUpMyQuestionDetailWithValue:(id)value;

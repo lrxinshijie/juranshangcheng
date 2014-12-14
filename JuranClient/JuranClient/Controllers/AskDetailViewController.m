@@ -18,6 +18,10 @@
 @property (nonatomic, strong) IBOutlet UIView *answerView;
 @property (nonatomic, strong) AnswerDetailCell *answerDetailCell;
 
+@property (nonatomic, strong) IBOutlet UILabel *contentLabel;
+@property (nonatomic, strong) IBOutlet UIView *timeAndTypeBgView;
+@property (nonatomic, strong) IBOutlet UILabel *typeLabel;
+@property (nonatomic, strong) IBOutlet UILabel *timeLabel;
 
 @end
 
@@ -53,10 +57,40 @@
     [[ALEngine shareEngine] pathURL:JR_GET_DEQUESTIONDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            [_question buildUpMyQuestionDetailWithValue:data];
+            if (_isMyQuestion) {
+                [_question buildUpMyQuestionDetailWithValue:data];
+            }else{
+                _question = [[JRQuestion alloc] initWithDictionary:data];
+                [_question buildUpMyQuestionDetailWithValue:data];
+            }
+            
         }
-        [_tableView reloadData];
+        [self reloadData];
     }];
+}
+
+- (void)setupHeaderView{
+    _contentLabel.text = _question.questionContent;
+    _typeLabel.text = [NSString stringWithFormat:@"分类：%@", [_question questionTypeString]];
+    _timeLabel.text = _question.publishTime;
+    
+    CGRect frame = _contentLabel.frame;
+    frame.size.height = [_contentLabel.text heightWithFont:_contentLabel.font constrainedToWidth:_contentLabel.frame.size.width];
+    _contentLabel.frame = frame;
+    
+    frame = _timeAndTypeBgView.frame;
+    frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;
+    _timeAndTypeBgView.frame = frame;
+    
+    frame = _headerView.frame;
+    frame.size.height = CGRectGetMaxY(_timeAndTypeBgView.frame);
+    _headerView.frame = frame;
+    _tableView.tableHeaderView = _headerView;
+}
+
+- (void)reloadData{
+    [self setupHeaderView];
+    [_tableView reloadData];
 }
 
 - (void)setBestAnswer:(JRAnswer*) answer{
@@ -81,34 +115,32 @@
 #pragma makr - UITableViewDataSource/Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (_isMyQuestion) {
-        return _question.otherAnswers.count;
-    }
-    return 0;
+    return _question.otherAnswers.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"AnswerDetailCell";
+    AnswerDetailCell *cell = (AnswerDetailCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        cell = (AnswerDetailCell *)[nibs firstObject];
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    JRAnswer *answer = [_question.otherAnswers objectAtIndex:indexPath.row];
     if (_isMyQuestion) {
-        static NSString *CellIdentifier = @"AnswerDetailCell";
-        AnswerDetailCell *cell = (AnswerDetailCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
-            NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-            cell = (AnswerDetailCell *)[nibs firstObject];
-        }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        JRAnswer *answer = [_question.otherAnswers objectAtIndex:indexPath.row];
         cell.delegate = nil;
         if (!_question.isResolved) {
             cell.delegate = self;
         }
         [cell fillCellWithAnswer:answer type:_question.isResolved?1:0];
-        
-        return cell;
     }else{
-        return nil;
+        [cell fillCellWithAnswer:answer type:1];
     }
+    
+    
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -116,8 +148,11 @@
         JRAnswer *answer = [_question.otherAnswers objectAtIndex:indexPath.row];
         [self.answerDetailCell fillCellWithAnswer:answer type:_question.isResolved?1:0];
         return self.answerDetailCell.contentView.frame.size.height;
+    }else{
+        JRAnswer *answer = [_question.otherAnswers objectAtIndex:indexPath.row];
+        [self.answerDetailCell fillCellWithAnswer:answer type:1];
+        return self.answerDetailCell.contentView.frame.size.height;
     }
-    return 170;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

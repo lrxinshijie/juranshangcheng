@@ -53,9 +53,9 @@
 #define JR_GET_HOTWORDS [NSString stringWithFormat:@"%@/search/getHotwords.json",JR_SERVICE]
 #define JR_SEARCH_DESIGNER [NSString stringWithFormat:@"%@/search/searchDesigner.json",JR_SERVICE]
 #define JR_GET_MYDEMANDDETAIL [NSString stringWithFormat:@"%@/design/getMyDesignReqDetailInfo.json",JR_SERVICE]
-
-
-
+#define JR_GET_TOPICDETAIL [NSString stringWithFormat:@"%@/topic/getTopicDetail.json",JR_SERVICE]
+#define JR_COMMIT_TOPIC [NSString stringWithFormat:@"%@/topic/commitTopic.json",JR_SERVICE]
+#define JR_GET_OLDTOPICLIST [NSString stringWithFormat:@"%@/topic/getOldTopicList.json",JR_SERVICE]
 
 
 

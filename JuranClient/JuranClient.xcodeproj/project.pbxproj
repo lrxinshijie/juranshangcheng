@@ -98,6 +98,8 @@
 		14610C731A39ED20008A52C7 /* AnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14610C711A39ED20008A52C7 /* AnswerCell.xib */; };
 		14646DB11A3C76D000E5D6F6 /* BidDesignerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14646DAF1A3C76D000E5D6F6 /* BidDesignerCell.m */; };
 		14646DB21A3C76D000E5D6F6 /* BidDesignerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14646DB01A3C76D000E5D6F6 /* BidDesignerCell.xib */; };
+		14646DB61A3CA1A500E5D6F6 /* OldTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14646DB41A3CA1A500E5D6F6 /* OldTopicViewController.m */; };
+		14646DB71A3CA1A500E5D6F6 /* OldTopicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14646DB51A3CA1A500E5D6F6 /* OldTopicViewController.xib */; };
 		1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */; };
 		1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */; };
 		1476DA8A1A21DAF30006E9E0 /* JRDesigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA891A21DAF30006E9E0 /* JRDesigner.m */; };
@@ -476,6 +478,9 @@
 		14646DAE1A3C76D000E5D6F6 /* BidDesignerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidDesignerCell.h; sourceTree = "<group>"; };
 		14646DAF1A3C76D000E5D6F6 /* BidDesignerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidDesignerCell.m; sourceTree = "<group>"; };
 		14646DB01A3C76D000E5D6F6 /* BidDesignerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BidDesignerCell.xib; sourceTree = "<group>"; };
+		14646DB31A3CA1A500E5D6F6 /* OldTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldTopicViewController.h; sourceTree = "<group>"; };
+		14646DB41A3CA1A500E5D6F6 /* OldTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldTopicViewController.m; sourceTree = "<group>"; };
+		14646DB51A3CA1A500E5D6F6 /* OldTopicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OldTopicViewController.xib; sourceTree = "<group>"; };
 		1476DA831A21DAC50006E9E0 /* DesignerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DesignerDetailViewController.h; sourceTree = "<group>"; };
 		1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DesignerDetailViewController.m; sourceTree = "<group>"; };
 		1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DesignerDetailViewController.xib; sourceTree = "<group>"; };
@@ -1426,6 +1431,9 @@
 				145471C81A3887A400428BCB /* NewestTopicViewController.h */,
 				145471C91A3887A400428BCB /* NewestTopicViewController.m */,
 				145471CA1A3887A400428BCB /* NewestTopicViewController.xib */,
+				14646DB31A3CA1A500E5D6F6 /* OldTopicViewController.h */,
+				14646DB41A3CA1A500E5D6F6 /* OldTopicViewController.m */,
+				14646DB51A3CA1A500E5D6F6 /* OldTopicViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1989,6 +1997,7 @@
 				14FE2E4A1A38542700B31FBA /* send-highlighted@2x.png in Resources */,
 				14FE2E3C1A38542700B31FBA /* bubble-square-incoming-selected@2x.png in Resources */,
 				14FE2E451A38542700B31FBA /* input-bar.png in Resources */,
+				14646DB71A3CA1A500E5D6F6 /* OldTopicViewController.xib in Resources */,
 				14FE2E411A38542700B31FBA /* bubble-square-outgoing.png in Resources */,
 				14FE2E391A38542700B31FBA /* bubble-default-outgoing.png in Resources */,
 				14FE2E3E1A38542700B31FBA /* bubble-square-incoming@2x.png in Resources */,
@@ -2118,6 +2127,7 @@
 				14D9738B1A33138900E771ED /* JRDemand.m in Sources */,
 				A987EE5F1A209E7900CED7CD /* CaseCell.m in Sources */,
 				14FE2E281A38542700B31FBA /* JSBubbleMessageCell.m in Sources */,
+				14646DB61A3CA1A500E5D6F6 /* OldTopicViewController.m in Sources */,
 				A9C3984A1A29D98C006A8AAB /* ResetEmailViewController.m in Sources */,
 				A987EE1D1A20928B00CED7CD /* NSDate+RFC1123.m in Sources */,
 				A987EDE11A20920500CED7CD /* NSMutableArray+ASCategory.m in Sources */,
