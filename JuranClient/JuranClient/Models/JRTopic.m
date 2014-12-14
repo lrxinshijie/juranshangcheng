@@ -7,6 +7,7 @@
 //
 
 #import "JRTopic.h"
+#import "JRComment.h"
 
 @implementation JRTopic
 
@@ -29,6 +30,25 @@
             self.commentImageUrlList = obj;
         }
         
+    }
+    
+    return self;
+}
+
+- (id)initWithDictionaryForDetail:(NSDictionary *)dict{
+    if (self=[self init]) {
+        
+        if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+            return self;
+        }
+        
+        self.topicId = [dict getStringValueForKey:@"topicId" defaultValue:@""];
+        self.theme = [dict getStringValueForKey:@"theme" defaultValue:@""];
+        self.publishTime = [dict getStringValueForKey:@"publishTime" defaultValue:@""];
+        self.contentUrl = [dict getStringValueForKey:@"contentUrl" defaultValue:@""];
+        self.viewCount = [dict getIntValueForKey:@"viewCount" defaultValue:0];
+        self.commentCount = [dict getIntValueForKey:@"commentCount" defaultValue:0];
+        self.commentImageUrlList = [JRComment buildUpWithValue:dict[@"commitList"]];
     }
     
     return self;

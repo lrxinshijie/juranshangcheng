@@ -41,16 +41,28 @@
 
 - (void)fillCellWithAnswer:(JRAnswer *)data{
     _contentLabel.text = data.content;
-    _statusLabel.text = data.isResolved?@"已解决":@"未解决";
-    _statusImageView.image = [UIImage imageNamed:data.isResolved?@"question_unresolved":@"answer_wati_accept.png"];
+    NSString *statusText = nil;
+    NSString *statusImage = nil;
+    if ([data answerStatus] == AnswerStatusResolved) {
+        statusText = @"已解决";
+        statusImage = @"question_unresolved";
+    }else if ([data answerStatus] == AnswerStatusWatiAdopt) {
+        statusText = @"等待采纳";
+        statusImage = @"answer_wati_accept.png";
+    }else if ([data answerStatus] == AnswerStatusAdopted) {
+        statusText = @"已采纳";
+        statusImage = @"question_resolved.png";
+    }
+    _statusLabel.text = statusText;
+    _statusImageView.image = [UIImage imageNamed:statusImage];
     _timeLabel.text = data.commitTime;
     _redPointView.hidden = YES;
     [self adjustFrame];
 }
 - (void)fillCellWithQuestion:(JRQuestion *)data{
     _contentLabel.text = data.title;
-    _statusLabel.text = @"已解决";
-    _statusImageView.image = [UIImage imageNamed:data.isResolved?@"question_unresolved":@"answer_wati_accept.png"];
+    _statusLabel.text = data.isResolved?@"已解决":@"待解决";
+    _statusImageView.image = [UIImage imageNamed:data.isResolved?@"question_resolved":@"question_wati_resolve"];
     _timeLabel.text = [NSString stringWithFormat:@"回答：%d  |  %@", data.answerCount, data.publishTime];
     [self adjustFrame];
 }

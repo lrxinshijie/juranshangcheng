@@ -309,7 +309,14 @@
             case 3:
             {
                 BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
-                vc.areaInfo = _memberDetail.areaInfo;
+                [vc setAreaInfo:_memberDetail.areaInfo andAddressSelected:^(id data) {
+                    JRAreaInfo *areaInfo = (JRAreaInfo*)data;
+                    param = @{@"areaInfo": @{@"provinceCode": areaInfo.provinceCode,
+                                             @"cityCode": areaInfo.cityCode,
+                                             @"districtCode": areaInfo.districtCode
+                                             }};
+                    [self modifyMemberDetail];
+                }];
                 [self.navigationController pushViewController:vc animated:YES];
                 break;
             }

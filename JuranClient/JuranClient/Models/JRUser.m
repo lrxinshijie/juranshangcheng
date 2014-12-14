@@ -7,6 +7,7 @@
 //
 
 #import "JRUser.h"
+#import "JRAreaInfo.h"
 
 #define kLocalUserData @"kLocalUserData"
 
@@ -120,5 +121,79 @@
         }
     }];
 }
+
+- (void)buildUpProfileDataWithDictionary:(NSDictionary*)dict{
+    if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+        return ;
+    }
+    self.hasNewBidCount = [dict getIntValueForKey:@"hasNewBigCount" defaultValue:0];
+    self.newPrivateLetterCount = [dict getIntValueForKey:@"newPrivateLetterCount" defaultValue:0];
+    self.newAnswerCount = [dict getIntValueForKey:@"newAnswerCount" defaultValue:0];
+    self.newPushMsgCount = [dict getIntValueForKey:@"newPushMsgCount" defaultValue:0];
+    self.isSigned = [dict getBoolValueForKey:@"isSigned" defaultValue:FALSE];
+}
+
+- (void)buildUpMemberDetailWithDictionary:(NSDictionary *)dict{
+    if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+        return ;
+    }
+    
+    self.mobileNum = [dict getStringValueForKey:@"mobileNum" defaultValue:@""];
+    self.email = [dict getStringValueForKey:@"email" defaultValue:@""];
+    self.birthday = [dict getStringValueForKey:@"birthday" defaultValue:@""];
+    self.homeTel = [dict getStringValueForKey:@"homeTel" defaultValue:@""];
+    NSDictionary *areaDic = dict[@"areaInfo"];
+    self.areaInfo = [[JRAreaInfo alloc] initWithDictionary:areaDic];
+    self.detailAddress = [dict getStringValueForKey:@"detailAddress" defaultValue:@""];
+    self.zipCode = [dict getStringValueForKey:@"zipCode" defaultValue:@""];
+    self.idCardType = [dict getStringValueForKey:@"idCardType" defaultValue:@""];
+    self.idCardNumber = [dict getStringValueForKey:@"idCardNumber" defaultValue:@""];
+    self.qq = [dict getStringValueForKey:@"qq" defaultValue:@""];
+    self.weixin = [dict getStringValueForKey:@"weixin" defaultValue:@""];
+    self.sex = [dict getIntValueForKey:@"sex" defaultValue:0];
+    self.useablePoints = [dict getIntValueForKey:@"useablePoints" defaultValue:0];
+    self.useableExp = [dict getIntValueForKey:@"useableExp" defaultValue:0];
+    
+}
+
+- (NSString*)locationAddress{
+    NSString *address = @"";
+    if (self.areaInfo.provinceName && self.areaInfo.provinceName.length > 0) {
+        address = self.areaInfo.provinceName;
+    }
+    if (self.areaInfo.cityName && self.areaInfo.cityName.length > 0) {
+        address = [NSString stringWithFormat:@"%@-%@", address, self.areaInfo.cityName];
+    }
+    if (self.areaInfo.districtName && self.areaInfo.districtName.length > 0) {
+        address = [NSString stringWithFormat:@"%@-%@", address, self.areaInfo.districtName];
+    }
+    if (address.length == 0) {
+        return @"未设置";
+    }
+    return address;
+}
+
+- (NSString*)idCardInfomation{
+    NSArray *arr = @[@"身份证", @"军官证", @"护照"];
+    if (!(self.idCardNumber && self.idCardNumber.length > 0)) {
+        return @"未设置";
+    }
+    return [NSString stringWithFormat:@"%@:%@", arr[self.idCardType.intValue], self.idCardNumber];
+}
+
+- (NSString*)homeTelForPersonal{
+    if (_homeTel.length == 0) {
+        return @"未设置";
+    }
+    return _homeTel;
+}
+
+- (NSString*)mobileNumForBindPhone{
+    if (_mobileNum && _mobileNum.length > 0) {
+        return [NSString stringWithFormat:@"%@****%@", [_mobileNum substringToIndex:3], [_mobileNum substringFromIndex:7]];
+    }
+    return @"";
+}
+
 
 @end

@@ -10,12 +10,21 @@
 
 @interface JRTopic : NSObject
 
-@property (nonatomic, strong) NSString *topicId;
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *content;
-@property (nonatomic, strong) NSString *commentDate;
+@property (nonatomic, copy) NSString *topicId;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *commentDate;
 @property (nonatomic, strong) NSArray *commentImageUrlList;
 
+//Detail
+@property (nonatomic, copy) NSString *theme;
+@property (nonatomic, copy) NSString *publishTime;
+@property (nonatomic, copy) NSString *contentUrl;
+@property (nonatomic, assign) NSInteger viewCount;
+@property (nonatomic, assign) NSInteger commentCount;
+@property (nonatomic, strong) NSMutableArray *commitList;
+
+- (id)initWithDictionaryForDetail:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
 @end

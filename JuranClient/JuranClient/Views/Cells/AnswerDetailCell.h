@@ -7,12 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JRAnswer.h"
+@class AnswerDetailCell;
 
-@class JRAnswer;
+
+@protocol AnswerDetailCellDelegate <NSObject>
+
+- (void)answerDetailCell:(AnswerDetailCell*) cell adoptAnswer:(JRAnswer*) answer;
+
+@end
 
 @interface AnswerDetailCell : UITableViewCell
 
+@property (nonatomic, weak) id<AnswerDetailCellDelegate> delegate;
 
-- (void)fillCellWithAnswer:(JRAnswer*) answer;
+- (void)fillCellWithAnswer:(JRAnswer*) answer type:(NSInteger)type;
+
 
 @end

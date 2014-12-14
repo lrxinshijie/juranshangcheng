@@ -12,6 +12,7 @@
 
 @interface AskDetailViewController : ALViewController
 
+@property (nonatomic, assign) BOOL isMyQuestion;
 @property (nonatomic, strong) JRQuestion *question;
 
 @end

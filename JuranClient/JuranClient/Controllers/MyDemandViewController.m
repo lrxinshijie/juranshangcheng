@@ -9,6 +9,7 @@
 #import "MyDemandViewController.h"
 #import "DemandCell.h"
 #import "JRDemand.h"
+#import "DemandDetailViewController.h"
 
 @interface MyDemandViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -117,10 +118,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
-//    detailVC.designer = _datas[indexPath.row];
-//    detailVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:detailVC animated:YES];
+    DemandDetailViewController *vc = [[DemandDetailViewController alloc] init];
+    vc.demand = _datas[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

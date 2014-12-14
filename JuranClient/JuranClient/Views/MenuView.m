@@ -9,6 +9,8 @@
 #import "MenuView.h"
 #import "AppDelegate.h"
 #import "SettingsViewController.h"
+#import "QuestionViewController.h"
+#import "NewestTopicViewController.h"
 
 static CGFloat kAnimateDuration = 0.25f;
 
@@ -147,6 +149,16 @@ static CGFloat kAnimateDuration = 0.25f;
             SettingsViewController *vc = [[SettingsViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
 
+            [nav pushViewController:vc animated:YES];
+        }else if (indexPath.row == 2){
+            QuestionViewController *vc = [[QuestionViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [nav pushViewController:vc animated:YES];
+        }else if (indexPath.row == 3){
+            NewestTopicViewController *vc = [[NewestTopicViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            
             [nav pushViewController:vc animated:YES];
         }
         

@@ -10,4 +10,6 @@
 
 @interface SearchViewController : ALViewController
 
+@property (nonatomic, assign) SearchType type;
+
 @end

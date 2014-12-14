@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum : NSUInteger {
+    AnswerStatusUnResolved,
+    AnswerStatusResolved,
+    AnswerStatusWatiAdopt,
+    AnswerStatusAdopted
+} AnswerStatus;
+
 @interface JRAnswer : NSObject
 
 @property (nonatomic, assign) NSInteger answerId;
@@ -17,7 +24,22 @@
 @property (nonatomic, strong) NSString *commitTime;
 @property (nonatomic, strong) NSString *status;
 
+//
+@property (nonatomic, assign) NSInteger userId;
+@property (nonatomic, assign) NSInteger userType;
+@property (nonatomic, strong) NSString *account;
+@property (nonatomic, strong) NSString *nickName;
+@property (nonatomic, strong) NSString *imageUrl;
+@property (nonatomic, strong) NSString *headUrl;
+
+@property (nonatomic, assign) BOOL bestAnswerFlag;
+
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (BOOL)isResolved;
+- (AnswerStatus)answerStatus;
+- (NSString*)userTypeString;
+//
++ (NSMutableArray *)buildUpDetailWithValue:(id)value;
+- (id)initWithDictionaryForDetail:(NSDictionary *)dict;
 
 @end

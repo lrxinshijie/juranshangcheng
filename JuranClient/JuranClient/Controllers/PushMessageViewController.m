@@ -58,7 +58,7 @@
     [[ALEngine shareEngine] pathURL:JR_GET_MSG_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *list = [data objectForKey:@"easyHomeDesignDtotList"];
+            NSArray *list = [data objectForKey:@"webMessageList"];
             NSMutableArray *rows = [JRPushInfoMsg buildUpWithValue:list];
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];

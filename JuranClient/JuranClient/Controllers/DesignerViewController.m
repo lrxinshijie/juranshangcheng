@@ -42,11 +42,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    if (!_isSearchResult) {
+        [self configureMenu];
+        [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
+    }else{
+        self.navigationItem.title = _searchKeyWord;
+    }
     
-    [self configureMenu];
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
-    
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:_isSearchResult? kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -72,10 +75,18 @@
 
 - (NSMutableDictionary *)filterData{
     if (!_filterData) {
-        _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"experience": @"",
-                                                                      @"isRealNameAuth": @"",
-                                                                      @"style" : @"",
-                                                                      @"order": @""}];
+        if (!_isSearchResult) {
+            _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"experience": @"",
+                                                                          @"isRealNameAuth": @"",
+                                                                          @"style" : @"",
+                                                                          @"order": @""}];
+        }else{
+            _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"experience": @"",
+                                                                          @"isAuth": @"",
+                                                                          @"style" : @"",
+                                                                          @"order": @""}];
+        }
+        
     }
     return _filterData;
 }
@@ -90,24 +101,34 @@
 
 - (void)onSearch{
     SearchViewController *vc = [[SearchViewController alloc] init];
+    vc.type = SearchTypeDesigner;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)loadData{
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": @"10"}];
+    if (_isSearchResult) {
+        [param setObject:_searchKeyWord forKey:@"keyword"];
+    }
     [param addEntriesFromDictionary:self.filterData];
-    
+    NSString *url = _isSearchResult?JR_SEARCH_DESIGNER:JR_DESIGNERLIST;
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_DESIGNERLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *designerList = [data objectForKey:@"easyHomeDesignDtotList"];
-            NSMutableArray *rows = [JRDesigner buildUpWithValue:designerList];
+            NSArray *designerList = nil;
+            NSMutableArray *rows = nil;
+            if (_isSearchResult) {
+                rows = [JRDesigner buildUpSearchDesignerWithValue:data];
+            }else{
+                designerList = [data objectForKey:@"easyHomeDesignDtotList"];
+                rows = [JRDesigner buildUpWithValue:designerList];
+            }
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
-                self.datas = [JRDesigner buildUpWithValue:designerList];
+                self.datas = rows;
             }
             
             [_tableView reloadData];
