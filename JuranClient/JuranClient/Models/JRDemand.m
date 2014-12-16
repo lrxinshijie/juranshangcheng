@@ -15,6 +15,7 @@
     if (self = [super init]) {
         self.areaInfo = [[JRAreaInfo alloc] init];
         self.status = @"";
+        self.designReqId = @"";
         self.title = @"";
         self.houseType = @"";
         self.publishTime = @"";
@@ -42,7 +43,7 @@
             return self;
         }
         
-        self.designReqId = [dict getIntValueForKey:@"designReqId" defaultValue:0];
+        self.designReqId = [dict getStringValueForKey:@"designReqId" defaultValue:@""];
         self.title = [dict getStringValueForKey:@"title" defaultValue:@""];
         self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
         self.houseType = [dict getStringValueForKey:@"houseType" defaultValue:@""];
@@ -70,6 +71,27 @@
         }
     }
     return retVal;
+}
+
+- (void)buildUpDetailWithValue:(id)value{
+    if (!(value && [value isKindOfClass:[NSDictionary class]])) {
+        return;
+    }
+    self.contactsName = [value getStringValueForKey:@"contactsName" defaultValue:@""];
+    self.contactsSex = [value getStringValueForKey:@"contactsSex" defaultValue:@""];
+    self.contactsMobile = [value getStringValueForKey:@"contactsMobile" defaultValue:@""];
+    self.budget = [value getStringValueForKey:@"budget" defaultValue:@""];
+    self.renovationStyle = [value getStringValueForKey:@"renovationStyle" defaultValue:@""];
+    NSDictionary *areaDic = value[@"areaInfo"];
+    self.areaInfo = [[JRAreaInfo alloc] initWithDictionary:areaDic];
+    
+    self.neighbourhoods = [value getStringValueForKey:@"neighbourhoods" defaultValue:@""];
+    self.roomType = [value getStringValueForKey:@"roomType" defaultValue:@""];
+    self.imageUrl = [value getStringValueForKey:@"imageUrl" defaultValue:@""];
+    self.bidId = [value getStringValueForKey:@"bidId" defaultValue:@""];
+    self.deadBalance = [value getStringValueForKey:@"deadBalance" defaultValue:@""];
+//    self.bidInfoList = @[];
+    
 }
 
 - (NSString *)houseTypeString{

@@ -78,7 +78,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="9jl-x2-zZN" customClass="ASPlaceholderTextView">
-                    <rect key="frame" x="10" y="10" width="195" height="140"/>
+                    <rect key="frame" x="6" y="0.0" width="195" height="150"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>

@@ -45,7 +45,7 @@
 }
 
 - (void)fillCellWithDemand:(JRDemand*)demand{
-    _projectNumLabel.text = [NSString stringWithFormat:@"项目编号：%d", demand.designReqId];
+    _projectNumLabel.text = [NSString stringWithFormat:@"项目编号：%@", demand.designReqId];
     _timeLabel.text = @"2014-10-20";
     _titleLabel.text = demand.title;
     _addressLabel.text = demand.houseAddress;

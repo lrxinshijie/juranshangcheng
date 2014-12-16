@@ -9,6 +9,8 @@
 #import "SettingsViewController.h"
 #import "VersionInfoViewController.h"
 #import "FeedBackViewController.h"
+#import "APPRecommendViewController.h"
+
 #import "AppDelegate.h"
 #import "SDImageCache.h"
 
@@ -185,6 +187,11 @@
             [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 1){
             VersionInfoViewController *vc = [[VersionInfoViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (indexPath.row == 2){
+            
+        }else if (indexPath.row == 3){
+            APPRecommendViewController *vc = [[APPRecommendViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

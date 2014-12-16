@@ -53,7 +53,24 @@
 }
 
 - (void)onSend{
-    
+    if (!(_contactTextField.text && _contactTextField.text.length > 0)) {
+        [self showTip:@"联系方式不能为空!!!"];
+        return;
+    }
+    if (!(_contentTextView.text && _contentTextView.text.length > 0)) {
+        [self showTip:@"反馈内容不能为空!!!"];
+        return;
+    }
+    NSDictionary *param = @{@"type":@"iphone",
+                            @"contactInfo":_contactTextField.text,
+                            @"memo":_contentTextView.text};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_ADD_FEEDBACK parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            
+        }
+    }];
 }
 
 - (IBAction)doChoosseImage:(id)sender{

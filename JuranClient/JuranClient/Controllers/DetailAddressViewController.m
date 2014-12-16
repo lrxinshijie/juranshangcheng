@@ -8,9 +8,9 @@
 
 #import "DetailAddressViewController.h"
 
-@interface DetailAddressViewController ()
+@interface DetailAddressViewController ()<UITextViewDelegate>
 
-@property (nonatomic, strong) IBOutlet UITextView *textVeiw;
+@property (nonatomic, strong) IBOutlet ASPlaceholderTextView *textVeiw;
 
 @end
 
@@ -24,6 +24,8 @@
     
     self.navigationItem.title = @"详细地址";
     
+    _textVeiw.delegate = self;
+    _textVeiw.placeholder = @"请输入5-60字内的地址信息，不能全部为数字";
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave:) title:@"保存" backgroundImage:nil];
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
@@ -54,10 +56,20 @@
 
 
 - (void)onSave:(id)sender{
-    if (!(_textVeiw.text && _textVeiw.text.length > 0)) {
+    if (!(_textVeiw.text && _textVeiw.text.length > 5)) {
+        [self showTip:@"请输入5-60字内的地址信息，不能全部为数字"];
         return;
     }
     [self modifyMemberDetail];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    NSString * toBeString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    if (toBeString.length >= 120) {
+        [self showTip:@"输入地址长度不能超过60!"];
+        return NO;
+    }
+    return YES;
 }
 
 @end

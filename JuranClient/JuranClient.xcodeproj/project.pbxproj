@@ -152,6 +152,8 @@
 		14EDB38E1A3B4FE200E5AC77 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EDB38C1A3B4FE200E5AC77 /* FeedBackViewController.xib */; };
 		14EDB3921A3B519000E5AC77 /* VersionInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EDB3901A3B519000E5AC77 /* VersionInfoViewController.m */; };
 		14EDB3931A3B519000E5AC77 /* VersionInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EDB3911A3B519000E5AC77 /* VersionInfoViewController.xib */; };
+		14F4A59F1A4066D100D7AFA0 /* APPRecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F4A59D1A4066D100D7AFA0 /* APPRecommendViewController.m */; };
+		14F4A5A01A4066D100D7AFA0 /* APPRecommendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F4A59E1A4066D100D7AFA0 /* APPRecommendViewController.xib */; };
 		14FE2DE21A382FCB00B31FBA /* PrivateMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FE2DE01A382FCB00B31FBA /* PrivateMessageViewController.m */; };
 		14FE2DE31A382FCB00B31FBA /* PrivateMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FE2DE11A382FCB00B31FBA /* PrivateMessageViewController.xib */; };
 		14FE2DE71A38313800B31FBA /* PrivateMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FE2DE51A38313800B31FBA /* PrivateMessageCell.m */; };
@@ -581,6 +583,9 @@
 		14EDB38F1A3B519000E5AC77 /* VersionInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionInfoViewController.h; sourceTree = "<group>"; };
 		14EDB3901A3B519000E5AC77 /* VersionInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionInfoViewController.m; sourceTree = "<group>"; };
 		14EDB3911A3B519000E5AC77 /* VersionInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VersionInfoViewController.xib; sourceTree = "<group>"; };
+		14F4A59C1A4066D100D7AFA0 /* APPRecommendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPRecommendViewController.h; sourceTree = "<group>"; };
+		14F4A59D1A4066D100D7AFA0 /* APPRecommendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPRecommendViewController.m; sourceTree = "<group>"; };
+		14F4A59E1A4066D100D7AFA0 /* APPRecommendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APPRecommendViewController.xib; sourceTree = "<group>"; };
 		14FE2DDF1A382FCB00B31FBA /* PrivateMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateMessageViewController.h; sourceTree = "<group>"; };
 		14FE2DE01A382FCB00B31FBA /* PrivateMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateMessageViewController.m; sourceTree = "<group>"; };
 		14FE2DE11A382FCB00B31FBA /* PrivateMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateMessageViewController.xib; sourceTree = "<group>"; };
@@ -1183,6 +1188,9 @@
 				145987701A3DDDE5002AE413 /* AboutViewController.h */,
 				145987711A3DDDE5002AE413 /* AboutViewController.m */,
 				145987721A3DDDE5002AE413 /* AboutViewController.xib */,
+				14F4A59C1A4066D100D7AFA0 /* APPRecommendViewController.h */,
+				14F4A59D1A4066D100D7AFA0 /* APPRecommendViewController.m */,
+				14F4A59E1A4066D100D7AFA0 /* APPRecommendViewController.xib */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -2044,6 +2052,7 @@
 				1441A1751A29E3CD004A038E /* WeiboSDK.bundle in Resources */,
 				14FE2E4B1A38542700B31FBA /* send.png in Resources */,
 				14FE2E571A38549200B31FBA /* PrivateMessageDetailViewController.xib in Resources */,
+				14F4A5A01A4066D100D7AFA0 /* APPRecommendViewController.xib in Resources */,
 				14C953AA1A2DC0E800FE6F8D /* SubjectCell.xib in Resources */,
 				145471C71A3885DB00428BCB /* DemandDetailViewController.xib in Resources */,
 				14FE2E421A38542700B31FBA /* bubble-square-outgoing@2x.png in Resources */,
@@ -2295,6 +2304,7 @@
 				A987EE3A1A2093C900CED7CD /* MJRefreshHeaderView.m in Sources */,
 				145471CB1A3887A400428BCB /* NewestTopicViewController.m in Sources */,
 				145987731A3DDDE5002AE413 /* AboutViewController.m in Sources */,
+				14F4A59F1A4066D100D7AFA0 /* APPRecommendViewController.m in Sources */,
 				14A3FDC61A2C9EDF002BEFF4 /* DemandCell.m in Sources */,
 				14D973871A32CBC000E771ED /* AnswerDetailCell.m in Sources */,
 				A9A067161A3D76DA0059D73B /* ActionSheetDistancePicker.m in Sources */,

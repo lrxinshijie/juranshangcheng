@@ -13,6 +13,8 @@
 #import "BaseAddressViewController.h"
 #import "DetailAddressViewController.h"
 #import "JRAreaInfo.h"
+#import "ALGetPhoto.h"
+#import "ActionSheetDatePicker.h"
 
 @interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, SexySwitchDelegate, ModifyViewControllerDelegate>
 {
@@ -27,6 +29,7 @@
 }
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) SexySwitch *sexySwitch;
+@property (nonatomic, strong) UIImageView *iconImageView;
 
 @end
 
@@ -90,6 +93,9 @@
 }
 
 - (void)reSetData{
+    if (_user.headUrl && _user.headUrl.length>0) {
+        [self.iconImageView setImageWithURLString:_user.headUrl];
+    }
     valuesForSection1 = @[@"", _user.account];
     valuesForSection2 = @[_user.nickName,
                           @"性别",
@@ -138,15 +144,16 @@
     [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            if ([data isKindOfClass:[NSDictionary class]]) {
-                [_user buildUpMemberDetailWithDictionary:data];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self reSetData];
-                    [_tableView reloadData];
-                });
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self reSetData];
+                [_tableView reloadData];
+            });
         }
     }];
+}
+
+- (void)uploadHeaderImage:(UIImage*)image{
+    
 }
 
 #pragma mark - ModifyViewControllerDelegate
@@ -227,14 +234,14 @@
             UIImageView *arrowImageView = [cell imageViewWithFrame:frame image:[UIImage imageNamed:@"cellIndicator.png"]];
             [view addSubview:arrowImageView];
             
-            frame.origin = CGPointMake(view.frame.size.width - frame.size.width - 10 -50, 0);
-            frame.size = CGSizeMake(50, 50);
-            
-            UIImageView *iconImageView = [cell imageViewWithFrame:frame image:[UIImage imageNamed:@"unlogin_head.png"]];
-            iconImageView.layer.masksToBounds = YES;
-            iconImageView.layer.cornerRadius = iconImageView.frame.size.height/2;
-            [view addSubview:iconImageView];
-            [iconImageView setImageWithURLString:_user.headUrl];
+            if (self.iconImageView.superview) {
+                [self.iconImageView removeFromSuperview];
+            }
+            frame = self.iconImageView.frame;
+            frame.origin = CGPointMake(view.frame.size.width - arrowImageView.frame.size.width - 10 -50, 0);
+            self.iconImageView.frame = frame;
+            [view addSubview:self.iconImageView];
+//            [self.iconImageView setImageWithURLString:_user.headUrl];
             cell.accessoryView = view;
             
         }else{
@@ -296,10 +303,19 @@
      [self.navigationController pushViewController:vc animated:YES];
      }
      */
-    if (indexPath.section == 0 && indexPath.row == 1) {
-        ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeUserName];
-        vc.title = keysForSection1[indexPath.row];
-        [self.navigationController pushViewController:vc animated:YES];
+    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+                [self uploadHeaderImage:images[0]];
+                self.iconImageView.image = images[0];
+                [_tableView reloadData];
+            }];
+        }else if (indexPath.row == 1) {
+            ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeUserName];
+            vc.title = keysForSection1[indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }else if (indexPath.section == 1){
         switch (indexPath.row) {
             case 0:
@@ -307,6 +323,18 @@
                 ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeNickName];
                 vc.title = keysForSection2[indexPath.row];
                 [self.navigationController pushViewController:vc animated:YES];
+                break;
+            }
+            case 2:
+            {
+                [ActionSheetDatePicker showPickerWithTitle:@"生日" datePickerMode:UIDatePickerModeDate selectedDate:[NSDate date] doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
+                    _user.birthday = [(NSDate*)selectedDate stringWithFormat:[NSDate dateFormatString]];
+                    NSString *dateString = [(NSDate*)selectedDate stringWithFormat:[NSDate timestampFormatString]];
+                    param = @{@"birthday": dateString};
+                    [self modifyMemberDetail];
+                } cancelBlock:^(ActionSheetDatePicker *picker) {
+                    
+                } origin:self.view];
                 break;
             }
             case 3:
@@ -346,6 +374,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UIImageView*)iconImageView{
+    if (!_iconImageView) {
+        _iconImageView = [self.view imageViewWithFrame:CGRectMake(0, 0, 50, 50) image:[UIImage imageNamed:@"unlogin_head.png"]];
+        _iconImageView.layer.masksToBounds = YES;
+        _iconImageView.layer.cornerRadius = _iconImageView.frame.size.height/2;
+    }
+    return _iconImageView;
 }
 
 @end

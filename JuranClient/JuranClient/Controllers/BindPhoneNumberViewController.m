@@ -10,6 +10,7 @@
 
 @interface BindPhoneNumberViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
+    //1为解绑手机  2为绑定新手机
     NSInteger step;
 }
 @property (nonatomic, strong) UITableView *tableView;
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) IBOutlet UIView *step11View;
 @property (nonatomic, strong) IBOutlet UILabel *oldPhoneLabel;
 @property (nonatomic, strong) IBOutlet UIButton *commiteButton;
+@property (nonatomic, strong) UILabel *countDownLabel;
 
 @end
 
@@ -33,10 +35,8 @@
     [self setupUI];
     if (_user.mobileNum && _user.mobileNum.length > 0) {
         step = 1;
-        self.navigationItem.title = @"安全验证";
     }else{
         step = 2;
-        self.navigationItem.title = @"绑定手机号码";
     }
     [self reloadData];
 }
@@ -66,6 +66,14 @@
     _tableView.tableFooterView = _tableFooterView;
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     [self.view addSubview:_tableView];
+    
+    self.countDownLabel = [self.view labelWithFrame:CGRectMake(kWindowWidth - 100 - 15, kWindowHeightWithoutNavigationBar - 30 -15, 100, 30) text:@"" textColor:[UIColor darkGrayColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:kSystemFontSize]];
+    _countDownLabel.layer.masksToBounds = YES;
+    _countDownLabel.layer.cornerRadius = 3;
+    _countDownLabel.layer.borderColor = [UIColor darkGrayColor].CGColor;
+    _countDownLabel.layer.borderWidth = 1;
+    _countDownLabel.hidden = YES;
+    [self.view addSubview:_countDownLabel];
 }
 
 - (IBAction)onCommit:(id)sender{
