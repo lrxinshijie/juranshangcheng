@@ -10,6 +10,7 @@
 
 @interface BindMailViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
+    //1为修改绑定邮箱  2为绑定邮箱
     NSInteger step;
     BOOL isSended;
 }
@@ -39,19 +40,23 @@
 }
 
 - (void)setupUI{
-    _mailTextField = [self.view textFieldWithFrame:CGRectMake(0, 0, kWindowWidth -30, 30) borderStyle:UITextBorderStyleNone backgroundColor:[UIColor whiteColor] text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
-    _mailTextField.placeholder = @"";
-    _mailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
-    _tableView.tableFooterView = _tableFooterView;
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_tableView.frame), CGRectGetHeight(_tableView.frame))];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeightWithoutNavigationBar)];
     CGPoint center = CGPointMake(bgView.center.x, 220);
     _backgroundView.center = center;
     _backgroundView.hidden = YES;
     [bgView addSubview:_backgroundView];
-    _tableView.backgroundView = bgView;
+    [self.view addSubview:bgView];
+    
+    _mailTextField = [self.view textFieldWithFrame:CGRectMake(0, 0, kWindowWidth -30, 30) borderStyle:UITextBorderStyleNone backgroundColor:[UIColor whiteColor] text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
+    _mailTextField.placeholder = @"";
+    _mailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 0, kWindowWidth, 88) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+//    _tableView.tableFooterView = _tableFooterView;
     [self.view addSubview:_tableView];
+    
+    _tableFooterView.frame = CGRectMake(0, 88, kWindowWidth, _tableFooterView.frame.size.height);
+    [self.view addSubview:_tableFooterView];
 }
 
 - (void)reloadData{
@@ -66,10 +71,31 @@
 }
 
 - (IBAction)onSend:(id)sender{
-    isSended = YES;
-    _tableView.tableFooterView = [[UIView alloc] init];
-    _backgroundView.hidden = NO;
-    [_tableView reloadData];
+    if (!(_mailTextField.text && _mailTextField.text.length > 0)) {
+        [self showTip:@"请输入电子邮箱"];
+        return;
+    }
+    NSDictionary *param = nil;
+    if(step == 1){
+        param = @{@"email":_user.email};
+    }else if (step == 2){
+        param = @{@"email":_mailTextField.text};
+    }
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_UPDATE_BINDINGEMAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            isSended = YES;
+            _tableView.tableFooterView = [[UIView alloc] init];
+            _backgroundView.hidden = NO;
+            [_tableView reloadData];
+        }
+    }];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+    [_mailTextField resignFirstResponder];
 }
 
 #pragma mark - UITableViewDataSource/Delegate

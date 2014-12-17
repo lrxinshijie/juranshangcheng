@@ -8,8 +8,10 @@
 
 #import "NewQuestionViewController.h"
 #import "JRQuestion.h"
+#import "ALGetPhoto.h"
+#import "CanRemoveImageView.h"
 
-@interface NewQuestionViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface NewQuestionViewController ()<UITableViewDataSource, UITableViewDelegate, CanRemoveImageViewDelegate>
 {
     NSInteger step;
     NSArray *typeKeys;
@@ -23,6 +25,7 @@
 @property (nonatomic, strong) IBOutlet ASPlaceholderTextView *contentTextView;
 @property (nonatomic, strong) IBOutlet UITextField *titleTextField;
 @property (nonatomic, strong) IBOutlet UIView *commitedView;
+@property (nonatomic, strong) IBOutlet UIView *chooseView;
 
 @end
 
@@ -99,6 +102,16 @@
     
 }
 
+- (IBAction)onChooseImage:(id)sender{
+    [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+        _chooseView.hidden = YES;
+        CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:_chooseView.frame];
+        imageView.delegate = self;
+        [imageView setImage:images[0]];
+        [_contentView addSubview:imageView];
+    }];
+}
+
 - (void)back:(id)sender{
     if (step == 3 || step == 1) {
         [super back:sender];
@@ -129,6 +142,12 @@
         }
 
     }];
+}
+
+#pragma CanRemoveImageView
+
+- (void)deleteCanRemoveImageView:(CanRemoveImageView *)view{
+    _chooseView.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

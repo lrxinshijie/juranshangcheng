@@ -56,9 +56,9 @@
 #define JR_GET_TOPICDETAIL [NSString stringWithFormat:@"%@/topic/getTopicDetail.json",JR_SERVICE]
 #define JR_COMMIT_TOPIC [NSString stringWithFormat:@"%@/topic/commitTopic.json",JR_SERVICE]
 #define JR_GET_OLDTOPICLIST [NSString stringWithFormat:@"%@/topic/getOldTopicList.json",JR_SERVICE]
-
-
-
+#define JR_SEARCH_QUESTION [NSString stringWithFormat:@"%@/search/searchQuestion.json",JR_SERVICE]
+#define JR_UPDATE_BINDINGEMAIL [NSString stringWithFormat:@"%@/member/updateBindingEmail.json",JR_SERVICE]
+#define JR_ADD_FEEDBACK [NSString stringWithFormat:@"%@/support/addFeedback.json",JR_SERVICE]
 
 
 

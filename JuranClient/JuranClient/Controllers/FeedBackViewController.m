@@ -7,13 +7,16 @@
 //
 
 #import "FeedBackViewController.h"
+#import "ALGetPhoto.h"
+#import "CanRemoveImageView.h"
 
-@interface FeedBackViewController ()
+@interface FeedBackViewController ()<CanRemoveImageViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UIView *inputView;
 @property (nonatomic, strong) IBOutlet UIView *contactView;
 @property (nonatomic, strong) IBOutlet ASPlaceholderTextView *contentTextView;
 @property (nonatomic, strong) IBOutlet UITextField *contactTextField;
+@property (nonatomic, strong) IBOutlet UIView *chooseView;
 
 @end
 
@@ -50,12 +53,42 @@
 }
 
 - (void)onSend{
-    
+    if (!(_contactTextField.text && _contactTextField.text.length > 0)) {
+        [self showTip:@"联系方式不能为空!!!"];
+        return;
+    }
+    if (!(_contentTextView.text && _contentTextView.text.length > 0)) {
+        [self showTip:@"反馈内容不能为空!!!"];
+        return;
+    }
+    NSDictionary *param = @{@"type":@"iphone",
+                            @"contactInfo":_contactTextField.text,
+                            @"memo":_contentTextView.text};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_ADD_FEEDBACK parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            
+        }
+    }];
 }
 
 - (IBAction)doChoosseImage:(id)sender{
-    
+    [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+        _chooseView.hidden = YES;
+        CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:_chooseView.frame];
+        imageView.delegate = self;
+        [imageView setImage:images[0]];
+        [_inputView addSubview:imageView];
+    }];
 }
+
+#pragma CanRemoveImageView
+
+- (void)deleteCanRemoveImageView:(CanRemoveImageView *)view{
+    _chooseView.hidden = NO;
+}
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];

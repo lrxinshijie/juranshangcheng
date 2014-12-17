@@ -12,6 +12,7 @@
 #import "JRQuestion.h"
 #import "QuestionCell.h"
 #import "QuestionDetailViewController.h"
+#import "SearchViewController.h"
 
 @interface QuestionViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate, NewQuestionViewControllerDelegate>
 
@@ -30,18 +31,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    self.navigationItem.title = @"答疑解惑";
+    if (!_isSearchResult) {
+        self.navigationItem.title = @"答疑解惑";
+        [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
+    }else{
+        self.navigationItem.title = _searchKeyWord;
+    }
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:_isSearchResult? kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     
-    CGRect frame = _askView.frame;
-    frame.origin.y = CGRectGetMaxY(_tableView.frame);
-    _askView.frame = frame;
-    [self.view addSubview:_askView];
+    if (!_isSearchResult) {
+        CGRect frame = _askView.frame;
+        frame.origin.y = CGRectGetMaxY(_tableView.frame);
+        _askView.frame = frame;
+        [self.view addSubview:_askView];
+    }
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -88,10 +96,13 @@
 
 - (void)loadData{
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": @"10"}];
+    if (_isSearchResult) {
+        [param setObject:_searchKeyWord forKey:@"keyword"];
+    }
     [param addEntriesFromDictionary:self.filterData];
-    
+    NSString *url = _isSearchResult?JR_SEARCH_QUESTION:JR_GET_QUESTIONLIST;
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_GET_QUESTIONLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             NSArray *designerList = [data objectForKey:@"questionList"];
@@ -114,8 +125,16 @@
     
 }
 
+- (void)onSearch{
+    SearchViewController *vc = [[SearchViewController alloc] init];
+    vc.type = SearchTypeQuestion;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (IBAction)doAsk:(id)sender{
     NewQuestionViewController *vc = [[NewQuestionViewController alloc] init];
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

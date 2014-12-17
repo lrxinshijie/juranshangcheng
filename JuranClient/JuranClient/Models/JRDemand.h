@@ -12,7 +12,7 @@
 @class JRAreaInfo;
 @interface JRDemand : NSObject
 
-@property (nonatomic, assign) NSInteger designReqId;
+@property (nonatomic, strong) NSString *designReqId;
 @property (nonatomic, strong) NSString *status;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *houseType;
@@ -25,8 +25,6 @@
 @property (nonatomic, strong) NSString *deadline;
 @property (nonatomic, assign) NSInteger newBidNums;
 @property (nonatomic, assign) BOOL isBidded;
-
-- (NSString*)statusString;
 
 
 @property (nonatomic, copy) NSString *contactsName;
@@ -42,10 +40,20 @@
 
 @property (nonatomic, strong) JRAreaInfo *areaInfo;
 
+//Detail
+@property (nonatomic, strong) NSString *contactsSex;
+@property (nonatomic, strong) NSString *roomType;
+@property (nonatomic, strong) NSString *imageUrl;
+@property (nonatomic, strong) NSString *bidId;
+@property (nonatomic, strong) NSMutableArray *bidInfoList;
+@property (nonatomic, strong) NSString *deadBalance;
+
+- (NSString*)statusString;
 - (NSString *)houseTypeString;
 - (NSString *)renovationStyleString;
 - (NSString *)roomNumString;
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
+- (void)buildUpDetailWithValue:(id)value;
 
 @end

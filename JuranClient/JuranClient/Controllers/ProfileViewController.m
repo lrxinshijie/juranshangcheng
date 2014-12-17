@@ -93,16 +93,27 @@
 }
 
 - (void)refreshUI{
-    _unLoginLabel.hidden = [JRUser isLogin];
-    _loginNameLabel.hidden = ![JRUser isLogin];
-    _userNameLabel.hidden = ![JRUser isLogin];
-    _userNameLabel.text = _user.nickName;
-    [_headerImageView setImageWithURLString:_user.headUrl];
-    _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _user.account];
-    _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _user.newPushMsgCount];
+    if (![JRUser isLogin]) {
+        _unLoginLabel.hidden = NO;
+        _loginNameLabel.hidden = YES;
+        _userNameLabel.hidden = YES;
+        [_headerImageView setImage:[UIImage imageNamed:@"unlogin_head.png"]];
+        _signedButton.enabled = YES;
+        [_signedButton setTitle:@" 签到" forState:UIControlStateNormal];
+    }else{
+        _unLoginLabel.hidden = YES;
+        _loginNameLabel.hidden = NO;
+        _userNameLabel.hidden = NO;
+        _userNameLabel.text = _user.nickName.length?_user.nickName:_user.account;
+        _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _user.account];
+        [_headerImageView setImageWithURLString:_user.headUrl];
+        
+        _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _user.newPushMsgCount];
+        _signedButton.enabled = !_user.isSigned;
+        [_signedButton setTitle:_user.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
+    }
+
     _privateLetterCountLabel.hidden = [JRUser isLogin] && _user.newPushMsgCount?NO:YES;
-    _signedButton.enabled = !_user.isSigned;
-    [_signedButton setTitle:_user.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
     _hasNewAnswerView.hidden = [JRUser isLogin] && _user.newAnswerCount?NO:YES;
     _hasNewBidView.hidden = [JRUser isLogin] && _user.hasNewBidCount?NO:YES;
     _hasNewPushMsgView.hidden = [JRUser isLogin] && _user.newPushMsgCount?NO:YES;

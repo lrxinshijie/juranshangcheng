@@ -8,6 +8,8 @@
 
 #import "CanRemoveImageView.h"
 
+#define kMargin 15
+
 @interface CanRemoveImageView()
 
 @property (nonatomic, strong) UIImageView *imageView;
@@ -18,18 +20,18 @@
 @implementation CanRemoveImageView
 
 - (id)initWithFrame:(CGRect)frame{
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y - kMargin, CGRectGetWidth(frame) + kMargin, CGRectGetHeight(frame) + kMargin)];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame))];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kMargin, CGRectGetWidth(frame), CGRectGetHeight(frame))];
         [self addSubview:_imageView];
         
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_deleteButton setImage:[UIImage imageNamed:@"delete_image.png"] forState:UIControlStateNormal];
         [_deleteButton addTarget:self action:@selector(onDeleteImage:) forControlEvents:UIControlEventTouchUpInside];
         _deleteButton.frame = CGRectMake(0, 0, 22, 22);
-        _deleteButton.center = CGPointMake(CGRectGetWidth(frame), 0);
+        _deleteButton.center = CGPointMake(CGRectGetWidth(frame), kMargin);
         [self addSubview:_deleteButton];
     }
     return self;

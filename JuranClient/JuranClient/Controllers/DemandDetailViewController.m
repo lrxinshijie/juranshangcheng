@@ -36,13 +36,14 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"designReqId": [NSString stringWithFormat:@"%d", _demand.designReqId],
+    NSDictionary *param = @{@"designReqId": _demand.designReqId,
                             @"searchFlag": @"forMySpace"};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_MYDEMANDDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-                        [_tableView reloadData];
+            [_demand buildUpDetailWithValue:data];
+            [_tableView reloadData];
         }
     }];
     
