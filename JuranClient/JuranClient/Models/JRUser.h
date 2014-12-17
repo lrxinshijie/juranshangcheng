@@ -68,4 +68,5 @@
 - (NSString*)mobileNumForBindPhone;
 - (NSURL *)headImageURL;
 
+- (NSString *)showName;
 @end

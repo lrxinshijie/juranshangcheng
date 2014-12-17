@@ -111,6 +111,8 @@
 		1476DA921A21DB850006E9E0 /* DesignerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA901A21DB850006E9E0 /* DesignerCell.xib */; };
 		1476DA961A21DFBE0006E9E0 /* SelfIntrodutionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA941A21DFBE0006E9E0 /* SelfIntrodutionCell.m */; };
 		1476DA971A21DFBE0006E9E0 /* SelfIntrodutionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA951A21DFBE0006E9E0 /* SelfIntrodutionCell.xib */; };
+		147A9FB21A415DD400132804 /* PrivateLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 147A9FB01A415DD400132804 /* PrivateLetterViewController.m */; };
+		147A9FB31A415DD400132804 /* PrivateLetterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 147A9FB11A415DD400132804 /* PrivateLetterViewController.xib */; };
 		14A3FDC11A2C9EB7002BEFF4 /* MyDemandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A3FDBF1A2C9EB7002BEFF4 /* MyDemandViewController.m */; };
 		14A3FDC21A2C9EB7002BEFF4 /* MyDemandViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14A3FDC01A2C9EB7002BEFF4 /* MyDemandViewController.xib */; };
 		14A3FDC61A2C9EDF002BEFF4 /* DemandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A3FDC41A2C9EDF002BEFF4 /* DemandCell.m */; };
@@ -518,6 +520,9 @@
 		1476DA931A21DFBE0006E9E0 /* SelfIntrodutionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfIntrodutionCell.h; sourceTree = "<group>"; };
 		1476DA941A21DFBE0006E9E0 /* SelfIntrodutionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfIntrodutionCell.m; sourceTree = "<group>"; };
 		1476DA951A21DFBE0006E9E0 /* SelfIntrodutionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelfIntrodutionCell.xib; sourceTree = "<group>"; };
+		147A9FAF1A415DD400132804 /* PrivateLetterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateLetterViewController.h; sourceTree = "<group>"; };
+		147A9FB01A415DD400132804 /* PrivateLetterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateLetterViewController.m; sourceTree = "<group>"; };
+		147A9FB11A415DD400132804 /* PrivateLetterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterViewController.xib; sourceTree = "<group>"; };
 		14A3FDBE1A2C9EB7002BEFF4 /* MyDemandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyDemandViewController.h; sourceTree = "<group>"; };
 		14A3FDBF1A2C9EB7002BEFF4 /* MyDemandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDemandViewController.m; sourceTree = "<group>"; };
 		14A3FDC01A2C9EB7002BEFF4 /* MyDemandViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyDemandViewController.xib; sourceTree = "<group>"; };
@@ -1292,6 +1297,9 @@
 				A9B4EB761A371F120091AAAF /* CaseCollectViewController.h */,
 				A9B4EB771A371F120091AAAF /* CaseCollectViewController.m */,
 				A9B4EB781A371F120091AAAF /* CaseCollectViewController.xib */,
+				147A9FAF1A415DD400132804 /* PrivateLetterViewController.h */,
+				147A9FB01A415DD400132804 /* PrivateLetterViewController.m */,
+				147A9FB11A415DD400132804 /* PrivateLetterViewController.xib */,
 			);
 			name = Case;
 			sourceTree = "<group>";
@@ -2103,6 +2111,7 @@
 				14FE2E3A1A38542700B31FBA /* bubble-default-outgoing@2x.png in Resources */,
 				1441A1731A29E3CD004A038E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				14FE2E461A38542700B31FBA /* input-bar@2x.png in Resources */,
+				147A9FB31A415DD400132804 /* PrivateLetterViewController.xib in Resources */,
 				14FE2E361A38542700B31FBA /* bubble-default-outgoing-green@2x.png in Resources */,
 				14FE2E4A1A38542700B31FBA /* send-highlighted@2x.png in Resources */,
 				14FE2E3C1A38542700B31FBA /* bubble-square-incoming-selected@2x.png in Resources */,
@@ -2207,6 +2216,7 @@
 				A9A067181A3D76DA0059D73B /* ActionSheetStringPicker.m in Sources */,
 				14ABFBF01A25DADC00C4AF65 /* RegistViewController.m in Sources */,
 				14610C6D1A39D2F9008A52C7 /* QuestionDetailViewController.m in Sources */,
+				147A9FB21A415DD400132804 /* PrivateLetterViewController.m in Sources */,
 				14FE2E501A38542700B31FBA /* UIColor+JSMessagesView.m in Sources */,
 				A987EE241A20928B00CED7CD /* Reachability.m in Sources */,
 				A9A067131A3D76DA0059D73B /* AbstractActionSheetPicker.m in Sources */,

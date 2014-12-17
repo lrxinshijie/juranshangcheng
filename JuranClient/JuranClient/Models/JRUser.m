@@ -205,4 +205,12 @@
     return [NSURL URLWithString:self.headUrl relativeToURL:[NSURL URLWithString:JR_IMAGE_SERVICE]];
 }
 
+- (NSString *)showName{
+    if (self.nickName.length > 0) {
+        return self.nickName;
+    }
+    
+    return self.account;
+}
+
 @end

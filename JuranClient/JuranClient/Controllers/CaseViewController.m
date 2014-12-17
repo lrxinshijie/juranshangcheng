@@ -114,18 +114,21 @@
         [self hideHUD];
         if (!error) {
             NSArray *bannerList = [data objectForKey:@"bannerList"];
-            self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
-            [_adInfos addObjectsFromArray:_adInfos];
+            if (bannerList.count > 0) {
+                self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
+                [_adInfos addObjectsFromArray:_adInfos];
+                
+                CGRect frame = _headerView.frame;
+                frame.size.height = 165 + 44;
+                _headerView.frame = frame;
+                
+                self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 44, kWindowWidth, 165) ImageArray:_adInfos];
+                _bannerView.delegate = self;
+                [_headerView addSubview:_bannerView];
+                
+                self.tableView.tableHeaderView = _headerView;
+            }
             
-            CGRect frame = _headerView.frame;
-            frame.size.height = 165 + 44;
-            _headerView.frame = frame;
-            
-            self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 44, kWindowWidth, 165) ImageArray:_adInfos];
-            _bannerView.delegate = self;
-            [_headerView addSubview:_bannerView];
-            
-            self.tableView.tableHeaderView = _headerView;
         }
         [self loadData];
     }];
@@ -143,7 +146,7 @@
     [[ALEngine shareEngine] pathURL:_searchKey.length > 0 ? JR_SEARCH_CASE : JR_PROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *projectList = [data objectForKey:@"projectList"];
+            NSArray *projectList = [data objectForKey:@"projectGeneralDtoList"];
             NSMutableArray *rows = [JRCase buildUpWithValue:projectList];
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];

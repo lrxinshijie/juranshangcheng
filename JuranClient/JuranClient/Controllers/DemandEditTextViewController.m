@@ -48,7 +48,7 @@
             keyboardType = UIKeyboardTypeDefault;
             break;
         case DemandEditBudget:
-            placeholder = @"装修预算(万)";
+            placeholder = @"装修预算(元)";
             value = _demand.budget;
             keyboardType = UIKeyboardTypeNumberPad;
             break;

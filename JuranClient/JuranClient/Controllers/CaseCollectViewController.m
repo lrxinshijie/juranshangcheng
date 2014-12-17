@@ -53,7 +53,7 @@
     [[ALEngine shareEngine] pathURL:JR_FAV_PROJECT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *projectList = [data objectForKey:@"projectList"];
+            NSArray *projectList = [data objectForKey:@"projectGeneralDtoList"];
             NSMutableArray *rows = [JRCase buildUpWithValue:projectList];
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];

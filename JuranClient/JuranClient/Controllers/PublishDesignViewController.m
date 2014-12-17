@@ -139,7 +139,7 @@
                             @"contactsMobile": _demand.contactsMobile,
                             @"houseArea": [NSString stringWithFormat:@"%d", _demand.houseArea],
                             @"budget": _demand.budget,
-                            @"budgetUnit": @"million",
+                            @"budgetUnit": @"yuan",
                             @"renovationStyle": _demand.renovationStyle,
                             @"neighbourhoods": _demand.neighbourhoods,
                             @"roomNum":_demand.roomNum,
