@@ -42,7 +42,7 @@
 @property (nonatomic, copy) NSString *districtCode;
 @property (nonatomic, copy) NSString *districtName;
 @property (nonatomic, copy) NSString *stylesName;
-
+@property (nonatomic, assign) BOOL isAuth;
 //ProjectDto
 @property (nonatomic, copy) NSString *designerInfoDto;
 @property (nonatomic, copy) NSString *constructionTeamDto;

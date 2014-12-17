@@ -27,6 +27,7 @@
 
 @property (nonatomic, strong) IBOutlet UIView *designerView;
 @property (nonatomic, strong) IBOutlet UIImageView *avtarImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *idImageView;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *detailLabel;
 
@@ -95,6 +96,15 @@
     _nameLabel.text = _jrCase.nickName;
     _detailLabel.text = _jrCase.stylesName;
     [_avtarImageView setImageWithURLString:_jrCase.headUrl];
+    _idImageView.hidden = !_jrCase.isAuth;
+    
+    frame = _nameLabel.frame;
+    frame.size.width = [_jrCase.nickName widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(frame)];
+    _nameLabel.frame = frame;
+    
+    frame = _idImageView.frame;
+    frame.origin.x = CGRectGetMaxX(_nameLabel.frame) + 10;
+    _idImageView.frame = frame;
     
     [_tableView headerBeginRefreshing];
     
