@@ -61,11 +61,11 @@
                             @"pageCount": [NSString stringWithFormat:@"%d", _currentPage],
                             @"pageSize": @"20"};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_SUBJECT_DETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_SUBJECT_DETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             NSDictionary *info = [data objectForKey:@"infoSubjectDetailResp"];
-            NSMutableArray *rows = [JRCase buildUpWithValue:[info objectForKey:@"projectList"]];
+            NSMutableArray *rows = [JRCase buildUpWithValue:[info objectForKey:@"projectGeneralDtoList"]];
             if (_currentPage == 1) {
                 self.datas = rows;
                 NSString *subjectName = [info objectForKey:@"subjectName"];

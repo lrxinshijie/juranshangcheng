@@ -58,7 +58,7 @@
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
-                self.datas = [JRCase buildUpWithValue:projectList];
+                self.datas = rows;
             }
             
             [_collectionView reloadData];

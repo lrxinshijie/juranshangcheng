@@ -54,6 +54,7 @@
     self.projectPrice = [dict getIntValueForKey:@"projectPrice" defaultValue:0];
     self.detailImageList = [dict objectForKey:@"detailImageList"];
     self.stylesName = [dict getStringValueForKey:@"stylesName" defaultValue:@""];
+    self.isAuth = [dict getBoolValueForKey:@"isAuth" defaultValue:NO];
     NSDictionary *areaInfo = [dict objectForKey:@"areaInfo"];
     if (areaInfo && [areaInfo isKindOfClass:[NSDictionary class]]) {
         self.provinceCode = [areaInfo getStringValueForKey:@"provinceCode" defaultValue:@""];

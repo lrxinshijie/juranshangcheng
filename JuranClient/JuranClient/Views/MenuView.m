@@ -60,7 +60,7 @@ static CGFloat kAnimateDuration = 0.25f;
         [self addGestureRecognizer:swipt];
         
         self.tableView = [self tableViewWithFrame:CGRectMake(0, 0, 220, kWindowHeightWithoutNavigationBar) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
-        _tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
+        _tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:.8];
         _tableView.bounces = NO;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self addSubview:_tableView];
@@ -150,11 +150,11 @@ static CGFloat kAnimateDuration = 0.25f;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    cell.backgroundColor = [UIColor colorWithWhite:1 alpha:.5];
+    cell.backgroundColor = [UIColor clearColor];//[UIColor colorWithWhite:1 alpha:.5];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return CGRectGetHeight(tableView.frame)/[_titles count];
+    return 70;//CGRectGetHeight(tableView.frame)/[_titles count];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

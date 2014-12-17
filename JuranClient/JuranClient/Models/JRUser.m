@@ -45,9 +45,9 @@
         NSDictionary *data = [self localUserData];
         if (data && [data isKindOfClass:[NSDictionary class]]) {
             self.account = [data getStringValueForKey:@"account" defaultValue:@""];
-            self.guid = [data getStringValueForKey:@"guid" defaultValue:@""];
+//            self.guid = [data getStringValueForKey:@"guid" defaultValue:@""];
             self.password = [data getStringValueForKey:@"password" defaultValue:@""];
-            self.token = [data getStringValueForKey:@"token" defaultValue:@""];
+//            self.token = [data getStringValueForKey:@"token" defaultValue:@""];
         }
     }
     
@@ -55,12 +55,12 @@
 }
 
 - (void)resetCurrentUser{
-    JRUser *userInfo = [[JRUser alloc] initWithLocal];
+//    JRUser *userInfo = [[JRUser alloc] initWithLocal];
     
-    [JRUser currentUser].account = userInfo.account;
-    [JRUser currentUser].guid = userInfo.guid;
-    [JRUser currentUser].password = userInfo.password;
-    [JRUser currentUser].token = userInfo.token;
+    [JRUser currentUser].account = self.account;
+    [JRUser currentUser].guid = self.guid;
+    [JRUser currentUser].password = self.password;
+    [JRUser currentUser].token = self.token;
 }
 
 - (void)saveLocal{
@@ -72,9 +72,9 @@
 
 - (NSDictionary *)dictionary{
     return @{@"account": [NSString stringWithFormat:@"%@",self.account],
-             @"guid": [NSString stringWithFormat:@"%@",self.guid],
+//             @"guid": [NSString stringWithFormat:@"%@",self.guid],
              @"password": [NSString stringWithFormat:@"%@",self.password],
-             @"token": [NSString stringWithFormat:@"%@",self.token]
+//             @"token": [NSString stringWithFormat:@"%@",self.token]
              };
 }
 
