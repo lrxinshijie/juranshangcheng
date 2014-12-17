@@ -17,6 +17,7 @@
     NSArray *typeKeys;
     NSArray *typeValues;
     NSString *selectedType;
+    UIImage *fileImage;
 }
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) UIButton *rightButton;
@@ -105,6 +106,7 @@
 - (IBAction)onChooseImage:(id)sender{
     [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
         _chooseView.hidden = YES;
+        fileImage = images.firstObject;
         CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:_chooseView.frame];
         imageView.delegate = self;
         [imageView setImage:images[0]];

@@ -68,11 +68,11 @@
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
-                NSMutableArray *rows = [JRDesigner buildUpFollowDesignerListWithValue:data];
+                NSMutableArray *rows = [JRDesigner buildUpWithValue:[data objectForKey:@"designerSearchResDtoList"]];
                 if (_currentPage > 1) {
                     [_datas addObjectsFromArray:rows];
                 }else{
-                    self.datas = [JRDesigner buildUpFollowDesignerListWithValue:data];
+                    self.datas = rows;
                 }
                 
                 [_tableView reloadData];

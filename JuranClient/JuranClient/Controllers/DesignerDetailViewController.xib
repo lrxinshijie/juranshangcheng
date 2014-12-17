@@ -35,8 +35,8 @@
                     <rect key="frame" x="10" y="10" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="uBU-bY-II0">
-                    <rect key="frame" x="236" y="13" width="24" height="16"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_isauth" id="uBU-bY-II0">
+                    <rect key="frame" x="236" y="14" width="17" height="12"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="po3-83-dtO">
@@ -213,6 +213,7 @@
         </view>
     </objects>
     <resources>
+        <image name="icon_isauth" width="16" height="12"/>
         <image name="menu_icon_fenxiang" width="17" height="19"/>
         <image name="menu_icon_guanzhu" width="21" height="21"/>
         <image name="menu_icon_sixin" width="22" height="16"/>

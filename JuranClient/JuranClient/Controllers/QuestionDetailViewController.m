@@ -337,6 +337,15 @@
     return YES;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (toBeString.length >= 400) {
+        [self showTip:@"回答长度不能超过400!"];
+        return NO;
+    }
+    return YES;
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
 //    if (_selectComment && textField.text.length == 0) {
 //        self.selectComment = nil;

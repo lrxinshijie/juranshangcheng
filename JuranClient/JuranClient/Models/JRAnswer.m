@@ -23,6 +23,7 @@
         self.content = [dict getStringValueForKey:@"content" defaultValue:@""];
         self.commitTime = [dict getStringValueForKey:@"commitTime" defaultValue:@""];
         self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
+        self.questionId = [dict getStringValueForKey:@"questionId" defaultValue:@""];
     }
     
     return self;

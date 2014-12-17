@@ -83,7 +83,7 @@
 
 
 
-
+#define JR_UPLOAD_HEAD_IMAGE [NSString stringWithFormat:@"%@/member/uploadHeadImage.htm",JR_SERVICE]
 
 #define JR_ADD_COMMENT [NSString stringWithFormat:@"%@/design/addComment.json",JR_SERVICE]
 #define JR_GET_BANNER_INFO [NSString stringWithFormat:@"%@/member/getBannerInfo.json",JR_SERVICE]

@@ -60,8 +60,8 @@
     [self configureMenu];
     
     _user = [JRUser currentUser];
-    
-    titleArray = @[@"互动", @"我的关注", @"我的收藏", @"订单管理", @"账户管理", @"账户安全"];
+    //@"互动",@"订单管理",  @"账户管理",
+    titleArray = @[ @"我的关注", @"我的收藏", @"账户安全"];
     imageArray = @[@"icon_personal_hudong.png", @"icon_personal_guanzhu.png", @"icon_personal_shouchang.png", @"icon_personal_ddgl.png", @"icon_personal_zhgl.png", @"icon_personal_zhaq"];
     [self setupUI];
     [self loadData];
@@ -265,7 +265,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 2) {
+    if (indexPath.row == 1) {
         if (![self checkLogin:^{
             [self loadData];
         }]) {
@@ -274,7 +274,7 @@
         MyFollowViewController *vc = [[MyFollowViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 1){
+    }else if (indexPath.row == 15){
         if (![self checkLogin:^{
             [self loadData];
         }]) {
@@ -283,7 +283,7 @@
         InteractionViewController *vc = [[InteractionViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 5){
+    }else if (indexPath.row == 15){
         if (![self checkLogin:^{
             [self loadData];
         }]) {
@@ -292,7 +292,7 @@
         AccountManageViewController *vc = [[AccountManageViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 6){
+    }else if (indexPath.row == 3){
         if (![self checkLogin:^{
             [self loadData];
         }]) {
@@ -301,7 +301,7 @@
         AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 3){
+    }else if (indexPath.row == 2){
         if (![self checkLogin]) {
             return;
         }

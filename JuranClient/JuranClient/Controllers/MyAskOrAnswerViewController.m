@@ -202,7 +202,8 @@
         AskDetailViewController *vc = [[AskDetailViewController alloc] init];
         vc.isMyQuestion = NO;
         JRQuestion *q = [[JRQuestion alloc] init];
-        q.questionId = 1275;
+        JRAnswer *r = _answerDatas[indexPath.row];
+        q.questionId = [r.questionId integerValue];
         vc.question = q;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
