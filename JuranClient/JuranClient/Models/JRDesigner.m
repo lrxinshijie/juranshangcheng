@@ -143,7 +143,7 @@
 + (NSMutableArray *)buildUpFollowDesignerListWithValue:(id)value{
     NSMutableArray *retVal = [NSMutableArray array];
     if ([value isKindOfClass:[NSDictionary class]]) {
-        id designerList = value[@"designerList"];
+        id designerList = value[@"designerSearchResDtoList"];
         NSDictionary *frontImgDic = value[@"frontImgUrlMap"];
         NSDictionary *designExperienceDic = value[@"designExperience"];
         if ([designerList isKindOfClass:[NSArray class]]) {

@@ -124,14 +124,9 @@
     [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *designerList = nil;
-            NSMutableArray *rows = nil;
-            if (_isSearchResult) {
-                rows = [JRDesigner buildUpSearchDesignerWithValue:data];
-            }else{
-                designerList = [data objectForKey:@"easyHomeDesignDtotList"];
-                rows = [JRDesigner buildUpWithValue:designerList];
-            }
+            
+            NSMutableArray *rows = rows = [JRDesigner buildUpWithValue:[data objectForKey:@"designerSearchResDtoList"]];;
+            
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
