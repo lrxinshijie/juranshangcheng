@@ -68,6 +68,8 @@
 + (NSMutableArray *)buildUpFollowDesignerListWithValue:(id)value;
 
 - (NSURL *)imageURL;
+
+- (NSString*)formatUserName;
 /*
  * type  0为设计师列表   1为设计师详情  主要是分隔符不一样
  */

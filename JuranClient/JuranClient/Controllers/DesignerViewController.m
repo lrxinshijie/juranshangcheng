@@ -82,17 +82,10 @@
 
 - (NSMutableDictionary *)filterData{
     if (!_filterData) {
-        if (!_isSearchResult) {
-            _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"experience": @"",
-                                                                          @"isRealNameAuth": @"",
-                                                                          @"style" : @"",
-                                                                          @"order": @""}];
-        }else{
-            _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"experience": @"",
-                                                                          @"isAuth": @"",
-                                                                          @"style" : @"",
-                                                                          @"order": @""}];
-        }
+        _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"experience": @"",
+                                                                      @"isRealNameAuth": @"",
+                                                                      @"style" : @"",
+                                                                      @"order": @""}];
         
     }
     return _filterData;
@@ -115,17 +108,19 @@
 
 - (void)loadData{
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": @"10"}];
+    [param addEntriesFromDictionary:self.filterData];
     if (_isSearchResult) {
         [param setObject:_searchKeyWord forKey:@"keyword"];
+        [param removeObjectForKey:@"experience"];
+        [param removeObjectForKey:@"isRealNameAuth"];
     }
-    [param addEntriesFromDictionary:self.filterData];
     NSString *url = _isSearchResult?JR_SEARCH_DESIGNER:JR_DESIGNERLIST;
     [self showHUD];
     [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             
-            NSMutableArray *rows = rows = [JRDesigner buildUpWithValue:[data objectForKey:@"designerSearchResDtoList"]];;
+            NSMutableArray *rows = [JRDesigner buildUpWithValue:[data objectForKey:@"designerSearchResDtoList"]];
             
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];

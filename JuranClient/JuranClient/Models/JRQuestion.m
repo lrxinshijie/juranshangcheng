@@ -17,22 +17,27 @@
         if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
             return self;
         }
-        
-        self.questionId = [dict getIntValueForKey:@"questionId" defaultValue:0];
-        self.title = [dict getStringValueForKey:@"title" defaultValue:@""];
-        self.questionType = [dict getStringValueForKey:@"questionType" defaultValue:@""];
-        self.userId = [dict getIntValueForKey:@"userId" defaultValue:0];
-        self.userType = [dict getIntValueForKey:@"userType" defaultValue:0];
-        self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
-        self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
-        self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
-        self.publishTime = [dict getStringValueForKey:@"publishTime" defaultValue:@""];
-        self.answerCount = [dict getIntValueForKey:@"answerCount" defaultValue:0];
-        self.viewCount = [dict getIntValueForKey:@"viewCount" defaultValue:0];
-        self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
+        [self buildupGeneralWithValue:dict];
     }
     
     return self;
+}
+
+- (void)buildupGeneralWithValue:(NSDictionary*)dict{
+    self.questionId = [dict getIntValueForKey:@"questionId" defaultValue:0];
+    self.title = [dict getStringValueForKey:@"title" defaultValue:@""];
+    self.questionType = [dict getStringValueForKey:@"questionType" defaultValue:@""];
+    self.userId = [dict getIntValueForKey:@"userId" defaultValue:0];
+    self.userType = [dict getIntValueForKey:@"userType" defaultValue:0];
+    self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
+    self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
+    self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
+    self.publishTime = [dict getStringValueForKey:@"publishTime" defaultValue:@""];
+    self.answerCount = [dict getIntValueForKey:@"answerCount" defaultValue:0];
+    self.viewCount = [dict getIntValueForKey:@"viewCount" defaultValue:0];
+    self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
+    self.imageUrl = [dict getStringValueForKey:@"imageUrl" defaultValue:@""];
+    self.questionContent = [dict getStringValueForKey:@"questionContent" defaultValue:@""];
 }
 
 + (NSMutableArray *)buildUpWithValue:(id)value{
@@ -46,6 +51,30 @@
     }
     return retVal;
 }
+
+- (void)buildUpDetailWithValue:(id)value{
+    if (!value || ![value isKindOfClass:[NSDictionary class]]) {
+        return ;
+    }
+    NSDictionary *dic = value[@"questionGeneral"];
+    [self buildupGeneralWithValue:dic];
+    NSDictionary *adoptedAnswerDic = value[@"adoptedAnswer"];
+    self.adoptedAnswer = [[JRAnswer alloc] initWithDictionaryForDetail:adoptedAnswerDic];
+    NSDictionary *otherAnswersDic = value[@"otherAnswers"];
+    self.otherAnswers = [JRAnswer buildUpDetailWithValue:otherAnswersDic];
+    
+}
+
+- (void)buildUpMyQuestionDetailWithValue:(id)value{
+    if (!value || ![value isKindOfClass:[NSDictionary class]]) {
+        return ;
+    }
+    NSDictionary *dic = value[@"general"];
+    [self buildupGeneralWithValue:dic];
+    NSDictionary *otherAnswersDic = value[@"answerList"];
+    self.otherAnswers = [JRAnswer buildUpDetailWithValue:otherAnswersDic];
+}
+
 
 - (BOOL)isResolved{
     BOOL flag = NO;
@@ -74,30 +103,6 @@
     return s;
 }
 
-- (void)buildUpDetailWithValue:(id)value{
-    if (!value || ![value isKindOfClass:[NSDictionary class]]) {
-        return ;
-    }
-    NSDictionary *dic = (NSDictionary*)value;
-    self.imageUrl = [dic getStringValueForKey:@"imageUrl" defaultValue:@""];
-    self.questionContent = [dic getStringValueForKey:@"questionContent" defaultValue:@""];
-    NSDictionary *adoptedAnswerDic = dic[@"adoptedAnswer"];
-    self.adoptedAnswer = [[JRAnswer alloc] initWithDictionaryForDetail:adoptedAnswerDic];
-    NSDictionary *otherAnswersDic = dic[@"otherAnswers"];
-    self.otherAnswers = [JRAnswer buildUpDetailWithValue:otherAnswersDic];
-    
-}
-
-- (void)buildUpMyQuestionDetailWithValue:(id)value{
-    if (!value || ![value isKindOfClass:[NSDictionary class]]) {
-        return ;
-    }
-    NSDictionary *dic = (NSDictionary*)value;
-    self.imageUrl = [dic getStringValueForKey:@"imageUrl" defaultValue:@""];
-    self.questionContent = [dic getStringValueForKey:@"questionContent" defaultValue:@""];
-    NSDictionary *otherAnswersDic = dic[@"answerList"];
-    self.otherAnswers = [JRAnswer buildUpDetailWithValue:otherAnswersDic];
-}
 
 
 

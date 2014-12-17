@@ -71,7 +71,7 @@
             if (_isMyQuestion) {
                 [_question buildUpMyQuestionDetailWithValue:data];
             }else{
-                _question = [[JRQuestion alloc] initWithDictionary:data];
+                _question = [[JRQuestion alloc] initWithDictionary:data[@"general"]];
                 [_question buildUpMyQuestionDetailWithValue:data];
             }
             
@@ -242,6 +242,15 @@
     //    if (_selectComment && textField.text.length == 0) {
     //        self.selectComment = nil;
     //    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (toBeString.length >= 400) {
+        [self showTip:@"回答长度不能超过400!"];
+        return NO;
+    }
+    return YES;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification{

@@ -142,18 +142,21 @@
     */
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
+//        [self hideHUD];
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self reSetData];
-                [_tableView reloadData];
+                [self loadData];
             });
         }
     }];
 }
 
 - (void)uploadHeaderImage:(UIImage*)image{
-    
+    [[ALEngine shareEngine] pathURL:JR_UPLOAD_HEAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"headpic":image} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            [self loadData];
+        }
+    }];
 }
 
 #pragma mark - ModifyViewControllerDelegate
@@ -307,9 +310,9 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
-                [self uploadHeaderImage:images[0]];
-                self.iconImageView.image = images[0];
-                [_tableView reloadData];
+                if (images.count > 0) {
+                    [self uploadHeaderImage:images[0]];
+                }
             }];
         }else if (indexPath.row == 1) {
             ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeUserName];

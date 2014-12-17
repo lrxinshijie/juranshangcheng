@@ -20,8 +20,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *readCountLabel;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UIView *sContentView;
+@property (nonatomic, weak) IBOutlet UIImageView *isAuthImageView;
 
 - (void)fillCellWithDesigner:(JRDesigner *)data;
-- (void)fillCellWithDesignerFollowDto:(JRDesignerFollowDto *)data;
 
 @end

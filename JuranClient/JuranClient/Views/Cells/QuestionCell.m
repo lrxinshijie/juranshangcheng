@@ -40,6 +40,7 @@
     _statusImageView.image = [UIImage imageNamed:data.isResolved?@"question_resolved.png":@"question_wati_resolve.png"];
     _timeLabel.text = [NSString stringWithFormat:@"回答：%d  |  %@", data.answerCount, data.publishTime];
     _describeLabel.text = [data descriptionForCell];
+    _iconImageView.hidden = !(data.imageUrl.length > 0);
     [self adjustFrame];
 }
 

@@ -36,11 +36,9 @@
     // Configure the view for the selected state
 }
 
-- (void)fillCellWithDesignerFollowDto:(JRDesignerFollowDto *)data{
-}
 
 - (void)fillCellWithDesigner:(JRDesigner *)data{
-    _nameLabel.text = data.nickName.length?data.nickName:data.account;
+    _nameLabel.text = [data formatUserName];
     if (data.headUrl.length > 0) {
         [_headImageView setImageWithURLString:data.headUrl];
     }else{
@@ -51,6 +49,9 @@
     _experienceLabel.text =  [NSString stringWithFormat:@"%d年", data.experienceCount];
     _productCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];
     _readCountLabel.text = [NSString stringWithFormat:@"%i", data.browseCount];
+    _isAuthImageView.hidden = !data.isAuth;
+    CGRect frame = _isAuthImageView.frame;
+    frame.origin.x = [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)] + 5;
     NSInteger i = 0;
     for (NSString *url in data.frontImageUrlList) {
         UIImageView *imageView = (UIImageView*)[self.contentView viewWithTag:i + kCaseImageViewTag];

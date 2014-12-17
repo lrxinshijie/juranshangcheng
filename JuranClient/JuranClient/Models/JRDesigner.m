@@ -165,6 +165,18 @@
     return retVal;
 }
 
+- (NSString*)formatUserName{
+    NSString *name = @"";
+    if (_userName && _userName.length > 0) {
+        name = _userName;
+    }else if (_nickName && _nickName.length > 0){
+        name = _nickName;
+    }else{
+        name = _account;
+    }
+    return name;
+}
+
 - (NSURL *)imageURL{
     return [NSURL URLWithString:self.headUrl relativeToURL:[NSURL URLWithString:JR_IMAGE_SERVICE]];
 }

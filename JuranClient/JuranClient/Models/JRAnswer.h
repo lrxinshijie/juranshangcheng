@@ -23,6 +23,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSString *content;
 @property (nonatomic, strong) NSString *commitTime;
 @property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSString *questionId;
 
 //
 @property (nonatomic, assign) NSInteger userId;
