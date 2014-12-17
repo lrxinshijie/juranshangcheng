@@ -27,7 +27,6 @@ typedef NS_ENUM(NSInteger, ModifyCVType ) {
 @interface ModifyViewController : ALViewController
 
 @property (nonatomic, assign) ModifyCVType type;
-@property (nonatomic, assign) UIKeyboardType keyboardType;
 @property (nonatomic, weak) id<ModifyViewControllerDelegate> delegate;
 @property (nonatomic, strong) JRUser *user;
 

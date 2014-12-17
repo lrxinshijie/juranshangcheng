@@ -124,14 +124,28 @@
 }
 
 - (void)commit{
+    if (fileImage) {
+        [self uploadQuestionImage];
+    }else{
+        [self submitQuestionInfo:@""];
+    }
+}
+
+- (void)uploadQuestionImage{
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":fileImage} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            [self submitQuestionInfo:[data objectForKey:@"imgUrl"]];
+        }
+    }];
+}
+
+- (void)submitQuestionInfo:(NSString*)imageUrl{
     NSDictionary *param = @{@"questionType": selectedType,
                             @"title": _titleTextField.text,
-                            @"content": _contentTextView.text
-//                            @"imageInfo": @""
+                            @"content": _contentTextView.text,
+                            @"imgUrl": imageUrl
                             };
-//    @"fileField": @"",
-//    @"fileName": @"",
-//    @"fileType": @""
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_PUBLISHQUESTION parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
@@ -142,13 +156,14 @@
                 [_delegate newQuestionViewController:self];
             }
         }
-
+        
     }];
 }
 
 #pragma CanRemoveImageView
 
 - (void)deleteCanRemoveImageView:(CanRemoveImageView *)view{
+    fileImage = nil;
     _chooseView.hidden = NO;
 }
 

@@ -84,9 +84,17 @@
     return flag;
 }
 
+- (NSString*)userNameForCell{
+    NSString *username = _nickName.length?_nickName:_account;
+    if (username.length > 12) {
+        username = [NSString stringWithFormat:@"%@...", [username substringToIndex:12]];
+    }
+    return username;
+}
+
 - (NSString*)descriptionForCell{
     
-    return [NSString stringWithFormat:@"%@ | %@", _nickName.length?_nickName:_account, [self questionTypeString]];
+    return [NSString stringWithFormat:@"%@ | %@", [self userNameForCell], [self questionTypeString]];
 }
 
 - (NSString*)questionTypeString{
@@ -94,7 +102,7 @@
                           @"design": @"设计疑惑",
                           @"decoration": @"装修前后",
                           @"goods": @"商品选购",
-                          @"diy": @"DIY工具使用困境",
+                          @"diy": @"DIY技巧",
                           @"other": @"其他"};
     NSString *s = dic[_questionType];
     if (!(s && s.length > 0)) {

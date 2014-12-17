@@ -49,9 +49,12 @@
     _experienceLabel.text =  [NSString stringWithFormat:@"%d年", data.experienceCount];
     _productCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];
     _readCountLabel.text = [NSString stringWithFormat:@"%i", data.browseCount];
-    _isAuthImageView.hidden = !data.isAuth;
+    
+    _isAuthImageView.hidden = !(data.isRealNameAuth == 2);
     CGRect frame = _isAuthImageView.frame;
-    frame.origin.x = [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)] + 5;
+    frame.origin.x = _nameLabel.frame.origin.x + [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)] + 5;
+    _isAuthImageView.frame = frame;
+    
     NSInteger i = 0;
     for (NSString *url in data.frontImageUrlList) {
         UIImageView *imageView = (UIImageView*)[self.contentView viewWithTag:i + kCaseImageViewTag];

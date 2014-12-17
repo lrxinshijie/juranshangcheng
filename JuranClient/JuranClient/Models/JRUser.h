@@ -19,7 +19,7 @@
 @property (nonatomic, assign) NSInteger visitCount;
 @property (nonatomic, copy) NSString *account;
 @property (nonatomic, copy) NSString *password;
-
+@property (nonatomic, copy) NSString *userName;
 @property (nonatomic, copy) NSString *headUrl;
 @property (nonatomic, copy) NSString *nickName;
 @property (nonatomic, assign) NSInteger userId;

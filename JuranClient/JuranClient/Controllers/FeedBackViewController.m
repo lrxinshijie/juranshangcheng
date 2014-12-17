@@ -11,12 +11,15 @@
 #import "CanRemoveImageView.h"
 
 @interface FeedBackViewController ()<CanRemoveImageViewDelegate>
-
+{
+    UIImage *fileImage;
+}
 @property (nonatomic, strong) IBOutlet UIView *inputView;
 @property (nonatomic, strong) IBOutlet UIView *contactView;
 @property (nonatomic, strong) IBOutlet ASPlaceholderTextView *contentTextView;
 @property (nonatomic, strong) IBOutlet UITextField *contactTextField;
 @property (nonatomic, strong) IBOutlet UIView *chooseView;
+
 
 @end
 
@@ -61,14 +64,32 @@
         [self showTip:@"反馈内容不能为空!!!"];
         return;
     }
+    if (fileImage) {
+        [self uploadQuestionImage];
+    }else{
+        [self submitFeedBack:@""];
+    }
+}
+
+- (void)uploadQuestionImage{
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":fileImage} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            [self submitFeedBack:[data objectForKey:@"imgUrl"]];
+        }
+    }];
+}
+
+- (void)submitFeedBack:(NSString*)imageUrl{
     NSDictionary *param = @{@"type":@"iphone",
                             @"contactInfo":_contactTextField.text,
-                            @"memo":_contentTextView.text};
+                            @"memo":_contentTextView.text,
+                            @"imgURL":imageUrl};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_ADD_FEEDBACK parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }];
 }
@@ -76,6 +97,7 @@
 - (IBAction)doChoosseImage:(id)sender{
     [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
         _chooseView.hidden = YES;
+        fileImage = images.firstObject;
         CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:_chooseView.frame];
         imageView.delegate = self;
         [imageView setImage:images[0]];
@@ -86,6 +108,7 @@
 #pragma CanRemoveImageView
 
 - (void)deleteCanRemoveImageView:(CanRemoveImageView *)view{
+    fileImage = nil;
     _chooseView.hidden = NO;
 }
 

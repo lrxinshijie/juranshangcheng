@@ -37,6 +37,8 @@
 //AnswerView
 @property (nonatomic, strong) IBOutlet UIView *answerView;
 @property (nonatomic, strong) IBOutlet UITextField *answerTextField;
+@property (nonatomic, strong) IBOutlet UIView *answerImageView;
+@property (nonatomic, strong) IBOutlet UIView *chooseImageView;
 
 @end
 
@@ -65,6 +67,14 @@
         frame.origin.y = CGRectGetMaxY(_tableView.frame);
         _answerView.frame = frame;
         [self.view addSubview:_answerView];
+        
+        frame = _answerImageView.frame;
+        frame.origin.y = kWindowHeightWithoutNavigationBar - CGRectGetHeight(_answerImageView.frame);
+        _answerImageView.frame = frame;
+        [self.view addSubview:_answerImageView];
+        
+        UIButton *btn = [_answerImageView buttonWithFrame:_answerImageView.bounds target:self action:@selector(onHiddenAnswerImageView) image:nil];
+        [_answerImageView insertSubview:btn atIndex:0];
     }
     
     [self loadData];
@@ -181,6 +191,14 @@
     }
 }
 
+- (void)onHiddenAnswerImageView{
+    
+}
+
+- (IBAction)onShowAnswerImageView:(id)sender{
+    
+}
+
 - (IBAction)onSend:(id)sender{
     if (!(_answerTextField.text && _answerTextField.text.length > 0))
     {
@@ -206,6 +224,7 @@
             answer.content = _answerTextField.text;
             answer.commitTime = [[NSDate date] timestamp];
             [_question.otherAnswers insertObject:answer atIndex:0];
+            _question.answerCount += 1;
             _answerTextField.text = @"";
             [self reloadData];
         }
@@ -309,6 +328,10 @@
     //    detailVC.designer = _datas[indexPath.row];
     //    detailVC.hidesBottomBarWhenPushed = YES;
     //    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [_answerTextField resignFirstResponder];
 }
 
 

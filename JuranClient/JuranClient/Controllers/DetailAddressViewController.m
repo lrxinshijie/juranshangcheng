@@ -26,6 +26,7 @@
     
     _textVeiw.delegate = self;
     _textVeiw.placeholder = @"请输入5-60字内的地址信息，不能全部为数字";
+    _textVeiw.text = _user.detailAddress;
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave:) title:@"保存" backgroundImage:nil];
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];

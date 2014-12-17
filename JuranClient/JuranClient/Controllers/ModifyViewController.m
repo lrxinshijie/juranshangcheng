@@ -53,7 +53,7 @@
     
     _textField = [self.view textFieldWithFrame:CGRectMake(0, 0, kWindowWidth -40, 30) borderStyle:UITextBorderStyleNone backgroundColor:[UIColor whiteColor] text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
     _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _textField.keyboardType = _keyboardType;
+    _textField.keyboardType = UIKeyboardTypeDefault;
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = RGBColor(241, 241, 241);
@@ -71,6 +71,7 @@
         case ModifyCVTypeHomeTel:
         {
             _textField.text = _user.homeTel;
+            _textField.keyboardType = UIKeyboardTypeNumberPad;
             _tipLabel.text = @"";
             _textField.placeholder = @"请输入固定电话";
             break;
@@ -80,6 +81,7 @@
             _textField.text = _user.idCardNumber;
             _tipLabel.text = @"";
             _textField.placeholder = @"输入证件号码";
+            _textField.keyboardType = UIKeyboardTypeNumberPad;
             idTypes = @[@"  身份证", @"  军官证", @"  护照"];
             idCardType = _user.idCardNumber.length == 0?-1:_user.idCardNumber.integerValue;
             break;
@@ -87,6 +89,7 @@
         case ModifyCVTypeQQ:
         {
             _textField.text = _user.qq;
+            _textField.keyboardType = UIKeyboardTypeNumberPad;
             _tipLabel.text = @"";
             _textField.placeholder = @"请输入QQ号码";
             break;

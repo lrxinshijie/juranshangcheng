@@ -154,6 +154,9 @@
 }
 
 - (void)doSearch{
+    _searchKeyWord = _textField.text;
+    [_textField resignFirstResponder];
+    [Public addSearchHistory:_textField.text];
     if (_type == SearchTypeDesigner) {
         DesignerViewController *vc = [[DesignerViewController alloc] init];
         vc.searchKeyWord = _searchKeyWord;
@@ -190,9 +193,7 @@
         [self showTip:@"请输入搜索关键字"];
         return;
     }
-    _searchKeyWord = _textField.text;
-    [_textField resignFirstResponder];
-    [Public addSearchHistory:_textField.text];
+    _type = SearchTypeCase;
     [self doSearch];
 }
 
@@ -261,7 +262,7 @@
         [self textFieldTextDidChangeNotification:nil];
     }else if (step == 3){
         _type = (SearchType)indexPath.row;
-        [self onSearch:nil];
+        [self doSearch];
     }
 }
 

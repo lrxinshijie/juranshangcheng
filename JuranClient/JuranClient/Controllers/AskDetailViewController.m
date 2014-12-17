@@ -210,6 +210,10 @@
     }
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [_answerTextField resignFirstResponder];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //    DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
     //    detailVC.designer = _datas[indexPath.row];

@@ -24,6 +24,7 @@
         self.visitCount = [dict getIntValueForKey:@"visitCount" defaultValue:0];
         self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
         self.password = [dict getStringValueForKey:@"password" defaultValue:@""];
+        self.userName = [dict getStringValueForKey:@"userName" defaultValue:@""];
 
     }
     return self;
@@ -129,6 +130,7 @@
     self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
     self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
     self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
+    self.userName = [dict getStringValueForKey:@"userName" defaultValue:@""];
     self.hasNewBidCount = [dict getIntValueForKey:@"hasNewBigCount" defaultValue:0];
     self.newPrivateLetterCount = [dict getIntValueForKey:@"newPrivateLetterCount" defaultValue:0];
     self.newAnswerCount = [dict getIntValueForKey:@"newAnswerCount" defaultValue:0];
@@ -144,6 +146,7 @@
     self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
     self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
     self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
+    self.userName = [dict getStringValueForKey:@"userName" defaultValue:@""];
     self.mobileNum = [dict getStringValueForKey:@"mobileNum" defaultValue:@""];
     self.email = [dict getStringValueForKey:@"email" defaultValue:@""];
     self.birthday = [dict getStringValueForKey:@"birthday" defaultValue:@""];
@@ -191,7 +194,9 @@
     if (_homeTel.length == 0) {
         return @"未设置";
     }
-    return _homeTel;
+    NSString *tel = _homeTel;
+    tel = [NSString stringWithFormat:@"%@****%@", [tel substringToIndex:5], [_mobileNum substringFromIndex:9]];
+    return tel;
 }
 
 - (NSString*)mobileNumForBindPhone{

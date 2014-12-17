@@ -13,6 +13,7 @@
                 <outlet property="followTitleLabel" destination="cZQ-1x-Nlb" id="keh-9K-0En"/>
                 <outlet property="headImageView" destination="gM7-2K-AQC" id="hpJ-CA-AbV"/>
                 <outlet property="headView" destination="hhF-tf-Fdy" id="Njh-CE-afz"/>
+                <outlet property="isAuthImageView" destination="uBU-bY-II0" id="Eh5-2U-u6X"/>
                 <outlet property="nameLabel" destination="E56-Rj-g5b" id="nZh-PH-wkb"/>
                 <outlet property="pictureCountLabel" destination="4rx-do-xR6" id="mMB-yc-tT9"/>
                 <outlet property="popularityLabel" destination="wLV-Ws-Txn" id="Pgr-YA-ZWI"/>
@@ -22,12 +23,12 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>
-        <view contentMode="scaleToFill" id="hhF-tf-Fdy">
+        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="hhF-tf-Fdy">
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -35,7 +36,7 @@
                     <rect key="frame" x="10" y="10" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_isauth" id="uBU-bY-II0">
+                <imageView hidden="YES" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_isauth" id="uBU-bY-II0">
                     <rect key="frame" x="236" y="14" width="17" height="12"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>

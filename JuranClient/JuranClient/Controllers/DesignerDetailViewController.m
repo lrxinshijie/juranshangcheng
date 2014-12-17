@@ -34,6 +34,9 @@
 @property (nonatomic, weak) IBOutlet UILabel *diyProjectCountLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *followImageView;
 @property (nonatomic, weak) IBOutlet UILabel *followTitleLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *isAuthImageView;
+
+
 @property (nonatomic, strong) SelfIntrodutionCell *introductionCell;
 @property (nonatomic, strong) TATopicCell *topicCell;
 @property (nonatomic, assign) NSInteger caseCurrentPage;
@@ -56,8 +59,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _nameLabel.text = _designer.nickName.length?_designer.nickName:_designer.account;
-    self.navigationItem.title = _designer.nickName.length?_designer.nickName:_designer.account;
     
     personDatas = @[@"毕业院校", @"量房费", @"设计费用", @"从业年限", @"擅长风格"];
     _caseCurrentPage = 1;
@@ -105,6 +106,13 @@
 }
 
 - (void)reloadData{
+    _nameLabel.text = [_designer formatUserName];
+    self.navigationItem.title = [_designer formatUserName];
+    
+    _isAuthImageView.hidden = !_designer.isAuth;
+    CGRect frame = _isAuthImageView.frame;
+    frame.origin.x = _nameLabel.frame.origin.x + [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)] + 5;
+    _isAuthImageView.frame = frame;
     
     [_headImageView setImageWithURLString:_designer.headUrl];
     _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.fansCount];

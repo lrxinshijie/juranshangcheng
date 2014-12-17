@@ -62,10 +62,19 @@
     _captchaTextField.placeholder = @"请输入手机短信中的验证码";
     _captchaTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
-    _tableView.tableFooterView = _tableFooterView;
+    UIButton *btn = [self.view buttonWithFrame:kContentFrameWithoutNavigationBar target:self action:@selector(onHidden:) image:nil];
+    [self.view addSubview:btn];
+    
+    CGRect frame = CGRectMake(0, 0, kWindowWidth, 44*3);
+    self.tableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     [self.view addSubview:_tableView];
+    
+    frame = _tableFooterView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame);
+    _tableFooterView.frame = frame;
+    [self.view addSubview:_tableFooterView];
     
     self.countDownLabel = [self.view labelWithFrame:CGRectMake(kWindowWidth - 100 - 15, kWindowHeightWithoutNavigationBar - 30 -15, 100, 30) text:@"" textColor:[UIColor darkGrayColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:kSystemFontSize]];
     _countDownLabel.layer.masksToBounds = YES;
@@ -74,6 +83,11 @@
     _countDownLabel.layer.borderWidth = 1;
     _countDownLabel.hidden = YES;
     [self.view addSubview:_countDownLabel];
+}
+
+- (void)onHidden:(id)sender{
+    [_captchaTextField resignFirstResponder];
+    [_phoneTextField resignFirstResponder];
 }
 
 - (IBAction)onCommit:(id)sender{

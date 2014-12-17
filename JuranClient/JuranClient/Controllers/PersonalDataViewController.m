@@ -367,7 +367,6 @@
     }else if (indexPath.section == 2){
         ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:[typesForSection3[indexPath.row] integerValue]];
         vc.title = keysForSection3[indexPath.row];
-        vc.keyboardType = UIKeyboardTypeNumberPad;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
