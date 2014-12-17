@@ -29,9 +29,31 @@ static CGFloat kAnimateDuration = 0.25f;
 - (instancetype)init{
     if (self = [super initWithFrame:CGRectMake(0, 64, kWindowWidth, kWindowHeightWithoutNavigationBar)]) {
         
-        self.titles = @[@"精选活动",@"家装百科",@"答疑解惑",@"最新话题",@"扫一扫",@"设置",@"关于"];
-        self.images = @[@"menu_activity_default",@"menu_baike_default",@"menu_answer_default",@"menu_topic_default",@"menu_qr_default",@"menu_setting_default",@"menu_about_default"];
-        self.selects = @[@"menu_activity_select",@"menu_baike_select",@"menu_answer_select",@"menu_topic_select",@"menu_qr_select",@"menu_setting_select",@"menu_about_select"];
+        self.titles = @[
+//                        @"精选活动",
+//                        @"家装百科",
+                        @"答疑解惑",
+                        @"最新话题",
+//                        @"扫一扫",
+                        @"设置",
+                        @"关于"];
+        self.images = @[
+//                        @"menu_activity_default",
+//                        @"menu_baike_default",
+                        @"menu_answer_default",
+                        @"menu_topic_default",
+//                        @"menu_qr_default",
+                        @"menu_setting_default",
+                        @"menu_about_default"
+                        ];
+        self.selects = @[
+//                         @"menu_activity_select",
+//                         @"menu_baike_select",
+                         @"menu_answer_select",
+                         @"menu_topic_select",
+//                         @"menu_qr_select",
+                         @"menu_setting_select",
+                         @"menu_about_select"];
 
         UISwipeGestureRecognizer *swipt = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideMenu)];
         swipt.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -146,22 +168,22 @@ static CGFloat kAnimateDuration = 0.25f;
         [self removeFromSuperview];
         
         UINavigationController *nav = (UINavigationController *)[(AppDelegate *)[UIApplication sharedApplication].delegate tabBarController].selectedViewController;
-        if (indexPath.row == 5) {
+        if (indexPath.row == 2) {
             SettingsViewController *vc = [[SettingsViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
 
             [nav pushViewController:vc animated:YES];
-        }else if (indexPath.row == 2){
+        }else if (indexPath.row == 0){
             QuestionViewController *vc = [[QuestionViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             
             [nav pushViewController:vc animated:YES];
-        }else if (indexPath.row == 3){
+        }else if (indexPath.row == 1){
             NewestTopicViewController *vc = [[NewestTopicViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             
             [nav pushViewController:vc animated:YES];
-        }if (indexPath.row == 6){
+        }if (indexPath.row == 3){
             AboutViewController *vc = [[AboutViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [nav pushViewController:vc animated:YES];
