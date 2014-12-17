@@ -24,6 +24,7 @@
 @property (nonatomic, strong) JRDemand *demand;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) UIImage *fileImage;
+@property (nonatomic, strong) NSString *fileImageURL;
 
 
 @end
@@ -118,6 +119,21 @@
     }
     
     [self showHUD];
+    
+    if (_fileImage) {
+        [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":_fileImage} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            if (!error) {
+                _demand.roomTypeImgUrl = [data objectForKey:@"imgUrl"];
+                [self submitDemand];
+            }
+        }];
+    }else{
+        [self submitDemand];
+    }
+    
+}
+
+- (void)submitDemand{
     NSDictionary *param = @{@"contactsName": _demand.contactsName,
                             @"houseType": _demand.houseType,
                             @"contactsMobile": _demand.contactsMobile,
@@ -127,19 +143,19 @@
                             @"renovationStyle": _demand.renovationStyle,
                             @"neighbourhoods": _demand.neighbourhoods,
                             @"roomNum":_demand.roomNum,
-//                            @"livingRoomCount":_demand.livingroomCount,
-//                            @"bathroomCount":_demand.bathroomCount,
-                            @"areaInfo": [_demand.areaInfo dictionaryValue]
+                            @"livingroomCount":_demand.livingroomCount,
+                            @"bathroomCount":_demand.bathroomCount,
+                            @"areaInfo": [_demand.areaInfo dictionaryValue],
+                            @"roomTypeImgUrl": _demand.roomTypeImgUrl
                             };
-    NSDictionary *fileDict = nil;
-    if (_fileImage) {
-        fileDict = @{@"roomImageInfo": _fileImage};
-    }
-    [[ALEngine shareEngine] pathURL:JR_PUBLISH_DESIGN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:fileDict responseHandler:^(NSError *error, id data, NSDictionary *other) {
+
+    [[ALEngine shareEngine] pathURL:JR_PUBLISH_DESIGN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             [self showTip:@"发布需求成功"];
             self.demand = [[JRDemand alloc] init];
+            self.fileImage = nil;
+            _photoImageView.image = [UIImage imageNamed:@"publish_image_default"];
             [self reloadData];
         }
     }];

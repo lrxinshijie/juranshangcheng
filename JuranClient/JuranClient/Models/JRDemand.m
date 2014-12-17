@@ -30,6 +30,7 @@
         self.roomNum = @"";
         self.livingroomCount = @"";
         self.bathroomCount = @"";
+        self.roomTypeImgUrl = @"";
     }
     
     return self;

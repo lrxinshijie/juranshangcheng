@@ -44,7 +44,7 @@
 }
 
 - (IBAction)onLike:(id)sender{
-    
+    return;
     
     if ([self.viewController checkLogin:nil]) {
         [_jrCase like:^(BOOL result) {

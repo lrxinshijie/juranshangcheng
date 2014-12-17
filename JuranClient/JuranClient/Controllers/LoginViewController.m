@@ -51,9 +51,6 @@
 - (IBAction)onThirdLogin:(UIButton *)btn{
     [self onHideKeyboard:btn];
     
-    [self showHUD];
-    
-    
     ShareType type = ShareTypeQQSpace;
     if (btn.tag == 1001) {
         type = ShareTypeSinaWeibo;
@@ -83,7 +80,7 @@
                                     @"thirdSource": thirdSource,
                                     @"nickName": nickName,
                                     @"deviceInfo":@{@"appType":@"iphone",@"version":@"1.0",@"deviceType":@"iphone",@"osVersion":@"8.0"}};
-            
+            [self showHUD];
             [[ALEngine shareEngine] pathURL:JR_THIRD_LOGIN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
                 [self hideHUD];
                 if (!error) {
@@ -103,7 +100,7 @@
                 }
             }];
         }else{
-            [self hideHUD];
+            [self showTip:error.errorDescription];
         }
     }];
     

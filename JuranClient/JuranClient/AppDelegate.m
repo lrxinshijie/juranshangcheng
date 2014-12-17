@@ -114,19 +114,21 @@
                                   appSecret:@"558f8c19eb566dcce87b898461b0cf24"
                                 redirectUri:@"http://www.sharesdk.cn"
                                    wbApiCls:[WeiboApi class]];
-    [ShareSDK connect163WeiboWithAppKey:@"w2sMmVpSmY4zXCIX" appSecret:@"UGqxcqJQglAZkYd57nDGmJ5z8bh5TL9A" redirectUri:@"http://demo.juran.cn/member/sinalogin.htm"];
+    [ShareSDK connect163WeiboWithAppKey:@"9F2EiRMl1VxVMEtj"
+                              appSecret:@"iWxz6yHnT5xexD04hDIKnjUihlvNq3co"
+                            redirectUri:@"http://www.juran.cn/member/nteslogin.htm"];
     
     //添加QQ空间应用  注册网址  http://connect.qq.com/intro/login/
     [ShareSDK connectQZoneWithAppKey:QQHLSDKAppKey
                            appSecret:QQHLSDKAppSecret
                    qqApiInterfaceCls:[QQApiInterface class]
                      tencentOAuthCls:[TencentOAuth class]];
-    
+
     
     //添加QQ应用  注册网址  http://open.qq.com/
-    [ShareSDK connectQQWithQZoneAppKey:QQHLSDKAppKey
-                     qqApiInterfaceCls:[QQApiInterface class]
-                       tencentOAuthCls:[TencentOAuth class]];
+//    [ShareSDK connectQQWithQZoneAppKey:QQHLSDKAppKey
+//                     qqApiInterfaceCls:[QQApiInterface class]
+//                       tencentOAuthCls:[TencentOAuth class]];
     
     
     

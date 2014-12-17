@@ -124,6 +124,8 @@
             self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 44, kWindowWidth, 165) ImageArray:_adInfos];
             _bannerView.delegate = self;
             [_headerView addSubview:_bannerView];
+            
+            self.tableView.tableHeaderView = _headerView;
         }
         [self loadData];
     }];
@@ -138,7 +140,7 @@
     }
     
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:_searchKey.length > 0 ? JR_SEARCH_CASE : JR_PROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:_searchKey.length > 0 ? JR_SEARCH_CASE : JR_PROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             NSArray *projectList = [data objectForKey:@"projectList"];
