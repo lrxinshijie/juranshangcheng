@@ -47,11 +47,15 @@
 @property (nonatomic, strong) NSString *bidId;
 @property (nonatomic, strong) NSMutableArray *bidInfoList;
 @property (nonatomic, strong) NSString *deadBalance;
+@property (nonatomic, strong) NSString *postDate;
+@property (nonatomic, strong) NSString *auditDesc;
 
 - (NSString*)statusString;
+- (NSInteger)statusIndex;
 - (NSString *)houseTypeString;
 - (NSString *)renovationStyleString;
 - (NSString *)roomNumString;
+- (NSString *)descriptionForDetail;
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (void)buildUpDetailWithValue:(id)value;

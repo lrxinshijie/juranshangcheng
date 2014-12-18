@@ -48,6 +48,7 @@
     [self.view addSubview:bgView];
     
     _mailTextField = [self.view textFieldWithFrame:CGRectMake(0, 0, kWindowWidth -30, 30) borderStyle:UITextBorderStyleNone backgroundColor:[UIColor whiteColor] text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
+    _mailTextField.keyboardType = UIKeyboardTypeEmailAddress;
     _mailTextField.placeholder = @"";
     _mailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
@@ -86,7 +87,7 @@
         [self hideHUD];
         if (!error) {
             isSended = YES;
-            _tableView.tableFooterView = [[UIView alloc] init];
+            _tableFooterView.hidden = YES;;
             _backgroundView.hidden = NO;
             [_tableView reloadData];
         }

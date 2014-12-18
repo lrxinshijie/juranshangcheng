@@ -12,6 +12,8 @@
 {
     //1为解绑手机  2为绑定新手机
     NSInteger step;
+    NSTimer *timer;
+    NSInteger counter;
 }
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UITextField *captchaTextField;
@@ -60,6 +62,7 @@
 - (void)setupUI{
     _captchaTextField = [self.view textFieldWithFrame:CGRectMake(0, 0, kWindowWidth -30, 30) borderStyle:UITextBorderStyleNone backgroundColor:[UIColor whiteColor] text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
     _captchaTextField.placeholder = @"请输入手机短信中的验证码";
+    _captchaTextField.keyboardType = UIKeyboardTypeNumberPad;
     _captchaTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     UIButton *btn = [self.view buttonWithFrame:kContentFrameWithoutNavigationBar target:self action:@selector(onHidden:) image:nil];
@@ -92,11 +95,55 @@
 
 - (IBAction)onCommit:(id)sender{
     if (step == 1) {
-        step = 2;
-        [self reloadData];
+        [self unbindCommit];
     }else if (step == 2){
-        
+        [self bindCommit];
     }
+}
+
+- (void)unbindCommit{
+    if (!(_captchaTextField.text && _captchaTextField.text.length > 0)) {
+        [self showTip:@"请输入验证码"];
+        return;
+    }
+    NSDictionary *param = @{@"mobileNum": _user.mobileNum,
+                            @"smsAuthNo": _captchaTextField.text,
+                            @"mobileType": @"P04"};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_VALIDSMS parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                _countDownLabel.hidden = YES;
+                _captchaTextField.text = @"";
+                _phoneTextField.text = @"";
+                step = 2;
+                [self reloadData];
+            });
+        }
+    }];
+}
+
+- (void)bindCommit{
+    if (!(_captchaTextField.text && _captchaTextField.text.length > 0)) {
+        [self showTip:@"请输入验证码"];
+        return;
+    }
+    if (!(_phoneTextField.text && _phoneTextField.text.length > 0)) {
+        [self showTip:@"请输入手机号码"];
+        return;
+    }
+    NSDictionary *param = @{@"smsAuthNo":_captchaTextField.text,
+                            @"mobileNum":_phoneTextField.text};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_SAVE_MOBILEPHONE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            _countDownLabel.hidden = YES;
+            _user.mobileNum = _phoneTextField.text;
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
 }
 
 - (IBAction)getCaptcha:(id)sender{
@@ -110,6 +157,7 @@
             [self showTip:@"请输入完整的手机号码"];
             return;
         }
+        [_phoneTextField resignFirstResponder];
         param = @{@"mobileNum": _phoneTextField.text,
                   @"mobileType": @"P03"
                   };
@@ -119,8 +167,24 @@
     [[ALEngine shareEngine] pathURL:JR_REGIST_SENDSMS parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
+            _countDownLabel.hidden = NO;
+            counter = 60;
+            timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
         }
     }];
+}
+
+//倒计时
+- (void)countDown{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        counter--;
+        _countDownLabel.text = [NSString stringWithFormat:@"%d秒",counter];
+        if (counter <= 0) {
+            [timer invalidate];
+            timer = nil;
+            _countDownLabel.hidden = YES;
+        }
+    });
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

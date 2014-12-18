@@ -192,14 +192,27 @@
 }
 
 - (void)onHiddenAnswerImageView{
+    _answerImageView.hidden = YES;
     
+    CGRect frame = _answerView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame);
+    _answerView.frame = frame;
 }
 
 - (IBAction)onShowAnswerImageView:(id)sender{
+    _answerImageView.hidden = NO;
     
+    CGRect frame = _answerView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame) - CGRectGetHeight(_answerImageView.frame);
+    _answerView.frame = frame;
 }
 
 - (IBAction)onSend:(id)sender{
+    if (![self checkLogin:^{
+    }]) {
+        return;
+    }
+    
     if (!(_answerTextField.text && _answerTextField.text.length > 0))
     {
         [self showTip:@"回答内容不能为空"];
@@ -226,6 +239,9 @@
             [_question.otherAnswers insertObject:answer atIndex:0];
             _question.answerCount += 1;
             _answerTextField.text = @"";
+            if (_delegate && [_delegate respondsToSelector:@selector(valueChangedWithQuestionDetailViewController:)]) {
+                [_delegate valueChangedWithQuestionDetailViewController:self];
+            }
             [self reloadData];
         }
         
@@ -376,6 +392,7 @@
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification{
+    _answerImageView.hidden = YES;
     NSDictionary *info = [notification userInfo];
     NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
     CGSize keyboardSize = [value CGRectValue].size;
