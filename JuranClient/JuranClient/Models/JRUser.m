@@ -211,6 +211,11 @@
 }
 
 - (NSString *)showName{
+    
+    if (self.userName.length > 0) {
+        return self.userName;
+    }
+    
     if (self.nickName.length > 0) {
         return self.nickName;
     }

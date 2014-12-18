@@ -116,7 +116,7 @@
             NSArray *bannerList = [data objectForKey:@"bannerList"];
             if (bannerList.count > 0) {
                 self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
-                [_adInfos addObjectsFromArray:_adInfos];
+//                [_adInfos addObjectsFromArray:_adInfos];
                 
                 CGRect frame = _headerView.frame;
                 frame.size.height = 165 + 44;
