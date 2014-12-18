@@ -59,9 +59,9 @@
 #define JR_SEARCH_QUESTION [NSString stringWithFormat:@"%@/search/searchQuestion.json",JR_SERVICE]
 #define JR_UPDATE_BINDINGEMAIL [NSString stringWithFormat:@"%@/member/updateBindingEmail.json",JR_SERVICE]
 #define JR_ADD_FEEDBACK [NSString stringWithFormat:@"%@/support/addFeedback.json",JR_SERVICE]
-
-
-
+#define JR_SAVE_MOBILEPHONE [NSString stringWithFormat:@"%@/member/saveMobilePhone.json",JR_SERVICE]
+#define JR_REQ_STOP [NSString stringWithFormat:@"%@/design/ReqStop.json",JR_SERVICE]
+#define JR_REJECT_DESIGNREQ [NSString stringWithFormat:@"%@/design/rejectDesignReq.json",JR_SERVICE]
 
 
 

@@ -14,7 +14,7 @@
 #import "QuestionDetailViewController.h"
 #import "SearchViewController.h"
 
-@interface QuestionViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate, NewQuestionViewControllerDelegate>
+@interface QuestionViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate, NewQuestionViewControllerDelegate, QuestionDetailViewControllerDelegate>
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -169,6 +169,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     JRQuestion *q = [_datas objectAtIndex:indexPath.row];
     QuestionDetailViewController *vc = [[QuestionDetailViewController alloc] init];
+    vc.delegate = self;
     vc.question = q;
     vc.isResolved = [q isResolved];
     [self.navigationController pushViewController:vc animated:YES];
@@ -191,6 +192,12 @@
 #pragma mark - NewQuestionViewControllerDelegate
 
 - (void)newQuestionViewController:(NewQuestionViewController *)vc{
+    [_tableView headerBeginRefreshing];
+}
+
+#pragma mark - QuestionDetailViewControllerDelegate
+
+- (void)valueChangedWithQuestionDetailViewController:(QuestionDetailViewController *)vc{
     [_tableView headerBeginRefreshing];
 }
 

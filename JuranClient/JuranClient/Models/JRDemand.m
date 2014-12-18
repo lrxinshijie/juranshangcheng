@@ -8,6 +8,7 @@
 
 #import "JRDemand.h"
 #import "JRAreaInfo.h"
+#import "JRDesigner.h"
 
 @implementation JRDemand
 
@@ -32,6 +33,14 @@
         self.livingroomCount = @"";
         self.bathroomCount = @"";
         self.roomTypeImgUrl = @"";
+        self.contactsSex = @"";
+        self.roomType = @"";
+        self.imageUrl = @"";
+        self.bidId = @"";
+        self.bidInfoList = [NSMutableArray array];
+        self.deadBalance = @"";
+        self.postDate = @"";
+        self.auditDesc = @"";
     }
     
     return self;
@@ -57,6 +66,8 @@
         self.deadline = [dict getStringValueForKey:@"deadline" defaultValue:@""];
         self.newBidNums = [dict getIntValueForKey:@"newBidNums" defaultValue:0];
         self.isBidded = [dict getBoolValueForKey:@"isBidded" defaultValue:NO];
+        self.deadBalance = [dict getStringValueForKey:@"deadBalance" defaultValue:@""];
+        self.auditDesc = [dict getStringValueForKey:@"auditDesc" defaultValue:@""];
     }
     
     return self;
@@ -91,7 +102,11 @@
     self.imageUrl = [value getStringValueForKey:@"imageUrl" defaultValue:@""];
     self.bidId = [value getStringValueForKey:@"bidId" defaultValue:@""];
     self.deadBalance = [value getStringValueForKey:@"deadBalance" defaultValue:@""];
-//    self.bidInfoList = @[];
+    self.postDate = [value getStringValueForKey:@"postDate" defaultValue:@""];
+    self.auditDesc = [value getStringValueForKey:@"auditDesc" defaultValue:@""];
+    self.bidNums = [value getIntValueForKey:@"bidNums" defaultValue:0];
+    self.deadline = [value getStringValueForKey:@"deadline" defaultValue:@""];
+    self.bidInfoList = [JRDesigner buildUpDemandDetailWithValue:value[@"bidInfoList"]];
     
 }
 
@@ -156,8 +171,13 @@
 }
 
 - (NSString*)statusString{
-    NSArray *keys = @[@"01_waitAudit", @"02_refusal", @"03_pass", @"04_complete", @"05_close", @"06_falied"];
+    
     NSArray *values = @[@"待审核", @"审核拒绝", @"进行中", @"已完成", @"已结束", @"已流标"];
+    return values[[self statusIndex]];
+}
+
+- (NSInteger)statusIndex{
+    NSArray *keys = @[@"01_waitAudit", @"02_refusal", @"03_pass", @"04_complete", @"05_close", @"06_falied"];
     NSInteger index = 0;
     for (NSString *key in keys) {
         if ([key isEqualToString:_status]) {
@@ -165,8 +185,51 @@
         }
         index++;
     }
-    return values[index];
+    return index;
 }
 
+- (NSString *)descriptionForDetail{
+    NSInteger index = [self statusIndex];
+    NSString *des = @"";
+    switch (index) {
+        case 0:
+        {
+            des = @"当前平台正在审核您的需求，请您耐心等待，如有问题请联系客服：010-84094000";
+            break;
+        }
+        case 1:
+        {
+            des = _auditDesc;
+            break;
+        }
+        case 2:
+        {
+            if (_bidNums > 0) {
+                des = [NSString stringWithFormat:@"已有%d人投标，快去选择设计师吧！剩余%@天结束招标。", _bidNums, _deadBalance];
+            }else{
+                des = [NSString stringWithFormat:@"目前没有设计师投标呦！剩余%@天结束招标。", _deadBalance];
+            }
+            break;
+        }
+        case 3:
+        {
+            des = @"恭喜您！已有心怡的设计师。\n请及时与设计师沟通，相关订单状态可查询订单管理。";
+            break;
+        }
+        case 4:
+        {
+            des = @"该需求已到期，未有设计师中标，您可再次发布设计需求。";
+            break;
+        }
+        case 5:
+        {
+            des = @"您终止了该招标需求。";
+            break;
+        }
+        default:
+            break;
+    }
+    return des;
+}
 
 @end

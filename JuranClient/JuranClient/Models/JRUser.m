@@ -156,7 +156,7 @@
     self.detailAddress = [dict getStringValueForKey:@"detailAddress" defaultValue:@""];
     self.zipCode = [dict getStringValueForKey:@"zipCode" defaultValue:@""];
     self.idCardType = [dict getStringValueForKey:@"idCardType" defaultValue:@""];
-    self.idCardNumber = [dict getStringValueForKey:@"idCardNumber" defaultValue:@""];
+    self.idCardNumber = [dict getStringValueForKey:@"idCardNum" defaultValue:@""];
     self.qq = [dict getStringValueForKey:@"qq" defaultValue:@""];
     self.weixin = [dict getStringValueForKey:@"weixin" defaultValue:@""];
     self.sex = [dict getIntValueForKey:@"sex" defaultValue:0];
@@ -187,16 +187,15 @@
     if (!(self.idCardNumber && self.idCardNumber.length > 0)) {
         return @"未设置";
     }
-    return [NSString stringWithFormat:@"%@:%@", arr[self.idCardType.intValue], self.idCardNumber];
+    return [NSString stringWithFormat:@"%@:%@****%@", arr[self.idCardType.intValue], [self.idCardNumber substringToIndex:5], [self.idCardNumber substringFromIndex:_idCardNumber.length - 2]];
 }
 
 - (NSString*)homeTelForPersonal{
     if (_homeTel.length == 0) {
         return @"未设置";
     }
-    NSString *tel = _homeTel;
-    tel = [NSString stringWithFormat:@"%@****%@", [tel substringToIndex:5], [_mobileNum substringFromIndex:9]];
-    return tel;
+    
+    return [NSString stringWithFormat:@"%@****%@", [_homeTel substringToIndex:3], [_homeTel substringFromIndex:7]];
 }
 
 - (NSString*)mobileNumForBindPhone{

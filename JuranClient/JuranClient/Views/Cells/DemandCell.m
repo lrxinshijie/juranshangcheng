@@ -46,7 +46,7 @@
 
 - (void)fillCellWithDemand:(JRDemand*)demand{
     _projectNumLabel.text = [NSString stringWithFormat:@"项目编号：%@", demand.designReqId];
-    _timeLabel.text = @"2014-10-20";
+    _timeLabel.text = demand.publishTime;
     _titleLabel.text = demand.title;
     _addressLabel.text = demand.houseAddress;
     _sizeLabel.text = [NSString stringWithFormat:@"%d平方米", demand.houseArea];
@@ -57,6 +57,13 @@
     _statusLabel.hidden = demand.isBidded;
     _statusLabel.text = demand.isBidded?@"":[demand statusString];
     _statusImageView.image = [UIImage imageNamed:demand.isBidded?@"status_end.png":@"status_underway.png"];
+    NSInteger index = [demand statusIndex];
+    if (index == 2) {
+        _endTimeLabel.text = [NSString stringWithFormat:@"离结束还有%@天", demand.deadBalance];
+    }else{
+        _endTimeLabel.text = @"";
+    }
+    
 }
 
 @end

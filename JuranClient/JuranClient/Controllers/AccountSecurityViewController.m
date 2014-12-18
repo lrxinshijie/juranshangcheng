@@ -53,6 +53,20 @@
     [self loadData];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self reloadData];
+}
+
+- (void)reloadData{
+    values = @[@"",
+               _user.mobileNum.length == 0?@"未绑定":[_user mobileNumForBindPhone],
+               _user.email.length == 0?@"未绑定":_user.email];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_tableView reloadData];
+    });
+}
+
 - (void)loadData{
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken: @"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -60,12 +74,7 @@
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
                 [_user buildUpMemberDetailWithDictionary:data];
-                values = @[@"",
-                           _user.mobileNum.length == 0?@"未绑定":[_user mobileNumForBindPhone],
-                           _user.email.length == 0?@"未绑定":_user.email];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [_tableView reloadData];
-                });
+                [self reloadData];
             }
         }
     }];

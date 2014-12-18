@@ -9,7 +9,7 @@
 #import "ModifyViewController.h"
 #import "JRMemberDetail.h"
 
-@interface ModifyViewController ()<UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
+@interface ModifyViewController ()<UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, UITextFieldDelegate>
 {
     NSArray *idTypes;
     NSInteger idCardType;
@@ -54,6 +54,7 @@
     _textField = [self.view textFieldWithFrame:CGRectMake(0, 0, kWindowWidth -40, 30) borderStyle:UITextBorderStyleNone backgroundColor:[UIColor whiteColor] text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
     _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     _textField.keyboardType = UIKeyboardTypeDefault;
+    _textField.delegate = self;
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = RGBColor(241, 241, 241);
@@ -83,7 +84,7 @@
             _textField.placeholder = @"输入证件号码";
             _textField.keyboardType = UIKeyboardTypeNumberPad;
             idTypes = @[@"  身份证", @"  军官证", @"  护照"];
-            idCardType = _user.idCardNumber.length == 0?-1:_user.idCardNumber.integerValue;
+            idCardType = _user.idCardType.integerValue;
             break;
         }
         case ModifyCVTypeQQ:
@@ -111,11 +112,13 @@
         default:
             break;
     }
+    [_textField becomeFirstResponder];
 }
 
 - (void)save{
     if (_textField.text.length == 0) {
         //不能为空
+        [self showTip:@"输入内容不能为空!!"];
         return;
     }
     switch (_type) {
@@ -130,6 +133,11 @@
         }
         case ModifyCVTypeHomeTel:
         {
+            if (_textField.text.length < 8) {
+                //不能为空
+                [self showTip:@"请输入完整的固定!!"];
+                return;
+            }
             param = @{@"homeTel": _user.homeTel};
             break;
         }
@@ -263,6 +271,40 @@
     }
     idCardType = buttonIndex;
     [_tableView reloadData];
+}
+
+- (int)countTheStrLength:(NSString*)strtemp {
+    int strlength = 0;
+    char* p = (char*)[strtemp cStringUsingEncoding:NSUnicodeStringEncoding];
+    for (int i=0 ; i<[strtemp lengthOfBytesUsingEncoding:NSUnicodeStringEncoding] ;i++) {
+        if (*p) {
+            p++;
+            strlength++;
+        }
+        else {
+            p++;
+        }
+    }
+    return (strlength+1)/2;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    NSInteger length = [self countTheStrLength:toBeString];
+    switch (_type) {
+        case ModifyCVTypeNickName:
+        case ModifyCVTypeUserName:
+        {
+            if (length > 12) {
+                [self showTip:@"输入长度不超过12"];
+                return NO;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+    return YES;
 }
 
 @end

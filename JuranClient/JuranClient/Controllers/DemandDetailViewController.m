@@ -9,8 +9,11 @@
 #import "DemandDetailViewController.h"
 #import "BidDesignerCell.h"
 #import "JRDemand.h"
+#import "JRDesigner.h"
 
-@interface DemandDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
+#define kStatusBGImageViewTag 2933
+
+@interface DemandDetailViewController ()<UITableViewDelegate, UITableViewDataSource, BidDesignerCellDelegate>
 {
     NSArray *demandInfoKeys;
     NSArray *demandInfoValues;
@@ -18,12 +21,20 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong)  UITableView *designerTableView;
 @property (nonatomic, strong)  UITableView *demandInfoTableView;
-@property (nonatomic, strong) IBOutlet UIView *demandInfoTableHeaderView;
+
 @property (nonatomic, strong) IBOutlet UIView *designerTableHeaderView;
-@property (nonatomic, strong) IBOutlet UIView *demandInfoHeaderView;
 @property (nonatomic, strong) IBOutlet UIView *designerHeaderView;
 
+@property (nonatomic, strong) IBOutlet UIView *demandInfoTableHeaderView;
+@property (nonatomic, strong) IBOutlet UIView *demandInfoHeaderView;
+@property (nonatomic, strong) IBOutlet UILabel *demandInfoTitleLabel;
+
 @property (nonatomic, strong) IBOutlet UIView *demandAddressView;
+@property (nonatomic, strong) IBOutlet UILabel *demandAddressLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *roomTypeImageView;
+
+@property (nonatomic, strong) IBOutlet UILabel *demandDescribeLabel;
+@property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
 
 @end
 
@@ -56,14 +67,45 @@
 }
 
 - (void)reloadData{
+    NSInteger index = [_demand statusIndex];
+    if (index < 3) {
+        self.navigationItem.rightBarButtonItem = _rightBarButtonItem;
+    }else{
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    _demandInfoTitleLabel.text = _demand.title;
     [self reSetData];
-    
+    [self setupDesignerTableHeaderView];
     [_designerTableView reloadData];
     [_demandInfoTableView reloadData];
 }
 
+- (void)setupDesignerTableHeaderView{
+    NSInteger index = [_demand statusIndex];
+    NSInteger tag = kStatusBGImageViewTag;
+    if (index == 2) {
+        tag += 1;
+    }else if (index > 2){
+        tag += 2;
+    }
+    UIImageView *imageView = (UIImageView*)[_designerTableHeaderView viewWithTag:tag];
+    imageView.image = [UIImage imageNamed:@"request_doing.png"];
+    
+    _demandDescribeLabel.text = [_demand descriptionForDetail];
+    
+    CGRect frame = _demandDescribeLabel.frame;
+    frame.size.height = [_demandDescribeLabel.text heightWithFont:_demandDescribeLabel.font constrainedToWidth:CGRectGetWidth(_demandDescribeLabel.frame)];
+    _demandDescribeLabel.frame = frame;
+    
+    frame = _designerTableHeaderView.frame;
+    frame.size.height = CGRectGetMaxY(_demandDescribeLabel.frame) + 10;
+    _designerTableHeaderView.frame = frame;
+    
+    _designerTableView.tableHeaderView = _designerTableHeaderView;
+}
+
 - (void)reSetData{
-    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, _demand.roomType, [NSString stringWithFormat:@"￥%d", (NSInteger)_demand.renovationBudget/100], [_demand statusString], [NSString stringWithFormat:@"%d平方米", _demand.houseArea], [_demand renovationStyleString], @"2014-08-18 10:23:12", @"2014-08-18 10:23:12", @""];
+    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, _demand.roomType, [NSString stringWithFormat:@"￥%d", (NSInteger)_demand.renovationBudget/100], [_demand statusString], [NSString stringWithFormat:@"%d平方米", _demand.houseArea], [_demand renovationStyleString], _demand.postDate, _demand.deadline, @""];
 }
 
 - (void)setupUI{
@@ -87,12 +129,59 @@
     [_scrollView addSubview:_demandInfoTableView];
     
     _scrollView.contentSize = CGSizeMake(kWindowWidth, 2*kWindowHeightWithoutNavigationBar);
+    
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onDeadRequest) title:@"终止需求" backgroundImage:nil];
+    [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    _rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Target Action
+
+- (IBAction)onModifyDemandInfo:(id)sender{
+    
+}
+
+- (void)onDeadRequest{
+    
+    NSDictionary *param = @{@"designReqId": _demand.designReqId};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_REQ_STOP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
+}
+
+#pragma mark - 拒绝、私信、选TA量房
+
+- (void)privateLetter:(BidDesignerCell *)cell andDesigner:(JRDesigner *)designer{
+    
+}
+
+- (void)takeMeasure:(BidDesignerCell *)cell andDesigner:(JRDesigner *)designer{
+    
+}
+
+- (void)rejectForBid:(BidDesignerCell *)cell andDesigner:(JRDesigner *)designer{
+    NSDictionary *param = @{@"designReqId": _demand.designReqId,
+                            @"bidId":designer.bidId};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_REJECT_DESIGNREQ parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            [_demand.bidInfoList removeObject:designer];
+            [_designerTableView reloadData];
+        }
+    }];
+}
+
 
 #pragma mark - UITableViewDataSource/Delegate
 
@@ -102,35 +191,38 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView == _designerTableView) {
-        return 7;
-    }else{
+        return _demand.bidInfoList.count;
+    }else if(tableView == _demandInfoTableView){
         return demandInfoKeys.count;
     }
+    return 0;
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (tableView == _designerTableView) {
         return _designerHeaderView;
-    }else{
+    }else if(tableView == _demandInfoTableView){
         return _demandInfoHeaderView;
     }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (tableView == _designerTableView) {
         return 45;
-    }else{
+    }else if(tableView == _demandInfoTableView){
         return 30;
     }
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _designerTableView) {
-        return 170 + ((indexPath.row == 7-1)?5:0);
-    }else{
+        return 170 + ((indexPath.row == _demand.bidInfoList.count - 1)?5:0);
+    }else if(tableView == _demandInfoTableView){
         return  (indexPath.row == demandInfoKeys.count - 1)?95:44;
     }
-    
+    return 0;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -143,12 +235,14 @@
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+        cell.delegate = self;
+        JRDesigner *designer = _demand.bidInfoList[indexPath.row];
+        [cell fillCellWithDesigner:designer];
         //    JRDemand *d = [_datas objectAtIndex:indexPath.row];
         //    [cell fillCellWithDemand:d];
         
         return cell;
-    }else{
+    }else if(tableView == _demandInfoTableView){
         static NSString *CellIdentifier = @"DemandInfoCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
@@ -162,6 +256,11 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row == demandInfoKeys.count - 1) {
+            if (_demandAddressView.superview) {
+                [_demandAddressView removeFromSuperview];
+            }
+            _demandAddressLabel.text = _demand.houseAddress;
+            [_roomTypeImageView setImageWithURLString:_demand.imageUrl];
             [cell.contentView addSubview:_demandAddressView];
         }else if (indexPath.row == 5){
             cell.detailTextLabel.textColor = RGBColor(49, 113, 179);
@@ -174,7 +273,7 @@
         
         return cell;
     }
-//    return nil;
+    return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@""];
 }
 
 @end

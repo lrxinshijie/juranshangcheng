@@ -110,12 +110,13 @@
     }
     
     NSDictionary *param = @{@"topicId": _topic.topicId,
-                            @"commentContent": comment};
+                            @"commentContent": comment,
+                            @"imgUrl":@""};
     if (_selectComment) {
         param = @{@"projectId": _topic.topicId,
                   @"commentContent": comment,
-                  @"commentId": [NSString stringWithFormat:@"%d", _selectComment.commentId]
-                  };
+                  @"commentId": [NSString stringWithFormat:@"%d", _selectComment.commentId],
+                  @"imgUrl":@""};
     }
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_COMMIT_TOPIC parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {

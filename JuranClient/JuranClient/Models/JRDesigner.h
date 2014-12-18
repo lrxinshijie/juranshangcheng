@@ -55,6 +55,11 @@
 @property (nonatomic, strong) NSString *tradeCount;
 @property (nonatomic, strong) NSString *realNameAuth;
 
+//DemandDetail
+@property (nonatomic, assign) NSInteger userType;
+@property (nonatomic, strong) NSString *biddingDeclatation;
+@property (nonatomic, strong) NSString *bidId;
+
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
@@ -66,6 +71,8 @@
 
 //构造我的关注列表数据
 + (NSMutableArray *)buildUpFollowDesignerListWithValue:(id)value;
+
++ (NSMutableArray *)buildUpDemandDetailWithValue:(id)value;
 
 - (NSURL *)imageURL;
 

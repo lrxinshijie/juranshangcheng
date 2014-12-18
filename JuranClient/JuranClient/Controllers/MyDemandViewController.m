@@ -119,7 +119,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DemandDetailViewController *vc = [[DemandDetailViewController alloc] init];
-//    vc.demand = _datas[indexPath.row];
+    vc.demand = _datas[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

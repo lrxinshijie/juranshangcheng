@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DemandDetailViewController">
             <connections>
+                <outlet property="demandAddressLabel" destination="02C-OQ-bhx" id="rY8-iw-jQp"/>
                 <outlet property="demandAddressView" destination="2gw-N2-oPZ" id="wAp-rM-r1m"/>
+                <outlet property="demandDescribeLabel" destination="6UQ-m6-eKA" id="NXO-aS-c0g"/>
                 <outlet property="demandInfoHeaderView" destination="EXc-mK-SEG" id="Hw2-Ts-HKd"/>
                 <outlet property="demandInfoTableHeaderView" destination="WnU-SQ-Rn3" id="NXO-3C-IMi"/>
+                <outlet property="demandInfoTitleLabel" destination="ZvC-ex-WI2" id="GZg-lw-nkW"/>
                 <outlet property="designerHeaderView" destination="04P-1U-cd7" id="G5M-Sw-6CZ"/>
                 <outlet property="designerTableHeaderView" destination="roe-3I-C8d" id="nkf-y2-GzO"/>
+                <outlet property="roomTypeImageView" destination="16N-1v-4o6" id="Ue8-AK-RSc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -49,19 +52,19 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="413" y="-188.5"/>
         </view>
-        <view contentMode="scaleToFill" id="roe-3I-C8d">
+        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="roe-3I-C8d">
             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="request_reviewing" id="Lae-8O-Wie">
+                <imageView userInteractionEnabled="NO" tag="2933" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="request_reviewing" id="Lae-8O-Wie">
                     <rect key="frame" x="16" y="10" width="89" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="request_doing" id="il3-rm-N2B">
+                <imageView userInteractionEnabled="NO" tag="2934" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="request_reviewing" id="il3-rm-N2B">
                     <rect key="frame" x="115" y="10" width="89" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="request_reviewing" id="gyZ-VC-Czc">
+                <imageView userInteractionEnabled="NO" tag="2935" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="request_reviewing" id="gyZ-VC-Czc">
                     <rect key="frame" x="214" y="10" width="89" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -72,7 +75,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="啥地方就是靠劳动纠纷两款手机打了快放假快乐数据的弗兰克建设路口的附近两款手机的路口附近深刻理解对方考虑技术可理解对方考虑数据库空间上看到了房价款了手机的付款了就是可怜的积分卡就是快递放假啥地方建设力度家乐福发送到" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6UQ-m6-eKA">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6UQ-m6-eKA">
                     <rect key="frame" x="10" y="48" width="300" height="142"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -133,25 +136,28 @@
                         <color key="titleColor" red="0.19215688109397888" green="0.44313728809356689" blue="0.70196080207824707" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="onModifyDemandInfo:" destination="-1" eventType="touchUpInside" id="hdO-u1-AEr"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.90980398654937744" green="0.90980398654937744" blue="0.90980398654937744" alpha="1" colorSpace="deviceRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="413" y="-353"/>
+            <point key="canvasLocation" x="413" y="-285"/>
         </view>
         <view contentMode="scaleToFill" id="2gw-N2-oPZ">
             <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="项目地址" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PZ5-Mg-Gxc">
-                    <rect key="frame" x="18" y="11" width="69" height="21"/>
+                    <rect key="frame" x="15" y="11" width="69" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label上来看几点发链接数量的客服经理看世界的罚款了" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="02C-OQ-bhx">
-                    <rect key="frame" x="18" y="36" width="180" height="35"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="02C-OQ-bhx">
+                    <rect key="frame" x="15" y="36" width="180" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -176,7 +182,6 @@
     </objects>
     <resources>
         <image name="arrow_up" width="15" height="8"/>
-        <image name="request_doing" width="89" height="30"/>
         <image name="request_reviewing" width="89" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
