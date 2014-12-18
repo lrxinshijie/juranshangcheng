@@ -44,6 +44,7 @@
     [self removeFromSuperview];
 }
 
+
 - (void)setImage:(UIImage*)image{
     _imageView.image = image;
 }

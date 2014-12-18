@@ -1987,7 +1987,7 @@
 				ORGANIZATIONNAME = Juran;
 				TargetAttributes = {
 					A971BC901A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = 726366T28C;
 					};
 					A971BCAB1A20825800C018D6 = {
 						DevelopmentTeam = D2JB8K885C;

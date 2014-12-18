@@ -11,9 +11,13 @@
 #import "JRQuestion.h"
 #import "AnswerDetailCell.h"
 #import "JRAnswer.h"
+#import "ALGetPhoto.h"
+#import "CanRemoveImageView.h"
 
-@interface QuestionDetailViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
-
+@interface QuestionDetailViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, CanRemoveImageViewDelegate>
+{
+    UIImage *fileImage;
+}
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) AnswerCell *answerCell;
 @property (nonatomic, strong) AnswerDetailCell *answerDetailCell;
@@ -72,6 +76,7 @@
         frame.origin.y = kWindowHeightWithoutNavigationBar - CGRectGetHeight(_answerImageView.frame);
         _answerImageView.frame = frame;
         [self.view addSubview:_answerImageView];
+        _answerImageView.hidden = YES;
         
         UIButton *btn = [_answerImageView buttonWithFrame:_answerImageView.bounds target:self action:@selector(onHiddenAnswerImageView) image:nil];
         [_answerImageView insertSubview:btn atIndex:0];
@@ -191,36 +196,26 @@
     }
 }
 
-- (void)onHiddenAnswerImageView{
-    _answerImageView.hidden = YES;
-    
-    CGRect frame = _answerView.frame;
-    frame.origin.y = CGRectGetMaxY(_tableView.frame);
-    _answerView.frame = frame;
+- (void)uploadAnswerImage{
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":fileImage} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            [self submitAnswer:[data objectForKey:@"imgUrl"]];
+            for (UIView *v in _answerImageView.subviews) {
+                if ([v isKindOfClass:[CanRemoveImageView class]]) {
+                    [v removeFromSuperview];
+                }
+            }
+            _chooseImageView.hidden = NO;
+            fileImage = nil;
+        }
+    }];
 }
 
-- (IBAction)onShowAnswerImageView:(id)sender{
-    _answerImageView.hidden = NO;
-    
-    CGRect frame = _answerView.frame;
-    frame.origin.y = CGRectGetMaxY(_tableView.frame) - CGRectGetHeight(_answerImageView.frame);
-    _answerView.frame = frame;
-}
-
-- (IBAction)onSend:(id)sender{
-    if (![self checkLogin:^{
-    }]) {
-        return;
-    }
-    
-    if (!(_answerTextField.text && _answerTextField.text.length > 0))
-    {
-        [self showTip:@"回答内容不能为空"];
-        return;
-    }
-    [_answerTextField resignFirstResponder];
+- (void)submitAnswer:(NSString*)imageUrl{
     NSDictionary *param = @{@"questionId": [NSString stringWithFormat:@"%d", _question.questionId],
-                            @"content": _answerTextField.text
+                            @"content": _answerTextField.text,
+                            @"imgUrl":imageUrl
                             };
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_ANSWER_QUESTION parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -235,6 +230,7 @@
             answer.imageUrl = @"";
             answer.headUrl = user.headUrl;
             answer.content = _answerTextField.text;
+            answer.imageUrl = imageUrl;
             answer.commitTime = [[NSDate date] timestamp];
             [_question.otherAnswers insertObject:answer atIndex:0];
             _question.answerCount += 1;
@@ -246,8 +242,65 @@
         }
         
     }];
-
 }
+
+#pragma mark - Target Action
+
+- (void)onHiddenAnswerImageView{
+    _answerImageView.hidden = YES;
+    
+    CGRect frame = _answerView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame);
+    _answerView.frame = frame;
+}
+
+- (IBAction)onShowAnswerImageView:(id)sender{
+    [_answerTextField resignFirstResponder];
+    CGRect frame = _answerView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame) - CGRectGetHeight(_answerImageView.frame);
+    _answerView.frame = frame;
+    
+    _answerImageView.hidden = NO;
+}
+
+- (IBAction)onSend:(id)sender{
+    if (![self checkLogin:^{
+    }]) {
+        return;
+    }
+    
+    if (!(_answerTextField.text && _answerTextField.text.length > 0))
+    {
+        [self showTip:@"回答内容不能为空"];
+        return;
+    }
+    [_answerTextField resignFirstResponder];
+    [self onHiddenAnswerImageView];
+    if (fileImage) {
+        [self uploadAnswerImage];
+    }else{
+        [self submitAnswer:@""];
+    }
+}
+
+- (IBAction)onChooseImage:(id)sender{
+    [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+        _chooseImageView.hidden = YES;
+        fileImage = images.firstObject;
+        CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:_chooseImageView.frame];
+        imageView.delegate = self;
+        [imageView setImage:images[0]];
+        [_answerImageView addSubview:imageView];
+    }];
+}
+
+#pragma mark - CanRemoveImageViewDelegate
+
+- (void)deleteCanRemoveImageView:(CanRemoveImageView *)view{
+    fileImage = nil;
+    _chooseImageView.hidden = NO;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -280,7 +333,7 @@
             cell = (AnswerCell *)[nibs firstObject];
         }
         
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell fillCellWithAnswer:indexPath.section?_question.otherAnswers[indexPath.row]:_question.adoptedAnswer anIsAdoptedAnswer:indexPath.section == 0?YES:NO];
         
         return cell;
@@ -293,7 +346,7 @@
             cell.backgroundColor = [UIColor clearColor];
         }
         
-        //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell fillCellWithAnswer:_question.otherAnswers[indexPath.row] type:2];
         
         return cell;
@@ -348,6 +401,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [_answerTextField resignFirstResponder];
+    [self onHiddenAnswerImageView];
 }
 
 

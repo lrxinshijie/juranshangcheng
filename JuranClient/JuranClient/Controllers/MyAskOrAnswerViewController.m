@@ -12,7 +12,7 @@
 #import "JRAnswer.h"
 #import "AskDetailViewController.h"
 
-@interface MyAskOrAnswerViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface MyAskOrAnswerViewController ()<UITableViewDelegate, UITableViewDataSource, AskDetailViewControllerDelegate>
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *answerDatas;
@@ -200,6 +200,7 @@
 
     }else{
         AskDetailViewController *vc = [[AskDetailViewController alloc] init];
+        vc.delegate = self;
         vc.isMyQuestion = NO;
         JRQuestion *q = [[JRQuestion alloc] init];
         JRAnswer *r = _answerDatas[indexPath.row];
@@ -210,5 +211,10 @@
     }
 }
 
+#pragma mark - AskDetailViewControllerDelegate
+
+- (void)answeredWithAskDetailViewController:(AskDetailViewController *)vc{
+    [_tableView headerBeginRefreshing];
+}
 
 @end
