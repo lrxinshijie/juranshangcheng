@@ -115,7 +115,7 @@
     _isAuthImageView.frame = frame;
     
     [_headImageView setImageWithURLString:_designer.headUrl];
-    _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.fansCount];
+    _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.followCount];
     _popularityLabel.text = [NSString stringWithFormat:@"%i", _designer.viewCount];
     _pictureCountLabel.text = [NSString stringWithFormat:@"%i", _designer.product2DCount];
     _diyProjectCountLabel.text = [NSString stringWithFormat:@"%i", _designer.product3DCount];
@@ -237,9 +237,11 @@
             if (!error) {
                 _designer.isFollowed = YES;
                 _designer.followId = data[@"followId"];
+                _designer.followCount++;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
                     _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
+                    _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.followCount];
                 });
                 if ([_delegate respondsToSelector:@selector(changeFollowStatus:withDesigner:status:)]) {
                     [_delegate changeFollowStatus:self withDesigner:_designer status:YES];
@@ -253,9 +255,11 @@
             if (!error) {
                 _designer.isFollowed = NO;
                 _designer.followId = @"";
+                _designer.followCount--;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
                     _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
+                    _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.followCount];
                 });
                 if ([_delegate respondsToSelector:@selector(changeFollowStatus:withDesigner:status:)]) {
                     [_delegate changeFollowStatus:self withDesigner:_designer status:NO];

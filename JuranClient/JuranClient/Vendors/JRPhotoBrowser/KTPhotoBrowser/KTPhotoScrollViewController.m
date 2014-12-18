@@ -20,6 +20,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #define BUTTON_CANCEL 1
 
 @interface KTPhotoScrollViewController (KTPrivate)
+
 - (void)setCurrentIndex:(NSInteger)newIndex;
 - (void)toggleChrome:(BOOL)hide;
 - (void)startChromeDisplayTimer;
@@ -108,8 +109,6 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 - (void)setBottomView{
     
-    
-    
 }
 
 - (void)setTitleWithCurrentPhotoIndex
@@ -134,7 +133,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
         pageCount = 1;
     }
     
-    CGSize size = CGSizeMake(scrollView_.frame.size.width * pageCount,
+    CGSize size = CGSizeMake(scrollView_.frame.size.width * pageCount + 1,
                              scrollView_.frame.size.height / 2);   // Cut in half to prevent horizontal scrolling.
     [scrollView_ setContentSize:size];
 }
@@ -283,6 +282,10 @@ const CGFloat ktkDefaultToolbarHeight = 44;
         [photoView setScroller:self];
         [photoView setIndex:index];
         
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+        longPress.minimumPressDuration = 1.f;
+        [photoView addGestureRecognizer:longPress];
+        
         // Set the photo image.
         if (dataSource_) {
             if ([dataSource_ respondsToSelector:@selector(imageAtIndex:photoView:)] == NO) {
@@ -300,6 +303,10 @@ const CGFloat ktkDefaultToolbarHeight = 44;
         // Turn off zooming.
         [currentPhotoView turnOffZoom];
     }
+}
+
+- (void)handleLongPress:(UIGestureRecognizer*)gesture{
+    
 }
 
 - (void)unloadPhoto:(NSInteger)index

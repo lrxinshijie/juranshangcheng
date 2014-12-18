@@ -152,11 +152,17 @@
 }
 
 - (void)uploadHeaderImage:(UIImage*)image{
-    [[ALEngine shareEngine] pathURL:JR_UPLOAD_HEAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"headpic":image} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":image} responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            [self loadData];
+            [[ALEngine shareEngine] pathURL:JR_UPLOAD_HEAD_IMAGE parameters:@{@"headUrl":[data objectForKey:@"imgUrl"]} HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:nil responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                if (!error) {
+                    [self loadData];
+                }
+            }];
         }
     }];
+    
 }
 
 #pragma mark - ModifyViewControllerDelegate

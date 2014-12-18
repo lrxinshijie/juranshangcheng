@@ -12,9 +12,11 @@
 #import "KTPhotoView.h"
 #import "CaseDetailViewController.h"
 #import "ShareView.h"
+#import "SDWebImageManager.h"
 
-@interface JRPhotoScrollViewController ()<KTPhotoBrowserDataSource>
+@interface JRPhotoScrollViewController ()<KTPhotoBrowserDataSource, UIActionSheetDelegate>
 {
+    KTPhotoView *photoView;
 }
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *indexLabel;
@@ -149,6 +151,32 @@
     
 }
 
+- (void)handleLongPress:(UIGestureRecognizer *)gesture{
+    [super handleLongPress:gesture];
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        photoView = (KTPhotoView*)gesture.view;
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存到相册", nil];
+        [actionSheet showInView:self.view];
+    }
+    
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        UIImageWriteToSavedPhotosAlbum([photoView image], self, @selector(image:didFinishSavingWithError:contextInfo:),nil);
+    }
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+    if (!error) {
+        [self showTip:@"图片保存成功"];
+    }else{
+        [self showTip:[NSString stringWithFormat:@"图片保存失败!%@", error.localizedFailureReason]];
+    }
+}
+
 - (void)setCurrentIndex:(NSInteger)newIndex{
     [super setCurrentIndex:newIndex];
     [self setTitleAndIndex:newIndex];
@@ -256,7 +284,6 @@
     NSLog(@"%@",[Public imageURL:imageStr]);
     [photoView setImageWithURL:[Public imageURL:imageStr] placeholderImage:[UIImage imageNamed:@"case_default_image.png"]];
 }
-
 
 
 @end

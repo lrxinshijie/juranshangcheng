@@ -13,6 +13,7 @@
 
 @interface KTPhotoScrollViewController : UIViewController<UIScrollViewDelegate, UIActionSheetDelegate>
 {
+    
     id <KTPhotoBrowserDataSource> dataSource_;
     UIScrollView *scrollView_;
     UIView *bottomView_;
@@ -48,5 +49,6 @@
 - (void)setCurrentIndex:(NSInteger)newIndex;
 - (void)setScrollViewContentSize;
 - (CGRect)frameForPageAtIndex:(NSUInteger)index;
+- (void)handleLongPress:(UIGestureRecognizer*)gesture;
 
 @end
