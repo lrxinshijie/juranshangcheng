@@ -52,6 +52,10 @@
    [imageView_ setImage:newImage];
 }
 
+- (UIImage *)image{
+    return imageView_.image;
+}
+
 - (void)layoutSubviews 
 {
    [super layoutSubviews];

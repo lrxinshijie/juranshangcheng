@@ -160,7 +160,7 @@
     }];
 }
 
-#pragma CanRemoveImageView
+#pragma CanRemoveImageViewDelegate
 
 - (void)deleteCanRemoveImageView:(CanRemoveImageView *)view{
     fileImage = nil;

@@ -9,9 +9,17 @@
 #import "ALViewController.h"
 
 @class JRQuestion;
+@class AskDetailViewController;
+
+@protocol AskDetailViewControllerDelegate <NSObject>
+
+- (void)answeredWithAskDetailViewController:(AskDetailViewController*)vc;
+
+@end
 
 @interface AskDetailViewController : ALViewController
 
+@property (nonatomic, weak) id<AskDetailViewControllerDelegate> delegate;
 @property (nonatomic, assign) BOOL isMyQuestion;
 @property (nonatomic, strong) JRQuestion *question;
 

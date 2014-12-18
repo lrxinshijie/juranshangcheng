@@ -23,6 +23,7 @@
 
 - (void)setImage:(UIImage *)newImage;
 - (void)turnOffZoom;
+- (UIImage *)image;
 
 - (CGPoint)pointToCenterAfterRotation;
 - (CGFloat)scaleToRestoreAfterRotation;

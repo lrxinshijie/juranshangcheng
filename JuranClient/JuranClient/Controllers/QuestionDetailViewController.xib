@@ -7,8 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuestionDetailViewController">
             <connections>
+                <outlet property="answerImageView" destination="KQJ-ph-0Mf" id="MVG-J9-cQw"/>
                 <outlet property="answerTextField" destination="nOS-oy-dXV" id="B1y-eG-oNw"/>
                 <outlet property="answerView" destination="RlI-VM-r22" id="Dx9-Wd-ROO"/>
+                <outlet property="chooseImageView" destination="wJW-fc-EGZ" id="BiK-iw-lqC"/>
                 <outlet property="resolvedAdoptedHeaderView" destination="QMU-pr-xPt" id="fam-IM-uI1"/>
                 <outlet property="resolvedContentLabel" destination="Web-jc-oeS" id="nGF-lb-ceJ"/>
                 <outlet property="resolvedHeaderImageView" destination="0zd-kE-rEh" id="hNs-KL-kSE"/>
@@ -187,6 +189,9 @@
                         <color key="titleColor" red="0.17254902420000001" green="0.4274510145" blue="0.7019608021" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="onShowAnswerImageView:" destination="-1" eventType="touchUpInside" id="nE0-d4-VwH"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.90196084980000002" green="0.9215686917" blue="0.93725496529999996" alpha="1" colorSpace="deviceRGB"/>
@@ -211,6 +216,9 @@
                             <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="onChooseImage:" destination="-1" eventType="touchUpInside" id="SHA-yJ-i2F"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_ camera" id="mjb-b6-Pog">
                             <rect key="frame" x="18" y="11" width="29" height="26"/>
