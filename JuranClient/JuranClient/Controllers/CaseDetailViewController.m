@@ -141,7 +141,7 @@
 - (void)loadComment{
     NSDictionary *param = @{@"projectId": _jrCase.projectId,
                             @"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"onePageCount": @"20"};
+                            @"onePageCount": kOnePageCount};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_CASE_COMMENT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

@@ -18,6 +18,7 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
 #import <TencentOpenAPI/QQApiInterface.h>
+#import "GuideViewController.h"
 
 @interface AppDelegate () <UINavigationControllerDelegate>
 
@@ -36,6 +37,16 @@
     
     [self setupShareSDK];
     [self setupTabbar];
+    
+    if ([GuideViewController showGuide]) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            GuideViewController *gv = [[GuideViewController alloc] init];
+            gv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self.tabBarController presentViewController:gv animated:YES completion:NULL];
+        });
+    }
+
+    
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -70,26 +81,6 @@
     UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
     profileNav.tabBarItem = [self setupTabbarItemTitle:@"个人中心" image:@"tabbar_personal" selected:@"tabbar_personal_hl"];
     
-    
-    
-//    self.tabBarController = [[LeveyTabBarController alloc] initWithViewControllers:@[homeNav,csNav,desNav,wikiNav,profileNav]
-//                                                                        imageArray:@[@{@"Default": @"nav-home-default",
-//                                                                                       @"Highlighted": @"nav-home-active",
-//                                                                                       @"Seleted": @"nav-home-active"},
-//  @{@"Default": @"nav-case-default",
-//    @"Highlighted": @"nav-case-active",
-//    @"Seleted": @"nav-case-active"},
-//  @{@"Default": @"nav-designer-default",
-//    @"Highlighted": @"nav-designer-active",
-//    @"Seleted": @"nav-designer-active"},
-//  @{@"Default": @"nav-wiki-default",
-//    @"Highlighted": @"nav-wiki-active",
-//    @"Seleted": @"nav-wiki-active"},
-//  @{@"Default": @"nav-user-default",
-//    @"Highlighted": @"nav-user-active",
-//    @"Seleted": @"nav-user-active"}]];
-//	_tabBarController.tabBar.backgroundColor = kTabBarBackgroundColor;
-//	[_tabBarController setTabBarTransparent:YES];
     self.tabBarController = [[UITabBarController alloc] init];
     _tabBarController.viewControllers = @[csNav,topicNav,publishNav,desNav,profileNav];
     self.window.rootViewController = _tabBarController;
@@ -97,6 +88,8 @@
 }
 
 - (void)setupShareSDK{
+    return;
+    
     [ShareSDK registerApp:@"477b2576a9ca"];
     
     //添加新浪微博应用 注册网址 http://open.weibo.com

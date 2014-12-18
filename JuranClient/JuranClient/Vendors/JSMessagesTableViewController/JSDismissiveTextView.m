@@ -79,6 +79,9 @@
     self.keyboardDelegate = nil;
 }
 
+- (void)panning:(UIPanGestureRecognizer *)pan{
+    
+}
 #pragma mark - Setters
 - (void)setDismissivePanGestureRecognizer:(UIPanGestureRecognizer *)pan
 {

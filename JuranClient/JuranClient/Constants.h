@@ -17,7 +17,7 @@
 
 #define kContentFrameWithoutNavigationBarAndTabBar CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), kWindowHeightWithoutNavigationBarAndTabbar)
 
-#define kContentFrame CGRectMake(0, SystemVersionGreaterThanOrEqualTo7 ? 20 : 0, kWindowWidth, SystemVersionGreaterThanOrEqualTo7 ? (kWindowHeight + 20) : kWindowHeight)
+#define kContentFrame CGRectMake(0, 0, kWindowWidth, SystemVersionGreaterThanOrEqualTo7 ? (kWindowHeight + 20) : kWindowHeight)
 
 #define kViewBackgroundColor [UIColor whiteColor]
 #define kTabBarBackgroundColor RGBColor(25, 25, 25)
@@ -59,6 +59,8 @@
 #define kAccountMaxNumber 24
 #define kPhoneMaxNumber 11
 #define kCodeMaxNumber 6
+
+#define kOnePageCount @"10"
 
 typedef void (^BOOLBlock)(BOOL result);
 typedef void (^VoidBlock)(void);

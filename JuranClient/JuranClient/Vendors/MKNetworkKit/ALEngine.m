@@ -9,7 +9,8 @@
 #import "ALEngine.h"
 #import "GlobalPopupAlert.h"
 #import "NSDictionary+ASCategory.h"
-//#import "User.h"
+#import "LoginViewController.h"
+#import "AppDelegate.h"
 
 @interface ALEngine ()
 
@@ -169,6 +170,13 @@
                 if (header && [header isKindOfClass:[NSDictionary class]]) {
                     if ([[[header getStringValueForKey:@"respCode" defaultValue:@""] uppercaseString] isEqualToString:@"OK"]) {
                         completionBlock(body);
+                    }else if([[[header getStringValueForKey:@"respCode" defaultValue:@""] uppercaseString] isEqualToString:@"TL"]){
+                        LoginViewController *login = [[LoginViewController alloc] init];
+                        UINavigationController *loginNav = [Public navigationControllerFromRootViewController:login];
+                        [[(AppDelegate *)[UIApplication sharedApplication].delegate tabBarController] presentViewController:loginNav animated:YES completion:nil];
+                        
+                        NSError *err = [[NSError alloc] initWithDomain:@"" code:100 userInfo:@{NSLocalizedDescriptionKey:[header getStringValueForKey:@"respShow" defaultValue:@""]}];
+                        errorBlock(err);
                     }else{
                         NSError *err = [[NSError alloc] initWithDomain:@"" code:100 userInfo:@{NSLocalizedDescriptionKey:[header getStringValueForKey:@"respShow" defaultValue:@""]}];
                         errorBlock(err);

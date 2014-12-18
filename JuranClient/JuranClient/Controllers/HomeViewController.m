@@ -30,9 +30,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-//
-//    [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"icon-case-empty"] leftBarButtonItemAction:nil];
-        [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"navbar_leftbtn_logo"] leftBarButtonItemAction:nil];
+
+    [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"navbar_leftbtn_logo"] leftBarButtonItemAction:nil];
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
 }
 

@@ -75,7 +75,7 @@ typedef NSString *(^CacheKeyFilter)(NSURL *url);
  */
 + (id)sharedManager;
 
-- (UIImage *)imageWithURL:(NSURL *)url __attribute__ ((deprecated));
+- (UIImage *)imageWithURL:(NSURL *)url;// __attribute__ ((deprecated));
 
 /**
  * Downloads the image at the given URL if not present in cache or return the cached version otherwise.

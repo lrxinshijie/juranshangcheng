@@ -53,7 +53,7 @@
 
 - (void)loadData{
     NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"rowsPerPage": @"10"};
+                            @"rowsPerPage": kOnePageCount};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_MSG_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

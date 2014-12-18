@@ -47,7 +47,7 @@
 
 - (void)loadData{
     NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"rowsPerPage": @"20"};
+                            @"rowsPerPage": kOnePageCount};
     
     [[ALEngine shareEngine] pathURL:JR_PRIVATE_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

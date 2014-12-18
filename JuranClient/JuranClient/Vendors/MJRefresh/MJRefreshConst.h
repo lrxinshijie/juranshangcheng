@@ -22,7 +22,8 @@
 #define MJRefreshLabelTextColor MJColor(150, 150, 150)
 
 // 图片路径
-#define MJRefreshSrcName(file) [@"MJRefresh.bundle" stringByAppendingPathComponent:file]
+//#define MJRefreshSrcName(file) [@"MJRefresh.bundle" stringByAppendingPathComponent:file]
+#define MJRefreshSrcName(file) file
 
 UIKIT_EXTERN const CGFloat MJRefreshViewHeight;
 UIKIT_EXTERN const CGFloat MJRefreshFastAnimationDuration;
