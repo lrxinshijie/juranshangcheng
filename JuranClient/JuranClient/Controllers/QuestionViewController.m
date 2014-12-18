@@ -95,7 +95,7 @@
 }
 
 - (void)loadData{
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": @"10"}];
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": kOnePageCount}];
     if (_isSearchResult) {
         [param setObject:_searchKeyWord forKey:@"keyword"];
     }

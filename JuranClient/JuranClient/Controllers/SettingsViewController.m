@@ -13,6 +13,7 @@
 
 #import "AppDelegate.h"
 #import "SDImageCache.h"
+#import "GuideViewController.h"
 
 @interface SettingsViewController ()<UITableViewDelegate, UITableViewDataSource>
 {

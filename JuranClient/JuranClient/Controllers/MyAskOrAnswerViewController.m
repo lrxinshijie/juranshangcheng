@@ -77,7 +77,7 @@
 
 - (void)loadData{
     NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"onePageCount": @"10"};
+                            @"onePageCount": kOnePageCount};
     [self showHUD];
     NSString *url = _segment.selectedSegmentIndex == 0?JR_MYQUESTION:JR_MYANSWER;
     [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {

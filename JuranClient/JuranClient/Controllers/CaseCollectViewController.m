@@ -47,7 +47,7 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": @"20", @"projectType" : @"01"};
+    NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": kOnePageCount, @"projectType" : @"01"};
     
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_FAV_PROJECT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
