@@ -123,6 +123,10 @@
             _sections = @[CELLDICTIONARYBUILT(@"问题分类", @"questionType"),
                           CELLDICTIONARYBUILT(@"是否回答", @"status")
                           ];
+        }else if (_type == FilterViewTypeDesignerSearch){
+            _sections = @[CELLDICTIONARYBUILT(@"擅长风格", @"style"),
+                          CELLDICTIONARYBUILT(@"设计师称号", @"levelCode")
+                          ];
         }
         
     }
@@ -196,6 +200,26 @@
                       @[@{@"k":@"默认",@"v":@""},
                         @{@"k":@"未解决",@"v":@"unresolved"},
                         @{@"k":@"已解决",@"v":@"resolved"}]
+                      ];
+        }else if (_type == FilterViewTypeDesignerSearch){
+            _rows = @[@[@{@"k":@"混搭",@"v":@"mashup"},
+                        @{@"k":@"欧式",@"v":@"european"},
+                        @{@"k":@"中式",@"v":@"chinese"},
+                        @{@"k":@"新古典",@"v":@"newClassical"},
+                        @{@"k":@"东南亚",@"v":@"eastSourthAsia"},
+                        @{@"k":@"美式",@"v":@"america"},
+                        @{@"k":@"田园",@"v":@"countryside"},
+                        @{@"k":@"地中海",@"v":@"mediterranean"},
+                        @{@"k":@"韩式",@"v":@"kora"},
+                        @{@"k":@"日式",@"v":@"japanese"},
+                        @{@"k":@"现代",@"v":@"modern"},
+                        @{@"k":@"其他",@"v":@"other"},],
+                      @[@{@"k":@"优秀",@"v":@"design_one"},
+                        @{@"k":@"普通",@"v":@"design_two"},
+                        @{@"k":@"资深",@"v":@"design_three"},
+                        @{@"k":@"首席",@"v":@"design_four"},
+                        @{@"k":@"主任",@"v":@"design_five"},
+                        ]
                       ];
         }
         

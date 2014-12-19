@@ -32,9 +32,6 @@
         self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
         self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
         
-        self.isFav = [dict getBoolValueForKey:@"isFav" defaultValue:NO];
-        self.isLike = [dict getBoolValueForKey:@"isLike" defaultValue:NO];
-        
     }
     
     return self;
@@ -55,6 +52,10 @@
     self.detailImageList = [dict objectForKey:@"detailImageList"];
     self.stylesName = [dict getStringValueForKey:@"stylesName" defaultValue:@""];
     self.isAuth = [dict getBoolValueForKey:@"isAuth" defaultValue:NO];
+    
+    self.isFav = [dict getBoolValueForKey:@"isFavFlag" defaultValue:NO];
+    self.isLike = [dict getBoolValueForKey:@"isLikeFlag" defaultValue:NO];
+    
     NSDictionary *areaInfo = [dict objectForKey:@"areaInfo"];
     if (areaInfo && [areaInfo isKindOfClass:[NSDictionary class]]) {
         self.provinceCode = [areaInfo getStringValueForKey:@"provinceCode" defaultValue:@""];

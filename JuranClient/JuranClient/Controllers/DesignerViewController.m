@@ -82,10 +82,16 @@
 
 - (NSMutableDictionary *)filterData{
     if (!_filterData) {
-        _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"experience": @"",
-                                                                      @"isRealNameAuth": @"",
-                                                                      @"style" : @"",
-                                                                      @"order": @""}];
+        if (_isSearchResult) {
+            _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"style" : @"",
+                                                                          @"order": @""}];
+        }else{
+            _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"experience": @"",
+                                                                          @"isRealNameAuth": @"",
+                                                                          @"style" : @"",
+                                                                          @"order": @""}];
+        }
+        
         
     }
     return _filterData;
@@ -111,8 +117,6 @@
     [param addEntriesFromDictionary:self.filterData];
     if (_isSearchResult) {
         [param setObject:_searchKeyWord forKey:@"keyword"];
-        [param removeObjectForKey:@"experience"];
-        [param removeObjectForKey:@"isRealNameAuth"];
     }
     NSString *url = _isSearchResult?JR_SEARCH_DESIGNER:JR_DESIGNERLIST;
     [self showHUD];

@@ -138,6 +138,7 @@
                                      49);
     _toolBar.frame = toolbarFrame;
     [bottomView_ addSubview:_toolBar];
+    _favImageView.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
     
     CGRect bottomFrame = CGRectMake(0,
                                     screenFrame.size.height - _titleView.frame.size.height - toolbarFrame.size.height - _titleView.frame.size.height,

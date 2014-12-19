@@ -169,7 +169,7 @@
             _sorts = @[CELLDICTIONARYBUILT(@"人气量降序", @"11"),
                        CELLDICTIONARYBUILT(@"点赞量", @"10"),
                        CELLDICTIONARYBUILT(@"默认", @"0")];
-        }else if (_type == FilterViewTypeDesigner){
+        }else if (_type == FilterViewTypeDesigner || _type == FilterViewTypeDesignerSearch){
             _sorts = @[CELLDICTIONARYBUILT(@"人气（浏览量）", @"1"),
                        CELLDICTIONARYBUILT(@"作品量", @"0"),
                        CELLDICTIONARYBUILT(@"默认", @"0")];
