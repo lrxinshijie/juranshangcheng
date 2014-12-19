@@ -44,6 +44,7 @@
     self.navigationItem.title = @"账户安全";
     
     keys = @[@"修改密码", @"手机号码", @"邮箱"];
+    _user = [JRUser currentUser];
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
@@ -60,8 +61,8 @@
 
 - (void)reloadData{
     values = @[@"",
-               _user.mobileNum.length == 0?@"未绑定":[_user mobileNumForBindPhone],
-               _user.email.length == 0?@"未绑定":_user.email];
+               [_user mobileNumForBindPhone],
+               [_user emailForBindEmail]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [_tableView reloadData];
     });
@@ -69,12 +70,14 @@
 
 - (void)loadData{
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken: @"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_GETMEMBERDETAIL parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
                 [_user buildUpMemberDetailWithDictionary:data];
-                [self reloadData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self reloadData];
+                });
             }
         }
     }];

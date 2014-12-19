@@ -128,7 +128,9 @@
                 //未修改
                 return;
             }
-            param = @{@"account":_textField.text};
+            param = @{@"oldAccount": _user.account,
+                      @"account":_textField.text,
+                      @"accountChangeable":[NSString stringWithFormat:@"%d", _user.accountChangeable]};
             break;
         }
         case ModifyCVTypeHomeTel:
@@ -138,7 +140,7 @@
                 [self showTip:@"请输入完整的固定!!"];
                 return;
             }
-            param = @{@"homeTel": _user.homeTel};
+            param = @{@"homeTel": _textField.text};
             break;
         }
         case ModifyCVTypeIdType:
@@ -163,7 +165,7 @@
         }
         case ModifyCVTypeNickName:
         {
-            param = @{@"nickName": _user.nickName};
+            param = @{@"nickName": _textField.text};
             break;
         }
         default:
@@ -202,6 +204,7 @@
                 case ModifyCVTypeUserName:
                 {
                     _user.account = _textField.text;
+                    _user.accountChangeable = YES;
                     break;
                 }
                 case ModifyCVTypeIdType:

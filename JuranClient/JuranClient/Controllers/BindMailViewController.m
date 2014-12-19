@@ -72,14 +72,14 @@
 }
 
 - (IBAction)onSend:(id)sender{
-    if (!(_mailTextField.text && _mailTextField.text.length > 0)) {
-        [self showTip:@"请输入电子邮箱"];
-        return;
-    }
     NSDictionary *param = nil;
     if(step == 1){
         param = @{@"email":_user.email};
     }else if (step == 2){
+        if (!(_mailTextField.text && _mailTextField.text.length > 0)) {
+            [self showTip:@"请输入电子邮箱"];
+            return;
+        }
         param = @{@"email":_mailTextField.text};
     }
     [self showHUD];
@@ -129,8 +129,9 @@
         
     }else if (indexPath.row == 1) {
         if (step == 1) {
-            cell.textLabel.text = _user.email;
+            cell.textLabel.text = [_user emailForBindEmail];
         }else if (step == 2){
+            cell.textLabel.text = @"";
             cell.accessoryView = _mailTextField;
         }
     }

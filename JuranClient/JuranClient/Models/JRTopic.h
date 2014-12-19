@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSMutableArray *commitList;
 
 - (id)initWithDictionaryForDetail:(NSDictionary *)dict;
+- (void)buildUpDetialValueWithDictionary:(NSDictionary*)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 + (NSMutableArray *)buildUpDetailWithValue:(id)value;
 

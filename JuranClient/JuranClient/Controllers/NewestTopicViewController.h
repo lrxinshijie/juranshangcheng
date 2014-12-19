@@ -12,5 +12,6 @@
 @interface NewestTopicViewController : ALViewController
 
 @property (nonatomic, strong) JRTopic *topic;
+@property (nonatomic, assign) BOOL isOld;
 
 @end

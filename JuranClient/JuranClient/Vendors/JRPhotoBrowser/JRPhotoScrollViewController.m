@@ -16,7 +16,7 @@
 
 @interface JRPhotoScrollViewController ()<KTPhotoBrowserDataSource, UIActionSheetDelegate>
 {
-    KTPhotoView *photoView;
+    KTPhotoView *_photoView;
 }
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *indexLabel;
@@ -155,7 +155,7 @@
 - (void)handleLongPress:(UIGestureRecognizer *)gesture{
     [super handleLongPress:gesture];
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        photoView = (KTPhotoView*)gesture.view;
+        _photoView = (KTPhotoView*)gesture.view;
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存到相册", nil];
         [actionSheet showInView:self.view];
     }
@@ -166,7 +166,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
-        UIImageWriteToSavedPhotosAlbum([photoView image], self, @selector(image:didFinishSavingWithError:contextInfo:),nil);
+        UIImageWriteToSavedPhotosAlbum([_photoView image], self, @selector(image:didFinishSavingWithError:contextInfo:),nil);
     }
 }
 

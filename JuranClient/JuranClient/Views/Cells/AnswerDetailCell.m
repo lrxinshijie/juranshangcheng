@@ -58,11 +58,16 @@
     _type = type;
     _answer = answer;
     _nameLabel.text = _answer.nickName.length?_answer.nickName:_answer.account;
-    [_headImageView setImageWithURLString:_answer.headUrl];
+    if (_answer.headUrl.length > 0) {
+        [_headImageView setImageWithURLString:_answer.headUrl];
+    }else{
+        [_headImageView setImage:[UIImage imageNamed:@"unlogin_head.png"]];
+    }
     _timeLabel.text = _answer.commitTime;
     _contentLabel.text = _answer.content;
-    [_contentImageView setImageWithURLString:answer.imageUrl];
-    
+    if (answer.imageUrl.length > 0) {
+        [_contentImageView setImageWithURLString:answer.imageUrl];
+    }
     [self adjustFrame];
 }
 

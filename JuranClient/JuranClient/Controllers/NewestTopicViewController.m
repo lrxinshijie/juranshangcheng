@@ -40,7 +40,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    self.navigationItem.title = @"最新话题";
+    if (_topic) {
+        self.navigationItem.title = _topic.theme;
+    }else{
+        self.navigationItem.title = @"最新话题";
+    }
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
@@ -79,7 +83,11 @@
     [[ALEngine shareEngine] pathURL:JR_GET_TOPICDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            _topic = [[JRTopic alloc] initWithDictionaryForDetail:data];
+            if (_topic) {
+                [_topic buildUpDetialValueWithDictionary:data];
+            }else{
+                _topic = [[JRTopic alloc] initWithDictionaryForDetail:data];
+            }
             [self reloadData];
         }
     }];

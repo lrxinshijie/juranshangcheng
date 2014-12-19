@@ -162,7 +162,7 @@
     self.sex = [dict getIntValueForKey:@"sex" defaultValue:0];
     self.useablePoints = [dict getIntValueForKey:@"useablePoints" defaultValue:0];
     self.useableExp = [dict getIntValueForKey:@"useableExp" defaultValue:0];
-    
+    self.accountChangeable = [dict getBoolValueForKey:@"accountChangeable" defaultValue:NO];
 }
 
 - (NSString*)locationAddress{
@@ -215,7 +215,22 @@
         return _mobileNum;
     }
     
-    return @"";
+    return @"未绑定";
+}
+
+- (NSString*)emailForBindEmail{
+    NSString *mail = @"未绑定";
+    if (!(_email.length > 0)) {
+        return mail;
+    }else{
+        
+        NSRange range = [_email rangeOfString:@"@"];
+        if (range.length == 0) {
+            return _email;
+        }
+        mail = [NSString stringWithFormat:@"%@****%@", [_email substringToIndex:range.location/4],[_email substringFromIndex:range.location/4*3]];
+        return mail;
+    }
 }
 
 - (NSURL *)headImageURL{
