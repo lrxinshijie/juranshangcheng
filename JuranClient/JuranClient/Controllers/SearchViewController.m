@@ -50,7 +50,7 @@
     self.navigationItem.title = @"搜索";
     step = 1;
     [self setupUI];
-//    [self loadData];
+    [self loadData];
     
 }
 
@@ -65,10 +65,11 @@
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
-                NSString *hotWordStr = data[@"hotWords"];
+                NSString *hotWordStr = data[@"appKeyWords"];
                 if (hotWordStr && hotWordStr.length > 0) {
                     hotWords = [hotWordStr componentsSeparatedByString:@","];
                 }
+                [self setupHotwordsView];
             }
             [self reloadData];
         }
@@ -106,11 +107,22 @@
     btn.layer.masksToBounds = YES;
     btn.layer.cornerRadius = 2.f;
     
-    for (NSInteger i = 0; i < 9; i++) {
-        btn = (UIButton*)[_keywordsFooterView viewWithTag:kKeywordsButtonTag + i];
-        [btn addTarget:self action:@selector(onHotWordSearch:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)setupHotwordsView{
+    for (UIView *v in _keywordsFooterView.subviews) {
+        [v removeFromSuperview];
+    }
+    NSInteger i = 0;
+    for (NSString *hotword in hotWords) {
+        CGRect frame = CGRectMake(5 + (i%3)*105, 5 + (i/3)*40, 100, 35);
+        UIButton *btn = [_keywordsFooterView buttonWithFrame:frame target:self action:@selector(onHotWordSearch:) title:hotword backgroundImage:nil];
+        btn.backgroundColor = RGBColor(209, 209, 209);
+        [btn setTitleColor:RGBColor(101, 101, 101) forState:UIControlStateNormal];
         btn.layer.masksToBounds = YES;
         btn.layer.cornerRadius = 2.f;
+        [_keywordsFooterView addSubview:btn];
+        i++;
     }
 }
 

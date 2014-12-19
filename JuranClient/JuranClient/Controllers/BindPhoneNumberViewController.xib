@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BindPhoneNumberViewController">
             <connections>
                 <outlet property="commiteButton" destination="wTM-o5-ghS" id="qgK-nO-vbB"/>
+                <outlet property="getCaptchaButton" destination="QDL-el-5cN" id="7nf-VR-IHM"/>
                 <outlet property="oldPhoneLabel" destination="nxs-Kc-sDq" id="f8g-pH-avi"/>
                 <outlet property="phoneTextField" destination="8LJ-Gn-xh7" id="F2M-2V-P4a"/>
                 <outlet property="step10View" destination="i5M-Pr-FkT" id="iku-oy-a3V"/>

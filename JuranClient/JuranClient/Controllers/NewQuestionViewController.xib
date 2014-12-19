@@ -98,7 +98,7 @@
             <point key="canvasLocation" x="518" y="49"/>
         </view>
         <view contentMode="scaleToFill" id="B9P-UZ-m8a">
-            <rect key="frame" x="0.0" y="0.0" width="192" height="128"/>
+            <rect key="frame" x="0.0" y="0.0" width="192" height="130"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="question_commited" id="Zeb-fD-UfD">
@@ -116,7 +116,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="140" y="-265"/>
+            <point key="canvasLocation" x="140" y="-264"/>
         </view>
     </objects>
     <resources>

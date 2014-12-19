@@ -26,6 +26,7 @@
 @property (nonatomic, strong) IBOutlet UIView *commentView;
 @property (nonatomic, strong) IBOutlet UITextField *commentTextField;
 @property (nonatomic, strong) IBOutlet UIView *bottomView;
+@property (nonatomic, strong) IBOutlet UIWebView *contentWebView;
 
 @property (nonatomic, strong) JRComment *selectComment;
 
@@ -40,14 +41,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    self.navigationItem.title = @"最新话题";
+    if (_topic) {
+        self.navigationItem.title = _topic.theme;
+    }else{
+        self.navigationItem.title = @"最新话题";
+        
+        UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(oldTopic:) title:@"往期话题" backgroundImage:nil];
+        [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    }
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
-    
-    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(oldTopic:) title:@"往期话题" backgroundImage:nil];
-    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
@@ -74,12 +79,18 @@
     NSDictionary *param = nil;
     if (_topic) {
         param = @{@"topicId": _topic.topicId};
+    }else{
+        param = @{};
     }
     
     [[ALEngine shareEngine] pathURL:JR_GET_TOPICDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            _topic = [[JRTopic alloc] initWithDictionaryForDetail:data];
+            if (_topic) {
+                [_topic buildUpDetialValueWithDictionary:data];
+            }else{
+                _topic = [[JRTopic alloc] initWithDictionaryForDetail:data];
+            }
             [self reloadData];
         }
     }];
@@ -92,6 +103,25 @@
 }
 
 - (void)setupTableHeaderView{
+    if (!(_topic.contentDescription && _topic.contentDescription.length > 0)) {
+        return;
+    }
+    [_contentWebView loadHTMLString:_topic.contentDescription baseURL:[NSURL URLWithString:@"http://10.199.5.57:8080"]];
+    CGRect frame = _contentWebView.frame;
+    frame.size.width = CGRectGetWidth(_contentWebView.frame);
+    frame.size.height = 1;
+    
+//    _contentWebView.scrollView.scrollEnabled = NO;
+    _contentWebView.frame = frame;
+    
+    frame.size.height = _contentWebView.scrollView.contentSize.height;
+    
+    NSLog(@"frame = %@", [NSValue valueWithCGRect:frame]);
+    _contentWebView.frame = frame;
+    
+    frame = _tableHeaderView.frame;
+    frame.size.height = CGRectGetMaxY(_contentWebView.frame);
+    _tableHeaderView.frame = frame;
     
 }
 

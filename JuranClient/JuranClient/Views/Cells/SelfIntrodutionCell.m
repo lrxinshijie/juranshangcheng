@@ -51,30 +51,25 @@
     CGRect frame = _contentLabel.frame;
     _contentLabel.numberOfLines = 0;
     _arrowImageView.hidden = NO;
+    _contentLabel.text = _content;
+    CGFloat height = [_contentLabel.text heightWithFont:_contentLabel.font constrainedToWidth:CGRectGetWidth(_contentLabel.frame)];
     if (_isClose) {
         _arrowImageView.image = [UIImage imageNamed:@"arrow_down.png"];
-        if (_content.length < kContentLengthForClose) {
+        if (height < 32) {
             _contentLabel.text = _content;
             _arrowImageView.hidden = YES;
         }else{
-            _contentLabel.text = [NSString stringWithFormat:@"%@...", [_content substringToIndex:kContentLengthForClose]];
+            if (_content.length > kContentLengthForClose) {
+                _contentLabel.text = [NSString stringWithFormat:@"%@...", [_content substringToIndex:kContentLengthForClose]];
+            }
         }
         frame.size.height = 32;
     }else{
         _arrowImageView.image = [UIImage imageNamed:@"arrow_up.png"];
-        if (_content.length < kContentLengthForClose) {
-            _contentLabel.text = _content;
+        if (_content.length < 32) {
             _arrowImageView.hidden = YES;
         }else{
-            _contentLabel.text = _content;
-            CGSize size;
-            if (SystemVersionGreaterThanOrEqualTo7) {
-                size = [_contentLabel.text sizeWithFont:_contentLabel.font constrainedToSize:CGSizeMake(CGRectGetWidth(_contentLabel.frame), MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
-            }else{
-                NSDictionary *attribute = @{NSFontAttributeName: _contentLabel.font};
-                size = [_contentLabel.text boundingRectWithSize:CGSizeMake(280, 0) options: NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attribute context:nil].size;
-            }
-            frame.size = size;
+            frame.size.height = height;
         }
     }
     _contentLabel.frame = frame;

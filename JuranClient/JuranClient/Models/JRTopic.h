@@ -19,12 +19,13 @@
 //Detail
 @property (nonatomic, copy) NSString *theme;
 @property (nonatomic, copy) NSString *publishTime;
-@property (nonatomic, copy) NSString *contentUrl;
+@property (nonatomic, copy) NSString *contentDescription;
 @property (nonatomic, assign) NSInteger viewCount;
 @property (nonatomic, assign) NSInteger commentCount;
 @property (nonatomic, strong) NSMutableArray *commitList;
 
 - (id)initWithDictionaryForDetail:(NSDictionary *)dict;
+- (void)buildUpDetialValueWithDictionary:(NSDictionary*)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 + (NSMutableArray *)buildUpDetailWithValue:(id)value;
 

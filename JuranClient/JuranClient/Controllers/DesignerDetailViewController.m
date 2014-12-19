@@ -168,17 +168,17 @@
 - (void)loadDesignerProject{
     NSDictionary *param = @{@"designerId": [NSString stringWithFormat:@"%i", _designer.userId],
                             @"pageNo":[NSString stringWithFormat:@"%d", _caseCurrentPage],
-                            @"rowsPerPage":kOnePageCount};
+                            @"onePageCount":kOnePageCount};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GETDEDESIGNERPROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *list = [data objectForKey:@"deProjectList"];
+            NSArray *list = [data objectForKey:@"projectGeneralDtoList"];
             NSMutableArray *rows = [JRCase buildUpWithValue:list];
             if (_caseCurrentPage > 1) {
                 [_caseDatas addObjectsFromArray:rows];
             }else{
-                self.caseDatas = [JRCase buildUpWithValue:list];
+                self.caseDatas = rows;
             }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -193,7 +193,7 @@
 - (void)loadTopic{
     NSDictionary *param = @{@"designerId": [NSString stringWithFormat:@"%i", _designer.userId],
                             @"pageNo":[NSString stringWithFormat:@"%d", _topicCurrentPage],
-                            @"rowsPerPage":kOnePageCount};
+                            @"onePageCount":kOnePageCount};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_DE_MYTOPIC parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

@@ -23,6 +23,7 @@
 @property (nonatomic, strong) IBOutlet UIView *step11View;
 @property (nonatomic, strong) IBOutlet UILabel *oldPhoneLabel;
 @property (nonatomic, strong) IBOutlet UIButton *commiteButton;
+@property (nonatomic, strong) IBOutlet UIButton *getCaptchaButton;
 @property (nonatomic, strong) UILabel *countDownLabel;
 
 @end
@@ -46,6 +47,7 @@
 - (void)reloadData{
     if (step == 1) {
         self.navigationItem.title = @"安全验证";
+        _getCaptchaButton.enabled = YES;
         _phoneTextField.hidden = YES;
         _oldPhoneLabel.hidden = NO;
         _oldPhoneLabel.text = [_user mobileNumForBindPhone];
@@ -54,6 +56,7 @@
         self.navigationItem.title = @"绑定手机号码";
         _phoneTextField.hidden = NO;
         _oldPhoneLabel.hidden = YES;
+        _getCaptchaButton.enabled = YES;
         [_commiteButton setTitle:@"提交" forState:UIControlStateNormal];
     }
     [_tableView reloadData];
@@ -110,7 +113,7 @@
                             @"smsAuthNo": _captchaTextField.text,
                             @"mobileType": @"P04"};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_VALIDSMS parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_VALIDSMS parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken: @"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -167,11 +170,17 @@
     [[ALEngine shareEngine] pathURL:JR_REGIST_SENDSMS parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            _countDownLabel.hidden = NO;
-            counter = 60;
-            timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
+            [self startCountDown];
         }
     }];
+}
+
+- (void)startCountDown{
+    _countDownLabel.hidden = NO;
+    _getCaptchaButton.enabled = NO;
+    counter = 60;
+    _countDownLabel.text = [NSString stringWithFormat:@"%d秒",counter];
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
 }
 
 //倒计时
@@ -183,6 +192,7 @@
             [timer invalidate];
             timer = nil;
             _countDownLabel.hidden = YES;
+            _getCaptchaButton.enabled = YES;
         }
     });
 }
