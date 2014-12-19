@@ -47,8 +47,6 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    self.navigationItem.title = @"我的提问";
-    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
@@ -130,6 +128,11 @@
 }
 
 - (void)reloadData{
+    if (_isMyQuestion) {
+        self.navigationItem.title = @"我的提问";
+    }else{
+        self.navigationItem.title = [NSString stringWithFormat:@"%@的提问", _question.nickName.length > 0?_question.nickName:_question.account];
+    }
     [self setupHeaderView];
     [_tableView reloadData];
 }

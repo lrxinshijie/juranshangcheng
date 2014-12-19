@@ -25,6 +25,7 @@
 
 - (void)fillCellWithTopic:(JRTopic *)data
 {
+    _topic = data;
     _topicContentLabel.text = [NSString stringWithFormat: @"\"%@\"", data.title];
     _ideaContentLabel.text = data.content;
     _timeLabel.text = data.commentDate;
@@ -48,7 +49,7 @@
     frame.size.height = [_ideaContentLabel.text heightWithFont:_ideaContentLabel.font constrainedToWidth:_ideaContentLabel.frame.size.width];
     _ideaContentLabel.frame = frame;
     
-    if (_relateImageView.image) {
+    if (_topic.commentImageUrlList.count > 0) {
         _relateImageView.hidden = NO;
         frame = _relateImageView.frame;
         frame.origin.y = CGRectGetMaxY(_ideaContentLabel.frame)+10;

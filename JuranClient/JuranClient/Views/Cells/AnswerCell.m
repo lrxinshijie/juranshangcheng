@@ -43,7 +43,8 @@
     _isAdoptedAnswer = flag;
     _contentLabel.text = answer.content;
     _userNameLabel.text = answer.nickName.length?answer.nickName:answer.account;
-    _userTypeLabel.text = [answer userTypeString];
+//    _userTypeLabel.text = [answer userTypeString];
+    _userTypeLabel.hidden = !(_isAdoptedAnswer && answer.userType == 2);
     _timeLabel.text = answer.commitTime;
     [self layoutFrame];
 }
@@ -61,7 +62,6 @@
     frame.size.width = [_userNameLabel.text widthWithFont:_userNameLabel.font constrainedToHeight:CGRectGetHeight(_userNameLabel.frame)];
     _userNameLabel.frame = frame;
     
-    _userTypeLabel.hidden = !_isAdoptedAnswer;
     frame = _userTypeLabel.frame;
     frame.origin.x = CGRectGetMaxX(_userNameLabel.frame) + 10;
     _userTypeLabel.frame = frame;

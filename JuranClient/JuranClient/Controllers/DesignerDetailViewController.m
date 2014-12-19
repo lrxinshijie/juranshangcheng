@@ -351,7 +351,7 @@
         }
     }else{
         [self.topicCell fillCellWithTopic:_topicDatas[indexPath.row]];
-        return self.topicCell.frame.size.height + (indexPath.row == (_topicDatas.count - 1)?5:0);
+        return self.topicCell.contentView.frame.size.height + (indexPath.row == (_topicDatas.count - 1)?5:0);
     }
 }
 

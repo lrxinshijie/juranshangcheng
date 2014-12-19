@@ -20,6 +20,8 @@
 @property (nonatomic, weak) IBOutlet UIView *backView;
 @property (nonatomic, weak) IBOutlet UIImageView *relateImageView;
 
+@property (nonatomic, strong) JRTopic *topic;
+
 - (void)fillCellWithTopic:(JRTopic *)data;
 
 

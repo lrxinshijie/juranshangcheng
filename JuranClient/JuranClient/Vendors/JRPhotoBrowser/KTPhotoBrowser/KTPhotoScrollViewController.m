@@ -152,6 +152,9 @@ const CGFloat ktkDefaultToolbarHeight = 44;
     for (int i=0; i < photoCount_; i++) {
         [photoViews_ addObject:[NSNull null]];
     }
+    if (photoCount_ == 0) {
+        [photoViews_ addObject:[NSNull null]];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -270,7 +273,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 - (void)loadPhoto:(NSInteger)index
 {
-    if (index < 0 || index >= photoCount_) {
+    if (index < 0 || (index >= photoCount_ && index != 0)) {
         return;
     }
     
@@ -287,7 +290,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
         [photoView addGestureRecognizer:longPress];
         
         // Set the photo image.
-        if (dataSource_) {
+        if (dataSource_ && photoCount_ > 0) {
             if ([dataSource_ respondsToSelector:@selector(imageAtIndex:photoView:)] == NO) {
                 UIImage *image = [dataSource_ imageAtIndex:index];
                 [photoView setImage:image];
