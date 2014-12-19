@@ -10,4 +10,6 @@
 
 @interface TextFieldCell : UITableViewCell
 
+@property (nonatomic, strong) IBOutlet UITextField *textField;
+
 @end

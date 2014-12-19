@@ -187,7 +187,12 @@
     if (!(self.idCardNumber && self.idCardNumber.length > 0)) {
         return @"未设置";
     }
-    return [NSString stringWithFormat:@"%@:%@****%@", arr[self.idCardType.intValue], [self.idCardNumber substringToIndex:5], [self.idCardNumber substringFromIndex:_idCardNumber.length - 2]];
+    if (self.idCardNumber.length >= 10) {
+        return [NSString stringWithFormat:@"%@:%@****%@", arr[self.idCardType.intValue], [self.idCardNumber substringToIndex:5], [self.idCardNumber substringFromIndex:_idCardNumber.length - 2]];
+    }
+    
+    return [NSString stringWithFormat:@"%@:%@", arr[self.idCardType.intValue], self.idCardNumber];
+    
 }
 
 - (NSString*)homeTelForPersonal{
@@ -195,13 +200,21 @@
         return @"未设置";
     }
     
-    return [NSString stringWithFormat:@"%@****%@", [_homeTel substringToIndex:3], [_homeTel substringFromIndex:7]];
+    if (self.homeTel.length > 7) {
+        return [NSString stringWithFormat:@"%@****%@", [_homeTel substringToIndex:3], [_homeTel substringFromIndex:7]];
+    }
+    
+    return [NSString stringWithFormat:@"%@", _homeTel];
 }
 
 - (NSString*)mobileNumForBindPhone{
-    if (_mobileNum && _mobileNum.length > 0) {
+    if (_mobileNum.length == 11) {
         return [NSString stringWithFormat:@"%@****%@", [_mobileNum substringToIndex:3], [_mobileNum substringFromIndex:7]];
     }
+    if (_mobileNum.length > 0) {
+        return _mobileNum;
+    }
+    
     return @"";
 }
 
