@@ -170,7 +170,7 @@
 - (void)loadDesignerProject{
     NSDictionary *param = @{@"designerId": [NSString stringWithFormat:@"%i", _designer.userId],
                             @"pageNo":[NSString stringWithFormat:@"%d", _caseCurrentPage],
-                            @"rowsPerPage":kOnePageCount};
+                            @"onePageCount":kOnePageCount};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GETDEDESIGNERPROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
@@ -195,7 +195,7 @@
 - (void)loadTopic{
     NSDictionary *param = @{@"designerId": [NSString stringWithFormat:@"%i", _designer.userId],
                             @"pageNo":[NSString stringWithFormat:@"%d", _topicCurrentPage],
-                            @"rowsPerPage":kOnePageCount};
+                            @"onePageCount":kOnePageCount};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_DE_MYTOPIC parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

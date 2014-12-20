@@ -49,7 +49,7 @@
 
 - (void)loadData{
     NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"rowsPerPage": kOnePageCount,
+                            @"onePageCount": kOnePageCount,
                             @"privateLetterId": [NSString stringWithFormat:@"%d", _message.letterId]};
     
     [[ALEngine shareEngine] pathURL:JR_PRIVATE_DETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {

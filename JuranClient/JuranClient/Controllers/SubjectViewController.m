@@ -53,8 +53,8 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"subjectScope": @"2",@"pageCount": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"pageSize": kOnePageCount};
+    NSDictionary *param = @{@"subjectScope": @"2",@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
+                            @"onePageCount": kOnePageCount};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_SUBJECT_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
