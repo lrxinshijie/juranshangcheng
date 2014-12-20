@@ -8,18 +8,18 @@
 
 #import "QuestionViewController.h"
 #import "NewQuestionViewController.h"
-#import "FilterView.h"
+#import "QuestionFilterView.h"
 #import "JRQuestion.h"
 #import "QuestionCell.h"
 #import "QuestionDetailViewController.h"
 #import "SearchViewController.h"
 
-@interface QuestionViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate, NewQuestionViewControllerDelegate, QuestionDetailViewControllerDelegate>
+@interface QuestionViewController ()<UITableViewDataSource, UITableViewDelegate, QuestionFilterViewDelegate, NewQuestionViewControllerDelegate, QuestionDetailViewControllerDelegate>
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
-@property (nonatomic, strong) FilterView *filterView;
+@property (nonatomic, strong) QuestionFilterView *filterView;
 @property (nonatomic, strong) NSMutableDictionary *filterData;
 @property (nonatomic, strong) QuestionCell *questionCell;
 @property (nonatomic, strong) IBOutlet UIView *askView;
@@ -62,9 +62,9 @@
         [weakSelf loadData];
     }];
     
-//    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeQuestion defaultData:_filterData];
-//    _filterView.delegate = self;
-//    _tableView.tableHeaderView = _filterView;
+    self.filterView = [[QuestionFilterView alloc] initWithDefaultData:_filterData];
+    _filterView.delegate = self;
+    _tableView.tableHeaderView = _filterView;
     
     [_tableView headerBeginRefreshing];
 
@@ -86,7 +86,7 @@
     return _filterData;
 }
 
-- (void)clickFilterView:(FilterView *)view actionType:(FilterViewAction)action returnData:(NSDictionary *)data{
+- (void)clickQuestionFilterView:(QuestionFilterView *)view returnData:(NSDictionary *)data{
     [data.allKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
         [_filterData setObject:data[key] forKey:key];
     }];

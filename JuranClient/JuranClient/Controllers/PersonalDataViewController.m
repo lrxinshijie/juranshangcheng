@@ -321,6 +321,10 @@
                 }
             }];
         }else if (indexPath.row == 1) {
+            if (_user.accountChangeable) {
+                [self showTip:@"用户名不可修改"];
+                return;
+            }
             ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeUserName];
             vc.title = keysForSection1[indexPath.row];
             [self.navigationController pushViewController:vc animated:YES];

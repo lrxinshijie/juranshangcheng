@@ -59,6 +59,9 @@
                 cityDic = data[@"regions"];
             }else{
                 districtDic = data[@"regions"];
+                if (districtDic.allKeys.count == 0) {
+                    [self commit];
+                }
             }
             [self reloadData];
         }

@@ -38,20 +38,25 @@
 - (id)initWithDictionaryForDetail:(NSDictionary *)dict{
     if (self=[self init]) {
         
-        if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
-            return self;
-        }
+        [self buildUpDetialValueWithDictionary:dict];
         
-        self.topicId = [dict getStringValueForKey:@"topicId" defaultValue:@""];
-        self.theme = [dict getStringValueForKey:@"theme" defaultValue:@""];
-        self.publishTime = [dict getStringValueForKey:@"publishTime" defaultValue:@""];
-        self.contentUrl = [dict getStringValueForKey:@"contentUrl" defaultValue:@""];
-        self.viewCount = [dict getIntValueForKey:@"viewCount" defaultValue:0];
-        self.commentCount = [dict getIntValueForKey:@"commentCount" defaultValue:0];
-        self.commitList = [JRComment buildUpWithValue:dict[@"commitList"]];
     }
     
     return self;
+}
+
+- (void)buildUpDetialValueWithDictionary:(NSDictionary*)dict{
+    if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+        return ;
+    }
+    
+    self.topicId = [dict getStringValueForKey:@"topicId" defaultValue:@""];
+    self.theme = [dict getStringValueForKey:@"theme" defaultValue:@""];
+    self.publishTime = [dict getStringValueForKey:@"publishTime" defaultValue:@""];
+    self.contentUrl = [dict getStringValueForKey:@"contentUrl" defaultValue:@""];
+    self.viewCount = [dict getIntValueForKey:@"viewCount" defaultValue:0];
+    self.commentCount = [dict getIntValueForKey:@"commentCount" defaultValue:0];
+    self.commitList = [JRComment buildUpWithValue:dict[@"commitList"]];
 }
 
 + (NSMutableArray *)buildUpWithValue:(id)value{

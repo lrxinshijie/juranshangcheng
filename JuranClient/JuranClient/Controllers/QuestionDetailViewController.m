@@ -13,6 +13,7 @@
 #import "JRAnswer.h"
 #import "ALGetPhoto.h"
 #import "CanRemoveImageView.h"
+#import "ZoomInImageView.h"
 
 @interface QuestionDetailViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, CanRemoveImageViewDelegate>
 {
@@ -30,13 +31,13 @@
 @property (nonatomic, strong) IBOutlet UILabel *resolvedStyleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *resolvedContentLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *resolvedIconImageView;
-@property (nonatomic, strong) IBOutlet UIImageView *resolvedHeaderImageView;
+@property (nonatomic, strong) IBOutlet ZoomInImageView *resolvedHeaderImageView;
 
 //unResolvedView
 @property (nonatomic, strong) IBOutlet UIView *unResolvedTableHeaderView;
 @property (nonatomic, strong) IBOutlet UILabel *unResolvedTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *unResolvedContentLabel;
-@property (nonatomic, strong) IBOutlet UIImageView *unResolvedHeaderImageView;
+@property (nonatomic, strong) IBOutlet ZoomInImageView *unResolvedHeaderImageView;
 
 //AnswerView
 @property (nonatomic, strong) IBOutlet UIView *answerView;

@@ -47,6 +47,7 @@
 @property (nonatomic, assign) NSInteger sex;
 @property (nonatomic, assign) NSInteger useablePoints;
 @property (nonatomic, assign) NSInteger useableExp;
+@property (nonatomic, assign) BOOL accountChangeable;
 
 + (BOOL)isLogin;
 - (void)logout;
@@ -66,6 +67,7 @@
 - (NSString*)idCardInfomation;
 - (NSString*)homeTelForPersonal;
 - (NSString*)mobileNumForBindPhone;
+- (NSString*)emailForBindEmail;
 - (NSURL *)headImageURL;
 
 - (NSString *)showName;

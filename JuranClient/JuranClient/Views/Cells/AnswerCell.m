@@ -19,8 +19,10 @@
 @property (nonatomic, strong) IBOutlet UILabel *userTypeLabel;
 @property (nonatomic, weak) IBOutlet UIView *backView;
 @property (nonatomic, weak) IBOutlet UIView *footerView;
+@property (nonatomic, strong) IBOutlet UIImageView *contentImageView;
 
 @property (nonatomic, assign) BOOL isAdoptedAnswer;
+@property (nonatomic, strong) JRAnswer *answer;
 
 @end
 
@@ -40,12 +42,17 @@
 
 - (void)fillCellWithAnswer:(JRAnswer*)answer anIsAdoptedAnswer:(BOOL)flag
 {
+    _answer = answer;
     _isAdoptedAnswer = flag;
     _contentLabel.text = answer.content;
     _userNameLabel.text = answer.nickName.length?answer.nickName:answer.account;
 //    _userTypeLabel.text = [answer userTypeString];
     _userTypeLabel.hidden = !(_isAdoptedAnswer && answer.userType == 2);
     _timeLabel.text = answer.commitTime;
+    
+    if (answer.imageUrl.length > 0) {
+        [_contentImageView setImageWithURLString:answer.imageUrl];
+    }
     [self layoutFrame];
 }
 
@@ -54,9 +61,22 @@
     frame.size.height = [_contentLabel.text heightWithFont:_contentLabel.font constrainedToWidth:CGRectGetWidth(_contentLabel.frame)];
     _contentLabel.frame = frame;
     
-    frame = _footerView.frame;
-    frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;
-    _footerView.frame = frame;
+    if (_answer.imageUrl.length > 0) {
+        _contentImageView.hidden = NO;
+        
+        frame = _contentImageView.frame;
+        frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;
+        _contentImageView.frame = frame;
+        
+        frame = _footerView.frame;
+        frame.origin.y = CGRectGetMaxY(_contentImageView.frame);
+        _footerView.frame = frame;
+    }else{
+        _contentImageView.hidden = YES;
+        frame = _footerView.frame;
+        frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;
+        _footerView.frame = frame;
+    }
     
     frame = _userNameLabel.frame;
     frame.size.width = [_userNameLabel.text widthWithFont:_userNameLabel.font constrainedToHeight:CGRectGetHeight(_userNameLabel.frame)];

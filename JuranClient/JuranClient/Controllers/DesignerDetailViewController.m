@@ -180,7 +180,7 @@
             if (_caseCurrentPage > 1) {
                 [_caseDatas addObjectsFromArray:rows];
             }else{
-                self.caseDatas = [JRCase buildUpWithValue:list];
+                self.caseDatas = rows;
             }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
