@@ -18,4 +18,7 @@
 - (NSArray *)roomNum;
 - (NSArray *)livingroomCount;
 - (NSArray *)bathroomCount;
+
+- (id)objectForKey:(NSString *)key;
+
 @end

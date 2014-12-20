@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1403802E1A44247300221398 /* MeasureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1403802C1A44247300221398 /* MeasureViewController.m */; };
+		1403802F1A44247300221398 /* MeasureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1403802D1A44247300221398 /* MeasureViewController.xib */; };
 		140C46E81A2A296A003317AD /* ModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 140C46E61A2A296A003317AD /* ModifyViewController.m */; };
 		140C46E91A2A296A003317AD /* ModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 140C46E71A2A296A003317AD /* ModifyViewController.xib */; };
 		140C46ED1A2A3741003317AD /* MyFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 140C46EB1A2A3741003317AD /* MyFollowViewController.m */; };
@@ -365,6 +367,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1403802B1A44247300221398 /* MeasureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeasureViewController.h; sourceTree = "<group>"; };
+		1403802C1A44247300221398 /* MeasureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeasureViewController.m; sourceTree = "<group>"; };
+		1403802D1A44247300221398 /* MeasureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeasureViewController.xib; sourceTree = "<group>"; };
 		140C46E51A2A296A003317AD /* ModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyViewController.h; sourceTree = "<group>"; };
 		140C46E61A2A296A003317AD /* ModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyViewController.m; sourceTree = "<group>"; };
 		140C46E71A2A296A003317AD /* ModifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyViewController.xib; sourceTree = "<group>"; };
@@ -1307,6 +1312,9 @@
 				A96E89491A431C6400C9CB69 /* TextFieldCell.h */,
 				A96E894A1A431C6400C9CB69 /* TextFieldCell.m */,
 				A96E894B1A431C6400C9CB69 /* TextFieldCell.xib */,
+				1403802B1A44247300221398 /* MeasureViewController.h */,
+				1403802C1A44247300221398 /* MeasureViewController.m */,
+				1403802D1A44247300221398 /* MeasureViewController.xib */,
 			);
 			name = Case;
 			sourceTree = "<group>";
@@ -2092,6 +2100,7 @@
 				14D973951A334DFC00E771ED /* PushMessageCell.xib in Resources */,
 				A90459D41A278A6100F8CD74 /* PublishDesignViewController.xib in Resources */,
 				14FE2E321A38542700B31FBA /* bubble-default-incoming-selected@2x.png in Resources */,
+				1403802F1A44247300221398 /* MeasureViewController.xib in Resources */,
 				A987EE601A209E7900CED7CD /* CaseCell.xib in Resources */,
 				A96E894D1A431C6400C9CB69 /* TextFieldCell.xib in Resources */,
 				14C953B31A2DC60B00FE6F8D /* SubjectDetailViewController.xib in Resources */,
@@ -2210,6 +2219,7 @@
 				14C855491A2E196B00A15ED9 /* SettingsViewController.m in Sources */,
 				A987EDF11A20920500CED7CD /* UITableView+ASCategory.m in Sources */,
 				A9A2A3FF1A2B1F0900DFA49B /* BannerView.m in Sources */,
+				1403802E1A44247300221398 /* MeasureViewController.m in Sources */,
 				14555D341A36EB4100E36339 /* JRAreaInfo.m in Sources */,
 				A987EE1F1A20928B00CED7CD /* NSString+MKNetworkKitAdditions.m in Sources */,
 				A9A067181A3D76DA0059D73B /* ActionSheetStringPicker.m in Sources */,

@@ -69,8 +69,8 @@ typedef void (^AddressSelected)(id data);
 typedef enum : NSUInteger {
     FilterViewTypeCase,
     FilterViewTypeDesigner,
-    FilterViewTypeQuestion,
     FilterViewTypeDesignerSearch,
+    FilterViewTypeCaseSearch,
 } FilterViewType;
 
 typedef enum : NSUInteger {

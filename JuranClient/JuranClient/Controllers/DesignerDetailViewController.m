@@ -17,6 +17,8 @@
 #import "JRCase.h"
 #import "JRTopic.h"
 #import "JRPhotoScrollViewController.h"
+#import "MeasureViewController.h"
+#import "PrivateLetterViewController.h"
 
 @interface DesignerDetailViewController ()<UITableViewDataSource, UITableViewDelegate, JRSegmentControlDelegate, SelfIntroductionCellDelegate>
 {
@@ -173,7 +175,7 @@
     [[ALEngine shareEngine] pathURL:JR_GETDEDESIGNERPROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *list = [data objectForKey:@"deProjectList"];
+            NSArray *list = [data objectForKey:@"projectGeneralDtoList"];
             NSMutableArray *rows = [JRCase buildUpWithValue:list];
             if (_caseCurrentPage > 1) {
                 [_caseDatas addObjectsFromArray:rows];
@@ -277,12 +279,16 @@
 
 //预约
 - (IBAction)doMakeAppointment:(id)sender{
-    ASLog(@"预约");
+    MeasureViewController *mv = [[MeasureViewController alloc] init];
+    mv.designer = _designer;
+    [self.navigationController pushViewController:mv animated:YES];
 }
 
 //私信
 - (IBAction)doPrivateLetter:(id)sender{
-    ASLog(@"私信");
+    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+    pv.designer = _designer;
+    [self.navigationController pushViewController:pv animated:YES];
 }
 
 //分享

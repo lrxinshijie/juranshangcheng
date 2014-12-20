@@ -99,6 +99,8 @@
 #define JR_PRIVATE_DETAIL [NSString stringWithFormat:@"%@/member/getPrivateLetterDetailList.json",JR_SERVICE]
 #define JR_SEARCH_CASE [NSString stringWithFormat:@"%@/search/searchProject2d.json",JR_SERVICE]
 #define JR_UPLOAD_IMAGE [NSString stringWithFormat:@"%@/image/uploadImage.htm",JR_SERVICE]
+#define JR_SEND_PRIVATE [NSString stringWithFormat:@"%@/member/sendPrivateLetter.json",JR_SERVICE]
+#define JR_APPLY_MEASURE [NSString stringWithFormat:@"%@/trade/applyMeasure.json",JR_SERVICE]
 
 #define kHTTPMethodGet @"GET"
 #define kHTTPMethodPost @"POST"

@@ -24,6 +24,10 @@
     return self;
 }
 
+- (id)objectForKey:(NSString *)key{
+    return [_defaultData objectForKey:key];
+}
+
 + (DefaultData *)sharedData{
     static DefaultData *sharedInstance = nil;
     
@@ -40,11 +44,11 @@
 }
 
 - (NSArray *)renovationStyle{
-    return [_defaultData objectForKey:@"renovationStyle"];
+    return [_defaultData objectForKey:@"style"];
 }
 
 - (NSArray *)roomNum{
-    return [_defaultData objectForKey:@"roomNum"];
+    return [_defaultData objectForKey:@"roomType"];
 }
 
 - (NSArray *)livingroomCount{

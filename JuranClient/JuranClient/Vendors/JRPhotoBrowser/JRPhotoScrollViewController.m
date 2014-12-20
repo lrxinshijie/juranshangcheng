@@ -13,6 +13,9 @@
 #import "CaseDetailViewController.h"
 #import "ShareView.h"
 #import "SDWebImageManager.h"
+#import "PrivateLetterViewController.h"
+#import "MeasureViewController.h"
+#import "JRDesigner.h"
 
 @interface JRPhotoScrollViewController ()<KTPhotoBrowserDataSource, UIActionSheetDelegate>
 {
@@ -259,11 +262,23 @@
 }
 
 - (IBAction)doMakeAppointment:(id)sender{
-    
+    MeasureViewController *mv = [[MeasureViewController alloc] init];
+    JRDesigner *designer = [[JRDesigner alloc] init];
+    designer.userId = _jrCase.userId;
+    designer.headUrl = _jrCase.headUrl;
+    designer.nickName = _jrCase.nickName;
+    mv.designer = designer;
+    [self.navigationController pushViewController:mv animated:YES];
 }
 
 - (IBAction)doPrivateLetter:(id)sender{
-    
+    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+    JRDesigner *designer = [[JRDesigner alloc] init];
+    designer.userId = _jrCase.userId;
+    designer.headUrl = _jrCase.headUrl;
+    designer.nickName = _jrCase.nickName;
+    pv.designer = designer;
+    [self.navigationController pushViewController:pv animated:YES];
 }
 
 #pragma mark -

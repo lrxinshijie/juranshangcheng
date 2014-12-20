@@ -7,6 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrivateLetterViewController">
             <connections>
+                <outlet property="arrowButton" destination="qkS-2B-bxp" id="kv4-f3-85K"/>
+                <outlet property="checkButton" destination="XBy-Ou-YsP" id="XLB-k9-3U6"/>
+                <outlet property="contentTextView" destination="tEO-W5-ROh" id="nVC-36-zJn"/>
+                <outlet property="headerView" destination="7Cc-hC-9pe" id="49z-yt-ydl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,7 +30,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                 </textView>
                 <view contentMode="scaleToFill" id="q0x-b3-1YZ">
                     <rect key="frame" x="0.0" y="140" width="320" height="30"/>
@@ -38,6 +42,9 @@
                             <state key="normal" image="checkbox_checked_okk">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="onCheck:" destination="-1" eventType="touchUpInside" id="dDo-zE-ya8"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的个人资料（可选）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="obl-4d-bMN">
                             <rect key="frame" x="45" y="4" width="172" height="21"/>
@@ -46,12 +53,15 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qkS-2B-bxp">
-                            <rect key="frame" x="250" y="0.0" width="46" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qkS-2B-bxp">
+                            <rect key="frame" x="290" y="4" width="15" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button">
+                            <state key="normal" image="arrow_down">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="onArrow:" destination="-1" eventType="touchUpInside" id="ZU2-Ax-5zk"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
@@ -64,6 +74,7 @@
         </view>
     </objects>
     <resources>
+        <image name="arrow_down" width="15" height="8"/>
         <image name="checkbox_checked_okk" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

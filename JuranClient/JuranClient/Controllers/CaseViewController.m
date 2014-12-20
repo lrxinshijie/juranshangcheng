@@ -151,7 +151,7 @@
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
-                self.datas = [JRCase buildUpWithValue:projectList];
+                self.datas = rows;
             }
             
             [_tableView reloadData];
@@ -168,10 +168,13 @@
 
 - (NSMutableDictionary *)filterData{
     if (!_filterData) {
-        _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"projectStyle": @"",
-                        @"roomType": @"",
-                        @"houseArea" : @"",
-                        @"order": @""}];
+        NSDictionary *param = nil;
+        if (_searchKey.length > 0) {
+            param = [[DefaultData sharedData] objectForKey:@"caseSearchDefaultParam"];
+        }else{
+            param = [[DefaultData sharedData] objectForKey:@"caseDefaultParam"];
+        }
+        _filterData = [NSMutableDictionary dictionaryWithDictionary:param];
     }
     return _filterData;
 }
