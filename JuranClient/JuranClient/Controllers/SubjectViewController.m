@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, assign) NSInteger currentPage;
 
 @end
 
@@ -36,6 +37,12 @@
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView addFooterWithCallback:^{
+        weakSelf.currentPage++;
         [weakSelf loadData];
     }];
     
@@ -46,13 +53,20 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"subjectScope": @"2"};
+    NSDictionary *param = @{@"subjectScope": @"2",@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
+                            @"onePageCount": kOnePageCount};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_SUBJECT_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             NSArray *projectList = [data objectForKey:@"infoSubjectRespList"];
-            self.datas = [JRSubject buildUpWithValue:projectList];
+            NSMutableArray *rows = [JRSubject buildUpWithValue:projectList];
+            
+            if (_currentPage > 1) {
+                [_datas addObjectsFromArray:rows];
+            }else{
+                self.datas = rows;
+            }
             
             [_tableView reloadData];
         }

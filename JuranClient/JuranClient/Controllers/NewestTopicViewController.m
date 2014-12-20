@@ -80,7 +80,7 @@
     if (_topic) {
         param = @{@"topicId": _topic.topicId};
     }else{
-        param = @{};
+//        param = @{};
     }
     
     [[ALEngine shareEngine] pathURL:JR_GET_TOPICDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {

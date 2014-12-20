@@ -17,6 +17,8 @@
 #import "JRCase.h"
 #import "JRTopic.h"
 #import "JRPhotoScrollViewController.h"
+#import "MeasureViewController.h"
+#import "PrivateLetterViewController.h"
 
 @interface DesignerDetailViewController ()<UITableViewDataSource, UITableViewDelegate, JRSegmentControlDelegate, SelfIntroductionCellDelegate>
 {
@@ -277,12 +279,16 @@
 
 //预约
 - (IBAction)doMakeAppointment:(id)sender{
-    ASLog(@"预约");
+    MeasureViewController *mv = [[MeasureViewController alloc] init];
+    mv.designer = _designer;
+    [self.navigationController pushViewController:mv animated:YES];
 }
 
 //私信
 - (IBAction)doPrivateLetter:(id)sender{
-    ASLog(@"私信");
+    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+    pv.designer = _designer;
+    [self.navigationController pushViewController:pv animated:YES];
 }
 
 //分享

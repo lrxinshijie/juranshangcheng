@@ -14,6 +14,7 @@
 #import "ActionSheetStringPicker.h"
 #import "ActionSheetMultiPicker.h"
 #import "ALGetPhoto.h"
+#import "MyDemandViewController.h"
 
 @interface PublishDesignViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -139,7 +140,7 @@
                             @"contactsMobile": _demand.contactsMobile,
                             @"houseArea": [NSString stringWithFormat:@"%d", _demand.houseArea],
                             @"budget": _demand.budget,
-                            @"budgetUnit": @"yuan",
+                            @"budgetUnit": @"million",
                             @"renovationStyle": _demand.renovationStyle,
                             @"neighbourhoods": _demand.neighbourhoods,
                             @"roomNum":_demand.roomNum,
@@ -157,6 +158,13 @@
             self.fileImage = nil;
             _photoImageView.image = [UIImage imageNamed:@"publish_image_default"];
             [self reloadData];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                MyDemandViewController *vc = [[MyDemandViewController alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            });
+            
         }
     }];
 }

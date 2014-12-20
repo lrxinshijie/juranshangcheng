@@ -66,7 +66,7 @@
         [weakSelf loadData];
     }];
     
-    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeDesigner defaultData:_filterData];
+    self.filterView = [[FilterView alloc] initWithType:_isSearchResult ? FilterViewTypeDesignerSearch : FilterViewTypeDesigner defaultData:_filterData];
     _filterView.delegate = self;
     _tableView.tableHeaderView = _filterView;
     
@@ -82,17 +82,15 @@
 
 - (NSMutableDictionary *)filterData{
     if (!_filterData) {
+        
+        NSDictionary *param = nil;
         if (_isSearchResult) {
-            _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"style" : @"",
-                                                                          @"order": @""}];
+            param = [[DefaultData sharedData] objectForKey:@"designerSearchDefaultParam"];
         }else{
-            _filterData = [NSMutableDictionary dictionaryWithDictionary:@{@"experience": @"",
-                                                                          @"isRealNameAuth": @"",
-                                                                          @"style" : @"",
-                                                                          @"order": @""}];
+            param = [[DefaultData sharedData] objectForKey:@"designerDefaultParam"];
         }
         
-        
+        _filterData = [NSMutableDictionary dictionaryWithDictionary:param];
     }
     return _filterData;
 }

@@ -74,10 +74,10 @@
         [weakSelf loadComment];
     }];
     
-    [_tableView addFooterWithCallback:^{
-        weakSelf.currentPage++;
-        [weakSelf loadComment];
-    }];
+//    [_tableView addFooterWithCallback:^{
+//        weakSelf.currentPage++;
+//        [weakSelf loadComment];
+//    }];
     
     CGRect frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
@@ -110,32 +110,6 @@
     
     _avtarImageView.layer.masksToBounds = YES;
     _avtarImageView.layer.cornerRadius = CGRectGetWidth(_avtarImageView.frame) / 2;
-}
-
-- (void)loadData{
-    
-//    NSDictionary *param = @{@"projectId": _jrCase.projectId};
-//    [self showHUD];
-//    [[ALEngine shareEngine] pathURL:JR_PRODETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-//        [self hideHUD];
-//        if (!error) {
-//            self.jrCase = [_jrCase buildDetailWithDictionary:data];
-//            self.values = @[[NSString stringWithFormat:@"%@-%@",_jrCase.cityName, _jrCase.districtName],
-//                            _jrCase.neighbourhoods,
-//                            _jrCase.roomType,
-//                            _jrCase.styleString,
-//                            [NSString stringWithFormat:@"%d平米",_jrCase.houseArea],
-//                            [NSString stringWithFormat:@"￥%d万元",_jrCase.projectPrice],
-//                            _jrCase.desc
-//                            ];
-//            _nameLabel.text = _jrCase.nickName;
-//            _detailLabel.text = _jrCase.tags;
-//            [_avtarImageView setImageWithURLString:_jrCase.headUrl];
-//        }
-//        
-//        [self loadComment];
-//        [_tableView reloadData];
-//    }];
 }
 
 - (void)loadComment{

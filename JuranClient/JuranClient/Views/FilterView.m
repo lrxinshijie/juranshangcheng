@@ -165,16 +165,21 @@
 
 - (NSArray *)sorts{
     if (!_sorts) {
-        if (_type == FilterViewTypeCase) {
-            _sorts = @[CELLDICTIONARYBUILT(@"人气量降序", @"11"),
-                       CELLDICTIONARYBUILT(@"点赞量", @"10"),
-                       CELLDICTIONARYBUILT(@"默认", @"0")];
-        }else if (_type == FilterViewTypeDesigner || _type == FilterViewTypeDesignerSearch){
-            _sorts = @[CELLDICTIONARYBUILT(@"人气（浏览量）", @"1"),
-                       CELLDICTIONARYBUILT(@"作品量", @"0"),
-                       CELLDICTIONARYBUILT(@"默认", @"0")];
-        }else if (_type == FilterViewTypeQuestion){
-            
+        switch (_type) {
+            case FilterViewTypeCase:
+                _sorts = [[DefaultData sharedData] objectForKey:@"caseOrder"];
+                break;
+            case FilterViewTypeCaseSearch:
+                _sorts = [[DefaultData sharedData] objectForKey:@"designerSearchOrder"];
+                break;
+            case FilterViewTypeDesigner:
+                _sorts = [[DefaultData sharedData] objectForKey:@"designerOrder"];
+                break;
+            case FilterViewTypeDesignerSearch:
+                _sorts = [[DefaultData sharedData] objectForKey:@"designerSearchOrder"];
+                break;
+            default:
+                break;
         }
         
     }
