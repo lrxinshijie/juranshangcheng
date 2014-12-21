@@ -72,7 +72,7 @@
     CGFloat width = self.data.view.frame.size.width;
     CGFloat height = self.data.view.frame.size.height;
 
-    CGFloat x = (type == BubbleTypeSomeoneElse) ? 0 : self.frame.size.width - width - self.data.insets.left - self.data.insets.right;
+    CGFloat x = (type == BubbleTypeSomeoneElse) ? 10 : self.frame.size.width - width - self.data.insets.left - self.data.insets.right - 10;
     CGFloat y = 0;
     
     // Adjusting the x coordinate for avatar
@@ -109,11 +109,12 @@
 
     if (type == BubbleTypeSomeoneElse)
     {
-        self.bubbleImage.image = [[UIImage imageNamed:@"bubbleSomeone.png"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
-
+//        self.bubbleImage.image = [[UIImage imageNamed:@"bubble-me"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
+        self.bubbleImage.image = [[UIImage imageNamed:@"bubble-me"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
     }
     else {
-        self.bubbleImage.image = [[UIImage imageNamed:@"bubbleMine.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:14];
+//        self.bubbleImage.image = [[UIImage imageNamed:@"bubble-other"] stretchableImageWithLeftCapWidth:15 topCapHeight:14];
+        self.bubbleImage.image = [[UIImage imageNamed:@"bubble-other"] stretchableImageWithLeftCapWidth:15 topCapHeight:14];
     }
 
     self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom);

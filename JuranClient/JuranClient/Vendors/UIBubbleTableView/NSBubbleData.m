@@ -39,8 +39,8 @@
 
 #pragma mark - Text bubble
 
-const UIEdgeInsets textInsetsMine = {5, 10, 11, 17};
-const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
+const UIEdgeInsets textInsetsMine = {7, 10, 11, 17};
+const UIEdgeInsets textInsetsSomeone = {7, 15, 11, 10};
 
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {
@@ -62,7 +62,7 @@ const UIEdgeInsets textInsetsSomeone = {5, 15, 11, 10};
     label.text = (text ? text : @"");
     label.font = font;
     label.backgroundColor = [UIColor clearColor];
-    
+    label.textColor = (type == BubbleTypeMine ? [UIColor whiteColor] : [UIColor blackColor]);
 #if !__has_feature(objc_arc)
     [label autorelease];
 #endif
