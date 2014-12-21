@@ -17,6 +17,7 @@
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, strong) IBOutlet UIView *emptyDataView;
 
 @end
 
@@ -46,6 +47,14 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_tableView.frame), CGRectGetHeight(_tableView.frame))];
+    _emptyDataView.backgroundColor = RGBColor(241, 241, 241);
+    CGPoint center = CGPointMake(bgView.center.x, 220);
+    _emptyDataView.center = center;
+    _emptyDataView.hidden = NO;
+    [bgView addSubview:_emptyDataView];
+    _tableView.backgroundView = bgView;
+    
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
@@ -74,14 +83,17 @@
                 }else{
                     self.datas = rows;
                 }
-                
-                [_tableView reloadData];
+                [self reloadData];
             }
         }
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
     }];
-    
+}
+
+- (void)reloadData{
+    _emptyDataView.hidden = (_datas.count != 0);
+    [_tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,6 +116,7 @@
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
         [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation: UITableViewRowAnimationAutomatic];
     }
+    _emptyDataView.hidden = (_datas.count != 0);
 }
 
 #pragma mark - UITableViewDataSource/Delegate

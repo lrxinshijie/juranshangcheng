@@ -92,7 +92,7 @@
     self.contactsName = [value getStringValueForKey:@"contactsName" defaultValue:@""];
     self.contactsSex = [value getStringValueForKey:@"contactsSex" defaultValue:@""];
     self.contactsMobile = [value getStringValueForKey:@"contactsMobile" defaultValue:@""];
-    self.budget = [value getStringValueForKey:@"budget" defaultValue:@""];
+    self.budget = [NSString stringWithFormat:@"%d", [value getIntValueForKey:@"budget" defaultValue:0]];
     self.renovationStyle = [value getStringValueForKey:@"renovationStyle" defaultValue:@""];
     NSDictionary *areaDic = value[@"areaInfo"];
     self.areaInfo = [[JRAreaInfo alloc] initWithDictionary:areaDic];

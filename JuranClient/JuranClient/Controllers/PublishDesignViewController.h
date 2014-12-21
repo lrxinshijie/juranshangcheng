@@ -7,7 +7,10 @@
 //
 
 #import "ALViewController.h"
+@class JRDemand;
 
 @interface PublishDesignViewController : ALViewController
+
+@property (nonatomic, strong) JRDemand *demand;
 
 @end

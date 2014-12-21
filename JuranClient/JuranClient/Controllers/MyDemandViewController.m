@@ -10,12 +10,14 @@
 #import "DemandCell.h"
 #import "JRDemand.h"
 #import "DemandDetailViewController.h"
+#import "PublishDesignViewController.h"
 
-@interface MyDemandViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface MyDemandViewController ()<UITableViewDelegate, UITableViewDataSource, DemandDetailViewControllerDelegate>
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, strong) IBOutlet UIView *emptyDataView;
 
 
 @end
@@ -40,11 +42,23 @@
     
     self.navigationItem.title = @"我的需求";
     
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 80, 30) target:self action:@selector(onPublishDemand) title:@"发布新需求" backgroundImage:nil];
+    [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
+    
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_tableView.frame), CGRectGetHeight(_tableView.frame))];
+    _emptyDataView.backgroundColor = RGBColor(241, 241, 241);
+    CGPoint center = CGPointMake(bgView.center.x, 220);
+    _emptyDataView.center = center;
+    _emptyDataView.hidden = NO;
+    [bgView addSubview:_emptyDataView];
+    _tableView.backgroundView = bgView;
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -75,8 +89,7 @@
             }else{
                 self.datas = [JRDemand buildUpWithValue:designReqList];
             }
-            
-            [_tableView reloadData];
+            [self reloadData];
         }
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
@@ -84,11 +97,22 @@
     
 }
 
+- (void)reloadData{
+    _emptyDataView.hidden = (_datas.count != 0);
+    [_tableView reloadData];
+}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Target Action
+
+- (void)onPublishDemand{
+    PublishDesignViewController *vc = [[PublishDesignViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma makr - UITableViewDataSource/Delegate
@@ -119,10 +143,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DemandDetailViewController *vc = [[DemandDetailViewController alloc] init];
+    vc.delegate = self;
     vc.demand = _datas[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - DemandDetailViewControllerDelegate
 
+- (void)valueChangedWithDemandDetailVC:(DemandDetailViewController *)vc{
+    [_tableView headerBeginRefreshing];
+}
 
 @end

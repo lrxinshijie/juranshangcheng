@@ -10,6 +10,7 @@
 #import "BidDesignerCell.h"
 #import "JRDemand.h"
 #import "JRDesigner.h"
+#import "PublishDesignViewController.h"
 
 #define kStatusBGImageViewTag 2933
 
@@ -35,6 +36,8 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *demandDescribeLabel;
 @property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
+
+@property (nonatomic, strong) IBOutlet UIButton *modifyDemandInfoButton;
 
 @end
 
@@ -70,8 +73,11 @@
     NSInteger index = [_demand statusIndex];
     if (index < 3) {
         self.navigationItem.rightBarButtonItem = _rightBarButtonItem;
+        _modifyDemandInfoButton.hidden = NO;
+        
     }else{
         self.navigationItem.rightBarButtonItem = nil;
+        _modifyDemandInfoButton.hidden = YES;
     }
     _demandInfoTitleLabel.text = _demand.title;
     [self reSetData];
@@ -144,7 +150,9 @@
 #pragma mark - Target Action
 
 - (IBAction)onModifyDemandInfo:(id)sender{
-    
+    PublishDesignViewController *vc = [[PublishDesignViewController alloc] init];
+    vc.demand = _demand;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)onDeadRequest{
@@ -154,6 +162,9 @@
     [[ALEngine shareEngine] pathURL:JR_REQ_STOP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
+            if (_delegate && [_delegate respondsToSelector:@selector(valueChangedWithDemandDetailVC:)]) {
+                [_delegate valueChangedWithDemandDetailVC:self];
+            }
             [self.navigationController popViewControllerAnimated:YES];
         }
     }];

@@ -84,6 +84,12 @@
         if (!error) {
             [self.jrCase buildDetailWithDictionary:data];
             dispatch_async(dispatch_get_main_queue(), ^{
+                for (id obj in scrollView_.subviews) {
+                    if ([obj isKindOfClass:[KTPhotoView class]]) {
+                        [obj removeFromSuperview];
+                    }
+                }
+
                 [self viewDidLoad];
                 [self viewWillAppear:YES];
             });

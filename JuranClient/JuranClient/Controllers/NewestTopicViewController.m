@@ -11,8 +11,9 @@
 #import "CommentCell.h"
 #import "JRTopic.h"
 #import "JRComment.h"
+#import "ALWebView.h"
 
-@interface NewestTopicViewController ()<UITableViewDataSource, UITableViewDelegate, CommentCellDelegate, UITextFieldDelegate>
+@interface NewestTopicViewController ()<UITableViewDataSource, UITableViewDelegate, CommentCellDelegate, UITextFieldDelegate, ALWebViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -26,7 +27,7 @@
 @property (nonatomic, strong) IBOutlet UIView *commentView;
 @property (nonatomic, strong) IBOutlet UITextField *commentTextField;
 @property (nonatomic, strong) IBOutlet UIView *bottomView;
-@property (nonatomic, strong) IBOutlet UIWebView *contentWebView;
+@property (nonatomic, strong) IBOutlet ALWebView *contentWebView;
 
 @property (nonatomic, strong) JRComment *selectComment;
 
@@ -54,6 +55,8 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
+    self.contentWebView.delegate = self;
+    
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -80,11 +83,10 @@
     if (_topic) {
         param = @{@"topicId": _topic.topicId};
     }else{
-//        param = @{};
+        param = @{};
     }
     
     [[ALEngine shareEngine] pathURL:JR_GET_TOPICDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
         if (!error) {
             if (_topic) {
                 [_topic buildUpDetialValueWithDictionary:data];
@@ -92,24 +94,28 @@
                 _topic = [[JRTopic alloc] initWithDictionaryForDetail:data];
             }
             [self reloadData];
+        }else{
+            [self hideHUD];
         }
     }];
 }
 
 - (void)reloadData{
+    _titleLabel.text = _topic.theme;
+    _timeLabel.text = _topic.publishTime;
+    _viewCountLabel.text = [NSString stringWithFormat:@"%d", _topic.viewCount];
+    _commentCountLabel.text = [NSString stringWithFormat:@"%d", _topic.commentCount];
+    
+    [_contentWebView loadHTMLString:_topic.contentDescription baseURL:[NSURL URLWithString:@"http://10.199.5.57:8080/"]]; //[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]//[NSURL URLWithString:@"http://10.199.5.57:8080/img/"]
     [self setupTableHeaderView];
-    _tableView.tableHeaderView = _tableHeaderView;
     [_tableView reloadData];
 }
 
 - (void)setupTableHeaderView{
-    if (!(_topic.contentDescription && _topic.contentDescription.length > 0)) {
-        return;
-    }
-    [_contentWebView loadHTMLString:_topic.contentDescription baseURL:[NSURL URLWithString:@"http://10.199.5.57:8080"]];
+    
     CGRect frame = _contentWebView.frame;
     frame.size.width = CGRectGetWidth(_contentWebView.frame);
-    frame.size.height = 1;
+    frame.size.height = 40;
     
 //    _contentWebView.scrollView.scrollEnabled = NO;
     _contentWebView.frame = frame;
@@ -123,6 +129,12 @@
     frame.size.height = CGRectGetMaxY(_contentWebView.frame);
     _tableHeaderView.frame = frame;
     
+//    NSString *htmlHeight = [_contentWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"foo\").offsetHeight;"];
+//    _contentWebView.scrollView.contentSize = CGSizeMake(320, 240+[htmlHeight intValue]);
+//    CGRect frame= _contentWebView.frame;
+//    [_contentWebView setFrame:CGRectMake(frame.origin.x, frame.origin.y, 320, [htmlHeight intValue]+100)];
+//    
+    _tableView.tableHeaderView = _tableHeaderView;
 }
 
 
@@ -289,5 +301,20 @@
     _commentView.frame = frame;
     _commentView.hidden = YES;
 }
+
+#pragma mark - ALWebViewDelegate
+
+- (void)webViewDidFinishLoad:(ALWebView *)aWebView{
+    [self hideHUD];
+    [self setupTableHeaderView];
+    [_tableView reloadData];
+
+}
+
+- (void)webView:(ALWebView *)aWebView didFailLoadWithError:(NSError *)error{
+    [self hideHUD];
+    [self showTip:@"加载失败"];
+}
+
 
 @end

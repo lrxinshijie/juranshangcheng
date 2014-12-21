@@ -84,7 +84,7 @@
     NSDictionary *param = @{@"type":@"iphone",
                             @"contactInfo":_contactTextField.text,
                             @"memo":_contentTextView.text,
-                            @"imgURL":imageUrl};
+                            @"imgUrl":imageUrl};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_ADD_FEEDBACK parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

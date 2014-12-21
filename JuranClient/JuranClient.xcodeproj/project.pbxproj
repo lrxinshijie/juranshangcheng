@@ -1319,9 +1319,6 @@
 				147A9FAF1A415DD400132804 /* PrivateLetterViewController.h */,
 				147A9FB01A415DD400132804 /* PrivateLetterViewController.m */,
 				147A9FB11A415DD400132804 /* PrivateLetterViewController.xib */,
-				A96E89491A431C6400C9CB69 /* TextFieldCell.h */,
-				A96E894A1A431C6400C9CB69 /* TextFieldCell.m */,
-				A96E894B1A431C6400C9CB69 /* TextFieldCell.xib */,
 				1403802B1A44247300221398 /* MeasureViewController.h */,
 				1403802C1A44247300221398 /* MeasureViewController.m */,
 				1403802D1A44247300221398 /* MeasureViewController.xib */,
@@ -2521,6 +2518,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Connection",
@@ -2555,6 +2553,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Connection",
