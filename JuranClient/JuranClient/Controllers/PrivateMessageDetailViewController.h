@@ -6,10 +6,10 @@
 //  Copyright (c) 2014年 Juran. All rights reserved.
 //
 
-#import "JSMessagesViewController.h"
+#import "ALViewController.h"
 
 @class PrivateMessage;
-@interface PrivateMessageDetailViewController : JSMessagesViewController
+@interface PrivateMessageDetailViewController : ALViewController;
 
 @property (nonatomic, strong) PrivateMessage *message;
 

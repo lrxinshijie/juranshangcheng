@@ -14,7 +14,6 @@
 #import "EScrollerView.h"
 #import "JRPhotoScrollViewController.h"
 #import "FilterView.h"
-#import "SearchViewController.h"
 
 @interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate>
 
@@ -52,8 +51,8 @@
     
     if (_searchKey.length == 0) {
         [self configureMenu];
+        [self configureSearch];
         
-        [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
     }else{
         self.navigationItem.title = _searchKey;
     }
@@ -97,12 +96,6 @@
     if ([_filterView isShow]) {
         [_filterView showSort];
     }
-}
-
-- (void)onSearch{
-    SearchViewController *vc = [[SearchViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)loadAd{

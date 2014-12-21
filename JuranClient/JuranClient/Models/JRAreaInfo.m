@@ -39,6 +39,10 @@
     return self;
 }
 
+- (NSString *)title{
+    return [NSString stringWithFormat:@"%@%@%@",_provinceName,_cityName,_districtName];
+}
+
 - (NSDictionary *)dictionaryValue{
     return @{@"provinceName": [NSString stringWithFormat:@"%@", self.provinceName],
              @"cityName": [NSString stringWithFormat:@"%@", self.cityName],

@@ -144,7 +144,7 @@
         }else if (indexPath.row == 6){
             placeholder = @"城市";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textField.text = _areaInfo.cityName;
+            cell.textField.text = _areaInfo.title;
         }else if (indexPath.row == 7){
             placeholder = @"小区名称";
             cell.textField.keyboardType = UIKeyboardTypeDefault;

@@ -8,30 +8,34 @@
 
 #import "PrivateMessageDetailViewController.h"
 #import "PrivateMessage.h"
+#import "UIBubbleTableView.h"
 
-@interface PrivateMessageDetailViewController () <JSMessagesViewDelegate, JSMessagesViewDataSource>
+@interface PrivateMessageDetailViewController () <UIBubbleTableViewDataSource>
 
+@property (nonatomic, strong) IBOutlet UIBubbleTableView *tableView;
+@property (nonatomic, strong) IBOutlet UITextField *contentTextField;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
+
+- (IBAction)onSend:(id)sender;
 
 @end
 
 @implementation PrivateMessageDetailViewController
 
 - (void)dealloc{
-    [ALEngine cancelOperationsWithClass:self];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    
     [self configureLeftBarButtonUniformly];
     self.view.backgroundColor = kViewBackgroundColor;
     self.navigationItem.title = @"我的私信";
-    self.delegate = self;
-    self.dataSource = self;
-    self.tableView.backgroundColor = [UIColor whiteColor];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
 
     __weak typeof(self) weakSelf = self;
     [self.tableView addHeaderWithCallback:^{
@@ -72,81 +76,20 @@
     }];
 }
 
-#pragma mark - Table view data source
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (IBAction)onSend:(id)sender{
+    
+}
+
+- (NSInteger)rowsForBubbleTable:(UIBubbleTableView *)tableView{
     return [_datas count];
 }
 
-#pragma mark - Messages view delegate
-- (void)sendPressed:(UIButton *)sender withText:(NSString *)text
-{
-//    [self.messages addObject:text];
-//    
-//    [self.timestamps addObject:[NSDate date]];
-//    
-//    if((self.messages.count - 1) % 2)
-//        [JSMessageSoundEffect playMessageSentSound];
-//    else
-//        [JSMessageSoundEffect playMessageReceivedSound];
-//    
-//    [self finishSend];
-}
-
-- (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    PrivateMessageDetail *detail = [_datas objectAtIndex:indexPath.row];
-    return detail.fromUserId == 0 ? JSBubbleMessageTypeIncoming : JSBubbleMessageTypeOutgoing;
-}
-
-- (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return JSBubbleMessageStyleDefaultGreen;
-}
-
-- (JSMessagesViewTimestampPolicy)timestampPolicy
-{
-    return JSMessagesViewTimestampPolicyEveryThree;
-}
-
-- (JSMessagesViewAvatarPolicy)avatarPolicy
-{
-    return JSMessagesViewAvatarPolicyNone;
-}
-
-- (JSAvatarStyle)avatarStyle
-{
-    return JSAvatarStyleNone;
-}
-
-//  Optional delegate method
-//  Required if using `JSMessagesViewTimestampPolicyCustom`
-//
-//  - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath
-//
-
-#pragma mark - Messages view data source
-- (NSString *)textForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    PrivateMessageDetail *detail = [_datas objectAtIndex:indexPath.row];
-    return detail.content;
-}
-
-- (NSDate *)timestampForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    PrivateMessageDetail *detail = [_datas objectAtIndex:indexPath.row];
+- (NSBubbleData *)bubbleTableView:(UIBubbleTableView *)tableView dataForRow:(NSInteger)row{
+    PrivateMessageDetail *detail = [_datas objectAtIndex:row];
     NSDate *date = [NSDate dateFromString:detail.publishTime dateFormat:kDateFormatHorizontalLineLong];
-    return date;
-}
-
-- (UIImage *)avatarImageForIncomingMessage
-{
-    return [UIImage imageNamed:@"demo-avatar-woz"];
-}
-
-- (UIImage *)avatarImageForOutgoingMessage
-{
-    return [UIImage imageNamed:@"demo-avatar-jobs"];
+    
+    NSBubbleData *bubble = [NSBubbleData dataWithText:detail.content date:date type:detail.fromUserId == [JRUser currentUser].userId ? BubbleTypeMine : BubbleTypeSomeoneElse];
+    return bubble;
 }
 
 - (void)didReceiveMemoryWarning {

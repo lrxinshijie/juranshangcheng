@@ -12,7 +12,6 @@
 #import "JRQuestion.h"
 #import "QuestionCell.h"
 #import "QuestionDetailViewController.h"
-#import "SearchViewController.h"
 
 @interface QuestionViewController ()<UITableViewDataSource, UITableViewDelegate, QuestionFilterViewDelegate, NewQuestionViewControllerDelegate, QuestionDetailViewControllerDelegate>
 
@@ -33,7 +32,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     if (!_isSearchResult) {
         self.navigationItem.title = @"答疑解惑";
-        [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
+        [self configureSearch];
     }else{
         self.navigationItem.title = _searchKeyWord;
     }
@@ -123,13 +122,6 @@
         
     }];
     
-}
-
-- (void)onSearch{
-    SearchViewController *vc = [[SearchViewController alloc] init];
-    vc.type = SearchTypeQuestion;
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)doAsk:(id)sender{

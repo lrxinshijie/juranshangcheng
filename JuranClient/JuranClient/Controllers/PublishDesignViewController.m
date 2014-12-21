@@ -63,7 +63,7 @@
 }
 
 - (void)reloadData{
-    self.values = @[_demand.contactsName,_demand.contactsMobile, _demand.houseTypeString, _demand.budget,_demand.houseArea == 0 ? @"" : [NSString stringWithFormat:@"%d",_demand.houseArea],_demand.renovationStyleString,_demand.areaInfo.cityName ? _demand.areaInfo.cityName : @"",_demand.neighbourhoods,_demand.roomNumString,@"可选"];
+    self.values = @[_demand.contactsName,_demand.contactsMobile, _demand.houseTypeString, _demand.budget,_demand.houseArea == 0 ? @"" : [NSString stringWithFormat:@"%d",_demand.houseArea],_demand.renovationStyleString,_demand.areaInfo.title,_demand.neighbourhoods,_demand.roomNumString,@"可选"];
     
     if (_fileImage) {
         _photoImageView.image = _fileImage;

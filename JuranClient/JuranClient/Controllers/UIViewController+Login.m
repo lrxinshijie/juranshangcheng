@@ -9,6 +9,7 @@
 #import "UIViewController+Login.h"
 #import "LoginViewController.h"
 #import "MenuView.h"
+#import "SearchViewController.h"
 
 @interface UIViewController ()
 
@@ -41,6 +42,16 @@
     UISwipeGestureRecognizer *swipt = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showMenu)];
     swipt.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:swipt];
+}
+
+- (void)configureSearch{
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
+}
+
+- (void)onSearch{
+    SearchViewController *vc = [[SearchViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)showMenu{
