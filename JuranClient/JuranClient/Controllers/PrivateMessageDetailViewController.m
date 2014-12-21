@@ -10,10 +10,11 @@
 #import "PrivateMessage.h"
 #import "UIBubbleTableView.h"
 
-@interface PrivateMessageDetailViewController () <UIBubbleTableViewDataSource>
+@interface PrivateMessageDetailViewController () <UIBubbleTableViewDataSource, UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UIBubbleTableView *tableView;
 @property (nonatomic, strong) IBOutlet UITextField *contentTextField;
+@property (nonatomic, strong) IBOutlet UIView *commentView;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
 
@@ -24,7 +25,7 @@
 @implementation PrivateMessageDetailViewController
 
 - (void)dealloc{
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad {
@@ -36,7 +37,9 @@
     self.view.backgroundColor = kViewBackgroundColor;
     self.navigationItem.title = @"我的私信";
     
-
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
+    
     __weak typeof(self) weakSelf = self;
     [self.tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
@@ -77,7 +80,21 @@
 }
 
 - (IBAction)onSend:(id)sender{
+    [_contentTextField resignFirstResponder];
+    NSString *value = _contentTextField.text;
+    if (value.length == 0) {
+        return;
+    }
     
+    NSDictionary *param = @{@"privateLetterId":[NSString stringWithFormat:@"%d",_message.letterId],
+                            @"receiverId": [NSString stringWithFormat:@"%d", _message.receiverId],
+                            @"memo": value};
+    [[ALEngine shareEngine] pathURL:JR_REPLY_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            _contentTextField.text = @"";
+            [_tableView headerBeginRefreshing];
+        }
+    }];
 }
 
 - (NSInteger)rowsForBubbleTable:(UIBubbleTableView *)tableView{
@@ -90,6 +107,29 @@
     
     NSBubbleData *bubble = [NSBubbleData dataWithText:detail.content date:date type:detail.fromUserId == [JRUser currentUser].userId ? BubbleTypeMine : BubbleTypeSomeoneElse];
     return bubble;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self onSend:nil];
+    
+    return YES;
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification{
+    NSDictionary *info = [notification userInfo];
+    NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
+    CGSize keyboardSize = [value CGRectValue].size;
+    
+    CGRect frame = _commentView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame) - keyboardSize.height;
+    _commentView.frame = frame;
+}
+
+-(void)keyboardWillBeHidden:(NSNotification *)aNotification{
+    
+    CGRect frame = _commentView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame);
+    _commentView.frame = frame;
 }
 
 - (void)didReceiveMemoryWarning {

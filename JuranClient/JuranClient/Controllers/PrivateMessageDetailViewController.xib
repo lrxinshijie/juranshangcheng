@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrivateMessageDetailViewController">
             <connections>
+                <outlet property="commentView" destination="bIX-qD-aKR" id="3z7-LO-cWM"/>
+                <outlet property="contentTextField" destination="ucD-sf-Ffk" id="MN8-AJ-RA4"/>
                 <outlet property="tableView" destination="QTy-ar-5lx" id="mZO-CM-2fJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -26,7 +28,38 @@
                 </tableView>
                 <view contentMode="scaleToFill" id="bIX-qD-aKR">
                     <rect key="frame" x="0.0" y="454" width="320" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message_text_bg" id="Aku-Uw-ogA">
+                            <rect key="frame" x="5" y="5" width="243" height="39"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nGV-bI-89c">
+                            <rect key="frame" x="253" y="5" width="62" height="39"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="发送" backgroundImage="message_btn_bg">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onSend:" destination="-1" eventType="touchUpInside" id="aRT-ms-8dB"/>
+                            </connections>
+                        </button>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="回复信息" minimumFontSize="17" clearButtonMode="whileEditing" id="ucD-sf-Ffk">
+                            <rect key="frame" x="8" y="10" width="237" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="send"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="82i-k2-1as"/>
+                            </connections>
+                        </textField>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Llv-Vp-90z">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.89411764705882346" green="0.89411764705882346" blue="0.89411764705882346" alpha="1" colorSpace="calibratedRGB"/>
+                        </imageView>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
@@ -36,6 +69,10 @@
             <point key="canvasLocation" x="214" y="319"/>
         </view>
     </objects>
+    <resources>
+        <image name="message_btn_bg" width="62" height="39"/>
+        <image name="message_text_bg" width="242" height="39"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
