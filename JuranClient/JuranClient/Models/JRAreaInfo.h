@@ -19,5 +19,6 @@
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 - (NSDictionary *)dictionaryValue;
+- (NSString *)title;
 
 @end

@@ -15,6 +15,7 @@
 
 
 - (void)configureMenu;
+- (void)configureSearch;
 - (void)showMenu;
 
 @end

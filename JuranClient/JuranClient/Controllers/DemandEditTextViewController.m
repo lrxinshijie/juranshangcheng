@@ -50,7 +50,7 @@
         case DemandEditBudget:
             placeholder = @"装修预算(万元)";
             value = _demand.budget;
-            keyboardType = UIKeyboardTypeNumberPad;
+            keyboardType = UIKeyboardTypeNumbersAndPunctuation;
             break;
         case DemandEditHouseArea:
             placeholder = @"房屋面积(平方米)";
@@ -106,6 +106,11 @@
         return NO;
     }else if (_editType == DemandEditContactsMobile && value.length > 32){
         return NO;
+    }else if (_editType == DemandEditBudget){
+        double budget = [value doubleValue];
+        if (budget > 99999) {
+            return NO;
+        }
     }
     
     return YES;

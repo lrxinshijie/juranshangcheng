@@ -16,6 +16,7 @@
 #import "WeiboSDK.h"
 #import "WeiboApi.h"
 #import <TencentOpenAPI/TencentOAuth.h>
+#import <QZoneConnection/QZoneConnection.h>
 #import "WXApi.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "GuideViewController.h"
@@ -128,6 +129,9 @@
     //添加微信应用 注册网址 http://open.weixin.qq.com
     [ShareSDK connectWeChatWithAppId:@"wxbe9895c4d26b95dc"
                            wechatCls:[WXApi class]];
+    
+    id<ISSQZoneApp> app =(id<ISSQZoneApp>)[ShareSDK getClientWithType:ShareTypeQQSpace];
+    [app setIsAllowWebAuthorize:YES];
     
 }
 

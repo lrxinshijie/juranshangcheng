@@ -27,7 +27,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     [self configureMenu];
-//    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
+    [self configureSearch];
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
@@ -47,9 +47,6 @@
     }];
     
     [_tableView headerBeginRefreshing];
-}
-
-- (void)onSearch{
 }
 
 - (void)loadData{
