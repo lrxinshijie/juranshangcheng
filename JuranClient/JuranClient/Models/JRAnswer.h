@@ -39,6 +39,7 @@ typedef enum : NSUInteger {
 - (BOOL)isResolved;
 - (AnswerStatus)answerStatus;
 - (NSString*)userTypeString;
+
 //
 + (NSMutableArray *)buildUpDetailWithValue:(id)value;
 - (id)initWithDictionaryForDetail:(NSDictionary *)dict;

@@ -363,6 +363,38 @@
     [kUD synchronize];
 }
 
++ (NSInteger)convertToInt:(NSString*)strtemp{
+    
+    NSInteger strlength = 0;
+    char* p = (char*)[strtemp cStringUsingEncoding:NSUnicodeStringEncoding];
+    for (int i=0 ; i<[strtemp lengthOfBytesUsingEncoding:NSUnicodeStringEncoding] ;i++) {
+        if (*p) {
+            p++;
+            strlength++;
+        }
+        else {
+            p++;
+        }
+    }
+    return (strlength+1)/2;
+}
+
++ (NSString*)formatString:(NSString*)string maxLength:(NSInteger)maxLength{
+    if (!string || maxLength < 2) {
+        return @"";
+    }
+    NSString *value = string;
+    NSInteger length = [Public convertToInt:value];
+    if (length > maxLength) {
+        NSInteger i = maxLength/2;
+        do{
+            value = [string substringToIndex:i];
+            i++;
+        }while ([Public convertToInt:value] < maxLength - 2);
+        value = [NSString stringWithFormat:@"%@..", value];
+    }
+    return value;
+}
 
 /*
 + (NSArray*)searchHistorysWithSearchType:(SearchType)type{

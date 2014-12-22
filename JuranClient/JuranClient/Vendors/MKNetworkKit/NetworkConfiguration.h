@@ -62,8 +62,8 @@
 #define JR_SAVE_MOBILEPHONE [NSString stringWithFormat:@"%@/member/saveMobilePhone.json",JR_SERVICE]
 #define JR_REQ_STOP [NSString stringWithFormat:@"%@/design/ReqStop.json",JR_SERVICE]
 #define JR_REJECT_DESIGNREQ [NSString stringWithFormat:@"%@/design/rejectDesignReq.json",JR_SERVICE]
-
-
+#define JR_SET_MSG_READ [NSString stringWithFormat:@"%@/info/set_msg_read.json",JR_SERVICE]
+#define JR_GET_VERSION [NSString stringWithFormat:@"%@/search/getVersion.json",JR_SERVICE]
 
 
 

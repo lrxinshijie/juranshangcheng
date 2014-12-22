@@ -57,7 +57,7 @@
         self.title = [dict getStringValueForKey:@"title" defaultValue:@""];
         self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
         self.houseType = [dict getStringValueForKey:@"houseType" defaultValue:@""];
-        self.renovationBudget = [dict getIntValueForKey:@"renovationBudget" defaultValue:0];
+        self.renovationBudget = [dict getIntValueForKey:@"renovationBudget" defaultValue:0]/1000000;
         self.bidNums = [dict getIntValueForKey:@"bidNums" defaultValue:0];
         self.publishTime = [dict getStringValueForKey:@"publishTime" defaultValue:@""];
         self.houseAddress = [dict getStringValueForKey:@"houseAddress" defaultValue:@""];
@@ -92,7 +92,7 @@
     self.contactsName = [value getStringValueForKey:@"contactsName" defaultValue:@""];
     self.contactsSex = [value getStringValueForKey:@"contactsSex" defaultValue:@""];
     self.contactsMobile = [value getStringValueForKey:@"contactsMobile" defaultValue:@""];
-    self.budget = [NSString stringWithFormat:@"%d", [value getIntValueForKey:@"budget" defaultValue:0]];
+    self.budget = [NSString stringWithFormat:@"%d", [value getIntValueForKey:@"budget" defaultValue:0]/1000000];
     self.renovationStyle = [value getStringValueForKey:@"renovationStyle" defaultValue:@""];
     NSDictionary *areaDic = value[@"areaInfo"];
     self.areaInfo = [[JRAreaInfo alloc] initWithDictionary:areaDic];

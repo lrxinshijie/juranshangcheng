@@ -50,30 +50,13 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
-    self.tableView = [self.view tableViewWithFrame:_isMyQuestion? kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.tableHeaderView = _headerView;
     [self.view addSubview:_tableView];
     
-    if (!_isMyQuestion) {
-        [self setupAnswerView];
-        
-        CGRect frame = _answerView.frame;
-        frame.origin.y = CGRectGetMaxY(_tableView.frame);
-        _answerView.frame = frame;
-        [self.view addSubview:_answerView];
-        
-        frame = _answerImageView.frame;
-        frame.origin.y = kWindowHeightWithoutNavigationBar - CGRectGetHeight(_answerImageView.frame);
-        _answerImageView.frame = frame;
-        [self.view addSubview:_answerImageView];
-        _answerImageView.hidden = YES;
-        
-        UIButton *btn = [_answerImageView buttonWithFrame:_answerImageView.bounds target:self action:@selector(onHiddenAnswerImageView) image:nil];
-        [_answerImageView insertSubview:btn atIndex:0];
-    }
     [self loadData];
 }
 
@@ -88,11 +71,36 @@
             }else{
                 _question = [[JRQuestion alloc] initWithDictionary:data[@"general"]];
                 [_question buildUpMyQuestionDetailWithValue:data];
+                if (![_question isResolved]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self setupUIForUnResovleQuestion];
+                    });
+                }
             }
             
         }
         [self reloadData];
     }];
+}
+
+- (void)setupUIForUnResovleQuestion{
+    _tableView.frame = kContentFrameWithoutNavigationBarAndTabBar;
+    
+    [self setupAnswerView];
+    
+    CGRect frame = _answerView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame);
+    _answerView.frame = frame;
+    [self.view addSubview:_answerView];
+    
+    frame = _answerImageView.frame;
+    frame.origin.y = kWindowHeightWithoutNavigationBar - CGRectGetHeight(_answerImageView.frame);
+    _answerImageView.frame = frame;
+    [self.view addSubview:_answerImageView];
+    _answerImageView.hidden = YES;
+    
+    UIButton *btn = [_answerImageView buttonWithFrame:_answerImageView.bounds target:self action:@selector(onHiddenAnswerImageView) image:nil];
+    [_answerImageView insertSubview:btn atIndex:0];
 }
 
 - (void)setupAnswerView{
@@ -131,7 +139,7 @@
     if (_isMyQuestion) {
         self.navigationItem.title = @"我的提问";
     }else{
-        self.navigationItem.title = [NSString stringWithFormat:@"%@的提问", _question.nickName.length > 0?_question.nickName:_question.account];
+        self.navigationItem.title = [NSString stringWithFormat:@"%@的提问", [Public formatString:_question.nickName.length > 0?_question.nickName:_question.account maxLength:12]];
     }
     [self setupHeaderView];
     [_tableView reloadData];
@@ -291,11 +299,11 @@
     if (_isMyQuestion) {
         JRAnswer *answer = [_question.otherAnswers objectAtIndex:indexPath.row];
         [self.answerDetailCell fillCellWithAnswer:answer type:_question.isResolved?1:0];
-        return self.answerDetailCell.contentView.frame.size.height + ((indexPath.row == _question.otherAnswers.count - 1)?5:0);
+        return self.answerDetailCell.contentView.frame.size.height;
     }else{
         JRAnswer *answer = [_question.otherAnswers objectAtIndex:indexPath.row];
         [self.answerDetailCell fillCellWithAnswer:answer type:1];
-        return self.answerDetailCell.contentView.frame.size.height + ((indexPath.row == _question.otherAnswers.count - 1)?5:0);
+        return self.answerDetailCell.contentView.frame.size.height;
     }
 }
 

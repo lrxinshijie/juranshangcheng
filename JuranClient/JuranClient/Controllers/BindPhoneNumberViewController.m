@@ -12,8 +12,6 @@
 {
     //1为解绑手机  2为绑定新手机
     NSInteger step;
-    NSTimer *timer;
-    NSInteger counter;
 }
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UITextField *captchaTextField;
@@ -24,7 +22,9 @@
 @property (nonatomic, strong) IBOutlet UILabel *oldPhoneLabel;
 @property (nonatomic, strong) IBOutlet UIButton *commiteButton;
 @property (nonatomic, strong) IBOutlet UIButton *getCaptchaButton;
-@property (nonatomic, strong) UILabel *countDownLabel;
+
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) NSInteger currentTime;
 
 @end
 
@@ -82,13 +82,6 @@
     _tableFooterView.frame = frame;
     [self.view addSubview:_tableFooterView];
     
-    self.countDownLabel = [self.view labelWithFrame:CGRectMake(kWindowWidth - 100 - 15, kWindowHeightWithoutNavigationBar - 30 -15, 100, 30) text:@"" textColor:[UIColor darkGrayColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:kSystemFontSize]];
-    _countDownLabel.layer.masksToBounds = YES;
-    _countDownLabel.layer.cornerRadius = 3;
-    _countDownLabel.layer.borderColor = [UIColor darkGrayColor].CGColor;
-    _countDownLabel.layer.borderWidth = 1;
-    _countDownLabel.hidden = YES;
-    [self.view addSubview:_countDownLabel];
 }
 
 - (void)onHidden:(id)sender{
@@ -117,7 +110,8 @@
         [self hideHUD];
         if (!error) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                _countDownLabel.hidden = YES;
+                [_timer invalidate];
+                self.currentTime = 0;
                 _captchaTextField.text = @"";
                 _phoneTextField.text = @"";
                 step = 2;
@@ -142,7 +136,6 @@
     [[ALEngine shareEngine] pathURL:JR_SAVE_MOBILEPHONE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            _countDownLabel.hidden = YES;
             _user.mobileNum = _phoneTextField.text;
             [self.navigationController popViewControllerAnimated:YES];
         }
@@ -170,31 +163,28 @@
     [[ALEngine shareEngine] pathURL:JR_REGIST_SENDSMS parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            [self startCountDown];
+            self.currentTime = 60;
         }
     }];
 }
 
-- (void)startCountDown{
-    _countDownLabel.hidden = NO;
-    _getCaptchaButton.enabled = NO;
-    counter = 60;
-    _countDownLabel.text = [NSString stringWithFormat:@"%d秒",counter];
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDown) userInfo:nil repeats:YES];
+- (void)setCurrentTime:(NSInteger)currentTime{
+    _currentTime = currentTime;
+    if (currentTime == 0) {
+        [_getCaptchaButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [_getCaptchaButton setTitleColor:RGBColor(0, 70, 165) forState:UIControlStateNormal];
+        _getCaptchaButton.enabled = YES;
+    }else{
+        _getCaptchaButton.enabled = NO;
+        [_getCaptchaButton setTitle:[NSString stringWithFormat:@"%d秒",_currentTime] forState:UIControlStateNormal];
+        [_getCaptchaButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeTime) userInfo:nil repeats:NO];
+    }
 }
 
-//倒计时
-- (void)countDown{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        counter--;
-        _countDownLabel.text = [NSString stringWithFormat:@"%d秒",counter];
-        if (counter <= 0) {
-            [timer invalidate];
-            timer = nil;
-            _countDownLabel.hidden = YES;
-            _getCaptchaButton.enabled = YES;
-        }
-    });
+- (void)changeTime{
+    self.currentTime = _currentTime - 1;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

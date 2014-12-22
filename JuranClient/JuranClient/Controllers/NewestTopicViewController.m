@@ -43,7 +43,7 @@
     [super viewDidLoad];
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     if (_topic) {
-        self.navigationItem.title = _topic.theme;
+        self.navigationItem.title = _topic.theme.length>0?_topic.theme:_topic.title;
     }else{
         self.navigationItem.title = @"最新话题";
         
@@ -141,7 +141,8 @@
 - (IBAction)onSend:(id)sender{
     [_commentTextField resignFirstResponder];
     
-    if (![self checkLogin:nil]) {
+    if (![self checkLogin:^{
+    }]) {
         return;
     }
     

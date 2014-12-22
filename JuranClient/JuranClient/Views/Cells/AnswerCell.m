@@ -8,6 +8,7 @@
 
 #import "AnswerCell.h"
 #import "JRAnswer.h"
+#import "ZoomInImageView.h"
 
 @interface AnswerCell()
 {
@@ -19,7 +20,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *userTypeLabel;
 @property (nonatomic, weak) IBOutlet UIView *backView;
 @property (nonatomic, weak) IBOutlet UIView *footerView;
-@property (nonatomic, strong) IBOutlet UIImageView *contentImageView;
+@property (nonatomic, strong) IBOutlet ZoomInImageView *contentImageView;
 
 @property (nonatomic, assign) BOOL isAdoptedAnswer;
 @property (nonatomic, strong) JRAnswer *answer;
@@ -45,7 +46,7 @@
     _answer = answer;
     _isAdoptedAnswer = flag;
     _contentLabel.text = answer.content;
-    _userNameLabel.text = answer.nickName.length?answer.nickName:answer.account;
+    _userNameLabel.text = [Public formatString:_answer.nickName.length > 0?_answer.nickName:_answer.account maxLength:12];
 //    _userTypeLabel.text = [answer userTypeString];
     _userTypeLabel.hidden = !(_isAdoptedAnswer && answer.userType == 2);
     _timeLabel.text = answer.commitTime;

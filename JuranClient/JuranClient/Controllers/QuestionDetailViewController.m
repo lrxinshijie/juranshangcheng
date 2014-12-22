@@ -117,7 +117,7 @@
 }
 
 - (void)reloadData{
-    self.navigationItem.title = [NSString stringWithFormat:@"%@的提问", _question.nickName.length?_question.nickName:_question.account];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@的提问", [Public formatString:_question.nickName.length?_question.nickName:_question.account maxLength:12]];
     if (_isResolved) {
         [self setupResolvedTableHeaderView];
         _tableView.tableHeaderView = _resolvedTableHeaderView;

@@ -63,7 +63,7 @@
 - (void)reloadData{
     if (step == 1) {
         self.navigationItem.title = @"安全验证";
-        _tipLabel.text = @"点击发送按钮，系统将为您发送一封邮箱变更邮件，您可以通过此邮件修改绑定邮箱地址";
+        _tipLabel.text = @"点击发送按钮，系统将为您发送一封解除邮箱绑定的邮件，您可以通过此邮件解除绑定当前的邮箱地址";
     }else if(step == 2){
         self.navigationItem.title = @"绑定邮箱";
         _tipLabel.text = @"点击发送按钮，系统将为您发送一封邮箱变更邮件，您可以通过此邮件完成邮箱绑定";
@@ -74,13 +74,15 @@
 - (IBAction)onSend:(id)sender{
     NSDictionary *param = nil;
     if(step == 1){
-        param = @{@"email":_user.email};
+        param = @{@"email":_user.email,
+                  @"emailType":@"email"};
     }else if (step == 2){
         if (!(_mailTextField.text && _mailTextField.text.length > 0)) {
             [self showTip:@"请输入电子邮箱"];
             return;
         }
-        param = @{@"email":_mailTextField.text};
+        param = @{@"email":_mailTextField.text,
+                  @"emailType":@"activityemail"};
     }
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_UPDATE_BINDINGEMAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {

@@ -85,10 +85,28 @@
 }
 
 - (void)setAllReaded:(id)sender{
-    for (JRPushInfoMsg *msg in _datas) {
-        msg.isUnread = NO;
+    [self submitReadMsg:nil];
+}
+
+- (void)submitReadMsg:(JRPushInfoMsg*)msg{
+    NSDictionary *param = nil;
+    if (msg) {
+        param = @{@"msgId": [NSString stringWithFormat:@"%d", msg.msgId]};
     }
-    [_tableView reloadData];
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_SET_MSG_READ parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            if (msg) {
+                msg.isUnread = NO;
+            }else{
+                for (JRPushInfoMsg *msg in _datas) {
+                    msg.isUnread = NO;
+                }
+            }
+            [_tableView reloadData];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -153,6 +171,10 @@
 - (void)changeCellExpand:(PushMessageCell *)cell{
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    JRPushInfoMsg *msg = _datas[indexPath.row];
+    if (msg.isUnread) {
+        [self submitReadMsg:msg];
+    }
 }
 
 @end

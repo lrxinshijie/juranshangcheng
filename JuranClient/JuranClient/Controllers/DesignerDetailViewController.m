@@ -19,6 +19,7 @@
 #import "JRPhotoScrollViewController.h"
 #import "MeasureViewController.h"
 #import "PrivateLetterViewController.h"
+#import "NewestTopicViewController.h"
 
 @interface DesignerDetailViewController ()<UITableViewDataSource, UITableViewDelegate, JRSegmentControlDelegate, SelfIntroductionCellDelegate>
 {
@@ -444,6 +445,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (_segment.selectedIndex == 0) {
         JRCase *cs = [_caseDatas objectAtIndex:indexPath.row];
         
@@ -458,7 +460,10 @@
 //        }];
 
     }else if (_segment.selectedIndex == 2){
-        
+        JRTopic *t = _topicDatas[indexPath.row];
+        NewestTopicViewController *vc = [[NewestTopicViewController alloc] init];
+        vc.topic = t;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

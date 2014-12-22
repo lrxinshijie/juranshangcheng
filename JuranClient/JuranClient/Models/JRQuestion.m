@@ -86,9 +86,7 @@
 
 - (NSString*)userNameForCell{
     NSString *username = _nickName.length?_nickName:_account;
-    if (username.length > 12) {
-        username = [NSString stringWithFormat:@"%@...", [username substringToIndex:12]];
-    }
+    username = [Public formatString:username maxLength:12];
     return username;
 }
 

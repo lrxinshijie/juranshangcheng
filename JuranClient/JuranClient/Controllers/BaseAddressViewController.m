@@ -164,6 +164,21 @@
     return 30;
 }
 
+- (NSArray*)sectionIndexTitlesForTableView:(UITableView *)tableView{
+    return sortedProvinceKeys;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
+    NSInteger i = 0;
+    for (NSString *str in sortedProvinceKeys) {
+        if ([title isEqualToString:str]) {
+            return i;
+        }
+        i++;
+    }
+    return 0;
+}
+
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (type == 0) {
         return [NSString stringWithFormat:@"  %@", sortedProvinceKeys[section]];

@@ -43,6 +43,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)onCall:(id)sender{
+    NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",@"4006888888"]; //number为号码字符串 如果使用这个方法 结束电话之后会进入联系人列表
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]]; //拨
+}
+
 /*
 #pragma mark - Navigation
 

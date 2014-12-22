@@ -7,9 +7,12 @@
 //
 
 #import "VersionInfoViewController.h"
+#import "GuideViewController.h"
 
-@interface VersionInfoViewController ()<UITableViewDataSource, UITableViewDelegate>
-
+@interface VersionInfoViewController ()<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+{
+    NSString *downLoadUrl;
+}
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *tableHeaderView;
 @property (nonatomic, strong) IBOutlet UILabel *versionLabel;
@@ -42,6 +45,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)checkUpdate{
+    
+    NSDictionary *param = @{@"type": @"ios",
+                            @"versionNo":[Public versionString]};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_GET_VERSION parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSString *version = [data getStringValueForKey:@"versionNo" defaultValue:@""];
+            if ([Public versionEqualString:[Public versionString] NewVersion:version]) {
+                [self showTip:@"已经是最新版本"];
+            }else{
+                downLoadUrl = [data getStringValueForKey:@"downLoadUrl" defaultValue:nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"版本更新" message:[data getStringValueForKey:@"versionContent" defaultValue:@""] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"更新", nil];
+                [alertView show];
+            }
+        }
+    }];
+}
+
 #pragma mark- UITableViewDataSource/Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -61,6 +84,27 @@
         cell.textLabel.text = @"欢迎页";
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        [self checkUpdate];
+    }else if (indexPath.row == 1) {
+        GuideViewController *gv = [[GuideViewController alloc] init];
+        gv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self.tabBarController presentViewController:gv animated:YES completion:NULL];
+    }
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        if (downLoadUrl && downLoadUrl.length > 0) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:downLoadUrl]];
+        }
+    }
 }
 
 @end

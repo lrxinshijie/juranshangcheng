@@ -11,6 +11,7 @@
 #import "JRDemand.h"
 #import "JRDesigner.h"
 #import "PublishDesignViewController.h"
+#import "ZoomInImageView.h"
 
 #define kStatusBGImageViewTag 2933
 
@@ -32,7 +33,7 @@
 
 @property (nonatomic, strong) IBOutlet UIView *demandAddressView;
 @property (nonatomic, strong) IBOutlet UILabel *demandAddressLabel;
-@property (nonatomic, strong) IBOutlet UIImageView *roomTypeImageView;
+@property (nonatomic, strong) IBOutlet ZoomInImageView *roomTypeImageView;
 
 @property (nonatomic, strong) IBOutlet UILabel *demandDescribeLabel;
 @property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
@@ -111,7 +112,7 @@
 }
 
 - (void)reSetData{
-    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, _demand.roomType, [NSString stringWithFormat:@"￥%d", (NSInteger)_demand.renovationBudget/100], [_demand statusString], [NSString stringWithFormat:@"%d平方米", _demand.houseArea], [_demand renovationStyleString], _demand.postDate, _demand.deadline, @""];
+    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, _demand.roomType, [NSString stringWithFormat:@"%d万元", (NSInteger)_demand.renovationBudget], [_demand statusString], [NSString stringWithFormat:@"%d平方米", _demand.houseArea], [_demand renovationStyleString], _demand.postDate, _demand.deadline, @""];
 }
 
 - (void)setupUI{
@@ -119,19 +120,24 @@
     _scrollView.pagingEnabled = YES;
     [self.view addSubview:_scrollView];
     
-    self.designerTableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.designerTableView = [self.view tableViewWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeightWithoutNavigationBar - 55) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _designerTableView.backgroundColor = RGBColor(241, 241, 241);
     _designerTableView.tableFooterView = [[UIView alloc] init];
     _designerTableView.tableHeaderView = _designerTableHeaderView;
     _designerTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_scrollView addSubview:_designerTableView];
     
-    CGRect frame = kContentFrameWithoutNavigationBar;
-    frame.origin.y = CGRectGetMaxY(_designerTableView.frame);
+    CGRect frame = _demandInfoTableHeaderView.frame;
+    frame.origin = CGPointMake(0, CGRectGetMaxY(_designerTableView.frame));
+    _demandInfoTableHeaderView.frame = frame;
+    [_scrollView addSubview:_demandInfoTableHeaderView];
+    _demandInfoTableHeaderView.backgroundColor = RGBColor(241, 241, 241);
+    
+    frame = kContentFrameWithoutNavigationBar;
+    frame.origin.y = kWindowHeightWithoutNavigationBar;
     self.demandInfoTableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _demandInfoTableView.backgroundColor = RGBColor(241, 241, 241);
     _demandInfoTableView.tableFooterView = [[UIView alloc] init];
-    _demandInfoTableView.tableHeaderView = _demandInfoTableHeaderView;
     [_scrollView addSubview:_demandInfoTableView];
     
     _scrollView.contentSize = CGSizeMake(kWindowWidth, 2*kWindowHeightWithoutNavigationBar);

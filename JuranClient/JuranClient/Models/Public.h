@@ -89,4 +89,8 @@
 + (void)addSearchHistory:(NSString*)keyword;
 + (void)removeAllSearchHistory;
 
+//计算中文字符的长度
++ (NSInteger)convertToInt:(NSString*)strtemp;
++ (NSString*)formatString:(NSString*)string maxLength:(NSInteger)maxLength;
+
 @end

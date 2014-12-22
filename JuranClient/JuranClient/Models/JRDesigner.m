@@ -205,6 +205,7 @@
     }else{
         name = _account;
     }
+    name = [Public formatString:name maxLength:12];
     return name;
 }
 

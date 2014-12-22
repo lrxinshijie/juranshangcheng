@@ -7,7 +7,7 @@
 //
 
 #import "AnswerDetailCell.h"
-
+#import "ZoomInImageView.h"
 
 @interface AnswerDetailCell()
 {
@@ -17,7 +17,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *timeLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *headImageView;
 @property (nonatomic, strong) IBOutlet UIImageView *flagImageView;
-@property (nonatomic, strong) IBOutlet UIImageView *contentImageView;
+@property (nonatomic, strong) IBOutlet ZoomInImageView *contentImageView;
 @property (nonatomic, strong) IBOutlet UILabel *contentLabel;
 @property (nonatomic, strong) IBOutlet UIButton *acceptButton;
 @property (nonatomic, strong) IBOutlet UIView *bgView;
