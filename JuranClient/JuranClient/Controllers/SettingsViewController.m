@@ -53,7 +53,7 @@
     keysForOthers = @[@"问题反馈", @"版本信息", @"给我打分"];//, @"其他APP推荐"
     
     intelligentMode = [Public intelligentModeForImageQuality];
-    imageQuality = [Public imageQuality];
+    imageQuality = [DefaultData sharedData].imageQuality;
     
     _intelligentModeSwitch = [[UISwitch alloc] init];
     _intelligentModeSwitch.on = intelligentMode.integerValue;
@@ -178,7 +178,7 @@
         }else if (indexPath.row == 2){
             imageQuality = @0;
         }
-        [Public setImageQuality:imageQuality];
+        [[DefaultData sharedData] setImageQuality:imageQuality];
         [_tableView reloadData];
     }else if (indexPath.section == 1) {
         

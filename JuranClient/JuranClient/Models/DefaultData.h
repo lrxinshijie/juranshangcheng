@@ -21,4 +21,7 @@
 
 - (id)objectForKey:(NSString *)key;
 
+- (NSNumber *)imageQuality;
+- (void)setImageQuality:(NSNumber *)imageQuality;
+
 @end

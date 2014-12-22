@@ -12,7 +12,11 @@
 @implementation UIImageView (Download)
 
 - (void)setImageWithURLString:(NSString *)url{
-    NSURL *URL = [Public imageURL:url Width:CGRectGetWidth(self.frame)*2 Height:CGRectGetHeight(self.frame)*2];
+    NSInteger scale = 2;
+    if ([[DefaultData sharedData].imageQuality integerValue] == 0) {
+        scale = 1;
+    }
+    NSURL *URL = [Public imageURL:url Width:CGRectGetWidth(self.frame)*scale Height:CGRectGetHeight(self.frame)*scale];
     [self setImageWithURL:URL placeholderImage:self.image];
 }
 

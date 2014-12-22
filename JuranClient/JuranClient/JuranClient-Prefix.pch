@@ -24,6 +24,7 @@
     #import "JRUser.h"
     #import "UIViewController+Login.h"
     #import "MJRefresh.h"
-    #import "UIImageView+Download.h"
     #import "DefaultData.h"
+    #import "UIImageView+Download.h"
+
 #endif

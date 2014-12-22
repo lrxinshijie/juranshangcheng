@@ -8,7 +8,9 @@
 
 #import "DefaultData.h"
 
-@interface DefaultData ()
+@interface DefaultData (){
+    NSNumber *_imageQuality;
+}
 
 @property (nonatomic, strong) NSDictionary *defaultData;
 
@@ -57,6 +59,19 @@
 
 - (NSArray *)bathroomCount{
     return [_defaultData objectForKey:@"bathroomCount"];
+}
+
+- (NSNumber *)imageQuality{
+    if (!_imageQuality) {
+        _imageQuality = [Public imageQuality];
+    }
+    
+    return _imageQuality;
+}
+
+- (void)setImageQuality:(NSNumber *)imageQuality{
+    _imageQuality = imageQuality;
+    [Public setImageQuality:imageQuality];
 }
 
 @end
