@@ -64,7 +64,6 @@
 
 typedef void (^BOOLBlock)(BOOL result);
 typedef void (^VoidBlock)(void);
-typedef void (^AddressSelected)(id data);
 
 typedef enum : NSUInteger {
     FilterViewTypeCase,

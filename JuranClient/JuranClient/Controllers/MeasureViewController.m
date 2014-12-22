@@ -256,11 +256,9 @@
 
 - (void)editAddress{
     BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
-    [vc setAreaInfo:_areaInfo andAddressSelected:^(id data) {
-        if (data && [data isKindOfClass:[JRAreaInfo class]]) {
-            self.areaInfo = data;
-            [_tableView reloadData];
-        }
+    [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
+        self.areaInfo = areaInfo;
+        [_tableView reloadData];
     }];
     [self.navigationController pushViewController:vc animated:YES];
 }

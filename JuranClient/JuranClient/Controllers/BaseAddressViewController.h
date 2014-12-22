@@ -8,14 +8,14 @@
 
 #import "ALViewController.h"
 
-//@class JRMemberDetail;
 @class JRAreaInfo;
+
+typedef void (^AddressSelected)(JRAreaInfo *areaInfo);
 
 @interface BaseAddressViewController : ALViewController
 
-//@property (nonatomic, strong) JRMemberDetail *memberDetail;
 @property (nonatomic, copy) AddressSelected block;
 
-- (void)setAreaInfo:(JRAreaInfo *)areaInfo andAddressSelected:(AddressSelected)finish;
+- (void)setFinishBlock:(AddressSelected)finished;
 
 @end

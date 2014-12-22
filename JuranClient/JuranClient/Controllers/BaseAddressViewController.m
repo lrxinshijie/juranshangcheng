@@ -39,7 +39,7 @@
 //    _areaInfo.cityCode = @"";
 //    _areaInfo.districtCode = @"";
     
-    _areaInfo = [[JRAreaInfo alloc] init];
+    self.areaInfo = [[JRAreaInfo alloc] init];
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
@@ -102,17 +102,16 @@
     }];
 }*/
 
-
-- (void)setAreaInfo:(JRAreaInfo *)areaInfo andAddressSelected:(AddressSelected)finish{
-    _areaInfo = areaInfo;
-    _block = finish;
+- (void)setFinishBlock:(AddressSelected)finished{
+    self.block = finished;
 }
 
 - (void)commit{
     if (_block) {
-        [self.navigationController popViewControllerAnimated:YES];
         _block(_areaInfo);
     }
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)parseProvince:(NSDictionary*)dic{

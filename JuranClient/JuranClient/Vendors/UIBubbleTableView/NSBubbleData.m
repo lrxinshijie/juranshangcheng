@@ -39,8 +39,8 @@
 
 #pragma mark - Text bubble
 
-const UIEdgeInsets textInsetsMine = {8, 10, 11, 17};
-const UIEdgeInsets textInsetsSomeone = {8, 15, 11, 10};
+const UIEdgeInsets textInsetsMine = {5, 10, 5, 17};
+const UIEdgeInsets textInsetsSomeone = {5, 15, 5, 10};
 
 + (id)dataWithText:(NSString *)text date:(NSDate *)date type:(NSBubbleType)type
 {

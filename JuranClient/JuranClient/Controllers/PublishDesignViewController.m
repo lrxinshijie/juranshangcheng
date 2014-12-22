@@ -227,9 +227,10 @@
     
     if (indexPath.row == 6) {
         BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
-        [vc setAreaInfo:_demand.areaInfo andAddressSelected:^(id data) {
-            
+        [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
+            _demand.areaInfo = areaInfo;
         }];
+        
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 7){

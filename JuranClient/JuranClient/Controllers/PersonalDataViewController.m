@@ -147,6 +147,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self loadData];
             });
+        }else{
+            [self hideHUD];
         }
     }];
 }
@@ -353,8 +355,7 @@
             case 3:
             {
                 BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
-                [vc setAreaInfo:_user.areaInfo andAddressSelected:^(id data) {
-                    JRAreaInfo *areaInfo = (JRAreaInfo*)data;
+                [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
                     param = @{@"areaInfo": @{@"provinceCode": areaInfo.provinceCode,
                                              @"cityCode": areaInfo.cityCode,
                                              @"districtCode": areaInfo.districtCode
