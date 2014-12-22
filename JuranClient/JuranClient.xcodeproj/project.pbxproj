@@ -105,6 +105,8 @@
 		14646DB21A3C76D000E5D6F6 /* BidDesignerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14646DB01A3C76D000E5D6F6 /* BidDesignerCell.xib */; };
 		14646DB61A3CA1A500E5D6F6 /* OldTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14646DB41A3CA1A500E5D6F6 /* OldTopicViewController.m */; };
 		14646DB71A3CA1A500E5D6F6 /* OldTopicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14646DB51A3CA1A500E5D6F6 /* OldTopicViewController.xib */; };
+		146CE9C51A47EB0700FAA87F /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 146CE9C31A47EB0700FAA87F /* TextFieldCell.m */; };
+		146CE9C61A47EB0700FAA87F /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */; };
 		1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */; };
 		1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */; };
 		1476DA8A1A21DAF30006E9E0 /* JRDesigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA891A21DAF30006E9E0 /* JRDesigner.m */; };
@@ -477,6 +479,9 @@
 		14646DB31A3CA1A500E5D6F6 /* OldTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldTopicViewController.h; sourceTree = "<group>"; };
 		14646DB41A3CA1A500E5D6F6 /* OldTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldTopicViewController.m; sourceTree = "<group>"; };
 		14646DB51A3CA1A500E5D6F6 /* OldTopicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OldTopicViewController.xib; sourceTree = "<group>"; };
+		146CE9C21A47EB0700FAA87F /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
+		146CE9C31A47EB0700FAA87F /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
+		146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		1476DA831A21DAC50006E9E0 /* DesignerDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DesignerDetailViewController.h; sourceTree = "<group>"; };
 		1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DesignerDetailViewController.m; sourceTree = "<group>"; };
 		1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DesignerDetailViewController.xib; sourceTree = "<group>"; };
@@ -1135,6 +1140,9 @@
 		A90459DA1A278D7E00F8CD74 /* Case */ = {
 			isa = PBXGroup;
 			children = (
+				146CE9C21A47EB0700FAA87F /* TextFieldCell.h */,
+				146CE9C31A47EB0700FAA87F /* TextFieldCell.m */,
+				146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */,
 				A987EE451A20986100CED7CD /* CaseViewController.h */,
 				A987EE461A20986100CED7CD /* CaseViewController.m */,
 				A987EE471A20986100CED7CD /* CaseViewController.xib */,
@@ -1852,10 +1860,10 @@
 				ORGANIZATIONNAME = Juran;
 				TargetAttributes = {
 					A971BC901A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = QHWR2FWBM6;
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = QHWR2FWBM6;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -1967,6 +1975,7 @@
 				14A3FDC21A2C9EB7002BEFF4 /* MyDemandViewController.xib in Resources */,
 				A9B4EB7A1A371F120091AAAF /* CaseCollectViewController.xib in Resources */,
 				14D973831A32CAE400E771ED /* AskDetailViewController.xib in Resources */,
+				146CE9C61A47EB0700FAA87F /* TextFieldCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2162,6 +2171,7 @@
 				A9A53B0C1A46FE7C008D75B8 /* NSBubbleData.m in Sources */,
 				A987EE571A2098BA00CED7CD /* ProfileViewController.m in Sources */,
 				A987EDFF1A20920500CED7CD /* GlobalPopupAlert.m in Sources */,
+				146CE9C51A47EB0700FAA87F /* TextFieldCell.m in Sources */,
 				14ABFBE91A25C7F400C4AF65 /* JRUser.m in Sources */,
 				1416C8B81A242FD100FA9999 /* CaseCollectionCell.m in Sources */,
 				A987EDEA1A20920500CED7CD /* UIDevice+ASCategory.m in Sources */,
@@ -2331,7 +2341,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "194df8ba-78eb-42aa-a27b-6365633e5d63";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2366,7 +2376,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "194df8ba-78eb-42aa-a27b-6365633e5d63";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
