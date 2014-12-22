@@ -37,9 +37,12 @@
     _imageView2.image = [UIImage imageNamed:bol ? @"guide_h_2" : @"guide_2"];
     _imageView3.image = [UIImage imageNamed:bol ? @"guide_h_3" : @"guide_3"];
     
-    _imageView1.frame = kContentFrame;
     
-    CGRect frame = _imageView2.frame;
+    CGRect frame = _imageView1.frame;
+    frame.size.height = kWindowHeight;
+    _imageView1.frame = frame;
+    
+    frame = _imageView2.frame;
     frame.size.height = kWindowHeight;
     _imageView2.frame = frame;
     
@@ -57,6 +60,7 @@
 }
 
 + (BOOL)showGuide{
+
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     if (![ud objectForKey:@"showGuide"] || [ud boolForKey:@"showGuide"]) {
         return YES;

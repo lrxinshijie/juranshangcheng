@@ -93,6 +93,8 @@
                 [self viewDidLoad];
                 [self viewWillAppear:YES];
             });
+        }else{
+            [super back:nil];
         }
     }];
 }
@@ -287,14 +289,11 @@
     [self.navigationController pushViewController:pv animated:YES];
 }
 
-#pragma mark -
-#pragma mark KTPhotoBrowserDataSource
+#pragma mark - KTPhotoBrowserDataSource
 
 - (NSInteger)numberOfPhotos {
     return _jrCase.detailImageList.count;
 }
-
-
 
 - (NSString*)titleAtIndex:(NSInteger)index{
     return _jrCase.desc;
