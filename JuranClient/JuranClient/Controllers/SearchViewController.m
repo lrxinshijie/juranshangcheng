@@ -293,7 +293,6 @@
         step = 3;
         [self reloadData];
     }
-    
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{

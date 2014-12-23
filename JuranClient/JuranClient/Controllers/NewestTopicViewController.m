@@ -57,22 +57,24 @@
     
     self.contentWebView.delegate = self;
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:_isOld?kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
     
-    CGRect frame = _bottomView.frame;
-    frame.origin.y = CGRectGetMaxY(_tableView.frame);
-    _bottomView.frame = frame;
-    [self.view addSubview:_bottomView];
-    
-    frame = _commentView.frame;
-    frame.origin.y = CGRectGetMaxY(_tableView.frame);
-    _commentView.frame = frame;
-    _commentView.hidden = YES;
-    [self.view addSubview:_commentView];
+    if (!_isOld) {
+        CGRect frame = _bottomView.frame;
+        frame.origin.y = CGRectGetMaxY(_tableView.frame);
+        _bottomView.frame = frame;
+        [self.view addSubview:_bottomView];
+        
+        frame = _commentView.frame;
+        frame.origin.y = CGRectGetMaxY(_tableView.frame);
+        _commentView.frame = frame;
+        _commentView.hidden = YES;
+        [self.view addSubview:_commentView];
+    }
     
     [self loadData];
 }
