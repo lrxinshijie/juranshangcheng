@@ -15,7 +15,9 @@
 #import "JRPhotoScrollViewController.h"
 #import "FilterView.h"
 
-@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate>
+@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate>{
+    CGFloat startOffsetY;
+}
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -214,6 +216,24 @@
     [cell fillCellWithCase:c];
     
     return cell;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    startOffsetY = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    CGFloat y = scrollView.contentOffset.y;
+    if (y > 0 && y < 44) {
+        [scrollView setContentOffset:CGPointMake(0, startOffsetY > y ? 0 : 44) animated:YES];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGFloat y = scrollView.contentOffset.y;
+    if (y > 0 && y < 44) {
+        [scrollView setContentOffset:CGPointMake(0, startOffsetY > y ? 0 : 44) animated:YES];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

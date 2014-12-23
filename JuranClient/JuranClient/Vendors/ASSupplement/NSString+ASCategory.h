@@ -31,4 +31,6 @@
 - (NSComparisonResult)compareToVersionString:(NSString *)version;
 
 - (NSString *)URLDecodedString;
+
+- (BOOL)isContainsEmoji;
 @end

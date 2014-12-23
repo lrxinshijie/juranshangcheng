@@ -118,6 +118,10 @@
 
 - (void)like:(void (^) (BOOL result))finished{
     if (self.isLike) {
+        if (finished) {
+            finished(NO);
+        }
+        
         [Public alertOK:nil Message:@"已经点过赞"];
         return;
     }
@@ -127,7 +131,10 @@
             self.isLike = YES;
             self.likeCount++;
         }
-        finished(!error);
+        if (finished) {
+            finished(!error);
+        }
+        
     }];
 }
 
@@ -143,7 +150,9 @@
         if (!error) {
             self.isFav = !_isFav;
         }
-        finished(!error);
+        if (finished) {
+            finished(!error);
+        }
     }];
 }
 
