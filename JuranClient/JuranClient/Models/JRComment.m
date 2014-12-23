@@ -38,7 +38,7 @@
             self.replyList = [JRComment buildUpWithValue:replyList];
         }
         
-        self.unfold = YES;
+        self.unfold = NO;
     }
     
     return self;
