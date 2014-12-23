@@ -13,7 +13,9 @@
 #import "QuestionCell.h"
 #import "QuestionDetailViewController.h"
 
-@interface QuestionViewController ()<UITableViewDataSource, UITableViewDelegate, QuestionFilterViewDelegate, NewQuestionViewControllerDelegate, QuestionDetailViewControllerDelegate>
+@interface QuestionViewController ()<UITableViewDataSource, UITableViewDelegate, QuestionFilterViewDelegate, NewQuestionViewControllerDelegate, QuestionDetailViewControllerDelegate, UIScrollViewDelegate>{
+    CGFloat startOffsetY;
+}
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -191,6 +193,24 @@
 
 - (void)valueChangedWithQuestionDetailViewController:(QuestionDetailViewController *)vc{
     [_tableView headerBeginRefreshing];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    startOffsetY = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    CGFloat y = scrollView.contentOffset.y;
+    if (y > 0 && y < 44) {
+        [scrollView setContentOffset:CGPointMake(0, startOffsetY > y ? 0 : 44) animated:YES];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGFloat y = scrollView.contentOffset.y;
+    if (y > 0 && y < 44) {
+        [scrollView setContentOffset:CGPointMake(0, startOffsetY > y ? 0 : 44) animated:YES];
+    }
 }
 
 @end

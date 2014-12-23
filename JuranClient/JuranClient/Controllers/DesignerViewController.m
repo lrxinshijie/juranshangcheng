@@ -14,7 +14,9 @@
 #import "JRWebImageDataSource.h"
 #import "FilterView.h"
 
-@interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate>
+@interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate, UIScrollViewDelegate>{
+    CGFloat startOffsetY;
+}
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -171,6 +173,24 @@
     detailVC.designer = _datas[indexPath.row];
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    startOffsetY = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    CGFloat y = scrollView.contentOffset.y;
+    if (y > 0 && y < 44) {
+        [scrollView setContentOffset:CGPointMake(0, startOffsetY > y ? 0 : 44) animated:YES];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGFloat y = scrollView.contentOffset.y;
+    if (y > 0 && y < 44) {
+        [scrollView setContentOffset:CGPointMake(0, startOffsetY > y ? 0 : 44) animated:YES];
+    }
 }
 
 @end
