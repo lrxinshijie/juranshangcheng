@@ -246,6 +246,10 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isContainsEmoji]) {
+        return NO;
+    }
+    
     NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (textField.tag == 1 && value.length > kPhoneMaxNumber) {
         return NO;

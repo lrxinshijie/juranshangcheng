@@ -180,6 +180,10 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isContainsEmoji]) {
+        return NO;
+    }
+    
     NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if ([textField isEqual:_accountTextField] && value.length > kAccountMaxNumber) {
         return NO;

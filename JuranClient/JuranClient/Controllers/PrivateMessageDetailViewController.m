@@ -115,6 +115,13 @@
     return YES;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isContainsEmoji]) {
+        return NO;
+    }
+    return YES;
+}
+
 - (void)keyboardWillShow:(NSNotification *)notification{
     NSDictionary *info = [notification userInfo];
     NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];

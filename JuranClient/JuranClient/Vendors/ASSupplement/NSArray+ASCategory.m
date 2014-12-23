@@ -21,10 +21,10 @@
 - (id)objectAtTheIndex:(NSUInteger)index
 {
     if (![self isKindOfClass:[NSArray class]]) {
-        ASLog(@"%@ is not array type", NSStringFromClass([self class]));
+//        ASLog(@"%@ is not array type", NSStringFromClass([self class]));
         return nil;
     } else if (index >= self.count) {
-        ASLog(@"index (%d) beyond bounds (%d)", index, self.count);
+//        ASLog(@"index (%d) beyond bounds (%d)", index, self.count);
 //        [NSException raise:NSRangeException format:@"*** -[%@ %@]: index (%lu) beyond bounds (%lu)", NSStringFromClass([self class]), NSStringFromSelector(_cmd), (unsigned long)index, (unsigned long)self.count];
         return nil;
     } else {
