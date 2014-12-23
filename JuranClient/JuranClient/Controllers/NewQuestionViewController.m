@@ -11,7 +11,7 @@
 #import "ALGetPhoto.h"
 #import "CanRemoveImageView.h"
 
-@interface NewQuestionViewController ()<UITableViewDataSource, UITableViewDelegate, CanRemoveImageViewDelegate>
+@interface NewQuestionViewController ()<UITableViewDataSource, UITableViewDelegate, CanRemoveImageViewDelegate, UITextViewDelegate, UITextFieldDelegate>
 {
     NSInteger step;
     NSArray *typeKeys;
@@ -202,5 +202,20 @@
     }
 }
 
+#pragma mark - UITextField/View Delegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isContainsEmoji]) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isContainsEmoji]) {
+        return NO;
+    }
+    return YES;
+}
 
 @end

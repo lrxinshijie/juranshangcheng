@@ -8,7 +8,7 @@
 
 #import "ModifyPasswordViewController.h"
 
-@interface ModifyPasswordViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface ModifyPasswordViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UITextField *oldPsdTextField;
@@ -32,16 +32,19 @@
 
 - (void)setupUI{
     _oldPsdTextField = [self.view textFieldWithFrame:CGRectMake(0, 0, kWindowWidth -30, 30) borderStyle:UITextBorderStyleNone backgroundColor:[UIColor whiteColor] text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
+    _oldPsdTextField.delegate = self;
     _oldPsdTextField.placeholder = @"当前密码";
     _oldPsdTextField.secureTextEntry = YES;
     _oldPsdTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     _newsPsdTextField = [self.view textFieldWithFrame:CGRectMake(0, 0, kWindowWidth -30, 30) borderStyle:UITextBorderStyleNone backgroundColor:[UIColor whiteColor] text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
+    _newsPsdTextField.delegate = self;
     _newsPsdTextField.placeholder = @"新密码";
     _newsPsdTextField.secureTextEntry = YES;
     _newsPsdTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     _verifyPsdTextField = [self.view textFieldWithFrame:CGRectMake(0, 0, kWindowWidth -30, 30) borderStyle:UITextBorderStyleNone backgroundColor:[UIColor whiteColor] text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
+    _verifyPsdTextField.delegate = self;
     _verifyPsdTextField.placeholder = @"确认新密码";
     _verifyPsdTextField.secureTextEntry = YES;
     _verifyPsdTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -130,15 +133,13 @@
     return cell;
 }
 
+#pragma mark - UITextFieldDelegate
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isContainsEmoji]) {
+        return NO;
+    }
+    return YES;
 }
-*/
 
 @end

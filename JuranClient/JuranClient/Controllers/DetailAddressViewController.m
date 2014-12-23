@@ -65,8 +65,12 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isContainsEmoji]) {
+        return NO;
+    }
+    
     NSString * toBeString = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    if (toBeString.length >= 120) {
+    if ([Public convertToInt:toBeString] >= 60) {
         [self showTip:@"输入地址长度不能超过60!"];
         return NO;
     }

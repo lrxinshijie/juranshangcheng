@@ -47,7 +47,7 @@
 
 - (void)checkUpdate{
     
-    NSDictionary *param = @{@"type": @"ios",
+    NSDictionary *param = @{@"type": @"IOS",
                             @"versionNo":[Public versionString]};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_VERSION parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
