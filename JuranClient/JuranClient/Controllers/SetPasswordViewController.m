@@ -44,6 +44,12 @@
         [self showTip:@"密码不能为空"];
         return;
     }
+    
+    if (password.length < 6 || confirm.length < 6) {
+        [self showTip:@"密码不能少于6位"];
+        return;
+    }
+    
     if (![password isEqualToString:confirm]) {
         [self showTip:@"两次密码不一致"];
         return;

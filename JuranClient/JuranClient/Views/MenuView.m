@@ -15,7 +15,7 @@
 
 static CGFloat kAnimateDuration = 0.25f;
 
-@interface MenuView () <UITableViewDataSource, UITableViewDelegate>
+@interface MenuView () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *titles;
@@ -59,6 +59,8 @@ static CGFloat kAnimateDuration = 0.25f;
         swipt.direction = UISwipeGestureRecognizerDirectionLeft;
         [self addGestureRecognizer:swipt];
         
+        [self addTapGestureRecognizerWithTarget:self action:@selector(hideMenu) delegate:self];
+        
         self.tableView = [self tableViewWithFrame:CGRectMake(0, 0, 220, kWindowHeightWithoutNavigationBar) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
         _tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:.8];
         _tableView.bounces = NO;
@@ -67,6 +69,15 @@ static CGFloat kAnimateDuration = 0.25f;
     }
     
     return self;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    ASLog(@"class:%@",[touch.view class])
+    if ([touch.view isKindOfClass:[MenuView class]]) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 

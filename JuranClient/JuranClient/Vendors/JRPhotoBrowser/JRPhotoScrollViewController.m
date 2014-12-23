@@ -250,7 +250,9 @@
         return;
     }
     
+    [self showHUD];
     [_jrCase like:^(BOOL result) {
+        [self hideHUD];
         if (result) {
             [self showTip:@"点赞成功"];
         }
@@ -262,7 +264,9 @@
         return;
     }
     
+    [self showHUD];
     [_jrCase favorite:^(BOOL result) {
+        [self hideHUD];
         if (result) {
             _favImageView.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
         }

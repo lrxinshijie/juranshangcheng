@@ -55,7 +55,11 @@
 }
 
 - (void)showMenu{
-    [[MenuView sharedView] showMenu];
+    if ([[MenuView sharedView] superview]) {
+        [self hideMenu];
+    }else{
+        [[MenuView sharedView] showMenu];
+    }
 }
 
 - (void)hideMenu{

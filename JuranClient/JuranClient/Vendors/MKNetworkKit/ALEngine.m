@@ -11,6 +11,7 @@
 #import "NSDictionary+ASCategory.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
+#import "UIAlertView+Blocks.h"
 
 @interface ALEngine ()
 
