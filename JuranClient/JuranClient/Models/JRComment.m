@@ -26,8 +26,12 @@
         self.commentTime = [dict getStringValueForKey:@"commentTime" defaultValue:@""];
         self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
         self.userType = [dict getStringValueForKey:@"userType" defaultValue:@""];
-        
-        
+        id obj = dict[@"imageUrlList"];
+        if ([obj isKindOfClass:[NSArray class]]) {
+            self.imageUrlList = (NSArray*)obj;
+        }else{
+            self.imageUrlList = @[];
+        }
         
         self.replyId = [dict getIntValueForKey:@"replyId" defaultValue:0];
         self.replyContent = [dict getStringValueForKey:@"replyContent" defaultValue:@""];

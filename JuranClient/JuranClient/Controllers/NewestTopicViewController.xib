@@ -8,10 +8,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewestTopicViewController">
             <connections>
                 <outlet property="bottomView" destination="Pwg-Fp-k3R" id="M1A-kk-Pw4"/>
+                <outlet property="chooseImageButtonView" destination="rZH-J8-Zzs" id="lYt-0v-6in"/>
                 <outlet property="commentCountLabel" destination="dH1-bH-Y5m" id="vi9-gi-Jhf"/>
-                <outlet property="commentTextField" destination="e4b-wP-FHA" id="ju1-NG-s4G"/>
-                <outlet property="commentView" destination="XHb-Cr-83b" id="jKM-5V-KlH"/>
+                <outlet property="commentImageView" destination="Rbx-Tt-qc3" id="tOf-cP-N31"/>
+                <outlet property="commentTextField" destination="Cjl-Zl-f7N" id="PH6-Kh-QDQ"/>
+                <outlet property="commentView" destination="3au-No-JLt" id="Ozd-Jp-fzI"/>
                 <outlet property="contentWebView" destination="yhK-hq-tjb" id="iFh-fz-0cn"/>
+                <outlet property="fileImageCountLabel" destination="mA0-Qi-7cu" id="yRS-Xz-drJ"/>
                 <outlet property="headerView" destination="t43-hW-djg" id="hdS-bg-Jr0"/>
                 <outlet property="tableHeaderView" destination="FKs-2z-9fY" id="Gxy-5f-zx3"/>
                 <outlet property="timeLabel" destination="x6r-o0-ddZ" id="uer-Iq-4yc"/>
@@ -70,7 +73,7 @@
                 <view contentMode="scaleToFill" id="yhK-hq-tjb" customClass="ALWebView">
                     <rect key="frame" x="0.0" y="56" width="320" height="282"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.93333339691162109" green="0.93333339691162109" blue="0.93333339691162109" alpha="1" colorSpace="deviceRGB"/>
@@ -92,42 +95,6 @@
             <color key="backgroundColor" red="0.93333339691162109" green="0.93333339691162109" blue="0.93333339691162109" alpha="1" colorSpace="deviceRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="500" y="265.5"/>
-        </view>
-        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="XHb-Cr-83b">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
-            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case-detail-text" id="M8M-yo-bXf">
-                    <rect key="frame" x="8" y="5" width="240" height="39"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="r7V-58-CPO">
-                    <rect key="frame" x="253" y="5" width="62" height="39"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="发送" backgroundImage="case-detail-send">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="onSend:" destination="-1" eventType="touchUpInside" id="ior-B9-vtk"/>
-                    </connections>
-                </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="写评论" minimumFontSize="17" id="e4b-wP-FHA">
-                    <rect key="frame" x="50" y="10" width="190" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="send"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="XsA-jy-Acu"/>
-                    </connections>
-                </textField>
-            </subviews>
-            <color key="backgroundColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-            <nil key="simulatedStatusBarMetrics"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="493" y="349.5"/>
         </view>
         <view autoresizesSubviews="NO" contentMode="scaleToFill" id="Pwg-Fp-k3R">
             <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -168,15 +135,133 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="493" y="443.5"/>
+            <point key="canvasLocation" x="493" y="437.5"/>
+        </view>
+        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="3au-No-JLt">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="f5K-i2-irx">
+                    <rect key="frame" x="253" y="5" width="62" height="39"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="发送" backgroundImage="case-detail-send">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onSend:" destination="-1" eventType="touchUpInside" id="jDe-He-q86"/>
+                    </connections>
+                </button>
+                <view tag="2201" contentMode="scaleToFill" id="H8p-83-OnR">
+                    <rect key="frame" x="48" y="5" width="200" height="39"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="写评论" minimumFontSize="17" id="Cjl-Zl-f7N">
+                            <rect key="frame" x="8" y="5" width="184" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="RKp-Sq-zVJ"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" tag="2200" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nU0-h9-iaP">
+                    <rect key="frame" x="8" y="8" width="32" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" image="icon_camera3">
+                        <color key="titleColor" red="0.17254902420000001" green="0.4274510145" blue="0.7019608021" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onShowCommentImageView:" destination="-1" eventType="touchUpInside" id="Xgj-94-rH8"/>
+                    </connections>
+                </button>
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mA0-Qi-7cu">
+                    <rect key="frame" x="31" y="1" width="19" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.90196084980000002" green="0.9215686917" blue="0.93725496529999996" alpha="1" colorSpace="deviceRGB"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="500" y="353.5"/>
+        </view>
+        <view contentMode="scaleToFill" id="Rbx-Tt-qc3">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="rZH-J8-Zzs">
+                    <rect key="frame" x="15" y="20" width="142" height="65"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bZy-3f-sDl">
+                            <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="picker_bg">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onChooseImageWithCamera:" destination="-1" eventType="touchUpInside" id="5U4-rf-ncr"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_ camera" id="Nig-8K-PAt">
+                            <rect key="frame" x="17" y="14" width="30" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拍照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dmI-Jx-u0g">
+                            <rect key="frame" x="17" y="42" width="30" height="14"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dyk-HM-jEX">
+                            <rect key="frame" x="75" y="0.0" width="65" height="65"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="picker_bg">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onChooseImageWithPhoto:" destination="-1" eventType="touchUpInside" id="Jlo-GH-pNs"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_image1" id="Ut9-4z-kAu">
+                            <rect key="frame" x="92" y="14" width="30" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图片" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iZi-t7-cb4">
+                            <rect key="frame" x="92" y="42" width="30" height="14"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.8666666666666667" green="0.8901960784313725" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="493" y="589"/>
         </view>
     </objects>
     <resources>
         <image name="case-detail-send" width="62" height="39"/>
-        <image name="case-detail-text" width="242" height="39"/>
         <image name="case-icon-comment" width="22" height="21"/>
+        <image name="icon_ camera" width="29" height="26"/>
+        <image name="icon_camera3" width="16" height="14"/>
+        <image name="icon_image1" width="29" height="24"/>
         <image name="look_count" width="17" height="10"/>
         <image name="menu_icon_fenxiang" width="17" height="19"/>
+        <image name="picker_bg" width="65" height="65"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -14,6 +14,7 @@ typedef void (^ImagesBlock)(NSArray *images);
 
 + (ALGetPhoto *)sharedPhoto;
 
+- (void)showInViewController:(UIViewController *)viewController sourceType:(UIImagePickerControllerSourceType)sourceType allowsEditing:(BOOL)editing MaxNumber:(NSInteger)maxNumber  Handler:(ImagesBlock)block;
 - (void)showInViewController:(UIViewController *)viewController allowsEditing:(BOOL)editing MaxNumber:(NSInteger)maxNumber Handler:(ImagesBlock)block;
 
 @end

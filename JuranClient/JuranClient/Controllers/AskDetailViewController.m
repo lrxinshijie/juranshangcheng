@@ -227,16 +227,31 @@
     _answerImageView.hidden = NO;
 }
 
-- (IBAction)onChooseImage:(id)sender{
-    [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+- (IBAction)onChooseImageWithPhoto:(id)sender{
+    [[ALGetPhoto sharedPhoto] showInViewController:self sourceType:UIImagePickerControllerSourceTypePhotoLibrary allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
         _chooseImageView.hidden = YES;
         fileImage = images.firstObject;
-        CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:_chooseImageView.frame];
+        
+        CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:CGRectMake(25, 15, 80, 120)];
         imageView.delegate = self;
         [imageView setImage:images[0]];
         [_answerImageView addSubview:imageView];
     }];
 }
+
+
+- (IBAction)onChooseImageWithCamera:(id)sender{
+    [[ALGetPhoto sharedPhoto] showInViewController:self sourceType:UIImagePickerControllerSourceTypeCamera allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+        _chooseImageView.hidden = YES;
+        fileImage = images.firstObject;
+        
+        CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:CGRectMake(25, 15, 80, 120)];
+        imageView.delegate = self;
+        [imageView setImage:images[0]];
+        [_answerImageView addSubview:imageView];
+    }];
+}
+
 
 - (IBAction)onSend:(id)sender{
     if (!(_answerTextField.text && _answerTextField.text.length > 0))
