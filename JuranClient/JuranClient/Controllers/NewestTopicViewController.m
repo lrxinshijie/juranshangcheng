@@ -42,7 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    if (_topic) {
+    if (_isOld) {
         self.navigationItem.title = _topic.theme.length>0?_topic.theme:_topic.title;
     }else{
         self.navigationItem.title = @"最新话题";
@@ -80,7 +80,7 @@
 - (void)loadData{
     [self showHUD];
     NSDictionary *param = nil;
-    if (_topic) {
+    if (_isOld) {
         param = @{@"topicId": _topic.topicId};
     }else{
         param = @{};

@@ -238,7 +238,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 #pragma mark -
 #pragma mark Frame calculations
-#define PADDING  20
+#define PADDING  0
 
 - (CGRect)frameForPagingScrollView
 {

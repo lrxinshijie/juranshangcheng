@@ -114,7 +114,7 @@
     CGRect lastImageFrame = [self frameForPageAtIndex:[self numberOfPhotos] - 1];
     CGSize contentSize = scrollView_.contentSize;
     CGFloat y = lastImageFrame.origin.y + lastImageFrame.size.height/2;
-    CGRect frame = CGRectMake(contentSize.width-10, y, 80, 20);
+    CGRect frame = CGRectMake(contentSize.width, y, 80, 20);
     self.lastPageLabel.frame = frame;
 }
 
