@@ -26,6 +26,8 @@
 @property (nonatomic, assign) NSInteger replyId;
 @property (nonatomic, assign) BOOL unfold;
 
+@property (nonatomic, strong) NSArray *imageUrlList;
+
 + (NSMutableArray *)buildUpWithValue:(id)value;;
 
 @end

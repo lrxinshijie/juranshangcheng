@@ -10,7 +10,7 @@
 #import "ALGetPhoto.h"
 #import "CanRemoveImageView.h"
 
-@interface FeedBackViewController ()<CanRemoveImageViewDelegate>
+@interface FeedBackViewController ()<CanRemoveImageViewDelegate, UITextViewDelegate>
 {
     UIImage *fileImage;
 }
@@ -124,6 +124,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UITextViewDelegate
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isContainsEmoji]) {
+        return NO;
+    }
+    return YES;
+}
 
 @end

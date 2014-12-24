@@ -8,7 +8,7 @@
 
 #import "BindPhoneNumberViewController.h"
 
-@interface BindPhoneNumberViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface BindPhoneNumberViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     //1为解绑手机  2为绑定新手机
     NSInteger step;
@@ -64,6 +64,7 @@
 
 - (void)setupUI{
     _captchaTextField = [self.view textFieldWithFrame:CGRectMake(0, 0, kWindowWidth -30, 30) borderStyle:UITextBorderStyleNone backgroundColor:[UIColor whiteColor] text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
+    _captchaTextField.delegate = self;
     _captchaTextField.placeholder = @"请输入手机短信中的验证码";
     _captchaTextField.keyboardType = UIKeyboardTypeNumberPad;
     _captchaTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -242,6 +243,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UITextFieldDelegate
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isContainsEmoji]) {
+        return NO;
+    }
+    return YES;
+}
 
 @end

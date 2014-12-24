@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AskDetailViewController">
             <connections>
-                <outlet property="answerImageView" destination="x6z-B1-ReH" id="9cI-MK-TN3"/>
+                <outlet property="answerImageView" destination="f5e-Qu-bdk" id="PJC-i4-uhv"/>
                 <outlet property="answerTextField" destination="akh-VV-nGL" id="e7Y-aJ-t0U"/>
                 <outlet property="answerView" destination="tiy-hd-yce" id="g2S-dY-XqF"/>
-                <outlet property="chooseImageView" destination="wrl-zb-tb7" id="R8x-we-GrI"/>
+                <outlet property="chooseImageView" destination="Q1V-6V-TWn" id="zbr-Z3-Z4i"/>
                 <outlet property="contentLabel" destination="w6o-Cx-mgs" id="GEH-c5-tDF"/>
                 <outlet property="headerView" destination="zyT-fC-cYY" id="QIn-gr-kXd"/>
                 <outlet property="timeAndTypeBgView" destination="gcJ-Ao-JfR" id="LRi-v8-Xmk"/>
@@ -114,49 +114,69 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="513" y="-408.5"/>
         </view>
-        <view contentMode="scaleToFill" id="x6z-B1-ReH">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+        <view contentMode="scaleToFill" id="f5e-Qu-bdk">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view autoresizesSubviews="NO" contentMode="scaleToFill" id="wrl-zb-tb7">
-                    <rect key="frame" x="18" y="17" width="65" height="65"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view contentMode="scaleToFill" id="Q1V-6V-TWn">
+                    <rect key="frame" x="15" y="20" width="142" height="65"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HKR-ql-Z5r">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Fev-Ox-ujP">
                             <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.94901967050000002" green="0.95294123890000004" blue="0.96078437569999997" alpha="1" colorSpace="deviceRGB"/>
-                            <state key="normal">
+                            <state key="normal" backgroundImage="picker_bg">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="onChooseImage:" destination="-1" eventType="touchUpInside" id="kFL-yA-imr"/>
+                                <action selector="onChooseImageWithCamera:" destination="-1" eventType="touchUpInside" id="mlZ-fb-gjc"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_ camera" id="oyE-cS-B3O">
-                            <rect key="frame" x="18" y="11" width="29" height="26"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_ camera" id="NAb-vd-RAB">
+                            <rect key="frame" x="17" y="14" width="30" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择图片" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lMa-JO-48v">
-                            <rect key="frame" x="11" y="40" width="42" height="15"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拍照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="chD-zn-ET2">
+                            <rect key="frame" x="17" y="42" width="30" height="14"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ne0-Wb-SB9">
+                            <rect key="frame" x="75" y="0.0" width="65" height="65"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="picker_bg">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onChooseImageWithPhoto:" destination="-1" eventType="touchUpInside" id="FRq-de-wfE"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_image1" id="ddC-Fu-qeG">
+                            <rect key="frame" x="92" y="14" width="30" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图片" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a1m-3w-5IW">
+                            <rect key="frame" x="92" y="42" width="30" height="14"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.86666666670000003" green="0.89019607840000003" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="600" y="-2"/>
+            <point key="canvasLocation" x="600" y="-206"/>
         </view>
     </objects>
     <resources>
         <image name="case-detail-send" width="62" height="39"/>
         <image name="icon_ camera" width="29" height="26"/>
         <image name="icon_camera3" width="16" height="14"/>
+        <image name="icon_image1" width="29" height="24"/>
+        <image name="picker_bg" width="65" height="65"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

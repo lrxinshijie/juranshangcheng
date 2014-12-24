@@ -12,8 +12,11 @@
 #import "JRTopic.h"
 #import "JRComment.h"
 #import "ALWebView.h"
+#import "ALGetPhoto.h"
+#import "CanRemoveImageView.h"
 
-@interface NewestTopicViewController ()<UITableViewDataSource, UITableViewDelegate, CommentCellDelegate, UITextFieldDelegate, ALWebViewDelegate>
+
+@interface NewestTopicViewController ()<UITableViewDataSource, UITableViewDelegate, CommentCellDelegate, UITextFieldDelegate, ALWebViewDelegate, CanRemoveImageViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -29,7 +32,13 @@
 @property (nonatomic, strong) IBOutlet UIView *bottomView;
 @property (nonatomic, strong) IBOutlet ALWebView *contentWebView;
 
+@property (nonatomic, strong) IBOutlet UIView *commentImageView;
+@property (nonatomic, strong) IBOutlet UIView *chooseImageButtonView;
+
 @property (nonatomic, strong) JRComment *selectComment;
+@property (nonatomic, strong) UIImage *fileImage;
+@property (nonatomic, strong) NSString *comment;
+@property (nonatomic, strong) IBOutlet UILabel *fileImageCountLabel;
 
 @end
 
@@ -57,12 +66,20 @@
     
     self.contentWebView.delegate = self;
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:_isOld?kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
+        
+    if (!_isOld) {
+        [self setupCommentView];
+    }
     
+    [self loadData];
+}
+
+- (void)setupCommentView{
     CGRect frame = _bottomView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _bottomView.frame = frame;
@@ -74,7 +91,27 @@
     _commentView.hidden = YES;
     [self.view addSubview:_commentView];
     
-    [self loadData];
+    UIView *view = [_commentView viewWithTag:2200];
+    view.layer.cornerRadius = view.frame.size.height/2;
+    view.layer.borderWidth = 1;
+    view.layer.borderColor = RGBColor(151, 161, 166).CGColor;
+    
+    view = [_commentView viewWithTag:2201];
+    view.layer.cornerRadius = 3;
+    view.layer.borderWidth = 1;
+    view.layer.borderColor = RGBColor(151, 161, 166).CGColor;
+    
+    frame = _commentImageView.frame;
+    frame.origin.y = kWindowHeightWithoutNavigationBar - CGRectGetHeight(_commentImageView.frame);
+    _commentImageView.frame = frame;
+    [self.view addSubview:_commentImageView];
+    _commentImageView.hidden = YES;
+    
+    _fileImageCountLabel.layer.masksToBounds = YES;
+    _fileImageCountLabel.layer.cornerRadius = CGRectGetWidth(_fileImageCountLabel.frame)/2.f;
+    
+    UIButton *btn = [_commentImageView buttonWithFrame:_commentImageView.bounds target:self action:@selector(onHiddenCommentImageView) image:nil];
+    [_commentImageView insertSubview:btn atIndex:0];
 }
 
 - (void)loadData{
@@ -137,29 +174,31 @@
     _tableView.tableHeaderView = _tableHeaderView;
 }
 
+- (void)uploadCommentImage{
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":_fileImage} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            [self submitComment:[data objectForKey:@"imgUrl"]];
+            for (UIView *v in _commentImageView.subviews) {
+                if ([v isKindOfClass:[CanRemoveImageView class]]) {
+                    [v removeFromSuperview];
+                }
+            }
+            _chooseImageButtonView.hidden = NO;
+            self.fileImage = nil;
+        }
+    }];
+}
 
-- (IBAction)onSend:(id)sender{
-    [_commentTextField resignFirstResponder];
-    
-    if (![self checkLogin:^{
-    }]) {
-        return;
-    }
-    
-    NSString *comment = _commentTextField.text;
-    if (comment.length == 0) {
-        [self showTip:@"评论内容不能为空"];
-        return;
-    }
-    
+- (void)submitComment:(NSString*)imageUrl{
     NSDictionary *param = @{@"topicId": _topic.topicId,
-                            @"commentContent": comment,
-                            @"imgUrl":@""};
+                            @"commentContent": _comment,
+                            @"imgUrl":imageUrl};
     if (_selectComment) {
-        param = @{@"projectId": _topic.topicId,
-                  @"commentContent": comment,
+        param = @{@"topicId": _topic.topicId,
+                  @"commentContent": _comment,
                   @"commentId": [NSString stringWithFormat:@"%d", _selectComment.commentId],
-                  @"imgUrl":@""};
+                  @"imgUrl":imageUrl};
     }
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_COMMIT_TOPIC parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -168,9 +207,83 @@
             _commentTextField.text = @"";
             [self loadData];
             self.selectComment = nil;
+            [_commentTextField resignFirstResponder];
         }
         
     }];
+}
+
+- (void)setFileImage:(UIImage *)fileImage{
+    _fileImage = fileImage;
+    _fileImageCountLabel.hidden = fileImage == nil;
+}
+
+#pragma mark - Target Action
+
+- (IBAction)onSend:(id)sender{
+    if (![self checkLogin:^{
+    }]) {
+        return;
+    }
+    
+    _comment = _commentTextField.text;
+    if (_comment.length == 0) {
+        [self showTip:@"评论内容不能为空"];
+        return;
+    }
+    [_commentTextField resignFirstResponder];
+    
+    if (self.fileImage) {
+        [self uploadCommentImage];
+    }else{
+        [self submitComment:@""];
+    }
+    
+}
+
+
+- (IBAction)onChooseImageWithCamera:(id)sender{
+    [[ALGetPhoto sharedPhoto] showInViewController:self sourceType:UIImagePickerControllerSourceTypeCamera allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+        _chooseImageButtonView.hidden = YES;
+        self.fileImage = images.firstObject;
+        
+        CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:CGRectMake(25, 15, 80, 120)];
+        imageView.delegate = self;
+        [imageView setImage:images[0]];
+        [_commentImageView addSubview:imageView];
+    }];
+}
+
+- (IBAction)onChooseImageWithPhoto:(id)sender{
+    [[ALGetPhoto sharedPhoto] showInViewController:self sourceType:UIImagePickerControllerSourceTypePhotoLibrary allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+        _chooseImageButtonView.hidden = YES;
+        self.fileImage = images.firstObject;
+        
+        CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:CGRectMake(25, 15, 80, 120)];
+        imageView.delegate = self;
+        [imageView setImage:images[0]];
+        [_commentImageView addSubview:imageView];
+    }];
+}
+
+- (IBAction)onShowCommentImageView:(id)sender{
+    [_commentTextField resignFirstResponder];
+    _commentImageView.hidden = NO;
+    
+    CGRect frame = _commentView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame) - CGRectGetHeight(_commentImageView.frame);
+    _commentView.frame = frame;
+    
+    
+}
+
+- (void)onHiddenCommentImageView{
+    _commentImageView.hidden = YES;
+    _commentView.hidden = YES;
+    
+    CGRect frame = _commentView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame);
+    _commentView.frame = frame;
 }
 
 - (void)oldTopic:(id)sender{
@@ -187,12 +300,19 @@
     [_commentTextField becomeFirstResponder];
 }
 
+#pragma mark - CanRemoveImageViewDelegate
+
+- (void)deleteCanRemoveImageView:(CanRemoveImageView *)view{
+    self.fileImage = nil;
+    _chooseImageButtonView.hidden = NO;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-#pragma makr - UITableViewDataSource/Delegate
+#pragma mark - UITableViewDataSource/Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -214,7 +334,9 @@
     JRComment *comment = [_topic.commitList objectAtIndex:indexPath.row];
     NSString *content = comment.commentContent;
     CGFloat height = [content heightWithFont:[UIFont systemFontOfSize:15] constrainedToWidth:290];
-    
+    if (comment.imageUrlList.count > 0) {
+        height += 50;
+    }
     if (comment.replyList.count > 0) {
         CGFloat replyHeight = 25;
         if (comment.unfold) {
@@ -224,6 +346,9 @@
                 NSString *content = [NSString stringWithFormat:@"%@%@", name, reply.replyContent];
                 replyHeight += [content heightWithFont:[UIFont systemFontOfSize:15] constrainedToWidth:290];
                 replyHeight += 30;
+                if (reply.imageUrlList.count > 0) {
+                    replyHeight += 50;
+                }
             }
         }
         height += replyHeight;
@@ -239,6 +364,7 @@
     if (!cell) {
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = [nibs firstObject];
+        cell.backgroundColor = [UIColor clearColor];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -274,8 +400,10 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
-    [self onSend:nil];
+    [_commentTextField resignFirstResponder];
     
+    _commentView.hidden = YES;
+    _commentImageView.hidden = YES;
     return YES;
 }
 
@@ -283,6 +411,13 @@
     if (_selectComment && textField.text.length == 0) {
         self.selectComment = nil;
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isContainsEmoji]) {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification{
@@ -300,7 +435,6 @@
     CGRect frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
-    _commentView.hidden = YES;
 }
 
 #pragma mark - ALWebViewDelegate
@@ -316,6 +450,5 @@
     [self hideHUD];
     [self showTip:@"加载失败"];
 }
-
 
 @end

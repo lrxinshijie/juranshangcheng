@@ -46,6 +46,8 @@
     _tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
     
+    _tableView.sectionIndexBackgroundColor = [UIColor clearColor];
+    
     [self loadData];
 }
 

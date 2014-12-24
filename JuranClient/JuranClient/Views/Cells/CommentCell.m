@@ -20,6 +20,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *contentLabel;
 @property (nonatomic, strong) ReplyView *replyView;
 @property (nonatomic, strong) IBOutlet UIButton *replyButton;
+@property (nonatomic, strong) IBOutlet UIImageView *contentImageView;
 
 - (IBAction)onComment:(id)sender;
 - (IBAction)onReply:(id)sender;
@@ -39,6 +40,8 @@
     
     self.replyView = [[ReplyView alloc] initWithFrame:CGRectMake(10, 0, 290, 0)];
     [_mainView addSubview:_replyView];
+    
+    _contentImageView.hidden = YES;
 }
 
 - (IBAction)onReply:(id)sender{
@@ -78,8 +81,24 @@
     frame.size.height = [content heightWithFont:_contentLabel.font constrainedToWidth:CGRectGetWidth(frame)];
     _contentLabel.frame = frame;
     
+    CGFloat replyViewY = 0;
+    
+    if (data.imageUrlList.count > 0) {
+        _contentImageView.hidden = NO;
+        [_contentImageView setImageWithURLString:data.imageUrlList.firstObject];
+        
+        frame = _contentImageView.frame;
+        frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;
+        _contentImageView.frame = frame;
+        
+        replyViewY = CGRectGetMaxY(_contentImageView.frame);
+    }else{
+        _contentImageView.hidden = YES;
+        replyViewY = CGRectGetMaxY(_contentLabel.frame);
+    }
+    
     frame = _replyView.frame;
-    frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;
+    frame.origin.y = replyViewY + 5;
     _replyView.frame = frame;
     
     frame.size.height = _comment.unfold ? _replyView.height : 0;

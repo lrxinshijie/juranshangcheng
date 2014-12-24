@@ -8,7 +8,7 @@
 
 #import "BindMailViewController.h"
 
-@interface BindMailViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface BindMailViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     //1为修改绑定邮箱  2为绑定邮箱
     NSInteger step;
@@ -48,6 +48,7 @@
     [self.view addSubview:bgView];
     
     _mailTextField = [self.view textFieldWithFrame:CGRectMake(0, 0, kWindowWidth -30, 30) borderStyle:UITextBorderStyleNone backgroundColor:[UIColor whiteColor] text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
+    _mailTextField.delegate = self;
     _mailTextField.keyboardType = UIKeyboardTypeEmailAddress;
     _mailTextField.placeholder = @"";
     _mailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -145,5 +146,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isContainsEmoji]) {
+        return NO;
+    }
+    return YES;
+}
 
 @end

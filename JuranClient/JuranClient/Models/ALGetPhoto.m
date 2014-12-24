@@ -46,6 +46,14 @@
     }];
 }
 
+- (void)showInViewController:(UIViewController *)viewController sourceType:(UIImagePickerControllerSourceType)sourceType allowsEditing:(BOOL)editing MaxNumber:(NSInteger)maxNumber  Handler:(ImagesBlock)block{
+    self.viewController = viewController;
+    self.block = block;
+    self.allowsEditing = editing;
+    self.maxNumber = maxNumber;
+    [self showImagePickerForSourceType:sourceType];
+}
+
 - (void)showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType
 {
     if (sourceType == UIImagePickerControllerSourceTypePhotoLibrary && !_allowsEditing) {

@@ -52,6 +52,7 @@
     self.navigationItem.rightBarButtonItem = item;
     
     _textField = [self.view textFieldWithFrame:CGRectMake(0, 0, kWindowWidth -40, 30) borderStyle:UITextBorderStyleNone backgroundColor:[UIColor whiteColor] text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
+    _textField.delegate = self;
     _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     _textField.keyboardType = UIKeyboardTypeDefault;
     _textField.delegate = self;
@@ -292,6 +293,10 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isContainsEmoji]) {
+        return NO;
+    }
+    
     NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     NSInteger length = [self countTheStrLength:toBeString];
     switch (_type) {

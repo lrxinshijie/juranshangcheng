@@ -285,6 +285,13 @@
     return YES;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isContainsEmoji]) {
+        return NO;
+    }
+    return YES;
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     if (!(_textField.text && _textField.text.length > 0)) {
         step = 2;
@@ -293,7 +300,6 @@
         step = 3;
         [self reloadData];
     }
-    
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{

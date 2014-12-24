@@ -9,6 +9,7 @@
 #import "ReplyView.h"
 #import "JRComment.h"
 #import "TTTAttributedLabel.h"
+#import "ZoomInImageView.h"
 
 @interface ReplyView ()
 
@@ -65,6 +66,17 @@
         frame.size.height = 10;
         UILabel *timeLabel = [self labelWithFrame:frame text:comment.replyTime textColor:[UIColor grayColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:10]];
         [self addSubview:timeLabel];
+        
+        if (comment.imageUrlList.count > 0) {
+            frame.origin.y = CGRectGetMaxY(frame) + 5;
+            frame.size.height = 45;
+            frame.size.width = 60;
+            ZoomInImageView *imageView = [[ZoomInImageView alloc] initWithFrame:frame];
+            [imageView setImageWithURLString:comment.imageUrlList.firstObject];
+            [self addSubview:imageView];
+            
+            frame.size.width = label.frame.size.width;
+        }
     }
     
     self.height = CGRectGetMaxY(frame) + 10;
