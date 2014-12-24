@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class JRDesigner;
+@class JRBidInfo;
 @class BidDesignerCell;
 
 @protocol BidDesignerCellDelegate <NSObject>
 
-- (void)rejectForBid:(BidDesignerCell*)cell andDesigner:(JRDesigner*)designer;
-- (void)takeMeasure:(BidDesignerCell*)cell andDesigner:(JRDesigner*)designer;
-- (void)privateLetter:(BidDesignerCell*)cell andDesigner:(JRDesigner*)designer;
+- (void)rejectForBid:(BidDesignerCell*)cell andBidInfo:(JRBidInfo*)bidInfo;
+- (void)takeMeasure:(BidDesignerCell*)cell andBidInfo:(JRBidInfo*)bidInfo;
+- (void)privateLetter:(BidDesignerCell*)cell andBidInfo:(JRBidInfo*)bidInfo;
 
 @end
 
@@ -23,6 +23,6 @@
 
 @property (nonatomic, weak) id<BidDesignerCellDelegate> delegate;
 
-- (void)fillCellWithDesigner:(JRDesigner*)designer;
+- (void)fillCellWithJRBidInfo:(JRBidInfo*)bidInfo;
 
 @end

@@ -43,10 +43,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    self.navigationItem.title = @"需求发布";
-    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSubmit) title:@"确认发布" backgroundImage:nil];
-    [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    if (!_isModify) {
+        self.navigationItem.title = @"需求发布";
+        UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSubmit) title:@"确认发布" backgroundImage:nil];
+        [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+        self.demand = [[JRDemand alloc] init];
+    }else{
+        self.navigationItem.title = @"修改需求";
+        UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSubmit) title:@"确认修改" backgroundImage:nil];
+        [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    }
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
@@ -56,9 +64,6 @@
     
     self.keys = @[@"姓名",@"联系电话",@"房屋类型",@"装修预算",@"房屋面积",@"风格",@"项目地址",@"小区名称",@"户型",@"户型图上传"];
     self.placeholders = @[@"请填写您的姓名",@"必须是11位数字",@"房屋类型", @"装修预算(万元)",@"必须是数字(平方米)",@"风格",@"项目地址",@"2-32个汉字",@"户型",@"可选"];
-    if (!_demand) {
-        self.demand = [[JRDemand alloc] init];
-    }
     
     BOOL flag = self.navigationController.tabBarController.tabBar.hidden;
     self.tableView = [self.view tableViewWithFrame:flag?kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
@@ -149,36 +154,44 @@
 }
 
 - (void)submitDemand{
-    NSDictionary *param = @{@"contactsName": _demand.contactsName,
-                            @"houseType": _demand.houseType,
-                            @"contactsMobile": _demand.contactsMobile,
-                            @"houseArea": [NSString stringWithFormat:@"%.2f", _demand.houseArea],
-                            @"budget": _demand.budget,
-                            @"budgetUnit": @"million",
-                            @"renovationStyle": _demand.renovationStyle,
-                            @"neighbourhoods": _demand.neighbourhoods,
-                            @"roomNum":_demand.roomNum,
-                            @"livingroomCount":_demand.livingroomCount,
-                            @"bathroomCount":_demand.bathroomCount,
-                            @"areaInfo": [_demand.areaInfo dictionaryValue],
-                            @"roomTypeImgUrl": _demand.roomTypeImgUrl
-                            };
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"contactsName": _demand.contactsName,
+                                                                                 @"houseType": _demand.houseType,
+                                                                                 @"contactsMobile": _demand.contactsMobile,
+                                                                                 @"houseArea": [NSString stringWithFormat:@"%.2f", _demand.houseArea],
+                                                                                 @"budget": _demand.budget,
+                                                                                 @"budgetUnit": @"million",
+                                                                                 @"renovationStyle": _demand.renovationStyle,
+                                                                                 @"neighbourhoods": _demand.neighbourhoods,
+                                                                                 @"roomNum":_demand.roomNum,
+                                                                                 @"livingroomCount":_demand.livingroomCount,
+                                                                                 @"bathroomCount":_demand.bathroomCount,
+                                                                                 @"areaInfo": [_demand.areaInfo dictionaryValue],
+                                                                                 @"roomTypeImgUrl": _demand.roomTypeImgUrl
+                                                                                 }];
+    if (_isModify) {
+        [param setValue:_demand.designReqId forKey:@"designReqId"];
+    }
 
     [[ALEngine shareEngine] pathURL:JR_PUBLISH_DESIGN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            [self showTip:@"发布需求成功"];
-            self.demand = [[JRDemand alloc] init];
-            self.fileImage = nil;
-            _photoImageView.image = [UIImage imageNamed:@"publish_image_default"];
-            [self reloadData];
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                MyDemandViewController *vc = [[MyDemandViewController alloc] init];
-                vc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:vc animated:YES];
-            });
-            
+            if (!_isModify) {
+                [self showTip:@"发布需求成功"];
+                self.demand = [[JRDemand alloc] init];
+                self.fileImage = nil;
+                _photoImageView.image = [UIImage imageNamed:@"publish_image_default"];
+                [self reloadData];
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    MyDemandViewController *vc = [[MyDemandViewController alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                });
+            }else{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            }
         }
     }];
 }

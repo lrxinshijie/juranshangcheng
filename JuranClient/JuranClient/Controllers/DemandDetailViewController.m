@@ -12,6 +12,10 @@
 #import "JRDesigner.h"
 #import "PublishDesignViewController.h"
 #import "ZoomInImageView.h"
+#import "JRBidInfo.h"
+#import "DesignerDetailViewController.h"
+#import "PrivateLetterViewController.h"
+#import "MeasureViewController.h"
 
 #define kStatusBGImageViewTag 2933
 
@@ -112,7 +116,7 @@
 }
 
 - (void)reSetData{
-    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, _demand.roomType, [NSString stringWithFormat:@"%d万元", (NSInteger)_demand.renovationBudget], [_demand statusString], [NSString stringWithFormat:@"%d平方米", _demand.houseArea], [_demand renovationStyleString], _demand.postDate, _demand.deadline, @""];
+    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, _demand.roomType, [NSString stringWithFormat:@"%d万元", (NSInteger)_demand.renovationBudget], [_demand statusString], [NSString stringWithFormat:@"%d平方米", (NSInteger)_demand.houseArea], [_demand renovationStyleString], _demand.postDate, _demand.deadline, @""];
 }
 
 - (void)setupUI{
@@ -158,6 +162,7 @@
 - (IBAction)onModifyDemandInfo:(id)sender{
     PublishDesignViewController *vc = [[PublishDesignViewController alloc] init];
     vc.demand = _demand;
+    vc.isModify = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -178,22 +183,30 @@
 
 #pragma mark - 拒绝、私信、选TA量房
 
-- (void)privateLetter:(BidDesignerCell *)cell andDesigner:(JRDesigner *)designer{
-    
+- (void)privateLetter:(BidDesignerCell *)cell andBidInfo:(JRBidInfo *)bidInfo{
+    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+    pv.designer = bidInfo.userBase;
+    [self.navigationController pushViewController:pv animated:YES];
 }
 
-- (void)takeMeasure:(BidDesignerCell *)cell andDesigner:(JRDesigner *)designer{
-    
+- (void)takeMeasure:(BidDesignerCell *)cell andBidInfo:(JRBidInfo *)bidInfo{
+//    if (!_jrCase.isAuth) {
+//        [self showTip:@"未认证的设计师无法预约量房"];
+//        return;
+//    }
+    MeasureViewController *mv = [[MeasureViewController alloc] init];
+    mv.designer = bidInfo.userBase;
+    [self.navigationController pushViewController:mv animated:YES];
 }
 
-- (void)rejectForBid:(BidDesignerCell *)cell andDesigner:(JRDesigner *)designer{
+- (void)rejectForBid:(BidDesignerCell *)cell andBidInfo:(JRBidInfo *)bidInfo{
     NSDictionary *param = @{@"designReqId": _demand.designReqId,
-                            @"bidId":designer.bidId};
+                            @"bidId":bidInfo.bidId};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_REJECT_DESIGNREQ parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            [_demand.bidInfoList removeObject:designer];
+            [_demand.bidInfoList removeObject:bidInfo];
             [_designerTableView reloadData];
         }
     }];
@@ -253,8 +266,8 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
-        JRDesigner *designer = _demand.bidInfoList[indexPath.row];
-        [cell fillCellWithDesigner:designer];
+        JRBidInfo *bidInfo = _demand.bidInfoList[indexPath.row];
+        [cell fillCellWithJRBidInfo:bidInfo];
         //    JRDemand *d = [_datas objectAtIndex:indexPath.row];
         //    [cell fillCellWithDemand:d];
         
@@ -291,6 +304,15 @@
         return cell;
     }
     return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@""];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == _designerTableView) {
+        JRBidInfo *bidInfo = _demand.bidInfoList[indexPath.row];
+        DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
+        detailVC.designer = bidInfo.userBase;
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
 }
 
 @end

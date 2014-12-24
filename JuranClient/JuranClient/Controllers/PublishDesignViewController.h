@@ -12,5 +12,6 @@
 @interface PublishDesignViewController : ALViewController
 
 @property (nonatomic, strong) JRDemand *demand;
+@property (nonatomic, assign) BOOL isModify;
 
 @end

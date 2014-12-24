@@ -15,21 +15,22 @@
 #import "JRAreaInfo.h"
 #import "ALGetPhoto.h"
 #import "ActionSheetDatePicker.h"
+#import "TextFieldCell.h"
 
-@interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, SexySwitchDelegate, ModifyViewControllerDelegate>
+@interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, SexySwitchDelegate, ModifyViewControllerDelegate, UITextFieldDelegate>
 {
-    NSArray *valuesForSection1;
-    NSArray *keysForSection1;
-    NSArray *valuesForSection2;
-    NSArray *keysForSection2;
-    NSArray *valuesForSection3;
-    NSArray *keysForSection3;
     NSDictionary *param;
-    NSArray *typesForSection3;
 }
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) SexySwitch *sexySwitch;
 @property (nonatomic, strong) UIImageView *iconImageView;
+
+@property (nonatomic, strong) NSArray *keys;
+@property (nonatomic, strong) NSArray *values;
+@property (nonatomic, strong) NSArray *placeholders;
+@property (nonatomic, strong) NSArray *tags;
+
+@property (nonatomic, strong) UITextField *selectedTextField;
 
 @end
 
@@ -44,6 +45,11 @@
     return self;
 }
 
+- (void)dealloc{
+    _tableView.delegate = nil; _tableView.dataSource = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -52,6 +58,9 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     self.navigationItem.title = @"个人资料";
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
     [self setupDatas];
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
@@ -74,11 +83,11 @@
 }
 
 - (void)setupDatas{
-    keysForSection1 = @[@"头像", @"用户名"];
-    keysForSection2 = @[@"昵称", @"性别", @"生日", @"所在地", @"详细地址"];
-    keysForSection3 = @[@"固定电话", @"证件信息", @"QQ", @"微信"];
+    _keys = @[@[@"头像", @"用户名"], @[@"昵称", @"性别", @"生日", @"所在地", @"详细地址"], @[@"固定电话", @"证件信息", @"QQ", @"微信"]];
+    _placeholders = @[@[@"", @"请输入用户名"], @[@"请输入昵称", @"", @"", @"", @""], @[@"请输入固定电话", @"", @"请输入QQ", @"请输入微信"]];
+    _tags = @[@[@"", @"1100"], @[@"1101", @"", @"", @"", @""], @[@"1102", @"", @"1103", @"1104"]];
     
-    typesForSection3 = @[@(ModifyCVTypeHomeTel), @(ModifyCVTypeIdType),@(ModifyCVTypeQQ),@(ModifyCVTypeWeiXin)];
+//    typesForSection3 = @[@(ModifyCVTypeHomeTel), @(ModifyCVTypeIdType),@(ModifyCVTypeQQ),@(ModifyCVTypeWeiXin)];
     /*
      *   设计师端个人资料
      *
@@ -96,13 +105,11 @@
     if (_user.headUrl && _user.headUrl.length>0) {
         [self.iconImageView setImageWithURLString:_user.headUrl];
     }
-    valuesForSection1 = @[@"", _user.account];
-    valuesForSection2 = @[_user.nickName,
-                          @"性别",
-                          _user.birthday.length == 0?@"未设置":_user.birthday,
-                          [_user locationAddress],
-                          _user.detailAddress.length == 0?@"未设置":_user.detailAddress];
-    valuesForSection3 = @[[_user homeTelForPersonal], [_user idCardInfomation], _user.qq.length == 0?@"未设置":_user.qq, _user.weixin.length == 0?@"未设置":_user.weixin];
+    _values = @[@[@"", _user.account], @[_user.nickName,
+                                         @"性别",
+                                         _user.birthday.length == 0?@"未设置":_user.birthday,
+                                         [_user locationAddress],
+                                         _user.detailAddress.length == 0?@"未设置":_user.detailAddress], @[[_user homeTelForPersonal], [_user idCardInfomation], _user.qq.length == 0?@"未设置":_user.qq, _user.weixin.length == 0?@"未设置":_user.weixin]];
 }
 
 - (void)loadData{
@@ -184,19 +191,11 @@
 #pragma mark - UITableViewDataSource/Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return _keys.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0) {
-        return keysForSection1.count;
-    }else if (section == 1){
-        return keysForSection2.count;
-    }else if (section == 2){
-        return keysForSection3.count;
-    }else{
-        return 1;
-    }
+    return [_keys[section] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -227,17 +226,20 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellIdentifier = @"personalData";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-        cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize+2];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
-    }
-    cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]];
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            cell.textLabel.text = keysForSection1[indexPath.row];
+    if ((indexPath.section == 0 && indexPath.row == 0) || (indexPath.section == 1 && indexPath.row != 0) || (indexPath.section == 2 && indexPath.row == 1)) {
+        static NSString *cellIdentifier = @"personalData";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+            cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize+2];
+            cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
+            cell.detailTextLabel.textColor = [UIColor blackColor];
+        }
+        cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]];
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        cell.detailTextLabel.text = @"";
+        if (indexPath.section == 0) {
+            cell.textLabel.text = _keys[indexPath.section][indexPath.row];
             CGRect frame = CGRectMake(0, 0, 100, 50);
             UIView *view = [[UIView alloc] initWithFrame:frame];
             frame.origin = CGPointMake(frame.size.width - 8, (frame.size.height - 16)/2);
@@ -252,24 +254,53 @@
             frame.origin = CGPointMake(view.frame.size.width - arrowImageView.frame.size.width - 10 -50, 0);
             self.iconImageView.frame = frame;
             [view addSubview:self.iconImageView];
-//            [self.iconImageView setImageWithURLString:_user.headUrl];
+            //            [self.iconImageView setImageWithURLString:_user.headUrl];
             cell.accessoryView = view;
-            
-        }else{
-            cell.textLabel.text = keysForSection1[indexPath.row];
-            cell.detailTextLabel.text = valuesForSection1[indexPath.row];
-        }
-    }else if (indexPath.section == 1){
-        if (indexPath.row == 1) {
-            cell.textLabel.text = keysForSection2[indexPath.row];
+        }else if (indexPath.section == 1 && indexPath.row == 1){
+            cell.textLabel.text = _keys[indexPath.section][indexPath.row];
             cell.detailTextLabel.text = @"";
             _sexySwitch.selectedIndex = _user.sex;
             cell.accessoryView = _sexySwitch;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }else{
-            cell.textLabel.text = keysForSection2[indexPath.row];
-            cell.detailTextLabel.text = valuesForSection2[indexPath.row];
+            cell.textLabel.text = _keys[indexPath.section][indexPath.row];
+            cell.detailTextLabel.text = _values[indexPath.section][indexPath.row];
         }
-    }else if (indexPath.section == 2){
+        return cell;
+    }else{
+        static NSString *CellIdentifier = @"TextFieldCell";
+        TextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+            cell = (TextFieldCell *)[nibs firstObject];
+        }
+        
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.textField.enabled = YES;
+        cell.textField.delegate = self;
+        cell.textField.tag = [_tags[indexPath.section][indexPath.row] integerValue];
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+            cell.layoutMargins = UIEdgeInsetsZero;
+        }
+        if (indexPath.section == 0 && indexPath.row == 1) {
+            cell.textField.enabled = !_user.accountChangeable;
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.titleLabel.text =  _keys[indexPath.section][indexPath.row];
+        cell.textField.placeholder = _placeholders[indexPath.section][indexPath.row];
+        cell.textField.text = _values[indexPath.section][indexPath.row];
+        cell.textField.keyboardType = UIKeyboardTypeDefault;
+        
+        if (indexPath.section == 2 && (indexPath.row == 0 || indexPath.row == 2)) {
+            cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+        }
+        
+        return cell;
+    }
+    
         /*
          *设计师端内容
          if (indexPath.row == keysForSection3.count - 1) {
@@ -296,17 +327,11 @@
          cell.detailTextLabel.text = valuesForSection3[indexPath.row];
          }
          */
-        cell.textLabel.text = keysForSection3[indexPath.row];
-        cell.detailTextLabel.text = valuesForSection3[indexPath.row];
-    }else{
-        cell.textLabel.text = @"更多资料";
-        cell.detailTextLabel.text = @"";
-    }
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.selectedTextField resignFirstResponder];
     /*
      *设计师端
      if (indexPath.section == 3) {
@@ -315,71 +340,51 @@
      }
      */
     
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
-                if (images.count > 0) {
-                    [self uploadHeaderImage:images[0]];
-                }
-            }];
-        }else if (indexPath.row == 1) {
-            if (_user.accountChangeable) {
-                [self showTip:@"用户名不可修改"];
-                return;
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+            if (images.count > 0) {
+                [self uploadHeaderImage:images[0]];
             }
-            ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeUserName];
-            vc.title = keysForSection1[indexPath.row];
+        }];
+        /*
+         if (_user.accountChangeable) {
+         [self showTip:@"用户名不可修改"];
+         return;
+         }
+         ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeUserName];
+         vc.title = keysForSection1[indexPath.row];
+         [self.navigationController pushViewController:vc animated:YES];*/
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 2) {
+            [ActionSheetDatePicker showPickerWithTitle:@"生日" datePickerMode:UIDatePickerModeDate selectedDate:[NSDate date] doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
+                _user.birthday = [(NSDate*)selectedDate stringWithFormat:[NSDate dateFormatString]];
+                NSString *dateString = [(NSDate*)selectedDate stringWithFormat:[NSDate timestampFormatString]];
+                param = @{@"birthday": dateString};
+                [self modifyMemberDetail];
+            } cancelBlock:^(ActionSheetDatePicker *picker) {
+                
+            } origin:self.view];
+        }else if (indexPath.row == 3){
+            BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
+            [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
+                param = @{@"areaInfo": @{@"provinceCode": areaInfo.provinceCode,
+                                         @"cityCode": areaInfo.cityCode,
+                                         @"districtCode": areaInfo.districtCode
+                                         }};
+                [self modifyMemberDetail];
+            }];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (indexPath.row == 4){
+            DetailAddressViewController *vc = [[DetailAddressViewController alloc] init];
+            vc.user = _user;
             [self.navigationController pushViewController:vc animated:YES];
         }
-    }else if (indexPath.section == 1){
-        switch (indexPath.row) {
-            case 0:
-            {
-                ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeNickName];
-                vc.title = keysForSection2[indexPath.row];
-                [self.navigationController pushViewController:vc animated:YES];
-                break;
-            }
-            case 2:
-            {
-                [ActionSheetDatePicker showPickerWithTitle:@"生日" datePickerMode:UIDatePickerModeDate selectedDate:[NSDate date] doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
-                    _user.birthday = [(NSDate*)selectedDate stringWithFormat:[NSDate dateFormatString]];
-                    NSString *dateString = [(NSDate*)selectedDate stringWithFormat:[NSDate timestampFormatString]];
-                    param = @{@"birthday": dateString};
-                    [self modifyMemberDetail];
-                } cancelBlock:^(ActionSheetDatePicker *picker) {
-                    
-                } origin:self.view];
-                break;
-            }
-            case 3:
-            {
-                BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
-                [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
-                    param = @{@"areaInfo": @{@"provinceCode": areaInfo.provinceCode,
-                                             @"cityCode": areaInfo.cityCode,
-                                             @"districtCode": areaInfo.districtCode
-                                             }};
-                    [self modifyMemberDetail];
-                }];
-                [self.navigationController pushViewController:vc animated:YES];
-                break;
-            }
-            case 4:
-            {
-                DetailAddressViewController *vc = [[DetailAddressViewController alloc] init];
-                vc.user = _user;
-                [self.navigationController pushViewController:vc animated:YES];
-                break;
-            }
-            default:
-                break;
-        }
-    }else if (indexPath.section == 2){
-        ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:[typesForSection3[indexPath.row] integerValue]];
-        vc.title = keysForSection3[indexPath.row];
+    }else if (indexPath.section == 2 && indexPath.row == 1){
+        ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeIdType];
+        vc.title = _keys[indexPath.section][indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }
+    return;
 }
 
 
@@ -396,6 +401,134 @@
         _iconImageView.layer.cornerRadius = _iconImageView.frame.size.height/2;
     }
     return _iconImageView;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if ([string isContainsEmoji]) {
+        return NO;
+    }
+    
+//    NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
+//    if (textField.tag == DemandEditContactsMobile && value.length > kPhoneMaxNumber) {
+//        return NO;
+//    }else if (textField.tag == DemandEditContactsMobile && value.length > 32){
+//        return NO;
+//    }else if (textField.tag == DemandEditBudget){
+//        double budget = [value doubleValue];
+//        if (budget > 99999) {
+//            return NO;
+//        }
+//    }
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    self.selectedTextField = textField;
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+//    if (textField.tag == 0) {
+//        _demand.contactsName = textField.text;
+//    }else if (textField.tag == 1){
+//        _demand.contactsMobile = textField.text;
+//    }else if (textField.tag == 3){
+//        _demand.budget = textField.text;
+//    }else if (textField.tag == 4){
+//        _demand.houseArea = [textField.text doubleValue];
+//    }else if (textField.tag == 7){
+//        _demand.neighbourhoods = textField.text;
+//    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField.text.length == 0) {
+        //不能为空
+        [self showTip:@"输入内容不能为空!!"];
+        return NO;
+    }
+    switch (textField.tag) {
+        case 1100:
+        {
+            if (_user.accountChangeable) {
+                [self showTip:@"用户名不可修改"];
+                return YES;
+            }
+            param = @{@"oldAccount": _user.account,
+                      @"account":_selectedTextField.text,
+                      @"accountChangeable":[NSString stringWithFormat:@"%d", _user.accountChangeable]};
+            break;
+        }
+        case 1101:{
+            param = @{@"nickName": _selectedTextField.text};
+            break;
+        }
+        case 1102:{
+            if (![self isPureNumandCharacters:_selectedTextField.text]) {
+                [self showTip:@"请输入合法电话号码！！"];
+                return NO;
+            }
+            if (_selectedTextField.text.length < 8 || _selectedTextField.text.length > 12) {
+                //不能为空
+                [self showTip:@"请输入合法电话号码！！"];
+                return NO;
+            }
+            param = @{@"homeTel": _selectedTextField.text};
+            break;
+        }
+        case 1103:{
+            param = @{@"qq": _selectedTextField.text};
+            break;
+        }
+        case 1104:{
+            param = @{@"weixin": _selectedTextField.text};
+            break;
+        }
+        default:
+            break;
+    }
+    [textField resignFirstResponder];
+    [self modifyMemberDetail];
+    return YES;
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification{
+    NSDictionary *info = [notification userInfo];
+    NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
+    CGSize keyboardSize = [value CGRectValue].size;
+    
+    NSValue *animationDurationValue = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    NSTimeInterval animation = animationDuration;
+    
+    //视图移动的动画开始
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:animation];
+    CGRect frame = _tableView.frame;
+    frame.size.height = kWindowHeightWithoutNavigationBar - keyboardSize.height;
+    _tableView.frame = frame;
+    
+    [UIView commitAnimations];
+}
+
+-(void)keyboardWillBeHidden:(NSNotification *)aNotification{
+    _tableView.frame = kContentFrameWithoutNavigationBar;
+}
+
+//判断是否为数字
+- (BOOL)isPureNumandCharacters:(NSString *)string
+{
+    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet decimalDigitCharacterSet]];
+    if(string.length > 0)
+    {
+        return NO;
+    }
+    return YES;
 }
 
 @end

@@ -57,11 +57,11 @@
 
 //DemandDetail
 @property (nonatomic, assign) NSInteger userType;
-@property (nonatomic, strong) NSString *biddingDeclatation;
-@property (nonatomic, strong) NSString *bidId;
 
 
 - (id)initWithDictionary:(NSDictionary *)dict;
+- (id)initWithDictionaryForBidInfo:(NSDictionary *)dict;
+
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
 //构造设计师详情数据
@@ -71,8 +71,6 @@
 
 //构造我的关注列表数据
 + (NSMutableArray *)buildUpFollowDesignerListWithValue:(id)value;
-
-+ (NSMutableArray *)buildUpDemandDetailWithValue:(id)value;
 
 - (NSURL *)imageURL;
 
