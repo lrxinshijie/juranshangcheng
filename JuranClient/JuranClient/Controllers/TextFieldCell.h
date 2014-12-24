@@ -11,5 +11,6 @@
 @interface TextFieldCell : UITableViewCell
 
 @property (nonatomic, strong) IBOutlet UITextField *textField;
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 
 @end

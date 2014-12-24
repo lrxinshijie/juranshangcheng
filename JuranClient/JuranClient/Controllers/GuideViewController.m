@@ -7,7 +7,7 @@
 //
 
 #import "GuideViewController.h"
-
+#import "AppDelegate.h"
 @interface GuideViewController ()
 
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
@@ -76,7 +76,7 @@
     [ud setBool:NO forKey:@"showGuide"];
     [ud synchronize];
     
-    [super back:sender];
+    [(AppDelegate *)[UIApplication sharedApplication].delegate jumpToMain];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -37,20 +37,20 @@
     [JRUser refreshToken:nil];
     
     [self setupShareSDK];
-    [self setupTabbar];
     
-    if ([GuideViewController showGuide]) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            GuideViewController *gv = [[GuideViewController alloc] init];
-            gv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self.tabBarController presentViewController:gv animated:YES completion:NULL];
-        });
-    }
-
-    
+    [self jumpToMain];
     
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)jumpToMain{
+    if ([GuideViewController showGuide]) {
+        GuideViewController *gv = [[GuideViewController alloc] init];
+        self.window.rootViewController = gv;
+    }else{
+        [self setupTabbar];
+    }
 }
 
 - (UITabBarItem *)setupTabbarItemTitle:(NSString *)title image:(NSString *)image selected:(NSString *)imageSel{

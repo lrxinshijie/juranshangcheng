@@ -11,6 +11,7 @@
 #import "JRSubject.h"
 #import "JRCase.h"
 #import "JRPhotoScrollViewController.h"
+#import "ShareView.h"
 
 @interface SubjectDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -37,6 +38,8 @@
     _tableView.backgroundColor = RGBColor(236, 236, 236);
     [self.view addSubview:_tableView];
     
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onShare)];
+    
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
@@ -51,6 +54,10 @@
     [_tableView headerBeginRefreshing];
 }
 
+- (void)onShare{
+    [[ShareView sharedView] showWithContent:_subject.subjectContent image:[[Public imageURL:_subject.subjectUrl] absoluteString] title:_subject.subjectName url:@""];
+}
+
 - (void)loadData{
     NSDictionary *param = @{@"id": [NSString stringWithFormat:@"%d",_subject.key],
                             @"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
@@ -63,14 +70,14 @@
             NSMutableArray *rows = [JRCase buildUpWithValue:[info objectForKey:@"projectGeneralDtoList"]];
             if (_currentPage == 1) {
                 self.datas = rows;
-                NSString *subjectName = [info objectForKey:@"subjectName"];
-                NSString *subjectUrl = [info objectForKey:@"subjectUrl"];
-                NSString *subjectContent = [info objectForKey:@"subjectContent"];
-                self.navigationItem.title = subjectName;
-                [_photoImageView setImageWithURLString:subjectUrl];
-                _contentLabel.text = subjectContent;
+                _subject.subjectName = [info objectForKey:@"subjectName"];
+                _subject.subjectUrl = [info objectForKey:@"subjectUrl"];
+                _subject.subjectContent = [info objectForKey:@"subjectContent"];
+                self.navigationItem.title = _subject.subjectName;
+                [_photoImageView setImageWithURLString:_subject.subjectUrl];
+                _contentLabel.text = _subject.subjectContent;
                 CGRect frame = _contentLabel.frame;
-                frame.size.height = [subjectContent heightWithFont:_contentLabel.font constrainedToWidth:CGRectGetWidth(frame)];
+                frame.size.height = [_subject.subjectContent heightWithFont:_contentLabel.font constrainedToWidth:CGRectGetWidth(frame)];
                 _contentLabel.frame = frame;
                 frame = _headerView.frame;
                 frame.size.height = CGRectGetMaxY(_contentLabel.frame) + 10;

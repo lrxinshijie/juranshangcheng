@@ -19,6 +19,8 @@
         
         self.key = [dict getIntValueForKey:@"id" defaultValue:0];
         self.subjectUrl = [dict getStringValueForKey:@"subjectUrl" defaultValue:@""];
+        self.subjectName = [dict getStringValueForKey:@"subjectName" defaultValue:@""];
+        self.subjectContent = [dict getStringValueForKey:@"subjectContent" defaultValue:@""];
     }
     
     return self;

@@ -54,7 +54,7 @@
             break;
         case DemandEditHouseArea:
             placeholder = @"房屋面积(平方米)";
-            value = [NSString stringWithFormat:@"%d", _demand.houseArea];
+            value = [NSString stringWithFormat:@"%.2f", _demand.houseArea];
             keyboardType = UIKeyboardTypeNumberPad;
             break;
         default:

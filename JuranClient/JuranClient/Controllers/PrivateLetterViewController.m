@@ -112,25 +112,30 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     NSString *placeholder = @"";
+    NSString *title = @"";
     if (indexPath.row == 0) {
         placeholder = @"您的姓名";
+        title = @"姓名";
         cell.textField.keyboardType = UIKeyboardTypeDefault;
         cell.textField.text = _senderName;
     }else if (indexPath.row == 1) {
         placeholder = @"您的电话";
+        title = @"电话";
         cell.textField.text = _mobilePhone;
         cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }else if (indexPath.row == 2){
         placeholder = @"喜欢的风格";
+        title = @"风格";
         cell.textField.text = _likeStyleKey;
         cell.textField.keyboardType = UIKeyboardTypeDefault;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }else if (indexPath.row == 3){
         cell.textField.text = _houseArea;
+        title = @"房屋面积";
         placeholder = @"房屋面积(平方米)";
         cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }
-    
+    cell.titleLabel.text = title;
     cell.textField.placeholder = placeholder;
     cell.textField.delegate = self;
     cell.textField.tag = indexPath.row;

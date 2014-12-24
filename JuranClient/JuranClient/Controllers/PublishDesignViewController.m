@@ -15,8 +15,9 @@
 #import "ActionSheetMultiPicker.h"
 #import "ALGetPhoto.h"
 #import "MyDemandViewController.h"
+#import "TextFieldCell.h"
 
-@interface PublishDesignViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface PublishDesignViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *keys;
@@ -25,11 +26,18 @@
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) UIImage *fileImage;
 @property (nonatomic, strong) NSString *fileImageURL;
+@property (nonatomic, strong) NSArray *placeholders;
+@property (nonatomic, strong) UITextField *selectedTextField;
 
 
 @end
 
 @implementation PublishDesignViewController
+
+- (void)dealloc{
+    _tableView.delegate = nil; _tableView.dataSource = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,11 +48,14 @@
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
-    self.photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(220, 12, 60, 45)];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
+    
+    self.photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(230, 12, 60, 45)];
     _photoImageView.image = [UIImage imageNamed:@"publish_image_default"];
     
     self.keys = @[@"姓名",@"联系电话",@"房屋类型",@"装修预算",@"房屋面积",@"风格",@"项目地址",@"小区名称",@"户型",@"户型图上传"];
-    self.values = @[@"请填写您的姓名",@"必须是11位数字",@"两居室", @"必须是整数",@"必须是数字(平方米)",@"地中海",@"石家庄",@"2-32个汉字",@"三室一厅一卫",@"可选"];
+    self.placeholders = @[@"请填写您的姓名",@"必须是11位数字",@"房屋类型", @"装修预算(万元)",@"必须是数字(平方米)",@"风格",@"项目地址",@"2-32个汉字",@"户型",@"可选"];
     if (!_demand) {
         self.demand = [[JRDemand alloc] init];
     }
@@ -63,7 +74,7 @@
 }
 
 - (void)reloadData{
-    self.values = @[_demand.contactsName,_demand.contactsMobile, _demand.houseTypeString, _demand.budget,_demand.houseArea == 0 ? @"" : [NSString stringWithFormat:@"%d",_demand.houseArea],_demand.renovationStyleString,_demand.areaInfo.title,_demand.neighbourhoods,_demand.roomNumString,@"可选"];
+    self.values = @[_demand.contactsName,_demand.contactsMobile, _demand.houseTypeString, _demand.budget,_demand.houseArea == 0 ? @"" : [NSString stringWithFormat:@"%.2f",_demand.houseArea],_demand.renovationStyleString,_demand.areaInfo.title,_demand.neighbourhoods,_demand.roomNumString,@"可选"];
     
     if (_fileImage) {
         _photoImageView.image = _fileImage;
@@ -141,7 +152,7 @@
     NSDictionary *param = @{@"contactsName": _demand.contactsName,
                             @"houseType": _demand.houseType,
                             @"contactsMobile": _demand.contactsMobile,
-                            @"houseArea": [NSString stringWithFormat:@"%d", _demand.houseArea],
+                            @"houseArea": [NSString stringWithFormat:@"%.2f", _demand.houseArea],
                             @"budget": _demand.budget,
                             @"budgetUnit": @"million",
                             @"renovationStyle": _demand.renovationStyle,
@@ -193,30 +204,62 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    if (indexPath.row == [_keys count] - 1) {
+        static NSString *CellIdentifier = @"UITableViewCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ImageCell"];
+        }
+        
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+            cell.layoutMargins = UIEdgeInsetsZero;
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.textLabel.text = [_keys objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = [_values objectAtIndex:indexPath.row];
+        if (indexPath.row == 9) {
+            [_photoImageView removeFromSuperview];
+            [cell addSubview:_photoImageView];
+        }
+        return cell;
     }
-    
-    if (indexPath.row == [_keys count]-1) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ImageCell"];
+    static NSString *CellIdentifier = @"TextFieldCell";
+    TextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        cell = (TextFieldCell *)[nibs firstObject];
     }
     
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.textField.enabled = YES;
+    cell.textField.delegate = self;
+    cell.textField.tag = indexPath.row;
+    if (indexPath.row == 2 || indexPath.row == 5 || indexPath.row == 6 || indexPath.row == 8) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textField.enabled = NO;
+    }
     
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         cell.layoutMargins = UIEdgeInsetsZero;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    cell.textLabel.text = [_keys objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = [_values objectAtIndex:indexPath.row];
-    if (indexPath.row == 9) {
-        [_photoImageView removeFromSuperview];
-        [cell addSubview:_photoImageView];
+    cell.titleLabel.text = [_keys objectAtIndex:indexPath.row];
+    cell.textField.placeholder = [_placeholders objectAtIndex:indexPath.row];
+    cell.textField.text = [_values objectAtIndex:indexPath.row];
+    cell.textField.keyboardType = UIKeyboardTypeDefault;
+    
+    if (indexPath.row == 1) {
+        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+    }else if (indexPath.row == 3 || indexPath.row == 4){
+        cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }
     
     return cell;
@@ -225,6 +268,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    [_selectedTextField resignFirstResponder];
+    
     if (indexPath.row == 6) {
         BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
         [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
@@ -232,11 +277,6 @@
         }];
         
         vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 7){
-        DemandEditTextViewController *vc = [[DemandEditTextViewController alloc] init];
-        vc.demand = _demand;
-        vc.editType = indexPath.row;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 2 || indexPath.row == 5){
         NSMutableArray *rows = [NSMutableArray array];
@@ -346,6 +386,76 @@
     if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
         [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if ([string isContainsEmoji]) {
+        return NO;
+    }
+    
+    NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (textField.tag == DemandEditContactsMobile && value.length > kPhoneMaxNumber) {
+        return NO;
+    }else if (textField.tag == DemandEditContactsMobile && value.length > 32){
+        return NO;
+    }else if (textField.tag == DemandEditBudget){
+        double budget = [value doubleValue];
+        if (budget > 99999) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    self.selectedTextField = textField;
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if (textField.tag == 0) {
+        _demand.contactsName = textField.text;
+    }else if (textField.tag == 1){
+        _demand.contactsMobile = textField.text;
+    }else if (textField.tag == 3){
+        _demand.budget = textField.text;
+    }else if (textField.tag == 4){
+        _demand.houseArea = [textField.text doubleValue];
+    }else if (textField.tag == 7){
+        _demand.neighbourhoods = textField.text;
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification{
+    NSDictionary *info = [notification userInfo];
+    NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
+    CGSize keyboardSize = [value CGRectValue].size;
+    
+    NSValue *animationDurationValue = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    NSTimeInterval animation = animationDuration;
+    
+    //视图移动的动画开始
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:animation];
+    CGRect frame = _tableView.frame;
+    frame.size.height = kWindowHeightWithoutNavigationBar - keyboardSize.height;
+    _tableView.frame = frame;
+    
+    [UIView commitAnimations];
+}
+
+-(void)keyboardWillBeHidden:(NSNotification *)aNotification{
+    _tableView.frame = kContentFrameWithoutNavigationBarAndTabBar;
 }
 
 - (void)didReceiveMemoryWarning {

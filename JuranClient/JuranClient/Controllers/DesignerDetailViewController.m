@@ -280,6 +280,11 @@
 
 //预约
 - (IBAction)doMakeAppointment:(id)sender{
+    if (!_designer.isAuth) {
+        [self showTip:@"未认证的设计师无法预约量房"];
+        return;
+    }
+    
     MeasureViewController *mv = [[MeasureViewController alloc] init];
     mv.designer = _designer;
     [self.navigationController pushViewController:mv animated:YES];

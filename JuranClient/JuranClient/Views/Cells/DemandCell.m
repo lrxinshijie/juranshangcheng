@@ -49,7 +49,7 @@
     _timeLabel.text = demand.publishTime;
     _titleLabel.text = demand.title;
     _addressLabel.text = demand.houseAddress;
-    _sizeLabel.text = [NSString stringWithFormat:@"%d平方米", demand.houseArea];
+    _sizeLabel.text = [NSString stringWithFormat:@"%.2f平方米", demand.houseArea];
     _styleLabel.text = [demand houseTypeString];
     _priceLabel.text = [NSString stringWithFormat:@"%d万元", demand.renovationBudget];
     _bidNumberLabel.text = [NSString stringWithFormat:@"投标人数：%d人", demand.bidNums];

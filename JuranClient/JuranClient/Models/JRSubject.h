@@ -12,6 +12,8 @@
 
 @property (nonatomic, assign) NSInteger key;
 @property (nonatomic, copy) NSString *subjectUrl;
+@property (nonatomic, copy) NSString *subjectName;
+@property (nonatomic, copy) NSString *subjectContent;
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
