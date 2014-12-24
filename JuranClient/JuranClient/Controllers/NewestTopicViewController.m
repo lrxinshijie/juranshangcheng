@@ -207,7 +207,6 @@
             _commentTextField.text = @"";
             [self loadData];
             self.selectComment = nil;
-            [_commentTextField resignFirstResponder];
         }
         
     }];
@@ -231,7 +230,7 @@
         [self showTip:@"评论内容不能为空"];
         return;
     }
-    [_commentTextField resignFirstResponder];
+    [self textFieldShouldReturn:nil];
     
     if (self.fileImage) {
         [self uploadCommentImage];
@@ -375,6 +374,10 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self textFieldShouldReturn:nil];
+}
+
 #pragma mark - CommentCellDelegate
 
 - (void)clickCellComment:(CommentCell *)cell{
@@ -399,7 +402,6 @@
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
     [_commentTextField resignFirstResponder];
     
     _commentView.hidden = YES;

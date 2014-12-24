@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+@class JRDesigner;
 
 @interface JRBidInfo : NSObject
+
+@property (nonatomic, strong) JRDesigner *userBase;
+@property (nonatomic, strong) NSString *biddingDeclatation;
+@property (nonatomic, strong) NSString *bidId;
+
++ (NSMutableArray *)buildUpWithValue:(id)value;
 
 @end

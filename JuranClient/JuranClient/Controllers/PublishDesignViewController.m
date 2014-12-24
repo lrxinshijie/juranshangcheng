@@ -183,9 +183,13 @@
                 [self reloadData];
                 
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    MyDemandViewController *vc = [[MyDemandViewController alloc] init];
-                    vc.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:vc animated:YES];
+                    if (self.navigationController.tabBarController.tabBar.hidden) {
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }else{
+                        MyDemandViewController *vc = [[MyDemandViewController alloc] init];
+                        vc.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
                 });
             }else{
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

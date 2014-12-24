@@ -135,6 +135,7 @@
 
 - (void)reloadData{
     [_tableView reloadData];
+    [_tableView scrollToTop];
 }
 
 - (void)back:(id)sender{
