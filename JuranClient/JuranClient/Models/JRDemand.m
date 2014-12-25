@@ -8,7 +8,7 @@
 
 #import "JRDemand.h"
 #import "JRAreaInfo.h"
-#import "JRDesigner.h"
+#import "JRBidInfo.h"
 
 @implementation JRDemand
 
@@ -106,7 +106,7 @@
     self.auditDesc = [value getStringValueForKey:@"auditDesc" defaultValue:@""];
     self.bidNums = [value getIntValueForKey:@"bidNums" defaultValue:0];
     self.deadline = [value getStringValueForKey:@"deadline" defaultValue:@""];
-    self.bidInfoList = [JRDesigner buildUpDemandDetailWithValue:value[@"bidInfoList"]];
+    self.bidInfoList = [JRBidInfo buildUpWithValue:value[@"bidInfoList"]];
     
 }
 
@@ -143,6 +143,9 @@
 - (NSString *)roomNumString{
     
     NSMutableArray *retVals = [NSMutableArray array];
+//    if (_roomNum.length > 0) {
+//        return _roomNum;
+//    }
     
     NSArray *roomNum = [[DefaultData sharedData] roomNum];
     for (int i = 0; i<[roomNum count]; i++) {

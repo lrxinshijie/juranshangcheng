@@ -43,7 +43,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    self.navigationItem.title = _demand ? @"需求发布" : @"需求发布";
+    
+    self.navigationItem.title = _demand ? @"修改需求" : @"需求发布";
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSubmit) title:_demand ? @"保存" : @"确认发布" backgroundImage:nil];
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
@@ -56,9 +57,6 @@
     
     self.keys = @[@"姓名",@"联系电话",@"房屋类型",@"装修预算",@"房屋面积",@"风格",@"项目地址",@"小区名称",@"户型",@"户型图上传"];
     self.placeholders = @[@"请填写您的姓名",@"必须是11位数字",@"房屋类型", @"装修预算(万元)",@"必须是数字(平方米)",@"风格",@"项目地址",@"2-32个汉字",@"户型",@"可选"];
-    if (!_demand) {
-        self.demand = [[JRDemand alloc] init];
-    }
     
     BOOL flag = self.navigationController.tabBarController.tabBar.hidden;
     self.tableView = [self.view tableViewWithFrame:flag?kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
@@ -188,8 +186,6 @@
                     [self.navigationController pushViewController:vc animated:YES];
                 });
             }
-            
-            
         }
     }];
 }

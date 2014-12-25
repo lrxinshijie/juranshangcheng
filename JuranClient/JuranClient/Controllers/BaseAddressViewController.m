@@ -135,6 +135,7 @@
 
 - (void)reloadData{
     [_tableView reloadData];
+    [_tableView scrollToTop];
 }
 
 - (void)back:(id)sender{
@@ -167,16 +168,22 @@
 }
 
 - (NSArray*)sectionIndexTitlesForTableView:(UITableView *)tableView{
-    return sortedProvinceKeys;
+    if (type == 0) {
+        return sortedProvinceKeys;
+    }else{
+        return nil;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
-    NSInteger i = 0;
-    for (NSString *str in sortedProvinceKeys) {
-        if ([title isEqualToString:str]) {
-            return i;
+    if (type == 0) {
+        NSInteger i = 0;
+        for (NSString *str in sortedProvinceKeys) {
+            if ([title isEqualToString:str]) {
+                return i;
+            }
+            i++;
         }
-        i++;
     }
     return 0;
 }

@@ -166,7 +166,7 @@
     return retVal;
 }
 
-- (id)initWithDictionaryForDemandDetail:(NSDictionary *)dict{
+- (id)initWithDictionaryForBidInfo:(NSDictionary *)dict{
     if (self=[self init]) {
         
         if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
@@ -175,25 +175,11 @@
         self.userId = [dict getIntValueForKey:@"userId" defaultValue:0];
         self.userType = [dict getIntValueForKey:@"userType" defaultValue:0];
         self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
-        self.bidId = [dict getStringValueForKey:@"bidId" defaultValue:@""];
-        self.biddingDeclatation = [dict getStringValueForKey:@"biddingDeclatation" defaultValue:@""];
         self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
         self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
         
     }
     return self;
-}
-
-+ (NSMutableArray *)buildUpDemandDetailWithValue:(id)value{
-    NSMutableArray *retVal = [NSMutableArray array];
-    
-    if ([value isKindOfClass:[NSArray class]]) {
-        for (NSDictionary *item in value) {
-            JRDesigner *d = [[JRDesigner alloc] initWithDictionaryForDemandDetail:item];
-            [retVal addObject:d];
-        }
-    }
-    return retVal;
 }
 
 - (NSString*)formatUserName{
