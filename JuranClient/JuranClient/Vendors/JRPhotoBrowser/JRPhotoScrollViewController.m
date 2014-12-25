@@ -205,17 +205,18 @@
 - (void)adjustBottomViewFrame{
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
     CGFloat height = [_descTextView.text heightWithFont:_descTextView.font constrainedToWidth:_descTextView.frame.size.width];
-//    _descTextView.scrollEnabled = NO;
     if (height == 0) {
         height = 16;
     }else if (height > 65){
         height = 65;
-        _descTextView.scrollEnabled = YES;
+    }else{
+        height += 10;
     }
     
     CGRect frame = _descTextView.frame;
     frame.size.height = height;
     _descTextView.frame = frame;
+    _descTextView.scrollEnabled = height == 65;
     
     frame = _titleView.frame;
     frame.size.height = CGRectGetMaxY(_descTextView.frame) + 10;
