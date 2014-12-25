@@ -106,10 +106,10 @@
         [self.iconImageView setImageWithURLString:_user.headUrl];
     }
     _values = @[@[@"", _user.account], @[_user.nickName,
-                                         @"性别",
+                                         @"",
                                          _user.birthday.length == 0?@"未设置":_user.birthday,
                                          [_user locationAddress],
-                                         _user.detailAddress.length == 0?@"未设置":_user.detailAddress], @[[_user homeTelForPersonal], [_user idCardInfomation], _user.qq.length == 0?@"未设置":_user.qq, _user.weixin.length == 0?@"未设置":_user.weixin]];
+                                         _user.detailAddress.length == 0?@"未设置":_user.detailAddress], @[[_user homeTelForPersonal], [_user idCardInfomation], _user.qq, _user.weixin]];
 }
 
 - (void)loadData{
@@ -233,11 +233,12 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
             cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize+2];
             cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
-            cell.detailTextLabel.textColor = [UIColor blackColor];
         }
         cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]];
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        cell.detailTextLabel.textColor = [UIColor blackColor];
         cell.detailTextLabel.text = @"";
+        
         if (indexPath.section == 0) {
             cell.textLabel.text = _keys[indexPath.section][indexPath.row];
             CGRect frame = CGRectMake(0, 0, 100, 50);
@@ -256,6 +257,7 @@
             [view addSubview:self.iconImageView];
             //            [self.iconImageView setImageWithURLString:_user.headUrl];
             cell.accessoryView = view;
+            
         }else if (indexPath.section == 1 && indexPath.row == 1){
             cell.textLabel.text = _keys[indexPath.section][indexPath.row];
             cell.detailTextLabel.text = @"";
@@ -264,7 +266,11 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }else{
             cell.textLabel.text = _keys[indexPath.section][indexPath.row];
+            NSString *value = _values[indexPath.section][indexPath.row];
             cell.detailTextLabel.text = _values[indexPath.section][indexPath.row];
+            if ([value isEqualToString:@"未设置"]) {
+                cell.detailTextLabel.textColor = [UIColor grayColor];
+            }
         }
         return cell;
     }else{

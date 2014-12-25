@@ -197,7 +197,7 @@
 
 - (NSString*)homeTelForPersonal{
     if (_homeTel.length == 0) {
-        return @"未设置";
+        return @"";
     }
     
     if (self.homeTel.length > 7) {
