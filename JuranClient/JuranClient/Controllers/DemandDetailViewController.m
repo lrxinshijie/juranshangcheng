@@ -170,7 +170,6 @@
 - (IBAction)onModifyDemandInfo:(id)sender{
     PublishDesignViewController *vc = [[PublishDesignViewController alloc] init];
     vc.demand = _demand;
-    vc.isModify = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
