@@ -102,7 +102,8 @@
 
 - (void)loadAd{
     NSDictionary *param = @{@"adCode": @"app_consumer_index_roll",
-                            @"areaCode": @""};
+                            @"areaCode": @"",
+                            @"type": @(7)};
     [self showHUD];
     
     [[ALEngine shareEngine] pathURL:JR_GET_BANNER_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {

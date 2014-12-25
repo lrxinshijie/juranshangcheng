@@ -31,6 +31,10 @@
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *detailLabel;
 
+@property (nonatomic, strong) UILabel *detailTitleLabel;
+@property (nonatomic, strong) UILabel *detailContentLabel;
+@property (nonatomic, assign) CGFloat detailContentHeight;
+
 @property (nonatomic, strong) IBOutlet UIView *commentView;
 @property (nonatomic, strong) IBOutlet UITextField *commentTextField;
 
@@ -59,6 +63,21 @@
     self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard)];
     self.keys = @[@"地区", @"楼盘", @"户型", @"风格", @"面积", @"参考", @"描述"];
     self.values = @[@"", @"", @"", @"", @"", @"", @""];
+    self.detailTitleLabel = [self.view labelWithFrame:CGRectMake(15, 0, 100, 44) text:@"描述" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:15]];
+    self.detailContentLabel = [self.view labelWithFrame:CGRectMake(15, 44, 290, 0) text:_jrCase.desc textColor:[UIColor grayColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:14]];
+    _detailContentLabel.numberOfLines = 0;
+    if (_jrCase.desc.length == 0) {
+        self.detailContentHeight = 0;
+    }else{
+        self.detailContentHeight = [_jrCase.desc heightWithFont:_detailContentLabel.font constrainedToWidth:CGRectGetWidth(_detailContentLabel.frame)];
+    }
+    CGRect frame = _detailContentLabel.frame;
+    frame.size.height = _detailContentHeight;
+    _detailContentLabel.frame = frame;
+    
+    if (_detailContentHeight > 0) {
+        _detailContentHeight += 10;
+    }
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(237, 237, 237);
@@ -79,7 +98,7 @@
 //        [weakSelf loadComment];
 //    }];
     
-    CGRect frame = _commentView.frame;
+    frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
     
@@ -152,7 +171,12 @@
     if (indexPath.section == 0) {
         return 80;
     }else if (indexPath.section == 1){
-        return 44;
+        if (indexPath.row == [_keys count]-1) {
+            return 44 + _detailContentHeight;
+        }else{
+            return 44;
+        }
+        
     }else{
         JRComment *comment = [_comments objectAtIndex:indexPath.row];
         NSString *content = comment.commentContent;
@@ -194,20 +218,39 @@
     }else if (indexPath.section == 1){
         static NSString *CellIdentifier = @"Cell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        static NSInteger kViewTag = 1999;
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
             cell.backgroundColor = [UIColor clearColor];
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(5, 1, 310, 43)];
             view.backgroundColor = [UIColor whiteColor];
+            view.tag = kViewTag;
             [cell.contentView addSubview:view];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
+        cell.detailTextLabel.textColor = [UIColor grayColor];
         
-        cell.textLabel.text = [_keys objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = [_values objectAtIndex:indexPath.row];
+        UIView *view = (UIView *)[cell viewWithTag:kViewTag];
+        CGRect frame = view.frame;
+        if (indexPath.row == [_keys count] - 1) {
+            cell.textLabel.text = @"";
+            cell.detailTextLabel.text = @"";
+            [_detailTitleLabel removeFromSuperview];
+            [_detailContentLabel removeFromSuperview];
+            frame.size.height = 43 + _detailContentHeight;
+            [cell addSubview:_detailTitleLabel];
+            [cell addSubview:_detailContentLabel];
+        }else{
+            cell.textLabel.text = [_keys objectAtIndex:indexPath.row];
+            cell.detailTextLabel.text = [_values objectAtIndex:indexPath.row];
+            frame.size.height = 43;
+        }
+        
+        view.frame = frame;
+        
         return cell;
     }else{
         static NSString *CellIdentifier = @"CommentCell";
@@ -304,6 +347,11 @@
 
 - (void)clickCellUnfold:(CommentCell *)cell{
     [_tableView reloadData];
+    if ([_comments indexOfObject:cell.comment] == [_comments count]-1 && cell.comment.unfold) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [_tableView scrollToBottom];
+        });
+    }
 }
 
 - (void)setSelectComment:(JRComment *)selectComment{
@@ -348,6 +396,10 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isContainsEmoji]) {
+        return NO;
+    }
+    
     NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (text.length > 200) {
         return NO;

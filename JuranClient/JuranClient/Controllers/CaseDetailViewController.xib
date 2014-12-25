@@ -26,7 +26,7 @@
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <nil key="simulatedBottomBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-299" y="180"/>
+            <point key="canvasLocation" x="-554" y="185"/>
         </view>
         <view autoresizesSubviews="NO" contentMode="scaleToFill" id="wup-D7-78X">
             <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>

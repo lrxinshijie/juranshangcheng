@@ -19,6 +19,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *arrowButton;
 @property (nonatomic, strong) IBOutlet ASPlaceholderTextView *contentTextView;
 @property (nonatomic, strong) UITextField *selectedTextField;
+@property (nonatomic, strong) UITapGestureRecognizer *tapHide;
 @property (nonatomic, assign) BOOL isCheck;
 @property (nonatomic, assign) BOOL isPopview;
 
@@ -64,7 +65,7 @@
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(237, 237, 237);
     [self.view addSubview:_tableView];
-    
+    self.tapHide = [_tableView addTapGestureRecognizerWithTarget:self action:@selector(hideKeyboard)];
     _tableView.tableHeaderView = _headerView;
     
     self.isCheck = YES;
@@ -110,7 +111,7 @@
     }
     
     cell.accessoryType = UITableViewCellAccessoryNone;
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSString *placeholder = @"";
     NSString *title = @"";
     if (indexPath.row == 0) {
@@ -145,6 +146,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     if (textField.tag == 2) {
+        [self hideKeyboard];
         NSMutableArray *rows = [NSMutableArray array];
         NSString *key = textField.text;
         
@@ -289,12 +291,14 @@
     CGRect frame = _tableView.frame;
     frame.size.height = kWindowHeightWithoutNavigationBar - keyboardSize.height;
     _tableView.frame = frame;
+    [_tableView addGestureRecognizer:_tapHide];
     
     [UIView commitAnimations];
 }
 
 -(void)keyboardWillBeHidden:(NSNotification *)aNotification{
     _tableView.frame = kContentFrameWithoutNavigationBar;
+    [_tableView removeGestureRecognizer:_tapHide];
 }
 
 - (void)didReceiveMemoryWarning {

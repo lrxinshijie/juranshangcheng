@@ -94,6 +94,25 @@
     return 67;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        PrivateMessage *message = [_datas objectAtIndex:indexPath.row];
+        NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", message.receiverId],
+                                @"privateLetterId": [NSString stringWithFormat:@"%d", message.letterId],
+                                @"senderId": [NSString stringWithFormat:@"%d", message.senderId]};
+        [[ALEngine shareEngine] pathURL:JR_DELETE_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            if (!error) {
+                [_datas removeObject:message];
+                [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }];
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     

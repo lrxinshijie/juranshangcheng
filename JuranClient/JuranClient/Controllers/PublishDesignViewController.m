@@ -43,18 +43,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    if (!_isModify) {
-        self.navigationItem.title = @"需求发布";
-        UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSubmit) title:@"确认发布" backgroundImage:nil];
-        [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-        self.demand = [[JRDemand alloc] init];
-    }else{
-        self.navigationItem.title = @"修改需求";
-        UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSubmit) title:@"确认修改" backgroundImage:nil];
-        [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    }
+    
+    self.navigationItem.title = _demand ? @"修改需求" : @"需求发布";
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSubmit) title:_demand ? @"保存" : @"确认发布" backgroundImage:nil];
+    [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
@@ -71,6 +64,10 @@
     [self.view addSubview:_tableView];
     
     _tableView.tableHeaderView = _headerView;
+    
+    if (!_demand) {
+        self.demand = [[JRDemand alloc] init];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -89,6 +86,8 @@
 }
 
 - (void)onSubmit{
+    [_selectedTextField resignFirstResponder];
+    
     if (![self checkLogin]) {
         return;
     }
@@ -168,14 +167,21 @@
                                                                                  @"areaInfo": [_demand.areaInfo dictionaryValue],
                                                                                  @"roomTypeImgUrl": _demand.roomTypeImgUrl
                                                                                  }];
-    if (_isModify) {
-        [param setValue:_demand.designReqId forKey:@"designReqId"];
+    
+    if (_demand.designReqId.length > 0) {
+        [param setObject:_demand.designReqId forKey:@"designReqId"];
     }
-
+    
     [[ALEngine shareEngine] pathURL:JR_PUBLISH_DESIGN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            if (!_isModify) {
+            if (_demand.designReqId.length > 0) {
+                [self showTip:@"需求修改成功"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            }else{
                 [self showTip:@"发布需求成功"];
                 self.demand = [[JRDemand alloc] init];
                 self.fileImage = nil;
@@ -190,11 +196,6 @@
                         vc.hidesBottomBarWhenPushed = YES;
                         [self.navigationController pushViewController:vc animated:YES];
                     }
-                });
-            }else{
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
-                    [self.navigationController popViewControllerAnimated:YES];
                 });
             }
         }
@@ -419,7 +420,7 @@
         return NO;
     }else if (textField.tag == DemandEditBudget){
         double budget = [value doubleValue];
-        if (budget > 99999) {
+        if (budget < 0 || budget > 99999) {
             return NO;
         }
     }
@@ -473,7 +474,8 @@
 }
 
 -(void)keyboardWillBeHidden:(NSNotification *)aNotification{
-    _tableView.frame = kContentFrameWithoutNavigationBarAndTabBar;
+    BOOL flag = self.navigationController.tabBarController.tabBar.hidden;
+    _tableView.frame = flag ? kContentFrameWithoutNavigationBar : kContentFrameWithoutNavigationBarAndTabBar;
 }
 
 - (void)didReceiveMemoryWarning {

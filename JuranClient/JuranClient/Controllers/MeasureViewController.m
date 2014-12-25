@@ -29,6 +29,7 @@
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, assign) NSInteger serviceDate;
 @property (nonatomic, strong) JRAreaInfo *areaInfo;
+@property (nonatomic, strong) UITapGestureRecognizer *tapHide;
 
 @property (nonatomic, strong) IBOutlet UIView *designerView;
 @property (nonatomic, strong) IBOutlet UILabel *designerLabel;
@@ -63,7 +64,6 @@
     self.address = @"";
     self.areaInfo = [[JRAreaInfo alloc] init];
     
-    
     _designerImageView.layer.masksToBounds = YES;
     _designerImageView.layer.cornerRadius = CGRectGetHeight(_designerImageView.frame)/2;
     [_designerImageView setImageWithURLString:_designer.headUrl];
@@ -72,6 +72,9 @@
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(237, 237, 237);
     [self.view addSubview:_tableView];
+    
+    self.tapHide = [_tableView addTapGestureRecognizerWithTarget:self action:@selector(hideKeyboard)];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -104,7 +107,7 @@
             cell.detailTextLabel.text = _serviceDateKey;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
         static NSString *CellIdentifier = @"TextFieldCell";
@@ -115,6 +118,7 @@
         }
         
         cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         NSString *placeholder = @"";
         NSString *title = @"";
@@ -360,12 +364,13 @@
     CGRect frame = _tableView.frame;
     frame.size.height = kWindowHeightWithoutNavigationBar - keyboardSize.height;
     _tableView.frame = frame;
-    
+    [_tableView addGestureRecognizer:_tapHide];
     [UIView commitAnimations];
 }
 
 -(void)keyboardWillBeHidden:(NSNotification *)aNotification{
     _tableView.frame = kContentFrameWithoutNavigationBar;
+    [_tableView removeGestureRecognizer:_tapHide];
 }
 
 - (void)didReceiveMemoryWarning {
