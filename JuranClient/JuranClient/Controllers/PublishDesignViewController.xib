@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PublishDesignViewController">
             <connections>
-                <outlet property="headerView" destination="o3b-0b-KX2" id="a3b-F9-Px0"/>
+                <outlet property="headerView" destination="npy-t4-rpL" id="N2K-0z-BQT"/>
                 <outlet property="imageView" destination="GqJ-YR-Pxx" id="L0n-3o-gKN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
