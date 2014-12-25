@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSArray *values;
 @property (nonatomic, strong) UIImageView *photoImageView;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) UIImage *fileImage;
 @property (nonatomic, strong) NSString *fileImageURL;
 @property (nonatomic, strong) NSArray *placeholders;
@@ -68,11 +69,31 @@
     if (!_demand) {
         self.demand = [[JRDemand alloc] init];
     }
+    
+    [self loadAd];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self reloadData];
+}
+
+- (void)loadAd{
+    NSDictionary *param = @{@"adCode": @"app_consume_req_page",
+                            @"areaCode": @"110000",
+                            @"type": @(7)};
+    [self showHUD];
+    
+    [[ALEngine shareEngine] pathURL:JR_GET_BANNER_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSArray *bannerList = [data objectForKey:@"bannerList"];
+            NSDictionary *list = [bannerList firstObject];
+            if (list) {
+                [_imageView setImageWithURLString:[list objectForKey:@"mediaCode"]];
+            }
+        }
+    }];
 }
 
 - (void)reloadData{

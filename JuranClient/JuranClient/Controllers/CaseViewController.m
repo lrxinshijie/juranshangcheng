@@ -101,8 +101,8 @@
 }
 
 - (void)loadAd{
-    NSDictionary *param = @{@"adCode": @"app_consumer_index_roll",
-                            @"areaCode": @"",
+    NSDictionary *param = @{@"adCode": @"app_consume_service_page",
+                            @"areaCode": @"110000",
                             @"type": @(7)};
     [self showHUD];
     

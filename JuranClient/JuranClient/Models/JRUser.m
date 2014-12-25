@@ -25,6 +25,7 @@
         self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
         self.password = [dict getStringValueForKey:@"password" defaultValue:@""];
         self.userName = [dict getStringValueForKey:@"userName" defaultValue:@""];
+        self.userId = [dict getIntValueForKey:@"userId" defaultValue:0];
 
     }
     return self;
