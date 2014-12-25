@@ -89,6 +89,7 @@
     user.password = @"";
     user.guid = @"";
     user.token = @"";
+    user.userId = 0;
     [user saveLocal];
     [user resetCurrentUser];
 }

@@ -64,6 +64,10 @@
     [self.view addSubview:_tableView];
     
     _tableView.tableHeaderView = _headerView;
+    
+    if (!_demand) {
+        self.demand = [[JRDemand alloc] init];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -408,7 +412,7 @@
         return NO;
     }else if (textField.tag == DemandEditBudget){
         double budget = [value doubleValue];
-        if (budget > 99999) {
+        if (budget < 0 || budget > 99999) {
             return NO;
         }
     }
