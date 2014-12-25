@@ -48,10 +48,15 @@
 
 @implementation DemandDetailViewController
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameMyDemandReloadData object:nil];
     
     self.navigationItem.title = @"我的需求";
     demandInfoKeys = @[@"姓名", @"联系电话", @"编号", @"户型", @"装修预算", @"当前状态", @"房屋面积", @"风格", @"发布时间", @"终止时间", @"项目地址"];
@@ -116,7 +121,7 @@
 }
 
 - (void)reSetData{
-    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, _demand.roomType, [NSString stringWithFormat:@"%d万元", (NSInteger)_demand.renovationBudget], [_demand statusString], [NSString stringWithFormat:@"%d平方米", (NSInteger)_demand.houseArea], [_demand renovationStyleString], _demand.postDate, _demand.deadline, @""];
+    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, [_demand roomNumString], [NSString stringWithFormat:@"%d万元", (NSInteger)_demand.renovationBudget], [_demand statusString], [NSString stringWithFormat:@"%d平方米", (NSInteger)_demand.houseArea], [_demand renovationStyleString], _demand.postDate, _demand.deadline, @""];
 }
 
 - (void)setupUI{
@@ -151,6 +156,9 @@
     _rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
 }
 
+- (void)receiveReloadDataNotification:(NSNotification*)notification{
+    [self loadData];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -162,7 +170,6 @@
 - (IBAction)onModifyDemandInfo:(id)sender{
     PublishDesignViewController *vc = [[PublishDesignViewController alloc] init];
     vc.demand = _demand;
-    vc.isModify = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -173,9 +180,7 @@
     [[ALEngine shareEngine] pathURL:JR_REQ_STOP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            if (_delegate && [_delegate respondsToSelector:@selector(valueChangedWithDemandDetailVC:)]) {
-                [_delegate valueChangedWithDemandDetailVC:self];
-            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }];

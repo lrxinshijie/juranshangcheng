@@ -175,29 +175,33 @@
 
 - (void)submitDemand{
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"contactsName": _demand.contactsName,
-                            @"houseType": _demand.houseType,
-                            @"contactsMobile": _demand.contactsMobile,
-                            @"houseArea": [NSString stringWithFormat:@"%.2f", _demand.houseArea],
-                            @"budget": _demand.budget,
-                            @"budgetUnit": @"million",
-                            @"renovationStyle": _demand.renovationStyle,
-                            @"neighbourhoods": _demand.neighbourhoods,
-                            @"roomNum":_demand.roomNum,
-                            @"livingroomCount":_demand.livingroomCount,
-                            @"bathroomCount":_demand.bathroomCount,
-                            @"areaInfo": [_demand.areaInfo dictionaryValue],
-                            @"roomTypeImgUrl": _demand.roomTypeImgUrl
-                            }];
+                                                                                 @"houseType": _demand.houseType,
+                                                                                 @"contactsMobile": _demand.contactsMobile,
+                                                                                 @"houseArea": [NSString stringWithFormat:@"%.2f", _demand.houseArea],
+                                                                                 @"budget": _demand.budget,
+                                                                                 @"budgetUnit": @"million",
+                                                                                 @"renovationStyle": _demand.renovationStyle,
+                                                                                 @"neighbourhoods": _demand.neighbourhoods,
+                                                                                 @"roomNum":_demand.roomNum,
+                                                                                 @"livingroomCount":_demand.livingroomCount,
+                                                                                 @"bathroomCount":_demand.bathroomCount,
+                                                                                 @"areaInfo": [_demand.areaInfo dictionaryValue],
+                                                                                 @"roomTypeImgUrl": _demand.roomTypeImgUrl
+                                                                                 }];
     
     if (_demand.designReqId.length > 0) {
         [param setObject:_demand.designReqId forKey:@"designReqId"];
     }
-
+    
     [[ALEngine shareEngine] pathURL:JR_PUBLISH_DESIGN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if (_demand.designReqId.length > 0) {
                 [self showTip:@"需求修改成功"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
             }else{
                 [self showTip:@"发布需求成功"];
                 self.demand = [[JRDemand alloc] init];
@@ -206,9 +210,13 @@
                 [self reloadData];
                 
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    MyDemandViewController *vc = [[MyDemandViewController alloc] init];
-                    vc.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:vc animated:YES];
+                    if (self.navigationController.tabBarController.tabBar.hidden) {
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }else{
+                        MyDemandViewController *vc = [[MyDemandViewController alloc] init];
+                        vc.hidesBottomBarWhenPushed = YES;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
                 });
             }
         }

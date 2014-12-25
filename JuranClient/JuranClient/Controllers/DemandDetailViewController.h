@@ -7,18 +7,10 @@
 //
 
 #import "ALViewController.h"
-@class DemandDetailViewController;
 @class JRDemand;
-
-@protocol DemandDetailViewControllerDelegate <NSObject>
-
-- (void)valueChangedWithDemandDetailVC:(DemandDetailViewController*)vc;
-
-@end
 
 @interface DemandDetailViewController : ALViewController
 
 @property (nonatomic, strong) JRDemand *demand;
-@property (nonatomic, weak) id<DemandDetailViewControllerDelegate> delegate;
 
 @end
