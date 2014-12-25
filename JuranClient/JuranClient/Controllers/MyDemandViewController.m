@@ -12,7 +12,7 @@
 #import "DemandDetailViewController.h"
 #import "PublishDesignViewController.h"
 
-@interface MyDemandViewController ()<UITableViewDelegate, UITableViewDataSource, DemandDetailViewControllerDelegate>
+@interface MyDemandViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -33,12 +33,20 @@
     return self;
 }
 
+- (void)dealloc{
+    _tableView.dataSource = nil;
+    _tableView.delegate = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameMyDemandReloadData object:nil];
     
     self.navigationItem.title = @"我的需求";
     
@@ -102,6 +110,10 @@
     [_tableView reloadData];
 }
 
+- (void)receiveReloadDataNotification:(NSNotification*)notification{
+    [_tableView headerBeginRefreshing];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -143,15 +155,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DemandDetailViewController *vc = [[DemandDetailViewController alloc] init];
-    vc.delegate = self;
     vc.demand = _datas[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - DemandDetailViewControllerDelegate
-
-- (void)valueChangedWithDemandDetailVC:(DemandDetailViewController *)vc{
-    [_tableView headerBeginRefreshing];
-}
 
 @end

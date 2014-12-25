@@ -21,7 +21,8 @@
 {
     KTPhotoView *_photoView;
 }
-@property (nonatomic, strong) UILabel *titleLabel;
+
+@property (nonatomic, strong) UITextView *descTextView;
 @property (nonatomic, strong) UILabel *indexLabel;
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) IBOutlet UIView *toolBar;
@@ -129,12 +130,13 @@
     _titleView.backgroundColor = [UIColor clearColor];
     [bottomView_ addSubview:_titleView];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 220, 50)];
-    _titleLabel.numberOfLines = 0;
-    _titleLabel.textAlignment = NSTextAlignmentLeft;
-    _titleLabel.font = [UIFont systemFontOfSize:16];
-    _titleLabel.textColor = [UIColor whiteColor];
-    [_titleView addSubview:_titleLabel];
+    _descTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 220, 50)];
+    _descTextView.editable = NO;
+    _descTextView.backgroundColor = [UIColor clearColor];
+    _descTextView.textAlignment = NSTextAlignmentLeft;
+    _descTextView.font = [UIFont systemFontOfSize:16];
+    _descTextView.textColor = [UIColor whiteColor];
+    [_titleView addSubview:_descTextView];
     
     _indexLabel = [[UILabel alloc] initWithFrame:CGRectMake(screenFrame.size.width - 70, 10, 60, 20)];
     _indexLabel.numberOfLines = 1;
@@ -195,26 +197,29 @@
 }
 
 - (void)setTitleAndIndex:(NSInteger)newIndex{
-    _titleLabel.text = [dataSource_ titleAtIndex:newIndex];
+    _descTextView.text = [dataSource_ titleAtIndex:newIndex];
     _indexLabel.text = [NSString stringWithFormat:@"%i/%i", newIndex+1,[dataSource_ numberOfPhotos]];
     [self adjustBottomViewFrame];
 }
 
 - (void)adjustBottomViewFrame{
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
-    CGFloat height = [_titleLabel.text heightWithFont:_titleLabel.font constrainedToWidth:_titleLabel.frame.size.width];
-    height = height == 0? 16: height;
-    CGRect frame = _titleLabel.frame;
+    CGFloat height = [_descTextView.text heightWithFont:_descTextView.font constrainedToWidth:_descTextView.frame.size.width];
+//    _descTextView.scrollEnabled = NO;
+    if (height == 0) {
+        height = 16;
+    }else if (height > 65){
+        height = 65;
+        _descTextView.scrollEnabled = YES;
+    }
+    
+    CGRect frame = _descTextView.frame;
     frame.size.height = height;
-    _titleLabel.frame = frame;
+    _descTextView.frame = frame;
     
     frame = _titleView.frame;
-    frame.size.height = CGRectGetMaxY(_titleLabel.frame) + 10;
+    frame.size.height = CGRectGetMaxY(_descTextView.frame) + 10;
     _titleView.frame = frame;
-//    
-//    CGPoint center = _indexLabel.center;
-//    center.y = _titleView.center.y;
-//    _indexLabel.center = center;
     
     frame = _toolBar.frame;
     frame.origin.y = CGRectGetMaxY(_titleView.frame);

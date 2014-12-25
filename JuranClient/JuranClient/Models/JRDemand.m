@@ -108,6 +108,9 @@
     self.deadline = [value getStringValueForKey:@"deadline" defaultValue:@""];
     self.bidInfoList = [JRBidInfo buildUpWithValue:value[@"bidInfoList"]];
     
+    self.roomNum = [value getStringValueForKey:@"roomNum" defaultValue:@""];
+    self.livingroomCount = [value getStringValueForKey:@"livingroomCount" defaultValue:@""];
+    self.bathroomCount = [value getStringValueForKey:@"bathroomCount" defaultValue:@""];
 }
 
 - (NSString *)houseTypeString{
