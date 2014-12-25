@@ -43,8 +43,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    self.navigationItem.title = @"需求发布";
-    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSubmit) title:@"确认发布" backgroundImage:nil];
+    self.navigationItem.title = _demand ? @"需求发布" : @"需求发布";
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSubmit) title:_demand ? @"保存" : @"确认发布" backgroundImage:nil];
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
@@ -84,6 +84,8 @@
 }
 
 - (void)onSubmit{
+    [_selectedTextField resignFirstResponder];
+    
     if (![self checkLogin]) {
         return;
     }
@@ -149,7 +151,7 @@
 }
 
 - (void)submitDemand{
-    NSDictionary *param = @{@"contactsName": _demand.contactsName,
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"contactsName": _demand.contactsName,
                             @"houseType": _demand.houseType,
                             @"contactsMobile": _demand.contactsMobile,
                             @"houseArea": [NSString stringWithFormat:@"%.2f", _demand.houseArea],
@@ -162,22 +164,31 @@
                             @"bathroomCount":_demand.bathroomCount,
                             @"areaInfo": [_demand.areaInfo dictionaryValue],
                             @"roomTypeImgUrl": _demand.roomTypeImgUrl
-                            };
+                            }];
+    
+    if (_demand.designReqId.length > 0) {
+        [param setObject:_demand.designReqId forKey:@"designReqId"];
+    }
 
     [[ALEngine shareEngine] pathURL:JR_PUBLISH_DESIGN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            [self showTip:@"发布需求成功"];
-            self.demand = [[JRDemand alloc] init];
-            self.fileImage = nil;
-            _photoImageView.image = [UIImage imageNamed:@"publish_image_default"];
-            [self reloadData];
+            if (_demand.designReqId.length > 0) {
+                [self showTip:@"需求修改成功"];
+            }else{
+                [self showTip:@"发布需求成功"];
+                self.demand = [[JRDemand alloc] init];
+                self.fileImage = nil;
+                _photoImageView.image = [UIImage imageNamed:@"publish_image_default"];
+                [self reloadData];
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    MyDemandViewController *vc = [[MyDemandViewController alloc] init];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                });
+            }
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                MyDemandViewController *vc = [[MyDemandViewController alloc] init];
-                vc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:vc animated:YES];
-            });
             
         }
     }];
@@ -455,7 +466,8 @@
 }
 
 -(void)keyboardWillBeHidden:(NSNotification *)aNotification{
-    _tableView.frame = kContentFrameWithoutNavigationBarAndTabBar;
+    BOOL flag = self.navigationController.tabBarController.tabBar.hidden;
+    _tableView.frame = flag ? kContentFrameWithoutNavigationBar : kContentFrameWithoutNavigationBarAndTabBar;
 }
 
 - (void)didReceiveMemoryWarning {
