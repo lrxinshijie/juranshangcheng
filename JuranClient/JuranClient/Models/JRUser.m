@@ -13,6 +13,33 @@
 
 @implementation JRUser
 
+- (id)init{
+    self = [super init];
+    if (self) {
+        self.guid = @"";
+        self.token = @"";
+        self.userLevel = @"";
+        self.userLevelName = @"";
+        self.account = @"";
+        self.userName = @"";
+        self.headUrl = @"";
+        self.nickName = @"";
+        self.userType = @"";
+        self.mobileNum = @"";
+        self.email = @"";
+        self.birthday = @"";
+        self.homeTel = @"";
+        self.areaInfo = [[JRAreaInfo alloc] init];
+        self.detailAddress = @"";
+        self.zipCode = @"";
+        self.idCardType = @"";
+        self.idCardNumber = @"";
+        self.qq = @"";
+        self.weixin = @"";
+    }
+    return self;
+}
+
 - (id)initWithDictionary:(NSDictionary*)dict{
     if (self=[self init]) {
         //用户信息
@@ -165,6 +192,7 @@
     self.useablePoints = [dict getIntValueForKey:@"useablePoints" defaultValue:0];
     self.useableExp = [dict getIntValueForKey:@"useableExp" defaultValue:0];
     self.accountChangeable = [dict getBoolValueForKey:@"accountChangeable" defaultValue:NO];
+
 }
 
 - (NSString*)locationAddress{

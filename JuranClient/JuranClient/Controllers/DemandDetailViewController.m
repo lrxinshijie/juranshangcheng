@@ -317,6 +317,13 @@
         DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
         detailVC.designer = bidInfo.userBase;
         [self.navigationController pushViewController:detailVC animated:YES];
+    }else if (tableView == _demandInfoTableView){
+        if (indexPath.section == 0 && indexPath.row == 1) {
+            if (_demand.contactsMobile.length > 0) {
+                NSString *num = [[NSString alloc] initWithFormat:@"tel://%@", _demand.contactsMobile];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]];
+            }
+        }
     }
 }
 

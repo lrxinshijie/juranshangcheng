@@ -40,7 +40,7 @@
 }
 
 - (void)fillCellWithAnswer:(JRAnswer *)data{
-    _contentLabel.text = data.content;
+    _contentLabel.text = data.title;
     NSString *statusText = nil;
     NSString *statusImage = nil;
     if ([data answerStatus] == AnswerStatusResolved) {

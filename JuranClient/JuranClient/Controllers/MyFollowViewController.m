@@ -41,19 +41,15 @@
     
     self.navigationItem.title = @"我的关注";
     
+    CGPoint center = CGPointMake(self.view.center.x, 220);
+    _emptyDataView.center = center;
+    [self.view addSubview:_emptyDataView];
+    
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
-    
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_tableView.frame), CGRectGetHeight(_tableView.frame))];
-    _emptyDataView.backgroundColor = RGBColor(241, 241, 241);
-    CGPoint center = CGPointMake(bgView.center.x, 220);
-    _emptyDataView.center = center;
-    _emptyDataView.hidden = NO;
-    [bgView addSubview:_emptyDataView];
-    _tableView.backgroundView = bgView;
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -92,7 +88,7 @@
 }
 
 - (void)reloadData{
-    _emptyDataView.hidden = (_datas.count != 0);
+    _tableView.hidden = (_datas.count != 0);
     [_tableView reloadData];
 }
 

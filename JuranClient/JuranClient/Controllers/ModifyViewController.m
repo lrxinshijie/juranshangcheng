@@ -138,7 +138,7 @@
         {
             if (_textField.text.length < 8) {
                 //不能为空
-                [self showTip:@"请输入完整的固定!!"];
+                [self showTip:@"请输入完整的固定电话!!"];
                 return;
             }
             param = @{@"homeTel": _textField.text};
@@ -146,12 +146,8 @@
         }
         case ModifyCVTypeIdType:
         {
-            if (idCardType == -1) {
-                [self showTip:@"请选择证件类型"];
-                return;
-            }
-            param = @{@"idCardType":[NSString stringWithFormat:@"%d",idCardType],
-                      @"idCardNum":_textField.text};
+            _user.idCardType = [NSString stringWithFormat:@"%d", idCardType];
+            _user.idCardNumber = _textField.text;
             break;
         }
         case ModifyCVTypeQQ:
@@ -172,8 +168,7 @@
         default:
             break;
     }
-    [self modifyMemberDetail];
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)modifyMemberDetail{
@@ -243,7 +238,7 @@
     }
     if (_type == ModifyCVTypeIdType) {
         if (indexPath.row == 0) {
-            cell.textLabel.text = idCardType == -1?@"  选择证件类型":idTypes[idCardType];
+            cell.textLabel.text = idTypes[idCardType];
         }else{
             cell.accessoryView = _textField;
         }

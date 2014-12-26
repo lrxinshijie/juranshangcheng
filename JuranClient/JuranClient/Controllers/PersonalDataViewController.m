@@ -17,7 +17,7 @@
 #import "ActionSheetDatePicker.h"
 #import "TextFieldCell.h"
 
-@interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, SexySwitchDelegate, ModifyViewControllerDelegate, UITextFieldDelegate>
+@interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     NSDictionary *param;
 }
@@ -31,6 +31,7 @@
 @property (nonatomic, strong) NSArray *tags;
 
 @property (nonatomic, strong) UITextField *selectedTextField;
+@property (nonatomic, strong) NSString* oldAccount;
 
 @end
 
@@ -62,6 +63,13 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
+    _user = [[JRUser alloc] init];
+    _oldAccount = @"";
+    
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave) title:@"保存" backgroundImage:nil];
+    [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    
     [self setupDatas];
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
@@ -69,7 +77,6 @@
     [self.view addSubview:_tableView];
     _sexySwitch = [[SexySwitch alloc] init];
     _sexySwitch.selectedIndex = 1;
-    _sexySwitch.delegate = self;
     
     [self loadData];
 }
@@ -86,18 +93,6 @@
     _keys = @[@[@"头像", @"用户名"], @[@"昵称", @"性别", @"生日", @"所在地", @"详细地址"], @[@"固定电话", @"证件信息", @"QQ", @"微信"]];
     _placeholders = @[@[@"", @"请输入用户名"], @[@"请输入昵称", @"", @"", @"", @""], @[@"请输入固定电话", @"", @"请输入QQ", @"请输入微信"]];
     _tags = @[@[@"", @"1100"], @[@"1101", @"", @"", @"", @""], @[@"1102", @"", @"1103", @"1104"]];
-    
-//    typesForSection3 = @[@(ModifyCVTypeHomeTel), @(ModifyCVTypeIdType),@(ModifyCVTypeQQ),@(ModifyCVTypeWeiXin)];
-    /*
-     *   设计师端个人资料
-     *
-     keysForSection1 = @[@"头像", @"用户名"];
-     keysForSection2 = @[@"昵称", @"性别", @"生日", @"所在地"];
-     keysForSection3 = @[@"从业经验", @"设计费用", @"量房费用", @"擅长风格", @"设计专长", @"毕业院校", @"自我介绍是老骥伏枥开离开就是离开对方极乐世界进口飞机来上课"];
-     valuesForSection1 = @[@"头像", @"用户名"];
-     valuesForSection1 = @[@"昵称", @"性别", @"生日", @"所在地"];
-     valuesForSection1 = @[@"从业经验", @"设计费用", @"量房费用", @"擅长风格", @"设计专长", @"毕业院校", @"自我介绍"];
-     */
     
 }
 
@@ -118,7 +113,6 @@
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
-                _user = [JRUser currentUser];
                 [_user buildUpMemberDetailWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self reSetData];
@@ -130,26 +124,28 @@
 }
 
 - (void)modifyMemberDetail{
-    /*
-    NSDictionary *param11 = @{@"nickName": _user.nickName,
+    
+    NSDictionary *param1 = @{@"nickName": _user.nickName,
                             @"birthday": _user.birthday,
                             @"homeTel": _user.homeTel,
-                            @"provinceCode": _user.areaInfo.provinceCode,
-                            @"cityCode": _user.areaInfo.cityCode,
-                            @"districtCode": _user.areaInfo.districtCode,
+                             @"areaInfo": @{@"provinceCode": _user.areaInfo.provinceCode,
+                                            @"cityCode": _user.areaInfo.cityCode,
+                                            @"districtCode": _user.areaInfo.districtCode
+                                            },
                             @"detailAddress": _user.detailAddress,
                             @"zipCode": _user.zipCode,
                             @"idCardType": _user.idCardType,
                             @"idCardNum": _user.idCardNumber,
                             @"qq": _user.qq,
                             @"weixin": _user.weixin,
-                            @"account": _user.account,
-                            @"sex": @"1"
+                             @"oldAccount": self.oldAccount,
+                             @"account": _user.account,
+                             @"accountChangeable": [NSString stringWithFormat:@"%d", _user.accountChangeable],
+                            @"sex": [NSString stringWithFormat:@"%d", _sexySwitch.selectedIndex]
                         };
-    */
+    
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-//        [self hideHUD];
+    [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param1 HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self loadData];
@@ -165,15 +161,41 @@
     [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":image} responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             [[ALEngine shareEngine] pathURL:JR_UPLOAD_HEAD_IMAGE parameters:@{@"headUrl":[data objectForKey:@"imgUrl"]} HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:nil responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                [self hideHUD];
                 if (!error) {
                     [self loadData];
                 }
             }];
+        }else{
+            [self hideHUD];
         }
     }];
     
 }
 
+#pragma mark - Target Action
+
+- (void)onSave{
+    //判断合法性
+    if (_user.account.length == 0) {
+        [self showTip:@"用户名不能为空"];
+        return;
+    }
+    
+    if (![self isPureNumandCharacters:_user.homeTel]) {
+        [self showTip:@"请输入合法电话号码！！"];
+        return;
+    }
+    if (_user.homeTel.length < 8 || _user.homeTel.length > 12) {
+        //不能为空
+        [self showTip:@"请输入合法电话号码！！"];
+        return;
+    }
+    
+    [self modifyMemberDetail];
+    
+}
+/*
 #pragma mark - ModifyViewControllerDelegate
 
 - (void)modifyCommit:(ModifyViewController *)vc{
@@ -181,12 +203,14 @@
     [_tableView reloadData];
 }
 
+
 #pragma mark - SexySwitchDelegate
 
 - (void)sexySwitch:(SexySwitch *)sexySwitch valueChange:(NSInteger)index{
     param = @{@"sex": [NSString stringWithFormat:@"%d", index]};
     [self modifyMemberDetail];
 }
+*/
 
 #pragma mark - UITableViewDataSource/Delegate
 
@@ -338,46 +362,26 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.selectedTextField resignFirstResponder];
-    /*
-     *设计师端
-     if (indexPath.section == 3) {
-     PersonalDatasMoreViewController *vc = [[PersonalDatasMoreViewController alloc] init];
-     [self.navigationController pushViewController:vc animated:YES];
-     }
-     */
-    
     if (indexPath.section == 0 && indexPath.row == 0) {
         [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
             if (images.count > 0) {
                 [self uploadHeaderImage:images[0]];
             }
         }];
-        /*
-         if (_user.accountChangeable) {
-         [self showTip:@"用户名不可修改"];
-         return;
-         }
-         ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeUserName];
-         vc.title = keysForSection1[indexPath.row];
-         [self.navigationController pushViewController:vc animated:YES];*/
     }else if (indexPath.section == 1){
         if (indexPath.row == 2) {
             [ActionSheetDatePicker showPickerWithTitle:@"生日" datePickerMode:UIDatePickerModeDate selectedDate:[NSDate date] doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
                 _user.birthday = [(NSDate*)selectedDate stringWithFormat:[NSDate dateFormatString]];
-                NSString *dateString = [(NSDate*)selectedDate stringWithFormat:[NSDate timestampFormatString]];
-                param = @{@"birthday": dateString};
-                [self modifyMemberDetail];
+//                NSString *dateString = [(NSDate*)selectedDate stringWithFormat:[NSDate timestampFormatString]];
+//                param = @{@"birthday": dateString};
+//                [self modifyMemberDetail];
             } cancelBlock:^(ActionSheetDatePicker *picker) {
                 
             } origin:self.view];
         }else if (indexPath.row == 3){
             BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
             [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
-                param = @{@"areaInfo": @{@"provinceCode": areaInfo.provinceCode,
-                                         @"cityCode": areaInfo.cityCode,
-                                         @"districtCode": areaInfo.districtCode
-                                         }};
-                [self modifyMemberDetail];
+                _user.areaInfo = areaInfo;
             }];
             [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 4){
@@ -392,7 +396,6 @@
     }
     return;
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -434,72 +437,33 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    if (textField.tag == 1100 && _user.accountChangeable) {
+        [self showTip:@"用户名不可修改"];
+        return NO;
+    }
     self.selectedTextField = textField;
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-//    if (textField.tag == 0) {
-//        _demand.contactsName = textField.text;
-//    }else if (textField.tag == 1){
-//        _demand.contactsMobile = textField.text;
-//    }else if (textField.tag == 3){
-//        _demand.budget = textField.text;
-//    }else if (textField.tag == 4){
-//        _demand.houseArea = [textField.text doubleValue];
-//    }else if (textField.tag == 7){
-//        _demand.neighbourhoods = textField.text;
-//    }
+    if (textField.tag == 1100) {
+        if (textField.text >0 && [textField.text isEqualToString:_user.account]) {
+            self.oldAccount = _user.account;
+        }
+        _user.account = textField.text;
+    }else if (textField.tag == 1101){
+        _user.nickName = textField.text;
+    }else if (textField.tag == 1102){
+        _user.homeTel = textField.text;
+    }else if (textField.tag == 1103){
+        _user.qq = textField.text;
+    }else if (textField.tag == 1104){
+        _user.weixin = textField.text;
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if (textField.text.length == 0) {
-        //不能为空
-        [self showTip:@"输入内容不能为空!!"];
-        return NO;
-    }
-    switch (textField.tag) {
-        case 1100:
-        {
-            if (_user.accountChangeable) {
-                [self showTip:@"用户名不可修改"];
-                return YES;
-            }
-            param = @{@"oldAccount": _user.account,
-                      @"account":_selectedTextField.text,
-                      @"accountChangeable":[NSString stringWithFormat:@"%d", _user.accountChangeable]};
-            break;
-        }
-        case 1101:{
-            param = @{@"nickName": _selectedTextField.text};
-            break;
-        }
-        case 1102:{
-            if (![self isPureNumandCharacters:_selectedTextField.text]) {
-                [self showTip:@"请输入合法电话号码！！"];
-                return NO;
-            }
-            if (_selectedTextField.text.length < 8 || _selectedTextField.text.length > 12) {
-                //不能为空
-                [self showTip:@"请输入合法电话号码！！"];
-                return NO;
-            }
-            param = @{@"homeTel": _selectedTextField.text};
-            break;
-        }
-        case 1103:{
-            param = @{@"qq": _selectedTextField.text};
-            break;
-        }
-        case 1104:{
-            param = @{@"weixin": _selectedTextField.text};
-            break;
-        }
-        default:
-            break;
-    }
     [textField resignFirstResponder];
-    [self modifyMemberDetail];
     return YES;
 }
 
