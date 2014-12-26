@@ -43,12 +43,17 @@
 //Detail
 @property (nonatomic, strong) NSString *contactsSex;
 @property (nonatomic, strong) NSString *roomType;
-@property (nonatomic, strong) NSString *imageUrl;
+
 @property (nonatomic, strong) NSString *bidId;
 @property (nonatomic, strong) NSMutableArray *bidInfoList;
 @property (nonatomic, strong) NSString *deadBalance;
 @property (nonatomic, strong) NSString *postDate;
 @property (nonatomic, strong) NSString *auditDesc;
+
+//
+@property (nonatomic, copy) NSString *neRoomTypeImgUrl;
+@property (nonatomic, copy) NSString *oldRoomTypeImgUrl;
+@property (nonatomic, copy) NSString *roomTypeId;
 
 - (NSString*)statusString;
 - (NSInteger)statusIndex;

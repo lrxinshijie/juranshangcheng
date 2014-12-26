@@ -34,7 +34,6 @@
 @property (nonatomic, strong) NSString *realName;
 @property (nonatomic, assign) BOOL isAuth;
 @property (nonatomic, strong) NSString *granuate;
-@property (nonatomic, assign) NSInteger experience;
 @property (nonatomic, strong) NSString *style;
 @property (nonatomic, assign) NSInteger priceMeasure;
 @property (nonatomic, assign) NSInteger designFeeMin;
@@ -79,5 +78,7 @@
  * type  0为设计师列表   1为设计师详情  主要是分隔符不一样
  */
 - (NSString*)styleNamesWithType:(NSInteger)type;
+
+- (NSString*)experienceString;
 
 @end

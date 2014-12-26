@@ -417,10 +417,11 @@
         return NO;
     }
     
-//    NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
-//    if (textField.tag == DemandEditContactsMobile && value.length > kPhoneMaxNumber) {
-//        return NO;
-//    }else if (textField.tag == DemandEditContactsMobile && value.length > 32){
+    NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (textField.tag == 1101 && [Public convertToInt:value] > 12) {
+        return NO;
+    }
+//    else if (textField.tag == DemandEditContactsMobile && value.length > 32){
 //        return NO;
 //    }else if (textField.tag == DemandEditBudget){
 //        double budget = [value doubleValue];

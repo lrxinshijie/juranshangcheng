@@ -83,7 +83,7 @@
             _textField.text = _user.idCardNumber;
             _tipLabel.text = @"";
             _textField.placeholder = @"输入证件号码";
-            _textField.keyboardType = UIKeyboardTypeNumberPad;
+            _textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
             idTypes = @[@"  身份证", @"  军官证", @"  护照"];
             idCardType = _user.idCardType.integerValue;
             break;
@@ -277,28 +277,13 @@
     [_tableView reloadData];
 }
 
-- (int)countTheStrLength:(NSString*)strtemp {
-    int strlength = 0;
-    char* p = (char*)[strtemp cStringUsingEncoding:NSUnicodeStringEncoding];
-    for (int i=0 ; i<[strtemp lengthOfBytesUsingEncoding:NSUnicodeStringEncoding] ;i++) {
-        if (*p) {
-            p++;
-            strlength++;
-        }
-        else {
-            p++;
-        }
-    }
-    return (strlength+1)/2;
-}
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if ([string isContainsEmoji]) {
         return NO;
     }
     
     NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    NSInteger length = [self countTheStrLength:toBeString];
+    NSInteger length = [Public convertToInt:toBeString];
     switch (_type) {
         case ModifyCVTypeNickName:
         case ModifyCVTypeUserName:

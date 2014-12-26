@@ -48,7 +48,7 @@
         [_femaleBtn addTarget:self action:@selector(onSelected:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_femaleBtn];
         
-        self.selectedIndex = 0;
+        self.selectedIndex = 2;
     }
     return self;
 }
@@ -56,7 +56,7 @@
 - (void)onSelected:(id)sender{
     NSInteger index;
     if (sender == _maleBtn) {
-        index = 0;
+        index = 2;
     }else{
         index = 1;
     }
@@ -71,8 +71,8 @@
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex{
     _selectedIndex = selectedIndex;
-    UIButton *btn = selectedIndex?_femaleBtn:_maleBtn;
-    UIButton *otherBtn = selectedIndex?_maleBtn:_femaleBtn;
+    UIButton *btn = selectedIndex == 1?_femaleBtn:_maleBtn;
+    UIButton *otherBtn = selectedIndex == 1?_maleBtn:_femaleBtn;
     [UIView animateWithDuration:.3f animations:^{
         _backgroundView.center = btn.center;
     } completion:^(BOOL finished) {
