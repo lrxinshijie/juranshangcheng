@@ -101,6 +101,8 @@
     
     if (_fileImage) {
         _photoImageView.image = _fileImage;
+    }else if (_demand.designReqId.length > 0){
+        [_photoImageView setImageWithURLString:_demand.roomTypeImgUrl];
     }
     
     [_tableView reloadData];
@@ -165,6 +167,8 @@
             if (!error) {
                 _demand.roomTypeImgUrl = [data objectForKey:@"imgUrl"];
                 [self submitDemand];
+            }else{
+                [self hideHUD];
             }
         }];
     }else{
@@ -186,7 +190,9 @@
                                                                                  @"livingroomCount":_demand.livingroomCount,
                                                                                  @"bathroomCount":_demand.bathroomCount,
                                                                                  @"areaInfo": [_demand.areaInfo dictionaryValue],
-                                                                                 @"roomTypeImgUrl": _demand.roomTypeImgUrl
+                                                                                 @"newRoomTypeUrl": _demand.neRoomTypeImgUrl,
+                                                                                 @"oldRoomTypeUrl": _demand.oldRoomTypeImgUrl,
+                                                                                 @"roomTypeId": _demand.roomTypeId
                                                                                  }];
     
     if (_demand.designReqId.length > 0) {
@@ -211,6 +217,7 @@
                 
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     if (self.navigationController.tabBarController.tabBar.hidden) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
                         [self.navigationController popViewControllerAnimated:YES];
                     }else{
                         MyDemandViewController *vc = [[MyDemandViewController alloc] init];

@@ -409,7 +409,7 @@
             if (1 == indexPath.row) {
                 cell.detailTextLabel.text = _designer.granuate;
             }else if (4 == indexPath.row){
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%d年", _designer.experience];
+                cell.detailTextLabel.text = [_designer experienceString];
             }else if (5 == indexPath.row){
                 cell.detailTextLabel.text = [_designer styleNamesWithType:1];
             }else if (2 == indexPath.row){

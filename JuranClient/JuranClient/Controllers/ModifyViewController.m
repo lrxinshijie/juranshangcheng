@@ -83,7 +83,7 @@
             _textField.text = _user.idCardNumber;
             _tipLabel.text = @"";
             _textField.placeholder = @"输入证件号码";
-            _textField.keyboardType = UIKeyboardTypeNumberPad;
+            _textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
             idTypes = @[@"  身份证", @"  军官证", @"  护照"];
             idCardType = _user.idCardType.integerValue;
             break;
@@ -138,7 +138,7 @@
         {
             if (_textField.text.length < 8) {
                 //不能为空
-                [self showTip:@"请输入完整的固定!!"];
+                [self showTip:@"请输入完整的固定电话!!"];
                 return;
             }
             param = @{@"homeTel": _textField.text};
@@ -146,12 +146,8 @@
         }
         case ModifyCVTypeIdType:
         {
-            if (idCardType == -1) {
-                [self showTip:@"请选择证件类型"];
-                return;
-            }
-            param = @{@"idCardType":[NSString stringWithFormat:@"%d",idCardType],
-                      @"idCardNum":_textField.text};
+            _user.idCardType = [NSString stringWithFormat:@"%d", idCardType];
+            _user.idCardNumber = _textField.text;
             break;
         }
         case ModifyCVTypeQQ:
@@ -172,8 +168,7 @@
         default:
             break;
     }
-    [self modifyMemberDetail];
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)modifyMemberDetail{
@@ -243,7 +238,7 @@
     }
     if (_type == ModifyCVTypeIdType) {
         if (indexPath.row == 0) {
-            cell.textLabel.text = idCardType == -1?@"  选择证件类型":idTypes[idCardType];
+            cell.textLabel.text = idTypes[idCardType];
         }else{
             cell.accessoryView = _textField;
         }
@@ -277,28 +272,13 @@
     [_tableView reloadData];
 }
 
-- (int)countTheStrLength:(NSString*)strtemp {
-    int strlength = 0;
-    char* p = (char*)[strtemp cStringUsingEncoding:NSUnicodeStringEncoding];
-    for (int i=0 ; i<[strtemp lengthOfBytesUsingEncoding:NSUnicodeStringEncoding] ;i++) {
-        if (*p) {
-            p++;
-            strlength++;
-        }
-        else {
-            p++;
-        }
-    }
-    return (strlength+1)/2;
-}
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if ([string isContainsEmoji]) {
         return NO;
     }
     
     NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    NSInteger length = [self countTheStrLength:toBeString];
+    NSInteger length = [Public convertToInt:toBeString];
     switch (_type) {
         case ModifyCVTypeNickName:
         case ModifyCVTypeUserName:

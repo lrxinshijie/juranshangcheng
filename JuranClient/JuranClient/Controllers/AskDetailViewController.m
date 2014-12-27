@@ -19,6 +19,7 @@
 }
 
 @property (nonatomic, strong) IBOutlet UIView *headerView;
+@property (nonatomic, strong) IBOutlet UIImageView *contentImageView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *answerView;
 @property (nonatomic, strong) IBOutlet UITextField *answerTextField;
@@ -118,6 +119,9 @@
 
 - (void)setupHeaderView{
     _contentLabel.text = _question.questionContent;
+    if (_question.imageUrl.length > 0) {
+        [_contentImageView setImageWithURLString:_question.imageUrl];
+    }
     _typeLabel.text = [NSString stringWithFormat:@"分类：%@", [_question questionTypeString]];
     _timeLabel.text = _question.publishTime;
     
@@ -125,8 +129,22 @@
     frame.size.height = [_contentLabel.text heightWithFont:_contentLabel.font constrainedToWidth:_contentLabel.frame.size.width];
     _contentLabel.frame = frame;
     
+    CGFloat y;
+    
+    if (_question.imageUrl.length) {
+        _contentImageView.hidden = NO;
+        frame = _contentImageView.frame;
+        frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;
+        _contentImageView.frame = frame;
+        
+        y = CGRectGetMaxY(_contentImageView.frame) + 5;
+    }else{
+        _contentImageView.hidden = YES;
+        y = CGRectGetMaxY(_contentLabel.frame) + 5;
+    }
+    
     frame = _timeAndTypeBgView.frame;
-    frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;
+    frame.origin.y = y;
     _timeAndTypeBgView.frame = frame;
     
     frame = _headerView.frame;

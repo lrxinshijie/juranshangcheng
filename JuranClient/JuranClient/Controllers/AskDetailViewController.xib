@@ -11,6 +11,7 @@
                 <outlet property="answerTextField" destination="akh-VV-nGL" id="e7Y-aJ-t0U"/>
                 <outlet property="answerView" destination="tiy-hd-yce" id="g2S-dY-XqF"/>
                 <outlet property="chooseImageView" destination="Q1V-6V-TWn" id="zbr-Z3-Z4i"/>
+                <outlet property="contentImageView" destination="uwL-3q-VYZ" id="dKo-jg-qtp"/>
                 <outlet property="contentLabel" destination="w6o-Cx-mgs" id="GEH-c5-tDF"/>
                 <outlet property="headerView" destination="zyT-fC-cYY" id="QIn-gr-kXd"/>
                 <outlet property="timeAndTypeBgView" destination="gcJ-Ao-JfR" id="LRi-v8-Xmk"/>
@@ -27,11 +28,11 @@
             <point key="canvasLocation" x="237" y="50"/>
         </view>
         <view autoresizesSubviews="NO" contentMode="scaleToFill" id="zyT-fC-cYY">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="gcJ-Ao-JfR">
-                    <rect key="frame" x="0.0" y="62" width="320" height="38"/>
+                    <rect key="frame" x="0.0" y="124" width="320" height="38"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Oqw-4b-yAc">
@@ -58,10 +59,15 @@
                     <color key="textColor" red="0.49803924560546875" green="0.49803924560546875" blue="0.49803924560546875" alpha="1" colorSpace="deviceRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="uwL-3q-VYZ" customClass="ZoomInImageView">
+                    <rect key="frame" x="20" y="69" width="70" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.9647059440612793" green="0.9647059440612793" blue="0.9647059440612793" alpha="1" colorSpace="deviceRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-56" y="212"/>
+            <point key="canvasLocation" x="-56" y="243"/>
         </view>
         <view autoresizesSubviews="NO" contentMode="scaleToFill" id="tiy-hd-yce">
             <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>

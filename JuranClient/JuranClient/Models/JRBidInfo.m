@@ -19,7 +19,9 @@
         }
         self.bidId = [dict getStringValueForKey:@"bidId" defaultValue:@""];
         self.biddingDeclatation = [dict getStringValueForKey:@"biddingDeclatation" defaultValue:@""];
-        self.userBase = [[JRDesigner alloc] initWithDictionaryForBidInfo:dict[@"userBase"]];
+        self.userBase = [[JRDesigner alloc] initWithDictionaryForBidInfo:dict];
+        self.bidDate = [dict getStringValueForKey:@"bidDate" defaultValue:@""];
+        
     }
     return self;
 }

@@ -35,12 +35,14 @@
         self.roomTypeImgUrl = @"";
         self.contactsSex = @"";
         self.roomType = @"";
-        self.imageUrl = @"";
+        self.neRoomTypeImgUrl = @"";
+        self.oldRoomTypeImgUrl = @"";
         self.bidId = @"";
         self.bidInfoList = [NSMutableArray array];
         self.deadBalance = @"";
         self.postDate = @"";
         self.auditDesc = @"";
+        self.roomTypeId = @"";
     }
     
     return self;
@@ -61,7 +63,7 @@
         self.bidNums = [dict getIntValueForKey:@"bidNums" defaultValue:0];
         self.publishTime = [dict getStringValueForKey:@"publishTime" defaultValue:@""];
         self.houseAddress = [dict getStringValueForKey:@"houseAddress" defaultValue:@""];
-        self.houseArea = [dict getIntValueForKey:@"houseArea" defaultValue:0];
+        self.houseArea = [dict getDoubleValueForKey:@"houseArea" defaultValue:0];
         self.style = [dict getStringValueForKey:@"style" defaultValue:@""];
         self.deadline = [dict getStringValueForKey:@"deadline" defaultValue:@""];
         self.newBidNums = [dict getIntValueForKey:@"newBidNums" defaultValue:0];
@@ -97,9 +99,22 @@
     NSDictionary *areaDic = value[@"areaInfo"];
     self.areaInfo = [[JRAreaInfo alloc] initWithDictionary:areaDic];
     
+    self.title = [value getStringValueForKey:@"title" defaultValue:@""];
+    self.status = [value getStringValueForKey:@"status" defaultValue:@""];
+    self.houseType = [value getStringValueForKey:@"houseType" defaultValue:@""];
+    self.renovationBudget = [value getIntValueForKey:@"renovationBudget" defaultValue:0]/1000000;
+    self.houseAddress = [value getStringValueForKey:@"houseAddress" defaultValue:@""];
+    self.houseArea = [value getDoubleValueForKey:@"houseArea" defaultValue:0];
+    self.style = [value getStringValueForKey:@"style" defaultValue:@""];
+    self.deadline = [value getStringValueForKey:@"deadline" defaultValue:@""];
+    self.newBidNums = [value getIntValueForKey:@"newBidNums" defaultValue:0];
+    self.isBidded = [value getBoolValueForKey:@"isBidded" defaultValue:NO];
+    
     self.neighbourhoods = [value getStringValueForKey:@"neighbourhoods" defaultValue:@""];
     self.roomType = [value getStringValueForKey:@"roomType" defaultValue:@""];
-    self.imageUrl = [value getStringValueForKey:@"imageUrl" defaultValue:@""];
+    self.neRoomTypeImgUrl = @"";
+    self.oldRoomTypeImgUrl = @"";
+    _roomTypeImgUrl = [value getStringValueForKey:@"imageUrl" defaultValue:@""];
     self.bidId = [value getStringValueForKey:@"bidId" defaultValue:@""];
     self.deadBalance = [value getStringValueForKey:@"deadBalance" defaultValue:@""];
     self.postDate = [value getStringValueForKey:@"postDate" defaultValue:@""];
@@ -111,6 +126,14 @@
     self.roomNum = [value getStringValueForKey:@"roomNum" defaultValue:@""];
     self.livingroomCount = [value getStringValueForKey:@"livingroomCount" defaultValue:@""];
     self.bathroomCount = [value getStringValueForKey:@"bathroomCount" defaultValue:@""];
+    self.roomTypeId = [value getStringValueForKey:@"imageId" defaultValue:@""];
+}
+
+- (void)setRoomTypeImgUrl:(NSString *)roomTypeImgUrl{
+    _oldRoomTypeImgUrl = _roomTypeImgUrl;
+    
+    _roomTypeImgUrl = roomTypeImgUrl;
+    _neRoomTypeImgUrl = _roomTypeImgUrl;
 }
 
 - (NSString *)houseTypeString{

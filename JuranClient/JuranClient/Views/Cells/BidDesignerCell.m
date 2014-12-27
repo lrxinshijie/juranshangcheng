@@ -58,9 +58,9 @@
         _headImageView.image = [UIImage imageNamed:@"unlogin_head.png"];
     }
     
-    _timeLabel.text = @"2014-9-20";
-    _styleLabel.text = [designer styleNamesWithType:0];
-    _experienceLabel.text =  [NSString stringWithFormat:@"%d年", designer.experienceCount];
+    _timeLabel.text = bidInfo.bidDate;
+    _styleLabel.text = designer.styleNames;
+    _experienceLabel.text =  [designer experienceString];
     _produntCountLabel.text = [NSString stringWithFormat:@"%i", designer.projectCount];
     _browseCountLabel.text = [NSString stringWithFormat:@"%i", designer.browseCount];
     _declarationLabel.text = [NSString stringWithFormat:@"应标宣言:%@", bidInfo.biddingDeclatation];

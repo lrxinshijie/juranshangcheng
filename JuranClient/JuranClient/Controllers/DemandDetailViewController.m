@@ -121,7 +121,7 @@
 }
 
 - (void)reSetData{
-    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, [_demand roomNumString], [NSString stringWithFormat:@"%d万元", (NSInteger)_demand.renovationBudget], [_demand statusString], [NSString stringWithFormat:@"%d平方米", (NSInteger)_demand.houseArea], [_demand renovationStyleString], _demand.postDate, _demand.deadline, @""];
+    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, [_demand roomNumString], [NSString stringWithFormat:@"%d万元", (NSInteger)_demand.renovationBudget], [_demand statusString], [NSString stringWithFormat:@"%.2f平方米", _demand.houseArea], [_demand renovationStyleString], _demand.postDate, _demand.deadline, @""];
 }
 
 - (void)setupUI{
@@ -295,7 +295,7 @@
                 [_demandAddressView removeFromSuperview];
             }
             _demandAddressLabel.text = _demand.houseAddress;
-            [_roomTypeImageView setImageWithURLString:_demand.imageUrl];
+            [_roomTypeImageView setImageWithURLString:_demand.roomTypeImgUrl];
             [cell.contentView addSubview:_demandAddressView];
         }else if (indexPath.row == 5){
             cell.detailTextLabel.textColor = RGBColor(49, 113, 179);
@@ -317,6 +317,13 @@
         DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
         detailVC.designer = bidInfo.userBase;
         [self.navigationController pushViewController:detailVC animated:YES];
+    }else if (tableView == _demandInfoTableView){
+        if (indexPath.section == 0 && indexPath.row == 1) {
+            if (_demand.contactsMobile.length > 0) {
+                NSString *num = [[NSString alloc] initWithFormat:@"tel://%@", _demand.contactsMobile];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]];
+            }
+        }
     }
 }
 

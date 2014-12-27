@@ -60,7 +60,7 @@
     self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
     self.isAuth = [dict getBoolValueForKey:@"isAuth" defaultValue:FALSE];
     self.granuate = [dict getStringValueForKey:@"granuate" defaultValue:@""];
-    self.experience = [dict getIntValueForKey:@"experience" defaultValue:0];
+    self.experienceCount = [dict getIntValueForKey:@"experience" defaultValue:0];
     self.style = [dict getStringValueForKey:@"style" defaultValue:@""];
     self.priceMeasure = [dict getIntValueForKey:@"priceMeasure" defaultValue:0];
     self.designFeeMin = [dict getIntValueForKey:@"designFeeMin" defaultValue:0];
@@ -177,7 +177,11 @@
         self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
         self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
         self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
-        
+        self.isRealNameAuth = [dict getIntValueForKey:@"isRealNameAuth" defaultValue:0];
+        self.styleNames = [dict getStringValueForKey:@"styleNames" defaultValue:@""];
+        self.experienceCount = [dict getIntValueForKey:@"experienceCount" defaultValue:0];
+        self.browseCount = [dict getIntValueForKey:@"browseCount" defaultValue:0];
+        self.projectCount = [dict getIntValueForKey:@"projectCount" defaultValue:0];
     }
     return self;
 }
@@ -212,6 +216,13 @@
         styleNames = [styleNames stringByAppendingString:separateStr];
     }
     return styleNames;
+}
+
+- (NSString*)experienceString{
+    if (!_experienceCount) {
+        return @"";
+    }
+    return [NSString stringWithFormat:@"%d年", _experienceCount];
 }
 
 @end

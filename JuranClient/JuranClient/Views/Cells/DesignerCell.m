@@ -46,7 +46,7 @@
     }
     
     _styleLabel.text = [data styleNamesWithType:0];
-    _experienceLabel.text =  [NSString stringWithFormat:@"%d年", data.experienceCount];
+    _experienceLabel.text =  [data experienceString];
     _productCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];
     _readCountLabel.text = [NSString stringWithFormat:@"%i", data.browseCount];
     

@@ -14,6 +14,7 @@
 @property (nonatomic, strong) JRDesigner *userBase;
 @property (nonatomic, strong) NSString *biddingDeclatation;
 @property (nonatomic, strong) NSString *bidId;
+@property (nonatomic, strong) NSString *bidDate;
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
