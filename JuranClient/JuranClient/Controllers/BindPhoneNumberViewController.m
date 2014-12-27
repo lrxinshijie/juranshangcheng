@@ -36,6 +36,7 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [self setupUI];
+    
     if (_user.mobileNum && _user.mobileNum.length > 0) {
         step = 1;
     }else{
@@ -80,7 +81,7 @@
     CGRect frame = CGRectMake(0, 0, kWindowWidth, 44*3);
     self.tableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
-    _tableView.backgroundColor = RGBColor(241, 241, 241);
+    _tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_tableView];
     
     frame = _tableFooterView.frame;
@@ -242,6 +243,10 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [_phoneTextField resignFirstResponder];
+    [_captchaTextField resignFirstResponder];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

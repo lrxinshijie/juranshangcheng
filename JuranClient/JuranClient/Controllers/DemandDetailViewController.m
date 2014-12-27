@@ -91,7 +91,7 @@
         _modifyDemandInfoButton.hidden = YES;
     }
     
-    _demandInfoTitleLabel.text = [NSString stringWithFormat:@"%@的%@", _demand.neighbourhoods, _demand.roomType];
+    _demandInfoTitleLabel.text = [NSString stringWithFormat:@"%@%@", _demand.neighbourhoods, _demand.roomType];
 //    _demandInfoTitleLabel.text = _demand.title;
     [self reSetData];
     [self setupDesignerTableHeaderView];
@@ -169,6 +169,10 @@
 }
 
 #pragma mark - Target Action
+
+- (void)handleTap:(UITapGestureRecognizer*)gesture{
+    
+}
 
 - (IBAction)onModifyDemandInfo:(id)sender{
     PublishDesignViewController *vc = [[PublishDesignViewController alloc] init];
@@ -277,7 +281,7 @@
             cell = (BidDesignerCell *)[nibs firstObject];
         }
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
         JRBidInfo *bidInfo = _demand.bidInfoList[indexPath.row];
         [cell fillCellWithJRBidInfo:bidInfo];
@@ -320,18 +324,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (tableView == _designerTableView) {
         JRBidInfo *bidInfo = _demand.bidInfoList[indexPath.row];
         DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
         detailVC.designer = bidInfo.userBase;
         [self.navigationController pushViewController:detailVC animated:YES];
     }else if (tableView == _demandInfoTableView){
-        if (indexPath.section == 0 && indexPath.row == 1) {
-            if (_demand.contactsMobile.length > 0) {
-                NSString *num = [[NSString alloc] initWithFormat:@"tel://%@", _demand.contactsMobile];
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]];
-            }
-        }
     }
 }
 

@@ -32,7 +32,7 @@
    self = [super initWithFrame:frame];
    if (self) {
       [self setDelegate:self];
-      [self setMaximumZoomScale:2.0];
+      [self setMaximumZoomScale:3.0];
       [self setShowsHorizontalScrollIndicator:NO];
       [self setShowsVerticalScrollIndicator:NO];
       [self loadSubviewsWithFrame:frame];
@@ -49,7 +49,9 @@
 
 - (void)setImage:(UIImage *)newImage 
 {
+    
     CGSize size = newImage.size;
+    
     CGRect frame;
     if (size.width/CGRectGetWidth(self.bounds) > size.height/CGRectGetHeight(self.bounds)) {
         frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), size.width/CGRectGetWidth(self.bounds)*size.height);
@@ -58,8 +60,11 @@
     }
     imageView_.frame = frame;
     imageView_.center = self.center;
+    self.contentSize = CGSizeMake(0, size.height);
+    
    [imageView_ setImage:newImage];
 }
+
 
 - (UIImage *)image{
     return imageView_.image;
@@ -71,6 +76,7 @@
 
    if ([self isZoomed] == NO && CGRectEqualToRect([self bounds], [imageView_ frame]) == NO) {
       [imageView_ setFrame:[self bounds]];
+//       imageView_.center = self.center;
    }
 }
 
@@ -109,7 +115,8 @@
    float newScale;
    CGRect zoomRect;
    if ([self isZoomed]) {
-      zoomRect = [self bounds];
+//      zoomRect = [self bounds];
+       zoomRect = imageView_.bounds;
    } else {
       newScale = [self maximumZoomScale];
       zoomRect = [self zoomRectForScale:newScale withCenter:location];
@@ -157,7 +164,6 @@
    UIView *viewToZoom = imageView_;
    return viewToZoom;
 }
-
 
 #pragma mark -
 #pragma mark Methods called during rotation to preserve the zoomScale and the visible portion of the image

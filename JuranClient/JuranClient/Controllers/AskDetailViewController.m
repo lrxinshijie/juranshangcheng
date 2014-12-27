@@ -219,6 +219,7 @@
             _question.answerCount += 1;
             _answerTextField.text = @"";
             [self reloadData];
+            [_tableView scrollsToTop];
             
             if (_delegate && [_delegate respondsToSelector:@selector(answeredWithAskDetailViewController:)]) {
                 [_delegate answeredWithAskDetailViewController:self];
