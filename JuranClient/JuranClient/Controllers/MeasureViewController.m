@@ -73,8 +73,7 @@
     _tableView.backgroundColor = RGBColor(237, 237, 237);
     [self.view addSubview:_tableView];
     
-    self.tapHide = [_tableView addTapGestureRecognizerWithTarget:self action:@selector(hideKeyboard)];
-    
+    self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

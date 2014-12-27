@@ -96,11 +96,11 @@
             <point key="canvasLocation" x="45" y="-202"/>
         </view>
         <view contentMode="scaleToFill" id="npy-t4-rpL">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="GqJ-YR-Pxx">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
             </subviews>
