@@ -113,7 +113,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" id="H4v-nr-Gtn">
-                    <rect key="frame" x="158" y="17" width="1" height="15"/>
+                    <rect key="frame" x="158" y="17" width="0.5" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.85882359743118286" green="0.85882359743118286" blue="0.85882359743118286" alpha="1" colorSpace="deviceRGB"/>
                 </view>

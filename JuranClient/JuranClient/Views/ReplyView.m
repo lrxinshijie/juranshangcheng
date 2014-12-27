@@ -19,6 +19,7 @@
 
 - (instancetype)initWithComments:(NSArray *)comments{
     CGRect frame = CGRectMake(0, 0, 290, 0);
+    self.userInteractionEnabled = YES;
     if (self = [super initWithFrame:frame]) {
         
     }

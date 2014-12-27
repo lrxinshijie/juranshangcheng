@@ -49,9 +49,16 @@
     _verifyPsdTextField.secureTextEntry = YES;
     _verifyPsdTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
-    _tableView.tableFooterView = _tableFooterView;
+    
+    CGRect frame = CGRectMake(0, 0, kWindowWidth, 44*3);
+    self.tableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     [self.view addSubview:_tableView];
+    
+    frame = _tableFooterView.frame;
+    frame.origin = CGPointMake(0, CGRectGetMaxY(_tableView.frame));
+    _tableFooterView.frame = frame;
+    
+    [self.view addSubview:_tableFooterView];
     
     UIButton *btn = [self.view buttonWithFrame:_tableFooterView.bounds target:self action:@selector(onHidden:) image:nil];
     [_tableFooterView insertSubview:btn atIndex:0];
@@ -129,6 +136,7 @@
         //        cell.detailTextLabel.textColor = RGBColor(69, 118, 187);
         cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (indexPath.row == 0) {
         cell.accessoryView = _oldPsdTextField;
@@ -139,6 +147,10 @@
         cell.accessoryView = _verifyPsdTextField;
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self onHidden:nil];
 }
 
 #pragma mark - UITextFieldDelegate
