@@ -275,6 +275,7 @@
         [self hideHUD];
         if (result) {
             _favImageView.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
+            [self showTip:_jrCase.isFav?@"收藏成功":@"取消收藏成功"];
         }
     }];
 }

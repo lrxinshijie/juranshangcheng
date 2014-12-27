@@ -27,6 +27,11 @@
     CGRect frame = _sContentView.frame;
     frame.origin.y += 5;
     _sContentView.frame = frame;
+    
+    _redPointView.layer.masksToBounds = YES;
+    _redPointView.layer.cornerRadius = _redPointView.frame.size.height/2;
+    _redPointView.hidden = YES;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

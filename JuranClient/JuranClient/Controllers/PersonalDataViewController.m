@@ -16,10 +16,13 @@
 #import "ALGetPhoto.h"
 #import "ActionSheetDatePicker.h"
 #import "TextFieldCell.h"
+#import "UIAlertView+Blocks.h"
+
 
 @interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     NSDictionary *param;
+    BOOL accountChangeTip;
 }
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) SexySwitch *sexySwitch;
@@ -70,6 +73,7 @@
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
+    
     [self setupDatas];
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
@@ -104,7 +108,7 @@
                                          @"",
                                          _user.birthday.length == 0?@"未设置":_user.birthday,
                                          [_user locationAddress],
-                                         _user.detailAddress.length == 0?@"未设置":_user.detailAddress], @[[_user homeTelForPersonal], [_user idCardInfomation], _user.qq, _user.weixin]];
+                                         _user.detailAddress.length == 0?@"未设置":_user.detailAddress], @[_user.homeTel, [_user idCardInfomation], _user.qq, _user.weixin]];
 }
 
 - (void)loadData{
@@ -437,9 +441,20 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    if (textField.tag == 1100 && _user.accountChangeable) {
-        [self showTip:@"用户名不可修改"];
-        return NO;
+    if (textField.tag == 1100) {
+        if (_user.accountChangeable) {
+            [self showTip:@"用户名不可修改"];
+            return NO;
+        }else if(!accountChangeTip){
+            self.selectedTextField = textField;
+            [UIAlertView showWithTitle:@"" message:@"用户名只可修改一次，确定修改？" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确定"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                if (buttonIndex == 1) {
+                    accountChangeTip = YES;
+                    [self.selectedTextField becomeFirstResponder];
+                }
+            }];
+            return NO;
+        }
     }
     self.selectedTextField = textField;
     return YES;
@@ -450,6 +465,7 @@
         if (textField.text >0 && [textField.text isEqualToString:_user.account]) {
             self.oldAccount = _user.account;
         }
+        accountChangeTip = NO;
         _user.account = textField.text;
     }else if (textField.tag == 1101){
         _user.nickName = textField.text;

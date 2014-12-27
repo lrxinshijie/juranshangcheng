@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -101,6 +101,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.90980398650000005" green="0.90980398650000005" blue="0.90980398650000005" alpha="1" colorSpace="deviceRGB"/>
                             </imageView>
+                            <view contentMode="scaleToFill" id="8jG-V6-Uq9">
+                                <rect key="frame" x="55" y="6" width="8" height="8"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
@@ -115,6 +120,7 @@
                 <outlet property="nameLabel" destination="pxK-GR-pfo" id="lw6-UW-WSh"/>
                 <outlet property="productCountLabel" destination="AVP-t8-NXZ" id="dk1-aC-o6r"/>
                 <outlet property="readCountLabel" destination="CXt-Lh-A3S" id="tih-br-v9v"/>
+                <outlet property="redPointView" destination="8jG-V6-Uq9" id="gKZ-XF-dgt"/>
                 <outlet property="sContentView" destination="ZwF-Np-ISJ" id="cQh-wW-QAl"/>
                 <outlet property="styleLabel" destination="7hj-Mt-uvD" id="h9p-tE-Uid"/>
             </connections>

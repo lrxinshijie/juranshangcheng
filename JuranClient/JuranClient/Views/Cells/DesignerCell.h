@@ -21,6 +21,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UIView *sContentView;
 @property (nonatomic, weak) IBOutlet UIImageView *isAuthImageView;
+@property (nonatomic, strong) IBOutlet UIView *redPointView;
 
 - (void)fillCellWithDesigner:(JRDesigner *)data;
 
