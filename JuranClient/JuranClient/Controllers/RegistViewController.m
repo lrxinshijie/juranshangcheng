@@ -42,6 +42,9 @@
     
     self.isAgress = YES;
     
+    [_phoneTextField configurePlaceholderColor:[UIColor whiteColor]];
+    [_codeTextField configurePlaceholderColor:[UIColor whiteColor]];
+    
 }
 
 - (void)setIsAgress:(BOOL)isAgress{

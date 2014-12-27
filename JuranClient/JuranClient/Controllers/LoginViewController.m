@@ -32,6 +32,9 @@
     // Do any additional setup after loading the view from its nib.
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    
+    [_passwordTextField configurePlaceholderColor:[UIColor whiteColor]];
+    [_accountTextField configurePlaceholderColor:[UIColor whiteColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -111,7 +114,7 @@
     
     NSString *account = _accountTextField.text;
     NSString *password = _passwordTextField.text;
-    
+
     if (account.length == 0 || password.length == 0) {
         [self showTip:@"帐户或密码不能为空"];
         return;

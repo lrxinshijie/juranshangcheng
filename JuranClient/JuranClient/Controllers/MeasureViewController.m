@@ -90,7 +90,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0 && indexPath.row <= 1) {
         static NSString *CellIdentifier = @"Cell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
@@ -122,6 +122,7 @@
         
         NSString *placeholder = @"";
         NSString *title = @"";
+        
         if (indexPath.row == 0) {
             placeholder = @"真实姓名";
             cell.textField.keyboardType = UIKeyboardTypeDefault;
@@ -135,7 +136,7 @@
         }else if (indexPath.row == 2){
             placeholder = @"会员卡号";
             cell.textField.text = _customerCardNo;
-            cell.textField.keyboardType = UIKeyboardTypeDefault;
+            cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
             title = @"会员卡号";
         }else if (indexPath.row == 3){
             cell.textField.text = _customerEmail;

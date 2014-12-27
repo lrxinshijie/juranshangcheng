@@ -29,6 +29,10 @@
     
     _phoneTextField.text = _phone;
     _phoneTextField.enabled = NO;
+    
+    [_phoneTextField configurePlaceholderColor:[UIColor whiteColor]];
+    [_passwordTextField configurePlaceholderColor:[UIColor whiteColor]];
+    [_confirmPasswordTextField configurePlaceholderColor:[UIColor whiteColor]];
 }
 
 - (IBAction)onBack:(id)sender{

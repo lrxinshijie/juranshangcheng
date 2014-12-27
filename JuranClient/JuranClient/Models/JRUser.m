@@ -63,6 +63,7 @@
     [JRUser currentUser].guid = self.guid;
     [JRUser currentUser].password = self.password;
     [JRUser currentUser].token = self.token;
+    [JRUser currentUser].userId = self.userId;
 }
 
 - (void)saveLocal{

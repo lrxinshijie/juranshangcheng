@@ -59,6 +59,10 @@
     _phoneView.frame = frame;
     
     self.isPhone = YES;
+    
+    [_phoneTextField configurePlaceholderColor:[UIColor whiteColor]];
+    [_emailTextField configurePlaceholderColor:[UIColor whiteColor]];
+    [_codeTextField configurePlaceholderColor:[UIColor whiteColor]];
 }
 
 - (void)setIsPhone:(BOOL)isPhone{

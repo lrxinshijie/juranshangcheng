@@ -32,4 +32,10 @@
     self.leftView = paddingView;
 }
 
+- (void)configurePlaceholderColor:(UIColor *)color{
+    if ([self respondsToSelector:@selector(setAttributedPlaceholder:)]) {
+        self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName: color}];
+    }
+}
+
 @end

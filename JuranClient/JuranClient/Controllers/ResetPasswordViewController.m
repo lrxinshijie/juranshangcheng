@@ -26,6 +26,8 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
+    [_passwordTextField configurePlaceholderColor:[UIColor whiteColor]];
+    [_confirmPasswordTextField configurePlaceholderColor:[UIColor whiteColor]];
 }
 
 - (IBAction)onSubmit:(id)sender{

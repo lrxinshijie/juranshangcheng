@@ -34,7 +34,11 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
-    
+//    _tableView.backgroundColor = RGBColor(202, 202, 202);
+    _tableView.bounces = NO;
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+    view.backgroundColor = RGBColor(202, 202, 202);
+    _tableView.tableFooterView = view;
     [self.view addSubview:_tableView];
 }
 
@@ -82,6 +86,18 @@
     
     return cell;
 }
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+//    if (section == [_sections count] - 1) {
+//        return 20;
+//    }
+//    
+//    return 0;
+//}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    return nil;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -12,5 +12,5 @@
 
 - (UIView *)roundedRectBackgroundView;
 - (void)configureWithBorderColor:(UIColor *)borderColor borderWidth:(CGFloat)borderWidth cornerRadius:(CGFloat)cornerRadius paddingWidth:(CGFloat)paddingWidth;
-
+- (void)configurePlaceholderColor:(UIColor *)color;
 @end
