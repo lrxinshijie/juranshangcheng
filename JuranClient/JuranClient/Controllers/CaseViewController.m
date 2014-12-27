@@ -56,7 +56,7 @@
         [self configureSearch];
         
     }else{
-        self.navigationItem.title = _searchKey;
+        self.navigationItem.title = @"搜索结果";
     }
     
     

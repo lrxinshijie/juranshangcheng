@@ -22,15 +22,16 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) NSInteger questionType;
 @property (nonatomic, strong) NSString *content;
 @property (nonatomic, strong) NSString *commitTime;
+@property (nonatomic, assign) NSInteger answerCount;
 @property (nonatomic, strong) NSString *status;
 @property (nonatomic, strong) NSString *questionId;
+@property (nonatomic, strong) NSString *imageUrl;
 
 //
 @property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, assign) NSInteger userType;
 @property (nonatomic, strong) NSString *account;
 @property (nonatomic, strong) NSString *nickName;
-@property (nonatomic, strong) NSString *imageUrl;
 @property (nonatomic, strong) NSString *headUrl;
 
 @property (nonatomic, assign) BOOL bestAnswerFlag;

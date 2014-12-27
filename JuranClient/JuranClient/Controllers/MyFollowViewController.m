@@ -88,7 +88,7 @@
 }
 
 - (void)reloadData{
-    _tableView.hidden = (_datas.count != 0);
+    _tableView.hidden = (_datas.count == 0);
     [_tableView reloadData];
 }
 

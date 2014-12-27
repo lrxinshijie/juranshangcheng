@@ -11,6 +11,25 @@
 
 @implementation JRQuestion
 
+- (id)init{
+    self = [super init];
+    if (self) {
+        self.title = @"";
+        self.questionType = @"";
+        self.account = @"";
+        self.nickName = @"";
+        self.headUrl = @"";
+        self.publishTime = @"";
+        self.status = @"";
+        
+        self.adoptedAnswer = [[JRAnswer alloc] init];
+        self.imageUrl = @"";
+        self.questionContent = @"";
+        self.otherAnswers = [NSMutableArray array];
+    }
+    return self;
+}
+
 - (id)initWithDictionary:(NSDictionary *)dict{
     if (self=[self init]) {
         

@@ -264,6 +264,11 @@
     }
 }
 
+- (NSString*)sexyString{
+    NSArray *sexs = @[@"未设置", @"女", @"男"];
+    return sexs[_sex];
+}
+
 - (NSURL *)headImageURL{
     return [NSURL URLWithString:self.headUrl relativeToURL:[NSURL URLWithString:JR_IMAGE_SERVICE]];
 }

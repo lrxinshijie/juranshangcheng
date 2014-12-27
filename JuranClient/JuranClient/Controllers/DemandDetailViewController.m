@@ -16,6 +16,7 @@
 #import "DesignerDetailViewController.h"
 #import "PrivateLetterViewController.h"
 #import "MeasureViewController.h"
+#import "UIAlertView+Blocks.h"
 
 #define kStatusBGImageViewTag 2933
 
@@ -89,7 +90,9 @@
         self.navigationItem.rightBarButtonItem = nil;
         _modifyDemandInfoButton.hidden = YES;
     }
-    _demandInfoTitleLabel.text = _demand.title;
+    
+    _demandInfoTitleLabel.text = [NSString stringWithFormat:@"%@的%@", _demand.neighbourhoods, _demand.roomType];
+//    _demandInfoTitleLabel.text = _demand.title;
     [self reSetData];
     [self setupDesignerTableHeaderView];
     [_designerTableView reloadData];
@@ -175,15 +178,20 @@
 
 - (void)onDeadRequest{
     
-    NSDictionary *param = @{@"designReqId": _demand.designReqId};
-    [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_REQ_STOP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
-        if (!error) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
-            [self.navigationController popViewControllerAnimated:YES];
+    [UIAlertView showWithTitle:@"" message:@"您确定要终止本次设计需求吗？" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确定"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            NSDictionary *param = @{@"designReqId": _demand.designReqId};
+            [self showHUD];
+            [[ALEngine shareEngine] pathURL:JR_REQ_STOP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                [self hideHUD];
+                if (!error) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }];
         }
     }];
+    
 }
 
 #pragma mark - 拒绝、私信、选TA量房

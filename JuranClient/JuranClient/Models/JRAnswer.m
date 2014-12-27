@@ -10,6 +10,23 @@
 
 @implementation JRAnswer
 
+- (id)init{
+    self = [super init];
+    if (self) {
+        self.title = @"";
+        self.content = @"";
+        self.commitTime = @"";
+        self.status = @"";
+        self.questionId = @"";
+        self.imageUrl = @"";
+        
+        self.account = @"";
+        self.nickName = @"";
+        self.headUrl = @"";
+    }
+    return self;
+}
+
 - (id)initWithDictionary:(NSDictionary *)dict{
     if (self=[self init]) {
         
@@ -22,6 +39,7 @@
         self.questionType = [dict getIntValueForKey:@"questionType" defaultValue:0];
         self.content = [dict getStringValueForKey:@"content" defaultValue:@""];
         self.commitTime = [dict getStringValueForKey:@"commitTime" defaultValue:@""];
+        self.answerCount = [dict getIntValueForKey:@"answerCount" defaultValue:0];
         self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
         self.questionId = [dict getStringValueForKey:@"questionId" defaultValue:@""];
     }

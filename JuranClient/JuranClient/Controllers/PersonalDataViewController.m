@@ -15,14 +15,17 @@
 #import "JRAreaInfo.h"
 #import "ALGetPhoto.h"
 #import "ActionSheetDatePicker.h"
+#import "ActionSheetStringPicker.h"
 #import "TextFieldCell.h"
+#import "UIAlertView+Blocks.h"
+
 
 @interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     NSDictionary *param;
+    BOOL accountChangeTip;
 }
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) SexySwitch *sexySwitch;
 @property (nonatomic, strong) UIImageView *iconImageView;
 
 @property (nonatomic, strong) NSArray *keys;
@@ -70,13 +73,12 @@
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
+    
     [self setupDatas];
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
-    _sexySwitch = [[SexySwitch alloc] init];
-    _sexySwitch.selectedIndex = 1;
     
     [self loadData];
 }
@@ -84,9 +86,14 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (_user) {
-        [self reSetData];
-        [_tableView reloadData];
+        [self reloadData];
     }
+}
+
+- (void)reloadData{
+    [self reSetData];
+    [_tableView reloadData];
+
 }
 
 - (void)setupDatas{
@@ -101,10 +108,10 @@
         [self.iconImageView setImageWithURLString:_user.headUrl];
     }
     _values = @[@[@"", _user.account], @[_user.nickName,
-                                         @"",
+                                         [_user sexyString],
                                          _user.birthday.length == 0?@"未设置":_user.birthday,
                                          [_user locationAddress],
-                                         _user.detailAddress.length == 0?@"未设置":_user.detailAddress], @[[_user homeTelForPersonal], [_user idCardInfomation], _user.qq, _user.weixin]];
+                                         _user.detailAddress.length == 0?@"未设置":_user.detailAddress], @[_user.homeTel, [_user idCardInfomation], _user.qq, _user.weixin]];
 }
 
 - (void)loadData{
@@ -115,8 +122,7 @@
             if ([data isKindOfClass:[NSDictionary class]]) {
                 [_user buildUpMemberDetailWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self reSetData];
-                    [_tableView reloadData];
+                    [self reloadData];
                 });
             }
         }
@@ -141,7 +147,7 @@
                              @"oldAccount": self.oldAccount,
                              @"account": _user.account,
                              @"accountChangeable": [NSString stringWithFormat:@"%d", _user.accountChangeable],
-                            @"sex": [NSString stringWithFormat:@"%d", _sexySwitch.selectedIndex]
+                            @"sex": [NSString stringWithFormat:@"%d", _user.sex]
                         };
     
     [self showHUD];
@@ -149,6 +155,7 @@
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self loadData];
+                [self showTip:@"修改用户信息成功"];
             });
         }else{
             [self hideHUD];
@@ -282,12 +289,6 @@
             //            [self.iconImageView setImageWithURLString:_user.headUrl];
             cell.accessoryView = view;
             
-        }else if (indexPath.section == 1 && indexPath.row == 1){
-            cell.textLabel.text = _keys[indexPath.section][indexPath.row];
-            cell.detailTextLabel.text = @"";
-            _sexySwitch.selectedIndex = _user.sex;
-            cell.accessoryView = _sexySwitch;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }else{
             cell.textLabel.text = _keys[indexPath.section][indexPath.row];
             NSString *value = _values[indexPath.section][indexPath.row];
@@ -369,12 +370,21 @@
             }
         }];
     }else if (indexPath.section == 1){
-        if (indexPath.row == 2) {
+        if (indexPath.row == 1) {
+            
+            [ActionSheetStringPicker showPickerWithTitle:nil rows:@[@"女", @"男"] initialSelection:_user.sex - 1 doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                _user.sex= selectedIndex + 1;
+                [self reloadData];
+            } cancelBlock:^(ActionSheetStringPicker *picker) {
+                
+            } origin:[UIApplication sharedApplication].keyWindow];
+        }else if (indexPath.row == 2) {
             [ActionSheetDatePicker showPickerWithTitle:@"生日" datePickerMode:UIDatePickerModeDate selectedDate:[NSDate date] doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
                 _user.birthday = [(NSDate*)selectedDate stringWithFormat:[NSDate dateFormatString]];
 //                NSString *dateString = [(NSDate*)selectedDate stringWithFormat:[NSDate timestampFormatString]];
 //                param = @{@"birthday": dateString};
 //                [self modifyMemberDetail];
+                [self reloadData];
             } cancelBlock:^(ActionSheetDatePicker *picker) {
                 
             } origin:self.view];
@@ -437,9 +447,20 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    if (textField.tag == 1100 && _user.accountChangeable) {
-        [self showTip:@"用户名不可修改"];
-        return NO;
+    if (textField.tag == 1100) {
+        if (_user.accountChangeable) {
+            [self showTip:@"用户名不可修改"];
+            return NO;
+        }else if(!accountChangeTip){
+            self.selectedTextField = textField;
+            [UIAlertView showWithTitle:@"" message:@"用户名只可修改一次，确定修改？" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确定"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                if (buttonIndex == 1) {
+                    accountChangeTip = YES;
+                    [self.selectedTextField becomeFirstResponder];
+                }
+            }];
+            return NO;
+        }
     }
     self.selectedTextField = textField;
     return YES;
@@ -450,6 +471,7 @@
         if (textField.text >0 && [textField.text isEqualToString:_user.account]) {
             self.oldAccount = _user.account;
         }
+        accountChangeTip = NO;
         _user.account = textField.text;
     }else if (textField.tag == 1101){
         _user.nickName = textField.text;

@@ -69,6 +69,7 @@
 - (NSString*)mobileNumForBindPhone;
 - (NSString*)emailForBindEmail;
 - (NSURL *)headImageURL;
+- (NSString*)sexyString;
 
 - (NSString *)showName;
 @end

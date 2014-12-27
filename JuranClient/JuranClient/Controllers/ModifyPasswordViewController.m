@@ -49,15 +49,23 @@
     _verifyPsdTextField.secureTextEntry = YES;
     _verifyPsdTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = _tableFooterView;
-    _tableView.backgroundColor = RGBColor(241, 241, 241);
     [self.view addSubview:_tableView];
+    
+    UIButton *btn = [self.view buttonWithFrame:_tableFooterView.bounds target:self action:@selector(onHidden:) image:nil];
+    [_tableFooterView insertSubview:btn atIndex:0];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)onHidden:(id)sender{
+    [_oldPsdTextField resignFirstResponder];
+    [_newsPsdTextField resignFirstResponder];
+    [_verifyPsdTextField resignFirstResponder];
 }
 
 - (IBAction)onCommit:(id)sender{

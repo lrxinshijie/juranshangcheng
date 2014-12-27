@@ -69,6 +69,11 @@
     _captchaTextField.keyboardType = UIKeyboardTypeNumberPad;
     _captchaTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
+    _getCaptchaButton.layer.masksToBounds = YES;
+    _getCaptchaButton.layer.cornerRadius = 3.f;
+    _getCaptchaButton.layer.borderColor = RGBColor(65, 103, 178).CGColor;
+    _getCaptchaButton.layer.borderWidth = 1.f;
+    
     UIButton *btn = [self.view buttonWithFrame:kContentFrameWithoutNavigationBar target:self action:@selector(onHidden:) image:nil];
     [self.view addSubview:btn];
     
