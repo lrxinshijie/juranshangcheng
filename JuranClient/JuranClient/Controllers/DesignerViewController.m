@@ -47,7 +47,7 @@
         [self configureMenu];
         [self configureSearch];
     }else{
-        self.navigationItem.title = _searchKeyWord;
+        self.navigationItem.title = @"搜索结果";
     }
     
     self.tableView = [self.view tableViewWithFrame:_isSearchResult? kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];

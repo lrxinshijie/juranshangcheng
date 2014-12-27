@@ -36,6 +36,7 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [self setupUI];
+    
     if (_user.mobileNum && _user.mobileNum.length > 0) {
         step = 1;
     }else{
@@ -69,13 +70,18 @@
     _captchaTextField.keyboardType = UIKeyboardTypeNumberPad;
     _captchaTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
+    _getCaptchaButton.layer.masksToBounds = YES;
+    _getCaptchaButton.layer.cornerRadius = 3.f;
+    _getCaptchaButton.layer.borderColor = RGBColor(65, 103, 178).CGColor;
+    _getCaptchaButton.layer.borderWidth = 1.f;
+    
     UIButton *btn = [self.view buttonWithFrame:kContentFrameWithoutNavigationBar target:self action:@selector(onHidden:) image:nil];
     [self.view addSubview:btn];
     
     CGRect frame = CGRectMake(0, 0, kWindowWidth, 44*3);
     self.tableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
-    _tableView.backgroundColor = RGBColor(241, 241, 241);
+    _tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_tableView];
     
     frame = _tableFooterView.frame;
@@ -237,6 +243,10 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [_phoneTextField resignFirstResponder];
+    [_captchaTextField resignFirstResponder];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -172,6 +172,8 @@
         if (!error) {
             answer.bestAnswerFlag = YES;
             _question.status = @"resolved";
+            [_question.otherAnswers removeObject:answer];
+            [_question.otherAnswers insertObject:answer atIndex:0];
         }
         [_tableView reloadData];
     }];
@@ -217,6 +219,7 @@
             _question.answerCount += 1;
             _answerTextField.text = @"";
             [self reloadData];
+            [_tableView scrollsToTop];
             
             if (_delegate && [_delegate respondsToSelector:@selector(answeredWithAskDetailViewController:)]) {
                 [_delegate answeredWithAskDetailViewController:self];

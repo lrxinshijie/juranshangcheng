@@ -245,10 +245,13 @@
                     _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
                     _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
                     _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.followCount];
+                    [self showTip:@"关注成功"];
                 });
                 if ([_delegate respondsToSelector:@selector(changeFollowStatus:withDesigner:status:)]) {
                     [_delegate changeFollowStatus:self withDesigner:_designer status:YES];
                 }
+            }else{
+                [self showTip:@"关注失败"];
             }
         }];
     }else{
@@ -263,10 +266,13 @@
                     _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
                     _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
                     _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.followCount];
+                    [self showTip:@"取消关注成功"];
                 });
                 if ([_delegate respondsToSelector:@selector(changeFollowStatus:withDesigner:status:)]) {
                     [_delegate changeFollowStatus:self withDesigner:_designer status:NO];
                 }
+            }else{
+                [self showTip:@"取消关注失败"];
             }
         }];
     }

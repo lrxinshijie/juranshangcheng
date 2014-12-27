@@ -55,7 +55,7 @@
     }
     _statusLabel.text = statusText;
     _statusImageView.image = [UIImage imageNamed:statusImage];
-    _timeLabel.text = data.commitTime;
+    _timeLabel.text = [NSString stringWithFormat:@"回答：%d  |  %@", data.answerCount, data.commitTime];
     _redPointView.hidden = YES;
     [self adjustFrame];
 }

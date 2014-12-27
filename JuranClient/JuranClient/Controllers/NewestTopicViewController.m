@@ -71,7 +71,10 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
-        
+    
+    _contentWebView.backgroundColor = [UIColor clearColor];
+    _contentWebView.scrollView.backgroundColor = [UIColor clearColor];
+    
     if (!_isOld) {
         [self setupCommentView];
     }

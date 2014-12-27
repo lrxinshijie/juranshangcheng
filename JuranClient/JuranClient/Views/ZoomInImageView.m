@@ -18,6 +18,14 @@
 
 @implementation ZoomInImageView
 
+- (id)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self configureImageView];
+    }
+    return self;
+}
+
 - (id)init{
     self = [super init];
     if (self) {
