@@ -73,8 +73,8 @@
         [scrollView setContentOffset:CGPointMake(viewSize.size.width, 0)];
         [self addSubview:scrollView];
         
-        float pageControlWidth = ([imageArray count]-2)*10.0f+40.f;
-        float pagecontrolHeight = 20.0f;
+//        float pageControlWidth = ([imageArray count]-2)*10.0f+40.f;
+//        float pagecontrolHeight = 20.0f;
 //        pageControl = [[SMPageControl alloc]initWithFrame:CGRectMake((self.frame.size.width-pageControlWidth)-7, 6,pageControlWidth, pagecontrolHeight)];
         pageControl = [[SMPageControl alloc] init];
         pageControl.numberOfPages = ([imageArray count]-2);
@@ -84,7 +84,7 @@
         [pageControl sizeToFit];
 //        pageControl.pageIndicatorTintColor = [UIColor grayColor];
 //        pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
-        pageControl.center = CGPointMake(rect.size.width/2, CGRectGetHeight(rect)-10);
+        pageControl.center = CGPointMake(rect.size.width/2 + 100, CGRectGetHeight(rect)-10);
         
         [self addSubview:pageControl];
 	}

@@ -14,6 +14,9 @@
 #import "EScrollerView.h"
 #import "JRPhotoScrollViewController.h"
 #import "FilterView.h"
+#import "JRWebViewController.h"
+#import "DesignerDetailViewController.h"
+#import "SubjectDetailViewController.h"
 
 @interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate>{
     CGFloat startOffsetY;
@@ -248,6 +251,31 @@
 
 - (void)EScrollerViewDidClicked:(NSUInteger)index{
     
+    JRAdInfo *ad = [_adInfos objectAtIndex:index];
+    ASLog(@"index:%d,%@",index,ad.link);
+    
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    NSArray *links = [ad.link componentsSeparatedByString:@"&"];
+    [links enumerateObjectsUsingBlock:^(NSString *link, NSUInteger idx, BOOL *stop) {
+        NSArray *values = [link componentsSeparatedByString:@"="];
+        if ([values count] == 2) {
+            [param setObject:[values lastObject] forKey:[values firstObject]];
+        }
+    }];
+    
+    NSInteger type = [param getIntValueForKey:@"type" defaultValue:0];
+    if (type == 1) {
+        [_tableView headerBeginRefreshing];
+    }else if (type == 2){
+        
+    }
+//    NSArray *types = [[links firstObject] componentsSeparatedByString:@"="];
+//    if ([types count] == 0) {
+//        NSInteger type = [[types lastObject] integerValue];
+//        if (type == 1) {
+//            
+//        }
+//    }
 }
 
 - (void)didReceiveMemoryWarning

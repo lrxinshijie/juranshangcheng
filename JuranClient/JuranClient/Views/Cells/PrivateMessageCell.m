@@ -39,8 +39,8 @@
         _numButton.hidden = NO;
         [_numButton setTitle:[NSString stringWithFormat:@"%d", message.unReadNum] forState:UIControlStateNormal];
     }
-    [_avtarImageView setImageWithURLString:message.senderHeadUrl];
-    _nameLabel.text = message.senderNickName;
+    [_avtarImageView setImageWithURLString:message.receiverHeadUrl];
+    _nameLabel.text = message.receiverNickName;
     _contentLabel.text = message.content;
     _timeLabel.text = message.publishCustomTime;
 }
