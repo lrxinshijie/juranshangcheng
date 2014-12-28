@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="东社国际3室2厅的设计" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ux5-ov-PKy">
-                                <rect key="frame" x="13" y="10" width="188" height="16"/>
+                                <rect key="frame" x="13" y="10" width="201" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -42,7 +42,7 @@
                                 <color key="backgroundColor" red="0.80784313725490198" green="0.80784313725490198" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="287.85平方米 | 北京北京朝阳区" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gqk-fE-lT0">
-                                <rect key="frame" x="13" y="44" width="179" height="14"/>
+                                <rect key="frame" x="13" y="44" width="201" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -79,6 +79,13 @@
                     </view>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="bidNumsLabel" destination="duZ-E2-rLy" id="w6g-Zf-hvP"/>
+                <outlet property="budgetLabel" destination="u9a-ry-lrp" id="ApP-YR-SZp"/>
+                <outlet property="descLabel" destination="Gqk-fE-lT0" id="f8O-B9-D8p"/>
+                <outlet property="timeLabel" destination="yqJ-Pk-ptp" id="sgJ-ir-yKS"/>
+                <outlet property="titleLabel" destination="ux5-ov-PKy" id="otm-qF-2Bl"/>
+            </connections>
             <point key="canvasLocation" x="245" y="226.5"/>
         </tableViewCell>
     </objects>

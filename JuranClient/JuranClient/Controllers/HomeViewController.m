@@ -8,11 +8,16 @@
 
 #import "HomeViewController.h"
 #import "NewestBidInfoCell.h"
+#import "JRDemand.h"
+#import "JRDesigner.h"
+
+#define kDesignerViewTag 1100
 
 @interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *tableHeaderView;
+@property (nonatomic, assign) NSInteger currentPage;
 
 @end
 
@@ -38,10 +43,8 @@
     [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"navbar_leftbtn_logo"] leftBarButtonItemAction:nil];
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
     
-    [self loadDemandData];
+    [_tableView headerBeginRefreshing];
 }
-
-
 
 - (void)setupUI{
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
@@ -49,20 +52,79 @@
     _tableView.tableHeaderView = _tableHeaderView;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
+    
+    __weak typeof(self) weakSelf = self;
+    [_tableView addHeaderWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadDemandData];
+        [weakSelf loadNewestDesignerData];
+    }];
+    
+    [_tableView addFooterWithCallback:^{
+        weakSelf.currentPage++;
+        [weakSelf loadDemandData];
+    }];
 }
 
 - (void)loadDemandData{
-    NSDictionary *param = @{@"pageNo": @"1",
+    NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
                             @"onePageCount": kOnePageCount};
     [self showHUD];
     
-    [[ALEngine shareEngine] pathURL:JR_GET_INDEX_DESIGNREP_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_GET_INDEX_DESIGN_REQ_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
+            NSArray *demandList = [data objectForKey:@"designReqGeneralList"];
+            NSMutableArray *rows = [JRDemand buildUpWithValueForDesigner:demandList];
+            if (_currentPage > 1) {
+                [_demandDatas addObjectsFromArray:rows];
+            }else{
+                self.demandDatas = rows;
+            }
             
-            
+            [_tableView reloadData];
         }
+        [_tableView headerEndRefreshing];
+        [_tableView footerEndRefreshing];
     }];
+}
+
+- (void)loadNewestDesignerData{
+    NSDictionary *param = @{@"count": @"4"};
+    [self showHUD];
+    
+    [[ALEngine shareEngine] pathURL:JR_GET_INDEX_DESIGNER_LIST_REQ parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            self.designerDatas = [JRDesigner buildUpWithValue:[data objectForKey:@"designerList"]];
+            
+            [self reloadNesestDesignerData];
+        }
+        [_tableView headerEndRefreshing];
+        [_tableView footerEndRefreshing];
+    }];
+}
+
+- (void)reloadNesestDesignerData{
+    NSInteger i = 0;
+    for (JRDesigner *d in _designerDatas) {
+        UIImageView *imageView = (UIImageView*)[_tableHeaderView viewWithTag:kDesignerViewTag + i * 2];
+        [imageView setImageWithURLString:d.headUrl];
+        
+        UILabel *label = (UILabel*)[_tableHeaderView viewWithTag:kDesignerViewTag + i*2 + 1];
+        label.text = [d formatUserName];
+        
+        i++;
+    }
+    
+    for (; i < 4; i++) {
+        UIImageView *imageView = (UIImageView*)[_tableHeaderView viewWithTag:kDesignerViewTag + i * 2];
+        imageView.image = nil;
+        
+        UILabel *label = (UILabel*)[_tableHeaderView viewWithTag:kDesignerViewTag + i*2 + 1];
+        label.text = @"";
+    }
+    
 }
 
 #pragma mark - TargetAction
@@ -90,11 +152,11 @@
 #pragma mark - UITableViewDataSource/Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return _demandDatas.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 87 + ((indexPath.row == 5 - 1)?5:0);
+    return 87 + ((indexPath.row == _demandDatas.count - 1)?5:0);
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -105,7 +167,8 @@
         cell = (NewestBidInfoCell *)[nibs firstObject];
     }
     
-    [cell fillCellWithData:nil];
+    JRDemand *d = _demandDatas[indexPath.row];
+    [cell fillCellWithData:d];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     

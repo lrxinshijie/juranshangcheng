@@ -9,10 +9,20 @@
 #import "NewestBidInfoCell.h"
 #import "JRDemand.h"
 
+@interface NewestBidInfoCell()
+
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *descLabel;
+@property (nonatomic, strong) IBOutlet UILabel *bidNumsLabel;
+@property (nonatomic, strong) IBOutlet UILabel *budgetLabel;
+@property (nonatomic, strong) IBOutlet UILabel *timeLabel;
+
+@end
+
 @implementation NewestBidInfoCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    // Initialization code￥
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -22,6 +32,11 @@
 }
 
 - (void)fillCellWithData:(JRDemand*)data{
+    _titleLabel.text = data.title;
+    _timeLabel.text = [NSString stringWithFormat:@"剩余%@天", data.deadBalance];
+    _descLabel.text = [NSString stringWithFormat:@"%@平方米 | %@", data.houseArea, data.houseAddress];
+    _bidNumsLabel.text = [NSString stringWithFormat:@"已有%d人应标", data.bidNums];
+    _budgetLabel.text = [NSString stringWithFormat:@"%@万元", data.budget];
     
 }
 

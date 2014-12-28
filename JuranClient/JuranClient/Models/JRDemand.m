@@ -149,7 +149,7 @@
         
         self.designReqId = [dict getStringValueForKey:@"reqId" defaultValue:@""];
         
-        self.budget = [NSString stringWithFormat:@"%d", [dict getIntValueForKey:@"budget" defaultValue:0]];
+        self.budget = [NSString stringWithFormat:@"%d", [dict getIntValueForKey:@"budget" defaultValue:0]/1000000];
         
         self.title = [dict getStringValueForKey:@"title" defaultValue:@""];
         self.budgetUnit = [dict getStringValueForKey:@"budgetUnit" defaultValue:@""];

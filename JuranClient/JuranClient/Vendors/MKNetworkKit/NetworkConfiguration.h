@@ -109,9 +109,9 @@
 
 
 //设计师端
-#define JR_GET_INDEX_DESIGNREP_LIST [NSString stringWithFormat:@"%@/index/getIndexDesignReqList.json",JR_SERVICE]
+#define JR_GET_INDEX_DESIGN_REQ_LIST [NSString stringWithFormat:@"%@/index/getIndexDesignReqList.json",JR_SERVICE]
 #define JR_GET_INDEX_PRIVATELETTERREP [NSString stringWithFormat:@"%@/index/getIndexPrivateLetterReq.json",JR_SERVICE]
-#define JR_GET_INDEX_DESIGNERLISTREQ [NSString stringWithFormat:@"%@/index/getIndexDesignerListReq.json",JR_SERVICE]
+#define JR_GET_INDEX_DESIGNER_LIST_REQ [NSString stringWithFormat:@"%@/index/getIndexDesignerListReq.json",JR_SERVICE]
 
 
 
