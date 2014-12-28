@@ -8,13 +8,15 @@
 
 #import "EScrollerView.h"
 #import "JRAdInfo.h"
+#import "JRPageControl.h"
+#import "SMPageControl.h"
 
 @interface EScrollerView () <UIScrollViewDelegate> {
     CGRect viewSize;
     UIScrollView *scrollView;
     NSArray *imageArray;
     
-    UIPageControl *pageControl;
+    SMPageControl *pageControl;
     
     int currentPageIndex;
 }
@@ -73,12 +75,17 @@
         
         float pageControlWidth = ([imageArray count]-2)*10.0f+40.f;
         float pagecontrolHeight = 20.0f;
-        pageControl=[[UIPageControl alloc]initWithFrame:CGRectMake((self.frame.size.width-pageControlWidth)-7,6, pageControlWidth, pagecontrolHeight)];
-        pageControl.currentPage = 0;
-        pageControl.pageIndicatorTintColor = [UIColor grayColor];
-        pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
+//        pageControl = [[SMPageControl alloc]initWithFrame:CGRectMake((self.frame.size.width-pageControlWidth)-7, 6,pageControlWidth, pagecontrolHeight)];
+        pageControl = [[SMPageControl alloc] init];
+        pageControl.numberOfPages = ([imageArray count]-2);
+//        pageControl.currentPage = 0;
+        pageControl.pageIndicatorImage = [UIImage imageNamed:@"ad_page_action"];
+        pageControl.currentPageIndicatorImage = [UIImage imageNamed:@"ad_page_inactive"];
+        [pageControl sizeToFit];
+//        pageControl.pageIndicatorTintColor = [UIColor grayColor];
+//        pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
         pageControl.center = CGPointMake(rect.size.width/2, CGRectGetHeight(rect)-10);
-        pageControl.numberOfPages=([imageArray count]-2);
+        
         [self addSubview:pageControl];
 	}
 	return self;

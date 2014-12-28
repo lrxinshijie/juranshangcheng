@@ -54,7 +54,7 @@
             break;
         case DemandEditHouseArea:
             placeholder = @"房屋面积(平方米)";
-            value = [NSString stringWithFormat:@"%.2f", _demand.houseArea];
+            value = _demand.houseArea;
             keyboardType = UIKeyboardTypeNumberPad;
             break;
         default:
@@ -84,7 +84,7 @@
             _demand.contactsMobile = text;
             break;
         case DemandEditHouseArea:
-            _demand.houseArea = [text integerValue];
+            _demand.houseArea = text;
             break;
         case DemandEditBudget:
             _demand.budget = text;

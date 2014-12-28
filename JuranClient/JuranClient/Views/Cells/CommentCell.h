@@ -22,6 +22,7 @@
 
 @property (nonatomic, assign) id <CommentCellDelegate> delegate;
 @property (nonatomic, strong) JRComment *comment;
+@property (nonatomic, strong) IBOutlet UIButton *commentButton;
 
 - (void)fillCellWithComment:(JRComment *)data;
 

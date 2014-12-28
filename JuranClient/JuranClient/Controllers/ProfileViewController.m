@@ -51,11 +51,16 @@
     return self;
 }
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameProfileReloadData object:nil];
     
     [self configureMenu];
     
@@ -139,6 +144,10 @@
             }
         }
     }];
+}
+
+- (void)receiveReloadDataNotification:(NSNotification*)notification{
+    [self loadData];
 }
 
 

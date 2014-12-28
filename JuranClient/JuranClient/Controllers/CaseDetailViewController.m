@@ -296,7 +296,14 @@
     if (section == 1) {
         label.text = @"方案描述";
     }else{
-        label.text = @"评论";
+        if ([_comments count] == 0) {
+            label.textColor = [UIColor grayColor];
+            label.text = @"暂无评论";
+        }else{
+            label.textColor = [UIColor blackColor];
+            label.text = @"评论";
+        }
+        
     }
     [headerView addSubview:label];
     return headerView;

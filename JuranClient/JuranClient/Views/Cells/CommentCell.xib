@@ -85,6 +85,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="avtarImageView" destination="GrT-kC-9e9" id="vJI-hL-wMX"/>
+                <outlet property="commentButton" destination="cT1-Fw-6vt" id="09d-AQ-Kfw"/>
                 <outlet property="contentImageView" destination="Xf7-ok-c21" id="JRb-Zt-5wI"/>
                 <outlet property="contentLabel" destination="syV-kM-K0K" id="4R8-8k-qDb"/>
                 <outlet property="mainView" destination="5i9-9X-LMP" id="iDY-BZ-QOX"/>

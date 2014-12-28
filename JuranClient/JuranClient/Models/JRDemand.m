@@ -43,6 +43,7 @@
         self.postDate = @"";
         self.auditDesc = @"";
         self.roomTypeId = @"";
+        self.houseArea = @"";
     }
     
     return self;
@@ -63,7 +64,7 @@
         self.bidNums = [dict getIntValueForKey:@"bidNums" defaultValue:0];
         self.publishTime = [dict getStringValueForKey:@"publishTime" defaultValue:@""];
         self.houseAddress = [dict getStringValueForKey:@"houseAddress" defaultValue:@""];
-        self.houseArea = [dict getDoubleValueForKey:@"houseArea" defaultValue:0];
+        self.houseArea = [dict getStringValueForKey:@"houseArea" defaultValue:@""];
         self.style = [dict getStringValueForKey:@"style" defaultValue:@""];
         self.deadline = [dict getStringValueForKey:@"deadline" defaultValue:@""];
         self.newBidNums = [dict getIntValueForKey:@"newBidNums" defaultValue:0];
@@ -104,7 +105,7 @@
     self.houseType = [value getStringValueForKey:@"houseType" defaultValue:@""];
     self.renovationBudget = [value getIntValueForKey:@"renovationBudget" defaultValue:0]/1000000;
     self.houseAddress = [value getStringValueForKey:@"houseAddress" defaultValue:@""];
-    self.houseArea = [value getDoubleValueForKey:@"houseArea" defaultValue:0];
+    self.houseArea = [value getStringValueForKey:@"houseArea" defaultValue:@""];
     self.style = [value getStringValueForKey:@"style" defaultValue:@""];
     self.deadline = [value getStringValueForKey:@"deadline" defaultValue:@""];
     self.newBidNums = [value getIntValueForKey:@"newBidNums" defaultValue:0];
