@@ -13,6 +13,7 @@
 #import "JRAreaInfo.h"
 #import "BaseAddressViewController.h"
 #import "ActionSheetStringPicker.h"
+#import "ActionSheetMultiPicker.h"
 
 @interface MeasureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 
@@ -27,6 +28,10 @@
 @property (nonatomic, copy) NSString *customerWechat;
 @property (nonatomic, copy) NSString *serviceDateKey;
 @property (nonatomic, copy) NSString *address;
+@property (nonatomic, copy) NSString *roomNum;
+@property (nonatomic, copy) NSString *livingroomCount;
+@property (nonatomic, copy) NSString *bathroomCount;
+@property (nonatomic, copy) NSString *houseArea;
 @property (nonatomic, assign) NSInteger serviceDate;
 @property (nonatomic, strong) JRAreaInfo *areaInfo;
 @property (nonatomic, strong) UITapGestureRecognizer *tapHide;
@@ -62,12 +67,16 @@
     self.customerWechat = @"";
     self.serviceDateKey = @"";
     self.address = @"";
+    self.roomNum = @"";
+    self.livingroomCount = @"";
+    self.bathroomCount = @"";
+    self.houseArea = @"";
     self.areaInfo = [[JRAreaInfo alloc] init];
     
     _designerImageView.layer.masksToBounds = YES;
     _designerImageView.layer.cornerRadius = CGRectGetHeight(_designerImageView.frame)/2;
     [_designerImageView setImageWithURLString:_designer.headUrl];
-    _designerLabel.text = _designer.nickName;
+    _designerLabel.text = _designer.formatUserName;
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(237, 237, 237);
@@ -82,7 +91,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 2;
+        return 4;
     }
     
     return 8;
@@ -98,6 +107,7 @@
         cell.textLabel.font = [UIFont systemFontOfSize:15];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
         cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.detailTextLabel.textColor = [UIColor blackColor];
         if (indexPath.row == 0) {
             [_designerView removeFromSuperview];
             [cell addSubview:_designerView];
@@ -121,53 +131,74 @@
         
         NSString *placeholder = @"";
         NSString *title = @"";
+        cell.textField.enabled = YES;
+        cell.textField.tag = indexPath.row;
+        cell.detailTextLabel.textColor = [UIColor blackColor];
         
-        if (indexPath.row == 0) {
-            placeholder = @"真实姓名";
-            cell.textField.keyboardType = UIKeyboardTypeDefault;
-            cell.textField.text = _customerRealName;
-            title = @"姓名";
-        }else if (indexPath.row == 1) {
-            placeholder = @"您的电话";
-            cell.textField.text = _customerMobile;
-            cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-            title = @"电话";
-        }else if (indexPath.row == 2){
-            placeholder = @"会员卡号";
-            cell.textField.text = _customerCardNo;
-            cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-            title = @"会员卡号";
-        }else if (indexPath.row == 3){
-            cell.textField.text = _customerEmail;
-            placeholder = @"电子邮箱";
-            cell.textField.keyboardType = UIKeyboardTypeEmailAddress;
-            title = @"电子邮箱";
-        }else if (indexPath.row == 4){
-            placeholder = @"QQ";
-            cell.textField.text = _customerQQ;
-            cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-            title = @"QQ";
-        }else if (indexPath.row == 5){
-            placeholder = @"微信号";
-            cell.textField.text = _customerWechat;
-            cell.textField.keyboardType = UIKeyboardTypeDefault;
-            title = @"微信号";
-        }else if (indexPath.row == 6){
-            placeholder = @"城市";
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.textField.text = _areaInfo.title;
-            title = @"城市";
-        }else if (indexPath.row == 7){
-            placeholder = @"小区名称";
-            cell.textField.keyboardType = UIKeyboardTypeDefault;
-            cell.textField.text = _address;
-            title = @"小区名称";
+        if (indexPath.section == 0) {
+            if (indexPath.row == 2) {
+                placeholder = @"户型";
+                cell.textField.keyboardType = UIKeyboardTypeDefault;
+                cell.textField.text = [self roomNumString];
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.textField.enabled = NO;
+                title = @"请选择";
+            }else if (indexPath.row == 3){
+                placeholder = @"请输入数字";
+                cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+                cell.textField.text = _houseArea;
+                title = @"房屋面积(㎡)";
+                cell.textField.tag = 99;
+            }
+        }else{
+            if (indexPath.row == 0) {
+                placeholder = @"真实姓名";
+                cell.textField.keyboardType = UIKeyboardTypeDefault;
+                cell.textField.text = _customerRealName;
+                title = @"姓名";
+            }else if (indexPath.row == 1) {
+                placeholder = @"您的电话";
+                cell.textField.text = _customerMobile;
+                cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+                title = @"电话";
+            }else if (indexPath.row == 2){
+                placeholder = @"会员卡号";
+                cell.textField.text = _customerCardNo;
+                cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+                title = @"会员卡号";
+            }else if (indexPath.row == 3){
+                cell.textField.text = _customerEmail;
+                placeholder = @"电子邮箱";
+                cell.textField.keyboardType = UIKeyboardTypeEmailAddress;
+                title = @"电子邮箱";
+            }else if (indexPath.row == 4){
+                placeholder = @"QQ";
+                cell.textField.text = _customerQQ;
+                cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+                title = @"QQ";
+            }else if (indexPath.row == 5){
+                placeholder = @"微信号";
+                cell.textField.text = _customerWechat;
+                cell.textField.keyboardType = UIKeyboardTypeDefault;
+                title = @"微信号";
+            }else if (indexPath.row == 6){
+                placeholder = @"城市";
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.textField.text = _areaInfo.title;
+                title = @"城市";
+            }else if (indexPath.row == 7){
+                placeholder = @"小区名称";
+                cell.textField.keyboardType = UIKeyboardTypeDefault;
+                cell.textField.text = _address;
+                title = @"小区名称";
+            }
         }
+        
         
         cell.titleLabel.text = title;
         cell.textField.placeholder = placeholder;
         cell.textField.delegate = self;
-        cell.textField.tag = indexPath.row;
+        
         
         return cell;
     }
@@ -209,7 +240,7 @@
             DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
             detailVC.designer = _designer;
             [self.navigationController pushViewController:detailVC animated:YES];
-        }else{
+        }else if (indexPath.row == 1) {
             NSArray *rows = @[@"只工作日",@"工作日、双休日与假日均可",@"只双休日、假日"];
             [ActionSheetStringPicker showPickerWithTitle:nil rows:rows initialSelection:0 doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
                 self.serviceDate = [[@[@(1),@(2),@(3)] objectAtIndex:selectedIndex] intValue];
@@ -219,13 +250,106 @@
             } cancelBlock:^(ActionSheetStringPicker *picker) {
                 
             } origin:[UIApplication sharedApplication].keyWindow];
+        }else if (indexPath.row == 2){
+            NSMutableArray *rows = [NSMutableArray array];
+            NSMutableArray *selects = [NSMutableArray array];
+            
+            NSMutableArray *datas = [NSMutableArray array];
+            __block NSInteger ind = 0;
+            NSArray *roomNum = [[DefaultData sharedData] roomNum];
+            [roomNum enumerateObjectsUsingBlock:^(NSDictionary *row, NSUInteger idx, BOOL *stop) {
+                [datas addObject:[row objectForKey:@"k"]];
+                if ([[row objectForKey:@"v"] isEqualToString:_roomNum]) {
+                    ind = idx;
+                }
+            }];
+            [rows addObject:datas];
+            [selects addObject:@(ind)];
+            
+            ind = 0;
+            NSArray *livingroomCount = [[DefaultData sharedData] livingroomCount];
+            datas = [NSMutableArray array];
+            [livingroomCount enumerateObjectsUsingBlock:^(NSDictionary *row, NSUInteger idx, BOOL *stop) {
+                [datas addObject:[row objectForKey:@"k"]];
+                if ([[row objectForKey:@"v"] isEqualToString:_livingroomCount]) {
+                    ind = idx;
+                }
+            }];
+            [rows addObject:datas];
+            [selects addObject:@(ind)];
+            
+            ind = 0;
+            NSArray *bathroomCount = [[DefaultData sharedData] bathroomCount];
+            datas = [NSMutableArray array];
+            [bathroomCount enumerateObjectsUsingBlock:^(NSDictionary *row, NSUInteger idx, BOOL *stop) {
+                [datas addObject:[row objectForKey:@"k"]];
+                if ([[row objectForKey:@"v"] isEqualToString:_bathroomCount]) {
+                    ind = idx;
+                }
+            }];
+            [rows addObject:datas];
+            [selects addObject:@(ind)];
+            
+            [ActionSheetMultiPicker showPickerWithTitle:nil rows:rows initialSelection:selects doneBlock:^(ActionSheetMultiPicker *picker, NSArray *selectedIndexs, NSArray *selectedValues) {
+                NSArray *roomNum = [[DefaultData sharedData] roomNum];
+                _roomNum = [[roomNum objectAtIndex:[selectedIndexs[0] integerValue]] objectForKey:@"v"];
+                
+                NSArray *livingroomCount = [[DefaultData sharedData] livingroomCount];
+                _livingroomCount = [[livingroomCount objectAtIndex:[selectedIndexs[1] integerValue]] objectForKey:@"v"];
+                
+                NSArray *bathroomCount = [[DefaultData sharedData] bathroomCount];
+                _bathroomCount = [[bathroomCount objectAtIndex:[selectedIndexs[2] integerValue]] objectForKey:@"v"];
+                
+                [_tableView reloadData];
+            } cancelBlock:^(ActionSheetMultiPicker *picker) {
+                
+            } origin:[UIApplication sharedApplication].keyWindow];
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 6) {
             [self editAddress];
+        }else{
+            TextFieldCell *cell = (TextFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
+            [cell.textField becomeFirstResponder];
         }
     }
 }
+
+- (NSString *)roomNumString{
+    
+    NSMutableArray *retVals = [NSMutableArray array];
+    //    if (_roomNum.length > 0) {
+    //        return _roomNum;
+    //    }
+    
+    NSArray *roomNum = [[DefaultData sharedData] roomNum];
+    for (int i = 0; i<[roomNum count]; i++) {
+        NSDictionary *row = [roomNum objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.roomNum]) {
+            [retVals addObject:[row objectForKey:@"k"]];
+        }
+    }
+    
+    NSArray *livingroomCount = [[DefaultData sharedData] livingroomCount];
+    for (int i = 0; i<[livingroomCount count]; i++) {
+        NSDictionary *row = [livingroomCount objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.livingroomCount]) {
+            [retVals addObject:[row objectForKey:@"k"]];
+        }
+    }
+    
+    NSArray *bathroomCount = [[DefaultData sharedData] bathroomCount];
+    for (int i = 0; i<[bathroomCount count]; i++) {
+        NSDictionary *row = [bathroomCount objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.bathroomCount]) {
+            [retVals addObject:[row objectForKey:@"k"]];
+        }
+    }
+    
+    return [retVals componentsJoinedByString:@""];
+}
+
+
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     if (textField.tag == 6) {
@@ -251,6 +375,8 @@
         self.customerWechat = textField.text;
     }else if (textField.tag == 7){
         self.address = textField.text;
+    }else if (textField.tag == 99){
+        self.houseArea = textField.text;
     }
 }
 
@@ -284,6 +410,16 @@
 - (void)onSubmit{
     [self hideKeyboard];
     if (![self checkLogin]) {
+        return;
+    }
+    
+    if ([self roomNumString].length == 0) {
+        [self showTip:@"户型不能为空"];
+        return;
+    }
+    
+    if (_houseArea.length == 0) {
+        [self showTip:@"房屋面积不能为空"];
         return;
     }
     
@@ -332,7 +468,11 @@
                             @"customerWechat":_customerWechat,
                             @"customerEmail": _customerEmail,
                             @"address": _address,
-                            @"areaInfo": [_areaInfo dictionaryValue]};
+                            @"areaInfo": [_areaInfo dictionaryValue],
+                            @"houseArea": _houseArea,
+                            @"roomNum": _roomNum,
+                            @"livingroomNum": _livingroomCount,
+                            @"bathroomNum": _bathroomCount};
     [[ALEngine shareEngine] pathURL:JR_APPLY_MEASURE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {

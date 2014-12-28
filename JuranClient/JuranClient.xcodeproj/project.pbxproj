@@ -303,6 +303,7 @@
 		A9A53B0E1A46FE7C008D75B8 /* UIBubbleTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A53B061A46FE7C008D75B8 /* UIBubbleTableView.m */; };
 		A9A53B0F1A46FE7C008D75B8 /* UIBubbleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A53B081A46FE7C008D75B8 /* UIBubbleTableViewCell.m */; };
 		A9A53B101A46FE7C008D75B8 /* UIBubbleTypingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A53B0B1A46FE7C008D75B8 /* UIBubbleTypingTableViewCell.m */; };
+		A9A7D4AB1A503715001A70FF /* JRWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A7D4AA1A503715001A70FF /* JRWebViewController.m */; };
 		A9B4EB791A371F120091AAAF /* CaseCollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B4EB771A371F120091AAAF /* CaseCollectViewController.m */; };
 		A9B4EB7A1A371F120091AAAF /* CaseCollectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B4EB781A371F120091AAAF /* CaseCollectViewController.xib */; };
 		A9C398371A298047006A8AAB /* JRComment.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C398361A298047006A8AAB /* JRComment.m */; };
@@ -837,6 +838,8 @@
 		A9A53B091A46FE7C008D75B8 /* UIBubbleTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTableViewDataSource.h; sourceTree = "<group>"; };
 		A9A53B0A1A46FE7C008D75B8 /* UIBubbleTypingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBubbleTypingTableViewCell.h; sourceTree = "<group>"; };
 		A9A53B0B1A46FE7C008D75B8 /* UIBubbleTypingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBubbleTypingTableViewCell.m; sourceTree = "<group>"; };
+		A9A7D4A91A503715001A70FF /* JRWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRWebViewController.h; sourceTree = "<group>"; };
+		A9A7D4AA1A503715001A70FF /* JRWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRWebViewController.m; sourceTree = "<group>"; };
 		A9B4EB761A371F120091AAAF /* CaseCollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseCollectViewController.h; sourceTree = "<group>"; };
 		A9B4EB771A371F120091AAAF /* CaseCollectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseCollectViewController.m; sourceTree = "<group>"; };
 		A9B4EB781A371F120091AAAF /* CaseCollectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseCollectViewController.xib; sourceTree = "<group>"; };
@@ -1380,6 +1383,8 @@
 				149077301A44720000065EE3 /* GuideViewController.xib */,
 				149BE7131A4569DE00A9E1EC /* DDHPreviewViewController.h */,
 				149BE7141A4569DE00A9E1EC /* DDHPreviewViewController.m */,
+				A9A7D4A91A503715001A70FF /* JRWebViewController.h */,
+				A9A7D4AA1A503715001A70FF /* JRWebViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1886,7 +1891,7 @@
 						DevelopmentTeam = D2JB8K885C;
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = K7N89S4ZM6;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -2204,6 +2209,7 @@
 				A987EDEA1A20920500CED7CD /* UIDevice+ASCategory.m in Sources */,
 				A987EE1A1A20928B00CED7CD /* ALEngine.m in Sources */,
 				A9C398451A29D25F006A8AAB /* ResetPasswordViewController.m in Sources */,
+				A9A7D4AB1A503715001A70FF /* JRWebViewController.m in Sources */,
 				A9D654B71A27642800A80253 /* JSONValueTransformer.m in Sources */,
 				1441A18D1A29E3D5004A038E /* KTPhotoScrollViewController.m in Sources */,
 				14EDB38D1A3B4FE200E5AC77 /* FeedBackViewController.m in Sources */,
@@ -2368,7 +2374,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2b24e78a-088f-4c6a-b596-97ed5fe67368";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2403,7 +2409,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2b24e78a-088f-4c6a-b596-97ed5fe67368";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

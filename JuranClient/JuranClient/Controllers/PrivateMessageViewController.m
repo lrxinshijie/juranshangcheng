@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
 
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
+
 @end
 
 @implementation PrivateMessageViewController
@@ -43,6 +45,10 @@
     }];
     
     [_tableView headerBeginRefreshing];
+    
+    _emptyView.hidden = YES;
+    _emptyView.center = _tableView.center;
+    [self.view addSubview:_emptyView];
 }
 
 - (void)loadData{
@@ -57,6 +63,7 @@
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
+                _emptyView.hidden = [rows count] != 0;
                 self.datas = rows;
             }
             
