@@ -121,6 +121,9 @@
     for (NSString *key in dic.allKeys) {
         NSString *value = [dic objectForKey:key];
         char first = pinyinFirstLetter([value characterAtIndex:0]);
+        if ([value isEqualToString:@"重庆"]) {
+            first = 'c';
+        }
         NSMutableArray *proValues = [provinceDic objectForKey:[NSString stringWithFormat:@"%c", first - 32]];
         if (proValues == nil) {
             proValues = [NSMutableArray array];

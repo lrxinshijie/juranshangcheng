@@ -51,11 +51,16 @@
     return self;
 }
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameProfileReloadData object:nil];
     
     [self configureMenu];
     
@@ -141,6 +146,10 @@
     }];
 }
 
+- (void)receiveReloadDataNotification:(NSNotification*)notification{
+    [self loadData];
+}
+
 
 #pragma mark - Target Action
 
@@ -181,6 +190,7 @@
     }]) {
         return;
     }
+    _user.hasNewBidCount = 0;
     MyDemandViewController *vc = [[MyDemandViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
@@ -192,6 +202,7 @@
         return;
     }
     
+    _user.newPrivateLetterCount = 0;
     PrivateMessageViewController *pv = [[PrivateMessageViewController alloc] init];
     pv.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:pv animated:YES];
@@ -204,6 +215,7 @@
     }]) {
         return;
     }
+    _user.newAnswerCount = 0;
     MyAskOrAnswerViewController *vc = [[MyAskOrAnswerViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
@@ -217,6 +229,7 @@
     }]) {
         return;
     }
+    _user.newPushMsgCount = 0;
     PushMessageViewController *vc = [[PushMessageViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];

@@ -91,7 +91,7 @@
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
-                self.datas = [JRDemand buildUpWithValue:designReqList];
+                self.datas = rows;
             }
             [self reloadData];
         }
@@ -137,7 +137,7 @@
         cell = (DemandCell *)[nibs firstObject];
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     JRDemand *d = [_datas objectAtIndex:indexPath.row];
     [cell fillCellWithDemand:d];
@@ -150,8 +150,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    JRDemand *demand = _datas[indexPath.row];
+    demand.newBidNums = 0;
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     DemandDetailViewController *vc = [[DemandDetailViewController alloc] init];
-    vc.demand = _datas[indexPath.row];
+    vc.demand = demand;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

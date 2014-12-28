@@ -21,6 +21,8 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "GuideViewController.h"
 
+#import "HomeViewController.h"
+
 @interface AppDelegate () <UINavigationControllerDelegate>
 
 @end
@@ -63,6 +65,7 @@
 
 - (void)setupTabbar{
     CaseViewController *cs = [[CaseViewController alloc] init];
+//    HomeViewController *cs = [[HomeViewController alloc] init];
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
     csNav.tabBarItem = [self setupTabbarItemTitle:@"案例" image:@"tabbar_case" selected:@"tabbar_case_hl"];
     

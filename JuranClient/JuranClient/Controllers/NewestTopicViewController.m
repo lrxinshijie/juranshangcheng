@@ -372,6 +372,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
     JRComment *commnet = [_topic.commitList objectAtIndex:indexPath.row];
+    cell.commentButton.hidden = _isOld;
     [cell fillCellWithComment:commnet];
     
     return cell;

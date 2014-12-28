@@ -50,17 +50,17 @@
 - (void)setImage:(UIImage *)newImage 
 {
     
-    CGSize size = newImage.size;
-    
-    CGRect frame;
-    if (size.width/CGRectGetWidth(self.bounds) > size.height/CGRectGetHeight(self.bounds)) {
-        frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), size.width/CGRectGetWidth(self.bounds)*size.height);
-    }else{
-        frame = CGRectMake(0, 0, size.height/CGRectGetHeight(self.bounds)*size.width, CGRectGetHeight(self.bounds));
-    }
-    imageView_.frame = frame;
-    imageView_.center = self.center;
-    self.contentSize = CGSizeMake(0, size.height);
+//    CGSize size = newImage.size;
+//    
+//    CGRect frame;
+//    if (size.width/CGRectGetWidth(self.bounds) > size.height/CGRectGetHeight(self.bounds)) {
+//        frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), size.width/CGRectGetWidth(self.bounds)*size.height);
+//    }else{
+//        frame = CGRectMake(0, 0, size.height/CGRectGetHeight(self.bounds)*size.width, CGRectGetHeight(self.bounds));
+//    }
+//    imageView_.frame = frame;
+//    imageView_.center = self.center;
+//    self.contentSize = CGSizeMake(0, size.height);
     
    [imageView_ setImage:newImage];
 }

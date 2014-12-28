@@ -56,8 +56,8 @@
     self.photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(230, 12, 60, 45)];
     _photoImageView.image = [UIImage imageNamed:@"publish_image_default"];
     
-    self.keys = @[@"姓名",@"联系电话",@"房屋类型",@"装修预算",@"房屋面积",@"风格",@"项目地址",@"小区名称",@"户型",@"户型图上传"];
-    self.placeholders = @[@"请填写您的姓名",@"必须是11位数字",@"房屋类型", @"装修预算(万元)",@"必须是数字(平方米)",@"风格",@"项目地址",@"2-32个汉字",@"户型",@"可选"];
+    self.keys = @[@"姓名",@"联系电话",@"房屋类型",@"装修预算(万元)",@"房屋面积(㎡)",@"风格",@"项目地址",@"小区名称",@"户型",@"户型图(可选)"];
+    self.placeholders = @[@"请输入姓名",@"请输入11位手机号",@"房屋类型", @"请输入数字",@"请输入数字",@"请选择",@"请选择",@"请输入文字",@"请选择",@"可选"];
     
     BOOL flag = self.navigationController.tabBarController.tabBar.hidden;
     self.tableView = [self.view tableViewWithFrame:flag?kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
@@ -97,7 +97,7 @@
 }
 
 - (void)reloadData{
-    self.values = @[_demand.contactsName,_demand.contactsMobile, _demand.houseTypeString, _demand.budget,_demand.houseArea == 0 ? @"" : [NSString stringWithFormat:@"%.2f",_demand.houseArea],_demand.renovationStyleString,_demand.areaInfo.title,_demand.neighbourhoods,_demand.roomNumString,@"可选"];
+    self.values = @[_demand.contactsName,_demand.contactsMobile, _demand.houseTypeString, _demand.budget,_demand.houseArea,_demand.renovationStyleString,_demand.areaInfo.title,_demand.neighbourhoods,_demand.roomNumString,@"可选"];
     
     if (_fileImage) {
         _photoImageView.image = _fileImage;
@@ -181,7 +181,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"contactsName": _demand.contactsName,
                                                                                  @"houseType": _demand.houseType,
                                                                                  @"contactsMobile": _demand.contactsMobile,
-                                                                                 @"houseArea": [NSString stringWithFormat:@"%.2f", _demand.houseArea],
+                                                                                 @"houseArea": _demand.houseArea,
                                                                                  @"budget": _demand.budget,
                                                                                  @"budgetUnit": @"million",
                                                                                  @"renovationStyle": _demand.renovationStyle,
@@ -303,9 +303,7 @@
     cell.textField.text = [_values objectAtIndex:indexPath.row];
     cell.textField.keyboardType = UIKeyboardTypeDefault;
     
-    if (indexPath.row == 1) {
-        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-    }else if (indexPath.row == 3 || indexPath.row == 4){
+    if (indexPath.row == 1 || indexPath.row == 3 || indexPath.row == 4){
         cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }
     
@@ -415,7 +413,7 @@
             
         } origin:[UIApplication sharedApplication].keyWindow];
     }else if (indexPath.row == 9){
-        [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+        [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:NO MaxNumber:1 Handler:^(NSArray *images) {
             self.fileImage = [images firstObject];
             [self reloadData];
         }];
@@ -469,7 +467,7 @@
     }else if (textField.tag == 3){
         _demand.budget = textField.text;
     }else if (textField.tag == 4){
-        _demand.houseArea = [textField.text doubleValue];
+        _demand.houseArea = textField.text;
     }else if (textField.tag == 7){
         _demand.neighbourhoods = textField.text;
     }

@@ -71,6 +71,7 @@
     
     NSString * toBeString = [textView.text stringByReplacingCharactersInRange:range withString:text];
     if ([Public convertToInt:toBeString] >= 60) {
+        [_textVeiw resignFirstResponder];
         [self showTip:@"输入地址长度不能超过60!"];
         return NO;
     }

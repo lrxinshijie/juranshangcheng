@@ -124,7 +124,7 @@
 }
 
 - (void)reSetData{
-    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, [_demand roomNumString], [NSString stringWithFormat:@"%d万元", (NSInteger)_demand.renovationBudget], [_demand statusString], [NSString stringWithFormat:@"%.2f平方米", _demand.houseArea], [_demand renovationStyleString], _demand.postDate, _demand.deadline, @""];
+    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, [_demand roomNumString], [NSString stringWithFormat:@"%@万元", _demand.budget], [_demand statusString], [NSString stringWithFormat:@"%.2f平方米", [_demand.houseArea doubleValue]], [_demand renovationStyleString], _demand.postDate, _demand.deadline, @""];
 }
 
 - (void)setupUI{
@@ -138,6 +138,9 @@
     _designerTableView.tableHeaderView = _designerTableHeaderView;
     _designerTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_scrollView addSubview:_designerTableView];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [_designerTableHeaderView addGestureRecognizer:tap];
     
     CGRect frame = _demandInfoTableHeaderView.frame;
     frame.origin = CGPointMake(0, CGRectGetMaxY(_designerTableView.frame));
@@ -171,7 +174,10 @@
 #pragma mark - Target Action
 
 - (void)handleTap:(UITapGestureRecognizer*)gesture{
-    
+    if ([_demand statusIndex] == 0) {
+        NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",@"01084094000"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]];
+    }
 }
 
 - (IBAction)onModifyDemandInfo:(id)sender{

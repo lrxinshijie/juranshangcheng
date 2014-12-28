@@ -43,6 +43,7 @@
         self.postDate = @"";
         self.auditDesc = @"";
         self.roomTypeId = @"";
+        self.houseArea = @"";
     }
     
     return self;
@@ -59,11 +60,11 @@
         self.title = [dict getStringValueForKey:@"title" defaultValue:@""];
         self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
         self.houseType = [dict getStringValueForKey:@"houseType" defaultValue:@""];
-        self.renovationBudget = [dict getIntValueForKey:@"renovationBudget" defaultValue:0]/1000000;
+        self.budget = [NSString stringWithFormat:@"%d", [dict getIntValueForKey:@"renovationBudget" defaultValue:0]/1000000];
         self.bidNums = [dict getIntValueForKey:@"bidNums" defaultValue:0];
         self.publishTime = [dict getStringValueForKey:@"publishTime" defaultValue:@""];
         self.houseAddress = [dict getStringValueForKey:@"houseAddress" defaultValue:@""];
-        self.houseArea = [dict getDoubleValueForKey:@"houseArea" defaultValue:0];
+        self.houseArea = [dict getStringValueForKey:@"houseArea" defaultValue:@""];
         self.style = [dict getStringValueForKey:@"style" defaultValue:@""];
         self.deadline = [dict getStringValueForKey:@"deadline" defaultValue:@""];
         self.newBidNums = [dict getIntValueForKey:@"newBidNums" defaultValue:0];
@@ -102,9 +103,8 @@
     self.title = [value getStringValueForKey:@"title" defaultValue:@""];
     self.status = [value getStringValueForKey:@"status" defaultValue:@""];
     self.houseType = [value getStringValueForKey:@"houseType" defaultValue:@""];
-    self.renovationBudget = [value getIntValueForKey:@"renovationBudget" defaultValue:0]/1000000;
     self.houseAddress = [value getStringValueForKey:@"houseAddress" defaultValue:@""];
-    self.houseArea = [value getDoubleValueForKey:@"houseArea" defaultValue:0];
+    self.houseArea = [value getStringValueForKey:@"houseArea" defaultValue:@""];
     self.style = [value getStringValueForKey:@"style" defaultValue:@""];
     self.deadline = [value getStringValueForKey:@"deadline" defaultValue:@""];
     self.newBidNums = [value getIntValueForKey:@"newBidNums" defaultValue:0];
@@ -128,6 +128,40 @@
     self.bathroomCount = [value getStringValueForKey:@"bathroomCount" defaultValue:@""];
     self.roomTypeId = [value getStringValueForKey:@"imageId" defaultValue:@""];
 }
+
++ (NSMutableArray *)buildUpWithValueForDesigner:(id)value{
+    NSMutableArray *retVal = [NSMutableArray array];
+    
+    if ([value isKindOfClass:[NSArray class]]) {
+        for (NSDictionary *item in value) {
+            JRDemand *t = [[JRDemand alloc] initForDesignerWithDictionary:item];
+            [retVal addObject:t];
+        }
+    }
+    return retVal;
+}
+
+- (id)initForDesignerWithDictionary:(NSDictionary *)dict{
+    if (self=[self init]) {
+        if (!(dict && [dict isKindOfClass:[NSDictionary class]])) {
+            return self;
+        }
+        
+        self.designReqId = [dict getStringValueForKey:@"reqId" defaultValue:@""];
+        
+        self.budget = [NSString stringWithFormat:@"%d", [dict getIntValueForKey:@"budget" defaultValue:0]];
+        
+        self.title = [dict getStringValueForKey:@"title" defaultValue:@""];
+        self.budgetUnit = [dict getStringValueForKey:@"budgetUnit" defaultValue:@""];
+        self.isBidded = [dict getBoolValueForKey:@"isBided" defaultValue:NO];
+        self.houseAddress = [dict getStringValueForKey:@"address" defaultValue:@""];
+        self.houseArea = [dict getStringValueForKey:@"houseArea" defaultValue:@""];
+        self.deadBalance = [dict getStringValueForKey:@"balanceDays" defaultValue:@""];
+        self.bidNums = [dict getIntValueForKey:@"bidNums" defaultValue:0];
+    }
+    return self;
+}
+
 
 - (void)setRoomTypeImgUrl:(NSString *)roomTypeImgUrl{
     _oldRoomTypeImgUrl = _roomTypeImgUrl;

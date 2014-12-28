@@ -8,8 +8,10 @@
 
 #import "ModifyViewController.h"
 #import "JRMemberDetail.h"
+#import "UIActionSheet+Blocks.h"
 
-@interface ModifyViewController ()<UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, UITextFieldDelegate>
+
+@interface ModifyViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     NSArray *idTypes;
     NSInteger idCardType;
@@ -251,8 +253,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_type == ModifyCVTypeIdType && indexPath.row == 0) {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"请选择证件类型" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:idTypes[0], idTypes[1], idTypes[2], nil];
-        [actionSheet showInView:self.view];
+        [UIActionSheet showInView:self.view withTitle:@"请选择证件类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:idTypes tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+            if (buttonIndex != 3) {
+                idCardType = buttonIndex;
+                [_tableView reloadData];
+            }
+        }];
+        
     }
 }
 
@@ -260,16 +267,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == 3) {
-        return;
-    }
-    idCardType = buttonIndex;
-    [_tableView reloadData];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

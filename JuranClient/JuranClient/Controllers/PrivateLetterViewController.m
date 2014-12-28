@@ -45,7 +45,7 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"私信";
-    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 40, 30) target:self action:@selector(onSubmit) title:@"发布" backgroundImage:nil];
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 40, 30) target:self action:@selector(onSubmit) title:@"发送" backgroundImage:nil];
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
@@ -65,7 +65,7 @@
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(237, 237, 237);
     [self.view addSubview:_tableView];
-    self.tapHide = [_tableView addTapGestureRecognizerWithTarget:self action:@selector(hideKeyboard)];
+    self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     _tableView.tableHeaderView = _headerView;
     
     self.isCheck = YES;
@@ -227,7 +227,7 @@
         return;
     }
     
-    if (_isCheck) {
+//    if (_isCheck) {
         if (_senderName.length == 0) {
             [self showTip:@"姓名不能为空"];
             return;
@@ -252,12 +252,12 @@
             [self showTip:@"房屋面积不能为空"];
             return;
         }
-    }else{
-        _senderName = @"";
-        _mobilePhone = @"";
-        _likeStyle = @"";
-        _houseArea = @"";
-    }
+//    }else{
+//        _senderName = @"";
+//        _mobilePhone = @"";
+//        _likeStyle = @"";
+//        _houseArea = @"";
+//    }
     
     NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _designer.userId],
                             @"senderName":_senderName,

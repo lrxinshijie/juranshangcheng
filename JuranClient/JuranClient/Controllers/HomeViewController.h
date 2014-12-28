@@ -10,4 +10,6 @@
 
 @interface HomeViewController : ALViewController
 
+@property (nonatomic, strong) NSMutableArray *demandDatas;
+
 @end

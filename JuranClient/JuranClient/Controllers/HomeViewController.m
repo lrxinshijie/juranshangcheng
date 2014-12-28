@@ -7,10 +7,12 @@
 //
 
 #import "HomeViewController.h"
+#import "NewestBidInfoCell.h"
 
 @interface HomeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) IBOutlet UIView *tableHeaderView;
 
 @end
 
@@ -30,42 +32,85 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-
+    
+    [self setupUI];
+    
     [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"navbar_leftbtn_logo"] leftBarButtonItemAction:nil];
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
+    
+    [self loadDemandData];
+}
+
+
+
+- (void)setupUI{
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    _tableView.tableFooterView = [[UIView alloc] init];
+    _tableView.tableHeaderView = _tableHeaderView;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:_tableView];
+}
+
+- (void)loadDemandData{
+    NSDictionary *param = @{@"pageNo": @"1",
+                            @"onePageCount": kOnePageCount};
+    [self showHUD];
+    
+    [[ALEngine shareEngine] pathURL:JR_GET_INDEX_DESIGNREP_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            
+            
+        }
+    }];
+}
+
+#pragma mark - TargetAction
+
+- (IBAction)onBid:(id)sender{
+    
+}
+
+- (IBAction)onQuestion:(id)sender{
+    
+}
+
+- (IBAction)onTopic:(id)sender{
+    
+}
+
+- (IBAction)onPrivateLetter:(id)sender{
+    
 }
 
 - (void)onSearch{
 
-    
-    [self setupView];
-}
-
-- (void)setupView{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
-    view.backgroundColor = [UIColor yellowColor];
-//    _tableView.tableHeaderView = view;
-    _tableView.tableFooterView = [[UIView alloc] init];
 }
 
 #pragma mark - UITableViewDataSource/Delegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 5;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 87 + ((indexPath.row == 5 - 1)?5:0);
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    static NSString *CellIdentifier = @"NewestBidInfoCell";
+    NewestBidInfoCell *cell = (NewestBidInfoCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        cell = (NewestBidInfoCell *)[nibs firstObject];
+    }
+    
+    [cell fillCellWithData:nil];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    return 22;
-//}
 
 - (void)didReceiveMemoryWarning
 {

@@ -16,11 +16,10 @@
 @property (nonatomic, strong) NSString *status;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *houseType;
-@property (nonatomic, assign) NSInteger renovationBudget;
 @property (nonatomic, assign) NSInteger bidNums;
 @property (nonatomic, strong) NSString *publishTime;
 @property (nonatomic, strong) NSString *houseAddress;
-@property (nonatomic, assign) CGFloat houseArea;
+@property (nonatomic, copy) NSString *houseArea;
 @property (nonatomic, strong) NSString *style;
 @property (nonatomic, strong) NSString *deadline;
 @property (nonatomic, assign) NSInteger newBidNums;
@@ -55,6 +54,7 @@
 @property (nonatomic, copy) NSString *oldRoomTypeImgUrl;
 @property (nonatomic, copy) NSString *roomTypeId;
 
+
 - (NSString*)statusString;
 - (NSInteger)statusIndex;
 - (NSString *)houseTypeString;
@@ -64,5 +64,6 @@
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (void)buildUpDetailWithValue:(id)value;
++ (NSMutableArray *)buildUpWithValueForDesigner:(id)value;
 
 @end
