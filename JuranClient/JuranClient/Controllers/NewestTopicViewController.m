@@ -128,7 +128,6 @@
     
     [[ALEngine shareEngine] pathURL:JR_GET_TOPICDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            [self hideHUD];
             if (_topic) {
                 [_topic buildUpDetialValueWithDictionary:data];
             }else{

@@ -31,7 +31,10 @@
     _titleList = titleList;
     NSInteger i = 0;
     for (NSString *title in _titleList) {
-        CGRect frame = CGRectMake(CGRectGetWidth(self.frame)/_titleList.count*i, 0, CGRectGetWidth(self.frame)/_titleList.count, CGRectGetHeight(self.frame));
+        CGRect frame = CGRectMake(95*i, 0, 95, CGRectGetHeight(self.frame));
+        if (i == _titleList.count - 1) {
+            frame = CGRectMake(95*i, 0, CGRectGetWidth(self.frame) - 95*i, CGRectGetHeight(self.frame));
+        }
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag = kButtonTag+i;
         btn.frame = frame;
@@ -60,6 +63,7 @@
         [UIView animateWithDuration:.3f animations:^{
             CGRect frame = _selectedBackgroundView.frame;
             frame.origin.x = btn.frame.origin.x;
+            frame.size.width = btn.frame.size.width;
             _selectedBackgroundView.frame = frame;
         } completion:^(BOOL finished) {
             [(UIButton*)[self viewWithTag:kButtonTag+_selectedIndex] setSelected:NO];

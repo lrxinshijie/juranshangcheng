@@ -268,9 +268,14 @@
         case 2:
         {
             if (_bidNums > 0) {
-                des = [NSString stringWithFormat:@"已有%d人投标，快去选择设计师吧！剩余%@天结束招标。", _bidNums, _deadBalance];
+                des = [NSString stringWithFormat:@"已有%d人投标，快去选择设计师吧！", _bidNums];
             }else{
-                des = [NSString stringWithFormat:@"目前没有设计师投标呦！剩余%@天结束招标。", _deadBalance];
+                des = @"目前没有设计师投标呦！";
+            }
+            if (_deadBalance == 0) {
+                des = [NSString stringWithFormat:@"%@离结束不足1天", des];
+            }else{
+                des = [NSString stringWithFormat:@"%@剩余%@天结束招标。", des, _deadBalance];
             }
             break;
         }

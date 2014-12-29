@@ -114,11 +114,25 @@
 - (void)reloadData{
     _nameLabel.text = [_designer formatUserName];
     self.navigationItem.title = [_designer formatUserName];
+    self.userLevelImageView.image = [UIImage imageNamed:[JRDesigner userLevelImage:_designer.userLevel]];
     
-    _isAuthImageView.hidden = !_designer.isAuth;
-    CGRect frame = _isAuthImageView.frame;
-    frame.origin.x = _nameLabel.frame.origin.x + [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)] + 5;
-    _isAuthImageView.frame = frame;
+    if (_designer.isAuth) {
+        _isAuthImageView.hidden = NO;
+        
+        CGRect frame = _isAuthImageView.frame;
+        frame.origin.x = _nameLabel.frame.origin.x + [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)] + 5;
+        _isAuthImageView.frame = frame;
+        
+        frame = _userLevelImageView.frame;
+        frame.origin.x = CGRectGetMaxX(_isAuthImageView.frame) + 5;
+        _userLevelImageView.frame = frame;
+    }else{
+        _isAuthImageView.hidden = YES;
+
+        CGRect frame = _userLevelImageView.frame;
+        frame.origin.x = _nameLabel.frame.origin.x + [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)] + 5;
+        _userLevelImageView.frame = frame;
+    }
     
     [_headImageView setImageWithURLString:_designer.headUrl];
     _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.followCount];
