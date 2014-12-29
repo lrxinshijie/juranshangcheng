@@ -152,14 +152,14 @@
     
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param1 HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
-                [self loadData];
                 [self showTip:@"修改用户信息成功"];
             });
         }else{
-            [self hideHUD];
+            [self loadData];
         }
     }];
 }
@@ -486,9 +486,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField.tag == 1100) {
-        if (textField.text >0 && [textField.text isEqualToString:_user.account]) {
-            self.oldAccount = _user.account;
-        }
+        self.oldAccount = _user.account;
         accountChangeTip = NO;
         _user.account = textField.text;
     }else if (textField.tag == 1101){
