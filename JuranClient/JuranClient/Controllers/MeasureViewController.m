@@ -137,12 +137,12 @@
         
         if (indexPath.section == 0) {
             if (indexPath.row == 2) {
-                placeholder = @"户型";
+                placeholder = @"请选择";
                 cell.textField.keyboardType = UIKeyboardTypeDefault;
                 cell.textField.text = [self roomNumString];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.textField.enabled = NO;
-                title = @"请选择";
+                title = @"户型";
             }else if (indexPath.row == 3){
                 placeholder = @"请输入数字";
                 cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
