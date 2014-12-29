@@ -28,7 +28,6 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) EScrollerView *bannerView;
 @property (nonatomic, strong) FilterView *filterView;
-@property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) NSMutableDictionary *filterData;
 
 @end
@@ -62,19 +61,15 @@
         self.navigationItem.title = @"搜索结果";
     }
     
+    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCase defaultData:_filterData];
+    _filterView.delegate = self;
+    [self.view addSubview:_filterView];
     
-    self.tableView = [self.view tableViewWithFrame:_searchKey.length > 0 ? kContentFrameWithoutNavigationBar : kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 44, kWindowWidth, (_searchKey.length > 0 ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = RGBColor(236, 236, 236);
     [self.view addSubview:_tableView];
-    
-    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 44)];
-    
-    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCase defaultData:_filterData];
-    _filterView.delegate = self;
-    [_headerView addSubview:_filterView];
-    _tableView.tableHeaderView = _headerView;
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -117,15 +112,10 @@
                 self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
 //                [_adInfos addObjectsFromArray:_adInfos];
                 
-                CGRect frame = _headerView.frame;
-                frame.size.height = 165 + 44;
-                _headerView.frame = frame;
-                
                 self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 44, kWindowWidth, 165) ImageArray:_adInfos];
                 _bannerView.delegate = self;
-                [_headerView addSubview:_bannerView];
                 
-                self.tableView.tableHeaderView = _headerView;
+                self.tableView.tableHeaderView = _bannerView;
             }
             
         }
@@ -157,10 +147,6 @@
         }
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
-        
-        if (_currentPage == 1) {
-            _tableView.contentOffset = CGPointMake(0, CGRectGetHeight(_filterView.frame));
-        }
         
     }];
 }
