@@ -73,6 +73,7 @@
             frame.size.height = 45;
             frame.size.width = 60;
             ZoomInImageView *imageView = [[ZoomInImageView alloc] initWithFrame:frame];
+            imageView.image = [UIImage imageNamed:@"image_default.png"];
             [imageView setImageWithURLString:comment.imageUrlList.firstObject];
             [self addSubview:imageView];
             
