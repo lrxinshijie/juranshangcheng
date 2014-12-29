@@ -231,7 +231,7 @@
     
     [self textFieldShouldReturn:nil];
     
-    if (_comment.length == 0 && self.fileImage == nil) {
+    if (_comment.length == 0) {
         [self showTip:@"评论内容不能为空"];
         return;
     }
@@ -276,8 +276,6 @@
     CGRect frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame) - CGRectGetHeight(_commentImageView.frame);
     _commentView.frame = frame;
-    
-    
 }
 
 - (void)onHiddenCommentImageView{
@@ -299,6 +297,7 @@
 }
 
 - (IBAction)onComment:(id)sender{
+    self.selectComment = nil;
     _commentView.hidden = NO;
     [_commentTextField becomeFirstResponder];
 }
@@ -415,9 +414,7 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    if (_selectComment && textField.text.length == 0) {
-        self.selectComment = nil;
-    }
+    
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

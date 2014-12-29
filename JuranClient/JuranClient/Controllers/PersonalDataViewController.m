@@ -373,7 +373,7 @@
     }else if (indexPath.section == 1){
         if (indexPath.row == 1) {
             
-            [ActionSheetStringPicker showPickerWithTitle:nil rows:@[@"女", @"男"] initialSelection:_user.sex - 1 doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+            [ActionSheetStringPicker showPickerWithTitle:nil rows:@[@"女", @"男"] initialSelection:_user.sex ==0?0:(_user.sex - 1) doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
                 _user.sex= selectedIndex + 1;
                 [self reloadData];
             } cancelBlock:^(ActionSheetStringPicker *picker) {
