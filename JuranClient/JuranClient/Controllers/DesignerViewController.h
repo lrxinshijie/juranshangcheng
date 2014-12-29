@@ -11,6 +11,7 @@
 @interface DesignerViewController : ALViewController
 
 @property (nonatomic, copy) NSString *searchKeyWord;
-@property (nonatomic, assign) BOOL isSearchResult;
+@property (nonatomic, assign) BOOL isHome;
+@property (nonatomic, strong) NSMutableDictionary *filterData;
 
 @end

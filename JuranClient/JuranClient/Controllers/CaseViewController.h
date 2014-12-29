@@ -11,6 +11,8 @@
 @interface CaseViewController : ALViewController
 
 @property (nonatomic, copy) NSString *searchKey;
+@property (nonatomic, strong) NSMutableDictionary *filterData;
+@property (nonatomic, assign) BOOL isHome;
 
 
 

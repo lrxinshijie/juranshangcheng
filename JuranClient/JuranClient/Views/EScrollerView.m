@@ -38,7 +38,7 @@
             return self;
         }
         
-        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+        [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
         
         self.userInteractionEnabled=YES;
         
@@ -84,7 +84,7 @@
         [pageControl sizeToFit];
 //        pageControl.pageIndicatorTintColor = [UIColor grayColor];
 //        pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
-        pageControl.center = CGPointMake(rect.size.width/2 + 100, CGRectGetHeight(rect)-10);
+        pageControl.center = CGPointMake(rect.size.width - (rect.size.width - CGRectGetWidth(pageControl.frame))/2 , CGRectGetHeight(rect)-10);
         
         [self addSubview:pageControl];
 	}

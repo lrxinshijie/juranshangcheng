@@ -89,7 +89,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="next"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="axS-hq-mlF"/>
                     </connections>
