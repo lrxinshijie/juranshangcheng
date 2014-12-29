@@ -39,7 +39,12 @@
         self.navigationItem.title = @"搜索结果";
     }
     
-    self.tableView = [self.view tableViewWithFrame:_isSearchResult? kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.filterView = [[QuestionFilterView alloc] initWithDefaultData:_filterData];
+    _filterView.delegate = self;
+    [self.view addSubview:_filterView];
+    
+    
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 44, kWindowWidth, (_isSearchResult?kWindowHeightWithoutNavigationBar:kWindowHeightWithoutNavigationBarAndTabbar) - 44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -62,10 +67,6 @@
         weakSelf.currentPage++;
         [weakSelf loadData];
     }];
-    
-    self.filterView = [[QuestionFilterView alloc] initWithDefaultData:_filterData];
-    _filterView.delegate = self;
-    _tableView.tableHeaderView = _filterView;
     
     [_tableView headerBeginRefreshing];
 
