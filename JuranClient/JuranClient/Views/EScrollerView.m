@@ -79,8 +79,8 @@
         pageControl = [[SMPageControl alloc] init];
         pageControl.numberOfPages = ([imageArray count]-2);
 //        pageControl.currentPage = 0;
-        pageControl.pageIndicatorImage = [UIImage imageNamed:@"ad_page_action"];
-        pageControl.currentPageIndicatorImage = [UIImage imageNamed:@"ad_page_inactive"];
+        pageControl.pageIndicatorImage = [UIImage imageNamed:@"ad_page_inactive"];
+        pageControl.currentPageIndicatorImage = [UIImage imageNamed:@"ad_page_action"];
         [pageControl sizeToFit];
 //        pageControl.pageIndicatorTintColor = [UIColor grayColor];
 //        pageControl.currentPageIndicatorTintColor = [UIColor blueColor];
@@ -114,7 +114,7 @@
 - (void)turnPage
 {
     int page = pageControl.currentPage;
-    [scrollView scrollRectToVisible:CGRectMake(viewSize.size.width*(page+1),0,viewSize.size.width,viewSize.size.height) animated:NO];
+    [scrollView scrollRectToVisible:CGRectMake(viewSize.size.width*(page+1),0,viewSize.size.width,viewSize.size.height) animated:YES];
 }
 
 - (void)runTimePage
