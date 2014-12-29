@@ -158,9 +158,8 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
                 [self showTip:@"修改用户信息成功"];
             });
-        }else{
-            [self loadData];
         }
+        [self loadData];
     }];
 }
 
@@ -316,9 +315,6 @@
         if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
             cell.layoutMargins = UIEdgeInsetsZero;
         }
-        if (indexPath.section == 0 && indexPath.row == 1) {
-            cell.textField.enabled = !_user.accountChangeable;
-        }
         
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.titleLabel.text =  _keys[indexPath.section][indexPath.row];
@@ -439,7 +435,7 @@
     }
     
     if (textField.tag == 1102) {
-        if(![self isPureNumandCharacters:value]){
+        if(![self isPureNumandCharacters:string] && ![string isEqualToString:@"-"]){
             [self showTip:@"请输入合法字符！！"];
             return NO;
         }
@@ -467,7 +463,7 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     if (textField.tag == 1100) {
         if (_user.accountChangeable) {
-            [self showTip:@"用户名不可修改"];
+            [self showTip:@"用户名仅限修改一次"];
             return NO;
         }else if(!accountChangeTip){
             self.selectedTextField = textField;

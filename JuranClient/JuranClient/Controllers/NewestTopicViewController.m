@@ -86,12 +86,12 @@
     CGRect frame = _bottomView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _bottomView.frame = frame;
-    [self.view addSubview:_bottomView];
+//    [self.view addSubview:_bottomView];
     
     frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
-    _commentView.hidden = YES;
+    _commentView.hidden = NO;
     [self.view addSubview:_commentView];
     
     UIView *view = [_commentView viewWithTag:2200];
@@ -128,6 +128,7 @@
     
     [[ALEngine shareEngine] pathURL:JR_GET_TOPICDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
+            [self hideHUD];
             if (_topic) {
                 [_topic buildUpDetialValueWithDictionary:data];
             }else{
@@ -228,7 +229,6 @@
         return;
     }
     _comment = _commentTextField.text;
-    
     [self textFieldShouldReturn:nil];
     
     if (_comment.length == 0) {
@@ -280,7 +280,7 @@
 
 - (void)onHiddenCommentImageView{
     _commentImageView.hidden = YES;
-    _commentView.hidden = YES;
+//    _commentView.hidden = YES;
     
     CGRect frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
@@ -298,7 +298,7 @@
 
 - (IBAction)onComment:(id)sender{
     self.selectComment = nil;
-    _commentView.hidden = NO;
+//    _commentView.hidden = NO;
     [_commentTextField becomeFirstResponder];
 }
 
@@ -386,7 +386,7 @@
 
 - (void)clickCellComment:(CommentCell *)cell{
     self.selectComment = cell.comment;
-    _commentView.hidden = NO;
+//    _commentView.hidden = NO;
     [_commentTextField becomeFirstResponder];
 }
 
@@ -408,8 +408,9 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [_commentTextField resignFirstResponder];
     
-    _commentView.hidden = YES;
-    _commentImageView.hidden = YES;
+//    _commentView.hidden = YES;
+    self.selectComment = nil;
+    [self onHiddenCommentImageView];
     return YES;
 }
 

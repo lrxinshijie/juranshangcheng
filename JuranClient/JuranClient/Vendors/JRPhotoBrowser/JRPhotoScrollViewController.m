@@ -130,7 +130,7 @@
     _titleView.backgroundColor = [UIColor clearColor];
     [bottomView_ addSubview:_titleView];
     
-    _descTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 220, 50)];
+    _descTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 270, 50)];
     _descTextView.editable = NO;
     _descTextView.backgroundColor = [UIColor clearColor];
     _descTextView.textAlignment = NSTextAlignmentLeft;

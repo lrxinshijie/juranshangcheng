@@ -28,16 +28,19 @@
 @property (nonatomic, weak) IBOutlet UIView *toolBar;
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) IBOutlet JRSegmentControl *segment;
+
 @property (nonatomic, weak) IBOutlet UIImageView *headImageView;
 @property (nonatomic, weak) IBOutlet UIView *headView;
 @property (nonatomic, weak) IBOutlet UILabel *fansCountLabel;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+
 @property (nonatomic, weak) IBOutlet UILabel *popularityLabel;
 @property (nonatomic, weak) IBOutlet UILabel *pictureCountLabel;
 @property (nonatomic, weak) IBOutlet UILabel *diyProjectCountLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *followImageView;
 @property (nonatomic, weak) IBOutlet UILabel *followTitleLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *isAuthImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *userLevelImageView;
 
 
 @property (nonatomic, strong) SelfIntrodutionCell *introductionCell;

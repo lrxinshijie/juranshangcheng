@@ -22,7 +22,7 @@
         self.isRealNameAuth = [dict getIntValueForKey:@"isRealNameAuth" defaultValue:0];
         self.userId = [dict getIntValueForKey:@"userId" defaultValue:0];
         self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
-        self.levelCode = [dict getStringValueForKey:@"levelCode" defaultValue:@""];
+        self.userLevel = [dict getStringValueForKey:@"levelCode" defaultValue:@""];
         self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
         self.userName = [dict getStringValueForKey:@"userName" defaultValue:@""];
         self.styleNames = [dict getStringValueForKey:@"styleNames" defaultValue:@""];
@@ -223,6 +223,18 @@
         return @"";
     }
     return [NSString stringWithFormat:@"%d年", _experienceCount];
+}
+
++ (NSString*)userLevelImage:(NSString*)userLevel{
+    NSArray *levels = @[@"design_one", @"design_two", @"design_three", @"design_four", @"design_five"];
+    NSInteger index = 0;
+    for (NSString *s in levels) {
+        if ([s isEqualToString:userLevel]) {
+            break;
+        }
+        index++;
+    }
+    return [NSString stringWithFormat:@"userlevel%d", index];
 }
 
 @end

@@ -54,11 +54,26 @@
     _experienceLabel.text =  [data experienceString];
     _productCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];
     _readCountLabel.text = [NSString stringWithFormat:@"%i", data.browseCount];
+//    _userLevelImageView.image = [UIImage imageNamed:[JRDesigner userLevelImage:data.userLevel]];
+    _userLevelImageView.hidden = YES;
     
-    _isAuthImageView.hidden = !(data.isRealNameAuth == 2);
-    CGRect frame = _isAuthImageView.frame;
-    frame.origin.x = _nameLabel.frame.origin.x + [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)] + 5;
-    _isAuthImageView.frame = frame;
+    if (data.isRealNameAuth == 2) {
+        _isAuthImageView.hidden = NO;
+        
+        CGRect frame = _isAuthImageView.frame;
+        frame.origin.x = _nameLabel.frame.origin.x + [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)] + 5;
+        _isAuthImageView.frame = frame;
+        
+        frame = _userLevelImageView.frame;
+        frame.origin.x = CGRectGetMaxX(_isAuthImageView.frame) + 5;
+        _userLevelImageView.frame = frame;
+    }else{
+        _isAuthImageView.hidden = YES;
+        
+        CGRect frame = _userLevelImageView.frame;
+        frame.origin.x = _nameLabel.frame.origin.x + [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)] + 5;
+        _userLevelImageView.frame = frame;
+    }
     
     NSInteger i = 0;
     for (NSString *url in data.frontImageUrlList) {

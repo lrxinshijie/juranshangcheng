@@ -125,7 +125,7 @@
 }
 
 - (void)reSetData{
-    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, [_demand roomNumString], [NSString stringWithFormat:@"%@万元", _demand.budget], [_demand statusString], [NSString stringWithFormat:@"%.2f平方米", [_demand.houseArea doubleValue]], [_demand renovationStyleString], _demand.postDate, _demand.deadline, @""];
+    demandInfoValues = @[_demand.contactsName, _demand.contactsMobile, _demand.designReqId, [_demand roomNumString], [NSString stringWithFormat:@"%@万元", _demand.budget], [_demand statusString], [NSString stringWithFormat:@"%.2f㎡", [_demand.houseArea doubleValue]], [_demand renovationStyleString], _demand.postDate, _demand.deadline, @""];
 }
 
 - (void)setupUI{
