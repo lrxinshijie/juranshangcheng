@@ -51,7 +51,7 @@
     _addressLabel.text = demand.houseAddress;
     _sizeLabel.text = [NSString stringWithFormat:@"%.2f平方米", [demand.houseArea doubleValue]];
     _styleLabel.text = [demand houseTypeString];
-    _priceLabel.text = [NSString stringWithFormat:@"%d万元", [demand.budget intValue]];
+    _priceLabel.text = [NSString stringWithFormat:@"%@万元", demand.budget];
     _bidNumberLabel.text = [NSString stringWithFormat:@"投标人数：%d人", demand.bidNums];
     _bidNumberView.hidden = demand.newBidNums?NO:YES;
     _statusLabel.hidden = demand.isBidded;

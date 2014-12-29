@@ -60,7 +60,7 @@
         self.title = [dict getStringValueForKey:@"title" defaultValue:@""];
         self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
         self.houseType = [dict getStringValueForKey:@"houseType" defaultValue:@""];
-        self.budget = [NSString stringWithFormat:@"%d", [dict getIntValueForKey:@"renovationBudget" defaultValue:0]/1000000];
+        self.budget = [NSString stringWithFormat:@"%.2f", ([dict getDoubleValueForKey:@"renovationBudget" defaultValue:0]*1.0)/1000000];
         self.bidNums = [dict getIntValueForKey:@"bidNums" defaultValue:0];
         self.publishTime = [dict getStringValueForKey:@"publishTime" defaultValue:@""];
         self.houseAddress = [dict getStringValueForKey:@"houseAddress" defaultValue:@""];
