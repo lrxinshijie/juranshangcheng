@@ -152,14 +152,14 @@
     
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param1 HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
-                [self loadData];
                 [self showTip:@"修改用户信息成功"];
             });
         }else{
-            [self hideHUD];
+            [self loadData];
         }
     }];
 }
@@ -186,22 +186,19 @@
 #pragma mark - Target Action
 
 - (void)onSave{
+    
+    [self.selectedTextField resignFirstResponder];
+    
     //判断合法性
     if (_user.account.length == 0) {
         [self showTip:@"用户名不能为空"];
         return;
     }
     
-    if (![self isPureNumandCharacters:_user.homeTel]) {
-        [self showTip:@"请输入合法电话号码！！"];
+    if (_user.nickName.length < 4) {
+        [self showTip:@"昵称至少需要4个字符"];
         return;
     }
-    if (_user.homeTel.length < 8 || _user.homeTel.length > 12) {
-        //不能为空
-        [self showTip:@"请输入合法电话号码！！"];
-        return;
-    }
-    [self.selectedTextField resignFirstResponder];
     
     [self modifyMemberDetail];
     
@@ -435,9 +432,26 @@
     }
     
     NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if (textField.tag == 1101 && [Public convertToInt:value] > 12) {
+    if (textField.tag == 1101 && [Public convertToInt:value] > 20) {
+        [textField resignFirstResponder];
+        [self showTip:@"昵称长度不能超过20个字符"];
         return NO;
     }
+    
+    if (textField.tag == 1102) {
+        if(![self isPureNumandCharacters:value]){
+            [self showTip:@"请输入合法字符！！"];
+            return NO;
+        }
+        
+        if (value.length > 11) {
+            //不能为空
+            [self showTip:@"固定电话长度不能超过11位！"];
+            return NO;
+        }
+    }
+    
+    
 //    else if (textField.tag == DemandEditContactsMobile && value.length > 32){
 //        return NO;
 //    }else if (textField.tag == DemandEditBudget){
@@ -472,9 +486,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField.tag == 1100) {
-        if (textField.text >0 && [textField.text isEqualToString:_user.account]) {
-            self.oldAccount = _user.account;
-        }
+        self.oldAccount = _user.account;
         accountChangeTip = NO;
         _user.account = textField.text;
     }else if (textField.tag == 1101){

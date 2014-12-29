@@ -239,7 +239,10 @@
             if (_delegate && [_delegate respondsToSelector:@selector(valueChangedWithQuestionDetailViewController:)]) {
                 [_delegate valueChangedWithQuestionDetailViewController:self];
             }
-            [self reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+                [self reloadData];
+            });
         }
         
     }];

@@ -17,6 +17,7 @@
 #import "PrivateLetterViewController.h"
 #import "MeasureViewController.h"
 #import "UIAlertView+Blocks.h"
+#import "JRAreaInfo.h"
 
 #define kStatusBGImageViewTag 2933
 
@@ -312,7 +313,7 @@
             if (_demandAddressView.superview) {
                 [_demandAddressView removeFromSuperview];
             }
-            _demandAddressLabel.text = _demand.houseAddress;
+            _demandAddressLabel.text = [NSString stringWithFormat:@"%@%@", _demand.areaInfo.title, _demand.neighbourhoods];
             [_roomTypeImageView setImageWithURLString:_demand.roomTypeImgUrl];
             [cell.contentView addSubview:_demandAddressView];
         }else if (indexPath.row == 5){

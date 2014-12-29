@@ -218,8 +218,10 @@
             [_question.otherAnswers insertObject:answer atIndex:0];
             _question.answerCount += 1;
             _answerTextField.text = @"";
-            [self reloadData];
-            [_tableView scrollsToTop];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+                [self reloadData];
+            });
             
             if (_delegate && [_delegate respondsToSelector:@selector(answeredWithAskDetailViewController:)]) {
                 [_delegate answeredWithAskDetailViewController:self];

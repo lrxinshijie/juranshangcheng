@@ -60,7 +60,7 @@
         self.title = [dict getStringValueForKey:@"title" defaultValue:@""];
         self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
         self.houseType = [dict getStringValueForKey:@"houseType" defaultValue:@""];
-        self.budget = [NSString stringWithFormat:@"%.2f", ([dict getDoubleValueForKey:@"renovationBudget" defaultValue:0]*1.0)/1000000];
+        self.budget = [NSString stringWithFormat:@"%.2f", [dict getDoubleValueForKey:@"renovationBudget" defaultValue:0]/1000000.f];
         self.bidNums = [dict getIntValueForKey:@"bidNums" defaultValue:0];
         self.publishTime = [dict getStringValueForKey:@"publishTime" defaultValue:@""];
         self.houseAddress = [dict getStringValueForKey:@"houseAddress" defaultValue:@""];
@@ -95,7 +95,7 @@
     self.contactsName = [value getStringValueForKey:@"contactsName" defaultValue:@""];
     self.contactsSex = [value getStringValueForKey:@"contactsSex" defaultValue:@""];
     self.contactsMobile = [value getStringValueForKey:@"contactsMobile" defaultValue:@""];
-    self.budget = [NSString stringWithFormat:@"%d", [value getIntValueForKey:@"budget" defaultValue:0]/1000000];
+    self.budget = [NSString stringWithFormat:@"%.2f", [value getDoubleValueForKey:@"budget" defaultValue:0]/1000000.f];
     self.renovationStyle = [value getStringValueForKey:@"renovationStyle" defaultValue:@""];
     NSDictionary *areaDic = value[@"areaInfo"];
     self.areaInfo = [[JRAreaInfo alloc] initWithDictionary:areaDic];
@@ -103,7 +103,6 @@
     self.title = [value getStringValueForKey:@"title" defaultValue:@""];
     self.status = [value getStringValueForKey:@"status" defaultValue:@""];
     self.houseType = [value getStringValueForKey:@"houseType" defaultValue:@""];
-    self.houseAddress = [value getStringValueForKey:@"houseAddress" defaultValue:@""];
     self.houseArea = [value getStringValueForKey:@"houseArea" defaultValue:@""];
     self.style = [value getStringValueForKey:@"style" defaultValue:@""];
     self.deadline = [value getStringValueForKey:@"deadline" defaultValue:@""];
@@ -149,7 +148,7 @@
         
         self.designReqId = [dict getStringValueForKey:@"reqId" defaultValue:@""];
         
-        self.budget = [NSString stringWithFormat:@"%d", [dict getIntValueForKey:@"budget" defaultValue:0]];
+        self.budget = [NSString stringWithFormat:@"%d", [dict getIntValueForKey:@"budget" defaultValue:0]/1000000];
         
         self.title = [dict getStringValueForKey:@"title" defaultValue:@""];
         self.budgetUnit = [dict getStringValueForKey:@"budgetUnit" defaultValue:@""];
@@ -282,12 +281,12 @@
         }
         case 4:
         {
-            des = @"该需求已到期，未有设计师中标，您可再次发布设计需求。";
+            des = @"您终止了该招标需求。";
             break;
         }
         case 5:
         {
-            des = @"您终止了该招标需求。";
+            des =@"该需求已到期，未有设计师中标，您可再次发布设计需求。";
             break;
         }
         default:

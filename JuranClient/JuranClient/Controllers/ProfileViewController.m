@@ -134,7 +134,9 @@
     }
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self hideHUD];
+        });
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
                 [_user buildUpProfileDataWithDictionary:data];

@@ -227,13 +227,14 @@
     }]) {
         return;
     }
-    
     _comment = _commentTextField.text;
-    if (_comment.length == 0) {
+    
+    [self textFieldShouldReturn:nil];
+    
+    if (_comment.length == 0 && self.fileImage == nil) {
         [self showTip:@"评论内容不能为空"];
         return;
     }
-    [self textFieldShouldReturn:nil];
     
     if (self.fileImage) {
         [self uploadCommentImage];
