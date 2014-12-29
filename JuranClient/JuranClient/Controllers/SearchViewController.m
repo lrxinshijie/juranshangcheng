@@ -172,7 +172,6 @@
     if (_type == SearchTypeDesigner) {
         DesignerViewController *vc = [[DesignerViewController alloc] init];
         vc.searchKeyWord = _searchKeyWord;
-        vc.isSearchResult = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (_type == SearchTypeCase){
         CaseViewController *vc = [[CaseViewController alloc] init];
