@@ -152,14 +152,14 @@
     
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param1 HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
-                [self loadData];
                 [self showTip:@"修改用户信息成功"];
             });
         }else{
-            [self hideHUD];
+            [self loadData];
         }
     }];
 }
