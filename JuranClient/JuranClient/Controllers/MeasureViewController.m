@@ -164,7 +164,7 @@
             }else if (indexPath.row == 2){
                 placeholder = @"会员卡号";
                 cell.textField.text = _customerCardNo;
-                cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+                cell.textField.keyboardType = UIKeyboardTypeNumberPad;
                 title = @"会员卡号";
             }else if (indexPath.row == 3){
                 cell.textField.text = _customerEmail;

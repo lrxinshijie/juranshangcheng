@@ -9,6 +9,9 @@
             <connections>
                 <outlet property="commentView" destination="bIX-qD-aKR" id="3z7-LO-cWM"/>
                 <outlet property="contentTextField" destination="ucD-sf-Ffk" id="MN8-AJ-RA4"/>
+                <outlet property="firstContactLabel" destination="vvD-Wn-23b" id="2sd-wf-Kqz"/>
+                <outlet property="firstContentLabel" destination="v1Y-NN-0hT" id="Ndb-rU-wlJ"/>
+                <outlet property="firstView" destination="ZfQ-qh-7k8" id="MEs-FT-USe"/>
                 <outlet property="tableView" destination="QTy-ar-5lx" id="mZO-CM-2fJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -66,7 +69,39 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="214" y="319"/>
+            <point key="canvasLocation" x="-131" y="259"/>
+        </view>
+        <view contentMode="scaleToFill" id="ZfQ-qh-7k8">
+            <rect key="frame" x="0.0" y="0.0" width="220" height="124"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="想问下预算？" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v1Y-NN-0hT">
+                    <rect key="frame" x="14" y="14" width="171" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="r0Z-Ga-Wpj">
+                    <rect key="frame" x="14" y="45" width="198" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vvD-Wn-23b">
+                    <rect key="frame" x="14" y="52" width="198" height="51"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <string key="text">李玉坤
+13488853970
+欧式|83.3平米</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="219" y="54"/>
         </view>
     </objects>
     <resources>

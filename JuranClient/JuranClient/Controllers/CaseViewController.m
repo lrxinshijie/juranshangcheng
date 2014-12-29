@@ -69,7 +69,7 @@
     _tableView.backgroundColor = RGBColor(236, 236, 236);
     [self.view addSubview:_tableView];
     
-    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 44)];
     
     self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCase defaultData:_filterData];
     _filterView.delegate = self;

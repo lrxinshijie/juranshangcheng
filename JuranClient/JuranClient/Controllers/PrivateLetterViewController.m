@@ -109,7 +109,7 @@
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (TextFieldCell *)[nibs firstObject];
     }
-    
+    cell.textField.enabled = YES;
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSString *placeholder = @"";
@@ -128,6 +128,7 @@
         placeholder = @"喜欢的风格";
         title = @"风格";
         cell.textField.text = _likeStyleKey;
+        cell.textField.enabled = NO;
         cell.textField.keyboardType = UIKeyboardTypeDefault;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }else if (indexPath.row == 3){
@@ -144,32 +145,32 @@
     return cell;
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    if (textField.tag == 2) {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 2) {
         [self hideKeyboard];
         NSMutableArray *rows = [NSMutableArray array];
-        NSString *key = textField.text;
-        
-        __block NSInteger ind = 0;
+
+        NSInteger ind = 0;
         
         NSArray *renovationStyle = [[DefaultData sharedData] renovationStyle];
         [renovationStyle enumerateObjectsUsingBlock:^(NSDictionary *row, NSUInteger idx, BOOL *stop) {
             [rows addObject:[row objectForKey:@"k"]];
-            if ([[row objectForKey:@"k"] isEqualToString:key]) {
-                ind = idx;
-            }
         }];
         
         [ActionSheetStringPicker showPickerWithTitle:nil rows:rows initialSelection:ind doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
             NSArray *renovationStyle = [[DefaultData sharedData] renovationStyle];
-            textField.text = [[renovationStyle objectAtIndex:selectedIndex] objectForKey:@"k"];
+            self.likeStyleKey = [[renovationStyle objectAtIndex:selectedIndex] objectForKey:@"k"];
             self.likeStyle = [[renovationStyle objectAtIndex:selectedIndex] objectForKey:@"v"];
-            self.likeStyleKey = textField.text;
+            [_tableView reloadData];
         } cancelBlock:^(ActionSheetStringPicker *picker) {
             
         } origin:[UIApplication sharedApplication].keyWindow];
-        return NO;
     }
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     self.selectedTextField = textField;
     return YES;
 }

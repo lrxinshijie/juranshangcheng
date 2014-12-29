@@ -391,7 +391,7 @@
         }
         return section == 0?_resolvedAdoptedHeaderView:_resolvedUnAdoptedHeaderView;
     }else{
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1)];
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 1)];
         line.backgroundColor = [UIColor clearColor];
         return line;
     }

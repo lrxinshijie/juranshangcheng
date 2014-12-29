@@ -15,6 +15,9 @@
 @property (nonatomic, strong) IBOutlet UIBubbleTableView *tableView;
 @property (nonatomic, strong) IBOutlet UITextField *contentTextField;
 @property (nonatomic, strong) IBOutlet UIView *commentView;
+@property (nonatomic, strong) IBOutlet UIView *firstView;
+@property (nonatomic, strong) IBOutlet UILabel *firstContentLabel;
+@property (nonatomic, strong) IBOutlet UILabel *firstContactLabel;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
 
@@ -68,6 +71,9 @@
                 [_datas addObjectsFromArray:rows];
             }else{
                 self.datas = rows;
+                PrivateMessageDetail *detail = [_datas firstObject];
+                _firstContactLabel.text = detail.content;
+//                NSArray *rows = @[detail.fromNickName, detail];
             }
             
             [self.tableView reloadData];

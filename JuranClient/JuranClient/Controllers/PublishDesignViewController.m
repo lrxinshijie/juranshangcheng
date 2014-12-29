@@ -268,7 +268,7 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.textLabel.text = [_keys objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = [_values objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = @"";//[_values objectAtIndex:indexPath.row];
         if (indexPath.row == 9) {
             [_photoImageView removeFromSuperview];
             [cell addSubview:_photoImageView];
