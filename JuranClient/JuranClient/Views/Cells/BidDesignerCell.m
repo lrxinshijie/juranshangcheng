@@ -22,6 +22,8 @@
 @property (nonatomic, strong) IBOutlet UILabel *declarationLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *headImageView;
 
+@property (nonatomic, strong) IBOutlet UIButton *measureButton;
+
 @property (nonatomic, strong) JRBidInfo *bidInfo;
 
 @end
@@ -64,6 +66,7 @@
     _produntCountLabel.text = [NSString stringWithFormat:@"%i", designer.projectCount];
     _browseCountLabel.text = [NSString stringWithFormat:@"%i", designer.browseCount];
     _declarationLabel.text = [NSString stringWithFormat:@"应标宣言:%@", bidInfo.biddingDeclatation];
+    _measureButton.enabled = !bidInfo.isMeasured;
 }
 
 #pragma mark - Target Action

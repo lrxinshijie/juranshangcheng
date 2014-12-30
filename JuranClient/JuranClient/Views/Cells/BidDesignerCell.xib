@@ -133,6 +133,7 @@
                 <outlet property="declarationLabel" destination="OOp-f5-w3D" id="ga6-x1-vIP"/>
                 <outlet property="experienceLabel" destination="bCj-hn-gPy" id="PQw-YJ-0NH"/>
                 <outlet property="headImageView" destination="oyN-xj-X8J" id="t5q-Eq-JQF"/>
+                <outlet property="measureButton" destination="als-Rh-igi" id="F7V-rE-xUF"/>
                 <outlet property="nameLabel" destination="33s-gS-v8R" id="jCL-pB-33x"/>
                 <outlet property="produntCountLabel" destination="71X-cR-MeB" id="4Gf-hY-cOP"/>
                 <outlet property="styleLabel" destination="d4o-8U-O5w" id="PMX-96-K4z"/>

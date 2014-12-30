@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *biddingDeclatation;
 @property (nonatomic, strong) NSString *bidId;
 @property (nonatomic, strong) NSString *bidDate;
+@property (nonatomic, assign) BOOL isMeasured;
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 

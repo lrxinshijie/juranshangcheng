@@ -440,7 +440,7 @@
             return NO;
         }
         
-        if (value.length > 11) {
+        if (value.length > 15) {
             //不能为空
             [self showTip:@"固定电话长度不能超过11位！"];
             return NO;
