@@ -31,6 +31,7 @@
 @property (nonatomic, copy) NSString *neighbourhoods;
 @property (nonatomic, copy) NSString *roomType;
 @property (nonatomic, copy) NSString *projectStyle;
+@property (nonatomic, copy) NSString *userLevel;
 @property (nonatomic, assign) NSInteger houseArea;
 @property (nonatomic, assign) NSInteger projectPrice;
 @property (nonatomic, copy) NSString *tags;

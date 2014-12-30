@@ -52,7 +52,7 @@
     self.detailImageList = [dict objectForKey:@"detailImageList"];
     self.stylesName = [dict getStringValueForKey:@"stylesName" defaultValue:@""];
     self.isAuth = [dict getBoolValueForKey:@"isAuth" defaultValue:NO];
-    
+    self.userLevel = [dict getStringValueForKey:@"userLevel" defaultValue:@""];
     self.isFav = [dict getBoolValueForKey:@"isFavFlag" defaultValue:NO];
     self.isLike = [dict getBoolValueForKey:@"isLikeFlag" defaultValue:NO];
     

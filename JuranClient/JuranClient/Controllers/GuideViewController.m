@@ -15,6 +15,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView *imageView2;
 @property (nonatomic, strong) IBOutlet UIImageView *imageView3;
 @property (nonatomic, strong) IBOutlet UIButton *startButton;
+@property (nonatomic, strong) IBOutlet UIPageControl *pageCtl;
 
 - (IBAction)onStart:(id)sender;
 
@@ -77,6 +78,12 @@
     [ud synchronize];
     
     [(AppDelegate *)[UIApplication sharedApplication].delegate jumpToMain];
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    int page = scrollView.contentOffset.x/kWindowWidth;
+    _pageCtl.currentPage = page;
 }
 
 - (void)didReceiveMemoryWarning {

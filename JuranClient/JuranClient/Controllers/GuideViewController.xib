@@ -10,6 +10,7 @@
                 <outlet property="imageView1" destination="0Le-k5-HpD" id="p2N-bc-a6k"/>
                 <outlet property="imageView2" destination="NLm-s6-jYY" id="Vzs-4q-KbW"/>
                 <outlet property="imageView3" destination="2uB-h2-Tpk" id="bh0-Z8-fbL"/>
+                <outlet property="pageCtl" destination="kXO-2n-dNJ" id="R8g-1N-UOc"/>
                 <outlet property="scrollView" destination="ay6-tK-w4V" id="gT4-ha-ROC"/>
                 <outlet property="startButton" destination="gno-ga-xi8" id="t1p-V8-nm9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -48,6 +49,9 @@
                             </connections>
                         </button>
                     </subviews>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="ZBS-zQ-zry"/>
+                    </connections>
                 </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YME-21-ZGr">
                     <rect key="frame" x="284" y="1" width="35" height="37"/>
@@ -59,6 +63,12 @@
                         <action selector="onStart:" destination="-1" eventType="touchUpInside" id="8LI-hn-zrs"/>
                     </connections>
                 </button>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="kXO-2n-dNJ">
+                    <rect key="frame" x="140" y="516" width="39" height="37"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                    <color key="pageIndicatorTintColor" red="0.71372549019607845" green="0.70980392156862748" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="currentPageIndicatorTintColor" red="0.047058823529411764" green="0.32549019607843138" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                </pageControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>

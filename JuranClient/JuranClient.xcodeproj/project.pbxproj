@@ -136,6 +136,7 @@
 		14ABFBEC1A25CFFD00C4AF65 /* UIViewController+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEB1A25CFFD00C4AF65 /* UIViewController+Login.m */; };
 		14ABFBF01A25DADC00C4AF65 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */; };
 		14ABFBF11A25DADC00C4AF65 /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */; };
+		14C8204C1A528D340010A19F /* libGexinSdk-1.0.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C8204B1A528D340010A19F /* libGexinSdk-1.0.8.a */; };
 		14C855471A2E196B00A15ED9 /* InteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855421A2E196B00A15ED9 /* InteractionViewController.m */; };
 		14C855481A2E196B00A15ED9 /* InteractionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C855431A2E196B00A15ED9 /* InteractionViewController.xib */; };
 		14C855491A2E196B00A15ED9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855451A2E196B00A15ED9 /* SettingsViewController.m */; };
@@ -536,6 +537,9 @@
 		14ABFBED1A25DADC00C4AF65 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
+		14C820491A528D340010A19F /* GexinSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GexinSdk.h; sourceTree = "<group>"; };
+		14C8204A1A528D340010A19F /* GXSdkError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSdkError.h; sourceTree = "<group>"; };
+		14C8204B1A528D340010A19F /* libGexinSdk-1.0.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGexinSdk-1.0.8.a"; sourceTree = "<group>"; };
 		14C855411A2E196B00A15ED9 /* InteractionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractionViewController.h; sourceTree = "<group>"; };
 		14C855421A2E196B00A15ED9 /* InteractionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractionViewController.m; sourceTree = "<group>"; };
 		14C855431A2E196B00A15ED9 /* InteractionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InteractionViewController.xib; sourceTree = "<group>"; };
@@ -896,6 +900,7 @@
 				1441A1931A29E436004A038E /* libsqlite3.dylib in Frameworks */,
 				1441A1911A29E42C004A038E /* MessageUI.framework in Frameworks */,
 				1441A16D1A29E3CD004A038E /* WeChatConnection.framework in Frameworks */,
+				14C8204C1A528D340010A19F /* libGexinSdk-1.0.8.a in Frameworks */,
 				1441A1771A29E3CD004A038E /* libWeChatSDK.a in Frameworks */,
 				1441A1741A29E3CD004A038E /* libSinaWeiboSDK.a in Frameworks */,
 				1441A1781A29E3CD004A038E /* ShareSDK.framework in Frameworks */,
@@ -1117,6 +1122,24 @@
 				14610C6C1A39D2F9008A52C7 /* QuestionDetailViewController.xib */,
 			);
 			name = Question;
+			sourceTree = "<group>";
+		};
+		14C820471A528D340010A19F /* dist */ = {
+			isa = PBXGroup;
+			children = (
+				14C820481A528D340010A19F /* include */,
+				14C8204B1A528D340010A19F /* libGexinSdk-1.0.8.a */,
+			);
+			path = dist;
+			sourceTree = "<group>";
+		};
+		14C820481A528D340010A19F /* include */ = {
+			isa = PBXGroup;
+			children = (
+				14C820491A528D340010A19F /* GexinSdk.h */,
+				14C8204A1A528D340010A19F /* GXSdkError.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		14C953AE1A2DC45D00FE6F8D /* Subject */ = {
@@ -1441,6 +1464,7 @@
 		A987ED6F1A20920500CED7CD /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				14C820471A528D340010A19F /* dist */,
 				A9A53B001A46FE7C008D75B8 /* UIBubbleTableView */,
 				A9A067261A3D92F70059D73B /* ZYQAssetPickerController */,
 				A9A067011A3D76DA0059D73B /* ActionSheetPicker */,
@@ -2372,6 +2396,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
+					"$(PROJECT_DIR)/JuranClient/Vendors/dist",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "14ec59d1-090e-4be6-9742-4260a8a86e1d";
@@ -2407,6 +2432,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
+					"$(PROJECT_DIR)/JuranClient/Vendors/dist",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "14ec59d1-090e-4be6-9742-4260a8a86e1d";

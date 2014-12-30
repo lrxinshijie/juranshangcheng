@@ -58,9 +58,9 @@
     if (btn.tag == 1001) {
         type = ShareTypeSinaWeibo;
     }else if (btn.tag == 1003){
-        type = ShareType163Weibo;
+        type = ShareTypeWeixiSession;
     }
-    
+    ASLog(@"version:%@", [ShareSDK version]);
     [ShareSDK cancelAuthWithType:type];
     [ShareSDK getUserInfoWithType:type authOptions:nil result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
         if (result){
@@ -72,7 +72,7 @@
             NSNumber *thirdSource = @(0);
             if (type == ShareTypeSinaWeibo) {
                 thirdSource = @(1);
-            } else if (type == ShareType163Weibo) {
+            } else if (type == ShareTypeWeixiSession) {
                 thirdSource = @(3);
             } else if (type == ShareTypeQQSpace) {
                 thirdSource = @(2);
