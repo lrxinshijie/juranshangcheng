@@ -484,7 +484,7 @@
                             @"roomNum": _roomNum,
                             @"livingroomNum": _livingroomCount,
                             @"bathroomNum": _bathroomCount,
-                            @"bidId": _bidId};
+                            @"bidId": _bidId?_bidId:@""};
     [[ALEngine shareEngine] pathURL:JR_APPLY_MEASURE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
