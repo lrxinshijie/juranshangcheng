@@ -142,7 +142,7 @@
 }
 
 - (void)reloadData{
-    if ([_topic isNewestTopic]) {
+    if (![_topic isNewestTopic]) {
         _tableView.frame = kContentFrameWithoutNavigationBar;
         _commentView.hidden = YES;
     }

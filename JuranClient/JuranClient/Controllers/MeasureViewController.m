@@ -489,6 +489,7 @@
         [self hideHUD];
         if (!error) {
             [self showTip:@"预约量房发送成功!"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [super back:nil];
             });

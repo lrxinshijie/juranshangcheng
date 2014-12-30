@@ -92,7 +92,7 @@
         _modifyDemandInfoButton.hidden = YES;
     }
     
-    _demandInfoTitleLabel.text = [NSString stringWithFormat:@"%@%@", _demand.neighbourhoods, _demand.roomType];
+    _demandInfoTitleLabel.text = [NSString stringWithFormat:@"%@%@", _demand.neighbourhoods, [_demand roomNumString]];
 //    _demandInfoTitleLabel.text = _demand.title;
     [self reSetData];
     [self setupDesignerTableHeaderView];
@@ -227,7 +227,7 @@
 
 - (void)rejectForBid:(BidDesignerCell *)cell andBidInfo:(JRBidInfo *)bidInfo{
     NSDictionary *param = @{@"designReqId": _demand.designReqId,
-                            @"designID":@(bidInfo.userBase.userId)};
+                            @"designId":@(bidInfo.userBase.userId)};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_REJECT_DESIGNREQ parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
@@ -247,6 +247,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView == _designerTableView) {
+        if ([_demand statusIndex] == 3) {
+            return _demand.bidInfoList.count + 1;
+        }
         return _demand.bidInfoList.count;
     }else if(tableView == _demandInfoTableView){
         return demandInfoKeys.count;
@@ -290,12 +293,19 @@
             cell = (BidDesignerCell *)[nibs firstObject];
         }
         
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.delegate = self;
-        JRBidInfo *bidInfo = _demand.bidInfoList[indexPath.row];
-        [cell fillCellWithJRBidInfo:bidInfo];
-        //    JRDemand *d = [_datas objectAtIndex:indexPath.row];
-        //    [cell fillCellWithDemand:d];
+        if ([_demand statusIndex] == 3) {
+            cell.delegate = self;
+            if (indexPath.row == 0) {
+                [cell fillCellWithJRBidInfo:_demand.confirmDesignerDetail];
+            }else{
+                JRBidInfo *bidInfo = _demand.bidInfoList[indexPath.row - 1];
+                [cell fillCellWithJRBidInfo:bidInfo];
+            }
+        }else{
+            cell.delegate = self;
+            JRBidInfo *bidInfo = _demand.bidInfoList[indexPath.row];
+            [cell fillCellWithJRBidInfo:bidInfo];
+        }
         
         return cell;
     }else if(tableView == _demandInfoTableView){

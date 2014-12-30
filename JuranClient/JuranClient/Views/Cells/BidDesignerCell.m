@@ -66,7 +66,14 @@
     _produntCountLabel.text = [NSString stringWithFormat:@"%i", designer.projectCount];
     _browseCountLabel.text = [NSString stringWithFormat:@"%i", designer.browseCount];
     _declarationLabel.text = [NSString stringWithFormat:@"应标宣言:%@", bidInfo.biddingDeclatation];
-    _measureButton.enabled = !bidInfo.isMeasured;
+    if (bidInfo.isMeasured) {
+        _measureButton.enabled = NO;
+        _measureButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    }else{
+        _measureButton.enabled = YES;
+        _measureButton.layer.borderColor = RGBColor(0, 89, 172).CGColor;
+    }
+    
 }
 
 #pragma mark - Target Action

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-
+@class JRBidInfo;
 @class JRAreaInfo;
 @interface JRDemand : NSObject
 
@@ -45,6 +45,7 @@
 
 @property (nonatomic, strong) NSString *bidId;
 @property (nonatomic, strong) NSMutableArray *bidInfoList;
+@property (nonatomic, strong) JRBidInfo *confirmDesignerDetail;
 @property (nonatomic, strong) NSString *deadBalance;
 @property (nonatomic, strong) NSString *postDate;
 @property (nonatomic, strong) NSString *auditDesc;
