@@ -75,7 +75,7 @@
         }
     }*/
     
-    frame.size.height = height;
+    frame.size.height = height+5;
     if (height < 32) {
         _arrowImageView.hidden = YES;
     }else{
