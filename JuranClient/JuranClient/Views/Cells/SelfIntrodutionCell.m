@@ -53,6 +53,8 @@
     _arrowImageView.hidden = NO;
     _contentLabel.text = _content;
     CGFloat height = [_contentLabel.text heightWithFont:_contentLabel.font constrainedToWidth:CGRectGetWidth(_contentLabel.frame)];
+    
+    /*
     if (_isClose) {
         _arrowImageView.image = [UIImage imageNamed:@"arrow_down.png"];
         if (height < 32) {
@@ -71,7 +73,24 @@
         }else{
             frame.size.height = height;
         }
+    }*/
+    
+    frame.size.height = height;
+    if (height < 32) {
+        _arrowImageView.hidden = YES;
+    }else{
+        if (_isClose) {
+            _arrowImageView.image = [UIImage imageNamed:@"arrow_down.png"];
+            if (_content.length > kContentLengthForClose) {
+                _contentLabel.text = [NSString stringWithFormat:@"%@...", [_content substringToIndex:kContentLengthForClose]];
+            }
+            frame.size.height = 32;
+        }else{
+            _arrowImageView.image = [UIImage imageNamed:@"arrow_up.png"];
+        }
     }
+    
+    
     _contentLabel.frame = frame;
     frame = self.frame;
     frame.size.height =  57 + _contentLabel.frame.size.height;

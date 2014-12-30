@@ -17,6 +17,9 @@
 #import "JRWebViewController.h"
 #import "DesignerDetailViewController.h"
 #import "SubjectDetailViewController.h"
+#import "DesignerViewController.h"
+#import "JRDesigner.h"
+#import "JRSubject.h"
 
 @interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate>{
     CGFloat startOffsetY;
@@ -28,8 +31,7 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) EScrollerView *bannerView;
 @property (nonatomic, strong) FilterView *filterView;
-@property (nonatomic, strong) UIView *headerView;
-@property (nonatomic, strong) NSMutableDictionary *filterData;
+
 
 @end
 
@@ -54,35 +56,35 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    if (_searchKey.length == 0) {
+    if (_isHome) {
         [self configureMenu];
         [self configureSearch];
         
     }else{
-        self.navigationItem.title = @"搜索结果";
+        if ( _searchKey.length == 0) {
+            self.navigationItem.title = @"";
+        }else{
+            self.navigationItem.title = @"搜索结果";
+        }
     }
     
+    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCase defaultData:_filterData];
+    _filterView.delegate = self;
+    [self.view addSubview:_filterView];
     
-    self.tableView = [self.view tableViewWithFrame:_searchKey.length > 0 ? kContentFrameWithoutNavigationBar : kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 44, kWindowWidth, (!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = RGBColor(236, 236, 236);
     [self.view addSubview:_tableView];
     
-    self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    
-    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCase defaultData:_filterData];
-    _filterView.delegate = self;
-    [_headerView addSubview:_filterView];
-    _tableView.tableHeaderView = _headerView;
-    
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
-        if (weakSelf.searchKey.length > 0) {
-            [weakSelf loadData];
-        }else{
+        if (weakSelf.isHome) {
             [weakSelf loadAd];
+        }else{
+            [weakSelf loadData];
         }
         
     }];
@@ -117,15 +119,10 @@
                 self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
 //                [_adInfos addObjectsFromArray:_adInfos];
                 
-                CGRect frame = _headerView.frame;
-                frame.size.height = 165 + 44;
-                _headerView.frame = frame;
-                
                 self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 44, kWindowWidth, 165) ImageArray:_adInfos];
                 _bannerView.delegate = self;
-                [_headerView addSubview:_bannerView];
                 
-                self.tableView.tableHeaderView = _headerView;
+                self.tableView.tableHeaderView = _bannerView;
             }
             
         }
@@ -142,7 +139,7 @@
     }
     
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:_searchKey.length > 0 ? JR_SEARCH_CASE : JR_PROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL: !_isHome && _searchKey.length > 0 ? JR_SEARCH_CASE : JR_PROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             NSArray *projectList = [data objectForKey:@"projectGeneralDtoList"];
@@ -157,10 +154,6 @@
         }
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
-        
-        if (_currentPage == 1) {
-            _tableView.contentOffset = CGPointMake(0, CGRectGetHeight(_filterView.frame));
-        }
         
     }];
 }
@@ -262,12 +255,53 @@
             [param setObject:[values lastObject] forKey:[values firstObject]];
         }
     }];
-    
+    ASLog(@"param:%@",param);
     NSInteger type = [param getIntValueForKey:@"type" defaultValue:0];
     if (type == 1) {
         [_tableView headerBeginRefreshing];
     }else if (type == 2){
-        
+        if ([param.allKeys containsObject:@"id"]) {
+            DesignerDetailViewController *dv = [[DesignerDetailViewController alloc] init];
+            JRDesigner *designer = [[JRDesigner alloc] init];
+            designer.userId = [param getIntValueForKey:@"id" defaultValue:0];
+            dv.designer = designer;
+            dv.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:dv animated:YES];
+        }else{
+            DesignerViewController *cv = [[DesignerViewController alloc] init];
+            NSMutableDictionary *filterData = [NSMutableDictionary dictionaryWithDictionary:param];
+            [filterData removeObjectForKey:@"type"];
+            cv.filterData = filterData;
+            cv.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:cv animated:YES];
+        }
+    }else if (type == 7){
+        JRWebViewController *wv = [[JRWebViewController alloc] init];
+        wv.urlString = [param getStringValueForKey:@"url" defaultValue:@""];
+        wv.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:wv animated:YES];
+    }else if (type == 6){
+        SubjectDetailViewController *sd = [[SubjectDetailViewController alloc] init];
+        JRSubject *subject = [[JRSubject alloc] init];
+        subject.key = [param getIntValueForKey:@"id" defaultValue:0];
+        sd.subject = subject;
+        sd.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:sd animated:YES];
+    }else if (type == 3){
+        if ([param.allKeys containsObject:@"id"]) {
+            JRCase *jrCase = [[JRCase alloc] init];
+            jrCase.projectId = [param getStringValueForKey:@"id" defaultValue:@""];
+            JRPhotoScrollViewController *dv = [[JRPhotoScrollViewController alloc] initWithJRCase:jrCase andStartWithPhotoAtIndex:0];
+            dv.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:dv animated:YES];
+        }else{
+            CaseViewController *cv = [[CaseViewController alloc] init];
+            NSMutableDictionary *filterData = [NSMutableDictionary dictionaryWithDictionary:param];
+            [filterData removeObjectForKey:@"type"];
+            cv.filterData = filterData;
+            cv.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:cv animated:YES];
+        }
     }
 //    NSArray *types = [[links firstObject] componentsSeparatedByString:@"="];
 //    if ([types count] == 0) {

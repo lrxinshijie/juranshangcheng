@@ -36,7 +36,7 @@
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
 //    _tableView.backgroundColor = RGBColor(202, 202, 202);
     _tableView.bounces = NO;
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 30)];
     view.backgroundColor = RGBColor(202, 202, 202);
     _tableView.tableFooterView = view;
     [self.view addSubview:_tableView];
@@ -57,7 +57,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 30)];
     headerView.backgroundColor = RGBColor(202, 202, 202);
     UILabel *titleLabel = [headerView labelWithFrame:CGRectMake(10, 0, 300, 30) text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:15]];
     titleLabel.text = [self.sections[section] objectForKey:@"k"];

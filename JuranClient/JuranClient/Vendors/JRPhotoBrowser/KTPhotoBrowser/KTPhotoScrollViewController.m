@@ -489,12 +489,14 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 - (void)startChromeDisplayTimer
 {
+    /*
     [self cancelChromeDisplayTimer];
+    
     chromeHideTimer_ = [NSTimer scheduledTimerWithTimeInterval:5.0
                                                         target:self
                                                       selector:@selector(hideChrome)
                                                       userInfo:nil
-                                                       repeats:NO];
+                                                       repeats:NO];*/
 }
 
 - (void)cancelChromeDisplayTimer
@@ -521,7 +523,9 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+    /*
     [self hideChrome];
+     */
 }
 
 

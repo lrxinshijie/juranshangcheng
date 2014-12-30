@@ -9,12 +9,18 @@
 #import "PrivateMessageDetailViewController.h"
 #import "PrivateMessage.h"
 #import "UIBubbleTableView.h"
+#import "JRDesigner.h"
+#import "DesignerDetailViewController.h"
+#import "UIActionSheet+Blocks.h"
 
 @interface PrivateMessageDetailViewController () <UIBubbleTableViewDataSource, UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UIBubbleTableView *tableView;
 @property (nonatomic, strong) IBOutlet UITextField *contentTextField;
 @property (nonatomic, strong) IBOutlet UIView *commentView;
+@property (nonatomic, strong) IBOutlet UIView *firstView;
+@property (nonatomic, strong) IBOutlet UILabel *firstContentLabel;
+@property (nonatomic, strong) IBOutlet UILabel *firstContactLabel;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
 
@@ -35,10 +41,12 @@
     
     [self configureLeftBarButtonUniformly];
     self.view.backgroundColor = kViewBackgroundColor;
-    self.navigationItem.title = @"我的私信";
+    self.navigationItem.title = _message.receiverNickName;
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
+    
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"private_message_more"] rightBarButtonItemAction:@selector(onDetail)];
     
     __weak typeof(self) weakSelf = self;
     [self.tableView addHeaderWithCallback:^{
@@ -52,6 +60,20 @@
     }];
     
     [self.tableView headerBeginRefreshing];
+}
+
+- (void)onDetail{
+    [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"查看设计师详情"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        if (buttonIndex == [actionSheet cancelButtonIndex]) {
+            return;
+        }
+        
+        JRDesigner *designer = [[JRDesigner alloc] init];
+        designer.userId = _message.receiverId;
+        DesignerDetailViewController *dv = [[DesignerDetailViewController alloc] init];
+        dv.designer = designer;
+        [self.navigationController pushViewController:dv animated:YES];
+    }];
 }
 
 - (void)loadData{
@@ -68,6 +90,9 @@
                 [_datas addObjectsFromArray:rows];
             }else{
                 self.datas = rows;
+                PrivateMessageDetail *detail = [_datas firstObject];
+                _firstContactLabel.text = detail.content;
+//                NSArray *rows = @[detail.fromNickName, detail];
             }
             
             [self.tableView reloadData];

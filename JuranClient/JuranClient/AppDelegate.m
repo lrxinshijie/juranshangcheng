@@ -65,11 +65,13 @@
 
 - (void)setupTabbar{
     CaseViewController *cs = [[CaseViewController alloc] init];
+    cs.isHome = YES;
 //    HomeViewController *cs = [[HomeViewController alloc] init];
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
     csNav.tabBarItem = [self setupTabbarItemTitle:@"案例" image:@"tabbar_case" selected:@"tabbar_case_hl"];
     
     DesignerViewController *des = [[DesignerViewController alloc] init];
+    des.isHome = YES;
     UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
     desNav.tabBarItem = [self setupTabbarItemTitle:@"设计师" image:@"tabbar_designer" selected:@"tabbar_designer_hl"];
     

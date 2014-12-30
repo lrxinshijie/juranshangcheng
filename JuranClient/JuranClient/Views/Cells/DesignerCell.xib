@@ -66,12 +66,8 @@
                                 <rect key="frame" x="162" y="13" width="17" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" tag="1030" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_xunzhang_1" id="y5O-0P-upv">
-                                <rect key="frame" x="188" y="13" width="9" height="12"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" tag="1031" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_xunzhang_2" id="R3S-OA-i7G">
-                                <rect key="frame" x="206" y="13" width="9" height="12"/>
+                            <imageView userInteractionEnabled="NO" tag="1030" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userlevel0" id="y5O-0P-upv">
+                                <rect key="frame" x="188" y="12" width="26" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product_count" id="jKa-tx-xDz">
@@ -123,6 +119,7 @@
                 <outlet property="redPointView" destination="8jG-V6-Uq9" id="gKZ-XF-dgt"/>
                 <outlet property="sContentView" destination="ZwF-Np-ISJ" id="cQh-wW-QAl"/>
                 <outlet property="styleLabel" destination="7hj-Mt-uvD" id="h9p-tE-Uid"/>
+                <outlet property="userLevelImageView" destination="y5O-0P-upv" id="D91-Gg-NQh"/>
             </connections>
             <point key="canvasLocation" x="183" y="148.5"/>
         </tableViewCell>
@@ -130,11 +127,10 @@
     <resources>
         <image name="cellIndicator" width="8" height="15"/>
         <image name="icon_isauth" width="16" height="12"/>
-        <image name="icon_xunzhang_1" width="9" height="12"/>
-        <image name="icon_xunzhang_2" width="8" height="12"/>
         <image name="look_count" width="17" height="10"/>
         <image name="product_count" width="12" height="10"/>
         <image name="unlogin_head" width="60" height="60"/>
+        <image name="userlevel0" width="25" height="11"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

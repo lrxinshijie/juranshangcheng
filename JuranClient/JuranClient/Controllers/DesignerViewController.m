@@ -22,7 +22,6 @@
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) FilterView *filterView;
-@property (nonatomic, strong) NSMutableDictionary *filterData;
 
 
 @end
@@ -43,14 +42,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    if (!_isSearchResult) {
+    if (_isHome) {
         [self configureMenu];
         [self configureSearch];
-    }else{
-        self.navigationItem.title = @"搜索结果";
+    } else {
+        if (_searchKeyWord.length > 0) {
+            self.navigationItem.title = @"搜索结果";
+        }else{
+            self.navigationItem.title = @"";
+        }
     }
     
-    self.tableView = [self.view tableViewWithFrame:_isSearchResult? kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeDesigner defaultData:_filterData];
+    _filterView.delegate = self;
+    [self.view addSubview:_filterView];
+    
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 44, kWindowWidth, (!_isHome ? kWindowHeightWithoutNavigationBar:kWindowHeightWithoutNavigationBarAndTabbar) - 44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -67,10 +74,6 @@
         [weakSelf loadData];
     }];
     
-    self.filterView = [[FilterView alloc] initWithType:_isSearchResult ? FilterViewTypeDesignerSearch : FilterViewTypeDesigner defaultData:_filterData];
-    _filterView.delegate = self;
-    _tableView.tableHeaderView = _filterView;
-    
     [_tableView headerBeginRefreshing];
 }
 
@@ -85,7 +88,7 @@
     if (!_filterData) {
         
         NSDictionary *param = nil;
-        if (_isSearchResult) {
+        if (!_isHome) {
             param = [[DefaultData sharedData] objectForKey:@"designerSearchDefaultParam"];
         }else{
             param = [[DefaultData sharedData] objectForKey:@"designerDefaultParam"];
@@ -107,10 +110,10 @@
 - (void)loadData{
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": kOnePageCount}];
     [param addEntriesFromDictionary:self.filterData];
-    if (_isSearchResult) {
+    if (!_isHome && _searchKeyWord.length > 0) {
         [param setObject:_searchKeyWord forKey:@"keyword"];
     }
-    NSString *url = _isSearchResult?JR_SEARCH_DESIGNER:JR_DESIGNERLIST;
+    NSString *url = !_isHome && _searchKeyWord.length > 0 ? JR_SEARCH_DESIGNER : JR_DESIGNERLIST;
     [self showHUD];
     [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
@@ -128,10 +131,6 @@
         }
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
-        if (_currentPage == 1) {
-            _tableView.contentOffset = CGPointMake(0, CGRectGetHeight(_filterView.frame));
-        }
-        
     }];
     
 }

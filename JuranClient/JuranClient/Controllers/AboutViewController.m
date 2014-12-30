@@ -26,7 +26,7 @@
     UILabel *label = [self.view labelWithFrame:CGRectMake(20, 10, 280, 20) text:@"居然在线简介" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:17]];
     [self.view addSubview:label];
     
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 40, 320, 1)];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 40, kWindowWidth, 1)];
     line.backgroundColor = RGBColor(241, 241, 241);
     [self.view addSubview:line];
     

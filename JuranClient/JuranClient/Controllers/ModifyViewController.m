@@ -241,6 +241,7 @@
     if (_type == ModifyCVTypeIdType) {
         if (indexPath.row == 0) {
             cell.textLabel.text = idTypes[idCardType];
+            cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellIndicator.png"]];
         }else{
             cell.accessoryView = _textField;
         }

@@ -24,6 +24,7 @@
 - (void)dealloc 
 {
    [imageView_ release], imageView_ = nil;
+    [indicatorView_ release], indicatorView_ = nil;
    [super dealloc];
 }
 
@@ -32,12 +33,23 @@
    self = [super initWithFrame:frame];
    if (self) {
       [self setDelegate:self];
-      [self setMaximumZoomScale:3.0];
+      [self setMaximumZoomScale:2.0];
       [self setShowsHorizontalScrollIndicator:NO];
       [self setShowsVerticalScrollIndicator:NO];
       [self loadSubviewsWithFrame:frame];
+       
    }
    return self;
+}
+
+- (void)startActivity{
+    indicatorView_.hidden = NO;
+    [indicatorView_ startAnimating];
+}
+
+- (void)stopActivity{
+    indicatorView_.hidden = YES;
+    [indicatorView_ stopAnimating];
 }
 
 - (void)loadSubviewsWithFrame:(CGRect)frame
@@ -45,9 +57,14 @@
    imageView_ = [[UIImageView alloc] initWithFrame:frame];
    [imageView_ setContentMode:UIViewContentModeScaleAspectFit];
    [self addSubview:imageView_];
+    
+    indicatorView_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    indicatorView_.hidden = YES;
+    indicatorView_.center = CGPointMake(CGRectGetWidth(frame)/2, CGRectGetHeight(frame)/2);
+    [self addSubview:indicatorView_];
 }
 
-- (void)setImage:(UIImage *)newImage 
+- (void)setImage:(UIImage *)newImage
 {
     
 //    CGSize size = newImage.size;

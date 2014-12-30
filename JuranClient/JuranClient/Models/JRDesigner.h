@@ -14,7 +14,6 @@
 @property (nonatomic, assign) NSInteger isRealNameAuth;/*实名认证	非必填	String	0:待认证;1:认证失败;2:认证成功*/
 @property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, strong) NSString *account;
-@property (nonatomic, strong) NSString *levelCode;
 @property (nonatomic, strong) NSString *nickName;
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *styleNames;
@@ -80,5 +79,7 @@
 - (NSString*)styleNamesWithType:(NSInteger)type;
 
 - (NSString*)experienceString;
+
++ (NSString*)userLevelImage:(NSString*)userLevel;
 
 @end

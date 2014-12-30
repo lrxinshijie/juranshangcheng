@@ -16,6 +16,8 @@
    UIImageView *imageView_;
    KTPhotoScrollViewController *scroller_;
    NSInteger index_;
+    UIActivityIndicatorView *indicatorView_;
+    
 }
 
 @property (nonatomic, assign) KTPhotoScrollViewController *scroller;
@@ -30,5 +32,7 @@
 - (void)setMaxMinZoomScalesForCurrentBounds;
 - (void)restoreCenterPoint:(CGPoint)oldCenter scale:(CGFloat)oldScale;
 
+- (void)startActivity;
+- (void)stopActivity;
 
 @end

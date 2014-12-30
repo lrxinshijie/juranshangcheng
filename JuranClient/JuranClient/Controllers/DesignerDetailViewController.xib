@@ -19,6 +19,7 @@
                 <outlet property="popularityLabel" destination="wLV-Ws-Txn" id="Pgr-YA-ZWI"/>
                 <outlet property="segment" destination="IIX-wi-BSQ" id="E7j-qF-6Rg"/>
                 <outlet property="toolBar" destination="wLf-xL-jR6" id="8b7-mC-FJX"/>
+                <outlet property="userLevelImageView" destination="oW4-uK-6qi" id="zYh-qf-bIb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -102,6 +103,10 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="oW4-uK-6qi">
+                    <rect key="frame" x="266" y="13" width="25" height="13"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
