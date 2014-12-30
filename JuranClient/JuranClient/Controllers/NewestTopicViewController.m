@@ -189,6 +189,8 @@
             }
             _chooseImageButtonView.hidden = NO;
             self.fileImage = nil;
+        }else{
+            [self hideHUD];
         }
     }];
 }
@@ -211,7 +213,6 @@
             [self loadData];
             self.selectComment = nil;
         }
-        
     }];
 }
 
@@ -228,7 +229,9 @@
         return;
     }
     _comment = _commentTextField.text;
-    [self textFieldShouldReturn:nil];
+    
+    [_commentTextField resignFirstResponder];
+    [self onHiddenCommentImageView];
     
     if (_comment.length == 0) {
         [self showTip:@"评论内容不能为空"];

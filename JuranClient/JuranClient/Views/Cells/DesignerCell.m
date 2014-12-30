@@ -54,8 +54,7 @@
     _experienceLabel.text =  [data experienceString];
     _productCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];
     _readCountLabel.text = [NSString stringWithFormat:@"%i", data.browseCount];
-//    _userLevelImageView.image = [UIImage imageNamed:[JRDesigner userLevelImage:data.userLevel]];
-    _userLevelImageView.hidden = YES;
+    _userLevelImageView.image = [UIImage imageNamed:[JRDesigner userLevelImage:data.userLevel]];
     
     if (data.isRealNameAuth == 2) {
         _isAuthImageView.hidden = NO;

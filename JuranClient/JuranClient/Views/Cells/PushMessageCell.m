@@ -65,32 +65,47 @@
     frame.origin.y = CGRectGetMaxY(_titleLabel.frame)+5;
     _timeLabel.frame = frame;
     
+    _contentLabel.numberOfLines = 0;
     frame = _contentLabel.frame;
     frame.origin.y = CGRectGetMaxY(_timeLabel.frame) + 5;
+    
+    CGFloat height =[_contentLabel.text heightWithFont:_contentLabel.font constrainedToWidth:_contentLabel.frame.size.width];
+    
     if (!_pushInfoMsg.isExpand) {
-        frame.size.height = 120 - CGRectGetMaxY(_timeLabel.frame) - 10;
+        if (height > 32) {
+            _contentLabel.numberOfLines = 2;
+            frame.size.height = 32;
+        }else{
+            frame.size.height = height;
+        }
     }else{
-        frame.size.height = [_contentLabel.text heightWithFont:_contentLabel.font constrainedToWidth:_contentLabel.frame.size.width];
+        frame.size.height = height;
+    }
+    
+    if (_contentLabel.text.length == 0) {
+        frame.size.height = 0;
     }
     _contentLabel.frame = frame;
     
-    if (!_pushInfoMsg.isExpand) {
-        frame = self.frame;
-        frame.size.height = 120;
-        self.frame = frame;
-        
-        frame = self.contentView.frame;
-        frame.size.height = 120;
-        self.contentView.frame = frame;
-    }else{
-        frame = self.frame;
-        frame.size.height = CGRectGetMaxY(_contentLabel.frame) + 10;
-        self.frame = frame;
-        
-        frame = self.contentView.frame;
-        frame.size.height = CGRectGetHeight(self.frame);
-        self.contentView.frame = frame;
-    }
+//    if (!_pushInfoMsg.isExpand) {
+//        frame = self.frame;
+//        frame.size.height = 120;
+//        self.frame = frame;
+//        
+//        frame = self.contentView.frame;
+//        frame.size.height = 120;
+//        self.contentView.frame = frame;
+//    }else{
+//        
+//    }
+    
+    frame = self.frame;
+    frame.size.height = CGRectGetMaxY(_contentLabel.frame) + 10;
+    self.frame = frame;
+    
+    frame = self.contentView.frame;
+    frame.size.height = CGRectGetHeight(self.frame);
+    self.contentView.frame = frame;
     
     if (_pushInfoMsg.isUnread) {
         self.backgroundColor = RGBColor(240, 240, 240);

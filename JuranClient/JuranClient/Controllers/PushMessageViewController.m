@@ -122,12 +122,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     JRPushInfoMsg *msg = _datas[indexPath.row];
-    if (!msg.isExpand) {
-        return 120;
-    }else{
-        [self.msgCell fillCellWithMsg:msg];
-        return self.msgCell.frame.size.height;
-    }
+    [self.msgCell fillCellWithMsg:msg];
+    return self.msgCell.frame.size.height;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
