@@ -439,12 +439,6 @@
             [self showTip:@"请输入合法字符！！"];
             return NO;
         }
-        
-        if (value.length > 11) {
-            //不能为空
-            [self showTip:@"固定电话长度不能超过11位！"];
-            return NO;
-        }
     }
     
     

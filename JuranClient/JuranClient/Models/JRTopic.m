@@ -57,6 +57,14 @@
     self.viewCount = [dict getIntValueForKey:@"viewCount" defaultValue:0];
     self.commentCount = [dict getIntValueForKey:@"commentCount" defaultValue:0];
     self.commitList = [JRComment buildUpWithValue:dict[@"commitList"]];
+    self.topicFlag = [dict getStringValueForKey:@"topicFlag" defaultValue:@"historyTopic"];
+}
+
+- (BOOL)isNewestTopic{
+    if ([_topicFlag isEqualToString:@"nowTopic"]) {
+        return YES;
+    }
+    return NO;
 }
 
 + (NSMutableArray *)buildUpWithValue:(id)value{

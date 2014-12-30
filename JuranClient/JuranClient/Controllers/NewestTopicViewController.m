@@ -51,7 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    if (_isOld) {
+    if (_topic.topicId.length > 0) {
         self.navigationItem.title = _topic.theme.length>0?_topic.theme:_topic.title;
     }else{
         self.navigationItem.title = @"最新话题";
@@ -66,7 +66,7 @@
     
     self.contentWebView.delegate = self;
     
-    self.tableView = [self.view tableViewWithFrame:_isOld?kContentFrameWithoutNavigationBar:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.tableFooterView = [[UIView alloc] init];
@@ -75,9 +75,7 @@
     _contentWebView.backgroundColor = [UIColor clearColor];
     _contentWebView.scrollView.backgroundColor = [UIColor clearColor];
     
-    if (!_isOld) {
-        [self setupCommentView];
-    }
+    [self setupCommentView];
     
     [self loadData];
 }
@@ -120,7 +118,7 @@
 - (void)loadData{
     [self showHUD];
     NSDictionary *param = nil;
-    if (_isOld) {
+    if (_topic.topicId.length > 0) {
         param = @{@"topicId": _topic.topicId};
     }else{
         param = @{};
@@ -128,13 +126,15 @@
     
     [[ALEngine shareEngine] pathURL:JR_GET_TOPICDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            [self hideHUD];
             if (_topic) {
                 [_topic buildUpDetialValueWithDictionary:data];
             }else{
                 _topic = [[JRTopic alloc] initWithDictionaryForDetail:data];
             }
-            [self reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self reloadData];
+            });
+            
         }else{
             [self hideHUD];
         }
@@ -142,6 +142,11 @@
 }
 
 - (void)reloadData{
+    if (![_topic isNewestTopic]) {
+        _tableView.frame = kContentFrameWithoutNavigationBar;
+        _commentView.hidden = YES;
+    }
+    
     _titleLabel.text = _topic.theme;
     _timeLabel.text = _topic.publishTime;
     _viewCountLabel.text = [NSString stringWithFormat:@"%d", _topic.viewCount];
@@ -190,6 +195,8 @@
             }
             _chooseImageButtonView.hidden = NO;
             self.fileImage = nil;
+        }else{
+            [self hideHUD];
         }
     }];
 }
@@ -212,7 +219,6 @@
             [self loadData];
             self.selectComment = nil;
         }
-        
     }];
 }
 
@@ -229,7 +235,9 @@
         return;
     }
     _comment = _commentTextField.text;
-    [self textFieldShouldReturn:nil];
+    
+    [_commentTextField resignFirstResponder];
+    [self onHiddenCommentImageView];
     
     if (_comment.length == 0) {
         [self showTip:@"评论内容不能为空"];
@@ -372,7 +380,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
     JRComment *commnet = [_topic.commitList objectAtIndex:indexPath.row];
-    cell.commentButton.hidden = _isOld;
+    cell.commentButton.hidden = ![_topic isNewestTopic];
     [cell fillCellWithComment:commnet];
     
     return cell;

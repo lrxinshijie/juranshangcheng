@@ -49,7 +49,7 @@
     _timeLabel.text = demand.publishTime;
     _titleLabel.text = demand.title;
     _addressLabel.text = demand.houseAddress;
-    _sizeLabel.text = [NSString stringWithFormat:@"%.2f平方米", [demand.houseArea doubleValue]];
+    _sizeLabel.text = [NSString stringWithFormat:@"%.2f㎡", [demand.houseArea doubleValue]];
     _styleLabel.text = [demand houseTypeString];
     _priceLabel.text = [NSString stringWithFormat:@"%@万元", demand.budget];
     _bidNumberLabel.text = [NSString stringWithFormat:@"投标人数：%d人", demand.bidNums];
@@ -59,7 +59,12 @@
     _statusImageView.image = [UIImage imageNamed:demand.isBidded?@"status_end.png":@"status_underway.png"];
     NSInteger index = [demand statusIndex];
     if (index == 2) {
-        _endTimeLabel.text = [NSString stringWithFormat:@"离结束还有%@天", demand.deadBalance];
+        if (demand.deadBalance.integerValue == 0) {
+            _endTimeLabel.text = [NSString stringWithFormat:@"离结束不足1天"];
+        }else{
+            _endTimeLabel.text = [NSString stringWithFormat:@"离结束还有%@天", demand.deadBalance];
+        }
+        
     }else{
         _endTimeLabel.text = @"";
     }

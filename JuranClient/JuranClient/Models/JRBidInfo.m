@@ -21,7 +21,7 @@
         self.biddingDeclatation = [dict getStringValueForKey:@"biddingDeclatation" defaultValue:@""];
         self.userBase = [[JRDesigner alloc] initWithDictionaryForBidInfo:dict];
         self.bidDate = [dict getStringValueForKey:@"bidDate" defaultValue:@""];
-        
+        self.isMeasured = [dict getBoolValueForKey:@"measured" defaultValue:NO];
     }
     return self;
 }

@@ -86,8 +86,11 @@
             _tipLabel.text = @"";
             _textField.placeholder = @"输入证件号码";
             _textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-            idTypes = @[@"  身份证", @"  军官证", @"  护照"];
-            idCardType = _user.idCardType.integerValue;
+            idTypes = @[@"身份证", @"军官证", @"护照"];
+            idCardType = -1;
+            CGRect frame = _textField.frame;
+            frame.size.width = 200;
+            _textField.frame = frame;
             break;
         }
         case ModifyCVTypeQQ:
@@ -234,15 +237,20 @@
     static NSString *cellIdentifier = @"";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
     }
+    cell.detailTextLabel.text = @"";
+    
     if (_type == ModifyCVTypeIdType) {
         if (indexPath.row == 0) {
-            cell.textLabel.text = idTypes[idCardType];
+            cell.textLabel.text = @"证件信息";
+            cell.detailTextLabel.text = idCardType == -1?@"请选择":idTypes[idCardType];
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellIndicator.png"]];
         }else{
+            cell.textLabel.text = @"证件号码";
             cell.accessoryView = _textField;
         }
     }else{
@@ -253,6 +261,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [_textField resignFirstResponder];
     if (_type == ModifyCVTypeIdType && indexPath.row == 0) {
         [UIActionSheet showInView:self.view withTitle:@"请选择证件类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:idTypes tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
             if (buttonIndex != 3) {
@@ -260,7 +269,6 @@
                 [_tableView reloadData];
             }
         }];
-        
     }
 }
 
@@ -291,6 +299,10 @@
             break;
     }
     return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [_textField resignFirstResponder];
 }
 
 @end

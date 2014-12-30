@@ -20,6 +20,15 @@
 @property (nonatomic, strong) NSString *gmtCreate;
 @property (nonatomic, strong) NSString *msgAbstract;
 
+//Detail
+@property (nonatomic, strong) NSString *msgImgUrl;
+@property (nonatomic, strong) NSString *msgContent;
+@property (nonatomic, strong) NSString *msgLinkTitle;
+@property (nonatomic, strong) NSString *msgLinkUrl;
+@property (nonatomic, assign) NSInteger msgUrlType;
+@property (nonatomic, strong) NSString *msgUrl;
+
 + (NSMutableArray *)buildUpWithValue:(id)value;
+- (void)buildUpDetailWithValue:(id)value;
 
 @end

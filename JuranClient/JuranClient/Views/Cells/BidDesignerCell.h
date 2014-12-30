@@ -24,5 +24,6 @@
 @property (nonatomic, weak) id<BidDesignerCellDelegate> delegate;
 
 - (void)fillCellWithJRBidInfo:(JRBidInfo*)bidInfo;
+- (void)fillCellWithConfirmBidInfo:(JRBidInfo*)bidInfo;
 
 @end

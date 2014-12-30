@@ -9,6 +9,7 @@
 #import "PushMessageViewController.h"
 #import "JRPushInfoMsg.h"
 #import "PushMessageCell.h"
+#import "PushMsgDetailViewController.h"
 
 @interface PushMessageViewController ()<UITableViewDataSource, UITableViewDelegate, PushMessageCellDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -122,12 +123,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     JRPushInfoMsg *msg = _datas[indexPath.row];
-    if (!msg.isExpand) {
-        return 120;
-    }else{
-        [self.msgCell fillCellWithMsg:msg];
-        return self.msgCell.frame.size.height;
-    }
+    [self.msgCell fillCellWithMsg:msg];
+    return self.msgCell.frame.size.height;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -171,10 +168,18 @@
 - (void)changeCellExpand:(PushMessageCell *)cell{
     NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
     [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    
     JRPushInfoMsg *msg = _datas[indexPath.row];
     if (msg.isUnread) {
         [self submitReadMsg:msg];
     }
+}
+
+- (void)didSelectedDetail:(PushMessageCell *)cell andPushMsg:(JRPushInfoMsg *)msg{
+    PushMsgDetailViewController *vc = [[PushMsgDetailViewController alloc] init];
+    vc.pushInfo = msg;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

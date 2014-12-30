@@ -318,7 +318,8 @@
     NSString *imageStr = [_jrCase.detailImageList objectAtIndex:index];
     imageStr = [imageStr stringByAppendingString:@"_512_0.img"];
     NSLog(@"%@",[Public imageURL:imageStr]);
-    [photoView setImageWithURL:[Public imageURL:imageStr] placeholderImage:[UIImage imageNamed:@"case_default_image.png"]];
+    [photoView setImageWithURL:[Public imageURL:imageStr] placeholderImage:nil];
+//    [UIImage imageNamed:@"case_default_image.png"]
 }
 
 

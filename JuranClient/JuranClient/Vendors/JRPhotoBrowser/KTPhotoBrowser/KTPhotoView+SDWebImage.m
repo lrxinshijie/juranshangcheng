@@ -22,10 +22,12 @@
    
    UIImage *cachedImage = nil;
    if (url) {
+       [self startActivity];
      cachedImage = [manager imageWithURL:url];
    }
    
    if (cachedImage) {
+       [self stopActivity];
       [self setImage:cachedImage];
    }
    else {
@@ -40,6 +42,7 @@
 }
 
 - (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image {
+    [self stopActivity];
    [self setImage:image];
 }
 

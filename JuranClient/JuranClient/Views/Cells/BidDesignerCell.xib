@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -116,10 +116,17 @@
                                     <color key="titleColor" red="0.0" green="0.34901961679999999" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="onTakeMeasure:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="HMt-0k-Ky3"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_confirm" id="YzN-yl-unA">
+                                <rect key="frame" x="221" y="7" width="70" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -130,9 +137,11 @@
             <connections>
                 <outlet property="bgView" destination="TaE-Zo-2s4" id="QPM-I0-evP"/>
                 <outlet property="browseCountLabel" destination="ThJ-Uj-VF9" id="bkt-3R-9Vf"/>
+                <outlet property="confirmFlagImageView" destination="YzN-yl-unA" id="BRd-Pn-N5H"/>
                 <outlet property="declarationLabel" destination="OOp-f5-w3D" id="ga6-x1-vIP"/>
                 <outlet property="experienceLabel" destination="bCj-hn-gPy" id="PQw-YJ-0NH"/>
                 <outlet property="headImageView" destination="oyN-xj-X8J" id="t5q-Eq-JQF"/>
+                <outlet property="measureButton" destination="als-Rh-igi" id="F7V-rE-xUF"/>
                 <outlet property="nameLabel" destination="33s-gS-v8R" id="jCL-pB-33x"/>
                 <outlet property="produntCountLabel" destination="71X-cR-MeB" id="4Gf-hY-cOP"/>
                 <outlet property="styleLabel" destination="d4o-8U-O5w" id="PMX-96-K4z"/>
@@ -142,6 +151,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="icon_confirm" width="70" height="55"/>
         <image name="look_count" width="17" height="10"/>
         <image name="product_count" width="12" height="10"/>
         <image name="unlogin_head" width="60" height="60"/>

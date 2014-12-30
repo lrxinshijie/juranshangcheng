@@ -22,6 +22,10 @@
 @property (nonatomic, strong) IBOutlet UILabel *declarationLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *headImageView;
 
+@property (nonatomic, strong) IBOutlet UIImageView *confirmFlagImageView;
+
+@property (nonatomic, strong) IBOutlet UIButton *measureButton;
+
 @property (nonatomic, strong) JRBidInfo *bidInfo;
 
 @end
@@ -48,7 +52,13 @@
     // Configure the view for the selected state
 }
 
+- (void)fillCellWithConfirmBidInfo:(JRBidInfo*)bidInfo{
+    [self fillCellWithJRBidInfo:bidInfo];
+    _confirmFlagImageView.hidden = NO;
+}
+
 - (void)fillCellWithJRBidInfo:(JRBidInfo*)bidInfo{
+    _confirmFlagImageView.hidden = YES;
     _bidInfo = bidInfo;
     JRDesigner *designer = _bidInfo.userBase;
     _nameLabel.text = designer.nickName.length?designer.nickName:designer.account;
@@ -64,6 +74,14 @@
     _produntCountLabel.text = [NSString stringWithFormat:@"%i", designer.projectCount];
     _browseCountLabel.text = [NSString stringWithFormat:@"%i", designer.browseCount];
     _declarationLabel.text = [NSString stringWithFormat:@"应标宣言:%@", bidInfo.biddingDeclatation];
+    if (bidInfo.isMeasured) {
+        _measureButton.enabled = NO;
+        _measureButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    }else{
+        _measureButton.enabled = YES;
+        _measureButton.layer.borderColor = RGBColor(0, 89, 172).CGColor;
+    }
+    
 }
 
 #pragma mark - Target Action

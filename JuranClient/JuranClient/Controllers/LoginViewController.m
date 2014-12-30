@@ -125,7 +125,8 @@
     }
     
     NSDictionary *param = @{@"account": account,
-                            @"password": [NSString stringWithFormat:@"%@", password]
+                            @"password": [NSString stringWithFormat:@"%@", password],
+                            @"userType": @"member"
 //                            @"pushID": @"1111",
 //                            @"DeviceInfo": @"iPhone",
 //                            @"DeviceInfo/appType": @"11",

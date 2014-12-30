@@ -22,7 +22,7 @@
         self.isRealNameAuth = [dict getIntValueForKey:@"isRealNameAuth" defaultValue:0];
         self.userId = [dict getIntValueForKey:@"userId" defaultValue:0];
         self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
-        self.userLevel = [dict getStringValueForKey:@"levelCode" defaultValue:@""];
+        self.userLevel = [dict getStringValueForKey:@"userLevel" defaultValue:@""];
         self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
         self.userName = [dict getStringValueForKey:@"userName" defaultValue:@""];
         self.styleNames = [dict getStringValueForKey:@"styleNames" defaultValue:@""];
