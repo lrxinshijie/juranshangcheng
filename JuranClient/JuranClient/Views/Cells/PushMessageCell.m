@@ -12,12 +12,14 @@
 @interface PushMessageCell()
 
 @property (nonatomic, strong) JRPushInfoMsg *pushInfoMsg;
+
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) IBOutlet UIView *redPointView;
 @property (nonatomic, strong) IBOutlet UIImageView *arrowImageView;
 @property (nonatomic, strong) IBOutlet UILabel *timeLabel;
 @property (nonatomic, strong) IBOutlet UILabel *contentLabel;
 
+@property (nonatomic, strong) IBOutlet UIButton *detailButton;
 
 @end
 
@@ -31,6 +33,10 @@
     _redPointView.layer.masksToBounds = YES;
     _redPointView.layer.cornerRadius = _redPointView.frame.size.height/2;
     _redPointView.hidden = NO;
+    
+    _detailButton.layer.masksToBounds = YES;
+    _detailButton.layer.cornerRadius = 3.f;
+    _detailButton.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -53,6 +59,12 @@
     _pushInfoMsg.isExpand = !_pushInfoMsg.isExpand;
     if ([_delegate respondsToSelector:@selector(changeCellExpand:)]) {
         [_delegate changeCellExpand:self];
+    }
+}
+
+- (IBAction)onDetail:(id)sender{
+    if (_delegate && [_delegate respondsToSelector:@selector(didSelectedDetail:andPushMsg:)]) {
+        [_delegate didSelectedDetail:self andPushMsg:_pushInfoMsg];
     }
 }
 
@@ -87,20 +99,21 @@
     }
     _contentLabel.frame = frame;
     
-//    if (!_pushInfoMsg.isExpand) {
-//        frame = self.frame;
-//        frame.size.height = 120;
-//        self.frame = frame;
-//        
-//        frame = self.contentView.frame;
-//        frame.size.height = 120;
-//        self.contentView.frame = frame;
-//    }else{
-//        
-//    }
+   height = CGRectGetMaxY(_contentLabel.frame) + 10;
+    if (_pushInfoMsg.isExpand && _pushInfoMsg.msgType == 1) {
+        _detailButton.hidden = NO;
+        
+        frame = _detailButton.frame;
+        frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;
+        _detailButton.frame = frame;
+        
+        height =  CGRectGetMaxY(_detailButton.frame) + 10;
+    }else{
+        _detailButton.hidden = YES;
+    }
     
     frame = self.frame;
-    frame.size.height = CGRectGetMaxY(_contentLabel.frame) + 10;
+    frame.size.height = height;
     self.frame = frame;
     
     frame = self.contentView.frame;

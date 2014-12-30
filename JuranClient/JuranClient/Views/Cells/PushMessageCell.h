@@ -14,6 +14,7 @@
 @protocol PushMessageCellDelegate <NSObject>
 
 - (void)changeCellExpand:(PushMessageCell*) cell;
+- (void)didSelectedDetail:(PushMessageCell*) cell andPushMsg:(JRPushInfoMsg*)msg;
 
 @end
 

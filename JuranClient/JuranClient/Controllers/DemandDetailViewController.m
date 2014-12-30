@@ -296,7 +296,7 @@
         if ([_demand statusIndex] == 3) {
             cell.delegate = self;
             if (indexPath.row == 0) {
-                [cell fillCellWithJRBidInfo:_demand.confirmDesignerDetail];
+                [cell fillCellWithConfirmBidInfo:_demand.confirmDesignerDetail];
             }else{
                 JRBidInfo *bidInfo = _demand.bidInfoList[indexPath.row - 1];
                 [cell fillCellWithJRBidInfo:bidInfo];

@@ -183,6 +183,8 @@
 		37D3EAD61A52CF5C0091B3BB /* SerciceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3EAD41A52CF5C0091B3BB /* SerciceDetailViewController.xib */; };
 		37D3EADA1A52CF690091B3BB /* JRServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3EAD81A52CF690091B3BB /* JRServiceViewController.m */; };
 		37D3EADB1A52CF690091B3BB /* JRServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3EAD91A52CF690091B3BB /* JRServiceViewController.xib */; };
+		37D3EADF1A52FF330091B3BB /* PushMsgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3EADD1A52FF330091B3BB /* PushMsgDetailViewController.m */; };
+		37D3EAE01A52FF330091B3BB /* PushMsgDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3EADE1A52FF330091B3BB /* PushMsgDetailViewController.xib */; };
 		A90459CE1A27874800F8CD74 /* CaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */; };
 		A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */; };
 		A90459D31A278A6100F8CD74 /* PublishDesignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459D11A278A6100F8CD74 /* PublishDesignViewController.m */; };
@@ -613,6 +615,9 @@
 		37D3EAD71A52CF690091B3BB /* JRServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRServiceViewController.h; sourceTree = "<group>"; };
 		37D3EAD81A52CF690091B3BB /* JRServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRServiceViewController.m; sourceTree = "<group>"; };
 		37D3EAD91A52CF690091B3BB /* JRServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JRServiceViewController.xib; sourceTree = "<group>"; };
+		37D3EADC1A52FF330091B3BB /* PushMsgDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMsgDetailViewController.h; sourceTree = "<group>"; };
+		37D3EADD1A52FF330091B3BB /* PushMsgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMsgDetailViewController.m; sourceTree = "<group>"; };
+		37D3EADE1A52FF330091B3BB /* PushMsgDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PushMsgDetailViewController.xib; sourceTree = "<group>"; };
 		A90459CB1A27874800F8CD74 /* CaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseDetailViewController.h; sourceTree = "<group>"; };
 		A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseDetailViewController.m; sourceTree = "<group>"; };
 		A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseDetailViewController.xib; sourceTree = "<group>"; };
@@ -1103,6 +1108,9 @@
 				14587E0D1A35D5E300D41236 /* DetailAddressViewController.h */,
 				14587E0E1A35D5E300D41236 /* DetailAddressViewController.m */,
 				14587E0F1A35D5E300D41236 /* DetailAddressViewController.xib */,
+				37D3EADC1A52FF330091B3BB /* PushMsgDetailViewController.h */,
+				37D3EADD1A52FF330091B3BB /* PushMsgDetailViewController.m */,
+				37D3EADE1A52FF330091B3BB /* PushMsgDetailViewController.xib */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -1999,6 +2007,7 @@
 				A987EE601A209E7900CED7CD /* CaseCell.xib in Resources */,
 				14C953B31A2DC60B00FE6F8D /* SubjectDetailViewController.xib in Resources */,
 				1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */,
+				37D3EAE01A52FF330091B3BB /* PushMsgDetailViewController.xib in Resources */,
 				37D3EAD61A52CF5C0091B3BB /* SerciceDetailViewController.xib in Resources */,
 				A987EE441A20984200CED7CD /* HomeViewController.xib in Resources */,
 				14ABFBF11A25DADC00C4AF65 /* RegistViewController.xib in Resources */,
@@ -2165,6 +2174,7 @@
 				378BB2C31A4B1C6E00E8358D /* JRBidInfo.m in Sources */,
 				A9A067171A3D76DA0059D73B /* ActionSheetLocalePicker.m in Sources */,
 				141A1D3B1A2CC09600C073C5 /* AskOrAnswerCell.m in Sources */,
+				37D3EADF1A52FF330091B3BB /* PushMsgDetailViewController.m in Sources */,
 				A93BF2951A262A290070B72A /* ServiceViewController.m in Sources */,
 				14EDB3921A3B519000E5AC77 /* VersionInfoViewController.m in Sources */,
 				37D3EADA1A52CF690091B3BB /* JRServiceViewController.m in Sources */,

@@ -123,6 +123,10 @@
                                     <action selector="onTakeMeasure:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="HMt-0k-Ky3"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_confirm" id="YzN-yl-unA">
+                                <rect key="frame" x="221" y="7" width="70" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -133,6 +137,7 @@
             <connections>
                 <outlet property="bgView" destination="TaE-Zo-2s4" id="QPM-I0-evP"/>
                 <outlet property="browseCountLabel" destination="ThJ-Uj-VF9" id="bkt-3R-9Vf"/>
+                <outlet property="confirmFlagImageView" destination="YzN-yl-unA" id="BRd-Pn-N5H"/>
                 <outlet property="declarationLabel" destination="OOp-f5-w3D" id="ga6-x1-vIP"/>
                 <outlet property="experienceLabel" destination="bCj-hn-gPy" id="PQw-YJ-0NH"/>
                 <outlet property="headImageView" destination="oyN-xj-X8J" id="t5q-Eq-JQF"/>
@@ -146,6 +151,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="icon_confirm" width="70" height="55"/>
         <image name="look_count" width="17" height="10"/>
         <image name="product_count" width="12" height="10"/>
         <image name="unlogin_head" width="60" height="60"/>
