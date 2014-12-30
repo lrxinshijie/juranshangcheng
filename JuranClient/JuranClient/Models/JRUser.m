@@ -136,7 +136,8 @@
     }
     
     NSDictionary *param = @{@"account": account,
-                            @"password": password};
+                            @"password": password,
+                            @"userType": @"member"};
     [[ALEngine shareEngine] pathURL:JR_LOGIN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyShowErrorDefaultMessage:@"NO",kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             JRUser *user = [[JRUser alloc] initWithDictionary:data];

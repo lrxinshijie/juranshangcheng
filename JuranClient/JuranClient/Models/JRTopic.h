@@ -23,10 +23,12 @@
 @property (nonatomic, assign) NSInteger viewCount;
 @property (nonatomic, assign) NSInteger commentCount;
 @property (nonatomic, strong) NSMutableArray *commitList;
+@property (nonatomic, strong) NSString *topicFlag;
 
 - (id)initWithDictionaryForDetail:(NSDictionary *)dict;
 - (void)buildUpDetialValueWithDictionary:(NSDictionary*)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 + (NSMutableArray *)buildUpDetailWithValue:(id)value;
+- (BOOL)isNewestTopic;
 
 @end
