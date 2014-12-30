@@ -220,12 +220,14 @@
 //    }
     MeasureViewController *mv = [[MeasureViewController alloc] init];
     mv.designer = bidInfo.userBase;
+    mv.bidId = bidInfo.bidId;
+    mv.demand = _demand;
     [self.navigationController pushViewController:mv animated:YES];
 }
 
 - (void)rejectForBid:(BidDesignerCell *)cell andBidInfo:(JRBidInfo *)bidInfo{
     NSDictionary *param = @{@"designReqId": _demand.designReqId,
-                            @"bidId":bidInfo.bidId};
+                            @"designID":@(bidInfo.userBase.userId)};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_REJECT_DESIGNREQ parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

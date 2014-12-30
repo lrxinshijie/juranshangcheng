@@ -72,9 +72,9 @@
     CGFloat height =[_contentLabel.text heightWithFont:_contentLabel.font constrainedToWidth:_contentLabel.frame.size.width];
     
     if (!_pushInfoMsg.isExpand) {
-        if (height > 32) {
+        if (height > 35) {
             _contentLabel.numberOfLines = 2;
-            frame.size.height = 32;
+            frame.size.height = 35;
         }else{
             frame.size.height = height;
         }

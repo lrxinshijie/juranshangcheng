@@ -12,6 +12,7 @@
 #import "QuestionViewController.h"
 #import "NewestTopicViewController.h"
 #import "AboutViewController.h"
+#import "JRServiceViewController.h"
 
 static CGFloat kAnimateDuration = 0.25f;
 
@@ -36,7 +37,7 @@ static CGFloat kAnimateDuration = 0.25f;
                         @"最新话题",
 //                        @"扫一扫",
                         @"设置",
-                        @"关于"];
+                        @"居然服务"];
         self.images = @[
 //                        @"menu_activity_default",
 //                        @"menu_baike_default",
@@ -195,7 +196,7 @@ static CGFloat kAnimateDuration = 0.25f;
             
             [nav pushViewController:vc animated:YES];
         }if (indexPath.row == 3){
-            AboutViewController *vc = [[AboutViewController alloc] init];
+            JRServiceViewController *vc = [[JRServiceViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [nav pushViewController:vc animated:YES];
         }

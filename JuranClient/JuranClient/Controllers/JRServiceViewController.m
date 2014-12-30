@@ -7,8 +7,15 @@
 //
 
 #import "JRServiceViewController.h"
+#import "SerciceDetailViewController.h"
+
+#define kButtonTag 1100
 
 @interface JRServiceViewController ()
+
+@property (nonatomic, strong) IBOutlet UIView *headView;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) NSArray *titles;
 
 @end
 
@@ -19,18 +26,53 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    self.navigationItem.title = @"关于";
-    [self setUI];
+    self.navigationItem.title = @"居然服务";
+    [self setupData];
+    [self setupUI];
     
 }
 
-- (void)setUI{
-    
+- (void)setupData{
+    _titles = @[@"先行赔付", @"绿色环保", @"一个月无理由退换货", @"送货安装 零延迟", @"统一收银 统一退换货", @"同一品牌 同一价", @"家装零增项", @"红木全保真", @"进口家具百分百纯进口", @"明码实价", @"三包服务期延至三年", @"清单式报价"];
 }
 
+- (void)setupUI{
+    CGRect frame = _headView.frame;
+    frame.origin = CGPointMake(0, 0);
+    _headView.frame = frame;
+    [self.view addSubview:_headView];
+    
+    frame.origin.y = CGRectGetMaxY(_headView.frame);
+    frame.size = CGSizeMake(kWindowWidth, kWindowHeightWithoutNavigationBar - CGRectGetHeight(_headView.frame));
+    self.scrollView = [[UIScrollView alloc] initWithFrame:frame];
+    [self.view addSubview:_scrollView];
+    
+    CGFloat x = 0;
+    CGFloat y = 0;
+    for (NSInteger i = 0; i < _titles.count; i ++) {
+        frame = CGRectMake(30 + x + 100 * (i%3), 10 + y + 95*(i/3), 60, 60);
+        UIButton *btn = [self.view buttonWithFrame:frame target:self action:@selector(onDetail:) image:[UIImage imageNamed:[NSString stringWithFormat:@"service_normal_%d", i]]];
+        btn.tag = i + kButtonTag;
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"service_highlight_%d", i]] forState:UIControlStateHighlighted];
+        [_scrollView addSubview:btn];
+        
+        frame.origin.y += 60;
+        UILabel *label = [self.view labelWithFrame:frame text:_titles[i] textColor:[UIColor darkGrayColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:kSmallSystemFontSize]];
+        label.numberOfLines = 0;
+        frame.size.height = [label.text heightWithFont:label.font constrainedToWidth:CGRectGetWidth(frame)];
+        label.frame = frame;
+        [_scrollView addSubview:label];
+    }
+    
+    _scrollView.contentSize = CGSizeMake(kWindowWidth, CGRectGetMaxY(frame) + 20);
+}
 - (IBAction)onDetail:(id)sender{
-    
-    
+    UIButton *btn = (UIButton*)sender;
+    NSInteger index = btn.tag - kButtonTag;
+    SerciceDetailViewController *vc = [[SerciceDetailViewController alloc] init];
+    vc.titleForService = _titles[index];
+    vc.index = index;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

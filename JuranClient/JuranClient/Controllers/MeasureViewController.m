@@ -14,6 +14,7 @@
 #import "BaseAddressViewController.h"
 #import "ActionSheetStringPicker.h"
 #import "ActionSheetMultiPicker.h"
+#import "JRDemand.h"
 
 @interface MeasureViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 
@@ -72,6 +73,16 @@
     self.bathroomCount = @"";
     self.houseArea = @"";
     self.areaInfo = [[JRAreaInfo alloc] init];
+    if (_demand) {
+        self.customerRealName = _demand.contactsName;
+        self.customerMobile = _demand.contactsMobile;
+        self.address = _demand.areaInfo.title;
+        self.roomNum = _demand.roomNum;
+        self.livingroomCount = _demand.livingroomCount;
+        self.bathroomCount = _demand.bathroomCount;
+        self.houseArea = _demand.neighbourhoods;
+        self.areaInfo = _demand.areaInfo;
+    }
     
     _designerImageView.layer.masksToBounds = YES;
     _designerImageView.layer.cornerRadius = CGRectGetHeight(_designerImageView.frame)/2;
@@ -472,7 +483,8 @@
                             @"houseArea": _houseArea,
                             @"roomNum": _roomNum,
                             @"livingroomNum": _livingroomCount,
-                            @"bathroomNum": _bathroomCount};
+                            @"bathroomNum": _bathroomCount,
+                            @"bidId": _bidId};
     [[ALEngine shareEngine] pathURL:JR_APPLY_MEASURE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
