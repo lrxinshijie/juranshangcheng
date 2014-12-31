@@ -59,16 +59,11 @@
     if (_isHome) {
         [self configureMenu];
         [self configureSearch];
-        
     }else{
-        if ( _searchKey.length == 0) {
-            self.navigationItem.title = @"";
-        }else{
-            self.navigationItem.title = @"搜索结果";
-        }
+        self.navigationItem.title = @"搜索结果";
     }
     
-    self.filterView = [[FilterView alloc] initWithType:!_isHome && _searchKey.length > 0 ? FilterViewTypeCaseSearch : FilterViewTypeCase defaultData:_filterData];
+    self.filterView = [[FilterView alloc] initWithType:!_isHome ? FilterViewTypeCaseSearch : FilterViewTypeCase defaultData:_filterData];
     _filterView.delegate = self;
     [self.view addSubview:_filterView];
     
@@ -139,7 +134,7 @@
     }
     
     [self showHUD];
-    [[ALEngine shareEngine] pathURL: !_isHome && _searchKey.length > 0 ? JR_SEARCH_CASE : JR_PROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL: !_isHome ? JR_SEARCH_CASE : JR_PROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             NSArray *projectList = [data objectForKey:@"projectGeneralDtoList"];
@@ -271,6 +266,7 @@
             DesignerViewController *cv = [[DesignerViewController alloc] init];
             NSMutableDictionary *filterData = [NSMutableDictionary dictionaryWithDictionary:param];
             [filterData removeObjectForKey:@"type"];
+            [filterData removeObjectForKey:@"isRealAuth"];
             cv.filterData = filterData;
             cv.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:cv animated:YES];

@@ -242,7 +242,8 @@
 #pragma mark - Target Action
 
 - (void)doShare{
-    [[ShareView sharedView] showWithContent:[self titleAtIndex:currentIndex_] image:[Public imageURLString:_jrCase.detailImageList[currentIndex_]] title:_jrCase.title url:@""];
+//    [[ShareView sharedView] showWithContent:[self titleAtIndex:currentIndex_] image:[Public imageURLString:_jrCase.detailImageList[currentIndex_]] title:_jrCase.title url:_jrCase.shareURL];
+    [_jrCase doShare];
 }
 
 - (IBAction)doDetail:(id)sender{

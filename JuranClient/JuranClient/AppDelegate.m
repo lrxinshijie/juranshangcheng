@@ -126,12 +126,11 @@
                            appSecret:@"B4DwT98l9vD3oHnB"
                    qqApiInterfaceCls:[QQApiInterface class]
                      tencentOAuthCls:[TencentOAuth class]];
-
     
     //添加QQ应用  注册网址  http://open.qq.com/
-//    [ShareSDK connectQQWithQZoneAppKey:QQHLSDKAppKey
-//                     qqApiInterfaceCls:[QQApiInterface class]
-//                       tencentOAuthCls:[TencentOAuth class]];
+    [ShareSDK connectQQWithQZoneAppKey:@"1103839607"
+                     qqApiInterfaceCls:[QQApiInterface class]
+                       tencentOAuthCls:[TencentOAuth class]];
     
     
     

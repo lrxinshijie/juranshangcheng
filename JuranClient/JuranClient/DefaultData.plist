@@ -646,6 +646,8 @@
 	</dict>
 	<key>designerSearchDefaultParam</key>
 	<dict>
+		<key>style</key>
+		<string></string>
 		<key>order</key>
 		<string>4</string>
 		<key>sex</key>
