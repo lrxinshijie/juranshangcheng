@@ -37,8 +37,9 @@
         if ([imgArr count] == 0) {
             return self;
         }
-        
-        [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+        if ([imgArr count] > 1) {
+            [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+        }
         
         self.userInteractionEnabled=YES;
         
