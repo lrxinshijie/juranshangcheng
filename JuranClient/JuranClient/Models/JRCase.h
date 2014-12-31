@@ -76,4 +76,7 @@
 - (void)like:(void (^) (BOOL result))finished;
 - (void)favorite:(void (^) (BOOL result))finished;
 
+- (NSString *)shareURL;
+- (void)doShare;
+
 @end

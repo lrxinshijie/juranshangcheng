@@ -46,18 +46,14 @@
         [self configureMenu];
         [self configureSearch];
     } else {
-        if (_searchKeyWord.length > 0) {
-            self.navigationItem.title = @"搜索结果";
-        }else{
-            self.navigationItem.title = @"";
-        }
+        self.navigationItem.title = @"搜索结果";
     }
     
-    self.filterView = [[FilterView alloc] initWithType:!_isHome && _searchKeyWord.length > 0 ? FilterViewTypeDesignerSearch : FilterViewTypeDesigner defaultData:_filterData];
+    self.filterView = [[FilterView alloc] initWithType:!_isHome ? FilterViewTypeDesignerSearch : FilterViewTypeDesigner defaultData:_filterData];
     _filterView.delegate = self;
     [self.view addSubview:_filterView];
     
-    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 44, kWindowWidth, (!_isHome ? kWindowHeightWithoutNavigationBar:kWindowHeightWithoutNavigationBarAndTabbar) - 44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 44, kWindowWidth, (!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) - 44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -113,7 +109,7 @@
     if (!_isHome && _searchKeyWord.length > 0) {
         [param setObject:_searchKeyWord forKey:@"keyword"];
     }
-    NSString *url = !_isHome && _searchKeyWord.length > 0 ? JR_SEARCH_DESIGNER : JR_DESIGNERLIST;
+    NSString *url = !_isHome ? JR_SEARCH_DESIGNER : JR_DESIGNERLIST;
     [self showHUD];
     [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

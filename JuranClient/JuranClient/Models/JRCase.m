@@ -7,6 +7,7 @@
 //
 
 #import "JRCase.h"
+#import "ShareView.h"
 
 @implementation JRCase
 
@@ -156,7 +157,13 @@
     }];
 }
 
+- (NSString *)shareURL{
+    return [NSString stringWithFormat:@"http://apph5.juran.cn/cases/%@",self.projectId];
+}
 
+- (void)doShare{
+    [[ShareView sharedView] showWithContent:self.desc image:[Public imageURLString:self.imageUrl] title:self.title url:self.shareURL];
+}
 
 
 
