@@ -162,7 +162,7 @@
 }
 
 - (void)doShare{
-    [[ShareView sharedView] showWithContent:self.title image:[Public imageURLString:[self.detailImageList firstObject]] title:self.title url:self.shareURL];
+    [[ShareView sharedView] showWithContent:self.desc image:[Public imageURLString:self.imageUrl] title:self.title url:self.shareURL];
 }
 
 

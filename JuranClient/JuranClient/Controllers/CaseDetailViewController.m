@@ -320,7 +320,8 @@
 }
 
 - (void)onShare{
-    [[ShareView sharedView] showWithContent:_jrCase.desc image:[[Public imageURL:_jrCase.imageUrl] absoluteString] title:_jrCase.title url:@""];
+//    [[ShareView sharedView] showWithContent:_jrCase.desc image:[[Public imageURL:_jrCase.imageUrl] absoluteString] title:_jrCase.title url:@""];
+    [_jrCase doShare];
 }
 
 - (IBAction)onSend:(id)sender{
