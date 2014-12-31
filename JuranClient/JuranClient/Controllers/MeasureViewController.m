@@ -79,7 +79,7 @@
     if (_demand) {
         self.customerRealName = _demand.contactsName;
         self.customerMobile = _demand.contactsMobile;
-        self.address = _demand.areaInfo.title;
+        self.address = _demand.neighbourhoods;
         self.roomNum = _demand.roomNum;
         self.livingroomCount = _demand.livingroomCount;
         self.bathroomCount = _demand.bathroomCount;

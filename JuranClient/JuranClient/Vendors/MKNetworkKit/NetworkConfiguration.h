@@ -10,11 +10,11 @@
 #define NetworkingConfiguration_h
 
 /* Interface */
-//#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
-//#define JR_SERVICE  @"http://124.207.66.50:10005"
+#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
+#define JR_SERVICE  @"http://124.207.66.50:10005"
 
-#define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
-#define JR_SERVICE  @"http://app.juran.cn:81"
+//#define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
+//#define JR_SERVICE  @"http://app.juran.cn:81"
 
 #define JR_LOGIN [NSString stringWithFormat:@"%@/member/login.json",JR_SERVICE]
 #define JR_REGIST_SENDSMS [NSString stringWithFormat:@"%@/member/sendSmsAuth.json",JR_SERVICE]
