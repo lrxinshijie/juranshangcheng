@@ -151,6 +151,10 @@
         }
         case ModifyCVTypeIdType:
         {
+            if (idCardType == -1) {
+                [self showTip:@"请选择证件类型"];
+                return;
+            }
             _user.idCardType = [NSString stringWithFormat:@"%d", idCardType];
             _user.idCardNumber = _textField.text;
             break;
