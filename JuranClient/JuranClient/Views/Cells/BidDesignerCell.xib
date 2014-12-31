@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -97,6 +97,9 @@
                                     <color key="titleColor" red="0.0" green="0.34901961679999999" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="onReject:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qSE-W7-y2j"/>
                                 </connections>
@@ -144,6 +147,7 @@
                 <outlet property="measureButton" destination="als-Rh-igi" id="F7V-rE-xUF"/>
                 <outlet property="nameLabel" destination="33s-gS-v8R" id="jCL-pB-33x"/>
                 <outlet property="produntCountLabel" destination="71X-cR-MeB" id="4Gf-hY-cOP"/>
+                <outlet property="rejectButton" destination="jj2-BK-q5j" id="qzq-aB-u0z"/>
                 <outlet property="styleLabel" destination="d4o-8U-O5w" id="PMX-96-K4z"/>
                 <outlet property="timeLabel" destination="eEW-t1-Qwk" id="rOz-HJ-S4d"/>
             </connections>

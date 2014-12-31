@@ -25,6 +25,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView *confirmFlagImageView;
 
 @property (nonatomic, strong) IBOutlet UIButton *measureButton;
+@property (nonatomic, strong) IBOutlet UIButton *rejectButton;
 
 @property (nonatomic, strong) JRBidInfo *bidInfo;
 
@@ -77,9 +78,13 @@
     if (bidInfo.isMeasured) {
         _measureButton.enabled = NO;
         _measureButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        _rejectButton.enabled = NO;
+        _rejectButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     }else{
         _measureButton.enabled = YES;
         _measureButton.layer.borderColor = RGBColor(0, 89, 172).CGColor;
+        _rejectButton.enabled = YES;
+        _rejectButton.layer.borderColor = RGBColor(0, 89, 172).CGColor;
     }
     
 }
