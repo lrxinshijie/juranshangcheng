@@ -180,10 +180,6 @@
 		378BB2C31A4B1C6E00E8358D /* JRBidInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 378BB2C21A4B1C6E00E8358D /* JRBidInfo.m */; };
 		37CF672C1A4FE11D0044F709 /* NewestBidInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */; };
 		37CF672D1A4FE11D0044F709 /* NewestBidInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37CF672B1A4FE11D0044F709 /* NewestBidInfoCell.xib */; };
-		37D3EAD51A52CF5C0091B3BB /* SerciceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3EAD31A52CF5C0091B3BB /* SerciceDetailViewController.m */; };
-		37D3EAD61A52CF5C0091B3BB /* SerciceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3EAD41A52CF5C0091B3BB /* SerciceDetailViewController.xib */; };
-		37D3EADA1A52CF690091B3BB /* JRServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3EAD81A52CF690091B3BB /* JRServiceViewController.m */; };
-		37D3EADB1A52CF690091B3BB /* JRServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3EAD91A52CF690091B3BB /* JRServiceViewController.xib */; };
 		37D3EADF1A52FF330091B3BB /* PushMsgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3EADD1A52FF330091B3BB /* PushMsgDetailViewController.m */; };
 		37D3EAE01A52FF330091B3BB /* PushMsgDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3EADE1A52FF330091B3BB /* PushMsgDetailViewController.xib */; };
 		A90459CE1A27874800F8CD74 /* CaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */; };
@@ -332,6 +328,12 @@
 		A9D654B51A27642800A80253 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654A81A27642800A80253 /* JSONModel+networking.m */; };
 		A9D654B61A27642800A80253 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654AB1A27642800A80253 /* JSONKeyMapper.m */; };
 		A9D654B71A27642800A80253 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654AD1A27642800A80253 /* JSONValueTransformer.m */; };
+		BD48B58D1A5283340041725C /* JRServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD48B58B1A5283340041725C /* JRServiceViewController.m */; };
+		BD48B58E1A5283340041725C /* JRServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD48B58C1A5283340041725C /* JRServiceViewController.xib */; };
+		BD5F23E61A52A430009F759E /* SerciceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5F23E41A52A430009F759E /* SerciceDetailViewController.m */; };
+		BD5F23E71A52A430009F759E /* SerciceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD5F23E51A52A430009F759E /* SerciceDetailViewController.xib */; };
+		BDA4E5011A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E4FF1A5395380005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle */; };
+		BDA4E5021A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA4E5001A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -613,12 +615,6 @@
 		37CF67291A4FE11D0044F709 /* NewestBidInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewestBidInfoCell.h; sourceTree = "<group>"; };
 		37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewestBidInfoCell.m; sourceTree = "<group>"; };
 		37CF672B1A4FE11D0044F709 /* NewestBidInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewestBidInfoCell.xib; sourceTree = "<group>"; };
-		37D3EAD21A52CF5C0091B3BB /* SerciceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerciceDetailViewController.h; sourceTree = "<group>"; };
-		37D3EAD31A52CF5C0091B3BB /* SerciceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerciceDetailViewController.m; sourceTree = "<group>"; };
-		37D3EAD41A52CF5C0091B3BB /* SerciceDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SerciceDetailViewController.xib; sourceTree = "<group>"; };
-		37D3EAD71A52CF690091B3BB /* JRServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRServiceViewController.h; sourceTree = "<group>"; };
-		37D3EAD81A52CF690091B3BB /* JRServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRServiceViewController.m; sourceTree = "<group>"; };
-		37D3EAD91A52CF690091B3BB /* JRServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JRServiceViewController.xib; sourceTree = "<group>"; };
 		37D3EADC1A52FF330091B3BB /* PushMsgDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMsgDetailViewController.h; sourceTree = "<group>"; };
 		37D3EADD1A52FF330091B3BB /* PushMsgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMsgDetailViewController.m; sourceTree = "<group>"; };
 		37D3EADE1A52FF330091B3BB /* PushMsgDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PushMsgDetailViewController.xib; sourceTree = "<group>"; };
@@ -897,6 +893,14 @@
 		A9D654AB1A27642800A80253 /* JSONKeyMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKeyMapper.m; sourceTree = "<group>"; };
 		A9D654AC1A27642800A80253 /* JSONValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValueTransformer.h; sourceTree = "<group>"; };
 		A9D654AD1A27642800A80253 /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
+		BD48B58A1A5283340041725C /* JRServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRServiceViewController.h; sourceTree = "<group>"; };
+		BD48B58B1A5283340041725C /* JRServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRServiceViewController.m; sourceTree = "<group>"; };
+		BD48B58C1A5283340041725C /* JRServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JRServiceViewController.xib; sourceTree = "<group>"; };
+		BD5F23E31A52A430009F759E /* SerciceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerciceDetailViewController.h; sourceTree = "<group>"; };
+		BD5F23E41A52A430009F759E /* SerciceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerciceDetailViewController.m; sourceTree = "<group>"; };
+		BD5F23E51A52A430009F759E /* SerciceDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SerciceDetailViewController.xib; sourceTree = "<group>"; };
+		BDA4E4FF1A5395380005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKiPhoneDefaultShareViewUI.bundle; sourceTree = "<group>"; };
+		BDA4E5001A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneDefaultShareViewUI.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -919,6 +923,7 @@
 				1441A1771A29E3CD004A038E /* libWeChatSDK.a in Frameworks */,
 				1441A1741A29E3CD004A038E /* libSinaWeiboSDK.a in Frameworks */,
 				1441A1781A29E3CD004A038E /* ShareSDK.framework in Frameworks */,
+				BDA4E5021A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */,
 				A971BC991A20825800C018D6 /* UIKit.framework in Frameworks */,
 				1441A1691A29E3CD004A038E /* QZoneConnection.framework in Frameworks */,
 				1441A1721A29E3CD004A038E /* TencentOpenAPI.framework in Frameworks */,
@@ -959,6 +964,8 @@
 		1441A1471A29E3CD004A038E /* ShareSDK */ = {
 			isa = PBXGroup;
 			children = (
+				BDA4E4FF1A5395380005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle */,
+				BDA4E5001A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework */,
 				1441A1481A29E3CD004A038E /* Connection */,
 				1441A1501A29E3CD004A038E /* Core */,
 				1441A1571A29E3CD004A038E /* Extend */,
@@ -1176,12 +1183,6 @@
 		14EDB3891A3B4F9A00E5AC77 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				37D3EAD71A52CF690091B3BB /* JRServiceViewController.h */,
-				37D3EAD81A52CF690091B3BB /* JRServiceViewController.m */,
-				37D3EAD91A52CF690091B3BB /* JRServiceViewController.xib */,
-				37D3EAD21A52CF5C0091B3BB /* SerciceDetailViewController.h */,
-				37D3EAD31A52CF5C0091B3BB /* SerciceDetailViewController.m */,
-				37D3EAD41A52CF5C0091B3BB /* SerciceDetailViewController.xib */,
 				14C855441A2E196B00A15ED9 /* SettingsViewController.h */,
 				14C855451A2E196B00A15ED9 /* SettingsViewController.m */,
 				14C855461A2E196B00A15ED9 /* SettingsViewController.xib */,
@@ -1197,6 +1198,12 @@
 				14F4A59C1A4066D100D7AFA0 /* APPRecommendViewController.h */,
 				14F4A59D1A4066D100D7AFA0 /* APPRecommendViewController.m */,
 				14F4A59E1A4066D100D7AFA0 /* APPRecommendViewController.xib */,
+				BD48B58A1A5283340041725C /* JRServiceViewController.h */,
+				BD48B58B1A5283340041725C /* JRServiceViewController.m */,
+				BD48B58C1A5283340041725C /* JRServiceViewController.xib */,
+				BD5F23E31A52A430009F759E /* SerciceDetailViewController.h */,
+				BD5F23E41A52A430009F759E /* SerciceDetailViewController.m */,
+				BD5F23E51A52A430009F759E /* SerciceDetailViewController.xib */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1976,6 +1983,7 @@
 				1441A16F1A29E3CD004A038E /* ShareSDKLocalizable.strings in Resources */,
 				14EDB3931A3B519000E5AC77 /* VersionInfoViewController.xib in Resources */,
 				14A3FDCC1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.xib in Resources */,
+				BDA4E5011A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				145EF9451A2B0E33001CC76B /* JRPhotoScrollViewController.xib in Resources */,
 				1441A18B1A29E3D5004A038E /* KTPhotoBrowser.bundle in Resources */,
 				14D973881A32CBC000E771ED /* AnswerDetailCell.xib in Resources */,
@@ -2003,6 +2011,7 @@
 				145471C71A3885DB00428BCB /* DemandDetailViewController.xib in Resources */,
 				14C8554A1A2E196B00A15ED9 /* SettingsViewController.xib in Resources */,
 				A907F2B71A38884A00DEB8EA /* DemandEditTextViewController.xib in Resources */,
+				BD48B58E1A5283340041725C /* JRServiceViewController.xib in Resources */,
 				1441A1701A29E3CD004A038E /* Resource.bundle in Resources */,
 				14490CB41A2B6A19001CB160 /* AccountSecurityViewController.xib in Resources */,
 				14FE2DE31A382FCB00B31FBA /* PrivateMessageViewController.xib in Resources */,
@@ -2032,7 +2041,6 @@
 				14C953B31A2DC60B00FE6F8D /* SubjectDetailViewController.xib in Resources */,
 				1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */,
 				37D3EAE01A52FF330091B3BB /* PushMsgDetailViewController.xib in Resources */,
-				37D3EAD61A52CF5C0091B3BB /* SerciceDetailViewController.xib in Resources */,
 				A987EE441A20984200CED7CD /* HomeViewController.xib in Resources */,
 				14ABFBF11A25DADC00C4AF65 /* RegistViewController.xib in Resources */,
 				145471DD1A38A53000428BCB /* NewQuestionViewController.xib in Resources */,
@@ -2041,11 +2049,11 @@
 				A9C398461A29D25F006A8AAB /* ResetPasswordViewController.xib in Resources */,
 				1441A1731A29E3CD004A038E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				147A9FB31A415DD400132804 /* PrivateLetterViewController.xib in Resources */,
-				37D3EADB1A52CF690091B3BB /* JRServiceViewController.xib in Resources */,
 				14646DB71A3CA1A500E5D6F6 /* OldTopicViewController.xib in Resources */,
 				14EDB3881A3B29E700E5AC77 /* FilterInfo.plist in Resources */,
 				1416C8B91A242FD100FA9999 /* CaseCollectionCell.xib in Resources */,
 				14490CAA1A2B5D50001CB160 /* AccountManageViewController.xib in Resources */,
+				BD5F23E71A52A430009F759E /* SerciceDetailViewController.xib in Resources */,
 				A9C3984B1A29D98C006A8AAB /* ResetEmailViewController.xib in Resources */,
 				1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */,
 				14361E561A343F5F00F9BD94 /* BaseAddressViewController.xib in Resources */,
@@ -2081,7 +2089,6 @@
 				A987EDEB1A20920500CED7CD /* UIImage+ASCategory.m in Sources */,
 				A9A067221A3D82C20059D73B /* ActionSheetMultiPicker.m in Sources */,
 				A987EDF01A20920500CED7CD /* UIProgressView+ASCategory.m in Sources */,
-				37D3EAD51A52CF5C0091B3BB /* SerciceDetailViewController.m in Sources */,
 				A9C398401A29BC24006A8AAB /* ForgetViewController.m in Sources */,
 				A987EDDB1A20920500CED7CD /* ASPlaceholderTextView.m in Sources */,
 				1476DA8A1A21DAF30006E9E0 /* JRDesigner.m in Sources */,
@@ -2118,6 +2125,7 @@
 				14C953B21A2DC60B00FE6F8D /* SubjectDetailViewController.m in Sources */,
 				A90459D81A278B2D00F8CD74 /* SubjectViewController.m in Sources */,
 				A987EE201A20928B00CED7CD /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
+				BD5F23E61A52A430009F759E /* SerciceDetailViewController.m in Sources */,
 				A987EDD21A20920500CED7CD /* ALViewController.m in Sources */,
 				A93BF29A1A2633D90070B72A /* SetPasswordViewController.m in Sources */,
 				A987EDE51A20920500CED7CD /* UIActionSheet+Blocks.m in Sources */,
@@ -2166,6 +2174,7 @@
 				A987EDF81A20920500CED7CD /* SDImageCache.m in Sources */,
 				A987EDD41A20920500CED7CD /* Public.m in Sources */,
 				A9902CA61A3432A500F08DA1 /* FilterViewController.m in Sources */,
+				BD48B58D1A5283340041725C /* JRServiceViewController.m in Sources */,
 				A987EE221A20928B00CED7CD /* MKNetworkEngine.m in Sources */,
 				1476DA961A21DFBE0006E9E0 /* SelfIntrodutionCell.m in Sources */,
 				1441A18C1A29E3D5004A038E /* KTPhotoBrowserGlobal.m in Sources */,
@@ -2201,7 +2210,6 @@
 				37D3EADF1A52FF330091B3BB /* PushMsgDetailViewController.m in Sources */,
 				A93BF2951A262A290070B72A /* ServiceViewController.m in Sources */,
 				14EDB3921A3B519000E5AC77 /* VersionInfoViewController.m in Sources */,
-				37D3EADA1A52CF690091B3BB /* JRServiceViewController.m in Sources */,
 				A9A0671A1A3D76DA0059D73B /* SWActionSheet.m in Sources */,
 				A9D654B01A27642800A80253 /* JSONModelClassProperty.m in Sources */,
 				14587E1A1A35DD2600D41236 /* BindPhoneNumberViewController.m in Sources */,
