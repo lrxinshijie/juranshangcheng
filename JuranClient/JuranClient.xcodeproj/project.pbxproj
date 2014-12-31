@@ -1936,10 +1936,10 @@
 				ORGANIZATIONNAME = Juran;
 				TargetAttributes = {
 					A971BC901A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = QHWR2FWBM6;
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = QHWR2FWBM6;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -2429,7 +2429,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/dist",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "77356761-627b-4880-be9e-4b5ca2899a8b";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2465,7 +2465,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/dist",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "77356761-627b-4880-be9e-4b5ca2899a8b";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
