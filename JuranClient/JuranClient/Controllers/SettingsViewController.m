@@ -52,7 +52,9 @@
     self.navigationItem.title = @"设置";
     
     keysForImageSet = @[@"智能模式", @"高质量（适合WIFI环境）", @"普通（适合2G或3G模式）"];
-    keysForOthers = @[@"问题反馈", @"版本信息", @"给我打分"];//, @"其他APP推荐"
+    keysForOthers = @[@"问题反馈", @"版本信息"
+//                      , @"给我打分"
+                      ];//, @"其他APP推荐"
     
     intelligentMode = [Public intelligentModeForImageQuality];
     imageQuality = [DefaultData sharedData].imageQuality;
