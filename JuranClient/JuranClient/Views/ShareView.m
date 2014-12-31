@@ -76,7 +76,7 @@
                                                 title:_title
                                                   url:_url
                                           description:_content
-                                            mediaType:SSPublishContentMediaTypeVideo];
+                                            mediaType:SSPublishContentMediaTypeNews];
     ShareType shareType;
     
     switch (btn.tag - kButtonTag) {
