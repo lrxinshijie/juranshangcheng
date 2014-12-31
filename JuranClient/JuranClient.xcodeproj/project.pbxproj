@@ -136,6 +136,7 @@
 		14ABFBEC1A25CFFD00C4AF65 /* UIViewController+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEB1A25CFFD00C4AF65 /* UIViewController+Login.m */; };
 		14ABFBF01A25DADC00C4AF65 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */; };
 		14ABFBF11A25DADC00C4AF65 /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */; };
+		14C8204C1A528D340010A19F /* libGexinSdk-1.0.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C8204B1A528D340010A19F /* libGexinSdk-1.0.8.a */; };
 		14C855471A2E196B00A15ED9 /* InteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855421A2E196B00A15ED9 /* InteractionViewController.m */; };
 		14C855481A2E196B00A15ED9 /* InteractionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C855431A2E196B00A15ED9 /* InteractionViewController.xib */; };
 		14C855491A2E196B00A15ED9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855451A2E196B00A15ED9 /* SettingsViewController.m */; };
@@ -179,6 +180,12 @@
 		378BB2C31A4B1C6E00E8358D /* JRBidInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 378BB2C21A4B1C6E00E8358D /* JRBidInfo.m */; };
 		37CF672C1A4FE11D0044F709 /* NewestBidInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */; };
 		37CF672D1A4FE11D0044F709 /* NewestBidInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37CF672B1A4FE11D0044F709 /* NewestBidInfoCell.xib */; };
+		37D3EAD51A52CF5C0091B3BB /* SerciceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3EAD31A52CF5C0091B3BB /* SerciceDetailViewController.m */; };
+		37D3EAD61A52CF5C0091B3BB /* SerciceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3EAD41A52CF5C0091B3BB /* SerciceDetailViewController.xib */; };
+		37D3EADA1A52CF690091B3BB /* JRServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3EAD81A52CF690091B3BB /* JRServiceViewController.m */; };
+		37D3EADB1A52CF690091B3BB /* JRServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3EAD91A52CF690091B3BB /* JRServiceViewController.xib */; };
+		37D3EADF1A52FF330091B3BB /* PushMsgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3EADD1A52FF330091B3BB /* PushMsgDetailViewController.m */; };
+		37D3EAE01A52FF330091B3BB /* PushMsgDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3EADE1A52FF330091B3BB /* PushMsgDetailViewController.xib */; };
 		A90459CE1A27874800F8CD74 /* CaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */; };
 		A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */; };
 		A90459D31A278A6100F8CD74 /* PublishDesignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459D11A278A6100F8CD74 /* PublishDesignViewController.m */; };
@@ -540,6 +547,9 @@
 		14ABFBED1A25DADC00C4AF65 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
+		14C820491A528D340010A19F /* GexinSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GexinSdk.h; sourceTree = "<group>"; };
+		14C8204A1A528D340010A19F /* GXSdkError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSdkError.h; sourceTree = "<group>"; };
+		14C8204B1A528D340010A19F /* libGexinSdk-1.0.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGexinSdk-1.0.8.a"; sourceTree = "<group>"; };
 		14C855411A2E196B00A15ED9 /* InteractionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractionViewController.h; sourceTree = "<group>"; };
 		14C855421A2E196B00A15ED9 /* InteractionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractionViewController.m; sourceTree = "<group>"; };
 		14C855431A2E196B00A15ED9 /* InteractionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InteractionViewController.xib; sourceTree = "<group>"; };
@@ -607,6 +617,15 @@
 		37CF67291A4FE11D0044F709 /* NewestBidInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewestBidInfoCell.h; sourceTree = "<group>"; };
 		37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewestBidInfoCell.m; sourceTree = "<group>"; };
 		37CF672B1A4FE11D0044F709 /* NewestBidInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewestBidInfoCell.xib; sourceTree = "<group>"; };
+		37D3EAD21A52CF5C0091B3BB /* SerciceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerciceDetailViewController.h; sourceTree = "<group>"; };
+		37D3EAD31A52CF5C0091B3BB /* SerciceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerciceDetailViewController.m; sourceTree = "<group>"; };
+		37D3EAD41A52CF5C0091B3BB /* SerciceDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SerciceDetailViewController.xib; sourceTree = "<group>"; };
+		37D3EAD71A52CF690091B3BB /* JRServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRServiceViewController.h; sourceTree = "<group>"; };
+		37D3EAD81A52CF690091B3BB /* JRServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRServiceViewController.m; sourceTree = "<group>"; };
+		37D3EAD91A52CF690091B3BB /* JRServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JRServiceViewController.xib; sourceTree = "<group>"; };
+		37D3EADC1A52FF330091B3BB /* PushMsgDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMsgDetailViewController.h; sourceTree = "<group>"; };
+		37D3EADD1A52FF330091B3BB /* PushMsgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMsgDetailViewController.m; sourceTree = "<group>"; };
+		37D3EADE1A52FF330091B3BB /* PushMsgDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PushMsgDetailViewController.xib; sourceTree = "<group>"; };
 		A90459CB1A27874800F8CD74 /* CaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseDetailViewController.h; sourceTree = "<group>"; };
 		A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseDetailViewController.m; sourceTree = "<group>"; };
 		A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseDetailViewController.xib; sourceTree = "<group>"; };
@@ -906,6 +925,7 @@
 				1441A1931A29E436004A038E /* libsqlite3.dylib in Frameworks */,
 				1441A1911A29E42C004A038E /* MessageUI.framework in Frameworks */,
 				1441A16D1A29E3CD004A038E /* WeChatConnection.framework in Frameworks */,
+				14C8204C1A528D340010A19F /* libGexinSdk-1.0.8.a in Frameworks */,
 				1441A1771A29E3CD004A038E /* libWeChatSDK.a in Frameworks */,
 				1441A1741A29E3CD004A038E /* libSinaWeiboSDK.a in Frameworks */,
 				1441A1781A29E3CD004A038E /* ShareSDK.framework in Frameworks */,
@@ -1103,6 +1123,9 @@
 				14587E0D1A35D5E300D41236 /* DetailAddressViewController.h */,
 				14587E0E1A35D5E300D41236 /* DetailAddressViewController.m */,
 				14587E0F1A35D5E300D41236 /* DetailAddressViewController.xib */,
+				37D3EADC1A52FF330091B3BB /* PushMsgDetailViewController.h */,
+				37D3EADD1A52FF330091B3BB /* PushMsgDetailViewController.m */,
+				37D3EADE1A52FF330091B3BB /* PushMsgDetailViewController.xib */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -1129,6 +1152,24 @@
 			name = Question;
 			sourceTree = "<group>";
 		};
+		14C820471A528D340010A19F /* dist */ = {
+			isa = PBXGroup;
+			children = (
+				14C820481A528D340010A19F /* include */,
+				14C8204B1A528D340010A19F /* libGexinSdk-1.0.8.a */,
+			);
+			path = dist;
+			sourceTree = "<group>";
+		};
+		14C820481A528D340010A19F /* include */ = {
+			isa = PBXGroup;
+			children = (
+				14C820491A528D340010A19F /* GexinSdk.h */,
+				14C8204A1A528D340010A19F /* GXSdkError.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
 		14C953AE1A2DC45D00FE6F8D /* Subject */ = {
 			isa = PBXGroup;
 			children = (
@@ -1145,6 +1186,12 @@
 		14EDB3891A3B4F9A00E5AC77 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				37D3EAD71A52CF690091B3BB /* JRServiceViewController.h */,
+				37D3EAD81A52CF690091B3BB /* JRServiceViewController.m */,
+				37D3EAD91A52CF690091B3BB /* JRServiceViewController.xib */,
+				37D3EAD21A52CF5C0091B3BB /* SerciceDetailViewController.h */,
+				37D3EAD31A52CF5C0091B3BB /* SerciceDetailViewController.m */,
+				37D3EAD41A52CF5C0091B3BB /* SerciceDetailViewController.xib */,
 				14C855441A2E196B00A15ED9 /* SettingsViewController.h */,
 				14C855451A2E196B00A15ED9 /* SettingsViewController.m */,
 				14C855461A2E196B00A15ED9 /* SettingsViewController.xib */,
@@ -1457,6 +1504,7 @@
 		A987ED6F1A20920500CED7CD /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				14C820471A528D340010A19F /* dist */,
 				A9A53B001A46FE7C008D75B8 /* UIBubbleTableView */,
 				A9A067261A3D92F70059D73B /* ZYQAssetPickerController */,
 				A9A067011A3D76DA0059D73B /* ActionSheetPicker */,
@@ -2000,6 +2048,8 @@
 				A987EE601A209E7900CED7CD /* CaseCell.xib in Resources */,
 				14C953B31A2DC60B00FE6F8D /* SubjectDetailViewController.xib in Resources */,
 				1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */,
+				37D3EAE01A52FF330091B3BB /* PushMsgDetailViewController.xib in Resources */,
+				37D3EAD61A52CF5C0091B3BB /* SerciceDetailViewController.xib in Resources */,
 				A987EE441A20984200CED7CD /* HomeViewController.xib in Resources */,
 				14ABFBF11A25DADC00C4AF65 /* RegistViewController.xib in Resources */,
 				145471DD1A38A53000428BCB /* NewQuestionViewController.xib in Resources */,
@@ -2008,6 +2058,7 @@
 				A9C398461A29D25F006A8AAB /* ResetPasswordViewController.xib in Resources */,
 				1441A1731A29E3CD004A038E /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				147A9FB31A415DD400132804 /* PrivateLetterViewController.xib in Resources */,
+				37D3EADB1A52CF690091B3BB /* JRServiceViewController.xib in Resources */,
 				14646DB71A3CA1A500E5D6F6 /* OldTopicViewController.xib in Resources */,
 				14EDB3881A3B29E700E5AC77 /* FilterInfo.plist in Resources */,
 				1416C8B91A242FD100FA9999 /* CaseCollectionCell.xib in Resources */,
@@ -2048,6 +2099,7 @@
 				A987EDEB1A20920500CED7CD /* UIImage+ASCategory.m in Sources */,
 				A9A067221A3D82C20059D73B /* ActionSheetMultiPicker.m in Sources */,
 				A987EDF01A20920500CED7CD /* UIProgressView+ASCategory.m in Sources */,
+				37D3EAD51A52CF5C0091B3BB /* SerciceDetailViewController.m in Sources */,
 				A9C398401A29BC24006A8AAB /* ForgetViewController.m in Sources */,
 				A987EDDB1A20920500CED7CD /* ASPlaceholderTextView.m in Sources */,
 				1476DA8A1A21DAF30006E9E0 /* JRDesigner.m in Sources */,
@@ -2166,8 +2218,10 @@
 				378BB2C31A4B1C6E00E8358D /* JRBidInfo.m in Sources */,
 				A9A067171A3D76DA0059D73B /* ActionSheetLocalePicker.m in Sources */,
 				141A1D3B1A2CC09600C073C5 /* AskOrAnswerCell.m in Sources */,
+				37D3EADF1A52FF330091B3BB /* PushMsgDetailViewController.m in Sources */,
 				A93BF2951A262A290070B72A /* ServiceViewController.m in Sources */,
 				14EDB3921A3B519000E5AC77 /* VersionInfoViewController.m in Sources */,
+				37D3EADA1A52CF690091B3BB /* JRServiceViewController.m in Sources */,
 				A9A0671A1A3D76DA0059D73B /* SWActionSheet.m in Sources */,
 				A9D654B01A27642800A80253 /* JSONModelClassProperty.m in Sources */,
 				14587E1A1A35DD2600D41236 /* BindPhoneNumberViewController.m in Sources */,
@@ -2392,6 +2446,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
+					"$(PROJECT_DIR)/JuranClient/Vendors/dist",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2427,6 +2482,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/TencentWeiboSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
+					"$(PROJECT_DIR)/JuranClient/Vendors/dist",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

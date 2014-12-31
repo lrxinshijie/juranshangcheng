@@ -14,6 +14,7 @@
                 <outlet property="detailLabel" destination="XeM-sJ-tWO" id="fFA-rI-pSc"/>
                 <outlet property="idImageView" destination="Dfg-FB-Cks" id="OMi-xR-jYN"/>
                 <outlet property="nameLabel" destination="A4g-UG-GnS" id="Aj3-eD-Bya"/>
+                <outlet property="userLevelImageView" destination="uF0-sI-k71" id="arZ-Cf-RgB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -90,6 +91,10 @@
                     <rect key="frame" x="218" y="22" width="18" height="13"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userlevel0" id="uF0-sI-k71">
+                    <rect key="frame" x="244" y="22" width="26" height="12"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -102,6 +107,7 @@
         <image name="case-detail-send" width="62" height="39"/>
         <image name="case-detail-text" width="242" height="39"/>
         <image name="icon-designer-id" width="18" height="12"/>
+        <image name="userlevel0" width="25" height="11"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

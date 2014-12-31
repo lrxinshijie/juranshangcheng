@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString *bidDate;
 @property (nonatomic, assign) BOOL isMeasured;
 
+- (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
 @end

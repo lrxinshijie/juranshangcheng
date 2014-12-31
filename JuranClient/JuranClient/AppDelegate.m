@@ -23,6 +23,11 @@
 
 #import "HomeViewController.h"
 
+#define kAppId           @"ZmiyzZ23sKAvFQ7RoAfbJ2"
+#define kAppKey          @"kJRhD2minf7dJ6CK5u43o6"
+#define kAppSecret       @"u1p1T7GV0e54W1DALv03c1"
+
+
 @interface AppDelegate () <UINavigationControllerDelegate>
 
 @end
@@ -94,32 +99,31 @@
 }
 
 - (void)setupShareSDK{
-    return;
-    
+
     [ShareSDK registerApp:@"477b2576a9ca"];
     
     //添加新浪微博应用 注册网址 http://open.weibo.com
-    [ShareSDK connectSinaWeiboWithAppKey:@"4218949951"
-                               appSecret:@"444121dbfb4e449ba7caf573b617652c"
-                             redirectUri:@"http://demo.juran.cn/member/sinalogin.htm"];
+//    [ShareSDK connectSinaWeiboWithAppKey:@"4218949951"
+//                               appSecret:@"444121dbfb4e449ba7caf573b617652c"
+//                             redirectUri:@"http://demo.juran.cn/member/sinalogin.htm"];
     //当使用新浪微博客户端分享的时候需要按照下面的方法来初始化新浪的平台
-    [ShareSDK  connectSinaWeiboWithAppKey:@"4218949951"
-                                appSecret:@"444121dbfb4e449ba7caf573b617652c"
-                              redirectUri:@"http://demo.juran.cn/member/sinalogin.htm"
+    [ShareSDK  connectSinaWeiboWithAppKey:@"974550530"
+                                appSecret:@"b6acbd20f461a9c83be83e90aacf8ffb"
+                              redirectUri:@"http://www.juran.cn"
                               weiboSDKCls:[WeiboSDK class]];
     
     //添加腾讯微博应用 注册网址 http://dev.t.qq.com
-    [ShareSDK connectTencentWeiboWithAppKey:@"801431266"
-                                  appSecret:@"558f8c19eb566dcce87b898461b0cf24"
-                                redirectUri:@"http://www.sharesdk.cn"
+    [ShareSDK connectTencentWeiboWithAppKey:@"801555309"
+                                  appSecret:@"71fd14ea4456a3bf906817e8bbefbdbd"
+                                redirectUri:@"http://www.juran.cn"
                                    wbApiCls:[WeiboApi class]];
-    [ShareSDK connect163WeiboWithAppKey:@"9F2EiRMl1VxVMEtj"
-                              appSecret:@"iWxz6yHnT5xexD04hDIKnjUihlvNq3co"
-                            redirectUri:@"http://www.juran.cn/member/nteslogin.htm"];
+//    [ShareSDK connect163WeiboWithAppKey:@"9F2EiRMl1VxVMEtj"
+//                              appSecret:@"iWxz6yHnT5xexD04hDIKnjUihlvNq3co"
+//                            redirectUri:@"http://www.juran.cn/member/nteslogin.htm"];
     
     //添加QQ空间应用  注册网址  http://connect.qq.com/intro/login/
-    [ShareSDK connectQZoneWithAppKey:QQHLSDKAppKey
-                           appSecret:QQHLSDKAppSecret
+    [ShareSDK connectQZoneWithAppKey:@"1103839607"
+                           appSecret:@"B4DwT98l9vD3oHnB"
                    qqApiInterfaceCls:[QQApiInterface class]
                      tencentOAuthCls:[TencentOAuth class]];
 
@@ -132,9 +136,12 @@
     
     
     //添加微信应用 注册网址 http://open.weixin.qq.com
-    [ShareSDK connectWeChatWithAppId:@"wxbe9895c4d26b95dc"
+//    [ShareSDK connectWeChatWithAppId:@"wx3e32aa05bb32f554"
+//                           wechatCls:[WXApi class]];
+//    [ShareSDK connectWeChatFavWithAppId:@"wx3e32aa05bb32f554" appSecret:@"f2c0d5958e633bdee9c25c33bb4e913c" wechatCls:[WXApi class]];
+    [ShareSDK connectWeChatWithAppId:@"wx3e32aa05bb32f554"
+                           appSecret:@"f2c0d5958e633bdee9c25c33bb4e913c"
                            wechatCls:[WXApi class]];
-    
     id<ISSQZoneApp> app =(id<ISSQZoneApp>)[ShareSDK getClientWithType:ShareTypeQQSpace];
     [app setIsAllowWebAuthorize:YES];
     
@@ -191,6 +198,63 @@
                  sourceApplication:sourceApplication
                         annotation:annotation
                         wxDelegate:self];
+}
+
+#pragma mark - Push
+
+- (void)setupPush{
+    // [1]:使用APPID/APPKEY/APPSECRENT创建个推实例
+    [self startSdkWith:kAppId appKey:kAppKey appSecret:kAppSecret];
+    
+    // [2]:注册APNS
+    [self registerRemoteNotification];
+}
+
+- (void)startSdkWith:(NSString *)appID appKey:(NSString *)appKey appSecret:(NSString *)appSecret
+{
+//    if (!_gexinPusher) {
+//        _sdkStatus = SdkStatusStoped;
+//        
+//        self.appID = appID;
+//        self.appKey = appKey;
+//        self.appSecret = appSecret;
+//        
+//        [_clientId release];
+//        _clientId = nil;
+//        
+//        NSError *err = nil;
+//        _gexinPusher = [GexinSdk createSdkWithAppId:_appID
+//                                             appKey:_appKey
+//                                          appSecret:_appSecret
+//                                         appVersion:@"0.0.0"
+//                                           delegate:self
+//                                              error:&err];
+//        if (!_gexinPusher) {
+//            [_viewController logMsg:[NSString stringWithFormat:@"%@", [err localizedDescription]]];
+//        } else {
+//            _sdkStatus = SdkStatusStarting;
+//        }
+//        
+//        [_viewController updateStatusView:self];
+//    }
+}
+
+- (void)registerRemoteNotification
+{
+#ifdef __IPHONE_8_0
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        
+        UIUserNotificationSettings *uns = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:uns];
+    } else {
+        UIRemoteNotificationType apn_type = (UIRemoteNotificationType)(UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge);
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:apn_type];
+    }
+#else
+    UIRemoteNotificationType apn_type = (UIRemoteNotificationType)(UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge);
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:apn_type];
+#endif
 }
 
 @end

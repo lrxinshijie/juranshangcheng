@@ -122,6 +122,11 @@
     self.deadline = [value getStringValueForKey:@"deadline" defaultValue:@""];
     self.bidInfoList = [JRBidInfo buildUpWithValue:value[@"bidInfoList"]];
     
+    id obj = value[@"confirmDesignerDetail"];
+    if (obj && [obj isKindOfClass:[NSDictionary class]]) {
+        self.confirmDesignerDetail = [[JRBidInfo alloc] initWithDictionary:obj];
+    }
+    
     self.roomNum = [value getStringValueForKey:@"roomNum" defaultValue:@""];
     self.livingroomCount = [value getStringValueForKey:@"livingroomCount" defaultValue:@""];
     self.bathroomCount = [value getStringValueForKey:@"bathroomCount" defaultValue:@""];
@@ -272,7 +277,7 @@
             }else{
                 des = @"目前没有设计师投标呦！";
             }
-            if (_deadBalance == 0) {
+            if (_deadBalance.integerValue == 0) {
                 des = [NSString stringWithFormat:@"%@离结束不足1天", des];
             }else{
                 des = [NSString stringWithFormat:@"%@剩余%@天结束招标。", des, _deadBalance];

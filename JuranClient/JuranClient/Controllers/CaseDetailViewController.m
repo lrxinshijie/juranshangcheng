@@ -28,6 +28,7 @@
 @property (nonatomic, strong) IBOutlet UIView *designerView;
 @property (nonatomic, strong) IBOutlet UIImageView *avtarImageView;
 @property (nonatomic, strong) IBOutlet UIImageView *idImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *userLevelImageView;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *detailLabel;
 
@@ -124,6 +125,15 @@
     frame = _idImageView.frame;
     frame.origin.x = CGRectGetMaxX(_nameLabel.frame) + 10;
     _idImageView.frame = frame;
+    
+    _userLevelImageView.image = [UIImage imageNamed:[JRDesigner userLevelImage:_jrCase.userLevel]];
+    frame = _userLevelImageView.frame;
+    if (_idImageView.hidden) {
+        frame.origin.x = CGRectGetMaxX(_nameLabel.frame) + 10;
+    }else{
+        frame.origin.x = CGRectGetMaxX(_idImageView.frame) + 10;
+    }
+    _userLevelImageView.frame = frame;
     
     [_tableView headerBeginRefreshing];
     

@@ -96,7 +96,6 @@
     JRTopic *t = _datas[indexPath.row];
     NewestTopicViewController *vc = [[NewestTopicViewController alloc] init];
     vc.topic = t;
-    vc.isOld = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

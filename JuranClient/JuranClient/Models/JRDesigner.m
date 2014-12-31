@@ -227,13 +227,15 @@
 
 + (NSString*)userLevelImage:(NSString*)userLevel{
     NSArray *levels = @[@"design_one", @"design_two", @"design_three", @"design_four", @"design_five"];
-    NSInteger index = 0;
-    for (NSString *s in levels) {
-        if ([s isEqualToString:userLevel]) {
-            break;
-        }
-        index++;
-    }
+//    NSInteger index = 0;
+//    for (NSString *s in levels) {
+//        if ([s isEqualToString:userLevel]) {
+//            break;
+//        }
+//        index++;
+//    }
+    
+    NSInteger index = [levels containsObject:userLevel] ? [levels indexOfObject:userLevel] : 0;
     return [NSString stringWithFormat:@"userlevel%d", index];
 }
 

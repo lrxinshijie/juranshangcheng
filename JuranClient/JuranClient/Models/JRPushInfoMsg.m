@@ -41,5 +41,16 @@
     return retVal;
 }
 
+- (void)buildUpDetailWithValue:(id)value{
+    if (!value || ![value isKindOfClass:[NSDictionary class]]) {
+        return ;
+    }
+    self.msgImgUrl = [value getStringValueForKey:@"msgImgUrl" defaultValue:@""];
+    self.msgContent = [value getStringValueForKey:@"msgContent" defaultValue:@""];
+    self.msgLinkTitle = [value getStringValueForKey:@"msgLinkTitle" defaultValue:@""];
+    self.msgLinkUrl = [value getStringValueForKey:@"msgLinkUrl" defaultValue:@""];
+    self.msgUrlType = [value getIntValueForKey:@"msgUrlType" defaultValue:0];
+    self.msgUrl = [value getStringValueForKey:@"msgUrl" defaultValue:@""];
+}
 
 @end

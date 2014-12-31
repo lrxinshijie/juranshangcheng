@@ -484,11 +484,12 @@
                             @"roomNum": _roomNum,
                             @"livingroomNum": _livingroomCount,
                             @"bathroomNum": _bathroomCount,
-                            @"bidId": _bidId};
+                            @"bidId": _bidId?_bidId:@""};
     [[ALEngine shareEngine] pathURL:JR_APPLY_MEASURE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             [self showTip:@"预约量房发送成功!"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [super back:nil];
             });

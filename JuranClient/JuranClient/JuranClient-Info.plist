@@ -33,7 +33,7 @@
 			<string>tencent</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tencent100543115</string>
+				<string>tencent1103839607</string>
 			</array>
 		</dict>
 		<dict>
@@ -43,7 +43,7 @@
 			<string>wb</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wb4218949951</string>
+				<string>wb974550530</string>
 			</array>
 		</dict>
 		<dict>
@@ -54,6 +54,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>QQ05FE2A8B</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>wx</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wx3e32aa05bb32f554</string>
 			</array>
 		</dict>
 	</array>

@@ -68,7 +68,7 @@
         }
     }
     
-    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCase defaultData:_filterData];
+    self.filterView = [[FilterView alloc] initWithType:!_isHome && _searchKey.length > 0 ? FilterViewTypeCaseSearch : FilterViewTypeCase defaultData:_filterData];
     _filterView.delegate = self;
     [self.view addSubview:_filterView];
     
