@@ -19,6 +19,8 @@
 #import "PushMessageViewController.h"
 #import "CaseCollectViewController.h"
 #import "PrivateMessageViewController.h"
+#import "RealNameAuthViewController.h"
+#import "CaseManagementViewController.h"
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -66,9 +68,19 @@
     
     _user = [JRUser currentUser];
     //@"互动",@"订单管理",  @"账户管理",
-    titleArray = @[ @"我的关注", @"我的收藏", @"账户安全"];
+    titleArray = @[ @"我的关注"
+                    , @"我的收藏"
+                    , @"账户安全"
+//                    , @"实名认证"
+//                    , @"案例管理"
+                    ];
     //@"icon_personal_hudong.png",, @"icon_personal_ddgl.png", @"icon_personal_zhgl.png"
-    imageArray = @[ @"icon_personal_guanzhu.png", @"icon_personal_shouchang.png", @"icon_personal_zhaq"];
+    imageArray = @[ @"icon_personal_guanzhu.png"
+                    , @"icon_personal_shouchang.png"
+                    , @"icon_personal_zhaq"
+//                    , @"icon_personal_zhaq"
+//                    , @"icon_personal_zhaq"
+                    ];
     [self setupUI];
     [self loadData];
 }
@@ -282,6 +294,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 1) {
+//        我的关注
         if (![self checkLogin:^{
             [self loadData];
         }]) {
@@ -309,6 +322,7 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 3){
+//        账户安全
         if (![self checkLogin:^{
             [self loadData];
         }]) {
@@ -318,10 +332,21 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 2){
+//        我的收藏
         if (![self checkLogin]) {
             return;
         }
         CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 4){
+        //实名认证
+        RealNameAuthViewController *vc = [[RealNameAuthViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 5){
+        //案例管理
+        CaseManagementViewController *vc = [[CaseManagementViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }

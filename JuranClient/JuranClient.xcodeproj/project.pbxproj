@@ -177,9 +177,25 @@
 		14FE2DED1A384E2700B31FBA /* service.html in Resources */ = {isa = PBXBuildFile; fileRef = 14FE2DEC1A384E2700B31FBA /* service.html */; };
 		14FE2E561A38549200B31FBA /* PrivateMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FE2E541A38549200B31FBA /* PrivateMessageDetailViewController.m */; };
 		14FE2E571A38549200B31FBA /* PrivateMessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FE2E551A38549200B31FBA /* PrivateMessageDetailViewController.xib */; };
+		3710D5AE1A557DF00028D32A /* RealNameAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */; };
+		3710D5AF1A557DF00028D32A /* RealNameAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */; };
 		378BB2C31A4B1C6E00E8358D /* JRBidInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 378BB2C21A4B1C6E00E8358D /* JRBidInfo.m */; };
 		37CF672C1A4FE11D0044F709 /* NewestBidInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */; };
 		37CF672D1A4FE11D0044F709 /* NewestBidInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37CF672B1A4FE11D0044F709 /* NewestBidInfoCell.xib */; };
+		37D010111A566AF900EC658D /* UploadCardImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D0100F1A566AF900EC658D /* UploadCardImageViewController.m */; };
+		37D010121A566AF900EC658D /* UploadCardImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D010101A566AF900EC658D /* UploadCardImageViewController.xib */; };
+		37D18DA31A56CC6900B41048 /* CaseManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D18DA11A56CC6900B41048 /* CaseManagementViewController.m */; };
+		37D18DA41A56CC6900B41048 /* CaseManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D18DA21A56CC6900B41048 /* CaseManagementViewController.xib */; };
+		37D18DA81A56CD7F00B41048 /* CaseManagementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D18DA61A56CD7F00B41048 /* CaseManagementCell.m */; };
+		37D18DA91A56CD7F00B41048 /* CaseManagementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D18DA71A56CD7F00B41048 /* CaseManagementCell.xib */; };
+		37D18DAD1A5819F300B41048 /* CaseImageManagemanetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D18DAB1A5819F300B41048 /* CaseImageManagemanetViewController.m */; };
+		37D18DAE1A5819F300B41048 /* CaseImageManagemanetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D18DAC1A5819F300B41048 /* CaseImageManagemanetViewController.xib */; };
+		37D18DB21A5829C800B41048 /* CaseImageCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D18DB01A5829C800B41048 /* CaseImageCollectionCell.m */; };
+		37D18DB31A5829C800B41048 /* CaseImageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D18DB11A5829C800B41048 /* CaseImageCollectionCell.xib */; };
+		37D18DB71A5829EC00B41048 /* CaseImageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D18DB51A5829EC00B41048 /* CaseImageHeaderView.m */; };
+		37D18DB81A5829EC00B41048 /* CaseImageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D18DB61A5829EC00B41048 /* CaseImageHeaderView.xib */; };
+		37D18DBC1A583AF600B41048 /* CaseIntroduceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D18DBA1A583AF600B41048 /* CaseIntroduceViewController.m */; };
+		37D18DBD1A583AF600B41048 /* CaseIntroduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D18DBB1A583AF600B41048 /* CaseIntroduceViewController.xib */; };
 		37D3EADF1A52FF330091B3BB /* PushMsgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3EADD1A52FF330091B3BB /* PushMsgDetailViewController.m */; };
 		37D3EAE01A52FF330091B3BB /* PushMsgDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3EADE1A52FF330091B3BB /* PushMsgDetailViewController.xib */; };
 		A90459CE1A27874800F8CD74 /* CaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */; };
@@ -610,11 +626,35 @@
 		14FE2E531A38549200B31FBA /* PrivateMessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateMessageDetailViewController.h; sourceTree = "<group>"; };
 		14FE2E541A38549200B31FBA /* PrivateMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateMessageDetailViewController.m; sourceTree = "<group>"; };
 		14FE2E551A38549200B31FBA /* PrivateMessageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateMessageDetailViewController.xib; sourceTree = "<group>"; };
+		3710D5AB1A557DF00028D32A /* RealNameAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealNameAuthViewController.h; sourceTree = "<group>"; };
+		3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealNameAuthViewController.m; sourceTree = "<group>"; };
+		3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RealNameAuthViewController.xib; sourceTree = "<group>"; };
 		378BB2C11A4B1C6E00E8358D /* JRBidInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRBidInfo.h; sourceTree = "<group>"; };
 		378BB2C21A4B1C6E00E8358D /* JRBidInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRBidInfo.m; sourceTree = "<group>"; };
 		37CF67291A4FE11D0044F709 /* NewestBidInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewestBidInfoCell.h; sourceTree = "<group>"; };
 		37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewestBidInfoCell.m; sourceTree = "<group>"; };
 		37CF672B1A4FE11D0044F709 /* NewestBidInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewestBidInfoCell.xib; sourceTree = "<group>"; };
+		37D0100E1A566AF900EC658D /* UploadCardImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadCardImageViewController.h; sourceTree = "<group>"; };
+		37D0100F1A566AF900EC658D /* UploadCardImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadCardImageViewController.m; sourceTree = "<group>"; };
+		37D010101A566AF900EC658D /* UploadCardImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UploadCardImageViewController.xib; sourceTree = "<group>"; };
+		37D18DA01A56CC6900B41048 /* CaseManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseManagementViewController.h; sourceTree = "<group>"; };
+		37D18DA11A56CC6900B41048 /* CaseManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseManagementViewController.m; sourceTree = "<group>"; };
+		37D18DA21A56CC6900B41048 /* CaseManagementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseManagementViewController.xib; sourceTree = "<group>"; };
+		37D18DA51A56CD7F00B41048 /* CaseManagementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseManagementCell.h; sourceTree = "<group>"; };
+		37D18DA61A56CD7F00B41048 /* CaseManagementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseManagementCell.m; sourceTree = "<group>"; };
+		37D18DA71A56CD7F00B41048 /* CaseManagementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseManagementCell.xib; sourceTree = "<group>"; };
+		37D18DAA1A5819F300B41048 /* CaseImageManagemanetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseImageManagemanetViewController.h; sourceTree = "<group>"; };
+		37D18DAB1A5819F300B41048 /* CaseImageManagemanetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseImageManagemanetViewController.m; sourceTree = "<group>"; };
+		37D18DAC1A5819F300B41048 /* CaseImageManagemanetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseImageManagemanetViewController.xib; sourceTree = "<group>"; };
+		37D18DAF1A5829C800B41048 /* CaseImageCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseImageCollectionCell.h; sourceTree = "<group>"; };
+		37D18DB01A5829C800B41048 /* CaseImageCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseImageCollectionCell.m; sourceTree = "<group>"; };
+		37D18DB11A5829C800B41048 /* CaseImageCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseImageCollectionCell.xib; sourceTree = "<group>"; };
+		37D18DB41A5829EC00B41048 /* CaseImageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseImageHeaderView.h; sourceTree = "<group>"; };
+		37D18DB51A5829EC00B41048 /* CaseImageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseImageHeaderView.m; sourceTree = "<group>"; };
+		37D18DB61A5829EC00B41048 /* CaseImageHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseImageHeaderView.xib; sourceTree = "<group>"; };
+		37D18DB91A583AF600B41048 /* CaseIntroduceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseIntroduceViewController.h; sourceTree = "<group>"; };
+		37D18DBA1A583AF600B41048 /* CaseIntroduceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseIntroduceViewController.m; sourceTree = "<group>"; };
+		37D18DBB1A583AF600B41048 /* CaseIntroduceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseIntroduceViewController.xib; sourceTree = "<group>"; };
 		37D3EADC1A52FF330091B3BB /* PushMsgDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMsgDetailViewController.h; sourceTree = "<group>"; };
 		37D3EADD1A52FF330091B3BB /* PushMsgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMsgDetailViewController.m; sourceTree = "<group>"; };
 		37D3EADE1A52FF330091B3BB /* PushMsgDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PushMsgDetailViewController.xib; sourceTree = "<group>"; };
@@ -1123,6 +1163,12 @@
 				37D3EADC1A52FF330091B3BB /* PushMsgDetailViewController.h */,
 				37D3EADD1A52FF330091B3BB /* PushMsgDetailViewController.m */,
 				37D3EADE1A52FF330091B3BB /* PushMsgDetailViewController.xib */,
+				3710D5AB1A557DF00028D32A /* RealNameAuthViewController.h */,
+				3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */,
+				3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */,
+				37D0100E1A566AF900EC658D /* UploadCardImageViewController.h */,
+				37D0100F1A566AF900EC658D /* UploadCardImageViewController.m */,
+				37D010101A566AF900EC658D /* UploadCardImageViewController.xib */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -1229,6 +1275,15 @@
 				1403802B1A44247300221398 /* MeasureViewController.h */,
 				1403802C1A44247300221398 /* MeasureViewController.m */,
 				1403802D1A44247300221398 /* MeasureViewController.xib */,
+				37D18DA01A56CC6900B41048 /* CaseManagementViewController.h */,
+				37D18DA11A56CC6900B41048 /* CaseManagementViewController.m */,
+				37D18DA21A56CC6900B41048 /* CaseManagementViewController.xib */,
+				37D18DAA1A5819F300B41048 /* CaseImageManagemanetViewController.h */,
+				37D18DAB1A5819F300B41048 /* CaseImageManagemanetViewController.m */,
+				37D18DAC1A5819F300B41048 /* CaseImageManagemanetViewController.xib */,
+				37D18DB91A583AF600B41048 /* CaseIntroduceViewController.h */,
+				37D18DBA1A583AF600B41048 /* CaseIntroduceViewController.m */,
+				37D18DBB1A583AF600B41048 /* CaseIntroduceViewController.xib */,
 			);
 			name = Case;
 			sourceTree = "<group>";
@@ -1726,6 +1781,15 @@
 				37CF67291A4FE11D0044F709 /* NewestBidInfoCell.h */,
 				37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */,
 				37CF672B1A4FE11D0044F709 /* NewestBidInfoCell.xib */,
+				37D18DA51A56CD7F00B41048 /* CaseManagementCell.h */,
+				37D18DA61A56CD7F00B41048 /* CaseManagementCell.m */,
+				37D18DA71A56CD7F00B41048 /* CaseManagementCell.xib */,
+				37D18DAF1A5829C800B41048 /* CaseImageCollectionCell.h */,
+				37D18DB01A5829C800B41048 /* CaseImageCollectionCell.m */,
+				37D18DB11A5829C800B41048 /* CaseImageCollectionCell.xib */,
+				37D18DB41A5829EC00B41048 /* CaseImageHeaderView.h */,
+				37D18DB51A5829EC00B41048 /* CaseImageHeaderView.m */,
+				37D18DB61A5829EC00B41048 /* CaseImageHeaderView.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1977,6 +2041,8 @@
 			files = (
 				140C46E91A2A296A003317AD /* ModifyViewController.xib in Resources */,
 				14EDB38E1A3B4FE200E5AC77 /* FeedBackViewController.xib in Resources */,
+				3710D5AF1A557DF00028D32A /* RealNameAuthViewController.xib in Resources */,
+				37D18DB81A5829EC00B41048 /* CaseImageHeaderView.xib in Resources */,
 				145E3D1C1A2792B200AA952F /* PersonalDataViewController.xib in Resources */,
 				A93BF29B1A2633D90070B72A /* SetPasswordViewController.xib in Resources */,
 				14A3FDC71A2C9EDF002BEFF4 /* DemandCell.xib in Resources */,
@@ -1997,12 +2063,15 @@
 				145987741A3DDDE5002AE413 /* AboutViewController.xib in Resources */,
 				14ABFBE61A25B63400C4AF65 /* LoginViewController.xib in Resources */,
 				14FE2DED1A384E2700B31FBA /* service.html in Resources */,
+				37D18DAE1A5819F300B41048 /* CaseImageManagemanetViewController.xib in Resources */,
 				145E3D1A1A2792B200AA952F /* PersonalDatasMoreViewController.xib in Resources */,
 				14FBC9E11A495143000A789C /* arrow@2x.png in Resources */,
+				37D010121A566AF900EC658D /* UploadCardImageViewController.xib in Resources */,
 				A90459D91A278B2D00F8CD74 /* SubjectViewController.xib in Resources */,
 				14646DB21A3C76D000E5D6F6 /* BidDesignerCell.xib in Resources */,
 				14587E111A35D5E300D41236 /* DetailAddressViewController.xib in Resources */,
 				144B5D661A37278E00C75955 /* SearchViewController.xib in Resources */,
+				37D18DB31A5829C800B41048 /* CaseImageCollectionCell.xib in Resources */,
 				A987EE581A2098BA00CED7CD /* ProfileViewController.xib in Resources */,
 				1441A1751A29E3CD004A038E /* WeiboSDK.bundle in Resources */,
 				14FE2E571A38549200B31FBA /* PrivateMessageDetailViewController.xib in Resources */,
@@ -2017,6 +2086,7 @@
 				14FE2DE31A382FCB00B31FBA /* PrivateMessageViewController.xib in Resources */,
 				14610C731A39ED20008A52C7 /* AnswerCell.xib in Resources */,
 				14610C6E1A39D2F9008A52C7 /* QuestionDetailViewController.xib in Resources */,
+				37D18DA91A56CD7F00B41048 /* CaseManagementCell.xib in Resources */,
 				1476DA921A21DB850006E9E0 /* DesignerCell.xib in Resources */,
 				140C46EE1A2A3741003317AD /* MyFollowViewController.xib in Resources */,
 				A987EE3F1A20980400CED7CD /* Images.xcassets in Resources */,
@@ -2057,12 +2127,14 @@
 				A9C3984B1A29D98C006A8AAB /* ResetEmailViewController.xib in Resources */,
 				1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */,
 				14361E561A343F5F00F9BD94 /* BaseAddressViewController.xib in Resources */,
+				37D18DBD1A583AF600B41048 /* CaseIntroduceViewController.xib in Resources */,
 				14D973901A334C4F00E771ED /* PushMessageViewController.xib in Resources */,
 				149077321A44720000065EE3 /* GuideViewController.xib in Resources */,
 				14A3FDC21A2C9EB7002BEFF4 /* MyDemandViewController.xib in Resources */,
 				A9B4EB7A1A371F120091AAAF /* CaseCollectViewController.xib in Resources */,
 				14D973831A32CAE400E771ED /* AskDetailViewController.xib in Resources */,
 				146CE9C61A47EB0700FAA87F /* TextFieldCell.xib in Resources */,
+				37D18DA41A56CC6900B41048 /* CaseManagementViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2084,6 +2156,7 @@
 				A987EE391A2093C900CED7CD /* MJRefreshFooterView.m in Sources */,
 				1437F2B81A30B09B00E7C077 /* JRTopic.m in Sources */,
 				14ABFBEC1A25CFFD00C4AF65 /* UIViewController+Login.m in Sources */,
+				3710D5AE1A557DF00028D32A /* RealNameAuthViewController.m in Sources */,
 				A987EDD51A20920500CED7CD /* ALLoadingView.m in Sources */,
 				A987EDFB1A20920500CED7CD /* SDWebImageManager.m in Sources */,
 				A987EDEB1A20920500CED7CD /* UIImage+ASCategory.m in Sources */,
@@ -2098,6 +2171,7 @@
 				1441A18E1A29E3D5004A038E /* KTPhotoView+SDWebImage.m in Sources */,
 				145471DC1A38A53000428BCB /* NewQuestionViewController.m in Sources */,
 				1441A0641A29A447004A038E /* SexySwitch.m in Sources */,
+				37D18DA81A56CD7F00B41048 /* CaseManagementCell.m in Sources */,
 				A9A067151A3D76DA0059D73B /* ActionSheetDatePicker.m in Sources */,
 				A987EDFE1A20920500CED7CD /* UIImageView+WebCache.m in Sources */,
 				A987EE3C1A2093C900CED7CD /* UIScrollView+MJRefresh.m in Sources */,
@@ -2154,6 +2228,7 @@
 				A9A067131A3D76DA0059D73B /* AbstractActionSheetPicker.m in Sources */,
 				A987EDE91A20920500CED7CD /* UIColor+ASCategory.m in Sources */,
 				A987EDE71A20920500CED7CD /* UIAlertView+Blocks.m in Sources */,
+				37D18DB21A5829C800B41048 /* CaseImageCollectionCell.m in Sources */,
 				1476DA8D1A21DB1E0006E9E0 /* JRSegmentControl.m in Sources */,
 				A987EDD31A20920500CED7CD /* UIViewController+HUD.m in Sources */,
 				14555D371A36FE1F00E36339 /* MenuView.m in Sources */,
@@ -2167,6 +2242,7 @@
 				14646DB11A3C76D000E5D6F6 /* BidDesignerCell.m in Sources */,
 				A9D654B11A27642800A80253 /* JSONModelError.m in Sources */,
 				A987EE3D1A2093C900CED7CD /* UIView+MJExtension.m in Sources */,
+				37D18DA31A56CC6900B41048 /* CaseManagementViewController.m in Sources */,
 				A9D654B51A27642800A80253 /* JSONModel+networking.m in Sources */,
 				14361E5A1A344E6100F9BD94 /* pinyin.c in Sources */,
 				A987EE431A20984200CED7CD /* HomeViewController.m in Sources */,
@@ -2187,6 +2263,7 @@
 				14D9738B1A33138900E771ED /* JRDemand.m in Sources */,
 				A987EE5F1A209E7900CED7CD /* CaseCell.m in Sources */,
 				14646DB61A3CA1A500E5D6F6 /* OldTopicViewController.m in Sources */,
+				37D010111A566AF900EC658D /* UploadCardImageViewController.m in Sources */,
 				A9C3984A1A29D98C006A8AAB /* ResetEmailViewController.m in Sources */,
 				A9A53B101A46FE7C008D75B8 /* UIBubbleTypingTableViewCell.m in Sources */,
 				A987EE1D1A20928B00CED7CD /* NSDate+RFC1123.m in Sources */,
@@ -2216,10 +2293,12 @@
 				A9A067191A3D76DA0059D73B /* DistancePickerView.m in Sources */,
 				1441A18F1A29E3D5004A038E /* KTPhotoView.m in Sources */,
 				140C46ED1A2A3741003317AD /* MyFollowViewController.m in Sources */,
+				37D18DBC1A583AF600B41048 /* CaseIntroduceViewController.m in Sources */,
 				A987EDEF1A20920500CED7CD /* UINavigationController+ASCategory.m in Sources */,
 				1441A1A41A29E62A004A038E /* ShareView.m in Sources */,
 				A987EE521A2098AF00CED7CD /* WikiViewController.m in Sources */,
 				14C953A91A2DC0E800FE6F8D /* SubjectCell.m in Sources */,
+				37D18DB71A5829EC00B41048 /* CaseImageHeaderView.m in Sources */,
 				A987EE1C1A20928B00CED7CD /* NSData+MKBase64.m in Sources */,
 				14C9539D1A2DAE9B00FE6F8D /* JRAdInfo.m in Sources */,
 				A987EE231A20928B00CED7CD /* MKNetworkOperation.m in Sources */,
@@ -2248,6 +2327,7 @@
 				1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */,
 				A987EE3A1A2093C900CED7CD /* MJRefreshHeaderView.m in Sources */,
 				145471CB1A3887A400428BCB /* NewestTopicViewController.m in Sources */,
+				37D18DAD1A5819F300B41048 /* CaseImageManagemanetViewController.m in Sources */,
 				145987731A3DDDE5002AE413 /* AboutViewController.m in Sources */,
 				14F4A59F1A4066D100D7AFA0 /* APPRecommendViewController.m in Sources */,
 				A9A53B0E1A46FE7C008D75B8 /* UIBubbleTableView.m in Sources */,
@@ -2410,10 +2490,7 @@
 		A971BCBE1A20825800C018D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7s,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2446,10 +2523,7 @@
 		A971BCBF1A20825800C018D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7s,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
