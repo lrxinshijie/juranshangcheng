@@ -343,17 +343,30 @@
         CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 4){
+    }
+#ifdef kJuranDesigner
+    else if (indexPath.row == 4){
         //实名认证
+        if (![self checkLogin:^{
+            [self loadData];
+        }]) {
+            return;
+        }
         RealNameAuthViewController *vc = [[RealNameAuthViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 5){
         //案例管理
+        if (![self checkLogin:^{
+            [self loadData];
+        }]) {
+            return;
+        }
         CaseManagementViewController *vc = [[CaseManagementViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
+#endif
 }
 
 - (void)didReceiveMemoryWarning

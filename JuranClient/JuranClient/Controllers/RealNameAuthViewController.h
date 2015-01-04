@@ -14,6 +14,9 @@ typedef enum : NSUInteger {
     RealNameAuthStatusApproved
 } RealNameAuthStatus;
 
+@class JRDesigner;
 @interface RealNameAuthViewController : ALViewController
+
+@property (nonatomic, strong) JRDesigner *designer;
 
 @end

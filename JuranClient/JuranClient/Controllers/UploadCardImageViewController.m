@@ -51,7 +51,7 @@
     [self.view addSubview:_tipsLabel];
     
     _chooseButton1.hidden = _chooseButton2.hidden = _chooseLabel1.hidden = _chooseLabel2.hidden = NO;
-    if (_type) {
+    if (_type == 0) {
         _chooseLabel1.text = @"正面";
         _tipsLabel.text = _tips[0];
     }else if (_type == 1){

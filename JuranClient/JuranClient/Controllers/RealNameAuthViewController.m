@@ -9,6 +9,7 @@
 #import "RealNameAuthViewController.h"
 #import "TextFieldCell.h"
 #import "UploadCardImageViewController.h"
+#import "JRDesigner.h"
 
 @interface RealNameAuthViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -40,8 +41,25 @@
     _placeholders = @[@"输入与身份证一致的名字", @"与真实姓名一致的身份证号码", @"上传证件照片", @"上传照片"];
     [self setupUI];
     _status = RealNameAuthStatusCommiting;
+    _designer = [[JRDesigner alloc] init];
     
     [self reloadData];
+    [self loadData];
+}
+
+- (void)loadData{
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_GET_DESIGNER_SELFDETAIL parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken: @"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                _designer = [_designer buildDetailWithDictionary:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self reloadData];
+                });
+            }
+        }
+    }];
 }
 
 - (void)setupUI{

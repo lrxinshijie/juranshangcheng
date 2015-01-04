@@ -24,6 +24,7 @@
         self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
         self.userLevel = [dict getStringValueForKey:@"userLevel" defaultValue:@""];
         self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
+        self.realName = [dict getStringValueForKey:@"realName" defaultValue:@""];
         self.userName = [dict getStringValueForKey:@"userName" defaultValue:@""];
         self.styleNames = [dict getStringValueForKey:@"styleNames" defaultValue:@""];
         self.styleCodes = [dict getStringValueForKey:@"styleCodes" defaultValue:@""];
@@ -42,7 +43,6 @@
 
         }
     }
-    
     return self;
 }
 

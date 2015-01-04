@@ -114,11 +114,8 @@
 #define JR_GET_INDEX_DESIGN_REQ_LIST [NSString stringWithFormat:@"%@/index/getIndexDesignReqList.json",JR_SERVICE]
 #define JR_GET_INDEX_PRIVATELETTERREP [NSString stringWithFormat:@"%@/index/getIndexPrivateLetterReq.json",JR_SERVICE]
 #define JR_GET_INDEX_DESIGNER_LIST_REQ [NSString stringWithFormat:@"%@/index/getIndexDesignerListReq.json",JR_SERVICE]
-
-
-
-
-
+#define JR_GET_DESIGNER_SELFDETAIL [NSString stringWithFormat:@"%@/member/getDesignerSelfDetail.json",JR_SERVICE]
+#define JR_GET_DEPROJECTLISTREQ [NSString stringWithFormat:@"%@/project/getDeProjectListReq.json",JR_SERVICE]
 
 
 #endif

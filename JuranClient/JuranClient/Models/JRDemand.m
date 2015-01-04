@@ -277,7 +277,7 @@
             }else{
                 des = @"目前没有设计师投标呦！";
             }
-            if (_deadBalance.integerValue == 0) {
+            if (_deadBalance.integerValue < 1) {
                 des = [NSString stringWithFormat:@"%@离结束不足1天", des];
             }else{
                 des = [NSString stringWithFormat:@"%@剩余%@天结束招标。", des, _deadBalance];

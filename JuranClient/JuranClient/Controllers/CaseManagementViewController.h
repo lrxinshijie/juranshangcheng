@@ -10,4 +10,6 @@
 
 @interface CaseManagementViewController : ALViewController
 
+@property (nonatomic, strong) NSMutableArray *datas;
+
 @end

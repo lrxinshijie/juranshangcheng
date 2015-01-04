@@ -69,9 +69,12 @@
 }
 
 - (void)setupTabbar{
+#ifndef kJuranDesigner
     CaseViewController *cs = [[CaseViewController alloc] init];
     cs.isHome = YES;
-//    HomeViewController *cs = [[HomeViewController alloc] init];
+#else
+    HomeViewController *cs = [[HomeViewController alloc] init];
+#endif
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
     csNav.tabBarItem = [self setupTabbarItemTitle:@"案例" image:@"tabbar_case" selected:@"tabbar_case_hl"];
     

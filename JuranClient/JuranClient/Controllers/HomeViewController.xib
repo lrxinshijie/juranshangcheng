@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -16,11 +16,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="420"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="dFk-TN-knp">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="165"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="0.58442706769999997" green="1" blue="0.40211347409999998" alpha="1" colorSpace="calibratedRGB"/>
-                </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rci-KM-85k">
                     <rect key="frame" x="25" y="185" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -107,7 +102,47 @@
                     <color key="textColor" red="0.2470588386" green="0.2470588386" blue="0.2470588386" alpha="1" colorSpace="deviceRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" tag="1100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="111111.jpg" id="TRP-tB-UrJ">
+                <button opaque="NO" tag="1108" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xHw-OH-ZIQ">
+                    <rect key="frame" x="4" y="294" width="79" height="94"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onDesignerDetail:" destination="-1" eventType="touchUpInside" id="ZKh-9S-DFi"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="1109" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HtA-eR-3dt">
+                    <rect key="frame" x="83" y="292" width="75" height="94"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onDesignerDetail:" destination="-1" eventType="touchUpInside" id="tlT-tX-HKg"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="1110" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rIc-4o-SMI">
+                    <rect key="frame" x="162" y="292" width="75" height="94"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onDesignerDetail:" destination="-1" eventType="touchUpInside" id="97W-L6-xIs"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="1111" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="U4X-Me-DBa">
+                    <rect key="frame" x="241" y="292" width="75" height="94"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onDesignerDetail:" destination="-1" eventType="touchUpInside" id="4vY-OR-zOd"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" tag="1100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="TRP-tB-UrJ">
                     <rect key="frame" x="4" y="293" width="75" height="75"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -123,7 +158,7 @@
                     <rect key="frame" x="241" y="293" width="75" height="75"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" tag="1101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="秦艳丽" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7gz-2R-sMq">
+                <label opaque="NO" userInteractionEnabled="NO" tag="1101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7gz-2R-sMq">
                     <rect key="frame" x="4" y="372" width="75" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -163,7 +198,6 @@
         </view>
     </objects>
     <resources>
-        <image name="111111.jpg" width="60" height="60"/>
         <image name="icon_bid" width="44" height="44"/>
         <image name="icon_letter" width="44" height="44"/>
         <image name="icon_question" width="44" height="44"/>

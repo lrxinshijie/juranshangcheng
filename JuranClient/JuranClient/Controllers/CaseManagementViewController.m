@@ -9,10 +9,13 @@
 #import "CaseManagementViewController.h"
 #import "CaseManagementCell.h"
 #import "CaseImageManagemanetViewController.h"
+#import "JRCase.h"
 
 @interface CaseManagementViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, assign) NSInteger currentPage;
+
 
 @end
 
@@ -28,12 +31,47 @@
     _tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
     
+    __weak typeof(self) weakSelf = self;
+    [_tableView addHeaderWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView addFooterWithCallback:^{
+        weakSelf.currentPage++;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView headerBeginRefreshing];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadData{
+    NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"rowsPerPage": kOnePageCount};
+    
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_GET_DEPROJECTLISTREQ  parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(YES)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSArray *projectList = [data objectForKey:@"projectList"];
+            NSMutableArray *rows = [JRCase buildUpWithValue:projectList];
+            if (_currentPage > 1) {
+                [_datas addObjectsFromArray:rows];
+            }else{
+                self.datas = rows;
+            }
+            
+            [_tableView reloadData];
+        }
+        [_tableView headerEndRefreshing];
+        [_tableView footerEndRefreshing];
+        
+    }];
 }
 
 #pragma makr - UITableViewDataSource/Delegate
