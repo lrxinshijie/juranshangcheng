@@ -38,7 +38,7 @@
             return self;
         }
         
-        [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+//        [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
         
         self.userInteractionEnabled=YES;
         
