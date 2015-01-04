@@ -11,6 +11,44 @@
 
 @implementation JRDesigner
 
+- (id)init{
+    self = [super init];
+    if (self) {
+        self.headUrl = @"";
+        self.account = @"";
+        self.nickName = @"";
+        self.userName = @"";
+        self.styleNames = @"";
+        self.styleCodes = @"";
+        self.selfIntroduction = @"";
+        self.minisite = @"";
+        self.frontImageUrlList = @[];
+        
+        self.userLevel = @"";
+        self.userLevelName = @"";
+        self.realName = @"";
+        self.granuate = @"";
+        self.style = @"";
+        self.followId = @"";
+        
+        self.followUserId = @"";
+        self.remark = @"";
+        self.gmtCreate = @"";
+        self.weight = @"";
+        self.evaluationCount = @"";
+        self.tradeCount = @"";
+        self.realNameAuth = @"";
+        
+        self.handHeldIdPhoto = @"";
+        self.idCardNum = @"";
+        self.positiveIdPhoto = @"";
+        self.backIdphoto = @"";
+        self.realNameGmtCreate = @"";
+        self.realAuditDesc = @"";
+    }
+    return self;
+}
+
 - (id)initWithDictionary:(NSDictionary *)dict{
     if (self=[self init]) {
         
@@ -182,6 +220,25 @@
         self.experienceCount = [dict getIntValueForKey:@"experienceCount" defaultValue:0];
         self.browseCount = [dict getIntValueForKey:@"browseCount" defaultValue:0];
         self.projectCount = [dict getIntValueForKey:@"projectCount" defaultValue:0];
+    }
+    return self;
+}
+
+- (id)initWithDictionaryForRealNameAuth:(NSDictionary *)dict{
+    if (self=[self init]) {
+        
+        if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+            return self;
+        }
+        self.handHeldIdPhoto = [dict getStringValueForKey:@"handHeldIdPhoto" defaultValue:@""];
+        self.userName = [dict getStringValueForKey:@"userName" defaultValue:@""];
+        self.idCardNum = [dict getStringValueForKey:@"idCardNum" defaultValue:@""];
+        self.positiveIdPhoto = [dict getStringValueForKey:@"positiveIdPhoto" defaultValue:@""];
+         self.backIdphoto = [dict getStringValueForKey:@"backIdphoto" defaultValue:@""];
+        self.realNameAuthId = [dict getIntValueForKey:@"id" defaultValue:0];
+        self.realNameAuthStatus = [dict getIntValueForKey:@"status" defaultValue:0];
+        self.realNameGmtCreate = [dict getStringValueForKey:@"gmtCreate" defaultValue:@""];
+        self.realAuditDesc = [dict getStringValueForKey:@"auditDesc" defaultValue:@""];
     }
     return self;
 }

@@ -8,8 +8,17 @@
 
 #import "ALViewController.h"
 
+@class UploadCardImageViewController;
+
+@protocol UploadCardImageViewControllerDelegate <NSObject>
+
+- (void)uploadCardImageWithImages:(NSArray*)images andType:(NSInteger)type;
+
+@end
+
 @interface UploadCardImageViewController : ALViewController
 
 @property (nonatomic, assign) NSInteger type;
+@property (nonatomic, weak) id<UploadCardImageViewControllerDelegate> delegate;
 
 @end

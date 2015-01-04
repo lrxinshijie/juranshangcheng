@@ -11,7 +11,7 @@
 #import "UploadCardImageViewController.h"
 #import "JRDesigner.h"
 
-@interface RealNameAuthViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface RealNameAuthViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UploadCardImageViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *tableHeaderView;
@@ -23,6 +23,10 @@
 @property (nonatomic, assign) RealNameAuthStatus status;
 @property (nonatomic, strong) NSArray *keys;
 @property (nonatomic, strong) NSArray *placeholders;
+
+@property (nonatomic, strong) UIImage *positiveIdImage;
+@property (nonatomic, strong) UIImage *backIdImage;
+@property (nonatomic, strong) UIImage *headImage;
 
 @end
 
@@ -41,7 +45,6 @@
     _placeholders = @[@"输入与身份证一致的名字", @"与真实姓名一致的身份证号码", @"上传证件照片", @"上传照片"];
     [self setupUI];
     _status = RealNameAuthStatusCommiting;
-    _designer = [[JRDesigner alloc] init];
     
     [self reloadData];
     [self loadData];
@@ -49,11 +52,11 @@
 
 - (void)loadData{
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_GET_DESIGNER_SELFDETAIL parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken: @"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_GET_REALNAMEAPPLY parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken: @"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
-                _designer = [_designer buildDetailWithDictionary:data];
+                _designer = [[JRDesigner alloc]initWithDictionaryForRealNameAuth:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self reloadData];
                 });
@@ -134,8 +137,59 @@
     }else if (_status == RealNameAuthStatusApproved){
         
     }
+}
+
+- (void)uploadImage{
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":_positiveIdImage} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            NSString *imageUrl = [data objectForKey:@"imgUrl"];
+            _designer.positiveIdPhoto = imageUrl;
+            [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":_backIdImage} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                if (!error) {
+                    NSString *imageUrl = [data objectForKey:@"imgUrl"];
+                    _designer.backIdphoto = imageUrl;
+                    [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":_headImage} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                        if (!error) {
+                            NSString *imageUrl = [data objectForKey:@"imgUrl"];
+                            _designer.handHeldIdPhoto = imageUrl;
+                            [self submitRealNameAuth];
+                        }else{
+                            [self hideHUD];
+                        }
+                    }];
+                }else{
+                    [self hideHUD];
+                }
+            }];
+        }else{
+            [self hideHUD];
+        }
+    }];
+}
+
+- (void)submitRealNameAuth{
+    NSDictionary *param1 = @{@"userName": _designer.userName,
+                             @"idCardNumber": _designer.idCardNum,
+                             @"positiveIdPhoto": _designer.positiveIdPhoto,
+                             @"positiveIdPhotoName": _designer.positiveIdPhoto,
+                             @"backIdphoto": _designer.backIdphoto,
+                             @"backIdphotoName": _designer.backIdphoto,
+                             @"headUrl": _designer.handHeldIdPhoto,
+                             @"headUrlName": _designer.handHeldIdPhoto
+                             };
     
-    
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_REALNAME_APPLY parameters:param1 HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
+                [self showTip:@"修改用户信息成功"];
+            });
+        }
+        [self loadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -143,7 +197,40 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma UploadCardImageViewControllerDelegate
+
+- (void)uploadCardImageWithImages:(NSArray *)images andType:(NSInteger)type{
+    if (type == 0) {
+        self.positiveIdImage = images[0];
+        self.backIdImage = images[1];
+    }else if(type == 1){
+        self.headImage = images[0];
+    }
+}
+
+#pragma mark - Target Action
+
 - (void)onSubmit:(id)sender{
+    if(_designer.userName.length == 0){
+        [self showTip:@"请输入与身份证一致的名字"];
+        return;
+    }
+    
+    if(_designer.idCardNum.length == 0){
+        [self showTip:@"请输入与真实名字一致的身份证号"];
+        return;
+    }
+    
+    if (!self.positiveIdImage || !self.backIdImage) {
+        [self showTip:@"请选择证件图片"];
+        return;
+    }
+    
+    if (!self.headImage) {
+        [self showTip:@"请选择手持证件照片"];
+        return;
+    }
+    [self uploadImage];
 }
 
 #pragma mark - UITableViewDataSource/UITableViewDelegate
@@ -197,10 +284,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row < 2) {
-        [_selectedTextField resignFirstResponder];
-    }else{
+    [_selectedTextField resignFirstResponder];
+    if (indexPath.row >= 2) {
         UploadCardImageViewController *vc = [[UploadCardImageViewController alloc] init];
+        vc.delegate = self;
         vc.type = indexPath.row - 2;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -227,9 +314,9 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField.tag == 10) {
-        
+        _designer.userName = textField.text;
     }else if (textField.tag == 11){
-        
+        _designer.idCardNum = textField.text;
     }
 }
 

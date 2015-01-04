@@ -56,9 +56,20 @@
 //DemandDetail
 @property (nonatomic, assign) NSInteger userType;
 
+//实名认证信息
+@property (nonatomic, strong) NSString *handHeldIdPhoto;
+@property (nonatomic, strong) NSString *idCardNum;
+@property (nonatomic, strong) NSString *positiveIdPhoto;
+@property (nonatomic, strong) NSString *backIdphoto;
+@property (nonatomic, assign) NSInteger realNameAuthId;
+@property (nonatomic, assign) NSInteger realNameAuthStatus;
+@property (nonatomic, strong) NSString *realNameGmtCreate;
+@property (nonatomic, strong) NSString *realAuditDesc;
+
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 - (id)initWithDictionaryForBidInfo:(NSDictionary *)dict;
+- (id)initWithDictionaryForRealNameAuth:(NSDictionary *)dict;
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 

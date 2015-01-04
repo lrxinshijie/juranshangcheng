@@ -116,6 +116,6 @@
 #define JR_GET_INDEX_DESIGNER_LIST_REQ [NSString stringWithFormat:@"%@/index/getIndexDesignerListReq.json",JR_SERVICE]
 #define JR_GET_DESIGNER_SELFDETAIL [NSString stringWithFormat:@"%@/member/getDesignerSelfDetail.json",JR_SERVICE]
 #define JR_GET_DEPROJECTLISTREQ [NSString stringWithFormat:@"%@/project/getDeProjectListReq.json",JR_SERVICE]
-
-
+#define JR_GET_REALNAMEAPPLY [NSString stringWithFormat:@"%@/design/getRealNameApply.json",JR_SERVICE]
+#define JR_REALNAME_APPLY [NSString stringWithFormat:@"%@/member/realNameApply.json",JR_SERVICE]
 #endif
