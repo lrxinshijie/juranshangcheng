@@ -10,6 +10,7 @@
 #import "CaseManagementCell.h"
 #import "CaseImageManagemanetViewController.h"
 #import "JRCase.h"
+#import "CaseIntroduceViewController.h"
 
 @interface CaseManagementViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -44,6 +45,12 @@
     
     [_tableView headerBeginRefreshing];
     
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onAdd)];
+}
+
+- (void)onAdd{
+    CaseIntroduceViewController *cv = [[CaseIntroduceViewController alloc] init];
+    [self.navigationController pushViewController:cv animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

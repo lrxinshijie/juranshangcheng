@@ -61,7 +61,7 @@
 }
 
 + (BOOL)showGuide{
-
+//    return YES;
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     if (![ud objectForKey:@"showGuide"] || [ud boolForKey:@"showGuide"]) {
         return YES;

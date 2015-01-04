@@ -8,6 +8,9 @@
 
 #import "ALViewController.h"
 
+@class JRCase;
 @interface CaseIntroduceViewController : ALViewController
+
+@property (nonatomic, strong) JRCase *jrCase;
 
 @end

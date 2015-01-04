@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JSONModel.h"
+#import "JRAreaInfo.h"
 
 @interface JRCase : NSObject
 
@@ -32,18 +32,18 @@
 @property (nonatomic, copy) NSString *roomType;
 @property (nonatomic, copy) NSString *projectStyle;
 @property (nonatomic, copy) NSString *userLevel;
-@property (nonatomic, assign) NSInteger houseArea;
-@property (nonatomic, assign) NSInteger projectPrice;
+@property (nonatomic, copy) NSString *houseArea;
+@property (nonatomic, copy) NSString *projectPrice;
 @property (nonatomic, copy) NSString *tags;
 @property (nonatomic, strong) NSArray *detailImageList;
-@property (nonatomic, copy) NSString *provinceCode;
-@property (nonatomic, copy) NSString *provinceName;
-@property (nonatomic, copy) NSString *cityCode;
-@property (nonatomic, copy) NSString *cityName;
-@property (nonatomic, copy) NSString *districtCode;
-@property (nonatomic, copy) NSString *districtName;
+@property (nonatomic, strong) JRAreaInfo *areaInfo;
 @property (nonatomic, copy) NSString *stylesName;
 @property (nonatomic, assign) BOOL isAuth;
+
+@property (nonatomic, copy) NSString *roomNum;
+@property (nonatomic, copy) NSString *livingroomCount;
+@property (nonatomic, copy) NSString *bathroomCount;
+
 //ProjectDto
 @property (nonatomic, copy) NSString *designerInfoDto;
 @property (nonatomic, copy) NSString *constructionTeamDto;
@@ -71,8 +71,7 @@
 - (NSURL *)imageURL;
 
 - (NSString *)styleString;
-
-- (void)loadDetail:(void (^) (BOOL result))finished;
+- (NSString *)roomNumString;
 - (void)like:(void (^) (BOOL result))finished;
 - (void)favorite:(void (^) (BOOL result))finished;
 
