@@ -84,4 +84,8 @@ typedef enum : NSUInteger {
     SearchTypeQuestion,
 } SearchType;
 
+#ifdef kJuranDesigner
+#define kJuranDesigner
+#endif
+
 #endif
