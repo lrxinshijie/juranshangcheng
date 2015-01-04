@@ -71,15 +71,15 @@
     titleArray = @[ @"我的关注"
                     , @"我的收藏"
                     , @"账户安全"
-//                    , @"实名认证"
-//                    , @"案例管理"
+                    , @"实名认证"
+                    , @"案例管理"
                     ];
     //@"icon_personal_hudong.png",, @"icon_personal_ddgl.png", @"icon_personal_zhgl.png"
     imageArray = @[ @"icon_personal_guanzhu.png"
                     , @"icon_personal_shouchang.png"
                     , @"icon_personal_zhaq"
-//                    , @"icon_personal_zhaq"
-//                    , @"icon_personal_zhaq"
+                    , @"icon_personal_zhaq"
+                    , @"icon_personal_zhaq"
                     ];
     [self setupUI];
     [self loadData];
