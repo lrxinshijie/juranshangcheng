@@ -11,6 +11,21 @@
 
 @implementation JRCase
 
+- (id)init{
+    if (self = [super init]) {
+        self.title = @"";
+        self.areaInfo = [[JRAreaInfo alloc] init];
+        self.neighbourhoods = @"";
+        self.roomType = @"";
+        self.stylesName = @"";
+        self.houseArea = @"";
+        self.projectPrice = @"";
+        self.desc = @"";
+    }
+    
+    return self;
+}
+
 - (id)initWithDictionary:(NSDictionary *)dict{
     if (self=[self init]) {
         
@@ -48,8 +63,12 @@
     self.tags = [dict getStringValueForKey:@"tags" defaultValue:@""];
     self.desc = [dict getStringValueForKey:@"description" defaultValue:@""];
     self.projectStyle = [dict getStringValueForKey:@"projectStyle" defaultValue:@""];
-    self.houseArea = [dict getIntValueForKey:@"houseArea" defaultValue:0];
-    self.projectPrice = [dict getIntValueForKey:@"projectPrice" defaultValue:0];
+//    self.houseArea = [dict getIntValueForKey:@"houseArea" defaultValue:0];
+//    self.projectPrice = [dict getIntValueForKey:@"projectPrice" defaultValue:0];
+    
+    self.houseArea = [dict getStringValueForKey:@"houseArea" defaultValue:@""];
+    self.projectPrice = [dict getStringValueForKey:@"projectPrice" defaultValue:@""];
+    
     self.detailImageList = [dict objectForKey:@"detailImageList"];
     self.stylesName = [dict getStringValueForKey:@"stylesName" defaultValue:@""];
     self.isAuth = [dict getBoolValueForKey:@"isAuth" defaultValue:NO];
@@ -57,15 +76,17 @@
     self.isFav = [dict getBoolValueForKey:@"isFavFlag" defaultValue:NO];
     self.isLike = [dict getBoolValueForKey:@"isLikeFlag" defaultValue:NO];
     
-    NSDictionary *areaInfo = [dict objectForKey:@"areaInfo"];
-    if (areaInfo && [areaInfo isKindOfClass:[NSDictionary class]]) {
-        self.provinceCode = [areaInfo getStringValueForKey:@"provinceCode" defaultValue:@""];
-        self.provinceName = [areaInfo getStringValueForKey:@"provinceName" defaultValue:@""];
-        self.cityCode = [areaInfo getStringValueForKey:@"cityCode" defaultValue:@""];
-        self.cityName = [areaInfo getStringValueForKey:@"cityName" defaultValue:@""];
-        self.districtCode = [areaInfo getStringValueForKey:@"districtCode" defaultValue:@""];
-        self.districtName = [areaInfo getStringValueForKey:@"districtName" defaultValue:@""];
-    }
+    self.areaInfo = [[JRAreaInfo alloc] initWithDictionary:[dict objectForKey:@"areaInfo"]];
+    
+//    NSDictionary *areaInfo = [dict objectForKey:@"areaInfo"];
+//    if (areaInfo && [areaInfo isKindOfClass:[NSDictionary class]]) {
+//        self.provinceCode = [areaInfo getStringValueForKey:@"provinceCode" defaultValue:@""];
+//        self.provinceName = [areaInfo getStringValueForKey:@"provinceName" defaultValue:@""];
+//        self.cityCode = [areaInfo getStringValueForKey:@"cityCode" defaultValue:@""];
+//        self.cityName = [areaInfo getStringValueForKey:@"cityName" defaultValue:@""];
+//        self.districtCode = [areaInfo getStringValueForKey:@"districtCode" defaultValue:@""];
+//        self.districtName = [areaInfo getStringValueForKey:@"districtName" defaultValue:@""];
+//    }
     
     return self;
 }
@@ -106,17 +127,6 @@
     return @"其他";
 }
 
-- (void)loadDetail:(void (^) (BOOL result))finished{
-//    NSDictionary *param = @{@"projectId": self.projectId};
-//    [[ALEngine shareEngine] pathURL:JR_PRODETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-//        if (!error) {
-//            [self buildDetailWithDictionary:data];
-//        }
-//        finished(!error);
-//    }];
-    finished(YES);
-}
-
 - (void)like:(void (^) (BOOL result))finished{
     if (self.isLike) {
         if (finished) {
@@ -155,6 +165,40 @@
             finished(!error);
         }
     }];
+}
+
+- (NSString *)roomNumString{
+    
+    NSMutableArray *retVals = [NSMutableArray array];
+    //    if (_roomNum.length > 0) {
+    //        return _roomNum;
+    //    }
+    
+    NSArray *roomNum = [[DefaultData sharedData] roomNum];
+    for (int i = 0; i<[roomNum count]; i++) {
+        NSDictionary *row = [roomNum objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.roomNum]) {
+            [retVals addObject:[row objectForKey:@"k"]];
+        }
+    }
+    
+    NSArray *livingroomCount = [[DefaultData sharedData] livingroomCount];
+    for (int i = 0; i<[livingroomCount count]; i++) {
+        NSDictionary *row = [livingroomCount objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.livingroomCount]) {
+            [retVals addObject:[row objectForKey:@"k"]];
+        }
+    }
+    
+    NSArray *bathroomCount = [[DefaultData sharedData] bathroomCount];
+    for (int i = 0; i<[bathroomCount count]; i++) {
+        NSDictionary *row = [bathroomCount objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.bathroomCount]) {
+            [retVals addObject:[row objectForKey:@"k"]];
+        }
+    }
+    
+    return [retVals componentsJoinedByString:@""];
 }
 
 - (NSString *)shareURL{

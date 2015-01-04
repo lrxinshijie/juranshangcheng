@@ -25,7 +25,7 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onIntroduce:) title:@"方案介绍" backgroundImage:nil];
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onIntroduce:) title:_jrCase.projectId.length == 0 ? @"提交" : @"方案介绍" backgroundImage:nil];
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
@@ -53,8 +53,12 @@
 }
 
 - (void)onIntroduce:(id)sender{
-    CaseIntroduceViewController *vc = [[CaseIntroduceViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (_jrCase.projectId.length == 0) {
+        
+    }else{
+        CaseIntroduceViewController *vc = [[CaseIntroduceViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - UICollectionViewDelegate

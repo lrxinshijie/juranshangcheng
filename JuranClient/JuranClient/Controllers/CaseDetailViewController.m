@@ -105,7 +105,7 @@
     
     [self.view addSubview:_commentView];
     
-    self.values = @[[NSString stringWithFormat:@"%@-%@",_jrCase.cityName, _jrCase.districtName],
+    self.values = @[_jrCase.areaInfo.title,
                     _jrCase.neighbourhoods,
                     _jrCase.roomType,
                     _jrCase.styleString,

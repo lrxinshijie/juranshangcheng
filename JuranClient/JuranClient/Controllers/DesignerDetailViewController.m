@@ -477,15 +477,9 @@
     if (_segment.selectedIndex == 0) {
         JRCase *cs = [_caseDatas objectAtIndex:indexPath.row];
         
-//        [self showHUD];
-//        [cs loadDetail:^(BOOL result) {
-//            [self hideHUD];
-//            if (result) {
-                JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
-                vc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:vc animated:YES];
-//            }
-//        }];
+        JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
 
     }else if (_segment.selectedIndex == 2){
         JRTopic *t = _topicDatas[indexPath.row];

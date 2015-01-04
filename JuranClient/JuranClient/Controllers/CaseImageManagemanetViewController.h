@@ -7,10 +7,12 @@
 //
 
 #import "ALViewController.h"
+#import "JRCase.h"
 
 @interface CaseImageManagemanetViewController : ALViewController
 
 @property (nonatomic, strong) NSMutableArray *roomTypeImages;
 @property (nonatomic, strong) NSMutableArray *caseImages;
+@property (nonatomic, strong) JRCase *jrCase;
 
 @end
