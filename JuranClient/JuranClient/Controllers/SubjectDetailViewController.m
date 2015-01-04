@@ -38,7 +38,7 @@
     _tableView.backgroundColor = RGBColor(236, 236, 236);
     [self.view addSubview:_tableView];
     
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onShare)];
+//    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onShare)];
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{

@@ -112,8 +112,7 @@
             NSArray *bannerList = [data objectForKey:@"bannerList"];
             if (bannerList.count > 0) {
                 self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
-//                [_adInfos addObjectsFromArray:_adInfos];
-                
+                //                [_adInfos addObjectsFromArray:_adInfos];
                 self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 44, kWindowWidth, 165) ImageArray:_adInfos];
                 _bannerView.delegate = self;
                 

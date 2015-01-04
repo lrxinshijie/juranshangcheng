@@ -33,6 +33,8 @@
 @property (nonatomic, copy) NSString *livingroomCount;
 @property (nonatomic, copy) NSString *bathroomCount;
 @property (nonatomic, copy) NSString *houseArea;
+@property (nonatomic, copy) NSString *designReqId;
+
 @property (nonatomic, assign) NSInteger serviceDate;
 @property (nonatomic, strong) JRAreaInfo *areaInfo;
 @property (nonatomic, strong) UITapGestureRecognizer *tapHide;
@@ -72,16 +74,18 @@
     self.livingroomCount = @"";
     self.bathroomCount = @"";
     self.houseArea = @"";
+    self.designReqId = @"";
     self.areaInfo = [[JRAreaInfo alloc] init];
     if (_demand) {
         self.customerRealName = _demand.contactsName;
         self.customerMobile = _demand.contactsMobile;
-        self.address = _demand.areaInfo.title;
+        self.address = _demand.neighbourhoods;
         self.roomNum = _demand.roomNum;
         self.livingroomCount = _demand.livingroomCount;
         self.bathroomCount = _demand.bathroomCount;
-        self.houseArea = _demand.neighbourhoods;
+        self.houseArea = _demand.houseArea;
         self.areaInfo = _demand.areaInfo;
+        self.designReqId = _demand.designReqId;
     }
     
     _designerImageView.layer.masksToBounds = YES;
@@ -484,7 +488,8 @@
                             @"roomNum": _roomNum,
                             @"livingroomNum": _livingroomCount,
                             @"bathroomNum": _bathroomCount,
-                            @"bidId": _bidId?_bidId:@""};
+                            @"bidId": _bidId?_bidId:@"",
+                            @"designReqId": _designReqId};
     [[ALEngine shareEngine] pathURL:JR_APPLY_MEASURE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {

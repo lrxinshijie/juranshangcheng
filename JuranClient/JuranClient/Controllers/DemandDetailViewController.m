@@ -344,11 +344,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (tableView == _designerTableView) {
-        JRBidInfo *bidInfo = _demand.bidInfoList[indexPath.row];
         DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
-        detailVC.designer = bidInfo.userBase;
+        if ([_demand statusIndex] == 3) {
+            if (indexPath.row == 0) {
+                detailVC.designer = _demand.confirmDesignerDetail.userBase;
+            }else{
+                JRBidInfo *bidInfo = _demand.bidInfoList[indexPath.row - 1];
+                detailVC.designer = bidInfo.userBase;
+            }
+        }else{
+            JRBidInfo *bidInfo = _demand.bidInfoList[indexPath.row];
+            detailVC.designer = bidInfo.userBase;
+        }
         [self.navigationController pushViewController:detailVC animated:YES];
+        
     }else if (tableView == _demandInfoTableView){
     }
 }

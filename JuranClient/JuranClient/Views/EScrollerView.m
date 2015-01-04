@@ -38,7 +38,9 @@
             return self;
         }
         
-//        [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+        if ([imgArr count] > 1) {
+            [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+        }
         
         self.userInteractionEnabled=YES;
         
@@ -78,7 +80,7 @@
         pageControl.pageIndicatorImage = [UIImage imageNamed:@"ad_page_inactive"];
         pageControl.currentPageIndicatorImage = [UIImage imageNamed:@"ad_page_action"];
         [pageControl sizeToFit];
-        pageControl.center = CGPointMake(rect.size.width - (rect.size.width - CGRectGetWidth(pageControl.frame))/2 , CGRectGetHeight(rect)-10);
+        pageControl.center = CGPointMake(rect.size.width - CGRectGetWidth(pageControl.frame)/2 - 10, CGRectGetHeight(rect)-10);
         
         [self addSubview:pageControl];
 	}

@@ -15,6 +15,8 @@
 #import "SDImageCache.h"
 #import "GuideViewController.h"
 
+#import "UIAlertView+Blocks.h"
+
 @interface SettingsViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
     NSArray *keysForImageSet;
@@ -50,7 +52,9 @@
     self.navigationItem.title = @"设置";
     
     keysForImageSet = @[@"智能模式", @"高质量（适合WIFI环境）", @"普通（适合2G或3G模式）"];
-    keysForOthers = @[@"问题反馈", @"版本信息", @"给我打分"];//, @"其他APP推荐"
+    keysForOthers = @[@"问题反馈", @"版本信息"
+//                      , @"给我打分"
+                      ];//, @"其他APP推荐"
     
     intelligentMode = [Public intelligentModeForImageQuality];
     imageQuality = [DefaultData sharedData].imageQuality;
@@ -161,7 +165,7 @@
         }
     }else if (indexPath.section == 1){
         cell.textLabel.text = @"清除缓存";
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f M", [[SDImageCache sharedImageCache] getMemorySize]/1024.f/1024.f];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%.2f M", [[SDImageCache sharedImageCache] getSize]/1024.f/1024.f];
     }else{
         cell.textLabel.text = keysForOthers[indexPath.row];
         if (indexPath.row == 1) {
@@ -181,7 +185,12 @@
         [[DefaultData sharedData] setImageQuality:imageQuality];
         [_tableView reloadData];
     }else if (indexPath.section == 1) {
-        
+        [UIAlertView showWithTitle:@"提示" message:@"确定清除缓存!" cancelButtonTitle:@"取消" otherButtonTitles:@[@"清除"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                [[SDImageCache sharedImageCache] clearDisk];
+                [_tableView reloadData];
+            }
+        }];
     }else if (indexPath.section == 2) {
         if (indexPath.row == 0) {
             FeedBackViewController *vc = [[FeedBackViewController alloc] init];
