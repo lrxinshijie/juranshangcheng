@@ -11,7 +11,7 @@
 
 @interface CaseImageManagemanetViewController : ALViewController
 
-@property (nonatomic, strong) NSMutableArray *roomTypeImages;
+@property (nonatomic, strong) UIImage *roomTypeImage;
 @property (nonatomic, strong) NSMutableArray *caseImages;
 @property (nonatomic, strong) JRCase *jrCase;
 

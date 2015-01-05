@@ -21,6 +21,7 @@
         self.houseArea = @"";
         self.projectPrice = @"";
         self.desc = @"";
+        self.roomTypeImageUrl = @"";
     }
     
     return self;
@@ -108,23 +109,37 @@
 }
 
 - (NSString *)styleString{
-    NSDictionary *styles = @{@"mashup": @"混搭风格",
-                             @"european": @"欧式风格",
-                             @"chinese": @"中式风格",
-                             @"newClassical": @"新古典风格",
-                             @"eastSourthAsia": @"东南亚风格",
-                             @"america": @"美式风格",
-                             @"countryside": @"田园风格",
-                             @"mediterranean": @"地中海风格",
-                             @"modern": @"现代风格",
-                             @"other": @"其他",
-                             };
-    NSString *style = [styles objectForKey:self.projectStyle];
-    if (style && style.length > 0) {
-        return style;
+    
+    if (self.projectStyle.length == 0) {
+        return @"";
+    }
+    NSArray *renovationStyle = [[DefaultData sharedData] renovationStyle];
+    for (int i = 0; i<[renovationStyle count]; i++) {
+        NSDictionary *row = [renovationStyle objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.projectStyle]) {
+            return [row objectForKey:@"k"];
+        }
     }
     
-    return @"其他";
+    return @"";
+    
+//    NSDictionary *styles = @{@"mashup": @"混搭风格",
+//                             @"european": @"欧式风格",
+//                             @"chinese": @"中式风格",
+//                             @"newClassical": @"新古典风格",
+//                             @"eastSourthAsia": @"东南亚风格",
+//                             @"america": @"美式风格",
+//                             @"countryside": @"田园风格",
+//                             @"mediterranean": @"地中海风格",
+//                             @"modern": @"现代风格",
+//                             @"other": @"其他",
+//                             };
+//    NSString *style = [styles objectForKey:self.projectStyle];
+//    if (style && style.length > 0) {
+//        return style;
+//    }
+//    
+//    return @"其他";
 }
 
 - (void)like:(void (^) (BOOL result))finished{

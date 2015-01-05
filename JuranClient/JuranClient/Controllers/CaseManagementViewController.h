@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSMutableArray *datas;
 
+- (void)refreshView;
+
 @end

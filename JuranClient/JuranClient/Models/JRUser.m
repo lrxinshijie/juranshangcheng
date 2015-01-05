@@ -8,6 +8,7 @@
 
 #import "JRUser.h"
 #import "JRAreaInfo.h"
+#import "AppDelegate.h"
 
 #define kLocalUserData @"kLocalUserData"
 
@@ -137,6 +138,8 @@
     
     NSDictionary *param = @{@"account": account,
                             @"password": password,
+                            @"pushID": ApplicationDelegate.clientId,
+                            @"deviceType": @"iphone",
 #ifdef kJuranDesigner
                             @"userType": @"designer"
 #else

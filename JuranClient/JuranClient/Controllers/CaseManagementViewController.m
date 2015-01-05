@@ -43,9 +43,15 @@
         [weakSelf loadData];
     }];
     
-    [_tableView headerBeginRefreshing];
+    
     
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onAdd)];
+    
+    [self refreshView];
+}
+
+- (void)refreshView{
+    [_tableView headerBeginRefreshing];
 }
 
 - (void)onAdd{
@@ -59,7 +65,7 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"rowsPerPage": kOnePageCount};
+    NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": kOnePageCount};
     
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_DEPROJECTLISTREQ  parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(YES)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -84,7 +90,7 @@
 #pragma makr - UITableViewDataSource/Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return [_datas count];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -94,7 +100,7 @@
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (CaseManagementCell *)[nibs firstObject];
     }
-
+    
     [cell fillCellWithValue:nil];
     
     return cell;

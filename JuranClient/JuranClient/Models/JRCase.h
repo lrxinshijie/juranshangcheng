@@ -43,6 +43,7 @@
 @property (nonatomic, copy) NSString *roomNum;
 @property (nonatomic, copy) NSString *livingroomCount;
 @property (nonatomic, copy) NSString *bathroomCount;
+@property (nonatomic, copy) NSString *roomTypeImageUrl;
 
 //ProjectDto
 @property (nonatomic, copy) NSString *designerInfoDto;

@@ -20,15 +20,19 @@
 #import "WXApi.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "GuideViewController.h"
-
 #import "HomeViewController.h"
+#import "GexinSdk.h"
+#import "UIAlertView+Blocks.h"
+#import "APService.h"
 
 #define kAppId           @"ZmiyzZ23sKAvFQ7RoAfbJ2"
 #define kAppKey          @"kJRhD2minf7dJ6CK5u43o6"
 #define kAppSecret       @"u1p1T7GV0e54W1DALv03c1"
 
 
-@interface AppDelegate () <UINavigationControllerDelegate>
+@interface AppDelegate () <UINavigationControllerDelegate, GexinSdkDelegate>
+
+@property (strong, nonatomic) GexinSdk *gexinPusher;
 
 @end
 
@@ -38,12 +42,29 @@
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
+    self.clientId = @"";
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-    [JRUser refreshToken:nil];
     
     [self setupShareSDK];
+    
+    
+    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                   UIRemoteNotificationTypeSound |
+                                                   UIRemoteNotificationTypeAlert) categories:nil];
+    
+    
+    // Required 初始化jPush
+    [APService setupWithOption:launchOptions];
+    
+//    [self setupPush];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [JRUser refreshToken:nil];
+    });
+    
     
     [self jumpToMain];
     
@@ -205,40 +226,16 @@
 #pragma mark - Push
 
 - (void)setupPush{
-    // [1]:使用APPID/APPKEY/APPSECRENT创建个推实例
-    [self startSdkWith:kAppId appKey:kAppKey appSecret:kAppSecret];
+    
+    self.gexinPusher = [GexinSdk createSdkWithAppId:kAppId
+                                         appKey:kAppKey
+                                      appSecret:kAppSecret
+                                     appVersion:@"0.0.0"
+                                       delegate:self
+                                          error:nil];
     
     // [2]:注册APNS
     [self registerRemoteNotification];
-}
-
-- (void)startSdkWith:(NSString *)appID appKey:(NSString *)appKey appSecret:(NSString *)appSecret
-{
-//    if (!_gexinPusher) {
-//        _sdkStatus = SdkStatusStoped;
-//        
-//        self.appID = appID;
-//        self.appKey = appKey;
-//        self.appSecret = appSecret;
-//        
-//        [_clientId release];
-//        _clientId = nil;
-//        
-//        NSError *err = nil;
-//        _gexinPusher = [GexinSdk createSdkWithAppId:_appID
-//                                             appKey:_appKey
-//                                          appSecret:_appSecret
-//                                         appVersion:@"0.0.0"
-//                                           delegate:self
-//                                              error:&err];
-//        if (!_gexinPusher) {
-//            [_viewController logMsg:[NSString stringWithFormat:@"%@", [err localizedDescription]]];
-//        } else {
-//            _sdkStatus = SdkStatusStarting;
-//        }
-//        
-//        [_viewController updateStatusView:self];
-//    }
 }
 
 - (void)registerRemoteNotification
@@ -257,6 +254,78 @@
     UIRemoteNotificationType apn_type = (UIRemoteNotificationType)(UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge);
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:apn_type];
 #endif
+}
+
+- (void)showAPNS:(NSDictionary *)userInfo{
+    ASLog(@"APNS:%@",userInfo);
+    
+    NSString *alert = [[userInfo objectForKey:@"aps"]objectForKey:@"alert"];
+    if ([alert isKindOfClass:[NSDictionary class]]) {
+        alert = [(NSDictionary *)alert objectForKey:@"body"];
+    }
+    [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"取消" otherButtonTitles:@[@"查看"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        if (buttonIndex == [alertView cancelButtonIndex]) {
+            return ;
+        }
+        
+        
+    }];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    [APService registerDeviceToken:deviceToken];
+    
+    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    NSString *dToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    ASLog(@"deviceToken:%@", dToken);
+    
+    if (_gexinPusher) {
+        [_gexinPusher registerDeviceToken:dToken];
+    }
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    [self showAPNS:userInfo];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    [self showAPNS:userInfo];
+    
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+#pragma mark - GexinSdkDelegate
+- (void)GexinSdkDidRegisterClient:(NSString *)clientId
+{
+    // [4-EXT-1]: 个推SDK已注册
+    self.clientId = clientId;
+}
+
+- (void)GexinSdkDidReceivePayload:(NSString *)payloadId fromApplication:(NSString *)appId
+{
+    // [4]: 收到个推消息
+    NSData *payload = [_gexinPusher retrivePayloadById:payloadId];
+    NSString *payloadMsg = [[NSString alloc] initWithBytes:payload.bytes
+                                              length:payload.length
+                                            encoding:NSUTF8StringEncoding];
+    ASLog(@"payload:%@",payloadMsg);
+}
+
+- (void)GexinSdkDidSendMessage:(NSString *)messageId result:(int)result {
+    // [4-EXT]:发送上行消息结果反馈
+}
+
+- (void)GexinSdkDidOccurError:(NSError *)error
+{
+    // [EXT]:个推错误报告，集成步骤发生的任何错误都在这里通知，如果集成后，无法正常收到消息，查看这里的通知。
+    ASLog(@"Push Error:%@",error.localizedDescription);
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "RegistViewController.h"
 #import "ForgetViewController.h"
 #import <ShareSDK/ShareSDK.h>
+#import "AppDelegate.h"
 
 @interface LoginViewController () <UITextFieldDelegate>
 
@@ -126,6 +127,8 @@
     
     NSDictionary *param = @{@"account": account,
                             @"password": [NSString stringWithFormat:@"%@", password],
+                            @"pushID": ApplicationDelegate.clientId,
+                            @"deviceType": @"iphone",
 #ifdef kJuranDesigner
                             @"userType": @"designer"
 #else
