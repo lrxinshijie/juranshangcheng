@@ -119,10 +119,6 @@
         }
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
-        if (_currentPage == 1) {
-            _tableView.contentOffset = CGPointMake(0, CGRectGetHeight(_filterView.frame));
-        }
-        
     }];
     
 }

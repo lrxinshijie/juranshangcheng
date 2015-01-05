@@ -27,18 +27,18 @@
     NSArray *titleArray;
     NSArray *imageArray;
 }
-@property (nonatomic, weak) IBOutlet UIView *buttonView;
-@property (nonatomic, weak) IBOutlet UIView *headerView;
-@property (nonatomic, weak) IBOutlet UILabel *userNameLabel;
-@property (nonatomic, weak) IBOutlet UILabel *loginNameLabel;
-@property (nonatomic, weak) IBOutlet UILabel *unLoginLabel;
+@property (nonatomic, strong) IBOutlet UIView *buttonView;
+@property (nonatomic, strong) IBOutlet UIView *headerView;
+@property (nonatomic, strong) IBOutlet UILabel *userNameLabel;
+@property (nonatomic, strong) IBOutlet UILabel *loginNameLabel;
+@property (nonatomic, strong) IBOutlet UILabel *unLoginLabel;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UIImageView *headerImageView;
-@property (nonatomic, weak) IBOutlet UIButton *signedButton;
-@property (nonatomic, weak) IBOutlet UIView *hasNewBidView;
-@property (nonatomic, weak) IBOutlet UIView *hasNewAnswerView;
-@property (nonatomic, weak) IBOutlet UIView *hasNewPushMsgView;
-@property (nonatomic, weak) IBOutlet UILabel *privateLetterCountLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *headerImageView;
+@property (nonatomic, strong) IBOutlet UIButton *signedButton;
+@property (nonatomic, strong) IBOutlet UIView *hasNewBidView;
+@property (nonatomic, strong) IBOutlet UIView *hasNewAnswerView;
+@property (nonatomic, strong) IBOutlet UIView *hasNewPushMsgView;
+@property (nonatomic, strong) IBOutlet UILabel *privateLetterCountLabel;
 
 @end
 

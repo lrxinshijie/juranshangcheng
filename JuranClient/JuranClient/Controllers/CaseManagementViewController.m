@@ -59,14 +59,15 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"rowsPerPage": kOnePageCount};
+    NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
+                            @"onePageCount": kOnePageCount};
     
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_DEPROJECTLISTREQ  parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(YES)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             NSArray *projectList = [data objectForKey:@"projectList"];
-            NSMutableArray *rows = [JRCase buildUpWithValue:projectList];
+            NSMutableArray *rows = [JRCase buildUpWithValueForManagement:projectList];
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
@@ -84,7 +85,7 @@
 #pragma makr - UITableViewDataSource/Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return _datas.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -94,8 +95,8 @@
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (CaseManagementCell *)[nibs firstObject];
     }
-
-    [cell fillCellWithValue:nil];
+    
+    [cell fillCellWithValue:_datas[indexPath.row]];
     
     return cell;
 }

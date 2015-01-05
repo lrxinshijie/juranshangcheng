@@ -7,6 +7,7 @@
 //
 
 #import "CaseManagementCell.h"
+#import "JRCase.h"
 
 @interface CaseManagementCell()
 
@@ -32,7 +33,11 @@
 }
 
 - (void)fillCellWithValue:(id)data{
-    
+    JRCase *jc = (JRCase*)data;
+    _titleLabel.text = jc.title;
+    _timeLabel.text = jc.publishTime;
+    _statusLabel.text = [jc statusString];
+    [_frontImageView setImageWithURLString:jc.frontImgUrl];
 }
 
 @end

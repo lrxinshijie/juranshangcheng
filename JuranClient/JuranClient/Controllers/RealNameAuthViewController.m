@@ -20,6 +20,14 @@
 @property (nonatomic, strong) UIView *bgView;
 @property (nonatomic, strong) UILabel *descLabel;
 
+@property (nonatomic, strong) IBOutlet UILabel *timeLabel;
+@property (nonatomic, strong) IBOutlet UILabel *userNameLabel;
+@property (nonatomic, strong) IBOutlet UILabel *idCardNumLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *positiveIdImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *backIdImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *handImageView;
+@property (nonatomic, strong) IBOutlet UILabel *statusLabel;
+
 @property (nonatomic, assign) RealNameAuthStatus status;
 @property (nonatomic, strong) NSArray *keys;
 @property (nonatomic, strong) NSArray *placeholders;
@@ -102,7 +110,8 @@
     [self.view addSubview:self.bgView];
     
     frame = CGRectMake(10, 0, kWindowWidth - 12, 12);
-    self.descLabel = [_bgView labelWithFrame:frame text:@"实名认证" textColor:RGBColor(66, 103, 177) textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSmallSystemFontSize]];
+    self.descLabel = [_bgView labelWithFrame:frame text:@"" textColor:RGBColor(66, 103, 177) textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSmallSystemFontSize]];
+    self.descLabel.numberOfLines = 0;
     [self.bgView addSubview:_descLabel];
     
     frame = _contentView.frame;
@@ -112,6 +121,13 @@
 }
 
 - (void)reloadData{
+    if (_designer.realNameAuthStatus == -1) {
+        _status = RealNameAuthStatusCommiting;
+    }else if (_designer.realNameAuthStatus == 2){
+        _status = RealNameAuthStatusApproved;
+    }else{
+        _status = RealNameAuthStatusReview;
+    }
     for (NSInteger i = 0; i < 3; i++) {
         UILabel *label = (UILabel*)[_tableHeaderView viewWithTag:1103+i];
         label.backgroundColor = RGBColor(175, 175, 175);
@@ -128,14 +144,31 @@
     _tableHeaderView.backgroundColor = [UIColor clearColor];
     _tableView.hidden = YES;
     _bgView.hidden = YES;
+    
     if (_status == RealNameAuthStatusCommiting) {
         _tableHeaderView.backgroundColor = RGBColor(237, 237, 237);
         _tableView.hidden = NO;
         [_tableView reloadData];
-    }else if (_status == RealNameAuthStatusReview){
+    }else{
         _bgView.hidden = NO;
-    }else if (_status == RealNameAuthStatusApproved){
+        self.timeLabel.text = _designer.realNameGmtCreate;
+        self.userNameLabel.text = _designer.userName;
+        self.idCardNumLabel.text = _designer.idCardNum;
+        [self.positiveIdImageView setImageWithURLString:_designer.positiveIdPhoto];
+        [self.backIdImageView setImageWithURLString:_designer.backIdphoto];
+        [self.handImageView setImageWithURLString:_designer.handHeldIdPhoto];
+        self.statusLabel.text = [_designer realNameAuthStatusString];
+        self.statusLabel.textColor = _designer.realNameAuthStatus == 1?[UIColor redColor]:RGBColor(28, 79, 166);
         
+        self.descLabel.text = [_designer realNameAuthDescription];
+        
+        CGRect frame = _descLabel.frame;
+        frame.size.height = [_descLabel.text heightWithFont:_descLabel.font constrainedToWidth:CGRectGetWidth(_descLabel.frame)];
+        _descLabel.frame = frame;
+
+        frame = _contentView.frame;
+        frame.origin.y = CGRectGetMaxY(_descLabel.frame)+10;
+        _contentView.frame = frame;
     }
 }
 

@@ -45,6 +45,7 @@
         self.backIdphoto = @"";
         self.realNameGmtCreate = @"";
         self.realAuditDesc = @"";
+        self.realNameAuthStatus = -1;
     }
     return self;
 }
@@ -236,7 +237,7 @@
         self.positiveIdPhoto = [dict getStringValueForKey:@"positiveIdPhoto" defaultValue:@""];
          self.backIdphoto = [dict getStringValueForKey:@"backIdphoto" defaultValue:@""];
         self.realNameAuthId = [dict getIntValueForKey:@"id" defaultValue:0];
-        self.realNameAuthStatus = [dict getIntValueForKey:@"status" defaultValue:0];
+        self.realNameAuthStatus = [dict getIntValueForKey:@"status" defaultValue:-1];
         self.realNameGmtCreate = [dict getStringValueForKey:@"gmtCreate" defaultValue:@""];
         self.realAuditDesc = [dict getStringValueForKey:@"auditDesc" defaultValue:@""];
     }
@@ -294,6 +295,28 @@
     
     NSInteger index = [levels containsObject:userLevel] ? [levels indexOfObject:userLevel] : 0;
     return [NSString stringWithFormat:@"userlevel%d", index];
+}
+
+- (NSString*)realNameAuthDescription{
+    if (_realNameAuthStatus == 0) {
+        return @"实名认证资料需3-5个工作日审核，请耐心等候！居然设计QQ群：124521444";
+    }else if (_realNameAuthStatus == 1) {
+        return _realAuditDesc;
+    }else if (_realNameAuthStatus == 2) {
+        return @"恭喜您已通过实名认证";
+    }
+    return @"";
+}
+
+- (NSString*)realNameAuthStatusString{
+    if (_realNameAuthStatus == 0) {
+        return @"信息审核中";
+    }else if (_realNameAuthStatus == 1) {
+        return @"信息审核失败";
+    }else if (_realNameAuthStatus == 2) {
+        return @"信息审核通过";
+    }
+    return @"";
 }
 
 @end

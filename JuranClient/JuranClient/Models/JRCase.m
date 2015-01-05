@@ -209,6 +209,46 @@
     [[ShareView sharedView] showWithContent:self.desc image:[Public imageURLString:self.imageUrl] title:self.title url:self.shareURL];
 }
 
++ (NSMutableArray*)buildUpWithValueForManagement:(id)value{
+    NSMutableArray *retVal = [NSMutableArray array];
+    
+    if ([value isKindOfClass:[NSArray class]]) {
+        for (NSDictionary *item in value) {
+            JRCase *s = [[JRCase alloc] initWithDictionaryForManagement:item];
+            [retVal addObject:s];
+        }
+    }
+    return retVal;
+}
 
+- (id)initWithDictionaryForManagement:(NSDictionary *)dict{
+    if (self=[self init]) {
+        
+        if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+            return self;
+        }
+        
+        self.frontImgUrl = [dict getStringValueForKey:@"frontImgUrl" defaultValue:@""];
+        self.title = [dict getStringValueForKey:@"title" defaultValue:@""];
+        self.projectId = [dict getStringValueForKey:@"projectId" defaultValue:@""];
+        self.publishTime = [dict getStringValueForKey:@"publishTime" defaultValue:@""];
+        self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
+        self.reviewType = [dict getStringValueForKey:@"reviewType" defaultValue:@""];
+        self.reason = [dict getStringValueForKey:@"reason" defaultValue:@""];
+    }
+    
+    return self;
+}
+
+- (NSString*)statusString{
+    if ([_status isEqualToString:@"00"]) {
+        return @"待审核";
+    }else if ([_status isEqualToString:@"01"]) {
+        return @"";
+    }else if ([_status isEqualToString:@"01"]) {
+        return @"审核未通过";
+    }
+    return @"";
+}
 
 @end

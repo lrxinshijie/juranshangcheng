@@ -267,7 +267,7 @@
         }
         case 1:
         {
-            des = _auditDesc;
+            des = [NSString stringWithFormat:@"很抱歉，您的需求未能通过审核！\n%@\n您可以修改后重新发布", _auditDesc];
             break;
         }
         case 2:

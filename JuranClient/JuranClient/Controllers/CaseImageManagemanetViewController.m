@@ -33,8 +33,8 @@
     _caseImages = [NSMutableArray array];
     
     
-    [_roomTypeImages addObject:[[UIImage alloc] init]];
-    [_caseImages addObject:[[UIImage alloc] init]];
+    [_roomTypeImages addObject:[UIImage imageNamed:@"icon_add_image.png"]];
+    [_caseImages addObject:[UIImage imageNamed:@"icon_add_image.png"]];
     
     self.navigationItem.title = @"案例图片管理";
     
