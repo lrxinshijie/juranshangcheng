@@ -42,6 +42,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *isAuthImageView;
 @property (nonatomic, strong) IBOutlet UIImageView *userLevelImageView;
 
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
 
 @property (nonatomic, strong) SelfIntrodutionCell *introductionCell;
 @property (nonatomic, strong) TATopicCell *topicCell;
@@ -88,6 +89,12 @@
     _tableView.backgroundColor = [UIColor colorWithRed:245/255.f green:245/255.f blue:245/255.f alpha:1.0f];
     [self.view addSubview:_tableView];
     
+    UIView *bgView = [[UIView alloc] initWithFrame:_tableView.bounds];
+    _emptyView.hidden = YES;
+    _emptyView.center = CGPointMake(bgView.center.x, bgView.center.y + 50);
+    [bgView addSubview:_emptyView];
+    self.tableView.backgroundView = bgView;
+    
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
         [weakSelf refreshData];
@@ -99,7 +106,6 @@
     
     _toolBar.frame = CGRectMake(0, kWindowHeightWithoutNavigationBar - 49, _toolBar.frame.size.width, _toolBar.frame.size.height);
     [self.view addSubview:_toolBar];
-    
 
     UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
     UISwipeGestureRecognizer *rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
@@ -145,6 +151,7 @@
 }
 
 - (void)refreshData{
+    _emptyView.hidden = YES;
     if (_segment.selectedIndex == 0) {
         _caseCurrentPage = 1;
         [self loadDesignerProject];
@@ -198,6 +205,7 @@
             if (_caseCurrentPage > 1) {
                 [_caseDatas addObjectsFromArray:rows];
             }else{
+                _emptyView.hidden = [rows count] != 0;
                 self.caseDatas = rows;
             }
         }
@@ -223,7 +231,8 @@
             if (_topicCurrentPage > 1) {
                 [_topicDatas addObjectsFromArray:rows];
             }else{
-                self.topicDatas = [JRTopic buildUpWithValue:list];
+                _emptyView.hidden = [rows count] != 0;
+                self.topicDatas = rows;
             }
         }
         dispatch_async(dispatch_get_main_queue(), ^{

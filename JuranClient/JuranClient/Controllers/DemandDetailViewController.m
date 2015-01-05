@@ -45,6 +45,7 @@
 @property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
 
 @property (nonatomic, strong) IBOutlet UIButton *modifyDemandInfoButton;
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
 
 @end
 
@@ -75,6 +76,7 @@
         [self hideHUD];
         if (!error) {
             [_demand buildUpDetailWithValue:data];
+            _emptyView.hidden = !(_demand.bidInfoList.count == 0 && !_demand.confirmDesignerDetail);
             [self reloadData];
         }
     }];
@@ -161,6 +163,10 @@
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onDeadRequest) title:@"终止需求" backgroundImage:nil];
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
     _rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    
+    _emptyView.hidden = YES;
+    _emptyView.center = CGPointMake(_designerTableView.center.x, _designerTableView.center.y + 50);
+    [_scrollView addSubview:_emptyView];
 }
 
 - (void)receiveReloadDataNotification:(NSNotification*)notification{

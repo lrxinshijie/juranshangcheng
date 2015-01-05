@@ -25,6 +25,8 @@
 @property (nonatomic, strong) QuestionCell *questionCell;
 @property (nonatomic, strong) IBOutlet UIView *askView;
 
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
+
 @end
 
 @implementation QuestionViewController
@@ -56,6 +58,10 @@
         _askView.frame = frame;
         [self.view addSubview:_askView];
     }
+    
+    _emptyView.hidden = YES;
+    _emptyView.center = _tableView.center;
+    [self.view addSubview:_emptyView];
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -112,6 +118,7 @@
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
+                _emptyView.hidden = rows.count != 0;
                 self.datas = rows;
             }
             

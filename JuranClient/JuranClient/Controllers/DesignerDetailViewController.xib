@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DesignerDetailViewController">
             <connections>
                 <outlet property="diyProjectCountLabel" destination="fZy-0u-BKj" id="CjG-yM-5jl"/>
+                <outlet property="emptyView" destination="iWB-PS-7Qh" id="xy8-vg-eFI"/>
                 <outlet property="fansCountLabel" destination="po3-83-dtO" id="RmW-Oa-5Tf"/>
                 <outlet property="followImageView" destination="MI4-eX-cIj" id="1Kz-Xc-h3c"/>
                 <outlet property="followTitleLabel" destination="cZQ-1x-Nlb" id="keh-9K-0En"/>
@@ -33,7 +34,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlogin_head" id="gM7-2K-AQC">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlogin_head" id="gM7-2K-AQC" customClass="ZoomInImageView">
                     <rect key="frame" x="10" y="10" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -219,8 +220,29 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
+        <view contentMode="scaleToFill" id="iWB-PS-7Qh">
+            <rect key="frame" x="0.0" y="0.0" width="192" height="128"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data" id="L4G-Nx-dU8">
+                    <rect key="frame" x="49" y="0.0" width="94" height="92"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无信息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nFW-6b-GXY">
+                    <rect key="frame" x="49" y="107" width="94" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <color key="textColor" red="0.61176472900000001" green="0.61176472900000001" blue="0.61176472900000001" alpha="1" colorSpace="deviceRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
     </objects>
     <resources>
+        <image name="answer_no_data" width="94" height="92"/>
         <image name="icon_isauth" width="16" height="12"/>
         <image name="menu_icon_fenxiang" width="17" height="19"/>
         <image name="menu_icon_guanzhu" width="21" height="21"/>
