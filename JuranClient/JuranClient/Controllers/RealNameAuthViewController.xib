@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -7,8 +7,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RealNameAuthViewController">
             <connections>
+                <outlet property="backIdImageView" destination="YlZ-5e-gkc" id="M2s-wP-lul"/>
                 <outlet property="contentView" destination="1Fy-pD-hQ5" id="sRO-FG-IOL"/>
+                <outlet property="handImageView" destination="2pj-dF-LaJ" id="htE-9o-XKK"/>
+                <outlet property="idCardNumLabel" destination="Oqq-HM-FfT" id="WXU-n6-BY7"/>
+                <outlet property="positiveIdImageView" destination="U39-wM-M0C" id="Wzg-dJ-isu"/>
+                <outlet property="statusLabel" destination="51d-5s-pil" id="TM4-C5-Hcl"/>
                 <outlet property="tableHeaderView" destination="qFm-PN-BUD" id="bRa-3A-kyQ"/>
+                <outlet property="timeLabel" destination="18W-yb-C4g" id="J2A-N4-5cR"/>
+                <outlet property="userNameLabel" destination="F2z-OM-RzE" id="Ng2-22-wu4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

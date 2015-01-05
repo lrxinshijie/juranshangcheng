@@ -151,7 +151,7 @@
     }else if (indexPath.section == 1 && indexPath.row > 0){
         [cell setImage:_caseImages[indexPath.row-1]];
     }else{
-        [cell setImage:nil];
+        [cell setImage:[UIImage imageNamed:@"icon_add_image"]];
     }
     return cell;
 }

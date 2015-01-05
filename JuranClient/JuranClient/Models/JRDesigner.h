@@ -69,7 +69,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 - (id)initWithDictionaryForBidInfo:(NSDictionary *)dict;
-- (id)initWithDictionaryForRealNameAuth:(NSDictionary *)dict;
+
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
@@ -92,5 +92,11 @@
 - (NSString*)experienceString;
 
 + (NSString*)userLevelImage:(NSString*)userLevel;
+
+
+//实名认证
+- (id)initWithDictionaryForRealNameAuth:(NSDictionary *)dict;
+- (NSString*)realNameAuthStatusString;
+- (NSString*)realNameAuthDescription;
 
 @end

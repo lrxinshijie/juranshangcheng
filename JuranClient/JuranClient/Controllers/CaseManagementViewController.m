@@ -72,7 +72,7 @@
         [self hideHUD];
         if (!error) {
             NSArray *projectList = [data objectForKey:@"projectList"];
-            NSMutableArray *rows = [JRCase buildUpWithValue:projectList];
+            NSMutableArray *rows = [JRCase buildUpWithValueForManagement:projectList];
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
@@ -90,7 +90,7 @@
 #pragma makr - UITableViewDataSource/Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_datas count];
+    return _datas.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -101,7 +101,7 @@
         cell = (CaseManagementCell *)[nibs firstObject];
     }
     
-    [cell fillCellWithValue:nil];
+    [cell fillCellWithValue:_datas[indexPath.row]];
     
     return cell;
 }

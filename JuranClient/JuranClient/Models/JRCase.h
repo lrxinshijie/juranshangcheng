@@ -66,6 +66,13 @@
 @property (nonatomic, assign) NSInteger projectType;
 @property (nonatomic, assign) NSInteger authorId;
 
+//Management
+@property (nonatomic, copy) NSString *publishTime;
+@property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *reviewType;
+@property (nonatomic, copy) NSString *reason;
+
+
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (id)buildDetailWithDictionary:(NSDictionary *)dict;
 
@@ -78,5 +85,9 @@
 
 - (NSString *)shareURL;
 - (void)doShare;
+
+//Management
++ (NSMutableArray*)buildUpWithValueForManagement:(id)value;
+- (NSString*)statusString;
 
 @end

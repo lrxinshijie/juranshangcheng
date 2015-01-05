@@ -25,7 +25,7 @@
     self.navigationItem.title = @"详细地址";
     
     _textVeiw.delegate = self;
-    _textVeiw.placeholder = @"请输入5-60字内的地址信息，不能全部为数字";
+    _textVeiw.placeholder = @"请输入详细地址";
     _textVeiw.text = _user.detailAddress;
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave:) title:@"保存" backgroundImage:nil];
@@ -57,11 +57,11 @@
 
 
 - (void)onSave:(id)sender{
-    if (!(_textVeiw.text && _textVeiw.text.length > 5)) {
-        [self showTip:@"请输入5-60字内的地址信息，不能全部为数字"];
-        return;
-    }
-    [self modifyMemberDetail];
+    _user.detailAddress = _textVeiw.text;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.navigationController popViewControllerAnimated:YES];
+    });
+//    [self modifyMemberDetail];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
