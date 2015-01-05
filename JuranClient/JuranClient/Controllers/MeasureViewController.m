@@ -523,7 +523,7 @@
     frame.size.height = kWindowHeightWithoutNavigationBar - keyboardSize.height;
     _tableView.frame = frame;
     [_tableView addGestureRecognizer:_tapHide];
-    [UIView commitAnimations];
+//    [UIView commitAnimations];
 }
 
 -(void)keyboardWillBeHidden:(NSNotification *)aNotification{

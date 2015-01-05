@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="demandAddressLabel" destination="02C-OQ-bhx" id="rY8-iw-jQp"/>
                 <outlet property="demandAddressView" destination="2gw-N2-oPZ" id="wAp-rM-r1m"/>
-                <outlet property="demandDescribeLabel" destination="6UQ-m6-eKA" id="NXO-aS-c0g"/>
                 <outlet property="demandInfoHeaderView" destination="EXc-mK-SEG" id="Hw2-Ts-HKd"/>
                 <outlet property="demandInfoTableHeaderView" destination="WnU-SQ-Rn3" id="NXO-3C-IMi"/>
                 <outlet property="demandInfoTitleLabel" destination="ZvC-ex-WI2" id="GZg-lw-nkW"/>
@@ -76,13 +75,6 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6UQ-m6-eKA">
-                    <rect key="frame" x="10" y="48" width="300" height="142"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="审核中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fTj-Ph-8BK">

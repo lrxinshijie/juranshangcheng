@@ -18,6 +18,7 @@
 #import "MeasureViewController.h"
 #import "UIAlertView+Blocks.h"
 #import "JRAreaInfo.h"
+#import "TTTAttributedLabel.h"
 
 #define kStatusBGImageViewTag 2933
 
@@ -41,7 +42,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *demandAddressLabel;
 @property (nonatomic, strong) IBOutlet ZoomInImageView *roomTypeImageView;
 
-@property (nonatomic, strong) IBOutlet UILabel *demandDescribeLabel;
+@property (nonatomic, strong) TTTAttributedLabel *demandDescribeLabel;
 @property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
 
 @property (nonatomic, strong) IBOutlet UIButton *modifyDemandInfoButton;
@@ -113,7 +114,11 @@
     UIImageView *imageView = (UIImageView*)[_designerTableHeaderView viewWithTag:tag];
     imageView.image = [UIImage imageNamed:@"request_doing.png"];
     
-    _demandDescribeLabel.text = [_demand descriptionForDetail];
+    [_demandDescribeLabel setText:[_demand descriptionForDetail] afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        NSRange range = [[mutableAttributedString string] rangeOfString:@"010-84094000" options:NSCaseInsensitiveSearch];
+        [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[kBlueColor CGColor] range:range];
+        return mutableAttributedString;
+    }];
     
     CGRect frame = _demandDescribeLabel.frame;
     frame.size.height = [_demandDescribeLabel.text heightWithFont:_demandDescribeLabel.font constrainedToWidth:CGRectGetWidth(_demandDescribeLabel.frame)];
@@ -141,6 +146,13 @@
     _designerTableView.tableHeaderView = _designerTableHeaderView;
     _designerTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_scrollView addSubview:_designerTableView];
+    
+    self.demandDescribeLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(10, 48, 300, 142)];
+    _demandDescribeLabel.textColor = [UIColor blackColor];
+    _demandDescribeLabel.font = [UIFont systemFontOfSize:14];
+    _demandDescribeLabel.backgroundColor = [UIColor clearColor];
+    _demandDescribeLabel.numberOfLines = 0;
+    [_designerTableHeaderView addSubview:_demandDescribeLabel];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [_designerTableHeaderView addGestureRecognizer:tap];

@@ -496,7 +496,7 @@
     frame.size.height = kWindowHeightWithoutNavigationBar - keyboardSize.height;
     _tableView.frame = frame;
     
-    [UIView commitAnimations];
+//    [UIView commitAnimations];
 }
 
 -(void)keyboardWillBeHidden:(NSNotification *)aNotification{
