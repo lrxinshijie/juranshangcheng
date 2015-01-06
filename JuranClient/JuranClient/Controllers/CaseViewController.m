@@ -241,63 +241,8 @@
     JRAdInfo *ad = [_adInfos objectAtIndex:index];
     ASLog(@"index:%d,%@",index,ad.link);
     
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    NSArray *links = [ad.link componentsSeparatedByString:@"&"];
-    [links enumerateObjectsUsingBlock:^(NSString *link, NSUInteger idx, BOOL *stop) {
-        NSArray *values = [link componentsSeparatedByString:@"="];
-        if ([values count] == 2) {
-            [param setObject:[values lastObject] forKey:[values firstObject]];
-        }
-    }];
-    ASLog(@"param:%@",param);
-    NSInteger type = [param getIntValueForKey:@"type" defaultValue:0];
-    if (type == 1) {
-        [_tableView headerBeginRefreshing];
-    }else if (type == 2){
-        if ([param.allKeys containsObject:@"id"]) {
-            DesignerDetailViewController *dv = [[DesignerDetailViewController alloc] init];
-            JRDesigner *designer = [[JRDesigner alloc] init];
-            designer.userId = [param getIntValueForKey:@"id" defaultValue:0];
-            dv.designer = designer;
-            dv.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:dv animated:YES];
-        }else{
-            DesignerViewController *cv = [[DesignerViewController alloc] init];
-            NSMutableDictionary *filterData = [NSMutableDictionary dictionaryWithDictionary:param];
-            [filterData removeObjectForKey:@"type"];
-            [filterData removeObjectForKey:@"isRealAuth"];
-            cv.filterData = filterData;
-            cv.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:cv animated:YES];
-        }
-    }else if (type == 7){
-        JRWebViewController *wv = [[JRWebViewController alloc] init];
-        wv.urlString = [param getStringValueForKey:@"url" defaultValue:@""];
-        wv.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:wv animated:YES];
-    }else if (type == 6){
-        SubjectDetailViewController *sd = [[SubjectDetailViewController alloc] init];
-        JRSubject *subject = [[JRSubject alloc] init];
-        subject.key = [param getIntValueForKey:@"id" defaultValue:0];
-        sd.subject = subject;
-        sd.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:sd animated:YES];
-    }else if (type == 3){
-        if ([param.allKeys containsObject:@"id"]) {
-            JRCase *jrCase = [[JRCase alloc] init];
-            jrCase.projectId = [param getStringValueForKey:@"id" defaultValue:@""];
-            JRPhotoScrollViewController *dv = [[JRPhotoScrollViewController alloc] initWithJRCase:jrCase andStartWithPhotoAtIndex:0];
-            dv.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:dv animated:YES];
-        }else{
-            CaseViewController *cv = [[CaseViewController alloc] init];
-            NSMutableDictionary *filterData = [NSMutableDictionary dictionaryWithDictionary:param];
-            [filterData removeObjectForKey:@"type"];
-            cv.filterData = filterData;
-            cv.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:cv animated:YES];
-        }
-    }
+    [Public jumpFromLink:ad.link];
+    
 //    NSArray *types = [[links firstObject] componentsSeparatedByString:@"="];
 //    if ([types count] == 0) {
 //        NSInteger type = [[types lastObject] integerValue];
