@@ -11,6 +11,12 @@
 
 @interface PushMsgDetailViewController ()
 
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic, strong) UIButton *linkButton;
+
 @end
 
 @implementation PushMsgDetailViewController
@@ -22,8 +28,69 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     self.navigationItem.title = @"消息";
+    [self setupUI];
     
     [self loadData];
+}
+
+- (void)setupUI{
+    self.scrollView = [[UIScrollView alloc] initWithFrame:kContentFrameWithoutNavigationBar];
+    [self.view addSubview:self.scrollView];
+    
+    CGRect frame = CGRectMake(10, 10, kWindowWidth - 20, 20);
+    self.titleLabel = [_scrollView labelWithFrame:frame text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:17]];
+    _titleLabel.numberOfLines = 0;
+    [self.scrollView addSubview:_titleLabel];
+    
+    frame.size = CGSizeMake(kWindowWidth - 20, 165);
+    frame.origin.y = CGRectGetMaxY(_titleLabel.frame) + 10;
+    self.imageView = [_scrollView imageViewWithFrame:frame image:nil];
+    [self.scrollView addSubview:_imageView];
+    
+    frame.size = CGSizeMake(kWindowWidth - 20, 30);
+    frame.origin.y = CGRectGetMaxY(_imageView.frame) + 10;
+    self.contentLabel = [_scrollView labelWithFrame:frame text:@"" textColor:[UIColor darkGrayColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:14]];
+    _contentLabel.numberOfLines = 0;
+    [self.scrollView addSubview:_contentLabel];
+    
+    frame.size = CGSizeMake(kWindowWidth - 20, 30);
+    frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 10;
+    self.linkButton = [_scrollView buttonWithFrame:frame target:self action:@selector(onLink) title:@"" backgroundImage:nil];
+    [self.linkButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    [self.scrollView addSubview:_linkButton];
+}
+
+- (void)reloadData{
+    _titleLabel.text = _pushInfo.msgTitle;
+    _contentLabel.text = _pushInfo.msgContent;
+    [_imageView setImageWithURLString:_pushInfo.msgImgUrl];
+    
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:_pushInfo.msgLinkTitle];
+    NSRange strRange = {0,[str length]};
+    [str setAttributes:@{NSForegroundColorAttributeName:kBlueColor, NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle], NSFontAttributeName: [UIFont systemFontOfSize:14]} range:strRange];
+    [_linkButton setAttributedTitle:str forState:UIControlStateNormal];
+    
+    CGRect frame = _titleLabel.frame;
+    frame.size.height = [_titleLabel.text heightWithFont:_titleLabel.font constrainedToWidth:CGRectGetWidth(_titleLabel.frame)];
+    _titleLabel.frame = frame;
+    
+    frame = _imageView.frame;
+    frame.origin.y = CGRectGetMaxY(_titleLabel.frame) + 10;
+    _imageView.frame = frame;
+    
+    frame = _contentLabel.frame;
+    frame.origin.y = CGRectGetMaxY(_imageView.frame) + 10;
+    frame.size.height = [_contentLabel.text heightWithFont:_contentLabel.font constrainedToWidth:CGRectGetWidth(_titleLabel.frame)];
+    _contentLabel.frame = frame;
+    
+    frame = _linkButton.frame;
+    frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 10;
+    _linkButton.frame = frame;
+    
+    CGFloat y = CGRectGetMaxY(_linkButton.frame);
+    if (y > kWindowHeightWithoutNavigationBar) {
+        _scrollView.contentSize = CGSizeMake(kWindowWidth, y);
+    }
 }
 
 - (void)loadData{
@@ -32,7 +99,8 @@
     [[ALEngine shareEngine] pathURL:JR_GET_MSG_DETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            [_pushInfo buildUpDetailWithValue:data];
+            [_pushInfo buildUpDetailWithValue:data[@"infoMsgDetailResp"]];
+            [self reloadData];
         }
     }];
 }
@@ -40,6 +108,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)onLink{
+    if (_pushInfo.msgLinkUrl.length > 0) {
+        NSString *url = _pushInfo.msgLinkUrl;
+        if (![_pushInfo.msgLinkUrl hasPrefix:@"http://"]) {
+            url = [NSString stringWithFormat:@"http://%@", _pushInfo.msgLinkUrl];
+        }
+        NSURL *requestURL = [[NSURL alloc] initWithString:url];
+        [[UIApplication sharedApplication] openURL:requestURL];
+    }
 }
 
 /*

@@ -80,10 +80,10 @@
         [imageView setImageWithURLString:url];
         i++;
     }
-    for (; i < 4; i++) {
-        UIImageView *imageView = (UIImageView*)[self.contentView viewWithTag:i + kCaseImageViewTag];
-        imageView.image = [UIImage imageNamed:@"designer_no_pic.png"];
-    }
+//    for (; i < 4; i++) {
+//        UIImageView *imageView = (UIImageView*)[self.contentView viewWithTag:i + kCaseImageViewTag];
+//        imageView.image = [UIImage imageNamed:@"designer_no_pic.png"];
+//    }
 }
 
 @end

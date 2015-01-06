@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -9,12 +9,12 @@
             <connections>
                 <outlet property="demandAddressLabel" destination="02C-OQ-bhx" id="rY8-iw-jQp"/>
                 <outlet property="demandAddressView" destination="2gw-N2-oPZ" id="wAp-rM-r1m"/>
-                <outlet property="demandDescribeLabel" destination="6UQ-m6-eKA" id="NXO-aS-c0g"/>
                 <outlet property="demandInfoHeaderView" destination="EXc-mK-SEG" id="Hw2-Ts-HKd"/>
                 <outlet property="demandInfoTableHeaderView" destination="WnU-SQ-Rn3" id="NXO-3C-IMi"/>
                 <outlet property="demandInfoTitleLabel" destination="ZvC-ex-WI2" id="GZg-lw-nkW"/>
                 <outlet property="designerHeaderView" destination="04P-1U-cd7" id="G5M-Sw-6CZ"/>
                 <outlet property="designerTableHeaderView" destination="roe-3I-C8d" id="nkf-y2-GzO"/>
+                <outlet property="emptyView" destination="JPI-by-20L" id="3I9-2q-0ul"/>
                 <outlet property="modifyDemandInfoButton" destination="NmH-kw-Mmi" id="jQd-lH-2bK"/>
                 <outlet property="roomTypeImageView" destination="16N-1v-4o6" id="Ue8-AK-RSc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -75,13 +75,6 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6UQ-m6-eKA">
-                    <rect key="frame" x="10" y="48" width="300" height="142"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="审核中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fTj-Ph-8BK">
@@ -181,8 +174,30 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="413" y="162"/>
         </view>
+        <view contentMode="scaleToFill" id="JPI-by-20L">
+            <rect key="frame" x="0.0" y="0.0" width="192" height="128"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data" id="WoG-p2-3I8">
+                    <rect key="frame" x="49" y="0.0" width="94" height="92"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无信息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MEX-i7-uNs">
+                    <rect key="frame" x="49" y="107" width="94" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <color key="textColor" red="0.61176472900000001" green="0.61176472900000001" blue="0.61176472900000001" alpha="1" colorSpace="deviceRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="182" y="213"/>
+        </view>
     </objects>
     <resources>
+        <image name="answer_no_data" width="94" height="92"/>
         <image name="arrow_up" width="15" height="8"/>
         <image name="designer_no_pic" width="76" height="56"/>
         <image name="request_reviewing" width="89" height="30"/>

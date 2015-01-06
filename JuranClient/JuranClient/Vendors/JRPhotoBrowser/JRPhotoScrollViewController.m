@@ -216,7 +216,6 @@
     CGRect frame = _descTextView.frame;
     frame.size.height = height;
     _descTextView.frame = frame;
-    _descTextView.scrollEnabled = height == 65;
     
     frame = _titleView.frame;
     frame.size.height = CGRectGetMaxY(_descTextView.frame) + 10;
