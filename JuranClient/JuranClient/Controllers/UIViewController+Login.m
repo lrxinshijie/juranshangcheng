@@ -11,7 +11,7 @@
 #import "MenuView.h"
 #import "SearchViewController.h"
 
-@interface UIViewController ()
+@interface UIViewController () <UIGestureRecognizerDelegate>
 
 @end
 
@@ -38,11 +38,17 @@
 
 - (void)configureMenu{
     [self setLogBackBarButton:@"navbar_leftbtn_logo" target:self action:@selector(showMenu)];
-    
+#ifndef kJuranDesigner
     UISwipeGestureRecognizer *swipt = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showMenu)];
     swipt.direction = UISwipeGestureRecognizerDirectionRight;
+    swipt.delegate = self;
     [self.view addGestureRecognizer:swipt];
+#endif
 }
+
+//- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+//    return YES;
+//}
 
 - (void)configureSearch{
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];

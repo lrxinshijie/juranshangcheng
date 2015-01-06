@@ -23,7 +23,6 @@
 #import "HomeViewController.h"
 #import "GexinSdk.h"
 #import "UIAlertView+Blocks.h"
-#import "APService.h"
 
 #define kAppId           @"ZmiyzZ23sKAvFQ7RoAfbJ2"
 #define kAppKey          @"kJRhD2minf7dJ6CK5u43o6"
@@ -50,16 +49,7 @@
     
     [self setupShareSDK];
     
-    
-    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                   UIRemoteNotificationTypeSound |
-                                                   UIRemoteNotificationTypeAlert) categories:nil];
-    
-    
-    // Required 初始化jPush
-    [APService setupWithOption:launchOptions];
-    
-//    [self setupPush];
+    [self setupPush];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [JRUser refreshToken:nil];
@@ -259,23 +249,34 @@
 - (void)showAPNS:(NSDictionary *)userInfo{
     ASLog(@"APNS:%@",userInfo);
     
-    NSString *alert = [[userInfo objectForKey:@"aps"]objectForKey:@"alert"];
+    NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     if ([alert isKindOfClass:[NSDictionary class]]) {
         alert = [(NSDictionary *)alert objectForKey:@"body"];
     }
-    [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"取消" otherButtonTitles:@[@"查看"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        if (buttonIndex == [alertView cancelButtonIndex]) {
-            return ;
+    
+    NSString *payload = [userInfo objectForKey:@"payload"];
+    if (payload && payload.length > 0) {
+        
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[payload dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+        NSString *link = [dict getStringValueForKey:@"link" defaultValue:@""];
+        if (link.length > 0) {
+            [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"取消" otherButtonTitles:@[@"查看"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                if (buttonIndex == [alertView cancelButtonIndex]) {
+                    return ;
+                }
+                
+                [Public jumpFromLink:link];
+            }];
         }
         
-        
-    }];
+    }else{
+        [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"取消" otherButtonTitles:nil tapBlock:nil];
+    }
+    
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
-    [APService registerDeviceToken:deviceToken];
-    
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     NSString *dToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     ASLog(@"deviceToken:%@", dToken);
@@ -316,6 +317,30 @@
                                               length:payload.length
                                             encoding:NSUTF8StringEncoding];
     ASLog(@"payload:%@",payloadMsg);
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[payloadMsg dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+    if (dict && [dict isKindOfClass:[NSDictionary class]]) {
+        NSString *title = [dict getStringValueForKey:@"title" defaultValue:@""];
+        NSString *body = [dict getStringValueForKey:@"body" defaultValue:@""];
+        
+        if (title.length == 0 || body.length == 0) {
+            return;
+        }
+        
+        NSInteger type = [dict getIntValueForKey:@"type" defaultValue:0];
+        
+        if (type == 2) {
+            [UIAlertView showWithTitle:title message:body cancelButtonTitle:@"取消" otherButtonTitles:@[@"查看"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                if (buttonIndex == [alertView cancelButtonIndex]) {
+                    return ;
+                }
+                
+                NSString *link = [dict getStringValueForKey:@"link" defaultValue:@""];
+                [Public jumpFromLink:link];
+            }];
+        }else{
+            [UIAlertView showWithTitle:title message:body cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:nil];
+        }
+    }
 }
 
 - (void)GexinSdkDidSendMessage:(NSString *)messageId result:(int)result {

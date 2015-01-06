@@ -93,4 +93,8 @@
 + (NSInteger)convertToInt:(NSString*)strtemp;
 + (NSString*)formatString:(NSString*)string maxLength:(NSInteger)maxLength;
 
++ (void)jumpFromLink:(NSString *)link;
+
++ (NSDictionary *)deviceInfo;
+
 @end

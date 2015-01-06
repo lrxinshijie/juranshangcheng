@@ -88,11 +88,11 @@
     
     self.comments = [NSMutableArray array];
     
-    __weak typeof(self) weakSelf = self;
-    [_tableView addHeaderWithCallback:^{
-        weakSelf.currentPage = 1;
-        [weakSelf loadComment];
-    }];
+//    __weak typeof(self) weakSelf = self;
+//    [_tableView addHeaderWithCallback:^{
+//        weakSelf.currentPage = 1;
+//        [weakSelf loadComment];
+//    }];
     
 //    [_tableView addFooterWithCallback:^{
 //        weakSelf.currentPage++;
@@ -135,10 +135,11 @@
     }
     _userLevelImageView.frame = frame;
     
-    [_tableView headerBeginRefreshing];
-    
     _avtarImageView.layer.masksToBounds = YES;
     _avtarImageView.layer.cornerRadius = CGRectGetWidth(_avtarImageView.frame) / 2;
+    
+    self.currentPage = 1;
+    [self loadComment];
 }
 
 - (void)loadComment{

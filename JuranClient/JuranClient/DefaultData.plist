@@ -345,13 +345,13 @@
 	<array>
 		<dict>
 			<key>k</key>
-			<string>优秀</string>
+			<string>普通</string>
 			<key>v</key>
 			<string>design_one</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>普通</string>
+			<string>优秀</string>
 			<key>v</key>
 			<string>design_two</string>
 		</dict>
@@ -363,13 +363,13 @@
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>首席</string>
+			<string>主任</string>
 			<key>v</key>
 			<string>design_four</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>主任</string>
+			<string>首席</string>
 			<key>v</key>
 			<string>design_five</string>
 		</dict>

@@ -17,6 +17,16 @@
 #import "NSString+ASCategory.h"
 #import "UINavigationBar+ASCategory.h"
 
+#import "DesignerDetailViewController.h"
+#import "JRDesigner.h"
+#import "DesignerViewController.h"
+#import "JRWebViewController.h"
+#import "SubjectDetailViewController.h"
+#import "JRSubject.h"
+#import "JRPhotoScrollViewController.h"
+#import "JRCase.h"
+#import "CaseViewController.h"
+
 @implementation Public
 
 + (NSString *)imagePath{
@@ -162,9 +172,11 @@
 + (UINavigationController *)navigationControllerFromRootViewController:(UIViewController *)viewController{
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [navigationController.navigationBar setBackgroundImageWithColor:[UIColor whiteColor]];
-//    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-//        navigationController.interactivePopGestureRecognizer.delegate = nil;
-//    }
+#ifdef kJuranDesigner
+    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        navigationController.interactivePopGestureRecognizer.delegate = nil;
+    }
+#endif
 //    if (SystemVersionGreaterThanOrEqualTo7) {
 //        [navigationController.navigationBar setBackgroundImageWithColor:kNavigationBarBackgroundColor];
 //        [navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor whiteColor]}];
@@ -423,6 +435,69 @@
     [kUD synchronize];
 }
 */
+
++ (void)jumpFromLink:(NSString *)link{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    NSArray *links = [link componentsSeparatedByString:@"&"];
+    [links enumerateObjectsUsingBlock:^(NSString *link, NSUInteger idx, BOOL *stop) {
+        NSArray *values = [link componentsSeparatedByString:@"="];
+        if ([values count] == 2) {
+            [param setObject:[values lastObject] forKey:[values firstObject]];
+        }
+    }];
+    ASLog(@"param:%@",param);
+    UINavigationController *navigationController = (UINavigationController *)ApplicationDelegate.tabBarController.selectedViewController;
+    NSInteger type = [param getIntValueForKey:@"type" defaultValue:0];
+    if (type == 2){
+        if ([param.allKeys containsObject:@"id"]) {
+            DesignerDetailViewController *dv = [[DesignerDetailViewController alloc] init];
+            JRDesigner *designer = [[JRDesigner alloc] init];
+            designer.userId = [param getIntValueForKey:@"id" defaultValue:0];
+            dv.designer = designer;
+            dv.hidesBottomBarWhenPushed = YES;
+            [navigationController pushViewController:dv animated:YES];
+        }else{
+            DesignerViewController *cv = [[DesignerViewController alloc] init];
+            NSMutableDictionary *filterData = [NSMutableDictionary dictionaryWithDictionary:param];
+            [filterData removeObjectForKey:@"type"];
+            [filterData removeObjectForKey:@"isRealAuth"];
+            cv.filterData = filterData;
+            cv.hidesBottomBarWhenPushed = YES;
+            [navigationController pushViewController:cv animated:YES];
+        }
+    }else if (type == 7){
+        JRWebViewController *wv = [[JRWebViewController alloc] init];
+        wv.urlString = [param getStringValueForKey:@"url" defaultValue:@""];
+        wv.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:wv animated:YES];
+    }else if (type == 6){
+        SubjectDetailViewController *sd = [[SubjectDetailViewController alloc] init];
+        JRSubject *subject = [[JRSubject alloc] init];
+        subject.key = [param getIntValueForKey:@"id" defaultValue:0];
+        sd.subject = subject;
+        sd.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:sd animated:YES];
+    }else if (type == 3){
+        if ([param.allKeys containsObject:@"id"]) {
+            JRCase *jrCase = [[JRCase alloc] init];
+            jrCase.projectId = [param getStringValueForKey:@"id" defaultValue:@""];
+            JRPhotoScrollViewController *dv = [[JRPhotoScrollViewController alloc] initWithJRCase:jrCase andStartWithPhotoAtIndex:0];
+            dv.hidesBottomBarWhenPushed = YES;
+            [navigationController pushViewController:dv animated:YES];
+        }else{
+            CaseViewController *cv = [[CaseViewController alloc] init];
+            NSMutableDictionary *filterData = [NSMutableDictionary dictionaryWithDictionary:param];
+            [filterData removeObjectForKey:@"type"];
+            cv.filterData = filterData;
+            cv.hidesBottomBarWhenPushed = YES;
+            [navigationController pushViewController:cv animated:YES];
+        }
+    }
+}
+
++ (NSDictionary *)deviceInfo{
+    return  @{@"appType":@"iphone",@"version":@"1.0",@"deviceType":@"iphone",@"osVersion":@"8.0"};
+}
 
 
 @end

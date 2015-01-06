@@ -83,7 +83,8 @@
                                     @"thirdUserId":thirdUserId,
                                     @"thirdSource": thirdSource,
                                     @"nickName": nickName,
-                                    @"deviceInfo":@{@"appType":@"iphone",@"version":@"1.0",@"deviceType":@"iphone",@"osVersion":@"8.0"}};
+                                    @"pushID": ApplicationDelegate.clientId,
+                                    @"deviceInfo":[Public deviceInfo]};
             [self showHUD];
             [[ALEngine shareEngine] pathURL:JR_THIRD_LOGIN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
                 [self hideHUD];
@@ -128,7 +129,7 @@
     NSDictionary *param = @{@"account": account,
                             @"password": [NSString stringWithFormat:@"%@", password],
                             @"pushID": ApplicationDelegate.clientId,
-                            @"deviceType": @"iphone",
+                            @"deviceInfo":[Public deviceInfo],
 #ifdef kJuranDesigner
                             @"userType": @"designer"
 #else
