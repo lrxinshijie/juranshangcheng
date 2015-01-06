@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
 
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
+
 @end
 
 @implementation CaseCollectViewController
@@ -31,6 +33,8 @@
     _collectionView.alwaysBounceVertical = YES;
     
     [_collectionView registerNib:[UINib nibWithNibName:@"CaseCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"CaseCollectionCell"];
+    
+    _emptyView.hidden = YES;
     
     __weak typeof(self) weakSelf = self;
     [_collectionView addHeaderWithCallback:^{
@@ -58,6 +62,7 @@
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
+                _emptyView.hidden = rows.count != 0;
                 self.datas = rows;
             }
             

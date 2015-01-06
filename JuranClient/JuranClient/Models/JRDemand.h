@@ -20,7 +20,7 @@
 @property (nonatomic, strong) NSString *publishTime;
 @property (nonatomic, strong) NSString *houseAddress;
 @property (nonatomic, copy) NSString *houseArea;
-@property (nonatomic, strong) NSString *style;
+//@property (nonatomic, strong) NSString *style;
 @property (nonatomic, strong) NSString *deadline;
 @property (nonatomic, assign) NSInteger newBidNums;
 @property (nonatomic, assign) BOOL isBidded;

@@ -32,6 +32,7 @@
 @property (nonatomic, strong) EScrollerView *bannerView;
 @property (nonatomic, strong) FilterView *filterView;
 
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
 
 @end
 
@@ -72,6 +73,10 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = RGBColor(236, 236, 236);
     [self.view addSubview:_tableView];
+    
+    _emptyView.hidden = YES;
+    _emptyView.center = _tableView.center;
+    [self.tableView addSubview:_emptyView];
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -141,6 +146,11 @@
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
+                _emptyView.hidden = rows.count != 0;
+                _emptyView.center = CGPointMake(_tableView.center.x, _tableView.center.y - 40);
+                if (self.bannerView) {
+                    _emptyView.center = CGPointMake(_tableView.center.x, _tableView.center.y +CGRectGetHeight(_bannerView.frame)/2-40);
+                }
                 self.datas = rows;
             }
             

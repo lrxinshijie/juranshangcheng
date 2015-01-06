@@ -57,6 +57,7 @@
     frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 10;
     self.linkButton = [_scrollView buttonWithFrame:frame target:self action:@selector(onLink) title:@"" backgroundImage:nil];
     [self.linkButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    [self.linkButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [self.scrollView addSubview:_linkButton];
 }
 
@@ -67,27 +68,34 @@
     
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:_pushInfo.msgLinkTitle];
     NSRange strRange = {0,[str length]};
-    [str setAttributes:@{NSForegroundColorAttributeName:kBlueColor, NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle], NSFontAttributeName: [UIFont systemFontOfSize:14]} range:strRange];
+    [str setAttributes:@{NSForegroundColorAttributeName:kBlueColor, NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle], NSFontAttributeName: [UIFont systemFontOfSize:14]} range:strRange];//, NSWritingDirectionAttributeName: @(NSWritingDirectionLeftToRight|NSTextWritingDirectionEmbedding)
     [_linkButton setAttributedTitle:str forState:UIControlStateNormal];
     
     CGRect frame = _titleLabel.frame;
     frame.size.height = [_titleLabel.text heightWithFont:_titleLabel.font constrainedToWidth:CGRectGetWidth(_titleLabel.frame)];
     _titleLabel.frame = frame;
     
+    _imageView.hidden = NO;
     frame = _imageView.frame;
     frame.origin.y = CGRectGetMaxY(_titleLabel.frame) + 10;
     _imageView.frame = frame;
     
+    CGFloat y = CGRectGetMaxY(_imageView.frame) + 10;
+    if (_pushInfo.msgImgUrl.length == 0) {
+        _imageView.hidden = YES;
+        y = CGRectGetMaxY(_titleLabel.frame) + 10;
+    }
+    
     frame = _contentLabel.frame;
-    frame.origin.y = CGRectGetMaxY(_imageView.frame) + 10;
+    frame.origin.y = y;
     frame.size.height = [_contentLabel.text heightWithFont:_contentLabel.font constrainedToWidth:CGRectGetWidth(_titleLabel.frame)];
     _contentLabel.frame = frame;
     
     frame = _linkButton.frame;
-    frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 10;
+    frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;
     _linkButton.frame = frame;
     
-    CGFloat y = CGRectGetMaxY(_linkButton.frame);
+    y = CGRectGetMaxY(_linkButton.frame);
     if (y > kWindowHeightWithoutNavigationBar) {
         _scrollView.contentSize = CGSizeMake(kWindowWidth, y);
     }

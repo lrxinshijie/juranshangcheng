@@ -54,7 +54,7 @@
         [self hideHUD];
         if (!error) {
             NSString *version = [data getStringValueForKey:@"versionNo" defaultValue:@""];
-            if ([Public versionEqualString:[Public versionString] NewVersion:version]) {
+            if (![Public versionEqualString:[Public versionString] NewVersion:version]) {
                 [self showTip:@"已经是最新版本"];
             }else{
                 downLoadUrl = [data getStringValueForKey:@"downLoadUrl" defaultValue:nil];
