@@ -73,6 +73,7 @@
 + (NSString *)imageURLString:(NSString *)url;
 + (NSURL *)imageURL:(NSString *)url;
 + (NSURL *)imageURL:(NSString *)url Width:(NSInteger)width Height:(NSInteger)height;
++ (NSURL *)imageURL:(NSString *)url Width:(NSInteger)width;
 
 //图片质量 0为普通 1为高质量
 + (NSNumber*)imageQuality;
