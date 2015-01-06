@@ -17,6 +17,7 @@
         scale = 1;
     }
     NSURL *URL = [Public imageURL:url Width:CGRectGetWidth(self.frame)*scale Height:CGRectGetHeight(self.frame)*scale];
+//    NSLog(@"%@",URL);
     [self setImageWithURL:URL placeholderImage:self.image];
 }
 

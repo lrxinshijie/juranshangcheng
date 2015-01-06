@@ -238,7 +238,7 @@
 //        return;
 //    }
     if (bidInfo.isMeasured) {
-//        [self showTip:@"你已选该设计师量房请耐心等待！"];
+        [self showTip:@"你已选该设计师量房请耐心等待！"];
         return;
     }
     MeasureViewController *mv = [[MeasureViewController alloc] init];
@@ -250,7 +250,7 @@
 
 - (void)rejectForBid:(BidDesignerCell *)cell andBidInfo:(JRBidInfo *)bidInfo{
     if (bidInfo.isMeasured) {
-//        [self showTip:@"你已选该设计师量房请耐心等待！"];
+        [self showTip:@"你已选该设计师量房请耐心等待！"];
         return;
     }
     NSDictionary *param = @{@"designReqId": _demand.designReqId,
