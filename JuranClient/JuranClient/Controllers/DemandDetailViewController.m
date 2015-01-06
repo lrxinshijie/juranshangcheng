@@ -77,7 +77,6 @@
         [self hideHUD];
         if (!error) {
             [_demand buildUpDetailWithValue:data];
-            _emptyView.hidden = !(_demand.bidInfoList.count == 0 && !_demand.confirmDesignerDetail);
             [self reloadData];
         }
     }];
@@ -99,6 +98,8 @@
 //    _demandInfoTitleLabel.text = _demand.title;
     [self reSetData];
     [self setupDesignerTableHeaderView];
+    _emptyView.hidden = !(_demand.bidInfoList.count == 0 && !_demand.confirmDesignerDetail);
+    _emptyView.center = CGPointMake(_designerTableView.center.x, _designerTableView.center.y + CGRectGetHeight(_designerTableView.tableHeaderView.frame)/2 + 20);
     [_designerTableView reloadData];
     [_demandInfoTableView reloadData];
 }
@@ -177,7 +178,7 @@
     _rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     _emptyView.hidden = YES;
-    _emptyView.center = CGPointMake(_designerTableView.center.x, _designerTableView.center.y + 50);
+    _emptyView.center = CGPointMake(_designerTableView.center.x, _designerTableView.center.y);
     [_scrollView addSubview:_emptyView];
 }
 
@@ -236,6 +237,10 @@
 //        [self showTip:@"未认证的设计师无法预约量房"];
 //        return;
 //    }
+    if (bidInfo.isMeasured) {
+        [self showTip:@"你已选该设计师量房请耐心等待！"];
+        return;
+    }
     MeasureViewController *mv = [[MeasureViewController alloc] init];
     mv.designer = bidInfo.userBase;
     mv.bidId = bidInfo.bidId;
@@ -244,6 +249,10 @@
 }
 
 - (void)rejectForBid:(BidDesignerCell *)cell andBidInfo:(JRBidInfo *)bidInfo{
+    if (bidInfo.isMeasured) {
+        [self showTip:@"你已选该设计师量房请耐心等待！"];
+        return;
+    }
     NSDictionary *param = @{@"designReqId": _demand.designReqId,
                             @"designId":@(bidInfo.userBase.userId)};
     [self showHUD];

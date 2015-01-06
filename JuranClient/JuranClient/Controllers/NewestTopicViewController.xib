@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -14,6 +14,7 @@
                 <outlet property="commentTextField" destination="Cjl-Zl-f7N" id="PH6-Kh-QDQ"/>
                 <outlet property="commentView" destination="3au-No-JLt" id="Ozd-Jp-fzI"/>
                 <outlet property="contentWebView" destination="yhK-hq-tjb" id="iFh-fz-0cn"/>
+                <outlet property="emptyView" destination="GB0-Xf-cB0" id="qHJ-xD-syJ"/>
                 <outlet property="fileImageCountLabel" destination="mA0-Qi-7cu" id="yRS-Xz-drJ"/>
                 <outlet property="headerView" destination="t43-hW-djg" id="hdS-bg-Jr0"/>
                 <outlet property="tableHeaderView" destination="FKs-2z-9fY" id="Gxy-5f-zx3"/>
@@ -252,8 +253,30 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="493" y="589"/>
         </view>
+        <view contentMode="scaleToFill" id="GB0-Xf-cB0">
+            <rect key="frame" x="0.0" y="0.0" width="192" height="128"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data" id="udY-Jv-DKR">
+                    <rect key="frame" x="49" y="0.0" width="94" height="92"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无信息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FnP-2w-GnJ">
+                    <rect key="frame" x="49" y="107" width="94" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <color key="textColor" red="0.61176472900000001" green="0.61176472900000001" blue="0.61176472900000001" alpha="1" colorSpace="deviceRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="463" y="210"/>
+        </view>
     </objects>
     <resources>
+        <image name="answer_no_data" width="94" height="92"/>
         <image name="case-detail-send" width="62" height="39"/>
         <image name="case-icon-comment" width="22" height="21"/>
         <image name="icon_ camera" width="29" height="26"/>

@@ -59,7 +59,7 @@
     _statusImageView.image = [UIImage imageNamed:demand.isBidded?@"status_end.png":@"status_underway.png"];
     NSInteger index = [demand statusIndex];
     if (index == 2) {
-        if (demand.deadBalance.integerValue == 0) {
+        if (demand.deadBalance.integerValue < 1) {
             _endTimeLabel.text = [NSString stringWithFormat:@"离结束不足1天"];
         }else{
             _endTimeLabel.text = [NSString stringWithFormat:@"离结束还有%@天", demand.deadBalance];

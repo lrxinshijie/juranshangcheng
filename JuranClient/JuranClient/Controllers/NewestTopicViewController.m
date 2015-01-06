@@ -40,6 +40,8 @@
 @property (nonatomic, strong) NSString *comment;
 @property (nonatomic, strong) IBOutlet UILabel *fileImageCountLabel;
 
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
+
 @end
 
 @implementation NewestTopicViewController
@@ -71,6 +73,10 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
+    
+    _emptyView.hidden = YES;
+    _emptyView.center = _tableView.center;
+    [self.view addSubview:_emptyView];
     
     _contentWebView.backgroundColor = [UIColor clearColor];
     _contentWebView.scrollView.backgroundColor = [UIColor clearColor];
@@ -117,6 +123,7 @@
 
 - (void)loadData{
     [self showHUD];
+    _emptyView.hidden = YES;
     NSDictionary *param = nil;
     if (_topic.topicId.length > 0) {
         param = @{@"topicId": _topic.topicId};
@@ -131,12 +138,16 @@
             }else{
                 _topic = [[JRTopic alloc] initWithDictionaryForDetail:data];
             }
+            if (!data) {
+                _emptyView.hidden = NO;
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self reloadData];
             });
             
         }else{
             [self hideHUD];
+            _emptyView.hidden = NO;
         }
     }];
 }

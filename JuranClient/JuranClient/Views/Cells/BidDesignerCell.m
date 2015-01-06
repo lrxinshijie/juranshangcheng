@@ -76,14 +76,14 @@
     _browseCountLabel.text = [NSString stringWithFormat:@"%i", designer.browseCount];
     _declarationLabel.text = [NSString stringWithFormat:@"应标宣言:%@", bidInfo.biddingDeclatation];
     if (bidInfo.isMeasured) {
-        _measureButton.enabled = NO;
+        [_measureButton setTitleColor:[UIColor lightGrayColor]forState:UIControlStateNormal];
         _measureButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        _rejectButton.enabled = NO;
+        [_rejectButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         _rejectButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     }else{
-        _measureButton.enabled = YES;
+        [_measureButton setTitleColor:RGBColor(0, 89, 172) forState:UIControlStateNormal];
         _measureButton.layer.borderColor = RGBColor(0, 89, 172).CGColor;
-        _rejectButton.enabled = YES;
+        [_rejectButton setTitleColor:RGBColor(0, 89, 172) forState:UIControlStateNormal];
         _rejectButton.layer.borderColor = RGBColor(0, 89, 172).CGColor;
     }
     

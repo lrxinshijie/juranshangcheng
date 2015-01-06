@@ -315,10 +315,9 @@
 }
 
 - (void)imageAtIndex:(NSInteger)index photoView:(KTPhotoView *)photoView {
-    NSString *imageStr = [_jrCase.detailImageList objectAtIndex:index];
-    imageStr = [imageStr stringByAppendingString:@"_512_0.img"];
-    NSLog(@"%@",[Public imageURL:imageStr]);
-    [photoView setImageWithURL:[Public imageURL:imageStr] placeholderImage:nil];
+    NSURL *url = [Public imageURL:[_jrCase.detailImageList objectAtIndex:index] Width:512];
+    NSLog(@"%@",url);
+    [photoView setImageWithURL:url placeholderImage:nil];
 //    [UIImage imageNamed:@"case_default_image.png"]
 }
 

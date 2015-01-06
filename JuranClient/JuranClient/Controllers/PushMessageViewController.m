@@ -16,6 +16,8 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) PushMessageCell *msgCell;
 
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
+
 @end
 
 @implementation PushMessageViewController
@@ -36,6 +38,10 @@
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(setAllReaded:) title:@"全部已读" backgroundImage:nil];
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    
+    _emptyView.hidden = YES;
+    _emptyView.center = _tableView.center;
+    [self.view addSubview:_emptyView];
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -64,6 +70,7 @@
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
+                _emptyView.hidden = rows.count != 0;
                 self.datas = [JRPushInfoMsg buildUpWithValue:list];
             }
             

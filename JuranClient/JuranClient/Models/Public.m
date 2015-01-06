@@ -325,7 +325,12 @@
 }
 
 + (NSURL *)imageURL:(NSString *)url Width:(NSInteger)width Height:(NSInteger)height{
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@_%d_%d.img",JR_IMAGE_SERVICE,url, width,height];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@_%d_%d_0.img",JR_IMAGE_SERVICE,url, width,height];
+    return [NSURL URLWithString:urlString];
+}
+
++ (NSURL*)imageURL:(NSString *)url Width:(NSInteger)width{
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@_%d_0.img",JR_IMAGE_SERVICE,url, width];
     return [NSURL URLWithString:urlString];
 }
 

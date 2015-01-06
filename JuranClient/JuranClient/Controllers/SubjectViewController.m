@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
 
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
+
 @end
 
 @implementation SubjectViewController
@@ -34,6 +36,10 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = RGBColor(236, 236, 236);
     [self.view addSubview:_tableView];
+    
+    _emptyView.hidden = YES;
+    _emptyView.center = _tableView.center;
+    [self.view addSubview:_emptyView];
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -62,6 +68,7 @@
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
+                _emptyView.hidden = rows.count != 0;
                 self.datas = rows;
             }
             
