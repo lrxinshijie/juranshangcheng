@@ -58,7 +58,7 @@
     [self.view addSubview:line];
     
     frame.origin.y += 15;
-    label = [self.view labelWithFrame:frame text:_descripes[_index] textColor:RGBColor(203, 203, 203) textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:14]];
+    label = [self.view labelWithFrame:frame text:_descripes[_index] textColor:[UIColor darkGrayColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:14]];
     label.numberOfLines = 0;
     [self.view addSubview:label];
     
