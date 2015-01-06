@@ -51,9 +51,9 @@
     CGFloat y = 0;
     for (NSInteger i = 0; i < _titles.count; i ++) {
         frame = CGRectMake(30 + x + 100 * (i%3), 10 + y + 95*(i/3), 60, 60);
-        UIButton *btn = [self.view buttonWithFrame:frame target:self action:@selector(onDetail:) image:[UIImage imageNamed:[NSString stringWithFormat:@"service_normal_%d", i]]];
+        UIButton *btn = [self.view buttonWithFrame:frame target:self action:@selector(onDetail:) image:[UIImage imageNamed:[NSString stringWithFormat:@"service_highlighted_%d", i]]];
         btn.tag = i + kButtonTag;
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"service_highlight_%d", i]] forState:UIControlStateHighlighted];
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"service_normal_%d", i]] forState:UIControlStateHighlighted];
         [_scrollView addSubview:btn];
         
         frame.origin.y += 60;

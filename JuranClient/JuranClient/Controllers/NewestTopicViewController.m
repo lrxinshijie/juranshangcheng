@@ -80,6 +80,7 @@
     
     _contentWebView.backgroundColor = [UIColor clearColor];
     _contentWebView.scrollView.backgroundColor = [UIColor clearColor];
+    _contentWebView.scrollView.scrollEnabled = NO;
     
     [self setupCommentView];
     
