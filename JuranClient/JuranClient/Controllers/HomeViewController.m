@@ -19,6 +19,9 @@
 #import "CaseViewController.h"
 #import "JRPhotoScrollViewController.h"
 #import "JRSubject.h"
+#import "QuestionViewController.h"
+#import "NewestTopicViewController.h"
+#import "PrivateMessageViewController.h"
 
 #define kDesignerViewTag 1100
 
@@ -71,6 +74,8 @@
     [_tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
         [weakSelf loadAd];
+        [weakSelf loadDemandData];
+        [weakSelf loadNewestDesignerData];
     }];
     
     [_tableView addFooterWithCallback:^{
@@ -79,8 +84,12 @@
     }];
 }
 
+- (void)loadData{
+    
+}
+
 - (void)loadAd{
-    NSDictionary *param = @{@"adCode": @"app_consumer_index_roll",
+    NSDictionary *param = @{@"adCode": @"app_designer_index_roll",
                             @"areaCode": @"110000",
                             @"type": @(7)};
     [self showHUD];
@@ -97,10 +106,7 @@
                 
                 [_tableHeaderView addSubview:_bannerView];
             }
-            
         }
-        [self loadDemandData];
-        [self loadNewestDesignerData];
     }];
 }
 
@@ -186,19 +192,31 @@
 }
 
 - (IBAction)onQuestion:(id)sender{
+    QuestionViewController *vc = [[QuestionViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
     
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)onTopic:(id)sender{
+    NewestTopicViewController *vc = [[NewestTopicViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
     
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)onPrivateLetter:(id)sender{
+    if (![self checkLogin]) {
+        return;
+    }
     
+    PrivateMessageViewController *pv = [[PrivateMessageViewController alloc] init];
+    pv.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:pv animated:YES];
 }
 
 - (void)onSearch{
-
+    
 }
 
 #pragma mark - UITableViewDataSource/Delegate
