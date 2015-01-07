@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign) NSInteger currentPage;
 
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
 
 @end
 
@@ -43,7 +44,9 @@
         [weakSelf loadData];
     }];
     
-    
+    _emptyView.hidden = YES;
+    _emptyView.center = _tableView.center;
+    [self.tableView addSubview:_emptyView];
     
     [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onAdd)];
     
@@ -81,6 +84,7 @@
             
             [_tableView reloadData];
         }
+        _emptyView.hidden = _datas.count != 0;
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
         

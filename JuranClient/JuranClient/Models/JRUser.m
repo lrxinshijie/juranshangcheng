@@ -173,8 +173,13 @@
     self.hasNewBidCount = [dict getIntValueForKey:@"hasNewBigCount" defaultValue:0];
     self.newPrivateLetterCount = [dict getIntValueForKey:@"newPrivateLetterCount" defaultValue:0];
     self.newAnswerCount = [dict getIntValueForKey:@"newAnswerCount" defaultValue:0];
-    self.newPushMsgCount = [dict getIntValueForKey:@"newPushMsgCount" defaultValue:0];
     self.isSigned = [dict getBoolValueForKey:@"isSigned" defaultValue:FALSE];
+    
+#ifndef kJuranDesigner
+    self.newPushMsgCount = [dict getIntValueForKey:@"newPushMsgCount" defaultValue:0];
+#else
+    self.newPushMsgCount = [dict getIntValueForKey:@"newMsgPushed" defaultValue:0];
+#endif
 }
 
 - (void)buildUpMemberDetailWithDictionary:(NSDictionary *)dict{

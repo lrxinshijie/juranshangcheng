@@ -124,7 +124,7 @@
 #define JR_GET_DEPROJECTLISTREQ [NSString stringWithFormat:@"%@/project/getDeProjectListReq.json",JR_SERVICE]
 #define JR_GET_REALNAMEAPPLY [NSString stringWithFormat:@"%@/design/getRealNameApply.json",JR_SERVICE]
 #define JR_REALNAME_APPLY [NSString stringWithFormat:@"%@/member/realNameApply.json",JR_SERVICE]
-
+#define JR_GET_DESIGNER_CENTERINFO [NSString stringWithFormat:@"%@/member/getDesignerCenterInfo.json",JR_SERVICE]
 
 
 

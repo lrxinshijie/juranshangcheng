@@ -153,7 +153,12 @@
     NSInteger i = 0;
     for (JRDesigner *d in _designerDatas) {
         UIImageView *imageView = (UIImageView*)[_tableHeaderView viewWithTag:kDesignerViewTag + i * 2];
-        [imageView setImageWithURLString:d.headUrl];
+        if (d.headUrl.length > 0) {
+            [imageView setImageWithURLString:d.headUrl];
+        }else{
+            imageView.image = [UIImage imageNamed:@"unlogin_head.png"];
+        }
+        
         
         UILabel *label = (UILabel*)[_tableHeaderView viewWithTag:kDesignerViewTag + i*2 + 1];
         label.text = [d formatUserName];
