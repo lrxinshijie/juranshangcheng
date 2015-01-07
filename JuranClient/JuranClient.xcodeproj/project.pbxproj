@@ -536,6 +536,12 @@
 		14FE2E571A38549200B31FBA /* PrivateMessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FE2E551A38549200B31FBA /* PrivateMessageDetailViewController.xib */; };
 		3710D5AE1A557DF00028D32A /* RealNameAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */; };
 		3710D5AF1A557DF00028D32A /* RealNameAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */; };
+		371D686F1A5D6E2000172AC9 /* icon_case_manage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D686B1A5D6E2000172AC9 /* icon_case_manage@2x.png */; };
+		371D68701A5D6E2000172AC9 /* icon_dingdan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D686C1A5D6E2000172AC9 /* icon_dingdan@2x.png */; };
+		371D68721A5D6E2000172AC9 /* icon_realname_auth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D686E1A5D6E2000172AC9 /* icon_realname_auth@2x.png */; };
+		371D68741A5D6E7E00172AC9 /* icon_homepage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D68731A5D6E7E00172AC9 /* icon_homepage@2x.png */; };
+		371D68761A5D72CA00172AC9 /* icon_setting_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D68751A5D72CA00172AC9 /* icon_setting_white@2x.png */; };
+		371D68781A5D78E700172AC9 /* personal_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D68771A5D78E700172AC9 /* personal_bg@2x.png */; };
 		378BB2C31A4B1C6E00E8358D /* JRBidInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 378BB2C21A4B1C6E00E8358D /* JRBidInfo.m */; };
 		37CF672C1A4FE11D0044F709 /* NewestBidInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */; };
 		37CF672D1A4FE11D0044F709 /* NewestBidInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37CF672B1A4FE11D0044F709 /* NewestBidInfoCell.xib */; };
@@ -1478,6 +1484,12 @@
 		3710D5AB1A557DF00028D32A /* RealNameAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealNameAuthViewController.h; sourceTree = "<group>"; };
 		3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealNameAuthViewController.m; sourceTree = "<group>"; };
 		3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RealNameAuthViewController.xib; sourceTree = "<group>"; };
+		371D686B1A5D6E2000172AC9 /* icon_case_manage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_case_manage@2x.png"; sourceTree = "<group>"; };
+		371D686C1A5D6E2000172AC9 /* icon_dingdan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_dingdan@2x.png"; sourceTree = "<group>"; };
+		371D686E1A5D6E2000172AC9 /* icon_realname_auth@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_realname_auth@2x.png"; sourceTree = "<group>"; };
+		371D68731A5D6E7E00172AC9 /* icon_homepage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_homepage@2x.png"; sourceTree = "<group>"; };
+		371D68751A5D72CA00172AC9 /* icon_setting_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_setting_white@2x.png"; sourceTree = "<group>"; };
+		371D68771A5D78E700172AC9 /* personal_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "personal_bg@2x.png"; sourceTree = "<group>"; };
 		378BB2C11A4B1C6E00E8358D /* JRBidInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRBidInfo.h; sourceTree = "<group>"; };
 		378BB2C21A4B1C6E00E8358D /* JRBidInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRBidInfo.m; sourceTree = "<group>"; };
 		37CF67291A4FE11D0044F709 /* NewestBidInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewestBidInfoCell.h; sourceTree = "<group>"; };
@@ -2396,6 +2408,19 @@
 				BD5F23E51A52A430009F759E /* SerciceDetailViewController.xib */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		371D686A1A5D6E2000172AC9 /* Personal */ = {
+			isa = PBXGroup;
+			children = (
+				371D68771A5D78E700172AC9 /* personal_bg@2x.png */,
+				371D68751A5D72CA00172AC9 /* icon_setting_white@2x.png */,
+				371D68731A5D6E7E00172AC9 /* icon_homepage@2x.png */,
+				371D686B1A5D6E2000172AC9 /* icon_case_manage@2x.png */,
+				371D686C1A5D6E2000172AC9 /* icon_dingdan@2x.png */,
+				371D686E1A5D6E2000172AC9 /* icon_realname_auth@2x.png */,
+			);
+			path = Personal;
 			sourceTree = "<group>";
 		};
 		A90459DA1A278D7E00F8CD74 /* Case */ = {
@@ -3465,6 +3490,7 @@
 		BD5185B31A5D0ED700BE508A /* JuranDesigner */ = {
 			isa = PBXGroup;
 			children = (
+				371D686A1A5D6E2000172AC9 /* Personal */,
 				1415FAA71A5D249E003D0C29 /* Icon-Small.png */,
 				1415FAA81A5D249E003D0C29 /* Icon-Small@2x.png */,
 				1415FAA91A5D249E003D0C29 /* Icon.png */,
@@ -3636,6 +3662,7 @@
 				BD5186FA1A5D0ED700BE508A /* menu_activity_select@2x.png in Resources */,
 				BD5186121A5D0ED700BE508A /* checkbox_checked@2x.png in Resources */,
 				1415FA331A5CD1CB003D0C29 /* DemandCell.xib in Resources */,
+				371D68741A5D6E7E00172AC9 /* icon_homepage@2x.png in Resources */,
 				BD5187181A5D0ED700BE508A /* service_highlighted_2@2x.png in Resources */,
 				BD5186CE1A5D0ED700BE508A /* question_unresolved@2x.png in Resources */,
 				1415FA341A5CD1CB003D0C29 /* ShareSDKLocalizable.strings in Resources */,
@@ -3841,6 +3868,7 @@
 				1415FA6F1A5CD1CB003D0C29 /* PublishDesignViewController.xib in Resources */,
 				BD5187801A5D0ED700BE508A /* nav-designer-active@2x.png in Resources */,
 				BD5187081A5D0ED700BE508A /* menu_setting_default@2x.png in Resources */,
+				371D68781A5D78E700172AC9 /* personal_bg@2x.png in Resources */,
 				1415FA701A5CD1CB003D0C29 /* MeasureViewController.xib in Resources */,
 				BD51867A1A5D0ED700BE508A /* empty_demand@2x.png in Resources */,
 				BD5186081A5D0ED700BE508A /* icon-star@2x.png in Resources */,
@@ -3855,6 +3883,7 @@
 				BD5186C41A5D0ED700BE508A /* question_input@2x.png in Resources */,
 				BD5187301A5D0ED700BE508A /* service_normal_2@2x.png in Resources */,
 				BD5186BA1A5D0ED700BE508A /* icon_camera3@2x.png in Resources */,
+				371D68761A5D72CA00172AC9 /* icon_setting_white@2x.png in Resources */,
 				BD51878A1A5D0ED700BE508A /* nav-user-default@2x.png in Resources */,
 				BD5186461A5D0ED700BE508A /* guide_h_3@2x.png in Resources */,
 				BD5186421A5D0ED700BE508A /* guide_h_1@2x.png in Resources */,
@@ -3884,8 +3913,10 @@
 				BD51864A1A5D0ED700BE508A /* check-on@2x.png in Resources */,
 				BD5187621A5D0ED700BE508A /* tabbar_demands_hl@2x.png in Resources */,
 				BD5185D41A5D0ED700BE508A /* avtar_default@2x.png in Resources */,
+				371D68701A5D6E2000172AC9 /* icon_dingdan@2x.png in Resources */,
 				BD5186A41A5D0ED700BE508A /* signleChocie@2x.png in Resources */,
 				BD5187681A5D0ED700BE508A /* tabbar_personal@2x.png in Resources */,
+				371D68721A5D6E2000172AC9 /* icon_realname_auth@2x.png in Resources */,
 				1415FA7A1A5CD1CB003D0C29 /* QuestionCell.xib in Resources */,
 				BD5186601A5D0ED700BE508A /* login-icon-wx@2x.png in Resources */,
 				BD5185FC1A5D0ED700BE508A /* icon-grid@2x.png in Resources */,
@@ -3939,6 +3970,7 @@
 				1415FA881A5CD1CB003D0C29 /* GuideViewController.xib in Resources */,
 				BD5186981A5D0ED700BE508A /* message_toolbar_split@2x 2.png in Resources */,
 				1415FA891A5CD1CB003D0C29 /* MyDemandViewController.xib in Resources */,
+				371D686F1A5D6E2000172AC9 /* icon_case_manage@2x.png in Resources */,
 				1415FA8A1A5CD1CB003D0C29 /* CaseCollectViewController.xib in Resources */,
 				BD5187881A5D0ED700BE508A /* nav-user-active@2x.png in Resources */,
 				1415FA8B1A5CD1CB003D0C29 /* AskDetailViewController.xib in Resources */,

@@ -18,9 +18,16 @@
 #import "InteractionViewController.h"
 #import "PushMessageViewController.h"
 #import "CaseCollectViewController.h"
-#import "PrivateMessageViewController.h"
+
+#ifdef kJuranDesigner
 #import "RealNameAuthViewController.h"
 #import "CaseManagementViewController.h"
+#import "DesignerDetailViewController.h"
+#import "JRDesigner.h"
+#import "SettingsViewController.h"
+#else
+#import "PrivateMessageViewController.h"
+#endif
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -75,12 +82,12 @@
                     , @"我的收藏"
                     , @"订单管理"
                     , @"实名认证"];
-    imageArray = @[ @"icon_personal_zhaq"
-                    , @"icon_personal_zhaq"
+    imageArray = @[ @"icon_case_manage"
+                    , @"icon_homepage.png"
                     , @"icon_personal_guanzhu.png"
                     , @"icon_personal_shouchang.png"
-                    , @"icon_personal_zhaq"
-                    , @"icon_personal_zhaq"];
+                    , @"icon_dingdan.png"
+                    , @"icon_realname_auth.png"];
 #else
     titleArray = @[ @"我的关注"
                     , @"我的收藏"
@@ -118,6 +125,21 @@
     _hasNewAnswerView.layer.cornerRadius = _hasNewAnswerView.frame.size.height/2.f;
     _hasNewBidView.layer.cornerRadius = _hasNewBidView.frame.size.height/2.f;
     _hasNewPushMsgView.layer.cornerRadius = _hasNewPushMsgView.frame.size.height/2.f;
+    
+#ifdef kJuranDesigner
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon_setting_white.png"] rightBarButtonItemAction:@selector(onSetting)];
+    
+    UILabel *label = (UILabel*)[_buttonView viewWithTag:1101];
+    label.text = @"应标";
+    
+    UIImageView *imageView = (UIImageView*)[_buttonView viewWithTag:1102];
+    imageView.image = [UIImage imageNamed:@"icon_personal_hudong.png"];
+    label = (UILabel*)[_buttonView viewWithTag:1103];
+    label.text = @"互动";
+    
+    imageView = (UIImageView*)[_headerView viewWithTag:2010];
+    imageView.image = [UIImage imageNamed:@"personal_bg.png"];
+#endif
 }
 
 - (void)refreshUI{
@@ -155,10 +177,14 @@
         return;
     }
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self hideHUD];
-        });
+    
+#ifndef kJuranDesigner
+    NSString *url = JR_MYCENTERINFO;
+#else
+    NSString *url = JR_MYCENTERINFO;
+#endif
+    [[ALEngine shareEngine] pathURL:url parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
                 [_user buildUpProfileDataWithDictionary:data];
@@ -176,6 +202,12 @@
 
 
 #pragma mark - Target Action
+
+- (void)onSetting{
+    SettingsViewController *vc = [[SettingsViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (IBAction)doSigned:(id)sender{
     if (![self checkLogin:^{
@@ -207,17 +239,22 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-//需求
+
 - (IBAction)doDemand:(id)sender{
     if (![self checkLogin:^{
         [self loadData];
     }]) {
         return;
     }
+#ifndef kJuranDesigner
+    //需求
     _user.hasNewBidCount = 0;
     MyDemandViewController *vc = [[MyDemandViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+#else
+    
+#endif
 }
 
 //私信
@@ -225,11 +262,16 @@
     if (![self checkLogin]) {
         return;
     }
-    
+#ifndef kJuranDesigner
     _user.newPrivateLetterCount = 0;
     PrivateMessageViewController *pv = [[PrivateMessageViewController alloc] init];
     pv.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:pv animated:YES];
+#else
+    InteractionViewController *vc = [[InteractionViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+#endif
 }
 
 //问答
@@ -374,7 +416,17 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 2){
 //        个人主页
-        
+        if (![self checkLogin:^{
+            [self loadData];
+        }]) {
+            return;
+        }
+        DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
+        JRDesigner *designer = [[JRDesigner alloc] init];
+        designer.userId = _user.userId;
+        detailVC.designer = designer;
+        detailVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detailVC animated:YES];
     }else if (indexPath.row == 3){
 //        我的关注
         if (![self checkLogin:^{

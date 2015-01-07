@@ -51,7 +51,7 @@
                         <action selector="doPrivateLetter:" destination="-1" eventType="touchUpInside" id="sdp-lt-9Pq"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_personal_letter" id="bvd-aa-EVP">
+                <imageView userInteractionEnabled="NO" tag="1102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_personal_letter.png" id="bvd-aa-EVP">
                     <rect key="frame" x="111" y="13" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -75,25 +75,25 @@
                         <action selector="doPushMsg:" destination="-1" eventType="touchUpInside" id="Hih-bt-6Sm"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_personal_demands" id="KbI-ac-06j">
+                <imageView userInteractionEnabled="NO" tag="1100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_personal_demands.png" id="KbI-ac-06j">
                     <rect key="frame" x="34" y="13" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="需求" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vWQ-gW-Vqh">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="需求" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vWQ-gW-Vqh">
                     <rect key="frame" x="30" y="42" width="33" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.32941177487373352" green="0.32941177487373352" blue="0.32941177487373352" alpha="1" colorSpace="deviceRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="私信" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oyV-0a-hFd">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1103" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="私信" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oyV-0a-hFd">
                     <rect key="frame" x="107" y="41" width="33" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.32941177490000001" green="0.32941177490000001" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_personal_ask" id="BrQ-Qn-frY">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_personal_ask.png" id="BrQ-Qn-frY">
                     <rect key="frame" x="187" y="13" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -147,7 +147,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="personal_background" id="LTg-if-obu">
+                <imageView userInteractionEnabled="NO" tag="2010" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="personal_background.png" id="LTg-if-obu">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -162,10 +162,6 @@
                         <action selector="doTouchHeaderView:" destination="-1" eventType="touchUpInside" id="exA-q8-GYh"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlogin_head" id="YKH-BR-NXK">
-                    <rect key="frame" x="130" y="10" width="60" height="60"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="立即登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bEL-Su-apM">
                     <rect key="frame" x="123" y="79" width="74" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -192,7 +188,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title=" 签到" image="icon_personal_signIn">
+                    <state key="normal" title=" 签到" image="icon_personal_signIn.png">
                         <color key="titleColor" red="0.32156863808631897" green="0.32156863808631897" blue="0.32941177487373352" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -200,6 +196,10 @@
                         <action selector="doSigned:" destination="-1" eventType="touchUpInside" id="uMi-Os-ipj"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlogin_head.png" id="YKH-BR-NXK">
+                    <rect key="frame" x="130" y="11" width="60" height="60"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -207,13 +207,13 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_personal_ask" width="25" height="25"/>
-        <image name="icon_personal_demands" width="25" height="25"/>
-        <image name="icon_personal_letter" width="25" height="25"/>
+        <image name="icon_personal_ask.png" width="25" height="25"/>
+        <image name="icon_personal_demands.png" width="25" height="25"/>
+        <image name="icon_personal_letter.png" width="25" height="25"/>
         <image name="icon_personal_msg" width="25" height="25"/>
-        <image name="icon_personal_signIn" width="12" height="12"/>
-        <image name="personal_background" width="320" height="120"/>
-        <image name="unlogin_head" width="60" height="60"/>
+        <image name="icon_personal_signIn.png" width="12" height="12"/>
+        <image name="personal_background.png" width="320" height="120"/>
+        <image name="unlogin_head.png" width="60" height="60"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
