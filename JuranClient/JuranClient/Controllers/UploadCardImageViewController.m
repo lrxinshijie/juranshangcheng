@@ -39,7 +39,7 @@
     self.navigationItem.title = @"上传证件照片";
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave:) title:@"保存" backgroundImage:nil];
-    [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     self.tips = @[@"备注：\n·请使用扫描、数码拍摄、复印得到的真实身份证有效图片上传来进行实名认证；\n·仅支持二代身份证，要求姓名、证件号码、脸部、地址清晰可见；\n·支持上传图片类型：JPG/PNG/BMP，文件大小在5M以内。", @"备注：\n·免冠、建议未化妆；五官可见；\n·身份证全部信息需清晰无遮挡，否则认证将无法通过；\n·完整露出手臂；\n·请勿进行任何软件处理；\n·支持上传图片类型：JPG/PNG/BMP，文件大小在10M以内。"];

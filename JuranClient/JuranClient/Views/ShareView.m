@@ -153,39 +153,45 @@
     if (shareType == ShareTypeQQ) {
         authType = ShareTypeQQSpace;
     }
-    if (![ShareSDK hasAuthorizedWithType:authType])
-    {
-        needAuth = YES;
-        [ShareSDK getUserInfoWithType:authType
-                          authOptions:authOptions
-                               result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
-                                   
-                                   if (result)
-                                   {
-                                       [ShareSDK showShareViewWithType:shareType container:nil content:publishContent statusBarTips:NO authOptions:authOptions shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                           
-                                       }];
-                                   }
-                                   else
-                                   {
-                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                                                           message:[NSString stringWithFormat:@"发送失败!%@", [error errorDescription]]
-                                                                                          delegate:nil
-                                                                                 cancelButtonTitle:@"知道了"
-                                                                                 otherButtonTitles:nil];
-                                       [alertView show];
-                                   }
-                               }];
-    }
-    
-    if (!needAuth)
-    {
-        //分享内容
-        [ShareSDK showShareViewWithType:shareType container:nil content:publishContent statusBarTips:NO authOptions:authOptions shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-            
-        }];
-
-    }
+//    if (![ShareSDK hasAuthorizedWithType:authType])
+//    {
+//        needAuth = YES;
+//        [ShareSDK getUserInfoWithType:authType
+//                          authOptions:authOptions
+//                               result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
+//                                   
+//                                   if (result)
+//                                   {
+//                                       [ShareSDK showShareViewWithType:shareType container:nil content:publishContent statusBarTips:NO authOptions:authOptions shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+//                                           
+//                                       }];
+//                                   }
+//                                   else
+//                                   {
+//                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
+//                                                                                           message:[NSString stringWithFormat:@"发送失败!%@", [error errorDescription]]
+//                                                                                          delegate:nil
+//                                                                                 cancelButtonTitle:@"知道了"
+//                                                                                 otherButtonTitles:nil];
+//                                       [alertView show];
+//                                   }
+//                               }];
+//    }
+////    
+//
+//    if (!needAuth)
+//    {
+//        //分享内容
+//        [ShareSDK showShareViewWithType:shareType container:nil content:publishContent statusBarTips:NO authOptions:authOptions shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+//            ASLog(@"err:%@",error.errorDescription);
+//        }];
+//
+//    }
+    [ShareSDK shareContent:publishContent type:shareType authOptions:nil shareOptions:nil statusBarTips:NO result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+        if (!error) {
+            ASLog(@"error:%@",error.errorDescription);
+        }
+    }];
     [self unShow];
     
 }

@@ -36,6 +36,29 @@ static LeveyTabBarController *leveyTabBarController;
 
 #pragma mark -
 #pragma mark lifecycle
+
+- (id)initWithViewControllers:(NSArray *)vcs
+{
+    self = [super init];
+    if (self != nil)
+    {
+        self.viewControllers = [NSMutableArray arrayWithArray:vcs];
+        
+        self.containerView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+        
+        self.transitionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0f, _containerView.frame.size.height - kTabBarHeight)];
+        
+        _transitionView.backgroundColor =  [UIColor groupTableViewBackgroundColor];
+        
+        self.tabBar = [[LeveyTabBar alloc] initWithFrame:CGRectMake(0, _containerView.frame.size.height - kTabBarHeight + (SystemVersionGreaterThanOrEqualTo7 ? 20 : 0), 320.0f, kTabBarHeight) controllers:vcs];
+        _tabBar.delegate = self;
+        
+        leveyTabBarController = self;
+        self.animateDriect = 0;
+    }
+    return self;
+}
+
 - (id)initWithViewControllers:(NSArray *)vcs imageArray:(NSArray *)arr
 {
 	self = [super init];
@@ -49,7 +72,8 @@ static LeveyTabBarController *leveyTabBarController;
         
 		_transitionView.backgroundColor =  [UIColor groupTableViewBackgroundColor];
 		
-		self.tabBar = [[LeveyTabBar alloc] initWithFrame:CGRectMake(0, _containerView.frame.size.height - kTabBarHeight + (SystemVersionGreaterThanOrEqualTo7 ? 20 : 0), 320.0f, kTabBarHeight) buttonImages:arr];
+//		self.tabBar = [[LeveyTabBar alloc] initWithFrame:CGRectMake(0, _containerView.frame.size.height - kTabBarHeight + (SystemVersionGreaterThanOrEqualTo7 ? 20 : 0), 320.0f, kTabBarHeight) buttonImages:arr];
+        self.tabBar = [[LeveyTabBar alloc] initWithFrame:CGRectMake(0, _containerView.frame.size.height - kTabBarHeight + (SystemVersionGreaterThanOrEqualTo7 ? 20 : 0), 320.0f, kTabBarHeight) buttonImages:arr];
 		_tabBar.delegate = self;
 		
         leveyTabBarController = self;

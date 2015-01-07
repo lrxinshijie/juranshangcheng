@@ -52,8 +52,10 @@
     
     [self setupUI];
     
-    [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"navbar_leftbtn_logo"] leftBarButtonItemAction:nil];
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
+//    [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"navbar_leftbtn_logo"] leftBarButtonItemAction:nil];
+    [self configureMenu];
+    
+    [self configureSearch];
     
     [_tableView headerBeginRefreshing];
 }

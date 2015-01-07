@@ -37,6 +37,7 @@
 }
 
 - (void)configureMenu{
+    
     [self setLogBackBarButton:@"navbar_leftbtn_logo" target:self action:@selector(showMenu)];
 #ifndef kJuranDesigner
     UISwipeGestureRecognizer *swipt = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showMenu)];
@@ -51,7 +52,7 @@
 //}
 
 - (void)configureSearch{
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
+    [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
 }
 
 - (void)onSearch{
@@ -61,6 +62,9 @@
 }
 
 - (void)showMenu{
+#ifndef kJuranDesigner
+    return;
+#endif
     if ([[MenuView sharedView] superview]) {
         [self hideMenu];
     }else{
@@ -83,7 +87,8 @@
     }
     
     btn.backgroundColor = [UIColor clearColor];
-    [btn setImage:[UIImage imageNamed:imgStr] forState:UIControlStateNormal];
+//    [btn setImage:[UIImage imageNamed:imgStr] forState:UIControlStateNormal];
+    [btn setImage:[[ALTheme sharedTheme] imageNamed:@"navbar_leftbtn_logo"] forState:UIControlStateNormal];
     
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
