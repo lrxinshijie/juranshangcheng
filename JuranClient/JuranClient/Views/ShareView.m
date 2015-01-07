@@ -98,6 +98,7 @@
         case 3:
         {
             shareType = ShareTypeTencentWeibo;
+            [publishContent setContent:[NSString stringWithFormat:@"%@\n%@", _content, _url]];
             break;
         }
         case 4:
@@ -118,6 +119,7 @@
         case 5:
         {
             shareType = ShareTypeSinaWeibo;
+            [publishContent setContent:[NSString stringWithFormat:@"%@\n%@", _content, _url]];
             break;
         }
         case 6:

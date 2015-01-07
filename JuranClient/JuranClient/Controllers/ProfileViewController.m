@@ -67,24 +67,30 @@
     [self configureMenu];
     
     _user = [JRUser currentUser];
-    //@"互动",@"订单管理",  @"账户管理",
-    titleArray = @[ @"我的关注"
-                    , @"我的收藏"
-                    , @"账户安全"
+    
 #ifdef kJuranDesigner
-                    , @"实名认证"
-                    , @"案例管理"
-#endif
-                    ];
-    //@"icon_personal_hudong.png",, @"icon_personal_ddgl.png", @"icon_personal_zhgl.png"
-    imageArray = @[ @"icon_personal_guanzhu.png"
+    titleArray = @[ @"案例管理"
+                    , @"个人主页"
+                    , @"我的关注"
+                    , @"我的收藏"
+                    , @"订单管理"
+                    , @"实名认证"];
+    imageArray = @[ @"icon_personal_zhaq"
+                    , @"icon_personal_zhaq"
+                    , @"icon_personal_guanzhu.png"
                     , @"icon_personal_shouchang.png"
                     , @"icon_personal_zhaq"
-#ifdef kJuranDesigner
-                    , @"icon_personal_zhaq"
-                    , @"icon_personal_zhaq"
+                    , @"icon_personal_zhaq"];
+#else
+    titleArray = @[ @"我的关注"
+                    , @"我的收藏"
+                    , @"账户安全"];
+    
+    imageArray = @[ @"icon_personal_guanzhu.png"
+                    , @"icon_personal_shouchang.png"
+                    , @"icon_personal_zhaq"];
 #endif
-                    ];
+                   
     [self setupUI];
     [self loadData];
 }
@@ -297,6 +303,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+#ifndef kJuranDesigner
     if (indexPath.row == 1) {
 //        我的关注
         if (![self checkLogin:^{
@@ -344,8 +351,8 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
-#ifdef kJuranDesigner
-    else if (indexPath.row == 4){
+#else
+    if (indexPath.row == 6){
         //实名认证
         if (![self checkLogin:^{
             [self loadData];
@@ -355,7 +362,7 @@
         RealNameAuthViewController *vc = [[RealNameAuthViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 5){
+    }else if (indexPath.row == 1){
         //案例管理
         if (![self checkLogin:^{
             [self loadData];
@@ -365,6 +372,29 @@
         CaseManagementViewController *vc = [[CaseManagementViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 2){
+//        个人主页
+        
+    }else if (indexPath.row == 3){
+//        我的关注
+        if (![self checkLogin:^{
+            [self loadData];
+        }]) {
+            return;
+        }
+        MyFollowViewController *vc = [[MyFollowViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 4){
+//        我的收藏
+        if (![self checkLogin]) {
+            return;
+        }
+        CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 5){
+//        订单管理
     }
 #endif
 }
