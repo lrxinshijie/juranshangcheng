@@ -62,7 +62,7 @@
 }
 
 - (void)showMenu{
-#ifndef kJuranDesigner
+#ifdef kJuranDesigner
     return;
 #endif
     if ([[MenuView sharedView] superview]) {

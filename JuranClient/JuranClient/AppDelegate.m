@@ -40,7 +40,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+#ifndef kJuranDesigner
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+#endif
     
     self.clientId = @"";
     
@@ -198,11 +200,13 @@
 
 #ifdef kJuranDesigner
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-    if (viewController.hidesBottomBarWhenPushed){
-        [_tabBarController hidesTabBar:YES animated:YES];
-    }else{
-        [_tabBarController hidesTabBar:NO animated:YES];
-    }
+    [_tabBarController hidesTabBar:navigationController.viewControllers.count > 1 animated:YES];
+    
+//    if (viewController.hidesBottomBarWhenPushed){
+//        [_tabBarController hidesTabBar:YES animated:YES];
+//    }else{
+//        [_tabBarController hidesTabBar:NO animated:YES];
+//    }
 }
 #endif
 
@@ -317,7 +321,7 @@
         }
         
     }else{
-        [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"取消" otherButtonTitles:nil tapBlock:nil];
+        [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:nil];
     }
     
 }

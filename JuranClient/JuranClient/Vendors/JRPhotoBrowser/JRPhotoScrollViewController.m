@@ -62,10 +62,15 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar setBackgroundImageWithColor:[UIColor whiteColor]];
+    
     [self.navigationController setNavigationBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+#ifdef kJuranDesigner
+    [self.navigationController.navigationBar setBackgroundImageWithColor:[UIColor blackColor]];
+#else
+    [self.navigationController.navigationBar setBackgroundImageWithColor:[UIColor whiteColor]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+#endif
 }
 
 - (void)viewDidLoad

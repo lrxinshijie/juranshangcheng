@@ -47,7 +47,7 @@
         [_sortButton setImage:[UIImage imageNamed:@"case-icon-order"] forState:UIControlStateNormal];
         
         [_sortButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_sortButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateSelected];
+        [_sortButton setTitleColor:kBlueColor forState:UIControlStateSelected];
         [_sortButton setImage:[UIImage imageNamed:@"menu_paixu"] forState:UIControlStateSelected];
         [self addSubview:_sortButton];
         
@@ -58,7 +58,7 @@
         _filterButton.titleLabel.font = [UIFont systemFontOfSize:15];
         [_filterButton setImage:[UIImage imageNamed:@"case-icon-filter"] forState:UIControlStateNormal];
         [_filterButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_filterButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateSelected];
+        [_filterButton setTitleColor:kBlueColor forState:UIControlStateSelected];
         [_filterButton setImage:[UIImage imageNamed:@"menu_shaixuan"] forState:UIControlStateSelected];
         [self addSubview:_filterButton];
         
