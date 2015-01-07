@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LeveyTabBar.h"
+#import "ALViewController.h"
 
 @class UITabBarController;
 @protocol LeveyTabBarControllerDelegate;
@@ -31,16 +32,9 @@
 
 @property(nonatomic, assign) NSInteger animateDriect;
 
-- (id)initWithViewControllers:(NSArray *)vcs imageArray:(NSArray *)arr;
 - (id)initWithViewControllers:(NSArray *)vcs;
+
 - (void)hidesTabBar:(BOOL)yesOrNO animated:(BOOL)animated;
-//- (void)hidesTabBar:(BOOL)yesOrNO animated:(BOOL)animated driect:(NSInteger)driect;
-
-// Remove the viewcontroller at index of viewControllers.
-- (void)removeViewControllerAtIndex:(NSUInteger)index;
-
-// Insert an viewcontroller at index of viewControllers.
-- (void)insertViewController:(UIViewController *)vc withImageDic:(NSDictionary *)dict atIndex:(NSUInteger)index;
 
 @end
 
