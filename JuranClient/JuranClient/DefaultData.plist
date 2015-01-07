@@ -557,6 +557,99 @@
 			<string>other</string>
 		</dict>
 	</array>
+	<key>bidInfoStatus</key>
+	<array>
+		<dict>
+			<key>k</key>
+			<string>待审核</string>
+			<key>v</key>
+			<string>01_waitAudit</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>审核拒绝</string>
+			<key>v</key>
+			<string>02_refusal</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>进行中</string>
+			<key>v</key>
+			<string>03_pass</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>已完成</string>
+			<key>v</key>
+			<string>04_complete</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>已结束</string>
+			<key>v</key>
+			<string>05_close</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>已流标</string>
+			<key>v</key>
+			<string>06_falied</string>
+		</dict>
+	</array>
+	<key>bidInfoBudget</key>
+	<array>
+		<dict>
+			<key>k</key>
+			<string>1-5万</string>
+			<key>v</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>5-8万</string>
+			<key>v</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>8-10万</string>
+			<key>v</key>
+			<string></string>
+		</dict>
+	</array>
+	<key>bidInfoHouseArea</key>
+	<array>
+		<dict>
+			<key>k</key>
+			<string>40㎡以下</string>
+			<key>v</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>40-60㎡</string>
+			<key>v</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>60-80㎡</string>
+			<key>v</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>80-100㎡</string>
+			<key>v</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>100㎡以上</string>
+			<key>v</key>
+			<string></string>
+		</dict>
+	</array>
 	<key>designerOrder</key>
 	<array>
 		<dict>
@@ -616,6 +709,33 @@
 		<dict>
 			<key>k</key>
 			<string>综合（默认）</string>
+			<key>v</key>
+			<string>4</string>
+		</dict>
+	</array>
+	<key>bidInfoOrder</key>
+	<array>
+		<dict>
+			<key>k</key>
+			<string>按发布时间</string>
+			<key>v</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>按结束时间</string>
+			<key>v</key>
+			<string>2</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>金额由高到低</string>
+			<key>v</key>
+			<string>3</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>金额由低到高</string>
 			<key>v</key>
 			<string>4</string>
 		</dict>
@@ -762,5 +882,49 @@
 			<string>projectRoom</string>
 		</dict>
 	</array>
+	<key>bidInfoSection</key>
+	<array>
+		<dict>
+			<key>k</key>
+			<string>需求状态</string>
+			<key>v</key>
+			<string>bidInfoStatus</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>项目类型</string>
+			<key>v</key>
+			<string>houseType</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>装修预算 </string>
+			<key>v</key>
+			<string>bidInfoBudget</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>项目面积</string>
+			<key>v</key>
+			<string>bidInfoHouseArea</string>
+		</dict>
+	</array>
+	<key>bidInfoDefaultParam</key>
+	<dict>
+		<key>status</key>
+		<string></string>
+		<key>houseType</key>
+		<string></string>
+		<key>budgetMin</key>
+		<string></string>
+		<key>budgetMax</key>
+		<string></string>
+		<key>houseAreaMin</key>
+		<string></string>
+		<key>houseAreaMax</key>
+		<string></string>
+		<key>order</key>
+		<string></string>
+	</dict>
 </dict>
 </plist>

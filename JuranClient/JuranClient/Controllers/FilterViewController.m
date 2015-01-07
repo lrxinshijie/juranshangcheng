@@ -143,6 +143,9 @@
             case FilterViewTypeDesignerSearch:
                 _sections = [[DefaultData sharedData] objectForKey:@"designerSearchSection"];
                 break;
+            case FilterViewTypeBidInfo:
+                _sections = [[DefaultData sharedData] objectForKey:@"bidInfoSection"];
+                break;
             default:
                 break;
         }

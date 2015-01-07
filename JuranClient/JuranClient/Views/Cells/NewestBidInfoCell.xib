@@ -25,15 +25,15 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余30天" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yqJ-Pk-ptp">
-                                <rect key="frame" x="250" y="11" width="50" height="13"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余不足1天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yqJ-Pk-ptp">
+                                <rect key="frame" x="234" y="11" width="68" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_countdown" id="kAc-Ag-t8a">
-                                <rect key="frame" x="231" y="11" width="13" height="13"/>
+                                <rect key="frame" x="215" y="11" width="13" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="rMF-90-6a1">
@@ -64,13 +64,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥10000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="u9a-ry-lrp">
-                                <rect key="frame" x="209" y="49" width="74" height="21"/>
+                                <rect key="frame" x="200" y="49" width="85" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.34901960784313724" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cellIndicator" id="Hbg-3d-rUc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cellIndicator.png" id="Hbg-3d-rUc">
                                 <rect key="frame" x="291" y="52" width="8" height="15"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -80,17 +80,19 @@
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bgView" destination="1hY-ph-Wyy" id="KWK-7S-EUJ"/>
                 <outlet property="bidNumsLabel" destination="duZ-E2-rLy" id="w6g-Zf-hvP"/>
                 <outlet property="budgetLabel" destination="u9a-ry-lrp" id="ApP-YR-SZp"/>
                 <outlet property="descLabel" destination="Gqk-fE-lT0" id="f8O-B9-D8p"/>
+                <outlet property="isBidedLabel" destination="d2G-KJ-CVu" id="Bf8-AS-y5f"/>
                 <outlet property="timeLabel" destination="yqJ-Pk-ptp" id="sgJ-ir-yKS"/>
                 <outlet property="titleLabel" destination="ux5-ov-PKy" id="otm-qF-2Bl"/>
             </connections>
-            <point key="canvasLocation" x="245" y="226.5"/>
+            <point key="canvasLocation" x="367" y="220.5"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="cellIndicator" width="8" height="15"/>
+        <image name="cellIndicator.png" width="8" height="15"/>
         <image name="icon_countdown" width="13" height="13"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

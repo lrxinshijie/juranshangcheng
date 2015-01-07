@@ -67,4 +67,6 @@
 - (void)buildUpDetailWithValue:(id)value;
 + (NSMutableArray *)buildUpWithValueForDesigner:(id)value;
 
+- (NSString*)deadBalanceString;
+
 @end

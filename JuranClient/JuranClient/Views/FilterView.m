@@ -178,6 +178,9 @@
             case FilterViewTypeDesignerSearch:
                 _sorts = [[DefaultData sharedData] objectForKey:@"designerSearchOrder"];
                 break;
+            case FilterViewTypeBidInfo:
+                _sorts = [[DefaultData sharedData] objectForKey:@"bidInfoOrder"];
+                break;
             default:
                 break;
         }

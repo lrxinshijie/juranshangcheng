@@ -11,6 +11,8 @@
 
 @interface NewestBidInfoCell : UITableViewCell
 
+@property (nonatomic, strong) IBOutlet UIView *bgView;
+
 - (void)fillCellWithData:(JRDemand*)data;
 
 @end

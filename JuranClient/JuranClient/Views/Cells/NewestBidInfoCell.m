@@ -16,6 +16,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *bidNumsLabel;
 @property (nonatomic, strong) IBOutlet UILabel *budgetLabel;
 @property (nonatomic, strong) IBOutlet UILabel *timeLabel;
+@property (nonatomic, strong) IBOutlet UILabel *isBidedLabel;
 
 @end
 
@@ -33,11 +34,11 @@
 
 - (void)fillCellWithData:(JRDemand*)data{
     _titleLabel.text = data.title;
-    _timeLabel.text = [NSString stringWithFormat:@"剩余%@天", data.deadBalance];
+    _timeLabel.text = [data deadBalanceString];
     _descLabel.text = [NSString stringWithFormat:@"%@平方米 | %@", data.houseArea, data.houseAddress];
     _bidNumsLabel.text = [NSString stringWithFormat:@"已有%d人应标", data.bidNums];
     _budgetLabel.text = [NSString stringWithFormat:@"%@万元", data.budget];
-    
+    _isBidedLabel.hidden = !data.isBidded;
 }
 
 @end

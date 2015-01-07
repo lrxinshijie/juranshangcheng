@@ -542,6 +542,8 @@
 		371D68741A5D6E7E00172AC9 /* icon_homepage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D68731A5D6E7E00172AC9 /* icon_homepage@2x.png */; };
 		371D68761A5D72CA00172AC9 /* icon_setting_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D68751A5D72CA00172AC9 /* icon_setting_white@2x.png */; };
 		371D68781A5D78E700172AC9 /* personal_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D68771A5D78E700172AC9 /* personal_bg@2x.png */; };
+		371D687E1A5D824E00172AC9 /* BidListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 371D687A1A5D7F0300172AC9 /* BidListViewController.m */; };
+		371D687F1A5D825F00172AC9 /* BidListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 371D687B1A5D7F0300172AC9 /* BidListViewController.xib */; };
 		378BB2C31A4B1C6E00E8358D /* JRBidInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 378BB2C21A4B1C6E00E8358D /* JRBidInfo.m */; };
 		37CF672C1A4FE11D0044F709 /* NewestBidInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */; };
 		37CF672D1A4FE11D0044F709 /* NewestBidInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37CF672B1A4FE11D0044F709 /* NewestBidInfoCell.xib */; };
@@ -1490,6 +1492,9 @@
 		371D68731A5D6E7E00172AC9 /* icon_homepage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_homepage@2x.png"; sourceTree = "<group>"; };
 		371D68751A5D72CA00172AC9 /* icon_setting_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_setting_white@2x.png"; sourceTree = "<group>"; };
 		371D68771A5D78E700172AC9 /* personal_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "personal_bg@2x.png"; sourceTree = "<group>"; };
+		371D68791A5D7F0300172AC9 /* BidListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidListViewController.h; sourceTree = "<group>"; };
+		371D687A1A5D7F0300172AC9 /* BidListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidListViewController.m; sourceTree = "<group>"; };
+		371D687B1A5D7F0300172AC9 /* BidListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BidListViewController.xib; sourceTree = "<group>"; };
 		378BB2C11A4B1C6E00E8358D /* JRBidInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRBidInfo.h; sourceTree = "<group>"; };
 		378BB2C21A4B1C6E00E8358D /* JRBidInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRBidInfo.m; sourceTree = "<group>"; };
 		37CF67291A4FE11D0044F709 /* NewestBidInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewestBidInfoCell.h; sourceTree = "<group>"; };
@@ -2668,6 +2673,9 @@
 				149BE7141A4569DE00A9E1EC /* DDHPreviewViewController.m */,
 				A9A7D4A91A503715001A70FF /* JRWebViewController.h */,
 				A9A7D4AA1A503715001A70FF /* JRWebViewController.m */,
+				371D68791A5D7F0300172AC9 /* BidListViewController.h */,
+				371D687A1A5D7F0300172AC9 /* BidListViewController.m */,
+				371D687B1A5D7F0300172AC9 /* BidListViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -3711,6 +3719,7 @@
 				BD5187701A5D0ED700BE508A /* tabbar_subject_hl@2x.png in Resources */,
 				BD5186EE1A5D0ED700BE508A /* request_reviewing@2x.png in Resources */,
 				1415FA451A5CD1CB003D0C29 /* CaseImageManagemanetViewController.xib in Resources */,
+				371D687F1A5D825F00172AC9 /* BidListViewController.xib in Resources */,
 				1415FA461A5CD1CB003D0C29 /* PersonalDatasMoreViewController.xib in Resources */,
 				1415FA471A5CD1CB003D0C29 /* arrow@2x.png in Resources */,
 				BD5186961A5D0ED700BE508A /* icon_personal_zhgl@2x.png in Resources */,
@@ -4401,6 +4410,7 @@
 				1415F96D1A5CD1CB003D0C29 /* NSDictionary+RequestEncoding.m in Sources */,
 				1415F96E1A5CD1CB003D0C29 /* UIImageView+Download.m in Sources */,
 				1415F96F1A5CD1CB003D0C29 /* CommentCell.m in Sources */,
+				371D687E1A5D824E00172AC9 /* BidListViewController.m in Sources */,
 				1415F9701A5CD1CB003D0C29 /* PrivateMessageCell.m in Sources */,
 				1415F9711A5CD1CB003D0C29 /* JRWebImageDataSource.m in Sources */,
 				1415F9721A5CD1CB003D0C29 /* MJRefreshBaseView.m in Sources */,

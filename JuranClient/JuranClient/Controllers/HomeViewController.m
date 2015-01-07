@@ -22,6 +22,8 @@
 #import "QuestionViewController.h"
 #import "NewestTopicViewController.h"
 #import "PrivateMessageViewController.h"
+#import "BidListViewController.h"
+#import "DemandDetailViewController.h"
 
 #define kDesignerViewTag 1100
 
@@ -193,7 +195,9 @@
 }
 
 - (IBAction)onBid:(id)sender{
-    
+    BidListViewController *vc = [[BidListViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)onQuestion:(id)sender{
@@ -244,6 +248,15 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    JRDemand *demand = _demandDatas[indexPath.row];
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    DemandDetailViewController *vc = [[DemandDetailViewController alloc] init];
+    vc.demand = demand;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

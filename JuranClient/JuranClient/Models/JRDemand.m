@@ -254,7 +254,7 @@
         }
         index++;
     }
-    return index;
+    return index >= keys.count?0:index;
 }
 
 - (NSString *)descriptionForDetail{
@@ -304,6 +304,13 @@
             break;
     }
     return des;
+}
+
+- (NSString*)deadBalanceString{
+    if (_deadBalance.integerValue < 1) {
+        return @"剩余不足1天";
+    }
+    return [NSString stringWithFormat:@"剩余%@天", _deadBalance];
 }
 
 @end

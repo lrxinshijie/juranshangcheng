@@ -37,6 +37,7 @@
 @property (nonatomic, strong) IBOutlet UIView *demandInfoTableHeaderView;
 @property (nonatomic, strong) IBOutlet UIView *demandInfoHeaderView;
 @property (nonatomic, strong) IBOutlet UILabel *demandInfoTitleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *pullTipLabel;
 
 @property (nonatomic, strong) IBOutlet UIView *demandAddressView;
 @property (nonatomic, strong) IBOutlet UILabel *demandAddressLabel;
@@ -70,20 +71,31 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"designReqId": _demand.designReqId,
-                            @"searchFlag": @"forMySpace"};
+    NSDictionary *param = @{@"designReqId": _demand.designReqId
+#ifndef kJuranDesigner
+                            ,@"searchFlag": @"forMySpace"
+#endif
+                            };
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_GET_MYDEMANDDETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+#ifdef kJuranDesigner
+    NSString *url = JR_GET_DESIGNREQ_DETAIL;
+#else
+    NSString *url = JR_GET_MYDEMANDDETAIL;
+#endif
+    [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             [_demand buildUpDetailWithValue:data];
-            [self reloadData];
         }
+        [self reloadData];
     }];
     
 }
 
 - (void)reloadData{
+//    _demandInfoTitleLabel.text = _demand.title;
+    [self reSetData];
+#ifndef kJuranDesigner
     NSInteger index = [_demand statusIndex];
     if (index < 3) {
         self.navigationItem.rightBarButtonItem = _rightBarButtonItem;
@@ -94,10 +106,10 @@
         _modifyDemandInfoButton.hidden = YES;
     }
     
-    _demandInfoTitleLabel.text = [NSString stringWithFormat:@"%@%@", _demand.neighbourhoods, [_demand roomNumString]];
-//    _demandInfoTitleLabel.text = _demand.title;
-    [self reSetData];
     [self setupDesignerTableHeaderView];
+#endif
+    _demandInfoTitleLabel.text = [NSString stringWithFormat:@"%@%@", _demand.neighbourhoods, [_demand roomNumString]];
+    
     _emptyView.hidden = !(_demand.bidInfoList.count == 0 && !_demand.confirmDesignerDetail);
     _emptyView.center = CGPointMake(_designerTableView.center.x, _designerTableView.center.y + CGRectGetHeight(_designerTableView.tableHeaderView.frame)/2 + 20);
     [_designerTableView reloadData];
@@ -177,9 +189,26 @@
     [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     _rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
+#ifdef kJuranDesigner
+    frame = _demandInfoTableView.frame;
+    _demandInfoTableView.frame = _designerTableView.frame;
+    _designerTableView.frame = frame;
+    
+    frame = _designerTableHeaderView.frame;
+    frame.size.height = 50;
+    _designerTableHeaderView.frame = frame;
+    
+    _designerTableView.tableHeaderView = nil;
+    _demandInfoTableView.tableHeaderView = _designerTableHeaderView;
+    
+    _modifyDemandInfoButton.hidden = YES;
+    _pullTipLabel.text = @"上拉查看参与投标的设计师";
+#endif
+    
     _emptyView.hidden = YES;
     _emptyView.center = CGPointMake(_designerTableView.center.x, _designerTableView.center.y);
     [_scrollView addSubview:_emptyView];
+    
 }
 
 - (void)receiveReloadDataNotification:(NSNotification*)notification{
@@ -294,7 +323,11 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (tableView == _designerTableView) {
+#ifndef kJuranDesigner
         return _designerHeaderView;
+#else
+        return nil;
+#endif
     }else if(tableView == _demandInfoTableView){
         return _demandInfoHeaderView;
     }
@@ -303,7 +336,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (tableView == _designerTableView) {
+#ifndef kJuranDesigner
         return 45;
+#else
+        return 0;
+#endif
     }else if(tableView == _demandInfoTableView){
         return 30;
     }

@@ -16,6 +16,7 @@
                 <outlet property="designerTableHeaderView" destination="roe-3I-C8d" id="nkf-y2-GzO"/>
                 <outlet property="emptyView" destination="JPI-by-20L" id="3I9-2q-0ul"/>
                 <outlet property="modifyDemandInfoButton" destination="NmH-kw-Mmi" id="jQd-lH-2bK"/>
+                <outlet property="pullTipLabel" destination="a3b-L5-piu" id="vxR-K1-V6G"/>
                 <outlet property="roomTypeImageView" destination="16N-1v-4o6" id="Ue8-AK-RSc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -36,11 +37,11 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_up" id="Fdo-H0-eoM">
-                            <rect key="frame" x="73" y="19" width="15" height="8"/>
+                            <rect key="frame" x="68" y="19" width="15" height="8"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上拉查看我的需求详情" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a3b-L5-piu">
-                            <rect key="frame" x="96" y="12" width="141" height="21"/>
+                            <rect key="frame" x="91" y="12" width="168" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.40000003576278687" green="0.40000003576278687" blue="0.40000003576278687" alpha="1" colorSpace="deviceRGB"/>
