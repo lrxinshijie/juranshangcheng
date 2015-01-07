@@ -168,6 +168,7 @@
     _viewCountLabel.text = [NSString stringWithFormat:@"%d", _topic.viewCount];
     _commentCountLabel.text = [NSString stringWithFormat:@"%d", _topic.commentCount];
     
+    ASLog(@"%@", _topic.contentDescription);
     [_contentWebView loadHTMLString:_topic.contentDescription baseURL:[NSURL URLWithString:@"http://10.199.5.57:8080/"]]; //[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]//[NSURL URLWithString:@"http://10.199.5.57:8080/img/"]
     [self setupTableHeaderView];
     [_tableView reloadData];
