@@ -75,7 +75,7 @@
     _produntCountLabel.text = [NSString stringWithFormat:@"%i", designer.projectCount];
     _browseCountLabel.text = [NSString stringWithFormat:@"%i", designer.browseCount];
     _declarationLabel.text = [NSString stringWithFormat:@"应标宣言:%@", bidInfo.biddingDeclatation];
-    if (bidInfo.isMeasured) {
+    if ([bidInfo isForbidMeasureAndReject]) {
         [_measureButton setTitleColor:[UIColor lightGrayColor]forState:UIControlStateNormal];
         _measureButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
         [_rejectButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];

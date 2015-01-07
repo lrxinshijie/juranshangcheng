@@ -187,6 +187,8 @@
                     [self loadDesignerProject];
                 });
             }
+        }else{
+            _emptyView.hidden = NO;
         }
     }];
 }
@@ -208,6 +210,8 @@
                 _emptyView.hidden = [rows count] != 0;
                 self.caseDatas = rows;
             }
+        }else{
+            _emptyView.hidden = [_caseDatas count] != 0;
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self reloadData];
@@ -234,6 +238,8 @@
                 _emptyView.hidden = [rows count] != 0;
                 self.topicDatas = rows;
             }
+        }else{
+            _emptyView.hidden = [_topicDatas count] != 0;
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self reloadData];
@@ -451,7 +457,7 @@
                 UILabel *label = [cell.contentView labelWithFrame:frame text:@"元" textColor:RGBColor(75, 75, 75) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
                 [view addSubview:label];
                 frame.size.width -= kSystemFontSize;
-                label = [cell.contentView labelWithFrame:frame text:[NSString stringWithFormat:@"%d", _designer.priceMeasure] textColor:RGBColor(73, 129, 189) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
+                label = [cell.contentView labelWithFrame:frame text:[NSString stringWithFormat:@"%.2f", _designer.priceMeasure] textColor:RGBColor(73, 129, 189) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
                 [view addSubview:label];
                 cell.accessoryView = view;
             }else if (3 == indexPath.row){
@@ -461,7 +467,7 @@
                 UILabel *label = [cell.contentView labelWithFrame:frame text:@"元/平方米" textColor:RGBColor(75, 75, 75) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
                 [view addSubview:label];
                 frame.size.width -= kSystemFontSize * 4.5f;
-                label = [cell.contentView labelWithFrame:frame text:[NSString stringWithFormat:@"%d-%d", _designer.designFeeMin, _designer.designFeeMax]  textColor:RGBColor(73, 129, 189) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
+                label = [cell.contentView labelWithFrame:frame text:[NSString stringWithFormat:@"%.2f-%.2f", _designer.designFeeMin, _designer.designFeeMax]  textColor:RGBColor(73, 129, 189) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
                 [view addSubview:label];
                 cell.accessoryView = view;
             }

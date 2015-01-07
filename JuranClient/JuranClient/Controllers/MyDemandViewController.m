@@ -50,9 +50,6 @@
     
     self.navigationItem.title = @"我的需求";
     
-    CGPoint center = CGPointMake(self.view.center.x, 220);
-    _emptyDataView.center = center;
-    [self.view addSubview:_emptyDataView];
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 80, 30) target:self action:@selector(onPublishDemand) title:@"发布新需求" backgroundImage:nil];
     [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
@@ -63,6 +60,10 @@
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
+    
+    _emptyDataView.hidden = YES;
+    _emptyDataView.center = _tableView.center;
+    [self.view addSubview:_emptyDataView];
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -95,6 +96,7 @@
             }
             [self reloadData];
         }
+        _emptyDataView.hidden = _datas.count != 0;
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
     }];
@@ -102,7 +104,6 @@
 }
 
 - (void)reloadData{
-    _tableView.hidden = _datas.count == 0;
     [_tableView reloadData];
 }
 

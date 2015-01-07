@@ -146,16 +146,17 @@
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
-                _emptyView.hidden = rows.count != 0;
-                _emptyView.center = CGPointMake(_tableView.center.x, _tableView.center.y - 40);
-                if (self.bannerView) {
-                    _emptyView.center = CGPointMake(_tableView.center.x, _tableView.center.y +CGRectGetHeight(_bannerView.frame)/2-40);
-                }
                 self.datas = rows;
             }
             
             [_tableView reloadData];
         }
+        _emptyView.hidden = _datas.count != 0;
+        _emptyView.center = CGPointMake(_tableView.center.x, _tableView.center.y - 40);
+        if (self.bannerView) {
+            _emptyView.center = CGPointMake(_tableView.center.x, _tableView.center.y +CGRectGetHeight(_bannerView.frame)/2-40);
+        }
+        
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
         

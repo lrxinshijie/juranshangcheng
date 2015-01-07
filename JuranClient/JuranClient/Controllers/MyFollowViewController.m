@@ -17,7 +17,7 @@
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
-@property (nonatomic, strong) IBOutlet UIView *emptyDataView;
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
 
 @end
 
@@ -41,15 +41,15 @@
     
     self.navigationItem.title = @"我的关注";
     
-    CGPoint center = CGPointMake(self.view.center.x, 220);
-    _emptyDataView.center = center;
-    [self.view addSubview:_emptyDataView];
-    
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
+    
+    _emptyView.hidden = YES;
+    _emptyView.center = _tableView.center;
+    [self.view addSubview:_emptyView];
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -82,13 +82,13 @@
                 [self reloadData];
             }
         }
+        _emptyView.hidden = _datas.count != 0;
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
     }];
 }
 
 - (void)reloadData{
-    _tableView.hidden = (_datas.count == 0);
     [_tableView reloadData];
 }
 
@@ -112,7 +112,7 @@
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
         [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation: UITableViewRowAnimationAutomatic];
     }
-    _emptyDataView.hidden = (_datas.count != 0);
+    _emptyView.hidden = (_datas.count != 0);
 }
 
 #pragma mark - UITableViewDataSource/Delegate

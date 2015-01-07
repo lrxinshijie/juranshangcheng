@@ -62,12 +62,12 @@
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
-                _emptyView.hidden = rows.count != 0;
                 self.datas = rows;
             }
             
             [_collectionView reloadData];
         }
+        _emptyView.hidden = _datas.count != 0;
         [_collectionView headerEndRefreshing];
         [_collectionView footerEndRefreshing];
         

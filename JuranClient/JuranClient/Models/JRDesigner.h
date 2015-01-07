@@ -34,9 +34,9 @@
 @property (nonatomic, assign) BOOL isAuth;
 @property (nonatomic, strong) NSString *granuate;
 @property (nonatomic, strong) NSString *style;
-@property (nonatomic, assign) NSInteger priceMeasure;
-@property (nonatomic, assign) NSInteger designFeeMin;
-@property (nonatomic, assign) NSInteger designFeeMax;
+@property (nonatomic, assign) CGFloat priceMeasure;
+@property (nonatomic, assign) CGFloat designFeeMin;
+@property (nonatomic, assign) CGFloat designFeeMax;
 @property (nonatomic, assign) NSInteger product2DCount;
 @property (nonatomic, assign) NSInteger product3DCount;
 @property (nonatomic, assign) NSInteger followCount;
