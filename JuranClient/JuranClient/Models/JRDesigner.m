@@ -277,9 +277,9 @@
 }
 
 - (NSString*)experienceString{
-    if (!_experienceCount) {
-        return @"";
-    }
+//    if (!_experienceCount) {
+//        return @"";
+//    }
     return [NSString stringWithFormat:@"%d年", _experienceCount];
 }
 
