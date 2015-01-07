@@ -23,7 +23,7 @@
 - (void)removeTabAtIndex:(NSInteger)index;
 - (void)insertTabWithImageDic:(NSDictionary *)dict atIndex:(NSUInteger)index;
 - (void)setBackgroundImage:(UIImage *)img;
-
+- (id)initWithFrame:(CGRect)frame controllers:(NSArray *)imageArray;
 @end
 @protocol LeveyTabBarDelegate<NSObject>
 @optional

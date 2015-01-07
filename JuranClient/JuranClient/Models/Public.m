@@ -177,10 +177,11 @@
         navigationController.interactivePopGestureRecognizer.delegate = nil;
     }
 #endif
-//    if (SystemVersionGreaterThanOrEqualTo7) {
-//        [navigationController.navigationBar setBackgroundImageWithColor:kNavigationBarBackgroundColor];
-//        [navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor whiteColor]}];
-//    }
+    
+    if (SystemVersionGreaterThanOrEqualTo7) {
+        [navigationController.navigationBar setBackgroundImageWithColor:[ALTheme sharedTheme].navigationColor];
+        [navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeTextColor: [ALTheme sharedTheme].navigationTitleColor}];
+    }
     
     return navigationController;
 }
