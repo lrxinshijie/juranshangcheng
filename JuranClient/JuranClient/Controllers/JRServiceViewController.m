@@ -50,18 +50,35 @@
     CGFloat x = 0;
     CGFloat y = 0;
     for (NSInteger i = 0; i < _titles.count; i ++) {
-        frame = CGRectMake(30 + x + 100 * (i%3), 10 + y + 95*(i/3), 60, 60);
-        UIButton *btn = [self.view buttonWithFrame:frame target:self action:@selector(onDetail:) image:[UIImage imageNamed:[NSString stringWithFormat:@"service_normal_%d", i]]];
+        frame = CGRectMake(30 + x + 100 * (i%3), 10 + y + 95*(i/3), 60, 95);
+        UIButton *btn = [self.view buttonWithFrame:frame target:self action:@selector(onDetail:) image:[UIImage imageNamed:[NSString stringWithFormat:@"service_highlighted_%d", i]]];
         btn.tag = i + kButtonTag;
-        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"service_highlight_%d", i]] forState:UIControlStateHighlighted];
+        [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"service_normal_%d", i]] forState:UIControlStateHighlighted];
+        UIEdgeInsets edge = btn.imageEdgeInsets;
+        edge.top = 5;
+        edge.bottom = 21;
+        btn.imageEdgeInsets = edge;
+        
+//        [btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+        btn.titleLabel.font = [UIFont systemFontOfSize:kSmallSystemFontSize];
+        btn.titleLabel.numberOfLines = 0;
+        NSString *title = _titles[i];
+        [btn setTitle:title forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [btn setTitleColor:kBlueColor forState:UIControlStateHighlighted];
+        edge = btn.titleEdgeInsets;
+        edge.top = 66 + (title.length > 5?12:0);
+        edge.left = -55;
+        btn.titleEdgeInsets = edge;
+        
         [_scrollView addSubview:btn];
         
-        frame.origin.y += 60;
-        UILabel *label = [self.view labelWithFrame:frame text:_titles[i] textColor:[UIColor darkGrayColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:kSmallSystemFontSize]];
-        label.numberOfLines = 0;
-        frame.size.height = [label.text heightWithFont:label.font constrainedToWidth:CGRectGetWidth(frame)];
-        label.frame = frame;
-        [_scrollView addSubview:label];
+//        frame.origin.y += 60;
+//        UILabel *label = [self.view labelWithFrame:frame text:_titles[i] textColor:[UIColor darkGrayColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:kSmallSystemFontSize]];
+//        label.numberOfLines = 0;
+//        frame.size.height = [label.text heightWithFont:label.font constrainedToWidth:CGRectGetWidth(frame)];
+//        label.frame = frame;
+//        [_scrollView addSubview:label];
     }
     
     _scrollView.contentSize = CGSizeMake(kWindowWidth, CGRectGetMaxY(frame) + 20);

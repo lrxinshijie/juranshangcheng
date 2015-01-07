@@ -47,6 +47,7 @@
     [self.view addSubview:_tableView];
     
     _tableView.sectionIndexBackgroundColor = [UIColor clearColor];
+    _tableView.sectionIndexColor = RGBColor(102, 102, 102);
     
     [self loadData];
 }
