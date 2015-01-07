@@ -249,6 +249,8 @@
 - (void)showAPNS:(NSDictionary *)userInfo{
     ASLog(@"APNS:%@",userInfo);
     
+    [self clearNotification];
+    
     NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     if ([alert isKindOfClass:[NSDictionary class]]) {
         alert = [(NSDictionary *)alert objectForKey:@"body"];
@@ -258,15 +260,20 @@
     if (payload && payload.length > 0) {
         
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[payload dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
-        NSString *link = [dict getStringValueForKey:@"link" defaultValue:@""];
-        if (link.length > 0) {
+        
+        NSInteger type = [dict getIntValueForKey:@"type" defaultValue:0];
+        
+        if (type == 2) {
             [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"取消" otherButtonTitles:@[@"查看"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
                 if (buttonIndex == [alertView cancelButtonIndex]) {
                     return ;
                 }
                 
+                NSString *link = [dict getStringValueForKey:@"link" defaultValue:@""];
                 [Public jumpFromLink:link];
             }];
+        }else{
+            [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:nil];
         }
         
     }else{
@@ -288,18 +295,20 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [self showAPNS:userInfo];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
     
     [self showAPNS:userInfo];
     
     completionHandler(UIBackgroundFetchResultNewData);
+}
+
+- (void)clearNotification{
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 #pragma mark - GexinSdkDelegate
@@ -317,6 +326,10 @@
                                               length:payload.length
                                             encoding:NSUTF8StringEncoding];
     ASLog(@"payload:%@",payloadMsg);
+    
+    if (payloadMsg.length == 0) {
+        return;
+    }
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[payloadMsg dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
     if (dict && [dict isKindOfClass:[NSDictionary class]]) {
         NSString *title = [dict getStringValueForKey:@"title" defaultValue:@""];

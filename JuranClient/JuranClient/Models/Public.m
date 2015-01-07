@@ -504,5 +504,10 @@
     return  @{@"appType":@"iphone",@"version":@"1.0",@"deviceType":@"iphone",@"osVersion":@"8.0"};
 }
 
++ (BOOL)isDesignerApp{
+    NSString *bundleIdentifier = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+    return ![bundleIdentifier isEqualToString:@"com.juran.JuranHome"];
+}
+
 
 @end
