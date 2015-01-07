@@ -98,6 +98,7 @@
         case 3:
         {
             shareType = ShareTypeTencentWeibo;
+            [publishContent setContent:[NSString stringWithFormat:@"%@\n%@", _content, _url]];
             break;
         }
         case 4:
@@ -118,6 +119,7 @@
         case 5:
         {
             shareType = ShareTypeSinaWeibo;
+            [publishContent setContent:[NSString stringWithFormat:@"%@\n%@", _content, _url]];
             break;
         }
         case 6:
@@ -166,15 +168,6 @@
                                            
                                        }];
                                    }
-                                   else
-                                   {
-                                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                                                           message:[NSString stringWithFormat:@"发送失败!%@", [error errorDescription]]
-                                                                                          delegate:nil
-                                                                                 cancelButtonTitle:@"知道了"
-                                                                                 otherButtonTitles:nil];
-                                       [alertView show];
-                                   }
                                }];
     }
     
@@ -182,7 +175,7 @@
     {
         //分享内容
         [ShareSDK showShareViewWithType:shareType container:nil content:publishContent statusBarTips:NO authOptions:authOptions shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-            
+            NSLog(@"error:%@",error);
         }];
 
     }

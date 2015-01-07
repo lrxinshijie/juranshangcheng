@@ -68,7 +68,7 @@
     
     self.contentWebView.delegate = self;
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.tableFooterView = [[UIView alloc] init];
@@ -80,7 +80,8 @@
     
     _contentWebView.backgroundColor = [UIColor clearColor];
     _contentWebView.scrollView.backgroundColor = [UIColor clearColor];
-    _contentWebView.scrollView.scrollEnabled = NO;
+    _contentWebView.scalesPageToFit = YES;
+//    _contentWebView.scrollView.scrollEnabled = NO;
     
     [self setupCommentView];
     
@@ -94,9 +95,9 @@
 //    [self.view addSubview:_bottomView];
     
     frame = _commentView.frame;
-    frame.origin.y = CGRectGetMaxY(_tableView.frame);
+    frame.origin.y = kWindowHeightWithoutNavigationBarAndTabbar;
     _commentView.frame = frame;
-    _commentView.hidden = NO;
+    _commentView.hidden = YES;
     [self.view addSubview:_commentView];
     
     UIView *view = [_commentView viewWithTag:2200];
@@ -157,6 +158,9 @@
     if (![_topic isNewestTopic]) {
         _tableView.frame = kContentFrameWithoutNavigationBar;
         _commentView.hidden = YES;
+    }else{
+        _tableView.frame = kContentFrameWithoutNavigationBarAndTabBar;
+        _commentView.hidden = NO;
     }
     
     _titleLabel.text = _topic.theme;
@@ -164,6 +168,7 @@
     _viewCountLabel.text = [NSString stringWithFormat:@"%d", _topic.viewCount];
     _commentCountLabel.text = [NSString stringWithFormat:@"%d", _topic.commentCount];
     
+    ASLog(@"%@", _topic.contentDescription);
     [_contentWebView loadHTMLString:_topic.contentDescription baseURL:[NSURL URLWithString:@"http://10.199.5.57:8080/"]]; //[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]//[NSURL URLWithString:@"http://10.199.5.57:8080/img/"]
     [self setupTableHeaderView];
     [_tableView reloadData];
@@ -349,7 +354,10 @@
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return _headerView;
+    if (_topic) {
+        return _headerView;
+    }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

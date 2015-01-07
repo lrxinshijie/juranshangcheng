@@ -118,10 +118,14 @@
     self.bidNums = [value getIntValueForKey:@"bidNums" defaultValue:0];
     self.deadline = [value getStringValueForKey:@"deadline" defaultValue:@""];
     self.bidInfoList = [JRBidInfo buildUpWithValue:value[@"bidInfoList"]];
+    for (JRBidInfo *b in _bidInfoList) {
+        b.statusIndex = [self statusIndex];
+    }
     
     id obj = value[@"confirmDesignerDetail"];
     if (obj && [obj isKindOfClass:[NSDictionary class]]) {
         self.confirmDesignerDetail = [[JRBidInfo alloc] initWithDictionary:obj];
+        self.confirmDesignerDetail.statusIndex = [self statusIndex];
     }
     
     self.roomNum = [value getStringValueForKey:@"roomNum" defaultValue:@""];

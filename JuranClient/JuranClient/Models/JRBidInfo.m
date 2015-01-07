@@ -38,4 +38,14 @@
     return retVal;
 }
 
+- (BOOL)isForbidMeasureAndReject{
+    if (_statusIndex == 4 || _statusIndex == 3) {
+        return YES;
+    }
+    if (_isMeasured) {
+        return YES;
+    }
+    return NO;
+}
+
 @end

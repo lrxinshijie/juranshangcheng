@@ -138,8 +138,8 @@
     
     NSDictionary *param = @{@"account": account,
                             @"password": password,
-                            @"pushID": ApplicationDelegate.clientId,
-                            @"deviceType": @"iphone",
+                            @"pushId": ApplicationDelegate.clientId,
+                            @"deviceInfo":[Public deviceInfo],
 #ifdef kJuranDesigner
                             @"userType": @"designer"
 #else

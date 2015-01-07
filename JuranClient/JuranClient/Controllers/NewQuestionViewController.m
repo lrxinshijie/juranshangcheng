@@ -41,7 +41,7 @@
     typeValues = @[@"账户管理", @"设计疑惑", @"装修前后", @"商品选购", @"DIY技巧", @"其他"];
     
     _rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onRightButton:) title:@"下一步" backgroundImage:nil];
-    [_rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    [_rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightButton];
     step = 1;
     

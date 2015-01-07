@@ -36,7 +36,7 @@
     [self.view addSubview:_tableView];
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(setAllReaded:) title:@"全部已读" backgroundImage:nil];
-    [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     _emptyView.hidden = YES;
@@ -70,12 +70,13 @@
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
-                _emptyView.hidden = rows.count != 0;
+                
                 self.datas = [JRPushInfoMsg buildUpWithValue:list];
             }
             
             [_tableView reloadData];
         }
+        _emptyView.hidden = _datas.count != 0;
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
     }];

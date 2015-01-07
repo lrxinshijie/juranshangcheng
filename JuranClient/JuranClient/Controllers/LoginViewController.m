@@ -83,7 +83,7 @@
                                     @"thirdUserId":thirdUserId,
                                     @"thirdSource": thirdSource,
                                     @"nickName": nickName,
-                                    @"pushID": ApplicationDelegate.clientId,
+                                    @"pushId": ApplicationDelegate.clientId,
                                     @"deviceInfo":[Public deviceInfo]};
             [self showHUD];
             [[ALEngine shareEngine] pathURL:JR_THIRD_LOGIN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -128,19 +128,13 @@
     
     NSDictionary *param = @{@"account": account,
                             @"password": [NSString stringWithFormat:@"%@", password],
-                            @"pushID": ApplicationDelegate.clientId,
+                            @"pushId": ApplicationDelegate.clientId,
                             @"deviceInfo":[Public deviceInfo],
 #ifdef kJuranDesigner
                             @"userType": @"designer"
 #else
                             @"userType": @"member"
 #endif
-//                            @"pushID": @"1111",
-//                            @"DeviceInfo": @"iPhone",
-//                            @"DeviceInfo/appType": @"11",
-//                            @"DeviceInfo/version": @"1.0",
-//                            @"DeviceInfo/deviceType": @"iPhone",
-//                            @"DeviceInfo/OSVersion": @"8.0"
                             };
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_LOGIN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {

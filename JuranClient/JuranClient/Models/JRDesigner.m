@@ -101,9 +101,9 @@
     self.granuate = [dict getStringValueForKey:@"granuate" defaultValue:@""];
     self.experienceCount = [dict getIntValueForKey:@"experience" defaultValue:0];
     self.style = [dict getStringValueForKey:@"style" defaultValue:@""];
-    self.priceMeasure = [dict getIntValueForKey:@"priceMeasure" defaultValue:0];
-    self.designFeeMin = [dict getIntValueForKey:@"designFeeMin" defaultValue:0];
-    self.designFeeMax = [dict getIntValueForKey:@"designFeeMax" defaultValue:0];
+    self.priceMeasure = [dict getIntValueForKey:@"priceMeasure" defaultValue:0]/100.f;
+    self.designFeeMin = [dict getIntValueForKey:@"designFeeMin" defaultValue:0]/100.f;
+    self.designFeeMax = [dict getIntValueForKey:@"designFeeMax" defaultValue:0]/100.f;
     self.selfIntroduction = [dict getStringValueForKey:@"selfIntroduction" defaultValue:@""];
     self.product2DCount = [dict getIntValueForKey:@"product2DCount" defaultValue:0];
     self.product3DCount = [dict getIntValueForKey:@"product3DCount" defaultValue:0];
@@ -277,9 +277,9 @@
 }
 
 - (NSString*)experienceString{
-    if (!_experienceCount) {
-        return @"";
-    }
+//    if (!_experienceCount) {
+//        return @"";
+//    }
     return [NSString stringWithFormat:@"%d年", _experienceCount];
 }
 

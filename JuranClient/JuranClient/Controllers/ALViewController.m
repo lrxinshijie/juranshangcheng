@@ -26,9 +26,11 @@
     [self configureLeftBarButtonUniformly];
     self.view.backgroundColor = kViewBackgroundColor;
     
-//    if (SystemVersionGreaterThanOrEqualTo7) {
-//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-//    }
+#ifdef kJuranDesigner
+    if (SystemVersionGreaterThanOrEqualTo7) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
+#endif
 }
 
 - (void)didReceiveMemoryWarning

@@ -28,7 +28,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onIntroduce:) title:_jrCase.projectId.length == 0 ? @"提交" : @"方案介绍" backgroundImage:nil];
-    [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     self.imageURLs = [NSMutableArray array];

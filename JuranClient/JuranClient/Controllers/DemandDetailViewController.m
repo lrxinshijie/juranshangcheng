@@ -174,7 +174,7 @@
     _scrollView.contentSize = CGSizeMake(kWindowWidth, 2*kWindowHeightWithoutNavigationBar);
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onDeadRequest) title:@"终止需求" backgroundImage:nil];
-    [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     _rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     _emptyView.hidden = YES;
@@ -237,6 +237,10 @@
 //        [self showTip:@"未认证的设计师无法预约量房"];
 //        return;
 //    }
+    if(bidInfo.statusIndex == 4 || bidInfo.statusIndex == 3){
+        [self showTip:@"该需求已结束！"];
+        return;
+    }
     if (bidInfo.isMeasured) {
         [self showTip:@"你已选该设计师量房请耐心等待！"];
         return;
@@ -249,6 +253,10 @@
 }
 
 - (void)rejectForBid:(BidDesignerCell *)cell andBidInfo:(JRBidInfo *)bidInfo{
+    if(bidInfo.statusIndex == 4 || bidInfo.statusIndex == 3){
+        [self showTip:@"该需求已结束！"];
+        return;
+    }
     if (bidInfo.isMeasured) {
         [self showTip:@"你已选该设计师量房请耐心等待！"];
         return;

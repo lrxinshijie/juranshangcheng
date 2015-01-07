@@ -8,8 +8,17 @@
 	<string>居然之家</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIcons</key>
-	<dict/>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>Icon7.png</string>
+		<string>Icon.png</string>
+		<string>Icon@2x.png</string>
+		<string>Icon-72.png</string>
+		<string>Icon-Small.png</string>
+		<string>Icon-Small-50.png</string>
+		<string>Icon-80.png</string>
+		<string>Icon-Small@2x.png</string>
+	</array>
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
 	<key>CFBundleIdentifier</key>
@@ -64,6 +73,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wx3e32aa05bb32f554</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>twb</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wb801555309</string>
 			</array>
 		</dict>
 	</array>

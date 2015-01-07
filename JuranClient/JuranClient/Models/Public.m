@@ -177,10 +177,11 @@
         navigationController.interactivePopGestureRecognizer.delegate = nil;
     }
 #endif
-//    if (SystemVersionGreaterThanOrEqualTo7) {
-//        [navigationController.navigationBar setBackgroundImageWithColor:kNavigationBarBackgroundColor];
-//        [navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor whiteColor]}];
-//    }
+    
+    if (SystemVersionGreaterThanOrEqualTo7) {
+        [navigationController.navigationBar setBackgroundImageWithColor:[ALTheme sharedTheme].navigationColor];
+        [navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeTextColor: [ALTheme sharedTheme].navigationTitleColor}];
+    }
     
     return navigationController;
 }
@@ -502,6 +503,11 @@
 
 + (NSDictionary *)deviceInfo{
     return  @{@"appType":@"iphone",@"version":@"1.0",@"deviceType":@"iphone",@"osVersion":@"8.0"};
+}
+
++ (BOOL)isDesignerApp{
+    NSString *bundleIdentifier = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+    return ![bundleIdentifier isEqualToString:@"com.juran.JuranHome"];
 }
 
 

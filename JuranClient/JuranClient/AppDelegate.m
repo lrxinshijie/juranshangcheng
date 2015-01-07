@@ -23,6 +23,7 @@
 #import "HomeViewController.h"
 #import "GexinSdk.h"
 #import "UIAlertView+Blocks.h"
+#import "APService.h"
 
 #define kAppId           @"ZmiyzZ23sKAvFQ7RoAfbJ2"
 #define kAppKey          @"kJRhD2minf7dJ6CK5u43o6"
@@ -49,7 +50,12 @@
     
     [self setupShareSDK];
     
-    [self setupPush];
+//    [self setupPush];
+    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                   UIRemoteNotificationTypeSound |
+                                                   UIRemoteNotificationTypeAlert)
+                                       categories:nil];
+    [APService setupWithOption:launchOptions];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [JRUser refreshToken:nil];
@@ -79,13 +85,39 @@
     return [[UITabBarItem alloc] initWithTitle:title image:caseImage selectedImage:caseImageSel];
 }
 
+#ifdef kJuranDesigner
 - (void)setupTabbar{
-#ifndef kJuranDesigner
+    
+    HomeViewController *home = [[HomeViewController alloc] init];
+    UINavigationController *homeNav = [Public navigationControllerFromRootViewController:home];
+    homeNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-home-default" selected:@"nav-home-active"];
+    
     CaseViewController *cs = [[CaseViewController alloc] init];
     cs.isHome = YES;
+    UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
+    csNav.tabBarItem = [self setupTabbarItemTitle:@"案例" image:@"nav-case-default" selected:@"nav-case-active"];
+    
+    DesignerViewController *des = [[DesignerViewController alloc] init];
+    des.isHome = YES;
+    UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
+    desNav.tabBarItem = [self setupTabbarItemTitle:@"设计师" image:@"nav-designer-default" selected:@"nav-designer-active"];
+    
+    ProfileViewController *profile = [[ProfileViewController alloc] init];
+    UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
+    profileNav.tabBarItem = [self setupTabbarItemTitle:@"个人中心" image:@"nav-user-default" selected:@"nav-user-active"];
+    
+    self.tabBarController = [[LeveyTabBarController alloc] initWithViewControllers:@[homeNav,csNav,desNav,profileNav]];
+    [_tabBarController.tabBar setBackgroundImage:[UIImage imageFromColor:[[ALTheme sharedTheme] navigationColor]]];
+    [_tabBarController setTabBarTransparent:YES];
+    
+    self.window.rootViewController = _tabBarController;
+}
 #else
-    HomeViewController *cs = [[HomeViewController alloc] init];
-#endif
+
+- (void)setupTabbar{
+
+    CaseViewController *cs = [[CaseViewController alloc] init];
+    cs.isHome = YES;
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
     csNav.tabBarItem = [self setupTabbarItemTitle:@"案例" image:@"tabbar_case" selected:@"tabbar_case_hl"];
     
@@ -109,8 +141,8 @@
     self.tabBarController = [[UITabBarController alloc] init];
     _tabBarController.viewControllers = @[csNav,topicNav,publishNav,desNav,profileNav];
     self.window.rootViewController = _tabBarController;
-    
 }
+#endif
 
 - (void)setupShareSDK{
 
@@ -160,13 +192,15 @@
     
 }
 
-//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-//    if (viewController.hidesBottomBarWhenPushed){
-//        [_tabBarController hidesTabBar:YES animated:YES];
-//    }else{
-//        [_tabBarController hidesTabBar:NO animated:YES];
-//    }
-//}
+#ifdef kJuranDesigner
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    if (viewController.hidesBottomBarWhenPushed){
+        [_tabBarController hidesTabBar:YES animated:YES];
+    }else{
+        [_tabBarController hidesTabBar:NO animated:YES];
+    }
+}
+#endif
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -249,6 +283,10 @@
 - (void)showAPNS:(NSDictionary *)userInfo{
     ASLog(@"APNS:%@",userInfo);
     
+    [APService handleRemoteNotification:userInfo];
+    
+    [self clearNotification];
+    
     NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     if ([alert isKindOfClass:[NSDictionary class]]) {
         alert = [(NSDictionary *)alert objectForKey:@"body"];
@@ -258,15 +296,20 @@
     if (payload && payload.length > 0) {
         
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[payload dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
-        NSString *link = [dict getStringValueForKey:@"link" defaultValue:@""];
-        if (link.length > 0) {
+        
+        NSInteger type = [dict getIntValueForKey:@"type" defaultValue:0];
+        
+        if (type == 2) {
             [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"取消" otherButtonTitles:@[@"查看"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
                 if (buttonIndex == [alertView cancelButtonIndex]) {
                     return ;
                 }
                 
+                NSString *link = [dict getStringValueForKey:@"link" defaultValue:@""];
                 [Public jumpFromLink:link];
             }];
+        }else{
+            [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:nil];
         }
         
     }else{
@@ -277,6 +320,9 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
+    
+    [APService registerDeviceToken:deviceToken];
+    
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     NSString *dToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     ASLog(@"deviceToken:%@", dToken);
@@ -288,18 +334,20 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [self showAPNS:userInfo];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
     
     [self showAPNS:userInfo];
     
     completionHandler(UIBackgroundFetchResultNewData);
+}
+
+- (void)clearNotification{
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 #pragma mark - GexinSdkDelegate
@@ -317,6 +365,10 @@
                                               length:payload.length
                                             encoding:NSUTF8StringEncoding];
     ASLog(@"payload:%@",payloadMsg);
+    
+    if (payloadMsg.length == 0) {
+        return;
+    }
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[payloadMsg dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
     if (dict && [dict isKindOfClass:[NSDictionary class]]) {
         NSString *title = [dict getStringValueForKey:@"title" defaultValue:@""];

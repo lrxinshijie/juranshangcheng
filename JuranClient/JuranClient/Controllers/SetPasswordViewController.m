@@ -7,6 +7,7 @@
 //
 
 #import "SetPasswordViewController.h"
+#import "AppDelegate.h"
 
 @interface SetPasswordViewController () <UITextFieldDelegate>
 
@@ -63,7 +64,9 @@
                             @"mobileNum": _phone,
                             @"regType" : @"telephone",
                             @"password": password,
-                            @"smsAuthNo": _code};
+                            @"smsAuthNo": _code,
+                            @"pushId": ApplicationDelegate.clientId,
+                            @"deviceInfo":[Public deviceInfo]};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_REGISTUSER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

@@ -24,7 +24,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave) title:@"保存" backgroundImage:nil];
-    [rightButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.title = @"编辑需求";
     self.view.backgroundColor = RGBColor(237, 237, 237);

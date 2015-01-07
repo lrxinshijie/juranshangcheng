@@ -30,7 +30,7 @@
     self.navigationItem.title = @"筛选";
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 50, 30) target:self action:@selector(onCancel) title:@"取消" backgroundImage:nil];
-    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];

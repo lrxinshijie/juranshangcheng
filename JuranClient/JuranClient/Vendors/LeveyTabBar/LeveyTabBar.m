@@ -11,6 +11,37 @@
 
 @implementation LeveyTabBar
 
+- (id)initWithFrame:(CGRect)frame controllers:(NSArray *)imageArray
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        self.backgroundColor = [UIColor clearColor];
+        _backgroundView = [[UIImageView alloc] initWithFrame:self.bounds];
+        [self addSubview:_backgroundView];
+        
+        self.buttons = [NSMutableArray arrayWithCapacity:[imageArray count]];
+        UIButton *btn;
+        CGFloat width = 320.0f / [imageArray count];
+        for (int i = 0; i < [imageArray count]; i++)
+        {
+            btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            //			btn.showsTouchWhenHighlighted = YES;
+            btn.tag = i;
+            UIViewController *controller = [imageArray objectAtIndex:i];
+            
+            btn.frame = CGRectMake(width * i, 0, width, frame.size.height);
+            [btn setImage:controller.tabBarItem.image forState:UIControlStateNormal];
+            [btn setImage:controller.tabBarItem.image forState:UIControlStateHighlighted];
+            [btn setImage:controller.tabBarItem.selectedImage forState:UIControlStateSelected];
+            [btn addTarget:self action:@selector(tabBarButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [self.buttons addObject:btn];
+            [self addSubview:btn];
+        }
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame buttonImages:(NSArray *)imageArray
 {
     self = [super initWithFrame:frame];

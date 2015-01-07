@@ -16,8 +16,11 @@
 @property (nonatomic, strong) NSString *bidId;
 @property (nonatomic, strong) NSString *bidDate;
 @property (nonatomic, assign) BOOL isMeasured;
+@property (nonatomic, assign) NSInteger statusIndex;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
+
+- (BOOL)isForbidMeasureAndReject;
 
 @end

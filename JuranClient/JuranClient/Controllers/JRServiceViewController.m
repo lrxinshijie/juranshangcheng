@@ -65,7 +65,7 @@
         NSString *title = _titles[i];
         [btn setTitle:title forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        [btn setTitleColor:kBlueColor forState:UIControlStateHighlighted];
+        [btn setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateHighlighted];
         edge = btn.titleEdgeInsets;
         edge.top = 66 + (title.length > 5?12:0);
         edge.left = -55;
