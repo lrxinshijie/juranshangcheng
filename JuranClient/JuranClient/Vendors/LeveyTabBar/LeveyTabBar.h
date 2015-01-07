@@ -17,8 +17,6 @@
 @property (nonatomic, assign) id<LeveyTabBarDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *buttons;
 
-
-- (id)initWithFrame:(CGRect)frame buttonImages:(NSArray *)imageArray;
 - (void)selectTabAtIndex:(NSInteger)index;
 - (void)removeTabAtIndex:(NSInteger)index;
 - (void)insertTabWithImageDic:(NSDictionary *)dict atIndex:(NSUInteger)index;
