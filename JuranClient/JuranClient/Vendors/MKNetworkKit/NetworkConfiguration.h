@@ -10,9 +10,15 @@
 #define NetworkingConfiguration_h
 
 /* Interface */
-#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
-#define JR_SERVICE  @"http://124.207.66.50:10005"
+/* Dev/TEST */
+//#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
+//#define JR_SERVICE  @"http://124.207.66.50:10005"
 
+/* UAT */
+#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
+#define JR_SERVICE  @"http://54.223.161.28:8080"
+
+/* Production */
 //#define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
 //#define JR_SERVICE  @"http://app.juran.cn:81"
 
