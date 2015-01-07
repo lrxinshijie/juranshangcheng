@@ -20,7 +20,7 @@
                     <rect key="frame" x="25" y="185" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" image="icon_bid">
+                    <state key="normal" image="icon_bid.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -38,7 +38,7 @@
                     <rect key="frame" x="100" y="185" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" image="icon_question">
+                    <state key="normal" image="icon_question.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -56,7 +56,7 @@
                     <rect key="frame" x="176" y="185" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" image="icon_topic">
+                    <state key="normal" image="icon_topic.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -74,7 +74,7 @@
                     <rect key="frame" x="251" y="185" width="44" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" image="icon_letter">
+                    <state key="normal" image="icon_letter.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -198,10 +198,10 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_bid" width="44" height="44"/>
-        <image name="icon_letter" width="44" height="44"/>
-        <image name="icon_question" width="44" height="44"/>
-        <image name="icon_topic" width="44" height="44"/>
+        <image name="icon_bid.png" width="44" height="44"/>
+        <image name="icon_letter.png" width="44" height="44"/>
+        <image name="icon_question.png" width="44" height="44"/>
+        <image name="icon_topic.png" width="44" height="44"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

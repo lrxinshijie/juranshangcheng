@@ -81,7 +81,7 @@
     _contentWebView.backgroundColor = [UIColor clearColor];
     _contentWebView.scrollView.backgroundColor = [UIColor clearColor];
     _contentWebView.scalesPageToFit = YES;
-    _contentWebView.scrollView.scrollEnabled = NO;
+//    _contentWebView.scrollView.scrollEnabled = NO;
     
     [self setupCommentView];
     
