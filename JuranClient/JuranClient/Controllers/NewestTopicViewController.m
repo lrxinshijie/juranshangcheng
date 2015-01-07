@@ -95,7 +95,7 @@
 //    [self.view addSubview:_bottomView];
     
     frame = _commentView.frame;
-    frame.origin.y = CGRectGetMaxY(_tableView.frame);
+    frame.origin.y = kWindowHeightWithoutNavigationBarAndTabbar;
     _commentView.frame = frame;
     _commentView.hidden = YES;
     [self.view addSubview:_commentView];
