@@ -58,9 +58,9 @@
     [APService setupWithOption:launchOptions];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        ASLog(@"registrationID:%@",[APService registrationID]);
         [JRUser refreshToken:nil];
     });
-    
     
     [self jumpToMain];
     
@@ -91,20 +91,24 @@
     HomeViewController *home = [[HomeViewController alloc] init];
     UINavigationController *homeNav = [Public navigationControllerFromRootViewController:home];
     homeNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-home-default" selected:@"nav-home-active"];
+    homeNav.delegate = self;
     
     CaseViewController *cs = [[CaseViewController alloc] init];
     cs.isHome = YES;
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
     csNav.tabBarItem = [self setupTabbarItemTitle:@"案例" image:@"nav-case-default" selected:@"nav-case-active"];
+    csNav.delegate = self;
     
     DesignerViewController *des = [[DesignerViewController alloc] init];
     des.isHome = YES;
     UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
     desNav.tabBarItem = [self setupTabbarItemTitle:@"设计师" image:@"nav-designer-default" selected:@"nav-designer-active"];
+    desNav.delegate = self;
     
     ProfileViewController *profile = [[ProfileViewController alloc] init];
     UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
     profileNav.tabBarItem = [self setupTabbarItemTitle:@"个人中心" image:@"nav-user-default" selected:@"nav-user-active"];
+    profileNav.delegate = self;
     
     self.tabBarController = [[LeveyTabBarController alloc] initWithViewControllers:@[homeNav,csNav,desNav,profileNav]];
     [_tabBarController.tabBar setBackgroundImage:[UIImage imageFromColor:[[ALTheme sharedTheme] navigationColor]]];
