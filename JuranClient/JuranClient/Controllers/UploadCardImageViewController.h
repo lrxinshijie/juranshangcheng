@@ -18,6 +18,9 @@
 
 @interface UploadCardImageViewController : ALViewController
 
+@property (nonatomic, strong) UIImage *positiveIdImage;
+@property (nonatomic, strong) UIImage *backIdImage;
+@property (nonatomic, strong) UIImage *headImage;
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, weak) id<UploadCardImageViewControllerDelegate> delegate;
 

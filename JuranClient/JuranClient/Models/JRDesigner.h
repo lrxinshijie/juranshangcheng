@@ -66,7 +66,6 @@
 @property (nonatomic, strong) NSString *realNameGmtCreate;
 @property (nonatomic, strong) NSString *realAuditDesc;
 
-
 - (id)initWithDictionary:(NSDictionary *)dict;
 - (id)initWithDictionaryForBidInfo:(NSDictionary *)dict;
 

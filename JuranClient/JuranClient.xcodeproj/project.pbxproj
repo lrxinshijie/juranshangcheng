@@ -545,6 +545,13 @@
 		371D68781A5D78E700172AC9 /* personal_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D68771A5D78E700172AC9 /* personal_bg@2x.png */; };
 		371D687E1A5D824E00172AC9 /* BidListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 371D687A1A5D7F0300172AC9 /* BidListViewController.m */; };
 		371D687F1A5D825F00172AC9 /* BidListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 371D687B1A5D7F0300172AC9 /* BidListViewController.xib */; };
+		375B46461A5EB7F100D7E74B /* input_remark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375B46451A5EB7F100D7E74B /* input_remark@2x.png */; };
+		375B464C1A5EDC9500D7E74B /* PersonalDataForDesignerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375B46481A5EDBB200D7E74B /* PersonalDataForDesignerViewController.m */; };
+		375B464D1A5EDC9A00D7E74B /* PersonalDataForDesignerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375B46491A5EDBB200D7E74B /* PersonalDataForDesignerViewController.xib */; };
+		375B46581A5EE75C00D7E74B /* PriceModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375B464F1A5EE6CF00D7E74B /* PriceModifyViewController.m */; };
+		375B46591A5EE76000D7E74B /* PriceModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375B46501A5EE6D000D7E74B /* PriceModifyViewController.xib */; };
+		375B465A1A5EE76300D7E74B /* StyleModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375B46541A5EE70F00D7E74B /* StyleModifyViewController.m */; };
+		375B465B1A5EE76700D7E74B /* StyleModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */; };
 		378BB2C31A4B1C6E00E8358D /* JRBidInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 378BB2C21A4B1C6E00E8358D /* JRBidInfo.m */; };
 		37CF672C1A4FE11D0044F709 /* NewestBidInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */; };
 		37CF672D1A4FE11D0044F709 /* NewestBidInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37CF672B1A4FE11D0044F709 /* NewestBidInfoCell.xib */; };
@@ -1184,8 +1191,6 @@
 		BD5187AE1A5D344D00BE508A /* icon_topic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5187A21A5D344D00BE508A /* icon_topic@2x.png */; };
 		BD5F23E61A52A430009F759E /* SerciceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5F23E41A52A430009F759E /* SerciceDetailViewController.m */; };
 		BD5F23E71A52A430009F759E /* SerciceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD5F23E51A52A430009F759E /* SerciceDetailViewController.xib */; };
-		BD6189E31A5E1D8E00FBE4E1 /* BidListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 371D687A1A5D7F0300172AC9 /* BidListViewController.m */; };
-		BD6189E41A5E1D9B00FBE4E1 /* BidListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 371D687B1A5D7F0300172AC9 /* BidListViewController.xib */; };
 		BD6189EA1A5E261400FBE4E1 /* BidManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6189E61A5E239200FBE4E1 /* BidManagementViewController.m */; };
 		BD6189EB1A5E261B00FBE4E1 /* BidManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD6189E71A5E239200FBE4E1 /* BidManagementViewController.xib */; };
 		BD6189ED1A5E51CB00FBE4E1 /* DesignerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */; };
@@ -1501,6 +1506,16 @@
 		371D68791A5D7F0300172AC9 /* BidListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidListViewController.h; sourceTree = "<group>"; };
 		371D687A1A5D7F0300172AC9 /* BidListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidListViewController.m; sourceTree = "<group>"; };
 		371D687B1A5D7F0300172AC9 /* BidListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BidListViewController.xib; sourceTree = "<group>"; };
+		375B46451A5EB7F100D7E74B /* input_remark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input_remark@2x.png"; sourceTree = "<group>"; };
+		375B46471A5EDBB200D7E74B /* PersonalDataForDesignerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDataForDesignerViewController.h; sourceTree = "<group>"; };
+		375B46481A5EDBB200D7E74B /* PersonalDataForDesignerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDataForDesignerViewController.m; sourceTree = "<group>"; };
+		375B46491A5EDBB200D7E74B /* PersonalDataForDesignerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalDataForDesignerViewController.xib; sourceTree = "<group>"; };
+		375B464E1A5EE6CF00D7E74B /* PriceModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceModifyViewController.h; sourceTree = "<group>"; };
+		375B464F1A5EE6CF00D7E74B /* PriceModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceModifyViewController.m; sourceTree = "<group>"; };
+		375B46501A5EE6D000D7E74B /* PriceModifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceModifyViewController.xib; sourceTree = "<group>"; };
+		375B46531A5EE70F00D7E74B /* StyleModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleModifyViewController.h; sourceTree = "<group>"; };
+		375B46541A5EE70F00D7E74B /* StyleModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleModifyViewController.m; sourceTree = "<group>"; };
+		375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleModifyViewController.xib; sourceTree = "<group>"; };
 		378BB2C11A4B1C6E00E8358D /* JRBidInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRBidInfo.h; sourceTree = "<group>"; };
 		378BB2C21A4B1C6E00E8358D /* JRBidInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRBidInfo.m; sourceTree = "<group>"; };
 		37CF67291A4FE11D0044F709 /* NewestBidInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewestBidInfoCell.h; sourceTree = "<group>"; };
@@ -2339,6 +2354,15 @@
 				37D0100E1A566AF900EC658D /* UploadCardImageViewController.h */,
 				37D0100F1A566AF900EC658D /* UploadCardImageViewController.m */,
 				37D010101A566AF900EC658D /* UploadCardImageViewController.xib */,
+				375B46471A5EDBB200D7E74B /* PersonalDataForDesignerViewController.h */,
+				375B46481A5EDBB200D7E74B /* PersonalDataForDesignerViewController.m */,
+				375B46491A5EDBB200D7E74B /* PersonalDataForDesignerViewController.xib */,
+				375B464E1A5EE6CF00D7E74B /* PriceModifyViewController.h */,
+				375B464F1A5EE6CF00D7E74B /* PriceModifyViewController.m */,
+				375B46501A5EE6D000D7E74B /* PriceModifyViewController.xib */,
+				375B46531A5EE70F00D7E74B /* StyleModifyViewController.h */,
+				375B46541A5EE70F00D7E74B /* StyleModifyViewController.m */,
+				375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -2427,6 +2451,7 @@
 		371D686A1A5D6E2000172AC9 /* Personal */ = {
 			isa = PBXGroup;
 			children = (
+				375B46451A5EB7F100D7E74B /* input_remark@2x.png */,
 				371D68771A5D78E700172AC9 /* personal_bg@2x.png */,
 				371D68751A5D72CA00172AC9 /* icon_setting_white@2x.png */,
 				371D68731A5D6E7E00172AC9 /* icon_homepage@2x.png */,
@@ -3815,6 +3840,7 @@
 				BD5186C01A5D0ED700BE508A /* picker_bg@2x.png in Resources */,
 				BD5186761A5D0ED700BE508A /* default_userhead@2x.png in Resources */,
 				BD5185E01A5D0ED700BE508A /* case_collect_selected@2x.png in Resources */,
+				375B46461A5EB7F100D7E74B /* input_remark@2x.png in Resources */,
 				BD51874E1A5D0ED700BE508A /* sns_icon_23_s@2x.png in Resources */,
 				BD5186061A5D0ED700BE508A /* icon-sorting-default@2x.png in Resources */,
 				BD5186F41A5D0ED700BE508A /* menu_about_default@2x.png in Resources */,
@@ -3848,6 +3874,7 @@
 				BD51878C1A5D0ED700BE508A /* nav-wiki-active@2x.png in Resources */,
 				1415FA671A5CD1CB003D0C29 /* InteractionCell.xib in Resources */,
 				BD5186361A5D0ED700BE508A /* menu_paixu@2x.png in Resources */,
+				375B465B1A5EE76700D7E74B /* StyleModifyViewController.xib in Resources */,
 				BD51875A1A5D0ED700BE508A /* navbar_leftbtn_logo@2x.png in Resources */,
 				BD51868A1A5D0ED700BE508A /* icon_personal_hudong@2x.png in Resources */,
 				BD5185E21A5D0ED700BE508A /* case_default_image@2x.png in Resources */,
@@ -3899,6 +3926,7 @@
 				1415FA721A5CD1CB003D0C29 /* SubjectDetailViewController.xib in Resources */,
 				1415FA731A5CD1CB003D0C29 /* DesignerDetailViewController.xib in Resources */,
 				BD5187101A5D0ED700BE508A /* service_highlighted_0@2x.png in Resources */,
+				375B464D1A5EDC9A00D7E74B /* PersonalDataForDesignerViewController.xib in Resources */,
 				BD51862E1A5D0ED700BE508A /* menu_icon_fenxiang@2x.png in Resources */,
 				BD5186E81A5D0ED700BE508A /* publish_point_default@2x.png in Resources */,
 				BD5186C41A5D0ED700BE508A /* question_input@2x.png in Resources */,
@@ -3921,6 +3949,7 @@
 				BD51872E1A5D0ED700BE508A /* service_normal_1@2x.png in Resources */,
 				1415FA761A5CD1CB003D0C29 /* RegistViewController.xib in Resources */,
 				BD5185D21A5D0ED700BE508A /* ad_page_inactive@2x.png in Resources */,
+				375B46591A5EE76000D7E74B /* PriceModifyViewController.xib in Resources */,
 				BD51877A1A5D0ED700BE508A /* userlevel4@2x.png in Resources */,
 				BD5186521A5D0ED700BE508A /* login-btn@2x.png in Resources */,
 				BD5186A61A5D0ED700BE508A /* signleUnChocie@2x.png in Resources */,
@@ -4394,6 +4423,7 @@
 				1415F94F1A5CD1CB003D0C29 /* JRProfileData.m in Sources */,
 				1415F9501A5CD1CB003D0C29 /* PublishDesignViewController.m in Sources */,
 				1415F9511A5CD1CB003D0C29 /* DemandEditTextViewController.m in Sources */,
+				375B46581A5EE75C00D7E74B /* PriceModifyViewController.m in Sources */,
 				1415F9521A5CD1CB003D0C29 /* JRComment.m in Sources */,
 				1415F9531A5CD1CB003D0C29 /* ModifyPasswordViewController.m in Sources */,
 				1415F9541A5CD1CB003D0C29 /* TTTAttributedLabel.m in Sources */,
@@ -4458,6 +4488,7 @@
 				BD6189EA1A5E261400FBE4E1 /* BidManagementViewController.m in Sources */,
 				1415F98E1A5CD1CB003D0C29 /* BidDesignerCell.m in Sources */,
 				1415F98F1A5CD1CB003D0C29 /* JSONModelError.m in Sources */,
+				375B465A1A5EE76300D7E74B /* StyleModifyViewController.m in Sources */,
 				1415F9901A5CD1CB003D0C29 /* UIView+MJExtension.m in Sources */,
 				1415F9911A5CD1CB003D0C29 /* CaseManagementViewController.m in Sources */,
 				1415F9921A5CD1CB003D0C29 /* JSONModel+networking.m in Sources */,
@@ -4489,6 +4520,7 @@
 				1415F9AB1A5CD1CB003D0C29 /* DefaultData.m in Sources */,
 				1415F9AC1A5CD1CB003D0C29 /* SDWebImageDownloader.m in Sources */,
 				1415F9AD1A5CD1CB003D0C29 /* PushMessageCell.m in Sources */,
+				375B464C1A5EDC9500D7E74B /* PersonalDataForDesignerViewController.m in Sources */,
 				1415F9AE1A5CD1CB003D0C29 /* main.m in Sources */,
 				1415F9AF1A5CD1CB003D0C29 /* ReplyView.m in Sources */,
 				1415F9B01A5CD1CB003D0C29 /* FilterView.m in Sources */,

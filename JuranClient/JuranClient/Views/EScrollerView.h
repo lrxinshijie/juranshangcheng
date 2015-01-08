@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    PageControlAligmentLeft,
+    PageControlAligmentRight,
+    PageControlAligmentCenter,
+} PageControlAligment;
+
 @protocol EScrollerViewDelegate <NSObject>
 
 @optional
@@ -19,6 +25,6 @@
 
 @property (nonatomic, assign) id<EScrollerViewDelegate> delegate;
 
-- (id)initWithFrameRect:(CGRect)rect ImageArray:(NSArray *)imgArr;
+- (id)initWithFrameRect:(CGRect)rect ImageArray:(NSArray *)imgArr Aligment:(PageControlAligment)aligment;
 
 @end

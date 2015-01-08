@@ -16,6 +16,7 @@
 #import "GuideViewController.h"
 
 #import "UIAlertView+Blocks.h"
+#import "JRServiceViewController.h"
 
 @interface SettingsViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
@@ -52,9 +53,19 @@
     self.navigationItem.title = @"设置";
     
     keysForImageSet = @[@"智能模式", @"高质量（适合WIFI环境）", @"普通（适合2G或3G模式）"];
+    
+    
+#ifdef kJuranDesigner
     keysForOthers = @[@"问题反馈", @"版本信息"
-//                      , @"给我打分"
+                      //                      , @"给我打分"
+                      //, @"其他APP推荐"
+                      , @"居然服务"
+                      ];
+#else
+    keysForOthers = @[@"问题反馈", @"版本信息"
+                      //                      , @"给我打分"
                       ];//, @"其他APP推荐"
+#endif
     
     intelligentMode = [Public intelligentModeForImageQuality];
     imageQuality = [DefaultData sharedData].imageQuality;
@@ -199,7 +210,9 @@
             VersionInfoViewController *vc = [[VersionInfoViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 2){
-            
+            //居然服务
+            JRServiceViewController *vc = [[JRServiceViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 3){
             APPRecommendViewController *vc = [[APPRecommendViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];

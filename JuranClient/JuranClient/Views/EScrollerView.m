@@ -19,6 +19,7 @@
     SMPageControl *pageControl;
     
     int currentPageIndex;
+    PageControlAligment _aligment;
 }
 
 @end
@@ -29,11 +30,11 @@
     
 }
 
--(id)initWithFrameRect:(CGRect)rect ImageArray:(NSArray *)imgArr
+- (id)initWithFrameRect:(CGRect)rect ImageArray:(NSArray *)imgArr Aligment:(PageControlAligment)aligment
 {
     //LOG(@"%d",imgArr.count);
 	if ((self = [super initWithFrame:rect])) {
-        
+        _aligment = aligment;
         if ([imgArr count] == 0) {
             return self;
         }
@@ -80,7 +81,11 @@
         pageControl.pageIndicatorImage = [UIImage imageNamed:@"ad_page_inactive"];
         pageControl.currentPageIndicatorImage = [UIImage imageNamed:@"ad_page_action"];
         [pageControl sizeToFit];
-        pageControl.center = CGPointMake(rect.size.width - CGRectGetWidth(pageControl.frame)/2 - 10, CGRectGetHeight(rect)-10);
+        if (_aligment == PageControlAligmentRight) {
+            pageControl.center = CGPointMake(rect.size.width - CGRectGetWidth(pageControl.frame)/2 - 10, CGRectGetHeight(rect)-10);
+        }else if (_aligment == PageControlAligmentCenter){
+            pageControl.center = CGPointMake(rect.size.width/2, CGRectGetHeight(rect)-10);
+        }
         
         [self addSubview:pageControl];
 	}

@@ -8,10 +8,17 @@
 
 #import <UIKit/UIKit.h>
 @class JRDemand;
+@class DemandCell;
+
+@protocol DemandCellDelegate <NSObject>
+
+- (void)editRemark:(DemandCell*) cell AndDemand:(JRDemand*)demand;
+
+@end
 
 @interface DemandCell : UITableViewCell
 
-
+@property (nonatomic, weak) id<DemandCellDelegate> delegate;
 
 - (void)fillCellWithDemand:(JRDemand*)demand;
 

@@ -714,32 +714,7 @@
 		</dict>
 	</array>
 	<key>bidInfoOrder</key>
-	<array>
-		<dict>
-			<key>k</key>
-			<string>按发布时间</string>
-			<key>v</key>
-			<string>1</string>
-		</dict>
-		<dict>
-			<key>k</key>
-			<string>按结束时间</string>
-			<key>v</key>
-			<string>2</string>
-		</dict>
-		<dict>
-			<key>k</key>
-			<string>金额由高到低</string>
-			<key>v</key>
-			<string>3</string>
-		</dict>
-		<dict>
-			<key>k</key>
-			<string>金额由低到高</string>
-			<key>v</key>
-			<string>4</string>
-		</dict>
-	</array>
+	<array/>
 	<key>designerDefaultParam</key>
 	<dict>
 		<key>order</key>
@@ -886,40 +861,30 @@
 	<array>
 		<dict>
 			<key>k</key>
-			<string>需求状态</string>
+			<string>擅长风格</string>
 			<key>v</key>
-			<string>bidInfoStatus</string>
+			<string>style</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>项目类型</string>
+			<string>户型</string>
 			<key>v</key>
-			<string>houseType</string>
-		</dict>
-		<dict>
-			<key>k</key>
-			<string>装修预算 </string>
-			<key>v</key>
-			<string>bidInfoBudget</string>
+			<string>roomType</string>
 		</dict>
 		<dict>
 			<key>k</key>
 			<string>项目面积</string>
 			<key>v</key>
-			<string>bidInfoHouseArea</string>
+			<string>houseArea</string>
 		</dict>
 	</array>
 	<key>bidInfoDefaultParam</key>
 	<dict>
-		<key>status</key>
+		<key>roomType</key>
 		<string></string>
-		<key>houseType</key>
-		<string></string>
-		<key>budget</key>
+		<key>style</key>
 		<string></string>
 		<key>houseArea</key>
-		<string></string>
-		<key>order</key>
 		<string></string>
 	</dict>
 </dict>

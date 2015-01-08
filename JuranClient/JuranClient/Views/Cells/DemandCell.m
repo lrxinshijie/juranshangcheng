@@ -28,8 +28,12 @@
 @property (nonatomic, strong) IBOutlet UIView *remarkView;
 @property (nonatomic, strong) IBOutlet UILabel *remarkLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *remarkImageView;
+@property (nonatomic, strong) IBOutlet UIButton *remarkButton;
 
 @property (nonatomic, strong) IBOutlet UIImageView *confirmFlagImageView;
+
+@property (nonatomic, strong) JRDemand *demand;
+
 @end
 
 @implementation DemandCell
@@ -54,6 +58,8 @@
 }
 
 - (void)fillCellWithDemand:(JRDemand*)demand{
+    _demand = demand;
+    
     _projectNumLabel.text = [NSString stringWithFormat:@"项目编号：%@", demand.designReqId];
     _timeLabel.text = demand.publishTime;
     _titleLabel.text = demand.title;
@@ -78,6 +84,35 @@
         _endTimeLabel.text = @"";
     }
 
+#ifdef kJuranDesigner
+    if (demand.memo.length == 0) {
+        _remarkLabel.text = @"写备注";
+        _remarkImageView.hidden = NO;
+    }else{
+        _remarkLabel.text = demand.memo;
+        _remarkImageView.hidden = YES;
+    }
+    
+    CGRect frame = _remarkLabel.frame;
+    frame.size.height = [_remarkLabel.text heightWithFont:_remarkLabel.font constrainedToWidth:CGRectGetWidth(_remarkLabel.frame)];
+    _remarkLabel.frame = frame;
+    
+    frame = _remarkView.frame;
+    frame.size.height = CGRectGetMaxY(_remarkLabel.frame) + 5;
+    _remarkView.frame = frame;
+    
+    frame = _remarkButton.frame;
+    frame.size.height = CGRectGetHeight(_remarkView.frame);
+    _remarkButton.frame = frame;
+    
+#endif
+    
+}
+
+- (IBAction)onRemark:(id)sender{
+    if (_delegate && [_delegate respondsToSelector:@selector(editRemark:AndDemand:)]) {
+        [_delegate editRemark:self AndDemand:_demand];
+    }
 }
 
 @end
