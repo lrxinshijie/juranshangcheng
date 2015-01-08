@@ -23,7 +23,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login-bg" translatesAutoresizingMaskIntoConstraints="NO" id="e4W-qh-Zbu">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="e4W-qh-Zbu">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IhW-Wg-yPZ">
@@ -34,7 +34,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rdo-d1-RB0">
                     <rect key="frame" x="10" y="22" width="25" height="25"/>
-                    <state key="normal" image="login-back">
+                    <state key="normal" image="login-back.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -83,11 +83,11 @@
                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="regist-code-bg" translatesAutoresizingMaskIntoConstraints="NO" id="4eS-P5-iq1">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="regist-code-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="4eS-P5-iq1">
                     <rect key="frame" x="0.0" y="29" width="280" height="50"/>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3aF-hj-2gb">
-                    <rect key="frame" x="14" y="39" width="141" height="30"/>
+                    <rect key="frame" x="14" y="29" width="141" height="49"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
@@ -95,11 +95,11 @@
                         <outlet property="delegate" destination="-1" id="aIM-uk-so9"/>
                     </connections>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login-text-bg" translatesAutoresizingMaskIntoConstraints="NO" id="NZT-M4-vMv">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login-text-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="NZT-M4-vMv">
                     <rect key="frame" x="0.0" y="87" width="280" height="50"/>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="J5p-Po-1Bx">
-                    <rect key="frame" x="14" y="97" width="251" height="30"/>
+                    <rect key="frame" x="14" y="87" width="251" height="50"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
@@ -120,7 +120,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Elb-1v-Pcm">
                     <rect key="frame" x="0.0" y="167" width="280" height="44"/>
-                    <state key="normal" title="提  交" backgroundImage="login-btn">
+                    <state key="normal" title="提  交" backgroundImage="login-btn.png">
                         <color key="titleColor" red="0.0" green="0.27450980390000002" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -139,11 +139,11 @@
             <rect key="frame" x="0.0" y="0.0" width="280" height="114"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login-text-bg" translatesAutoresizingMaskIntoConstraints="NO" id="VJn-O7-0gK">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login-text-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="VJn-O7-0gK">
                     <rect key="frame" x="0.0" y="0.0" width="280" height="50"/>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入注册时填写的电子邮箱" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="o0e-X1-IS8">
-                    <rect key="frame" x="14" y="10" width="251" height="30"/>
+                    <rect key="frame" x="14" y="0.0" width="251" height="50"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
@@ -153,7 +153,7 @@
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hSj-E9-fqS">
                     <rect key="frame" x="0.0" y="70" width="280" height="44"/>
-                    <state key="normal" title="提  交" backgroundImage="login-btn">
+                    <state key="normal" title="提  交" backgroundImage="login-btn.png">
                         <color key="titleColor" red="0.0" green="0.27450980390000002" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -170,10 +170,10 @@
         </view>
     </objects>
     <resources>
-        <image name="login-back" width="25" height="25"/>
-        <image name="login-bg" width="320" height="568"/>
-        <image name="login-btn" width="280" height="44"/>
-        <image name="login-text-bg" width="280" height="50"/>
-        <image name="regist-code-bg" width="280" height="50"/>
+        <image name="login-back.png" width="25" height="25"/>
+        <image name="login-bg.png" width="320" height="568"/>
+        <image name="login-btn.png" width="280" height="44"/>
+        <image name="login-text-bg.png" width="280" height="50"/>
+        <image name="regist-code-bg.png" width="280" height="50"/>
     </resources>
 </document>

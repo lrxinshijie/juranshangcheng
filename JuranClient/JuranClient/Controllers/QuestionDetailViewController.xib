@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -37,7 +37,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="question_wati_resolve" id="HYI-a4-rPU">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="question_wati_resolve.png" id="HYI-a4-rPU">
                     <rect key="frame" x="15" y="10" width="23" height="23"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -62,7 +62,7 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default" id="0zd-kE-rEh" customClass="ZoomInImageView">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default.png" id="0zd-kE-rEh" customClass="ZoomInImageView">
                     <rect key="frame" x="15" y="110" width="70" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -103,7 +103,7 @@
                     <rect key="frame" x="5" y="5" width="310" height="35"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="best_answer" id="BwE-Rg-eBs">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="best_answer.png" id="BwE-Rg-eBs">
                             <rect key="frame" x="10" y="0.0" width="24" height="31"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
@@ -140,7 +140,7 @@
                     <color key="textColor" red="0.5058823823928833" green="0.5058823823928833" blue="0.5058823823928833" alpha="1" colorSpace="deviceRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default" id="3wR-oH-dC0" customClass="ZoomInImageView">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default.png" id="3wR-oH-dC0" customClass="ZoomInImageView">
                     <rect key="frame" x="15" y="108" width="70" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -158,7 +158,7 @@
                     <rect key="frame" x="253" y="5" width="62" height="39"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="发送" backgroundImage="case-detail-send">
+                    <state key="normal" title="发送" backgroundImage="case-detail-send.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -185,7 +185,7 @@
                     <rect key="frame" x="8" y="8" width="32" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <state key="normal" image="icon_camera3">
+                    <state key="normal" image="icon_camera3.png">
                         <color key="titleColor" red="0.17254902420000001" green="0.4274510145" blue="0.7019608021" alpha="1" colorSpace="deviceRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -212,14 +212,14 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="AV5-d6-bBP">
                             <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" backgroundImage="picker_bg">
+                            <state key="normal" backgroundImage="picker_bg.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="onChooseImageWithCamera:" destination="-1" eventType="touchUpInside" id="p9n-ua-5nu"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_ camera" id="F1p-gJ-reX">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_ camera.png" id="F1p-gJ-reX">
                             <rect key="frame" x="17" y="14" width="30" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -232,14 +232,14 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jzE-c8-PBC">
                             <rect key="frame" x="75" y="0.0" width="65" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" backgroundImage="picker_bg">
+                            <state key="normal" backgroundImage="picker_bg.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="onChooseImageWithPhoto:" destination="-1" eventType="touchUpInside" id="8E2-0R-cW3"/>
                             </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_image1" id="UBx-66-Mjm">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_image1.png" id="UBx-66-Mjm">
                             <rect key="frame" x="92" y="14" width="30" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -259,14 +259,14 @@
         </view>
     </objects>
     <resources>
-        <image name="best_answer" width="24" height="30"/>
-        <image name="case-detail-send" width="62" height="39"/>
-        <image name="icon_ camera" width="29" height="26"/>
-        <image name="icon_camera3" width="16" height="14"/>
-        <image name="icon_image1" width="29" height="24"/>
-        <image name="image_default" width="320" height="240"/>
-        <image name="picker_bg" width="65" height="65"/>
-        <image name="question_wati_resolve" width="22" height="22"/>
+        <image name="best_answer.png" width="24" height="30"/>
+        <image name="case-detail-send.png" width="62" height="39"/>
+        <image name="icon_ camera.png" width="29" height="26"/>
+        <image name="icon_camera3.png" width="16" height="14"/>
+        <image name="icon_image1.png" width="29" height="24"/>
+        <image name="image_default.png" width="320" height="240"/>
+        <image name="picker_bg.png" width="65" height="65"/>
+        <image name="question_wati_resolve.png" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

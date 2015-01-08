@@ -34,7 +34,7 @@
                         <action selector="doAsk:" destination="-1" eventType="touchUpInside" id="LIb-ce-yRa"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="question_input" id="3L1-4P-fb7">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="question_input.png" id="3L1-4P-fb7">
                     <rect key="frame" x="5" y="5" width="310" height="39"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -58,7 +58,7 @@
             <rect key="frame" x="0.0" y="0.0" width="192" height="128"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data" id="7A5-89-l5W">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data.png" id="7A5-89-l5W">
                     <rect key="frame" x="49" y="0.0" width="94" height="92"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -77,8 +77,8 @@
         </view>
     </objects>
     <resources>
-        <image name="answer_no_data" width="94" height="92"/>
-        <image name="question_input" width="309" height="39"/>
+        <image name="answer_no_data.png" width="94" height="92"/>
+        <image name="question_input.png" width="309" height="39"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

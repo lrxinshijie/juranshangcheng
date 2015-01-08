@@ -33,7 +33,7 @@
                     <rect key="frame" x="0.0" y="454" width="320" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message_text_bg" id="Aku-Uw-ogA">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message_text_bg.png" id="Aku-Uw-ogA">
                             <rect key="frame" x="5" y="5" width="243" height="39"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
@@ -41,7 +41,7 @@
                             <rect key="frame" x="253" y="5" width="62" height="39"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="发送" backgroundImage="message_btn_bg">
+                            <state key="normal" title="发送" backgroundImage="message_btn_bg.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -105,8 +105,8 @@
         </view>
     </objects>
     <resources>
-        <image name="message_btn_bg" width="62" height="39"/>
-        <image name="message_text_bg" width="242" height="39"/>
+        <image name="message_btn_bg.png" width="62" height="39"/>
+        <image name="message_text_bg.png" width="242" height="39"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

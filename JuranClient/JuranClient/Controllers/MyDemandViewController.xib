@@ -21,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="192" height="128"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="empty_demand" translatesAutoresizingMaskIntoConstraints="NO" id="MHo-Sm-j5f">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="empty_demand.png" translatesAutoresizingMaskIntoConstraints="NO" id="MHo-Sm-j5f">
                     <rect key="frame" x="49" y="0.0" width="90" height="90"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="您还没有发布任何需求" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f6Z-Il-Gd5">
@@ -38,7 +38,7 @@
         </view>
     </objects>
     <resources>
-        <image name="empty_demand" width="102" height="102"/>
+        <image name="empty_demand.png" width="102" height="102"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

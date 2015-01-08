@@ -52,15 +52,15 @@
     
     [self setupShareSDK];
     
-//    [self setupPush];
-    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                   UIRemoteNotificationTypeSound |
-                                                   UIRemoteNotificationTypeAlert)
-                                       categories:nil];
-    [APService setupWithOption:launchOptions];
+    [self setupPush];
+//    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+//                                                   UIRemoteNotificationTypeSound |
+//                                                   UIRemoteNotificationTypeAlert)
+//                                       categories:nil];
+//    [APService setupWithOption:launchOptions];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        ASLog(@"registrationID:%@",[APService registrationID]);
+//        ASLog(@"registrationID:%@",[APService registrationID]);
         [JRUser refreshToken:nil];
     });
     
@@ -291,7 +291,7 @@
 - (void)showAPNS:(NSDictionary *)userInfo{
     ASLog(@"APNS:%@",userInfo);
     
-    [APService handleRemoteNotification:userInfo];
+//    [APService handleRemoteNotification:userInfo];
     
     [self clearNotification];
     
@@ -329,7 +329,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
     
-    [APService registerDeviceToken:deviceToken];
+//    [APService registerDeviceToken:deviceToken];
     
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     NSString *dToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -362,6 +362,7 @@
 - (void)GexinSdkDidRegisterClient:(NSString *)clientId
 {
     // [4-EXT-1]: 个推SDK已注册
+    ASLog(@"clientId:%@",clientId);
     self.clientId = clientId;
 }
 

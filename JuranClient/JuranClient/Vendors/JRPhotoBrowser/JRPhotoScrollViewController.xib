@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JRPhotoScrollViewController">
@@ -38,7 +38,7 @@
                         <action selector="doDetail:" destination="-1" eventType="touchUpInside" id="jSl-v4-WNj"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case_icon_detail" id="deC-YN-38s">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case_icon_detail.png" id="deC-YN-38s">
                     <rect key="frame" x="21" y="7" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -59,7 +59,7 @@
                         <action selector="doPraise:" destination="-1" eventType="touchUpInside" id="Rtg-x0-omj"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case_icon_praise" id="q4y-TL-2y8">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case_icon_praise.png" id="q4y-TL-2y8">
                     <rect key="frame" x="86" y="7" width="19" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -80,7 +80,7 @@
                         <action selector="doCollect:" destination="-1" eventType="touchUpInside" id="b11-NM-kl8"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case_icon_collect" id="8LO-Rv-6GY">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case_icon_collect.png" id="8LO-Rv-6GY">
                     <rect key="frame" x="148" y="6" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -101,7 +101,7 @@
                         <action selector="doMakeAppointment:" destination="-1" eventType="touchUpInside" id="1Oe-Tc-csy"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case_icon_yuyue" id="tZ3-qZ-QkT">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case_icon_yuyue.png" id="tZ3-qZ-QkT">
                     <rect key="frame" x="213" y="6" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -129,7 +129,7 @@
                         <action selector="doPrivateLetter:" destination="-1" eventType="touchUpInside" id="yAI-iv-Mmk"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case_icon_sixin" id="8tH-rE-aEw">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case_icon_sixin.png" id="8tH-rE-aEw">
                     <rect key="frame" x="276" y="10" width="20" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -168,11 +168,11 @@
         </view>
     </objects>
     <resources>
-        <image name="case_icon_collect" width="20" height="19"/>
-        <image name="case_icon_detail" width="20" height="20"/>
-        <image name="case_icon_praise" width="19" height="19"/>
-        <image name="case_icon_sixin" width="22" height="16"/>
-        <image name="case_icon_yuyue" width="24" height="25"/>
+        <image name="case_icon_collect.png" width="20" height="19"/>
+        <image name="case_icon_detail.png" width="20" height="20"/>
+        <image name="case_icon_praise.png" width="19" height="19"/>
+        <image name="case_icon_sixin.png" width="22" height="16"/>
+        <image name="case_icon_yuyue.png" width="24" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

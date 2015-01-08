@@ -51,7 +51,7 @@
             <rect key="frame" x="0.0" y="1" width="320" height="148"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email_password" id="8vj-Zw-tgd">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email_password_ok.png" id="8vj-Zw-tgd">
                     <rect key="frame" x="135" y="27" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -76,7 +76,7 @@
         </view>
     </objects>
     <resources>
-        <image name="email_password" width="50" height="50"/>
+        <image name="email_password_ok.png" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

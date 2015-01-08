@@ -34,11 +34,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlogin_head" id="gM7-2K-AQC" customClass="ZoomInImageView">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlogin_head.png" id="gM7-2K-AQC" customClass="ZoomInImageView">
                     <rect key="frame" x="10" y="10" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView hidden="YES" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_isauth" id="uBU-bY-II0">
+                <imageView hidden="YES" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_isauth.png" id="uBU-bY-II0">
                     <rect key="frame" x="236" y="14" width="17" height="12"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -127,7 +127,7 @@
                         <action selector="doFollow:" destination="-1" eventType="touchDown" id="M5t-GH-WN0"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_icon_guanzhu" id="MI4-eX-cIj">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_icon_guanzhu.png" id="MI4-eX-cIj">
                     <rect key="frame" x="29" y="7" width="21" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -148,7 +148,7 @@
                         <action selector="doMakeAppointment:" destination="-1" eventType="touchUpInside" id="L2X-YW-LA2"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_icon_yuyue" id="pWK-JS-wxs">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_icon_yuyue.png" id="pWK-JS-wxs">
                     <rect key="frame" x="106" y="6" width="29" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -169,7 +169,7 @@
                         <action selector="doPrivateLetter:" destination="-1" eventType="touchUpInside" id="BIq-IV-7mx"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_icon_sixin" id="Xv0-dj-PWF">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_icon_sixin.png" id="Xv0-dj-PWF">
                     <rect key="frame" x="189" y="9" width="22" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -190,7 +190,7 @@
                         <action selector="doShare:" destination="-1" eventType="touchUpInside" id="kRJ-7v-bqt"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_icon_fenxiang" id="DL2-Hd-zYi">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_icon_fenxiang.png" id="DL2-Hd-zYi">
                     <rect key="frame" x="271" y="8" width="18" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -224,7 +224,7 @@
             <rect key="frame" x="0.0" y="0.0" width="192" height="128"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data" id="L4G-Nx-dU8">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data.png" id="L4G-Nx-dU8">
                     <rect key="frame" x="49" y="0.0" width="94" height="92"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -242,13 +242,13 @@
         </view>
     </objects>
     <resources>
-        <image name="answer_no_data" width="94" height="92"/>
-        <image name="icon_isauth" width="16" height="12"/>
-        <image name="menu_icon_fenxiang" width="17" height="19"/>
-        <image name="menu_icon_guanzhu" width="21" height="21"/>
-        <image name="menu_icon_sixin" width="22" height="16"/>
-        <image name="menu_icon_yuyue" width="29" height="24"/>
-        <image name="unlogin_head" width="60" height="60"/>
+        <image name="answer_no_data.png" width="94" height="92"/>
+        <image name="icon_isauth.png" width="16" height="12"/>
+        <image name="menu_icon_fenxiang.png" width="17" height="19"/>
+        <image name="menu_icon_guanzhu.png" width="21" height="21"/>
+        <image name="menu_icon_sixin.png" width="22" height="16"/>
+        <image name="menu_icon_yuyue.png" width="29" height="24"/>
+        <image name="unlogin_head.png" width="60" height="60"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

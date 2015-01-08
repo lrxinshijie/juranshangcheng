@@ -25,15 +25,15 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide_h_1" id="0Le-k5-HpD">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide_h_1.png" id="0Le-k5-HpD">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide_h_2" id="NLm-s6-jYY">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide_h_2.png" id="NLm-s6-jYY">
                             <rect key="frame" x="320" y="0.0" width="320" height="568"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide_h_3" id="2uB-h2-Tpk">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide_h_3.png" id="2uB-h2-Tpk">
                             <rect key="frame" x="640" y="0.0" width="320" height="568"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -77,9 +77,9 @@
         </view>
     </objects>
     <resources>
-        <image name="guide_h_1" width="320" height="568"/>
-        <image name="guide_h_2" width="320" height="568"/>
-        <image name="guide_h_3" width="320" height="568"/>
+        <image name="guide_h_1.png" width="320" height="568"/>
+        <image name="guide_h_2.png" width="320" height="568"/>
+        <image name="guide_h_3.png" width="320" height="568"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

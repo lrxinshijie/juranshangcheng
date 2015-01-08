@@ -23,7 +23,7 @@
                             <rect key="frame" x="250" y="5" width="62" height="39"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="完成" backgroundImage="case-detail-send">
+                            <state key="normal" title="完成" backgroundImage="case-detail-send.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -46,7 +46,7 @@
         </view>
     </objects>
     <resources>
-        <image name="case-detail-send" width="62" height="39"/>
+        <image name="case-detail-send.png" width="62" height="39"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

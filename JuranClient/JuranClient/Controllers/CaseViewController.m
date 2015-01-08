@@ -58,7 +58,12 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     if (_isHome) {
+#ifdef kJuranDesigner
+        self.navigationItem.title = @"案例";
+#else
         [self configureMenu];
+#endif
+        
         [self configureSearch];
     }else{
         self.navigationItem.title = @"搜索结果";
@@ -81,11 +86,16 @@
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
+#ifdef kJuranDesigner
+        [weakSelf loadData];
+#else
         if (weakSelf.isHome) {
             [weakSelf loadAd];
         }else{
             [weakSelf loadData];
         }
+#endif
+        
         
     }];
     

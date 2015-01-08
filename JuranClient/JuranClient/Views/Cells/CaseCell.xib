@@ -18,7 +18,7 @@
                         <rect key="frame" x="5" y="5" width="310" height="265"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default" id="gex-9Q-tsk">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default.png" id="gex-9Q-tsk">
                                 <rect key="frame" x="0.0" y="0.0" width="310" height="240"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -30,7 +30,7 @@
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avtar_default" id="Tyr-0a-hwN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avtar_default.png" id="Tyr-0a-hwN">
                                 <rect key="frame" x="10" y="210" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -44,7 +44,7 @@
                                 <rect key="frame" x="256" y="241" width="54" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="  118" image="icon-eye">
+                                <state key="normal" title="  118" image="icon-eye.png">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -58,7 +58,7 @@
                                 <rect key="frame" x="194" y="241" width="54" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="  8" image="icon-zan-ro">
+                                <state key="normal" title="  8" image="icon-zan-ro.png">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -83,10 +83,10 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="avtar_default" width="60" height="60"/>
-        <image name="icon-eye" width="14" height="8"/>
-        <image name="icon-zan-ro" width="13" height="13"/>
-        <image name="image_default" width="320" height="240"/>
+        <image name="avtar_default.png" width="60" height="60"/>
+        <image name="icon-eye.png" width="14" height="8"/>
+        <image name="icon-zan-ro.png" width="13" height="13"/>
+        <image name="image_default.png" width="320" height="240"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

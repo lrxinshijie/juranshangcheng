@@ -32,7 +32,7 @@
                         <action selector="onCall:" destination="-1" eventType="touchUpInside" id="eOb-Fv-r3u"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile" id="AQM-Pe-nME">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_mobile.png" id="AQM-Pe-nME">
                     <rect key="frame" x="44" y="11" width="20" height="27"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -50,7 +50,7 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_mobile" width="20" height="27"/>
+        <image name="icon_mobile.png" width="20" height="27"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

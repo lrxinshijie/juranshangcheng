@@ -24,7 +24,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="243"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_120" id="sRf-d7-HVj">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon7.png" id="sRf-d7-HVj">
                     <rect key="frame" x="115" y="53" width="90" height="89"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -43,7 +43,7 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_120" width="120" height="120"/>
+        <image name="Icon7.png" width="120" height="120"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

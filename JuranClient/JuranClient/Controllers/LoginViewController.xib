@@ -17,15 +17,15 @@
             <rect key="frame" x="0.0" y="64" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-bg" id="A1V-7n-3Yr">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-bg.png" id="A1V-7n-3Yr">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-text-bg" id="Lh8-0f-5Lk">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-text-bg.png" id="Lh8-0f-5Lk">
                     <rect key="frame" x="20" y="116" width="280" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-icon-password" id="Yj8-DB-Dha">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-icon-password.png" id="Yj8-DB-Dha">
                     <rect key="frame" x="37" y="130" width="18" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -40,7 +40,7 @@
                     </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入密码" minimumFontSize="17" clearButtonMode="whileEditing" id="kvg-SR-Qd5">
-                    <rect key="frame" x="65" y="126" width="224" height="30"/>
+                    <rect key="frame" x="65" y="116" width="224" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -52,7 +52,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xoc-pP-CFv">
                     <rect key="frame" x="10" y="22" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="login-back">
+                    <state key="normal" image="login-back.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -76,16 +76,16 @@
                         <action selector="onRegist:" destination="-1" eventType="touchUpInside" id="43c-Qr-OyP"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-text-bg" id="j6c-Hw-Qyc">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-text-bg.png" id="j6c-Hw-Qyc">
                     <rect key="frame" x="20" y="58" width="280" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-icon-account" id="Gr7-8C-oVV">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-icon-account.png" id="Gr7-8C-oVV">
                     <rect key="frame" x="35" y="72" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入手机号/邮箱/用户名" minimumFontSize="17" clearButtonMode="whileEditing" id="Khf-pk-rTx">
-                    <rect key="frame" x="65" y="68" width="224" height="30"/>
+                    <rect key="frame" x="65" y="58" width="224" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -97,7 +97,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="AYO-TX-jjp">
                     <rect key="frame" x="20" y="183" width="280" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="登  录" backgroundImage="login-btn">
+                    <state key="normal" title="登  录" backgroundImage="login-btn.png">
                         <color key="titleColor" red="0.0" green="0.27450980392156865" blue="0.6470588235294118" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -128,7 +128,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="-46" minY="85" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="QQ登录" image="login-icon-tencent">
+                    <state key="normal" title="QQ登录" image="login-icon-tencent.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -141,7 +141,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="-50" minY="85" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="微信登录" image="login-icon-wx">
+                    <state key="normal" title="微信登录" image="login-icon-wx.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -154,7 +154,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <inset key="titleEdgeInsets" minX="-50" minY="85" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="微博登录" image="login-icon-sina">
+                    <state key="normal" title="微博登录" image="login-icon-sina.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -187,15 +187,15 @@
         </view>
     </objects>
     <resources>
-        <image name="login-back" width="25" height="25"/>
-        <image name="login-bg" width="320" height="568"/>
-        <image name="login-btn" width="280" height="44"/>
-        <image name="login-icon-account" width="22" height="22"/>
-        <image name="login-icon-password" width="18" height="22"/>
-        <image name="login-icon-sina" width="46" height="46"/>
-        <image name="login-icon-tencent" width="46" height="46"/>
-        <image name="login-icon-wx" width="46" height="46"/>
-        <image name="login-text-bg" width="280" height="50"/>
+        <image name="login-back.png" width="25" height="25"/>
+        <image name="login-bg.png" width="320" height="568"/>
+        <image name="login-btn.png" width="280" height="44"/>
+        <image name="login-icon-account.png" width="22" height="22"/>
+        <image name="login-icon-password.png" width="18" height="22"/>
+        <image name="login-icon-sina.png" width="46" height="46"/>
+        <image name="login-icon-tencent.png" width="46" height="46"/>
+        <image name="login-icon-wx.png" width="46" height="46"/>
+        <image name="login-text-bg.png" width="280" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

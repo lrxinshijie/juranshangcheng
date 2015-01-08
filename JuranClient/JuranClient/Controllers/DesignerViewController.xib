@@ -22,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="192" height="128"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data" id="g6I-jq-beO">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data.png" id="g6I-jq-beO">
                     <rect key="frame" x="49" y="0.0" width="94" height="92"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -41,7 +41,7 @@
         </view>
     </objects>
     <resources>
-        <image name="answer_no_data" width="94" height="92"/>
+        <image name="answer_no_data.png" width="94" height="92"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

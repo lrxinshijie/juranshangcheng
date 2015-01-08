@@ -76,6 +76,10 @@
     }];
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
 - (void)loadData{
     NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
                             @"onePageCount": kOnePageCount,

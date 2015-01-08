@@ -30,7 +30,7 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="private_message_empty" id="w0h-B9-9HO">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="private_message_empty.png" id="w0h-B9-9HO">
                     <rect key="frame" x="111" y="35" width="99" height="75"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -41,7 +41,7 @@
         </view>
     </objects>
     <resources>
-        <image name="private_message_empty" width="99" height="74"/>
+        <image name="private_message_empty.png" width="99" height="74"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

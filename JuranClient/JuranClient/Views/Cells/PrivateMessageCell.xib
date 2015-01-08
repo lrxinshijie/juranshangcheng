@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="avtar_default" translatesAutoresizingMaskIntoConstraints="NO" id="FxD-eG-04R">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="avtar_default.png" translatesAutoresizingMaskIntoConstraints="NO" id="FxD-eG-04R">
                         <rect key="frame" x="10" y="8" width="50" height="50"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ig9-Vn-4Tj">
@@ -56,6 +56,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="avtar_default" width="60" height="60"/>
+        <image name="avtar_default.png" width="60" height="60"/>
     </resources>
 </document>

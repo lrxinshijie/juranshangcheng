@@ -33,7 +33,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.90980398650000005" green="0.90980398650000005" blue="0.90980398650000005" alpha="1" colorSpace="deviceRGB"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlogin_head" id="U9R-Ib-syG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlogin_head.png" id="U9R-Ib-syG">
                                 <rect key="frame" x="8" y="10" width="48" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -58,23 +58,23 @@
                                 <color key="textColor" red="0.68235296010971069" green="0.68235296010971069" blue="0.68235296010971069" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cellIndicator" id="tHG-4M-60P">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cellIndicator.png" id="tHG-4M-60P">
                                 <rect key="frame" x="295" y="11" width="8" height="15"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView hidden="YES" userInteractionEnabled="NO" tag="1020" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_isauth" id="qW8-0g-vhD">
+                            <imageView hidden="YES" userInteractionEnabled="NO" tag="1020" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_isauth.png" id="qW8-0g-vhD">
                                 <rect key="frame" x="162" y="13" width="17" height="12"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" tag="1030" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userlevel0" id="y5O-0P-upv">
+                            <imageView userInteractionEnabled="NO" tag="1030" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userlevel0.png" id="y5O-0P-upv">
                                 <rect key="frame" x="188" y="12" width="26" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product_count" id="jKa-tx-xDz">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product_count.png" id="jKa-tx-xDz">
                                 <rect key="frame" x="185" y="49" width="13" height="11"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="look_count" id="8hl-Qg-ASl">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="look_count.png" id="8hl-Qg-ASl">
                                 <rect key="frame" x="249" y="49" width="18" height="11"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -125,12 +125,12 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="cellIndicator" width="8" height="15"/>
-        <image name="icon_isauth" width="16" height="12"/>
-        <image name="look_count" width="17" height="10"/>
-        <image name="product_count" width="12" height="10"/>
-        <image name="unlogin_head" width="60" height="60"/>
-        <image name="userlevel0" width="25" height="11"/>
+        <image name="cellIndicator.png" width="8" height="15"/>
+        <image name="icon_isauth.png" width="16" height="12"/>
+        <image name="look_count.png" width="17" height="10"/>
+        <image name="product_count.png" width="12" height="10"/>
+        <image name="unlogin_head.png" width="60" height="60"/>
+        <image name="userlevel0.png" width="25" height="11"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -18,13 +18,13 @@
 #import "InteractionViewController.h"
 #import "PushMessageViewController.h"
 #import "CaseCollectViewController.h"
+#import "SettingsViewController.h"
 
 #ifdef kJuranDesigner
 #import "RealNameAuthViewController.h"
 #import "CaseManagementViewController.h"
 #import "DesignerDetailViewController.h"
 #import "JRDesigner.h"
-#import "SettingsViewController.h"
 #else
 #import "PrivateMessageViewController.h"
 #endif

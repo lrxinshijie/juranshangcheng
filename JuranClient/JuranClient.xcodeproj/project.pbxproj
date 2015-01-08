@@ -438,6 +438,8 @@
 		145471DD1A38A53000428BCB /* NewQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145471DB1A38A53000428BCB /* NewQuestionViewController.xib */; };
 		14555D341A36EB4100E36339 /* JRAreaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 14555D331A36EB4100E36339 /* JRAreaInfo.m */; };
 		14555D371A36FE1F00E36339 /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14555D361A36FE1F00E36339 /* MenuView.m */; };
+		1456C8931A5E22750061F0FD /* BidListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 371D687B1A5D7F0300172AC9 /* BidListViewController.xib */; };
+		1456C8941A5E227A0061F0FD /* BidListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 371D687A1A5D7F0300172AC9 /* BidListViewController.m */; };
 		14587E101A35D5E300D41236 /* DetailAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14587E0E1A35D5E300D41236 /* DetailAddressViewController.m */; };
 		14587E111A35D5E300D41236 /* DetailAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14587E0F1A35D5E300D41236 /* DetailAddressViewController.xib */; };
 		14587E151A35DC9000D41236 /* ModifyPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14587E131A35DC9000D41236 /* ModifyPasswordViewController.m */; };
@@ -4197,6 +4199,7 @@
 				BD51873B1A5D0ED700BE508A /* service_normal_8@2x.png in Resources */,
 				37CF672D1A4FE11D0044F709 /* NewestBidInfoCell.xib in Resources */,
 				BD5186151A5D0ED700BE508A /* default_case@2x.png in Resources */,
+				1456C8931A5E22750061F0FD /* BidListViewController.xib in Resources */,
 				14FE2DE81A38313800B31FBA /* PrivateMessageCell.xib in Resources */,
 				BD51861D1A5D0ED700BE508A /* icon-designer-badge2@2x.png in Resources */,
 				BD5185EF1A5D0ED700BE508A /* icon-back@2x.png in Resources */,
@@ -4651,6 +4654,7 @@
 				149BE7151A4569DE00A9E1EC /* DDHPreviewViewController.m in Sources */,
 				14610C6D1A39D2F9008A52C7 /* QuestionDetailViewController.m in Sources */,
 				147A9FB21A415DD400132804 /* PrivateLetterViewController.m in Sources */,
+				1456C8941A5E227A0061F0FD /* BidListViewController.m in Sources */,
 				A987EE241A20928B00CED7CD /* Reachability.m in Sources */,
 				A9A067131A3D76DA0059D73B /* AbstractActionSheetPicker.m in Sources */,
 				A987EDE91A20920500CED7CD /* UIColor+ASCategory.m in Sources */,

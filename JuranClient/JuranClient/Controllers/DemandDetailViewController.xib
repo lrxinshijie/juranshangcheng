@@ -36,7 +36,7 @@
                     <rect key="frame" x="5" y="5" width="310" height="45"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_up" id="Fdo-H0-eoM">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_up.png" id="Fdo-H0-eoM">
                             <rect key="frame" x="68" y="19" width="15" height="8"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </imageView>
@@ -59,15 +59,15 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" tag="2933" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="request_reviewing" id="Lae-8O-Wie">
+                <imageView userInteractionEnabled="NO" tag="2933" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="request_reviewing.png" id="Lae-8O-Wie">
                     <rect key="frame" x="16" y="10" width="89" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" tag="2934" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="request_reviewing" id="il3-rm-N2B">
+                <imageView userInteractionEnabled="NO" tag="2934" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="request_reviewing.png" id="il3-rm-N2B">
                     <rect key="frame" x="115" y="10" width="89" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" tag="2935" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="request_reviewing" id="gyZ-VC-Czc">
+                <imageView userInteractionEnabled="NO" tag="2935" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="request_reviewing.png" id="gyZ-VC-Czc">
                     <rect key="frame" x="214" y="10" width="89" height="30"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -166,7 +166,7 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="designer_no_pic" id="16N-1v-4o6" customClass="ZoomInImageView">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="designer_no_pic.png" id="16N-1v-4o6" customClass="ZoomInImageView">
                     <rect key="frame" x="250" y="10" width="60" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -179,7 +179,7 @@
             <rect key="frame" x="0.0" y="0.0" width="192" height="128"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data" id="WoG-p2-3I8">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data.png" id="WoG-p2-3I8">
                     <rect key="frame" x="49" y="0.0" width="94" height="92"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -198,10 +198,10 @@
         </view>
     </objects>
     <resources>
-        <image name="answer_no_data" width="94" height="92"/>
-        <image name="arrow_up" width="15" height="8"/>
-        <image name="designer_no_pic" width="76" height="56"/>
-        <image name="request_reviewing" width="89" height="30"/>
+        <image name="answer_no_data.png" width="94" height="92"/>
+        <image name="arrow_up.png" width="15" height="8"/>
+        <image name="designer_no_pic.png" width="76" height="56"/>
+        <image name="request_reviewing.png" width="89" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

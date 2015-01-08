@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" id="1hY-ph-Wyy">
-                        <rect key="frame" x="5" y="5" width="310" height="81.5"/>
+                        <rect key="frame" x="5" y="5" width="310" height="82"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="东社国际3室2厅的设计" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ux5-ov-PKy">
@@ -32,12 +32,12 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_countdown" id="kAc-Ag-t8a">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_countdown.png" id="kAc-Ag-t8a">
                                 <rect key="frame" x="215" y="11" width="13" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="rMF-90-6a1">
-                                <rect key="frame" x="10" y="36" width="290" height="0.5"/>
+                                <rect key="frame" x="10" y="36" width="290" height="1"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.80784313725490198" green="0.80784313725490198" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -93,7 +93,7 @@
     </objects>
     <resources>
         <image name="cellIndicator.png" width="8" height="15"/>
-        <image name="icon_countdown" width="13" height="13"/>
+        <image name="icon_countdown.png" width="13" height="13"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -24,7 +24,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_line_selected" id="bdr-09-UXh">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_line_selected.png" id="bdr-09-UXh">
                     <rect key="frame" x="27" y="91" width="48" height="3"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -32,7 +32,7 @@
                     <rect key="frame" x="12" y="85" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <state key="normal" title="1" backgroundImage="publish_point_selected">
+                    <state key="normal" title="1" backgroundImage="publish_point_selected.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
@@ -40,12 +40,12 @@
                     <rect key="frame" x="74" y="85" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <state key="normal" title="2" backgroundImage="publish_point_default">
+                    <state key="normal" title="2" backgroundImage="publish_point_default.png">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_line_default" id="oT7-5M-2Vz">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_line_default.png" id="oT7-5M-2Vz">
                     <rect key="frame" x="89" y="91" width="48" height="3"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -53,12 +53,12 @@
                     <rect key="frame" x="136" y="85" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <state key="normal" title="3" backgroundImage="publish_point_default">
+                    <state key="normal" title="3" backgroundImage="publish_point_default.png">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_line_default" id="ZjL-nu-X5n">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_line_default.png" id="ZjL-nu-X5n">
                     <rect key="frame" x="151" y="91" width="48" height="3"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -66,12 +66,12 @@
                     <rect key="frame" x="198" y="85" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <state key="normal" title="4" backgroundImage="publish_point_default">
+                    <state key="normal" title="4" backgroundImage="publish_point_default.png">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_line_default" id="9uI-hn-oMS">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_line_default.png" id="9uI-hn-oMS">
                     <rect key="frame" x="213" y="91" width="48" height="3"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -84,7 +84,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_designer_top" id="ELy-pi-ewO">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_designer_top.png" id="ELy-pi-ewO">
                     <rect key="frame" x="14" y="11" width="295" height="67"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -112,11 +112,12 @@
         </view>
     </objects>
     <resources>
-        <image name="publish_designer_top" width="295" height="67"/>
-        <image name="publish_line_default" width="47" height="3"/>
-        <image name="publish_line_selected" width="47" height="3"/>
+        <image name="publish_designer_top.png" width="295" height="67"/>
+        <image name="publish_line_default.png" width="47" height="3"/>
+        <image name="publish_line_selected.png" width="47" height="3"/>
         <image name="publish_point_default" width="15" height="15"/>
-        <image name="publish_point_selected" width="15" height="15"/>
+        <image name="publish_point_default.png" width="15" height="15"/>
+        <image name="publish_point_selected.png" width="15" height="15"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

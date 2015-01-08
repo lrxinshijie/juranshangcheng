@@ -19,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-bg" id="VWK-e9-4fZ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-bg.png" id="VWK-e9-4fZ">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -33,12 +33,12 @@
                         <action selector="onHideKeyboard:" destination="-1" eventType="touchUpInside" id="Q65-uE-fqE"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="regist-code-bg" id="9gq-lA-ABZ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="regist-code-bg.png" id="9gq-lA-ABZ">
                     <rect key="frame" x="20" y="53" width="280" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" minimumFontSize="17" clearButtonMode="whileEditing" id="Mvz-Ty-Ir7">
-                    <rect key="frame" x="34" y="63" width="141" height="30"/>
+                    <rect key="frame" x="34" y="53" width="141" height="51"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -50,7 +50,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="weB-cN-hW3">
                     <rect key="frame" x="10" y="20" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="login-back">
+                    <state key="normal" image="login-back.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -64,14 +64,14 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-text-bg" id="VBC-hE-HgN">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-text-bg.png" id="VBC-hE-HgN">
                     <rect key="frame" x="20" y="111" width="280" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gZs-bP-OW7">
                     <rect key="frame" x="20" y="184" width="280" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="提  交" backgroundImage="login-btn">
+                    <state key="normal" title="提  交" backgroundImage="login-btn.png">
                         <color key="titleColor" red="0.0" green="0.27450980390000002" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -80,7 +80,7 @@
                     </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" minimumFontSize="17" clearButtonMode="whileEditing" id="jVA-dM-VaS">
-                    <rect key="frame" x="34" y="121" width="251" height="30"/>
+                    <rect key="frame" x="34" y="112" width="251" height="49"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -112,7 +112,7 @@
                     <rect key="frame" x="20" y="290" width="73" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title=" 我同意" image="check-off">
+                    <state key="normal" title=" 我同意" image="check-off.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -149,12 +149,12 @@
         </view>
     </objects>
     <resources>
-        <image name="check-off" width="16" height="16"/>
-        <image name="login-back" width="25" height="25"/>
-        <image name="login-bg" width="320" height="568"/>
-        <image name="login-btn" width="280" height="44"/>
-        <image name="login-text-bg" width="280" height="50"/>
-        <image name="regist-code-bg" width="280" height="50"/>
+        <image name="check-off.png" width="16" height="16"/>
+        <image name="login-back.png" width="25" height="25"/>
+        <image name="login-bg.png" width="320" height="568"/>
+        <image name="login-btn.png" width="280" height="44"/>
+        <image name="login-text-bg.png" width="280" height="50"/>
+        <image name="regist-code-bg.png" width="280" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

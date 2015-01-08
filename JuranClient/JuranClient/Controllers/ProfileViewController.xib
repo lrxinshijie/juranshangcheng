@@ -104,7 +104,7 @@
                     <color key="textColor" red="0.32941177490000001" green="0.32941177490000001" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_personal_msg" id="uGz-Qc-qB8">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_personal_msg.png" id="uGz-Qc-qB8">
                     <rect key="frame" x="261" y="13" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -210,7 +210,7 @@
         <image name="icon_personal_ask.png" width="25" height="25"/>
         <image name="icon_personal_demands.png" width="25" height="25"/>
         <image name="icon_personal_letter.png" width="25" height="25"/>
-        <image name="icon_personal_msg" width="25" height="25"/>
+        <image name="icon_personal_msg.png" width="25" height="25"/>
         <image name="icon_personal_signIn.png" width="12" height="12"/>
         <image name="personal_background.png" width="320" height="120"/>
         <image name="unlogin_head.png" width="60" height="60"/>

@@ -21,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="192" height="128"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="answer_no_data" translatesAutoresizingMaskIntoConstraints="NO" id="DyS-9R-rAS">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="answer_no_data.png" translatesAutoresizingMaskIntoConstraints="NO" id="DyS-9R-rAS">
                     <rect key="frame" x="49" y="0.0" width="94" height="92"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="暂无信息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWY-Cs-ZJk">
@@ -38,6 +38,6 @@
         </view>
     </objects>
     <resources>
-        <image name="answer_no_data" width="25" height="25"/>
+        <image name="answer_no_data.png" width="94" height="92"/>
     </resources>
 </document>
