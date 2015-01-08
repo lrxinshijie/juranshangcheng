@@ -467,7 +467,6 @@
 		147395AE1A4E634E00CB34E7 /* JRPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 147395AD1A4E634E00CB34E7 /* JRPageControl.m */; };
 		147395B11A4EAFC600CB34E7 /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 147395B01A4EAFC600CB34E7 /* SMPageControl.m */; };
 		1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */; };
-		1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */; };
 		1476DA8A1A21DAF30006E9E0 /* JRDesigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA891A21DAF30006E9E0 /* JRDesigner.m */; };
 		1476DA8D1A21DB1E0006E9E0 /* JRSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA8C1A21DB1E0006E9E0 /* JRSegmentControl.m */; };
 		1476DA911A21DB850006E9E0 /* DesignerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA8F1A21DB850006E9E0 /* DesignerCell.m */; };
@@ -1183,6 +1182,11 @@
 		BD5187AE1A5D344D00BE508A /* icon_topic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5187A21A5D344D00BE508A /* icon_topic@2x.png */; };
 		BD5F23E61A52A430009F759E /* SerciceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5F23E41A52A430009F759E /* SerciceDetailViewController.m */; };
 		BD5F23E71A52A430009F759E /* SerciceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD5F23E51A52A430009F759E /* SerciceDetailViewController.xib */; };
+		BD6189E31A5E1D8E00FBE4E1 /* BidListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 371D687A1A5D7F0300172AC9 /* BidListViewController.m */; };
+		BD6189E41A5E1D9B00FBE4E1 /* BidListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 371D687B1A5D7F0300172AC9 /* BidListViewController.xib */; };
+		BD6189EA1A5E261400FBE4E1 /* BidManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6189E61A5E239200FBE4E1 /* BidManagementViewController.m */; };
+		BD6189EB1A5E261B00FBE4E1 /* BidManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD6189E71A5E239200FBE4E1 /* BidManagementViewController.xib */; };
+		BD6189ED1A5E51CB00FBE4E1 /* DesignerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */; };
 		BDA4E5011A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E4FF1A5395380005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle */; };
 		BDA4E5021A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA4E5001A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework */; };
 /* End PBXBuildFile section */
@@ -2042,6 +2046,9 @@
 		BD5F23E31A52A430009F759E /* SerciceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerciceDetailViewController.h; sourceTree = "<group>"; };
 		BD5F23E41A52A430009F759E /* SerciceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerciceDetailViewController.m; sourceTree = "<group>"; };
 		BD5F23E51A52A430009F759E /* SerciceDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SerciceDetailViewController.xib; sourceTree = "<group>"; };
+		BD6189E51A5E239200FBE4E1 /* BidManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidManagementViewController.h; sourceTree = "<group>"; };
+		BD6189E61A5E239200FBE4E1 /* BidManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidManagementViewController.m; sourceTree = "<group>"; };
+		BD6189E71A5E239200FBE4E1 /* BidManagementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BidManagementViewController.xib; sourceTree = "<group>"; };
 		BDA4E4FF1A5395380005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKiPhoneDefaultShareViewUI.bundle; sourceTree = "<group>"; };
 		BDA4E5001A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneDefaultShareViewUI.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2521,6 +2528,12 @@
 				145471C31A3885DB00428BCB /* DemandDetailViewController.h */,
 				145471C41A3885DB00428BCB /* DemandDetailViewController.m */,
 				145471C51A3885DB00428BCB /* DemandDetailViewController.xib */,
+				371D68791A5D7F0300172AC9 /* BidListViewController.h */,
+				371D687A1A5D7F0300172AC9 /* BidListViewController.m */,
+				371D687B1A5D7F0300172AC9 /* BidListViewController.xib */,
+				BD6189E51A5E239200FBE4E1 /* BidManagementViewController.h */,
+				BD6189E61A5E239200FBE4E1 /* BidManagementViewController.m */,
+				BD6189E71A5E239200FBE4E1 /* BidManagementViewController.xib */,
 			);
 			name = Demand;
 			sourceTree = "<group>";
@@ -2673,9 +2686,6 @@
 				149BE7141A4569DE00A9E1EC /* DDHPreviewViewController.m */,
 				A9A7D4A91A503715001A70FF /* JRWebViewController.h */,
 				A9A7D4AA1A503715001A70FF /* JRWebViewController.m */,
-				371D68791A5D7F0300172AC9 /* BidListViewController.h */,
-				371D687A1A5D7F0300172AC9 /* BidListViewController.m */,
-				371D687B1A5D7F0300172AC9 /* BidListViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -3608,10 +3618,10 @@
 				ORGANIZATIONNAME = Juran;
 				TargetAttributes = {
 					1415F9361A5CD1CB003D0C29 = {
-						DevelopmentTeam = QHWR2FWBM6;
+						DevelopmentTeam = D2JB8K885C;
 					};
 					A971BC901A20825800C018D6 = {
-						DevelopmentTeam = QHWR2FWBM6;
+						DevelopmentTeam = D2JB8K885C;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -3619,7 +3629,7 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = QHWR2FWBM6;
+						DevelopmentTeam = D2JB8K885C;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -3892,6 +3902,7 @@
 				BD5186C41A5D0ED700BE508A /* question_input@2x.png in Resources */,
 				BD5187301A5D0ED700BE508A /* service_normal_2@2x.png in Resources */,
 				BD5186BA1A5D0ED700BE508A /* icon_camera3@2x.png in Resources */,
+				BD6189EB1A5E261B00FBE4E1 /* BidManagementViewController.xib in Resources */,
 				371D68761A5D72CA00172AC9 /* icon_setting_white@2x.png in Resources */,
 				BD51878A1A5D0ED700BE508A /* nav-user-default@2x.png in Resources */,
 				BD5186461A5D0ED700BE508A /* guide_h_3@2x.png in Resources */,
@@ -4137,6 +4148,7 @@
 				14610C6E1A39D2F9008A52C7 /* QuestionDetailViewController.xib in Resources */,
 				37D18DA91A56CD7F00B41048 /* CaseManagementCell.xib in Resources */,
 				1476DA921A21DB850006E9E0 /* DesignerCell.xib in Resources */,
+				BD6189ED1A5E51CB00FBE4E1 /* DesignerDetailViewController.xib in Resources */,
 				BD5186D91A5D0ED700BE508A /* message_text_bg@2x.png in Resources */,
 				BD5186D51A5D0ED700BE508A /* icon_confirm@2x.png in Resources */,
 				BD5186A11A5D0ED700BE508A /* seperator@2x.png in Resources */,
@@ -4197,6 +4209,7 @@
 				BD51873B1A5D0ED700BE508A /* service_normal_8@2x.png in Resources */,
 				37CF672D1A4FE11D0044F709 /* NewestBidInfoCell.xib in Resources */,
 				BD5186151A5D0ED700BE508A /* default_case@2x.png in Resources */,
+				BD6189E41A5E1D9B00FBE4E1 /* BidListViewController.xib in Resources */,
 				14FE2DE81A38313800B31FBA /* PrivateMessageCell.xib in Resources */,
 				BD51861D1A5D0ED700BE508A /* icon-designer-badge2@2x.png in Resources */,
 				BD5185EF1A5D0ED700BE508A /* icon-back@2x.png in Resources */,
@@ -4232,7 +4245,6 @@
 				A987EE601A209E7900CED7CD /* CaseCell.xib in Resources */,
 				BD5186871A5D0ED700BE508A /* icon_personal_guanzhu@2x.png in Resources */,
 				14C953B31A2DC60B00FE6F8D /* SubjectDetailViewController.xib in Resources */,
-				1476DA871A21DAC50006E9E0 /* DesignerDetailViewController.xib in Resources */,
 				BD51870F1A5D0ED700BE508A /* service_highlighted_0@2x.png in Resources */,
 				BD51862D1A5D0ED700BE508A /* menu_icon_fenxiang@2x.png in Resources */,
 				BD5186E71A5D0ED700BE508A /* publish_point_default@2x.png in Resources */,
@@ -4441,6 +4453,7 @@
 				1415F98B1A5CD1CB003D0C29 /* UITextField+ASCategory.m in Sources */,
 				1415F98C1A5CD1CB003D0C29 /* CanRemoveImageView.m in Sources */,
 				1415F98D1A5CD1CB003D0C29 /* PersonalDataViewController.m in Sources */,
+				BD6189EA1A5E261400FBE4E1 /* BidManagementViewController.m in Sources */,
 				1415F98E1A5CD1CB003D0C29 /* BidDesignerCell.m in Sources */,
 				1415F98F1A5CD1CB003D0C29 /* JSONModelError.m in Sources */,
 				1415F9901A5CD1CB003D0C29 /* UIView+MJExtension.m in Sources */,
@@ -4651,6 +4664,7 @@
 				149BE7151A4569DE00A9E1EC /* DDHPreviewViewController.m in Sources */,
 				14610C6D1A39D2F9008A52C7 /* QuestionDetailViewController.m in Sources */,
 				147A9FB21A415DD400132804 /* PrivateLetterViewController.m in Sources */,
+				BD6189E31A5E1D8E00FBE4E1 /* BidListViewController.m in Sources */,
 				A987EE241A20928B00CED7CD /* Reachability.m in Sources */,
 				A9A067131A3D76DA0059D73B /* AbstractActionSheetPicker.m in Sources */,
 				A987EDE91A20920500CED7CD /* UIColor+ASCategory.m in Sources */,
@@ -4875,7 +4889,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
 				);
 				PRODUCT_NAME = "JuranClient copy";
-				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5012,7 +5026,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

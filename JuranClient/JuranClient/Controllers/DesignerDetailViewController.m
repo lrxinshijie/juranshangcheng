@@ -20,6 +20,7 @@
 #import "MeasureViewController.h"
 #import "PrivateLetterViewController.h"
 #import "NewestTopicViewController.h"
+#import "ZoomInImageView.h"
 
 @interface DesignerDetailViewController ()<UITableViewDataSource, UITableViewDelegate, JRSegmentControlDelegate, SelfIntroductionCellDelegate>
 {
@@ -48,6 +49,10 @@
 @property (nonatomic, strong) TATopicCell *topicCell;
 @property (nonatomic, assign) NSInteger caseCurrentPage;
 @property (nonatomic, assign) NSInteger topicCurrentPage;
+
+@property (nonatomic, strong) IBOutlet UIButton *followButton;
+@property (nonatomic, strong) IBOutlet UIView *isFollowedView;
+
 
 @end
 
@@ -89,12 +94,6 @@
     _tableView.backgroundColor = [UIColor colorWithRed:245/255.f green:245/255.f blue:245/255.f alpha:1.0f];
     [self.view addSubview:_tableView];
     
-    UIView *bgView = [[UIView alloc] initWithFrame:_tableView.bounds];
-    _emptyView.hidden = YES;
-    _emptyView.center = CGPointMake(bgView.center.x, bgView.center.y + 50);
-    [bgView addSubview:_emptyView];
-    self.tableView.backgroundView = bgView;
-    
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
         [weakSelf refreshData];
@@ -115,6 +114,51 @@
     
     [_tableView addGestureRecognizer: leftSwipeGestureRecognizer];
     [_tableView addGestureRecognizer: rightSwipeGestureRecognizer];
+    
+#ifdef kJuranDesigner
+    CGRect frame = _headView.frame;
+    frame.size.height += 20;
+    _headView.frame = frame;
+    
+    _followButton.hidden = NO;
+    _followButton.layer.masksToBounds = YES;
+    _followButton.layer.borderWidth = 1;
+    _followButton.layer.borderColor = RGBColor(0, 94, 176).CGColor;
+    _followButton.layer.cornerRadius = 2.f;
+    
+    UIView *view = [_headView viewWithTag:2200];
+    frame = view.frame;
+    frame.origin.y += 10;
+    view.frame = frame;
+    
+    view = [_headView viewWithTag:2201];
+    frame = view.frame;
+    frame.origin.y += 20;
+    view.frame = frame;
+    _tableView.tableHeaderView = _headView;
+    
+    _tableView.frame = kContentFrameWithoutNavigationBar;
+    
+    _toolBar.hidden = YES;
+    
+    view = [_isFollowedView  viewWithTag:2300];
+    view.layer.masksToBounds = YES;
+    view.layer.borderWidth = 1;
+    view.layer.borderColor = RGBColor(0, 94, 176).CGColor;
+    view.layer.cornerRadius = 2.f;
+    
+    _isFollowedView.hidden = YES;
+    frame = _isFollowedView.frame;
+    frame.origin = CGPointMake(0, kWindowHeightWithoutNavigationBar - 30);
+    _isFollowedView.frame = frame;
+    [self.view addSubview:_isFollowedView];
+#endif
+    
+    UIView *bgView = [[UIView alloc] initWithFrame:_tableView.bounds];
+    _emptyView.hidden = YES;
+    _emptyView.center = CGPointMake(bgView.center.x, bgView.center.y + 50);
+    [bgView addSubview:_emptyView];
+    self.tableView.backgroundView = bgView;
 }
 
 - (void)reloadData{
@@ -145,9 +189,8 @@
     _popularityLabel.text = [NSString stringWithFormat:@"%i", _designer.viewCount];
     _pictureCountLabel.text = [NSString stringWithFormat:@"%i", _designer.product2DCount];
     _diyProjectCountLabel.text = [NSString stringWithFormat:@"%i", _designer.product3DCount];
-    _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
-    _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
     [_tableView reloadData];
+    [self reloadFollowData];
 }
 
 - (void)refreshData{
@@ -257,6 +300,7 @@
 
 #pragma mark - Target Action
 
+#ifndef kJuranDesigner
 - (IBAction)doFollow:(id)sender{
     if (![self checkLogin:^{
         [self loadData];
@@ -266,50 +310,94 @@
     ASLog(@"关注");
     [self showHUD];
     if (!_designer.isFollowed) {
-        NSDictionary *param = @{@"userId": [NSString stringWithFormat:@"%i", _designer.userId]};
-        [[ALEngine shareEngine] pathURL:JR_FOLLOWDESIGNER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-            [self hideHUD];
-            if (!error) {
-                _designer.isFollowed = YES;
-                _designer.followId = data[@"followId"];
-                _designer.followCount++;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
-                    _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
-                    _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.followCount];
-                    [self showTip:@"关注成功"];
-                });
-                if ([_delegate respondsToSelector:@selector(changeFollowStatus:withDesigner:status:)]) {
-                    [_delegate changeFollowStatus:self withDesigner:_designer status:YES];
-                }
-            }else{
-                [self showTip:@"关注失败"];
-            }
-        }];
+        [self follow];
     }else{
-        NSDictionary *param = @{@"followId": _designer.followId};
-        [[ALEngine shareEngine] pathURL:JR_UNFOLLOWDESIGNER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-            [self hideHUD];
-            if (!error) {
-                _designer.isFollowed = NO;
-                _designer.followId = @"";
-                _designer.followCount--;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
-                    _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
-                    _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.followCount];
-                    [self showTip:@"取消关注成功"];
-                });
-                if ([_delegate respondsToSelector:@selector(changeFollowStatus:withDesigner:status:)]) {
-                    [_delegate changeFollowStatus:self withDesigner:_designer status:NO];
-                }
-            }else{
-                [self showTip:@"取消关注失败"];
-            }
-        }];
+        [self unfollow];
     }
     
 }
+#else
+- (IBAction)doFollow:(id)sender{
+    if (![self checkLogin:^{
+        [self loadData];
+    }]) {
+        return;
+    }
+    [self showHUD];
+    if (!_designer.isFollowed) {
+        [self follow];
+    }else{
+        [self unfollow];
+    }
+}
+#endif
+
+- (void)follow{
+    NSDictionary *param = @{@"userId": [NSString stringWithFormat:@"%i", _designer.userId]};
+    [[ALEngine shareEngine] pathURL:JR_FOLLOWDESIGNER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            _designer.isFollowed = YES;
+            _designer.followId = data[@"followId"];
+            _designer.followCount++;
+            [self showTip:@"关注成功"];
+            [self reloadFollowData];
+            if ([_delegate respondsToSelector:@selector(changeFollowStatus:withDesigner:status:)]) {
+                [_delegate changeFollowStatus:self withDesigner:_designer status:YES];
+            }
+        }else{
+            [self showTip:@"关注失败"];
+        }
+    }];
+}
+
+- (void)unfollow{
+    NSDictionary *param = @{@"followId": _designer.followId};
+    [[ALEngine shareEngine] pathURL:JR_UNFOLLOWDESIGNER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            _designer.isFollowed = NO;
+            _designer.followId = @"";
+            _designer.followCount--;
+            [self showTip:@"取消关注成功"];
+            [self reloadFollowData];
+            if ([_delegate respondsToSelector:@selector(changeFollowStatus:withDesigner:status:)]) {
+                [_delegate changeFollowStatus:self withDesigner:_designer status:NO];
+            }
+        }else{
+            [self showTip:@"取消关注失败"];
+        }
+    }];
+}
+
+- (void)reloadFollowData{
+#ifdef kJuranDesigner
+    if ([JRUser isLogin] && [JRUser currentUser].userId == _designer.userId) {
+        _followButton.enabled = NO;
+        _followButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    }else{
+        if (_designer.isFollowed) {
+            CGRect frame = _tableView.frame;
+            frame.size.height = kWindowHeightWithoutNavigationBar - 30;
+            _tableView.frame = frame;
+            _isFollowedView.hidden = NO;
+        }else{
+            CGRect frame = _tableView.frame;
+            frame.size.height = kWindowHeightWithoutNavigationBar;
+            _tableView.frame = frame;
+            _isFollowedView.hidden = YES;
+        }
+    }
+#else
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _followImageView.image = [UIImage imageNamed:_designer.isFollowed?@"menu_icon_cancel_follow":@"menu_icon_guanzhu.png"];
+            _followTitleLabel.text = _designer.isFollowed?@"取消关注":@"关注";
+            _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.followCount];
+            
+        });
+#endif
+}
+
 
 
 - (void)nextAction{

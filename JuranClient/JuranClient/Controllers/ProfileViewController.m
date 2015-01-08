@@ -1,4 +1,4 @@
-//
+ //
 //  ProfileViewController.m
 //  JuranClient
 //
@@ -13,7 +13,6 @@
 #import "MyFollowViewController.h"
 #import "AccountManageViewController.h"
 #import "AccountSecurityViewController.h"
-#import "MyDemandViewController.h"
 #import "MyAskOrAnswerViewController.h"
 #import "InteractionViewController.h"
 #import "PushMessageViewController.h"
@@ -25,8 +24,10 @@
 #import "DesignerDetailViewController.h"
 #import "JRDesigner.h"
 #import "SettingsViewController.h"
+#import "BidManagementViewController.h"
 #else
 #import "PrivateMessageViewController.h"
+#import "MyDemandViewController.h"
 #endif
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -203,11 +204,15 @@
 
 #pragma mark - Target Action
 
+#ifdef kJuranDesigner
+
 - (void)onSetting{
     SettingsViewController *vc = [[SettingsViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+#endif
 
 - (IBAction)doSigned:(id)sender{
     if (![self checkLogin:^{
@@ -253,7 +258,9 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 #else
-    
+    BidManagementViewController *vc = [[BidManagementViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 #endif
 }
 

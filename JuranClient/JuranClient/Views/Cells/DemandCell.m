@@ -25,6 +25,11 @@
 @property (nonatomic, weak) IBOutlet UILabel *bidNumberLabel;
 @property (nonatomic, weak) IBOutlet UIView *bidNumberView;
 
+@property (nonatomic, strong) IBOutlet UIView *remarkView;
+@property (nonatomic, strong) IBOutlet UILabel *remarkLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *remarkImageView;
+
+@property (nonatomic, strong) IBOutlet UIImageView *confirmFlagImageView;
 @end
 
 @implementation DemandCell
@@ -35,6 +40,10 @@
     _bidNumberView.layer.masksToBounds = YES;
     _bidNumberView.layer.cornerRadius = _bidNumberView.frame.size.height/2;
     _bidNumberView.hidden = NO;
+#ifndef kJuranDesigner
+    _remarkView.hidden = YES;
+    _confirmFlagImageView.hidden = YES;
+#endif
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -68,7 +77,7 @@
     }else{
         _endTimeLabel.text = @"";
     }
-    
+
 }
 
 @end

@@ -11,12 +11,12 @@
 
 /* Interface */
 /* Dev/TEST */
-//#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
-//#define JR_SERVICE  @"http://124.207.66.50:10005"
+#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
+#define JR_SERVICE  @"http://124.207.66.50:10005"
 
 /* UAT */
-#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
-#define JR_SERVICE  @"http://54.223.161.28:8080"
+//#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
+//#define JR_SERVICE  @"http://54.223.161.28:8080"
 
 /* Production */
 //#define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
@@ -127,7 +127,7 @@
 #define JR_GET_DESIGNER_CENTERINFO [NSString stringWithFormat:@"%@/member/getDesignerCenterInfo.json",JR_SERVICE]
 #define JR_GET_DESIGNREQ_LIST [NSString stringWithFormat:@"%@/design/getDesignReqList.json",JR_SERVICE]
 #define JR_GET_DESIGNREQ_DETAIL [NSString stringWithFormat:@"%@/design/getDeDesignReqDetail.json",JR_SERVICE]
-
+#define JR_GET_DEDESIGNER_BIDLIST [NSString stringWithFormat:@"%@/design/getDeDesignerBidList.json",JR_SERVICE]
 
 
 

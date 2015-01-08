@@ -915,13 +915,9 @@
 		<string></string>
 		<key>houseType</key>
 		<string></string>
-		<key>budgetMin</key>
+		<key>budget</key>
 		<string></string>
-		<key>budgetMax</key>
-		<string></string>
-		<key>houseAreaMin</key>
-		<string></string>
-		<key>houseAreaMax</key>
+		<key>houseArea</key>
 		<string></string>
 		<key>order</key>
 		<string></string>

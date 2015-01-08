@@ -55,6 +55,14 @@
 @property (nonatomic, copy) NSString *oldRoomTypeImgUrl;
 @property (nonatomic, copy) NSString *roomTypeId;
 
+#ifdef kJuranDesigner
+
+@property (nonatomic, copy) NSString *publishNickName;
+@property (nonatomic, copy) NSString *account;
+@property (nonatomic, copy) NSString *memo;
+
+#endif
+
 
 - (NSString*)statusString;
 - (NSInteger)statusIndex;

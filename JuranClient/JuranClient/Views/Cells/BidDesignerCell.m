@@ -27,6 +27,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *measureButton;
 @property (nonatomic, strong) IBOutlet UIButton *rejectButton;
 
+
 @property (nonatomic, strong) JRBidInfo *bidInfo;
 
 @end
@@ -45,6 +46,11 @@
         btn.layer.borderColor = RGBColor(0, 89, 172).CGColor;
         btn.layer.borderWidth = 1.0f;
     }
+    
+#ifdef kJuranDesigner
+    UIView *view = [self.bgView viewWithTag:1200];
+    view.hidden = YES;
+#endif
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -75,6 +81,7 @@
     _produntCountLabel.text = [NSString stringWithFormat:@"%i", designer.projectCount];
     _browseCountLabel.text = [NSString stringWithFormat:@"%i", designer.browseCount];
     _declarationLabel.text = [NSString stringWithFormat:@"应标宣言:%@", bidInfo.biddingDeclatation];
+#ifndef kJuranDesigner
     if ([bidInfo isForbidMeasureAndReject]) {
         [_measureButton setTitleColor:[UIColor lightGrayColor]forState:UIControlStateNormal];
         _measureButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -86,7 +93,7 @@
         [_rejectButton setTitleColor:RGBColor(0, 89, 172) forState:UIControlStateNormal];
         _rejectButton.layer.borderColor = RGBColor(0, 89, 172).CGColor;
     }
-    
+#endif
 }
 
 #pragma mark - Target Action
