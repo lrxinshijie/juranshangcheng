@@ -62,8 +62,11 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameMyDemandReloadData object:nil];
-    
+#ifndef kJuranDesigner
     self.navigationItem.title = @"我的需求";
+#else
+    self.navigationItem.title = @"应标详情";
+#endif
     demandInfoKeys = @[@"姓名", @"联系电话", @"编号", @"户型", @"装修预算", @"当前状态", @"房屋面积", @"风格", @"发布时间", @"终止时间", @"项目地址"];
     [self setupUI];
     
@@ -106,8 +109,8 @@
         _modifyDemandInfoButton.hidden = YES;
     }
     
-    [self setupDesignerTableHeaderView];
 #endif
+    [self setupDesignerTableHeaderView];
     _demandInfoTitleLabel.text = [NSString stringWithFormat:@"%@%@", _demand.neighbourhoods, [_demand roomNumString]];
     
     _emptyView.hidden = !(_demand.bidInfoList.count == 0 && !_demand.confirmDesignerDetail);
@@ -127,6 +130,7 @@
     UIImageView *imageView = (UIImageView*)[_designerTableHeaderView viewWithTag:tag];
     imageView.image = [UIImage imageNamed:@"request_doing.png"];
     
+#ifndef kJuranDesigner
     [_demandDescribeLabel setText:[_demand descriptionForDetail] afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
         NSRange range = [[mutableAttributedString string] rangeOfString:@"010-84094000" options:NSCaseInsensitiveSearch];
         [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[kBlueColor CGColor] range:range];
@@ -142,6 +146,7 @@
     _designerTableHeaderView.frame = frame;
     
     _designerTableView.tableHeaderView = _designerTableHeaderView;
+#endif
 }
 
 - (void)reSetData{
@@ -349,7 +354,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _designerTableView) {
+#ifndef kJuranDesigner
         return 170 + ((indexPath.row == _demand.bidInfoList.count - 1)?5:0);
+#else
+        return 130 + ((indexPath.row == _demand.bidInfoList.count - 1)?5:0);
+#endif
+        
     }else if(tableView == _demandInfoTableView){
         return  (indexPath.row == demandInfoKeys.count - 1)?95:44;
     }
@@ -381,35 +391,46 @@
         
         return cell;
     }else if(tableView == _demandInfoTableView){
-        static NSString *CellIdentifier = @"DemandInfoCell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-            cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
-            cell.detailTextLabel.font = [UIFont systemFontOfSize:kSmallSystemFontSize];
-        }
-        cell.textLabel.text = @"";
-        cell.detailTextLabel.text = @"";
-        cell.detailTextLabel.textColor = [UIColor darkGrayColor];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row == demandInfoKeys.count - 1) {
+            static NSString *CellIdentifier = @"DemandAddressCell";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+                cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
+                cell.detailTextLabel.font = [UIFont systemFontOfSize:kSmallSystemFontSize];
+            }
+
             if (_demandAddressView.superview) {
                 [_demandAddressView removeFromSuperview];
             }
             _demandAddressLabel.text = [NSString stringWithFormat:@"%@%@", _demand.areaInfo.title, _demand.neighbourhoods];
             [_roomTypeImageView setImageWithURLString:_demand.roomTypeImgUrl];
             [cell.contentView addSubview:_demandAddressView];
-        }else if (indexPath.row == 5){
-            cell.detailTextLabel.textColor = RGBColor(49, 113, 179);
-            cell.textLabel.text = demandInfoKeys[indexPath.row];
-            cell.detailTextLabel.text = demandInfoValues[indexPath.row];
+            return cell;
         }else{
-            cell.textLabel.text = demandInfoKeys[indexPath.row];
-            cell.detailTextLabel.text = demandInfoValues[indexPath.row];
+            static NSString *CellIdentifier = @"DemandInfoCell";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+                cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
+                cell.detailTextLabel.font = [UIFont systemFontOfSize:kSmallSystemFontSize];
+            }
+            cell.textLabel.text = @"";
+            cell.detailTextLabel.text = @"";
+            cell.detailTextLabel.textColor = [UIColor darkGrayColor];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (indexPath.row == 5){
+                cell.detailTextLabel.textColor = RGBColor(49, 113, 179);
+                cell.textLabel.text = demandInfoKeys[indexPath.row];
+                cell.detailTextLabel.text = demandInfoValues[indexPath.row];
+            }else{
+                cell.textLabel.text = demandInfoKeys[indexPath.row];
+                cell.detailTextLabel.text = demandInfoValues[indexPath.row];
+            }
+            
+            return cell;
         }
-        
-        return cell;
     }
     return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@""];
 }

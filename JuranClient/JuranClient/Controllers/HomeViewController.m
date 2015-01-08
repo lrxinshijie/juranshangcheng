@@ -36,6 +36,9 @@
 @property (nonatomic, strong) NSMutableArray *adInfos;
 @property (nonatomic, strong) EScrollerView *bannerView;
 
+@property (nonatomic, assign) NSInteger privateMsgCount;
+@property (nonatomic, strong) IBOutlet UILabel *privateMsgCountLabel;
+
 @end
 
 @implementation HomeViewController
@@ -78,6 +81,9 @@
         [weakSelf loadAd];
         [weakSelf loadDemandData];
         [weakSelf loadNewestDesignerData];
+        if ([JRUser isLogin]) {
+            [weakSelf loadPrivateMsgData];
+        }
     }];
     
     [_tableView addFooterWithCallback:^{
@@ -86,8 +92,16 @@
     }];
 }
 
-- (void)loadData{
+- (void)loadPrivateMsgData{
     
+    [self showHUD];
+    
+    [[ALEngine shareEngine] pathURL:JR_GET_INDEX_PRIVATELETTERREP parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            self.privateMsgCount = [data getIntValueForKey:@"count" defaultValue:0];
+        }
+    }];
 }
 
 - (void)loadAd{
@@ -183,6 +197,12 @@
     }
 }
 
+- (void)setPrivateMsgCount:(NSInteger)privateMsgCount{
+    _privateMsgCount = privateMsgCount;
+    _privateMsgCountLabel.hidden = !privateMsgCount;
+    _privateMsgCountLabel.text = [NSString stringWithFormat:@"%d", _privateMsgCount];
+}
+
 #pragma mark - TargetAction
 
 - (IBAction)onDesignerDetail:(id)sender{
@@ -215,11 +235,14 @@
 }
 
 - (IBAction)onPrivateLetter:(id)sender{
-    if (![self checkLogin]) {
+    if (![self checkLogin:^{
+        [self loadPrivateMsgData];
+    }]) {
         return;
     }
     
     PrivateMessageViewController *pv = [[PrivateMessageViewController alloc] init];
+    self.privateMsgCount = 0;
     pv.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:pv animated:YES];
 }

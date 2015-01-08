@@ -18,6 +18,8 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) FilterView *filterView;
 
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
+
 @end
 
 @implementation BidListViewController
@@ -37,6 +39,10 @@
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
+    
+    _emptyView.hidden = YES;
+    _emptyView.center = _tableView.center;
+    [self.view addSubview:_emptyView];
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -69,6 +75,7 @@
             
             [_tableView reloadData];
         }
+        _emptyView.hidden = _datas.count != 0;
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
     }];
@@ -121,14 +128,13 @@
     JRDemand *d = _datas[indexPath.row];
     [cell fillCellWithData:d];
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     JRDemand *demand = _datas[indexPath.row];
+    demand.newBidNums = 0;
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     DemandDetailViewController *vc = [[DemandDetailViewController alloc] init];
     vc.demand = demand;

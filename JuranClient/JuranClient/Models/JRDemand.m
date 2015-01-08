@@ -70,6 +70,13 @@
         self.isBidded = [dict getBoolValueForKey:@"isBidded" defaultValue:NO];
         self.deadBalance = [dict getStringValueForKey:@"deadBalance" defaultValue:@""];
         self.auditDesc = [dict getStringValueForKey:@"auditDesc" defaultValue:@""];
+        
+#ifdef kJuranDesigner
+        self.publishNickName = [dict getStringValueForKey:@"publishNickName" defaultValue:@""];
+        self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
+        self.memo = [dict getStringValueForKey:@"memo" defaultValue:@""];
+        self.bidId = [dict getStringValueForKey:@"bidReqId" defaultValue:@""];
+#endif
     }
     
     return self;
@@ -117,7 +124,13 @@
     self.auditDesc = [value getStringValueForKey:@"auditDesc" defaultValue:@""];
     self.bidNums = [value getIntValueForKey:@"bidNums" defaultValue:0];
     self.deadline = [value getStringValueForKey:@"deadline" defaultValue:@""];
+#ifdef kJuranDesigner
+    self.bidInfoList = [JRBidInfo buildUpWithValue:value[@"bidDesignerGeneralList"]];
+#else
     self.bidInfoList = [JRBidInfo buildUpWithValue:value[@"bidInfoList"]];
+#endif
+    
+    
     for (JRBidInfo *b in _bidInfoList) {
         b.statusIndex = [self statusIndex];
     }
