@@ -11,7 +11,7 @@
 #import "JRDemand.h"
 #import "DemandCell.h"
 
-@interface BidManagementViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface BidManagementViewController ()<UITableViewDelegate, UITableViewDataSource, DemandCellDelegate>
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *doingDatas;
@@ -128,11 +128,18 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat height = 175;
+    JRDemand *d = nil;
     if (_segment.selectedSegmentIndex == 1) {
-        return 175 + (indexPath.row == (_doneDatas.count - 1)?5:0);
+        d = _doneDatas[indexPath.row];
+        
+        height += (indexPath.row == (_doneDatas.count - 1)?5:0);
     }else{
-        return 175 + (indexPath.row == (_doingDatas.count - 1)?5:0);
+        d = _doingDatas[indexPath.row];
+        height += (indexPath.row == (_doingDatas.count - 1)?5:0);
     }
+    height += [[NSString stringWithFormat:@"备注：%@", d.memo] heightWithFont:[UIFont systemFontOfSize:12] constrainedToWidth:300] + 10;
+    return height;
 }
 
 
@@ -168,6 +175,10 @@
     DemandDetailViewController *vc = [[DemandDetailViewController alloc] init];
     vc.demand = demand;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)editRemark:(DemandCell *)cell AndDemand:(JRDemand *)demand{
+    
 }
 
 

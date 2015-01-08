@@ -23,5 +23,8 @@
 @property (nonatomic, strong) NSMutableArray *caseDatas;
 @property (nonatomic, strong) NSMutableArray *topicDatas;
 @property (nonatomic, weak) id<DesignerDetailViewControllerDelegate> delegate;
+#ifdef kJuranDesigner
+@property (nonatomic, assign) BOOL isHomePage;
+#endif
 
 @end

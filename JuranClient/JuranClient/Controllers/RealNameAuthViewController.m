@@ -130,6 +130,7 @@
     }
     for (NSInteger i = 0; i < 3; i++) {
         UILabel *label = (UILabel*)[_tableHeaderView viewWithTag:1103+i];
+        label.text = [NSString stringWithFormat:@"%d", i + 1];
         label.backgroundColor = RGBColor(175, 175, 175);
         if (i == _status) {
             label.backgroundColor = RGBColor(28, 79, 166);
@@ -203,12 +204,12 @@
 
 - (void)submitRealNameAuth{
     NSDictionary *param1 = @{@"userName": _designer.userName,
-                             @"idCardNumber": _designer.idCardNum,
+                             @"idCardNum": _designer.idCardNum,
                              @"positiveIdPhoto": _designer.positiveIdPhoto,
                              @"positiveIdPhotoName": _designer.positiveIdPhoto,
                              @"backIdphoto": _designer.backIdphoto,
                              @"backIdphotoName": _designer.backIdphoto,
-                             @"headUrl": _designer.handHeldIdPhoto,
+                             @"handHeldIdPhoto": _designer.handHeldIdPhoto,
                              @"headUrlName": _designer.handHeldIdPhoto
                              };
     
@@ -220,8 +221,8 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
                 [self showTip:@"修改用户信息成功"];
             });
+            [self loadData];
         }
-        [self loadData];
     }];
 }
 
@@ -321,6 +322,9 @@
     if (indexPath.row >= 2) {
         UploadCardImageViewController *vc = [[UploadCardImageViewController alloc] init];
         vc.delegate = self;
+//        vc.positiveIdImage = self.positiveIdImage;
+//        vc.headImage = self.headImage;
+//        vc.backIdImage = self.backIdImage;
         vc.type = indexPath.row - 2;
         [self.navigationController pushViewController:vc animated:YES];
     }

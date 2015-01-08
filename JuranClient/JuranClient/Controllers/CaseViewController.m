@@ -128,7 +128,7 @@
             if (bannerList.count > 0) {
                 self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
                 //                [_adInfos addObjectsFromArray:_adInfos];
-                self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 44, kWindowWidth, 165) ImageArray:_adInfos];
+                self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 44, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentRight];
                 _bannerView.delegate = self;
                 
                 self.tableView.tableHeaderView = _bannerView;

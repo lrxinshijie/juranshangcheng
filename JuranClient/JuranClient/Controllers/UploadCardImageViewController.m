@@ -23,10 +23,6 @@
 
 @property (nonatomic, strong) NSArray *tips;
 
-@property (nonatomic, strong) UIImage *positiveIdImage;
-@property (nonatomic, strong) UIImage *backIdImage;
-@property (nonatomic, strong) UIImage *headImage;
-
 @end
 
 @implementation UploadCardImageViewController

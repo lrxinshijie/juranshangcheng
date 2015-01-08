@@ -1,12 +1,12 @@
 //
-//  PersonalDataViewController.m
+//  PersonalDataForDesignerViewController.m
 //  JuranClient
 //
-//  Created by song.he on 14-11-27.
-//  Copyright (c) 2014年 Juran. All rights reserved.
+//  Created by HuangKai on 15/1/8.
+//  Copyright (c) 2015年 Juran. All rights reserved.
 //
 
-#import "PersonalDataViewController.h"
+#import "PersonalDataForDesignerViewController.h"
 #import "PersonalDatasMoreViewController.h"
 #import "ModifyViewController.h"
 #import "BaseAddressViewController.h"
@@ -17,9 +17,11 @@
 #import "ActionSheetStringPicker.h"
 #import "TextFieldCell.h"
 #import "UIAlertView+Blocks.h"
+#import "JRDesigner.h"
+#import "PriceModifyViewController.h"
+#import "StyleModifyViewController.h"
 
-
-@interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface PersonalDataForDesignerViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     NSDictionary *param;
     BOOL accountChangeTip;
@@ -37,16 +39,7 @@
 
 @end
 
-@implementation PersonalDataViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@implementation PersonalDataForDesignerViewController
 
 - (void)dealloc{
     _tableView.delegate = nil; _tableView.dataSource = nil;
@@ -65,7 +58,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
-    _user = [[JRUser alloc] init];
+    _user = [[JRDesigner alloc] init];
     _oldAccount = @"";
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave) title:@"保存" backgroundImage:nil];
@@ -92,13 +85,13 @@
 - (void)reloadData{
     [self reSetData];
     [_tableView reloadData];
-
+    
 }
 
 - (void)setupDatas{
-    _keys = @[@[@"头像", @"用户名"], @[@"昵称", @"性别", @"生日", @"所在地", @"详细地址"], @[@"固定电话", @"证件信息", @"QQ", @"微信"]];
-    _placeholders = @[@[@"", @"请输入用户名"], @[@"请输入昵称", @"", @"", @"", @""], @[@"请输入固定电话", @"", @"请输入QQ", @"请输入微信"]];
-    _tags = @[@[@"", @"1100"], @[@"1101", @"", @"", @"", @""], @[@"1102", @"", @"1103", @"1104"]];
+    _keys = @[@[@"头像", @"用户名"], @[@"昵称", @"性别", @"生日", @"所在地"], @[@"从业经验", @"设计费用", @"量房费用", @"擅长风格", @"设计专长", @"毕业院校", @"自我介绍"], @[@"更多资料"]];
+    _placeholders = @[@[@"", @"请输入用户名"], @[@"请输入昵称", @"", @"", @""], @[@"", @"", @"", @"", @"", @"", @""], @[@""]];
+    _tags = @[@[@"", @"1100"], @[@"1101", @"", @"", @""], @[@"", @"", @"", @"", @"", @"", @""],@[@""]];
     
 }
 
@@ -106,20 +99,31 @@
     if (_user.headUrl && _user.headUrl.length>0) {
         [self.iconImageView setImageWithURLString:_user.headUrl];
     }
-    _values = @[@[@"", _user.account], @[_user.nickName,
-                                         [_user sexyString],
-                                         _user.birthday.length == 0?@"未设置":_user.birthday,
-                                         [_user locationAddress],
-                                         _user.detailAddress.length == 0?@"未设置":_user.detailAddress], @[_user.homeTel, [_user idCardInfomation], _user.qq, _user.weixin]];
+    _values = @[@[@""
+                  , _user.account]
+                , @[_user.nickName
+                    , @""//[_user sexyString]
+                    , @""//_user.birthday.length == 0?@"未设置":_user.birthday
+                    , @""//[_user locationAddress]
+                    ]
+                , @[@""
+                    , @""
+                    , @""
+                    , @""
+                    , @""
+                    , @""
+                    , @""]
+                ,@[@""]
+                ];
 }
 
 - (void)loadData{
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_GETMEMBERDETAIL parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_GET_DEDESIGNER_SELFDETAIL parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
-                [_user buildUpMemberDetailWithDictionary:data];
+                [_user buildDetailWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self reloadData];
                 });
@@ -129,25 +133,25 @@
 }
 
 - (void)modifyMemberDetail{
-    
+    /*
     NSDictionary *param1 = @{@"nickName": _user.nickName,
-                            @"birthday": _user.birthday,
-                            @"homeTel": _user.homeTel,
+                             @"birthday": _user.birthday,
+                             @"homeTel": _user.homeTel,
                              @"areaInfo": @{@"provinceCode": _user.areaInfo.provinceCode,
                                             @"cityCode": _user.areaInfo.cityCode,
                                             @"districtCode": _user.areaInfo.districtCode
                                             },
-                            @"detailAddress": _user.detailAddress,
-                            @"zipCode": _user.zipCode,
-                            @"idCardType": _user.idCardType,
-                            @"idCardNum": _user.idCardNumber,
-                            @"qq": _user.qq,
-                            @"weixin": _user.weixin,
+                             @"detailAddress": _user.detailAddress,
+                             @"zipCode": _user.zipCode,
+                             @"idCardType": _user.idCardType,
+                             @"idCardNum": _user.idCardNumber,
+                             @"qq": _user.qq,
+                             @"weixin": _user.weixin,
                              @"oldAccount": self.oldAccount,
                              @"account": _user.account,
                              @"accountChangeable": [NSString stringWithFormat:@"%d", _user.accountChangeable],
-                            @"sex": [NSString stringWithFormat:@"%d", _user.sex]
-                        };
+                             @"sex": [NSString stringWithFormat:@"%d", _user.sex]
+                             };
     
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param1 HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -159,7 +163,7 @@
             });
         }
         [self loadData];
-    }];
+    }];*/
 }
 
 - (void)uploadHeaderImage:(UIImage*)image{
@@ -202,21 +206,21 @@
     
 }
 /*
-#pragma mark - ModifyViewControllerDelegate
-
-- (void)modifyCommit:(ModifyViewController *)vc{
-    [self reSetData];
-    [_tableView reloadData];
-}
-
-
-#pragma mark - SexySwitchDelegate
-
-- (void)sexySwitch:(SexySwitch *)sexySwitch valueChange:(NSInteger)index{
-    param = @{@"sex": [NSString stringWithFormat:@"%d", index]};
-    [self modifyMemberDetail];
-}
-*/
+ #pragma mark - ModifyViewControllerDelegate
+ 
+ - (void)modifyCommit:(ModifyViewController *)vc{
+ [self reSetData];
+ [_tableView reloadData];
+ }
+ 
+ 
+ #pragma mark - SexySwitchDelegate
+ 
+ - (void)sexySwitch:(SexySwitch *)sexySwitch valueChange:(NSInteger)index{
+ param = @{@"sex": [NSString stringWithFormat:@"%d", index]};
+ [self modifyMemberDetail];
+ }
+ */
 
 #pragma mark - UITableViewDataSource/Delegate
 
@@ -251,12 +255,14 @@
      */
     if (indexPath.section == 0 && indexPath.row == 0) {
         return 65;
+    }else if (indexPath.section == 2 && indexPath.row == 6){
+        return 70;
     }
     return 44;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ((indexPath.section == 0 && indexPath.row == 0) || (indexPath.section == 1 && indexPath.row != 0) || (indexPath.section == 2 && indexPath.row == 1)) {
+    if ((indexPath.section == 0 && indexPath.row == 0) || (indexPath.section == 1 && indexPath.row != 0) || indexPath.section == 2 ||indexPath.section == 3) {
         static NSString *cellIdentifier = @"personalData";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
@@ -328,32 +334,32 @@
         return cell;
     }
     
-        /*
-         *设计师端内容
-         if (indexPath.row == keysForSection3.count - 1) {
-         cell.textLabel.text = valuesForSection3[indexPath.row];
-         cell.detailTextLabel.text = @"";
-         CGRect frame = CGRectMake(0, 0, 210, 53);
-         UIView *view = [[UIView alloc] initWithFrame:frame];
-         frame.origin = CGPointMake(frame.size.width - 8, (frame.size.height - 16)/2);
-         frame.size = CGSizeMake(8, 16);
-         UIImageView *arrowImageView = [cell imageViewWithFrame:frame image:[UIImage imageNamed:@"cellIndicator.png"]];
-         [view addSubview:arrowImageView];
-         
-         frame.origin = CGPointMake(view.frame.size.width - frame.size.width - 10 -190, 0);
-         frame.size = CGSizeMake(190, 53);
-         
-         UILabel *label = [cell labelWithFrame:frame text:valuesForSection3[indexPath.row] textColor:cell.detailTextLabel.textColor textAlignment:NSTextAlignmentCenter font:cell.detailTextLabel.font];
-         label.numberOfLines = 3;
-         [view addSubview:label];
-         
-         cell.accessoryView = view;
-         
-         }else{
-         cell.textLabel.text = keysForSection3[indexPath.row];
-         cell.detailTextLabel.text = valuesForSection3[indexPath.row];
-         }
-         */
+    /*
+     *设计师端内容
+     if (indexPath.row == keysForSection3.count - 1) {
+     cell.textLabel.text = valuesForSection3[indexPath.row];
+     cell.detailTextLabel.text = @"";
+     CGRect frame = CGRectMake(0, 0, 210, 53);
+     UIView *view = [[UIView alloc] initWithFrame:frame];
+     frame.origin = CGPointMake(frame.size.width - 8, (frame.size.height - 16)/2);
+     frame.size = CGSizeMake(8, 16);
+     UIImageView *arrowImageView = [cell imageViewWithFrame:frame image:[UIImage imageNamed:@"cellIndicator.png"]];
+     [view addSubview:arrowImageView];
+     
+     frame.origin = CGPointMake(view.frame.size.width - frame.size.width - 10 -190, 0);
+     frame.size = CGSizeMake(190, 53);
+     
+     UILabel *label = [cell labelWithFrame:frame text:valuesForSection3[indexPath.row] textColor:cell.detailTextLabel.textColor textAlignment:NSTextAlignmentCenter font:cell.detailTextLabel.font];
+     label.numberOfLines = 3;
+     [view addSubview:label];
+     
+     cell.accessoryView = view;
+     
+     }else{
+     cell.textLabel.text = keysForSection3[indexPath.row];
+     cell.detailTextLabel.text = valuesForSection3[indexPath.row];
+     }
+     */
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -368,18 +374,15 @@
     }else if (indexPath.section == 1){
         if (indexPath.row == 1) {
             
-            [ActionSheetStringPicker showPickerWithTitle:nil rows:@[@"女", @"男"] initialSelection:_user.sex ==0?0:(_user.sex - 1) doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                _user.sex= selectedIndex + 1;
-                [self reloadData];
-            } cancelBlock:^(ActionSheetStringPicker *picker) {
-                
-            } origin:[UIApplication sharedApplication].keyWindow];
+//            [ActionSheetStringPicker showPickerWithTitle:nil rows:@[@"女", @"男"] initialSelection:_user.sex ==0?0:(_user.sex - 1) doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+//                _user.sex= selectedIndex + 1;
+//                [self reloadData];
+//            } cancelBlock:^(ActionSheetStringPicker *picker) {
+//                
+//            } origin:[UIApplication sharedApplication].keyWindow];
         }else if (indexPath.row == 2) {
             [ActionSheetDatePicker showPickerWithTitle:@"生日" datePickerMode:UIDatePickerModeDate selectedDate:[NSDate date] doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
-                _user.birthday = [(NSDate*)selectedDate stringWithFormat:[NSDate dateFormatString]];
-//                NSString *dateString = [(NSDate*)selectedDate stringWithFormat:[NSDate timestampFormatString]];
-//                param = @{@"birthday": dateString};
-//                [self modifyMemberDetail];
+//                _user.birthday = [(NSDate*)selectedDate stringWithFormat:[NSDate dateFormatString]];
                 [self reloadData];
             } cancelBlock:^(ActionSheetDatePicker *picker) {
                 
@@ -387,7 +390,7 @@
         }else if (indexPath.row == 3){
             BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
             [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
-                _user.areaInfo = areaInfo;
+//                _user.areaInfo = areaInfo;
             }];
             [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 4){
@@ -395,10 +398,47 @@
             vc.user = _user;
             [self.navigationController pushViewController:vc animated:YES];
         }
-    }else if (indexPath.section == 2 && indexPath.row == 1){
-        ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeIdType];
-        vc.title = _keys[indexPath.section][indexPath.row];
-        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.section == 2){
+//        ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeIdType];
+//        vc.title = _keys[indexPath.section][indexPath.row];
+//        [self.navigationController pushViewController:vc animated:YES];
+        switch (indexPath.row) {
+            case 0:{
+                
+                break;
+            }
+            case 1:{
+                PriceModifyViewController *vc = [[PriceModifyViewController alloc] init];
+                vc.type = 0;
+                [self.navigationController pushViewController:vc animated:YES];
+                break;
+            }
+            case 2:{
+                PriceModifyViewController *vc = [[PriceModifyViewController alloc] init];
+                vc.type = 1;
+                [self.navigationController pushViewController:vc animated:YES];
+                break;
+            }
+            case 3:{
+                StyleModifyViewController *vc = [[StyleModifyViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+                break;
+            }
+            case 4:{
+                
+                break;
+            }
+            case 5:{
+                
+                break;
+            }
+            case 6:{
+                
+                break;
+            }
+            default:
+                break;
+        }
     }
     return;
 }
@@ -441,20 +481,21 @@
     }
     
     
-//    else if (textField.tag == DemandEditContactsMobile && value.length > 32){
-//        return NO;
-//    }else if (textField.tag == DemandEditBudget){
-//        double budget = [value doubleValue];
-//        if (budget > 99999) {
-//            return NO;
-//        }
-//    }
+    //    else if (textField.tag == DemandEditContactsMobile && value.length > 32){
+    //        return NO;
+    //    }else if (textField.tag == DemandEditBudget){
+    //        double budget = [value doubleValue];
+    //        if (budget > 99999) {
+    //            return NO;
+    //        }
+    //    }
     
     return YES;
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     if (textField.tag == 1100) {
+        /*
         if (_user.accountChangeable) {
             [self showTip:@"用户名仅限修改一次"];
             return NO;
@@ -467,7 +508,7 @@
                 }
             }];
             return NO;
-        }
+        }*/
     }
     self.selectedTextField = textField;
     return YES;
@@ -481,11 +522,11 @@
     }else if (textField.tag == 1101){
         _user.nickName = textField.text;
     }else if (textField.tag == 1102){
-        _user.homeTel = textField.text;
+//        _user.homeTel = textField.text;
     }else if (textField.tag == 1103){
-        _user.qq = textField.text;
+//        _user.qq = textField.text;
     }else if (textField.tag == 1104){
-        _user.weixin = textField.text;
+//        _user.weixin = textField.text;
     }
 }
 

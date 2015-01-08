@@ -57,6 +57,13 @@
     [_tableView headerBeginRefreshing];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if ([_filterView isShow]) {
+        [_filterView showSort];
+    }
+}
+
 - (void)loadData{
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": kOnePageCount}];
     [param addEntriesFromDictionary:self.filterData];

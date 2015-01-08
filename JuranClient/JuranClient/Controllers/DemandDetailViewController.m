@@ -45,6 +45,7 @@
 
 @property (nonatomic, strong) TTTAttributedLabel *demandDescribeLabel;
 @property (nonatomic, strong) UIBarButtonItem *rightBarButtonItem;
+@property (nonatomic, strong) UIButton *rightButton;
 
 @property (nonatomic, strong) IBOutlet UIButton *modifyDemandInfoButton;
 @property (nonatomic, strong) IBOutlet UIView *emptyView;
@@ -108,6 +109,8 @@
         self.navigationItem.rightBarButtonItem = nil;
         _modifyDemandInfoButton.hidden = YES;
     }
+#else
+    _rightButton.enabled = !_demand.isBidded;
     
 #endif
     [self setupDesignerTableHeaderView];
@@ -117,6 +120,8 @@
     _emptyView.center = CGPointMake(_designerTableView.center.x, _designerTableView.center.y + CGRectGetHeight(_designerTableView.tableHeaderView.frame)/2 + 20);
     [_designerTableView reloadData];
     [_demandInfoTableView reloadData];
+    
+    
 }
 
 - (void)setupDesignerTableHeaderView{
@@ -190,10 +195,6 @@
     
     _scrollView.contentSize = CGSizeMake(kWindowWidth, 2*kWindowHeightWithoutNavigationBar);
     
-    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onDeadRequest) title:@"终止需求" backgroundImage:nil];
-    [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
-    _rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    
 #ifdef kJuranDesigner
     frame = _demandInfoTableView.frame;
     _demandInfoTableView.frame = _designerTableView.frame;
@@ -208,6 +209,16 @@
     
     _modifyDemandInfoButton.hidden = YES;
     _pullTipLabel.text = @"上拉查看参与投标的设计师";
+    
+    self.rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onBidReq) title:@"我要应标" backgroundImage:nil];
+    [_rightButton setTitle:@"已应标" forState:UIControlStateDisabled];
+    [_rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
+    _rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightButton];
+    self.navigationItem.rightBarButtonItem = _rightBarButtonItem;
+#else
+    self.rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onDeadRequest) title:@"终止需求" backgroundImage:nil];
+    [_rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
+    _rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightButton];
 #endif
     
     _emptyView.hidden = YES;
@@ -238,6 +249,10 @@
     PublishDesignViewController *vc = [[PublishDesignViewController alloc] init];
     vc.demand = _demand;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)onBidReq{
+    
 }
 
 - (void)onDeadRequest{

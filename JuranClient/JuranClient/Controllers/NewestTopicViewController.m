@@ -59,7 +59,7 @@
         self.navigationItem.title = @"最新话题";
         
         UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(oldTopic:) title:@"往期话题" backgroundImage:nil];
-        [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     }
     
@@ -266,7 +266,6 @@
     }else{
         [self submitComment:@""];
     }
-    
 }
 
 
@@ -355,6 +354,11 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (_topic) {
+        UILabel *label = (UILabel*)[_headerView viewWithTag:100];
+        label.text = @"评论";
+        if (_topic.commitList.count == 0) {
+            label.text = @"暂无评论";
+        }
         return _headerView;
     }
     return nil;

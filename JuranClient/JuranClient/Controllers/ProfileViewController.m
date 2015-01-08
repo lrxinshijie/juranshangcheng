@@ -25,9 +25,11 @@
 #import "DesignerDetailViewController.h"
 #import "JRDesigner.h"
 #import "BidManagementViewController.h"
+#import "PersonalDataForDesignerViewController.h"
 #else
 #import "PrivateMessageViewController.h"
 #import "MyDemandViewController.h"
+
 #endif
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -81,14 +83,17 @@
                     , @"个人主页"
                     , @"我的关注"
                     , @"我的收藏"
-                    , @"订单管理"
-                    , @"实名认证"];
+//                    , @"订单管理"
+                    , @"实名认证"
+                    , @"账户安全"
+                    ];
     imageArray = @[ @"icon_case_manage"
                     , @"icon_homepage.png"
                     , @"icon_personal_guanzhu.png"
                     , @"icon_personal_shouchang.png"
-                    , @"icon_dingdan.png"
-                    , @"icon_realname_auth.png"];
+//                    , @"icon_dingdan.png"
+                    , @"icon_realname_auth.png"
+                    , @"icon_personal_zhaq"];
 #else
     titleArray = @[ @"我的关注"
                     , @"我的收藏"
@@ -239,9 +244,16 @@
     }]) {
         return;
     }
+//#ifdef kJuranDesigner
+//
+//    PersonalDataForDesignerViewController *vc = [[PersonalDataForDesignerViewController alloc] init];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+//#else
     PersonalDataViewController *vc = [[PersonalDataViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+//#endif
 }
 
 
@@ -401,7 +413,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
 #else
-    if (indexPath.row == 6){
+    if (indexPath.row == 5){
         //实名认证
         if (![self checkLogin:^{
             [self loadData];
@@ -429,6 +441,7 @@
             return;
         }
         DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
+        detailVC.isHomePage = YES;
         JRDesigner *designer = [[JRDesigner alloc] init];
         designer.userId = _user.userId;
         detailVC.designer = designer;
@@ -454,6 +467,16 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 5){
 //        订单管理
+    }else if (indexPath.row == 6){
+        //        账户安全
+        if (![self checkLogin:^{
+            [self loadData];
+        }]) {
+            return;
+        }
+        AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 #endif
 }
