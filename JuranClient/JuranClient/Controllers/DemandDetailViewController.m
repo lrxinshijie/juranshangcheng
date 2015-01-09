@@ -66,7 +66,7 @@
 #ifndef kJuranDesigner
     self.navigationItem.title = @"我的需求";
 #else
-    self.navigationItem.title = @"应标详情";
+    self.navigationItem.title = @"招标公告";
 #endif
     demandInfoKeys = @[@"姓名", @"联系电话", @"编号", @"户型", @"装修预算", @"当前状态", @"房屋面积", @"风格", @"发布时间", @"终止时间", @"项目地址"];
     [self setupUI];

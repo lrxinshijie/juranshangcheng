@@ -113,14 +113,16 @@
                     [NSString stringWithFormat:@"￥%@万元",_jrCase.projectPrice],
                     _jrCase.desc
                     ];
-    _nameLabel.text = _jrCase.nickName;
+    _nameLabel.text = @"就算了快点放假了快速减肥到了开始了剪短发了空间";//_jrCase.nickName;
     _detailLabel.text = _jrCase.stylesName;
     [_avtarImageView setImageWithURLString:_jrCase.headUrl];
     _idImageView.hidden = !_jrCase.isAuth;
     
-    frame = _nameLabel.frame;
-    frame.size.width = [_jrCase.nickName widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(frame)];
-    _nameLabel.frame = frame;
+    CGFloat width = [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)];
+    
+    if (width > CGRectGetWidth(_nameLabel.frame)) {
+        width = CGRectGetWidth(_nameLabel.frame);
+    }
     
     frame = _idImageView.frame;
     frame.origin.x = CGRectGetMaxX(_nameLabel.frame) + 10;

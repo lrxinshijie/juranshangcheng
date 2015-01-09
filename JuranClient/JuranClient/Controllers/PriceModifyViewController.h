@@ -7,9 +7,11 @@
 //
 
 #import "ALViewController.h"
+@class JRDesigner;
 
 @interface PriceModifyViewController : ALViewController
 
 @property (nonatomic, assign) NSInteger type;
+@property (nonatomic, strong) JRDesigner *designer;
 
 @end

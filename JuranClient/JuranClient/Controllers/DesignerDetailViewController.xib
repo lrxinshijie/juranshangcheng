@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -16,7 +16,6 @@
                 <outlet property="headImageView" destination="gM7-2K-AQC" id="hpJ-CA-AbV"/>
                 <outlet property="headView" destination="hhF-tf-Fdy" id="Njh-CE-afz"/>
                 <outlet property="isAuthImageView" destination="uBU-bY-II0" id="Eh5-2U-u6X"/>
-                <outlet property="isFollowedView" destination="roe-o0-ZMd" id="HzZ-ao-4vg"/>
                 <outlet property="nameLabel" destination="E56-Rj-g5b" id="nZh-PH-wkb"/>
                 <outlet property="pictureCountLabel" destination="4rx-do-xR6" id="mMB-yc-tT9"/>
                 <outlet property="popularityLabel" destination="wLV-Ws-Txn" id="Pgr-YA-ZWI"/>
@@ -270,30 +269,6 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-        </view>
-        <view contentMode="scaleToFill" id="roe-o0-ZMd">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <button opaque="NO" tag="2300" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ni0-AT-ySX">
-                    <rect key="frame" x="5" y="5" width="60" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title=" 已关注">
-                        <color key="titleColor" red="0.0" green="0.36862745879999997" blue="0.69019609689999994" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="disabled">
-                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="doFollow:" destination="-1" eventType="touchUpInside" id="nE8-gR-B1h"/>
-                    </connections>
-                </button>
-            </subviews>
-            <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="140" y="620"/>
         </view>
     </objects>
     <resources>

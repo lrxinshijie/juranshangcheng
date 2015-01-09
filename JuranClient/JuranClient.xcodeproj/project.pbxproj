@@ -1189,6 +1189,9 @@
 		BD5187AC1A5D344D00BE508A /* icon_question@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5187A11A5D344D00BE508A /* icon_question@2x.png */; };
 		BD5187AD1A5D344D00BE508A /* icon_topic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5187A21A5D344D00BE508A /* icon_topic@2x.png */; };
 		BD5187AE1A5D344D00BE508A /* icon_topic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5187A21A5D344D00BE508A /* icon_topic@2x.png */; };
+		BD5A11991A5FB301001590C6 /* PriceModifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5A11971A5FB301001590C6 /* PriceModifyCell.m */; };
+		BD5A119A1A5FB301001590C6 /* PriceModifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD5A11981A5FB301001590C6 /* PriceModifyCell.xib */; };
+		BD5A119C1A5FDFB3001590C6 /* icon_case_manage2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5A119B1A5FDFB3001590C6 /* icon_case_manage2@2x.png */; };
 		BD5F23E61A52A430009F759E /* SerciceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5F23E41A52A430009F759E /* SerciceDetailViewController.m */; };
 		BD5F23E71A52A430009F759E /* SerciceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD5F23E51A52A430009F759E /* SerciceDetailViewController.xib */; };
 		BD6189EA1A5E261400FBE4E1 /* BidManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6189E61A5E239200FBE4E1 /* BidManagementViewController.m */; };
@@ -2066,6 +2069,10 @@
 		BD5187A01A5D344D00BE508A /* icon_letter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_letter@2x.png"; sourceTree = "<group>"; };
 		BD5187A11A5D344D00BE508A /* icon_question@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_question@2x.png"; sourceTree = "<group>"; };
 		BD5187A21A5D344D00BE508A /* icon_topic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_topic@2x.png"; sourceTree = "<group>"; };
+		BD5A11961A5FB301001590C6 /* PriceModifyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceModifyCell.h; sourceTree = "<group>"; };
+		BD5A11971A5FB301001590C6 /* PriceModifyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceModifyCell.m; sourceTree = "<group>"; };
+		BD5A11981A5FB301001590C6 /* PriceModifyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceModifyCell.xib; sourceTree = "<group>"; };
+		BD5A119B1A5FDFB3001590C6 /* icon_case_manage2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_case_manage2@2x.png"; sourceTree = "<group>"; };
 		BD5F23E31A52A430009F759E /* SerciceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerciceDetailViewController.h; sourceTree = "<group>"; };
 		BD5F23E41A52A430009F759E /* SerciceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SerciceDetailViewController.m; sourceTree = "<group>"; };
 		BD5F23E51A52A430009F759E /* SerciceDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SerciceDetailViewController.xib; sourceTree = "<group>"; };
@@ -2457,6 +2464,7 @@
 		371D686A1A5D6E2000172AC9 /* Personal */ = {
 			isa = PBXGroup;
 			children = (
+				BD5A119B1A5FDFB3001590C6 /* icon_case_manage2@2x.png */,
 				375B46451A5EB7F100D7E74B /* input_remark@2x.png */,
 				371D68771A5D78E700172AC9 /* personal_bg@2x.png */,
 				371D68751A5D72CA00172AC9 /* icon_setting_white@2x.png */,
@@ -3032,6 +3040,9 @@
 				37D18DB41A5829EC00B41048 /* CaseImageHeaderView.h */,
 				37D18DB51A5829EC00B41048 /* CaseImageHeaderView.m */,
 				37D18DB61A5829EC00B41048 /* CaseImageHeaderView.xib */,
+				BD5A11961A5FB301001590C6 /* PriceModifyCell.h */,
+				BD5A11971A5FB301001590C6 /* PriceModifyCell.m */,
+				BD5A11981A5FB301001590C6 /* PriceModifyCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -3668,7 +3679,7 @@
 						DevelopmentTeam = D2JB8K885C;
 					};
 					A971BC901A20825800C018D6 = {
-						DevelopmentTeam = QHWR2FWBM6;
+						DevelopmentTeam = D2JB8K885C;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -3676,7 +3687,7 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = QHWR2FWBM6;
+						DevelopmentTeam = D2JB8K885C;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -3761,6 +3772,7 @@
 				BD51865C1A5D0ED700BE508A /* login-icon-sina@2x.png in Resources */,
 				BD5186681A5D0ED700BE508A /* regist-icon-password@2x.png in Resources */,
 				BD51860A1A5D0ED700BE508A /* icon-zan-op.png in Resources */,
+				BD5A119C1A5FDFB3001590C6 /* icon_case_manage2@2x.png in Resources */,
 				BD51877E1A5D0ED700BE508A /* nav-case-default@2x.png in Resources */,
 				1415FA3E1A5CD1CB003D0C29 /* CommentCell.xib in Resources */,
 				BD5187A41A5D344D00BE508A /* icon_add_image@2x.png in Resources */,
@@ -4076,6 +4088,7 @@
 				BD5186191A5D0ED700BE508A /* icon-chat@2x.png in Resources */,
 				BD5187351A5D0ED700BE508A /* service_normal_5@2x.png in Resources */,
 				BD5186AF1A5D0ED700BE508A /* delete_image@2x.png in Resources */,
+				BD5A119A1A5FB301001590C6 /* PriceModifyCell.xib in Resources */,
 				145E3D1C1A2792B200AA952F /* PersonalDataViewController.xib in Resources */,
 				BD5186911A5D0ED700BE508A /* icon_personal_signIn@2x.png in Resources */,
 				A93BF29B1A2633D90070B72A /* SetPasswordViewController.xib in Resources */,
@@ -4728,6 +4741,7 @@
 				A987EDD31A20920500CED7CD /* UIViewController+HUD.m in Sources */,
 				14555D371A36FE1F00E36339 /* MenuView.m in Sources */,
 				14ABFBE51A25B63400C4AF65 /* LoginViewController.m in Sources */,
+				BD5A11991A5FB301001590C6 /* PriceModifyCell.m in Sources */,
 				A9A067141A3D76DA0059D73B /* ActionSheetCustomPicker.m in Sources */,
 				A987EDDE1A20920500CED7CD /* NSArray+ASCategory.m in Sources */,
 				A987EE3B1A2093C900CED7CD /* UIScrollView+MJExtension.m in Sources */,
@@ -5080,7 +5094,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

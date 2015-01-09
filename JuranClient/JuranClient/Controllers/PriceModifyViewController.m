@@ -7,6 +7,8 @@
 //
 
 #import "PriceModifyViewController.h"
+#import "PriceModifyCell.h"
+#import "JRDesigner.h"
 
 @interface PriceModifyViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -65,9 +67,10 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"PriceModifyCell";
-    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    PriceModifyCell *cell = (PriceModifyCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        cell = (PriceModifyCell *)[nibs firstObject];
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -81,7 +84,7 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPat{
     
 }
 

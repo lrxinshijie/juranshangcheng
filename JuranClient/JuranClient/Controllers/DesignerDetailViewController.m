@@ -51,7 +51,6 @@
 @property (nonatomic, assign) NSInteger topicCurrentPage;
 
 @property (nonatomic, strong) IBOutlet UIButton *followButton;
-@property (nonatomic, strong) IBOutlet UIView *isFollowedView;
 
 
 @end
@@ -145,17 +144,6 @@
     
     _toolBar.hidden = YES;
     
-    view = [_isFollowedView  viewWithTag:2300];
-    view.layer.masksToBounds = YES;
-    view.layer.borderWidth = 1;
-    view.layer.borderColor = RGBColor(0, 94, 176).CGColor;
-    view.layer.cornerRadius = 2.f;
-    
-    _isFollowedView.hidden = YES;
-    frame = _isFollowedView.frame;
-    frame.origin = CGPointMake(0, kWindowHeightWithoutNavigationBar - 30);
-    _isFollowedView.frame = frame;
-    [self.view addSubview:_isFollowedView];
 #endif
     
     UIView *bgView = [[UIView alloc] initWithFrame:_tableView.bounds];
@@ -390,15 +378,9 @@
         _followButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     }else{
         if (_designer.isFollowed) {
-            CGRect frame = _tableView.frame;
-            frame.size.height = kWindowHeightWithoutNavigationBar - 30;
-            _tableView.frame = frame;
-            _isFollowedView.hidden = NO;
+            [_followButton setTitle:@"已关注" forState:UIControlStateNormal];
         }else{
-            CGRect frame = _tableView.frame;
-            frame.size.height = kWindowHeightWithoutNavigationBar;
-            _tableView.frame = frame;
-            _isFollowedView.hidden = YES;
+            [_followButton setTitle:@"+ 关注" forState:UIControlStateNormal];
         }
     }
 #else
