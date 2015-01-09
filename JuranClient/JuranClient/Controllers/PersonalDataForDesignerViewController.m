@@ -20,6 +20,7 @@
 #import "JRDesigner.h"
 #import "PriceModifyViewController.h"
 #import "StyleModifyViewController.h"
+#import "PersonalDatasMoreViewController.h"
 
 @interface PersonalDataForDesignerViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
@@ -90,8 +91,8 @@
 
 - (void)setupDatas{
     _keys = @[@[@"头像", @"用户名"], @[@"昵称", @"性别", @"生日", @"所在地"], @[@"从业经验", @"设计费用", @"量房费用", @"擅长风格", @"设计专长", @"毕业院校", @"自我介绍"], @[@"更多资料"]];
-    _placeholders = @[@[@"", @"请输入用户名"], @[@"请输入昵称", @"", @"", @""], @[@"", @"", @"", @"", @"", @"", @""], @[@""]];
-    _tags = @[@[@"", @"1100"], @[@"1101", @"", @"", @""], @[@"", @"", @"", @"", @"", @"", @""],@[@""]];
+    _placeholders = @[@[@"", @"请输入用户名"], @[@"请输入昵称", @"", @"", @""], @[@"请输入从业经验", @"", @"", @"", @"", @"请输入毕业院校", @""], @[@""]];
+    _tags = @[@[@"", @"1100"], @[@"1101", @"", @"", @""], @[@"1102", @"", @"", @"", @"", @"1103", @""],@[@""]];
     
 }
 
@@ -102,9 +103,9 @@
     _values = @[@[@""
                   , _user.account]
                 , @[_user.nickName
-                    , @""//[_user sexyString]
-                    , @""//_user.birthday.length == 0?@"未设置":_user.birthday
-                    , @""//[_user locationAddress]
+                    , [_user sexyString]
+                    , _user.birthday.length == 0?@"未设置":_user.birthday
+                    , _user.areaInfo.title
                     ]
                 , @[@""
                     , @""
@@ -112,7 +113,7 @@
                     , @""
                     , @""
                     , @""
-                    , @""]
+                    , _user.selfIntroduction]
                 ,@[@""]
                 ];
 }
@@ -123,7 +124,7 @@
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
-                [_user buildDetailWithDictionary:data];
+                [_user buildUpWithValueForPersonal:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self reloadData];
                 });
@@ -133,28 +134,38 @@
 }
 
 - (void)modifyMemberDetail{
-    /*
+    
     NSDictionary *param1 = @{@"nickName": _user.nickName,
-                             @"birthday": _user.birthday,
-                             @"homeTel": _user.homeTel,
+                             @"oldNickName": _user.birthday,
+                             @"nickNameChangeable":@"",
+//                             @"homeTel": _user.homeTel,
+                             @"birthday":@"",
                              @"areaInfo": @{@"provinceCode": _user.areaInfo.provinceCode,
                                             @"cityCode": _user.areaInfo.cityCode,
                                             @"districtCode": _user.areaInfo.districtCode
                                             },
-                             @"detailAddress": _user.detailAddress,
-                             @"zipCode": _user.zipCode,
+//                             @"detailAddress": _user.detailAddress,
                              @"idCardType": _user.idCardType,
-                             @"idCardNum": _user.idCardNumber,
+                             @"idCardNum": _user.idCardNum,
                              @"qq": _user.qq,
                              @"weixin": _user.weixin,
-                             @"oldAccount": self.oldAccount,
-                             @"account": _user.account,
-                             @"accountChangeable": [NSString stringWithFormat:@"%d", _user.accountChangeable],
-                             @"sex": [NSString stringWithFormat:@"%d", _user.sex]
+                             @"sex": [NSString stringWithFormat:@"%d", _user.sex],
+                             @"freeMeasure": [NSString stringWithFormat:@"%d", _user.freeMeasure],
+                             @"priceMeasureStr": [NSString stringWithFormat:@"%d", (NSInteger)_user.priceMeasure],
+                             @"style": _user.style,
+                             @"special":_user.special,
+                             @"graduateInstitutions":_user.granuate,
+                             @"selfIntroduction":_user.selfIntroduction,
+                             @"professional":_user.professional,
+                             @"professionalType":_user.professionalType,
+                             @"personalHonor":_user.personalHonor,
+                             @"faceToFace": [NSString stringWithFormat:@"%d", _user.faceToFace],
+                              @"chargeStandardMinStr": [NSString stringWithFormat:@"%d", (NSInteger)_user.designFeeMin],
+                              @"chargeStandardMaxStr": [NSString stringWithFormat:@"%d", (NSInteger)_user.designFeeMax]
                              };
     
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param1 HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_EDIT_DESIGNINFO parameters:param1 HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -163,7 +174,7 @@
             });
         }
         [self loadData];
-    }];*/
+    }];
 }
 
 - (void)uploadHeaderImage:(UIImage*)image{
@@ -197,8 +208,8 @@
         return;
     }
     
-    if (_user.nickName.length < 4) {
-        [self showTip:@"昵称至少需要4个字符"];
+    if (_user.nickName.length < 2) {
+        [self showTip:@"昵称至少需要2个字符"];
         return;
     }
     
@@ -245,24 +256,17 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    /*
-     *  设计师端
-     if (indexPath.section == 0 && indexPath.row == 0) {
-     return 65;
-     }else if (indexPath.section == 2 && indexPath.row == 6){
-     return 70;
-     }
-     */
     if (indexPath.section == 0 && indexPath.row == 0) {
         return 65;
-    }else if (indexPath.section == 2 && indexPath.row == 6){
-        return 70;
     }
+//    else if (indexPath.section == 2 && indexPath.row == 6){
+//        return 70;
+//    }
     return 44;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ((indexPath.section == 0 && indexPath.row == 0) || (indexPath.section == 1 && indexPath.row != 0) || indexPath.section == 2 ||indexPath.section == 3) {
+    if ((indexPath.section == 0 && indexPath.row == 0) || (indexPath.section == 1 && indexPath.row != 0) || (indexPath.section == 2 && indexPath.row != 0 && indexPath.row != 5) ||indexPath.section == 3) {
         static NSString *cellIdentifier = @"personalData";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
@@ -301,6 +305,11 @@
             if ([value isEqualToString:@"未设置"]) {
                 cell.detailTextLabel.textColor = [UIColor grayColor];
             }
+//            if (indexPath.section == 2 && indexPath.row == 6){
+//                cell.detailTextLabel.numberOfLines = 3;
+//            }else{
+//                cell.detailTextLabel.numberOfLines = 1;
+//            }
         }
         return cell;
     }else{
@@ -327,8 +336,8 @@
         cell.textField.text = _values[indexPath.section][indexPath.row];
         cell.textField.keyboardType = UIKeyboardTypeDefault;
         
-        if (indexPath.section == 2 && (indexPath.row == 0 || indexPath.row == 2)) {
-            cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+        if (indexPath.section == 2 && indexPath.row == 0) {
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         }
         
         return cell;
@@ -374,15 +383,15 @@
     }else if (indexPath.section == 1){
         if (indexPath.row == 1) {
             
-//            [ActionSheetStringPicker showPickerWithTitle:nil rows:@[@"女", @"男"] initialSelection:_user.sex ==0?0:(_user.sex - 1) doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-//                _user.sex= selectedIndex + 1;
-//                [self reloadData];
-//            } cancelBlock:^(ActionSheetStringPicker *picker) {
-//                
-//            } origin:[UIApplication sharedApplication].keyWindow];
+            [ActionSheetStringPicker showPickerWithTitle:nil rows:@[@"女", @"男"] initialSelection:_user.sex ==0?0:(_user.sex - 1) doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                _user.sex= selectedIndex + 1;
+                [self reloadData];
+            } cancelBlock:^(ActionSheetStringPicker *picker) {
+                
+            } origin:[UIApplication sharedApplication].keyWindow];
         }else if (indexPath.row == 2) {
             [ActionSheetDatePicker showPickerWithTitle:@"生日" datePickerMode:UIDatePickerModeDate selectedDate:[NSDate date] doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
-//                _user.birthday = [(NSDate*)selectedDate stringWithFormat:[NSDate dateFormatString]];
+                _user.birthday = [(NSDate*)selectedDate stringWithFormat:[NSDate dateFormatString]];
                 [self reloadData];
             } cancelBlock:^(ActionSheetDatePicker *picker) {
                 
@@ -390,18 +399,11 @@
         }else if (indexPath.row == 3){
             BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
             [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
-//                _user.areaInfo = areaInfo;
+                _user.areaInfo = areaInfo;
             }];
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (indexPath.row == 4){
-            DetailAddressViewController *vc = [[DetailAddressViewController alloc] init];
-            vc.user = _user;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else if (indexPath.section == 2){
-//        ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeIdType];
-//        vc.title = _keys[indexPath.section][indexPath.row];
-//        [self.navigationController pushViewController:vc animated:YES];
         switch (indexPath.row) {
             case 0:{
                 
@@ -410,22 +412,30 @@
             case 1:{
                 PriceModifyViewController *vc = [[PriceModifyViewController alloc] init];
                 vc.type = 0;
+                vc.designer = _user;
                 [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
             case 2:{
                 PriceModifyViewController *vc = [[PriceModifyViewController alloc] init];
                 vc.type = 1;
+                vc.designer = _user;
                 [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
             case 3:{
                 StyleModifyViewController *vc = [[StyleModifyViewController alloc] init];
+                vc.type = 0;
+                vc.designer = _user;
                 [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
             case 4:{
-                
+                StyleModifyViewController *vc = [[StyleModifyViewController alloc] init];
+                vc.type = 1;
+                vc.designer = _user;
+                [self.navigationController pushViewController:vc animated:YES];
+                break;
                 break;
             }
             case 5:{
@@ -433,14 +443,20 @@
                 break;
             }
             case 6:{
-                
+                DetailAddressViewController *vc = [[DetailAddressViewController alloc] init];
+                vc.user = _user;
+                vc.type = 1;
+                [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
             default:
                 break;
         }
+    }else if (indexPath.section == 3){
+        PersonalDatasMoreViewController *vc = [[PersonalDatasMoreViewController alloc] init];
+        vc.user = _user;
+        [self.navigationController pushViewController:vc animated:YES];
     }
-    return;
 }
 
 - (void)didReceiveMemoryWarning
@@ -472,24 +488,6 @@
         [self showTip:@"昵称长度不能超过20个字符"];
         return NO;
     }
-    
-    if (textField.tag == 1102) {
-        if(![self isPureNumandCharacters:string] && ![string isEqualToString:@"-"]){
-            [self showTip:@"请输入合法字符！！"];
-            return NO;
-        }
-    }
-    
-    
-    //    else if (textField.tag == DemandEditContactsMobile && value.length > 32){
-    //        return NO;
-    //    }else if (textField.tag == DemandEditBudget){
-    //        double budget = [value doubleValue];
-    //        if (budget > 99999) {
-    //            return NO;
-    //        }
-    //    }
-    
     return YES;
 }
 
@@ -516,17 +514,15 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField.tag == 1100) {
-        self.oldAccount = _user.account;
-        accountChangeTip = NO;
+//        self.oldAccount = _user.account;
+//        accountChangeTip = NO;
         _user.account = textField.text;
     }else if (textField.tag == 1101){
         _user.nickName = textField.text;
     }else if (textField.tag == 1102){
-//        _user.homeTel = textField.text;
+        _user.experienceCount = textField.text.integerValue;
     }else if (textField.tag == 1103){
-//        _user.qq = textField.text;
-    }else if (textField.tag == 1104){
-//        _user.weixin = textField.text;
+        _user.granuate = textField.text;
     }
 }
 

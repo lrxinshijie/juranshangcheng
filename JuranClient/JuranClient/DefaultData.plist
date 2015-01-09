@@ -488,6 +488,51 @@
 			<string>2</string>
 		</dict>
 	</array>
+	<key>professionalType</key>
+	<array>
+		<dict>
+			<key>k</key>
+			<string>选择类型</string>
+			<key>v</key>
+			<string>0</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>室内设计</string>
+			<key>v</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>软装设计</string>
+			<key>v</key>
+			<string>2</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>建筑设计</string>
+			<key>v</key>
+			<string>3</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>园林设计</string>
+			<key>v</key>
+			<string>4</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>装修设计</string>
+			<key>v</key>
+			<string>5</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>其他</string>
+			<key>v</key>
+			<string>6</string>
+		</dict>
+	</array>
 	<key>projectRoom</key>
 	<array>
 		<dict>

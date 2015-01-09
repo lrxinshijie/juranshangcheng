@@ -41,7 +41,7 @@
 @property (nonatomic, strong) NSString *detailAddress;
 @property (nonatomic, strong) NSString *zipCode;
 @property (nonatomic, strong) NSString *idCardType;
-@property (nonatomic, strong) NSString *idCardNumber;
+@property (nonatomic, strong) NSString *idCardNum;
 @property (nonatomic, strong) NSString *qq;
 @property (nonatomic, strong) NSString *weixin;
 @property (nonatomic, assign) NSInteger sex;

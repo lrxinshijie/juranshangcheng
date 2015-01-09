@@ -129,7 +129,7 @@
 #define JR_GET_DESIGNREQ_DETAIL [NSString stringWithFormat:@"%@/design/getDeDesignReqDetail.json",JR_SERVICE]
 #define JR_GET_DEDESIGNER_BIDLIST [NSString stringWithFormat:@"%@/design/getDeDesignerBidList.json",JR_SERVICE]
 #define JR_GET_DEDESIGNER_SELFDETAIL [NSString stringWithFormat:@"%@/member/getDesignerSelfDetail.json",JR_SERVICE]
-
+#define JR_EDIT_DESIGNINFO [NSString stringWithFormat:@"%@/design/editDesignInfo.json",JR_SERVICE]
 
 
 

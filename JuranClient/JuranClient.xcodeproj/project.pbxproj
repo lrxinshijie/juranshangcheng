@@ -98,7 +98,6 @@
 		1415F98A1A5CD1CB003D0C29 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A987EE311A2093C900CED7CD /* UIScrollView+MJExtension.m */; };
 		1415F98B1A5CD1CB003D0C29 /* UITextField+ASCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A987EDAD1A20920500CED7CD /* UITextField+ASCategory.m */; };
 		1415F98C1A5CD1CB003D0C29 /* CanRemoveImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1459876E1A3DC987002AE413 /* CanRemoveImageView.m */; };
-		1415F98D1A5CD1CB003D0C29 /* PersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D171A2792B200AA952F /* PersonalDataViewController.m */; };
 		1415F98E1A5CD1CB003D0C29 /* BidDesignerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14646DAF1A3C76D000E5D6F6 /* BidDesignerCell.m */; };
 		1415F98F1A5CD1CB003D0C29 /* JSONModelError.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D6549D1A27642800A80253 /* JSONModelError.m */; };
 		1415F9901A5CD1CB003D0C29 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A987EE351A2093C900CED7CD /* UIView+MJExtension.m */; };
@@ -260,7 +259,6 @@
 		1415FA2E1A5CD1CB003D0C29 /* FeedBackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EDB38C1A3B4FE200E5AC77 /* FeedBackViewController.xib */; };
 		1415FA2F1A5CD1CB003D0C29 /* RealNameAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */; };
 		1415FA301A5CD1CB003D0C29 /* CaseImageHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D18DB61A5829EC00B41048 /* CaseImageHeaderView.xib */; };
-		1415FA311A5CD1CB003D0C29 /* PersonalDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145E3D181A2792B200AA952F /* PersonalDataViewController.xib */; };
 		1415FA321A5CD1CB003D0C29 /* SetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93BF2991A2633D90070B72A /* SetPasswordViewController.xib */; };
 		1415FA331A5CD1CB003D0C29 /* DemandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14A3FDC51A2C9EDF002BEFF4 /* DemandCell.xib */; };
 		1415FA341A5CD1CB003D0C29 /* ShareSDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1441A1521A29E3CD004A038E /* ShareSDKLocalizable.strings */; };
@@ -451,8 +449,6 @@
 		1459876F1A3DC987002AE413 /* CanRemoveImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1459876E1A3DC987002AE413 /* CanRemoveImageView.m */; };
 		145987731A3DDDE5002AE413 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145987711A3DDDE5002AE413 /* AboutViewController.m */; };
 		145987741A3DDDE5002AE413 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145987721A3DDDE5002AE413 /* AboutViewController.xib */; };
-		145E3D191A2792B200AA952F /* PersonalDatasMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */; };
-		145E3D1A1A2792B200AA952F /* PersonalDatasMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */; };
 		145E3D1B1A2792B200AA952F /* PersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D171A2792B200AA952F /* PersonalDataViewController.m */; };
 		145E3D1C1A2792B200AA952F /* PersonalDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145E3D181A2792B200AA952F /* PersonalDataViewController.xib */; };
 		145EF9451A2B0E33001CC76B /* JRPhotoScrollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 145EF9441A2B0E33001CC76B /* JRPhotoScrollViewController.xib */; };
@@ -572,6 +568,10 @@
 		37D18DBD1A583AF600B41048 /* CaseIntroduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D18DBB1A583AF600B41048 /* CaseIntroduceViewController.xib */; };
 		37D3EADF1A52FF330091B3BB /* PushMsgDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3EADD1A52FF330091B3BB /* PushMsgDetailViewController.m */; };
 		37D3EAE01A52FF330091B3BB /* PushMsgDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3EADE1A52FF330091B3BB /* PushMsgDetailViewController.xib */; };
+		37D6796F1A6016B900C6DFAC /* PriceModifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5A11971A5FB301001590C6 /* PriceModifyCell.m */; };
+		37D679701A6016BE00C6DFAC /* PriceModifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD5A11981A5FB301001590C6 /* PriceModifyCell.xib */; };
+		37D679731A60188200C6DFAC /* icon_circle_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D679711A60188200C6DFAC /* icon_circle_selected@2x.png */; };
+		37D679741A60188200C6DFAC /* icon_circle_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D679721A60188200C6DFAC /* icon_circle_unselected@2x.png */; };
 		A90459CE1A27874800F8CD74 /* CaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */; };
 		A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */; };
 		A90459D31A278A6100F8CD74 /* PublishDesignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459D11A278A6100F8CD74 /* PublishDesignViewController.m */; };
@@ -1190,8 +1190,6 @@
 		BD5187AC1A5D344D00BE508A /* icon_question@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5187A11A5D344D00BE508A /* icon_question@2x.png */; };
 		BD5187AD1A5D344D00BE508A /* icon_topic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5187A21A5D344D00BE508A /* icon_topic@2x.png */; };
 		BD5187AE1A5D344D00BE508A /* icon_topic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5187A21A5D344D00BE508A /* icon_topic@2x.png */; };
-		BD5A11991A5FB301001590C6 /* PriceModifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5A11971A5FB301001590C6 /* PriceModifyCell.m */; };
-		BD5A119A1A5FB301001590C6 /* PriceModifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD5A11981A5FB301001590C6 /* PriceModifyCell.xib */; };
 		BD5A119C1A5FDFB3001590C6 /* icon_case_manage2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD5A119B1A5FDFB3001590C6 /* icon_case_manage2@2x.png */; };
 		BD5F23E61A52A430009F759E /* SerciceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5F23E41A52A430009F759E /* SerciceDetailViewController.m */; };
 		BD5F23E71A52A430009F759E /* SerciceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD5F23E51A52A430009F759E /* SerciceDetailViewController.xib */; };
@@ -1550,6 +1548,8 @@
 		37D3EADC1A52FF330091B3BB /* PushMsgDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMsgDetailViewController.h; sourceTree = "<group>"; };
 		37D3EADD1A52FF330091B3BB /* PushMsgDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMsgDetailViewController.m; sourceTree = "<group>"; };
 		37D3EADE1A52FF330091B3BB /* PushMsgDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PushMsgDetailViewController.xib; sourceTree = "<group>"; };
+		37D679711A60188200C6DFAC /* icon_circle_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_circle_selected@2x.png"; sourceTree = "<group>"; };
+		37D679721A60188200C6DFAC /* icon_circle_unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_circle_unselected@2x.png"; sourceTree = "<group>"; };
 		A90459CB1A27874800F8CD74 /* CaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseDetailViewController.h; sourceTree = "<group>"; };
 		A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseDetailViewController.m; sourceTree = "<group>"; };
 		A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseDetailViewController.xib; sourceTree = "<group>"; };
@@ -2345,9 +2345,6 @@
 				14587E1C1A35DD4300D41236 /* BindMailViewController.h */,
 				14587E1D1A35DD4300D41236 /* BindMailViewController.m */,
 				14587E1E1A35DD4300D41236 /* BindMailViewController.xib */,
-				145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */,
-				145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */,
-				145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */,
 				145E3D161A2792B100AA952F /* PersonalDataViewController.h */,
 				145E3D171A2792B200AA952F /* PersonalDataViewController.m */,
 				145E3D181A2792B200AA952F /* PersonalDataViewController.xib */,
@@ -2372,6 +2369,9 @@
 				375B46471A5EDBB200D7E74B /* PersonalDataForDesignerViewController.h */,
 				375B46481A5EDBB200D7E74B /* PersonalDataForDesignerViewController.m */,
 				375B46491A5EDBB200D7E74B /* PersonalDataForDesignerViewController.xib */,
+				145E3D131A2792B100AA952F /* PersonalDatasMoreViewController.h */,
+				145E3D141A2792B100AA952F /* PersonalDatasMoreViewController.m */,
+				145E3D151A2792B100AA952F /* PersonalDatasMoreViewController.xib */,
 				375B464E1A5EE6CF00D7E74B /* PriceModifyViewController.h */,
 				375B464F1A5EE6CF00D7E74B /* PriceModifyViewController.m */,
 				375B46501A5EE6D000D7E74B /* PriceModifyViewController.xib */,
@@ -2466,6 +2466,8 @@
 		371D686A1A5D6E2000172AC9 /* Personal */ = {
 			isa = PBXGroup;
 			children = (
+				37D679711A60188200C6DFAC /* icon_circle_selected@2x.png */,
+				37D679721A60188200C6DFAC /* icon_circle_unselected@2x.png */,
 				BD5A119B1A5FDFB3001590C6 /* icon_case_manage2@2x.png */,
 				375B46451A5EB7F100D7E74B /* input_remark@2x.png */,
 				371D68771A5D78E700172AC9 /* personal_bg@2x.png */,
@@ -3733,7 +3735,6 @@
 				BD51861A1A5D0ED700BE508A /* icon-chat@2x.png in Resources */,
 				BD5187361A5D0ED700BE508A /* service_normal_5@2x.png in Resources */,
 				BD5186B01A5D0ED700BE508A /* delete_image@2x.png in Resources */,
-				1415FA311A5CD1CB003D0C29 /* PersonalDataViewController.xib in Resources */,
 				BD5186921A5D0ED700BE508A /* icon_personal_signIn@2x.png in Resources */,
 				1415FA321A5CD1CB003D0C29 /* SetPasswordViewController.xib in Resources */,
 				BD5186E61A5D0ED700BE508A /* publish_line_selected@2x.png in Resources */,
@@ -3809,6 +3810,7 @@
 				BD5187241A5D0ED700BE508A /* service_highlighted_8@2x.png in Resources */,
 				1415FA4C1A5CD1CB003D0C29 /* SearchViewController.xib in Resources */,
 				1415FA4D1A5CD1CB003D0C29 /* CaseImageCollectionCell.xib in Resources */,
+				37D679701A6016BE00C6DFAC /* PriceModifyCell.xib in Resources */,
 				BD51872A1A5D0ED700BE508A /* service_normal_10@2x.png in Resources */,
 				1415FA4E1A5CD1CB003D0C29 /* ProfileViewController.xib in Resources */,
 				BD5187AA1A5D344D00BE508A /* icon_letter@2x.png in Resources */,
@@ -3831,6 +3833,7 @@
 				BD5187141A5D0ED700BE508A /* service_highlighted_11@2x.png in Resources */,
 				BD51862A1A5D0ED700BE508A /* look_count@2x.png in Resources */,
 				BD51873E1A5D0ED700BE508A /* service_normal_9@2x.png in Resources */,
+				37D679741A60188200C6DFAC /* icon_circle_unselected@2x.png in Resources */,
 				BD5185E81A5D0ED700BE508A /* case_icon_praise@2x.png in Resources */,
 				1415FA571A5CD1CB003D0C29 /* Resource.bundle in Resources */,
 				BD5187741A5D0ED700BE508A /* userlevel1@2x.png in Resources */,
@@ -4031,6 +4034,7 @@
 				1415FA7F1A5CD1CB003D0C29 /* FilterInfo.plist in Resources */,
 				BD5187581A5D0ED700BE508A /* nav_backbtn_white@2x.png in Resources */,
 				1415FA801A5CD1CB003D0C29 /* CaseCollectionCell.xib in Resources */,
+				37D679731A60188200C6DFAC /* icon_circle_selected@2x.png in Resources */,
 				BD5185D61A5D0ED700BE508A /* case-detail-send@2x.png in Resources */,
 				1415FA811A5CD1CB003D0C29 /* AccountManageViewController.xib in Resources */,
 				BD5186DC1A5D0ED700BE508A /* private_message_empty@2x.png in Resources */,
@@ -4092,7 +4096,6 @@
 				BD5186191A5D0ED700BE508A /* icon-chat@2x.png in Resources */,
 				BD5187351A5D0ED700BE508A /* service_normal_5@2x.png in Resources */,
 				BD5186AF1A5D0ED700BE508A /* delete_image@2x.png in Resources */,
-				BD5A119A1A5FB301001590C6 /* PriceModifyCell.xib in Resources */,
 				145E3D1C1A2792B200AA952F /* PersonalDataViewController.xib in Resources */,
 				BD5186911A5D0ED700BE508A /* icon_personal_signIn@2x.png in Resources */,
 				A93BF29B1A2633D90070B72A /* SetPasswordViewController.xib in Resources */,
@@ -4151,7 +4154,6 @@
 				BD51876F1A5D0ED700BE508A /* tabbar_subject_hl@2x.png in Resources */,
 				BD5186ED1A5D0ED700BE508A /* request_reviewing@2x.png in Resources */,
 				37D18DAE1A5819F300B41048 /* CaseImageManagemanetViewController.xib in Resources */,
-				145E3D1A1A2792B200AA952F /* PersonalDatasMoreViewController.xib in Resources */,
 				14FBC9E11A495143000A789C /* arrow@2x.png in Resources */,
 				BD5186951A5D0ED700BE508A /* icon_personal_zhgl@2x.png in Resources */,
 				37D010121A566AF900EC658D /* UploadCardImageViewController.xib in Resources */,
@@ -4473,6 +4475,7 @@
 				1415F95B1A5CD1CB003D0C29 /* MJRefreshConst.m in Sources */,
 				1415F95C1A5CD1CB003D0C29 /* AppDelegate.m in Sources */,
 				1415F95D1A5CD1CB003D0C29 /* QuestionFilterView.m in Sources */,
+				37D6796F1A6016B900C6DFAC /* PriceModifyCell.m in Sources */,
 				1415F95E1A5CD1CB003D0C29 /* UIImageView+Block.m in Sources */,
 				1415F95F1A5CD1CB003D0C29 /* PrivateMessageDetailViewController.m in Sources */,
 				1415F9601A5CD1CB003D0C29 /* JSONAPI.m in Sources */,
@@ -4521,7 +4524,6 @@
 				1415F98A1A5CD1CB003D0C29 /* UIScrollView+MJExtension.m in Sources */,
 				1415F98B1A5CD1CB003D0C29 /* UITextField+ASCategory.m in Sources */,
 				1415F98C1A5CD1CB003D0C29 /* CanRemoveImageView.m in Sources */,
-				1415F98D1A5CD1CB003D0C29 /* PersonalDataViewController.m in Sources */,
 				BD6189EA1A5E261400FBE4E1 /* BidManagementViewController.m in Sources */,
 				1415F98E1A5CD1CB003D0C29 /* BidDesignerCell.m in Sources */,
 				1415F98F1A5CD1CB003D0C29 /* JSONModelError.m in Sources */,
@@ -4745,7 +4747,6 @@
 				A987EDD31A20920500CED7CD /* UIViewController+HUD.m in Sources */,
 				14555D371A36FE1F00E36339 /* MenuView.m in Sources */,
 				14ABFBE51A25B63400C4AF65 /* LoginViewController.m in Sources */,
-				BD5A11991A5FB301001590C6 /* PriceModifyCell.m in Sources */,
 				A9A067141A3D76DA0059D73B /* ActionSheetCustomPicker.m in Sources */,
 				A987EDDE1A20920500CED7CD /* NSArray+ASCategory.m in Sources */,
 				A987EE3B1A2093C900CED7CD /* UIScrollView+MJExtension.m in Sources */,
@@ -4871,7 +4872,6 @@
 				1441A18D1A29E3D5004A038E /* KTPhotoScrollViewController.m in Sources */,
 				14EDB38D1A3B4FE200E5AC77 /* FeedBackViewController.m in Sources */,
 				A987EE5B1A209E6100CED7CD /* JRCase.m in Sources */,
-				145E3D191A2792B200AA952F /* PersonalDatasMoreViewController.m in Sources */,
 				A9B4EB791A371F120091AAAF /* CaseCollectViewController.m in Sources */,
 				A987EDFD1A20920500CED7CD /* UIButton+WebCache.m in Sources */,
 				A987EDDC1A20920500CED7CD /* CLLocation+ASCategory.m in Sources */,

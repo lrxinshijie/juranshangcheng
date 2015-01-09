@@ -9,7 +9,7 @@
 #import "ModifyViewController.h"
 #import "JRMemberDetail.h"
 #import "UIActionSheet+Blocks.h"
-
+#import "JRDesigner.h"
 
 @interface ModifyViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
@@ -26,7 +26,7 @@
 
 @implementation ModifyViewController
 
-- (id)initWithMemberDetail:(JRUser*)user type:(ModifyCVType)type{    self = [self init];
+- (id)initWithMemberDetail:(id)user type:(ModifyCVType)type{    self = [self init];
     if (self) {
         self.user = user;
         self.type = type;
@@ -82,7 +82,7 @@
         }
         case ModifyCVTypeIdType:
         {
-            _textField.text = _user.idCardNumber;
+            _textField.text = _user.idCardNum;
             _tipLabel.text = @"";
             _textField.placeholder = @"输入证件号码";
             _textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
@@ -128,17 +128,7 @@
         return;
     }
     switch (_type) {
-        case ModifyCVTypeUserName:
-        {
-            if ([_textField.text isEqualToString:_user.account]) {
-                //未修改
-                return;
-            }
-            param = @{@"oldAccount": _user.account,
-                      @"account":_textField.text,
-                      @"accountChangeable":[NSString stringWithFormat:@"%d", _user.accountChangeable]};
-            break;
-        }
+        
         case ModifyCVTypeHomeTel:
         {
             if (_textField.text.length < 8) {
@@ -156,7 +146,7 @@
                 return;
             }
             _user.idCardType = [NSString stringWithFormat:@"%d", idCardType];
-            _user.idCardNumber = _textField.text;
+            _user.idCardNum = _textField.text;
             break;
         }
         case ModifyCVTypeQQ:
@@ -206,16 +196,10 @@
                     _user.homeTel = _textField.text;
                     break;
                 }
-                case ModifyCVTypeUserName:
-                {
-                    _user.account = _textField.text;
-                    _user.accountChangeable = YES;
-                    break;
-                }
                 case ModifyCVTypeIdType:
                 {
                     _user.idCardType = [NSString stringWithFormat:@"%d", idCardType];
-                    _user.idCardNumber = _textField.text;
+                    _user.idCardNum = _textField.text;
                     break;
                 }
                 default:

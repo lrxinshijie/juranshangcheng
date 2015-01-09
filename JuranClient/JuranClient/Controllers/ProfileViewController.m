@@ -244,16 +244,16 @@
     }]) {
         return;
     }
-//#ifdef kJuranDesigner
-//
-//    PersonalDataForDesignerViewController *vc = [[PersonalDataForDesignerViewController alloc] init];
-//    vc.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:vc animated:YES];
-//#else
+#ifdef kJuranDesigner
+
+    PersonalDataForDesignerViewController *vc = [[PersonalDataForDesignerViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+#else
     PersonalDataViewController *vc = [[PersonalDataViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
-//#endif
+#endif
 }
 
 

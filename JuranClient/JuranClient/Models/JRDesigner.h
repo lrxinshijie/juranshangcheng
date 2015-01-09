@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class JRAreaInfo;
+
 @interface JRDesigner : NSObject
 
 @property (nonatomic, strong) NSString * headUrl;
@@ -66,6 +68,24 @@
 @property (nonatomic, strong) NSString *realNameGmtCreate;
 @property (nonatomic, strong) NSString *realAuditDesc;
 
+//个人资料
+@property (nonatomic, strong) NSString *oldNickName;
+@property (nonatomic, strong) NSString *nickNameChangeable;
+@property (nonatomic, strong) NSString *birthday;
+@property (nonatomic, strong) JRAreaInfo *areaInfo;
+@property (nonatomic, strong) NSString *idCardType;
+@property (nonatomic, strong) NSString *qq;
+@property (nonatomic, strong) NSString *weixin;
+@property (nonatomic, assign) NSInteger sex;
+@property (nonatomic, assign) NSInteger freeMeasure;
+@property (nonatomic, strong) NSString *special;
+@property (nonatomic, strong) NSString *professional;
+@property (nonatomic, strong) NSString *professionalType;
+@property (nonatomic, strong) NSString *personalHonor;
+@property (nonatomic, assign) NSInteger faceToFace;
+@property (nonatomic, strong) NSString *detailAddress;
+@property (nonatomic, strong) NSString *homeTel;
+
 - (id)initWithDictionary:(NSDictionary *)dict;
 - (id)initWithDictionaryForBidInfo:(NSDictionary *)dict;
 
@@ -97,5 +117,11 @@
 - (id)initWithDictionaryForRealNameAuth:(NSDictionary *)dict;
 - (NSString*)realNameAuthStatusString;
 - (NSString*)realNameAuthDescription;
+
+//个人资料
+- (void)buildUpWithValueForPersonal:(id)value;
+- (NSString*)sexyString;
+- (NSString*)idCardInfomation;
+- (NSString*)professionalTypeString;
 
 @end

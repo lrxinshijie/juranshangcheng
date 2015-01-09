@@ -8,6 +8,11 @@
 
 #import "ALViewController.h"
 
+@class JRDesigner;
+
 @interface StyleModifyViewController : ALViewController
+
+@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, strong) JRDesigner *designer;
 
 @end

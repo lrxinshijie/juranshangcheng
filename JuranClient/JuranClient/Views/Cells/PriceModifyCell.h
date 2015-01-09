@@ -10,6 +10,6 @@
 
 @interface PriceModifyCell : UITableViewCell
 
-@property (nonatomic, strong) IBOutlet UIImageView *iconImageView;
+@property (nonatomic, strong) UIImageView *iconImageView;
 
 @end

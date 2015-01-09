@@ -8,8 +8,15 @@
 
 #import "ALViewController.h"
 
-@interface DetailAddressViewController : ALViewController
+@class JRDesigner;
 
+@interface DetailAddressViewController : ALViewController
+#ifdef kJuranDesigner
+@property (nonatomic, strong) JRDesigner *user;
+#else
 @property (nonatomic, strong) JRUser *user;
+#endif
+
+@property (nonatomic, assign) NSInteger type;
 
 @end

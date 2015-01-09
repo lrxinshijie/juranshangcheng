@@ -61,6 +61,10 @@
     return [_defaultData objectForKey:@"bathroomCount"];
 }
 
+- (NSArray *)professionalType{
+    return [_defaultData objectForKey:@"professionalType"];
+}
+
 - (NSNumber *)imageQuality{
     if (!_imageQuality) {
         _imageQuality = [Public imageQuality];

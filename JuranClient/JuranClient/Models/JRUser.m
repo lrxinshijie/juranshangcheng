@@ -34,7 +34,7 @@
         self.detailAddress = @"";
         self.zipCode = @"";
         self.idCardType = @"";
-        self.idCardNumber = @"";
+        self.idCardNum = @"";
         self.qq = @"";
         self.weixin = @"";
     }
@@ -200,7 +200,7 @@
     self.detailAddress = [dict getStringValueForKey:@"detailAddress" defaultValue:@""];
     self.zipCode = [dict getStringValueForKey:@"zipCode" defaultValue:@""];
     self.idCardType = [dict getStringValueForKey:@"idCardType" defaultValue:@""];
-    self.idCardNumber = [dict getStringValueForKey:@"idCardNum" defaultValue:@""];
+    self.idCardNum = [dict getStringValueForKey:@"idCardNum" defaultValue:@""];
     self.qq = [dict getStringValueForKey:@"qq" defaultValue:@""];
     self.weixin = [dict getStringValueForKey:@"weixin" defaultValue:@""];
     self.sex = [dict getIntValueForKey:@"sex" defaultValue:0];
@@ -229,14 +229,14 @@
 
 - (NSString*)idCardInfomation{
     NSArray *arr = @[@"身份证", @"军官证", @"护照"];
-    if (!(self.idCardNumber && self.idCardNumber.length > 0)) {
+    if (!(self.idCardNum && self.idCardNum.length > 0)) {
         return @"未设置";
     }
-    if (self.idCardNumber.length >= 10) {
-        return [NSString stringWithFormat:@"%@:%@****%@", arr[self.idCardType.intValue], [self.idCardNumber substringToIndex:5], [self.idCardNumber substringFromIndex:_idCardNumber.length - 2]];
+    if (self.idCardNum.length >= 10) {
+        return [NSString stringWithFormat:@"%@:%@****%@", arr[self.idCardType.intValue], [self.idCardNum substringToIndex:5], [self.idCardNum substringFromIndex:_idCardNum.length - 2]];
     }
     
-    return [NSString stringWithFormat:@"%@:%@", arr[self.idCardType.intValue], self.idCardNumber];
+    return [NSString stringWithFormat:@"%@:%@", arr[self.idCardType.intValue], self.idCardNum];
     
 }
 

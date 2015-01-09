@@ -46,6 +46,20 @@
         self.realNameGmtCreate = @"";
         self.realAuditDesc = @"";
         self.realNameAuthStatus = -1;
+        
+        self.oldNickName = @"";
+        self.nickNameChangeable = @"";
+        self.birthday = @"";
+        self.areaInfo = [[JRAreaInfo alloc] init];
+        self.idCardType = @"";
+        self.qq = @"";
+        self.weixin = @"";
+        self.special = @"";
+        self.professional = @"";
+        self.professionalType = @"";
+        self.personalHonor = @"";
+        self.detailAddress = @"";
+        self.homeTel = @"";
     }
     return self;
 }
@@ -317,6 +331,73 @@
         return @"信息审核通过";
     }
     return @"";
+}
+
+- (void)buildUpWithValueForPersonal:(id)value{
+    if (!value || ![value isKindOfClass:[NSDictionary class]]) {
+        return ;
+    }
+    self.userLevel = [value getStringValueForKey:@"userLevel" defaultValue:@""];
+    self.userLevelName  = [value getStringValueForKey:@"userLevelName " defaultValue:@""];
+    self.userName = [value getStringValueForKey:@"realName" defaultValue:@""];
+    self.headUrl = [value getStringValueForKey:@"headUrl" defaultValue:@""];
+    self.account = [value getStringValueForKey:@"account" defaultValue:@""];
+    self.isAuth = [value getBoolValueForKey:@"isAuth" defaultValue:FALSE];
+    self.product2DCount = [value getIntValueForKey:@"product2DCount" defaultValue:0];
+    self.product3DCount = [value getIntValueForKey:@"product3DCount" defaultValue:0];
+    self.followCount = [value getIntValueForKey:@"followCount" defaultValue:0];
+    self.viewCount = [value getIntValueForKey:@"viewCount" defaultValue:0];
+    self.nickName = [value getStringValueForKey:@"nickName" defaultValue:@""];
+    self.oldNickName = [value getStringValueForKey:@"oldNickName" defaultValue:@""];
+    self.nickNameChangeable = [value getStringValueForKey:@"nickNameChangeable" defaultValue:@""];
+    self.birthday = [value getStringValueForKey:@"birthday" defaultValue:@""];
+    self.areaInfo = [[JRAreaInfo alloc] initWithDictionary:value[@"areaInfo"]];
+    self.idCardType = [value getStringValueForKey:@"idCardType" defaultValue:@""];
+    self.idCardNum = [value getStringValueForKey:@"idCardNum" defaultValue:@""];
+    self.qq = [value getStringValueForKey:@"qq" defaultValue:@""];
+    self.weixin = [value getStringValueForKey:@"weixin" defaultValue:@""];
+    self.sex = [value getIntValueForKey:@"sex" defaultValue:0];
+    self.experienceCount = [value getIntValueForKey:@"designExperience" defaultValue:0];
+    self.freeMeasure = [value getIntValueForKey:@"freeMeasure" defaultValue:0];
+    self.priceMeasure = [value getDoubleValueForKey:@"priceMeasureStr" defaultValue:0.f];
+    self.style = [value getStringValueForKey:@"style" defaultValue:@""];
+    self.special = [value getStringValueForKey:@"special" defaultValue:@""];
+    self.granuate = [value getStringValueForKey:@"graduateInstitutions" defaultValue:@""];
+    self.selfIntroduction = [value getStringValueForKey:@"selfIntroduction" defaultValue:@""];
+    self.professional = [value getStringValueForKey:@"professional" defaultValue:@""];
+    self.professionalType = [value getStringValueForKey:@"professionalType" defaultValue:@""];
+    self.personalHonor = [value getStringValueForKey:@"personalHonor" defaultValue:@""];
+    self.faceToFace = [value getIntValueForKey:@"faceToFace" defaultValue:0];
+    self.designFeeMax = [value getDoubleValueForKey:@"chargeStandardMaxStr" defaultValue:0.f];
+    self.designFeeMin = [value getDoubleValueForKey:@"chargeStandardMinStr" defaultValue:0.f];
+}
+
+- (NSString*)sexyString{
+    NSArray *sexs = @[@"未设置", @"女", @"男"];
+    return sexs[_sex];
+}
+
+- (NSString*)idCardInfomation{
+    NSArray *arr = @[@"身份证", @"军官证", @"护照"];
+    if (!(self.idCardNum && self.idCardNum.length > 0)) {
+        return @"未设置";
+    }
+    if (self.idCardNum.length >= 10) {
+        return [NSString stringWithFormat:@"%@:%@****%@", arr[self.idCardType.intValue], [self.idCardNum substringToIndex:5], [self.idCardNum substringFromIndex:_idCardNum.length - 2]];
+    }
+    
+    return [NSString stringWithFormat:@"%@:%@", arr[self.idCardType.intValue], self.idCardNum];
+    
+}
+
+- (NSString*)professionalTypeString{
+    NSArray *professionalTypes = [[DefaultData sharedData] professionalType];
+    for (NSDictionary *dic in professionalTypes) {
+        if ([[dic objectForKey:@"v"] isEqualToString:_professionalType]) {
+            return dic[@"k"];
+        }
+    }
+    return @"未设置";
 }
 
 @end

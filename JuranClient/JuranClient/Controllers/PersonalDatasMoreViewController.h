@@ -8,6 +8,9 @@
 
 #import "ALViewController.h"
 
+@class JRDesigner;
 @interface PersonalDatasMoreViewController : ALViewController
+
+@property (nonatomic, strong)JRDesigner  *user;
 
 @end

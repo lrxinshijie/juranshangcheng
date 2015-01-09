@@ -7,6 +7,7 @@
 //
 
 #import "DetailAddressViewController.h"
+#import "JRDesigner.h"
 
 @interface DetailAddressViewController ()<UITextViewDelegate>
 
@@ -22,11 +23,25 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    self.navigationItem.title = @"详细地址";
-    
     _textVeiw.delegate = self;
-    _textVeiw.placeholder = @"请输入详细地址";
-    _textVeiw.text = _user.detailAddress;
+    
+    if (_type == 0) {
+        self.navigationItem.title = @"详细地址";
+        _textVeiw.placeholder = @"请输入详细地址";
+        _textVeiw.text = _user.detailAddress;
+    }
+#ifdef kJuranDesigner
+    else if (_type == 1){
+        self.navigationItem.title = @"自我介绍";
+        _textVeiw.placeholder = @"请输入自我介绍";
+        _textVeiw.text = _user.selfIntroduction;
+    }else if (_type == 2){
+        self.navigationItem.title = @"证书与奖项";
+        _textVeiw.placeholder = @"请输入证书与奖项";
+        _textVeiw.text = _user.personalHonor;
+    }
+#endif
+    
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave:) title:@"保存" backgroundImage:nil];
     [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
@@ -40,24 +55,17 @@
     
 }
 
-- (void)modifyMemberDetail{
-    NSDictionary *param = @{@"detailAddress": _textVeiw.text
-                              };
-    [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
-        if (!error) {
-            _user.detailAddress = _textVeiw.text;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.navigationController popViewControllerAnimated:YES];
-            });
-        }
-    }];
-}
-
-
 - (void)onSave:(id)sender{
-    _user.detailAddress = _textVeiw.text;
+    if (_type == 0) {
+        _user.detailAddress = _textVeiw.text;
+    }
+#ifdef kJuranDesigner
+    else if (_type == 1){
+        _user.selfIntroduction = _textVeiw.text;
+    }else if (_type == 2){
+        _user.personalHonor = _textVeiw.text;
+    }
+#endif
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.navigationController popViewControllerAnimated:YES];
     });
@@ -70,11 +78,17 @@
     }
     
     NSString * toBeString = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    if ([Public convertToInt:toBeString] >= 60) {
-        [_textVeiw resignFirstResponder];
-        [self showTip:@"输入地址长度不能超过60!"];
-        return NO;
+    if (_type == 0) {
+        if ([Public convertToInt:toBeString] >= 60) {
+            [_textVeiw resignFirstResponder];
+            [self showTip:@"输入地址长度不能超过60!"];
+            return NO;
+        }
     }
+#ifdef kJuranDesigner
+    else if (_type == 1){
+    }
+#endif
     return YES;
 }
 
