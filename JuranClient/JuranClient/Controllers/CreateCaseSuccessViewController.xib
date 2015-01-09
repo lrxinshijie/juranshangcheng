@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="20" width="320" height="416"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="H7w-BZ-Hwi">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="case_create_success.png" id="H7w-BZ-Hwi">
                     <rect key="frame" x="130" y="154" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask"/>
                 </imageView>
@@ -41,6 +41,9 @@
             <point key="canvasLocation" x="303" y="379"/>
         </view>
     </objects>
+    <resources>
+        <image name="case_create_success.png" width="50" height="50"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

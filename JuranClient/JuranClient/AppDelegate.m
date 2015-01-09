@@ -52,15 +52,15 @@
     
     [self setupShareSDK];
     
-    [self setupPush];
-//    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-//                                                   UIRemoteNotificationTypeSound |
-//                                                   UIRemoteNotificationTypeAlert)
-//                                       categories:nil];
-//    [APService setupWithOption:launchOptions];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        ASLog(@"registrationID:%@",[APService registrationID]);
+//    [self setupPush];
+    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                   UIRemoteNotificationTypeSound |
+                                                   UIRemoteNotificationTypeAlert)
+                                       categories:nil];
+    [APService setupWithOption:launchOptions];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkDidLogin:) name:kJPFNetworkDidLoginNotification object:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        ASLog(@"registrationID:%@",[APService registrationID]);
         [JRUser refreshToken:nil];
     });
     
@@ -68,6 +68,10 @@
     
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)networkDidLogin:(NSNotification *)notification{
+    self.clientId = [APService registrationID];
 }
 
 - (void)jumpToMain{
@@ -291,21 +295,21 @@
 - (void)showAPNS:(NSDictionary *)userInfo{
     ASLog(@"APNS:%@",userInfo);
     
-//    [APService handleRemoteNotification:userInfo];
+    [APService handleRemoteNotification:userInfo];
     
     [self clearNotification];
     
     NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-    if ([alert isKindOfClass:[NSDictionary class]]) {
-        alert = [(NSDictionary *)alert objectForKey:@"body"];
-    }
+//    if ([alert isKindOfClass:[NSDictionary class]]) {
+//        alert = [(NSDictionary *)alert objectForKey:@"body"];
+//    }
     
-    NSString *payload = [userInfo objectForKey:@"payload"];
-    if (payload && payload.length > 0) {
-        
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[payload dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
-        
-        NSInteger type = [dict getIntValueForKey:@"type" defaultValue:0];
+//    NSString *payload = [userInfo objectForKey:@"payload"];
+//    if (payload && payload.length > 0) {
+//        
+//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[payload dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+    
+        NSInteger type = [userInfo getIntValueForKey:@"type" defaultValue:0];
         
         if (type == 2) {
             [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"取消" otherButtonTitles:@[@"查看"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
@@ -313,23 +317,23 @@
                     return ;
                 }
                 
-                NSString *link = [dict getStringValueForKey:@"link" defaultValue:@""];
+                NSString *link = [userInfo getStringValueForKey:@"link" defaultValue:@""];
                 [Public jumpFromLink:link];
             }];
         }else{
             [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:nil];
         }
         
-    }else{
-        [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:nil];
-    }
+//    }else{
+//        [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:nil];
+//    }
     
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
     
-//    [APService registerDeviceToken:deviceToken];
+    [APService registerDeviceToken:deviceToken];
     
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     NSString *dToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];

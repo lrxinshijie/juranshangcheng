@@ -488,6 +488,7 @@
 		14A3FDC71A2C9EDF002BEFF4 /* DemandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14A3FDC51A2C9EDF002BEFF4 /* DemandCell.xib */; };
 		14A3FDCB1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A3FDC91A2CBA95002BEFF4 /* MyAskOrAnswerViewController.m */; };
 		14A3FDCC1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14A3FDCA1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.xib */; };
+		14A6DA811A5F768C00D40CB3 /* case_create_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A6DA801A5F768C00D40CB3 /* case_create_success@2x.png */; };
 		14ABFBE51A25B63400C4AF65 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBE31A25B63400C4AF65 /* LoginViewController.m */; };
 		14ABFBE61A25B63400C4AF65 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14ABFBE41A25B63400C4AF65 /* LoginViewController.xib */; };
 		14ABFBE91A25C7F400C4AF65 /* JRUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBE81A25C7F400C4AF65 /* JRUser.m */; };
@@ -1419,6 +1420,7 @@
 		14A3FDC81A2CBA95002BEFF4 /* MyAskOrAnswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAskOrAnswerViewController.h; sourceTree = "<group>"; };
 		14A3FDC91A2CBA95002BEFF4 /* MyAskOrAnswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAskOrAnswerViewController.m; sourceTree = "<group>"; };
 		14A3FDCA1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyAskOrAnswerViewController.xib; sourceTree = "<group>"; };
+		14A6DA801A5F768C00D40CB3 /* case_create_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "case_create_success@2x.png"; sourceTree = "<group>"; };
 		14ABFBE21A25B63400C4AF65 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		14ABFBE31A25B63400C4AF65 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		14ABFBE41A25B63400C4AF65 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -3554,6 +3556,7 @@
 		BD5185B31A5D0ED700BE508A /* JuranDesigner */ = {
 			isa = PBXGroup;
 			children = (
+				14A6DA801A5F768C00D40CB3 /* case_create_success@2x.png */,
 				A95DB7061A5EF0BC00F543CE /* Guide */,
 				371D686A1A5D6E2000172AC9 /* Personal */,
 				1415FAA71A5D249E003D0C29 /* Icon-Small.png */,
@@ -3665,7 +3668,7 @@
 				ORGANIZATIONNAME = Juran;
 				TargetAttributes = {
 					1415F9361A5CD1CB003D0C29 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = QHWR2FWBM6;
 					};
 					A971BC901A20825800C018D6 = {
 						DevelopmentTeam = QHWR2FWBM6;
@@ -3886,6 +3889,7 @@
 				BD51869C1A5D0ED700BE508A /* navigationbar_setting@2x.png in Resources */,
 				BD5186A81A5D0ED700BE508A /* unlogin_head@2x.png in Resources */,
 				1415FA641A5CD1CB003D0C29 /* QuestionViewController.xib in Resources */,
+				14A6DA811A5F768C00D40CB3 /* case_create_success@2x.png in Resources */,
 				1415FA651A5CD1CB003D0C29 /* CaseDetailViewController.xib in Resources */,
 				BD5186A01A5D0ED700BE508A /* personal_header_bg@2x.png in Resources */,
 				BD51868C1A5D0ED700BE508A /* icon_personal_letter@2x.png in Resources */,

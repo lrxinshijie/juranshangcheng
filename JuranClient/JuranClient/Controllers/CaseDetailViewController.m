@@ -119,7 +119,11 @@
     _idImageView.hidden = !_jrCase.isAuth;
     
     frame = _nameLabel.frame;
-    frame.size.width = [_jrCase.nickName widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(frame)];
+    CGFloat width = [_jrCase.nickName widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(frame)];
+    if (width > 136) {
+        width = 136;
+    }
+    frame.size.width = width;
     _nameLabel.frame = frame;
     
     frame = _idImageView.frame;
