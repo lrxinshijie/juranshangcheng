@@ -79,16 +79,16 @@
     _user = [JRUser currentUser];
     
 #ifdef kJuranDesigner
-    titleArray = @[ @"案例管理"
-                    , @"个人主页"
+//    @"案例管理",
+    titleArray = @[  @"个人主页"
                     , @"我的关注"
                     , @"我的收藏"
 //                    , @"订单管理"
                     , @"实名认证"
                     , @"账户安全"
                     ];
-    imageArray = @[ @"icon_case_manage"
-                    , @"icon_homepage.png"
+//    @"icon_case_manage",
+    imageArray = @[@"icon_homepage.png"
                     , @"icon_personal_guanzhu.png"
                     , @"icon_personal_shouchang.png"
 //                    , @"icon_dingdan.png"
@@ -139,9 +139,9 @@
     label.text = @"应标";
     
     UIImageView *imageView = (UIImageView*)[_buttonView viewWithTag:1102];
-    imageView.image = [UIImage imageNamed:@"icon_personal_hudong.png"];
+    imageView.image = [UIImage imageNamed:@"icon_case_manage2.png"];
     label = (UILabel*)[_buttonView viewWithTag:1103];
-    label.text = @"互动";
+    label.text = @"案例";
     
     imageView = (UIImageView*)[_headerView viewWithTag:2010];
     imageView.image = [UIImage imageNamed:@"personal_bg.png"];
@@ -287,9 +287,15 @@
     pv.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:pv animated:YES];
 #else
-    InteractionViewController *vc = [[InteractionViewController alloc] init];
+    
+    //案例管理
+    CaseManagementViewController *vc = [[CaseManagementViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+//    互动隐藏
+//    InteractionViewController *vc = [[InteractionViewController alloc] init];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
 #endif
 }
 
@@ -365,119 +371,100 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 #ifndef kJuranDesigner
-    if (indexPath.row == 1) {
-//        我的关注
-        if (![self checkLogin:^{
-            [self loadData];
-        }]) {
-            return;
+    if (![self checkLogin:^{
+        [self loadData];
+    }]) {
+        return;
+    }
+    switch (indexPath.row) {
+        case 1:
+        {
+            //        我的关注
+            
+            MyFollowViewController *vc = [[MyFollowViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
         }
-        MyFollowViewController *vc = [[MyFollowViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 15){
-        if (![self checkLogin:^{
-            [self loadData];
-        }]) {
-            return;
+        case 2:
+        {
+            //        我的收藏
+            CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
         }
-        InteractionViewController *vc = [[InteractionViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 15){
-        if (![self checkLogin:^{
-            [self loadData];
-        }]) {
-            return;
+        case 3:
+        {
+            //        账户安全
+            AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
         }
-        AccountManageViewController *vc = [[AccountManageViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 3){
-//        账户安全
-        if (![self checkLogin:^{
-            [self loadData];
-        }]) {
-            return;
-        }
-        AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 2){
-//        我的收藏
-        if (![self checkLogin]) {
-            return;
-        }
-        CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        default:
+            break;
     }
 #else
-    if (indexPath.row == 5){
-        //实名认证
-        if (![self checkLogin:^{
-            [self loadData];
-        }]) {
-            return;
-        }
-        RealNameAuthViewController *vc = [[RealNameAuthViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 1){
-        //案例管理
-        if (![self checkLogin:^{
-            [self loadData];
-        }]) {
-            return;
-        }
-        CaseManagementViewController *vc = [[CaseManagementViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 2){
-//        个人主页
-        if (![self checkLogin:^{
-            [self loadData];
-        }]) {
-            return;
-        }
-        DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
-        detailVC.isHomePage = YES;
-        JRDesigner *designer = [[JRDesigner alloc] init];
-        designer.userId = _user.userId;
-        detailVC.designer = designer;
-        detailVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:detailVC animated:YES];
-    }else if (indexPath.row == 3){
-//        我的关注
-        if (![self checkLogin:^{
-            [self loadData];
-        }]) {
-            return;
-        }
-        MyFollowViewController *vc = [[MyFollowViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 4){
-//        我的收藏
-        if (![self checkLogin]) {
-            return;
-        }
-        CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 5){
-//        订单管理
-    }else if (indexPath.row == 6){
-        //        账户安全
-        if (![self checkLogin:^{
-            [self loadData];
-        }]) {
-            return;
-        }
-        AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+//    @"个人主页"
+//    , @"我的关注"
+//    , @"我的收藏"
+//    , @"实名认证"
+//    , @"账户安全"
+    if (![self checkLogin:^{
+        [self loadData];
+    }]) {
+        return;
     }
+    switch (indexPath.row) {
+        case 1:
+        {
+            //        个人主页
+            DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
+            detailVC.isHomePage = YES;
+            JRDesigner *designer = [[JRDesigner alloc] init];
+            designer.userId = _user.userId;
+            detailVC.designer = designer;
+            detailVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:detailVC animated:YES];
+            break;
+        }
+        case 2:
+        {
+            //        我的关注
+            MyFollowViewController *vc = [[MyFollowViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 3:
+        {
+            //        我的收藏
+            CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 4:
+        {
+            //实名认证
+            RealNameAuthViewController *vc = [[RealNameAuthViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 5:
+        {
+             //        账户安全
+            AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
+    
 #endif
 }
 

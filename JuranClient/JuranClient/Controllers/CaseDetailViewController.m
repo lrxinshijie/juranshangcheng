@@ -117,7 +117,7 @@
     _detailLabel.text = _jrCase.stylesName;
     [_avtarImageView setImageWithURLString:_jrCase.headUrl];
     _idImageView.hidden = !_jrCase.isAuth;
-    
+
     frame = _nameLabel.frame;
     CGFloat width = [_jrCase.nickName widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(frame)];
     if (width > 136) {

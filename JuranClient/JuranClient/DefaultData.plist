@@ -117,6 +117,12 @@
 		</dict>
 		<dict>
 			<key>k</key>
+			<string>复式</string>
+			<key>v</key>
+			<string>complex</string>
+		</dict>
+		<dict>
+			<key>k</key>
 			<string>别墅</string>
 			<key>v</key>
 			<string>villadom</string>
