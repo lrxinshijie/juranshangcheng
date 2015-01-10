@@ -43,6 +43,13 @@
     return kBlueColor;
 }
 
+- (NSString *)userType{
+#ifdef kJuranDesigner
+    return @"designer";
+#endif
+    return @"member";
+}
+
 - (UIImage *)imageNamed:(NSString *)name ofType:(NSString *)type{
 #ifdef kJuranDesigner
     name = [name stringByAppendingString:@"_white"];

@@ -51,7 +51,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [self setupShareSDK];
-    
+#ifdef kJuranDesigner
 //    [self setupPush];
     [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                                    UIRemoteNotificationTypeSound |
@@ -59,6 +59,7 @@
                                        categories:nil];
     [APService setupWithOption:launchOptions];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkDidLogin:) name:kJPFNetworkDidLoginNotification object:nil];
+#endif
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         ASLog(@"registrationID:%@",[APService registrationID]);
         [JRUser refreshToken:nil];

@@ -16,6 +16,8 @@
 - (UIColor *)navigationTitleColor;
 - (UIColor *)navigationButtonColor;
 
+- (NSString *)userType;
+
 - (UIImage *)imageNamed:(NSString *)name;
 - (UIImage *)imageNamed:(NSString *)name ofType:(NSString *)type;
 
