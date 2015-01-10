@@ -257,7 +257,7 @@
 
 - (NSString*)statusString{
     if ([_status isEqualToString:@"00"]) {
-        return @"待审核";
+        return @"审核中";
     }else if ([_status isEqualToString:@"01"]) {
         return @"";
     }else if ([_status isEqualToString:@"01"]) {
