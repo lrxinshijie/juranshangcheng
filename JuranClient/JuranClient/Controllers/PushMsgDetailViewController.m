@@ -8,8 +8,9 @@
 
 #import "PushMsgDetailViewController.h"
 #import "JRPushInfoMsg.h"
+#import "SDWebImageManager.h"
 
-@interface PushMsgDetailViewController ()
+@interface PushMsgDetailViewController ()<SDWebImageManagerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -64,13 +65,17 @@
 - (void)reloadData{
     _titleLabel.text = _pushInfo.msgTitle;
     _contentLabel.text = _pushInfo.msgContent;
-    [_imageView setImageWithURLString:_pushInfo.msgImgUrl];
+    NSURL *url = [Public imageURL:_pushInfo.msgImgUrl Width:CGRectGetWidth(_imageView.frame)];
+    [self setImageWithURL:url];
     
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:_pushInfo.msgLinkTitle];
     NSRange strRange = {0,[str length]};
     [str setAttributes:@{NSForegroundColorAttributeName:kBlueColor, NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle], NSFontAttributeName: [UIFont systemFontOfSize:14]} range:strRange];//, NSWritingDirectionAttributeName: @(NSWritingDirectionLeftToRight|NSTextWritingDirectionEmbedding)
     [_linkButton setAttributedTitle:str forState:UIControlStateNormal];
-    
+    [self adjustFrame];
+}
+
+- (void)adjustFrame{
     CGRect frame = _titleLabel.frame;
     frame.size.height = [_titleLabel.text heightWithFont:_titleLabel.font constrainedToWidth:CGRectGetWidth(_titleLabel.frame)];
     _titleLabel.frame = frame;
@@ -78,6 +83,9 @@
     _imageView.hidden = NO;
     frame = _imageView.frame;
     frame.origin.y = CGRectGetMaxY(_titleLabel.frame) + 10;
+    if (self.imageView.image) {
+        frame.size.height = _imageView.image.size.height/_imageView.image.size.width * CGRectGetWidth(_imageView.frame);
+    }
     _imageView.frame = frame;
     
     CGFloat y = CGRectGetMaxY(_imageView.frame) + 10;
@@ -128,6 +136,34 @@
         [[UIApplication sharedApplication] openURL:requestURL];
     }
 }
+
+- (void)setImageWithURL:(NSURL *)url{
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    
+    // Remove in progress downloader from queue
+    [manager cancelForDelegate:self];
+    
+    UIImage *cachedImage = nil;
+    if (url) {
+        cachedImage = [manager imageWithURL:url];
+    }
+    
+    if (cachedImage) {
+        self.imageView.image = cachedImage;
+    }
+    else {
+        if (url) {
+            [manager downloadWithURL:url delegate:self];
+        }
+    }
+}
+
+
+- (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image {
+    self.imageView.image = image;
+    [self adjustFrame];
+}
+
 
 /*
 #pragma mark - Navigation

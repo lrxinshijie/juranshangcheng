@@ -44,7 +44,11 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     if (_isHome) {
+#ifdef kJuranDesigner
+        self.navigationItem.title = @"设计师";
+#else
         [self configureMenu];
+#endif
         [self configureSearch];
     } else {
         self.navigationItem.title = @"搜索结果";

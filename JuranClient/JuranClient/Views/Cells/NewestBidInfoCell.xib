@@ -85,6 +85,7 @@
                 <outlet property="budgetLabel" destination="u9a-ry-lrp" id="ApP-YR-SZp"/>
                 <outlet property="descLabel" destination="Gqk-fE-lT0" id="f8O-B9-D8p"/>
                 <outlet property="isBidedLabel" destination="d2G-KJ-CVu" id="Bf8-AS-y5f"/>
+                <outlet property="timeImageView" destination="kAc-Ag-t8a" id="Mb7-HD-uWd"/>
                 <outlet property="timeLabel" destination="yqJ-Pk-ptp" id="sgJ-ir-yKS"/>
                 <outlet property="titleLabel" destination="ux5-ov-PKy" id="otm-qF-2Bl"/>
             </connections>

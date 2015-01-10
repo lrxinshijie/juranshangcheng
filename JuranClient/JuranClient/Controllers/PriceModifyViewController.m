@@ -85,9 +85,11 @@
         _designer.designFeeMax = [_designMaxTextField.text floatValue];
         _designer.designFeeMin = [_designMinTextField.text floatValue];
     }else if (_type == 1){
-        if (_designMaxTextField.text.length == 0) {
-            [self showTip:@"请输入量房费"];
-            return;
+        if (_selectedRow) {
+            if (_designMaxTextField.text.length == 0) {
+                [self showTip:@"请输入量房费"];
+                return;
+            }
         }
         _designer.freeMeasure = _selectedRow;
         _designer.priceMeasure = [_measureTextField.text floatValue];

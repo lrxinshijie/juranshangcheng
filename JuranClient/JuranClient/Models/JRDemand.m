@@ -76,6 +76,7 @@
         self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
         self.memo = [dict getStringValueForKey:@"memo" defaultValue:@""];
         self.bidId = [dict getStringValueForKey:@"bidReqId" defaultValue:@""];
+        self.biddingStatus = [dict getStringValueForKey:@"biddingStatus" defaultValue:@""];
 #endif
     }
     
@@ -111,7 +112,7 @@
     self.houseArea = [value getStringValueForKey:@"houseArea" defaultValue:@""];
     self.deadline = [value getStringValueForKey:@"deadline" defaultValue:@""];
     self.newBidNums = [value getIntValueForKey:@"newBidNums" defaultValue:0];
-    self.isBidded = [value getBoolValueForKey:@"isBidded" defaultValue:NO];
+    self.isBidded = [value getBoolValueForKey:@"bided" defaultValue:NO];
     
     self.neighbourhoods = [value getStringValueForKey:@"neighbourhoods" defaultValue:@""];
     self.roomType = [value getStringValueForKey:@"roomType" defaultValue:@""];
@@ -124,10 +125,10 @@
     self.auditDesc = [value getStringValueForKey:@"auditDesc" defaultValue:@""];
     self.bidNums = [value getIntValueForKey:@"bidNums" defaultValue:0];
     self.deadline = [value getStringValueForKey:@"deadline" defaultValue:@""];
-#ifdef kJuranDesigner
-    self.bidInfoList = [JRBidInfo buildUpWithValue:value[@"bidDesignerGeneralList"]];
-#else
     self.bidInfoList = [JRBidInfo buildUpWithValue:value[@"bidInfoList"]];
+#ifdef kJuranDesigner
+#else
+    
 #endif
     
     
@@ -167,15 +168,16 @@
         
         self.designReqId = [dict getStringValueForKey:@"reqId" defaultValue:@""];
         
-        self.budget = [NSString stringWithFormat:@"%d", [dict getIntValueForKey:@"budget" defaultValue:0]/1000000];
+        self.budget = [NSString stringWithFormat:@"%.2f", [dict getIntValueForKey:@"budget" defaultValue:0]/1000000.f];
         
         self.title = [dict getStringValueForKey:@"title" defaultValue:@""];
         self.budgetUnit = [dict getStringValueForKey:@"budgetUnit" defaultValue:@""];
-        self.isBidded = [dict getBoolValueForKey:@"isBided" defaultValue:NO];
+        self.isBidded = [dict getBoolValueForKey:@"isBidded" defaultValue:NO];
         self.houseAddress = [dict getStringValueForKey:@"address" defaultValue:@""];
         self.houseArea = [dict getStringValueForKey:@"houseArea" defaultValue:@""];
         self.deadBalance = [dict getStringValueForKey:@"balanceDays" defaultValue:@""];
         self.bidNums = [dict getIntValueForKey:@"bidNums" defaultValue:0];
+        self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
     }
     return self;
 }
@@ -325,5 +327,25 @@
     }
     return [NSString stringWithFormat:@"剩余%@天", _deadBalance];
 }
+
+#ifdef kJuranDesigner
+
+- (NSString *)contactsName{
+    if (_isBidded) {
+        return _contactsName;
+    }else{
+        return @"设计师应标后可见";
+    }
+}
+
+- (NSString *)contactsMobile{
+    if (_isBidded) {
+        return _contactsMobile;
+    }else{
+        return @"设计师应标后可见";
+    }
+}
+
+#endif
 
 @end

@@ -50,6 +50,7 @@
 #ifdef kJuranDesigner
     UIView *view = [self.bgView viewWithTag:1200];
     view.hidden = YES;
+    self.bgView.frame = CGRectMake(0, 0, kWindowWidth, 125);
 #endif
 }
 
@@ -76,7 +77,7 @@
     }
     
     _timeLabel.text = bidInfo.bidDate;
-    _styleLabel.text = designer.styleNames;
+    _styleLabel.text = [designer styleNameForPersonal];
     _experienceLabel.text =  [designer experienceString];
     _produntCountLabel.text = [NSString stringWithFormat:@"%i", designer.projectCount];
     _browseCountLabel.text = [NSString stringWithFormat:@"%i", designer.browseCount];

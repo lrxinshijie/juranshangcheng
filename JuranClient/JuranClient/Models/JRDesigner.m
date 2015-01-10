@@ -18,8 +18,6 @@
         self.account = @"";
         self.nickName = @"";
         self.userName = @"";
-        self.styleNames = @"";
-        self.styleCodes = @"";
         self.selfIntroduction = @"";
         self.minisite = @"";
         self.frontImageUrlList = @[];
@@ -80,7 +78,6 @@
         self.realName = [dict getStringValueForKey:@"realName" defaultValue:@""];
         self.userName = [dict getStringValueForKey:@"userName" defaultValue:@""];
         self.styleNames = [dict getStringValueForKey:@"styleNames" defaultValue:@""];
-        self.styleCodes = [dict getStringValueForKey:@"styleCodes" defaultValue:@""];
         self.selfIntroduction = [dict getStringValueForKey:@"selfIntroduction" defaultValue:@""];
         self.projectCount = [dict getIntValueForKey:@"projectCount" defaultValue:0];
         self.fansCount = [dict getIntValueForKey:@"fansCount" defaultValue:0];
@@ -231,7 +228,7 @@
         self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
         self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
         self.isRealNameAuth = [dict getIntValueForKey:@"isRealNameAuth" defaultValue:0];
-        self.styleNames = [dict getStringValueForKey:@"styleNames" defaultValue:@""];
+        self.style = [dict getStringValueForKey:@"styleNames" defaultValue:@""];
         self.experienceCount = [dict getIntValueForKey:@"experienceCount" defaultValue:0];
         self.browseCount = [dict getIntValueForKey:@"browseCount" defaultValue:0];
         self.projectCount = [dict getIntValueForKey:@"projectCount" defaultValue:0];
@@ -398,6 +395,64 @@
         }
     }
     return @"未设置";
+}
+
+
+- (NSString*)styleNameForPersonal{
+    NSArray *styles = [[DefaultData sharedData] style];
+    NSArray *arr = [self.style componentsSeparatedByString:@","];
+    NSString* styleNames = @"";
+    NSInteger i = 0;
+    for (NSString *str in arr) {
+        if (str.length > 0) {
+            for (NSDictionary *dic in styles) {
+                if ([str isEqualToString:dic[@"v"]]) {
+                    if(i != 0){
+                        styleNames = [styleNames stringByAppendingString:@"|"];
+                    }
+                    styleNames = [styleNames stringByAppendingString:dic[@"k"]];
+                }
+            }
+            i++;
+        }
+    }
+    return styleNames;
+}
+
+- (NSString*)specialForPersonal{
+    NSArray *specials = [[DefaultData sharedData] special];
+    NSArray *arr = [self.special componentsSeparatedByString:@","];
+    NSString* specialStr = @"";
+    NSInteger i = 0;
+    for (NSString *str in arr) {
+        if (str.length > 0) {
+            for (NSDictionary *dic in specials) {
+                if ([str isEqualToString:dic[@"v"]]) {
+                    if(i != 0){
+                        specialStr = [specialStr stringByAppendingString:@"|"];
+                    }
+                    specialStr = [specialStr stringByAppendingString:dic[@"k"]];
+                }
+            }
+            i++;
+        }
+    }
+    return specialStr;
+}
+
+- (NSString*)measureForPersonal{
+    if (self.freeMeasure == 0) {
+        return @"免费";
+    }else{
+        return [NSString stringWithFormat:@"%.2f元", _priceMeasure];
+    }
+}
+- (NSString*)designPriceForPersonal{
+    if (self.faceToFace == 0) {
+        return @"面议";
+    }else{
+        return [NSString stringWithFormat:@"%.2f-%.2f 元/平方米", _designFeeMin, _designFeeMax];
+    }
 }
 
 @end

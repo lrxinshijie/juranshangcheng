@@ -30,13 +30,27 @@
     [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
+    NSString *style = @"";
     self.selectedDic = [NSMutableArray array];
     if (_type == 0) {
         self.navigationItem.title = @"擅长风格";
         self.styles = [[DefaultData sharedData] objectForKey:@"style"];
+        style = _designer.style;
     }else if (_type == 1){
         self.navigationItem.title = @"设计专长";
-        self.styles = [[DefaultData sharedData] objectForKey:@"houseType"];
+        self.styles = [[DefaultData sharedData] special];
+        style = _designer.special;
+    }
+    
+    NSArray *arr = [style componentsSeparatedByString:@","];
+    for (NSString *str in arr) {
+        if (str.length > 0) {
+            for (NSDictionary *dic in _styles) {
+                if ([str isEqualToString:dic[@"v"]]) {
+                    [_selectedDic addObject:dic];
+                }
+            }
+        }
     }
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];

@@ -65,6 +65,14 @@
     return [_defaultData objectForKey:@"professionalType"];
 }
 
+- (NSArray *)style{
+    return [_defaultData objectForKey:@"style"];
+}
+
+- (NSArray *)special{
+    return [_defaultData objectForKey:@"special"];
+}
+
 - (NSNumber *)imageQuality{
     if (!_imageQuality) {
         _imageQuality = [Public imageQuality];

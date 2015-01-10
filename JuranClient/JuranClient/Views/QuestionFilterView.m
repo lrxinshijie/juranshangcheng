@@ -138,6 +138,11 @@
         _tableView.hidden = isHide;
     }];
     
+    if (isHide == YES) {
+        _sortButton.selected = NO;
+        _filterButton.selected = NO;
+        selectedBtn = nil;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

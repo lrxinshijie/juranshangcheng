@@ -113,14 +113,19 @@
         _modifyDemandInfoButton.hidden = YES;
     }
 #else
-    _rightButton.enabled = !_demand.isBidded;
+    if ([_demand.status isEqualToString:@"03_pass"]) {
+        self.navigationItem.rightBarButtonItem = _rightBarButtonItem;
+        _rightButton.enabled = !_demand.isBidded;
+    }else{
+        self.navigationItem.rightBarButtonItem = nil;
+    }
     
 #endif
     [self setupDesignerTableHeaderView];
     _demandInfoTitleLabel.text = [NSString stringWithFormat:@"%@%@", _demand.neighbourhoods, [_demand roomNumString]];
     
     _emptyView.hidden = !(_demand.bidInfoList.count == 0 && !_demand.confirmDesignerDetail);
-    _emptyView.center = CGPointMake(_designerTableView.center.x, _designerTableView.center.y + CGRectGetHeight(_designerTableView.tableHeaderView.frame)/2 + 20);
+    _emptyView.center = CGPointMake(CGRectGetMinX(_designerTableView.frame) + CGRectGetWidth(_designerTableView.frame)/2, CGRectGetMinY(_designerTableView.frame) + CGRectGetHeight(_designerTableView.frame)/2+20);
     [_designerTableView reloadData];
     [_demandInfoTableView reloadData];
     
@@ -225,7 +230,7 @@
 #endif
     
     _emptyView.hidden = YES;
-    _emptyView.center = CGPointMake(_designerTableView.center.x, _designerTableView.center.y);
+    _emptyView.center = CGPointMake(CGRectGetMinX(_designerTableView.frame) + CGRectGetWidth(_designerTableView.frame)/2, CGRectGetMinY(_designerTableView.frame) + CGRectGetHeight(_designerTableView.frame)/2);
     [_scrollView addSubview:_emptyView];
     
     self.inputView = [[InputView alloc] init];
@@ -258,17 +263,27 @@
 }
 
 - (void)onBidReq{
-    [_inputView showWithTitle:@"我来应标" placeHolder:@"请填写您的应标宣言" content:@"" block:^(id result) {
-        NSDictionary *param = @{@"designReqId": _demand.designReqId,
-                                @"biddingDeclatation":result};
-        [self showHUD];
-        [[ALEngine shareEngine] pathURL:JR_BID_DESIGNREQ parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-            [self hideHUD];
-            if (!error) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
-            }
+    if (![self checkLogin:^{
+        [self loadData];
+    }]) {
+        return;
+    }
+    if (_inputView.hidden) {
+        [_inputView showWithTitle:@"我来应标" placeHolder:@"请填写您的应标宣言" content:@"" block:^(id result) {
+            NSDictionary *param = @{@"designReqId": _demand.designReqId,
+                                    @"biddingDeclatation":result};
+            [self showHUD];
+            [[ALEngine shareEngine] pathURL:JR_BID_DESIGNREQ parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                [self hideHUD];
+                if (!error) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
+                }
+            }];
         }];
-    }];
+
+    }else{
+        [_inputView unShow];
+    }
 }
 
 - (void)onDeadRequest{
@@ -347,7 +362,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView == _designerTableView) {
-        if ([_demand statusIndex] == 3) {
+        if (_demand.confirmDesignerDetail) {
             return _demand.bidInfoList.count + 1;
         }
         return _demand.bidInfoList.count;
@@ -386,8 +401,14 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _designerTableView) {
 #ifndef kJuranDesigner
+        if (_demand.confirmDesignerDetail) {
+            return 170 + ((indexPath.row == _demand.bidInfoList.count)?5:0);
+        }
         return 170 + ((indexPath.row == _demand.bidInfoList.count - 1)?5:0);
 #else
+        if (_demand.confirmDesignerDetail) {
+            return 130 + ((indexPath.row == _demand.bidInfoList.count)?5:0);
+        }
         return 130 + ((indexPath.row == _demand.bidInfoList.count - 1)?5:0);
 #endif
         
@@ -406,7 +427,7 @@
             cell = (BidDesignerCell *)[nibs firstObject];
         }
         
-        if ([_demand statusIndex] == 3) {
+        if (_demand.confirmDesignerDetail) {
             cell.delegate = self;
             if (indexPath.row == 0) {
                 [cell fillCellWithConfirmBidInfo:_demand.confirmDesignerDetail];
@@ -471,7 +492,7 @@
     
     if (tableView == _designerTableView) {
         DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
-        if ([_demand statusIndex] == 3) {
+        if (_demand.confirmDesignerDetail) {
             if (indexPath.row == 0) {
                 detailVC.designer = _demand.confirmDesignerDetail.userBase;
             }else{
