@@ -23,6 +23,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *firstContactLabel;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, strong) UITapGestureRecognizer *tapHide;
 
 - (IBAction)onSend:(id)sender;
 
@@ -47,6 +48,8 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"private_message_more"] rightBarButtonItemAction:@selector(onDetail)];
+    
+    self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     
     __weak typeof(self) weakSelf = self;
     [self.tableView addHeaderWithCallback:^{
@@ -108,8 +111,13 @@
     }];
 }
 
-- (IBAction)onSend:(id)sender{
+- (void)hideKeyboard{
     [_contentTextField resignFirstResponder];
+}
+
+- (IBAction)onSend:(id)sender{
+    [self hideKeyboard];
+    
     NSString *value = _contentTextField.text;
     if (value.length == 0) {
         return;
@@ -159,6 +167,8 @@
     CGRect frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame) - keyboardSize.height;
     _commentView.frame = frame;
+    
+    [_tableView addGestureRecognizer:_tapHide];
 }
 
 -(void)keyboardWillBeHidden:(NSNotification *)aNotification{
@@ -166,6 +176,8 @@
     CGRect frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
+    
+    [_tableView removeGestureRecognizer:_tapHide];
 }
 
 - (void)didReceiveMemoryWarning {
