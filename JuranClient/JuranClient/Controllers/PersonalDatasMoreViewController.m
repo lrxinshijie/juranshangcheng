@@ -64,8 +64,8 @@
 - (void)setupDatas{
     [self resetValues];
     self.keys = @[@"证件信息", @"QQ", @"微信", @"所学专业", @"专业类型", @"证书与奖项"];
-    self.tags = @[@"", @"1101", @"1102", @"", @"", @""];
-    self.placeholders = @[@"", @"请输入QQ", @"请输入微信", @"", @"", @""];
+    self.tags = @[@"", @"1101", @"1102", @"1103", @"", @""];
+    self.placeholders = @[@"", @"请输入QQ", @"请输入微信", @"请输入所学专业", @"", @""];
 }
 
 - (void)reloadData{
@@ -74,7 +74,7 @@
 }
 
 - (void)resetValues{
-    self.values = @[[_user idCardInfomation], _user.qq, _user.weixin, @"所学专业", [_user professionalTypeString], _user.personalHonor];
+    self.values = @[[_user idCardInfomation], _user.qq, _user.weixin, _user.professional, [_user professionalTypeString], _user.personalHonor];
 }
 
 - (void)setupUI{
@@ -92,7 +92,7 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0  || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 5) {
+    if (indexPath.row == 0 || indexPath.row == 4 || indexPath.row == 5) {
         static NSString *cellIdentifier = @"personalDataMore";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
@@ -189,12 +189,12 @@
     
 //    NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
-    if (textField.tag == 1100) {
-        if(![self isPureNumandCharacters:string] && ![string isEqualToString:@"-"]){
-            [self showTip:@"请输入合法字符！！"];
-            return NO;
-        }
-    }
+//    if (textField.tag == 1100) {
+//        if(![self isPureNumandCharacters:string] && ![string isEqualToString:@"-"]){
+//            [self showTip:@"请输入合法字符！！"];
+//            return NO;
+//        }
+//    }
     
     
     return YES;
@@ -210,6 +210,8 @@
         _user.qq = textField.text;
     }else if (textField.tag == 1102){
         _user.weixin = textField.text;
+    }else if(textField.tag == 1103){
+        _user.professional = textField.text;
     }
 }
 

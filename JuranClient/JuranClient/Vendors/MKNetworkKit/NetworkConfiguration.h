@@ -19,8 +19,8 @@
 #define JR_SERVICE  @"http://54.223.161.28:8080"
 
 /* Production */
-#define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
-#define JR_SERVICE  @"http://app.juran.cn:81"
+//#define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
+//#define JR_SERVICE  @"http://app.juran.cn:81"
 
 #define JR_LOGIN [NSString stringWithFormat:@"%@/member/login.json",JR_SERVICE]
 #define JR_REGIST_SENDSMS [NSString stringWithFormat:@"%@/member/sendSmsAuth.json",JR_SERVICE]
