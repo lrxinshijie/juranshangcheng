@@ -10,6 +10,8 @@
 
 @interface GuideViewController : UIViewController
 
+@property (nonatomic, assign) BOOL isHome;
+
 + (BOOL)showGuide;
 
 @end

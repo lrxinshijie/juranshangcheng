@@ -77,7 +77,12 @@
     [ud setBool:NO forKey:@"showGuide"];
     [ud synchronize];
     
-    [(AppDelegate *)[UIApplication sharedApplication].delegate jumpToMain];
+    if (_isHome) {
+        [(AppDelegate *)[UIApplication sharedApplication].delegate jumpToMain];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView

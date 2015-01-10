@@ -78,6 +78,7 @@
 - (void)jumpToMain{
     if ([GuideViewController showGuide]) {
         GuideViewController *gv = [[GuideViewController alloc] init];
+        gv.isHome = YES;
         self.window.rootViewController = gv;
     }else{
         [self setupTabbar];
