@@ -77,7 +77,11 @@
     }
     
     _timeLabel.text = bidInfo.bidDate;
+#ifdef kJuranDesigner
     _styleLabel.text = [designer styleNameForPersonal];
+#else
+        _styleLabel.text = [designer style];
+#endif
     _experienceLabel.text =  [designer experienceString];
     _produntCountLabel.text = [NSString stringWithFormat:@"%i", designer.projectCount];
     _browseCountLabel.text = [NSString stringWithFormat:@"%i", designer.browseCount];
