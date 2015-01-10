@@ -140,7 +140,7 @@
                             @"detailAddress": _user.detailAddress,
                             @"zipCode": _user.zipCode,
                             @"idCardType": _user.idCardType,
-                            @"idCardNum": _user.idCardNumber,
+                            @"idCardNum": _user.idCardNum,
                             @"qq": _user.qq,
                             @"weixin": _user.weixin,
                              @"oldAccount": self.oldAccount,
