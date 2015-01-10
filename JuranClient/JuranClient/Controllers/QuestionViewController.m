@@ -35,7 +35,11 @@
     [super viewDidLoad];
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     if (!_isSearchResult) {
-        self.navigationItem.title = @"答疑解惑";
+#ifdef kJuranDesigner
+        self.navigationItem.title = @"问答";
+#else
+         self.navigationItem.title = @"答疑解惑";
+#endif
         [self configureSearch];
     }else{
         self.navigationItem.title = @"搜索结果";

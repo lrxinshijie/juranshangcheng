@@ -63,9 +63,9 @@
 
 - (void)setupDatas{
     [self resetValues];
-    self.keys = @[@"详细地址", @"固定电话", @"证件信息", @"QQ", @"微信", @"所学专业", @"专业类型", @"证书与奖项"];
-    self.tags = @[@"", @"1100", @"", @"1101", @"1102", @"", @"", @""];
-    self.placeholders = @[@"", @"请输入固定电话", @"", @"请输入QQ", @"请输入微信", @"", @"", @""];
+    self.keys = @[@"证件信息", @"QQ", @"微信", @"所学专业", @"专业类型", @"证书与奖项"];
+    self.tags = @[@"", @"1101", @"1102", @"", @"", @""];
+    self.placeholders = @[@"", @"请输入QQ", @"请输入微信", @"", @"", @""];
 }
 
 - (void)reloadData{
@@ -74,7 +74,7 @@
 }
 
 - (void)resetValues{
-    self.values = @[_user.detailAddress.length == 0?@"未设置":_user.detailAddress, _user.homeTel, [_user idCardInfomation], _user.qq, _user.weixin, @"所学专业", [_user professionalTypeString], _user.personalHonor];
+    self.values = @[[_user idCardInfomation], _user.qq, _user.weixin, @"所学专业", [_user professionalTypeString], _user.personalHonor];
 }
 
 - (void)setupUI{
@@ -92,7 +92,7 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0 || indexPath.row == 2  || indexPath.row == 5 || indexPath.row == 6 || indexPath.row == 7) {
+    if (indexPath.row == 0  || indexPath.row == 3 || indexPath.row == 4 || indexPath.row == 5) {
         static NSString *cellIdentifier = @"personalDataMore";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
@@ -144,17 +144,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.selectedTextField resignFirstResponder];
-    if (indexPath.row == 0) {
-        DetailAddressViewController *vc = [[DetailAddressViewController alloc] init];
-        vc.user = _user;
-        vc.type = 0;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 7){
+    if (indexPath.row == 5){
         DetailAddressViewController *vc = [[DetailAddressViewController alloc] init];
         vc.user = _user;
         vc.type = 2;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 6){
+    }else if (indexPath.row == 4){
         NSMutableArray *rows = [NSMutableArray array];
         __block NSInteger ind = 0;
         NSArray *professionalType = [[DefaultData sharedData] professionalType];
@@ -171,7 +166,7 @@
         } cancelBlock:^(ActionSheetStringPicker *picker) {
             
         } origin:[UIApplication sharedApplication].keyWindow];
-    }else if (indexPath.row == 2){
+    }else if (indexPath.row == 0){
         ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeIdType];
         vc.title = _keys[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
@@ -206,30 +201,12 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    if (textField.tag == 1100) {
-        /*
-         if (_user.accountChangeable) {
-         [self showTip:@"用户名仅限修改一次"];
-         return NO;
-         }else if(!accountChangeTip){
-         self.selectedTextField = textField;
-         [UIAlertView showWithTitle:@"" message:@"用户名只可修改一次，确定修改？" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确定"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-         if (buttonIndex == 1) {
-         accountChangeTip = YES;
-         [self.selectedTextField becomeFirstResponder];
-         }
-         }];
-         return NO;
-         }*/
-    }
     self.selectedTextField = textField;
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    if (textField.tag == 1100) {
-        _user.homeTel = textField.text;
-    }else if (textField.tag == 1101){
+   if (textField.tag == 1101){
         _user.qq = textField.text;
     }else if (textField.tag == 1102){
         _user.weixin = textField.text;

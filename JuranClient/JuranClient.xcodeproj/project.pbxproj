@@ -542,6 +542,20 @@
 		371D68781A5D78E700172AC9 /* personal_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D68771A5D78E700172AC9 /* personal_bg@2x.png */; };
 		371D687E1A5D824E00172AC9 /* BidListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 371D687A1A5D7F0300172AC9 /* BidListViewController.m */; };
 		371D687F1A5D825F00172AC9 /* BidListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 371D687B1A5D7F0300172AC9 /* BidListViewController.xib */; };
+		3756351C1A60E6FF00D120C8 /* icon_followed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3756351A1A60E6FF00D120C8 /* icon_followed@2x.png */; };
+		3756351D1A60E6FF00D120C8 /* icon_unfollowed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3756351B1A60E6FF00D120C8 /* icon_unfollowed@2x.png */; };
+		3756351F1A60E78300D120C8 /* icon_follow_unenable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3756351E1A60E78300D120C8 /* icon_follow_unenable@2x.png */; };
+		375635201A60E78300D120C8 /* icon_follow_unenable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3756351E1A60E78300D120C8 /* icon_follow_unenable@2x.png */; };
+		375635211A60E78900D120C8 /* icon_followed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3756351A1A60E6FF00D120C8 /* icon_followed@2x.png */; };
+		375635221A60E78C00D120C8 /* icon_unfollowed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3756351B1A60E6FF00D120C8 /* icon_unfollowed@2x.png */; };
+		375635241A60EE6300D120C8 /* service_page@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375635231A60EE6300D120C8 /* service_page@2x.png */; };
+		375635251A60EE6300D120C8 /* service_page@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375635231A60EE6300D120C8 /* service_page@2x.png */; };
+		3756352F1A60F2FA00D120C8 /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3756352E1A60F2FA00D120C8 /* InputView.m */; };
+		375635301A60F2FA00D120C8 /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3756352E1A60F2FA00D120C8 /* InputView.m */; };
+		375635331A60FF8F00D120C8 /* icon_check_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375635311A60FF8F00D120C8 /* icon_check_cancel@2x.png */; };
+		375635341A60FF8F00D120C8 /* icon_check_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375635311A60FF8F00D120C8 /* icon_check_cancel@2x.png */; };
+		375635351A60FF8F00D120C8 /* icon_check_ok@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375635321A60FF8F00D120C8 /* icon_check_ok@2x.png */; };
+		375635361A60FF8F00D120C8 /* icon_check_ok@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375635321A60FF8F00D120C8 /* icon_check_ok@2x.png */; };
 		375B46461A5EB7F100D7E74B /* input_remark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375B46451A5EB7F100D7E74B /* input_remark@2x.png */; };
 		375B464C1A5EDC9500D7E74B /* PersonalDataForDesignerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375B46481A5EDBB200D7E74B /* PersonalDataForDesignerViewController.m */; };
 		375B464D1A5EDC9A00D7E74B /* PersonalDataForDesignerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375B46491A5EDBB200D7E74B /* PersonalDataForDesignerViewController.xib */; };
@@ -1509,6 +1523,14 @@
 		371D68791A5D7F0300172AC9 /* BidListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidListViewController.h; sourceTree = "<group>"; };
 		371D687A1A5D7F0300172AC9 /* BidListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidListViewController.m; sourceTree = "<group>"; };
 		371D687B1A5D7F0300172AC9 /* BidListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BidListViewController.xib; sourceTree = "<group>"; };
+		3756351A1A60E6FF00D120C8 /* icon_followed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_followed@2x.png"; sourceTree = "<group>"; };
+		3756351B1A60E6FF00D120C8 /* icon_unfollowed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_unfollowed@2x.png"; sourceTree = "<group>"; };
+		3756351E1A60E78300D120C8 /* icon_follow_unenable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_follow_unenable@2x.png"; sourceTree = "<group>"; };
+		375635231A60EE6300D120C8 /* service_page@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service_page@2x.png"; sourceTree = "<group>"; };
+		3756352D1A60F2FA00D120C8 /* InputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputView.h; sourceTree = "<group>"; };
+		3756352E1A60F2FA00D120C8 /* InputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputView.m; sourceTree = "<group>"; };
+		375635311A60FF8F00D120C8 /* icon_check_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_check_cancel@2x.png"; sourceTree = "<group>"; };
+		375635321A60FF8F00D120C8 /* icon_check_ok@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_check_ok@2x.png"; sourceTree = "<group>"; };
 		375B46451A5EB7F100D7E74B /* input_remark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input_remark@2x.png"; sourceTree = "<group>"; };
 		375B46471A5EDBB200D7E74B /* PersonalDataForDesignerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDataForDesignerViewController.h; sourceTree = "<group>"; };
 		375B46481A5EDBB200D7E74B /* PersonalDataForDesignerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDataForDesignerViewController.m; sourceTree = "<group>"; };
@@ -2466,6 +2488,11 @@
 		371D686A1A5D6E2000172AC9 /* Personal */ = {
 			isa = PBXGroup;
 			children = (
+				375635311A60FF8F00D120C8 /* icon_check_cancel@2x.png */,
+				375635321A60FF8F00D120C8 /* icon_check_ok@2x.png */,
+				3756351E1A60E78300D120C8 /* icon_follow_unenable@2x.png */,
+				3756351A1A60E6FF00D120C8 /* icon_followed@2x.png */,
+				3756351B1A60E6FF00D120C8 /* icon_unfollowed@2x.png */,
 				37D679711A60188200C6DFAC /* icon_circle_selected@2x.png */,
 				37D679721A60188200C6DFAC /* icon_circle_unselected@2x.png */,
 				BD5A119B1A5FDFB3001590C6 /* icon_case_manage2@2x.png */,
@@ -2977,6 +3004,8 @@
 				149BE7111A4567F800A9E1EC /* ZoomInImageView.m */,
 				147395AC1A4E634E00CB34E7 /* JRPageControl.h */,
 				147395AD1A4E634E00CB34E7 /* JRPageControl.m */,
+				3756352D1A60F2FA00D120C8 /* InputView.h */,
+				3756352E1A60F2FA00D120C8 /* InputView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3480,6 +3509,7 @@
 		BD5185781A5D0ED700BE508A /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				375635231A60EE6300D120C8 /* service_page@2x.png */,
 				BD5185791A5D0ED700BE508A /* service_highlighted_0@2x.png */,
 				BD51857A1A5D0ED700BE508A /* service_highlighted_10@2x.png */,
 				BD51857B1A5D0ED700BE508A /* service_highlighted_11@2x.png */,
@@ -3754,6 +3784,7 @@
 				1415FA361A5CD1CB003D0C29 /* MyAskOrAnswerViewController.xib in Resources */,
 				BD5187721A5D0ED700BE508A /* userlevel0@2x.png in Resources */,
 				BD5186AE1A5D0ED700BE508A /* best_answer@2x.png in Resources */,
+				375635361A60FF8F00D120C8 /* icon_check_ok@2x.png in Resources */,
 				BD5185C21A5D0ED700BE508A /* Default.png in Resources */,
 				1415FA371A5CD1CB003D0C29 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				BD5186C21A5D0ED700BE508A /* question_commited@2x.png in Resources */,
@@ -3776,6 +3807,7 @@
 				BD51865C1A5D0ED700BE508A /* login-icon-sina@2x.png in Resources */,
 				BD5186681A5D0ED700BE508A /* regist-icon-password@2x.png in Resources */,
 				BD51860A1A5D0ED700BE508A /* icon-zan-op.png in Resources */,
+				375635201A60E78300D120C8 /* icon_follow_unenable@2x.png in Resources */,
 				BD5A119C1A5FDFB3001590C6 /* icon_case_manage2@2x.png in Resources */,
 				BD51877E1A5D0ED700BE508A /* nav-case-default@2x.png in Resources */,
 				1415FA3E1A5CD1CB003D0C29 /* CommentCell.xib in Resources */,
@@ -3808,6 +3840,7 @@
 				1415FA4B1A5CD1CB003D0C29 /* DetailAddressViewController.xib in Resources */,
 				BD51878E1A5D0ED700BE508A /* nav-wiki-default@2x.png in Resources */,
 				BD5187241A5D0ED700BE508A /* service_highlighted_8@2x.png in Resources */,
+				375635341A60FF8F00D120C8 /* icon_check_cancel@2x.png in Resources */,
 				1415FA4C1A5CD1CB003D0C29 /* SearchViewController.xib in Resources */,
 				1415FA4D1A5CD1CB003D0C29 /* CaseImageCollectionCell.xib in Resources */,
 				37D679701A6016BE00C6DFAC /* PriceModifyCell.xib in Resources */,
@@ -3816,6 +3849,7 @@
 				BD5187AA1A5D344D00BE508A /* icon_letter@2x.png in Resources */,
 				1415FA4F1A5CD1CB003D0C29 /* WeiboSDK.bundle in Resources */,
 				BD5186001A5D0ED700BE508A /* icon-search@2x.png in Resources */,
+				375635251A60EE6300D120C8 /* service_page@2x.png in Resources */,
 				1415FA501A5CD1CB003D0C29 /* PrivateMessageDetailViewController.xib in Resources */,
 				BD51861C1A5D0ED700BE508A /* icon-designer-badge1@2x.png in Resources */,
 				1415FA511A5CD1CB003D0C29 /* APPRecommendViewController.xib in Resources */,
@@ -3961,6 +3995,7 @@
 				BD51867A1A5D0ED700BE508A /* empty_demand@2x.png in Resources */,
 				BD5186081A5D0ED700BE508A /* icon-star@2x.png in Resources */,
 				BD5186FE1A5D0ED700BE508A /* menu_answer_select@2x.png in Resources */,
+				3756351C1A60E6FF00D120C8 /* icon_followed@2x.png in Resources */,
 				1415FA711A5CD1CB003D0C29 /* CaseCell.xib in Resources */,
 				BD5186881A5D0ED700BE508A /* icon_personal_guanzhu@2x.png in Resources */,
 				1415FA721A5CD1CB003D0C29 /* SubjectDetailViewController.xib in Resources */,
@@ -4059,6 +4094,7 @@
 				BD5186801A5D0ED700BE508A /* icon_personal_ask@2x.png in Resources */,
 				1415FA881A5CD1CB003D0C29 /* GuideViewController.xib in Resources */,
 				BD5186981A5D0ED700BE508A /* message_toolbar_split@2x 2.png in Resources */,
+				3756351D1A60E6FF00D120C8 /* icon_unfollowed@2x.png in Resources */,
 				1415FA891A5CD1CB003D0C29 /* MyDemandViewController.xib in Resources */,
 				371D686F1A5D6E2000172AC9 /* icon_case_manage@2x.png in Resources */,
 				1415FA8A1A5CD1CB003D0C29 /* CaseCollectViewController.xib in Resources */,
@@ -4095,6 +4131,7 @@
 				37D18DB81A5829EC00B41048 /* CaseImageHeaderView.xib in Resources */,
 				BD5186191A5D0ED700BE508A /* icon-chat@2x.png in Resources */,
 				BD5187351A5D0ED700BE508A /* service_normal_5@2x.png in Resources */,
+				3756351F1A60E78300D120C8 /* icon_follow_unenable@2x.png in Resources */,
 				BD5186AF1A5D0ED700BE508A /* delete_image@2x.png in Resources */,
 				145E3D1C1A2792B200AA952F /* PersonalDataViewController.xib in Resources */,
 				BD5186911A5D0ED700BE508A /* icon_personal_signIn@2x.png in Resources */,
@@ -4130,6 +4167,7 @@
 				BD5186E91A5D0ED700BE508A /* publish_point_selected@2x.png in Resources */,
 				BD5187311A5D0ED700BE508A /* service_normal_3@2x.png in Resources */,
 				14587E201A35DD4300D41236 /* BindMailViewController.xib in Resources */,
+				375635331A60FF8F00D120C8 /* icon_check_cancel@2x.png in Resources */,
 				BD5186531A5D0ED700BE508A /* login-icon-account@2x.png in Resources */,
 				A9902CA71A3432A500F08DA1 /* FilterViewController.xib in Resources */,
 				BD51860B1A5D0ED700BE508A /* icon-zan-ro@2x.png in Resources */,
@@ -4193,6 +4231,7 @@
 				BD51873D1A5D0ED700BE508A /* service_normal_9@2x.png in Resources */,
 				BD5185E71A5D0ED700BE508A /* case_icon_praise@2x.png in Resources */,
 				BD5187A31A5D344D00BE508A /* icon_add_image@2x.png in Resources */,
+				375635211A60E78900D120C8 /* icon_followed@2x.png in Resources */,
 				1441A1701A29E3CD004A038E /* Resource.bundle in Resources */,
 				BD5187731A5D0ED700BE508A /* userlevel1@2x.png in Resources */,
 				BD5187AD1A5D344D00BE508A /* icon_topic@2x.png in Resources */,
@@ -4249,6 +4288,7 @@
 				BD5185F51A5D0ED700BE508A /* icon-eye@2x.png in Resources */,
 				BD5185C91A5D0ED700BE508A /* Icon.png in Resources */,
 				14C855481A2E196B00A15ED9 /* InteractionViewController.xib in Resources */,
+				375635241A60EE6300D120C8 /* service_page@2x.png in Resources */,
 				BD5187451A5D0ED700BE508A /* image_quality_unselected@2x.png in Resources */,
 				A987EE4E1A20987800CED7CD /* DesignerViewController.xib in Resources */,
 				BD5186811A5D0ED700BE508A /* icon_personal_case@2x.png in Resources */,
@@ -4354,6 +4394,7 @@
 				BD5187671A5D0ED700BE508A /* tabbar_personal@2x.png in Resources */,
 				145471D81A3897D800428BCB /* QuestionCell.xib in Resources */,
 				BD51865F1A5D0ED700BE508A /* login-icon-wx@2x.png in Resources */,
+				375635351A60FF8F00D120C8 /* icon_check_ok@2x.png in Resources */,
 				BD5185FB1A5D0ED700BE508A /* icon-grid@2x.png in Resources */,
 				BD5186831A5D0ED700BE508A /* icon_personal_ddgl@2x.png in Resources */,
 				A9C398461A29D25F006A8AAB /* ResetPasswordViewController.xib in Resources */,
@@ -4381,6 +4422,7 @@
 				14EDB3881A3B29E700E5AC77 /* FilterInfo.plist in Resources */,
 				BD5187571A5D0ED700BE508A /* nav_backbtn_white@2x.png in Resources */,
 				1416C8B91A242FD100FA9999 /* CaseCollectionCell.xib in Resources */,
+				375635221A60E78C00D120C8 /* icon_unfollowed@2x.png in Resources */,
 				BD5185D51A5D0ED700BE508A /* case-detail-send@2x.png in Resources */,
 				14490CAA1A2B5D50001CB160 /* AccountManageViewController.xib in Resources */,
 				BD5186DB1A5D0ED700BE508A /* private_message_empty@2x.png in Resources */,
@@ -4613,6 +4655,7 @@
 				1415F9E01A5CD1CB003D0C29 /* QuestionViewController.m in Sources */,
 				1415F9E11A5CD1CB003D0C29 /* JSONModelArray.m in Sources */,
 				1415F9E21A5CD1CB003D0C29 /* GuideViewController.m in Sources */,
+				375635301A60F2FA00D120C8 /* InputView.m in Sources */,
 				1415F9E31A5CD1CB003D0C29 /* DesignerDetailViewController.m in Sources */,
 				1415F9E41A5CD1CB003D0C29 /* MJRefreshHeaderView.m in Sources */,
 				1415F9E51A5CD1CB003D0C29 /* NewestTopicViewController.m in Sources */,
@@ -4745,6 +4788,7 @@
 				37D18DB21A5829C800B41048 /* CaseImageCollectionCell.m in Sources */,
 				1476DA8D1A21DB1E0006E9E0 /* JRSegmentControl.m in Sources */,
 				A987EDD31A20920500CED7CD /* UIViewController+HUD.m in Sources */,
+				3756352F1A60F2FA00D120C8 /* InputView.m in Sources */,
 				14555D371A36FE1F00E36339 /* MenuView.m in Sources */,
 				14ABFBE51A25B63400C4AF65 /* LoginViewController.m in Sources */,
 				A9A067141A3D76DA0059D73B /* ActionSheetCustomPicker.m in Sources */,

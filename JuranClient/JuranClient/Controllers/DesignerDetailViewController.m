@@ -124,10 +124,6 @@
     _headView.frame = frame;
     
     _followButton.hidden = NO;
-    _followButton.layer.masksToBounds = YES;
-    _followButton.layer.borderWidth = 1;
-    _followButton.layer.borderColor = RGBColor(0, 94, 176).CGColor;
-    _followButton.layer.cornerRadius = 2.f;
     
     UIView *view = [_headView viewWithTag:2200];
     frame = view.frame;
@@ -375,12 +371,11 @@
 #ifdef kJuranDesigner
     if ([JRUser isLogin] && [JRUser currentUser].userId == _designer.userId) {
         _followButton.enabled = NO;
-        _followButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
     }else{
         if (_designer.isFollowed) {
-            [_followButton setTitle:@"已关注" forState:UIControlStateNormal];
+            [_followButton setImage:[UIImage imageNamed:@"icon_unfollowed.png"] forState:UIControlStateNormal];
         }else{
-            [_followButton setTitle:@"+ 关注" forState:UIControlStateNormal];
+            [_followButton setImage:[UIImage imageNamed:@"icon_followed.png"] forState:UIControlStateNormal];
         }
     }
 #else

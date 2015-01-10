@@ -110,9 +110,9 @@
                 , @[@""
                     , @""
                     , @""
-                    , @""
-                    , @""
-                    , @""
+                    , _user.style
+                    , _user.special
+                    , _user.granuate
                     , _user.selfIntroduction]
                 ,@[@""]
                 ];
