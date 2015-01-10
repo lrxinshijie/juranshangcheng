@@ -65,7 +65,7 @@
     [ShareSDK cancelAuthWithType:type];
     [ShareSDK getUserInfoWithType:type authOptions:nil result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
         if (result){
-            
+            ASLog(@"userInfo:%@",userInfo.sourceData);
             NSString *thirdUserId = [[userInfo credential] uid];
             NSString *nickName = [userInfo nickname];
 //            NSString *accessToken = [[userInfo credential] token];
@@ -75,11 +75,12 @@
                 thirdSource = @(1);
             } else if (type == ShareTypeWeixiSession) {
                 thirdSource = @(3);
+                thirdUserId = [userInfo.sourceData getStringValueForKey:@"unionid" defaultValue:@""];
             } else if (type == ShareTypeQQSpace) {
                 thirdSource = @(2);
             }
             
-            NSDictionary *param = @{@"userType": @"member",
+            NSDictionary *param = @{@"userType": [[ALTheme sharedTheme] userType],
                                     @"thirdUserId":thirdUserId,
                                     @"thirdSource": thirdSource,
                                     @"nickName": nickName,
@@ -130,11 +131,7 @@
                             @"password": [NSString stringWithFormat:@"%@", password],
                             @"pushId": ApplicationDelegate.clientId,
                             @"deviceInfo":[Public deviceInfo],
-#ifdef kJuranDesigner
-                            @"userType": @"designer"
-#else
-                            @"userType": @"member"
-#endif
+                            @"userType": [[ALTheme sharedTheme] userType]
                             };
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_LOGIN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {

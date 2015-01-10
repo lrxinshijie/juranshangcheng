@@ -60,7 +60,7 @@
         return;
     }
     
-    NSDictionary *param = @{@"userType": @"member",
+    NSDictionary *param = @{@"userType": [[ALTheme sharedTheme] userType],
                             @"mobileNum": _phone,
                             @"regType" : @"telephone",
                             @"password": password,

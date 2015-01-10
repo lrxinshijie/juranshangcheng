@@ -140,11 +140,7 @@
                             @"password": password,
                             @"pushId": ApplicationDelegate.clientId,
                             @"deviceInfo":[Public deviceInfo],
-#ifdef kJuranDesigner
-                            @"userType": @"designer"
-#else
-                            @"userType": @"member"
-#endif
+                            @"userType": [[ALTheme sharedTheme] userType]
                             };
     [[ALEngine shareEngine] pathURL:JR_LOGIN parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyShowErrorDefaultMessage:@"NO",kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
