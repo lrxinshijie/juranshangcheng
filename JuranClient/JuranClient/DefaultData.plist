@@ -380,6 +380,27 @@
 			<string>design_five</string>
 		</dict>
 	</array>
+	<key>picType</key>
+	<array>
+		<dict>
+			<key>k</key>
+			<string>实景图</string>
+			<key>v</key>
+			<string>02</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>效果图</string>
+			<key>v</key>
+			<string>03</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>手绘图</string>
+			<key>v</key>
+			<string>04</string>
+		</dict>
+	</array>
 	<key>houseArea</key>
 	<array>
 		<dict>
