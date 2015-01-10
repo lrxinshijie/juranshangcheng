@@ -19,6 +19,7 @@
 #import "UIAlertView+Blocks.h"
 #import "JRAreaInfo.h"
 #import "TTTAttributedLabel.h"
+#import "InputView.h"
 
 #define kStatusBGImageViewTag 2933
 
@@ -49,6 +50,8 @@
 
 @property (nonatomic, strong) IBOutlet UIButton *modifyDemandInfoButton;
 @property (nonatomic, strong) IBOutlet UIView *emptyView;
+
+@property (nonatomic, strong) InputView *inputView;
 
 @end
 
@@ -225,6 +228,9 @@
     _emptyView.center = CGPointMake(_designerTableView.center.x, _designerTableView.center.y);
     [_scrollView addSubview:_emptyView];
     
+    self.inputView = [[InputView alloc] init];
+    [self.view addSubview:_inputView];
+    
 }
 
 - (void)receiveReloadDataNotification:(NSNotification*)notification{
@@ -252,7 +258,17 @@
 }
 
 - (void)onBidReq{
-    
+    [_inputView showWithTitle:@"我来应标" placeHolder:@"请填写您的应标宣言" content:@"" block:^(id result) {
+        NSDictionary *param = @{@"designReqId": _demand.designReqId,
+                                @"biddingDeclatation":result};
+        [self showHUD];
+        [[ALEngine shareEngine] pathURL:JR_BID_DESIGNREQ parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            [self hideHUD];
+            if (!error) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
+            }
+        }];
+    }];
 }
 
 - (void)onDeadRequest{

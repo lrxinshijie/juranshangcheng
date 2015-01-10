@@ -10,6 +10,7 @@
 #import "DemandDetailViewController.h"
 #import "JRDemand.h"
 #import "DemandCell.h"
+#import "InputView.h"
 
 @interface BidManagementViewController ()<UITableViewDelegate, UITableViewDataSource, DemandCellDelegate>
 
@@ -23,7 +24,7 @@
 
 @property (nonatomic, strong) IBOutlet UIView *emptyView;
 
-
+@property (nonatomic, strong) InputView *inputView;
 
 @end
 
@@ -46,6 +47,9 @@
     _emptyView.center = _tableView.center;
     [self.view addSubview:_emptyView];
     
+    _inputView =  [[InputView alloc] init];
+    [self.view addSubview:_inputView];
+    
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
@@ -66,11 +70,7 @@
     NSString *status = _segment.selectedSegmentIndex == 0?@"goingon":@"finished";
     NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage]
                             ,@"onePageCount": kOnePageCount
-                            ,@"projectType": @""
                             ,@"status": status
-                            ,@"keyStr": @""
-                            ,@"biddingDateStart": @""
-                            ,@"biddingDateEnd": @""
                             };
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_DEDESIGNER_BIDLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -150,7 +150,7 @@
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
         cell = (DemandCell *)[nibs firstObject];
     }
-    
+    cell.delegate = self;
     if (_segment.selectedSegmentIndex == 0) {
         JRDemand *d = [_doingDatas objectAtIndex:indexPath.row];
         [cell fillCellWithDemand:d];
@@ -178,7 +178,19 @@
 }
 
 - (void)editRemark:(DemandCell *)cell AndDemand:(JRDemand *)demand{
-    
+    [_inputView showWithTitle:@"写备注" placeHolder:@"" content:demand.memo block:^(id result) {
+        NSDictionary *param = @{@"bidReqId": demand.bidId
+                                ,@"memo": result
+                                };
+        [self showHUD];
+        [[ALEngine shareEngine] pathURL:JR_EDIT_BID_MEMO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            [self hideHUD];
+            if (!error) {
+                demand.memo = result;
+                [self reloadData];
+            }
+        }];
+    }];
 }
 
 

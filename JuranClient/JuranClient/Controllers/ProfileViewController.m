@@ -168,11 +168,17 @@
         _signedButton.enabled = !_user.isSigned;
         [_signedButton setTitle:_user.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
     }
-
+#ifdef kJuranDesigner
+    _privateLetterCountLabel.hidden = YES;
+    _hasNewAnswerView.hidden = YES;
+    _hasNewBidView.hidden = YES;
+    _hasNewPushMsgView.hidden = YES;
+#else
     _privateLetterCountLabel.hidden = [JRUser isLogin] && _user.newPushMsgCount?NO:YES;
     _hasNewAnswerView.hidden = [JRUser isLogin] && _user.newAnswerCount?NO:YES;
     _hasNewBidView.hidden = [JRUser isLogin] && _user.hasNewBidCount?NO:YES;
     _hasNewPushMsgView.hidden = [JRUser isLogin] && _user.newPushMsgCount?NO:YES;
+#endif
 }
 
 - (void)loadData{
@@ -187,7 +193,7 @@
 #ifndef kJuranDesigner
     NSString *url = JR_MYCENTERINFO;
 #else
-    NSString *url = JR_MYCENTERINFO;
+    NSString *url = JR_GET_DESIGNER_CENTERINFO;
 #endif
     [[ALEngine shareEngine] pathURL:url parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
