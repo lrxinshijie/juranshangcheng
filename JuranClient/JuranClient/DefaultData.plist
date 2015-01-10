@@ -227,6 +227,105 @@
 			<string>other</string>
 		</dict>
 	</array>
+	<key>special</key>
+	<array>
+		<dict>
+			<key>k</key>
+			<string>家居住宅</string>
+			<key>v</key>
+			<string>0</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>别墅豪宅</string>
+			<key>v</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>办公空间</string>
+			<key>v</key>
+			<string>2</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>楼盘样板房</string>
+			<key>v</key>
+			<string>3</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>会所空间</string>
+			<key>v</key>
+			<string>4</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>商业展示</string>
+			<key>v</key>
+			<string>5</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>酒店宾馆</string>
+			<key>v</key>
+			<string>6</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>餐饮空间</string>
+			<key>v</key>
+			<string>7</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>运动场所</string>
+			<key>v</key>
+			<string>8</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>文化空间</string>
+			<key>v</key>
+			<string>9</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>教育机构</string>
+			<key>v</key>
+			<string>10</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>娱乐空间</string>
+			<key>v</key>
+			<string>11</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>医疗空间</string>
+			<key>v</key>
+			<string>12</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>售楼处</string>
+			<key>v</key>
+			<string>13</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>公园广场</string>
+			<key>v</key>
+			<string>14</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>其他</string>
+			<key>v</key>
+			<string>15</string>
+		</dict>
+	</array>
 	<key>livingroomCount</key>
 	<array>
 		<dict>
@@ -488,6 +587,33 @@
 			<string>resolved</string>
 		</dict>
 	</array>
+	<key>biddingStatus</key>
+	<array>
+		<dict>
+			<key>k</key>
+			<string>进行中</string>
+			<key>v</key>
+			<string>bidding</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>已中标</string>
+			<key>v</key>
+			<string>success</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>failed</string>
+			<key>v</key>
+			<string>resolved</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>被剔除</string>
+			<key>v</key>
+			<string>rejected</string>
+		</dict>
+	</array>
 	<key>sex</key>
 	<array>
 		<dict>
@@ -513,45 +639,39 @@
 	<array>
 		<dict>
 			<key>k</key>
-			<string>选择类型</string>
+			<string>室内设计</string>
 			<key>v</key>
 			<string>0</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>室内设计</string>
+			<string>软装设计</string>
 			<key>v</key>
 			<string>1</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>软装设计</string>
+			<string>建筑设计</string>
 			<key>v</key>
 			<string>2</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>建筑设计</string>
+			<string>园林设计</string>
 			<key>v</key>
 			<string>3</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>园林设计</string>
+			<string>装修设计</string>
 			<key>v</key>
 			<string>4</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>装修设计</string>
-			<key>v</key>
-			<string>5</string>
-		</dict>
-		<dict>
-			<key>k</key>
 			<string>其他</string>
 			<key>v</key>
-			<string>6</string>
+			<string>5</string>
 		</dict>
 	</array>
 	<key>projectRoom</key>

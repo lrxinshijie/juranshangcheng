@@ -60,6 +60,7 @@
 @property (nonatomic, copy) NSString *publishNickName;
 @property (nonatomic, copy) NSString *account;
 @property (nonatomic, copy) NSString *memo;
+@property (nonatomic, copy) NSString *biddingStatus;
 
 #endif
 

@@ -76,18 +76,23 @@
 }
 
 - (IBAction)onCommit:(id)sender{
-    if (!(_oldPsdTextField.text && _oldPsdTextField.text.length > 5)) {
+    if (_oldPsdTextField.text.length == 0) {
         [self showTip:@"当前密码不能为空"];
         return;
     }
-    if (!(_newsPsdTextField.text && _newsPsdTextField.text.length > 5)) {
+    if (_newsPsdTextField.text.length == 0) {
         [self showTip:@"新密码不能为空"];
         return;
     }
-    if (!(_verifyPsdTextField.text && _verifyPsdTextField.text.length > 5)) {
+    if (_verifyPsdTextField.text.length == 0) {
         [self showTip:@"确认密码不能为空"];
         return;
     }
+    if (_oldPsdTextField.text.length < 6 || _newsPsdTextField.text.length < 6 || _verifyPsdTextField.text.length < 6) {
+        [self showTip:@"密码长度不能少于6位"];
+        return;
+    }
+    
     if (!([_newsPsdTextField.text isEqualToString:_verifyPsdTextField.text])) {
         [self showTip:@"新密码与确认密码不相同"];
         return;
@@ -104,6 +109,7 @@
         [self hideHUD];
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self showTip:@"修改密码成功！"];
                 [[JRUser currentUser]logout];
                 [self.navigationController popViewControllerAnimated:YES];
             });

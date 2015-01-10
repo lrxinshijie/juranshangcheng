@@ -27,6 +27,8 @@
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) IBOutlet UIView *toolBar;
 @property (nonatomic, strong) IBOutlet UIImageView *favImageView;
+@property (nonatomic, strong) IBOutlet UIView *toolBarForDesigner;
+@property (nonatomic, strong) IBOutlet UIImageView *favImageViewForDesigner;
 @property (nonatomic, strong) UILabel *lastPageLabel;
 
 @end
@@ -77,9 +79,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"case_icon_share_white.png"] rightBarButtonItemAction:@selector(doShare)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self.view buttonWithFrame:CGRectZero target:self action:@selector(back:) image:[UIImage imageNamed:@"nav_backbtn_white"]]];
+#ifdef kJuranDesigner
+    _favImageViewForDesigner.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
+#else
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"case_icon_share_white.png"] rightBarButtonItemAction:@selector(doShare)];
     _favImageView.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
+#endif
 }
 
 - (void)loadData{
@@ -154,9 +160,16 @@
                                      _titleView.frame.size.height,
                                      screenFrame.size.width,
                                      49);
+    
+#ifdef kJuranDesigner
+    _toolBarForDesigner.frame = toolbarFrame;
+    [bottomView_ addSubview:_toolBarForDesigner];
+    _favImageViewForDesigner.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
+#else
     _toolBar.frame = toolbarFrame;
     [bottomView_ addSubview:_toolBar];
     _favImageView.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
+#endif
     
     CGRect bottomFrame = CGRectMake(0,
                                     screenFrame.size.height - _titleView.frame.size.height - toolbarFrame.size.height - _titleView.frame.size.height,
@@ -226,6 +239,16 @@
     frame.size.height = CGRectGetMaxY(_descTextView.frame) + 10;
     _titleView.frame = frame;
     
+#ifdef kJuranDesigner
+    frame = _toolBarForDesigner.frame;
+    frame.origin.y = CGRectGetMaxY(_titleView.frame);
+    _toolBarForDesigner.frame = frame;
+    
+    frame = bottomView_.frame;
+    frame.size.height = CGRectGetMaxY(_toolBarForDesigner.frame);
+    frame.origin.y = screenFrame.size.height - frame.size.height;
+    bottomView_.frame = frame;
+#else
     frame = _toolBar.frame;
     frame.origin.y = CGRectGetMaxY(_titleView.frame);
     _toolBar.frame = frame;
@@ -234,6 +257,7 @@
     frame.size.height = CGRectGetMaxY(_toolBar.frame);
     frame.origin.y = screenFrame.size.height - frame.size.height;
     bottomView_.frame = frame;
+#endif
 }
 
 - (void)didReceiveMemoryWarning
@@ -279,13 +303,20 @@
     [_jrCase favorite:^(BOOL result) {
         [self hideHUD];
         if (result) {
+#ifdef kJuranDesigner
+            _favImageViewForDesigner.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
+#else
             _favImageView.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
+#endif
             [self showTip:_jrCase.isFav?@"收藏成功":@"取消收藏成功"];
         }
     }];
 }
 
 - (IBAction)doMakeAppointment:(id)sender{
+#ifdef kJuranDesigner
+    [self doShare];
+#else
     if (!_jrCase.isAuth) {
         [self showTip:@"未认证的设计师无法预约量房"];
         return;
@@ -297,6 +328,7 @@
     designer.nickName = _jrCase.nickName;
     mv.designer = designer;
     [self.navigationController pushViewController:mv animated:YES];
+#endif
 }
 
 - (IBAction)doPrivateLetter:(id)sender{

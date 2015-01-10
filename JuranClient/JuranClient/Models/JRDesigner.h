@@ -18,8 +18,6 @@
 @property (nonatomic, strong) NSString *account;
 @property (nonatomic, strong) NSString *nickName;
 @property (nonatomic, strong) NSString *userName;
-@property (nonatomic, strong) NSString *styleNames;
-@property (nonatomic, strong) NSString *styleCodes;
 @property (nonatomic, strong) NSString *selfIntroduction;
 @property (nonatomic, assign) NSInteger projectCount;
 @property (nonatomic, assign) NSInteger fansCount;
@@ -36,6 +34,7 @@
 @property (nonatomic, assign) BOOL isAuth;
 @property (nonatomic, strong) NSString *granuate;
 @property (nonatomic, strong) NSString *style;
+@property (nonatomic, strong) NSString *styleNames;
 @property (nonatomic, assign) CGFloat priceMeasure;
 @property (nonatomic, assign) CGFloat designFeeMin;
 @property (nonatomic, assign) CGFloat designFeeMax;
@@ -123,5 +122,9 @@
 - (NSString*)sexyString;
 - (NSString*)idCardInfomation;
 - (NSString*)professionalTypeString;
+- (NSString*)styleNameForPersonal;
+- (NSString*)specialForPersonal;
+- (NSString*)measureForPersonal;
+- (NSString*)designPriceForPersonal;
 
 @end

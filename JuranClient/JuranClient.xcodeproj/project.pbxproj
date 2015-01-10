@@ -572,6 +572,7 @@
 		375635341A60FF8F00D120C8 /* icon_check_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375635311A60FF8F00D120C8 /* icon_check_cancel@2x.png */; };
 		375635351A60FF8F00D120C8 /* icon_check_ok@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375635321A60FF8F00D120C8 /* icon_check_ok@2x.png */; };
 		375635361A60FF8F00D120C8 /* icon_check_ok@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375635321A60FF8F00D120C8 /* icon_check_ok@2x.png */; };
+		375635381A6178F400D120C8 /* icon_share_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375635371A6178F400D120C8 /* icon_share_white@2x.png */; };
 		375B46461A5EB7F100D7E74B /* input_remark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375B46451A5EB7F100D7E74B /* input_remark@2x.png */; };
 		375B464C1A5EDC9500D7E74B /* PersonalDataForDesignerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375B46481A5EDBB200D7E74B /* PersonalDataForDesignerViewController.m */; };
 		375B464D1A5EDC9A00D7E74B /* PersonalDataForDesignerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375B46491A5EDBB200D7E74B /* PersonalDataForDesignerViewController.xib */; };
@@ -1558,6 +1559,7 @@
 		3756352E1A60F2FA00D120C8 /* InputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputView.m; sourceTree = "<group>"; };
 		375635311A60FF8F00D120C8 /* icon_check_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_check_cancel@2x.png"; sourceTree = "<group>"; };
 		375635321A60FF8F00D120C8 /* icon_check_ok@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_check_ok@2x.png"; sourceTree = "<group>"; };
+		375635371A6178F400D120C8 /* icon_share_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_share_white@2x.png"; sourceTree = "<group>"; };
 		375B46451A5EB7F100D7E74B /* input_remark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input_remark@2x.png"; sourceTree = "<group>"; };
 		375B46471A5EDBB200D7E74B /* PersonalDataForDesignerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDataForDesignerViewController.h; sourceTree = "<group>"; };
 		375B46481A5EDBB200D7E74B /* PersonalDataForDesignerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDataForDesignerViewController.m; sourceTree = "<group>"; };
@@ -3634,6 +3636,7 @@
 		BD5185B31A5D0ED700BE508A /* JuranDesigner */ = {
 			isa = PBXGroup;
 			children = (
+				375635371A6178F400D120C8 /* icon_share_white@2x.png */,
 				14321E621A6125F70065E8C3 /* case_edit_cover@2x.png */,
 				14321E631A6125F70065E8C3 /* case_edit_delete@2x.png */,
 				14321E641A6125F70065E8C3 /* case_edit_replace@2x.png */,
@@ -3822,6 +3825,7 @@
 				1415FA351A5CD1CB003D0C29 /* VersionInfoViewController.xib in Resources */,
 				1415FA361A5CD1CB003D0C29 /* MyAskOrAnswerViewController.xib in Resources */,
 				BD5187721A5D0ED700BE508A /* userlevel0@2x.png in Resources */,
+				375635381A6178F400D120C8 /* icon_share_white@2x.png in Resources */,
 				BD5186AE1A5D0ED700BE508A /* best_answer@2x.png in Resources */,
 				375635361A60FF8F00D120C8 /* icon_check_ok@2x.png in Resources */,
 				BD5185C21A5D0ED700BE508A /* Default.png in Resources */,

@@ -93,7 +93,11 @@
     }else if (indexPath.row == 1) {
         GuideViewController *gv = [[GuideViewController alloc] init];
         gv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+#ifndef kJuranDesigner
         [self.tabBarController presentViewController:gv animated:YES completion:NULL];
+#else
+        [self presentViewController:gv animated:YES completion:NULL];
+#endif
     }
 }
 

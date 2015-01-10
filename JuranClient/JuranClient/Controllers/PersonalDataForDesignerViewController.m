@@ -107,11 +107,11 @@
                     , _user.birthday.length == 0?@"未设置":_user.birthday
                     , _user.areaInfo.title
                     ]
-                , @[@""
-                    , @""
-                    , @""
-                    , _user.style
-                    , _user.special
+                , @[[NSString stringWithFormat:@"%d", _user.experienceCount]
+                    , [_user designPriceForPersonal]
+                    , [_user measureForPersonal]
+                    , [_user styleNameForPersonal]
+                    , [_user specialForPersonal]
                     , _user.granuate
                     , _user.selfIntroduction]
                 ,@[@""]
@@ -136,13 +136,16 @@
 - (void)modifyMemberDetail{
     
     NSDictionary *param1 = @{@"nickName": _user.nickName,
-                             @"oldNickName": _user.birthday,
+                             @"oldNickName": _user.oldNickName,
                              @"nickNameChangeable":@"",
 //                             @"homeTel": _user.homeTel,
-                             @"birthday":@"",
+                             @"birthday":_user.birthday,
                              @"areaInfo": @{@"provinceCode": _user.areaInfo.provinceCode,
+                                            @"provinceName": _user.areaInfo.provinceName,
                                             @"cityCode": _user.areaInfo.cityCode,
-                                            @"districtCode": _user.areaInfo.districtCode
+                                            @"cityName": _user.areaInfo.cityName,
+                                            @"districtCode": _user.areaInfo.districtCode,
+                                            @"districtName": _user.areaInfo.districtName
                                             },
 //                             @"detailAddress": _user.detailAddress,
                              @"idCardType": _user.idCardType,
@@ -150,6 +153,7 @@
                              @"qq": _user.qq,
                              @"weixin": _user.weixin,
                              @"sex": [NSString stringWithFormat:@"%d", _user.sex],
+                             @"designExperience": [NSString stringWithFormat:@"%d", _user.experienceCount],
                              @"freeMeasure": [NSString stringWithFormat:@"%d", _user.freeMeasure],
                              @"priceMeasureStr": [NSString stringWithFormat:@"%d", (NSInteger)_user.priceMeasure],
                              @"style": _user.style,

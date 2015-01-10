@@ -377,6 +377,7 @@
         }else{
             [_followButton setImage:[UIImage imageNamed:@"icon_followed.png"] forState:UIControlStateNormal];
         }
+        _fansCountLabel.text = [NSString stringWithFormat:@"%i", _designer.followCount];
     }
 #else
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -527,7 +528,7 @@
             }else if (4 == indexPath.row){
                 cell.detailTextLabel.text = [_designer experienceString];
             }else if (5 == indexPath.row){
-                cell.detailTextLabel.text = [_designer styleNamesWithType:1];
+                cell.detailTextLabel.text = [_designer styleNameForPersonal];
             }else if (2 == indexPath.row){
                 CGRect frame = CGRectMake(0, 0, 100, 30);
                 UIView *view = [[UIView alloc] initWithFrame:frame];

@@ -85,7 +85,7 @@
     }
 
 #ifdef kJuranDesigner
-    _confirmFlagImageView.hidden = !_demand.isBidded;
+    _confirmFlagImageView.hidden = !([_demand.biddingStatus isEqualToString:@"success"]);
     
     if (demand.memo.length == 0) {
         _remarkLabel.text = @"写备注";

@@ -74,7 +74,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameProfileReloadData object:nil];
     
-    [self configureMenu];
+    
     
     _user = [JRUser currentUser];
     
@@ -94,6 +94,7 @@
 //                    , @"icon_dingdan.png"
                     , @"icon_realname_auth.png"
                     , @"icon_personal_zhaq"];
+    self.navigationItem.title = @"个人中心";
 #else
     titleArray = @[ @"我的关注"
                     , @"我的收藏"
@@ -102,6 +103,7 @@
     imageArray = @[ @"icon_personal_guanzhu.png"
                     , @"icon_personal_shouchang.png"
                     , @"icon_personal_zhaq"];
+    [self configureMenu];
 #endif
                    
     [self setupUI];
