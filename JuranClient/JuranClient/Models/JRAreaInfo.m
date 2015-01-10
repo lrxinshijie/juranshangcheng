@@ -44,7 +44,8 @@
 }
 
 - (NSDictionary *)dictionaryValue{
-    return @{@"provinceName": [NSString stringWithFormat:@"%@", self.provinceName],
+    return @{
+             @"provinceName": [NSString stringWithFormat:@"%@", self.provinceName],
              @"cityName": [NSString stringWithFormat:@"%@", self.cityName],
              @"provinceCode": [NSString stringWithFormat:@"%@", self.provinceCode],
              @"districtCode": [NSString stringWithFormat:@"%@", self.districtCode],

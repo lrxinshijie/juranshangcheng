@@ -8,9 +8,20 @@
 
 #import "ALViewController.h"
 
+@class JRCaseImage;
+
+typedef enum : NSUInteger {
+    CaseImageEventCover,
+    CaseImageEventDelete,
+    CaseImageEventChange,
+} CaseImageEvent;
+
+typedef void(^CaseImageBlock)(JRCaseImage *image, CaseImageEvent event);
+
 @interface CaseImagePreviewViewController : ALViewController
 
-@property (nonatomic, strong) UIImage *image;
-@property (nonatomic, assign) NSInteger idx;
+@property (nonatomic, strong) JRCaseImage *caseImage;
+
+@property (nonatomic, copy) CaseImageBlock block;
 
 @end

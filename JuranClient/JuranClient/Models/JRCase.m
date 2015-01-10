@@ -266,4 +266,16 @@
     return @"";
 }
 
+- (void)loadDetail:(BOOLBlock)finished{
+    NSDictionary *param = @{@"projectId": self.projectId};
+    [[ALEngine shareEngine] pathURL:JR_PRODETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            [self buildDetailWithDictionary:data];
+        }
+        if (finished) {
+            finished(!error);
+        }
+    }];
+}
+
 @end

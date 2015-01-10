@@ -124,7 +124,7 @@
     cell.accessoryView = UITableViewCellAccessoryNone;
     
     cell.titleLabel.text = _keys[indexPath.row];
-    cell.textField.enabled = YES;
+    cell.textField.enabled = _jrCase.projectId.length == 0;
     cell.textField.delegate = self;
     cell.textField.tag = indexPath.row;
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
@@ -175,7 +175,7 @@
     NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (textField.tag == 5 || textField.tag == 6){
         double budget = [value doubleValue];
-        if (budget < 0 || budget > 99999) {
+        if (budget < 0 || budget > 9999.99) {
             return NO;
         }
     }
@@ -187,6 +187,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.view endEditing:YES];
 //    [_selectedTextField resignFirstResponder];
+    
+    if (_jrCase.projectId.length > 0) {
+        return;
+    }
     
     if (indexPath.row == 1) {
         BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];

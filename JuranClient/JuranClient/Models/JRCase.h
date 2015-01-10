@@ -82,6 +82,7 @@
 - (NSString *)roomNumString;
 - (void)like:(void (^) (BOOL result))finished;
 - (void)favorite:(void (^) (BOOL result))finished;
+- (void)loadDetail:(BOOLBlock)finished;
 
 - (NSString *)shareURL;
 - (void)doShare;

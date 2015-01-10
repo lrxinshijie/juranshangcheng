@@ -8,6 +8,7 @@
 
 #import "ALViewController.h"
 #import "JRCase.h"
+#import "JRCaseImage.h"
 
 @interface CaseImageManagemanetViewController : ALViewController
 

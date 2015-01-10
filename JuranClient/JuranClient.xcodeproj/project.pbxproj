@@ -383,6 +383,12 @@
 		14321E681A6125F70065E8C3 /* case_edit_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14321E631A6125F70065E8C3 /* case_edit_delete@2x.png */; };
 		14321E691A6125F70065E8C3 /* case_edit_replace@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14321E641A6125F70065E8C3 /* case_edit_replace@2x.png */; };
 		14321E6A1A6125F70065E8C3 /* case_edit_replace@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14321E641A6125F70065E8C3 /* case_edit_replace@2x.png */; };
+		14321E6E1A612E6A0065E8C3 /* CaseEditStyleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14321E6C1A612E6A0065E8C3 /* CaseEditStyleViewController.m */; };
+		14321E6F1A612E6A0065E8C3 /* CaseEditStyleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14321E6C1A612E6A0065E8C3 /* CaseEditStyleViewController.m */; };
+		14321E701A612E6A0065E8C3 /* CaseEditStyleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14321E6D1A612E6A0065E8C3 /* CaseEditStyleViewController.xib */; };
+		14321E711A612E6A0065E8C3 /* CaseEditStyleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14321E6D1A612E6A0065E8C3 /* CaseEditStyleViewController.xib */; };
+		14321E741A6142B30065E8C3 /* JRCaseImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 14321E731A6142B30065E8C3 /* JRCaseImage.m */; };
+		14321E751A6142B30065E8C3 /* JRCaseImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 14321E731A6142B30065E8C3 /* JRCaseImage.m */; };
 		14361E551A343F5F00F9BD94 /* BaseAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14361E531A343F5F00F9BD94 /* BaseAddressViewController.m */; };
 		14361E561A343F5F00F9BD94 /* BaseAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14361E541A343F5F00F9BD94 /* BaseAddressViewController.xib */; };
 		14361E5A1A344E6100F9BD94 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 14361E581A344E6100F9BD94 /* pinyin.c */; };
@@ -1281,6 +1287,11 @@
 		14321E621A6125F70065E8C3 /* case_edit_cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "case_edit_cover@2x.png"; sourceTree = "<group>"; };
 		14321E631A6125F70065E8C3 /* case_edit_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "case_edit_delete@2x.png"; sourceTree = "<group>"; };
 		14321E641A6125F70065E8C3 /* case_edit_replace@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "case_edit_replace@2x.png"; sourceTree = "<group>"; };
+		14321E6B1A612E6A0065E8C3 /* CaseEditStyleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseEditStyleViewController.h; sourceTree = "<group>"; };
+		14321E6C1A612E6A0065E8C3 /* CaseEditStyleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseEditStyleViewController.m; sourceTree = "<group>"; };
+		14321E6D1A612E6A0065E8C3 /* CaseEditStyleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseEditStyleViewController.xib; sourceTree = "<group>"; };
+		14321E721A6142B30065E8C3 /* JRCaseImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRCaseImage.h; sourceTree = "<group>"; };
+		14321E731A6142B30065E8C3 /* JRCaseImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRCaseImage.m; sourceTree = "<group>"; };
 		14361E521A343F5F00F9BD94 /* BaseAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAddressViewController.h; sourceTree = "<group>"; };
 		14361E531A343F5F00F9BD94 /* BaseAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseAddressViewController.m; sourceTree = "<group>"; };
 		14361E541A343F5F00F9BD94 /* BaseAddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseAddressViewController.xib; sourceTree = "<group>"; };
@@ -2559,6 +2570,9 @@
 				14321E5B1A61235B0065E8C3 /* CaseImagePreviewViewController.h */,
 				14321E5C1A61235B0065E8C3 /* CaseImagePreviewViewController.m */,
 				14321E5D1A61235B0065E8C3 /* CaseImagePreviewViewController.xib */,
+				14321E6B1A612E6A0065E8C3 /* CaseEditStyleViewController.h */,
+				14321E6C1A612E6A0065E8C3 /* CaseEditStyleViewController.m */,
+				14321E6D1A612E6A0065E8C3 /* CaseEditStyleViewController.xib */,
 			);
 			name = Case;
 			sourceTree = "<group>";
@@ -2841,6 +2855,8 @@
 				378BB2C21A4B1C6E00E8358D /* JRBidInfo.m */,
 				1415FA991A5D1844003D0C29 /* ALTheme.h */,
 				1415FA9A1A5D1844003D0C29 /* ALTheme.m */,
+				14321E721A6142B30065E8C3 /* JRCaseImage.h */,
+				14321E731A6142B30065E8C3 /* JRCaseImage.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3961,6 +3977,7 @@
 				1415FAAE1A5D249E003D0C29 /* Icon.png in Resources */,
 				1415FA631A5CD1CB003D0C29 /* AskOrAnswerCell.xib in Resources */,
 				BD51869C1A5D0ED700BE508A /* navigationbar_setting@2x.png in Resources */,
+				14321E711A612E6A0065E8C3 /* CaseEditStyleViewController.xib in Resources */,
 				BD5186A81A5D0ED700BE508A /* unlogin_head@2x.png in Resources */,
 				1415FA641A5CD1CB003D0C29 /* QuestionViewController.xib in Resources */,
 				14A6DA811A5F768C00D40CB3 /* case_create_success@2x.png in Resources */,
@@ -4435,6 +4452,7 @@
 				BD5186371A5D0ED700BE508A /* menu_shaixuan@2x.png in Resources */,
 				BD5186711A5D0ED700BE508A /* chat_receiver_bg@2x.png in Resources */,
 				147A9FB31A415DD400132804 /* PrivateLetterViewController.xib in Resources */,
+				14321E701A612E6A0065E8C3 /* CaseEditStyleViewController.xib in Resources */,
 				BD5187811A5D0ED700BE508A /* nav-designer-default@2x.png in Resources */,
 				BD5187771A5D0ED700BE508A /* userlevel3@2x.png in Resources */,
 				BD5187391A5D0ED700BE508A /* service_normal_7@2x.png in Resources */,
@@ -4638,6 +4656,7 @@
 				1415F9B11A5CD1CB003D0C29 /* JRMemberDetail.m in Sources */,
 				1415F9B21A5CD1CB003D0C29 /* JRPushInfoMsg.m in Sources */,
 				1415F9B31A5CD1CB003D0C29 /* NSDate+ASCategory.m in Sources */,
+				14321E6F1A612E6A0065E8C3 /* CaseEditStyleViewController.m in Sources */,
 				1415F9B41A5CD1CB003D0C29 /* NewestBidInfoCell.m in Sources */,
 				1415F9B51A5CD1CB003D0C29 /* DetailAddressViewController.m in Sources */,
 				1415F9B61A5CD1CB003D0C29 /* InteractionCell.m in Sources */,
@@ -4693,6 +4712,7 @@
 				1415F9E71A5CD1CB003D0C29 /* AboutViewController.m in Sources */,
 				14321E5F1A61235B0065E8C3 /* CaseImagePreviewViewController.m in Sources */,
 				1415F9E81A5CD1CB003D0C29 /* APPRecommendViewController.m in Sources */,
+				14321E751A6142B30065E8C3 /* JRCaseImage.m in Sources */,
 				1415F9E91A5CD1CB003D0C29 /* CreateCaseSuccessViewController.m in Sources */,
 				1415F9EA1A5CD1CB003D0C29 /* UIBubbleTableView.m in Sources */,
 				1415F9EB1A5CD1CB003D0C29 /* DemandCell.m in Sources */,
@@ -4779,6 +4799,7 @@
 				A971BCA51A20825800C018D6 /* AppDelegate.m in Sources */,
 				1490772D1A4471E200065EE3 /* QuestionFilterView.m in Sources */,
 				A987EDED1A20920500CED7CD /* UIImageView+Block.m in Sources */,
+				14321E6E1A612E6A0065E8C3 /* CaseEditStyleViewController.m in Sources */,
 				14FE2E561A38549200B31FBA /* PrivateMessageDetailViewController.m in Sources */,
 				A9D654B31A27642800A80253 /* JSONAPI.m in Sources */,
 				A987EE4D1A20987800CED7CD /* DesignerViewController.m in Sources */,
@@ -4878,6 +4899,7 @@
 				14EDB3921A3B519000E5AC77 /* VersionInfoViewController.m in Sources */,
 				A9A0671A1A3D76DA0059D73B /* SWActionSheet.m in Sources */,
 				A9D654B01A27642800A80253 /* JSONModelClassProperty.m in Sources */,
+				14321E741A6142B30065E8C3 /* JRCaseImage.m in Sources */,
 				14587E1A1A35DD2600D41236 /* BindPhoneNumberViewController.m in Sources */,
 				A9A067191A3D76DA0059D73B /* DistancePickerView.m in Sources */,
 				1441A18F1A29E3D5004A038E /* KTPhotoView.m in Sources */,

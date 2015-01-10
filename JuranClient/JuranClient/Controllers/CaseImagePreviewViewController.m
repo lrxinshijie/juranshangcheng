@@ -7,6 +7,9 @@
 //
 
 #import "CaseImagePreviewViewController.h"
+#import "JRCaseImage.h"
+#import "CaseEditStyleViewController.h"
+#import "ALGetPhoto.h"
 
 @interface CaseImagePreviewViewController ()
 
@@ -23,26 +26,65 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    _imageView.image = _image;
-    if (_idx == 0) {
-        
+    _imageView.image = _caseImage.image;
+    
+    if (_caseImage.frontFlag) {
+        [_coverButton setImage:[UIImage imageNamed:@"case_edit_replace"] forState:UIControlStateNormal];
+        [_coverButton setTitle:@"更换" forState:UIControlStateNormal];
     }else{
-        
+        [_coverButton setImage:[UIImage imageNamed:@"case_edit_cover"] forState:UIControlStateNormal];
+        [_coverButton setTitle:@"设为封面" forState:UIControlStateNormal];
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
-}
+//- (void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+//}
+//
+//- (void)viewWillDisappear:(BOOL)animated{
+//    [super viewWillDisappear:animated];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+//}
 
 - (IBAction)onBack:(id)sender{
+    if (_block) {
+        _block(_caseImage, CaseImageEventChange);
+    }
     [super back:sender];
+}
+
+- (IBAction)onDelete:(id)sender{
+    if (_block) {
+        _block(_caseImage, CaseImageEventDelete);
+    }
+    [self onBack:sender];
+}
+
+- (IBAction)onCover:(id)sender{
+    if (_caseImage.frontFlag) {
+        [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:NO MaxNumber:1 Handler:^(NSArray *images) {
+            UIImage *image = [images firstObject];
+            _caseImage.image = image;
+            _imageView.image = image;
+        }];
+    }else{
+        if (_block) {
+            _block(_caseImage, CaseImageEventCover);
+        }
+        [self onBack:sender];
+    }
+    
+}
+
+- (IBAction)onStyle:(id)sender{
+    CaseEditStyleViewController *es = [[CaseEditStyleViewController alloc] init];
+    es.caseImage = _caseImage;
+    
+    UINavigationController *nav = [Public navigationControllerFromRootViewController:es];
+    [self presentViewController:nav animated:YES completion:^{
+        
+    }];
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{

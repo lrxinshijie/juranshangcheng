@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaseImagePreviewViewController">
             <connections>
+                <outlet property="coverButton" destination="L9T-41-lXt" id="veN-y3-ala"/>
                 <outlet property="imageView" destination="f9i-8A-iz1" id="38G-9i-tFP"/>
                 <outlet property="scrollView" destination="Ihi-Yz-dfd" id="ZrH-W2-eaI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -48,6 +49,9 @@
                     <state key="normal" title="删除" image="case_edit_delete.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="onDelete:" destination="-1" eventType="touchUpInside" id="iMS-cs-8fe"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="L9T-41-lXt">
                     <rect key="frame" x="0.0" y="524" width="160" height="44"/>
@@ -57,6 +61,20 @@
                     <state key="normal" title="设为封面" image="case_edit_cover.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="onCover:" destination="-1" eventType="touchUpInside" id="2Qk-gL-HrA"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cRZ-46-6iE">
+                    <rect key="frame" x="264" y="22" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="管理">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onStyle:" destination="-1" eventType="touchUpInside" id="7g5-8a-rna"/>
+                    </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Hpv-Fa-T9C">
                     <rect key="frame" x="0.0" y="524" width="320" height="1"/>
@@ -66,7 +84,7 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="289" y="337"/>
+            <point key="canvasLocation" x="132" y="341"/>
         </view>
     </objects>
     <resources>

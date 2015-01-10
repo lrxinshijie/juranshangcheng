@@ -10,8 +10,6 @@
 
 @interface CaseImageCollectionCell()
 
-@property (nonatomic, strong) IBOutlet UIImageView *imageView;
-
 @end
 
 @implementation CaseImageCollectionCell

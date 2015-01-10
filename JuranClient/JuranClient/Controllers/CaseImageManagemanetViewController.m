@@ -12,6 +12,10 @@
 #import "ALGetPhoto.h"
 #import "CaseIntroduceViewController.h"
 #import "CreateCaseSuccessViewController.h"
+#import "CaseEditStyleViewController.h"
+#import "JRCaseImage.h"
+#import "CaseImagePreviewViewController.h"
+#import "UIActionSheet+Blocks.h"
 
 @interface CaseImageManagemanetViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -39,10 +43,22 @@
     _collectionView.backgroundColor = [UIColor whiteColor];
     _collectionView.alwaysBounceVertical = YES;
 
-    
     [_collectionView registerNib:[UINib nibWithNibName:@"CaseImageCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"CaseImageCollectionCell"];
     [_collectionView registerNib:[UINib nibWithNibName:@"CaseImageHeaderView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CaseImageHeaderView"];
     
+    if (_jrCase.projectId.length > 0) {
+        [self showHUD];
+        [_jrCase loadDetail:^(BOOL result) {
+            [self hideHUD];
+            
+            if (result) {
+                [_collectionView reloadData];
+            }else{
+                [super back:nil];
+            }
+            
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,6 +81,7 @@
         [self submitCase];
     }else{
         CaseIntroduceViewController *vc = [[CaseIntroduceViewController alloc] init];
+        vc.jrCase = _jrCase;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -90,13 +107,14 @@
 - (void)uploadCaseImage:(NSInteger)idx{
     ASLog(@"upload idx:%d", idx);
     
-    UIImage *image = [_caseImages objectAtTheIndex:idx];
-    [self setHUDTitle:[NSString stringWithFormat:@"上传效果图%d/%d...", idx+1,[_caseImages count]]];
-    
-    if (image) {
-        [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":image} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    JRCaseImage *caseImage = [_caseImages objectAtTheIndex:idx];
+
+    if (caseImage) {
+        [self setHUDTitle:[NSString stringWithFormat:@"上传效果图%d/%d...", idx+1,[_caseImages count]]];
+        [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":caseImage.image} responseHandler:^(NSError *error, id data, NSDictionary *other) {
             if (!error) {
-                [_imageURLs addObject:@{@"imageUrl":[data objectForKey:@"imgUrl"],@"frontFlag":idx == 0 ? @(1) : @(0),@"picType":@"03"}];
+                caseImage.imageUrl = [data objectForKey:@"imgUrl"];
+                [_imageURLs addObject:[caseImage dictionaryValue]];
                 NSInteger ind = idx + 1;
                 [self uploadCaseImage:ind];
             }else{
@@ -136,23 +154,43 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    if (section == 0) {
-        return _roomTypeImage ? 2 : 1;
+    if (_jrCase.projectId.length > 0) {
+        if (section == 0) {
+            return 1;
+        }else{
+            return _jrCase.detailImageList.count;
+        }
     }else{
-        return _caseImages.count + 1;
+        if (section == 0) {
+            return _roomTypeImage ? 2 : 1;
+        }else{
+            return _caseImages.count + 1;
+        }
     }
+    
 }
 
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"CaseImageCollectionCell";
     CaseImageCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    if (indexPath.section == 0 && indexPath.row == 1) {
-        [cell setImage:_roomTypeImage];
-    }else if (indexPath.section == 1 && indexPath.row > 0){
-        [cell setImage:_caseImages[indexPath.row-1]];
+    
+    if (_jrCase.projectId.length > 0) {
+        if (indexPath.section == 0) {
+            [cell.imageView setImageWithURLString:_jrCase.frontImgUrl];
+        }else{
+            [cell.imageView setImageWithURLString:_jrCase.detailImageList[indexPath.row]];
+        }
     }else{
-        [cell setImage:[UIImage imageNamed:@"icon_add_image"]];
+        if (indexPath.section == 0 && indexPath.row == 1) {
+            [cell setImage:_roomTypeImage];
+        }else if (indexPath.section == 1 && indexPath.row > 0){
+            JRCaseImage *caseImage = _caseImages[indexPath.row-1];
+            [cell setImage:caseImage.image];
+        }else{
+            [cell setImage:[UIImage imageNamed:@"icon_add_image"]];
+        }
     }
+    
     return cell;
 }
 
@@ -171,24 +209,77 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        if (!_roomTypeImage) {
-            [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:NO MaxNumber:1 Handler:^(NSArray *images) {
-                self.roomTypeImage = images.firstObject;
-                [_collectionView reloadData];
-            }];
+    if (_jrCase.projectId.length > 0) {
+        return;
+    }
+    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            if (!_roomTypeImage) {
+                [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:NO MaxNumber:1 Handler:^(NSArray *images) {
+                    self.roomTypeImage = [images firstObject];
+                    [_collectionView reloadData];
+                }];
+            }else{
+                [self showTip:@"户型图只限一张"];
+            }
         }else{
-            [self showTip:@"户型图只限一张"];
-        }
-    }else if (indexPath.section == 1 && indexPath.row == 0){
-        if (_caseImages.count < 20) {
-            [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:NO MaxNumber:20-_caseImages.count Handler:^(NSArray *images) {
-                [_caseImages addObjectsFromArray:images];
-                [_collectionView reloadData];
+            [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"删除"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                if (buttonIndex == [actionSheet cancelButtonIndex]) {
+                    return ;
+                }
+                
+                self.roomTypeImage = nil;
+                [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
             }];
-        }else{
-            [self showTip:@"案例图片最多只能20张"];
         }
+        
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 0) {
+            if (_caseImages.count < 20) {
+                CaseEditStyleViewController *ce = [[CaseEditStyleViewController alloc] init];
+                ce.block = ^(JRCaseImage *image){
+                    if (_caseImages.count == 0) {
+                        image.frontFlag = YES;
+                    }
+                    
+                    [_caseImages addObject:image];
+                    [_collectionView reloadData];
+                };
+                [self.navigationController pushViewController:ce animated:YES];
+                
+            }else{
+                [self showTip:@"案例图片最多只能20张"];
+            }
+        }else{
+            CaseImagePreviewViewController *ci = [[CaseImagePreviewViewController alloc] init];
+            ci.caseImage = [_caseImages objectAtIndex:indexPath.row-1];
+            ci.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            ci.block = ^(JRCaseImage *image, CaseImageEvent event){
+                if (event == CaseImageEventChange) {
+                    [_collectionView reloadData];
+                }else if (event == CaseImageEventCover){
+                    [_caseImages enumerateObjectsUsingBlock:^(JRCaseImage *caseImage, NSUInteger idx, BOOL *stop) {
+                        caseImage.frontFlag = NO;
+                    }];
+                    
+                    image.frontFlag = YES;
+                    
+                }else if (event == CaseImageEventDelete){
+                    [_caseImages removeObject:image];
+                    [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
+                    if (image.frontFlag) {
+                        JRCaseImage *caseImage = [_caseImages firstObject];
+                        if (caseImage) {
+                            caseImage.frontFlag = YES;
+                        }
+                    }
+                    
+                }
+            };
+            [self presentViewController:ci animated:YES completion:nil];
+        }
+        
     }
 }
 

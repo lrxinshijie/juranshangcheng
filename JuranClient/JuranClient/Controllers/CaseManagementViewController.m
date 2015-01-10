@@ -48,7 +48,9 @@
     _emptyView.center = _tableView.center;
     [self.tableView addSubview:_emptyView];
     
-    [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onAdd)];
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onAdd) title:@"发布" backgroundImage:nil];
+    [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     [self refreshView];
 }
@@ -65,6 +67,26 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        JRCase *jrCase = _datas[indexPath.row];
+        [self showHUD];
+        NSDictionary *param = @{@"projectId": jrCase.projectId,
+                                @"projectType": @"01"};
+        [[ALEngine shareEngine] pathURL:JR_DELETE_PROJECT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            [self hideHUD];
+            if (!error) {
+                [_datas removeObject:jrCase];
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }];
+    }
 }
 
 - (void)loadData{
@@ -116,7 +138,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    return;
+    
     CaseImageManagemanetViewController *vc = [[CaseImageManagemanetViewController alloc] init];
+    vc.jrCase = _datas[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
