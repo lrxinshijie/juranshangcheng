@@ -373,6 +373,16 @@
 		141A1D3F1A2CCDE200C073C5 /* JRQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 141A1D3E1A2CCDE200C073C5 /* JRQuestion.m */; };
 		141A1D421A2CCDFA00C073C5 /* JRAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 141A1D411A2CCDFA00C073C5 /* JRAnswer.m */; };
 		141C564D1A23613900A57971 /* TATopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 141C564B1A23613900A57971 /* TATopicCell.m */; };
+		14321E5E1A61235B0065E8C3 /* CaseImagePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14321E5C1A61235B0065E8C3 /* CaseImagePreviewViewController.m */; };
+		14321E5F1A61235B0065E8C3 /* CaseImagePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14321E5C1A61235B0065E8C3 /* CaseImagePreviewViewController.m */; };
+		14321E601A61235B0065E8C3 /* CaseImagePreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14321E5D1A61235B0065E8C3 /* CaseImagePreviewViewController.xib */; };
+		14321E611A61235B0065E8C3 /* CaseImagePreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14321E5D1A61235B0065E8C3 /* CaseImagePreviewViewController.xib */; };
+		14321E651A6125F70065E8C3 /* case_edit_cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14321E621A6125F70065E8C3 /* case_edit_cover@2x.png */; };
+		14321E661A6125F70065E8C3 /* case_edit_cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14321E621A6125F70065E8C3 /* case_edit_cover@2x.png */; };
+		14321E671A6125F70065E8C3 /* case_edit_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14321E631A6125F70065E8C3 /* case_edit_delete@2x.png */; };
+		14321E681A6125F70065E8C3 /* case_edit_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14321E631A6125F70065E8C3 /* case_edit_delete@2x.png */; };
+		14321E691A6125F70065E8C3 /* case_edit_replace@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14321E641A6125F70065E8C3 /* case_edit_replace@2x.png */; };
+		14321E6A1A6125F70065E8C3 /* case_edit_replace@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14321E641A6125F70065E8C3 /* case_edit_replace@2x.png */; };
 		14361E551A343F5F00F9BD94 /* BaseAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14361E531A343F5F00F9BD94 /* BaseAddressViewController.m */; };
 		14361E561A343F5F00F9BD94 /* BaseAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14361E541A343F5F00F9BD94 /* BaseAddressViewController.xib */; };
 		14361E5A1A344E6100F9BD94 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 14361E581A344E6100F9BD94 /* pinyin.c */; };
@@ -1251,6 +1261,12 @@
 		141A1D411A2CCDFA00C073C5 /* JRAnswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRAnswer.m; sourceTree = "<group>"; };
 		141C564A1A23613900A57971 /* TATopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TATopicCell.h; sourceTree = "<group>"; };
 		141C564B1A23613900A57971 /* TATopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TATopicCell.m; sourceTree = "<group>"; };
+		14321E5B1A61235B0065E8C3 /* CaseImagePreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseImagePreviewViewController.h; sourceTree = "<group>"; };
+		14321E5C1A61235B0065E8C3 /* CaseImagePreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseImagePreviewViewController.m; sourceTree = "<group>"; };
+		14321E5D1A61235B0065E8C3 /* CaseImagePreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseImagePreviewViewController.xib; sourceTree = "<group>"; };
+		14321E621A6125F70065E8C3 /* case_edit_cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "case_edit_cover@2x.png"; sourceTree = "<group>"; };
+		14321E631A6125F70065E8C3 /* case_edit_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "case_edit_delete@2x.png"; sourceTree = "<group>"; };
+		14321E641A6125F70065E8C3 /* case_edit_replace@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "case_edit_replace@2x.png"; sourceTree = "<group>"; };
 		14361E521A343F5F00F9BD94 /* BaseAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAddressViewController.h; sourceTree = "<group>"; };
 		14361E531A343F5F00F9BD94 /* BaseAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseAddressViewController.m; sourceTree = "<group>"; };
 		14361E541A343F5F00F9BD94 /* BaseAddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseAddressViewController.xib; sourceTree = "<group>"; };
@@ -2513,6 +2529,9 @@
 				144A268F1A5A846B009947F7 /* CreateCaseSuccessViewController.h */,
 				144A26901A5A846B009947F7 /* CreateCaseSuccessViewController.m */,
 				144A26911A5A846B009947F7 /* CreateCaseSuccessViewController.xib */,
+				14321E5B1A61235B0065E8C3 /* CaseImagePreviewViewController.h */,
+				14321E5C1A61235B0065E8C3 /* CaseImagePreviewViewController.m */,
+				14321E5D1A61235B0065E8C3 /* CaseImagePreviewViewController.xib */,
 			);
 			name = Case;
 			sourceTree = "<group>";
@@ -3569,6 +3588,9 @@
 		BD5185B31A5D0ED700BE508A /* JuranDesigner */ = {
 			isa = PBXGroup;
 			children = (
+				14321E621A6125F70065E8C3 /* case_edit_cover@2x.png */,
+				14321E631A6125F70065E8C3 /* case_edit_delete@2x.png */,
+				14321E641A6125F70065E8C3 /* case_edit_replace@2x.png */,
 				14A6DA801A5F768C00D40CB3 /* case_create_success@2x.png */,
 				A95DB7061A5EF0BC00F543CE /* Guide */,
 				371D686A1A5D6E2000172AC9 /* Personal */,
@@ -3725,6 +3747,7 @@
 				1415FA2D1A5CD1CB003D0C29 /* ModifyViewController.xib in Resources */,
 				BD5186621A5D0ED700BE508A /* login-text-bg@2x.png in Resources */,
 				BD5186D21A5D0ED700BE508A /* bubble-me@2x.png in Resources */,
+				14321E6A1A6125F70065E8C3 /* case_edit_replace@2x.png in Resources */,
 				BD5186BE1A5D0ED700BE508A /* img_adopt _bf@2x.png in Resources */,
 				1415FA2E1A5CD1CB003D0C29 /* FeedBackViewController.xib in Resources */,
 				1415FA2F1A5CD1CB003D0C29 /* RealNameAuthViewController.xib in Resources */,
@@ -3828,6 +3851,7 @@
 				1415FA551A5CD1CB003D0C29 /* DemandEditTextViewController.xib in Resources */,
 				BD5185E41A5D0ED700BE508A /* case_icon_collect@2x.png in Resources */,
 				BD5186B61A5D0ED700BE508A /* icon_ camera@2x.png in Resources */,
+				14321E611A61235B0065E8C3 /* CaseImagePreviewViewController.xib in Resources */,
 				1415FA561A5CD1CB003D0C29 /* JRServiceViewController.xib in Resources */,
 				BD5186561A5D0ED700BE508A /* login-icon-email@2x.png in Resources */,
 				BD5187141A5D0ED700BE508A /* service_highlighted_11@2x.png in Resources */,
@@ -3884,6 +3908,7 @@
 				375B46461A5EB7F100D7E74B /* input_remark@2x.png in Resources */,
 				BD51874E1A5D0ED700BE508A /* sns_icon_23_s@2x.png in Resources */,
 				BD5186061A5D0ED700BE508A /* icon-sorting-default@2x.png in Resources */,
+				14321E681A6125F70065E8C3 /* case_edit_delete@2x.png in Resources */,
 				BD5186F41A5D0ED700BE508A /* menu_about_default@2x.png in Resources */,
 				BD5186041A5D0ED700BE508A /* icon-sorting-active@2x.png in Resources */,
 				1415FAAF1A5D249E003D0C29 /* Icon@2x.png in Resources */,
@@ -4067,6 +4092,7 @@
 				BD5187381A5D0ED700BE508A /* service_normal_6@2x.png in Resources */,
 				BD51875C1A5D0ED700BE508A /* tabbar_case@2x.png in Resources */,
 				BD5186741A5D0ED700BE508A /* chat_sender_bg@2x.png in Resources */,
+				14321E661A6125F70065E8C3 /* case_edit_cover@2x.png in Resources */,
 				BD51870E1A5D0ED700BE508A /* menu_topic_select@2x.png in Resources */,
 				BD5186181A5D0ED700BE508A /* designer_no_pic@2x.png in Resources */,
 				BD5186F81A5D0ED700BE508A /* menu_activity_default@2x.png in Resources */,
@@ -4188,6 +4214,7 @@
 				BD5186B51A5D0ED700BE508A /* icon_ camera@2x.png in Resources */,
 				BD48B58E1A5283340041725C /* JRServiceViewController.xib in Resources */,
 				BD5186551A5D0ED700BE508A /* login-icon-email@2x.png in Resources */,
+				14321E691A6125F70065E8C3 /* case_edit_replace@2x.png in Resources */,
 				BD5187131A5D0ED700BE508A /* service_highlighted_11@2x.png in Resources */,
 				BD5186291A5D0ED700BE508A /* look_count@2x.png in Resources */,
 				BD51873D1A5D0ED700BE508A /* service_normal_9@2x.png in Resources */,
@@ -4240,6 +4267,7 @@
 				BD51874D1A5D0ED700BE508A /* sns_icon_23_s@2x.png in Resources */,
 				BD5186051A5D0ED700BE508A /* icon-sorting-default@2x.png in Resources */,
 				BD5186F31A5D0ED700BE508A /* menu_about_default@2x.png in Resources */,
+				14321E651A6125F70065E8C3 /* case_edit_cover@2x.png in Resources */,
 				BD5186031A5D0ED700BE508A /* icon-sorting-active@2x.png in Resources */,
 				BD5186EF1A5D0ED700BE508A /* status_end@2x.png in Resources */,
 				BD5186851A5D0ED700BE508A /* icon_personal_demands@2x.png in Resources */,
@@ -4258,6 +4286,7 @@
 				BD5186A71A5D0ED700BE508A /* unlogin_head@2x.png in Resources */,
 				145471D31A38944F00428BCB /* QuestionViewController.xib in Resources */,
 				A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */,
+				14321E601A61235B0065E8C3 /* CaseImagePreviewViewController.xib in Resources */,
 				BD51869F1A5D0ED700BE508A /* personal_header_bg@2x.png in Resources */,
 				BD51868B1A5D0ED700BE508A /* icon_personal_letter@2x.png in Resources */,
 				BD51875D1A5D0ED700BE508A /* tabbar_case_hl@2x.png in Resources */,
@@ -4408,6 +4437,7 @@
 				BD5187871A5D0ED700BE508A /* nav-user-active@2x.png in Resources */,
 				14D973831A32CAE400E771ED /* AskDetailViewController.xib in Resources */,
 				BD5187371A5D0ED700BE508A /* service_normal_6@2x.png in Resources */,
+				14321E671A6125F70065E8C3 /* case_edit_delete@2x.png in Resources */,
 				BD51875B1A5D0ED700BE508A /* tabbar_case@2x.png in Resources */,
 				BD5186731A5D0ED700BE508A /* chat_sender_bg@2x.png in Resources */,
 				BD51870D1A5D0ED700BE508A /* menu_topic_select@2x.png in Resources */,
@@ -4618,6 +4648,7 @@
 				1415F9E51A5CD1CB003D0C29 /* NewestTopicViewController.m in Sources */,
 				1415F9E61A5CD1CB003D0C29 /* CaseImageManagemanetViewController.m in Sources */,
 				1415F9E71A5CD1CB003D0C29 /* AboutViewController.m in Sources */,
+				14321E5F1A61235B0065E8C3 /* CaseImagePreviewViewController.m in Sources */,
 				1415F9E81A5CD1CB003D0C29 /* APPRecommendViewController.m in Sources */,
 				1415F9E91A5CD1CB003D0C29 /* CreateCaseSuccessViewController.m in Sources */,
 				1415F9EA1A5CD1CB003D0C29 /* UIBubbleTableView.m in Sources */,
@@ -4855,6 +4886,7 @@
 				A987EDE31A20920500CED7CD /* NSObject+ASCategory.m in Sources */,
 				14FE2DEB1A38338800B31FBA /* PrivateMessage.m in Sources */,
 				A987EDEC1A20920500CED7CD /* UIImageView+ASCategory.m in Sources */,
+				14321E5E1A61235B0065E8C3 /* CaseImagePreviewViewController.m in Sources */,
 				14FE2DE21A382FCB00B31FBA /* PrivateMessageViewController.m in Sources */,
 				A987EDD91A20920500CED7CD /* ASGeometry.m in Sources */,
 				A9A53B0C1A46FE7C008D75B8 /* NSBubbleData.m in Sources */,
