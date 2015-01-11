@@ -34,5 +34,5 @@
 
 - (void)startActivity;
 - (void)stopActivity;
-
+- (UIImageView *)imageView;
 @end
