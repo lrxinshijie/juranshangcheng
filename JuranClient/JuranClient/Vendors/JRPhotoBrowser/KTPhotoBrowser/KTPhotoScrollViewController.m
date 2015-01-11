@@ -69,6 +69,11 @@ const CGFloat ktkDefaultToolbarHeight = 44;
         [self setStatusbarHidden:isStatusbarHidden];
         
         self.hidesBottomBarWhenPushed = YES;
+        
+//        if (SystemVersionGreaterThanOrEqualTo7) {
+//            self.extendedLayoutIncludesOpaqueBars = NO;
+//            self.edgesForExtendedLayout = UIRectEdgeNone;
+//        }
     }
     return self;
 }
@@ -80,6 +85,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
     CGRect scrollFrame = [self frameForPagingScrollView];
     UIScrollView *newView = [[UIScrollView alloc] initWithFrame:scrollFrame];
     [newView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    newView.clipsToBounds = YES;
     [newView setDelegate:self];
     
     UIColor *backgroundColor = [dataSource_ respondsToSelector:@selector(imageBackgroundColor)] ?
@@ -242,9 +248,10 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 - (CGRect)frameForPagingScrollView
 {
-    CGRect frame = [[UIScreen mainScreen] bounds];
+    CGRect frame = kContentFrame;// [[UIScreen mainScreen] bounds];
     frame.origin.x -= PADDING;
     frame.size.width += (2 * PADDING);
+//    frame.origin.y = 64;
     return frame;
 }
 
@@ -257,10 +264,11 @@ const CGFloat ktkDefaultToolbarHeight = 44;
     CGRect bounds = [scrollView_ bounds];
     if (SystemVersionGreaterThanOrEqualTo(7)) {
         bounds.origin.y = -64;
-        bounds.size.height = [UIScreen mainScreen].bounds.size.height;
+        bounds.size.height = bounds.size.height;
     }else{
-        bounds.size.height = [UIScreen mainScreen].bounds.size.height;
+        bounds.size.height = bounds.size.height;
     }
+    
     CGRect pageFrame = bounds;
     pageFrame.size.width -= (2 * PADDING);
     pageFrame.origin.x = (bounds.size.width * index) + PADDING;
@@ -284,7 +292,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
         KTPhotoView *photoView = [[KTPhotoView alloc] initWithFrame:frame];
         [photoView setScroller:self];
         [photoView setIndex:index];
-        
+        ASLog(@"frame:%@,%@,%@", NSStringFromCGRect(scrollView_.frame),NSStringFromCGRect(photoView.frame),NSStringFromCGRect(photoView.imageView.frame));
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
         longPress.minimumPressDuration = 1.f;
         [photoView addGestureRecognizer:longPress];

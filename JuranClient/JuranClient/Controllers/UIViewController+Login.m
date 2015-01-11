@@ -91,6 +91,10 @@
     [btn setImage:[[ALTheme sharedTheme] imageNamed:@"navbar_leftbtn_logo"] forState:UIControlStateNormal];
     
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+
+#ifdef kJuranDesigner
+    btn.adjustsImageWhenHighlighted = NO;
+#endif
     UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
     if (SystemVersionGreaterThanOrEqualTo7) {
         UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
