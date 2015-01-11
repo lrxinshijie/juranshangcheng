@@ -41,6 +41,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *fileImageCountLabel;
 
 @property (nonatomic, strong) IBOutlet UIView *emptyView;
+@property (nonatomic, strong) NSMutableDictionary *openStatusDic;
 
 @end
 
@@ -53,6 +54,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    self.openStatusDic = [NSMutableDictionary dictionary];
     if (_topic.topicId.length > 0) {
         self.navigationItem.title = _topic.theme.length>0?_topic.theme:_topic.title;
     }else{
@@ -169,7 +171,8 @@
     _commentCountLabel.text = [NSString stringWithFormat:@"%d", _topic.commentCount];
     
     ASLog(@"%@", _topic.contentDescription);
-    [_contentWebView loadHTMLString:_topic.contentDescription baseURL:[NSURL URLWithString:@"http://10.199.5.57:8080/"]]; //[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]//[NSURL URLWithString:@"http://10.199.5.57:8080/img/"]
+    [_contentWebView reset];
+    [_contentWebView loadHTMLString:_topic.contentDescription baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]]; ////[NSURL URLWithString:@"http://10.199.5.57:8080/img/"]
     [self setupTableHeaderView];
     [_tableView reloadData];
 }
@@ -233,6 +236,11 @@
         [self hideHUD];
         if (!error) {
             _commentTextField.text = @"";
+            if (self.selectComment) {
+                if (![_openStatusDic objectForKey:[NSString stringWithFormat:@"%d", self.selectComment.commentId]]) {
+                    [_openStatusDic addEntriesFromDictionary:@{[NSString stringWithFormat:@"%d", self.selectComment.commentId]:@""}];
+                }
+            }
             [self loadData];
             self.selectComment = nil;
         }
@@ -297,8 +305,12 @@
     [_commentTextField resignFirstResponder];
     _commentImageView.hidden = NO;
     
-    CGRect frame = _commentView.frame;
-    frame.origin.y = CGRectGetMaxY(_tableView.frame) - CGRectGetHeight(_commentImageView.frame);
+    CGRect frame = self.tableView.frame;
+    frame.size.height = kWindowHeightWithoutNavigationBarAndTabbar - CGRectGetHeight(_commentImageView.frame);
+    self.tableView.frame = frame;
+    
+    frame = _commentView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
 }
 
@@ -306,7 +318,11 @@
     _commentImageView.hidden = YES;
 //    _commentView.hidden = YES;
     
-    CGRect frame = _commentView.frame;
+    CGRect frame = self.tableView.frame;
+    frame.size.height = kWindowHeightWithoutNavigationBarAndTabbar;
+    self.tableView.frame = frame;
+    
+    frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
 }
@@ -404,6 +420,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
     JRComment *commnet = [_topic.commitList objectAtIndex:indexPath.row];
+    commnet.unfold = [_openStatusDic objectForKey:[NSString stringWithFormat:@"%d", commnet.commentId]]?YES:NO;
     cell.commentButton.hidden = ![_topic isNewestTopic];
     [cell fillCellWithComment:commnet];
     
@@ -423,6 +440,12 @@
 }
 
 - (void)clickCellUnfold:(CommentCell *)cell{
+    JRComment *c = cell.comment;
+    if (!c.unfold) {
+        [_openStatusDic removeObjectForKey:[NSString stringWithFormat:@"%d", c.commentId]];
+    }else{
+        [_openStatusDic addEntriesFromDictionary:@{[NSString stringWithFormat:@"%d", c.commentId]:@""}];
+    }
     [_tableView reloadData];
 }
 
@@ -462,14 +485,24 @@
     NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
     CGSize keyboardSize = [value CGRectValue].size;
     
-    CGRect frame = _commentView.frame;
-    frame.origin.y = CGRectGetMaxY(_tableView.frame) - keyboardSize.height;
+    CGRect frame = self.tableView.frame;
+    frame.size.height = kWindowHeightWithoutNavigationBarAndTabbar - keyboardSize.height;
+    self.tableView.frame = frame;
+    
+    frame = _commentView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
+    
+    
 }
 
 -(void)keyboardWillBeHidden:(NSNotification *)aNotification{
     
-    CGRect frame = _commentView.frame;
+    CGRect frame = self.tableView.frame;
+    frame.size.height = kWindowHeightWithoutNavigationBarAndTabbar;
+    self.tableView.frame = frame;
+    
+    frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
 }

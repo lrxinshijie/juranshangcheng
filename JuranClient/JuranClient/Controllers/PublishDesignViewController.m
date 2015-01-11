@@ -484,14 +484,14 @@
     NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
     CGSize keyboardSize = [value CGRectValue].size;
     
-    NSValue *animationDurationValue = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-    NSTimeInterval animationDuration;
-    [animationDurationValue getValue:&animationDuration];
-    NSTimeInterval animation = animationDuration;
-    
-    //视图移动的动画开始
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:animation];
+//    NSValue *animationDurationValue = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+//    NSTimeInterval animationDuration;
+//    [animationDurationValue getValue:&animationDuration];
+//    NSTimeInterval animation = animationDuration;
+//    
+//    //视图移动的动画开始
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:animation];
     CGRect frame = _tableView.frame;
     frame.size.height = kWindowHeightWithoutNavigationBar - keyboardSize.height;
     _tableView.frame = frame;

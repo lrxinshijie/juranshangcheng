@@ -193,8 +193,8 @@
         return;
     }
     
-    if (_user.nickName.length < 4) {
-        [self showTip:@"昵称至少需要4个字符"];
+    if (_user.nickName.length == 0) {
+        [self showTip:@"昵称不能为空"];
         return;
     }
     
@@ -479,7 +479,7 @@
         accountChangeTip = NO;
         _user.account = textField.text;
     }else if (textField.tag == 1101){
-        _user.nickName = textField.text;
+        _user.nickName = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     }else if (textField.tag == 1102){
         _user.homeTel = textField.text;
     }else if (textField.tag == 1103){

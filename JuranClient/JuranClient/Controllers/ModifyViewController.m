@@ -88,6 +88,9 @@
             _textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
             idTypes = @[@"身份证", @"军官证", @"护照"];
             idCardType = -1;
+            if (_user.idCardType.length != 0) {
+                idCardType = _user.idCardType.integerValue;
+            }
             CGRect frame = _textField.frame;
             frame.size.width = 200;
             _textField.frame = frame;
@@ -170,50 +173,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)modifyMemberDetail{
-    [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_EDIT_MEMBERINFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
-        if (!error) {
-            switch (_type) {
-                case ModifyCVTypeNickName:
-                {
-                    _user.nickName = _textField.text;
-                    break;
-                }
-                case ModifyCVTypeWeiXin:
-                {
-                    _user.weixin = _textField.text;
-                    break;
-                }
-                case ModifyCVTypeQQ:
-                {
-                    _user.qq = _textField.text;
-                    break;
-                }
-                case ModifyCVTypeHomeTel:
-                {
-                    _user.homeTel = _textField.text;
-                    break;
-                }
-                case ModifyCVTypeIdType:
-                {
-                    _user.idCardType = [NSString stringWithFormat:@"%d", idCardType];
-                    _user.idCardNum = _textField.text;
-                    break;
-                }
-                default:
-                    break;
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if ([_delegate respondsToSelector:@selector(modifyCommit:)]) {
-                    [_delegate modifyCommit:self];
-                }
-                [self.navigationController popViewControllerAnimated:YES];
-            });
-        }
-    }];
-}
 
 #pragma mark - UITableViewDataSource/Delegate
 
