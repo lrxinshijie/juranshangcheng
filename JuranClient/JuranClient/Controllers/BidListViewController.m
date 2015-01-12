@@ -24,11 +24,19 @@
 
 @implementation BidListViewController
 
+- (void)dealloc{
+    _tableView.dataSource = nil;
+    _tableView.delegate = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
      [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"招标公告";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameMyDemandReloadData object:nil];
     
     self.filterView = [[FilterView alloc] initWithType:FilterViewTypeBidInfo defaultData:_filterData];
     _filterView.delegate = self;
@@ -54,6 +62,10 @@
         weakSelf.currentPage++;
         [weakSelf loadData];
     }];
+    [_tableView headerBeginRefreshing];
+}
+
+- (void)receiveReloadDataNotification:(NSNotification*)notification{
     [_tableView headerBeginRefreshing];
 }
 

@@ -52,7 +52,6 @@
 
 //
 @property (nonatomic, copy) NSString *neRoomTypeImgUrl;
-@property (nonatomic, copy) NSString *oldRoomTypeImgUrl;
 @property (nonatomic, copy) NSString *roomTypeId;
 
 #ifdef kJuranDesigner

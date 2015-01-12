@@ -25,7 +25,7 @@
 @interface PersonalDataForDesignerViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     NSDictionary *param;
-    BOOL accountChangeTip;
+    BOOL nickNameChangeTip;
 }
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIImageView *iconImageView;
@@ -36,7 +36,7 @@
 @property (nonatomic, strong) NSArray *tags;
 
 @property (nonatomic, strong) UITextField *selectedTextField;
-@property (nonatomic, strong) NSString* oldAccount;
+@property (nonatomic, strong) NSString* oldNickName;
 
 @end
 
@@ -60,7 +60,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
     _user = [[JRDesigner alloc] init];
-    _oldAccount = @"";
+    _oldNickName = @"";
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave) title:@"保存" backgroundImage:nil];
     [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
@@ -136,8 +136,8 @@
 - (void)modifyMemberDetail{
     
     NSDictionary *param1 = @{@"nickName": _user.nickName,
-                             @"oldNickName": _user.oldNickName,
-                             @"nickNameChangeable":@"",
+                             @"oldNickName": self.oldNickName,
+                             @"nickNameChangeable":_user.nickNameChangeable,
 //                             @"homeTel": _user.homeTel,
                              @"birthday":_user.birthday,
                              @"areaInfo": @{@"provinceCode": _user.areaInfo.provinceCode,
@@ -175,9 +175,12 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
                 [self showTip:@"修改用户信息成功"];
+                if ([_user.nickName isEqualToString:self.oldNickName]) {
+                    _user.nickNameChangeable = @"1";
+                }
             });
+            [self loadData];
         }
-        [self loadData];
     }];
 }
 
@@ -262,10 +265,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 0) {
         return 65;
+    }else if (indexPath.section == 2 && indexPath.row == 6){
+        return 70;
     }
-//    else if (indexPath.section == 2 && indexPath.row == 6){
-//        return 70;
-//    }
     return 44;
 }
 
@@ -282,6 +284,10 @@
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         cell.detailTextLabel.textColor = [UIColor blackColor];
         cell.detailTextLabel.text = @"";
+        
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+            cell.layoutMargins = UIEdgeInsetsZero;
+        }
         
         if (indexPath.section == 0) {
             cell.textLabel.text = _keys[indexPath.section][indexPath.row];
@@ -302,6 +308,29 @@
             //            [self.iconImageView setImageWithURLString:_user.headUrl];
             cell.accessoryView = view;
             
+        }else if (indexPath.section == 2 && indexPath.row == 6){
+            cell.textLabel.text = _keys[indexPath.section][indexPath.row];
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 210, 60)];
+            
+            CGRect frame = view.frame;
+            frame.origin = CGPointMake(0, 0);
+            frame.size = CGSizeMake(frame.size.width - 15, 60);
+            UILabel *label = [cell labelWithFrame:frame text:_values[indexPath.section][indexPath.row] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
+            label.numberOfLines = 3;
+            if ([label.text heightWithFont:label.font constrainedToWidth:CGRectGetWidth(label.frame)] < 20) {
+                label.textAlignment = NSTextAlignmentRight;
+            }
+            [view addSubview:label];
+            
+            frame = view.frame;
+            frame.origin = CGPointMake(frame.size.width - 8, (frame.size.height - 16)/2);
+            frame.size = CGSizeMake(8, 15);
+            UIImageView *arrowImageView = [cell imageViewWithFrame:frame image:[UIImage imageNamed:@"cellIndicator.png"]];
+            [view addSubview:arrowImageView];
+            
+            
+            //            [self.iconImageView setImageWithURLString:_user.headUrl];
+            cell.accessoryView = view;
         }else{
             cell.textLabel.text = _keys[indexPath.section][indexPath.row];
             NSString *value = _values[indexPath.section][indexPath.row];
@@ -309,11 +338,6 @@
             if ([value isEqualToString:@"未设置"]) {
                 cell.detailTextLabel.textColor = [UIColor grayColor];
             }
-//            if (indexPath.section == 2 && indexPath.row == 6){
-//                cell.detailTextLabel.numberOfLines = 3;
-//            }else{
-//                cell.detailTextLabel.numberOfLines = 1;
-//            }
         }
         return cell;
     }else{
@@ -339,6 +363,10 @@
         cell.textField.placeholder = _placeholders[indexPath.section][indexPath.row];
         cell.textField.text = _values[indexPath.section][indexPath.row];
         cell.textField.keyboardType = UIKeyboardTypeDefault;
+        
+        if (indexPath.section == 0 && indexPath.row == 1) {
+            cell.textField.enabled = NO;
+        }
         
         if (indexPath.section == 2 && indexPath.row == 0) {
             cell.textField.keyboardType = UIKeyboardTypeNumberPad;
@@ -496,21 +524,20 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    if (textField.tag == 1100) {
-        /*
-        if (_user.accountChangeable) {
+    if (textField.tag == 1101) {
+        if (_user.nickNameChangeable.boolValue) {
             [self showTip:@"用户名仅限修改一次"];
             return NO;
-        }else if(!accountChangeTip){
+        }else if(!nickNameChangeTip){
             self.selectedTextField = textField;
-            [UIAlertView showWithTitle:@"" message:@"用户名只可修改一次，确定修改？" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确定"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            [UIAlertView showWithTitle:@"" message:@"昵称只可修改一次，确定修改？" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确定"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
                 if (buttonIndex == 1) {
-                    accountChangeTip = YES;
+                    nickNameChangeTip = YES;
                     [self.selectedTextField becomeFirstResponder];
                 }
             }];
             return NO;
-        }*/
+        }
     }
     self.selectedTextField = textField;
     return YES;
@@ -518,11 +545,11 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField.tag == 1100) {
-//        self.oldAccount = _user.account;
-//        accountChangeTip = NO;
         _user.account = textField.text;
     }else if (textField.tag == 1101){
         _user.nickName = textField.text;
+        self.oldNickName = _user.nickName;
+        nickNameChangeTip = NO;
     }else if (textField.tag == 1102){
         _user.experienceCount = textField.text.integerValue;
     }else if (textField.tag == 1103){

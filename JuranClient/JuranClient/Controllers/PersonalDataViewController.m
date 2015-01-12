@@ -157,8 +157,8 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
                 [self showTip:@"修改用户信息成功"];
             });
+            [self loadData];
         }
-        [self loadData];
     }];
 }
 
@@ -268,6 +268,10 @@
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         cell.detailTextLabel.textColor = [UIColor blackColor];
         cell.detailTextLabel.text = @"";
+        
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+            cell.layoutMargins = UIEdgeInsetsZero;
+        }
         
         if (indexPath.section == 0) {
             cell.textLabel.text = _keys[indexPath.section][indexPath.row];

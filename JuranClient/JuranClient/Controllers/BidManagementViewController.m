@@ -30,10 +30,17 @@
 
 @implementation BidManagementViewController
 
+- (void)dealloc{
+    _tableView.dataSource = nil;
+    _tableView.delegate = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameMyDemandReloadData object:nil];
     
     self.navigationItem.title = @"应标管理";
     
@@ -65,6 +72,9 @@
     
 }
 
+- (void)receiveReloadDataNotification:(NSNotification*)notification{
+    [_tableView headerBeginRefreshing];
+}
 
 - (void)loadData{
     NSString *status = _segment.selectedSegmentIndex == 0?@"goingon":@"finished";
