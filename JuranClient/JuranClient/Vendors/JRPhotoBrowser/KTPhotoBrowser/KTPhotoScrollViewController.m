@@ -292,7 +292,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
         KTPhotoView *photoView = [[KTPhotoView alloc] initWithFrame:frame];
         [photoView setScroller:self];
         [photoView setIndex:index];
-        ASLog(@"frame:%@,%@,%@", NSStringFromCGRect(scrollView_.frame),NSStringFromCGRect(photoView.frame),NSStringFromCGRect(photoView.imageView.frame));
+//        ASLog(@"frame:%@,%@,%@", NSStringFromCGRect(scrollView_.frame),NSStringFromCGRect(photoView.frame),NSStringFromCGRect(photoView.imageView.frame));
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
         longPress.minimumPressDuration = 1.f;
         [photoView addGestureRecognizer:longPress];

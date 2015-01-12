@@ -51,7 +51,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [self setupShareSDK];
-#ifdef kJuranDesigner
+#ifndef kJuranDesigner
 //    [self setupPush];
     [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                                    UIRemoteNotificationTypeSound |
