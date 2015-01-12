@@ -77,6 +77,7 @@ typedef enum : NSUInteger {
 typedef enum : NSUInteger {
     FilterViewActionSort,
     FilterViewActionFilter,
+    FilterViewActionGrid,
 } FilterViewAction;
 
 typedef enum : NSUInteger {

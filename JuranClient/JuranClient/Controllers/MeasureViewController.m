@@ -393,6 +393,7 @@
     }else if (textField.tag == 99){
         self.houseArea = textField.text;
     }
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

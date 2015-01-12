@@ -95,34 +95,47 @@
 
 #ifdef kJuranDesigner
 - (void)setupTabbar{
-    
+    CGFloat top = 6;
     HomeViewController *home = [[HomeViewController alloc] init];
     UINavigationController *homeNav = [Public navigationControllerFromRootViewController:home];
     homeNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-home-default" selected:@"nav-home-active"];
-    homeNav.delegate = self;
+    [homeNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
+//    homeNav.delegate = self;
     
     CaseViewController *cs = [[CaseViewController alloc] init];
     cs.isHome = YES;
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
-    csNav.tabBarItem = [self setupTabbarItemTitle:@"案例" image:@"nav-case-default" selected:@"nav-case-active"];
-    csNav.delegate = self;
+    csNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-case-default" selected:@"nav-case-active"];
+    [csNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
+//    csNav.delegate = self;
     
     DesignerViewController *des = [[DesignerViewController alloc] init];
     des.isHome = YES;
     UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
-    desNav.tabBarItem = [self setupTabbarItemTitle:@"设计师" image:@"nav-designer-default" selected:@"nav-designer-active"];
-    desNav.delegate = self;
+    desNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-designer-default" selected:@"nav-designer-active"];
+    [desNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
+//    desNav.delegate = self;
     
     ProfileViewController *profile = [[ProfileViewController alloc] init];
     UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
-    profileNav.tabBarItem = [self setupTabbarItemTitle:@"个人中心" image:@"nav-user-default" selected:@"nav-user-active"];
-    profileNav.delegate = self;
+    profileNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-user-default" selected:@"nav-user-active"];
+    [profileNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
+//    profileNav.delegate = self;
     
-    self.tabBarController = [[LeveyTabBarController alloc] initWithViewControllers:@[homeNav,csNav,desNav,profileNav]];
-    [_tabBarController.tabBar setBackgroundImage:[UIImage imageFromColor:[[ALTheme sharedTheme] navigationColor]]];
-    [_tabBarController setTabBarTransparent:YES];
+    self.tabBarController = [[UITabBarController alloc] init];
+    UIImage *image = [UIImage imageFromColor:[UIColor blackColor]];
+    [_tabBarController.tabBar setBackgroundImage:image];
     
+    _tabBarController.viewControllers = @[homeNav,csNav,desNav,profileNav];
     self.window.rootViewController = _tabBarController;
+    
+//    self.tabBarController = [[LeveyTabBarController alloc] initWithViewControllers:@[homeNav,csNav,desNav,profileNav]];
+//    [_tabBarController.tabBar setBackgroundImage:[UIImage imageFromColor:[[ALTheme sharedTheme] navigationColor]]];
+//    [_tabBarController setTabBarTransparent:YES];
+//    
+//    self.window.rootViewController = _tabBarController;
+    
+    
 }
 #else
 
@@ -206,7 +219,7 @@
 
 #ifdef kJuranDesigner
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-    [_tabBarController hidesTabBar:navigationController.viewControllers.count > 1 animated:YES];
+//    [_tabBarController hidesTabBar:navigationController.viewControllers.count > 1 animated:YES];
     
 //    if (viewController.hidesBottomBarWhenPushed){
 //        [_tabBarController hidesTabBar:YES animated:YES];
