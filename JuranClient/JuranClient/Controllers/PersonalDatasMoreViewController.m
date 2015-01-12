@@ -213,6 +213,7 @@
     }else if(textField.tag == 1103){
         _user.professional = textField.text;
     }
+    [self resetValues];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
