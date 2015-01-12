@@ -528,6 +528,7 @@
     }else if (textField.tag == 1103){
         _user.granuate = textField.text;
     }
+    [self reSetData];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

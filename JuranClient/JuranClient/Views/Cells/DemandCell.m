@@ -69,9 +69,6 @@
     _priceLabel.text = [NSString stringWithFormat:@"%@万元", demand.budget];
     _bidNumberLabel.text = [NSString stringWithFormat:@"投标人数：%d人", demand.bidNums];
     _bidNumberView.hidden = demand.newBidNums?NO:YES;
-    _statusLabel.hidden = demand.isBidded;
-    _statusLabel.text = demand.isBidded?@"":[demand statusString];
-    _statusImageView.image = [UIImage imageNamed:demand.isBidded?@"status_end.png":@"status_underway.png"];
     NSInteger index = [demand statusIndex];
     if (index == 2) {
         if (demand.deadBalance.integerValue < 1) {
@@ -83,8 +80,29 @@
     }else{
         _endTimeLabel.text = @"";
     }
+    
+    _statusLabel.hidden = NO;
+    _statusLabel.text = [demand statusString];
+    if (index == 1) {
+        _statusImageView.image = [UIImage imageNamed:@"status_rejected.png"];
+    }else if(index < 3){
+        _statusImageView.image = [UIImage imageNamed:@"status_underway.png"];
+    }else{
+        _statusImageView.image = [UIImage imageNamed:@"status_end.png"];
+    }
 
 #ifdef kJuranDesigner
+    /*
+    _statusLabel.hidden = NO;
+    _statusLabel.text = [demand statusString];
+    if (index == 1) {
+        _statusImageView.image = [UIImage imageNamed:@"status_rejected.png"];
+    }else if(index < 3){
+        _statusImageView.image = [UIImage imageNamed:@"status_underway.png"];
+    }else{
+        _statusImageView.image = [UIImage imageNamed:@"status_end.png"];
+    }*/
+    
     _confirmFlagImageView.hidden = !([_demand.biddingStatus isEqualToString:@"success"]);
     
     if (demand.memo.length == 0) {
@@ -106,6 +124,14 @@
     frame = _remarkButton.frame;
     frame.size.height = CGRectGetHeight(_remarkView.frame);
     _remarkButton.frame = frame;
+    
+#else
+    /*
+    _statusLabel.hidden = demand.isBidded;
+    _statusLabel.text = demand.isBidded?@"":[demand statusString];
+    _statusImageView.image = [UIImage imageNamed:demand.isBidded?@"status_end.png":@"status_underway.png"];*/
+    
+    
     
 #endif
     

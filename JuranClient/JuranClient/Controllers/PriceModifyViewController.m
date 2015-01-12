@@ -41,7 +41,7 @@
             self.designMinTextField.text = [NSString stringWithFormat:@"%d",(NSInteger)_designer.designFeeMin];
         }
     }else if (_type == 1){
-        self.navigationItem.title = @"设计费用";
+        self.navigationItem.title = @"量房费用";
         self.titles = @[@"免费", @"元"];
         if (_designer.freeMeasure) {
             _selectedRow = 1;
@@ -86,7 +86,7 @@
         _designer.designFeeMin = [_designMinTextField.text floatValue];
     }else if (_type == 1){
         if (_selectedRow) {
-            if (_designMaxTextField.text.length == 0) {
+            if (_measureTextField.text.length == 0) {
                 [self showTip:@"请输入量房费"];
                 return;
             }

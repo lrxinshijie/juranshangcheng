@@ -487,6 +487,7 @@
     }else if (textField.tag == 1104){
         _user.weixin = textField.text;
     }
+    [self reSetData];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
