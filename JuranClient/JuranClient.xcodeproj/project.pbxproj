@@ -1235,6 +1235,8 @@
 		BD6189EA1A5E261400FBE4E1 /* BidManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6189E61A5E239200FBE4E1 /* BidManagementViewController.m */; };
 		BD6189EB1A5E261B00FBE4E1 /* BidManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD6189E71A5E239200FBE4E1 /* BidManagementViewController.xib */; };
 		BD6189ED1A5E51CB00FBE4E1 /* DesignerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */; };
+		BD6C74261A63B70C0054BAC9 /* status_rejected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD6C74251A63B70C0054BAC9 /* status_rejected@2x.png */; };
+		BD6C74271A63B7130054BAC9 /* status_rejected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD6C74251A63B70C0054BAC9 /* status_rejected@2x.png */; };
 		BDA4E5011A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E4FF1A5395380005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle */; };
 		BDA4E5021A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA4E5001A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework */; };
 /* End PBXBuildFile section */
@@ -2148,6 +2150,7 @@
 		BD6189E51A5E239200FBE4E1 /* BidManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BidManagementViewController.h; sourceTree = "<group>"; };
 		BD6189E61A5E239200FBE4E1 /* BidManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidManagementViewController.m; sourceTree = "<group>"; };
 		BD6189E71A5E239200FBE4E1 /* BidManagementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BidManagementViewController.xib; sourceTree = "<group>"; };
+		BD6C74251A63B70C0054BAC9 /* status_rejected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status_rejected@2x.png"; sourceTree = "<group>"; };
 		BDA4E4FF1A5395380005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKiPhoneDefaultShareViewUI.bundle; sourceTree = "<group>"; };
 		BDA4E5001A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneDefaultShareViewUI.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3521,6 +3524,7 @@
 		BD5185571A5D0ED700BE508A /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				BD6C74251A63B70C0054BAC9 /* status_rejected@2x.png */,
 				BD5185581A5D0ED700BE508A /* bubble-me@2x.png */,
 				BD5185591A5D0ED700BE508A /* bubble-other@2x.png */,
 				BD51855A1A5D0ED700BE508A /* icon_confirm@2x.png */,
@@ -3998,6 +4002,7 @@
 				BD5186861A5D0ED700BE508A /* icon_personal_demands@2x.png in Resources */,
 				BD5187421A5D0ED700BE508A /* icon_mobile@2x.png in Resources */,
 				BD5186501A5D0ED700BE508A /* login-bg@2x.png in Resources */,
+				BD6C74271A63B7130054BAC9 /* status_rejected@2x.png in Resources */,
 				1415FA601A5CD1CB003D0C29 /* InfoPlist.strings in Resources */,
 				BD5185F61A5D0ED700BE508A /* icon-eye@2x.png in Resources */,
 				1415FA611A5CD1CB003D0C29 /* InteractionViewController.xib in Resources */,
@@ -4529,6 +4534,7 @@
 				149077321A44720000065EE3 /* GuideViewController.xib in Resources */,
 				BD5186971A5D0ED700BE508A /* message_toolbar_split@2x 2.png in Resources */,
 				14A3FDC21A2C9EB7002BEFF4 /* MyDemandViewController.xib in Resources */,
+				BD6C74261A63B70C0054BAC9 /* status_rejected@2x.png in Resources */,
 				A9B4EB7A1A371F120091AAAF /* CaseCollectViewController.xib in Resources */,
 				BD5187871A5D0ED700BE508A /* nav-user-active@2x.png in Resources */,
 				14D973831A32CAE400E771ED /* AskDetailViewController.xib in Resources */,

@@ -85,11 +85,11 @@
 
 - (void)onRightButton:(id)sender{
     if (step == 1) {
-        if (!(_titleTextField.text && _titleTextField.text.length > 0)) {
+        if ([_titleTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length == 0) {
             [self showTip:@"请输入问题标题"];
             return;
         }
-        if (!(_contentTextView.text && _contentTextView.text.length > 0)) {
+        if ([_contentTextView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length == 0) {
             [self showTip:@"请输入问题内容"];
             return;
         }
@@ -142,8 +142,8 @@
 
 - (void)submitQuestionInfo:(NSString*)imageUrl{
     NSDictionary *param = @{@"questionType": selectedType,
-                            @"title": _titleTextField.text,
-                            @"content": _contentTextView.text,
+                            @"title": [_titleTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""],
+                            @"content": [_contentTextView.text stringByReplacingOccurrencesOfString:@" " withString:@""],
                             @"imgUrl": imageUrl
                             };
     [self showHUD];
