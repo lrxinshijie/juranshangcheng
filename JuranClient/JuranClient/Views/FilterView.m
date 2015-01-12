@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) UIButton *sortButton;
 @property (nonatomic, strong) UIButton *filterButton;
+@property (nonatomic, strong) UIButton *listButton;
 @property (nonatomic, strong) NSArray *sorts;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign) UIView *parentView;
@@ -39,8 +40,25 @@
         [bgImg setImage:[UIImage imageNamed:@"bcs_list_bg"]];
         [self addSubview:bgImg];
         
+        CGFloat width = kWindowWidth;
+        if ([Public isDesignerApp]  || type == FilterViewTypeCaseSearch) {
+            if (type == FilterViewTypeCase) {
+                width = kWindowWidth - 44;
+                UIView *gridView = [[UIView alloc] initWithFrame:CGRectMake(width, 0, 44, 44)];
+                gridView.backgroundColor = [UIColor clearColor];
+                UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 1, 44)];
+                lineImageView.backgroundColor = RGBColor(213, 213, 213);
+                [gridView addSubview:lineImageView];
+                
+                self.listButton = [gridView buttonWithFrame:gridView.bounds target:self action:@selector(onList) image:[UIImage imageNamed:@"icon-grid"]];
+                [gridView addSubview:_listButton];
+                [self addSubview:gridView];
+            }
+        }
+        
+        width /= 2;
         self.sortButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _sortButton.frame = CGRectMake(0, 0, 160, 44);
+        _sortButton.frame = CGRectMake(0, 0, width, 44);
         [_sortButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         [_sortButton setTitle:@" 排序" forState:UIControlStateNormal];
         _sortButton.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -52,7 +70,7 @@
         [self addSubview:_sortButton];
         
         self.filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _filterButton.frame = CGRectMake(160, 0, 160, 44);
+        _filterButton.frame = CGRectMake(width, 0, width, 44);
         [_filterButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         [_filterButton setTitle:@" 筛选" forState:UIControlStateNormal];
         _filterButton.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -62,7 +80,7 @@
         [_filterButton setImage:[UIImage imageNamed:@"menu_shaixuan"] forState:UIControlStateSelected];
         [self addSubview:_filterButton];
         
-        UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(160, 0, 1, 44)];
+        UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(width, 0, 1, 44)];
         lineImageView.backgroundColor = RGBColor(213, 213, 213);
         [self addSubview:lineImageView];
     }
@@ -158,6 +176,20 @@
 - (void)clickFilterViewReturnData:(NSDictionary *)data{
     if ([_delegate respondsToSelector:@selector(clickFilterView:actionType:returnData:)]) {
         [_delegate clickFilterView:self actionType:FilterViewActionFilter returnData:data];
+    }
+}
+
+- (void)setIsGrid:(BOOL)isGrid{
+    _isGrid = isGrid;
+    
+    [_listButton setImage:[UIImage imageNamed:_isGrid ? @"icon-list" : @"icon-grid"] forState:UIControlStateNormal];
+}
+
+- (void)onList{
+    self.isGrid = !_isGrid;
+    
+    if ([_delegate respondsToSelector:@selector(clickFilterView:actionType:returnData:)]) {
+        [_delegate clickFilterView:self actionType:FilterViewActionGrid returnData:nil];
     }
 }
 

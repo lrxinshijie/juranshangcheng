@@ -98,4 +98,6 @@
 
 + (NSDictionary *)deviceInfo;
 
++ (BOOL)isDesignerApp;
+
 @end

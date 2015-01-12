@@ -19,8 +19,10 @@
 @interface FilterView : UIView
 
 @property (nonatomic, assign) id<FilterViewDelegate> delegate;
+@property (nonatomic, assign) BOOL isGrid;
 
 -(id)initWithType:(FilterViewType)type defaultData:(NSDictionary *)defaultData;
+
 
 - (void)showSort;
 - (BOOL)isShow;

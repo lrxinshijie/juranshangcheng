@@ -20,12 +20,12 @@
 #import "DesignerViewController.h"
 #import "JRDesigner.h"
 #import "JRSubject.h"
+#import "CaseCollectionCell.h"
 
-@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate>{
-    CGFloat startOffsetY;
-}
+@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, strong) NSMutableArray *adInfos;
 @property (nonatomic, assign) NSInteger currentPage;
@@ -83,6 +83,9 @@
     _emptyView.center = _tableView.center;
     [self.tableView addSubview:_emptyView];
     
+    
+
+    
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
@@ -105,6 +108,33 @@
     }];
     
     [_tableView headerBeginRefreshing];
+    
+    if ([Public isDesignerApp]  || !_isHome) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
+        layout.itemSize = CGSizeMake(152, 133);
+        layout.minimumLineSpacing = 5;
+        layout.minimumInteritemSpacing = 5;
+        
+        self.collectionView = [[UICollectionView alloc] initWithFrame:_tableView.frame collectionViewLayout:layout];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.alwaysBounceVertical = YES;
+        _collectionView.backgroundColor = RGBColor(236, 236, 236);
+        
+        [_collectionView registerNib:[UINib nibWithNibName:@"CaseCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"CaseCollectionCell"];
+        
+        __weak typeof(self) weakSelf = self;
+        [_collectionView addHeaderWithCallback:^{
+            weakSelf.currentPage = 1;
+            [weakSelf loadData];
+        }];
+        
+        [_collectionView addFooterWithCallback:^{
+            weakSelf.currentPage++;
+            [weakSelf loadData];
+        }];
+    }
     
 }
 
@@ -160,6 +190,7 @@
             }
             
             [_tableView reloadData];
+            [_collectionView reloadData];
         }
         _emptyView.hidden = _datas.count != 0;
         _emptyView.center = CGPointMake(_tableView.center.x, _tableView.center.y - 40);
@@ -169,6 +200,9 @@
         
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
+        
+        [_collectionView headerEndRefreshing];
+        [_collectionView footerEndRefreshing];
         
     }];
 }
@@ -187,11 +221,34 @@
 }
 
 - (void)clickFilterView:(FilterView *)view actionType:(FilterViewAction)action returnData:(NSDictionary *)data{
-    [data.allKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
-        [_filterData setObject:data[key] forKey:key];
-    }];
-    
-    [_tableView headerBeginRefreshing];
+    if (action == FilterViewActionGrid) {
+        [UIView setAnimationDelegate:self];
+//        [UIView setAnimationDidStopSelector:@selector(animationDidStop:animationIDfinished:finished:context:)];
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.75];
+        
+        [UIView setAnimationTransition:([_collectionView superview] ? UIViewAnimationTransitionFlipFromLeft : UIViewAnimationTransitionFlipFromRight)
+                               forView:self.view
+                                 cache:YES];
+        
+        if ([_collectionView superview]) {
+            [_collectionView removeFromSuperview];
+            [self.view addSubview:_tableView];
+            [_tableView reloadData];
+        } else {
+            [_tableView removeFromSuperview];
+            [self.view addSubview:_collectionView];
+            [_collectionView reloadData];
+        }
+        
+        [UIView commitAnimations];
+    }else{
+        [data.allKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
+            [_filterData setObject:data[key] forKey:key];
+        }];
+        
+        [_tableView headerBeginRefreshing];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -230,26 +287,34 @@
     return cell;
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    startOffsetY = scrollView.contentOffset.y;
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    CGFloat y = scrollView.contentOffset.y;
-    if (y > 0 && y < 44) {
-        [scrollView setContentOffset:CGPointMake(0, startOffsetY > y ? 0 : 44) animated:YES];
-    }
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    CGFloat y = scrollView.contentOffset.y;
-    if (y > 0 && y < 44) {
-        [scrollView setContentOffset:CGPointMake(0, startOffsetY > y ? 0 : 44) animated:YES];
-    }
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
+    JRCase *cs = [_datas objectAtIndex:indexPath.row];
+    
+    JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return [_datas count];
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"CaseCollectionCell";
+    CaseCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    JRCase *cs = [_datas objectAtIndex:indexPath.row];
+    [cell fillCellWithCase:cs];
+    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     JRCase *cs = [_datas objectAtIndex:indexPath.row];
     
     JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
@@ -263,14 +328,6 @@
     ASLog(@"index:%d,%@",index,ad.link);
     
     [Public jumpFromLink:ad.link];
-    
-//    NSArray *types = [[links firstObject] componentsSeparatedByString:@"="];
-//    if ([types count] == 0) {
-//        NSInteger type = [[types lastObject] integerValue];
-//        if (type == 1) {
-//            
-//        }
-//    }
 }
 
 - (void)didReceiveMemoryWarning

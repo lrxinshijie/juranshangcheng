@@ -164,6 +164,7 @@
     }else if (textField.tag == 7){
         _jrCase.desc = textField.text;
     }
+    [self reloadData];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

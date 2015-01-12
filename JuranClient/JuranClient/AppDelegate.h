@@ -18,7 +18,7 @@
 @property (strong, nonatomic) UIWindow *window;
 
 #ifdef kJuranDesigner
-@property (nonatomic, strong) LeveyTabBarController *tabBarController;
+@property (nonatomic, strong) UITabBarController *tabBarController;
 #else
 @property (nonatomic, strong) UITabBarController *tabBarController;
 #endif
