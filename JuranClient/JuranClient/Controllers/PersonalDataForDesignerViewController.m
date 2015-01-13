@@ -530,7 +530,7 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     if (textField.tag == 1101) {
         if (_user.nickNameChangeable.boolValue) {
-            [self showTip:@"用户名仅限修改一次"];
+            [self showTip:@"昵称仅限修改一次"];
             return NO;
         }else if(!nickNameChangeTip){
             self.selectedTextField = textField;
