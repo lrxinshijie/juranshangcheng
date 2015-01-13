@@ -238,7 +238,6 @@
 		1415FA181A5CD1CB003D0C29 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1441A1921A29E436004A038E /* libsqlite3.dylib */; };
 		1415FA191A5CD1CB003D0C29 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1441A1901A29E42C004A038E /* MessageUI.framework */; };
 		1415FA1A1A5CD1CB003D0C29 /* WeChatConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1441A14F1A29E3CD004A038E /* WeChatConnection.framework */; };
-		1415FA1B1A5CD1CB003D0C29 /* libGexinSdk-1.0.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C8204B1A528D340010A19F /* libGexinSdk-1.0.8.a */; };
 		1415FA1C1A5CD1CB003D0C29 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1441A1631A29E3CD004A038E /* libWeChatSDK.a */; };
 		1415FA1D1A5CD1CB003D0C29 /* libSinaWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1441A15C1A29E3CD004A038E /* libSinaWeiboSDK.a */; };
 		1415FA1E1A5CD1CB003D0C29 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1441A1661A29E3CD004A038E /* ShareSDK.framework */; };
@@ -363,8 +362,6 @@
 		1415FAAE1A5D249E003D0C29 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1415FAA91A5D249E003D0C29 /* Icon.png */; };
 		1415FAAF1A5D249E003D0C29 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1415FAAA1A5D249E003D0C29 /* Icon@2x.png */; };
 		1415FAB01A5D249E003D0C29 /* Icon7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1415FAAB1A5D249E003D0C29 /* Icon7.png */; };
-		1415FAB61A5D25B7003D0C29 /* LeveyTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1415FAB31A5D25B7003D0C29 /* LeveyTabBar.m */; };
-		1415FAB71A5D25B7003D0C29 /* LeveyTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1415FAB51A5D25B7003D0C29 /* LeveyTabBarController.m */; };
 		1416C8B81A242FD100FA9999 /* CaseCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1416C8B61A242FD100FA9999 /* CaseCollectionCell.m */; };
 		1416C8B91A242FD100FA9999 /* CaseCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1416C8B71A242FD100FA9999 /* CaseCollectionCell.xib */; };
 		141A1D3B1A2CC09600C073C5 /* AskOrAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 141A1D391A2CC09600C073C5 /* AskOrAnswerCell.m */; };
@@ -507,7 +504,6 @@
 		14ABFBEC1A25CFFD00C4AF65 /* UIViewController+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEB1A25CFFD00C4AF65 /* UIViewController+Login.m */; };
 		14ABFBF01A25DADC00C4AF65 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */; };
 		14ABFBF11A25DADC00C4AF65 /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */; };
-		14C8204C1A528D340010A19F /* libGexinSdk-1.0.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C8204B1A528D340010A19F /* libGexinSdk-1.0.8.a */; };
 		14C855471A2E196B00A15ED9 /* InteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855421A2E196B00A15ED9 /* InteractionViewController.m */; };
 		14C855481A2E196B00A15ED9 /* InteractionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C855431A2E196B00A15ED9 /* InteractionViewController.xib */; };
 		14C855491A2E196B00A15ED9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855451A2E196B00A15ED9 /* SettingsViewController.m */; };
@@ -1276,10 +1272,6 @@
 		1415FAA91A5D249E003D0C29 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		1415FAAA1A5D249E003D0C29 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		1415FAAB1A5D249E003D0C29 /* Icon7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon7.png; sourceTree = "<group>"; };
-		1415FAB21A5D25B7003D0C29 /* LeveyTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeveyTabBar.h; sourceTree = "<group>"; };
-		1415FAB31A5D25B7003D0C29 /* LeveyTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeveyTabBar.m; sourceTree = "<group>"; };
-		1415FAB41A5D25B7003D0C29 /* LeveyTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeveyTabBarController.h; sourceTree = "<group>"; };
-		1415FAB51A5D25B7003D0C29 /* LeveyTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeveyTabBarController.m; sourceTree = "<group>"; };
 		1416C8B51A242FD000FA9999 /* CaseCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseCollectionCell.h; sourceTree = "<group>"; };
 		1416C8B61A242FD100FA9999 /* CaseCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseCollectionCell.m; sourceTree = "<group>"; };
 		1416C8B71A242FD100FA9999 /* CaseCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseCollectionCell.xib; sourceTree = "<group>"; };
@@ -1485,9 +1477,6 @@
 		14ABFBED1A25DADC00C4AF65 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
-		14C820491A528D340010A19F /* GexinSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GexinSdk.h; sourceTree = "<group>"; };
-		14C8204A1A528D340010A19F /* GXSdkError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GXSdkError.h; sourceTree = "<group>"; };
-		14C8204B1A528D340010A19F /* libGexinSdk-1.0.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libGexinSdk-1.0.8.a"; sourceTree = "<group>"; };
 		14C855411A2E196B00A15ED9 /* InteractionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractionViewController.h; sourceTree = "<group>"; };
 		14C855421A2E196B00A15ED9 /* InteractionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractionViewController.m; sourceTree = "<group>"; };
 		14C855431A2E196B00A15ED9 /* InteractionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InteractionViewController.xib; sourceTree = "<group>"; };
@@ -2172,7 +2161,6 @@
 				1415FA181A5CD1CB003D0C29 /* libsqlite3.dylib in Frameworks */,
 				1415FA191A5CD1CB003D0C29 /* MessageUI.framework in Frameworks */,
 				1415FA1A1A5CD1CB003D0C29 /* WeChatConnection.framework in Frameworks */,
-				1415FA1B1A5CD1CB003D0C29 /* libGexinSdk-1.0.8.a in Frameworks */,
 				1415FA1C1A5CD1CB003D0C29 /* libWeChatSDK.a in Frameworks */,
 				1415FA1D1A5CD1CB003D0C29 /* libSinaWeiboSDK.a in Frameworks */,
 				1415FA1E1A5CD1CB003D0C29 /* ShareSDK.framework in Frameworks */,
@@ -2208,7 +2196,6 @@
 				1441A1931A29E436004A038E /* libsqlite3.dylib in Frameworks */,
 				1441A1911A29E42C004A038E /* MessageUI.framework in Frameworks */,
 				1441A16D1A29E3CD004A038E /* WeChatConnection.framework in Frameworks */,
-				14C8204C1A528D340010A19F /* libGexinSdk-1.0.8.a in Frameworks */,
 				1441A1771A29E3CD004A038E /* libWeChatSDK.a in Frameworks */,
 				1441A1741A29E3CD004A038E /* libSinaWeiboSDK.a in Frameworks */,
 				1441A1781A29E3CD004A038E /* ShareSDK.framework in Frameworks */,
@@ -2250,17 +2237,6 @@
 				1415FA961A5D144B003D0C29 /* PushConfig.plist */,
 			);
 			path = JPush;
-			sourceTree = "<group>";
-		};
-		1415FAB11A5D25B7003D0C29 /* LeveyTabBar */ = {
-			isa = PBXGroup;
-			children = (
-				1415FAB21A5D25B7003D0C29 /* LeveyTabBar.h */,
-				1415FAB31A5D25B7003D0C29 /* LeveyTabBar.m */,
-				1415FAB41A5D25B7003D0C29 /* LeveyTabBarController.h */,
-				1415FAB51A5D25B7003D0C29 /* LeveyTabBarController.m */,
-			);
-			path = LeveyTabBar;
 			sourceTree = "<group>";
 		};
 		14361E571A344E6100F9BD94 /* PinYin */ = {
@@ -2473,24 +2449,6 @@
 				14610C6C1A39D2F9008A52C7 /* QuestionDetailViewController.xib */,
 			);
 			name = Question;
-			sourceTree = "<group>";
-		};
-		14C820471A528D340010A19F /* dist */ = {
-			isa = PBXGroup;
-			children = (
-				14C820481A528D340010A19F /* include */,
-				14C8204B1A528D340010A19F /* libGexinSdk-1.0.8.a */,
-			);
-			path = dist;
-			sourceTree = "<group>";
-		};
-		14C820481A528D340010A19F /* include */ = {
-			isa = PBXGroup;
-			children = (
-				14C820491A528D340010A19F /* GexinSdk.h */,
-				14C8204A1A528D340010A19F /* GXSdkError.h */,
-			);
-			path = include;
 			sourceTree = "<group>";
 		};
 		14C953AE1A2DC45D00FE6F8D /* Subject */ = {
@@ -2887,9 +2845,7 @@
 			isa = PBXGroup;
 			children = (
 				1495C8541A655659000040DB /* PushConfig.plist */,
-				1415FAB11A5D25B7003D0C29 /* LeveyTabBar */,
 				1415FA931A5D144B003D0C29 /* JPush */,
-				14C820471A528D340010A19F /* dist */,
 				A9A53B001A46FE7C008D75B8 /* UIBubbleTableView */,
 				A9A067261A3D92F70059D73B /* ZYQAssetPickerController */,
 				A9A067011A3D76DA0059D73B /* ActionSheetPicker */,
@@ -4687,7 +4643,6 @@
 				1415F9A61A5CD1CB003D0C29 /* UploadCardImageViewController.m in Sources */,
 				1415F9A71A5CD1CB003D0C29 /* ResetEmailViewController.m in Sources */,
 				1415F9A81A5CD1CB003D0C29 /* UIBubbleTypingTableViewCell.m in Sources */,
-				1415FAB61A5D25B7003D0C29 /* LeveyTabBar.m in Sources */,
 				1415F9A91A5CD1CB003D0C29 /* NSDate+RFC1123.m in Sources */,
 				1415F9AA1A5CD1CB003D0C29 /* NSMutableArray+ASCategory.m in Sources */,
 				1415F9AB1A5CD1CB003D0C29 /* DefaultData.m in Sources */,
@@ -4770,7 +4725,6 @@
 				1415F9F31A5CD1CB003D0C29 /* UIImageView+ASCategory.m in Sources */,
 				1415F9F41A5CD1CB003D0C29 /* PrivateMessageViewController.m in Sources */,
 				1415F9F51A5CD1CB003D0C29 /* ASGeometry.m in Sources */,
-				1415FAB71A5D25B7003D0C29 /* LeveyTabBarController.m in Sources */,
 				1415F9F61A5CD1CB003D0C29 /* NSBubbleData.m in Sources */,
 				1415F9F71A5CD1CB003D0C29 /* ProfileViewController.m in Sources */,
 				1415F9F81A5CD1CB003D0C29 /* GlobalPopupAlert.m in Sources */,
