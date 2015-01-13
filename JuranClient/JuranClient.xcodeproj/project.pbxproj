@@ -355,7 +355,6 @@
 		1415FA9B1A5D1844003D0C29 /* ALTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 1415FA9A1A5D1844003D0C29 /* ALTheme.m */; };
 		1415FA9C1A5D1844003D0C29 /* ALTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 1415FA9A1A5D1844003D0C29 /* ALTheme.m */; };
 		1415FA9D1A5D1A23003D0C29 /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1415FA951A5D144B003D0C29 /* libPushSDK-1.8.2.a */; };
-		1415FA9E1A5D1A26003D0C29 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1415FA961A5D144B003D0C29 /* PushConfig.plist */; };
 		1415FAA01A5D1FD8003D0C29 /* navbar_leftbtn_logo_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1415FA9F1A5D1FD8003D0C29 /* navbar_leftbtn_logo_white@2x.png */; };
 		1415FAA51A5D21DF003D0C29 /* nav-icon-share_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1415FAA21A5D21D7003D0C29 /* nav-icon-share_white@2x.png */; };
 		1415FAA61A5D21E3003D0C29 /* icon-search_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1415FAA11A5D21D7003D0C29 /* icon-search_white@2x.png */; };
@@ -492,6 +491,7 @@
 		1490772D1A4471E200065EE3 /* QuestionFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1490772C1A4471E200065EE3 /* QuestionFilterView.m */; };
 		149077311A44720000065EE3 /* GuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1490772F1A44720000065EE3 /* GuideViewController.m */; };
 		149077321A44720000065EE3 /* GuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 149077301A44720000065EE3 /* GuideViewController.xib */; };
+		1495C8551A655659000040DB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1495C8541A655659000040DB /* PushConfig.plist */; };
 		149BE7121A4567F800A9E1EC /* ZoomInImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 149BE7111A4567F800A9E1EC /* ZoomInImageView.m */; };
 		149BE7151A4569DE00A9E1EC /* DDHPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149BE7141A4569DE00A9E1EC /* DDHPreviewViewController.m */; };
 		14A3FDC11A2C9EB7002BEFF4 /* MyDemandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A3FDBF1A2C9EB7002BEFF4 /* MyDemandViewController.m */; };
@@ -1460,6 +1460,7 @@
 		1490772E1A44720000065EE3 /* GuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideViewController.h; sourceTree = "<group>"; };
 		1490772F1A44720000065EE3 /* GuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideViewController.m; sourceTree = "<group>"; };
 		149077301A44720000065EE3 /* GuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuideViewController.xib; sourceTree = "<group>"; };
+		1495C8541A655659000040DB /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		149BE7101A4567F800A9E1EC /* ZoomInImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomInImageView.h; sourceTree = "<group>"; };
 		149BE7111A4567F800A9E1EC /* ZoomInImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomInImageView.m; sourceTree = "<group>"; };
 		149BE7131A4569DE00A9E1EC /* DDHPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHPreviewViewController.h; sourceTree = "<group>"; };
@@ -2885,6 +2886,7 @@
 		A987ED6F1A20920500CED7CD /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				1495C8541A655659000040DB /* PushConfig.plist */,
 				1415FAB11A5D25B7003D0C29 /* LeveyTabBar */,
 				1415FA931A5D144B003D0C29 /* JPush */,
 				14C820471A528D340010A19F /* dist */,
@@ -3783,7 +3785,7 @@
 						DevelopmentTeam = D2JB8K885C;
 					};
 					A971BC901A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = QHWR2FWBM6;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -3791,7 +3793,7 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = K7N89S4ZM6;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -3823,6 +3825,7 @@
 			files = (
 				1415FA2D1A5CD1CB003D0C29 /* ModifyViewController.xib in Resources */,
 				BD5186621A5D0ED700BE508A /* login-text-bg@2x.png in Resources */,
+				1495C8551A655659000040DB /* PushConfig.plist in Resources */,
 				BD5186D21A5D0ED700BE508A /* bubble-me@2x.png in Resources */,
 				14321E6A1A6125F70065E8C3 /* case_edit_replace@2x.png in Resources */,
 				BD5186BE1A5D0ED700BE508A /* img_adopt _bf@2x.png in Resources */,
@@ -4169,7 +4172,6 @@
 				BD5187281A5D0ED700BE508A /* service_normal_0@2x.png in Resources */,
 				1415FA871A5CD1CB003D0C29 /* PushMessageViewController.xib in Resources */,
 				BD5186CA1A5D0ED700BE508A /* question_type_selected@2x.png in Resources */,
-				1415FA9E1A5D1A26003D0C29 /* PushConfig.plist in Resources */,
 				BD5186801A5D0ED700BE508A /* icon_personal_ask@2x.png in Resources */,
 				1415FA881A5CD1CB003D0C29 /* GuideViewController.xib in Resources */,
 				BD5186981A5D0ED700BE508A /* message_toolbar_split@2x 2.png in Resources */,
@@ -5101,7 +5103,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
 				);
 				PRODUCT_NAME = "JuranClient copy";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2b2b4f10-1e7a-4d62-a56e-6c4f681a58b5";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5238,7 +5240,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "52657c77-bd2b-4e6b-96ce-0b0ad9451c14";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5270,7 +5272,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

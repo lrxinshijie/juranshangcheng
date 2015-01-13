@@ -26,6 +26,8 @@
 #import "JRPhotoScrollViewController.h"
 #import "JRCase.h"
 #import "CaseViewController.h"
+#import "PushMessageViewController.h"
+#import "PrivateMessageViewController.h"
 
 @implementation Public
 
@@ -498,6 +500,16 @@
             cv.hidesBottomBarWhenPushed = YES;
             [navigationController pushViewController:cv animated:YES];
         }
+    }else if (type == 8){
+        //消息列表
+        PushMessageViewController *vc = [[PushMessageViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:vc animated:YES];
+    }else if (type == 9){
+        //私信列表
+        PrivateMessageViewController *pv = [[PrivateMessageViewController alloc] init];
+        pv.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:pv animated:YES];
     }
 }
 

@@ -86,4 +86,31 @@ typedef enum : NSUInteger {
     SearchTypeQuestion,
 } SearchType;
 
+//Share SDK
+#define kShareSDKKey @"477b2576a9ca"
+
+//新浪微博
+#define kShareSinaWeiboKey @"974550530"
+#define kShareSinaWeiboSecret @"b6acbd20f461a9c83be83e90aacf8ffb"
+#define kShareSinaWeiboRedirectUri @"http://www.juran.cn"
+
+//腾讯微博
+#define kShareTencentWeiboKey @"801555309"
+#define kShareTencentWeiboSecret @"71fd14ea4456a3bf906817e8bbefbdbd"
+#define kShareTencentWeiboRedirectUri @"http://www.juran.cn"
+
+//QQ互联
+#define kShareQZoneKey @"1103839607"
+#define kShareQZoneSecret @"B4DwT98l9vD3oHnB"
+
+//微信
+#define kShareWeChatKey @"wx3e32aa05bb32f554"
+#define kShareWeChatSecret @"f2c0d5958e633bdee9c25c33bb4e913c"
+
+//#ifdef kJuranDesigner
+//
+//#else
+//
+//#endif
+
 #endif

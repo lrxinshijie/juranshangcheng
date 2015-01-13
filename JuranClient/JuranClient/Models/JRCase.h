@@ -90,5 +90,7 @@
 //Management
 + (NSMutableArray*)buildUpWithValueForManagement:(id)value;
 - (NSString*)statusString;
+- (UIColor *)statusColor;
+- (CGFloat)managerCellHeight;
 
 @end
