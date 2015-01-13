@@ -163,7 +163,7 @@
         [self.handImageView setImageWithURLString:_designer.handHeldIdPhoto];
         self.statusLabel.text = [_designer realNameAuthStatusString];
         self.statusLabel.textColor = _designer.realNameAuthStatus == 1?[UIColor redColor]:RGBColor(28, 79, 166);
-        
+        self.descLabel.textColor = _designer.realNameAuthStatus == 1?[UIColor redColor]:RGBColor(28, 79, 166);
         self.descLabel.text = [_designer realNameAuthDescription];
         
         CGRect frame = _descLabel.frame;
@@ -173,6 +173,7 @@
         frame = _contentView.frame;
         frame.origin.y = CGRectGetMaxY(_descLabel.frame)+10;
         _contentView.frame = frame;
+        
     }
 }
 

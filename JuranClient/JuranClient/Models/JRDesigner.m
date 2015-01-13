@@ -57,7 +57,7 @@
         self.professionalType = @"";
         self.personalHonor = @"";
         self.detailAddress = @"";
-        self.homeTel = @"";
+        self.mobilePhone = @"";
     }
     return self;
 }
@@ -367,6 +367,8 @@
     self.faceToFace = [value getIntValueForKey:@"faceToFace" defaultValue:0];
     self.designFeeMax = [value getDoubleValueForKey:@"chargeStandardMaxStr" defaultValue:0.f];
     self.designFeeMin = [value getDoubleValueForKey:@"chargeStandardMinStr" defaultValue:0.f];
+    self.mobilePhone = [value getStringValueForKey:@"mobilePhone" defaultValue:@""];
+
 }
 
 - (NSString*)sexyString{

@@ -162,7 +162,7 @@
         _unLoginLabel.hidden = YES;
         _loginNameLabel.hidden = NO;
         _userNameLabel.hidden = NO;
-        _userNameLabel.text = _user.nickName.length?_user.nickName:_user.account;
+        _userNameLabel.text = _user.showName;
         _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _user.account];
         [_headerImageView setImageWithURLString:_user.headUrl];
         
