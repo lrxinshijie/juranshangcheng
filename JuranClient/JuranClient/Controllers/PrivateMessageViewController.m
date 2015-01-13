@@ -127,6 +127,10 @@
     PrivateMessageDetailViewController *pd = [[PrivateMessageDetailViewController alloc] init];
     pd.message = message;
     [self.navigationController pushViewController:pd animated:YES];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_tableView headerBeginRefreshing];
+    });
 }
 
 - (void)didReceiveMemoryWarning {

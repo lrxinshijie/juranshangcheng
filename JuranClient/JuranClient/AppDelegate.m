@@ -21,18 +21,11 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "GuideViewController.h"
 #import "HomeViewController.h"
-#import "GexinSdk.h"
 #import "UIAlertView+Blocks.h"
 #import "APService.h"
 
-#define kAppId           @"ZmiyzZ23sKAvFQ7RoAfbJ2"
-#define kAppKey          @"kJRhD2minf7dJ6CK5u43o6"
-#define kAppSecret       @"u1p1T7GV0e54W1DALv03c1"
 
-
-@interface AppDelegate () <UINavigationControllerDelegate, GexinSdkDelegate>
-
-@property (strong, nonatomic) GexinSdk *gexinPusher;
+@interface AppDelegate () <UINavigationControllerDelegate>
 
 @end
 
@@ -51,15 +44,14 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [self setupShareSDK];
-#ifndef kJuranDesigner
-//    [self setupPush];
+
     [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                                    UIRemoteNotificationTypeSound |
                                                    UIRemoteNotificationTypeAlert)
                                        categories:nil];
     [APService setupWithOption:launchOptions];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkDidLogin:) name:kJPFNetworkDidLoginNotification object:nil];
-#endif
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         ASLog(@"registrationID:%@",[APService registrationID]);
         [JRUser refreshToken:nil];
@@ -171,35 +163,35 @@
 
 - (void)setupShareSDK{
 
-    [ShareSDK registerApp:@"477b2576a9ca"];
+    [ShareSDK registerApp:kShareSDKKey];
     
     //添加新浪微博应用 注册网址 http://open.weibo.com
 //    [ShareSDK connectSinaWeiboWithAppKey:@"4218949951"
 //                               appSecret:@"444121dbfb4e449ba7caf573b617652c"
 //                             redirectUri:@"http://demo.juran.cn/member/sinalogin.htm"];
     //当使用新浪微博客户端分享的时候需要按照下面的方法来初始化新浪的平台
-    [ShareSDK  connectSinaWeiboWithAppKey:@"974550530"
-                                appSecret:@"b6acbd20f461a9c83be83e90aacf8ffb"
-                              redirectUri:@"http://www.juran.cn"
+    [ShareSDK  connectSinaWeiboWithAppKey:kShareSinaWeiboKey
+                                appSecret:kShareSinaWeiboSecret
+                              redirectUri:kShareSinaWeiboRedirectUri
                               weiboSDKCls:[WeiboSDK class]];
     
     //添加腾讯微博应用 注册网址 http://dev.t.qq.com
-    [ShareSDK connectTencentWeiboWithAppKey:@"801555309"
-                                  appSecret:@"71fd14ea4456a3bf906817e8bbefbdbd"
-                                redirectUri:@"http://www.juran.cn"
+    [ShareSDK connectTencentWeiboWithAppKey:kShareTencentWeiboKey
+                                  appSecret:kShareTencentWeiboSecret
+                                redirectUri:kShareTencentWeiboRedirectUri
                                    wbApiCls:[WeiboApi class]];
 //    [ShareSDK connect163WeiboWithAppKey:@"9F2EiRMl1VxVMEtj"
 //                              appSecret:@"iWxz6yHnT5xexD04hDIKnjUihlvNq3co"
 //                            redirectUri:@"http://www.juran.cn/member/nteslogin.htm"];
     
     //添加QQ空间应用  注册网址  http://connect.qq.com/intro/login/
-    [ShareSDK connectQZoneWithAppKey:@"1103839607"
-                           appSecret:@"B4DwT98l9vD3oHnB"
+    [ShareSDK connectQZoneWithAppKey:kShareQZoneKey
+                           appSecret:kShareQZoneSecret
                    qqApiInterfaceCls:[QQApiInterface class]
                      tencentOAuthCls:[TencentOAuth class]];
     
     //添加QQ应用  注册网址  http://open.qq.com/
-    [ShareSDK connectQQWithQZoneAppKey:@"1103839607"
+    [ShareSDK connectQQWithQZoneAppKey:kShareQZoneKey
                      qqApiInterfaceCls:[QQApiInterface class]
                        tencentOAuthCls:[TencentOAuth class]];
     
@@ -209,25 +201,14 @@
 //    [ShareSDK connectWeChatWithAppId:@"wx3e32aa05bb32f554"
 //                           wechatCls:[WXApi class]];
 //    [ShareSDK connectWeChatFavWithAppId:@"wx3e32aa05bb32f554" appSecret:@"f2c0d5958e633bdee9c25c33bb4e913c" wechatCls:[WXApi class]];
-    [ShareSDK connectWeChatWithAppId:@"wx3e32aa05bb32f554"
-                           appSecret:@"f2c0d5958e633bdee9c25c33bb4e913c"
+    [ShareSDK connectWeChatWithAppId:kShareWeChatKey
+                           appSecret:kShareWeChatSecret
                            wechatCls:[WXApi class]];
+    
     id<ISSQZoneApp> app =(id<ISSQZoneApp>)[ShareSDK getClientWithType:ShareTypeQQSpace];
     [app setIsAllowWebAuthorize:YES];
     
 }
-
-#ifdef kJuranDesigner
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-//    [_tabBarController hidesTabBar:navigationController.viewControllers.count > 1 animated:YES];
-    
-//    if (viewController.hidesBottomBarWhenPushed){
-//        [_tabBarController hidesTabBar:YES animated:YES];
-//    }else{
-//        [_tabBarController hidesTabBar:NO animated:YES];
-//    }
-}
-#endif
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -239,6 +220,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [self clearNotification];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -276,37 +258,6 @@
 
 #pragma mark - Push
 
-- (void)setupPush{
-    
-    self.gexinPusher = [GexinSdk createSdkWithAppId:kAppId
-                                         appKey:kAppKey
-                                      appSecret:kAppSecret
-                                     appVersion:@"0.0.0"
-                                       delegate:self
-                                          error:nil];
-    
-    // [2]:注册APNS
-    [self registerRemoteNotification];
-}
-
-- (void)registerRemoteNotification
-{
-#ifdef __IPHONE_8_0
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-        
-        UIUserNotificationSettings *uns = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:uns];
-    } else {
-        UIRemoteNotificationType apn_type = (UIRemoteNotificationType)(UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge);
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:apn_type];
-    }
-#else
-    UIRemoteNotificationType apn_type = (UIRemoteNotificationType)(UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge);
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:apn_type];
-#endif
-}
-
 - (void)showAPNS:(NSDictionary *)userInfo{
     ASLog(@"APNS:%@",userInfo);
     
@@ -315,33 +266,21 @@
     [self clearNotification];
     
     NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-//    if ([alert isKindOfClass:[NSDictionary class]]) {
-//        alert = [(NSDictionary *)alert objectForKey:@"body"];
-//    }
+
+    NSInteger type = [userInfo getIntValueForKey:@"type" defaultValue:0];
     
-//    NSString *payload = [userInfo objectForKey:@"payload"];
-//    if (payload && payload.length > 0) {
-//        
-//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[payload dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
-    
-        NSInteger type = [userInfo getIntValueForKey:@"type" defaultValue:0];
-        
-        if (type == 2) {
-            [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"取消" otherButtonTitles:@[@"查看"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                if (buttonIndex == [alertView cancelButtonIndex]) {
-                    return ;
-                }
-                
-                NSString *link = [userInfo getStringValueForKey:@"link" defaultValue:@""];
-                [Public jumpFromLink:link];
-            }];
-        }else{
-            [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:nil];
-        }
-        
-//    }else{
-//        [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:nil];
-//    }
+    if (type == 2) {
+        [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"取消" otherButtonTitles:@[@"查看"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == [alertView cancelButtonIndex]) {
+                return ;
+            }
+            
+            NSString *link = [userInfo getStringValueForKey:@"link" defaultValue:@""];
+            [Public jumpFromLink:link];
+        }];
+    }else{
+        [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:nil];
+    }
     
 }
 
@@ -353,10 +292,6 @@
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     NSString *dToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     ASLog(@"deviceToken:%@", dToken);
-    
-    if (_gexinPusher) {
-        [_gexinPusher registerDeviceToken:dToken];
-    }
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -375,62 +310,6 @@
 - (void)clearNotification{
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-}
-
-#pragma mark - GexinSdkDelegate
-- (void)GexinSdkDidRegisterClient:(NSString *)clientId
-{
-    // [4-EXT-1]: 个推SDK已注册
-    ASLog(@"clientId:%@",clientId);
-    self.clientId = clientId;
-}
-
-- (void)GexinSdkDidReceivePayload:(NSString *)payloadId fromApplication:(NSString *)appId
-{
-    // [4]: 收到个推消息
-    NSData *payload = [_gexinPusher retrivePayloadById:payloadId];
-    NSString *payloadMsg = [[NSString alloc] initWithBytes:payload.bytes
-                                              length:payload.length
-                                            encoding:NSUTF8StringEncoding];
-    ASLog(@"payload:%@",payloadMsg);
-    
-    if (payloadMsg.length == 0) {
-        return;
-    }
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[payloadMsg dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
-    if (dict && [dict isKindOfClass:[NSDictionary class]]) {
-        NSString *title = [dict getStringValueForKey:@"title" defaultValue:@""];
-        NSString *body = [dict getStringValueForKey:@"body" defaultValue:@""];
-        
-        if (title.length == 0 || body.length == 0) {
-            return;
-        }
-        
-        NSInteger type = [dict getIntValueForKey:@"type" defaultValue:0];
-        
-        if (type == 2) {
-            [UIAlertView showWithTitle:title message:body cancelButtonTitle:@"取消" otherButtonTitles:@[@"查看"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                if (buttonIndex == [alertView cancelButtonIndex]) {
-                    return ;
-                }
-                
-                NSString *link = [dict getStringValueForKey:@"link" defaultValue:@""];
-                [Public jumpFromLink:link];
-            }];
-        }else{
-            [UIAlertView showWithTitle:title message:body cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:nil];
-        }
-    }
-}
-
-- (void)GexinSdkDidSendMessage:(NSString *)messageId result:(int)result {
-    // [4-EXT]:发送上行消息结果反馈
-}
-
-- (void)GexinSdkDidOccurError:(NSError *)error
-{
-    // [EXT]:个推错误报告，集成步骤发生的任何错误都在这里通知，如果集成后，无法正常收到消息，查看这里的通知。
-    ASLog(@"Push Error:%@",error.localizedDescription);
 }
 
 @end

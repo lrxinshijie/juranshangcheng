@@ -260,10 +260,27 @@
         return @"审核中";
     }else if ([_status isEqualToString:@"01"]) {
         return @"";
-    }else if ([_status isEqualToString:@"01"]) {
+    }else if ([_status isEqualToString:@"02"]) {
         return @"审核未通过";
     }
     return @"";
+}
+
+- (UIColor *)statusColor{
+    if ([_status isEqualToString:@"00"]) {
+        return RGBColor(0, 69, 167);
+    }
+    return RGBColor(231, 0, 0);
+}
+
+- (CGFloat)managerCellHeight{
+    CGFloat height = 75;
+    if ([_status isEqualToString:@"02"] && self.reason.length > 0) {
+        height += [self.reason heightWithFont:[UIFont systemFontOfSize:15] constrainedToWidth:304] + 5;
+        height += 8;
+    }
+    
+    return height;
 }
 
 - (void)loadDetail:(BOOLBlock)finished{

@@ -37,6 +37,19 @@
     _titleLabel.text = jc.title;
     _timeLabel.text = jc.publishTime;
     _statusLabel.text = [jc statusString];
+    _statusLabel.textColor = [jc statusColor];
+    
+    NSString *content = jc.reason;
+    if ([jc.status isEqualToString:@"02"] && content.length > 0) {
+        _reasonLabel.hidden = NO;
+        CGRect frame = _reasonLabel.frame;
+        frame.size.height = [content heightWithFont:_reasonLabel.font constrainedToWidth:CGRectGetWidth(frame)]+5;
+        _reasonLabel.frame = frame;
+        _reasonLabel.numberOfLines = 0;
+        _reasonLabel.text = content;
+    }else{
+        _reasonLabel.hidden = YES;
+    }
     [_frontImageView setImageWithURLString:jc.frontImgUrl];
 }
 

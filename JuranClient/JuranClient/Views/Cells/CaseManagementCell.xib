@@ -39,10 +39,19 @@
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Aey-tX-m4c">
+                        <rect key="frame" x="8" y="71" width="304" height="10"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.22745098039215686" green="0.22745098039215686" blue="0.22745098039215686" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="frontImageView" destination="HUZ-Jn-PF8" id="8wA-8D-PQU"/>
+                <outlet property="reasonLabel" destination="Aey-tX-m4c" id="I0s-Uy-ily"/>
                 <outlet property="statusLabel" destination="tI2-Ba-wbV" id="G7M-4g-NJv"/>
                 <outlet property="timeLabel" destination="CdW-hd-0PN" id="0DL-44-Ee9"/>
                 <outlet property="titleLabel" destination="Tdi-E8-DIB" id="u2N-8y-dWV"/>
