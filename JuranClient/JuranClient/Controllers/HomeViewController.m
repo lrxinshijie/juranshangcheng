@@ -43,6 +43,12 @@
 
 @implementation HomeViewController
 
+- (void)dealloc{
+    _tableView.dataSource = nil;
+    _tableView.delegate = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -57,6 +63,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameMyDemandReloadData object:nil];
     
     [self setupUI];
     
@@ -67,6 +74,11 @@
     
     [_tableView headerBeginRefreshing];
 }
+
+- (void)receiveReloadDataNotification:(NSNotification*)notification{
+    [_tableView headerBeginRefreshing];
+}
+
 
 - (void)setupUI{
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];

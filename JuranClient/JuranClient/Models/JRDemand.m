@@ -35,7 +35,6 @@
         self.contactsSex = @"";
         self.roomType = @"";
         self.neRoomTypeImgUrl = @"";
-        self.oldRoomTypeImgUrl = @"";
         self.bidId = @"";
         self.bidInfoList = [NSMutableArray array];
         self.deadBalance = @"";
@@ -117,7 +116,6 @@
     self.neighbourhoods = [value getStringValueForKey:@"neighbourhoods" defaultValue:@""];
     self.roomType = [value getStringValueForKey:@"roomType" defaultValue:@""];
     self.neRoomTypeImgUrl = @"";
-    self.oldRoomTypeImgUrl = @"";
     _roomTypeImgUrl = [value getStringValueForKey:@"imageUrl" defaultValue:@""];
     self.bidId = [value getStringValueForKey:@"bidId" defaultValue:@""];
     self.deadBalance = [value getStringValueForKey:@"deadBalance" defaultValue:@""];
@@ -180,14 +178,6 @@
         self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
     }
     return self;
-}
-
-
-- (void)setRoomTypeImgUrl:(NSString *)roomTypeImgUrl{
-    _oldRoomTypeImgUrl = _roomTypeImgUrl;
-    
-    _roomTypeImgUrl = roomTypeImgUrl;
-    _neRoomTypeImgUrl = _roomTypeImgUrl;
 }
 
 - (NSString *)houseTypeString{

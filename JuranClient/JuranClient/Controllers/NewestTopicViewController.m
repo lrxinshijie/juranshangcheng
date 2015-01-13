@@ -446,7 +446,10 @@
     }else{
         [_openStatusDic addEntriesFromDictionary:@{[NSString stringWithFormat:@"%d", c.commentId]:@""}];
     }
+    [_tableView reloadRowsAtIndexPaths:@[[_tableView indexPathForCell:cell]] withRowAnimation:UITableViewRowAnimationAutomatic];
     [_tableView reloadData];
+//    [_tableView scrollToRowAtIndexPath:[_tableView indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    
 }
 
 - (void)setSelectComment:(JRComment *)selectComment{

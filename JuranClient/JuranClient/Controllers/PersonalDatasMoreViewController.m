@@ -63,9 +63,9 @@
 
 - (void)setupDatas{
     [self resetValues];
-    self.keys = @[@"证件信息", @"QQ", @"微信", @"所学专业", @"专业类型", @"证书与奖项"];
-    self.tags = @[@"", @"1101", @"1102", @"1103", @"", @""];
-    self.placeholders = @[@"", @"请输入QQ", @"请输入微信", @"请输入所学专业", @"", @""];
+    self.keys = @[@"QQ", @"微信", @"所学专业", @"专业类型", @"证书与奖项"];
+    self.tags = @[@"1101", @"1102", @"1103", @"", @""];
+    self.placeholders = @[@"请输入QQ", @"请输入微信", @"请输入所学专业", @"", @""];
 }
 
 - (void)reloadData{
@@ -74,7 +74,7 @@
 }
 
 - (void)resetValues{
-    self.values = @[[_user idCardInfomation], _user.qq, _user.weixin, _user.professional, [_user professionalTypeString], _user.personalHonor];
+    self.values = @[_user.qq, _user.weixin, _user.professional, [_user professionalTypeString], _user.personalHonor];
 }
 
 - (void)setupUI{
@@ -92,7 +92,7 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0 || indexPath.row == 4 || indexPath.row == 5) {
+    if (indexPath.row == 3 || indexPath.row == 4) {
         static NSString *cellIdentifier = @"personalDataMore";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
@@ -144,12 +144,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.selectedTextField resignFirstResponder];
-    if (indexPath.row == 5){
+    if (indexPath.row == 4){
         DetailAddressViewController *vc = [[DetailAddressViewController alloc] init];
         vc.user = _user;
         vc.type = 2;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 4){
+    }else if (indexPath.row == 3){
         NSMutableArray *rows = [NSMutableArray array];
         __block NSInteger ind = 0;
         NSArray *professionalType = [[DefaultData sharedData] professionalType];
@@ -166,11 +166,11 @@
         } cancelBlock:^(ActionSheetStringPicker *picker) {
             
         } origin:[UIApplication sharedApplication].keyWindow];
-    }else if (indexPath.row == 0){
+    }/*else if (indexPath.row == 0){
         ModifyViewController *vc = [[ModifyViewController alloc] initWithMemberDetail:_user type:ModifyCVTypeIdType];
         vc.title = _keys[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
-    }
+    }*/
 }
 
 - (void)didReceiveMemoryWarning

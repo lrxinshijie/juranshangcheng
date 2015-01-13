@@ -165,7 +165,8 @@
     if (_fileImage) {
         [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":_fileImage} responseHandler:^(NSError *error, id data, NSDictionary *other) {
             if (!error) {
-                _demand.roomTypeImgUrl = [data objectForKey:@"imgUrl"];
+                _demand.neRoomTypeImgUrl = [data objectForKey:@"imgUrl"];
+                _demand.roomTypeImgUrl = @"";
                 [self submitDemand];
             }else{
                 [self hideHUD];
@@ -191,7 +192,7 @@
                                                                                  @"bathroomCount":_demand.bathroomCount,
                                                                                  @"areaInfo": [_demand.areaInfo dictionaryValue],
                                                                                  @"newRoomTypeUrl": _demand.neRoomTypeImgUrl,
-                                                                                 @"oldRoomTypeUrl": _demand.oldRoomTypeImgUrl,
+                                                                                 @"oldRoomTypeUrl": _demand.roomTypeImgUrl,
                                                                                  @"roomTypeId": _demand.roomTypeId
                                                                                  }];
     
