@@ -906,7 +906,26 @@
 		</dict>
 	</array>
 	<key>bidInfoOrder</key>
-	<array/>
+	<array>
+		<dict>
+			<key>k</key>
+			<string>按发布时间</string>
+			<key>v</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>按结束时间</string>
+			<key>v</key>
+			<string>2</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>金额由高到低</string>
+			<key>v</key>
+			<string>3</string>
+		</dict>
+	</array>
 	<key>designerDefaultParam</key>
 	<dict>
 		<key>order</key>
@@ -1077,6 +1096,8 @@
 		<key>style</key>
 		<string></string>
 		<key>houseArea</key>
+		<string></string>
+		<key>order</key>
 		<string></string>
 	</dict>
 </dict>
