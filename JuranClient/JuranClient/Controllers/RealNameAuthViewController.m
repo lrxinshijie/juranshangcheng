@@ -74,6 +74,9 @@
 }
 
 - (void)setupUI{
+    UIButton *hiddenBtn = [self.view buttonWithFrame:kContentFrameWithoutNavigationBar target:self action:@selector(onHidden) image:nil];
+    [self.view addSubview:hiddenBtn];
+    
     
     for (NSInteger i = 0; i < 6; i++) {
         UIView *v = [_tableHeaderView viewWithTag:1100+i];
@@ -243,6 +246,10 @@
 }
 
 #pragma mark - Target Action
+
+- (void)onHidden{
+    [self.selectedTextField resignFirstResponder];
+}
 
 - (void)onSubmit:(id)sender{
     if(_designer.userName.length == 0){
