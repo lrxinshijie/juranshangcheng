@@ -57,13 +57,13 @@
     
 #ifdef kJuranDesigner
     keysForOthers = @[@"问题反馈", @"版本信息"
-                      //                      , @"给我打分"
+                                            , @"给我打分"
                       //, @"其他APP推荐"
                       , @"居然服务"
                       ];
 #else
     keysForOthers = @[@"问题反馈", @"版本信息"
-                      //                      , @"给我打分"
+                                            , @"给我打分"
                       ];//, @"其他APP推荐"
 #endif
     
@@ -210,11 +210,10 @@
             VersionInfoViewController *vc = [[VersionInfoViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 2){
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%d", kAppleID]]];
+        }else if (indexPath.row == 3){
             //居然服务
             JRServiceViewController *vc = [[JRServiceViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (indexPath.row == 3){
-            APPRecommendViewController *vc = [[APPRecommendViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
