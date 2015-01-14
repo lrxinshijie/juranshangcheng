@@ -36,6 +36,8 @@
 @property (nonatomic, strong) UIImage *backIdImage;
 @property (nonatomic, strong) UIImage *headImage;
 
+@property (nonatomic, strong) UIBarButtonItem *rightBarItem;
+
 @end
 
 @implementation RealNameAuthViewController
@@ -47,6 +49,10 @@
     [super viewDidLoad];
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onResubmit) title:@"重新申请" backgroundImage:nil];
+    [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
+    self.rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     self.navigationItem.title = @"实名认证";
     _keys = @[@"真实姓名", @"身份证号码", @"证件图片", @"手持证件照"];
@@ -65,6 +71,13 @@
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
                 _designer = [[JRDesigner alloc]initWithDictionaryForRealNameAuth:data];
+                if (_designer.realNameAuthStatus == -1) {
+                    _status = RealNameAuthStatusCommiting;
+                }else if (_designer.realNameAuthStatus == 2){
+                    _status = RealNameAuthStatusApproved;
+                }else{
+                    _status = RealNameAuthStatusReview;
+                }
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self reloadData];
                 });
@@ -124,13 +137,6 @@
 }
 
 - (void)reloadData{
-    if (_designer.realNameAuthStatus == -1) {
-        _status = RealNameAuthStatusCommiting;
-    }else if (_designer.realNameAuthStatus == 2){
-        _status = RealNameAuthStatusApproved;
-    }else{
-        _status = RealNameAuthStatusReview;
-    }
     for (NSInteger i = 0; i < 3; i++) {
         UILabel *label = (UILabel*)[_tableHeaderView viewWithTag:1103+i];
         label.text = [NSString stringWithFormat:@"%d", i + 1];
@@ -146,6 +152,7 @@
         }
     }
     _tableHeaderView.backgroundColor = [UIColor clearColor];
+    self.navigationItem.rightBarButtonItem = nil;
     _tableView.hidden = YES;
     _bgView.hidden = YES;
     
@@ -163,7 +170,8 @@
         [self.handImageView setImageWithURLString:_designer.handHeldIdPhoto];
         self.statusLabel.text = [_designer realNameAuthStatusString];
         self.statusLabel.textColor = _designer.realNameAuthStatus == 1?[UIColor redColor]:RGBColor(28, 79, 166);
-        
+        self.descLabel.textColor = _designer.realNameAuthStatus == 1?[UIColor redColor]:RGBColor(28, 79, 166);
+        self.navigationItem.rightBarButtonItem = _designer.realNameAuthStatus == 1?_rightBarItem:nil;
         self.descLabel.text = [_designer realNameAuthDescription];
         
         CGRect frame = _descLabel.frame;
@@ -173,6 +181,7 @@
         frame = _contentView.frame;
         frame.origin.y = CGRectGetMaxY(_descLabel.frame)+10;
         _contentView.frame = frame;
+        
     }
 }
 
@@ -227,6 +236,11 @@
             [self loadData];
         }
     }];
+}
+
+- (void)onResubmit{
+    _status = RealNameAuthStatusCommiting;
+    [self reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -32,7 +32,12 @@
 #define kDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 
 #define UMENG_KEY @"53a7cf7f56240bbe65195bfd"
+
+#ifdef kJuranDesigner
 #define kAppleID 954983948
+#else
+#define kAppleID 954983948
+#endif
 
 #define kAppURL [NSString stringWithFormat:@"http://itunes.apple.com/app/id%d?mt=8",kAppleID]
 //#define kImageBackgroundColor RGBColor(242, 242, 242)

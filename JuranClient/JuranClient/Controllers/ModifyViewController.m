@@ -72,14 +72,6 @@
             _tipLabel.text = @"注：用户名仅限修改一次";
             break;
         }
-        case ModifyCVTypeHomeTel:
-        {
-            _textField.text = _user.homeTel;
-            _textField.keyboardType = UIKeyboardTypeNumberPad;
-            _tipLabel.text = @"";
-            _textField.placeholder = @"请输入固定电话";
-            break;
-        }
         case ModifyCVTypeIdType:
         {
             _textField.text = _user.idCardNum;

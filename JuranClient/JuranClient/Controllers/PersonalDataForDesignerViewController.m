@@ -90,7 +90,7 @@
 }
 
 - (void)setupDatas{
-    _keys = @[@[@"头像", @"用户名"], @[@"昵称", @"性别", @"生日", @"所在地"], @[@"从业经验", @"设计费用", @"量房费用", @"擅长风格", @"设计专长", @"毕业院校", @"自我介绍"], @[@"更多资料"]];
+    _keys = @[@[@"头像", @"用户名"], @[@"昵称", @"性别", @"生日", @"所在地"], @[@"从业经验(年)", @"设计费用", @"量房费用", @"擅长风格", @"设计专长", @"毕业院校", @"自我介绍"], @[@"更多资料"]];
     _placeholders = @[@[@"", @"请输入用户名"], @[@"请输入昵称", @"", @"", @""], @[@"请输入从业经验", @"", @"", @"", @"", @"请输入毕业院校", @""], @[@""]];
     _tags = @[@[@"", @"1100"], @[@"1101", @"", @"", @""], @[@"1102", @"", @"", @"", @"", @"1103", @""],@[@""]];
     
@@ -138,7 +138,7 @@
     NSDictionary *param1 = @{@"nickName": _user.nickName,
                              @"oldNickName": self.oldNickName,
                              @"nickNameChangeable":_user.nickNameChangeable,
-//                             @"homeTel": _user.homeTel,
+//                             @"mobilePhone": _user.mobilePhone,
                              @"birthday":_user.birthday,
                              @"areaInfo": @{@"provinceCode": _user.areaInfo.provinceCode,
                                             @"provinceName": _user.areaInfo.provinceName,
@@ -406,12 +406,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.selectedTextField resignFirstResponder];
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
-            if (images.count > 0) {
-                [self uploadHeaderImage:images[0]];
-            }
-        }];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+                if (images.count > 0) {
+                    [self uploadHeaderImage:images[0]];
+                }
+            }];
+        }else if (indexPath.row == 1){
+            [self showTip:@"用户名不可更改!"];
+        }
     }else if (indexPath.section == 1){
         if (indexPath.row == 1) {
             
@@ -526,7 +530,7 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     if (textField.tag == 1101) {
         if (_user.nickNameChangeable.boolValue) {
-            [self showTip:@"用户名仅限修改一次"];
+            [self showTip:@"昵称仅限修改一次"];
             return NO;
         }else if(!nickNameChangeTip){
             self.selectedTextField = textField;

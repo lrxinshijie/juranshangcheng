@@ -241,6 +241,13 @@
                     [_openStatusDic addEntriesFromDictionary:@{[NSString stringWithFormat:@"%d", self.selectComment.commentId]:@""}];
                 }
             }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (_topic.commitList.count == 0) {
+                    [_tableView scrollToBottom];
+                }else{
+                    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+                }
+            });
             [self loadData];
             self.selectComment = nil;
         }
@@ -446,10 +453,14 @@
     }else{
         [_openStatusDic addEntriesFromDictionary:@{[NSString stringWithFormat:@"%d", c.commentId]:@""}];
     }
-    [_tableView reloadRowsAtIndexPaths:@[[_tableView indexPathForCell:cell]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [_tableView reloadData];
-//    [_tableView scrollToRowAtIndexPath:[_tableView indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-    
+//    [_tableView reloadData];
+    NSIndexPath *indexPath = [_tableView indexPathForCell:cell];
+    [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    if (c.unfold) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        });
+    }
 }
 
 - (void)setSelectComment:(JRComment *)selectComment{
