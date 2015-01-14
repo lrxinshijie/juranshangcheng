@@ -33,11 +33,12 @@
    self = [super initWithFrame:frame];
    if (self) {
       [self setDelegate:self];
-      [self setMaximumZoomScale:2.0];
+       self.clipsToBounds = YES;
+      [self setMaximumZoomScale:2];
       [self setShowsHorizontalScrollIndicator:NO];
       [self setShowsVerticalScrollIndicator:NO];
       [self loadSubviewsWithFrame:frame];
-       
+//      [self loadSubviewsWithFrame:self.bounds];
    }
    return self;
 }
@@ -54,8 +55,12 @@
 
 - (void)loadSubviewsWithFrame:(CGRect)frame
 {
+    frame.origin.y = 164;
    imageView_ = [[UIImageView alloc] initWithFrame:frame];
+    imageView_.clipsToBounds = YES;
+//    [imageView_ setContentMode:UIViewContentModeScaleAspectFill];
    [imageView_ setContentMode:UIViewContentModeScaleAspectFit];
+//   [imageView_ setContentMode:UIViewContentModeRedraw];
    [self addSubview:imageView_];
     
     indicatorView_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
@@ -80,11 +85,20 @@
 //    self.contentSize = CGSizeMake(0, size.height);
     
    [imageView_ setImage:newImage];
+//    CGSize size = newImage.size;
+//    CGRect frame = imageView_.frame;
+//    frame.size = size;
+//    imageView_.frame = frame;
+//    self.contentSize = size;
 }
 
 
 - (UIImage *)image{
     return imageView_.image;
+}
+
+- (UIImageView *)imageView{
+    return imageView_;
 }
 
 - (void)layoutSubviews 
@@ -178,6 +192,7 @@
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
+    return imageView_;
    UIView *viewToZoom = imageView_;
    return viewToZoom;
 }
