@@ -131,10 +131,13 @@
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
     }];
-    
 }
 
 - (IBAction)doAsk:(id)sender{
+    if (![self checkLogin:^{
+    }]) {
+        return;
+    }
     NewQuestionViewController *vc = [[NewQuestionViewController alloc] init];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
