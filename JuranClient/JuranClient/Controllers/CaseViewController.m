@@ -247,7 +247,11 @@
             [_filterData setObject:data[key] forKey:key];
         }];
         
-        [_tableView headerBeginRefreshing];
+        if (view.isGrid) {
+            [_collectionView headerBeginRefreshing];
+        }else{
+            [_tableView headerBeginRefreshing];
+        }
     }
 }
 

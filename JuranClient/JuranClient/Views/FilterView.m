@@ -42,18 +42,16 @@
         
         CGFloat width = kWindowWidth;
         if ([Public isDesignerApp]  || type == FilterViewTypeCaseSearch) {
-            if (type == FilterViewTypeCase) {
-                width = kWindowWidth - 44;
-                UIView *gridView = [[UIView alloc] initWithFrame:CGRectMake(width, 0, 44, 44)];
-                gridView.backgroundColor = [UIColor clearColor];
-                UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 1, 44)];
-                lineImageView.backgroundColor = RGBColor(213, 213, 213);
-                [gridView addSubview:lineImageView];
-                
-                self.listButton = [gridView buttonWithFrame:gridView.bounds target:self action:@selector(onList) image:[UIImage imageNamed:@"icon-grid"]];
-                [gridView addSubview:_listButton];
-                [self addSubview:gridView];
-            }
+            width = kWindowWidth - 44;
+            UIView *gridView = [[UIView alloc] initWithFrame:CGRectMake(width, 0, 44, 44)];
+            gridView.backgroundColor = [UIColor clearColor];
+            UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 1, 44)];
+            lineImageView.backgroundColor = RGBColor(213, 213, 213);
+            [gridView addSubview:lineImageView];
+            
+            self.listButton = [gridView buttonWithFrame:gridView.bounds target:self action:@selector(onList) image:[UIImage imageNamed:@"icon-list"]];
+            [gridView addSubview:_listButton];
+            [self addSubview:gridView];
         }
         
         width /= 2;
@@ -182,7 +180,7 @@
 - (void)setIsGrid:(BOOL)isGrid{
     _isGrid = isGrid;
     
-    [_listButton setImage:[UIImage imageNamed:_isGrid ? @"icon-list" : @"icon-grid"] forState:UIControlStateNormal];
+    [_listButton setImage:[UIImage imageNamed:_isGrid ? @"icon-grid" : @"icon-list"] forState:UIControlStateNormal];
 }
 
 - (void)onList{

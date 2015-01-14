@@ -23,6 +23,10 @@
 
 @implementation CaseManagementViewController
 
+- (void)dealloc{
+    _tableView.delegate = nil, _tableView.dataSource = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -84,6 +88,7 @@
             if (!error) {
                 [_datas removeObject:jrCase];
                 [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                _emptyView.hidden = _datas.count != 0;
             }
         }];
     }
