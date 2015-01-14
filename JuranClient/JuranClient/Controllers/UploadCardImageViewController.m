@@ -58,10 +58,33 @@
     if (_type == 0) {
         _chooseLabel1.text = @"正面";
         _tipsLabel.text = _tips[0];
+        if (self.positiveIdImage) {
+            CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:_chooseButton1.frame];
+            [imageView setImage:_positiveIdImage];
+            imageView.delegate = self;
+            [_chooseButton1.superview addSubview:imageView];
+            imageView.tag = 0;
+
+        }
+        if (self.backIdImage){
+            CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:_chooseButton2.frame];
+            [imageView setImage:_backIdImage];
+            imageView.delegate = self;
+            [_chooseButton2.superview addSubview:imageView];
+            imageView.tag = 1;
+        }
+        
     }else if (_type == 1){
         _chooseLabel2.hidden = _chooseButton2.hidden = YES;
         _chooseLabel1.text = @"手持证件照片";
         _tipsLabel.text = _tips[1];
+        
+        if (self.headImage){
+            CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:_chooseButton1.frame];
+            [imageView setImage:_headImage];
+            imageView.delegate = self;
+            [_chooseButton1.superview addSubview:imageView];
+        }
     }
     
     frame = _tipsLabel.frame;

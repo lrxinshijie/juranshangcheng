@@ -371,6 +371,7 @@
 #ifdef kJuranDesigner
     if ([JRUser isLogin] && [JRUser currentUser].userId == _designer.userId) {
         _followButton.enabled = NO;
+        self.navigationItem.rightBarButtonItem = nil;
     }else{
         if (_designer.isFollowed) {
             [_followButton setImage:[UIImage imageNamed:@"icon_unfollowed.png"] forState:UIControlStateNormal];

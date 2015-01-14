@@ -71,8 +71,8 @@
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
                 _designer = [[JRDesigner alloc]initWithDictionaryForRealNameAuth:data];
-                _designer.realNameAuthStatus = 1;
-                _designer.realAuditDesc = @"老师就分了就是看对方即可";
+//                _designer.realNameAuthStatus = 1;
+//                _designer.realAuditDesc = @"老师就分了就是看对方即可";
                 if (_designer.realNameAuthStatus == -1) {
                     _status = RealNameAuthStatusCommiting;
                 }else if (_designer.realNameAuthStatus == 2){
@@ -183,7 +183,6 @@
         frame = _contentView.frame;
         frame.origin.y = CGRectGetMaxY(_descLabel.frame)+10;
         _contentView.frame = frame;
-        
     }
 }
 
@@ -320,7 +319,7 @@
         cell.textField.keyboardType = UIKeyboardTypeDefault;
         cell.textField.tag = 10+indexPath.row;
         if (indexPath.row == 1) {
-            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+            cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         }
         return cell;
     }else{
@@ -345,9 +344,9 @@
     if (indexPath.row >= 2) {
         UploadCardImageViewController *vc = [[UploadCardImageViewController alloc] init];
         vc.delegate = self;
-//        vc.positiveIdImage = self.positiveIdImage;
-//        vc.headImage = self.headImage;
-//        vc.backIdImage = self.backIdImage;
+        vc.positiveIdImage = self.positiveIdImage;
+        vc.headImage = self.headImage;
+        vc.backIdImage = self.backIdImage;
         vc.type = indexPath.row - 2;
         [self.navigationController pushViewController:vc animated:YES];
     }

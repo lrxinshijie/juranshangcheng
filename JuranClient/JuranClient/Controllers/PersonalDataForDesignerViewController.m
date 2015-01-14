@@ -374,33 +374,6 @@
         
         return cell;
     }
-    
-    /*
-     *设计师端内容
-     if (indexPath.row == keysForSection3.count - 1) {
-     cell.textLabel.text = valuesForSection3[indexPath.row];
-     cell.detailTextLabel.text = @"";
-     CGRect frame = CGRectMake(0, 0, 210, 53);
-     UIView *view = [[UIView alloc] initWithFrame:frame];
-     frame.origin = CGPointMake(frame.size.width - 8, (frame.size.height - 16)/2);
-     frame.size = CGSizeMake(8, 16);
-     UIImageView *arrowImageView = [cell imageViewWithFrame:frame image:[UIImage imageNamed:@"cellIndicator.png"]];
-     [view addSubview:arrowImageView];
-     
-     frame.origin = CGPointMake(view.frame.size.width - frame.size.width - 10 -190, 0);
-     frame.size = CGSizeMake(190, 53);
-     
-     UILabel *label = [cell labelWithFrame:frame text:valuesForSection3[indexPath.row] textColor:cell.detailTextLabel.textColor textAlignment:NSTextAlignmentCenter font:cell.detailTextLabel.font];
-     label.numberOfLines = 3;
-     [view addSubview:label];
-     
-     cell.accessoryView = view;
-     
-     }else{
-     cell.textLabel.text = keysForSection3[indexPath.row];
-     cell.detailTextLabel.text = valuesForSection3[indexPath.row];
-     }
-     */
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -426,12 +399,25 @@
                 
             } origin:[UIApplication sharedApplication].keyWindow];
         }else if (indexPath.row == 2) {
-            [ActionSheetDatePicker showPickerWithTitle:@"生日" datePickerMode:UIDatePickerModeDate selectedDate:[NSDate date] doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
+            NSDate *date = [NSDate date];
+            NSDateComponents *comp = [[NSDateComponents alloc]init];
+            [comp setMonth:date.month];
+            [comp setDay:date.day];
+            [comp setYear:date.year - 1];
+            NSCalendar *myCal = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+            date = [myCal dateFromComponents:comp];
+            if (_user.birthday.length > 0) {
+                date = [NSDate dateFromString:_user.birthday dateFormat:[NSDate dateFormatString]];
+            }
+            ActionSheetDatePicker *datePicker = [[ActionSheetDatePicker alloc] initWithTitle:@"生日" datePickerMode:UIDatePickerModeDate selectedDate:date doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
                 _user.birthday = [(NSDate*)selectedDate stringWithFormat:[NSDate dateFormatString]];
                 [self reloadData];
             } cancelBlock:^(ActionSheetDatePicker *picker) {
-                
             } origin:self.view];
+            datePicker.maximumDate = [myCal dateFromComponents:comp];
+            [comp setYear:[NSDate date].year - 60];
+            datePicker.minimumDate = [myCal dateFromComponents:comp];
+            [datePicker showActionSheetPicker];
         }else if (indexPath.row == 3){
             BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
             [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
@@ -442,7 +428,6 @@
     }else if (indexPath.section == 2){
         switch (indexPath.row) {
             case 0:{
-                
                 break;
             }
             case 1:{

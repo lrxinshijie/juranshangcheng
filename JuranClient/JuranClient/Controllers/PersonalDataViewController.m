@@ -379,15 +379,25 @@
                 
             } origin:[UIApplication sharedApplication].keyWindow];
         }else if (indexPath.row == 2) {
-            [ActionSheetDatePicker showPickerWithTitle:@"生日" datePickerMode:UIDatePickerModeDate selectedDate:[NSDate date] doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
+            NSDate *date = [NSDate date];
+            NSDateComponents *comp = [[NSDateComponents alloc]init];
+            [comp setMonth:date.month];
+            [comp setDay:date.day];
+            [comp setYear:date.year - 1];
+            NSCalendar *myCal = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+            date = [myCal dateFromComponents:comp];
+            if (_user.birthday.length > 0) {
+                date = [NSDate dateFromString:_user.birthday dateFormat:[NSDate dateFormatString]];
+            }
+            ActionSheetDatePicker *datePicker = [[ActionSheetDatePicker alloc] initWithTitle:@"生日" datePickerMode:UIDatePickerModeDate selectedDate:date doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin) {
                 _user.birthday = [(NSDate*)selectedDate stringWithFormat:[NSDate dateFormatString]];
-//                NSString *dateString = [(NSDate*)selectedDate stringWithFormat:[NSDate timestampFormatString]];
-//                param = @{@"birthday": dateString};
-//                [self modifyMemberDetail];
                 [self reloadData];
             } cancelBlock:^(ActionSheetDatePicker *picker) {
-                
             } origin:self.view];
+            datePicker.maximumDate = [myCal dateFromComponents:comp];
+            [comp setYear:[NSDate date].year - 60];
+            datePicker.minimumDate = [myCal dateFromComponents:comp];
+            [datePicker showActionSheetPicker];
         }else if (indexPath.row == 3){
             BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
             [vc setFinishBlock:^(JRAreaInfo *areaInfo) {

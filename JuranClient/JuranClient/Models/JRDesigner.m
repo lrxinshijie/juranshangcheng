@@ -83,7 +83,7 @@
         self.fansCount = [dict getIntValueForKey:@"fansCount" defaultValue:0];
         self.creditRateCount = [dict getIntValueForKey:@"creditRateCount" defaultValue:0];
         self.minisite = [dict getStringValueForKey:@"minisite" defaultValue:@""];
-        self.experienceCount = [dict getIntValueForKey:@"experienceCount" defaultValue:0];
+        self.experienceCount = [dict getIntValueForKey:@"experienceCount" defaultValue:-1];
         self.browseCount = [dict getIntValueForKey:@"browseCount" defaultValue:0];
         NSString *urls = [dict getStringValueForKey:@"frontImgUrl"defaultValue:@""];
         if (urls.length == 0) {
@@ -110,7 +110,7 @@
     self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
     self.isAuth = [dict getBoolValueForKey:@"isAuth" defaultValue:FALSE];
     self.granuate = [dict getStringValueForKey:@"granuate" defaultValue:@""];
-    self.experienceCount = [dict getIntValueForKey:@"experience" defaultValue:0];
+    self.experienceCount = [dict getIntValueForKey:@"experience" defaultValue:-1];
     self.style = [dict getStringValueForKey:@"style" defaultValue:@""];
     self.priceMeasure = [dict getIntValueForKey:@"priceMeasure" defaultValue:0]/100.f;
     self.designFeeMin = [dict getIntValueForKey:@"designFeeMin" defaultValue:0]/100.f;
@@ -182,7 +182,7 @@
                 }else{
                     d.frontImageUrlList = [urls componentsSeparatedByString:@","];
                 }
-                d.experienceCount = [designExperienceDic getIntValueForKey:[NSString stringWithFormat:@"%i", d.userId] defaultValue:0];
+                d.experienceCount = [designExperienceDic getIntValueForKey:[NSString stringWithFormat:@"%i", d.userId] defaultValue:-1];
                 [retVal addObject:d];
             }
         }
@@ -207,7 +207,7 @@
                 }else{
                     d.frontImageUrlList = [urls componentsSeparatedByString:@","];
                 }
-                d.experienceCount = [designExperienceDic getIntValueForKey:[NSString stringWithFormat:@"%i", d.userId] defaultValue:0];
+                d.experienceCount = [designExperienceDic getIntValueForKey:[NSString stringWithFormat:@"%i", d.userId] defaultValue:-1];
                 [retVal addObject:d];
             }
         }
@@ -229,7 +229,7 @@
         self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
         self.isRealNameAuth = [dict getIntValueForKey:@"isRealNameAuth" defaultValue:0];
         self.style = [dict getStringValueForKey:@"styleNames" defaultValue:@""];
-        self.experienceCount = [dict getIntValueForKey:@"experienceCount" defaultValue:0];
+        self.experienceCount = [dict getIntValueForKey:@"experienceCount" defaultValue:-1];
         self.browseCount = [dict getIntValueForKey:@"browseCount" defaultValue:0];
         self.projectCount = [dict getIntValueForKey:@"projectCount" defaultValue:0];
     }
@@ -288,9 +288,9 @@
 }
 
 - (NSString*)experienceString{
-//    if (!_experienceCount) {
-//        return @"";
-//    }
+    if (_experienceCount == -1) {
+        return @"";
+    }
     return [NSString stringWithFormat:@"%d年", _experienceCount];
 }
 
