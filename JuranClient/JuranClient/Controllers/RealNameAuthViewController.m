@@ -154,6 +154,7 @@
         }
     }
     _tableHeaderView.backgroundColor = [UIColor clearColor];
+    self.navigationItem.rightBarButtonItem = nil;
     _tableView.hidden = YES;
     _bgView.hidden = YES;
     
@@ -172,6 +173,7 @@
         self.statusLabel.text = [_designer realNameAuthStatusString];
         self.statusLabel.textColor = _designer.realNameAuthStatus == 1?[UIColor redColor]:RGBColor(28, 79, 166);
         self.descLabel.textColor = _designer.realNameAuthStatus == 1?[UIColor redColor]:RGBColor(28, 79, 166);
+        self.navigationItem.rightBarButtonItem = _designer.realNameAuthStatus == 1?_rightBarItem:nil;
         self.descLabel.text = [_designer realNameAuthDescription];
         
         CGRect frame = _descLabel.frame;
