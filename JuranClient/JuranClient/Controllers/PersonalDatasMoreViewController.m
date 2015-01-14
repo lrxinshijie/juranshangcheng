@@ -63,9 +63,9 @@
 
 - (void)setupDatas{
     [self resetValues];
-    self.keys = @[@"QQ", @"微信", @"所学专业", @"专业类型", @"证书与奖项"];
-    self.tags = @[@"1101", @"1102", @"1103", @"", @""];
-    self.placeholders = @[@"请输入QQ", @"请输入微信", @"请输入所学专业", @"", @""];
+    self.keys = @[@"QQ", @"微信", @"所学专业", @"专业类型", @"证书与奖项"];//, @"手机号码"
+    self.tags = @[@"1101", @"1102", @"1103", @"", @""];//, @"1104"
+    self.placeholders = @[@"请输入QQ", @"请输入微信", @"请输入所学专业", @"", @""];//, @"请输入手机号码"
 }
 
 - (void)reloadData{
@@ -74,7 +74,7 @@
 }
 
 - (void)resetValues{
-    self.values = @[_user.qq, _user.weixin, _user.professional, [_user professionalTypeString], _user.personalHonor];
+    self.values = @[_user.qq, _user.weixin, _user.professional, [_user professionalTypeString], _user.personalHonor];//, _user.mobilePhone
 }
 
 - (void)setupUI{
@@ -205,6 +205,16 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    if (textField.tag == 1104) {
+        if (textField.text.length > 0 && textField.text.length != 11) {
+            [self showTip:@"请输入正确地手机号码!"];
+            return NO;
+        }
+    }
+    return YES;
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
    if (textField.tag == 1101){
         _user.qq = textField.text;
@@ -212,6 +222,8 @@
         _user.weixin = textField.text;
     }else if(textField.tag == 1103){
         _user.professional = textField.text;
+    }else if (textField.tag == 1104){
+        _user.mobilePhone = textField.text;
     }
     [self resetValues];
 }

@@ -83,7 +83,7 @@
 @property (nonatomic, strong) NSString *personalHonor;
 @property (nonatomic, assign) NSInteger faceToFace;
 @property (nonatomic, strong) NSString *detailAddress;
-@property (nonatomic, strong) NSString *homeTel;
+@property (nonatomic, strong) NSString *mobilePhone;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 - (id)initWithDictionaryForBidInfo:(NSDictionary *)dict;

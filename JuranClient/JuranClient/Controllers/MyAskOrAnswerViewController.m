@@ -44,7 +44,10 @@
     
     self.navigationItem.title = @"我的提问";
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    [self.view addSubview:_headView];
+    
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 40, kWindowWidth, kWindowHeightWithoutNavigationBar - 40) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_tableView.frame), CGRectGetHeight(_tableView.frame))];
     bgView.backgroundColor = RGBColor(241, 241, 241);
     CGPoint center = CGPointMake(bgView.center.x, 220);
@@ -52,6 +55,7 @@
     _noDatasView.hidden = YES;
     [bgView addSubview:_noDatasView];
     _tableView.backgroundView = bgView;
+    
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
@@ -139,14 +143,6 @@
 }
 
 #pragma makr - UITableViewDataSource/Delegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 40;
-}
-
-- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return _headView;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _segment.selectedSegmentIndex == 0?_questionDatas.count:_answerDatas.count;
