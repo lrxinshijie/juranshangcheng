@@ -105,15 +105,15 @@
                 , @[_user.nickName
                     , [_user sexyString]
                     , _user.birthday.length == 0?@"未设置":_user.birthday
-                    , _user.areaInfo.title
+                    , _user.areaInfo.title.length == 0?@"未设置":_user.areaInfo.title
                     ]
-                , @[[NSString stringWithFormat:@"%d", _user.experienceCount]
+                , @[_user.experienceCount == -1?@"":[NSString stringWithFormat:@"%d", _user.experienceCount]
                     , [_user designPriceForPersonal]
                     , [_user measureForPersonal]
-                    , [_user styleNameForPersonal]
-                    , [_user specialForPersonal]
+                    , [_user styleNameForPersonal].length == 0?@"未设置":[_user styleNameForPersonal]
+                    , [_user specialForPersonal].length == 0?@"未设置":[_user specialForPersonal]
                     , _user.granuate
-                    , _user.selfIntroduction]
+                    , _user.selfIntroduction.length == 0?@"未设置":_user.selfIntroduction]
                 ,@[@""]
                 ];
 }
@@ -155,7 +155,7 @@
                              @"sex": [NSString stringWithFormat:@"%d", _user.sex],
                              @"designExperience": [NSString stringWithFormat:@"%d", _user.experienceCount],
                              @"freeMeasure": [NSString stringWithFormat:@"%d", _user.freeMeasure],
-                             @"priceMeasureStr": [NSString stringWithFormat:@"%d", (NSInteger)_user.priceMeasure],
+                             @"priceMeasureStr": [NSString stringWithFormat:@"%.2f", _user.priceMeasure],
                              @"style": _user.style,
                              @"special":_user.special,
                              @"graduateInstitutions":_user.granuate,
@@ -164,8 +164,8 @@
                              @"professionalType":_user.professionalType,
                              @"personalHonor":_user.personalHonor,
                              @"faceToFace": [NSString stringWithFormat:@"%d", _user.faceToFace],
-                              @"chargeStandardMinStr": [NSString stringWithFormat:@"%d", (NSInteger)_user.designFeeMin],
-                              @"chargeStandardMaxStr": [NSString stringWithFormat:@"%d", (NSInteger)_user.designFeeMax]
+                              @"chargeStandardMinStr": [NSString stringWithFormat:@"%.2f", _user.designFeeMin],
+                              @"chargeStandardMaxStr": [NSString stringWithFormat:@"%.2f", _user.designFeeMax]
                              };
     
     [self showHUD];
@@ -315,10 +315,14 @@
             CGRect frame = view.frame;
             frame.origin = CGPointMake(0, 0);
             frame.size = CGSizeMake(frame.size.width - 15, 60);
-            UILabel *label = [cell labelWithFrame:frame text:_values[indexPath.section][indexPath.row] textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
+            NSString *value = _values[indexPath.section][indexPath.row];
+            UILabel *label = [cell labelWithFrame:frame text:value textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
             label.numberOfLines = 3;
             if ([label.text heightWithFont:label.font constrainedToWidth:CGRectGetWidth(label.frame)] < 20) {
                 label.textAlignment = NSTextAlignmentRight;
+            }
+            if ([value isEqualToString:@"未设置"]) {
+                label.textColor = [UIColor grayColor];
             }
             [view addSubview:label];
             

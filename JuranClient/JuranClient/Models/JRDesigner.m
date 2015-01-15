@@ -354,8 +354,8 @@
     self.qq = [value getStringValueForKey:@"qq" defaultValue:@""];
     self.weixin = [value getStringValueForKey:@"weixin" defaultValue:@""];
     self.sex = [value getIntValueForKey:@"sex" defaultValue:0];
-    self.experienceCount = [value getIntValueForKey:@"designExperience" defaultValue:0];
-    self.freeMeasure = [value getIntValueForKey:@"freeMeasure" defaultValue:0];
+    self.experienceCount = [value getIntValueForKey:@"designExperience" defaultValue:-1];
+    self.freeMeasure = [value getIntValueForKey:@"freeMeasure" defaultValue:-1];
     self.priceMeasure = [value getDoubleValueForKey:@"priceMeasureStr" defaultValue:0.f];
     self.style = [value getStringValueForKey:@"style" defaultValue:@""];
     self.special = [value getStringValueForKey:@"special" defaultValue:@""];
@@ -364,7 +364,7 @@
     self.professional = [value getStringValueForKey:@"professional" defaultValue:@""];
     self.professionalType = [value getStringValueForKey:@"professionalType" defaultValue:@""];
     self.personalHonor = [value getStringValueForKey:@"personalHonor" defaultValue:@""];
-    self.faceToFace = [value getIntValueForKey:@"faceToFace" defaultValue:0];
+    self.faceToFace = [value getIntValueForKey:@"faceToFace" defaultValue:-1];
     self.designFeeMax = [value getDoubleValueForKey:@"chargeStandardMaxStr" defaultValue:0.f];
     self.designFeeMin = [value getDoubleValueForKey:@"chargeStandardMinStr" defaultValue:0.f];
     self.mobilePhone = [value getStringValueForKey:@"mobilePhone" defaultValue:@""];
@@ -443,14 +443,18 @@
 }
 
 - (NSString*)measureForPersonal{
-    if (self.freeMeasure == 0) {
+    if (self.freeMeasure == -1) {
+        return @"未设置";
+    }else if (self.freeMeasure == 0) {
         return @"免费";
     }else{
         return [NSString stringWithFormat:@"%.2f元", _priceMeasure];
     }
 }
 - (NSString*)designPriceForPersonal{
-    if (self.faceToFace == 0) {
+    if (self.faceToFace == -1) {
+        return @"未设置";
+    }else if (self.faceToFace == 0) {
         return @"面议";
     }else{
         return [NSString stringWithFormat:@"%.2f-%.2f 元/平方米", _designFeeMin, _designFeeMax];
