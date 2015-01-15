@@ -10,7 +10,7 @@
 #import "PriceModifyCell.h"
 #import "JRDesigner.h"
 
-@interface PriceModifyViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface PriceModifyViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *titles;
@@ -95,6 +95,16 @@
         _designer.priceMeasure = [_measureTextField.text floatValue];
     }
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    if (self.selectedRow != 1) {
+        self.selectedRow = 1;
+        [_tableView reloadData];
+    }
+    return YES;
 }
 
 #pragma makr - UITableViewDataSource/Delegate
