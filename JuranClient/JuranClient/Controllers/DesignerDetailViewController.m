@@ -72,6 +72,7 @@
     // Do any additional setup after loading the view from its nib.
 #ifdef kJuranDesigner
     self.navigationItem.title = _isHomePage?@"我的主页":@"";
+    
 #endif
     personDatas = @[@"毕业院校", @"量房费", @"设计费用", @"从业年限", @"擅长风格"];
     _caseCurrentPage = 1;
@@ -117,7 +118,12 @@
     [_tableView addGestureRecognizer: rightSwipeGestureRecognizer];
     
 #ifdef kJuranDesigner
-    [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(doShare:)];
+    if (_isHomePage) {
+        self.navigationItem.rightBarButtonItem = nil;
+        _followButton.enabled = NO;
+    }else{
+        [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(doShare:)];
+    }
     
     CGRect frame = _headView.frame;
     frame.size.height += 20;

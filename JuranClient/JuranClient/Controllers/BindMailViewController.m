@@ -66,8 +66,8 @@
         self.navigationItem.title = @"安全验证";
         _tipLabel.text = @"点击发送按钮，系统将为您发送一封解除邮箱绑定的邮件，您可以通过此邮件解除绑定当前的邮箱地址";
     }else if(step == 2){
-        self.navigationItem.title = @"绑定邮箱";
-        _tipLabel.text = @"点击发送按钮，系统将为您发送一封邮箱变更邮件，您可以通过此邮件完成邮箱绑定";
+        self.navigationItem.title = @"邮箱绑定";
+        _tipLabel.text = @"点击发送按钮，系统将为您发送一封激活邮件，您可以通过此邮件完成绑定";
     }
     [_tableView reloadData];
 }
