@@ -208,6 +208,11 @@
     if ([string isContainsEmoji]) {
         return NO;
     }
+    NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (toBeString.length > 50) {
+        [self showTip:@"标题长度不能超过50个字!"];
+        return NO;
+    }
     return YES;
 }
 
@@ -215,6 +220,13 @@
     if ([text isContainsEmoji]) {
         return NO;
     }
+    
+    NSString * toBeString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    if (toBeString.length > 200) {
+        [self showTip:@"内容长度不能超过200个字!"];
+        return NO;
+    }
+    
     return YES;
 }
 
