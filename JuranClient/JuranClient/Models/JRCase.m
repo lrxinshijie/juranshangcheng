@@ -8,6 +8,7 @@
 
 #import "JRCase.h"
 #import "ShareView.h"
+#import "JRCaseImage.h"
 
 @implementation JRCase
 
@@ -22,6 +23,7 @@
         self.projectPrice = @"";
         self.desc = @"";
         self.roomTypeImageUrl = @"";
+        self.imageList = [NSMutableArray array];
     }
     
     return self;
@@ -64,9 +66,7 @@
     self.tags = [dict getStringValueForKey:@"tags" defaultValue:@""];
     self.desc = [dict getStringValueForKey:@"description" defaultValue:@""];
     self.projectStyle = [dict getStringValueForKey:@"projectStyle" defaultValue:@""];
-//    self.houseArea = [dict getIntValueForKey:@"houseArea" defaultValue:0];
-//    self.projectPrice = [dict getIntValueForKey:@"projectPrice" defaultValue:0];
-    
+
     self.houseArea = [dict getStringValueForKey:@"houseArea" defaultValue:@""];
     self.projectPrice = [dict getStringValueForKey:@"projectPrice" defaultValue:@""];
     
@@ -79,15 +79,11 @@
     
     self.areaInfo = [[JRAreaInfo alloc] initWithDictionary:[dict objectForKey:@"areaInfo"]];
     
-//    NSDictionary *areaInfo = [dict objectForKey:@"areaInfo"];
-//    if (areaInfo && [areaInfo isKindOfClass:[NSDictionary class]]) {
-//        self.provinceCode = [areaInfo getStringValueForKey:@"provinceCode" defaultValue:@""];
-//        self.provinceName = [areaInfo getStringValueForKey:@"provinceName" defaultValue:@""];
-//        self.cityCode = [areaInfo getStringValueForKey:@"cityCode" defaultValue:@""];
-//        self.cityName = [areaInfo getStringValueForKey:@"cityName" defaultValue:@""];
-//        self.districtCode = [areaInfo getStringValueForKey:@"districtCode" defaultValue:@""];
-//        self.districtName = [areaInfo getStringValueForKey:@"districtName" defaultValue:@""];
-//    }
+    //Manager
+    self.projectStyle = [dict getStringValueForKey:@"renovationStyle" defaultValue:@""];
+    self.projectPrice = [dict getStringValueForKey:@"budget" defaultValue:@""];
+    self.roomTypeImageUrl = [dict getStringValueForKey:@"roomTypeImageUrl" defaultValue:@""];
+    self.imageList = [JRCaseImage buildUpWithValue:[dict objectForKey:@"imageList"]];
     
     return self;
 }
@@ -285,7 +281,7 @@
 
 - (void)loadDetail:(BOOLBlock)finished{
     NSDictionary *param = @{@"projectId": self.projectId};
-    [[ALEngine shareEngine] pathURL:JR_PRODETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_MANAGER_PRODETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             [self buildDetailWithDictionary:data];
         }

@@ -35,9 +35,6 @@
     [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
-    self.imageURLs = [NSMutableArray array];
-    self.caseImages = [NSMutableArray array];
-    
     self.navigationItem.title = @"案例图片管理";
     
     _collectionView.backgroundColor = [UIColor whiteColor];
@@ -58,6 +55,8 @@
             }
             
         }];
+    }else if (!_jrCase) {
+        self.jrCase = [[JRCase alloc] init];
     }
 }
 
@@ -68,12 +67,8 @@
 
 - (void)onIntroduce:(id)sender{
     if (_jrCase.projectId.length == 0) {
-        if (!_roomTypeImage) {
-            [self showTip:@"户型图不能为空"];
-            return;
-        }
         
-        if (_caseImages.count == 0) {
+        if (_jrCase.imageList.count == 0) {
             [self showTip:@"效果图不能为空"];
             return;
         }
@@ -93,24 +88,30 @@
     
     self.imageURLs = [NSMutableArray array];
     
-    [self showHUDFromTitle:@"上传户型图..."];
-    [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":_roomTypeImage} responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        if (!error) {
-            _jrCase.roomTypeImageUrl = [data objectForKey:@"imgUrl"];
-            [self uploadCaseImage:0];
-        }else{
-            [self hideHUD];
-        }
-    }];
+    
+    if (_jrCase.roomTypeImage) {
+        [self showHUDFromTitle:@"上传户型图..."];
+        [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":_jrCase.roomTypeImage} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            if (!error) {
+                _jrCase.roomTypeImageUrl = [data objectForKey:@"imgUrl"];
+                [self uploadCaseImage:0];
+            }else{
+                [self hideHUD];
+            }
+        }];
+    }else{
+        [self showHUDFromTitle:@""];
+        [self uploadCaseImage:0];
+    }
 }
 
 - (void)uploadCaseImage:(NSInteger)idx{
     ASLog(@"upload idx:%d", idx);
     
-    JRCaseImage *caseImage = [_caseImages objectAtTheIndex:idx];
+    JRCaseImage *caseImage = [_jrCase.imageList objectAtTheIndex:idx];
 
     if (caseImage) {
-        [self setHUDTitle:[NSString stringWithFormat:@"上传效果图%d/%d...", idx+1,[_caseImages count]]];
+        [self setHUDTitle:[NSString stringWithFormat:@"上传效果图%d/%d...", idx+1,[_jrCase.imageList count]]];
         [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":caseImage.image} responseHandler:^(NSError *error, id data, NSDictionary *other) {
             if (!error) {
                 caseImage.imageUrl = [data objectForKey:@"imgUrl"];
@@ -154,41 +155,33 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    if (_jrCase.projectId.length > 0) {
-        if (section == 0) {
-            return 1;
-        }else{
-            return _jrCase.detailImageList.count;
-        }
+    if (section == 0) {
+        return ( _jrCase.roomTypeImage || _jrCase.projectId.length > 0 ) ? 2 : 1 ;
     }else{
-        if (section == 0) {
-            return _roomTypeImage ? 2 : 1;
-        }else{
-            return _caseImages.count + 1;
-        }
+        return _jrCase.imageList.count + 1;
     }
-    
 }
 
-- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"CaseImageCollectionCell";
     CaseImageCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    if (_jrCase.projectId.length > 0) {
-        if (indexPath.section == 0) {
-            [cell.imageView setImageWithURLString:_jrCase.frontImgUrl];
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        if (_jrCase.roomTypeImageUrl.length > 0) {
+            [cell.imageView setImageWithURLString:_jrCase.roomTypeImageUrl];
         }else{
-            [cell.imageView setImageWithURLString:_jrCase.detailImageList[indexPath.row]];
+            [cell setImage:_jrCase.roomTypeImage];
         }
-    }else{
-        if (indexPath.section == 0 && indexPath.row == 1) {
-            [cell setImage:_roomTypeImage];
-        }else if (indexPath.section == 1 && indexPath.row > 0){
-            JRCaseImage *caseImage = _caseImages[indexPath.row-1];
+    }else if (indexPath.section == 1 && indexPath.row > 0){
+        JRCaseImage *caseImage = _jrCase.imageList[indexPath.row-1];
+        if (caseImage.image) {
             [cell setImage:caseImage.image];
         }else{
-            [cell setImage:[UIImage imageNamed:@"icon_add_image"]];
+            [cell.imageView setImageWithURLString:caseImage.imageUrl];
         }
+        
+    }else{
+        [cell setImage:[UIImage imageNamed:@"icon_add_image"]];
     }
     
     return cell;
@@ -202,7 +195,7 @@
         if (indexPath.section == 0) {
             [header setTitle:@"上传户型图（只限1张）" lineHidden:YES];
         }else{
-            [header setTitle:[NSString stringWithFormat:@"上传案例图（最多%d/20张）", _caseImages.count] lineHidden:NO];
+            [header setTitle:[NSString stringWithFormat:@"上传案例图（最多%d/20张）", _jrCase.imageList.count] lineHidden:NO];
         }
     }
     return header;
@@ -215,9 +208,9 @@
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            if (!_roomTypeImage) {
+            if (!_jrCase.roomTypeImage) {
                 [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:NO MaxNumber:1 Handler:^(NSArray *images) {
-                    self.roomTypeImage = [images firstObject];
+                    _jrCase.roomTypeImage = [images firstObject];
                     [_collectionView reloadData];
                 }];
             }else{
@@ -229,21 +222,21 @@
                     return ;
                 }
                 
-                self.roomTypeImage = nil;
+                _jrCase.roomTypeImage = nil;
                 [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
             }];
         }
         
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
-            if (_caseImages.count < 20) {
+            if (_jrCase.imageList.count < 20) {
                 CaseEditStyleViewController *ce = [[CaseEditStyleViewController alloc] init];
                 ce.block = ^(JRCaseImage *image){
-                    if (_caseImages.count == 0) {
+                    if (_jrCase.imageList.count == 0) {
                         image.frontFlag = YES;
                     }
                     
-                    [_caseImages addObject:image];
+                    [_jrCase.imageList addObject:image];
                     [_collectionView reloadData];
                 };
                 [self.navigationController pushViewController:ce animated:YES];
@@ -253,23 +246,23 @@
             }
         }else{
             CaseImagePreviewViewController *ci = [[CaseImagePreviewViewController alloc] init];
-            ci.caseImage = [_caseImages objectAtIndex:indexPath.row-1];
+            ci.caseImage = [_jrCase.imageList objectAtIndex:indexPath.row-1];
             ci.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             ci.block = ^(JRCaseImage *image, CaseImageEvent event){
                 if (event == CaseImageEventChange) {
                     [_collectionView reloadData];
                 }else if (event == CaseImageEventCover){
-                    [_caseImages enumerateObjectsUsingBlock:^(JRCaseImage *caseImage, NSUInteger idx, BOOL *stop) {
+                    [_jrCase.imageList enumerateObjectsUsingBlock:^(JRCaseImage *caseImage, NSUInteger idx, BOOL *stop) {
                         caseImage.frontFlag = NO;
                     }];
                     
                     image.frontFlag = YES;
                     
                 }else if (event == CaseImageEventDelete){
-                    [_caseImages removeObject:image];
+                    [_jrCase.imageList removeObject:image];
                     [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
                     if (image.frontFlag) {
-                        JRCaseImage *caseImage = [_caseImages firstObject];
+                        JRCaseImage *caseImage = [_jrCase.imageList firstObject];
                         if (caseImage) {
                             caseImage.frontFlag = YES;
                         }

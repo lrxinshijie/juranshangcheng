@@ -474,6 +474,8 @@
 		14646DB71A3CA1A500E5D6F6 /* OldTopicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14646DB51A3CA1A500E5D6F6 /* OldTopicViewController.xib */; };
 		146CE9C51A47EB0700FAA87F /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 146CE9C31A47EB0700FAA87F /* TextFieldCell.m */; };
 		146CE9C61A47EB0700FAA87F /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */; };
+		147282C71A67673500FB0CFB /* AHReach.m in Sources */ = {isa = PBXBuildFile; fileRef = 147282C61A67673500FB0CFB /* AHReach.m */; };
+		147282C81A67673500FB0CFB /* AHReach.m in Sources */ = {isa = PBXBuildFile; fileRef = 147282C61A67673500FB0CFB /* AHReach.m */; };
 		147395AE1A4E634E00CB34E7 /* JRPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 147395AD1A4E634E00CB34E7 /* JRPageControl.m */; };
 		147395B11A4EAFC600CB34E7 /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 147395B01A4EAFC600CB34E7 /* SMPageControl.m */; };
 		1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */; };
@@ -1427,6 +1429,8 @@
 		146CE9C21A47EB0700FAA87F /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
 		146CE9C31A47EB0700FAA87F /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
+		147282C51A67673500FB0CFB /* AHReach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHReach.h; sourceTree = "<group>"; };
+		147282C61A67673500FB0CFB /* AHReach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHReach.m; sourceTree = "<group>"; };
 		147395AC1A4E634E00CB34E7 /* JRPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRPageControl.h; sourceTree = "<group>"; };
 		147395AD1A4E634E00CB34E7 /* JRPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRPageControl.m; sourceTree = "<group>"; };
 		147395AF1A4EAFC600CB34E7 /* SMPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPageControl.h; sourceTree = "<group>"; };
@@ -2451,6 +2455,15 @@
 			name = Question;
 			sourceTree = "<group>";
 		};
+		147282C41A67673500FB0CFB /* AHReach */ = {
+			isa = PBXGroup;
+			children = (
+				147282C51A67673500FB0CFB /* AHReach.h */,
+				147282C61A67673500FB0CFB /* AHReach.m */,
+			);
+			path = AHReach;
+			sourceTree = "<group>";
+		};
 		14C953AE1A2DC45D00FE6F8D /* Subject */ = {
 			isa = PBXGroup;
 			children = (
@@ -2844,6 +2857,7 @@
 		A987ED6F1A20920500CED7CD /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				147282C41A67673500FB0CFB /* AHReach */,
 				1495C8541A655659000040DB /* PushConfig.plist */,
 				1415FA931A5D144B003D0C29 /* JPush */,
 				A9A53B001A46FE7C008D75B8 /* UIBubbleTableView */,
@@ -4700,6 +4714,7 @@
 				1415F9DD1A5CD1CB003D0C29 /* ZoomInImageView.m in Sources */,
 				1415F9DE1A5CD1CB003D0C29 /* AccountManageViewController.m in Sources */,
 				1415F9DF1A5CD1CB003D0C29 /* JRPhotoScrollViewController.m in Sources */,
+				147282C81A67673500FB0CFB /* AHReach.m in Sources */,
 				1415F9E01A5CD1CB003D0C29 /* QuestionViewController.m in Sources */,
 				1415F9E11A5CD1CB003D0C29 /* JSONModelArray.m in Sources */,
 				1415F9E21A5CD1CB003D0C29 /* GuideViewController.m in Sources */,
@@ -4778,6 +4793,7 @@
 				1441A0641A29A447004A038E /* SexySwitch.m in Sources */,
 				37D18DA81A56CD7F00B41048 /* CaseManagementCell.m in Sources */,
 				A9A067151A3D76DA0059D73B /* ActionSheetDatePicker.m in Sources */,
+				147282C71A67673500FB0CFB /* AHReach.m in Sources */,
 				A987EDFE1A20920500CED7CD /* UIImageView+WebCache.m in Sources */,
 				A987EE3C1A2093C900CED7CD /* UIScrollView+MJRefresh.m in Sources */,
 				14A3FDC11A2C9EB7002BEFF4 /* MyDemandViewController.m in Sources */,
@@ -5057,7 +5073,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
 				);
 				PRODUCT_NAME = "JuranClient copy";
-				PROVISIONING_PROFILE = "2b2b4f10-1e7a-4d62-a56e-6c4f681a58b5";
+				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

@@ -71,6 +71,8 @@
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, copy) NSString *reviewType;
 @property (nonatomic, copy) NSString *reason;
+@property (nonatomic, strong) UIImage *roomTypeImage;
+@property (nonatomic, strong) NSMutableArray *imageList;
 
 
 + (NSMutableArray *)buildUpWithValue:(id)value;

@@ -10,6 +10,7 @@
 
 @interface JRCaseImage : NSObject
 
+@property (nonatomic, copy) NSString *imageId;
 @property (nonatomic, copy) NSString *imageUrl;
 @property (nonatomic, assign) BOOL frontFlag;
 @property (nonatomic, strong) UIImage *image;
@@ -17,5 +18,7 @@
 @property (nonatomic, copy) NSString *picRoom;
 
 - (NSDictionary *)dictionaryValue;
+
++ (NSMutableArray *)buildUpWithValue:(id)value;
 
 @end
