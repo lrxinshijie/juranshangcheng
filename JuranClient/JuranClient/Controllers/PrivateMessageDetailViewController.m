@@ -53,16 +53,17 @@
     
     __weak typeof(self) weakSelf = self;
     [self.tableView addHeaderWithCallback:^{
-        weakSelf.currentPage = 1;
-        [weakSelf loadData];
-    }];
-    
-    [self.tableView addFooterWithCallback:^{
+        
         weakSelf.currentPage++;
         [weakSelf loadData];
     }];
     
-    [self.tableView headerBeginRefreshing];
+    [self.tableView addFooterWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadData];
+    }];
+    
+    [self.tableView footerBeginRefreshing];
 }
 
 - (void)onDetail{
@@ -129,7 +130,7 @@
     [[ALEngine shareEngine] pathURL:JR_REPLY_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             _contentTextField.text = @"";
-            [_tableView headerBeginRefreshing];
+            [_tableView footerEndRefreshing];
         }
     }];
 }
