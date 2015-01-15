@@ -74,7 +74,7 @@
 }
 
 - (void)resetValues{
-    self.values = @[_user.qq, _user.weixin, _user.professional, [_user professionalTypeString], _user.personalHonor];//, _user.mobilePhone
+    self.values = @[_user.qq, _user.weixin, _user.professional, [_user professionalTypeString], _user.personalHonor.length == 0?@"未设置":_user.personalHonor];//, _user.mobilePhone
 }
 
 - (void)setupUI{
