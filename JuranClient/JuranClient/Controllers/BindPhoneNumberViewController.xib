@@ -39,7 +39,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-72" y="-256"/>
+            <point key="canvasLocation" x="-72" y="-303"/>
         </view>
         <view contentMode="scaleToFill" id="AQc-hs-NMC">
             <rect key="frame" x="0.0" y="-1" width="320" height="200"/>
@@ -102,7 +102,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-72" y="-204.5"/>
+            <point key="canvasLocation" x="-72" y="-216.5"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
