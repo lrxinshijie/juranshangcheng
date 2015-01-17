@@ -13,6 +13,7 @@
 #import "NewestTopicViewController.h"
 #import "AboutViewController.h"
 #import "JRServiceViewController.h"
+#import "WikiViewController.h"
 
 static CGFloat kAnimateDuration = 0.25f;
 
@@ -32,7 +33,7 @@ static CGFloat kAnimateDuration = 0.25f;
         
         self.titles = @[
 //                        @"精选活动",
-//                        @"家装百科",
+                        @"家装百科",
                         @"答疑解惑",
                         @"最新话题",
 //                        @"扫一扫",
@@ -40,7 +41,7 @@ static CGFloat kAnimateDuration = 0.25f;
                         @"居然服务"];
         self.images = @[
 //                        @"menu_activity_default",
-//                        @"menu_baike_default",
+                        @"menu_baike_default",
                         @"menu_answer_default",
                         @"menu_topic_default",
 //                        @"menu_qr_default",
@@ -49,7 +50,7 @@ static CGFloat kAnimateDuration = 0.25f;
                         ];
         self.selects = @[
 //                         @"menu_activity_select",
-//                         @"menu_baike_select",
+                         @"menu_baike_select",
                          @"menu_answer_select",
                          @"menu_topic_select",
 //                         @"menu_qr_select",
@@ -180,22 +181,27 @@ static CGFloat kAnimateDuration = 0.25f;
         [self removeFromSuperview];
         
         UINavigationController *nav = (UINavigationController *)[(AppDelegate *)[UIApplication sharedApplication].delegate tabBarController].selectedViewController;
-        if (indexPath.row == 2) {
+        if (indexPath.row == 0){
+            WikiViewController *vc = [[WikiViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [nav pushViewController:vc animated:YES];
+        }else if (indexPath.row == 3) {
             SettingsViewController *vc = [[SettingsViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
 
             [nav pushViewController:vc animated:YES];
-        }else if (indexPath.row == 0){
+        }else if (indexPath.row == 1){
             QuestionViewController *vc = [[QuestionViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             
             [nav pushViewController:vc animated:YES];
-        }else if (indexPath.row == 1){
+        }else if (indexPath.row == 2){
             NewestTopicViewController *vc = [[NewestTopicViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             
             [nav pushViewController:vc animated:YES];
-        }if (indexPath.row == 3){
+        }if (indexPath.row == 4){
             JRServiceViewController *vc = [[JRServiceViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [nav pushViewController:vc animated:YES];

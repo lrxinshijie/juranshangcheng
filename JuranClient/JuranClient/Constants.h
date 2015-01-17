@@ -77,6 +77,7 @@ typedef enum : NSUInteger {
     FilterViewTypeDesignerSearch,
     FilterViewTypeCaseSearch,
     FilterViewTypeBidInfo,
+    FilterViewTypeWiki,
 } FilterViewType;
 
 typedef enum : NSUInteger {

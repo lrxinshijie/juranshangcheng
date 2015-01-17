@@ -10,4 +10,6 @@
 
 @interface WikiViewController : ALViewController
 
+@property (nonatomic, strong) NSMutableDictionary *filterData;
+
 @end

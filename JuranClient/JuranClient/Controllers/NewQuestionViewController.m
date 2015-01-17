@@ -85,12 +85,20 @@
 
 - (void)onRightButton:(id)sender{
     if (step == 1) {
-        if ([_titleTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""].length == 0) {
-            [self showTip:@"请输入问题标题"];
+        if (_titleTextField.text.length == 0) {
+            [self showTip:@"问题标题不能为空！"];
             return;
         }
-        if ([_contentTextView.text stringByReplacingOccurrencesOfString:@" " withString:@""].length == 0) {
-            [self showTip:@"请输入问题内容"];
+        if (_contentTextView.text.length == 0) {
+            [self showTip:@"问题内容不能为空"];
+            return;
+        }
+        if (_titleTextField.text.trim.length == 0) {
+            [self showTip:@"问题标题不能全为空格！"];
+            return;
+        }
+        if (_contentTextView.text.trim.length == 0) {
+            [self showTip:@"问题内容不能全为空格"];
             return;
         }
         step = 2;
@@ -142,8 +150,8 @@
 
 - (void)submitQuestionInfo:(NSString*)imageUrl{
     NSDictionary *param = @{@"questionType": selectedType,
-                            @"title": [_titleTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""],
-                            @"content": [_contentTextView.text stringByReplacingOccurrencesOfString:@" " withString:@""],
+                            @"title": _titleTextField.text,
+                            @"content": _contentTextView.text,
                             @"imgUrl": imageUrl
                             };
     [self showHUD];

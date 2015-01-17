@@ -23,6 +23,9 @@
 - (NSString*)md5HexDigest;
 - (int)hexConvertString:(int)n;
 
+//去空格
+- (NSString*)trim;
+
 //验证Email
 - (BOOL)validateEmail;
 

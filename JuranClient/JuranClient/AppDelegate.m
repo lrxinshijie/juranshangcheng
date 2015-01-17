@@ -22,6 +22,7 @@
 #import "GuideViewController.h"
 #import "HomeViewController.h"
 #import "UIAlertView+Blocks.h"
+#import "WikiViewController.h"
 #import "APService.h"
 
 //Share SDK
@@ -153,6 +154,11 @@
     [desNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
 //    desNav.delegate = self;
     
+    WikiViewController *wiki = [[WikiViewController alloc] init];
+    UINavigationController *wikiNav = [Public navigationControllerFromRootViewController:wiki];
+    wikiNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-wiki-default" selected:@"nav-wiki-active"];
+    [wikiNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
+    
     ProfileViewController *profile = [[ProfileViewController alloc] init];
     UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
     profileNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-user-default" selected:@"nav-user-active"];
@@ -163,7 +169,7 @@
     UIImage *image = [UIImage imageFromColor:[UIColor blackColor]];
     [_tabBarController.tabBar setBackgroundImage:image];
     
-    _tabBarController.viewControllers = @[homeNav,csNav,desNav,profileNav];
+    _tabBarController.viewControllers = @[homeNav,csNav,desNav,wikiNav,profileNav];
     self.window.rootViewController = _tabBarController;
     
 //    self.tabBarController = [[LeveyTabBarController alloc] initWithViewControllers:@[homeNav,csNav,desNav,profileNav]];

@@ -73,6 +73,10 @@
     return [_defaultData objectForKey:@"special"];
 }
 
+- (NSArray*)sex{
+    return [_defaultData objectForKey:@"sex"];
+}
+
 - (NSNumber *)imageQuality{
     if (!_imageQuality) {
         _imageQuality = [Public imageQuality];

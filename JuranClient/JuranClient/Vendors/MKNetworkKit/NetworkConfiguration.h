@@ -74,7 +74,8 @@
 #define JR_SET_MSG_READ [NSString stringWithFormat:@"%@/info/set_msg_read.json",JR_SERVICE]
 #define JR_GET_VERSION [NSString stringWithFormat:@"%@/search/getVersion.json",JR_SERVICE]
 #define JR_GET_MSG_DETAIL [NSString stringWithFormat:@"%@/info/get_msg_detail.json",JR_SERVICE]
-
+#define JR_GET_KNOWLEDGE_LIST [NSString stringWithFormat:@"%@/design/getKnowledgeList.json",JR_SERVICE]
+#define JR_GET_CATEGORE_LISTREQ [NSString stringWithFormat:@"%@/knowledge/getCategoryListReq.json",JR_SERVICE]
 
 
 

@@ -925,6 +925,27 @@
 			<key>v</key>
 			<string>3</string>
 		</dict>
+		<dict>
+			<key>k</key>
+			<string>金额由低到高</string>
+			<key>v</key>
+			<string>4</string>
+		</dict>
+	</array>
+	<key>wikiOrder</key>
+	<array>
+		<dict>
+			<key>k</key>
+			<string>默认顺序</string>
+			<key>v</key>
+			<string>1</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>人气从高到低</string>
+			<key>v</key>
+			<string>2</string>
+		</dict>
 	</array>
 	<key>designerDefaultParam</key>
 	<dict>
@@ -937,6 +958,13 @@
 		<key>isRealNameAuth</key>
 		<string></string>
 		<key>levelCode</key>
+		<string></string>
+	</dict>
+	<key>wikiDefaultParam</key>
+	<dict>
+		<key>order</key>
+		<string>1</string>
+		<key>type</key>
 		<string></string>
 	</dict>
 	<key>caseDefaultParam</key>
