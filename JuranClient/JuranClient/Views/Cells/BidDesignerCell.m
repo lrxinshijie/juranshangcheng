@@ -27,6 +27,8 @@
 @property (nonatomic, strong) IBOutlet UIButton *measureButton;
 @property (nonatomic, strong) IBOutlet UIButton *rejectButton;
 
+@property (nonatomic, strong) IBOutlet UIView *buttonBGView;
+
 
 @property (nonatomic, strong) JRBidInfo *bidInfo;
 
@@ -86,6 +88,13 @@
     _produntCountLabel.text = [NSString stringWithFormat:@"%i", designer.projectCount];
     _browseCountLabel.text = [NSString stringWithFormat:@"%i", designer.browseCount];
     _declarationLabel.text = [NSString stringWithFormat:@"应标宣言:%@", bidInfo.biddingDeclatation];
+    CGRect frame = _declarationLabel.frame;
+    frame.size.height = [_declarationLabel.text heightWithFont:_declarationLabel.font constrainedToWidth:CGRectGetWidth(_declarationLabel.frame)];
+    _declarationLabel.frame = frame;
+    
+    frame = _buttonBGView.frame;
+    frame.origin.y = CGRectGetMaxY(_declarationLabel.frame) + 5;
+    _buttonBGView.frame = frame;
 #ifndef kJuranDesigner
     if ([bidInfo isForbidMeasureAndReject]) {
         [_measureButton setTitleColor:[UIColor lightGrayColor]forState:UIControlStateNormal];
@@ -98,6 +107,13 @@
         [_rejectButton setTitleColor:RGBColor(0, 89, 172) forState:UIControlStateNormal];
         _rejectButton.layer.borderColor = RGBColor(0, 89, 172).CGColor;
     }
+    frame = _bgView.frame;
+    frame.size.height = CGRectGetMaxY(_buttonBGView.frame)+ 5;
+    _bgView.frame = frame;
+#else
+    frame = _bgView.frame;
+    frame.size.height = CGRectGetMaxY(_declarationLabel.frame)+ 5;
+    _bgView.frame = frame;
 #endif
 }
 

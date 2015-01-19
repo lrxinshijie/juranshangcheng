@@ -60,12 +60,20 @@
 }
 
 - (void)onSend{
-    if (!(_contactTextField.text && _contactTextField.text.length > 0)) {
-        [self showTip:@"联系方式不能为空!!!"];
+    if (_contactTextField.text.length == 0) {
+        [self showTip:@"联系方式不能为空!"];
         return;
     }
-    if (!(_contentTextView.text && _contentTextView.text.length > 0)) {
-        [self showTip:@"反馈内容不能为空!!!"];
+    if (_contentTextView.text.length == 0) {
+        [self showTip:@"反馈内容不能为空!"];
+        return;
+    }
+    if (_contactTextField.text.trim.length == 0) {
+        [self showTip:@"联系方式不能全为空格!"];
+        return;
+    }
+    if (_contentTextView.text.trim.length == 0) {
+        [self showTip:@"反馈内容不能全为空格!"];
         return;
     }
     [_contactTextField resignFirstResponder];
@@ -95,7 +103,10 @@
     [[ALEngine shareEngine] pathURL:JR_ADD_FEEDBACK parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            [self.navigationController popViewControllerAnimated:YES];
+            [self showTip:@"问题反馈成功!"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
         }
     }];
 }

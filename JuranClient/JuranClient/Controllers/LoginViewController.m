@@ -16,6 +16,9 @@
 
 @property (nonatomic, strong) IBOutlet UITextField *accountTextField;
 @property (nonatomic, strong) IBOutlet UITextField *passwordTextField;
+@property (nonatomic, strong) IBOutlet UIButton *qqButton;
+@property (nonatomic, strong) IBOutlet UIButton *sinaButton;
+@property (nonatomic, strong) IBOutlet UIButton *wxButton;
 
 - (IBAction)onBack:(id)sender;
 - (IBAction)onThirdLogin:(UIButton *)btn;
@@ -36,6 +39,17 @@
     
     [_passwordTextField configurePlaceholderColor:[UIColor whiteColor]];
     [_accountTextField configurePlaceholderColor:[UIColor whiteColor]];
+    
+#ifdef kJuranDesigner
+    _qqButton.hidden = YES;
+    CGRect frame = _sinaButton.frame;
+    frame.origin.x = 67;
+    _sinaButton.frame = frame;
+    
+    frame = _wxButton.frame;
+    frame.origin.x = 193;
+    _wxButton.frame = frame;
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated{

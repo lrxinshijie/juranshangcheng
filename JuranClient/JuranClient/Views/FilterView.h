@@ -14,6 +14,7 @@
 
 - (void)clickFilterView:(FilterView *)view actionType:(FilterViewAction)action returnData:(NSDictionary *)data;
 
+
 @end
 
 @interface FilterView : UIView

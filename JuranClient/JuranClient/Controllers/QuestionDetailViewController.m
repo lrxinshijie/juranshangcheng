@@ -454,7 +454,7 @@
     }
     
     NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if ([Public convertToInt:toBeString] >= 400) {
+    if ([Public convertToInt:toBeString] > 400) {
         [self showTip:@"回答长度不能超过400!"];
         return NO;
     }

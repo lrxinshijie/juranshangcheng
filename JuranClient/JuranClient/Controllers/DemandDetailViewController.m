@@ -400,16 +400,35 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _designerTableView) {
+        CGFloat height = 0;
 #ifndef kJuranDesigner
         if (_demand.confirmDesignerDetail) {
-            return 170 + ((indexPath.row == _demand.bidInfoList.count)?5:0);
+            if (indexPath.row == 0) {
+                height = [[NSString stringWithFormat:@"应标宣言:%@", _demand.confirmDesignerDetail.biddingDeclatation] heightWithFont:[UIFont systemFontOfSize:kSystemFontSize] constrainedToWidth:300];
+            }else{
+                JRBidInfo *b = _demand.bidInfoList[indexPath.row - 1];
+                height = [[NSString stringWithFormat:@"应标宣言:%@", b.biddingDeclatation] heightWithFont:[UIFont systemFontOfSize:kSystemFontSize] constrainedToWidth:300];
+            }
+            return 145 + height;
+        }else{
+            JRBidInfo *b = _demand.bidInfoList[indexPath.row];
+            height = [[NSString stringWithFormat:@"应标宣言:%@", b.biddingDeclatation] heightWithFont:[UIFont systemFontOfSize:kSystemFontSize] constrainedToWidth:300];
+            return 145 + height;
         }
-        return 170 + ((indexPath.row == _demand.bidInfoList.count - 1)?5:0);
 #else
         if (_demand.confirmDesignerDetail) {
-            return 130 + ((indexPath.row == _demand.bidInfoList.count)?5:0);
+            if (indexPath.row == 0) {
+                height = [[NSString stringWithFormat:@"应标宣言:%@", _demand.confirmDesignerDetail.biddingDeclatation] heightWithFont:[UIFont systemFontOfSize:kSystemFontSize] constrainedToWidth:300];
+            }else{
+                JRBidInfo *b = _demand.bidInfoList[indexPath.row - 1];
+                height = [[NSString stringWithFormat:@"应标宣言:%@", b.biddingDeclatation] heightWithFont:[UIFont systemFontOfSize:kSystemFontSize] constrainedToWidth:300];
+            }
+            return 112 + ((indexPath.row == _demand.bidInfoList.count)?5:0) + height;
+        }else{
+            JRBidInfo *b = _demand.bidInfoList[indexPath.row];
+            height = [[NSString stringWithFormat:@"应标宣言:%@", b.biddingDeclatation]  heightWithFont:[UIFont systemFontOfSize:kSystemFontSize] constrainedToWidth:300];
+            return 112 + ((indexPath.row == _demand.bidInfoList.count - 1)?5:0) + height;
         }
-        return 130 + ((indexPath.row == _demand.bidInfoList.count - 1)?5:0);
 #endif
         
     }else if(tableView == _demandInfoTableView){

@@ -22,7 +22,53 @@
 #import "GuideViewController.h"
 #import "HomeViewController.h"
 #import "UIAlertView+Blocks.h"
+#import "WikiViewController.h"
 #import "APService.h"
+
+//Share SDK
+#define kShareSDKKey @"477b2576a9ca"
+
+#ifdef kJuranDesigner
+
+//新浪微博
+#define kShareSinaWeiboKey @"1808654070"
+#define kShareSinaWeiboSecret @"18664b6d7be4e3decf0135bd770b44ce"
+#define kShareSinaWeiboRedirectUri @"http://www.juran.cn"
+
+//腾讯微博
+#define kShareTencentWeiboKey @"801555309"
+#define kShareTencentWeiboSecret @"71fd14ea4456a3bf906817e8bbefbdbd"
+#define kShareTencentWeiboRedirectUri @"http://www.juran.cn"
+
+//QQ互联
+#define kShareQZoneKey @"1103839607"
+#define kShareQZoneSecret @"B4DwT98l9vD3oHnB"
+
+//微信
+#define kShareWeChatKey @"wx338441f4726af98d"
+#define kShareWeChatSecret @"599f3a84d5377b1a1848ebf2c7515330"
+
+#else
+
+//新浪微博
+#define kShareSinaWeiboKey @"974550530"
+#define kShareSinaWeiboSecret @"b6acbd20f461a9c83be83e90aacf8ffb"
+#define kShareSinaWeiboRedirectUri @"http://www.juran.cn"
+
+//腾讯微博
+#define kShareTencentWeiboKey @"801555309"
+#define kShareTencentWeiboSecret @"71fd14ea4456a3bf906817e8bbefbdbd"
+#define kShareTencentWeiboRedirectUri @"http://www.juran.cn"
+
+//QQ互联
+#define kShareQZoneKey @"1103839607"
+#define kShareQZoneSecret @"B4DwT98l9vD3oHnB"
+
+//微信
+#define kShareWeChatKey @"wx3e32aa05bb32f554"
+#define kShareWeChatSecret @"f2c0d5958e633bdee9c25c33bb4e913c"
+
+#endif
 
 
 @interface AppDelegate () <UINavigationControllerDelegate>
@@ -108,6 +154,11 @@
     [desNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
 //    desNav.delegate = self;
     
+    WikiViewController *wiki = [[WikiViewController alloc] init];
+    UINavigationController *wikiNav = [Public navigationControllerFromRootViewController:wiki];
+    wikiNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-wiki-default" selected:@"nav-wiki-active"];
+    [wikiNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
+    
     ProfileViewController *profile = [[ProfileViewController alloc] init];
     UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
     profileNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-user-default" selected:@"nav-user-active"];
@@ -118,7 +169,7 @@
     UIImage *image = [UIImage imageFromColor:[UIColor blackColor]];
     [_tabBarController.tabBar setBackgroundImage:image];
     
-    _tabBarController.viewControllers = @[homeNav,csNav,desNav,profileNav];
+    _tabBarController.viewControllers = @[homeNav,csNav,desNav,wikiNav,profileNav];
     self.window.rootViewController = _tabBarController;
     
 //    self.tabBarController = [[LeveyTabBarController alloc] initWithViewControllers:@[homeNav,csNav,desNav,profileNav]];

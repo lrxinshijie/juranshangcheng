@@ -48,7 +48,7 @@
     _contentLabel.text = answer.content;
     _userNameLabel.text = [Public formatString:_answer.nickName.length > 0?_answer.nickName:_answer.account maxLength:12];
 //    _userTypeLabel.text = [answer userTypeString];
-    _userTypeLabel.hidden = !(_isAdoptedAnswer && answer.userType == 2);
+    _userTypeLabel.hidden = answer.userType != 2;
     _timeLabel.text = answer.commitTime;
     
     if (answer.imageUrl.length > 0) {

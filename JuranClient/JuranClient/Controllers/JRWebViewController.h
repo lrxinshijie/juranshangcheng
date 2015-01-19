@@ -11,5 +11,6 @@
 @interface JRWebViewController : ALViewController
 
 @property (nonatomic, copy) NSString *urlString;
+@property (nonatomic, copy) NSString *htmlString;
 
 @end

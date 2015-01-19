@@ -14,6 +14,7 @@
 #import "ALWebView.h"
 #import "ALGetPhoto.h"
 #import "CanRemoveImageView.h"
+#import "ShareView.h"
 
 
 @interface NewestTopicViewController ()<UITableViewDataSource, UITableViewDelegate, CommentCellDelegate, UITextFieldDelegate, ALWebViewDelegate, CanRemoveImageViewDelegate>
@@ -31,6 +32,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *commentTextField;
 @property (nonatomic, strong) IBOutlet UIView *bottomView;
 @property (nonatomic, strong) IBOutlet ALWebView *contentWebView;
+@property (nonatomic, strong) UIButton *hiddenButton;
 
 @property (nonatomic, strong) IBOutlet UIView *commentImageView;
 @property (nonatomic, strong) IBOutlet UIView *chooseImageButtonView;
@@ -83,6 +85,10 @@
     _contentWebView.backgroundColor = [UIColor clearColor];
     _contentWebView.scrollView.backgroundColor = [UIColor clearColor];
     _contentWebView.scalesPageToFit = YES;
+    _contentWebView.userInteractionEnabled = NO;
+    
+    self.hiddenButton = [_tableHeaderView buttonWithFrame:_tableHeaderView.bounds target:self action:@selector(onHiddenCommentImageView) image:nil];
+    [_tableHeaderView insertSubview:_hiddenButton atIndex:0];
 //    _contentWebView.scrollView.scrollEnabled = NO;
     
     [self setupCommentView];
@@ -92,9 +98,10 @@
 
 - (void)setupCommentView{
     CGRect frame = _bottomView.frame;
-    frame.origin.y = CGRectGetMaxY(_tableView.frame);
+    frame.origin.y = kWindowHeightWithoutNavigationBar - CGRectGetHeight(_bottomView.frame);
     _bottomView.frame = frame;
-//    [self.view addSubview:_bottomView];
+    _bottomView.hidden = YES;
+    [self.view addSubview:_bottomView];
     
     frame = _commentView.frame;
     frame.origin.y = kWindowHeightWithoutNavigationBarAndTabbar;
@@ -159,10 +166,12 @@
 - (void)reloadData{
     if (![_topic isNewestTopic]) {
         _tableView.frame = kContentFrameWithoutNavigationBar;
-        _commentView.hidden = YES;
+//        _commentView.hidden = YES;
+        _bottomView.hidden = YES;
     }else{
         _tableView.frame = kContentFrameWithoutNavigationBarAndTabBar;
-        _commentView.hidden = NO;
+//        _commentView.hidden = NO;
+        _bottomView.hidden = NO;
     }
     
     _titleLabel.text = _topic.theme;
@@ -171,9 +180,14 @@
     _commentCountLabel.text = [NSString stringWithFormat:@"%d", _topic.commentCount];
     
     ASLog(@"%@", _topic.contentDescription);
-    [_contentWebView reset];
-    [_contentWebView loadHTMLString:_topic.contentDescription baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]]; ////[NSURL URLWithString:@"http://10.199.5.57:8080/img/"]
-    [self setupTableHeaderView];
+    static BOOL first = NO;
+    if (!first) {
+        [_contentWebView reset];
+        [_contentWebView loadHTMLString:_topic.contentDescription baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+        [self setupTableHeaderView];
+        first = YES;
+    }
+    
     [_tableView reloadData];
 }
 
@@ -182,8 +196,6 @@
     CGRect frame = _contentWebView.frame;
     frame.size.width = CGRectGetWidth(_contentWebView.frame);
     frame.size.height = 40;
-    
-//    _contentWebView.scrollView.scrollEnabled = NO;
     _contentWebView.frame = frame;
     
     frame.size.height = _contentWebView.scrollView.contentSize.height;
@@ -195,11 +207,8 @@
     frame.size.height = CGRectGetMaxY(_contentWebView.frame);
     _tableHeaderView.frame = frame;
     
-//    NSString *htmlHeight = [_contentWebView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"foo\").offsetHeight;"];
-//    _contentWebView.scrollView.contentSize = CGSizeMake(320, 240+[htmlHeight intValue]);
-//    CGRect frame= _contentWebView.frame;
-//    [_contentWebView setFrame:CGRectMake(frame.origin.x, frame.origin.y, 320, [htmlHeight intValue]+100)];
-//    
+    _hiddenButton.frame = _tableHeaderView.bounds;
+   
     _tableView.tableHeaderView = _tableHeaderView;
 }
 
@@ -241,7 +250,7 @@
                     [_openStatusDic addEntriesFromDictionary:@{[NSString stringWithFormat:@"%d", self.selectComment.commentId]:@""}];
                 }
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 if (_topic.commitList.count == 0) {
                     [_tableView scrollToBottom];
                 }else{
@@ -269,7 +278,7 @@
     _comment = _commentTextField.text;
     
     [_commentTextField resignFirstResponder];
-    [self onHiddenCommentImageView];
+    [self hiddenCommentView];
     
     if (_comment.length == 0) {
         [self showTip:@"评论内容不能为空"];
@@ -322,8 +331,9 @@
 }
 
 - (void)onHiddenCommentImageView{
+    /*
     _commentImageView.hidden = YES;
-//    _commentView.hidden = YES;
+    _commentView.hidden = YES;
     
     CGRect frame = self.tableView.frame;
     frame.size.height = kWindowHeightWithoutNavigationBarAndTabbar;
@@ -332,6 +342,28 @@
     frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
+     */
+    [self hiddenCommentView];
+    self.selectComment = nil;
+
+}
+
+- (void)hiddenCommentView{
+    [_commentTextField resignFirstResponder];
+    
+    _commentView.hidden = YES;
+    
+    _commentImageView.hidden = YES;
+    _commentView.hidden = YES;
+    
+    CGRect frame = self.tableView.frame;
+    frame.size.height = kWindowHeightWithoutNavigationBarAndTabbar;
+    self.tableView.frame = frame;
+    
+    frame = _commentView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame);
+    _commentView.frame = frame;
+    
 }
 
 - (void)oldTopic:(id)sender{
@@ -340,12 +372,12 @@
 }
 
 - (IBAction)onShare:(id)sender{
-    
+    [[ShareView sharedView] showWithContent:_topic.theme image:nil title:_topic.theme url:[NSString stringWithFormat:@"http://apph5.juran.cn/topics/%@", _topic.topicId]];
 }
 
 - (IBAction)onComment:(id)sender{
     self.selectComment = nil;
-//    _commentView.hidden = NO;
+    _commentView.hidden = NO;
     [_commentTextField becomeFirstResponder];
 }
 
@@ -442,7 +474,7 @@
 
 - (void)clickCellComment:(CommentCell *)cell{
     self.selectComment = cell.comment;
-//    _commentView.hidden = NO;
+    _commentView.hidden = NO;
     [_commentTextField becomeFirstResponder];
 }
 
@@ -475,11 +507,13 @@
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [_commentTextField resignFirstResponder];
+    /*[_commentTextField resignFirstResponder];
     
-//    _commentView.hidden = YES;
+    _commentView.hidden = YES;
     self.selectComment = nil;
-    [self onHiddenCommentImageView];
+    [self onHiddenCommentImageView];*/
+    [self hiddenCommentView];
+    self.selectComment = nil;
     return YES;
 }
 
@@ -534,5 +568,6 @@
     [self hideHUD];
     [self showTip:@"加载失败"];
 }
+
 
 @end

@@ -112,16 +112,23 @@
 
     if (caseImage) {
         [self setHUDTitle:[NSString stringWithFormat:@"上传效果图%d/%d...", idx+1,[_jrCase.imageList count]]];
-        [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":caseImage.image} responseHandler:^(NSError *error, id data, NSDictionary *other) {
-            if (!error) {
-                caseImage.imageUrl = [data objectForKey:@"imgUrl"];
-                [_imageURLs addObject:[caseImage dictionaryValue]];
-                NSInteger ind = idx + 1;
-                [self uploadCaseImage:ind];
-            }else{
-                [self hideHUD];
-            }
-        }];
+        if (caseImage.imageUrl.length > 0) {
+            [_imageURLs addObject:[caseImage dictionaryValue]];
+            NSInteger ind = idx + 1;
+            [self uploadCaseImage:ind];
+        }else{
+            [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":caseImage.image} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                if (!error) {
+                    caseImage.imageUrl = [data objectForKey:@"imgUrl"];
+                    [_imageURLs addObject:[caseImage dictionaryValue]];
+                    NSInteger ind = idx + 1;
+                    [self uploadCaseImage:ind];
+                }else{
+                    [self hideHUD];
+                }
+            }];
+        }
+        
     }else{
         NSDictionary *param = @{@"areaInfo": [_jrCase.areaInfo dictionaryValue],
                                 @"neighbourhoods": _jrCase.neighbourhoods,

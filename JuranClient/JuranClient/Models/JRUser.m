@@ -199,7 +199,7 @@
     self.idCardNum = [dict getStringValueForKey:@"idCardNum" defaultValue:@""];
     self.qq = [dict getStringValueForKey:@"qq" defaultValue:@""];
     self.weixin = [dict getStringValueForKey:@"weixin" defaultValue:@""];
-    self.sex = [dict getIntValueForKey:@"sex" defaultValue:0];
+    self.sex = [dict getIntValueForKey:@"sex" defaultValue:-1];
     self.useablePoints = [dict getIntValueForKey:@"useablePoints" defaultValue:0];
     self.useableExp = [dict getIntValueForKey:@"useableExp" defaultValue:0];
     self.accountChangeable = [dict getBoolValueForKey:@"accountChangeable" defaultValue:NO];
@@ -275,8 +275,12 @@
 }
 
 - (NSString*)sexyString{
-    NSArray *sexs = @[@"未设置", @"女", @"男"];
-    return sexs[_sex];
+    if (self.sex == -1) {
+        return @"未设置";
+    }
+    NSArray *sexs = [DefaultData sharedData].sex;
+    NSDictionary *dic = sexs[_sex];
+    return dic[@"k"];
 }
 
 - (NSURL *)headImageURL{

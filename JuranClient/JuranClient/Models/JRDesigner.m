@@ -274,7 +274,7 @@
 
 - (NSString*)styleNamesWithType:(NSInteger)type{
     //0 为设计师 1 为设计师详情
-    NSArray *arr = [self.styleNames componentsSeparatedByString:@","];
+    NSArray *arr = [self.styleNames componentsSeparatedByString:@"，"];
     NSString* styleNames = @"";
     NSString* separateStr = type?@"、":@"｜";
     for (NSInteger i = 0; arr.count; i++) {
@@ -353,7 +353,7 @@
     self.idCardNum = [value getStringValueForKey:@"idCardNum" defaultValue:@""];
     self.qq = [value getStringValueForKey:@"qq" defaultValue:@""];
     self.weixin = [value getStringValueForKey:@"weixin" defaultValue:@""];
-    self.sex = [value getIntValueForKey:@"sex" defaultValue:0];
+    self.sex = [value getIntValueForKey:@"sex" defaultValue:-1];
     self.experienceCount = [value getIntValueForKey:@"designExperience" defaultValue:-1];
     self.freeMeasure = [value getIntValueForKey:@"freeMeasure" defaultValue:-1];
     self.priceMeasure = [value getDoubleValueForKey:@"priceMeasureStr" defaultValue:0.f];
@@ -372,8 +372,12 @@
 }
 
 - (NSString*)sexyString{
-    NSArray *sexs = @[@"未设置", @"女", @"男"];
-    return sexs[_sex];
+    if (self.sex == -1) {
+        return @"未设置";
+    }
+    NSArray *sexs = [DefaultData sharedData].sex;
+    NSDictionary *dic = sexs[_sex];
+    return dic[@"k"];
 }
 
 - (NSString*)idCardInfomation{

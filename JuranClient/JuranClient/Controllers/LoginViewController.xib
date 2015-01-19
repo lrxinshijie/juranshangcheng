@@ -9,7 +9,10 @@
             <connections>
                 <outlet property="accountTextField" destination="Khf-pk-rTx" id="1Pr-PD-MaF"/>
                 <outlet property="passwordTextField" destination="kvg-SR-Qd5" id="qWY-R3-cM0"/>
+                <outlet property="qqButton" destination="d29-9T-LQ9" id="Xbk-Tk-IVg"/>
+                <outlet property="sinaButton" destination="QPe-uC-d5d" id="HJO-Xr-cpT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="wxButton" destination="baR-ct-VzD" id="Yo2-Vk-j7W"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
