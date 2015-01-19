@@ -228,12 +228,12 @@
     if (action == FilterViewActionGrid) {
         [UIView setAnimationDelegate:self];
 //        [UIView setAnimationDidStopSelector:@selector(animationDidStop:animationIDfinished:finished:context:)];
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.75];
-        
-        [UIView setAnimationTransition:([_collectionView superview] ? UIViewAnimationTransitionFlipFromLeft : UIViewAnimationTransitionFlipFromRight)
-                               forView:self.view
-                                 cache:YES];
+//        [UIView beginAnimations:nil context:nil];
+//        [UIView setAnimationDuration:0.75];
+//        
+//        [UIView setAnimationTransition:([_collectionView superview] ? UIViewAnimationTransitionFlipFromLeft : UIViewAnimationTransitionFlipFromRight)
+//                               forView:self.view
+//                                 cache:YES];
         
         if ([_collectionView superview]) {
             [_collectionView removeFromSuperview];
@@ -245,7 +245,7 @@
             [_collectionView reloadData];
         }
         
-        [UIView commitAnimations];
+//        [UIView commitAnimations];
     }else{
         [data.allKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
             [_filterData setObject:data[key] forKey:key];
