@@ -44,7 +44,9 @@
     
     self.navigationItem.title = @"互动管理";
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    [self.view addSubview:_headView];
+    
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_headView.frame), kWindowWidth, kWindowHeightWithoutNavigationBar - CGRectGetMaxY(_headView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     [self.view addSubview:_tableView];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -134,14 +136,6 @@
 }
 
 #pragma makr - UITableViewDataSource/Delegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 40;
-}
-
-- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return _headView;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _segment.selectedSegmentIndex == 0?_caseDatas.count:_topicDatas.count;

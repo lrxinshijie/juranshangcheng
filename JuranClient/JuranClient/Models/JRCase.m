@@ -278,7 +278,7 @@
 - (CGFloat)managerCellHeight{
     CGFloat height = 75;
     if ([_status isEqualToString:@"02"] && self.reason.length > 0) {
-        height += [self.reason heightWithFont:[UIFont systemFontOfSize:15] constrainedToWidth:304] + 5;
+        height += [[NSString stringWithFormat:@"原因：%@", self.reason] heightWithFont:[UIFont systemFontOfSize:14] constrainedToWidth:280] + 10;
         height += 8;
     }
     

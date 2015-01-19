@@ -58,7 +58,7 @@
     if (projectTitle.length == 0) {
         _titleLabel.text = [NSString stringWithFormat:@"原话题:%@", topicTitle];
     }else{
-        _titleLabel.text = [NSString stringWithFormat:@"原原案例:%@", projectTitle];
+        _titleLabel.text = [NSString stringWithFormat:@"原案例:%@", projectTitle];
     }
     
     
