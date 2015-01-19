@@ -21,8 +21,9 @@
 #import "JRDesigner.h"
 #import "JRSubject.h"
 #import "CaseCollectionCell.h"
+#import "YIFullScreenScroll.h"
 
-@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, YIFullScreenScrollDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -136,6 +137,9 @@
         }];
     }
     
+    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
+    self.fullScreenScroll.delegate = self;
+    self.fullScreenScroll.shouldShowUIBarsOnScrollUp = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -298,6 +302,8 @@
     JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+    
+    [self.fullScreenScroll showUIBarsAnimated:YES];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -324,6 +330,8 @@
     JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+    
+    [self.fullScreenScroll showUIBarsAnimated:NO];
 }
 
 - (void)EScrollerViewDidClicked:(NSUInteger)index{
@@ -332,6 +340,21 @@
     ASLog(@"index:%d,%@",index,ad.link);
     
     [Public jumpFromLink:ad.link];
+}
+
+- (void)fullScreenScrollDidLayoutUIBars:(YIFullScreenScroll *)fullScreenScroll{
+
+    CGFloat y = 20 - self.navigationController.navigationBar.frame.origin.y;
+    CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
+    CGRect frame = _filterView.frame;
+    frame.origin.y = -y;
+    _filterView.frame = frame;
+    
+    frame = _tableView.frame;
+    frame.origin.y = CGRectGetMaxY(_filterView.frame);
+    frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
+    _tableView.frame = frame;
+    ASLog(@"size;%f,%f",y, height);
 }
 
 - (void)didReceiveMemoryWarning

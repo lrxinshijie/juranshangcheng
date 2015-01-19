@@ -13,10 +13,9 @@
 #import "JRPhotoScrollViewController.h"
 #import "JRWebImageDataSource.h"
 #import "FilterView.h"
+#import "YIFullScreenScroll.h"
 
-@interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate, UIScrollViewDelegate>{
-    CGFloat startOffsetY;
-}
+@interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate, UIScrollViewDelegate, YIFullScreenScrollDelegate>
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -80,6 +79,10 @@
     _emptyView.hidden = YES;
     _emptyView.center = _tableView.center;
     [self.view addSubview:_emptyView];
+    
+    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
+    self.fullScreenScroll.delegate = self;
+    self.fullScreenScroll.shouldShowUIBarsOnScrollUp = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -177,24 +180,23 @@
     detailVC.designer = _datas[indexPath.row];
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
+    
+    [self.fullScreenScroll showUIBarsAnimated:YES];
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    startOffsetY = scrollView.contentOffset.y;
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    CGFloat y = scrollView.contentOffset.y;
-    if (y > 0 && y < 44) {
-        [scrollView setContentOffset:CGPointMake(0, startOffsetY > y ? 0 : 44) animated:YES];
-    }
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    CGFloat y = scrollView.contentOffset.y;
-    if (y > 0 && y < 44) {
-        [scrollView setContentOffset:CGPointMake(0, startOffsetY > y ? 0 : 44) animated:YES];
-    }
+- (void)fullScreenScrollDidLayoutUIBars:(YIFullScreenScroll *)fullScreenScroll{
+    
+    CGFloat y = 20 - self.navigationController.navigationBar.frame.origin.y;
+    CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
+    CGRect frame = _filterView.frame;
+    frame.origin.y = -y;
+    _filterView.frame = frame;
+    
+    frame = _tableView.frame;
+    frame.origin.y = CGRectGetMaxY(_filterView.frame);
+    frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
+    _tableView.frame = frame;
+    ASLog(@"size;%f,%f",y, height);
 }
 
 @end
