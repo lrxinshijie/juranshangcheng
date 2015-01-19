@@ -94,6 +94,10 @@
     [[ALEngine shareEngine] pathURL:JR_PRODETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
+            if (_jrCase.nickName.length == 0) {
+                self.jrCase = [[JRCase alloc] initWithDictionary:data];
+            }
+            
             [self.jrCase buildDetailWithDictionary:data];
             dispatch_async(dispatch_get_main_queue(), ^{
                 for (id obj in scrollView_.subviews) {

@@ -10,6 +10,6 @@
 
 @interface InteractionCell : UITableViewCell
 
-- (void)fillCellWithInteraction:(NSString*)data;
+- (void)fillCellWithInteraction:(NSDictionary *)dict;
 
 @end

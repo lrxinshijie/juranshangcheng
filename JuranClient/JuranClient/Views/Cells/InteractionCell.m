@@ -28,9 +28,9 @@
     _headImgeView.layer.cornerRadius = _headImgeView.frame.size.height/2;
     _headImgeView.hidden = NO;
     
-    _redPointView.layer.masksToBounds = YES;
-    _redPointView.layer.cornerRadius = _redPointView.frame.size.height/2;
-    _redPointView.hidden = NO;
+//    _redPointView.layer.masksToBounds = YES;
+//    _redPointView.layer.cornerRadius = _redPointView.frame.size.height/2;
+//    _redPointView.hidden = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -40,7 +40,28 @@
     // Configure the view for the selected state
 }
 
-- (void)fillCellWithInteraction:(NSString*)data{
+- (void)fillCellWithInteraction:(NSDictionary *)dict{
+    
+    NSString *topicTitle = [dict getStringValueForKey:@"topicTitle" defaultValue:@""];
+    NSString *projectTitle = [dict getStringValueForKey:@"projectTitle" defaultValue:@""];
+    NSString *commentContent = [dict getStringValueForKey:@"commentContent" defaultValue:@""];
+    NSString *commentTime = [dict getStringValueForKey:@"commentTime" defaultValue:@""];
+    NSString *nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
+    NSString *account = [dict getStringValueForKey:@"account" defaultValue:@""];
+    NSString *headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
+    
+    _userNameLabel.text = nickName.length == 0 ? account : nickName;
+    _timeLabel.text = commentTime;
+    [_headImgeView setImageWithURLString:headUrl];
+    _contentLabel.text = [NSString stringWithFormat:@"评论:%@", commentContent];
+    
+    if (projectTitle.length == 0) {
+        _titleLabel.text = [NSString stringWithFormat:@"原话题:%@", topicTitle];
+    }else{
+        _titleLabel.text = [NSString stringWithFormat:@"原原案例:%@", projectTitle];
+    }
+    
+    
     
 }
 

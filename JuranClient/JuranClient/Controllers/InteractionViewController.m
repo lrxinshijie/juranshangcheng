@@ -8,6 +8,9 @@
 
 #import "InteractionViewController.h"
 #import "InteractionCell.h"
+#import "JRPhotoScrollViewController.h"
+#import "NewestTopicViewController.h"
+#import "JRTopic.h"
 
 @interface InteractionViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -72,27 +75,25 @@
     NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
                             @"onePageCount": kOnePageCount};
     [self showHUD];
-    NSString *url = _segment.selectedSegmentIndex == 0?JR_MYQUESTION:JR_MYANSWER;
-    [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    NSString *url = _segment.selectedSegmentIndex == 0 ? JR_INTERACT_PROJECT : JR_INTERACT_TOPIC;
+    [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            //            if (_segment.selectedSegmentIndex == 0) {
-            //                NSArray *datas = [data objectForKey:@"questionList"];
-            //                NSMutableArray *rows = [JRQuestion buildUpWithValue:datas];
-            //                if (_currentPage > 1) {
-            //                    [_questionDatas addObjectsFromArray:rows];
-            //                }else{
-            //                    self.questionDatas = [JRQuestion buildUpWithValue:datas];
-            //                }
-            //            }else{
-            //                NSArray *datas = [data objectForKey:@"myAnswerList"];
-            //                NSMutableArray *rows = [JRAnswer buildUpWithValue:datas];
-            //                if (_currentPage > 1) {
-            //                    [_answerDatas addObjectsFromArray:rows];
-            //                }else{
-            //                    self.answerDatas = [JRAnswer buildUpWithValue:datas];
-            //                }
-            //            }
+            if (_segment.selectedSegmentIndex == 0) {
+                NSArray *datas = [data objectForKey:@"commentList"];
+                if (_currentPage > 1) {
+                    [_caseDatas addObjectsFromArray:datas];
+                }else{
+                    self.caseDatas = [NSMutableArray arrayWithArray:datas];
+                }
+            }else{
+                NSArray *datas = [data objectForKey:@"commentList"];
+                if (_currentPage > 1) {
+                    [_topicDatas addObjectsFromArray:datas];
+                }else{
+                    self.topicDatas = [NSMutableArray arrayWithArray:datas];
+                }
+            }
             
             [self reloadData];
         }
@@ -108,12 +109,12 @@
         if (_segment.selectedSegmentIndex == 0) {
             _noDatasView.hidden = YES;
             if (_caseDatas.count == 0) {
-//                _noDatasView.hidden = NO;
+                
             }
         }else{
             _noDatasView.hidden = YES;
             if (_topicDatas.count == 0) {
-//                _noDatasView.hidden = NO;
+
             }
         }
     });
@@ -143,12 +144,16 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
     return _segment.selectedSegmentIndex == 0?_caseDatas.count:_topicDatas.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 145 + (indexPath.row == 4?5:0);
+    if (_segment.selectedSegmentIndex == 0) {
+        return 145 + (indexPath.row == (_caseDatas.count-1)?5:0);
+    }else{
+        return 145 + (indexPath.row == (_topicDatas.count-1)?5:0);
+    }
+    
 }
 
 
@@ -163,21 +168,33 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (_segment.selectedSegmentIndex == 0) {
-//        JRQuestion *q = _questionDatas[indexPath.row];
-//        [cell fillCellWithQuestion:q];
+        NSDictionary *q = _caseDatas[indexPath.row];
+        [cell fillCellWithInteraction:q];
     }else{
-//        JRAnswer *r = _answerDatas[indexPath.row];
-//        [cell fillCellWithAnswer:r];
+        NSDictionary *q = _topicDatas[indexPath.row];
+        [cell fillCellWithInteraction:q];
     }
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    //    DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
-    //    detailVC.designer = _datas[indexPath.row];
-    //    detailVC.hidesBottomBarWhenPushed = YES;
-    //    [self.navigationController pushViewController:detailVC animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (_segment.selectedSegmentIndex == 0) {
+        NSDictionary *dict = [_caseDatas objectAtIndex:indexPath.row];
+        JRCase *cs = [[JRCase alloc] init];
+        cs.projectId = [dict getStringValueForKey:@"projectId" defaultValue:@""];
+        JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        NSDictionary *dict = [_topicDatas objectAtIndex:indexPath.row];
+        JRTopic *t = [[JRTopic alloc] init];
+        t.topicId = [dict getStringValueForKey:@"topicId" defaultValue:@""];
+        NewestTopicViewController *vc = [[NewestTopicViewController alloc] init];
+        vc.topic = t;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 @end

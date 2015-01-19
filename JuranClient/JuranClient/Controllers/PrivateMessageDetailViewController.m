@@ -130,7 +130,7 @@
     [[ALEngine shareEngine] pathURL:JR_REPLY_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             _contentTextField.text = @"";
-            [_tableView footerEndRefreshing];
+            [_tableView footerBeginRefreshing];
         }
     }];
 }
