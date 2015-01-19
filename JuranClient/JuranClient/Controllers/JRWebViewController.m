@@ -34,7 +34,12 @@
     _activityIndicatorView.hidesWhenStopped = YES;
     [self.view addSubview:_activityIndicatorView];
     
-    [_webView loadURLString:_urlString];
+    if (_urlString && _urlString.length > 0) {
+        [_webView loadURLString:_urlString];
+    }else if (_htmlString && _htmlString.length > 0){
+        [_webView loadHTMLString:_htmlString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+    }
+    
 }
 
 - (void)webViewDidStartLoad:(ALWebView *)aWebView{

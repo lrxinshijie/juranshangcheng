@@ -21,6 +21,7 @@
 - (NSArray *)professionalType;
 - (NSArray *)style;
 - (NSArray *)special;
+- (NSArray*)sex;
 
 - (id)objectForKey:(NSString *)key;
 

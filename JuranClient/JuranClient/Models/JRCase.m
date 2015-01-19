@@ -80,8 +80,14 @@
     self.areaInfo = [[JRAreaInfo alloc] initWithDictionary:[dict objectForKey:@"areaInfo"]];
     
     //Manager
-    self.projectStyle = [dict getStringValueForKey:@"renovationStyle" defaultValue:@""];
-    self.projectPrice = [dict getStringValueForKey:@"budget" defaultValue:@""];
+    if (self.projectStyle.length == 0) {
+        self.projectStyle = [dict getStringValueForKey:@"renovationStyle" defaultValue:@""];
+    }
+    
+    if (self.projectPrice.length == 0) {
+        self.projectPrice = [dict getStringValueForKey:@"budget" defaultValue:@""];
+    }
+    
     self.roomTypeImageUrl = [dict getStringValueForKey:@"roomTypeImageUrl" defaultValue:@""];
     self.imageList = [JRCaseImage buildUpWithValue:[dict objectForKey:@"imageList"]];
     

@@ -35,6 +35,9 @@
 @property (nonatomic, strong) UITextField *selectedTextField;
 @property (nonatomic, strong) NSString* oldAccount;
 
+//@property (nonatomic, assign) BOOL isEditing;
+@property (nonatomic, strong) UIButton *rightButton;
+
 @end
 
 @implementation PersonalDataViewController
@@ -68,9 +71,9 @@
     _user = [[JRUser alloc] init];
     _oldAccount = @"";
     
-    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave) title:@"保存" backgroundImage:nil];
-    [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave) title:@"保存" backgroundImage:nil];
+    [_rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightButton];
     
     
     [self setupDatas];
@@ -88,6 +91,17 @@
         [self reloadData];
     }
 }
+/*
+- (void)setIsEditing:(BOOL)isEditing{
+    _isEditing = isEditing;
+    if (_isEditing) {
+        [_rightButton setTitle:@"保存" forState:UIControlStateNormal];
+        [_tableView reloadData];
+    }else{
+        [_rightButton setTitle:@"修改" forState:UIControlStateNormal];
+        [_tableView reloadData];
+    }
+}*/
 
 - (void)reloadData{
     [self reSetData];
@@ -156,6 +170,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
                 [self showTip:@"修改用户信息成功"];
+//                self.isEditing = NO;
             });
             [self loadData];
         }
@@ -171,6 +186,7 @@
                 [self hideHUD];
                 if (!error) {
                     [self.iconImageView setImageWithURLString:imageUrl];
+//                    self.isEditing = NO;
                     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
                 }
             }];
@@ -184,6 +200,12 @@
 #pragma mark - Target Action
 
 - (void)onSave{
+    /*
+    if (self.isEditing) {
+        
+    }else{
+        self.isEditing = YES;
+    }*/
     
     [self.selectedTextField resignFirstResponder];
     
@@ -361,6 +383,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if (!self.isEditing) {
+//        return;
+//    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.selectedTextField resignFirstResponder];
     if (indexPath.section == 0 && indexPath.row == 0) {
@@ -372,8 +397,20 @@
     }else if (indexPath.section == 1){
         if (indexPath.row == 1) {
             
-            [ActionSheetStringPicker showPickerWithTitle:nil rows:@[@"女", @"男"] initialSelection:_user.sex ==0?0:(_user.sex - 1) doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                _user.sex= selectedIndex + 1;
+            NSMutableArray *rows = [NSMutableArray array];
+            __block NSInteger ind = 0;
+            NSArray *sexs = [[DefaultData sharedData] sex];
+            [sexs enumerateObjectsUsingBlock:^(NSDictionary *row, NSUInteger idx, BOOL *stop) {
+                [rows addObject:[row objectForKey:@"k"]];
+                if ([[row objectForKey:@"v"] integerValue] == _user.sex) {
+                    ind = idx;
+                }
+            }];
+            
+            [ActionSheetStringPicker showPickerWithTitle:nil rows:rows initialSelection:ind doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+                NSArray *sexs = [[DefaultData sharedData] sex];
+                _user.sex = [[[sexs objectAtIndex:selectedIndex] objectForKey:@"v"] integerValue];
+                
                 [self reloadData];
             } cancelBlock:^(ActionSheetStringPicker *picker) {
                 

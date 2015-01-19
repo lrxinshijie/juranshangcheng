@@ -8,8 +8,9 @@
 
 #import "FilterView.h"
 #import "FilterViewController.h"
+#import "WikiFilterViewController.h"
 
-@interface FilterView () <UITableViewDelegate, UITableViewDataSource, FilterViewControllerDelegate>
+@interface FilterView () <UITableViewDelegate, UITableViewDataSource, FilterViewControllerDelegate, WikiFilterViewControllerDelegate>
 
 @property (nonatomic, strong) UIButton *sortButton;
 @property (nonatomic, strong) UIButton *filterButton;
@@ -129,11 +130,19 @@
     }
     
     if (!_filterViewNav) {
-        FilterViewController *filterViewController = [[FilterViewController alloc] init];
-        filterViewController.type = _type;
-        filterViewController.delegate = self;
-        filterViewController.selecteds = [NSMutableDictionary dictionaryWithDictionary:_defaultData];
-        _filterViewNav = [Public navigationControllerFromRootViewController:filterViewController];
+        if (_type == FilterViewTypeWiki) {
+            WikiFilterViewController *filterViewController = [[WikiFilterViewController alloc] init];
+            filterViewController.delegate = self;
+            
+//            filterViewController.selecteds = [NSMutableDictionary dictionaryWithDictionary:_defaultData];
+            _filterViewNav = [Public navigationControllerFromRootViewController:filterViewController];
+        }else{
+            FilterViewController *filterViewController = [[FilterViewController alloc] init];
+            filterViewController.type = _type;
+            filterViewController.delegate = self;
+            filterViewController.selecteds = [NSMutableDictionary dictionaryWithDictionary:_defaultData];
+            _filterViewNav = [Public navigationControllerFromRootViewController:filterViewController];
+        }
     }
     
     [self.viewController presentViewController:_filterViewNav animated:YES completion:NULL];
@@ -177,6 +186,12 @@
     }
 }
 
+- (void)clickWikiFilterViewReturnData:(NSDictionary *)data{
+    if ([_delegate respondsToSelector:@selector(clickFilterView:actionType:returnData:)]) {
+        [_delegate clickFilterView:self actionType:FilterViewActionFilter returnData:data];
+    }
+}
+
 - (void)setIsGrid:(BOOL)isGrid{
     _isGrid = isGrid;
     
@@ -210,6 +225,9 @@
                 break;
             case FilterViewTypeBidInfo:
                 _sorts = [[DefaultData sharedData] objectForKey:@"bidInfoOrder"];
+                break;
+            case FilterViewTypeWiki:
+                _sorts = [[DefaultData sharedData] objectForKey:@"wikiOrder"];
                 break;
             default:
                 break;

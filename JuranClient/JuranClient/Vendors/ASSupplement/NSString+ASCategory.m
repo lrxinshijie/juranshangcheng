@@ -382,4 +382,8 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     
 }
 
+- (NSString*)trim{
+    return [self stringByReplacingOccurrencesOfString:@" " withString:@""];
+}
+
 @end
