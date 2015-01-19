@@ -12,4 +12,6 @@
 
 @property (nonatomic, copy) NSString *urlString;
 
+- (void)setShareTitle:(NSString *)title Content:(NSString*)content ImagePath:(NSString*) imagePath;
+
 @end

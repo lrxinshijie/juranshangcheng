@@ -94,13 +94,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     JRActivity *a = [_datas objectAtIndex:indexPath.row];
-    /*
     ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
-    vc.activity = a;
-    [self.navigationController pushViewController:vc animated:YES];*/
-    JRWebViewController *vc = [[JRWebViewController alloc] init];
     vc.title = @"精品活动";
-    vc.urlString = [NSString stringWithFormat:@"http://apph5.juran.cn/events/%d", a.activityId];
+    vc.urlString = [NSString stringWithFormat:@"http://apph5.juran.cn/events/%d%@", a.activityId, [Public shareEnv]];
+    [vc setShareTitle:a.activityName Content:a.activityIntro ImagePath:a.activityListUrl];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

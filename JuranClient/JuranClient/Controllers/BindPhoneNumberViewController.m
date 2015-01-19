@@ -51,18 +51,16 @@
 
 - (void)reloadData{
     if (step == 1) {
-        self.navigationItem.title = @"安全验证";
+        self.navigationItem.title = @"解绑手机";
         _getCaptchaButton.enabled = YES;
         _phoneTextField.hidden = YES;
         _oldPhoneLabel.hidden = NO;
         _oldPhoneLabel.text = [_user mobileNumForBindPhone];
-        [_commiteButton setTitle:@"验证" forState:UIControlStateNormal];
     }else{
         self.navigationItem.title = @"绑定手机号码";
         _phoneTextField.hidden = NO;
         _oldPhoneLabel.hidden = YES;
         _getCaptchaButton.enabled = YES;
-        [_commiteButton setTitle:@"提交" forState:UIControlStateNormal];
     }
     [_tableView reloadData];
 }
@@ -115,12 +113,13 @@
     }
     NSDictionary *param = @{@"mobileNum": _user.mobileNum,
                             @"smsAuthNo": _captchaTextField.text,
-                            @"mobileType": @"P04"};
+                            @"flag": @"1"};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_VALIDSMS parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken: @"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_SAVE_MOBILEPHONE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self showTip:@"解绑手机成功!"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [_timer invalidate];
                 self.currentTime = 0;
                 _captchaTextField.text = @"";
@@ -144,11 +143,14 @@
     NSDictionary *param = @{@"smsAuthNo":_captchaTextField.text,
                             @"mobileNum":_phoneTextField.text};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_SAVE_MOBILEPHONE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_SAVE_MOBILEPHONE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
+            [self showTip:@"绑定手机成功!"];
             _user.mobileNum = _phoneTextField.text;
-            [self.navigationController popViewControllerAnimated:YES];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
         }
     }];
 }
@@ -225,7 +227,8 @@
     }
     if (step == 1) {
         if (indexPath.row == 0) {
-            cell.accessoryView = _step10View;
+            cell.accessoryView = nil;
+            cell.textLabel.text = @"您当前绑定的手机号：";
             
         }else if (indexPath.row == 1) {
             cell.accessoryView = _step11View;
