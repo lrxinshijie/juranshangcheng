@@ -79,16 +79,18 @@
     _user = [JRUser currentUser];
     
 #ifdef kJuranDesigner
-//    @"案例管理",
-    titleArray = @[  @"个人主页"
+//
+    titleArray = @[ @"案例管理"
+                    , @"个人主页"
                     , @"我的关注"
                     , @"我的收藏"
 //                    , @"订单管理"
                     , @"实名认证"
                     , @"账户安全"
                     ];
-//    @"icon_case_manage",
-    imageArray = @[@"icon_homepage.png"
+//
+    imageArray = @[@"icon_case_manage"
+                    , @"icon_homepage.png"
                     , @"icon_personal_guanzhu.png"
                     , @"icon_personal_shouchang.png"
 //                    , @"icon_dingdan.png"
@@ -96,11 +98,13 @@
                     , @"icon_personal_zhaq"];
     self.navigationItem.title = @"个人中心";
 #else
-    titleArray = @[ @"我的关注"
+    titleArray = @[@"互动"
+                    , @"我的关注"
                     , @"我的收藏"
                     , @"账户安全"];
     
-    imageArray = @[ @"icon_personal_guanzhu.png"
+    imageArray = @[ @"icon_personal_hudong.png"
+                    , @"icon_personal_guanzhu.png"
                     , @"icon_personal_shouchang.png"
                     , @"icon_personal_zhaq"];
     [self configureMenu];
@@ -141,9 +145,9 @@
     label.text = @"应标";
     
     UIImageView *imageView = (UIImageView*)[_buttonView viewWithTag:1102];
-    imageView.image = [UIImage imageNamed:@"icon_case_manage2.png"];
+    imageView.image = [UIImage imageNamed:@"icon_personal_hudong.png"];
     label = (UILabel*)[_buttonView viewWithTag:1103];
-    label.text = @"案例";
+    label.text = @"互动";
     
     imageView = (UIImageView*)[_headerView viewWithTag:2010];
     imageView.image = [UIImage imageNamed:@"personal_bg.png"];
@@ -296,14 +300,11 @@
     [self.navigationController pushViewController:pv animated:YES];
 #else
     
-    //案例管理
-    CaseManagementViewController *vc = [[CaseManagementViewController alloc] init];
+    
+//    互动隐藏
+    InteractionViewController *vc = [[InteractionViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
-//    互动隐藏
-//    InteractionViewController *vc = [[InteractionViewController alloc] init];
-//    vc.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:vc animated:YES];
 #endif
 }
 
@@ -387,6 +388,14 @@
     switch (indexPath.row) {
         case 1:
         {
+            //互动
+            InteractionViewController *vc = [[InteractionViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 2:
+        {
             //        我的关注
             
             MyFollowViewController *vc = [[MyFollowViewController alloc] init];
@@ -394,7 +403,7 @@
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
-        case 2:
+        case 3:
         {
             //        我的收藏
             CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
@@ -402,7 +411,7 @@
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
-        case 3:
+        case 4:
         {
             //        账户安全
             AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
@@ -427,6 +436,14 @@
     switch (indexPath.row) {
         case 1:
         {
+            //案例管理
+            CaseManagementViewController *vc = [[CaseManagementViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 2:
+        {
             //        个人主页
             DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
             detailVC.isHomePage = YES;
@@ -437,7 +454,7 @@
             [self.navigationController pushViewController:detailVC animated:YES];
             break;
         }
-        case 2:
+        case 3:
         {
             //        我的关注
             MyFollowViewController *vc = [[MyFollowViewController alloc] init];
@@ -445,7 +462,7 @@
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
-        case 3:
+        case 4:
         {
             //        我的收藏
             CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
@@ -453,7 +470,7 @@
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
-        case 4:
+        case 5:
         {
             //实名认证
             RealNameAuthViewController *vc = [[RealNameAuthViewController alloc] init];
@@ -461,7 +478,7 @@
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
-        case 5:
+        case 6:
         {
              //        账户安全
             AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];

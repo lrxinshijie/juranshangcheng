@@ -223,7 +223,7 @@
     }else if(textField.tag == 1103){
         _user.professional = textField.text;
     }else if (textField.tag == 1104){
-        _user.mobilePhone = textField.text;
+        _user.mobileNum = textField.text;
     }
     [self resetValues];
 }

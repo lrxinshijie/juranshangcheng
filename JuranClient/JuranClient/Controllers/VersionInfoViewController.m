@@ -46,9 +46,14 @@
 }
 
 - (void)checkUpdate{
-    
+#ifdef kJuranDesigner
+    NSString *scope = @"2";
+#else
+    NSString *scope = @"1";
+#endif
     NSDictionary *param = @{@"type": @"IOS",
-                            @"versionNo":[Public versionString]};
+                            @"versionNo":[Public versionString],
+                            @"appScope":scope};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_VERSION parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

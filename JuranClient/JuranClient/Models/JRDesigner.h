@@ -83,7 +83,8 @@
 @property (nonatomic, strong) NSString *personalHonor;
 @property (nonatomic, assign) NSInteger faceToFace;
 @property (nonatomic, strong) NSString *detailAddress;
-@property (nonatomic, strong) NSString *mobilePhone;
+@property (nonatomic, strong) NSString *mobileNum;
+@property (nonatomic, strong) NSString *email;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 - (id)initWithDictionaryForBidInfo:(NSDictionary *)dict;
@@ -126,5 +127,7 @@
 - (NSString*)specialForPersonal;
 - (NSString*)measureForPersonal;
 - (NSString*)designPriceForPersonal;
+- (NSString*)mobileNumForBindPhone;
+- (NSString*)emailForBindEmail;
 
 @end

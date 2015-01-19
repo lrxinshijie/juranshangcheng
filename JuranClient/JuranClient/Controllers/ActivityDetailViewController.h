@@ -8,9 +8,8 @@
 
 #import "ALViewController.h"
 
-@class JRActivity;
 @interface ActivityDetailViewController : ALViewController
 
-@property (nonatomic, strong) JRActivity *activity;
+@property (nonatomic, copy) NSString *urlString;
 
 @end

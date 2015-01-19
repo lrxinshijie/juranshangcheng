@@ -7,59 +7,53 @@
 //
 
 #import "ActivityDetailViewController.h"
-#import "JRActivity.h"
 #import "ALWebView.h"
 
 @interface ActivityDetailViewController ()<ALWebViewDelegate>
 
 @property (nonatomic, strong) ALWebView *webView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
 @end
 
 @implementation ActivityDetailViewController
 
+- (void)dealloc{
+    _webView.delegate = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    self.navigationItem.title = @"精品活动";
+    // Do any additional setup after loading the view.
     
     self.webView = [[ALWebView alloc] initWithFrame:kContentFrameWithoutNavigationBar];
     _webView.delegate = self;
     [self.view addSubview:_webView];
     
-//    [self loadData];
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _activityIndicatorView.center = _webView.center;
+    _activityIndicatorView.hidesWhenStopped = YES;
+    [self.view addSubview:_activityIndicatorView];
     
-    [_webView loadURLString:[NSString stringWithFormat:@"http://apph5.juran.cn/events/%d", _activity.activityId]];
+    [_webView loadURLString:[NSString stringWithFormat:@"%@?env=uat&fromApp=1", _urlString]];
+    
 }
 
-- (void)loadData{
-    NSDictionary *param = @{@"id": [NSString stringWithFormat:@"%d", _activity.activityId]};
-    [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_GET_ACTIVITY_DETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
-        if (!error) {
-            [_activity buildUpWithValueForDetail:data];
-            [self reloadData];
-        }
-    }];
+- (void)webViewDidStartLoad:(ALWebView *)aWebView{
+    [_activityIndicatorView startAnimating];
 }
 
-- (void)reloadData{
-    
+- (void)webView:(ALWebView *)aWebView didFailLoadWithError:(NSError *)error{
+    [_activityIndicatorView stopAnimating];
+}
+
+- (void)webViewDidFinishLoad:(ALWebView *)aWebView{
+    [_activityIndicatorView stopAnimating];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)webView:(ALWebView *)aWebView didFailLoadWithError:(NSError *)error{
-    [self hideHUD];
-}
-
-- (void)webViewDidFinishLoad:(ALWebView *)aWebView{
-    [self hideHUD];
 }
 
 

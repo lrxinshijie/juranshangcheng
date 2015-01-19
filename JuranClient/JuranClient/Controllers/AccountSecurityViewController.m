@@ -12,6 +12,11 @@
 #import "BindPhoneNumberViewController.h"
 #import "BindMailViewController.h"
 
+#ifdef kJuranDesigner
+#import "JRDesigner.h"
+#endif
+
+
 @interface AccountSecurityViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *keys;
@@ -44,7 +49,11 @@
     self.navigationItem.title = @"账户安全";
     
     keys = @[@"修改密码", @"手机号码", @"邮箱"];
+#ifndef kJuranDesigner
     _user = [JRUser currentUser];
+#else
+    _user = [[JRDesigner alloc] init];
+#endif
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
@@ -68,6 +77,7 @@
     });
 }
 
+#ifndef kJuranDesigner
 - (void)loadData{
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GETMEMBERDETAIL parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -82,7 +92,22 @@
         }
     }];
 }
-
+#else
+- (void)loadData{
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_GET_DEDESIGNER_SELFDETAIL parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                [_user buildUpWithValueForPersonal:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self reloadData];
+                });
+            }
+        }
+    }];
+}
+#endif
 
 #pragma mark - UITableViewDataSource/Delegate
 
@@ -112,7 +137,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         ModifyPasswordViewController *vc = [[ModifyPasswordViewController alloc] init];
-        vc.user = _user;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.row == 1) {

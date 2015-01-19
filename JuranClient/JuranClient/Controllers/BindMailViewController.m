@@ -8,6 +8,10 @@
 
 #import "BindMailViewController.h"
 
+#ifdef kJuranDesigner
+#import "JRDesigner.h"
+#endif
+
 @interface BindMailViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     //1为修改绑定邮箱  2为绑定邮箱

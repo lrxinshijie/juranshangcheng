@@ -8,6 +8,10 @@
 
 #import "BindPhoneNumberViewController.h"
 
+#ifdef kJuranDesigner
+#import "JRDesigner.h"
+#endif
+
 @interface BindPhoneNumberViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
     //1为解绑手机  2为绑定新手机

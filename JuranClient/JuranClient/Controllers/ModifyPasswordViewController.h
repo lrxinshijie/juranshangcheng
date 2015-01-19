@@ -10,6 +10,5 @@
 
 @interface ModifyPasswordViewController : ALViewController
 
-@property (nonatomic, strong) JRUser *user;
 
 @end

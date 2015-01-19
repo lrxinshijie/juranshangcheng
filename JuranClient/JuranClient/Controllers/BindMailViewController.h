@@ -8,8 +8,16 @@
 
 #import "ALViewController.h"
 
+#ifdef kJuranDesigner
+@class JRDesigner;
+#endif
+
 @interface BindMailViewController : ALViewController
 
+#ifdef kJuranDesigner
+@property (nonatomic, strong) JRDesigner *user;
+#else
 @property (nonatomic, strong) JRUser *user;
+#endif
 
 @end

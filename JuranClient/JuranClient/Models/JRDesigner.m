@@ -57,7 +57,8 @@
         self.professionalType = @"";
         self.personalHonor = @"";
         self.detailAddress = @"";
-        self.mobilePhone = @"";
+        self.mobileNum = @"";
+        self.email = @"";
     }
     return self;
 }
@@ -367,8 +368,8 @@
     self.faceToFace = [value getIntValueForKey:@"faceToFace" defaultValue:-1];
     self.designFeeMax = [value getDoubleValueForKey:@"chargeStandardMaxStr" defaultValue:0.f];
     self.designFeeMin = [value getDoubleValueForKey:@"chargeStandardMinStr" defaultValue:0.f];
-    self.mobilePhone = [value getStringValueForKey:@"mobilePhone" defaultValue:@""];
-
+    self.mobileNum = [value getStringValueForKey:@"mobileNum" defaultValue:@""];
+    self.email = [value getStringValueForKey:@"email" defaultValue:@""];
 }
 
 - (NSString*)sexyString{
@@ -464,5 +465,33 @@
         return [NSString stringWithFormat:@"%.2f-%.2f 元/平方米", _designFeeMin, _designFeeMax];
     }
 }
+
+
+- (NSString*)mobileNumForBindPhone{
+    if (_mobileNum.length == 11) {
+        return [NSString stringWithFormat:@"%@****%@", [_mobileNum substringToIndex:3], [_mobileNum substringFromIndex:7]];
+    }
+    if (_mobileNum.length > 0) {
+        return _mobileNum;
+    }
+    
+    return @"未绑定";
+}
+
+- (NSString*)emailForBindEmail{
+    NSString *mail = @"未绑定";
+    if (!(_email.length > 0)) {
+        return mail;
+    }else{
+        
+        NSRange range = [_email rangeOfString:@"@"];
+        if (range.length == 0) {
+            return _email;
+        }
+        mail = [NSString stringWithFormat:@"%@****%@", [_email substringToIndex:range.location/4],[_email substringFromIndex:range.location/4*3]];
+        return mail;
+    }
+}
+
 
 @end
