@@ -26,7 +26,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#define kAHReachDefaultHost "apple.com"
+#define kAHReachDefaultHost "baidu.com"
 
 @class AHReach;
 

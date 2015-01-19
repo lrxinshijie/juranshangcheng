@@ -321,19 +321,20 @@
     NSInteger type = [userInfo getIntValueForKey:@"type" defaultValue:0];
     
     if (type == 2) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            NSString *link = [userInfo getStringValueForKey:@"link" defaultValue:@""];
-            [Public jumpFromLink:link];
-        });
+        NSString *link = [userInfo getStringValueForKey:@"link" defaultValue:@""];
         
-//        [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"取消" otherButtonTitles:@[@"查看"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-//            if (buttonIndex == [alertView cancelButtonIndex]) {
-//                return ;
-//            }
-//            
-//            NSString *link = [userInfo getStringValueForKey:@"link" defaultValue:@""];
-//            [Public jumpFromLink:link];
-//        }];
+        if ([UIApplication sharedApplication].applicationState == UIApplicationStateInactive) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [Public jumpFromLink:link];
+            });
+        }else{
+            [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"取消" otherButtonTitles:@[@"查看"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                if (buttonIndex == [alertView cancelButtonIndex]) {
+                    return ;
+                }
+                [Public jumpFromLink:link];
+            }];
+        }
     }else{
         [UIAlertView showWithTitle:nil message:alert cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:nil];
     }
