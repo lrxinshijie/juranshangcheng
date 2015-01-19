@@ -77,6 +77,7 @@
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (id)buildDetailWithDictionary:(NSDictionary *)dict;
+- (id)initWithDictionary:(NSDictionary *)dict;
 
 - (NSURL *)imageURL;
 
