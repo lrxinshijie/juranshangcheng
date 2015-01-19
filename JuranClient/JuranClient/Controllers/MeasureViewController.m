@@ -129,6 +129,10 @@
         }else if (indexPath.row == 1){
             cell.textLabel.text = @"量房时间";
             cell.detailTextLabel.text = _serviceDateKey;
+            if (_serviceDateKey.length == 0) {
+                cell.detailTextLabel.text = @"请选择";
+                cell.detailTextLabel.textColor = RGBColor(205, 205, 209);
+            }
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
