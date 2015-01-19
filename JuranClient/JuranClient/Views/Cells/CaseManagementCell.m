@@ -16,6 +16,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *timeLabel;
 @property (nonatomic, strong) IBOutlet UILabel *statusLabel;
 @property (nonatomic, strong) IBOutlet UILabel *reasonLabel;
+@property (nonatomic, strong) IBOutlet UIView *reasonView;
 
 
 @end
@@ -39,16 +40,20 @@
     _statusLabel.text = [jc statusString];
     _statusLabel.textColor = [jc statusColor];
     
-    NSString *content = jc.reason;
-    if ([jc.status isEqualToString:@"02"] && content.length > 0) {
+    NSString *content = [NSString stringWithFormat:@"原因：%@", jc.reason];
+    if ([jc.status isEqualToString:@"02"] && jc.reason.length > 0) {
         _reasonLabel.hidden = NO;
         CGRect frame = _reasonLabel.frame;
-        frame.size.height = [content heightWithFont:_reasonLabel.font constrainedToWidth:CGRectGetWidth(frame)]+5;
+        frame.size.height = [content heightWithFont:_reasonLabel.font constrainedToWidth:CGRectGetWidth(frame)];
         _reasonLabel.frame = frame;
         _reasonLabel.numberOfLines = 0;
         _reasonLabel.text = content;
+        
+        frame = _reasonView.frame;
+        frame.size.height = CGRectGetHeight(_reasonLabel.frame) + 10;
+        _reasonView.frame = frame;
     }else{
-        _reasonLabel.hidden = YES;
+        _reasonView.hidden = YES;
     }
     [_frontImageView setImageWithURLString:jc.frontImgUrl];
 }
