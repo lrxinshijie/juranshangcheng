@@ -522,5 +522,15 @@
     return ![bundleIdentifier isEqualToString:@"com.juran.JuranHome"];
 }
 
++ (NSString *)shareEnv{
+    if ([JR_SERVICE isEqualToString:@"http://54.223.161.28:8080"]) {
+        return @"?env=uat";
+    }else if ([JR_SERVICE isEqualToString:@"http://124.207.66.50:10005"]){
+        return @"?env=dev";
+    }else{
+        return @"";
+    }
+}
+
 
 @end

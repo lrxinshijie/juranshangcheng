@@ -100,4 +100,6 @@
 
 + (BOOL)isDesignerApp;
 
++ (NSString *)shareEnv;
+
 @end

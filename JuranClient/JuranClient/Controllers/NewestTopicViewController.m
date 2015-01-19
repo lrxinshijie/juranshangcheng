@@ -372,7 +372,7 @@
 }
 
 - (IBAction)onShare:(id)sender{
-    [[ShareView sharedView] showWithContent:_topic.theme image:nil title:_topic.theme url:[NSString stringWithFormat:@"http://apph5.juran.cn/topics/%@", _topic.topicId]];
+    [[ShareView sharedView] showWithContent:_topic.theme image:nil title:_topic.theme url:[NSString stringWithFormat:@"http://apph5.juran.cn/topics/%@%@", _topic.topicId, [Public shareEnv]]];
 }
 
 - (IBAction)onComment:(id)sender{
