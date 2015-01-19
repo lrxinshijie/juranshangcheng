@@ -611,6 +611,14 @@
 		A907F2B71A38884A00DEB8EA /* DemandEditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A907F2B51A38884A00DEB8EA /* DemandEditTextViewController.xib */; };
 		A9224E1A1A6BDE3D002974ED /* AMScrollingNavbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E191A6BDE3D002974ED /* AMScrollingNavbarViewController.m */; };
 		A9224E1B1A6BDE3D002974ED /* AMScrollingNavbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E191A6BDE3D002974ED /* AMScrollingNavbarViewController.m */; };
+		A9224E281A6CB779002974ED /* UIViewController+YIFullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E251A6CB779002974ED /* UIViewController+YIFullScreenScroll.m */; };
+		A9224E291A6CB779002974ED /* UIViewController+YIFullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E251A6CB779002974ED /* UIViewController+YIFullScreenScroll.m */; };
+		A9224E2A1A6CB779002974ED /* YIFullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E271A6CB779002974ED /* YIFullScreenScroll.m */; };
+		A9224E2B1A6CB779002974ED /* YIFullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E271A6CB779002974ED /* YIFullScreenScroll.m */; };
+		A9224E2E1A6CB7D5002974ED /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E2D1A6CB7D5002974ED /* JRSwizzle.m */; };
+		A9224E2F1A6CB7D5002974ED /* JRSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E2D1A6CB7D5002974ED /* JRSwizzle.m */; };
+		A9224E321A6CB829002974ED /* ViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E311A6CB829002974ED /* ViewUtils.m */; };
+		A9224E331A6CB829002974ED /* ViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E311A6CB829002974ED /* ViewUtils.m */; };
 		A932326C1A61AC2E00C85AE7 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A93232681A61AC2E00C85AE7 /* Icon-72.png */; };
 		A932326D1A61AC2E00C85AE7 /* Icon-80.png in Resources */ = {isa = PBXBuildFile; fileRef = A93232691A61AC2E00C85AE7 /* Icon-80.png */; };
 		A932326E1A61AC2E00C85AE7 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = A932326A1A61AC2E00C85AE7 /* Icon-Small-50.png */; };
@@ -1621,6 +1629,14 @@
 		A907F2B51A38884A00DEB8EA /* DemandEditTextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemandEditTextViewController.xib; sourceTree = "<group>"; };
 		A9224E181A6BDE3D002974ED /* AMScrollingNavbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScrollingNavbarViewController.h; sourceTree = "<group>"; };
 		A9224E191A6BDE3D002974ED /* AMScrollingNavbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScrollingNavbarViewController.m; sourceTree = "<group>"; };
+		A9224E241A6CB779002974ED /* UIViewController+YIFullScreenScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YIFullScreenScroll.h"; sourceTree = "<group>"; };
+		A9224E251A6CB779002974ED /* UIViewController+YIFullScreenScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YIFullScreenScroll.m"; sourceTree = "<group>"; };
+		A9224E261A6CB779002974ED /* YIFullScreenScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YIFullScreenScroll.h; sourceTree = "<group>"; };
+		A9224E271A6CB779002974ED /* YIFullScreenScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YIFullScreenScroll.m; sourceTree = "<group>"; };
+		A9224E2C1A6CB7D5002974ED /* JRSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSwizzle.h; sourceTree = "<group>"; };
+		A9224E2D1A6CB7D5002974ED /* JRSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSwizzle.m; sourceTree = "<group>"; };
+		A9224E301A6CB829002974ED /* ViewUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtils.h; sourceTree = "<group>"; };
+		A9224E311A6CB829002974ED /* ViewUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUtils.m; sourceTree = "<group>"; };
 		A93232681A61AC2E00C85AE7 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		A93232691A61AC2E00C85AE7 /* Icon-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-80.png"; sourceTree = "<group>"; };
 		A932326A1A61AC2E00C85AE7 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -2649,6 +2665,21 @@
 			path = AMScrollingNavbar;
 			sourceTree = "<group>";
 		};
+		A9224E231A6CB779002974ED /* YIFullScreenScroll */ = {
+			isa = PBXGroup;
+			children = (
+				A9224E301A6CB829002974ED /* ViewUtils.h */,
+				A9224E311A6CB829002974ED /* ViewUtils.m */,
+				A9224E2C1A6CB7D5002974ED /* JRSwizzle.h */,
+				A9224E2D1A6CB7D5002974ED /* JRSwizzle.m */,
+				A9224E241A6CB779002974ED /* UIViewController+YIFullScreenScroll.h */,
+				A9224E251A6CB779002974ED /* UIViewController+YIFullScreenScroll.m */,
+				A9224E261A6CB779002974ED /* YIFullScreenScroll.h */,
+				A9224E271A6CB779002974ED /* YIFullScreenScroll.m */,
+			);
+			path = YIFullScreenScroll;
+			sourceTree = "<group>";
+		};
 		A95DB7061A5EF0BC00F543CE /* Guide */ = {
 			isa = PBXGroup;
 			children = (
@@ -2870,6 +2901,7 @@
 		A987ED6F1A20920500CED7CD /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				A9224E231A6CB779002974ED /* YIFullScreenScroll */,
 				A9224E171A6BDE3D002974ED /* AMScrollingNavbar */,
 				147282C41A67673500FB0CFB /* AHReach */,
 				1495C8541A655659000040DB /* PushConfig.plist */,
@@ -4638,6 +4670,7 @@
 				1415F9851A5CD1CB003D0C29 /* UIViewController+HUD.m in Sources */,
 				1415F9861A5CD1CB003D0C29 /* MenuView.m in Sources */,
 				1415F9871A5CD1CB003D0C29 /* LoginViewController.m in Sources */,
+				A9224E2F1A6CB7D5002974ED /* JRSwizzle.m in Sources */,
 				1415F9881A5CD1CB003D0C29 /* ActionSheetCustomPicker.m in Sources */,
 				1415F9891A5CD1CB003D0C29 /* NSArray+ASCategory.m in Sources */,
 				1415F98A1A5CD1CB003D0C29 /* UIScrollView+MJExtension.m in Sources */,
@@ -4750,11 +4783,13 @@
 				1415F9EE1A5CD1CB003D0C29 /* JRQuestion.m in Sources */,
 				1415F9EF1A5CD1CB003D0C29 /* DemandDetailViewController.m in Sources */,
 				1415F9F01A5CD1CB003D0C29 /* MKMapView+ASCategory.m in Sources */,
+				A9224E291A6CB779002974ED /* UIViewController+YIFullScreenScroll.m in Sources */,
 				1415F9F11A5CD1CB003D0C29 /* NSObject+ASCategory.m in Sources */,
 				1415F9F21A5CD1CB003D0C29 /* PrivateMessage.m in Sources */,
 				1415F9F31A5CD1CB003D0C29 /* UIImageView+ASCategory.m in Sources */,
 				1415F9F41A5CD1CB003D0C29 /* PrivateMessageViewController.m in Sources */,
 				1415F9F51A5CD1CB003D0C29 /* ASGeometry.m in Sources */,
+				A9224E2B1A6CB779002974ED /* YIFullScreenScroll.m in Sources */,
 				1415F9F61A5CD1CB003D0C29 /* NSBubbleData.m in Sources */,
 				1415F9F71A5CD1CB003D0C29 /* ProfileViewController.m in Sources */,
 				1415F9F81A5CD1CB003D0C29 /* GlobalPopupAlert.m in Sources */,
@@ -4764,6 +4799,7 @@
 				1415FA9C1A5D1844003D0C29 /* ALTheme.m in Sources */,
 				1415F9FC1A5CD1CB003D0C29 /* UIDevice+ASCategory.m in Sources */,
 				1415F9FD1A5CD1CB003D0C29 /* ALEngine.m in Sources */,
+				A9224E331A6CB829002974ED /* ViewUtils.m in Sources */,
 				1415F9FE1A5CD1CB003D0C29 /* ResetPasswordViewController.m in Sources */,
 				1415F9FF1A5CD1CB003D0C29 /* JRWebViewController.m in Sources */,
 				1415FA001A5CD1CB003D0C29 /* JSONValueTransformer.m in Sources */,
@@ -4838,6 +4874,7 @@
 				A987EE201A20928B00CED7CD /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				BD5F23E61A52A430009F759E /* SerciceDetailViewController.m in Sources */,
 				A987EDD21A20920500CED7CD /* ALViewController.m in Sources */,
+				A9224E281A6CB779002974ED /* UIViewController+YIFullScreenScroll.m in Sources */,
 				A93BF29A1A2633D90070B72A /* SetPasswordViewController.m in Sources */,
 				A987EDE51A20920500CED7CD /* UIActionSheet+Blocks.m in Sources */,
 				A9D654B61A27642800A80253 /* JSONKeyMapper.m in Sources */,
@@ -4956,6 +4993,7 @@
 				140C46E81A2A296A003317AD /* ModifyViewController.m in Sources */,
 				14A3FDCB1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.m in Sources */,
 				14C855471A2E196B00A15ED9 /* InteractionViewController.m in Sources */,
+				A9224E2E1A6CB7D5002974ED /* JRSwizzle.m in Sources */,
 				144B5D651A37278E00C75955 /* SearchViewController.m in Sources */,
 				A987EDF31A20920500CED7CD /* UIView+ASCategory.m in Sources */,
 				A987EDFC1A20920500CED7CD /* SDWebImagePrefetcher.m in Sources */,
@@ -4966,6 +5004,7 @@
 				A9D654AF1A27642800A80253 /* JSONModelArray.m in Sources */,
 				149077311A44720000065EE3 /* GuideViewController.m in Sources */,
 				1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */,
+				A9224E2A1A6CB779002974ED /* YIFullScreenScroll.m in Sources */,
 				A987EE3A1A2093C900CED7CD /* MJRefreshHeaderView.m in Sources */,
 				145471CB1A3887A400428BCB /* NewestTopicViewController.m in Sources */,
 				37D18DAD1A5819F300B41048 /* CaseImageManagemanetViewController.m in Sources */,
@@ -5009,6 +5048,7 @@
 				A987EDE81A20920500CED7CD /* UIButton+ASCategory.m in Sources */,
 				14587E1F1A35DD4300D41236 /* BindMailViewController.m in Sources */,
 				14D9738F1A334C4F00E771ED /* PushMessageViewController.m in Sources */,
+				A9224E321A6CB829002974ED /* ViewUtils.m in Sources */,
 				141C564D1A23613900A57971 /* TATopicCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
