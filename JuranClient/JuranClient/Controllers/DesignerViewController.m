@@ -196,7 +196,7 @@
     frame.origin.y = CGRectGetMaxY(_filterView.frame);
     frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
     _tableView.frame = frame;
-    ASLog(@"size;%f,%f",y, height);
+//    ASLog(@"size;%f,%f",y, height);
 }
 
 @end

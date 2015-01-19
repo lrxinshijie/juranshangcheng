@@ -219,7 +219,7 @@
 }
 
 - (NSString *)shareURL{
-    return [NSString stringWithFormat:@"http://apph5.juran.cn/cases/%@",self.projectId];
+    return [NSString stringWithFormat:@"http://apph5.juran.cn/cases/%@%@",self.projectId, [Public shareEnv]];
 }
 
 - (void)doShare{

@@ -172,7 +172,7 @@
     vc.title = @"家装百科";
     JRWiki *wiki = [_datas objectAtIndex:indexPath.row];
 //    vc.htmlString = wiki.content;
-    vc.urlString = [NSString stringWithFormat:@"http://apph5.juran.cn/wikis/%d", wiki.wikiId];
+    vc.urlString = [NSString stringWithFormat:@"http://apph5.juran.cn/wikis/%d%@", wiki.wikiId,[Public shareEnv]];
     wiki.browseCount++;
     [self.navigationController pushViewController:vc animated:YES];
 }
