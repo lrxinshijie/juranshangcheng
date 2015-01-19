@@ -607,6 +607,8 @@
 		37A0F81D1A6B96C300611760 /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A0F81A1A6B96C300611760 /* ActivityDetailViewController.m */; };
 		37A0F81E1A6B96C300611760 /* ActivityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */; };
 		37A0F81F1A6B96C300611760 /* ActivityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */; };
+		37CE57271A6D346D00C75E65 /* WikiOrActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CE57251A6D346D00C75E65 /* WikiOrActivityViewController.m */; };
+		37CE57281A6D346D00C75E65 /* WikiOrActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37CE57261A6D346D00C75E65 /* WikiOrActivityViewController.xib */; };
 		37CF672C1A4FE11D0044F709 /* NewestBidInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */; };
 		37CF672D1A4FE11D0044F709 /* NewestBidInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37CF672B1A4FE11D0044F709 /* NewestBidInfoCell.xib */; };
 		37D010111A566AF900EC658D /* UploadCardImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D0100F1A566AF900EC658D /* UploadCardImageViewController.m */; };
@@ -1635,6 +1637,9 @@
 		37A0F8191A6B96C300611760 /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailViewController.h; sourceTree = "<group>"; };
 		37A0F81A1A6B96C300611760 /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailViewController.m; sourceTree = "<group>"; };
 		37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityDetailViewController.xib; sourceTree = "<group>"; };
+		37CE57241A6D346D00C75E65 /* WikiOrActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiOrActivityViewController.h; sourceTree = "<group>"; };
+		37CE57251A6D346D00C75E65 /* WikiOrActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiOrActivityViewController.m; sourceTree = "<group>"; };
+		37CE57261A6D346D00C75E65 /* WikiOrActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WikiOrActivityViewController.xib; sourceTree = "<group>"; };
 		37CF67291A4FE11D0044F709 /* NewestBidInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewestBidInfoCell.h; sourceTree = "<group>"; };
 		37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewestBidInfoCell.m; sourceTree = "<group>"; };
 		37CF672B1A4FE11D0044F709 /* NewestBidInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewestBidInfoCell.xib; sourceTree = "<group>"; };
@@ -2899,6 +2904,9 @@
 				37A0F8191A6B96C300611760 /* ActivityDetailViewController.h */,
 				37A0F81A1A6B96C300611760 /* ActivityDetailViewController.m */,
 				37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */,
+				37CE57241A6D346D00C75E65 /* WikiOrActivityViewController.h */,
+				37CE57251A6D346D00C75E65 /* WikiOrActivityViewController.m */,
+				37CE57261A6D346D00C75E65 /* WikiOrActivityViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -3933,6 +3941,7 @@
 				1415FA331A5CD1CB003D0C29 /* DemandCell.xib in Resources */,
 				A95DB70F1A5EF0BC00F543CE /* guide_3@2x.png in Resources */,
 				371D68741A5D6E7E00172AC9 /* icon_homepage@2x.png in Resources */,
+				37CE57281A6D346D00C75E65 /* WikiOrActivityViewController.xib in Resources */,
 				BD5187181A5D0ED700BE508A /* service_highlighted_2@2x.png in Resources */,
 				BD5186CE1A5D0ED700BE508A /* question_unresolved@2x.png in Resources */,
 				1415FA341A5CD1CB003D0C29 /* ShareSDKLocalizable.strings in Resources */,
@@ -4768,6 +4777,7 @@
 				1415F98E1A5CD1CB003D0C29 /* BidDesignerCell.m in Sources */,
 				1415F98F1A5CD1CB003D0C29 /* JSONModelError.m in Sources */,
 				375B465A1A5EE76300D7E74B /* StyleModifyViewController.m in Sources */,
+				37CE57271A6D346D00C75E65 /* WikiOrActivityViewController.m in Sources */,
 				1415F9901A5CD1CB003D0C29 /* UIView+MJExtension.m in Sources */,
 				1415F9911A5CD1CB003D0C29 /* CaseManagementViewController.m in Sources */,
 				1415F9921A5CD1CB003D0C29 /* JSONModel+networking.m in Sources */,

@@ -7,20 +7,20 @@
 //
 
 #import "WikiViewController.h"
-#import "FilterView.h"
+#import "WikiFilterViewController.h"
 #import "JRWiki.h"
 #import "WikiCell.h"
 #import "JRWebViewController.h"
 #import "ActivityDetailViewController.h"
 
-@interface WikiViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate>{
+@interface WikiViewController ()<UITableViewDataSource, UITableViewDelegate, WikiFilterViewControllerDelegate>{
 }
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
-@property (nonatomic, strong) FilterView *filterView;
 @property (nonatomic, strong) NSArray *filterSections;
+@property (nonatomic, strong) UINavigationController *filterViewNav;
 
 @property (nonatomic, strong) IBOutlet UIView *emptyView;
 
@@ -44,18 +44,17 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"家装百科";
     
-    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeWiki defaultData:_filterData];
-    _filterView.delegate = self;
-    [self.view addSubview:_filterView];
+    WikiFilterViewController *filterViewController = [[WikiFilterViewController alloc] init];
+    filterViewController.delegate = self;
     
-#ifdef kJuranDesigner
-    CGRect frame = CGRectMake(0, 44, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar - 44);
-#else
-    CGRect frame = CGRectMake(0, 44, kWindowWidth, kWindowHeightWithoutNavigationBar - 44);
-#endif
+    //            filterViewController.selecteds = [NSMutableDictionary dictionaryWithDictionary:_defaultData];
+    _filterViewNav = [Public navigationControllerFromRootViewController:filterViewController];
     
-    
-    self.tableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onFilter:) title:@"筛选" backgroundImage:nil];
+    [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
@@ -78,11 +77,12 @@
     [self.view addSubview:_emptyView];
 }
 
+- (void)onFilter:(id)sender{
+    [self presentViewController:_filterViewNav animated:YES completion:NULL];
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    if ([_filterView isShow]) {
-        [_filterView showSort];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -99,17 +99,12 @@
     return _filterData;
 }
 
-
-- (void)clickFilterView:(FilterView *)view actionType:(FilterViewAction)action returnData:(NSDictionary *)data{
+- (void)clickWikiFilterViewReturnData:(NSDictionary *)data{
     [data.allKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
         [_filterData setObject:data[key] forKey:key];
     }];
     
     [_tableView headerBeginRefreshing];
-}
-
-- (NSArray*)sectionDatasForFilterView:(FilterView *)view{
-    return _filterSections;
 }
 
 - (void)loadData{

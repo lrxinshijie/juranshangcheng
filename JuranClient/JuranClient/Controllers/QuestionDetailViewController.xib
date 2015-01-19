@@ -11,6 +11,7 @@
                 <outlet property="answerTextField" destination="nOS-oy-dXV" id="B1y-eG-oNw"/>
                 <outlet property="answerView" destination="RlI-VM-r22" id="Dx9-Wd-ROO"/>
                 <outlet property="chooseImageView" destination="w1P-JE-yuj" id="nKR-Qc-Z6P"/>
+                <outlet property="emptyView" destination="JuS-Zf-9gP" id="8lt-Hh-FPC"/>
                 <outlet property="resolvedAdoptedHeaderView" destination="QMU-pr-xPt" id="fam-IM-uI1"/>
                 <outlet property="resolvedContentLabel" destination="Web-jc-oeS" id="nGF-lb-ceJ"/>
                 <outlet property="resolvedHeaderImageView" destination="0zd-kE-rEh" id="hNs-KL-kSE"/>
@@ -257,8 +258,36 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="508" y="-62"/>
         </view>
+        <view contentMode="scaleToFill" id="JuS-Zf-9gP">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="355"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="HOe-Ql-I6z">
+                    <rect key="frame" x="64" y="113" width="192" height="128"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data.png" id="aDO-HZ-oMt">
+                            <rect key="frame" x="49" y="0.0" width="94" height="92"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无回答" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="au0-FC-z5S">
+                            <rect key="frame" x="49" y="107" width="94" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <color key="textColor" red="0.61176472900000001" green="0.61176472900000001" blue="0.61176472900000001" alpha="1" colorSpace="deviceRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="597" y="313.5"/>
+        </view>
     </objects>
     <resources>
+        <image name="answer_no_data.png" width="94" height="92"/>
         <image name="best_answer.png" width="24" height="30"/>
         <image name="case-detail-send.png" width="62" height="39"/>
         <image name="icon_ camera.png" width="29" height="26"/>

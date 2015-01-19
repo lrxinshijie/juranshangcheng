@@ -115,17 +115,17 @@
     NSString *placeholder = @"";
     NSString *title = @"";
     if (indexPath.row == 0) {
-        placeholder = @"您的姓名";
+        placeholder = @"请输入姓名";
         title = @"姓名";
         cell.textField.keyboardType = UIKeyboardTypeDefault;
         cell.textField.text = _senderName;
     }else if (indexPath.row == 1) {
-        placeholder = @"您的电话";
+        placeholder = @"请输入11位手机号";
         title = @"电话";
         cell.textField.text = _mobilePhone;
         cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }else if (indexPath.row == 2){
-        placeholder = @"喜欢的风格";
+        placeholder = @"请选择";
         title = @"风格";
         cell.textField.text = _likeStyleKey;
         cell.textField.enabled = NO;
@@ -134,7 +134,7 @@
     }else if (indexPath.row == 3){
         cell.textField.text = _houseArea;
         title = @"房屋面积";
-        placeholder = @"房屋面积(平方米)";
+        placeholder = @"请输入数字";
         cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }
     cell.titleLabel.text = title;

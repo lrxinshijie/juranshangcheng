@@ -45,6 +45,8 @@
 @property (nonatomic, strong) IBOutlet UIView *answerImageView;
 @property (nonatomic, strong) IBOutlet UIView *chooseImageView;
 
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
+
 @end
 
 @implementation QuestionDetailViewController
@@ -124,6 +126,17 @@
     }else{
         [self setupUnResolvedTableHeaderView];
         _tableView.tableHeaderView = _unResolvedTableHeaderView;
+        if (_question.otherAnswers.count == 0) {
+            CGRect frame = _emptyView.frame;
+            frame.size.height = kWindowHeightWithoutNavigationBar - CGRectGetHeight(_unResolvedTableHeaderView.frame);
+            if (frame.size.height < 140) {
+                frame.size.height = 140;
+            }
+            _emptyView.frame = frame;
+            _tableView.tableFooterView = _emptyView;
+        }else{
+            _tableView.tableFooterView = [[UIView alloc] init];
+        }
     }
     [_tableView reloadData];
 }

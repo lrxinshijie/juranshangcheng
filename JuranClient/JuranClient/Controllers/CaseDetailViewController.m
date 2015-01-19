@@ -62,7 +62,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard)];
-    self.keys = @[@"地区", @"楼盘", @"户型", @"风格", @"面积", @"参考", @"描述"];
+    self.keys = @[@"地区", @"楼盘", @"户型", @"风格", @"面积", @"参考价", @"描述"];
     self.values = @[@"", @"", @"", @"", @"", @"", @""];
     self.detailTitleLabel = [self.view labelWithFrame:CGRectMake(15, 0, 100, 44) text:@"描述" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:15]];
     self.detailContentLabel = [self.view labelWithFrame:CGRectMake(15, 44, 290, 0) text:_jrCase.desc textColor:[UIColor grayColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:14]];

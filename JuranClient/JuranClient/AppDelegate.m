@@ -22,7 +22,7 @@
 #import "GuideViewController.h"
 #import "HomeViewController.h"
 #import "UIAlertView+Blocks.h"
-#import "WikiViewController.h"
+#import "WikiOrActivityViewController.h"
 #import "APService.h"
 
 //Share SDK
@@ -154,7 +154,7 @@
     [desNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
 //    desNav.delegate = self;
     
-    WikiViewController *wiki = [[WikiViewController alloc] init];
+    WikiOrActivityViewController *wiki = [[WikiOrActivityViewController alloc] init];
     UINavigationController *wikiNav = [Public navigationControllerFromRootViewController:wiki];
     wikiNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-wiki-default" selected:@"nav-wiki-active"];
     [wikiNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
