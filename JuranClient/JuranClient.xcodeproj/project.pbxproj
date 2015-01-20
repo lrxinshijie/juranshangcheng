@@ -639,8 +639,6 @@
 		A90459D91A278B2D00F8CD74 /* SubjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459D71A278B2D00F8CD74 /* SubjectViewController.xib */; };
 		A907F2B61A38884A00DEB8EA /* DemandEditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A907F2B41A38884A00DEB8EA /* DemandEditTextViewController.m */; };
 		A907F2B71A38884A00DEB8EA /* DemandEditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A907F2B51A38884A00DEB8EA /* DemandEditTextViewController.xib */; };
-		A9224E1A1A6BDE3D002974ED /* AMScrollingNavbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E191A6BDE3D002974ED /* AMScrollingNavbarViewController.m */; };
-		A9224E1B1A6BDE3D002974ED /* AMScrollingNavbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E191A6BDE3D002974ED /* AMScrollingNavbarViewController.m */; };
 		A9224E281A6CB779002974ED /* UIViewController+YIFullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E251A6CB779002974ED /* UIViewController+YIFullScreenScroll.m */; };
 		A9224E291A6CB779002974ED /* UIViewController+YIFullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E251A6CB779002974ED /* UIViewController+YIFullScreenScroll.m */; };
 		A9224E2A1A6CB779002974ED /* YIFullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E271A6CB779002974ED /* YIFullScreenScroll.m */; };
@@ -1685,8 +1683,6 @@
 		A907F2B31A38884A00DEB8EA /* DemandEditTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemandEditTextViewController.h; sourceTree = "<group>"; };
 		A907F2B41A38884A00DEB8EA /* DemandEditTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemandEditTextViewController.m; sourceTree = "<group>"; };
 		A907F2B51A38884A00DEB8EA /* DemandEditTextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemandEditTextViewController.xib; sourceTree = "<group>"; };
-		A9224E181A6BDE3D002974ED /* AMScrollingNavbarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScrollingNavbarViewController.h; sourceTree = "<group>"; };
-		A9224E191A6BDE3D002974ED /* AMScrollingNavbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScrollingNavbarViewController.m; sourceTree = "<group>"; };
 		A9224E241A6CB779002974ED /* UIViewController+YIFullScreenScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YIFullScreenScroll.h"; sourceTree = "<group>"; };
 		A9224E251A6CB779002974ED /* UIViewController+YIFullScreenScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YIFullScreenScroll.m"; sourceTree = "<group>"; };
 		A9224E261A6CB779002974ED /* YIFullScreenScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YIFullScreenScroll.h; sourceTree = "<group>"; };
@@ -2716,15 +2712,6 @@
 			name = Demand;
 			sourceTree = "<group>";
 		};
-		A9224E171A6BDE3D002974ED /* AMScrollingNavbar */ = {
-			isa = PBXGroup;
-			children = (
-				A9224E181A6BDE3D002974ED /* AMScrollingNavbarViewController.h */,
-				A9224E191A6BDE3D002974ED /* AMScrollingNavbarViewController.m */,
-			);
-			path = AMScrollingNavbar;
-			sourceTree = "<group>";
-		};
 		A9224E231A6CB779002974ED /* YIFullScreenScroll */ = {
 			isa = PBXGroup;
 			children = (
@@ -2978,7 +2965,6 @@
 			isa = PBXGroup;
 			children = (
 				A9224E231A6CB779002974ED /* YIFullScreenScroll */,
-				A9224E171A6BDE3D002974ED /* AMScrollingNavbar */,
 				147282C41A67673500FB0CFB /* AHReach */,
 				1495C8541A655659000040DB /* PushConfig.plist */,
 				1415FA931A5D144B003D0C29 /* JPush */,
@@ -4763,7 +4749,6 @@
 				1415F9781A5CD1CB003D0C29 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				37A0F8101A6B877100611760 /* ActivityCell.m in Sources */,
 				1415F9791A5CD1CB003D0C29 /* ActionSheetStringPicker.m in Sources */,
-				A9224E1B1A6BDE3D002974ED /* AMScrollingNavbarViewController.m in Sources */,
 				1415F97A1A5CD1CB003D0C29 /* RegistViewController.m in Sources */,
 				1415F97B1A5CD1CB003D0C29 /* UIBubbleTableViewCell.m in Sources */,
 				1415F97C1A5CD1CB003D0C29 /* DDHPreviewViewController.m in Sources */,
@@ -5090,7 +5075,6 @@
 				37D18DBC1A583AF600B41048 /* CaseIntroduceViewController.m in Sources */,
 				A987EDEF1A20920500CED7CD /* UINavigationController+ASCategory.m in Sources */,
 				1441A1A41A29E62A004A038E /* ShareView.m in Sources */,
-				A9224E1A1A6BDE3D002974ED /* AMScrollingNavbarViewController.m in Sources */,
 				371FBEF21A6A379B00635D3D /* WikiCell.m in Sources */,
 				A987EE521A2098AF00CED7CD /* WikiViewController.m in Sources */,
 				14C953A91A2DC0E800FE6F8D /* SubjectCell.m in Sources */,
