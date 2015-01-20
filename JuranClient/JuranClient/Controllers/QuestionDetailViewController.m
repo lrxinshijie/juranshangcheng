@@ -424,17 +424,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [_answerTextField resignFirstResponder];
+    [self onHiddenAnswerImageView];
     //    DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
     //    detailVC.designer = _datas[indexPath.row];
     //    detailVC.hidesBottomBarWhenPushed = YES;
     //    [self.navigationController pushViewController:detailVC animated:YES];
 }
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [_answerTextField resignFirstResponder];
-    [self onHiddenAnswerImageView];
-}
-
 
 - (AnswerCell*)answerCell{
     if (!_answerCell) {

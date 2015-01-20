@@ -24,7 +24,7 @@
 @property (nonatomic, assign) NSInteger creditRateCount;
 @property (nonatomic, strong) NSString *minisite;
 @property (nonatomic, strong) NSArray *frontImageUrlList;
-@property (nonatomic, assign) NSInteger experienceCount;
+@property (nonatomic, strong) NSString *experienceCount;
 @property (nonatomic, assign) NSInteger browseCount;
 
 //Detail
@@ -75,13 +75,13 @@
 @property (nonatomic, strong) NSString *idCardType;
 @property (nonatomic, strong) NSString *qq;
 @property (nonatomic, strong) NSString *weixin;
-@property (nonatomic, assign) NSInteger sex;
-@property (nonatomic, assign) NSInteger freeMeasure;
+@property (nonatomic, strong) NSString *sex;
+@property (nonatomic, strong) NSString *freeMeasure;
 @property (nonatomic, strong) NSString *special;
 @property (nonatomic, strong) NSString *professional;
 @property (nonatomic, strong) NSString *professionalType;
 @property (nonatomic, strong) NSString *personalHonor;
-@property (nonatomic, assign) NSInteger faceToFace;
+@property (nonatomic, strong) NSString *faceToFace;
 @property (nonatomic, strong) NSString *detailAddress;
 @property (nonatomic, strong) NSString *mobileNum;
 @property (nonatomic, strong) NSString *email;

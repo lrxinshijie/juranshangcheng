@@ -144,6 +144,22 @@
 //    return @"其他";
 }
 
+- (NSString*)styleNamesString{
+
+    //0 为设计师 1 为设计师详情
+    NSArray *arr = [self.stylesName componentsSeparatedByString:@"，"];
+    NSString* styleNames = @"";
+    NSString* separateStr = @"｜";
+    for (NSInteger i = 0; arr.count; i++) {
+        styleNames = [styleNames stringByAppendingString:arr[i]];
+        if (i == arr.count - 1) {
+            break;
+        }
+        styleNames = [styleNames stringByAppendingString:separateStr];
+    }
+    return styleNames;
+}
+
 - (void)like:(void (^) (BOOL result))finished{
     if (self.isLike) {
         if (finished) {

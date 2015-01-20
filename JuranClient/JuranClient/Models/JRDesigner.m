@@ -59,6 +59,10 @@
         self.detailAddress = @"";
         self.mobileNum = @"";
         self.email = @"";
+        self.sex = @"";
+        self.experienceCount = @"";
+        self.faceToFace = @"";
+        self.freeMeasure = @"";
     }
     return self;
 }
@@ -84,7 +88,8 @@
         self.fansCount = [dict getIntValueForKey:@"fansCount" defaultValue:0];
         self.creditRateCount = [dict getIntValueForKey:@"creditRateCount" defaultValue:0];
         self.minisite = [dict getStringValueForKey:@"minisite" defaultValue:@""];
-        self.experienceCount = [dict getIntValueForKey:@"experienceCount" defaultValue:-1];
+        NSInteger e = [dict getIntValueForKey:@"experienceCount" defaultValue:-1];
+        self.experienceCount = e == -1?@"":[NSString stringWithFormat:@"%d", e];
         self.browseCount = [dict getIntValueForKey:@"browseCount" defaultValue:0];
         NSString *urls = [dict getStringValueForKey:@"frontImgUrl"defaultValue:@""];
         if (urls.length == 0) {
@@ -111,7 +116,9 @@
     self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
     self.isAuth = [dict getBoolValueForKey:@"isAuth" defaultValue:FALSE];
     self.granuate = [dict getStringValueForKey:@"granuate" defaultValue:@""];
-    self.experienceCount = [dict getIntValueForKey:@"experience" defaultValue:-1];
+    NSInteger e = [dict getIntValueForKey:@"experienceCount" defaultValue:-1];
+    self.experienceCount = e == -1?@"":[NSString stringWithFormat:@"%d", e];
+    
     self.style = [dict getStringValueForKey:@"style" defaultValue:@""];
     self.priceMeasure = [dict getIntValueForKey:@"priceMeasure" defaultValue:0]/100.f;
     self.designFeeMin = [dict getIntValueForKey:@"designFeeMin" defaultValue:0]/100.f;
@@ -183,7 +190,7 @@
                 }else{
                     d.frontImageUrlList = [urls componentsSeparatedByString:@","];
                 }
-                d.experienceCount = [designExperienceDic getIntValueForKey:[NSString stringWithFormat:@"%i", d.userId] defaultValue:-1];
+                d.experienceCount = [designExperienceDic getStringValueForKey:[NSString stringWithFormat:@"%i", d.userId] defaultValue:@""];
                 [retVal addObject:d];
             }
         }
@@ -208,7 +215,7 @@
                 }else{
                     d.frontImageUrlList = [urls componentsSeparatedByString:@","];
                 }
-                d.experienceCount = [designExperienceDic getIntValueForKey:[NSString stringWithFormat:@"%i", d.userId] defaultValue:-1];
+                d.experienceCount = [designExperienceDic getStringValueForKey:[NSString stringWithFormat:@"%i", d.userId] defaultValue:@""];
                 [retVal addObject:d];
             }
         }
@@ -230,7 +237,7 @@
         self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
         self.isRealNameAuth = [dict getIntValueForKey:@"isRealNameAuth" defaultValue:0];
         self.style = [dict getStringValueForKey:@"styleNames" defaultValue:@""];
-        self.experienceCount = [dict getIntValueForKey:@"experienceCount" defaultValue:-1];
+        self.experienceCount = [dict getStringValueForKey:@"experienceCount" defaultValue:@""];
         self.browseCount = [dict getIntValueForKey:@"browseCount" defaultValue:0];
         self.projectCount = [dict getIntValueForKey:@"projectCount" defaultValue:0];
     }
@@ -289,10 +296,10 @@
 }
 
 - (NSString*)experienceString{
-    if (_experienceCount == -1) {
+    if (_experienceCount.length == 0) {
         return @"";
     }
-    return [NSString stringWithFormat:@"%d年", _experienceCount];
+    return [NSString stringWithFormat:@"%@年", _experienceCount];
 }
 
 + (NSString*)userLevelImage:(NSString*)userLevel{
@@ -313,7 +320,7 @@
     if (_realNameAuthStatus == 0) {
         return @"实名认证资料需3-5个工作日审核，请耐心等候！居然设计QQ群：124521444";
     }else if (_realNameAuthStatus == 1) {
-        return _realAuditDesc;
+        return [NSString stringWithFormat:@"很抱歉，您未通过审核，可提交信息重新申请！\n未通过原因:%@", _realAuditDesc];
     }else if (_realNameAuthStatus == 2) {
         return @"恭喜您已通过实名认证";
     }
@@ -324,7 +331,7 @@
     if (_realNameAuthStatus == 0) {
         return @"信息审核中";
     }else if (_realNameAuthStatus == 1) {
-        return @"信息审核失败";
+        return @"信息审核未通过";
     }else if (_realNameAuthStatus == 2) {
         return @"信息审核通过";
     }
@@ -354,9 +361,12 @@
     self.idCardNum = [value getStringValueForKey:@"idCardNum" defaultValue:@""];
     self.qq = [value getStringValueForKey:@"qq" defaultValue:@""];
     self.weixin = [value getStringValueForKey:@"weixin" defaultValue:@""];
-    self.sex = [value getIntValueForKey:@"sex" defaultValue:-1];
-    self.experienceCount = [value getIntValueForKey:@"designExperience" defaultValue:-1];
-    self.freeMeasure = [value getIntValueForKey:@"freeMeasure" defaultValue:-1];
+    NSInteger s = [value getIntValueForKey:@"sex" defaultValue:-1];
+    self.sex = s == -1?@"":[NSString stringWithFormat:@"%d", s];
+    NSInteger e = [value getIntValueForKey:@"designExperience" defaultValue:-1];
+    self.experienceCount = e == -1?@"":[NSString stringWithFormat:@"%d", e];
+    NSInteger f = [value getIntValueForKey:@"freeMeasure" defaultValue:-1];
+    self.freeMeasure =  f == -1?@"":[NSString stringWithFormat:@"%d", f];
     self.priceMeasure = [value getDoubleValueForKey:@"priceMeasureStr" defaultValue:0.f];
     self.style = [value getStringValueForKey:@"style" defaultValue:@""];
     self.special = [value getStringValueForKey:@"special" defaultValue:@""];
@@ -365,7 +375,8 @@
     self.professional = [value getStringValueForKey:@"professional" defaultValue:@""];
     self.professionalType = [value getStringValueForKey:@"professionalType" defaultValue:@""];
     self.personalHonor = [value getStringValueForKey:@"personalHonor" defaultValue:@""];
-    self.faceToFace = [value getIntValueForKey:@"faceToFace" defaultValue:-1];
+    f = [value getIntValueForKey:@"faceToFace" defaultValue:-1];
+    self.faceToFace = f == -1?@"":[NSString stringWithFormat:@"%d", f];
     self.designFeeMax = [value getDoubleValueForKey:@"chargeStandardMaxStr" defaultValue:0.f];
     self.designFeeMin = [value getDoubleValueForKey:@"chargeStandardMinStr" defaultValue:0.f];
     self.mobileNum = [value getStringValueForKey:@"mobileNum" defaultValue:@""];
@@ -373,11 +384,11 @@
 }
 
 - (NSString*)sexyString{
-    if (self.sex == -1) {
+    if (self.sex.length == 0) {
         return @"未设置";
     }
     NSArray *sexs = [DefaultData sharedData].sex;
-    NSDictionary *dic = sexs[_sex];
+    NSDictionary *dic = sexs[[_sex integerValue]];
     return dic[@"k"];
 }
 
@@ -448,7 +459,7 @@
 }
 
 - (NSString*)measureForPersonal{
-    if (self.freeMeasure == -1) {
+    if (self.freeMeasure.length == 0) {
         return @"未设置";
     }else if (self.freeMeasure == 0) {
         return @"免费";
@@ -457,7 +468,7 @@
     }
 }
 - (NSString*)designPriceForPersonal{
-    if (self.faceToFace == -1) {
+    if (self.faceToFace.length == 0) {
         return @"未设置";
     }else if (self.faceToFace == 0) {
         return @"面议";

@@ -120,6 +120,7 @@
         if (!error) {
             [self showTip:@"解绑手机成功!"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
                 [_timer invalidate];
                 self.currentTime = 0;
                 _captchaTextField.text = @"";
@@ -149,6 +150,7 @@
             [self showTip:@"绑定手机成功!"];
             _user.mobileNum = _phoneTextField.text;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
                 [self.navigationController popViewControllerAnimated:YES];
             });
         }

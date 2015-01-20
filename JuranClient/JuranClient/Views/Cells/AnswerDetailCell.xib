@@ -17,6 +17,16 @@
                     <view autoresizesSubviews="NO" contentMode="scaleToFill" id="PLl-t3-94W">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="157"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设计师" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H6L-ux-Wg9">
+                                <rect key="frame" x="236" y="15" width="32" height="12"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.1176470667" green="0.41960787770000002" blue="0.71372550729999995" alpha="1" colorSpace="deviceRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlogin_head.png" id="rP3-aa-Acx">
@@ -24,7 +34,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="菜鸟的预言" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eWr-1d-15X">
-                        <rect key="frame" x="60" y="11" width="187" height="21"/>
+                        <rect key="frame" x="60" y="11" width="166" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.36862745881080627" blue="0.61568629741668701" alpha="1" colorSpace="deviceRGB"/>
@@ -77,6 +87,7 @@
                 <outlet property="headImageView" destination="rP3-aa-Acx" id="vuQ-yU-aGa"/>
                 <outlet property="nameLabel" destination="eWr-1d-15X" id="YLN-nK-mTI"/>
                 <outlet property="timeLabel" destination="WPs-iA-9kt" id="uGz-22-qa2"/>
+                <outlet property="userTypeLabel" destination="H6L-ux-Wg9" id="JpH-gF-cOe"/>
             </connections>
             <point key="canvasLocation" x="140" y="228"/>
         </tableViewCell>

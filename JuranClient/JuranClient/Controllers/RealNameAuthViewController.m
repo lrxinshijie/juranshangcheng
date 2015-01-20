@@ -64,6 +64,13 @@
     [self loadData];
 }
 
+//- (void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//    if (_status == RealNameAuthStatusCommiting) {
+//        [_tableView reloadData];
+//    }
+//}
+
 - (void)loadData{
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_REALNAMEAPPLY parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken: @"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -258,6 +265,7 @@
     }else if(type == 1){
         self.headImage = images[0];
     }
+    [_tableView reloadData];
 }
 
 #pragma mark - Target Action
@@ -334,6 +342,16 @@
         cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]];
         cell.textLabel.text = _keys[indexPath.row];
         cell.detailTextLabel.text = _placeholders[indexPath.row];
+        if (indexPath.row == 2) {
+            if (_positiveIdImage && _backIdImage) {
+                cell.detailTextLabel.text = @"已添加";
+            }
+        }
+        if (indexPath.row == 3) {
+            if (_headImage) {
+                cell.detailTextLabel.text = @"已添加";
+            }
+        }
         return cell;
     }
 }
