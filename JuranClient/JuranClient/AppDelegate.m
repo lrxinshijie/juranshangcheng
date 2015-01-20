@@ -22,7 +22,7 @@
 #import "GuideViewController.h"
 #import "HomeViewController.h"
 #import "UIAlertView+Blocks.h"
-#import "WikiViewController.h"
+#import "WikiOrActivityViewController.h"
 #import "APService.h"
 
 //Share SDK
@@ -154,7 +154,7 @@
     [desNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
 //    desNav.delegate = self;
     
-    WikiViewController *wiki = [[WikiViewController alloc] init];
+    WikiOrActivityViewController *wiki = [[WikiOrActivityViewController alloc] init];
     UINavigationController *wikiNav = [Public navigationControllerFromRootViewController:wiki];
     wikiNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-wiki-default" selected:@"nav-wiki-active"];
     [wikiNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
@@ -271,7 +271,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [self clearNotification];
+//    [self clearNotification];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -366,7 +366,8 @@
 
 - (void)clearNotification{
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber--;
+    [UIApplication sharedApplication].applicationIconBadgeNumber = badge;
 }
 
 @end
