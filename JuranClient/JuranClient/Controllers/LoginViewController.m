@@ -11,7 +11,7 @@
 #import "ForgetViewController.h"
 #import <ShareSDK/ShareSDK.h>
 #import "AppDelegate.h"
-
+#import "WXApi.h"
 @interface LoginViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UITextField *accountTextField;
@@ -42,13 +42,22 @@
     
 #ifdef kJuranDesigner
     _qqButton.hidden = YES;
-    CGRect frame = _sinaButton.frame;
-    frame.origin.x = 67;
-    _sinaButton.frame = frame;
     
-    frame = _wxButton.frame;
-    frame.origin.x = 193;
-    _wxButton.frame = frame;
+    if (![WXApi isWXAppInstalled]) {
+        _wxButton.hidden = YES;
+        CGRect frame = _sinaButton.frame;
+        frame.origin.x = (kWindowWidth-CGRectGetWidth(frame))/2;
+        _sinaButton.frame = frame;
+    }else{
+        CGRect frame = _sinaButton.frame;
+        frame.origin.x = 67;
+        _sinaButton.frame = frame;
+        
+        frame = _wxButton.frame;
+        frame.origin.x = 193;
+        _wxButton.frame = frame;
+    }
+    
 #endif
 }
 
