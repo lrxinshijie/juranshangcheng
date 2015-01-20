@@ -40,8 +40,18 @@
     _statusLabel.text = [jc statusString];
     _statusLabel.textColor = [jc statusColor];
     
-    NSString *content = [NSString stringWithFormat:@"原因：%@", jc.reason];
-    if ([jc.status isEqualToString:@"02"] && jc.reason.length > 0) {
+    if ([jc.status isEqualToString:@"02"] && (jc.reason.length > 0 || jc.reviewType.length > 0)) {
+        NSString *content = @"";
+        if (jc.reviewType.length > 0) {
+            content = [content stringByAppendingFormat:@"类型：%@", jc.reviewTypeString];
+        }
+        if (jc.reason.length > 0) {
+            if (content.length > 0) {
+                content = [content stringByAppendingString:@"\n"];
+            }
+            content = [content stringByAppendingFormat:@"原因：%@", jc.reason];
+        }
+        
         _reasonLabel.hidden = NO;
         CGRect frame = _reasonLabel.frame;
         frame.size.height = [content heightWithFont:_reasonLabel.font constrainedToWidth:CGRectGetWidth(frame)];

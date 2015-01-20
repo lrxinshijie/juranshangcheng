@@ -15,6 +15,8 @@
 }
 @property (nonatomic, strong) UITableView *tableView;
 
+@property (nonatomic, strong) JRUser *user;
+
 @end
 
 @implementation AccountManageViewController
@@ -36,13 +38,37 @@
     
     self.navigationItem.title = @"账户管理";
     
-    keys = @[@"账户余额", @"积分", @"经验值"];
-    values = @[@"￥0.00", @"2000", @"800"];
+    _user = [JRUser currentUser];
+    
+    keys = @[ @"积分", @"经验值"];//@"账户余额",
+    values = @[@"", @""];//@"￥0.00",
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     [self.view addSubview:_tableView];
+    
+    [self loadData];
+}
+
+- (void)reloadData{
+    values = @[[NSString stringWithFormat:@"%d", _user.useablePoints], [NSString stringWithFormat:@"%d", _user.useableExp]];
+    [_tableView reloadData];
+}
+
+- (void)loadData{
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_GETMEMBERDETAIL parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                [_user buildUpMemberDetailWithDictionary:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self reloadData];
+                });
+            }
+        }
+    }];
 }
 
 #pragma mark - UITableViewDataSource/Delegate

@@ -58,13 +58,15 @@
 #ifdef kJuranDesigner
     keysForOthers = @[@"问题反馈", @"版本信息"
                                             , @"给我打分"
-                      //, @"其他APP推荐"
+//                      , @"其他APP推荐"
                       , @"居然服务"
                       ];
 #else
-    keysForOthers = @[@"问题反馈", @"版本信息"
-                                            , @"给我打分"
-                      ];//, @"其他APP推荐"
+    keysForOthers = @[@"问题反馈"
+                      , @"版本信息"
+                      , @"给我打分"
+//                      , @"其他APP推荐"
+                      ];
 #endif
     
     intelligentMode = [Public intelligentModeForImageQuality];
@@ -96,6 +98,7 @@
 - (void)changeIntelligentMode:(id)sender{
     intelligentMode = @(_intelligentModeSwitch.on);
     [Public setIntelligentModeForImageQuality:intelligentMode];
+    [_tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource/Delegate
@@ -170,9 +173,9 @@
         if (indexPath.row == 0) {
             cell.accessoryView = _intelligentModeSwitch;
         }else if (indexPath.row == 1){
-            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:imageQuality.integerValue?@"image_quality_selected":@"image_quality_unselected"]];
+            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:intelligentMode.integerValue?(imageQuality.integerValue?@"image_quality_selected_disabled":@"image_quality_unselected_disabled"):(imageQuality.integerValue?@"image_quality_selected":@"image_quality_unselected")]];
         }else{
-            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:imageQuality.integerValue?@"image_quality_unselected":@"image_quality_selected"]];
+            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:intelligentMode.integerValue?(imageQuality.integerValue?@"image_quality_unselected_disabled":@"image_quality_selected_disabled"):(imageQuality.integerValue?@"image_quality_unselected":@"image_quality_selected")]];
         }
     }else if (indexPath.section == 1){
         cell.textLabel.text = @"清除缓存";
@@ -188,6 +191,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
+        if (intelligentMode.integerValue) {
+            return;
+        }
         if (indexPath.row == 1) {
             imageQuality = @1;
         }else if (indexPath.row == 2){
@@ -211,6 +217,10 @@
             [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 2){
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/app/id%d?mt=8", kAppleID]]];
+        }else if (indexPath.row == 13){
+            //其他APP推荐
+            APPRecommendViewController *vc = [[APPRecommendViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }else if (indexPath.row == 3){
             //居然服务
             JRServiceViewController *vc = [[JRServiceViewController alloc] init];

@@ -749,6 +749,21 @@
 			<string>other</string>
 		</dict>
 	</array>
+	<key>reviewType</key>
+	<array>
+		<dict>
+			<key>k</key>
+			<string>广告嫌疑</string>
+			<key>v</key>
+			<string>01</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>信息违法</string>
+			<key>v</key>
+			<string>02</string>
+		</dict>
+	</array>
 	<key>bidInfoStatus</key>
 	<array>
 		<dict>

@@ -14,7 +14,7 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) NSMutableArray *sections;
 @property (nonatomic, strong) NSDictionary *selected;
-@property (nonatomic, strong) NSMutableDictionary *openDic;
+//@property (nonatomic, strong) NSMutableDictionary *openDic;
 
 - (IBAction)onDone:(id)sender;
 
@@ -31,7 +31,6 @@
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 50, 30) target:self action:@selector(onCancel) title:@"取消" backgroundImage:nil];
     [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.openDic = [NSMutableDictionary dictionary];
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     //    _tableView.backgroundColor = RGBColor(202, 202, 202);
@@ -94,12 +93,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSDictionary *dic = _sections[section];
-    if (_openDic[dic[@"catId"]]) {
-        NSArray *rows = dic[@"children"];
-        return [rows count];
-    }else{
-        return 0;
-    }
+    NSArray *rows = dic[@"children"];
+    return [rows count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -181,17 +176,12 @@
     UIButton *btn = (UIButton *)sender;
     NSDictionary *dic = _sections[btn.tag];
     NSArray *rows = dic[@"children"];
-    if (_openDic[dic[@"catId"]]) {
-        [_openDic removeObjectForKey:dic[@"catId"]];
-    }else{
-        if (![rows isKindOfClass:[NSNull class]] && rows.count > 0) {
-            [_openDic addEntriesFromDictionary:@{dic[@"catId"]:@""}];
+    
+    if (!(![rows isKindOfClass:[NSNull class]] && rows.count > 0)) {
+        if ([_selected[@"type"] isEqualToString:dic[@"catCode"]]) {
+            _selected = nil;
         }else{
-            if ([_selected[@"type"] isEqualToString:dic[@"catCode"]]) {
-                _selected = nil;
-            }else{
-                _selected = @{@"type":dic[@"catCode"]};
-            }
+            _selected = @{@"type":dic[@"catCode"]};
         }
     }
     [_tableView reloadData];

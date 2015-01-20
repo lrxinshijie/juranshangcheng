@@ -47,7 +47,9 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
+#ifndef kJuranDesigner
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"private_message_more"] rightBarButtonItemAction:@selector(onDetail)];
+#endif
     
     self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     

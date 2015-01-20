@@ -95,5 +95,6 @@
 - (NSString*)statusString;
 - (UIColor *)statusColor;
 - (CGFloat)managerCellHeight;
+- (NSString*)reviewTypeString;
 
 @end

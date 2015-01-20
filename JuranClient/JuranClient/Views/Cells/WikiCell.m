@@ -32,7 +32,8 @@
 
 - (void)fillCellWithWiki:(JRWiki*)wiki{
     self.titleLabel.text = wiki.title;
-    self.browseCountLabel.text = [NSString stringWithFormat:@"人气：%d", wiki.browseCount];
+//    self.browseCountLabel.text = [NSString stringWithFormat:@"人气：%d", wiki.browseCount];
+    self.browseCountLabel.text = @"";
     if (wiki.imageUrl.length > 0) {
         [self.contentImageView setImageWithURLString:wiki.imageUrl];
     }else{

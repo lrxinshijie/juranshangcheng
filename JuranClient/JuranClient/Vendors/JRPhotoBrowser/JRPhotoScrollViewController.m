@@ -321,6 +321,10 @@
 #ifdef kJuranDesigner
     [self doShare];
 #else
+    if (![self checkLogin]) {
+        return;
+    }
+    
     if (!_jrCase.isAuth) {
         [self showTip:@"未认证的设计师无法预约量房"];
         return;
@@ -336,6 +340,9 @@
 }
 
 - (IBAction)doPrivateLetter:(id)sender{
+    if (![self checkLogin]) {
+        return;
+    }
     PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
     JRDesigner *designer = [[JRDesigner alloc] init];
     designer.userId = _jrCase.userId;

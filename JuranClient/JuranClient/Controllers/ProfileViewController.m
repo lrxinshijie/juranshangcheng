@@ -98,15 +98,17 @@
                     , @"icon_personal_zhaq"];
     self.navigationItem.title = @"个人中心";
 #else
-    titleArray = @[@"互动"
+    titleArray = @[@"互动管理"
                     , @"我的关注"
                     , @"我的收藏"
-                    , @"账户安全"];
+                    , @"账户安全"
+                    , @"账户管理"];
     
     imageArray = @[ @"icon_personal_hudong.png"
                     , @"icon_personal_guanzhu.png"
                     , @"icon_personal_shouchang.png"
-                    , @"icon_personal_zhaq"];
+                    , @"icon_personal_zhaq"
+                    , @"icon_personal_zhgl"];
     [self configureMenu];
 #endif
                    
@@ -415,6 +417,14 @@
         {
             //        账户安全
             AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 5:
+        {
+            //        账户管理
+            AccountManageViewController *vc = [[AccountManageViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
