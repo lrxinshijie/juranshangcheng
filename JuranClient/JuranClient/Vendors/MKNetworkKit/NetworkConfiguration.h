@@ -133,7 +133,7 @@
 #define JR_EDIT_DESIGNINFO [NSString stringWithFormat:@"%@/design/editDesignInfo.json",JR_SERVICE]
 #define JR_EDIT_BID_MEMO [NSString stringWithFormat:@"%@/design/editDeDesignerBidMemoReq.json",JR_SERVICE]
 #define JR_BID_DESIGNREQ [NSString stringWithFormat:@"%@/design/bidDesignReq.json",JR_SERVICE]
-
+#define JR_OTHER_APP [NSString stringWithFormat:@"%@/index/otherApp.json",JR_SERVICE]
 
 
 

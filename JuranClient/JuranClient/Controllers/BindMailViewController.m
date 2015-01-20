@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UITextField *mailTextField;
 @property (nonatomic, strong) IBOutlet UIView *tableFooterView;
 @property (nonatomic, strong) IBOutlet UILabel *tipLabel;
+@property (nonatomic, strong) IBOutlet UILabel *changedTipLabel;
 @property (nonatomic, strong) IBOutlet UIView *backgroundView;
 
 @end
@@ -69,9 +70,11 @@
     if (step == 1) {
         self.navigationItem.title = @"安全验证";
         _tipLabel.text = @"点击发送按钮，系统将为您发送一封解除邮箱绑定的邮件，您可以通过此邮件解除绑定当前的邮箱地址";
+        _changedTipLabel.text = @"请尽快登录邮箱完成邮箱解绑";
     }else if(step == 2){
         self.navigationItem.title = @"邮箱绑定";
         _tipLabel.text = @"点击发送按钮，系统将为您发送一封激活邮件，您可以通过此邮件完成绑定";
+        _changedTipLabel.text = @"请尽快登录邮箱完成邮箱绑定";
     }
     [_tableView reloadData];
 }

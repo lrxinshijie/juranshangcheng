@@ -11,6 +11,8 @@
 @interface APPRecommendViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, assign) NSInteger currentPage;
 
 @end
 
@@ -25,7 +27,49 @@
     [self.view addSubview:_tableView];
 //    _tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.tableFooterView = [[UIView alloc] init];
+    
+    __weak typeof(self) weakSelf = self;
+    [_tableView addHeaderWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView addFooterWithCallback:^{
+        weakSelf.currentPage++;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView headerBeginRefreshing];
+}
 
+
+- (void)loadData{
+#ifdef kJuranDesigner
+    NSString *scope = @"2";
+#else
+    NSString *scope = @"1";
+#endif
+    NSDictionary *param = @{@"type": @"IOS",
+                            @"appScope": scope,
+                            @"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
+                            @"onePageCount": kOnePageCount};
+    [self showHUD];
+    
+    [[ALEngine shareEngine] pathURL:JR_OTHER_APP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"No"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSMutableArray *rows = [NSMutableArray arrayWithArray:[data objectForKey:@"otherAppRespList"]];
+            if (_currentPage > 1) {
+                [_datas addObjectsFromArray:rows];
+            }else{
+                self.datas = rows;
+            }
+            
+            [_tableView reloadData];
+        }
+        [_tableView headerEndRefreshing];
+        [_tableView footerEndRefreshing];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,7 +80,7 @@
 #pragma mark - UITableViewDataSource/Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return _datas.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -53,11 +97,21 @@
         cell.detailTextLabel.textColor = [UIColor darkGrayColor];
     }
     cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellIndicator.png"]];
+    NSDictionary *dict = _datas[indexPath.row];
     
-    cell.imageView.image = [UIImage imageNamed:@"icon-juran.png"];
-    cell.textLabel.text = @"居然在线";
-    cell.detailTextLabel.text = @"装房子 买家具 我只来居然之家";
+    [cell.imageView setImageWithURLString:@"img/54b49ba9ed50bbb025bcfbad.img"];//[dict getStringValueForKey:@"image" defaultValue:@""]
+    cell.textLabel.text = [dict getStringValueForKey:@"name" defaultValue:@""];
+    cell.detailTextLabel.text = [dict getStringValueForKey:@"memo" defaultValue:@""];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *dict = _datas[indexPath.row];
+    NSString *url = [dict getStringValueForKey:@"url" defaultValue:@""];
+    if (url.length > 0) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
 }
 
 @end

@@ -281,12 +281,31 @@
 
 - (CGFloat)managerCellHeight{
     CGFloat height = 75;
-    if ([_status isEqualToString:@"02"] && self.reason.length > 0) {
-        height += [[NSString stringWithFormat:@"原因：%@", self.reason] heightWithFont:[UIFont systemFontOfSize:14] constrainedToWidth:280] + 10;
+    if ([_status isEqualToString:@"02"] && (self.reason.length > 0 || self.reviewType.length > 0)) {
+        NSString *tip = @"";
+        if (self.reviewType.length > 0) {
+            tip = [tip stringByAppendingFormat:@"类型：%@", self.reviewTypeString];
+        }
+        if (self.reason.length > 0) {
+            if (tip.length > 0) {
+                tip = [tip stringByAppendingString:@"\n"];
+            }
+            tip = [tip stringByAppendingFormat:@"原因：%@", self.reason];
+        }
+        height += [tip heightWithFont:[UIFont systemFontOfSize:14] constrainedToWidth:280] + 10;
         height += 8;
     }
-    
     return height;
+}
+
+- (NSString*)reviewTypeString{
+    NSArray *types = [[DefaultData sharedData] objectForKey:@"reviewType"];
+    for (NSDictionary *dict in types) {
+        if ([dict[@"v"] integerValue] == [self.reviewType integerValue]) {
+            return dict[@"k"];
+        }
+    }
+    return @"";
 }
 
 - (void)loadDetail:(BOOLBlock)finished{

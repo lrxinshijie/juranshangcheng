@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BindMailViewController">
             <connections>
                 <outlet property="backgroundView" destination="WO3-v6-vli" id="wt6-cj-3ao"/>
+                <outlet property="changedTipLabel" destination="IcI-Z5-laV" id="0jC-On-dZ7"/>
                 <outlet property="tableFooterView" destination="0uh-a1-Ti6" id="uqo-mc-NYv"/>
                 <outlet property="tipLabel" destination="Kb9-I9-g1k" id="QWi-aQ-suh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
