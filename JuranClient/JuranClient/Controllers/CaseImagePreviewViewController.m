@@ -26,7 +26,12 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    _imageView.image = _caseImage.image;
+    if (_caseImage.image) {
+        _imageView.image = _caseImage.image;
+    }else if (_caseImage.imageUrl.length > 0){
+        [_imageView setImageWithURLString:_caseImage.imageUrl];
+    }
+    
     
     if (_caseImage.frontFlag) {
         [_coverButton setImage:[UIImage imageNamed:@"case_edit_replace"] forState:UIControlStateNormal];

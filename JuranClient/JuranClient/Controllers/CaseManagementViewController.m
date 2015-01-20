@@ -144,11 +144,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    return;
     
-    CaseImageManagemanetViewController *vc = [[CaseImageManagemanetViewController alloc] init];
-    vc.jrCase = _datas[indexPath.row];
-    [self.navigationController pushViewController:vc animated:YES];
+    CaseIntroduceViewController *cv = [[CaseIntroduceViewController alloc] init];
+    cv.jrCase = _datas[indexPath.row];
+    [self.navigationController pushViewController:cv animated:YES];
 }
 
 @end
