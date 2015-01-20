@@ -148,7 +148,7 @@
 #define JR_CREATE_PROJECT [NSString stringWithFormat:@"%@/project/createProjectReq.json",JR_SERVICE]
 #define JR_DELETE_PROJECT [NSString stringWithFormat:@"%@/design/delDeProjectReq.json",JR_SERVICE]
 #define JR_MANAGER_PRODETAIL [NSString stringWithFormat:@"%@/project/get_project_detail.json",JR_SERVICE]
-
+#define JR_EDIT_PROJECT [NSString stringWithFormat:@"%@/project/edit_project_req.json",JR_SERVICE]
 #define JR_INTERACT_PROJECT [NSString stringWithFormat:@"%@/interact/get_commented_project_list.json",JR_SERVICE]
 #define JR_INTERACT_TOPIC [NSString stringWithFormat:@"%@/interact//get_commented_topic_list.json",JR_SERVICE]
 
