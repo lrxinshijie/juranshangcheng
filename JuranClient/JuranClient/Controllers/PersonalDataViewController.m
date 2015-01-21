@@ -408,20 +408,11 @@
         }];
     }else if (indexPath.section == 1){
         if (indexPath.row == 1) {
-            
-            NSMutableArray *rows = [NSMutableArray array];
-            __block NSInteger ind = 0;
-            NSArray *sexs = [[DefaultData sharedData] sex];
-            [sexs enumerateObjectsUsingBlock:^(NSDictionary *row, NSUInteger idx, BOOL *stop) {
-                [rows addObject:[row objectForKey:@"k"]];
-                if ([[row objectForKey:@"v"] integerValue] == _user.sex) {
-                    ind = idx;
-                }
-            }];
+            NSInteger ind = (_user.sex == -1 || _user.sex == 0)?0:(_user.sex - 1);
+            NSArray *rows = @[@"女", @"男"];
             
             [ActionSheetStringPicker showPickerWithTitle:nil rows:rows initialSelection:ind doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                NSArray *sexs = [[DefaultData sharedData] sex];
-                _user.sex = [[[sexs objectAtIndex:selectedIndex] objectForKey:@"v"] integerValue];
+                _user.sex = selectedIndex + 1;
                 
                 [self reloadData];
             } cancelBlock:^(ActionSheetStringPicker *picker) {

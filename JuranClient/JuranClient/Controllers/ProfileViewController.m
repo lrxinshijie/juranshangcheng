@@ -180,7 +180,7 @@
     _privateLetterCountLabel.hidden = YES;
     _hasNewAnswerView.hidden = YES;
     _hasNewBidView.hidden = YES;
-    _hasNewPushMsgView.hidden = YES;
+     _hasNewPushMsgView.hidden = [JRUser isLogin] && _user.newPushMsgCount?NO:YES;
 #else
     _privateLetterCountLabel.hidden = [JRUser isLogin] && _user.newPrivateLetterCount?NO:YES;
     _hasNewAnswerView.hidden = [JRUser isLogin] && _user.newAnswerCount?NO:YES;
@@ -331,7 +331,7 @@
     }]) {
         return;
     }
-    _user.newPushMsgCount = 0;
+//    _user.newPushMsgCount = 0;
     PushMessageViewController *vc = [[PushMessageViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
