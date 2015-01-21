@@ -3876,7 +3876,7 @@
 				ORGANIZATIONNAME = Juran;
 				TargetAttributes = {
 					1415F9361A5CD1CB003D0C29 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = QHWR2FWBM6;
 					};
 					A971BC901A20825800C018D6 = {
 						DevelopmentTeam = D2JB8K885C;
