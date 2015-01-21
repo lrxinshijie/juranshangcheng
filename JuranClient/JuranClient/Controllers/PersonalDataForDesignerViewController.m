@@ -37,6 +37,7 @@
 
 @property (nonatomic, strong) UITextField *selectedTextField;
 @property (nonatomic, strong) NSString* oldNickName;
+@property (nonatomic, strong) UIImage *headImage;
 
 @end
 
@@ -97,7 +98,9 @@
 }
 
 - (void)reSetData{
-    if (_user.headUrl && _user.headUrl.length>0) {
+    if (_headImage) {
+        _iconImageView.image = _headImage;
+    }else if (_user.headUrl && _user.headUrl.length>0) {
         [self.iconImageView setImageWithURLString:_user.headUrl];
     }
     _values = @[@[@""
@@ -165,7 +168,8 @@
                              @"personalHonor":_user.personalHonor,
                              @"faceToFace": _user.faceToFace,
                               @"chargeStandardMinStr": [NSString stringWithFormat:@"%.2f", _user.designFeeMin],
-                              @"chargeStandardMaxStr": [NSString stringWithFormat:@"%.2f", _user.designFeeMax]
+                              @"chargeStandardMaxStr": [NSString stringWithFormat:@"%.2f", _user.designFeeMax],
+                             @"headUrl":_user.headUrl
                              };
     
     [self showHUD];
@@ -188,14 +192,18 @@
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":image} responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
+            _headImage = nil;
             NSString *imageUrl = [data objectForKey:@"imgUrl"];
+            _user.headUrl = imageUrl;
+            [self modifyMemberDetail];
+            /*
             [[ALEngine shareEngine] pathURL:JR_UPLOAD_HEAD_IMAGE parameters:@{@"headUrl":imageUrl} HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:nil responseHandler:^(NSError *error, id data, NSDictionary *other) {
                 [self hideHUD];
                 if (!error) {
                     [self.iconImageView setImageWithURLString:imageUrl];
                     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
                 }
-            }];
+            }];*/
         }else{
             [self hideHUD];
         }
@@ -220,7 +228,11 @@
         return;
     }
     
-    [self modifyMemberDetail];
+    if (_headImage) {
+        [self uploadHeaderImage:_headImage];
+    }else{
+        [self modifyMemberDetail];
+    }
     
 }
 /*
@@ -387,7 +399,8 @@
         if (indexPath.row == 0) {
             [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
                 if (images.count > 0) {
-                    [self uploadHeaderImage:images[0]];
+                    _headImage = images.firstObject;
+                    self.iconImageView.image = _headImage;
                 }
             }];
         }else if (indexPath.row == 1){

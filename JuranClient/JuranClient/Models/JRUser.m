@@ -122,6 +122,9 @@
     user.userId = 0;
     [user saveLocal];
     [user resetCurrentUser];
+#ifdef kJuranDesigner
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
+#endif
 }
 
 + (BOOL)isLogin{
@@ -155,6 +158,9 @@
         }else{
             [[JRUser currentUser] logout];
         }
+#ifdef kJuranDesigner
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
+#endif
     }];
 }
 

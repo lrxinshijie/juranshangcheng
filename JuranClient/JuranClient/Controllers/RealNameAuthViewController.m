@@ -239,7 +239,11 @@
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
-                [self showTip:@"修改用户信息成功"];
+                if (_designer.realNameAuthStatus == -1) {
+                    [self showTip:@"申请成功"];
+                }else if (_designer.realNameAuthStatus == 1){
+                    [self showTip:@"重新申请成功"];
+                }
             });
             [self loadData];
         }
