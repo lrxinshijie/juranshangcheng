@@ -291,6 +291,7 @@
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     DemandDetailViewController *vc = [[DemandDetailViewController alloc] init];
     vc.demand = demand;
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

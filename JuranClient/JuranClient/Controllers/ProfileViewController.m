@@ -172,7 +172,7 @@
         _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _user.account];
         [_headerImageView setImageWithURLString:_user.headUrl];
         
-        _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _user.newPushMsgCount];
+        _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _user.newPrivateLetterCount];
         _signedButton.enabled = !_user.isSigned;
         [_signedButton setTitle:_user.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
     }
@@ -182,7 +182,7 @@
     _hasNewBidView.hidden = YES;
     _hasNewPushMsgView.hidden = YES;
 #else
-    _privateLetterCountLabel.hidden = [JRUser isLogin] && _user.newPushMsgCount?NO:YES;
+    _privateLetterCountLabel.hidden = [JRUser isLogin] && _user.newPrivateLetterCount?NO:YES;
     _hasNewAnswerView.hidden = [JRUser isLogin] && _user.newAnswerCount?NO:YES;
     _hasNewBidView.hidden = [JRUser isLogin] && _user.hasNewBidCount?NO:YES;
     _hasNewPushMsgView.hidden = [JRUser isLogin] && _user.newPushMsgCount?NO:YES;

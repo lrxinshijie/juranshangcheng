@@ -133,28 +133,18 @@
         default:
             break;
     }
-    /*
-    
-    [publishContent addInstapaperContentWithUrl:@"http://www.mob.com"
-                                          title:@"Hello Instapaper"
-                                    description:INHERIT_VALUE];
-    [publishContent addYouDaoNoteUnitWithContent:INHERIT_VALUE
-                                           title:NSLocalizedString(@"TEXT_HELLO_YOUDAO_NOTE", @"Hello 有道云笔记")
-                                          author:INHERIT_VALUE
-                                          source:@"http://www.mob.com"
-                                     attachments:INHERIT_VALUE];*/
-    
     id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
                                                          allowCallback:YES
                                                          authViewStyle:SSAuthViewStyleFullScreenPopup
                                                           viewDelegate:nil
                                                authManagerViewDelegate:self];
-    
+    /*
     BOOL needAuth = NO;
     ShareType authType = shareType;
     if (shareType == ShareTypeQQ) {
         authType = ShareTypeQQSpace;
     }
+    
     if (![ShareSDK hasAuthorizedWithType:authType])
     {
         needAuth = YES;
@@ -178,7 +168,12 @@
             NSLog(@"error:%@",error);
         }];
 
-    }
+    }*/
+    
+    //分享内容
+    [ShareSDK showShareViewWithType:shareType container:nil content:publishContent statusBarTips:NO authOptions:authOptions shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+        NSLog(@"error:%@ \n code:%d", [error errorDescription],[error errorCode]);
+    }];
     [self unShow];
     
 }
