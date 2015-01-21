@@ -19,6 +19,7 @@
 @property (nonatomic, strong) ActivityCell *activityCell;
 
 @property (nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, assign) NSInteger currentPage;
 
 @end
 
@@ -40,20 +41,41 @@
     _emptyView.center = _tableView.center;
     [self.view addSubview:_emptyView];
     
-    [self loadData];
+    __weak typeof(self) weakSelf = self;
+    [_tableView addHeaderWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView addFooterWithCallback:^{
+        weakSelf.currentPage++;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView headerBeginRefreshing];
 }
 
 - (void)loadData{
     NSString *scope = @"2";
-    NSDictionary *param = @{@"activityScope": scope};
+    NSDictionary *param = @{@"activityScope": scope
+                            , @"pageNo": [NSString stringWithFormat:@"%d", _currentPage]
+                            , @"onePageCount": kOnePageCount};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_ACTIVITY_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            self.datas = [JRActivity buildUpWithValue:data[@"infoActivityRespList"]];
+            NSMutableArray *rows = [JRActivity buildUpWithValue:data[@"infoActivityRespList"]];
+            
+            if (_currentPage > 1) {
+                [_datas addObjectsFromArray:rows];
+            }else{
+                self.datas = rows;
+            }
             [_tableView reloadData];
         }
         _emptyView.hidden = _datas.count != 0;
+        [_tableView headerEndRefreshing];
+        [_tableView footerEndRefreshing];
     }];
 }
 

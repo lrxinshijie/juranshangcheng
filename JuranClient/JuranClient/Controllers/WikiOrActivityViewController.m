@@ -66,7 +66,7 @@
     [self setupUI];
     
     [_wikiTableView headerBeginRefreshing];
-    [self loadActivityData];
+    [_activityTableView headerBeginRefreshing];
 }
 
 - (void)setupUI{
@@ -104,6 +104,16 @@
     _activityTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _activityTableView.tableFooterView = [[UIView alloc] init];
     [self.scrollView addSubview:_activityTableView];
+    
+    [_activityTableView addHeaderWithCallback:^{
+        weakSelf.activityCurrentPage = 1;
+        [weakSelf loadActivityData];
+    }];
+    
+    [_activityTableView addFooterWithCallback:^{
+        weakSelf.activityCurrentPage++;
+        [weakSelf loadActivityData];
+    }];
 
     _emptyView.hidden = YES;
     _emptyView.center = _wikiTableView.center;
@@ -161,14 +171,24 @@
 
 - (void)loadActivityData{
     NSString *scope = @"3";
-    NSDictionary *param = @{@"activityScope": scope};
+    NSDictionary *param = @{@"activityScope": scope
+                            , @"pageNo": [NSString stringWithFormat:@"%d", _activityCurrentPage]
+                            , @"onePageCount": kOnePageCount};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_ACTIVITY_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            self.activityDatas = [JRActivity buildUpWithValue:data[@"infoActivityRespList"]];
+            NSMutableArray *rows = [JRActivity buildUpWithValue:data[@"infoActivityRespList"]];
+            
+            if (_activityCurrentPage > 1) {
+                [_activityDatas addObjectsFromArray:rows];
+            }else{
+                self.activityDatas = rows;
+            }
             [self reloadData];
         }
+        [_activityTableView headerEndRefreshing];
+        [_activityTableView footerEndRefreshing];
     }];
 }
 
@@ -228,6 +248,9 @@
             cell = (WikiCell *)[nibs firstObject];
         }
         
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+            cell.layoutMargins = UIEdgeInsetsZero;
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         JRWiki *wiki = [_wikiDatas objectAtIndex:indexPath.row];

@@ -85,6 +85,10 @@
 @property (nonatomic, strong) NSString *detailAddress;
 @property (nonatomic, strong) NSString *mobileNum;
 @property (nonatomic, strong) NSString *email;
+@property (nonatomic, assign) NSInteger isMobileVali;
+@property (nonatomic, assign) NSInteger isEmailVali;
+@property (nonatomic, assign) NSInteger useablePoints;
+@property (nonatomic, assign) NSInteger useableExp;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 - (id)initWithDictionaryForBidInfo:(NSDictionary *)dict;

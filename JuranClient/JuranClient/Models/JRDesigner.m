@@ -116,7 +116,7 @@
     self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
     self.isAuth = [dict getBoolValueForKey:@"isAuth" defaultValue:FALSE];
     self.granuate = [dict getStringValueForKey:@"granuate" defaultValue:@""];
-    NSInteger e = [dict getIntValueForKey:@"experienceCount" defaultValue:-1];
+    NSInteger e = [dict getIntValueForKey:@"experience" defaultValue:-1];
     self.experienceCount = e == -1?@"":[NSString stringWithFormat:@"%d", e];
     
     self.style = [dict getStringValueForKey:@"style" defaultValue:@""];
@@ -134,7 +134,11 @@
     self.freeMeasure = f == -1?@"":[NSString stringWithFormat:@"%d", f];
     f = [dict getIntValueForKey:@"faceToFace" defaultValue:-1];
     self.faceToFace = f == -1?@"":[NSString stringWithFormat:@"%d", f];
-
+    self.useablePoints = [dict getIntValueForKey:@"useablePoints" defaultValue:0];
+    self.useableExp = [dict getIntValueForKey:@"useableExp" defaultValue:0];
+    self.isEmailVali = [dict getIntValueForKey:@"isEmailVali" defaultValue:0];
+    self.isMobileVali = [dict getIntValueForKey:@"isMobileVali" defaultValue:0];
+    
     return self;
 }
 

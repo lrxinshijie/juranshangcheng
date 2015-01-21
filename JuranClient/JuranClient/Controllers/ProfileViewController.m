@@ -87,6 +87,7 @@
 //                    , @"订单管理"
                     , @"实名认证"
                     , @"账户安全"
+                    , @"账户管理"
                     ];
 //
     imageArray = @[@"icon_case_manage"
@@ -95,7 +96,8 @@
                     , @"icon_personal_shouchang.png"
 //                    , @"icon_dingdan.png"
                     , @"icon_realname_auth.png"
-                    , @"icon_personal_zhaq"];
+                    , @"icon_personal_zhaq"
+                    , @"icon_personal_zhgl"];
     self.navigationItem.title = @"个人中心";
 #else
     titleArray = @[@"互动管理"
@@ -433,11 +435,6 @@
             break;
     }
 #else
-//    @"个人主页"
-//    , @"我的关注"
-//    , @"我的收藏"
-//    , @"实名认证"
-//    , @"账户安全"
     if (![self checkLogin:^{
         [self loadData];
     }]) {
@@ -492,6 +489,14 @@
         {
              //        账户安全
             AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 7:
+        {
+            //        账户管理
+            AccountManageViewController *vc = [[AccountManageViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;

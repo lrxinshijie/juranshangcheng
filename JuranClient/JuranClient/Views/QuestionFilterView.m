@@ -79,8 +79,17 @@
         _tableView.hidden = YES;
         UINavigationController *nav = self.viewController.navigationController;
         [nav.view addSubview:_tableView];
+        UIView *bgView = [[UIView alloc] initWithFrame:self.tableView.bounds];
+        bgView.backgroundColor = [UIColor clearColor];
+        UIButton *btn = [bgView buttonWithFrame:bgView.bounds target:self action:@selector(onHidden:) image:nil];
+        [bgView addSubview:btn];
+        _tableView.backgroundView = bgView;
     }
     return _tableView;
+}
+
+- (void)onHidden:(id)sender{
+    [self showSort];
 }
 
 - (void)clickSortButton:(UIButton *)btn{

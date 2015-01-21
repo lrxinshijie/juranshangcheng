@@ -137,6 +137,9 @@
 //        cell.detailTextLabel.textColor = RGBColor(69, 118, 187);
         cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
     }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        cell.layoutMargins = UIEdgeInsetsZero;
+    }
     cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]];
     cell.textLabel.text = keys[indexPath.row];
     cell.detailTextLabel.text = values[indexPath.row];

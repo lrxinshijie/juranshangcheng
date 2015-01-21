@@ -35,7 +35,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [self setupUI];
     
-    if (_user.email && _user.email.length>0) {
+    if (_user.isEmailVali) {
         step = 1;
     }else{
         step = 2;
