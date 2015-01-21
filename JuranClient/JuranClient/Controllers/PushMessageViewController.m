@@ -114,6 +114,7 @@
                 }
             }
             [_tableView reloadData];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
         }
     }];
 }

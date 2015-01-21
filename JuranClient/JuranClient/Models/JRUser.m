@@ -283,6 +283,8 @@
 - (NSString*)sexyString{
     if (self.sex == -1) {
         return @"未设置";
+    }else if (self.sex == 0){
+        return @"未设置";
     }
     NSArray *sexs = [DefaultData sharedData].sex;
     NSDictionary *dic = sexs[_sex];
