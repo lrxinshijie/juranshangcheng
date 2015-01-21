@@ -107,7 +107,7 @@
                     , _user.birthday.length == 0?@"未设置":_user.birthday
                     , _user.areaInfo.title.length == 0?@"未设置":_user.areaInfo.title
                     ]
-                , @[_user.experienceCount == -1?@"":[NSString stringWithFormat:@"%d", _user.experienceCount]
+                , @[_user.experienceCount
                     , [_user designPriceForPersonal]
                     , [_user measureForPersonal]
                     , [_user styleNameForPersonal].length == 0?@"未设置":[_user styleNameForPersonal]
@@ -152,9 +152,9 @@
                              @"idCardNum": _user.idCardNum,
                              @"qq": _user.qq,
                              @"weixin": _user.weixin,
-                             @"sex": [NSString stringWithFormat:@"%d", _user.sex],
-                             @"designExperience": [NSString stringWithFormat:@"%d", _user.experienceCount],
-                             @"freeMeasure": [NSString stringWithFormat:@"%d", _user.freeMeasure],
+                             @"sex": _user.sex,
+                             @"designExperience": _user.experienceCount,
+                             @"freeMeasure": _user.freeMeasure,
                              @"priceMeasureStr": [NSString stringWithFormat:@"%.2f", _user.priceMeasure],
                              @"style": _user.style,
                              @"special":_user.special,
@@ -163,7 +163,7 @@
                              @"professional":_user.professional,
                              @"professionalType":_user.professionalType,
                              @"personalHonor":_user.personalHonor,
-                             @"faceToFace": [NSString stringWithFormat:@"%d", _user.faceToFace],
+                             @"faceToFace": _user.faceToFace,
                               @"chargeStandardMinStr": [NSString stringWithFormat:@"%.2f", _user.designFeeMin],
                               @"chargeStandardMaxStr": [NSString stringWithFormat:@"%.2f", _user.designFeeMax]
                              };
@@ -400,14 +400,14 @@
             NSArray *sexs = [[DefaultData sharedData] sex];
             [sexs enumerateObjectsUsingBlock:^(NSDictionary *row, NSUInteger idx, BOOL *stop) {
                 [rows addObject:[row objectForKey:@"k"]];
-                if ([[row objectForKey:@"v"] integerValue] == _user.sex) {
+                if ([[row objectForKey:@"v"] integerValue] == [_user.sex integerValue]) {
                     ind = idx;
                 }
             }];
             
             [ActionSheetStringPicker showPickerWithTitle:nil rows:rows initialSelection:ind doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
                 NSArray *sexs = [[DefaultData sharedData] sex];
-                _user.sex = [[[sexs objectAtIndex:selectedIndex] objectForKey:@"v"] integerValue];
+                _user.sex = [[sexs objectAtIndex:selectedIndex] objectForKey:@"v"] ;
                 
                 [self reloadData];
             } cancelBlock:^(ActionSheetStringPicker *picker) {
@@ -551,11 +551,13 @@
     if (textField.tag == 1100) {
         _user.account = textField.text;
     }else if (textField.tag == 1101){
+        if (_oldNickName.length == 0) {
+            self.oldNickName = _user.nickName;
+        }
         _user.nickName = textField.text;
-        self.oldNickName = _user.nickName;
         nickNameChangeTip = NO;
     }else if (textField.tag == 1102){
-        _user.experienceCount = textField.text.integerValue;
+        _user.experienceCount = textField.text;
     }else if (textField.tag == 1103){
         _user.granuate = textField.text;
     }

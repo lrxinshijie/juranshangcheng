@@ -61,6 +61,10 @@
         return self;
     }
     
+    self.roomNum = [dict getStringValueForKey:@"roomNum" defaultValue:@""];
+    self.livingroomCount = [dict getStringValueForKey:@"livingroomCount" defaultValue:@""];
+    self.bathroomCount = [dict getStringValueForKey:@"bathroomCount" defaultValue:@""];
+    
     self.neighbourhoods = [dict getStringValueForKey:@"neighbourhoods" defaultValue:@""];
     self.roomType = [dict getStringValueForKey:@"roomType" defaultValue:@""];
     self.tags = [dict getStringValueForKey:@"tags" defaultValue:@""];
@@ -142,6 +146,22 @@
 //    }
 //    
 //    return @"其他";
+}
+
+- (NSString*)styleNamesString{
+
+    //0 为设计师 1 为设计师详情
+    NSArray *arr = [self.stylesName componentsSeparatedByString:@"，"];
+    NSString* styleNames = @"";
+    NSString* separateStr = @"｜";
+    for (NSInteger i = 0; arr.count; i++) {
+        styleNames = [styleNames stringByAppendingString:arr[i]];
+        if (i == arr.count - 1) {
+            break;
+        }
+        styleNames = [styleNames stringByAppendingString:separateStr];
+    }
+    return styleNames;
 }
 
 - (void)like:(void (^) (BOOL result))finished{
@@ -277,18 +297,52 @@
 
 - (CGFloat)managerCellHeight{
     CGFloat height = 75;
-    if ([_status isEqualToString:@"02"] && self.reason.length > 0) {
-        height += [[NSString stringWithFormat:@"原因：%@", self.reason] heightWithFont:[UIFont systemFontOfSize:14] constrainedToWidth:280] + 10;
+    if ([_status isEqualToString:@"02"] && (self.reason.length > 0 || self.reviewType.length > 0)) {
+        NSString *tip = @"";
+        if (self.reviewType.length > 0) {
+            tip = [tip stringByAppendingFormat:@"类型：%@", self.reviewTypeString];
+        }
+        if (self.reason.length > 0) {
+            if (tip.length > 0) {
+                tip = [tip stringByAppendingString:@"\n"];
+            }
+            tip = [tip stringByAppendingFormat:@"原因：%@", self.reason];
+        }
+        height += [tip heightWithFont:[UIFont systemFontOfSize:14] constrainedToWidth:280] + 10;
         height += 8;
     }
-    
     return height;
+}
+
+- (NSString*)reviewTypeString{
+    NSArray *types = [[DefaultData sharedData] objectForKey:@"reviewType"];
+    for (NSDictionary *dict in types) {
+        if ([dict[@"v"] integerValue] == [self.reviewType integerValue]) {
+            return dict[@"k"];
+        }
+    }
+    return @"";
 }
 
 - (void)loadDetail:(BOOLBlock)finished{
     NSDictionary *param = @{@"projectId": self.projectId};
     [[ALEngine shareEngine] pathURL:JR_MANAGER_PRODETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
+            self.userId = [data getIntValueForKey:@"userId" defaultValue:0];
+            self.likeCount = [data getIntValueForKey:@"likeCount" defaultValue:0];
+            self.viewCount = [data getIntValueForKey:@"viewCount" defaultValue:0]; //same with member_id
+            self.commentCount = [data getIntValueForKey:@"commentCount" defaultValue:0];
+            
+            self.headUrl = [data getStringValueForKey:@"headUrl" defaultValue:@""];
+            self.desc = [data getStringValueForKey:@"desc" defaultValue:@""];
+            self.userType = [data getStringValueForKey:@"userType" defaultValue:@""];
+            self.memo = [data getStringValueForKey:@"memo" defaultValue:@""];
+            self.imageUrl = [data getStringValueForKey:@"imageUrl" defaultValue:@""];
+            self.title = [data getStringValueForKey:@"title" defaultValue:@""];
+            self.projectId = [data getStringValueForKey:@"projectId" defaultValue:@""];
+            self.nickName = [data getStringValueForKey:@"nickName" defaultValue:@""];
+            self.account = [data getStringValueForKey:@"account" defaultValue:@""];
+            
             [self buildDetailWithDictionary:data];
         }
         if (finished) {

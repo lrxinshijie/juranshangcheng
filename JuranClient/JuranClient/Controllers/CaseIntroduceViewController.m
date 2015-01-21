@@ -38,12 +38,27 @@
     self.placeholders = @[@"请输入方案名称",@"请选择",@"请输入文字", @"请选择",@"请选择",@"请输入数字",@"请输入数字",@"请输入文字"];
     
     if (_jrCase) {
-        self.navigationItem.title = @"方案介绍";
+        self.navigationItem.title = @"修改方案";
     }else{
         self.navigationItem.title = @"新增方案";
-        UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onNext) title:@"下一步" backgroundImage:nil];
-        [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    }
+    
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onNext) title:@"下一步" backgroundImage:nil];
+    [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    
+    if (_jrCase.projectId.length > 0) {
+        [self showHUD];
+        [_jrCase loadDetail:^(BOOL result) {
+            [self hideHUD];
+            
+            if (result) {
+                [self reloadData];
+            }else{
+                [super back:nil];
+            }
+        }];
+    }else if (!_jrCase) {
         self.jrCase = [[JRCase alloc] init];
     }
     
@@ -124,7 +139,7 @@
     cell.accessoryView = UITableViewCellAccessoryNone;
     
     cell.titleLabel.text = _keys[indexPath.row];
-    cell.textField.enabled = _jrCase.projectId.length == 0;
+    cell.textField.enabled = YES;
     cell.textField.delegate = self;
     cell.textField.tag = indexPath.row;
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
@@ -187,11 +202,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.view endEditing:YES];
-//    [_selectedTextField resignFirstResponder];
-    
-    if (_jrCase.projectId.length > 0) {
-        return;
-    }
     
     if (indexPath.row == 1) {
         BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];

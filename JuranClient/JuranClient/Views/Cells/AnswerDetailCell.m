@@ -22,6 +22,8 @@
 @property (nonatomic, strong) IBOutlet UIButton *acceptButton;
 @property (nonatomic, strong) IBOutlet UIView *bgView;
 
+@property (nonatomic, strong) IBOutlet UILabel *userTypeLabel;
+
 @property (nonatomic, strong) JRAnswer *answer;
 @property (nonatomic, assign) NSInteger type;
 //0 表示待解决的我的提问
@@ -41,6 +43,9 @@
     _headImageView.layer.cornerRadius = _headImageView.frame.size.width/2.f;
     
     _acceptButton.hidden = YES;
+    
+    _userTypeLabel.layer.masksToBounds = YES;
+    _userTypeLabel.layer.cornerRadius = _userTypeLabel.frame.size.height/2.f;
 //    _acceptButton.layer.masksToBounds = YES;
 //    _acceptButton.layer.cornerRadius = 3;
 //    _acceptButton.layer.borderWidth = 1;
@@ -58,6 +63,9 @@
     _type = type;
     _answer = answer;
     _nameLabel.text = _answer.nickName.length?_answer.nickName:_answer.account;
+    
+    _userTypeLabel.hidden = answer.userType != 2;
+    
     if (_answer.headUrl.length > 0) {
         [_headImageView setImageWithURLString:_answer.headUrl];
     }else{
@@ -73,7 +81,14 @@
 
 
 - (void)adjustFrame{
-    CGRect frame = _contentLabel.frame;
+    CGRect frame = _userTypeLabel.frame;
+    CGFloat width = [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)];
+    if (width < CGRectGetWidth(_nameLabel.frame)) {
+        frame.origin.x = CGRectGetMinX(_nameLabel.frame) + width + 10;
+    }
+    _userTypeLabel.frame = frame;
+    
+    frame = _contentLabel.frame;
     frame.size.height = [_contentLabel.text heightWithFont:_contentLabel.font constrainedToWidth:_contentLabel.frame.size.width];
     _contentLabel.frame = frame;
     

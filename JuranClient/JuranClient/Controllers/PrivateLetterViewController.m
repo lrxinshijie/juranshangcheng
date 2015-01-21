@@ -121,7 +121,7 @@
         cell.textField.text = _senderName;
     }else if (indexPath.row == 1) {
         placeholder = @"请输入11位手机号";
-        title = @"电话";
+        title = @"手机号";
         cell.textField.text = _mobilePhone;
         cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }else if (indexPath.row == 2){

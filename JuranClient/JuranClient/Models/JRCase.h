@@ -82,6 +82,7 @@
 - (NSURL *)imageURL;
 
 - (NSString *)styleString;
+- (NSString*)styleNamesString;
 - (NSString *)roomNumString;
 - (void)like:(void (^) (BOOL result))finished;
 - (void)favorite:(void (^) (BOOL result))finished;
@@ -95,5 +96,6 @@
 - (NSString*)statusString;
 - (UIColor *)statusColor;
 - (CGFloat)managerCellHeight;
+- (NSString*)reviewTypeString;
 
 @end

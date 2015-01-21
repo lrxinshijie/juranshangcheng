@@ -81,7 +81,7 @@
                 return;
             }
         }
-        _designer.faceToFace = _selectedRow;
+        _designer.faceToFace = [NSString stringWithFormat:@"%d", _selectedRow];
         _designer.designFeeMax = [_designMaxTextField.text floatValue];
         _designer.designFeeMin = [_designMinTextField.text floatValue];
     }else if (_type == 1){
@@ -91,7 +91,7 @@
                 return;
             }
         }
-        _designer.freeMeasure = _selectedRow;
+        _designer.freeMeasure = [NSString stringWithFormat:@"%d", _selectedRow];
         _designer.priceMeasure = [_measureTextField.text floatValue];
     }
     [self.navigationController popViewControllerAnimated:YES];

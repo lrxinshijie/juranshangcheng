@@ -47,7 +47,9 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
+#ifndef kJuranDesigner
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"private_message_more"] rightBarButtonItemAction:@selector(onDetail)];
+#endif
     
     self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     
@@ -123,11 +125,12 @@
     if (value.length == 0) {
         return;
     }
-    
+    [self showHUD];
     NSDictionary *param = @{@"privateLetterId":[NSString stringWithFormat:@"%d",_message.letterId],
                             @"receiverId": [NSString stringWithFormat:@"%d", [JRUser currentUser].userId == _message.receiverId ? _message.senderId : _message.receiverId],
                             @"memo": value};
     [[ALEngine shareEngine] pathURL:JR_REPLY_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
         if (!error) {
             _contentTextField.text = @"";
             [_tableView footerBeginRefreshing];

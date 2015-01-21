@@ -101,6 +101,7 @@
     
     self.activityTableView = [self.view tableViewWithFrame:CGRectMake(kWindowWidth, 0, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.activityTableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
+    _activityTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _activityTableView.tableFooterView = [[UIView alloc] init];
     [self.scrollView addSubview:_activityTableView];
 
@@ -159,7 +160,7 @@
 }
 
 - (void)loadActivityData{
-    NSString *scope = @"2";
+    NSString *scope = @"3";
     NSDictionary *param = @{@"activityScope": scope};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GET_ACTIVITY_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {

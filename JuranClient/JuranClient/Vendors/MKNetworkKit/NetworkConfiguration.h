@@ -15,12 +15,12 @@
 //#define JR_SERVICE  @"http://124.207.66.50:10005"
 
 /* UAT */
-//#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
-//#define JR_SERVICE  @"http://54.223.161.28:8080"
+#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
+#define JR_SERVICE  @"http://54.223.161.28:8080"
 
 /* Production */
-#define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
-#define JR_SERVICE  @"http://app.juran.cn:81"
+//#define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
+//#define JR_SERVICE  @"http://app.juran.cn:81"
 
 #define JR_LOGIN [NSString stringWithFormat:@"%@/member/login.json",JR_SERVICE]
 #define JR_REGIST_SENDSMS [NSString stringWithFormat:@"%@/member/sendSmsAuth.json",JR_SERVICE]
@@ -133,7 +133,7 @@
 #define JR_EDIT_DESIGNINFO [NSString stringWithFormat:@"%@/design/editDesignInfo.json",JR_SERVICE]
 #define JR_EDIT_BID_MEMO [NSString stringWithFormat:@"%@/design/editDeDesignerBidMemoReq.json",JR_SERVICE]
 #define JR_BID_DESIGNREQ [NSString stringWithFormat:@"%@/design/bidDesignReq.json",JR_SERVICE]
-
+#define JR_OTHER_APP [NSString stringWithFormat:@"%@/index/otherApp.json",JR_SERVICE]
 
 
 
@@ -148,7 +148,7 @@
 #define JR_CREATE_PROJECT [NSString stringWithFormat:@"%@/project/createProjectReq.json",JR_SERVICE]
 #define JR_DELETE_PROJECT [NSString stringWithFormat:@"%@/design/delDeProjectReq.json",JR_SERVICE]
 #define JR_MANAGER_PRODETAIL [NSString stringWithFormat:@"%@/project/get_project_detail.json",JR_SERVICE]
-
+#define JR_EDIT_PROJECT [NSString stringWithFormat:@"%@/project/edit_project_req.json",JR_SERVICE]
 #define JR_INTERACT_PROJECT [NSString stringWithFormat:@"%@/interact/get_commented_project_list.json",JR_SERVICE]
 #define JR_INTERACT_TOPIC [NSString stringWithFormat:@"%@/interact//get_commented_topic_list.json",JR_SERVICE]
 

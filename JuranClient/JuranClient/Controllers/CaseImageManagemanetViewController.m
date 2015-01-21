@@ -16,6 +16,7 @@
 #import "JRCaseImage.h"
 #import "CaseImagePreviewViewController.h"
 #import "UIActionSheet+Blocks.h"
+#import "CaseManagementViewController.h"
 
 @interface CaseImageManagemanetViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -31,7 +32,7 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onIntroduce:) title:_jrCase.projectId.length == 0 ? @"提交" : @"方案介绍" backgroundImage:nil];
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onIntroduce:) title:@"提交" backgroundImage:nil];
     [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
@@ -43,21 +44,6 @@
     [_collectionView registerNib:[UINib nibWithNibName:@"CaseImageCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"CaseImageCollectionCell"];
     [_collectionView registerNib:[UINib nibWithNibName:@"CaseImageHeaderView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CaseImageHeaderView"];
     
-    if (_jrCase.projectId.length > 0) {
-        [self showHUD];
-        [_jrCase loadDetail:^(BOOL result) {
-            [self hideHUD];
-            
-            if (result) {
-                [_collectionView reloadData];
-            }else{
-                [super back:nil];
-            }
-            
-        }];
-    }else if (!_jrCase) {
-        self.jrCase = [[JRCase alloc] init];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,19 +52,13 @@
 }
 
 - (void)onIntroduce:(id)sender{
-    if (_jrCase.projectId.length == 0) {
-        
-        if (_jrCase.imageList.count == 0) {
-            [self showTip:@"效果图不能为空"];
-            return;
-        }
-        
-        [self submitCase];
-    }else{
-        CaseIntroduceViewController *vc = [[CaseIntroduceViewController alloc] init];
-        vc.jrCase = _jrCase;
-        [self.navigationController pushViewController:vc animated:YES];
+    
+    if (_jrCase.imageList.count == 0) {
+        [self showTip:@"效果图不能为空"];
+        return;
     }
+    
+    [self submitCase];
 }
 
 - (void)submitCase{
@@ -130,7 +110,8 @@
         }
         
     }else{
-        NSDictionary *param = @{@"areaInfo": [_jrCase.areaInfo dictionaryValue],
+        NSMutableDictionary *param =[NSMutableDictionary dictionaryWithDictionary:
+                                    @{@"areaInfo": [_jrCase.areaInfo dictionaryValue],
                                 @"neighbourhoods": _jrCase.neighbourhoods,
                                 @"roomNum": _jrCase.roomNum,
                                 @"livingroomCount": _jrCase.livingroomCount,
@@ -142,12 +123,24 @@
                                 @"description": _jrCase.desc,
                                 @"roomTypeImageUrl": _jrCase.roomTypeImageUrl,
                                 @"imageList": _imageURLs,
-                                @"title": _jrCase.title};
-        [[ALEngine shareEngine] pathURL:JR_CREATE_PROJECT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                                @"title": _jrCase.title}];
+        if (_jrCase.projectId.length > 0) {
+            [param setObject:_jrCase.projectId forKey:@"projectId"];
+        }
+        [[ALEngine shareEngine] pathURL:_jrCase.projectId.length > 0 ? JR_EDIT_PROJECT : JR_CREATE_PROJECT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
             [self hideHUD];
             if (!error) {
-                CreateCaseSuccessViewController *cv = [[CreateCaseSuccessViewController alloc] init];
-                [self.navigationController pushViewController:cv animated:YES];
+                if (_jrCase.projectId.length > 0) {
+                    CaseManagementViewController *cm = (CaseManagementViewController *)[self.navigationController.viewControllers objectAtTheIndex:1];
+                    if (cm && [cm isKindOfClass:[CaseManagementViewController class]]) {
+                        [cm refreshView];
+                        [self.navigationController popToViewController:cm animated:YES];
+                    }
+                }else{
+                    CreateCaseSuccessViewController *cv = [[CreateCaseSuccessViewController alloc] init];
+                    [self.navigationController pushViewController:cv animated:YES];
+                }
+                
             }
         }];
     }
@@ -163,7 +156,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (section == 0) {
-        return ( _jrCase.roomTypeImage || _jrCase.projectId.length > 0 ) ? 2 : 1 ;
+        return _jrCase.roomTypeImage || _jrCase.roomTypeImageUrl.length > 0 ? 2 : 1 ;
     }else{
         return _jrCase.imageList.count + 1;
     }
@@ -209,9 +202,6 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (_jrCase.projectId.length > 0) {
-        return;
-    }
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
@@ -230,6 +220,7 @@
                 }
                 
                 _jrCase.roomTypeImage = nil;
+                _jrCase.roomTypeImageUrl = @"";
                 [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
             }];
         }

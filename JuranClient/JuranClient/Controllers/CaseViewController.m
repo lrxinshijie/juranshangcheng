@@ -40,7 +40,7 @@
 @implementation CaseViewController
 
 - (void)dealloc{
-
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -80,13 +80,6 @@
     _tableView.backgroundColor = RGBColor(236, 236, 236);
     [self.view addSubview:_tableView];
     
-    _emptyView.hidden = YES;
-    _emptyView.center = _tableView.center;
-    [self.tableView addSubview:_emptyView];
-    
-    
-
-    
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
@@ -99,8 +92,6 @@
             [weakSelf loadData];
         }
 #endif
-        
-        
     }];
     
     [_tableView addFooterWithCallback:^{
@@ -139,7 +130,6 @@
     
     self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
     self.fullScreenScroll.delegate = self;
-    self.fullScreenScroll.shouldShowUIBarsOnScrollUp = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -192,12 +182,8 @@
             }else{
                 self.datas = rows;
             }
-            
-            [_tableView reloadData];
-            [_collectionView reloadData];
         }
-        _emptyView.hidden = _datas.count != 0;
-        _emptyView.center = CGPointMake(_tableView.center.x, _tableView.center.y - 40);
+        [self reloadData];
         if (self.bannerView) {
             _emptyView.center = CGPointMake(_tableView.center.x, _tableView.center.y +CGRectGetHeight(_bannerView.frame)/2-40);
         }
@@ -209,6 +195,26 @@
         [_collectionView footerEndRefreshing];
         
     }];
+}
+
+- (void)reloadData{
+    [_emptyView removeFromSuperview];
+    _tableView.tableFooterView = [[UIView alloc] init];
+    
+    if (_datas.count == 0) {
+        if (_tableView.superview) {
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, (!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44)];
+            _emptyView.center = view.center;
+            [view addSubview:_emptyView];
+            _tableView.tableFooterView = view;
+        }else if (_collectionView.superview){
+            _emptyView.center = _collectionView.center;
+            [self.view addSubview:_emptyView];
+        }
+    }
+    
+    [_tableView reloadData];
+    [_collectionView reloadData];
 }
 
 - (NSMutableDictionary *)filterData{
@@ -238,11 +244,11 @@
         if ([_collectionView superview]) {
             [_collectionView removeFromSuperview];
             [self.view addSubview:_tableView];
-            [_tableView reloadData];
+            [self reloadData];
         } else {
             [_tableView removeFromSuperview];
             [self.view addSubview:_collectionView];
-            [_collectionView reloadData];
+            [self reloadData];
         }
         
 //        [UIView commitAnimations];
