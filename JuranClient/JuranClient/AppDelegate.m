@@ -366,7 +366,7 @@
 
 - (void)clearNotification{
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber--;
+    NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber-1;
     [UIApplication sharedApplication].applicationIconBadgeNumber = badge;
 }
 
