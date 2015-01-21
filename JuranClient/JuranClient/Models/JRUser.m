@@ -172,7 +172,7 @@
     self.isSigned = [dict getBoolValueForKey:@"isSigned" defaultValue:FALSE];
     
 #ifndef kJuranDesigner
-    self.newPushMsgCount = [dict getIntValueForKey:@"newPushMsgCount" defaultValue:0];
+    self.newPushMsgCount = [dict getIntValueForKey:@"newMsgPushed" defaultValue:0];
 #else
     self.newPushMsgCount = [dict getIntValueForKey:@"newMsgPushed" defaultValue:0];
 #endif

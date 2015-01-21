@@ -326,8 +326,11 @@
         cell.textField.placeholder = _placeholders[indexPath.row];
         cell.textField.keyboardType = UIKeyboardTypeDefault;
         cell.textField.tag = 10+indexPath.row;
-        if (indexPath.row == 1) {
+        if (indexPath.row == 0) {
+            cell.textField.text = _designer.userName;
+        }else if (indexPath.row == 1) {
             cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+            cell.textField.text = _designer.idCardNum;
         }
         return cell;
     }else{
