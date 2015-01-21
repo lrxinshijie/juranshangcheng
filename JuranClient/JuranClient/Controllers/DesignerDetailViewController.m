@@ -21,6 +21,7 @@
 #import "PrivateLetterViewController.h"
 #import "NewestTopicViewController.h"
 #import "ZoomInImageView.h"
+#import "TTTAttributedLabel.h"
 
 @interface DesignerDetailViewController ()<UITableViewDataSource, UITableViewDelegate, JRSegmentControlDelegate, SelfIntroductionCellDelegate>
 {
@@ -537,25 +538,49 @@
             }else if (5 == indexPath.row){
                 cell.detailTextLabel.text = [_designer styleNameForPersonal];
             }else if (2 == indexPath.row){
-                CGRect frame = CGRectMake(0, 0, 100, 30);
-                UIView *view = [[UIView alloc] initWithFrame:frame];
-                view.backgroundColor = [UIColor clearColor];
-                UILabel *label = [cell.contentView labelWithFrame:frame text:@"元" textColor:RGBColor(75, 75, 75) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
-                [view addSubview:label];
-                frame.size.width -= kSystemFontSize;
-                label = [cell.contentView labelWithFrame:frame text:[NSString stringWithFormat:@"%.2f", _designer.priceMeasure] textColor:RGBColor(73, 129, 189) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
-                [view addSubview:label];
-                cell.accessoryView = view;
+//                CGRect frame = CGRectMake(0, 0, 100, 30);
+//                UIView *view = [[UIView alloc] initWithFrame:frame];
+//                view.backgroundColor = [UIColor clearColor];
+//                UILabel *label = [cell.contentView labelWithFrame:frame text:@"元" textColor:RGBColor(75, 75, 75) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
+//                [view addSubview:label];
+//                frame.size.width -= kSystemFontSize;
+//                label = [cell.contentView labelWithFrame:frame text:[NSString stringWithFormat:@"%.2f", _designer.priceMeasure] textColor:RGBColor(73, 129, 189) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
+//                [view addSubview:label];
+                
+                TTTAttributedLabel *label = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
+                label.textColor = [UIColor blackColor];
+                label.textAlignment = NSTextAlignmentRight;
+                label.font = [UIFont systemFontOfSize:14];
+                label.backgroundColor = [UIColor clearColor];
+                
+                [label setText:_designer.freeMeasure.length == 0?@"":[_designer measureForPersonal] afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+                    NSRange range = [[mutableAttributedString string] rangeOfString:[NSString stringWithFormat:@"%.2f", _designer.priceMeasure] options:NSCaseInsensitiveSearch];
+                    [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[kBlueColor CGColor] range:range];
+                    return mutableAttributedString;
+                }];
+                
+                cell.accessoryView = label;
             }else if (3 == indexPath.row){
-                CGRect frame = CGRectMake(0, 0, 200, 30);
-                UIView *view = [[UIView alloc] initWithFrame:frame];
-                view.backgroundColor = [UIColor clearColor];
-                UILabel *label = [cell.contentView labelWithFrame:frame text:@"元/平方米" textColor:RGBColor(75, 75, 75) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
-                [view addSubview:label];
-                frame.size.width -= kSystemFontSize * 4.5f;
-                label = [cell.contentView labelWithFrame:frame text:[NSString stringWithFormat:@"%.2f-%.2f", _designer.designFeeMin, _designer.designFeeMax]  textColor:RGBColor(73, 129, 189) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
-                [view addSubview:label];
-                cell.accessoryView = view;
+                TTTAttributedLabel *label = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
+                label.textColor = [UIColor blackColor];
+                label.font = [UIFont systemFontOfSize:14];
+                label.textAlignment = NSTextAlignmentRight;
+                label.backgroundColor = [UIColor clearColor];
+                
+                [label setText:_designer.faceToFace.length == 0?@"":[_designer designPriceForPersonal] afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+                    NSRange range = [[mutableAttributedString string] rangeOfString:[NSString stringWithFormat:@"%.2f-%.2f", _designer.designFeeMin, _designer.designFeeMax] options:NSCaseInsensitiveSearch];
+                    [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[kBlueColor CGColor] range:range];
+                    return mutableAttributedString;
+                }];
+//                CGRect frame = CGRectMake(0, 0, 200, 30);
+//                UIView *view = [[UIView alloc] initWithFrame:frame];
+//                view.backgroundColor = [UIColor clearColor];
+//                UILabel *label = [cell.contentView labelWithFrame:frame text:@"元/平方米" textColor:RGBColor(75, 75, 75) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
+//                [view addSubview:label];
+//                frame.size.width -= kSystemFontSize * 4.5f;
+//                label = [cell.contentView labelWithFrame:frame text:[NSString stringWithFormat:@"%.2f-%.2f", _designer.designFeeMin, _designer.designFeeMax]  textColor:RGBColor(73, 129, 189) textAlignment:NSTextAlignmentRight font:[UIFont systemFontOfSize:kSystemFontSize]];
+//                [view addSubview:label];
+                cell.accessoryView = label;
             }
         }
     }else{

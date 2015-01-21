@@ -120,9 +120,9 @@
     self.experienceCount = e == -1?@"":[NSString stringWithFormat:@"%d", e];
     
     self.style = [dict getStringValueForKey:@"style" defaultValue:@""];
-    self.priceMeasure = [dict getIntValueForKey:@"priceMeasure" defaultValue:0]/100.f;
-    self.designFeeMin = [dict getIntValueForKey:@"designFeeMin" defaultValue:0]/100.f;
-    self.designFeeMax = [dict getIntValueForKey:@"designFeeMax" defaultValue:0]/100.f;
+    self.priceMeasure = [dict getDoubleValueForKey:@"priceMeasureStr" defaultValue:0.f];
+    self.designFeeMin = [dict getDoubleValueForKey:@"chargeStandardMinStr" defaultValue:0.f];
+    self.designFeeMax = [dict getDoubleValueForKey:@"chargeStandardMaxStr" defaultValue:0.f];
     self.selfIntroduction = [dict getStringValueForKey:@"selfIntroduction" defaultValue:@""];
     self.product2DCount = [dict getIntValueForKey:@"product2DCount" defaultValue:0];
     self.product3DCount = [dict getIntValueForKey:@"product3DCount" defaultValue:0];
@@ -130,6 +130,10 @@
     self.viewCount = [dict getIntValueForKey:@"viewCount" defaultValue:0];
     self.isFollowed = [dict getBoolValueForKey:@"isFollowed" defaultValue:FALSE];
     self.followId = [dict getStringValueForKey:@"followId" defaultValue:@"0"];
+    NSInteger f = [dict getIntValueForKey:@"freeMeasure" defaultValue:-1];
+    self.freeMeasure = f == -1?@"":[NSString stringWithFormat:@"%d", f];
+    f = [dict getIntValueForKey:@"faceToFace" defaultValue:-1];
+    self.faceToFace = f == -1?@"":[NSString stringWithFormat:@"%d", f];
 
     return self;
 }
@@ -462,7 +466,7 @@
 - (NSString*)measureForPersonal{
     if (self.freeMeasure.length == 0) {
         return @"未设置";
-    }else if (self.freeMeasure == 0) {
+    }else if (self.freeMeasure.integerValue == 0) {
         return @"免费";
     }else{
         return [NSString stringWithFormat:@"%.2f元", _priceMeasure];
@@ -471,7 +475,7 @@
 - (NSString*)designPriceForPersonal{
     if (self.faceToFace.length == 0) {
         return @"未设置";
-    }else if (self.faceToFace == 0) {
+    }else if (self.faceToFace.integerValue == 0) {
         return @"面议";
     }else{
         return [NSString stringWithFormat:@"%.2f-%.2f 元/平方米", _designFeeMin, _designFeeMax];
