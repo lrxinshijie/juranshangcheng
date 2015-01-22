@@ -238,7 +238,7 @@
         [self hideHUD];
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
                 if (_designer.realNameAuthStatus == -1) {
                     [self showTip:@"申请成功"];
                 }else if (_designer.realNameAuthStatus == 1){

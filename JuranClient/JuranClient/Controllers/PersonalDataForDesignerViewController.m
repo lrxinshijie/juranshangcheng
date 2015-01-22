@@ -177,7 +177,7 @@
         [self hideHUD];
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
                 [self showTip:@"修改用户信息成功"];
                 if ([_user.nickName isEqualToString:self.oldNickName]) {
                     _user.nickNameChangeable = @"1";

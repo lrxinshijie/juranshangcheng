@@ -116,7 +116,6 @@
             }
             [ApplicationDelegate minusBadgeNumber:1];
             [_tableView reloadData];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
         }
     }];
 }

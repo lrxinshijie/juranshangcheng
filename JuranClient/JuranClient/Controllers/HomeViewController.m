@@ -64,6 +64,7 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameMyDemandReloadData object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveProfileReloadDataNotification:) name:kNotificationNameProfileReloadData object:nil];
     
     [self setupUI];
     
@@ -75,10 +76,22 @@
     [_tableView headerBeginRefreshing];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if ([JRUser isLogin]) {
+        [self loadPrivateMsgData];
+    }else{
+        self.privateMsgCount = 0;
+    }
+}
+
 - (void)receiveReloadDataNotification:(NSNotification*)notification{
     [_tableView headerBeginRefreshing];
 }
 
+- (void)receiveProfileReloadDataNotification:(NSNotification*)notification{
+    [self loadPrivateMsgData];
+}
 
 - (void)setupUI{
     _privateMsgCountLabel.layer.masksToBounds = YES;
@@ -96,9 +109,7 @@
         [weakSelf loadAd];
         [weakSelf loadDemandData];
         [weakSelf loadNewestDesignerData];
-        if ([JRUser isLogin]) {
-            [weakSelf loadPrivateMsgData];
-        }
+        [weakSelf loadPrivateMsgData];
     }];
     
     [_tableView addFooterWithCallback:^{
@@ -108,8 +119,8 @@
 }
 
 - (void)loadPrivateMsgData{
-    [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_GET_INDEX_PRIVATELETTERREP parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+//    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_GET_INDEX_PRIVATELETTERREP parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyShowErrorDefaultMessage: @(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             self.privateMsgCount = [data getIntValueForKey:@"count" defaultValue:0];

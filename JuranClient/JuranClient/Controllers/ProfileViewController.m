@@ -118,7 +118,11 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self refreshUI];
+    if ([JRUser isLogin]) {
+        [self loadData];
+    }else{
+        [self refreshUI];
+    }
 }
 
 - (void)setupUI{
@@ -196,14 +200,16 @@
         _userNameLabel.hidden = YES;
         return;
     }
-    [self showHUD];
-    
+    BOOL showError = _user.nickName.length == 0;
+    if (showError) {
+        [self showHUD];
+    }
 #ifndef kJuranDesigner
     NSString *url = JR_MYCENTERINFO;
 #else
     NSString *url = JR_GET_DESIGNER_CENTERINFO;
 #endif
-    [[ALEngine shareEngine] pathURL:url parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:url parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes", kNetworkParamKeyShowErrorDefaultMessage:@(showError)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
@@ -296,7 +302,7 @@
         return;
     }
 #ifndef kJuranDesigner
-    _user.newPrivateLetterCount = 0;
+//    _user.newPrivateLetterCount = 0;
     PrivateMessageViewController *pv = [[PrivateMessageViewController alloc] init];
     pv.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:pv animated:YES];
