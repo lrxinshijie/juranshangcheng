@@ -40,6 +40,7 @@
 @property (nonatomic, copy) NSString *toHeadUrl;
 @property (nonatomic, copy) NSString *isRead;
 @property (nonatomic, assign) NSInteger sort;
+@property (nonatomic, assign) BOOL isFirstFlag;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
 @end

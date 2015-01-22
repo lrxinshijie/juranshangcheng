@@ -67,7 +67,7 @@
         self.toNickName = [dict getStringValueForKey:@"toNickName" defaultValue:@""];
         self.toHeadUrl = [dict getStringValueForKey:@"toHeadUrl" defaultValue:@""];
         self.isRead = [dict getStringValueForKey:@"isRead" defaultValue:@"N"];
-        
+        self.isFirstFlag = [dict getBoolValueForKey:@"isFirstFlag" defaultValue:NO];
         self.sort = [dict getIntValueForKey:@"sort" defaultValue:0];
     }
     return self;
