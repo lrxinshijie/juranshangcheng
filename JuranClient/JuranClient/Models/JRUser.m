@@ -209,7 +209,8 @@
     self.useablePoints = [dict getIntValueForKey:@"useablePoints" defaultValue:0];
     self.useableExp = [dict getIntValueForKey:@"useableExp" defaultValue:0];
     self.accountChangeable = [dict getBoolValueForKey:@"accountChangeable" defaultValue:NO];
-
+    self.isEmailVali = [dict getIntValueForKey:@"isEmailVali" defaultValue:0];
+    self.isMobileVali = [dict getIntValueForKey:@"isMobileVali" defaultValue:0];
 }
 
 - (NSString*)locationAddress{

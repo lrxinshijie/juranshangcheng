@@ -64,6 +64,12 @@
         weakSelf.currentPage = 1;
         [weakSelf loadData];
     }];
+    [_tableView setFooterPullToRefreshText:@"上拉可以刷新"];
+    [_tableView setFooterRefreshingText:@"松开立即刷新"];
+    [_tableView setFooterReleaseToRefreshText:@"正在刷新..."];
+    [_tableView setHeaderPullToRefreshText:@"下拉可以加载更多数据"];
+    [_tableView setHeaderRefreshingText:@"松开立即加载更多数据"];
+    [_tableView setHeaderReleaseToRefreshText:@"正在加载..."];
     
     [self.tableView footerBeginRefreshing];
 }

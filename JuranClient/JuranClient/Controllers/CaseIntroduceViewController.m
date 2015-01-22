@@ -83,7 +83,7 @@
     }
     
     if (_jrCase.neighbourhoods.length == 0) {
-        [self showTip:@"楼盘不能为空"];
+        [self showTip:@"小区名称不允许为空"];
         return;
     }
     

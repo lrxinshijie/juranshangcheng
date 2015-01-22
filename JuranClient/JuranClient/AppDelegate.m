@@ -41,8 +41,8 @@
 #define kShareTencentWeiboRedirectUri @"http://www.juran.cn"
 
 //QQ互联
-#define kShareQZoneKey @"1103839607"
-#define kShareQZoneSecret @"B4DwT98l9vD3oHnB"
+#define kShareQZoneKey @"1103999165"
+#define kShareQZoneSecret @"RhagoumHovdjghAL"
 
 //微信
 #define kShareWeChatKey @"wx338441f4726af98d"
@@ -346,9 +346,9 @@
     
     [APService registerDeviceToken:deviceToken];
     
-    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-    NSString *dToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    ASLog(@"deviceToken:%@", dToken);
+//    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+//    NSString *dToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    ASLog(@"deviceToken:%@", dToken);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -366,8 +366,11 @@
 
 - (void)clearNotification{
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber-1;
-    [UIApplication sharedApplication].applicationIconBadgeNumber = badge;
+    [self minusBadgeNumber:1];
+}
+
+- (void)minusBadgeNumber:(NSInteger)num{
+    [UIApplication sharedApplication].applicationIconBadgeNumber -= num;
 }
 
 @end

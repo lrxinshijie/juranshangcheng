@@ -28,6 +28,7 @@
 #import "CaseViewController.h"
 #import "PushMessageViewController.h"
 #import "PrivateMessageViewController.h"
+#import "ALNavigationController.h"
 
 @implementation Public
 
@@ -140,7 +141,7 @@
 + (NSString *)versionString{
 	NSString *file = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
 	NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithContentsOfFile:file];
-	return [NSString stringWithFormat:@"%@",[dict objectForKey:@"CFBundleVersion"]];
+	return [NSString stringWithFormat:@"%@",[dict objectForKey:@"CFBundleShortVersionString"]];
 }
 
 + (UIImage *)imageWithName:(NSString *)aName{
@@ -172,13 +173,13 @@
 }
 
 + (UINavigationController *)navigationControllerFromRootViewController:(UIViewController *)viewController{
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    ALNavigationController *navigationController = [[ALNavigationController alloc] initWithRootViewController:viewController];
     [navigationController.navigationBar setBackgroundImageWithColor:[UIColor whiteColor]];
-#ifdef kJuranDesigner
-    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        navigationController.interactivePopGestureRecognizer.delegate = nil;
-    }
-#endif
+//#ifdef kJuranDesigner
+//    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+//        navigationController.interactivePopGestureRecognizer.delegate = nil;
+//    }
+//#endif
     
     if (SystemVersionGreaterThanOrEqualTo7) {
         [navigationController.navigationBar setBackgroundImageWithColor:[ALTheme sharedTheme].navigationColor];
