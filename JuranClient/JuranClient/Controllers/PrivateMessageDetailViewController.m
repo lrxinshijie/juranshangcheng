@@ -106,8 +106,6 @@
                 [_datas addObjectsFromArray:rows];
             }else{
                 self.datas = rows;
-                PrivateMessageDetail *detail = [_datas firstObject];
-                _firstContactLabel.text = detail.content;
 //                NSArray *rows = @[detail.fromNickName, detail];
             }
             
@@ -158,7 +156,14 @@
     PrivateMessageDetail *detail = [_datas objectAtIndex:row];
     NSDate *date = [NSDate dateFromString:detail.publishTime dateFormat:kDateFormatHorizontalLineLong];
     
-    NSBubbleData *bubble = [NSBubbleData dataWithText:detail.content date:date type:detail.fromUserId == [JRUser currentUser].userId ? BubbleTypeMine : BubbleTypeSomeoneElse];
+    NSBubbleData *bubble = nil;
+    NSBubbleType type = detail.fromUserId == [JRUser currentUser].userId ? BubbleTypeMine : BubbleTypeSomeoneElse;
+//    if (detail.isFirstFlag) {
+//        bubble = [NSBubbleData dataWithView:_firstView date:date type:type insets:UIEdgeInsetsZero];
+//    }else{
+        bubble = [NSBubbleData dataWithText:detail.content date:date type:detail.fromUserId == [JRUser currentUser].userId ? BubbleTypeMine : BubbleTypeSomeoneElse];
+//    }
+    
     return bubble;
 }
 

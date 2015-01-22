@@ -145,9 +145,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    CaseIntroduceViewController *cv = [[CaseIntroduceViewController alloc] init];
-    cv.jrCase = _datas[indexPath.row];
-    [self.navigationController pushViewController:cv animated:YES];
+    JRCase *jrCase = _datas[indexPath.row];
+    if ([jrCase.status isEqualToString:@"00"]) {
+        [self showTip:@"该案例审核中，暂不能编辑"];
+    }else{
+        CaseIntroduceViewController *cv = [[CaseIntroduceViewController alloc] init];
+        cv.jrCase = jrCase;
+        [self.navigationController pushViewController:cv animated:YES];
+    }
+    
 }
 
 @end
