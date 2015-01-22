@@ -205,7 +205,7 @@
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            if (!_jrCase.roomTypeImage) {
+            if (!_jrCase.roomTypeImage && _jrCase.roomTypeImageUrl.length == 0) {
                 [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:NO MaxNumber:1 Handler:^(NSArray *images) {
                     _jrCase.roomTypeImage = [images firstObject];
                     [_collectionView reloadData];
