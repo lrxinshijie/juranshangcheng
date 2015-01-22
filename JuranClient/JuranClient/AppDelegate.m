@@ -36,8 +36,8 @@
 #define kShareSinaWeiboRedirectUri @"http://www.juran.cn"
 
 //腾讯微博
-#define kShareTencentWeiboKey @"801555309"
-#define kShareTencentWeiboSecret @"71fd14ea4456a3bf906817e8bbefbdbd"
+#define kShareTencentWeiboKey @"801557599"
+#define kShareTencentWeiboSecret @"4543e45261590bf811ed90403fe7219a"
 #define kShareTencentWeiboRedirectUri @"http://www.juran.cn"
 
 //QQ互联
