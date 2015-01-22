@@ -61,4 +61,12 @@
     self.activityContentUrl = [dict getStringValueForKey:@"activityContentUrl" defaultValue:@""];
 }
 
+- (NSString*)shareImagePath{
+    if (_activityListUrl.length == 0) {
+        return nil;
+    }else{
+        return [Public imageURLString:_activityListUrl];
+    }
+}
+
 @end

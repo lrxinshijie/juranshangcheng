@@ -23,5 +23,6 @@
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
 - (void)buildUpWithValueForDetail:(id)dict;
+- (NSString*)shareImagePath;
 
 @end

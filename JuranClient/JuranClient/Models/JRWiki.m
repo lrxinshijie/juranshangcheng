@@ -58,5 +58,13 @@
     return retVal;
 }
 
+- (NSString*)shareImagePath{
+    if (_imageUrl.length == 0) {
+        return nil;
+    }else{
+        return [Public imageURLString:_imageUrl];
+    }
+}
+
 
 @end

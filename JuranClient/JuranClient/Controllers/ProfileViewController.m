@@ -74,8 +74,6 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameProfileReloadData object:nil];
     
-    
-    
     _user = [JRUser currentUser];
     
 #ifdef kJuranDesigner

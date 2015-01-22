@@ -291,7 +291,7 @@
         JRWiki *wiki = [_wikiDatas objectAtIndex:indexPath.row];
         vc.urlString = [NSString stringWithFormat:@"http://apph5.juran.cn/wikis/%d%@", wiki.wikiId,[Public shareEnv]];
         vc.hidesBottomBarWhenPushed = YES;
-        [vc setShareTitle:wiki.title Content:wiki.title ImagePath:wiki.imageUrl];
+        [vc setShareTitle:wiki.title Content:wiki.title ImagePath:wiki.shareImagePath];
         wiki.browseCount++;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
@@ -300,7 +300,7 @@
         vc.hidesBottomBarWhenPushed = YES;
         vc.title = @"精品活动";
         vc.urlString = [NSString stringWithFormat:@"http://apph5.juran.cn/events/%d%@", a.activityId, [Public shareEnv]];
-        [vc setShareTitle:a.activityName Content:a.activityIntro ImagePath:a.activityListUrl];
+        [vc setShareTitle:a.activityName Content:a.activityIntro ImagePath:a.shareImagePath];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
