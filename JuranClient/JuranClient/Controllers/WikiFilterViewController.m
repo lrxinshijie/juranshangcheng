@@ -14,7 +14,7 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) NSMutableArray *sections;
 @property (nonatomic, strong) NSDictionary *selected;
-//@property (nonatomic, strong) NSMutableDictionary *openDic;
+@property (nonatomic, strong) NSMutableDictionary *openDic;
 
 - (IBAction)onDone:(id)sender;
 
@@ -27,6 +27,8 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"筛选";
+    
+    self.openDic = [NSMutableDictionary dictionary];
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 50, 30) target:self action:@selector(onCancel) title:@"取消" backgroundImage:nil];
     [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
@@ -65,13 +67,12 @@
                 rows = [NSMutableArray arrayWithArray:data[@"categoryList"]];
             }
             
-            
             if (_currentPage > 1) {
                 [_sections addObjectsFromArray:rows];
             }else{
                 self.sections = rows;
-//                NSDictionary *dic = rows[0];
-//                [self.sections addObjectsFromArray:dic[@"children"]];
+                NSDictionary *dic = rows[0];
+                [self.sections addObjectsFromArray:dic[@"children"]];
             }
             [_tableView reloadData];
         }
@@ -93,8 +94,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSDictionary *dic = _sections[section];
-    NSArray *rows = dic[@"children"];
-    return [rows count];
+    if ([_openDic objectForKey:dic[@"catId"]]) {
+        NSArray *rows = dic[@"children"];
+        return [rows count];
+    }else{
+        return 0;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -108,6 +113,10 @@
     NSDictionary *dic = _sections[section];
     titleLabel.text = dic[@"catName"];
     [headerView addSubview:titleLabel];
+    
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 29.5, kWindowWidth, 0.5)];
+    line.backgroundColor = RGBColor(243, 243, 243);
+    [headerView addSubview:line];
     
     UIButton *btn = [headerView buttonWithFrame:headerView.bounds target:self action:@selector(onSeleted:) image:nil];
     btn.tag = section;
@@ -128,6 +137,9 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        cell.layoutMargins = UIEdgeInsetsZero;
     }
     cell.accessoryView = nil;
     cell.textLabel.font = [UIFont systemFontOfSize:15];
@@ -176,14 +188,21 @@
     UIButton *btn = (UIButton *)sender;
     NSDictionary *dic = _sections[btn.tag];
     NSArray *rows = dic[@"children"];
-    
-    if (!(![rows isKindOfClass:[NSNull class]] && rows.count > 0)) {
+
+    if (![rows isKindOfClass:[NSNull class]] && rows.count > 0){
+        if ([_openDic objectForKey:dic[@"catId"]]) {
+            [_openDic removeObjectForKey:dic[@"catId"]];
+        }else{
+            [_openDic addEntriesFromDictionary:@{dic[@"catId"]:@""}];
+        }
+    }
+    /*else{
         if ([_selected[@"type"] isEqualToString:dic[@"catCode"]]) {
             _selected = nil;
         }else{
             _selected = @{@"type":dic[@"catCode"]};
         }
-    }
+    }*/
     [_tableView reloadData];
 }
 

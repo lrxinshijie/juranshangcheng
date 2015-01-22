@@ -121,7 +121,9 @@
                     if (_block) {
                         _block();
                     }
-                    
+#ifdef kJuranDesigner
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
+#endif
                     
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [self back:nil];
@@ -169,7 +171,9 @@
             if (_block) {
                 _block();
             }
-            
+#ifdef kJuranDesigner
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
+#endif
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self back:nil];

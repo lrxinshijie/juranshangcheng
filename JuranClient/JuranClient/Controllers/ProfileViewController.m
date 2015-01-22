@@ -87,6 +87,7 @@
 //                    , @"订单管理"
                     , @"实名认证"
                     , @"账户安全"
+                    , @"账户管理"
                     ];
 //
     imageArray = @[@"icon_case_manage"
@@ -95,7 +96,8 @@
                     , @"icon_personal_shouchang.png"
 //                    , @"icon_dingdan.png"
                     , @"icon_realname_auth.png"
-                    , @"icon_personal_zhaq"];
+                    , @"icon_personal_zhaq"
+                    , @"icon_personal_zhgl"];
     self.navigationItem.title = @"个人中心";
 #else
     titleArray = @[@"互动管理"
@@ -180,7 +182,7 @@
     _privateLetterCountLabel.hidden = YES;
     _hasNewAnswerView.hidden = YES;
     _hasNewBidView.hidden = YES;
-    _hasNewPushMsgView.hidden = YES;
+     _hasNewPushMsgView.hidden = [JRUser isLogin] && _user.newPushMsgCount?NO:YES;
 #else
     _privateLetterCountLabel.hidden = [JRUser isLogin] && _user.newPrivateLetterCount?NO:YES;
     _hasNewAnswerView.hidden = [JRUser isLogin] && _user.newAnswerCount?NO:YES;
@@ -331,7 +333,7 @@
     }]) {
         return;
     }
-    _user.newPushMsgCount = 0;
+//    _user.newPushMsgCount = 0;
     PushMessageViewController *vc = [[PushMessageViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
@@ -433,11 +435,6 @@
             break;
     }
 #else
-//    @"个人主页"
-//    , @"我的关注"
-//    , @"我的收藏"
-//    , @"实名认证"
-//    , @"账户安全"
     if (![self checkLogin:^{
         [self loadData];
     }]) {
@@ -492,6 +489,14 @@
         {
              //        账户安全
             AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 7:
+        {
+            //        账户管理
+            AccountManageViewController *vc = [[AccountManageViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;

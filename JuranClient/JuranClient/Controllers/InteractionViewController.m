@@ -20,7 +20,9 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) IBOutlet UIView *headView;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *segment;
-@property (nonatomic, strong) IBOutlet UIView *noDatasView;
+
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
+
 
 @end
 
@@ -50,14 +52,11 @@
     [self.view addSubview:_tableView];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.backgroundColor = RGBColor(241, 241, 241);
     
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_tableView.frame), CGRectGetHeight(_tableView.frame))];
-    bgView.backgroundColor = RGBColor(241, 241, 241);
-    CGPoint center = CGPointMake(bgView.center.x, 220);
-    _noDatasView.center = center;
-    _noDatasView.hidden = YES;
-    [bgView addSubview:_noDatasView];
-    _tableView.backgroundView = bgView;
+    _emptyView.center = _tableView.center;
+    _emptyView.hidden = YES;
+    [self.view addSubview:_emptyView];
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -107,17 +106,12 @@
 
 - (void)reloadData{
     dispatch_async(dispatch_get_main_queue(), ^{
+        _emptyView.hidden = YES;
         [_tableView reloadData];
         if (_segment.selectedSegmentIndex == 0) {
-            _noDatasView.hidden = YES;
-            if (_caseDatas.count == 0) {
-                
-            }
+            _emptyView.hidden = _caseDatas.count != 0;
         }else{
-            _noDatasView.hidden = YES;
-            if (_topicDatas.count == 0) {
-
-            }
+            _emptyView.hidden = _topicDatas.count != 0;
         }
     });
 }

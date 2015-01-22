@@ -160,12 +160,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-        cell.textLabel.textColor = RGBColor(79, 79, 79);
         cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize+2];
         cell.detailTextLabel.textColor = RGBColor(143, 143, 143);
         cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    cell.textLabel.textColor = RGBColor(79, 79, 79);
     cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellIndicator.png"]];
     cell.detailTextLabel.text = @"";
     if (indexPath.section == 0) {
@@ -174,8 +174,14 @@
             cell.accessoryView = _intelligentModeSwitch;
         }else if (indexPath.row == 1){
             cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:intelligentMode.integerValue?(imageQuality.integerValue?@"image_quality_selected_disabled":@"image_quality_unselected_disabled"):(imageQuality.integerValue?@"image_quality_selected":@"image_quality_unselected")]];
+            if (intelligentMode.integerValue) {
+                cell.textLabel.textColor = [UIColor lightGrayColor];
+            }
         }else{
             cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:intelligentMode.integerValue?(imageQuality.integerValue?@"image_quality_unselected_disabled":@"image_quality_selected_disabled"):(imageQuality.integerValue?@"image_quality_unselected":@"image_quality_selected")]];
+            if (intelligentMode.integerValue) {
+                cell.textLabel.textColor = [UIColor lightGrayColor];
+            }
         }
     }else if (indexPath.section == 1){
         cell.textLabel.text = @"清除缓存";

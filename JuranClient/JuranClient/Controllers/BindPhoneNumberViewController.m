@@ -41,7 +41,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [self setupUI];
     
-    if (_user.mobileNum && _user.mobileNum.length > 0) {
+    if (_user.isMobileVali) {
         step = 1;
     }else{
         step = 2;

@@ -7,6 +7,7 @@
 //
 
 #import "AccountManageViewController.h"
+#import "JRDesigner.h"
 
 @interface AccountManageViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -15,7 +16,11 @@
 }
 @property (nonatomic, strong) UITableView *tableView;
 
+#ifdef kJuranDesigner
+@property (nonatomic, strong) JRDesigner *user;
+#else
 @property (nonatomic, strong) JRUser *user;
+#endif
 
 @end
 
@@ -38,7 +43,11 @@
     
     self.navigationItem.title = @"账户管理";
     
+#ifndef kJuranDesigner
     _user = [JRUser currentUser];
+#else
+    _user = [[JRDesigner alloc] init];
+#endif
     
     keys = @[ @"积分", @"经验值"];//@"账户余额",
     values = @[@"", @""];//@"￥0.00",
@@ -56,6 +65,7 @@
     [_tableView reloadData];
 }
 
+#ifndef kJuranDesigner
 - (void)loadData{
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_GETMEMBERDETAIL parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -70,6 +80,22 @@
         }
     }];
 }
+#else
+- (void)loadData{
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_GET_DEDESIGNER_SELFDETAIL parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                [_user buildUpWithValueForPersonal:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self reloadData];
+                });
+            }
+        }
+    }];
+}
+#endif
 
 #pragma mark - UITableViewDataSource/Delegate
 
@@ -89,6 +115,9 @@
         cell.textLabel.textColor = RGBColor(108, 108, 108);
         cell.detailTextLabel.textColor = RGBColor(69, 118, 187);
         cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        cell.layoutMargins = UIEdgeInsetsZero;
     }
     cell.textLabel.text = keys[indexPath.row];
     cell.detailTextLabel.text = values[indexPath.row];

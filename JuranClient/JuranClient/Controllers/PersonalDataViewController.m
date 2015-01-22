@@ -37,6 +37,7 @@
 
 //@property (nonatomic, assign) BOOL isEditing;
 @property (nonatomic, strong) UIButton *rightButton;
+@property (nonatomic, strong) UIImage *headImage;
 
 @end
 
@@ -117,7 +118,9 @@
 }
 
 - (void)reSetData{
-    if (_user.headUrl && _user.headUrl.length>0) {
+    if (_headImage) {
+        self.iconImageView.image = _headImage;
+    }else if (_user.headUrl && _user.headUrl.length>0) {
         [self.iconImageView setImageWithURLString:_user.headUrl];
     }
     _values = @[@[@"", _user.account], @[_user.nickName,
@@ -160,7 +163,8 @@
                              @"oldAccount": self.oldAccount,
                              @"account": _user.account,
                              @"accountChangeable": [NSString stringWithFormat:@"%d", _user.accountChangeable],
-                            @"sex": [NSString stringWithFormat:@"%d", _user.sex]
+                            @"sex": [NSString stringWithFormat:@"%d", _user.sex],
+                            @"headUrl":_user.headUrl
                         };
     
     [self showHUD];
@@ -181,7 +185,9 @@
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":image} responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
+            _headImage = nil;
             NSString *imageUrl = [data objectForKey:@"imgUrl"];
+            /*
             [[ALEngine shareEngine] pathURL:JR_UPLOAD_HEAD_IMAGE parameters:@{@"headUrl":imageUrl} HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:nil responseHandler:^(NSError *error, id data, NSDictionary *other) {
                 [self hideHUD];
                 if (!error) {
@@ -189,7 +195,9 @@
 //                    self.isEditing = NO;
                     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
                 }
-            }];
+            }];*/
+            _user.headUrl = imageUrl;
+            [self modifyMemberDetail];
         }else{
             [self hideHUD];
         }
@@ -220,8 +228,11 @@
         return;
     }
     
-    [self modifyMemberDetail];
-    
+    if (_headImage) {
+        [self uploadHeaderImage:_headImage];
+    }else{
+        [self modifyMemberDetail];
+    }
 }
 /*
 #pragma mark - ModifyViewControllerDelegate
@@ -391,25 +402,17 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
             if (images.count > 0) {
-                [self uploadHeaderImage:images[0]];
+                _headImage = images.firstObject;
+                self.iconImageView.image = _headImage;
             }
         }];
     }else if (indexPath.section == 1){
         if (indexPath.row == 1) {
-            
-            NSMutableArray *rows = [NSMutableArray array];
-            __block NSInteger ind = 0;
-            NSArray *sexs = [[DefaultData sharedData] sex];
-            [sexs enumerateObjectsUsingBlock:^(NSDictionary *row, NSUInteger idx, BOOL *stop) {
-                [rows addObject:[row objectForKey:@"k"]];
-                if ([[row objectForKey:@"v"] integerValue] == _user.sex) {
-                    ind = idx;
-                }
-            }];
+            NSInteger ind = (_user.sex == -1 || _user.sex == 0)?0:(_user.sex - 1);
+            NSArray *rows = @[@"女", @"男"];
             
             [ActionSheetStringPicker showPickerWithTitle:nil rows:rows initialSelection:ind doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
-                NSArray *sexs = [[DefaultData sharedData] sex];
-                _user.sex = [[[sexs objectAtIndex:selectedIndex] objectForKey:@"v"] integerValue];
+                _user.sex = selectedIndex + 1;
                 
                 [self reloadData];
             } cancelBlock:^(ActionSheetStringPicker *picker) {

@@ -122,6 +122,9 @@
     user.userId = 0;
     [user saveLocal];
     [user resetCurrentUser];
+#ifdef kJuranDesigner
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
+#endif
 }
 
 + (BOOL)isLogin{
@@ -155,6 +158,9 @@
         }else{
             [[JRUser currentUser] logout];
         }
+#ifdef kJuranDesigner
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
+#endif
     }];
 }
 
@@ -203,7 +209,8 @@
     self.useablePoints = [dict getIntValueForKey:@"useablePoints" defaultValue:0];
     self.useableExp = [dict getIntValueForKey:@"useableExp" defaultValue:0];
     self.accountChangeable = [dict getBoolValueForKey:@"accountChangeable" defaultValue:NO];
-
+    self.isEmailVali = [dict getIntValueForKey:@"isEmailVali" defaultValue:0];
+    self.isMobileVali = [dict getIntValueForKey:@"isMobileVali" defaultValue:0];
 }
 
 - (NSString*)locationAddress{
@@ -276,6 +283,8 @@
 
 - (NSString*)sexyString{
     if (self.sex == -1) {
+        return @"未设置";
+    }else if (self.sex == 0){
         return @"未设置";
     }
     NSArray *sexs = [DefaultData sharedData].sex;

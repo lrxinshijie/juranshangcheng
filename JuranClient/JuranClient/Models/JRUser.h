@@ -48,6 +48,8 @@
 @property (nonatomic, assign) NSInteger useablePoints;
 @property (nonatomic, assign) NSInteger useableExp;
 @property (nonatomic, assign) BOOL accountChangeable;
+@property (nonatomic, assign) NSInteger isMobileVali;
+@property (nonatomic, assign) NSInteger isEmailVali;
 
 + (BOOL)isLogin;
 - (void)logout;

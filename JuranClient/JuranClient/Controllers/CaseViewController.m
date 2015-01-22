@@ -184,9 +184,6 @@
             }
         }
         [self reloadData];
-        if (self.bannerView) {
-            _emptyView.center = CGPointMake(_tableView.center.x, _tableView.center.y +CGRectGetHeight(_bannerView.frame)/2-40);
-        }
         
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
@@ -203,7 +200,9 @@
     
     if (_datas.count == 0) {
         if (_tableView.superview) {
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, (!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44)];
+            CGRect frame = CGRectMake(0, 0, kWindowWidth, (!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44);
+            frame.size.height -= CGRectGetHeight(_tableView.tableHeaderView.frame);
+            UIView *view = [[UIView alloc] initWithFrame:frame];
             _emptyView.center = view.center;
             [view addSubview:_emptyView];
             _tableView.tableFooterView = view;
