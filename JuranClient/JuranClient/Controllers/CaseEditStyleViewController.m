@@ -32,7 +32,7 @@
     _tableView.bounces = NO;
     [self.view addSubview:_tableView];
     
-    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onAdd) title:_caseImage.image ? @"完成" : @"下一步" backgroundImage:nil];
+    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onAdd) title:_caseImage.image || _caseImage.imageUrl.length > 0 ? @"完成" : @"下一步" backgroundImage:nil];
     [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
 }
@@ -109,7 +109,7 @@
 }
 
 - (void)onAdd{
-    if (_caseImage.image) {
+    if (_caseImage.image || _caseImage.imageUrl.length > 0) {
         if (_block) {
             _block(_caseImage);
         }
