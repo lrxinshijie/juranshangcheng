@@ -10,6 +10,7 @@
 #import "PrivateMessage.h"
 #import "PrivateMessageCell.h"
 #import "PrivateMessageDetailViewController.h"
+#import "AppDelegate.h"
 
 @interface PrivateMessageViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -128,9 +129,14 @@
     pd.message = message;
     [self.navigationController pushViewController:pd animated:YES];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_tableView headerBeginRefreshing];
-    });
+    if (message.unReadNum > 0) {
+        
+        [ApplicationDelegate minusBadgeNumber:message.unReadNum];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [_tableView headerBeginRefreshing];
+        });
+    }
 }
 
 - (void)didReceiveMemoryWarning {

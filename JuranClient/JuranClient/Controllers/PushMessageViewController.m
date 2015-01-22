@@ -10,6 +10,7 @@
 #import "JRPushInfoMsg.h"
 #import "PushMessageCell.h"
 #import "PushMsgDetailViewController.h"
+#import "AppDelegate.h"
 
 @interface PushMessageViewController ()<UITableViewDataSource, UITableViewDelegate, PushMessageCellDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -113,6 +114,7 @@
                     msg.isUnread = NO;
                 }
             }
+            [ApplicationDelegate minusBadgeNumber:1];
             [_tableView reloadData];
         }
     }];

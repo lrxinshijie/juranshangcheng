@@ -506,6 +506,8 @@
 		14ABFBEC1A25CFFD00C4AF65 /* UIViewController+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEB1A25CFFD00C4AF65 /* UIViewController+Login.m */; };
 		14ABFBF01A25DADC00C4AF65 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */; };
 		14ABFBF11A25DADC00C4AF65 /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */; };
+		14C4872D1A6F7E0C0042A3D6 /* ALNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C4872C1A6F7E0C0042A3D6 /* ALNavigationController.m */; };
+		14C4872E1A6F7E0C0042A3D6 /* ALNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C4872C1A6F7E0C0042A3D6 /* ALNavigationController.m */; };
 		14C855471A2E196B00A15ED9 /* InteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855421A2E196B00A15ED9 /* InteractionViewController.m */; };
 		14C855481A2E196B00A15ED9 /* InteractionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C855431A2E196B00A15ED9 /* InteractionViewController.xib */; };
 		14C855491A2E196B00A15ED9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855451A2E196B00A15ED9 /* SettingsViewController.m */; };
@@ -1523,6 +1525,8 @@
 		14ABFBED1A25DADC00C4AF65 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
+		14C4872B1A6F7E0C0042A3D6 /* ALNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALNavigationController.h; sourceTree = "<group>"; };
+		14C4872C1A6F7E0C0042A3D6 /* ALNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALNavigationController.m; sourceTree = "<group>"; };
 		14C855411A2E196B00A15ED9 /* InteractionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractionViewController.h; sourceTree = "<group>"; };
 		14C855421A2E196B00A15ED9 /* InteractionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractionViewController.m; sourceTree = "<group>"; };
 		14C855431A2E196B00A15ED9 /* InteractionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InteractionViewController.xib; sourceTree = "<group>"; };
@@ -2900,6 +2904,8 @@
 				37CE57241A6D346D00C75E65 /* WikiOrActivityViewController.h */,
 				37CE57251A6D346D00C75E65 /* WikiOrActivityViewController.m */,
 				37CE57261A6D346D00C75E65 /* WikiOrActivityViewController.xib */,
+				14C4872B1A6F7E0C0042A3D6 /* ALNavigationController.h */,
+				14C4872C1A6F7E0C0042A3D6 /* ALNavigationController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -3815,6 +3821,7 @@
 				1415F9371A5CD1CB003D0C29 /* Sources */,
 				1415FA0F1A5CD1CB003D0C29 /* Frameworks */,
 				1415FA2C1A5CD1CB003D0C29 /* Resources */,
+				14C487301A6F825A0042A3D6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3832,6 +3839,7 @@
 				A971BC8D1A20825800C018D6 /* Sources */,
 				A971BC8E1A20825800C018D6 /* Frameworks */,
 				A971BC8F1A20825800C018D6 /* Resources */,
+				14C4872F1A6F819E0042A3D6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3881,7 +3889,7 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = QHWR2FWBM6;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -4672,6 +4680,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		14C4872F1A6F819E0042A3D6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "REV=`date +%y%m%d`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${REV}\" \"${TARGET_BUILD_DIR}\"/${INFOPLIST_PATH}\n";
+		};
+		14C487301A6F825A0042A3D6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "REV=`date +%y%m%d`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${REV}\" \"${TARGET_BUILD_DIR}\"/${INFOPLIST_PATH}";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1415F9371A5CD1CB003D0C29 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -4809,6 +4846,7 @@
 				375B464C1A5EDC9500D7E74B /* PersonalDataForDesignerViewController.m in Sources */,
 				1415F9AE1A5CD1CB003D0C29 /* main.m in Sources */,
 				1415F9AF1A5CD1CB003D0C29 /* ReplyView.m in Sources */,
+				14C4872E1A6F7E0C0042A3D6 /* ALNavigationController.m in Sources */,
 				1415F9B01A5CD1CB003D0C29 /* FilterView.m in Sources */,
 				371FBEF91A6A443D00635D3D /* JRWiki.m in Sources */,
 				1415F9B11A5CD1CB003D0C29 /* JRMemberDetail.m in Sources */,
@@ -4979,6 +5017,7 @@
 				A9D654B61A27642800A80253 /* JSONKeyMapper.m in Sources */,
 				A9A53B0D1A46FE7C008D75B8 /* UIBubbleHeaderTableViewCell.m in Sources */,
 				A987EDE21A20920500CED7CD /* NSMutableString+ASCategory.m in Sources */,
+				14C4872D1A6F7E0C0042A3D6 /* ALNavigationController.m in Sources */,
 				A987EE1E1A20928B00CED7CD /* NSDictionary+RequestEncoding.m in Sources */,
 				14C953A01A2DBC4600FE6F8D /* UIImageView+Download.m in Sources */,
 				A9C3983B1A29842D006A8AAB /* CommentCell.m in Sources */,
@@ -5372,6 +5411,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
 				VALID_ARCHS = "armv7 armv7s";
+				VERSIONING_SYSTEM = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -5404,6 +5444,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
 				VALID_ARCHS = "armv7 armv7s";
+				VERSIONING_SYSTEM = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -60,12 +60,22 @@
     _url = url;
     _imagePath = imagePath;
     
+    self.alpha = 0;
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     [app.window addSubview:self];
+    
+    [UIView animateWithDuration:.5 animations:^{
+        self.alpha = 1;
+    }];
 }
 
 - (void)unShow{
-    [self removeFromSuperview];
+    self.alpha = 1;
+    [UIView animateWithDuration:.5 animations:^{
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
 }
 
 - (void)onShare:(id)sender{
@@ -172,7 +182,9 @@
     
     //分享内容
     [ShareSDK showShareViewWithType:shareType container:nil content:publishContent statusBarTips:NO authOptions:authOptions shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-        NSLog(@"error:%@ \n code:%d", [error errorDescription],[error errorCode]);
+        if (error) {
+            [Public alertOK:nil Message:error.errorDescription];
+        }
     }];
     [self unShow];
     

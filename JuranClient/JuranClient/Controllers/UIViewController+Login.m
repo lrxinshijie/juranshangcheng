@@ -42,7 +42,7 @@
 #ifndef kJuranDesigner
     UISwipeGestureRecognizer *swipt = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showMenu)];
     swipt.direction = UISwipeGestureRecognizerDirectionRight;
-    swipt.delegate = self;
+//    swipt.delegate = self;
     [self.view addGestureRecognizer:swipt];
 #endif
 }

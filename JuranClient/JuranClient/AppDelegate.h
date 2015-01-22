@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UITabBarController *tabBarController;
 @property (nonatomic, strong) NSString *clientId;
 
+- (void)minusBadgeNumber:(NSInteger)num;
 - (void)jumpToMain;
 
 @end
