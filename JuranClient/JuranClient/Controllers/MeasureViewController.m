@@ -171,42 +171,42 @@
             }
         }else{
             if (indexPath.row == 0) {
-                placeholder = @"真实姓名";
+                placeholder = @"请输入姓名";
                 cell.textField.keyboardType = UIKeyboardTypeDefault;
                 cell.textField.text = _customerRealName;
                 title = @"姓名";
             }else if (indexPath.row == 1) {
-                placeholder = @"您的电话";
+                placeholder = @"请输入11位手机号";
                 cell.textField.text = _customerMobile;
                 cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-                title = @"电话";
+                title = @"手机号";
             }else if (indexPath.row == 2){
-                placeholder = @"会员卡号";
+                placeholder = @"请输入数字";
                 cell.textField.text = _customerCardNo;
                 cell.textField.keyboardType = UIKeyboardTypeNumberPad;
                 title = @"会员卡号";
             }else if (indexPath.row == 3){
                 cell.textField.text = _customerEmail;
-                placeholder = @"电子邮箱";
+                placeholder = @"请输入邮箱";
                 cell.textField.keyboardType = UIKeyboardTypeEmailAddress;
                 title = @"电子邮箱";
             }else if (indexPath.row == 4){
-                placeholder = @"QQ";
+                placeholder = @"请输入文字";
                 cell.textField.text = _customerQQ;
                 cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
                 title = @"QQ";
             }else if (indexPath.row == 5){
-                placeholder = @"微信号";
+                placeholder = @"请输入文字";
                 cell.textField.text = _customerWechat;
                 cell.textField.keyboardType = UIKeyboardTypeDefault;
                 title = @"微信号";
             }else if (indexPath.row == 6){
-                placeholder = @"城市";
+                placeholder = @"请选择";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.textField.text = _areaInfo.title;
                 title = @"城市";
             }else if (indexPath.row == 7){
-                placeholder = @"小区名称";
+                placeholder = @"请输入文字";
                 cell.textField.keyboardType = UIKeyboardTypeDefault;
                 cell.textField.text = _address;
                 title = @"小区名称";

@@ -71,8 +71,8 @@
                 [_sections addObjectsFromArray:rows];
             }else{
                 self.sections = rows;
-                NSDictionary *dic = rows[0];
-                [self.sections addObjectsFromArray:dic[@"children"]];
+//                NSDictionary *dic = rows[0];
+//                [self.sections addObjectsFromArray:dic[@"children"]];
             }
             [_tableView reloadData];
         }

@@ -114,23 +114,23 @@
     return [kUD objectForKey:kLocalUserData];
 }
 
-- (void)logout:(VoidBlock)finished{
-    [[ALEngine shareEngine] pathURL:JR_LOGOUT parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyShowErrorDefaultMessage:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+- (void)logout:(BOOLBlock)finished{
+    [[ALEngine shareEngine] pathURL:JR_LOGOUT parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyShowErrorDefaultMessage:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-        }
-        JRUser *user = [[JRUser alloc] init];
-        user.account = self.account;
-        user.password = @"";
-        user.guid = @"";
-        user.token = @"";
-        user.userId = 0;
-        [user saveLocal];
-        [user resetCurrentUser];
+            JRUser *user = [[JRUser alloc] init];
+            user.account = self.account;
+            user.password = @"";
+            user.guid = @"";
+            user.token = @"";
+            user.userId = 0;
+            [user saveLocal];
+            [user resetCurrentUser];
 #ifdef kJuranDesigner
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
 #endif
+        }
         if (finished) {
-            finished();
+            finished(!error);
         }
     }];
 }
@@ -164,7 +164,18 @@
                 finished();
             }
         }else{
-            [[JRUser currentUser] logout:NULL];
+            [[ALEngine shareEngine] pathURL:JR_LOGOUT parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyShowErrorDefaultMessage:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                if (!error) {
+                    JRUser *user = [[JRUser alloc] init];
+                    user.account = @"";
+                    user.password = @"";
+                    user.guid = @"";
+                    user.token = @"";
+                    user.userId = 0;
+                    [user saveLocal];
+                    [user resetCurrentUser];
+                }
+            }];
         }
 #ifdef kJuranDesigner
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];

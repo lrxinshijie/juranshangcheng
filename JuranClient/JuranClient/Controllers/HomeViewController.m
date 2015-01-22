@@ -81,6 +81,9 @@
 
 
 - (void)setupUI{
+    _privateMsgCountLabel.layer.masksToBounds = YES;
+    _privateMsgCountLabel.layer.cornerRadius = _privateMsgCountLabel.frame.size.width / 2.f;
+    
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.tableHeaderView = _tableHeaderView;
@@ -105,10 +108,8 @@
 }
 
 - (void)loadPrivateMsgData{
-    
     [self showHUD];
-    
-    [[ALEngine shareEngine] pathURL:JR_GET_INDEX_PRIVATELETTERREP parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_GET_INDEX_PRIVATELETTERREP parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             self.privateMsgCount = [data getIntValueForKey:@"count" defaultValue:0];

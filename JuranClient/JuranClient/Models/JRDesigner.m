@@ -134,11 +134,6 @@
     self.freeMeasure = f == -1?@"":[NSString stringWithFormat:@"%d", f];
     f = [dict getIntValueForKey:@"faceToFace" defaultValue:-1];
     self.faceToFace = f == -1?@"":[NSString stringWithFormat:@"%d", f];
-    self.useablePoints = [dict getIntValueForKey:@"useablePoints" defaultValue:0];
-    self.useableExp = [dict getIntValueForKey:@"useableExp" defaultValue:0];
-    self.isEmailVali = [dict getIntValueForKey:@"isEmailVali" defaultValue:0];
-    self.isMobileVali = [dict getIntValueForKey:@"isMobileVali" defaultValue:0];
-    
     return self;
 }
 
@@ -390,6 +385,10 @@
     self.designFeeMin = [value getDoubleValueForKey:@"chargeStandardMinStr" defaultValue:0.f];
     self.mobileNum = [value getStringValueForKey:@"mobileNum" defaultValue:@""];
     self.email = [value getStringValueForKey:@"email" defaultValue:@""];
+    self.useablePoints = [value getIntValueForKey:@"useablePoints" defaultValue:0];
+    self.useableExp = [value getIntValueForKey:@"useableExp" defaultValue:0];
+    self.isEmailVali = [value getIntValueForKey:@"isEmailVali" defaultValue:0];
+    self.isMobileVali = [value getIntValueForKey:@"isMobileVali" defaultValue:0];
 }
 
 - (NSString*)sexyString{

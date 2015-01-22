@@ -42,6 +42,8 @@
 @property (nonatomic, strong) JRComment *selectComment;
 @property (nonatomic, strong) UITapGestureRecognizer *tapHide;
 
+@property (nonatomic, strong) NSMutableDictionary *openStatusDic;
+
 - (IBAction)onSend:(id)sender;
 
 @end
@@ -57,6 +59,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    self.openStatusDic = [NSMutableDictionary dictionary];
+    
     self.navigationItem.title = @"方案描述";
     [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onShare)];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
@@ -278,6 +282,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
         JRComment *commnet = [_comments objectAtIndex:indexPath.row];
+        commnet.unfold = [_openStatusDic objectForKey:[NSString stringWithFormat:@"%d", commnet.commentId]]?YES:NO;
         [cell fillCellWithComment:commnet];
         
         return cell;
@@ -356,6 +361,18 @@
         if (!error) {
             _commentTextField.text = @"";
             self.currentPage = 1;
+            if (self.selectComment) {
+                if (![_openStatusDic objectForKey:[NSString stringWithFormat:@"%d", self.selectComment.commentId]]) {
+                    [_openStatusDic addEntriesFromDictionary:@{[NSString stringWithFormat:@"%d", self.selectComment.commentId]:@""}];
+                }
+            }
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if (_comments.count == 0) {
+                    [_tableView scrollToBottom];
+                }else{
+                    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+                }
+            });
             [self loadComment];
             self.selectComment = nil;
         }
@@ -369,6 +386,12 @@
 }
 
 - (void)clickCellUnfold:(CommentCell *)cell{
+    JRComment *c = cell.comment;
+    if (!c.unfold) {
+        [_openStatusDic removeObjectForKey:[NSString stringWithFormat:@"%d", c.commentId]];
+    }else{
+        [_openStatusDic addEntriesFromDictionary:@{[NSString stringWithFormat:@"%d", c.commentId]:@""}];
+    }
     [_tableView reloadData];
     if ([_comments indexOfObject:cell.comment] == [_comments count]-1 && cell.comment.unfold) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

@@ -80,7 +80,7 @@
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     [self.view addSubview:_tableView];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
-    _tableView.tableFooterView = _footerView;
+    _tableView.tableFooterView =[JRUser isLogin]?_footerView:[[UIView alloc]init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,12 +90,16 @@
 }
 
 - (IBAction)doLogout:(id)sender{
+    
     [UIAlertView showWithTitle:@"提示" message:@"是否注销" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确定"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
         if(buttonIndex == 1){
             [self showHUD];
-            [[JRUser currentUser] logout:^{
+            [[JRUser currentUser] logout:^(BOOL result) {
                 [self hideHUD];
-                [self.navigationController popViewControllerAnimated:YES];
+                if (result) {
+//                    [self showTip:@"账号注销成功"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
             }];
         }
     }];
