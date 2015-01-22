@@ -21,5 +21,6 @@
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
+- (NSString*)shareImagePath;
 
 @end

@@ -284,6 +284,14 @@
     return [NSURL URLWithString:self.headUrl relativeToURL:[NSURL URLWithString:JR_IMAGE_SERVICE]];
 }
 
+- (NSString*)shareImagePath{
+    if (_headUrl.length == 0) {
+        return nil;
+    }else{
+        return [Public imageURLString:_headUrl];
+    }
+}
+
 - (NSString*)styleNamesWithType:(NSInteger)type{
     //0 为设计师 1 为设计师详情
     NSArray *arr = [self.styleNames componentsSeparatedByString:@"，"];
