@@ -50,7 +50,7 @@
         _headImageView.image = [UIImage imageNamed:@"unlogin_head.png"];
     }
     
-    _styleLabel.text = [data styleNamesWithType:0];
+    _styleLabel.text = [data styleNames];
     _experienceLabel.text =  [data experienceString];
     _productCountLabel.text = [NSString stringWithFormat:@"%i", data.projectCount];
     _readCountLabel.text = [NSString stringWithFormat:@"%i", data.browseCount];

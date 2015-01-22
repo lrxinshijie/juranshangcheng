@@ -90,9 +90,15 @@
 }
 
 - (IBAction)doLogout:(id)sender{
-    [[JRUser currentUser] logout];
-    
-    [self.navigationController popViewControllerAnimated:YES];
+    [UIAlertView showWithTitle:@"提示" message:@"是否注销" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确定"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        if(buttonIndex == 1){
+            [self showHUD];
+            [[JRUser currentUser] logout:^{
+                [self hideHUD];
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+        }
+    }];
 }
 
 - (void)changeIntelligentMode:(id)sender{

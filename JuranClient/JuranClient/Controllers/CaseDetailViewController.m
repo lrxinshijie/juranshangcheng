@@ -114,7 +114,7 @@
                     _jrCase.desc
                     ];
     _nameLabel.text = _jrCase.nickName;
-    _detailLabel.text = _jrCase.styleNamesString;
+    _detailLabel.text = _jrCase.stylesName;
     [_avtarImageView setImageWithURLString:_jrCase.headUrl];
     _idImageView.hidden = !_jrCase.isAuth;
 

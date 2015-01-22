@@ -110,8 +110,9 @@
         if (!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self showTip:@"修改密码成功！"];
-                [[JRUser currentUser]logout];
-                [self.navigationController popViewControllerAnimated:YES];
+                [[JRUser currentUser]logout:^{
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }];
             });
         }
     }];

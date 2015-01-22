@@ -52,7 +52,7 @@
 @property (nonatomic, assign) NSInteger isEmailVali;
 
 + (BOOL)isLogin;
-- (void)logout;
+- (void)logout:(VoidBlock)finished;
 - (NSDictionary *)localUserData;
 - (void)saveLocal;
 - (void)resetCurrentUser;

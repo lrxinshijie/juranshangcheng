@@ -244,7 +244,7 @@
         self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
         self.nickName = [dict getStringValueForKey:@"nickName" defaultValue:@""];
         self.isRealNameAuth = [dict getIntValueForKey:@"isRealNameAuth" defaultValue:0];
-        self.style = [dict getStringValueForKey:@"styleNames" defaultValue:@""];
+        self.styleNames = [dict getStringValueForKey:@"styleNames" defaultValue:@""];
         NSInteger e = [dict getIntValueForKey:@"experienceCount" defaultValue:-1];
         self.experienceCount = e == -1?@"":[NSString stringWithFormat:@"%d", e];
         self.browseCount = [dict getIntValueForKey:@"browseCount" defaultValue:0];
