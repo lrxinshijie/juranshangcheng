@@ -183,7 +183,12 @@
     //分享内容
     [ShareSDK showShareViewWithType:shareType container:nil content:publishContent statusBarTips:NO authOptions:authOptions shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
         if (error) {
-            [Public alertOK:nil Message:error.errorDescription];
+            NSLog(@"Code:%d", [error errorCode]);
+            if ([error errorCode] == -6004) {
+                [Public alertOK:nil Message:@"尚未安装QQ客户端，请安装后重试"];
+            }else{
+                [Public alertOK:nil Message:error.errorDescription];
+            }
         }
     }];
     [self unShow];
