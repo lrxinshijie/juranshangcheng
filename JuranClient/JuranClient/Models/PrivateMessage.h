@@ -39,7 +39,7 @@
 @property (nonatomic, copy) NSString *toNickName;
 @property (nonatomic, copy) NSString *toHeadUrl;
 @property (nonatomic, copy) NSString *isRead;
-
+@property (nonatomic, assign) NSInteger sort;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
 @end

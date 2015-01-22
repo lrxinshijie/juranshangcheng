@@ -112,6 +112,12 @@
             }
             
             [self.tableView reloadData];
+            
+            if (_currentPage == 1) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [_tableView scrollToBottom];
+                });
+            }
         }
         
         [self.tableView headerEndRefreshing];
@@ -174,8 +180,12 @@
     NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
     CGSize keyboardSize = [value CGRectValue].size;
     
-    CGRect frame = _commentView.frame;
-    frame.origin.y = CGRectGetMaxY(_tableView.frame) - keyboardSize.height;
+    CGRect frame = _tableView.frame;
+    frame.size.height = kWindowHeightWithoutNavigationBar - CGRectGetHeight(_commentView.frame) - keyboardSize.height;
+    _tableView.frame = frame;
+    
+    frame = _commentView.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
     
     [_tableView addGestureRecognizer:_tapHide];
@@ -183,10 +193,15 @@
 
 -(void)keyboardWillBeHidden:(NSNotification *)aNotification{
     
-    CGRect frame = _commentView.frame;
+    CGRect frame = _tableView.frame;
+    frame.size.height = kWindowHeightWithoutNavigationBar - CGRectGetHeight(_commentView.frame);
+    _tableView.frame = frame;
+    
+     frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
     
+
     [_tableView removeGestureRecognizer:_tapHide];
 }
 

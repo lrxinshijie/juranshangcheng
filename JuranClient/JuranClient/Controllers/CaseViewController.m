@@ -130,6 +130,7 @@
     
     self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
     self.fullScreenScroll.delegate = self;
+//    self.fullScreenScroll.shouldHideUIBarsWhenNotDragging = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -231,7 +232,7 @@
 
 - (void)clickFilterView:(FilterView *)view actionType:(FilterViewAction)action returnData:(NSDictionary *)data{
     if (action == FilterViewActionGrid) {
-        [UIView setAnimationDelegate:self];
+//        [UIView setAnimationDelegate:self];
 //        [UIView setAnimationDidStopSelector:@selector(animationDidStop:animationIDfinished:finished:context:)];
 //        [UIView beginAnimations:nil context:nil];
 //        [UIView setAnimationDuration:0.75];

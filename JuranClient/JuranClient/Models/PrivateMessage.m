@@ -28,6 +28,7 @@
         self.receiverHeadUrl = [dict getStringValueForKey:@"receiverHeadUrl" defaultValue:@""];
         self.senderNickName = [dict getStringValueForKey:@"senderNickName" defaultValue:@""];
         self.receiverNickName = [dict getStringValueForKey:@"receiverNickName" defaultValue:@""];
+        
     }
     return self;
 }
@@ -66,6 +67,8 @@
         self.toNickName = [dict getStringValueForKey:@"toNickName" defaultValue:@""];
         self.toHeadUrl = [dict getStringValueForKey:@"toHeadUrl" defaultValue:@""];
         self.isRead = [dict getStringValueForKey:@"isRead" defaultValue:@"N"];
+        
+        self.sort = [dict getIntValueForKey:@"sort" defaultValue:0];
     }
     return self;
 }

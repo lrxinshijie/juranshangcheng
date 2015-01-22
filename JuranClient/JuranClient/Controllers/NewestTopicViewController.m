@@ -149,6 +149,11 @@
             }else{
                 _topic = [[JRTopic alloc] initWithDictionaryForDetail:data];
             }
+            
+            if (_topic.topicId.length > 0) {
+                self.navigationItem.title = _topic.theme.length>0?_topic.theme:_topic.title;
+            }
+            
             if (!data) {
                 _emptyView.hidden = NO;
             }

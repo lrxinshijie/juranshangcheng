@@ -33,6 +33,7 @@
 -(id)initWithType:(FilterViewType)type defaultData:(NSDictionary *)defaultData{
     self = [super initWithFrame:CGRectMake(0, 0, kWindowWidth, 44)];
     if (self) {
+        self.userInteractionEnabled = YES;
         self.defaultData = defaultData;
         self.type = type;
         self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
@@ -58,6 +59,7 @@
         width /= 2;
         self.sortButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _sortButton.frame = CGRectMake(0, 0, width, 44);
+        _sortButton.userInteractionEnabled = YES;
         [_sortButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         [_sortButton setTitle:@" 排序" forState:UIControlStateNormal];
         _sortButton.titleLabel.font = [UIFont systemFontOfSize:15];
