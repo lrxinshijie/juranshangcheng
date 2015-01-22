@@ -1303,7 +1303,7 @@
 		140C46EA1A2A3741003317AD /* MyFollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFollowViewController.h; sourceTree = "<group>"; };
 		140C46EB1A2A3741003317AD /* MyFollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFollowViewController.m; sourceTree = "<group>"; };
 		140C46EC1A2A3741003317AD /* MyFollowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyFollowViewController.xib; sourceTree = "<group>"; };
-		1415FA911A5CD1CB003D0C29 /* JuranClient copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JuranClient copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1415FA911A5CD1CB003D0C29 /* JuranDesigner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JuranDesigner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1415FA921A5CD1CB003D0C29 /* JuranDesigner-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "JuranDesigner-Info.plist"; path = "/Users/Sean/Dropbox/Source/hansay/juran/JuranClient/JuranDesigner-Info.plist"; sourceTree = "<absolute>"; };
 		1415FA941A5D144B003D0C29 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		1415FA951A5D144B003D0C29 /* libPushSDK-1.8.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.2.a"; sourceTree = "<group>"; };
@@ -2759,7 +2759,7 @@
 			children = (
 				A971BC911A20825800C018D6 /* JuranClient.app */,
 				A971BCAC1A20825800C018D6 /* JuranClientTests.xctest */,
-				1415FA911A5CD1CB003D0C29 /* JuranClient copy.app */,
+				1415FA911A5CD1CB003D0C29 /* JuranDesigner.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3829,7 +3829,7 @@
 			);
 			name = JuranDesigner;
 			productName = JuranClient;
-			productReference = 1415FA911A5CD1CB003D0C29 /* JuranClient copy.app */;
+			productReference = 1415FA911A5CD1CB003D0C29 /* JuranDesigner.app */;
 			productType = "com.apple.product-type.application";
 		};
 		A971BC901A20825800C018D6 /* JuranClient */ = {
@@ -4705,7 +4705,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "REV=`date +%y%m%d`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${REV}\" \"${TARGET_BUILD_DIR}\"/${INFOPLIST_PATH}";
+			shellScript = "REV=`date +%y%m%d`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${REV}\" \"${TARGET_BUILD_DIR}\"/${INFOPLIST_PATH}\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -5271,7 +5271,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/dist",
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
 				);
-				PRODUCT_NAME = "JuranClient copy";
+				PRODUCT_NAME = JuranDesigner;
 				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -5306,7 +5306,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/dist",
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
 				);
-				PRODUCT_NAME = "JuranClient copy";
+				PRODUCT_NAME = JuranDesigner;
 				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
