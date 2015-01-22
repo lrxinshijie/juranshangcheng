@@ -366,7 +366,7 @@
 
 - (void)clearNotification{
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    [self minusBadgeNumber:1];
+//    [self minusBadgeNumber:1];
 }
 
 - (void)minusBadgeNumber:(NSInteger)num{
