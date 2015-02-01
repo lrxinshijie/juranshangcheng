@@ -61,8 +61,11 @@
 #define kShareTencentWeiboRedirectUri @"http://www.juran.cn"
 
 //QQ互联
-#define kShareQZoneKey @"1103839607"
-#define kShareQZoneSecret @"B4DwT98l9vD3oHnB"
+//#define kShareQZoneKey @"1103839607"
+//#define kShareQZoneSecret @"B4DwT98l9vD3oHnB"
+#define kShareQZoneKey @"100570502"
+#define kShareQZoneSecret @"132432a6a38a4f2985de974ded313c2f"
+
 
 //微信
 #define kShareWeChatKey @"wx3e32aa05bb32f554"

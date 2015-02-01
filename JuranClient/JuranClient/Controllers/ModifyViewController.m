@@ -80,7 +80,7 @@
             _textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
             idTypes = @[@"身份证", @"军官证", @"护照"];
             idCardType = -1;
-            if (_user.idCardType.length != 0) {
+            if (_user.idCardType.length > 0 && _user.idCardType.integerValue >= 0 && _user.idCardType.integerValue <3) {
                 idCardType = _user.idCardType.integerValue;
             }
             CGRect frame = _textField.frame;
