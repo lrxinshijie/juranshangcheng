@@ -335,6 +335,7 @@
 
 + (NSURL*)imageURL:(NSString *)url Width:(NSInteger)width{
     NSString *urlString = [NSString stringWithFormat:@"%@/%@_%d_0.img",JR_IMAGE_SERVICE,url, width];
+    NSLog(@"%@", urlString);
     return [NSURL URLWithString:urlString];
 }
 

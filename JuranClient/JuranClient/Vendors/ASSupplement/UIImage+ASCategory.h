@@ -30,4 +30,6 @@
 + (UIImage *)imageFromView:(UIView *)view;
 + (UIImage *)imageFromColor:(UIColor *)color;
 
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
+
 @end
