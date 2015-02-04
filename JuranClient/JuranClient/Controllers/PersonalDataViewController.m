@@ -17,7 +17,7 @@
 #import "ActionSheetStringPicker.h"
 #import "TextFieldCell.h"
 #import "UIAlertView+Blocks.h"
-
+#import "ZoomInImageView.h"
 
 @interface PersonalDataViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
@@ -25,7 +25,7 @@
     BOOL accountChangeTip;
 }
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) ZoomInImageView *iconImageView;
 
 @property (nonatomic, strong) NSArray *keys;
 @property (nonatomic, strong) NSArray *values;
@@ -35,9 +35,11 @@
 @property (nonatomic, strong) UITextField *selectedTextField;
 @property (nonatomic, strong) NSString* oldAccount;
 
-//@property (nonatomic, assign) BOOL isEditing;
+@property (nonatomic, assign) BOOL isEditing;
 @property (nonatomic, strong) UIButton *rightButton;
 @property (nonatomic, strong) UIImage *headImage;
+
+@property (nonatomic, strong) NSDictionary *data;
 
 @end
 
@@ -72,7 +74,7 @@
     _user = [[JRUser alloc] init];
     _oldAccount = @"";
     
-    self.rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave) title:@"保存" backgroundImage:nil];
+    self.rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave) title:@"修改" backgroundImage:nil];
     [_rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightButton];
     
@@ -92,22 +94,24 @@
         [self reloadData];
     }
 }
-/*
+
 - (void)setIsEditing:(BOOL)isEditing{
     _isEditing = isEditing;
     if (_isEditing) {
+        UIButton *btn = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onCancelEditing) title:@"取消" backgroundImage:nil];
+        [btn setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
         [_rightButton setTitle:@"保存" forState:UIControlStateNormal];
-        [_tableView reloadData];
     }else{
+        [self configureLeftBarButtonUniformly];
         [_rightButton setTitle:@"修改" forState:UIControlStateNormal];
-        [_tableView reloadData];
     }
-}*/
+    [self reloadData];
+}
 
 - (void)reloadData{
     [self reSetData];
     [_tableView reloadData];
-
 }
 
 - (void)setupDatas{
@@ -125,9 +129,9 @@
     }
     _values = @[@[@"", _user.account], @[_user.nickName,
                                          [_user sexyString],
-                                         _user.birthday.length == 0?@"未设置":_user.birthday,
+                                         _user.birthday,
                                          [_user locationAddress],
-                                         _user.detailAddress.length == 0?@"未设置":_user.detailAddress], @[_user.homeTel, [_user idCardInfomation], _user.qq, _user.weixin]];
+                                         _user.detailAddress], @[_user.homeTel, [_user idCardInfomation], _user.qq, _user.weixin]];
 }
 
 - (void)loadData{
@@ -136,6 +140,7 @@
         [self hideHUD];
         if (!error) {
             if ([data isKindOfClass:[NSDictionary class]]) {
+                self.data = data;
                 [_user buildUpMemberDetailWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self reloadData];
@@ -174,7 +179,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
 //                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
                 [self showTip:@"修改用户信息成功"];
-//                self.isEditing = NO;
+                self.isEditing = NO;
             });
             [self loadData];
         }
@@ -187,15 +192,6 @@
         if (!error) {
             _headImage = nil;
             NSString *imageUrl = [data objectForKey:@"imgUrl"];
-            /*
-            [[ALEngine shareEngine] pathURL:JR_UPLOAD_HEAD_IMAGE parameters:@{@"headUrl":imageUrl} HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:nil responseHandler:^(NSError *error, id data, NSDictionary *other) {
-                [self hideHUD];
-                if (!error) {
-                    [self.iconImageView setImageWithURLString:imageUrl];
-//                    self.isEditing = NO;
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
-                }
-            }];*/
             _user.headUrl = imageUrl;
             [self modifyMemberDetail];
         }else{
@@ -207,49 +203,37 @@
 
 #pragma mark - Target Action
 
+- (void)onCancelEditing{
+    _headImage = nil;
+    [_user buildUpMemberDetailWithDictionary:self.data];
+    self.isEditing = NO;
+}
+
 - (void)onSave{
-    /*
+    
     if (self.isEditing) {
+        [self.selectedTextField resignFirstResponder];
         
+        //判断合法性
+        if (_user.account.length == 0) {
+            [self showTip:@"用户名不能为空"];
+            return;
+        }
+        
+        if (_user.nickName.length == 0) {
+            [self showTip:@"昵称不能为空"];
+            return;
+        }
+        
+        if (_headImage) {
+            [self uploadHeaderImage:_headImage];
+        }else{
+            [self modifyMemberDetail];
+        }
     }else{
         self.isEditing = YES;
-    }*/
-    
-    [self.selectedTextField resignFirstResponder];
-    
-    //判断合法性
-    if (_user.account.length == 0) {
-        [self showTip:@"用户名不能为空"];
-        return;
-    }
-    
-    if (_user.nickName.length == 0) {
-        [self showTip:@"昵称不能为空"];
-        return;
-    }
-    
-    if (_headImage) {
-        [self uploadHeaderImage:_headImage];
-    }else{
-        [self modifyMemberDetail];
     }
 }
-/*
-#pragma mark - ModifyViewControllerDelegate
-
-- (void)modifyCommit:(ModifyViewController *)vc{
-    [self reSetData];
-    [_tableView reloadData];
-}
-
-
-#pragma mark - SexySwitchDelegate
-
-- (void)sexySwitch:(SexySwitch *)sexySwitch valueChange:(NSInteger)index{
-    param = @{@"sex": [NSString stringWithFormat:@"%d", index]};
-    [self modifyMemberDetail];
-}
-*/
 
 #pragma mark - UITableViewDataSource/Delegate
 
@@ -274,14 +258,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    /*
-     *  设计师端
-     if (indexPath.section == 0 && indexPath.row == 0) {
-     return 65;
-     }else if (indexPath.section == 2 && indexPath.row == 6){
-     return 70;
-     }
-     */
     if (indexPath.section == 0 && indexPath.row == 0) {
         return 65;
     }
@@ -289,7 +265,7 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ((indexPath.section == 0 && indexPath.row == 0) || (indexPath.section == 1 && indexPath.row != 0) || (indexPath.section == 2 && indexPath.row == 1)) {
+    if (!_isEditing || (indexPath.section == 0 && indexPath.row == 0) || (indexPath.section == 1 && indexPath.row != 0) || (indexPath.section == 2 && indexPath.row == 1)) {
         static NSString *cellIdentifier = @"personalData";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
@@ -297,8 +273,8 @@
             cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize+2];
             cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
         }
-        cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]];
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        cell.accessoryView = _isEditing?[cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]]:nil;
+        cell.selectionStyle = _isEditing?UITableViewCellSelectionStyleDefault:UITableViewCellSelectionStyleNone;
         cell.detailTextLabel.textColor = [UIColor blackColor];
         cell.detailTextLabel.text = @"";
         
@@ -306,31 +282,34 @@
             cell.layoutMargins = UIEdgeInsetsZero;
         }
         
-        if (indexPath.section == 0) {
+        if (indexPath.section == 0 && indexPath.row == 0) {
             cell.textLabel.text = _keys[indexPath.section][indexPath.row];
             CGRect frame = CGRectMake(0, 0, 100, 50);
             UIView *view = [[UIView alloc] initWithFrame:frame];
             frame.origin = CGPointMake(frame.size.width - 8, (frame.size.height - 16)/2);
             frame.size = CGSizeMake(8, 15);
             UIImageView *arrowImageView = [cell imageViewWithFrame:frame image:[UIImage imageNamed:@"cellIndicator.png"]];
-            [view addSubview:arrowImageView];
+            if (_isEditing) {
+                [view addSubview:arrowImageView];
+            }
             
             if (self.iconImageView.superview) {
                 [self.iconImageView removeFromSuperview];
             }
             frame = self.iconImageView.frame;
-            frame.origin = CGPointMake(view.frame.size.width - arrowImageView.frame.size.width - 10 -50, 0);
+            frame.origin = CGPointMake(view.frame.size.width - 50 - (_isEditing?(arrowImageView.frame.size.width+10):0), 0);
             self.iconImageView.frame = frame;
             [view addSubview:self.iconImageView];
-            //            [self.iconImageView setImageWithURLString:_user.headUrl];
             cell.accessoryView = view;
             
         }else{
             cell.textLabel.text = _keys[indexPath.section][indexPath.row];
             NSString *value = _values[indexPath.section][indexPath.row];
-            cell.detailTextLabel.text = _values[indexPath.section][indexPath.row];
-            if ([value isEqualToString:@"未设置"]) {
+            if (value.length == 0) {
+                cell.detailTextLabel.text = @"未设置";
                 cell.detailTextLabel.textColor = [UIColor grayColor];
+            }else{
+                cell.detailTextLabel.text = _values[indexPath.section][indexPath.row];
             }
         }
         return cell;
@@ -345,7 +324,7 @@
         cell.textLabel.font = [UIFont systemFontOfSize:15];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
         cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.textField.enabled = YES;
+        cell.textField.enabled = _isEditing;
         cell.textField.delegate = self;
         cell.textField.tag = [_tags[indexPath.section][indexPath.row] integerValue];
         if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
@@ -394,16 +373,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (!self.isEditing) {
-//        return;
-//    }
+    if (!self.isEditing) {
+        return;
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.selectedTextField resignFirstResponder];
     if (indexPath.section == 0 && indexPath.row == 0) {
         [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
             if (images.count > 0) {
                 _headImage = images.firstObject;
-                self.iconImageView.image = _headImage;
+                [self.iconImageView setImageWithFile:_headImage];
             }
         }];
     }else if (indexPath.section == 1){
@@ -465,7 +444,8 @@
 
 - (UIImageView*)iconImageView{
     if (!_iconImageView) {
-        _iconImageView = [self.view imageViewWithFrame:CGRectMake(0, 0, 50, 50) image:[UIImage imageNamed:@"unlogin_head.png"]];
+        _iconImageView = [[ZoomInImageView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        _iconImageView.image = [UIImage imageNamed:@"unlogin_head.png"];
         _iconImageView.layer.masksToBounds = YES;
         _iconImageView.layer.cornerRadius = _iconImageView.frame.size.height/2;
     }
