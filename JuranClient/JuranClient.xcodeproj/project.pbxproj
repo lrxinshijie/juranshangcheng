@@ -5272,7 +5272,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
 				);
 				PRODUCT_NAME = JuranDesigner;
-				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
+				PROVISIONING_PROFILE = "2b2b4f10-1e7a-4d62-a56e-6c4f681a58b5";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5307,7 +5307,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
 				);
 				PRODUCT_NAME = JuranDesigner;
-				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
+				PROVISIONING_PROFILE = "2b2b4f10-1e7a-4d62-a56e-6c4f681a58b5";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
