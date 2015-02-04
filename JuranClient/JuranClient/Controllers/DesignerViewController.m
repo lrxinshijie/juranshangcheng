@@ -11,7 +11,6 @@
 #import "DesignerCell.h"
 #import "JRDesigner.h"
 #import "JRPhotoScrollViewController.h"
-#import "JRWebImageDataSource.h"
 #import "FilterView.h"
 #import "YIFullScreenScroll.h"
 

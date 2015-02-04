@@ -11,6 +11,7 @@
                 <outlet property="favImageViewForDesigner" destination="1KE-5u-SRa" id="ARI-Dn-A1y"/>
                 <outlet property="toolBar" destination="CAE-i4-M5N" id="yYN-j0-YZm"/>
                 <outlet property="toolBarForDesigner" destination="KGX-yI-TXL" id="FIW-BP-bcY"/>
+                <outlet property="view" destination="iN0-l3-epB" id="iCT-QI-0JW"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

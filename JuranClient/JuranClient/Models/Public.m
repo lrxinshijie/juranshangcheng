@@ -335,6 +335,7 @@
 
 + (NSURL*)imageURL:(NSString *)url Width:(NSInteger)width{
     NSString *urlString = [NSString stringWithFormat:@"%@/%@_%d_0.img",JR_IMAGE_SERVICE,url, width];
+    NSLog(@"%@", urlString);
     return [NSURL URLWithString:urlString];
 }
 
@@ -519,8 +520,14 @@
 }
 
 + (BOOL)isDesignerApp{
-    NSString *bundleIdentifier = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-    return ![bundleIdentifier isEqualToString:@"com.juran.JuranHome"];
+//    NSString *bundleIdentifier = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+//    return ![bundleIdentifier isEqualToString:@"com.juran.JuranHome"];
+    
+#ifdef kJuranDesigner
+    return YES;
+#endif
+    
+    return NO;
 }
 
 + (NSString *)shareEnv{

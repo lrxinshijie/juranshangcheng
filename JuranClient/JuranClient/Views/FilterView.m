@@ -43,6 +43,7 @@
         [self addSubview:bgImg];
         
         CGFloat width = kWindowWidth;
+        
         if (([Public isDesignerApp] && type == FilterViewTypeCase) || type == FilterViewTypeCaseSearch) {
             width = kWindowWidth - 44;
             UIView *gridView = [[UIView alloc] initWithFrame:CGRectMake(width, 0, 44, 44)];
