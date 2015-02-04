@@ -24,6 +24,7 @@
 #import "UIAlertView+Blocks.h"
 #import "WikiOrActivityViewController.h"
 #import "APService.h"
+#import "MobClick.h"
 
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
@@ -48,6 +49,8 @@
 #define kShareWeChatKey @"wx338441f4726af98d"
 #define kShareWeChatSecret @"599f3a84d5377b1a1848ebf2c7515330"
 
+#define kUMengKey @"54d180f2fd98c587df0009d6"
+
 #else
 
 //新浪微博
@@ -71,6 +74,8 @@
 #define kShareWeChatKey @"wx3e32aa05bb32f554"
 #define kShareWeChatSecret @"f2c0d5958e633bdee9c25c33bb4e913c"
 
+#define kUMengKey @"54d180b1fd98c50a77000e95"
+
 #endif
 
 
@@ -87,6 +92,9 @@
 #endif
     
     self.clientId = @"";
+    
+    [MobClick startWithAppkey:kUMengKey];
+    [MobClick updateOnlineConfig];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

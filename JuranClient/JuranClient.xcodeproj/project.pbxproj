@@ -376,6 +376,8 @@
 		14361E561A343F5F00F9BD94 /* BaseAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14361E541A343F5F00F9BD94 /* BaseAddressViewController.xib */; };
 		14361E5A1A344E6100F9BD94 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 14361E581A344E6100F9BD94 /* pinyin.c */; };
 		1437F2B81A30B09B00E7C077 /* JRTopic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1437F2B71A30B09B00E7C077 /* JRTopic.m */; };
+		143EF39A1A81B8C400A88386 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143EF3981A81B8C400A88386 /* libMobClickLibrary.a */; };
+		143EF39B1A81B8C400A88386 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 143EF3981A81B8C400A88386 /* libMobClickLibrary.a */; };
 		1441A0611A2987FB004A038E /* JRProfileData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A05F1A2987FB004A038E /* JRProfileData.m */; };
 		1441A0641A29A447004A038E /* SexySwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A0631A29A447004A038E /* SexySwitch.m */; };
 		1441A1461A29E156004A038E /* JRMemberDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 1441A1451A29E156004A038E /* JRMemberDetail.m */; };
@@ -1407,6 +1409,8 @@
 		14361E591A344E6100F9BD94 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		1437F2B61A30B09B00E7C077 /* JRTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRTopic.h; sourceTree = "<group>"; };
 		1437F2B71A30B09B00E7C077 /* JRTopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRTopic.m; sourceTree = "<group>"; };
+		143EF3981A81B8C400A88386 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		143EF3991A81B8C400A88386 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		1441A05E1A2987FB004A038E /* JRProfileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRProfileData.h; sourceTree = "<group>"; };
 		1441A05F1A2987FB004A038E /* JRProfileData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRProfileData.m; sourceTree = "<group>"; };
 		1441A0621A29A447004A038E /* SexySwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SexySwitch.h; sourceTree = "<group>"; };
@@ -2348,6 +2352,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				143EF39B1A81B8C400A88386 /* libMobClickLibrary.a in Frameworks */,
 				1415FA101A5CD1CB003D0C29 /* CoreGraphics.framework in Frameworks */,
 				1415FA111A5CD1CB003D0C29 /* SystemConfiguration.framework in Frameworks */,
 				1415FA121A5CD1CB003D0C29 /* QuartzCore.framework in Frameworks */,
@@ -2413,6 +2418,7 @@
 				1441A1761A29E3CD004A038E /* libTCWeiboSDK.a in Frameworks */,
 				1441A16B1A29E3CD004A038E /* SMSConnection.framework in Frameworks */,
 				1441A1671A29E3CD004A038E /* MailConnection.framework in Frameworks */,
+				143EF39A1A81B8C400A88386 /* libMobClickLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2446,6 +2452,15 @@
 				14361E591A344E6100F9BD94 /* pinyin.h */,
 			);
 			path = PinYin;
+			sourceTree = "<group>";
+		};
+		143EF3971A81B8C400A88386 /* UMAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				143EF3981A81B8C400A88386 /* libMobClickLibrary.a */,
+				143EF3991A81B8C400A88386 /* MobClick.h */,
+			);
+			path = UMAnalytics;
 			sourceTree = "<group>";
 		};
 		1441A1471A29E3CD004A038E /* ShareSDK */ = {
@@ -3206,6 +3221,7 @@
 		A987ED6F1A20920500CED7CD /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				143EF3971A81B8C400A88386 /* UMAnalytics */,
 				37F0E6DD1A7D2735004CCCB2 /* SDWebImage */,
 				A9224E231A6CB779002974ED /* YIFullScreenScroll */,
 				147282C41A67673500FB0CFB /* AHReach */,
@@ -4100,7 +4116,7 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = QHWR2FWBM6;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -5547,13 +5563,14 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/dist",
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
+					"$(PROJECT_DIR)/JuranClient/Vendors/UMAnalytics",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = JuranDesigner;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5586,6 +5603,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/dist",
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
+					"$(PROJECT_DIR)/JuranClient/Vendors/UMAnalytics",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -5697,10 +5715,11 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/dist",
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
+					"$(PROJECT_DIR)/JuranClient/Vendors/UMAnalytics",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
 				VERSIONING_SYSTEM = "";
@@ -5737,6 +5756,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/dist",
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
+					"$(PROJECT_DIR)/JuranClient/Vendors/UMAnalytics",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

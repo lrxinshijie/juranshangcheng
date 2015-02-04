@@ -520,8 +520,14 @@
 }
 
 + (BOOL)isDesignerApp{
-    NSString *bundleIdentifier = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-    return ![bundleIdentifier isEqualToString:@"com.juran.JuranHome"];
+//    NSString *bundleIdentifier = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+//    return ![bundleIdentifier isEqualToString:@"com.juran.JuranHome"];
+    
+#ifdef kJuranDesigner
+    return YES;
+#endif
+    
+    return NO;
 }
 
 + (NSString *)shareEnv{
