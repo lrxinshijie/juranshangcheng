@@ -128,6 +128,8 @@
 #ifdef kJuranDesigner
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMyDemandReloadData object:nil];
 #endif
+            
+            [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
         }
         if (finished) {
             finished(!error);

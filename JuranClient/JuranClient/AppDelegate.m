@@ -91,6 +91,8 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 #endif
     
+    [Public initApp];
+    
     self.clientId = @"";
     
     [MobClick startWithAppkey:kUMengKey];
