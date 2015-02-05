@@ -522,6 +522,12 @@
 		14EDB3931A3B519000E5AC77 /* VersionInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14EDB3911A3B519000E5AC77 /* VersionInfoViewController.xib */; };
 		14F4A59F1A4066D100D7AFA0 /* APPRecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F4A59D1A4066D100D7AFA0 /* APPRecommendViewController.m */; };
 		14F4A5A01A4066D100D7AFA0 /* APPRecommendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14F4A59E1A4066D100D7AFA0 /* APPRecommendViewController.xib */; };
+		14FB07F01A835B9800428DE5 /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FB07EE1A835B9800428DE5 /* OrderListViewController.m */; };
+		14FB07F11A835B9800428DE5 /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FB07EE1A835B9800428DE5 /* OrderListViewController.m */; };
+		14FB07F21A835B9800428DE5 /* OrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FB07EF1A835B9800428DE5 /* OrderListViewController.xib */; };
+		14FB07F31A835B9800428DE5 /* OrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FB07EF1A835B9800428DE5 /* OrderListViewController.xib */; };
+		14FB07F61A835BBA00428DE5 /* JROrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FB07F51A835BBA00428DE5 /* JROrder.m */; };
+		14FB07F71A835BBA00428DE5 /* JROrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FB07F51A835BBA00428DE5 /* JROrder.m */; };
 		14FBC9E11A495143000A789C /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14FBC9E01A495143000A789C /* arrow@2x.png */; };
 		14FE2DE21A382FCB00B31FBA /* PrivateMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FE2DE01A382FCB00B31FBA /* PrivateMessageViewController.m */; };
 		14FE2DE31A382FCB00B31FBA /* PrivateMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FE2DE11A382FCB00B31FBA /* PrivateMessageViewController.xib */; };
@@ -1627,6 +1633,11 @@
 		14F4A59C1A4066D100D7AFA0 /* APPRecommendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APPRecommendViewController.h; sourceTree = "<group>"; };
 		14F4A59D1A4066D100D7AFA0 /* APPRecommendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APPRecommendViewController.m; sourceTree = "<group>"; };
 		14F4A59E1A4066D100D7AFA0 /* APPRecommendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = APPRecommendViewController.xib; sourceTree = "<group>"; };
+		14FB07ED1A835B9800428DE5 /* OrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListViewController.h; sourceTree = "<group>"; };
+		14FB07EE1A835B9800428DE5 /* OrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListViewController.m; sourceTree = "<group>"; };
+		14FB07EF1A835B9800428DE5 /* OrderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListViewController.xib; sourceTree = "<group>"; };
+		14FB07F41A835BBA00428DE5 /* JROrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JROrder.h; sourceTree = "<group>"; };
+		14FB07F51A835BBA00428DE5 /* JROrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JROrder.m; sourceTree = "<group>"; };
 		14FBC9E01A495143000A789C /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
 		14FE2DDF1A382FCB00B31FBA /* PrivateMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateMessageViewController.h; sourceTree = "<group>"; };
 		14FE2DE01A382FCB00B31FBA /* PrivateMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateMessageViewController.m; sourceTree = "<group>"; };
@@ -2697,6 +2708,16 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		14FB07EC1A835B7B00428DE5 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				14FB07ED1A835B9800428DE5 /* OrderListViewController.h */,
+				14FB07EE1A835B9800428DE5 /* OrderListViewController.m */,
+				14FB07EF1A835B9800428DE5 /* OrderListViewController.xib */,
+			);
+			name = Order;
+			sourceTree = "<group>";
+		};
 		371D686A1A5D6E2000172AC9 /* Personal */ = {
 			isa = PBXGroup;
 			children = (
@@ -3095,6 +3116,7 @@
 		A987ED671A20920500CED7CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				14FB07EC1A835B7B00428DE5 /* Order */,
 				145471CE1A38932900428BCB /* Question */,
 				145471CD1A3892A200428BCB /* Personal */,
 				A907F2AD1A3887F600DEB8EA /* Demand */,
@@ -3214,6 +3236,8 @@
 				371FBEEA1A6A357700635D3D /* JRWiki.m */,
 				37A0F8151A6B89A800611760 /* JRActivity.h */,
 				37A0F8161A6B89A800611760 /* JRActivity.m */,
+				14FB07F41A835BBA00428DE5 /* JROrder.h */,
+				14FB07F51A835BBA00428DE5 /* JROrder.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -4405,6 +4429,7 @@
 				1415FAA51A5D21DF003D0C29 /* nav-icon-share_white@2x.png in Resources */,
 				1415FA6B1A5CD1CB003D0C29 /* DefaultData.plist in Resources */,
 				BD5187641A5D0ED700BE508A /* tabbar_designer@2x.png in Resources */,
+				14FB07F31A835B9800428DE5 /* OrderListViewController.xib in Resources */,
 				BD5186341A5D0ED700BE508A /* menu_icon_yuyue@2x.png in Resources */,
 				BD5186141A5D0ED700BE508A /* checkbox_checked_okk@2x.png in Resources */,
 				1415FA6C1A5CD1CB003D0C29 /* ModifyPasswordViewController.xib in Resources */,
@@ -4672,6 +4697,7 @@
 				14490CB41A2B6A19001CB160 /* AccountSecurityViewController.xib in Resources */,
 				BD5187511A5D0ED700BE508A /* sns_icon_2_s@2x.png in Resources */,
 				14FE2DE31A382FCB00B31FBA /* PrivateMessageViewController.xib in Resources */,
+				14FB07F21A835B9800428DE5 /* OrderListViewController.xib in Resources */,
 				BD5185D71A5D0ED700BE508A /* case-detail-text@2x.png in Resources */,
 				BD5185F11A5D0ED700BE508A /* icon-check-active@2x.png in Resources */,
 				BD5187471A5D0ED700BE508A /* share_view_close@2x.png in Resources */,
@@ -5142,6 +5168,7 @@
 				1415F9D11A5CD1CB003D0C29 /* AskDetailViewController.m in Sources */,
 				1415F9D21A5CD1CB003D0C29 /* ASAlertView.m in Sources */,
 				1415F9D31A5CD1CB003D0C29 /* NSDictionary+ASCategory.m in Sources */,
+				14FB07F11A835B9800428DE5 /* OrderListViewController.m in Sources */,
 				37A0F8131A6B877500611760 /* ActivityViewController.m in Sources */,
 				37F0E7181A7D2735004CCCB2 /* UIImage+WebP.m in Sources */,
 				1415F9D41A5CD1CB003D0C29 /* JRSubject.m in Sources */,
@@ -5151,6 +5178,7 @@
 				1415F9D71A5CD1CB003D0C29 /* ModifyViewController.m in Sources */,
 				1415F9D81A5CD1CB003D0C29 /* MyAskOrAnswerViewController.m in Sources */,
 				1415F9D91A5CD1CB003D0C29 /* InteractionViewController.m in Sources */,
+				14FB07F71A835BBA00428DE5 /* JROrder.m in Sources */,
 				1415F9DA1A5CD1CB003D0C29 /* SearchViewController.m in Sources */,
 				1415F9DB1A5CD1CB003D0C29 /* UIView+ASCategory.m in Sources */,
 				1415F9DD1A5CD1CB003D0C29 /* ZoomInImageView.m in Sources */,
@@ -5427,6 +5455,7 @@
 				37F0E71B1A7D2735004CCCB2 /* UIImageView+WebCache.m in Sources */,
 				144B5D651A37278E00C75955 /* SearchViewController.m in Sources */,
 				A987EDF31A20920500CED7CD /* UIView+ASCategory.m in Sources */,
+				14FB07F61A835BBA00428DE5 /* JROrder.m in Sources */,
 				149BE7121A4567F800A9E1EC /* ZoomInImageView.m in Sources */,
 				14490CA91A2B5D50001CB160 /* AccountManageViewController.m in Sources */,
 				1441A1891A29E3D5004A038E /* JRPhotoScrollViewController.m in Sources */,
@@ -5450,6 +5479,7 @@
 				141A1D3F1A2CCDE200C073C5 /* JRQuestion.m in Sources */,
 				145471C61A3885DB00428BCB /* DemandDetailViewController.m in Sources */,
 				A987EDDD1A20920500CED7CD /* MKMapView+ASCategory.m in Sources */,
+				14FB07F01A835B9800428DE5 /* OrderListViewController.m in Sources */,
 				A987EDE31A20920500CED7CD /* NSObject+ASCategory.m in Sources */,
 				14FE2DEB1A38338800B31FBA /* PrivateMessage.m in Sources */,
 				A987EDEC1A20920500CED7CD /* UIImageView+ASCategory.m in Sources */,
