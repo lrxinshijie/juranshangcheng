@@ -69,7 +69,7 @@
     self.imageURLs = [NSMutableArray array];
     
     
-    if (_jrCase.roomTypeImage) {
+    if (_jrCase.roomTypeImage && _jrCase.roomTypeImageUrl.length == 0) {
         [self showHUDFromTitle:@"上传户型图..."];
         [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":_jrCase.roomTypeImage} responseHandler:^(NSError *error, id data, NSDictionary *other) {
             if (!error) {
@@ -167,10 +167,10 @@
     CaseImageCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     
     if (indexPath.section == 0 && indexPath.row == 1) {
-        if (_jrCase.roomTypeImageUrl.length > 0) {
-            [cell.imageView setImageWithURLString:_jrCase.roomTypeImageUrl];
-        }else{
+        if (_jrCase.roomTypeImage) {
             [cell setImage:_jrCase.roomTypeImage];
+        }else{
+            [cell.imageView setImageWithURLString:_jrCase.roomTypeImageUrl];
         }
     }else if (indexPath.section == 1 && indexPath.row > 0){
         JRCaseImage *caseImage = _jrCase.imageList[indexPath.row-1];
@@ -208,6 +208,7 @@
             if (!_jrCase.roomTypeImage && _jrCase.roomTypeImageUrl.length == 0) {
                 [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:NO MaxNumber:1 Handler:^(NSArray *images) {
                     _jrCase.roomTypeImage = [images firstObject];
+                    _jrCase.roomTypeImageUrl = @"";
                     [_collectionView reloadData];
                 }];
             }else{

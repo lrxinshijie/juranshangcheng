@@ -7,9 +7,6 @@
 //
 
 #import "JRPhotoScrollViewController.h"
-#import "KTPhotoBrowserDataSource.h"
-#import "KTPhotoBrowserGlobal.h"
-#import "KTPhotoView.h"
 #import "CaseDetailViewController.h"
 #import "ShareView.h"
 #import "SDWebImageManager.h"
@@ -17,9 +14,8 @@
 #import "MeasureViewController.h"
 #import "JRDesigner.h"
 
-@interface JRPhotoScrollViewController ()<KTPhotoBrowserDataSource, UIActionSheetDelegate>
+@interface JRPhotoScrollViewController ()<UIActionSheetDelegate, MWPhotoBrowserDelegate>
 {
-    KTPhotoView *_photoView;
 }
 
 @property (nonatomic, strong) UITextView *descTextView;
@@ -30,15 +26,20 @@
 @property (nonatomic, strong) IBOutlet UIView *toolBarForDesigner;
 @property (nonatomic, strong) IBOutlet UIImageView *favImageViewForDesigner;
 @property (nonatomic, strong) UILabel *lastPageLabel;
+@property (nonatomic, strong) UIView *bottomView;
 
 @end
 
 @implementation JRPhotoScrollViewController
 
 - (id)initWithJRCase:(JRCase*)c andStartWithPhotoAtIndex:(NSUInteger)index{
-    self = [self initWithDataSource:self andStartWithPhotoAtIndex:index];
+    self = [self initWithDelegate:self];
+    
     if (self) {
         self.jrCase = c;
+        self.scrollNotHiddenControlEnable = YES;
+        self.isNotAutoHiddenControl = YES;
+        self.displayActionButton = NO;
     }
     return self;
 }
@@ -46,20 +47,19 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+//    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     if (self) {
         // Custom initialization
     }
     return self;
 }
 
-- (void)loadView{
-    [super loadView];
-    [self loadData];
-}
-
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setBackgroundImageWithColor:RGBAColor(0, 0, 0, .5f)];
+    [self.navigationController.navigationBar setBackgroundImageWithColor:RGBAColor(1, 1, 1, .5f)];
+#ifndef kJuranDesigner
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+#endif
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -78,14 +78,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view.
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self.view buttonWithFrame:CGRectZero target:self action:@selector(back:) image:[UIImage imageNamed:@"nav_backbtn_white"]]];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self.view buttonWithFrame:CGRectZero target:self action:@selector(back:) image:[UIImage imageNamed:@"nav_backbtn_white"]]];    
+    
+    if ([UINavigationBar instancesRespondToSelector:@selector(setShadowImage:)]){
+        [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:[UIColor clearColor] size:CGSizeMake(320, 3)]];
+    }
+    
 #ifdef kJuranDesigner
     _favImageViewForDesigner.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
 #else
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"case_icon_share_white.png"] rightBarButtonItemAction:@selector(doShare)];
     _favImageView.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
 #endif
+    [self setBottomView];
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    longPress.minimumPressDuration = 1.f;
+    [self.view addGestureRecognizer:longPress];
+    [self loadData];
 }
 
 - (void)loadData{
@@ -100,15 +111,10 @@
             
             [self.jrCase buildDetailWithDictionary:data];
             dispatch_async(dispatch_get_main_queue(), ^{
-                for (id obj in scrollView_.subviews) {
-                    if ([obj isKindOfClass:[KTPhotoView class]]) {
-                        [obj removeFromSuperview];
-                    }
-                }
-
-                [self viewDidLoad];
-                [self viewWillAppear:YES];
+                _descTextView.text = _jrCase.desc;
+                [self adjustBottomViewFrame];
             });
+            [self reloadData];
         }else{
             [super back:nil];
         }
@@ -117,13 +123,12 @@
 
 - (UILabel*)lastPageLabel{
     if (!_lastPageLabel) {
-        CGSize contentSize = scrollView_.contentSize;
-        _lastPageLabel = [scrollView_ labelWithFrame:CGRectMake(contentSize.width-10, contentSize.height/2, 80, 20) text:@"最后一张" textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:18]];
-        [scrollView_ addSubview:_lastPageLabel];
+        _lastPageLabel = [self.view labelWithFrame:CGRectMake(0, 0, 80, 20) text:@"最后一张" textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:18]];
+        [self.pagingScrollView addSubview:_lastPageLabel];
     }
     return _lastPageLabel;
 }
-
+/*
 - (void)setScrollViewContentSize{
     [super setScrollViewContentSize];
     
@@ -133,17 +138,16 @@
     CGRect frame = CGRectMake(contentSize.width, y, 80, 20);
     self.lastPageLabel.frame = frame;
 }
+*/
 
 - (void)setBottomView{
-    [super setBottomView];
-    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     CGRect screenFrame = [[UIScreen mainScreen] bounds];
     
-    bottomView_.backgroundColor = RGBAColor(0, 0, 0, .5f);
+    self.bottomView.backgroundColor = RGBAColor(0, 0, 0, .5f);
     
     _titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenFrame.size.width, 70)];
     _titleView.backgroundColor = [UIColor clearColor];
-    [bottomView_ addSubview:_titleView];
+    [self.bottomView addSubview:_titleView];
     
     _descTextView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, 270, 50)];
     _descTextView.editable = NO;
@@ -167,19 +171,19 @@
     
 #ifdef kJuranDesigner
     _toolBarForDesigner.frame = toolbarFrame;
-    [bottomView_ addSubview:_toolBarForDesigner];
+    [self.bottomView addSubview:_toolBarForDesigner];
     _favImageViewForDesigner.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
 #else
     _toolBar.frame = toolbarFrame;
-    [bottomView_ addSubview:_toolBar];
+    [self.bottomView addSubview:_toolBar];
     _favImageView.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
 #endif
     
     CGRect bottomFrame = CGRectMake(0,
                                     screenFrame.size.height - _titleView.frame.size.height - toolbarFrame.size.height - _titleView.frame.size.height,
                                     screenFrame.size.width,
-                                    bottomView_.frame.size.height + toolbarFrame.size.height + _titleView.frame.size.height);
-    bottomView_.frame = bottomFrame;
+                                    self.bottomView.frame.size.height + toolbarFrame.size.height + _titleView.frame.size.height);
+    self.bottomView.frame = bottomFrame;
     [self adjustBottomViewFrame];
 }
 
@@ -188,20 +192,23 @@
 }
 
 - (void)handleLongPress:(UIGestureRecognizer *)gesture{
-    [super handleLongPress:gesture];
     if (gesture.state == UIGestureRecognizerStateBegan) {
-        _photoView = (KTPhotoView*)gesture.view;
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存到相册", nil];
-        [actionSheet showInView:self.view];
+        NSURL *url = [Public imageURL:[_jrCase.detailImageList objectAtIndex:self.currentIndex] Width:512];
+        NSLog(@"%@",url);
+        MWPhoto *photo = [self currentPhoto];
+        if ([photo underlyingImage]) {
+            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"保存到相册", nil];
+            [actionSheet showInView:self.view];
+        }
     }
-    
 }
 
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0) {
-        UIImageWriteToSavedPhotosAlbum([_photoView image], self, @selector(image:didFinishSavingWithError:contextInfo:),nil);
+        MWPhoto *photo = [self currentPhoto];
+        UIImageWriteToSavedPhotosAlbum([photo underlyingImage], self, @selector(image:didFinishSavingWithError:contextInfo:),nil);
     }
 }
 
@@ -211,17 +218,6 @@
     }else{
         [self showTip:[NSString stringWithFormat:@"图片保存失败!%@", error.localizedFailureReason]];
     }
-}
-
-- (void)setCurrentIndex:(NSInteger)newIndex{
-    [super setCurrentIndex:newIndex];
-    [self setTitleAndIndex:newIndex];
-}
-
-- (void)setTitleAndIndex:(NSInteger)newIndex{
-    _descTextView.text = [dataSource_ titleAtIndex:newIndex];
-    _indexLabel.text = [NSString stringWithFormat:@"%i/%i", newIndex+1,[dataSource_ numberOfPhotos]];
-    [self adjustBottomViewFrame];
 }
 
 - (void)adjustBottomViewFrame{
@@ -239,6 +235,8 @@
     frame.size.height = height;
     _descTextView.frame = frame;
     
+    _indexLabel.center = CGPointMake(_indexLabel.center.x, _descTextView.center.y);
+    
     frame = _titleView.frame;
     frame.size.height = CGRectGetMaxY(_descTextView.frame) + 10;
     _titleView.frame = frame;
@@ -248,19 +246,19 @@
     frame.origin.y = CGRectGetMaxY(_titleView.frame);
     _toolBarForDesigner.frame = frame;
     
-    frame = bottomView_.frame;
+    frame = self.bottomView.frame;
     frame.size.height = CGRectGetMaxY(_toolBarForDesigner.frame);
     frame.origin.y = screenFrame.size.height - frame.size.height;
-    bottomView_.frame = frame;
+    self.bottomView.frame = frame;
 #else
     frame = _toolBar.frame;
     frame.origin.y = CGRectGetMaxY(_titleView.frame);
     _toolBar.frame = frame;
     
-    frame = bottomView_.frame;
+    frame = self.bottomView.frame;
     frame.size.height = CGRectGetMaxY(_toolBar.frame);
     frame.origin.y = screenFrame.size.height - frame.size.height;
-    bottomView_.frame = frame;
+    self.bottomView.frame = frame;
 #endif
 }
 
@@ -352,22 +350,33 @@
     [self.navigationController pushViewController:pv animated:YES];
 }
 
-#pragma mark - KTPhotoBrowserDataSource
 
-- (NSInteger)numberOfPhotos {
+#pragma mark - MWPhotoBrowserDelegate
+
+- (NSString*)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index{
+    return nil;
+}
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
     return _jrCase.detailImageList.count;
 }
 
-- (NSString*)titleAtIndex:(NSInteger)index{
-    return _jrCase.desc;
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < _jrCase.detailImageList.count){
+        NSURL *url = [Public imageURL:[_jrCase.detailImageList objectAtIndex:index] Width:512];
+        NSLog(@"%@",url);
+        return [MWPhoto photoWithURL:url];
+    }
+    return nil;
 }
 
-- (void)imageAtIndex:(NSInteger)index photoView:(KTPhotoView *)photoView {
-    NSURL *url = [Public imageURL:[_jrCase.detailImageList objectAtIndex:index] Width:512];
-    NSLog(@"%@",url);
-    [photoView setImageWithURL:url placeholderImage:nil];
-//    [UIImage imageNamed:@"case_default_image.png"]
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index{
+    _indexLabel.text = [NSString stringWithFormat:@"%i/%i", index+1,_jrCase.detailImageList.count];
+    if (index == _jrCase.detailImageList.count - 1) {
+        CGSize contentSize = self.pagingScrollView.contentSize;
+        CGPoint center = CGPointMake(contentSize.width + CGRectGetWidth(self.lastPageLabel.frame)/2, self.pagingScrollView.center.y);
+        self.lastPageLabel.center = center;
+    }
 }
-
 
 @end

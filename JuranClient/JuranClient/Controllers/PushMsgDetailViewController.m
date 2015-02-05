@@ -140,28 +140,35 @@
 - (void)setImageWithURL:(NSURL *)url{
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     
-    // Remove in progress downloader from queue
-    [manager cancelForDelegate:self];
-    
-    UIImage *cachedImage = nil;
-    if (url) {
-        cachedImage = [manager imageWithURL:url];
-    }
-    
-    if (cachedImage) {
-        self.imageView.image = cachedImage;
-    }
-    else {
-        if (url) {
-            [manager downloadWithURL:url delegate:self];
+    [manager downloadImageWithURL:url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        if (image && finished) {
+            self.imageView.image = image;
+            [self adjustFrame];
         }
-    }
+    }];
+    // Remove in progress downloader from queue
+//    [manager cancelAll];
+//    
+//    UIImage *cachedImage = nil;
+//    if (url) {
+//        cachedImage = [manager imageWithURL:];
+//    }
+//    
+//    if (cachedImage) {
+//        self.imageView.image = cachedImage;
+//    }
+//    else {
+//        if (url) {
+//            [manager downloadWithURL:url delegate:self];
+//        }
+//    }
 }
 
 
 - (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image {
-    self.imageView.image = image;
-    [self adjustFrame];
+    
 }
 
 

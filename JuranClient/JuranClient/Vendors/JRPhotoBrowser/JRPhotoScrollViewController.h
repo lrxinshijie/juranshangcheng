@@ -6,11 +6,10 @@
 //  Copyright (c) 2014年 song.he. All rights reserved.
 //
 
-#import "KTPhotoScrollViewController.h"
 #import "JRCase.h"
-#import "KTPhotoView+SDWebImage.h"
+#import "MWPhotoBrowser.h"
 
-@interface JRPhotoScrollViewController : KTPhotoScrollViewController
+@interface JRPhotoScrollViewController : MWPhotoBrowser
 
 @property (nonatomic, strong) JRCase *jrCase;
 
