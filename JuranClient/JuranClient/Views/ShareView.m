@@ -80,9 +80,13 @@
 
 - (void)onShare:(id)sender{
     UIButton *btn = (UIButton*)sender;
+    id<ISSCAttachment> shareImage = nil;
+    if (_imagePath && _imagePath.length > 0) {
+        shareImage = [ShareSDK imageWithUrl:_imagePath];
+    }
     id<ISSContent> publishContent = [ShareSDK content:_content
                                        defaultContent:_content
-                                                image:[ShareSDK imageWithUrl:_imagePath]
+                                                image:shareImage
                                                 title:_title
                                                   url:_url
                                           description:_content
@@ -93,16 +97,28 @@
         case 0:
         {
             shareType = ShareTypeWeixiSession;
+            if (![[ShareSDK getClientWithType:shareType]isClientInstalled]) {
+                [Public alertOK:nil Message:@"尚未安装微信客户端，请安装后重试"];
+                return;
+            };
             break;
         }
         case 1:
         {
             shareType = ShareTypeWeixiTimeline;
+            if (![[ShareSDK getClientWithType:shareType]isClientInstalled]) {
+                [Public alertOK:nil Message:@"尚未安装微信客户端，请安装后重试"];
+                return;
+            };
             break;
         }
         case 2:
         {
             shareType = ShareTypeQQ;
+            if (![[ShareSDK getClientWithType:ShareTypeQQSpace]isClientInstalled]) {
+                [Public alertOK:nil Message:@"尚未安装QQ客户端，请安装后重试"];
+                return;
+            };
             break;
         }
         case 3:
@@ -114,6 +130,10 @@
         case 4:
         {
             shareType = ShareTypeQQSpace;
+            if (![[ShareSDK getClientWithType:ShareTypeQQSpace]isClientInstalled]) {
+                [Public alertOK:nil Message:@"尚未安装QQ客户端，请安装后重试"];
+                return;
+            };
             [publishContent addQQSpaceUnitWithTitle:INHERIT_VALUE
                                                 url:INHERIT_VALUE
                                                site:nil

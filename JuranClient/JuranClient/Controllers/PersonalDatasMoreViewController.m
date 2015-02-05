@@ -75,7 +75,7 @@
 }
 
 - (void)resetValues{
-    self.values = @[_user.qq, _user.weixin, _user.professional, [_user professionalTypeString], _user.personalHonor.length == 0?@"未设置":_user.personalHonor];//, _user.mobilePhone
+    self.values = @[_user.qq, _user.weixin, _user.professional, [_user professionalTypeString], _user.personalHonor];//, _user.mobilePhone
 }
 
 - (void)setupUI{
@@ -93,7 +93,7 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 3 || indexPath.row == 4) {
+    if (!_isEditing || indexPath.row == 3 || indexPath.row == 4) {
         static NSString *cellIdentifier = @"personalDataMore";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
@@ -101,8 +101,8 @@
             cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize+2];
             cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
         }
-        cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]];
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        cell.accessoryView = _isEditing?[cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]]:nil;
+        cell.selectionStyle = _isEditing?UITableViewCellSelectionStyleDefault:UITableViewCellSelectionStyleNone;
         cell.detailTextLabel.textColor = [UIColor blackColor];
         cell.detailTextLabel.text = @"";
         
@@ -110,8 +110,11 @@
         cell.textLabel.text = _keys[indexPath.row];
         NSString *value = _values[indexPath.row];
         cell.detailTextLabel.text = value;
-        if ([value isEqualToString:@"未设置"]) {
+        if (value.length == 0) {
+            cell.detailTextLabel.text = @"未设置";
             cell.detailTextLabel.textColor = [UIColor grayColor];
+        }else{
+            cell.detailTextLabel.text = value;
         }
         return cell;
     }else{
@@ -143,6 +146,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (!self.isEditing) {
+        return;
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.selectedTextField resignFirstResponder];
     if (indexPath.row == 4){
