@@ -106,8 +106,10 @@
 
 - (NSURL *)imageURL;
 
+//分享的内容
 - (NSString*)shareImagePath;
 - (NSString*)shareTitle;
+- (NSString*)shareContent;
 
 - (NSString*)formatUserName;
 /*
