@@ -22,6 +22,11 @@
 @property (nonatomic, copy) NSString *senderNickName;
 @property (nonatomic, copy) NSString *receiverNickName;
 
+@property (nonatomic, copy) NSString *mobilePhone;
+@property (nonatomic, copy) NSString *likeStyle;
+@property (nonatomic, copy) NSString *houseArea;
+- (NSString *)likeStyleString;
+
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
 @end
