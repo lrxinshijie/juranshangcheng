@@ -128,24 +128,6 @@
     }
     
     return @"";
-    
-//    NSDictionary *styles = @{@"mashup": @"混搭风格",
-//                             @"european": @"欧式风格",
-//                             @"chinese": @"中式风格",
-//                             @"newClassical": @"新古典风格",
-//                             @"eastSourthAsia": @"东南亚风格",
-//                             @"america": @"美式风格",
-//                             @"countryside": @"田园风格",
-//                             @"mediterranean": @"地中海风格",
-//                             @"modern": @"现代风格",
-//                             @"other": @"其他",
-//                             };
-//    NSString *style = [styles objectForKey:self.projectStyle];
-//    if (style && style.length > 0) {
-//        return style;
-//    }
-//    
-//    return @"其他";
 }
 
 - (NSString*)styleNamesString{
