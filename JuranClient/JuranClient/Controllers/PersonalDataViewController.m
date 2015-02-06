@@ -74,7 +74,7 @@
     _user = [[JRUser alloc] init];
     _oldAccount = @"";
     
-    self.rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave) title:@"修改" backgroundImage:nil];
+    self.rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave) title:@"编辑" backgroundImage:nil];
     [_rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightButton];
     
@@ -104,7 +104,7 @@
         [_rightButton setTitle:@"保存" forState:UIControlStateNormal];
     }else{
         [self configureLeftBarButtonUniformly];
-        [_rightButton setTitle:@"修改" forState:UIControlStateNormal];
+        [_rightButton setTitle:@"编辑" forState:UIControlStateNormal];
     }
     [self reloadData];
 }
@@ -126,6 +126,8 @@
         self.iconImageView.image = _headImage;
     }else if (_user.headUrl && _user.headUrl.length>0) {
         [self.iconImageView setImageWithURLString:_user.headUrl];
+    }else{
+        [_iconImageView setImageWithFile:[UIImage imageNamed:@"unlogin_head.png"]];
     }
     _values = @[@[@"", _user.account], @[_user.nickName,
                                          [_user sexyString],
@@ -198,7 +200,6 @@
             [self hideHUD];
         }
     }];
-    
 }
 
 #pragma mark - Target Action

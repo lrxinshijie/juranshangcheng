@@ -12,5 +12,6 @@
 @interface PersonalDatasMoreViewController : ALViewController
 
 @property (nonatomic, strong)JRDesigner  *user;
+@property (nonatomic, assign) BOOL isEditing;
 
 @end

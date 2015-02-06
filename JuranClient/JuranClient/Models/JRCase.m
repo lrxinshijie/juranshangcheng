@@ -225,6 +225,10 @@
 }
 
 - (void)doShare{
+    NSString *content = self.desc;
+    if (content.length == 0) {
+        content = @"这里有满满的美家案例，总有一张适合你，点我收藏，做为您的灵感储备。";
+    }
     [[ShareView sharedView] showWithContent:self.desc image:[Public imageURLString:self.imageUrl] title:self.title url:self.shareURL];
 }
 
