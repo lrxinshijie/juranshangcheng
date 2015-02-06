@@ -29,8 +29,28 @@
         self.senderNickName = [dict getStringValueForKey:@"senderNickName" defaultValue:@""];
         self.receiverNickName = [dict getStringValueForKey:@"receiverNickName" defaultValue:@""];
         
+        self.mobilePhone = [dict getStringValueForKey:@"mobilePhone" defaultValue:@""];
+        self.likeStyle = [dict getStringValueForKey:@"likeStyle" defaultValue:@""];
+        self.houseArea = [dict getStringValueForKey:@"houseArea" defaultValue:@""];
+        
     }
     return self;
+}
+
+- (NSString *)likeStyleString{
+    
+    if (self.likeStyle.length == 0) {
+        return @"";
+    }
+    NSArray *renovationStyle = [[DefaultData sharedData] renovationStyle];
+    for (int i = 0; i<[renovationStyle count]; i++) {
+        NSDictionary *row = [renovationStyle objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.likeStyle]) {
+            return [row objectForKey:@"k"];
+        }
+    }
+    
+    return @"";
 }
 
 + (NSMutableArray *)buildUpWithValue:(id)value{
