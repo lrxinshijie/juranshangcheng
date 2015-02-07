@@ -281,12 +281,15 @@
     return name;
 }
 
-- (NSString*)shareTitle{
-    return [NSString stringWithFormat:@"居然之家%@设计师%@",[JRDesigner userLevelTitle:self.userLevel], [self formatUserName]];
+- (NSString*)shareContent{
+    if (self.selfIntroduction.length == 0) {
+        return [NSString stringWithFormat:@"我在居然之家看到%@的个人主页，分享给小伙伴们！", [self formatUserName]];
+    }
+    return self.selfIntroduction;
 }
 
-- (NSURL *)imageURL{
-    return [NSURL URLWithString:self.headUrl relativeToURL:[NSURL URLWithString:JR_IMAGE_SERVICE]];
+- (NSString*)shareTitle{
+    return [NSString stringWithFormat:@"居然之家%@设计师%@",[JRDesigner userLevelTitle:self.userLevel], [self formatUserName]];
 }
 
 - (NSString*)shareImagePath{
@@ -295,6 +298,10 @@
     }else{
         return [Public imageURLString:_headUrl];
     }
+}
+
+- (NSURL *)imageURL{
+    return [NSURL URLWithString:self.headUrl relativeToURL:[NSURL URLWithString:JR_IMAGE_SERVICE]];
 }
 
 - (NSString*)styleNamesWithType:(NSInteger)type{
