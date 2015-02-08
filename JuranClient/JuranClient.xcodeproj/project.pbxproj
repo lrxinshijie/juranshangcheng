@@ -598,6 +598,10 @@
 		37A0F81D1A6B96C300611760 /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A0F81A1A6B96C300611760 /* ActivityDetailViewController.m */; };
 		37A0F81E1A6B96C300611760 /* ActivityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */; };
 		37A0F81F1A6B96C300611760 /* ActivityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */; };
+		37C0700A1A87337200EBAD08 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C070081A87337200EBAD08 /* OrderDetailViewController.m */; };
+		37C0700B1A87337200EBAD08 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C070081A87337200EBAD08 /* OrderDetailViewController.m */; };
+		37C0700C1A87337200EBAD08 /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37C070091A87337200EBAD08 /* OrderDetailViewController.xib */; };
+		37C0700D1A87337200EBAD08 /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37C070091A87337200EBAD08 /* OrderDetailViewController.xib */; };
 		37CE57271A6D346D00C75E65 /* WikiOrActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CE57251A6D346D00C75E65 /* WikiOrActivityViewController.m */; };
 		37CE57281A6D346D00C75E65 /* WikiOrActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37CE57261A6D346D00C75E65 /* WikiOrActivityViewController.xib */; };
 		37CF672C1A4FE11D0044F709 /* NewestBidInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */; };
@@ -1705,6 +1709,9 @@
 		37A0F8191A6B96C300611760 /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailViewController.h; sourceTree = "<group>"; };
 		37A0F81A1A6B96C300611760 /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailViewController.m; sourceTree = "<group>"; };
 		37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityDetailViewController.xib; sourceTree = "<group>"; };
+		37C070071A87337200EBAD08 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
+		37C070081A87337200EBAD08 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		37C070091A87337200EBAD08 /* OrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
 		37CE57241A6D346D00C75E65 /* WikiOrActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiOrActivityViewController.h; sourceTree = "<group>"; };
 		37CE57251A6D346D00C75E65 /* WikiOrActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiOrActivityViewController.m; sourceTree = "<group>"; };
 		37CE57261A6D346D00C75E65 /* WikiOrActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WikiOrActivityViewController.xib; sourceTree = "<group>"; };
@@ -2714,6 +2721,9 @@
 				14FB07ED1A835B9800428DE5 /* OrderListViewController.h */,
 				14FB07EE1A835B9800428DE5 /* OrderListViewController.m */,
 				14FB07EF1A835B9800428DE5 /* OrderListViewController.xib */,
+				37C070071A87337200EBAD08 /* OrderDetailViewController.h */,
+				37C070081A87337200EBAD08 /* OrderDetailViewController.m */,
+				37C070091A87337200EBAD08 /* OrderDetailViewController.xib */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -4140,7 +4150,7 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = QHWR2FWBM6;
+						DevelopmentTeam = D2JB8K885C;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -4566,6 +4576,7 @@
 				37A0F81F1A6B96C300611760 /* ActivityDetailViewController.xib in Resources */,
 				BD5186901A5D0ED700BE508A /* icon_personal_shouchang@2x.png in Resources */,
 				37A0F8121A6B877100611760 /* ActivityCell.xib in Resources */,
+				37C0700D1A87337200EBAD08 /* OrderDetailViewController.xib in Resources */,
 				BD51866E1A5D0ED700BE508A /* bcs_list_bg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4696,6 +4707,7 @@
 				BD5187AD1A5D344D00BE508A /* icon_topic@2x.png in Resources */,
 				14490CB41A2B6A19001CB160 /* AccountSecurityViewController.xib in Resources */,
 				BD5187511A5D0ED700BE508A /* sns_icon_2_s@2x.png in Resources */,
+				37C0700C1A87337200EBAD08 /* OrderDetailViewController.xib in Resources */,
 				14FE2DE31A382FCB00B31FBA /* PrivateMessageViewController.xib in Resources */,
 				14FB07F21A835B9800428DE5 /* OrderListViewController.xib in Resources */,
 				BD5185D71A5D0ED700BE508A /* case-detail-text@2x.png in Resources */,
@@ -5145,6 +5157,7 @@
 				1415F9BC1A5CD1CB003D0C29 /* ServiceViewController.m in Sources */,
 				1415F9BD1A5CD1CB003D0C29 /* VersionInfoViewController.m in Sources */,
 				37F0E6331A7D1AFE004CCCB2 /* MWPhoto.m in Sources */,
+				37C0700B1A87337200EBAD08 /* OrderDetailViewController.m in Sources */,
 				1415F9BE1A5CD1CB003D0C29 /* SWActionSheet.m in Sources */,
 				1415F9BF1A5CD1CB003D0C29 /* JSONModelClassProperty.m in Sources */,
 				1415F9C01A5CD1CB003D0C29 /* BindPhoneNumberViewController.m in Sources */,
@@ -5317,6 +5330,7 @@
 				A987EDE51A20920500CED7CD /* UIActionSheet+Blocks.m in Sources */,
 				37F0E6301A7D1AFE004CCCB2 /* MWGridViewController.m in Sources */,
 				37F0E6AD1A7D1F4E004CCCB2 /* PSTCollectionViewLayout.m in Sources */,
+				37C0700A1A87337200EBAD08 /* OrderDetailViewController.m in Sources */,
 				A9D654B61A27642800A80253 /* JSONKeyMapper.m in Sources */,
 				A9A53B0D1A46FE7C008D75B8 /* UIBubbleHeaderTableViewCell.m in Sources */,
 				A987EDE21A20920500CED7CD /* NSMutableString+ASCategory.m in Sources */,
@@ -5600,7 +5614,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = JuranDesigner;
-				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5749,7 +5763,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
 				VERSIONING_SYSTEM = "";
