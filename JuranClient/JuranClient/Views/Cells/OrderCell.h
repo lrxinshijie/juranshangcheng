@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class JROrder;
 @interface OrderCell : UITableViewCell
+
+- (void)fillCellWithOrder:(JROrder *)order;
+
++ (CGFloat)cellHeight:(JROrder *)order;
 
 @end

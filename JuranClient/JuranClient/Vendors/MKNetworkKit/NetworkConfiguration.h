@@ -151,6 +151,9 @@
 #define JR_EDIT_PROJECT [NSString stringWithFormat:@"%@/project/edit_project_req.json",JR_SERVICE]
 #define JR_INTERACT_PROJECT [NSString stringWithFormat:@"%@/interact/get_commented_project_list.json",JR_SERVICE]
 #define JR_INTERACT_TOPIC [NSString stringWithFormat:@"%@/interact/get_commented_topic_list.json",JR_SERVICE]
+#define JR_ORDER_LIST [NSString stringWithFormat:@"%@/trade/getTradeList.json",JR_SERVICE]
+
+
 
 
 #endif
