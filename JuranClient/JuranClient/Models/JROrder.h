@@ -28,6 +28,8 @@
 @property (nonatomic, copy) NSString *decoratorName;
 @property (nonatomic, copy) NSString *levelCode;
 
+@property (nonatomic, assign) BOOL ifCanCredit;
+@property (nonatomic, assign) BOOL ifCanViewCredit;
 
 @property (nonatomic, copy) NSString *gmtCreate;
 @property (nonatomic, copy) NSString *customerName;
