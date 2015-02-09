@@ -35,7 +35,27 @@
 @property (nonatomic, copy) NSString *houseArea;
 @property (nonatomic, copy) NSString *addressInfo;
 
+//Detail
+@property (nonatomic, copy) NSString *payStatus;
+@property (nonatomic, assign) NSInteger firstPayAmount;
+@property (nonatomic, assign) NSInteger finalPayAmount;
+@property (nonatomic, strong) NSArray *measurefileSrc;
+@property (nonatomic, strong) NSArray *fileSrc;
+@property (nonatomic, copy) NSString *decoratorRealName;
+@property (nonatomic, copy) NSString *decoratorEmail;
+@property (nonatomic, copy) NSString *decoratorWechat;
+
+@property (nonatomic, copy) NSString *customerRealName;
+@property (nonatomic, copy) NSString *customerEmail;
+@property (nonatomic, copy) NSString *customerCardNo;
+@property (nonatomic, copy) NSString *customerWechat;
+@property (nonatomic, copy) NSString *houseType;
+@property (nonatomic, copy) NSString *serviceDate;
+
+
 - (NSString *)statusName;
+- (NSString *)houseAreaString;
 + (NSMutableArray *)buildUpWithValue:(id)value;
+- (void)buildUpWithValueForDetail:(id)dict;
 
 @end

@@ -610,6 +610,16 @@
 		37C0700B1A87337200EBAD08 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C070081A87337200EBAD08 /* OrderDetailViewController.m */; };
 		37C0700C1A87337200EBAD08 /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37C070091A87337200EBAD08 /* OrderDetailViewController.xib */; };
 		37C0700D1A87337200EBAD08 /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37C070091A87337200EBAD08 /* OrderDetailViewController.xib */; };
+		37C070141A87A2E300EBAD08 /* order_call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C0700F1A87A2E300EBAD08 /* order_call@2x.png */; };
+		37C070151A87A2E300EBAD08 /* order_call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C0700F1A87A2E300EBAD08 /* order_call@2x.png */; };
+		37C070161A87A2E300EBAD08 /* order_payment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C070101A87A2E300EBAD08 /* order_payment@2x.png */; };
+		37C070171A87A2E300EBAD08 /* order_payment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C070101A87A2E300EBAD08 /* order_payment@2x.png */; };
+		37C070181A87A2E300EBAD08 /* order_private_letter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C070111A87A2E300EBAD08 /* order_private_letter@2x.png */; };
+		37C070191A87A2E300EBAD08 /* order_private_letter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C070111A87A2E300EBAD08 /* order_private_letter@2x.png */; };
+		37C0701A1A87A2E300EBAD08 /* order_star_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C070121A87A2E300EBAD08 /* order_star_selected@2x.png */; };
+		37C0701B1A87A2E300EBAD08 /* order_star_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C070121A87A2E300EBAD08 /* order_star_selected@2x.png */; };
+		37C0701C1A87A2E300EBAD08 /* order_star_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C070131A87A2E300EBAD08 /* order_star_unselected@2x.png */; };
+		37C0701D1A87A2E300EBAD08 /* order_star_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C070131A87A2E300EBAD08 /* order_star_unselected@2x.png */; };
 		37CE57271A6D346D00C75E65 /* WikiOrActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CE57251A6D346D00C75E65 /* WikiOrActivityViewController.m */; };
 		37CE57281A6D346D00C75E65 /* WikiOrActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37CE57261A6D346D00C75E65 /* WikiOrActivityViewController.xib */; };
 		37CF672C1A4FE11D0044F709 /* NewestBidInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CF672A1A4FE11D0044F709 /* NewestBidInfoCell.m */; };
@@ -1726,6 +1736,11 @@
 		37C070071A87337200EBAD08 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		37C070081A87337200EBAD08 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		37C070091A87337200EBAD08 /* OrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
+		37C0700F1A87A2E300EBAD08 /* order_call@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_call@2x.png"; sourceTree = "<group>"; };
+		37C070101A87A2E300EBAD08 /* order_payment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_payment@2x.png"; sourceTree = "<group>"; };
+		37C070111A87A2E300EBAD08 /* order_private_letter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_private_letter@2x.png"; sourceTree = "<group>"; };
+		37C070121A87A2E300EBAD08 /* order_star_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_star_selected@2x.png"; sourceTree = "<group>"; };
+		37C070131A87A2E300EBAD08 /* order_star_unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_star_unselected@2x.png"; sourceTree = "<group>"; };
 		37CE57241A6D346D00C75E65 /* WikiOrActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiOrActivityViewController.h; sourceTree = "<group>"; };
 		37CE57251A6D346D00C75E65 /* WikiOrActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiOrActivityViewController.m; sourceTree = "<group>"; };
 		37CE57261A6D346D00C75E65 /* WikiOrActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WikiOrActivityViewController.xib; sourceTree = "<group>"; };
@@ -2691,6 +2706,11 @@
 		14BCD78C1A8605B400825A90 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				37C0700F1A87A2E300EBAD08 /* order_call@2x.png */,
+				37C070101A87A2E300EBAD08 /* order_payment@2x.png */,
+				37C070111A87A2E300EBAD08 /* order_private_letter@2x.png */,
+				37C070121A87A2E300EBAD08 /* order_star_selected@2x.png */,
+				37C070131A87A2E300EBAD08 /* order_star_unselected@2x.png */,
 				14BCD78D1A8605B400825A90 /* order_btn_accessory@2x.png */,
 			);
 			path = Order;
@@ -4250,6 +4270,7 @@
 				371D68741A5D6E7E00172AC9 /* icon_homepage@2x.png in Resources */,
 				37CE57281A6D346D00C75E65 /* WikiOrActivityViewController.xib in Resources */,
 				BD5187181A5D0ED700BE508A /* service_highlighted_2@2x.png in Resources */,
+				37C070151A87A2E300EBAD08 /* order_call@2x.png in Resources */,
 				BD5186CE1A5D0ED700BE508A /* question_unresolved@2x.png in Resources */,
 				1415FA341A5CD1CB003D0C29 /* ShareSDKLocalizable.strings in Resources */,
 				BD5187861A5D0ED700BE508A /* nav-home-default@2x.png in Resources */,
@@ -4264,6 +4285,7 @@
 				375635361A60FF8F00D120C8 /* icon_check_ok@2x.png in Resources */,
 				BD5185C21A5D0ED700BE508A /* Default.png in Resources */,
 				1415FA371A5CD1CB003D0C29 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
+				37C070191A87A2E300EBAD08 /* order_private_letter@2x.png in Resources */,
 				BD5186C21A5D0ED700BE508A /* question_commited@2x.png in Resources */,
 				BD51872C1A5D0ED700BE508A /* service_normal_11@2x.png in Resources */,
 				BD51867C1A5D0ED700BE508A /* empty_follow@2x.png in Resources */,
@@ -4330,6 +4352,7 @@
 				BD5186001A5D0ED700BE508A /* icon-search@2x.png in Resources */,
 				375635251A60EE6300D120C8 /* service_page@2x.png in Resources */,
 				1415FA501A5CD1CB003D0C29 /* PrivateMessageDetailViewController.xib in Resources */,
+				37C0701B1A87A2E300EBAD08 /* order_star_selected@2x.png in Resources */,
 				BD51861C1A5D0ED700BE508A /* icon-designer-badge1@2x.png in Resources */,
 				1415FA511A5CD1CB003D0C29 /* APPRecommendViewController.xib in Resources */,
 				BD5186261A5D0ED700BE508A /* icon_xunzhang_1@2x.png in Resources */,
@@ -4536,6 +4559,7 @@
 				371D68721A5D6E2000172AC9 /* icon_realname_auth@2x.png in Resources */,
 				1415FA7A1A5CD1CB003D0C29 /* QuestionCell.xib in Resources */,
 				BD5186601A5D0ED700BE508A /* login-icon-wx@2x.png in Resources */,
+				37C0701D1A87A2E300EBAD08 /* order_star_unselected@2x.png in Resources */,
 				BD5185FC1A5D0ED700BE508A /* icon-grid@2x.png in Resources */,
 				BD5186841A5D0ED700BE508A /* icon_personal_ddgl@2x.png in Resources */,
 				1415FA7B1A5CD1CB003D0C29 /* ResetPasswordViewController.xib in Resources */,
@@ -4563,6 +4587,7 @@
 				BD5187581A5D0ED700BE508A /* nav_backbtn_white@2x.png in Resources */,
 				1415FA801A5CD1CB003D0C29 /* CaseCollectionCell.xib in Resources */,
 				37D679731A60188200C6DFAC /* icon_circle_selected@2x.png in Resources */,
+				37C070171A87A2E300EBAD08 /* order_payment@2x.png in Resources */,
 				BD5185D61A5D0ED700BE508A /* case-detail-send@2x.png in Resources */,
 				1415FA811A5CD1CB003D0C29 /* AccountManageViewController.xib in Resources */,
 				BD5186DC1A5D0ED700BE508A /* private_message_empty@2x.png in Resources */,
@@ -4620,6 +4645,7 @@
 				BD5186D11A5D0ED700BE508A /* bubble-me@2x.png in Resources */,
 				BD5186BD1A5D0ED700BE508A /* img_adopt _bf@2x.png in Resources */,
 				14EDB38E1A3B4FE200E5AC77 /* FeedBackViewController.xib in Resources */,
+				37C070141A87A2E300EBAD08 /* order_call@2x.png in Resources */,
 				3710D5AF1A557DF00028D32A /* RealNameAuthViewController.xib in Resources */,
 				A9A4E35D1A62C46D00BB9F68 /* Icon-Small-50.png in Resources */,
 				37A0F80B1A6B856100611760 /* ActivityViewController.xib in Resources */,
@@ -4703,6 +4729,7 @@
 				BD5186471A5D0ED700BE508A /* check-off@2x.png in Resources */,
 				14587E111A35D5E300D41236 /* DetailAddressViewController.xib in Resources */,
 				BD51878D1A5D0ED700BE508A /* nav-wiki-default@2x.png in Resources */,
+				37C0701C1A87A2E300EBAD08 /* order_star_unselected@2x.png in Resources */,
 				BD5187231A5D0ED700BE508A /* service_highlighted_8@2x.png in Resources */,
 				144B5D661A37278E00C75955 /* SearchViewController.xib in Resources */,
 				37D18DB31A5829C800B41048 /* CaseImageCollectionCell.xib in Resources */,
@@ -4766,6 +4793,7 @@
 				BD5186A11A5D0ED700BE508A /* seperator@2x.png in Resources */,
 				BD5186311A5D0ED700BE508A /* menu_icon_sixin@2x.png in Resources */,
 				BD5186D71A5D0ED700BE508A /* message_btn_bg@2x.png in Resources */,
+				37C070161A87A2E300EBAD08 /* order_payment@2x.png in Resources */,
 				140C46EE1A2A3741003317AD /* MyFollowViewController.xib in Resources */,
 				BD5186211A5D0ED700BE508A /* icon-right@2x.png in Resources */,
 				BD5187551A5D0ED700BE508A /* nav_backbtn@2x.png in Resources */,
@@ -4799,6 +4827,7 @@
 				BD5187A71A5D344D00BE508A /* icon_countdown@2x.png in Resources */,
 				141A1D3C1A2CC09600C073C5 /* AskOrAnswerCell.xib in Resources */,
 				BD51869B1A5D0ED700BE508A /* navigationbar_setting@2x.png in Resources */,
+				37C0701A1A87A2E300EBAD08 /* order_star_selected@2x.png in Resources */,
 				BD5186A71A5D0ED700BE508A /* unlogin_head@2x.png in Resources */,
 				145471D31A38944F00428BCB /* QuestionViewController.xib in Resources */,
 				A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */,
@@ -4918,6 +4947,7 @@
 				BD5186711A5D0ED700BE508A /* chat_receiver_bg@2x.png in Resources */,
 				147A9FB31A415DD400132804 /* PrivateLetterViewController.xib in Resources */,
 				14321E701A612E6A0065E8C3 /* CaseEditStyleViewController.xib in Resources */,
+				37C070181A87A2E300EBAD08 /* order_private_letter@2x.png in Resources */,
 				BD5187811A5D0ED700BE508A /* nav-designer-default@2x.png in Resources */,
 				BD5187771A5D0ED700BE508A /* userlevel3@2x.png in Resources */,
 				BD5187391A5D0ED700BE508A /* service_normal_7@2x.png in Resources */,

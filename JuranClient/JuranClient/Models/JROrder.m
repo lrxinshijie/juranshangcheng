@@ -10,6 +10,39 @@
 
 @implementation JROrder
 
+
+- (id)init{
+    self = [super init];
+    if (self) {
+        self.measureTid = @"";
+        self.designTid = @"";
+        self.status = @"";
+        self.headUrl = @"";
+        self.decoratorMobile = @"";
+        self.account = @"";
+        self.decoratorName = @"";
+        self.levelCode = @"";
+        self.gmtCreate = @"";
+        self.customerName = @"";
+        self.customerMobile = @"";
+        self.houseArea = @"";
+        self.addressInfo = @"";
+        self.payStatus = @"";
+        self.measurefileSrc = @[];
+        self.fileSrc = @[];
+        self.decoratorRealName = @"";
+        self.decoratorEmail = @"";
+        self.decoratorWechat = @"";
+        self.customerRealName = @"";
+        self.customerEmail = @"";
+        self.customerCardNo = @"";
+        self.customerWechat = @"";
+        self.houseType = @"";
+        self.serviceDate = @"";
+    }
+    return self;
+}
+
 - (id)initWithDictionary:(NSDictionary *)dict{
     if (self=[self init]) {
         
@@ -87,8 +120,54 @@
     return [statuses getStringValueForKey:self.status defaultValue:@""];
 }
 
+- (NSString *)houseAreaString{
+    if (self.houseArea.length != 0) {
+        return [NSString stringWithFormat:@"%@㎡", self.houseArea];
+    }
+    return @"";
+}
+
 - (void)onNext{
     
+}
+
+- (void)buildUpWithValueForDetail:(id)dict{
+    if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+        return ;
+    }
+    self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
+    self.payStatus = [dict getStringValueForKey:@"payStatus" defaultValue:@""];
+    self.measurePayAmount = [dict getIntValueForKey:@"measurePayAmount" defaultValue:0];
+    self.firstPayAmount = [dict getIntValueForKey:@"firstPayAmount" defaultValue:0];
+    self.finalPayAmount = [dict getIntValueForKey:@"finalPayAmount" defaultValue:0];
+    self.amount = [dict getIntValueForKey:@"amount" defaultValue:0];
+    self.payAmount = [dict getIntValueForKey:@"payAmount" defaultValue:0];
+    self.waitPayAmount = [dict getIntValueForKey:@"waitPayAmount" defaultValue:0];
+    self.unPaidAmount = [dict getIntValueForKey:@"unPaidAmount" defaultValue:0];
+    self.measurefileSrc = dict[@"measurefileSrc"];
+    if(![self.measurefileSrc isKindOfClass:[NSArray class]]){
+        self.measurefileSrc = @[];
+    }
+    self.fileSrc = dict[@"fileSrc"];
+    if (![self.fileSrc isKindOfClass:[NSArray class]]) {
+        self.fileSrc = @[];
+    }
+    self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
+    self.decoratorRealName = [dict getStringValueForKey:@"decoratorRealName" defaultValue:@""];
+    self.decoratorName = [dict getStringValueForKey:@"decoratorName" defaultValue:@""];
+    self.decoratorMobile = [dict getStringValueForKey:@"decoratorMobile" defaultValue:@""];
+    self.decoratorEmail = [dict getStringValueForKey:@"decoratorEmail" defaultValue:@""];
+    self.decoratorWechat = [dict getStringValueForKey:@"decoratorWechat" defaultValue:@""];
+    self.customerRealName = [dict getStringValueForKey:@"customerRealName" defaultValue:@""];
+    self.customerName = [dict getStringValueForKey:@"customerName" defaultValue:@""];
+    self.customerMobile = [dict getStringValueForKey:@"customerMobile" defaultValue:@""];
+    self.customerEmail = [dict getStringValueForKey:@"customerEmail" defaultValue:@""];
+    self.customerCardNo = [dict getStringValueForKey:@"customerCardNo" defaultValue:@""];
+    self.customerWechat = [dict getStringValueForKey:@"customerWechat" defaultValue:@""];
+    self.houseType = [dict getStringValueForKey:@"houseType" defaultValue:@""];
+    self.houseArea = [dict getStringValueForKey:@"houseArea" defaultValue:@""];
+    self.addressInfo = [dict getStringValueForKey:@"addressInfo" defaultValue:@""];
+    self.serviceDate = [dict getStringValueForKey:@"serviceDate" defaultValue:@""];
 }
 
 @end

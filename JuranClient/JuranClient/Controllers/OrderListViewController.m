@@ -10,6 +10,7 @@
 #import "JROrder.h"
 #import "OrderCell.h"
 #import "MJRefresh.h"
+#import "OrderDetailViewController.h"
 
 @interface OrderListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -111,5 +112,13 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    JROrder *order = [_datas objectAtIndex:indexPath.row];
+    OrderDetailViewController *vc = [[OrderDetailViewController alloc] init];
+    vc.order = order;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end

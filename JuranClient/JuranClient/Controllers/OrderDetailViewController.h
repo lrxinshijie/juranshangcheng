@@ -7,7 +7,10 @@
 //
 
 #import "ALViewController.h"
+@class JROrder;
 
 @interface OrderDetailViewController : ALViewController
+
+@property (nonatomic, strong) JROrder *order;
 
 @end
