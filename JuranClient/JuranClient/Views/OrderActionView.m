@@ -8,6 +8,10 @@
 
 #import "OrderActionView.h"
 #import "JROrder.h"
+#import "OrderPayViewController.h"
+#import "OrderConfirmPayViewController.h"
+#import "OrderPriceViewController.h"
+#import "OrderExtractViewController.h"
 
 @interface OrderActionView ()
 
@@ -58,7 +62,7 @@
             [self addSubview:[self buttonWithAction:OrderActionConfirm]];
         }else if ([_order.status isEqualToString:@"complete"]){
             [self addSubview:[self buttonWithAction:OrderActionComment]];
-            [self addSubview:[self buttonWithAction:OrderActionDecoration]];
+//            [self addSubview:[self buttonWithAction:OrderActionDecoration]];
         }
     }
 #endif
@@ -88,8 +92,8 @@
             title = @"确认";
             break;
         case OrderActionComment:
-            title = @"评价设计";
-            x = 160;
+            title = _order.ifCanViewCredit ? @"查看评价" : @"评价设计";
+//            x = 160;
             break;
         case OrderActionReject:
             title = @"拒绝";
@@ -134,6 +138,52 @@
 }
 
 - (void)onAction:(UIButton *)button{
+    if (button.tag == OrderActionCancel) {
+        NSDictionary *param = @{@"measureTid": _order.measureTid};
+        [self.viewController showHUD];
+        [[ALEngine shareEngine] pathURL:JR_CANCEL_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            [self.viewController hideHUD];
+            if (!error) {
+                _order.status = @"cancel";
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
+            }
+        }];
+    }else if (button.tag == OrderActionConfirm){
+        NSDictionary *param = @{@"designTid": _order.designTid};
+        [self.viewController showHUD];
+        [[ALEngine shareEngine] pathURL:JR_CONFIRM_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            [self.viewController hideHUD];
+            if (!error) {
+                _order.status = @"complete";
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
+            }
+        }];
+    }else if (button.tag == OrderActionPay){
+        if (_order.type == 0) {
+            OrderConfirmPayViewController *ov = [[OrderConfirmPayViewController alloc] init];
+            ov.order = _order;
+            [self.viewController.navigationController pushViewController:ov animated:YES];
+        }else{
+            OrderPayViewController *ov = [[OrderPayViewController alloc] init];
+            ov.order = _order;
+            [self.viewController.navigationController pushViewController:ov animated:YES];
+        }
+    }else if (button.tag == OrderActionPrice){
+        OrderPriceViewController *ov = [[OrderPriceViewController alloc] init];
+        ov.order = _order;
+        [self.viewController.navigationController pushViewController:ov animated:YES];
+    }else if (button.tag == OrderActionExtract){
+        OrderExtractViewController *ov = [[OrderExtractViewController alloc] init];
+        ov.order = _order;
+        [self.viewController.navigationController pushViewController:ov animated:YES];
+    }else if (button.tag == OrderActionComment){
+        if (_order.ifCanViewCredit) {
+            //查看评价
+        }else{
+            //评价
+        }
+    }
+    
     if ([_delegate respondsToSelector:@selector(clickOrderAction:Action:)]) {
         [_delegate clickOrderAction:self Action:button.tag];
     }

@@ -138,7 +138,7 @@
                     , [_user specialForPersonal]
                     , _user.granuate
                     , _user.selfIntroduction]
-                ,@[@""]
+                ,@[@"  "]
                 ];
 }
 

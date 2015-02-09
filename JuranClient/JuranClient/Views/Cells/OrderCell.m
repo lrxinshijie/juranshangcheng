@@ -87,9 +87,42 @@
     _statusLabel.text = order.statusName;
     
     if (order.type == 0) {
-        _payAmountLabel.text = [NSString stringWithFormat:@"量房费 实付：￥%d", order.measurePayAmount];
+        NSString *measurePay = [NSString stringWithFormat:@"￥%d", order.measurePayAmount];
+        NSString *content = [NSString stringWithFormat:@"量房费 实付：%@", measurePay];
+        
+        [_payAmountLabel setText:content afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+            
+            NSRange waitPayRange = [[mutableAttributedString string] rangeOfString:measurePay  options:NSCaseInsensitiveSearch];
+            [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[kBlueColor CGColor] range:waitPayRange];
+            
+            return mutableAttributedString;
+        }];
     }else{
-        _payAmountLabel.text = [NSString stringWithFormat:@"已付：￥%d 未付：￥%d\n实付：￥%d", order.payAmount, order.unPaidAmount, order.waitPayAmount];
+        NSString *payAmount = [NSString stringWithFormat:@"已付：￥%d", order.payAmount];
+        NSString *unPaidAmount = [NSString stringWithFormat:@"未付：￥%d", order.unPaidAmount];
+        NSString *waitPayAmount = [NSString stringWithFormat:@"￥%d", order.waitPayAmount];
+        
+        NSString *content = [NSString stringWithFormat:@"%@   %@\n实付：%@", payAmount, unPaidAmount, waitPayAmount];
+        
+        [_payAmountLabel setText:content afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+            NSRange payRange = [[mutableAttributedString string] rangeOfString:payAmount  options:NSCaseInsensitiveSearch];
+            [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[RGBColor(120, 120, 120) CGColor] range:payRange];
+            UIFont *payFont = [UIFont systemFontOfSize:11];
+            CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)payFont.fontName, payFont.pointSize, NULL);
+            [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)font range:payRange];
+            CFRelease(font);
+            
+            NSRange unPaidRange = [[mutableAttributedString string] rangeOfString:unPaidAmount  options:NSCaseInsensitiveSearch];
+            payFont = [UIFont systemFontOfSize:13];
+            font = CTFontCreateWithName((__bridge CFStringRef)payFont.fontName, payFont.pointSize, NULL);
+            [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)font range:unPaidRange];
+            CFRelease(font);
+            
+            NSRange waitPayRange = [[mutableAttributedString string] rangeOfString:waitPayAmount  options:NSCaseInsensitiveSearch];
+            [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[kBlueColor CGColor] range:waitPayRange];
+            
+            return mutableAttributedString;
+        }];
     }
 }
 
