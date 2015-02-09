@@ -68,6 +68,9 @@
         self.levelCode = [dict getStringValueForKey:@"levelCode" defaultValue:@""];
         self.unPaidAmount = [dict getIntValueForKey:@"unPaidAmount" defaultValue:0];
         
+        self.ifCanCredit = [dict getBoolValueForKey:@"ifCanCredit" defaultValue:NO];
+        self.ifCanViewCredit = [dict getBoolValueForKey:@"ifCanViewCredit" defaultValue:NO];
+        
         self.gmtCreate = [dict getStringValueForKey:@"gmtCreate" defaultValue:@""];
         self.customerName = [dict getStringValueForKey:@"customerName" defaultValue:@""];
         self.customerMobile = [dict getStringValueForKey:@"customerMobile" defaultValue:@""];
@@ -110,7 +113,7 @@
                                @"construction_complete":@"施工完成",
                                @"convert_to_design":@"量房转设计",
                                @"cancel":@"交易取消",
-                               @"wait_first_pay":@"待支付首款",
+                               @"wait_first_pay":@"待支付",
                                @"wait_confirm_design":@"待确认交付物",
                                @"wait_last_pay":@"待确认交付物",
                                @"wait_designer_measure":@"待设计师量房",

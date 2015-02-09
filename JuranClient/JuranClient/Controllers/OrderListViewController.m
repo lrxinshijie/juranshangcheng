@@ -22,11 +22,17 @@
 
 @implementation OrderListViewController
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
     self.navigationItem.title = @"我的订单";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:kNotificationNameOrderReloadData object:nil];
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -45,6 +51,14 @@
     }];
     
     [_tableView headerBeginRefreshing];
+}
+
+- (void)reloadData:(NSNotification *)noti{
+    if (noti.object) {
+        [_tableView headerBeginRefreshing];
+    }else{
+        [_tableView reloadData];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

@@ -155,5 +155,8 @@
 #define JR_ORDER_DETAIL [NSString stringWithFormat:@"%@/trade/getTradeDetail.json",JR_SERVICE]
 
 
+#define JR_CANCEL_ORDER [NSString stringWithFormat:@"%@/trade/cancelTrade.json",JR_SERVICE]
+#define JR_CONFIRM_ORDER [NSString stringWithFormat:@"%@/trade/confirmResult.json",JR_SERVICE]
+
 
 #endif

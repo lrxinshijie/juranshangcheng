@@ -125,8 +125,8 @@
             cell = (TextFieldCell *)[nibs firstObject];
         }
         
-        cell.textLabel.font = [UIFont systemFontOfSize:15];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+        cell.textLabel.font = [UIFont systemFontOfSize:kSystemFontSize+2];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:kSystemFontSize];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textField.enabled = YES;
         cell.textField.delegate = self;

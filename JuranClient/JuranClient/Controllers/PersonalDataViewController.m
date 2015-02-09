@@ -74,7 +74,7 @@
     _user = [[JRUser alloc] init];
     _oldAccount = @"";
     
-    self.rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onSave) title:@"编辑" backgroundImage:nil];
+    self.rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 30, 30) target:self action:@selector(onSave) title:@"编辑" backgroundImage:nil];
     [_rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightButton];
     
@@ -98,7 +98,7 @@
 - (void)setIsEditing:(BOOL)isEditing{
     _isEditing = isEditing;
     if (_isEditing) {
-        UIButton *btn = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onCancelEditing) title:@"取消" backgroundImage:nil];
+        UIButton *btn = [self.view buttonWithFrame:CGRectMake(0, 0, 30, 30) target:self action:@selector(onCancelEditing) title:@"取消" backgroundImage:nil];
         [btn setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
         [_rightButton setTitle:@"保存" forState:UIControlStateNormal];
@@ -322,8 +322,8 @@
             cell = (TextFieldCell *)[nibs firstObject];
         }
         
-        cell.textLabel.font = [UIFont systemFontOfSize:15];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+        cell.titleLabel.font = [UIFont systemFontOfSize:kSystemFontSize+2];
+        cell.textField.font = [UIFont systemFontOfSize:kSystemFontSize];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textField.enabled = _isEditing;
         cell.textField.delegate = self;
