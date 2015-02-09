@@ -7,8 +7,15 @@
 //
 
 #import "OrderListViewController.h"
+#import "JROrder.h"
+#import "OrderCell.h"
+#import "MJRefresh.h"
 
-@interface OrderListViewController ()
+@interface OrderListViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, assign) NSInteger currentPage;
 
 @end
 
@@ -17,6 +24,77 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.navigationItem.title = @"我的订单";
+    
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.backgroundColor = RGBColor(237, 237, 237);
+    [self.view addSubview:_tableView];
+    
+    __weak typeof(self) weakSelf = self;
+    [_tableView addHeaderWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView addFooterWithCallback:^{
+        weakSelf.currentPage++;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView headerBeginRefreshing];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return _datas.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    JROrder *order = [_datas objectAtIndex:indexPath.row];
+    CGFloat height = [OrderCell cellHeight:order];
+    return indexPath.row == _datas.count-1 ? height : height-10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"OrderCell";
+    OrderCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        cell = (OrderCell *)[nibs firstObject];
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    JROrder *order = [_datas objectAtIndex:indexPath.row];
+    [cell fillCellWithOrder:order];
+    
+    return cell;
+}
+
+- (void)loadData{
+    NSDictionary *param = @{@"pageNo": @(_currentPage),
+                            @"onePageCount": kOnePageCount,
+                            @"userType": [[ALTheme sharedTheme] userType]
+                            };
+    [[ALEngine shareEngine]  pathURL:JR_ORDER_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            NSMutableArray *rows = [JROrder buildUpWithValue:[data objectForKey:[Public isDesignerApp] ? @"designerTradeList" : @"memberTradeList"]];
+            if (_currentPage == 1) {
+                self.datas = rows;
+            }else{
+                [_datas addObjectsFromArray:rows];
+            }
+        }
+        
+        [_tableView headerEndRefreshing];
+        [_tableView footerEndRefreshing];
+        [_tableView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

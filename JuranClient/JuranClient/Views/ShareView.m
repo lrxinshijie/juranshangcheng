@@ -14,6 +14,9 @@
 #import <AGCommon/UINavigationBar+Common.h>
 
 #define kButtonTag   1100
+#define kSinaWeiboContentLength 140
+#define kTencentWeiboContentLength 140
+#define kQQZoneContentLength 500
 
 @interface ShareView()<ISSViewDelegate>
 
@@ -84,13 +87,6 @@
     if (_imagePath && _imagePath.length > 0) {
         shareImage = [ShareSDK imageWithUrl:_imagePath];
     }
-    id<ISSContent> publishContent = [ShareSDK content:_content
-                                       defaultContent:_content
-                                                image:shareImage
-                                                title:_title
-                                                  url:_url
-                                          description:_content
-                                            mediaType:SSPublishContentMediaTypeNews];
     ShareType shareType;
     
     switch (btn.tag - kButtonTag) {
@@ -119,12 +115,16 @@
                 [Public alertOK:nil Message:@"尚未安装QQ客户端，请安装后重试"];
                 return;
             };
+            if (_content.length > kQQZoneContentLength) {
+                _content = [_content substringToIndex:kQQZoneContentLength-4];
+                _content = [NSString stringWithFormat:@"%@...",_content];
+            }
             break;
         }
         case 3:
         {
             shareType = ShareTypeTencentWeibo;
-            [publishContent setContent:[NSString stringWithFormat:@"%@\n%@", _content, _url]];
+            _content = [NSString stringWithFormat:@"%@\n%@", _content, _url];
             break;
         }
         case 4:
@@ -134,22 +134,21 @@
                 [Public alertOK:nil Message:@"尚未安装QQ客户端，请安装后重试"];
                 return;
             };
-            [publishContent addQQSpaceUnitWithTitle:INHERIT_VALUE
-                                                url:INHERIT_VALUE
-                                               site:nil
-                                            fromUrl:nil
-                                            comment:INHERIT_VALUE
-                                            summary:INHERIT_VALUE
-                                              image:INHERIT_VALUE
-                                               type:INHERIT_VALUE
-                                            playUrl:nil
-                                               nswb:nil];
+            if (_content.length > kQQZoneContentLength) {
+                _content = [_content substringToIndex:kQQZoneContentLength-4];
+                _content = [NSString stringWithFormat:@"%@...",_content];
+            }
+            
             break;
         }
         case 5:
         {
             shareType = ShareTypeSinaWeibo;
-            [publishContent setContent:[NSString stringWithFormat:@"%@\n%@", _content, _url]];
+            if (_content.length + _url.length > kSinaWeiboContentLength) {
+                _content = [_content substringToIndex:kSinaWeiboContentLength - _url.length - 4];
+                _content = [NSString stringWithFormat:@"%@...",_content];
+            }
+            _content = [NSString stringWithFormat:@"%@\n%@", _content, _url];
             break;
         }
         case 6:
@@ -163,54 +162,63 @@
         default:
             break;
     }
-    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
-                                                         allowCallback:YES
-                                                         authViewStyle:SSAuthViewStyleFullScreenPopup
-                                                          viewDelegate:nil
-                                               authManagerViewDelegate:self];
-    /*
-    BOOL needAuth = NO;
-    ShareType authType = shareType;
-    if (shareType == ShareTypeQQ) {
-        authType = ShareTypeQQSpace;
+    //分享内容
+    id<ISSContent> publishContent = [ShareSDK content:_content
+                                       defaultContent:@""
+                                                image:shareImage
+                                                title:_title
+                                                  url:_url
+                                          description:_content
+                                            mediaType:SSPublishContentMediaTypeNews];
+    if (shareType == ShareTypeQQSpace) {
+        [publishContent addQQSpaceUnitWithTitle:INHERIT_VALUE
+                                            url:INHERIT_VALUE
+                                           site:nil
+                                        fromUrl:nil
+                                        comment:INHERIT_VALUE
+                                        summary:INHERIT_VALUE
+                                          image:INHERIT_VALUE
+                                           type:INHERIT_VALUE
+                                        playUrl:nil
+                                           nswb:nil];
     }
     
-    if (![ShareSDK hasAuthorizedWithType:authType])
-    {
-        needAuth = YES;
-        [ShareSDK getUserInfoWithType:authType
-                          authOptions:authOptions
-                               result:^(BOOL result, id<ISSPlatformUser> userInfo, id<ICMErrorInfo> error) {
-                                   
-                                   if (result)
-                                   {
-                                       [ShareSDK showShareViewWithType:shareType container:nil content:publishContent statusBarTips:NO authOptions:authOptions shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                           
-                                       }];
-                                   }
-                               }];
-    }
+//    id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
+//                                                         allowCallback:YES
+//                                                         authViewStyle:SSAuthViewStyleFullScreenPopup
+//                                                          viewDelegate:nil
+//                                               authManagerViewDelegate:self];
     
-    if (!needAuth)
-    {
-        //分享内容
-        [ShareSDK showShareViewWithType:shareType container:nil content:publishContent statusBarTips:NO authOptions:authOptions shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-            NSLog(@"error:%@",error);
-        }];
+    [ShareSDK clientShareContent:publishContent //内容对象
+                            type:shareType //平台类型
+                   statusBarTips:YES
+                          result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {//返回事件
+                              
+                              if (state == SSPublishContentStateSuccess)
+                              {
+                                  [Public alertOK:nil Message:@"分享成功!"];
+                              }
+                              else if (state == SSPublishContentStateFail)
+                              {
+                                  if (error) {
+                                      NSLog(@"Code:%d , %@", [error errorCode], [error errorDescription]);
+                                      [Public alertOK:nil Message:error.errorDescription];
+                                  }
 
-    }*/
+                              }
+                          }];
     
     //分享内容
-    [ShareSDK showShareViewWithType:shareType container:nil content:publishContent statusBarTips:NO authOptions:authOptions shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-        if (error) {
-            NSLog(@"Code:%d", [error errorCode]);
-            if ([error errorCode] == -6004) {
-                [Public alertOK:nil Message:@"尚未安装QQ客户端，请安装后重试"];
-            }else{
-                [Public alertOK:nil Message:error.errorDescription];
-            }
-        }
-    }];
+//    [ShareSDK showShareViewWithType:shareType container:nil content:publishContent statusBarTips:NO authOptions:authOptions shareOptions:nil result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+//        if (error) {
+//            NSLog(@"Code:%d", [error errorCode]);
+//            if ([error errorCode] == -6004) {
+//                [Public alertOK:nil Message:@"尚未安装QQ客户端，请安装后重试"];
+//            }else{
+//                [Public alertOK:nil Message:error.errorDescription];
+//            }
+//        }
+//    }];
     [self unShow];
     
 }

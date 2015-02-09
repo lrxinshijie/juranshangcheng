@@ -75,6 +75,16 @@
 				<string>wx338441f4726af98d</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>twb</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wb801557599</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0.0</string>
