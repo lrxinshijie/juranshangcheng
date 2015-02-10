@@ -63,6 +63,7 @@
     [button setFrame:frame];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     [[button titleLabel] setFont:[UIFont systemFontOfSize:kSystemFontSize]];
+    [button setTitle:title forState:UIControlStateNormal];
     CGFloat width = image.size.width;
     CGFloat height = image.size.height;
     CGFloat top = (frame.size.height - height) * .5;
