@@ -83,7 +83,7 @@
                     , @"个人主页"
                     , @"我的关注"
                     , @"我的收藏"
-//                    , @"订单管理"
+                    , @"订单管理"
                     , @"实名认证"
                     , @"账户安全"
                     , @"账户管理"
@@ -93,7 +93,7 @@
                     , @"icon_homepage.png"
                     , @"icon_personal_guanzhu.png"
                     , @"icon_personal_shouchang.png"
-//                    , @"icon_dingdan.png"
+                    , @"icon_dingdan.png"
                     , @"icon_realname_auth.png"
                     , @"icon_personal_zhaq"
                     , @"icon_personal_zhgl"];
@@ -102,14 +102,14 @@
     titleArray = @[@"互动管理"
                     , @"我的关注"
                     , @"我的收藏"
-//                    , @"订单管理"
+                    , @"订单管理"
                     , @"账户安全"
                     , @"账户管理"];
     
     imageArray = @[ @"icon_personal_hudong.png"
                     , @"icon_personal_guanzhu.png"
                     , @"icon_personal_shouchang.png"
-//                    , @"icon_personal_ddgl.png"
+                    , @"icon_personal_ddgl.png"
                     , @"icon_personal_zhaq"
                     , @"icon_personal_zhgl"];
     [self configureMenu];
@@ -360,6 +360,17 @@
     if (indexPath.row == 0) {
         return 67;
     }
+    /*
+    //隐藏订单管理
+#ifndef kJuranDesigner
+    if (indexPath.row == 4){
+        return 0;
+    }
+#else
+    if (indexPath.row == 5){
+        return 0;
+    }
+#endif*/
     return 44;
 }
 
@@ -422,15 +433,15 @@
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
-        /*
+        
         case 4:{
             //        订单管理
             OrderListViewController *vc = [[OrderListViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
-        }*/
-        case 4:
+        }
+        case 5:
         {
             //        账户安全
             AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
@@ -438,7 +449,7 @@
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
-        case 5:
+        case 6:
         {
             //        账户管理
             AccountManageViewController *vc = [[AccountManageViewController alloc] init];
@@ -491,15 +502,15 @@
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
-        }/*
+        }
         case 5:{
             //        订单管理
             OrderListViewController *vc = [[OrderListViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
-        }*/
-        case 5:
+        }
+        case 6:
         {
             //实名认证
             RealNameAuthViewController *vc = [[RealNameAuthViewController alloc] init];
@@ -507,7 +518,7 @@
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
-        case 6:
+        case 7:
         {
              //        账户安全
             AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
@@ -515,7 +526,7 @@
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
-        case 7:
+        case 8:
         {
             //        账户管理
             AccountManageViewController *vc = [[AccountManageViewController alloc] init];
