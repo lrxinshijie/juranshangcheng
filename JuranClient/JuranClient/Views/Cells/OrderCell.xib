@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -18,6 +18,7 @@
             <connections>
                 <outlet property="actionBgView" destination="Ynp-vj-by1" id="R1a-en-gIy"/>
                 <outlet property="actionImageView" destination="6dR-BM-llb" id="DfW-Tx-87f"/>
+                <outlet property="addressLabel" destination="3Ra-A9-Xr3" id="dMa-ed-3m3"/>
                 <outlet property="amountImageView" destination="NjR-Z6-ulp" id="QqW-uL-YpX"/>
                 <outlet property="amountLabel" destination="2K4-y7-BcZ" id="X1v-FI-cgK"/>
                 <outlet property="amountView" destination="wss-AV-gIR" id="mXE-dP-OZb"/>
@@ -25,15 +26,21 @@
                 <outlet property="authorView" destination="Vmm-l1-XHs" id="VMN-Ck-xk5"/>
                 <outlet property="avtarImageView" destination="Kiv-CD-LL9" id="tde-Ze-cGi"/>
                 <outlet property="desigOrderLabel" destination="gNJ-oi-XSD" id="Enf-FM-Jlu"/>
+                <outlet property="designerAmountLabel" destination="xBd-7Z-zhF" id="Lwn-Ms-WGu"/>
+                <outlet property="designerOrderLabel" destination="fun-Aq-FFH" id="L6g-FQ-XSe"/>
+                <outlet property="designerOrderView" destination="uij-Z5-1dI" id="Vfq-ht-SrX"/>
+                <outlet property="designerStatusLabel" destination="9Bc-Gs-vOO" id="uMr-Pt-cvg"/>
                 <outlet property="effectImageView" destination="3Yr-du-Ncy" id="hSM-Cw-59V"/>
                 <outlet property="effectView" destination="Ijw-cv-xet" id="KxB-QO-BD7"/>
+                <outlet property="houseAreaLabel" destination="BUK-gZ-CcP" id="TBc-eY-ucc"/>
+                <outlet property="houseAreaView" destination="RvN-dn-jux" id="XrR-ZD-kVq"/>
                 <outlet property="measureOrderLabel" destination="F6r-JV-oKj" id="VNQ-mu-fxZ"/>
                 <outlet property="mobileLabel" destination="esr-qf-uln" id="IVT-Lf-L9s"/>
                 <outlet property="nameLabel" destination="BmR-Hu-q5H" id="zZe-aq-zTH"/>
                 <outlet property="orderImageView" destination="Y31-jw-244" id="6p4-ZL-beP"/>
                 <outlet property="orderView" destination="l2k-yH-oLH" id="Ine-jU-3Q1"/>
-                <outlet property="payAmountLabel" destination="e4t-eD-dsF" id="FdY-Lk-fAC"/>
                 <outlet property="statusLabel" destination="JTB-wi-DxO" id="aGS-Wb-O8X"/>
+                <outlet property="timeLabel" destination="hav-gt-IXr" id="NQq-dT-499"/>
             </connections>
             <point key="canvasLocation" x="299" y="186.5"/>
         </tableViewCell>
@@ -122,13 +129,6 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="量房费用，实付" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e4t-eD-dsF" customClass="TTTAttributedLabel">
-                    <rect key="frame" x="72" y="8" width="238" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -182,6 +182,78 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-323" y="489.5"/>
+        </view>
+        <view contentMode="scaleToFill" id="uij-Z5-1dI">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="101010101010101" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fun-Aq-FFH">
+                    <rect key="frame" x="10" y="7" width="199" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待支付" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Bc-Gs-vOO">
+                    <rect key="frame" x="10" y="7" width="145" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.0" green="0.15686274510000001" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="suH-pO-QK9">
+                    <rect key="frame" x="0.0" y="36" width="320" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-12-12 00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hav-gt-IXr">
+                    <rect key="frame" x="224" y="12" width="86" height="12"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-323" y="574.5"/>
+        </view>
+        <view contentMode="scaleToFill" id="RvN-dn-jux">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="北京东直门大街xxx号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Ra-A9-Xr3">
+                    <rect key="frame" x="10" y="7" width="237" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="面积：111.11" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BUK-gZ-CcP">
+                    <rect key="frame" x="10" y="27" width="300" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="G8m-Ya-joN">
+                    <rect key="frame" x="10" y="54" width="320" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥90000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xBd-7Z-zhF">
+                    <rect key="frame" x="222" y="7" width="88" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-323" y="662.5"/>
         </view>
     </objects>
     <resources>

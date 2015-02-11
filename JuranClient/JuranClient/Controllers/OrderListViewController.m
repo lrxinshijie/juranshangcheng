@@ -149,7 +149,7 @@
                             @"userType": [[ALTheme sharedTheme] userType]
                             }];
 #ifdef kJuranDesigner
-    [param setObject:@(_isLeft) forKey:@"type"];
+    [param setObject:[NSString stringWithFormat:@"%d", !_isLeft] forKey:@"type"];
 #endif
     
     [[ALEngine shareEngine]  pathURL:JR_ORDER_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
