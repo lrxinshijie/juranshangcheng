@@ -12,6 +12,7 @@
 #import "OrderConfirmPayViewController.h"
 #import "OrderPriceViewController.h"
 #import "OrderExtractViewController.h"
+#import "OrderCommentViewController.h"
 
 @interface OrderActionView ()
 
@@ -179,8 +180,12 @@
     }else if (button.tag == OrderActionComment){
         if (_order.ifCanViewCredit) {
             //查看评价
+            OrderCommentViewController *ov = [[OrderCommentViewController alloc] init];
+            [self.viewController.navigationController pushViewController:ov animated:YES];
         }else{
             //评价
+            OrderCommentViewController *ov = [[OrderCommentViewController alloc] init];
+            [self.viewController.navigationController pushViewController:ov animated:YES];
         }
     }
     
