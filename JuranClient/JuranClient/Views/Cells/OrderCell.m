@@ -28,7 +28,7 @@
 
 @property (nonatomic, strong) IBOutlet UIView *amountView;
 @property (nonatomic, strong) IBOutlet UIImageView *amountImageView;
-@property (nonatomic, strong) IBOutlet TTTAttributedLabel *payAmountLabel;
+@property (nonatomic, strong) TTTAttributedLabel *payAmountLabel;
 
 @property (nonatomic, strong) IBOutlet UIView *effectView;
 @property (nonatomic, strong) IBOutlet UIImageView *effectImageView;
@@ -36,6 +36,16 @@
 @property (nonatomic, strong) IBOutlet UIView *actionBgView;
 @property (nonatomic, strong) IBOutlet UIImageView *actionImageView;
 @property (nonatomic, strong) OrderActionView *actionView;
+
+@property (nonatomic, strong) IBOutlet UIView *designerOrderView;
+@property (nonatomic, strong) IBOutlet UILabel *designerOrderLabel;
+@property (nonatomic, strong) IBOutlet UILabel *designerStatusLabel;
+@property (nonatomic, strong) IBOutlet UILabel *timeLabel;
+
+@property (nonatomic, strong) IBOutlet UIView *houseAreaView;
+@property (nonatomic, strong) IBOutlet UILabel *addressLabel;
+@property (nonatomic, strong) IBOutlet UILabel *houseAreaLabel;
+@property (nonatomic, strong) IBOutlet UILabel *designerAmountLabel;
 
 @property (nonatomic, strong) JROrder *order;
 
@@ -52,6 +62,14 @@
     self.actionView = [[OrderActionView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 37)];
     _actionView.delegate = self;
     [_actionBgView addSubview:_actionView];
+    
+    self.payAmountLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(72, 8, 238, 21)];
+    _payAmountLabel.backgroundColor = [UIColor clearColor];
+    _payAmountLabel.numberOfLines = 0;
+    _payAmountLabel.font = [UIFont systemFontOfSize:14];
+    _payAmountLabel.textAlignment = NSTextAlignmentRight;
+    _payAmountLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
+    [_amountView addSubview:_payAmountLabel];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -66,9 +84,11 @@
     
     [self layoutFrame];
     
-    _payAmountLabel.numberOfLines = 0;
-    _payAmountLabel.backgroundColor = [UIColor clearColor];
-    _payAmountLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentCenter;
+    NSString *pay = @"付";
+    
+#ifdef kJuranDesigner
+    pay = @"收";
+#endif
     
     [_actionView fillViewWithOrder:order];
     
@@ -88,7 +108,7 @@
     
     if (order.type == 0) {
         NSString *measurePay = [NSString stringWithFormat:@"￥%d", order.measurePayAmount];
-        NSString *content = [NSString stringWithFormat:@"量房费 实付：%@", measurePay];
+        NSString *content = [NSString stringWithFormat:@"量房费 实%@：%@", pay, measurePay];
         
         [_payAmountLabel setText:content afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
             
@@ -98,11 +118,11 @@
             return mutableAttributedString;
         }];
     }else{
-        NSString *payAmount = [NSString stringWithFormat:@"已付：￥%d", order.payAmount];
-        NSString *unPaidAmount = [NSString stringWithFormat:@"未付：￥%d", order.unPaidAmount];
+        NSString *payAmount = [NSString stringWithFormat:@"已%@：￥%d",pay, order.payAmount];
+        NSString *unPaidAmount = [NSString stringWithFormat:@"未%@：￥%d",pay, order.unPaidAmount];
         NSString *waitPayAmount = [NSString stringWithFormat:@"￥%d", order.waitPayAmount];
         
-        NSString *content = [NSString stringWithFormat:@"%@   %@\n实付：%@", payAmount, unPaidAmount, waitPayAmount];
+        NSString *content = [NSString stringWithFormat:@"%@   %@\n实%@：%@", payAmount, unPaidAmount, pay, waitPayAmount];
         
         [_payAmountLabel setText:content afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
             NSRange payRange = [[mutableAttributedString string] rangeOfString:payAmount  options:NSCaseInsensitiveSearch];
@@ -124,9 +144,111 @@
             return mutableAttributedString;
         }];
     }
+    
+#ifdef kJuranDesigner
+    _amountLabel.text = @"";
+    _designerAmountLabel.text = [NSString stringWithFormat:@"￥%d", order.amount];
+    _designerStatusLabel.text = _order.statusName;
+    _designerOrderLabel.text = _order.type == 0 ? _order.measureTid : _order.designTid;
+    _addressLabel.text = _order.addressInfo;
+    _houseAreaLabel.text = [NSString stringWithFormat:@"面积：%@", _order.houseArea];
+    _timeLabel.text = _order.gmtCreate;
+    
+    [_avtarImageView setImageWithURLString:order.headUrl];
+    _nameLabel.text = order.customerName;
+    _mobileLabel.text = order.customerMobile;
+#endif
 }
 
 - (void)layoutFrame{
+#ifdef kJuranDesigner
+    [_designerOrderView removeFromSuperview];
+    [_authorView removeFromSuperview];
+    [_amountView removeFromSuperview];
+    [_effectView removeFromSuperview];
+    [_actionBgView removeFromSuperview];
+    [_houseAreaView removeFromSuperview];
+    
+    CGRect frame = _designerOrderView.frame;
+    frame.origin.y = 10;
+    _designerOrderView.frame = frame;
+    [self addSubview:_designerOrderView];
+    
+    frame = _authorView.frame;
+    frame.origin.y = CGRectGetMaxY(_designerOrderView.frame);
+    _authorView.frame = frame;
+    [self addSubview:_authorView];
+    
+    frame = _houseAreaView.frame;
+    frame.origin.y = CGRectGetMaxY(_authorView.frame);
+    _houseAreaView.frame = frame;
+    [self addSubview:_houseAreaView];
+    
+    if (_order.type == 0) {
+        
+        frame = _amountView.frame;
+        frame.origin.y = CGRectGetMaxY(_houseAreaView.frame);
+        frame.size.height = 37;
+        _amountView.frame = frame;
+        [self addSubview:_amountView];
+        
+        frame = _payAmountLabel.frame;
+        frame.origin.y = 0;
+        frame.size.height = CGRectGetHeight(_amountView.frame);
+        _payAmountLabel.frame = frame;
+        frame = _amountImageView.frame;
+        frame.origin.y = CGRectGetHeight(_amountView.frame)-1;
+        _amountImageView.frame = frame;
+        
+        CGFloat y = CGRectGetMaxY(_amountView.frame);
+        
+        if ([_order.status isEqualToString:@"wait_designer_measure"] || [_order.status isEqualToString:@"complete"]) {
+            frame = _effectView.frame;
+            frame.origin.y = CGRectGetMaxY(_amountView.frame);
+            _effectView.frame = frame;
+            [self addSubview:_effectView];
+            
+            y = CGRectGetMaxY(frame);
+        }
+        
+        if ([_order.status isEqualToString:@"wait_designer_confirm"] || [_order.status isEqualToString:@"wait_designer_measure"]) {
+            frame = _actionBgView.frame;
+            frame.origin.y = y;
+            _actionBgView.frame = frame;
+            [self addSubview:_actionBgView];
+        }
+        
+    }else{
+        frame = _amountView.frame;
+        frame.origin.y = CGRectGetMaxY(_houseAreaView.frame);
+        frame.size.height = 55;
+        _amountView.frame = frame;
+        
+        frame = _payAmountLabel.frame;
+        frame.origin.y = 0;
+        frame.size.height = CGRectGetHeight(_amountView.frame);
+        _payAmountLabel.frame = frame;
+        
+        frame = _amountImageView.frame;
+        frame.origin.y = CGRectGetHeight(_amountView.frame)-1;
+        _amountImageView.frame = frame;
+        
+        [self addSubview:_amountView];
+        
+        
+        frame = _effectView.frame;
+        frame.origin.y = CGRectGetMaxY(_amountView.frame);
+        _effectView.frame = frame;
+        [self addSubview:_effectView];
+        
+        if ([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) {
+            frame = _actionBgView.frame;
+            frame.origin.y = CGRectGetMaxY(_effectView.frame);
+            _actionBgView.frame = frame;
+            [self addSubview:_actionBgView];
+        }
+    }
+#else
     [_orderView removeFromSuperview];
     [_authorView removeFromSuperview];
     [_amountView removeFromSuperview];
@@ -224,6 +346,7 @@
         _actionBgView.frame = frame;
         [self addSubview:_actionBgView];
     }
+#endif
 }
 
 - (void)clickOrderAction:(OrderActionView *)view Action:(OrderAction)action{
@@ -232,6 +355,23 @@
 
 + (CGFloat)cellHeight:(JROrder *)order{
     CGFloat height = 20;
+#ifdef kJuranDesigner
+    if (order.type == 0) {
+        height += (37+70+55+37);
+        if ([order.status isEqualToString:@"wait_designer_measure"] || [order.status isEqualToString:@"complete"]) {
+            height += 37;
+        }
+        
+        if ([order.status isEqualToString:@"wait_designer_confirm"] || [order.status isEqualToString:@"wait_designer_measure"]) {
+            height += 37;
+        }
+    }else{
+        height += (37+70+55+55+37);
+        if ([order.status isEqualToString:@"wait_first_pay"] || [order.status isEqualToString:@"wait_last_pay"]) {
+            height += 37;
+        }
+    }
+#else
     if (order.type == 0) {
         height += (37+70+37);
         if ([order.status isEqualToString:@"wait_designer_measure"] || [order.status isEqualToString:@"complete"]) {
@@ -244,6 +384,8 @@
     }else{
         height += (55+70+55+37+37);
     }
+#endif
+    
     
     return height;
 }

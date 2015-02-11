@@ -157,6 +157,10 @@
 
 #define JR_CANCEL_ORDER [NSString stringWithFormat:@"%@/trade/cancelTrade.json",JR_SERVICE]
 #define JR_CONFIRM_ORDER [NSString stringWithFormat:@"%@/trade/confirmResult.json",JR_SERVICE]
+#define JR_REJECT_ORDER [NSString stringWithFormat:@"%@/trade/refuseMeasureApply.json",JR_SERVICE]
+#define JR_DESIGNER_CONFIRM_ORDER [NSString stringWithFormat:@"%@/trade/confirmMeasure.json",JR_SERVICE]
+#define JR_GET_EXTRACT_AMOUNT [NSString stringWithFormat:@"%@/trade/measureDrawApplyInit.json",JR_SERVICE]
+#define JR_EXTRACT_AMOUNT [NSString stringWithFormat:@"%@/trade/measureDrawApply.json",JR_SERVICE]
 
 
 #endif

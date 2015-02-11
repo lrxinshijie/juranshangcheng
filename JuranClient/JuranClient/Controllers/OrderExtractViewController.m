@@ -7,8 +7,17 @@
 //
 
 #import "OrderExtractViewController.h"
+#import "JROrder.h"
 
-@interface OrderExtractViewController ()
+@interface OrderExtractViewController () <UITextViewDelegate>
+
+@property (nonatomic, strong) IBOutlet UILabel *orderLabel;
+@property (nonatomic, strong) IBOutlet UILabel *amountLabel;
+@property (nonatomic, strong) IBOutlet UILabel *payAmountLabel;
+@property (nonatomic, strong) IBOutlet ASPlaceholderTextView *textView;
+@property (nonatomic, assign) NSInteger applyAmount;
+
+- (IBAction)onSubmit:(id)sender;
 
 @end
 
@@ -19,6 +28,62 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"申请提取量房费用";
+    
+    _textView.backgroundColor = [UIColor clearColor];
+    _textView.placeholder = @"请输入120字以内的提取理由";
+    _textView.layer.borderColor = [[UIColor blackColor] CGColor];
+    _textView.layer.borderWidth = 1;
+    _orderLabel.text = [NSString stringWithFormat:@"量房订单：%@", _order.measureTid];
+    
+    
+    NSDictionary *param = @{@"tid": _order.measureTid};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_GET_EXTRACT_AMOUNT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            self.applyAmount = [data getIntValueForKey:@"applyAmount" defaultValue:0];
+            _amountLabel.text = [NSString stringWithFormat:@"￥%d", [data getIntValueForKey:@"amount" defaultValue:0]];
+            _payAmountLabel.text = [NSString stringWithFormat:@"￥%d", _applyAmount];
+        }
+    }];
+    
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    NSString *key = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    if (key.length > 120) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
+- (IBAction)onSubmit:(id)sender{
+    NSString *content = _textView.text;
+    if (content.length == 0) {
+        [self showTip:@"提取理由不能为空"];
+        return;
+    }
+    
+    NSDictionary *param = @{@"tid": _order.measureTid,
+                            @"applyAmount": [NSString stringWithFormat:@"%d", _applyAmount],
+                            @"applyReason": content};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_EXTRACT_AMOUNT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

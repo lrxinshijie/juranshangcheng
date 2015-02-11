@@ -18,6 +18,17 @@
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
 
+#ifdef kJuranDesigner
+
+@property (nonatomic, strong) IBOutlet UIView *headerView;
+@property (nonatomic, strong) IBOutlet UIButton *leftButton;
+@property (nonatomic, strong) IBOutlet UIButton *rightButton;
+@property (nonatomic, assign) BOOL isLeft;
+
+@property (nonatomic, strong) UIButton *filterButton;
+
+#endif
+
 @end
 
 @implementation OrderListViewController
@@ -34,7 +45,18 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:kNotificationNameOrderReloadData object:nil];
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    CGRect frame = kContentFrameWithoutNavigationBar;
+    
+#ifdef kJuranDesigner
+    [self.view addSubview:_headerView];
+    frame.size.height = CGRectGetHeight(frame) - CGRectGetHeight(_headerView.frame);
+    frame.origin.y = CGRectGetHeight(_headerView.frame);
+    
+    self.filterButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onFilter) title:@"筛选" image:[UIImage imageNamed:@"case-icon-filter"]];
+    [_filterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+#endif
+    
+    self.tableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = RGBColor(237, 237, 237);
     [self.view addSubview:_tableView];
@@ -50,8 +72,38 @@
         [weakSelf loadData];
     }];
     
+#ifdef kJuranDesigner
+    self.isLeft = YES;
+#else
+    [_tableView headerBeginRefreshing];
+#endif
+}
+
+#ifdef kJuranDesigner
+- (void)setIsLeft:(BOOL)isLeft{
+    _isLeft = isLeft;
+    
+    [_leftButton setTitleColor:_isLeft ? kBlueColor : RGBColor(64, 65, 64) forState:UIControlStateNormal];
+    [_rightButton setTitleColor:_isLeft ? RGBColor(64, 65, 64) : kBlueColor forState:UIControlStateNormal];
+    
+    self.navigationItem.rightBarButtonItem = _isLeft ? nil : [[UIBarButtonItem alloc] initWithCustomView:_filterButton];
+    
     [_tableView headerBeginRefreshing];
 }
+
+- (IBAction)onSwitch:(UIButton *)btn{
+    if ((_isLeft && [btn isEqual:_leftButton]) || (!_isLeft && [btn isEqual:_rightButton]) ) {
+        return;
+    }
+    
+    self.isLeft = !_isLeft;
+}
+
+- (void)onFilter{
+    
+}
+
+#endif
 
 - (void)reloadData:(NSNotification *)noti{
     if (noti.object) {
@@ -92,10 +144,14 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"pageNo": @(_currentPage),
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary: @{@"pageNo": @(_currentPage),
                             @"onePageCount": kOnePageCount,
                             @"userType": [[ALTheme sharedTheme] userType]
-                            };
+                            }];
+#ifdef kJuranDesigner
+    [param setObject:[NSString stringWithFormat:@"%d", !_isLeft] forKey:@"type"];
+#endif
+    
     [[ALEngine shareEngine]  pathURL:JR_ORDER_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             NSMutableArray *rows = [JROrder buildUpWithValue:[data objectForKey:[Public isDesignerApp] ? @"designerTradeList" : @"memberTradeList"]];
