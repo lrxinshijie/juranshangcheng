@@ -7,8 +7,14 @@
 //
 
 #import "OrderPriceViewController.h"
+#import "JROrder.h"
+#import "UIAlertView+Blocks.h"
 
-@interface OrderPriceViewController ()
+@interface OrderPriceViewController () <UITextFieldDelegate>
+
+@property (nonatomic, strong) IBOutlet UITextField *amountTextField;
+
+- (IBAction)onSubmit:(id)sender;
 
 @end
 
@@ -19,6 +25,41 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"修改价格";
+    
+    _amountTextField.text = [NSString stringWithFormat:@"%d", _order.amount];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
+- (IBAction)onSubmit:(id)sender{
+    NSString *amount = _amountTextField.text;
+    
+    [UIAlertView showWithTitle:nil message:@"请确认量房费用，确认后无法修改" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确认"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        if (alertView.cancelButtonIndex == buttonIndex) {
+            return ;
+        }
+        
+        NSDictionary *param = @{@"measurePayAmount": [NSString stringWithFormat:@"%@", amount],
+                                @"id": [NSString stringWithFormat:@"%d", _order.key]};
+        [self showHUD];
+        [[ALEngine shareEngine] pathURL:JR_DESIGNER_CONFIRM_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            [self hideHUD];
+            if (!error) {
+                _order.status = @"wait_consumer_pay";
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            }
+        }];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,6 +8,9 @@
 
 #import "ALViewController.h"
 
+@class JROrder;
 @interface OrderCommentViewController : ALViewController
+
+@property (nonatomic, strong) JROrder *order;
 
 @end

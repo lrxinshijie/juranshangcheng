@@ -12,6 +12,7 @@
 #import "OrderConfirmPayViewController.h"
 #import "OrderPriceViewController.h"
 #import "OrderExtractViewController.h"
+#import "UIAlertView+Blocks.h"
 #import "OrderCommentViewController.h"
 
 @interface OrderActionView ()
@@ -140,6 +141,7 @@
 
 - (void)onAction:(UIButton *)button{
     if (button.tag == OrderActionCancel) {
+        //消费者取消订单
         NSDictionary *param = @{@"measureTid": _order.measureTid};
         [self.viewController showHUD];
         [[ALEngine shareEngine] pathURL:JR_CANCEL_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -150,6 +152,25 @@
             }
         }];
     }else if (button.tag == OrderActionConfirm){
+        //设计师确认订单
+#ifdef kJuranDesigner
+        [UIAlertView showWithTitle:nil message:@"请确认量房费用，确认后无法修改" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确认"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (alertView.cancelButtonIndex == buttonIndex) {
+                return ;
+            }
+            
+            NSDictionary *param = @{@"measurePayAmount": [NSString stringWithFormat:@"%d", _order.amount],
+                                    @"id": [NSString stringWithFormat:@"%d", _order.key]};
+            [self.viewController showHUD];
+            [[ALEngine shareEngine] pathURL:JR_DESIGNER_CONFIRM_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self.viewController responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                [self.viewController hideHUD];
+                if (!error) {
+                    _order.status = @"wait_consumer_pay";
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
+                }
+            }];
+        }];
+#else
         NSDictionary *param = @{@"designTid": _order.designTid};
         [self.viewController showHUD];
         [[ALEngine shareEngine] pathURL:JR_CONFIRM_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -159,7 +180,9 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
             }
         }];
+#endif
     }else if (button.tag == OrderActionPay){
+        //消费者支付
         if (_order.type == 0) {
             OrderConfirmPayViewController *ov = [[OrderConfirmPayViewController alloc] init];
             ov.order = _order;
@@ -170,23 +193,42 @@
             [self.viewController.navigationController pushViewController:ov animated:YES];
         }
     }else if (button.tag == OrderActionPrice){
+        //设计师修改价格
         OrderPriceViewController *ov = [[OrderPriceViewController alloc] init];
         ov.order = _order;
         [self.viewController.navigationController pushViewController:ov animated:YES];
     }else if (button.tag == OrderActionExtract){
+        //设计师提取量房费用
         OrderExtractViewController *ov = [[OrderExtractViewController alloc] init];
         ov.order = _order;
         [self.viewController.navigationController pushViewController:ov animated:YES];
     }else if (button.tag == OrderActionComment){
+        //消费者评论
         if (_order.ifCanViewCredit) {
             //查看评价
-            OrderCommentViewController *ov = [[OrderCommentViewController alloc] init];
+            OrderCommentViewController  *ov = [[OrderCommentViewController alloc] init];
+            ov.order = _order;
             [self.viewController.navigationController pushViewController:ov animated:YES];
         }else{
             //评价
-            OrderCommentViewController *ov = [[OrderCommentViewController alloc] init];
+            OrderCommentViewController  *ov = [[OrderCommentViewController alloc] init];
+            //            ov.order = _order;
             [self.viewController.navigationController pushViewController:ov animated:YES];
         }
+    }else if (button.tag == OrderActionReject){
+        //设计师拒绝
+        NSDictionary *param = @{@"measureTid": _order.measureTid};
+        [self.viewController showHUD];
+        [[ALEngine shareEngine] pathURL:JR_REJECT_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            [self.viewController hideHUD];
+            if (!error) {
+                _order.status = @"cancel";
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
+            }
+        }];
+    }else if (button.tag == OrderActionDesigner){
+        //签设计合同
+        
     }
     
     if ([_delegate respondsToSelector:@selector(clickOrderAction:Action:)]) {

@@ -360,6 +360,17 @@
     if (indexPath.row == 0) {
         return 67;
     }
+    /*
+    //隐藏订单管理
+#ifndef kJuranDesigner
+    if (indexPath.row == 4){
+        return 0;
+    }
+#else
+    if (indexPath.row == 5){
+        return 0;
+    }
+#endif*/
     return 44;
 }
 
@@ -422,6 +433,7 @@
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
+        
         case 4:{
             //        订单管理
             OrderListViewController *vc = [[OrderListViewController alloc] init];

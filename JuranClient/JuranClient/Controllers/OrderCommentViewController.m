@@ -8,6 +8,8 @@
 
 #import "OrderCommentViewController.h"
 #import "CommentStarView.h"
+#import "JROrder.h"
+#import "JRDesigner.h"
 
 @interface OrderCommentViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -22,6 +24,12 @@
 @property (nonatomic, strong) IBOutlet CommentStarView *servicePointView;
 
 @property (nonatomic, strong) IBOutlet UIView *toolView;
+
+@property (nonatomic, strong) IBOutlet UILabel *orderNumberLabel;
+@property (nonatomic, strong) IBOutlet UILabel *nameLabel;
+@property (nonatomic, strong) IBOutlet UILabel *mobileNumLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *idImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *userLevelImageView;
 
 @end
 
@@ -111,6 +119,32 @@
         [view removeFromSuperview];
     }
     if (indexPath.row == 0) {
+        _orderNumberLabel.text = [NSString stringWithFormat:@"设计订单：%@", _order.designTid];
+        [_headerImageView setImageWithURLString:_order.headUrl];
+        _nameLabel.text = _order.decoratorName;
+        _mobileNumLabel.text = _order.decoratorMobile;
+        
+        CGRect frame = _nameLabel.frame;
+        CGFloat width = [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(frame)];
+        if (width > 136) {
+            width = 136;
+        }
+        frame.size.width = width;
+        _nameLabel.frame = frame;
+        
+        frame = _idImageView.frame;
+        frame.origin.x = CGRectGetMaxX(_nameLabel.frame) + 10;
+        _idImageView.frame = frame;
+        _idImageView.hidden = !_order.isAuth;
+        
+        _userLevelImageView.image = [UIImage imageNamed:[JRDesigner userLevelImage:_order.levelCode]];
+        frame = _userLevelImageView.frame;
+        if (_idImageView.hidden) {
+            frame.origin.x = CGRectGetMaxX(_nameLabel.frame) + 10;
+        }else{
+            frame.origin.x = CGRectGetMaxX(_idImageView.frame) + 10;
+        }
+        _userLevelImageView.frame = frame;
         [cell.contentView addSubview:self.headerView];
     }else if (indexPath.row == 1) {
         [cell.contentView addSubview:self.footerView];
