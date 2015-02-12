@@ -11,7 +11,7 @@
 #import "JROrder.h"
 #import "JRDesigner.h"
 
-@interface OrderCommentViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface OrderCommentViewController ()<UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, CommentStarViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
@@ -22,14 +22,20 @@
 
 @property (nonatomic, strong) IBOutlet CommentStarView *capacityPointView;
 @property (nonatomic, strong) IBOutlet CommentStarView *servicePointView;
+@property (nonatomic, strong) IBOutlet UILabel *capacityLabel;
+@property (nonatomic, strong) IBOutlet UILabel *serviceLabel;
 
 @property (nonatomic, strong) IBOutlet UIView *toolView;
+@property (nonatomic, strong) IBOutlet UIButton *submitButton;
+@property (nonatomic, strong) IBOutlet UIButton *anonymityButton;
 
 @property (nonatomic, strong) IBOutlet UILabel *orderNumberLabel;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *mobileNumLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *idImageView;
 @property (nonatomic, strong) IBOutlet UIImageView *userLevelImageView;
+
+@property (nonatomic, assign) BOOL isAnonymity;
 
 @end
 
@@ -44,6 +50,7 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"订单评价";
+    self.isAnonymity = YES;
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
@@ -71,19 +78,67 @@
     
     _toolView.frame = CGRectMake(0, kWindowHeightWithoutNavigationBar - 40, kWindowWidth, 40);
     [self.view addSubview:_toolView];
+    
+    _contentTextView.placeholder = @"请输入10-200字之间\n商品质量是否符合描述？快来分享你的购物心得吧～";
+    _submitButton.layer.borderColor = RGBColor(35, 62, 143).CGColor;
+    _submitButton.layer.borderWidth = 1.f;
+    
+    _capacityPointView.delegate = self;
+    _servicePointView.delegate = self;
 }
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Target Action
+
+- (IBAction)onSubmit:(id)sender{
+    if (_capacityPointView.selectedIndex == 0) {
+        [self showTip:@"请选择实力评分！"];
+        return;
+    }
+    if (_servicePointView.selectedIndex == 0) {
+        [self showTip:@"请选择服务评价！"];
+        return;
+    }
+    if (_contentTextView.text.length < 10) {
+        [self showTip:@"请输入10-200字的评价内容！"];
+        return;
+    }
+    [self showHUD];
+    NSDictionary *param = @{@"tid": _order.type?_order.designTid:_order.measureTid,
+                            @"capacityPoint": [NSString stringWithFormat:@"%d", _capacityPointView.selectedIndex],
+                            @"servicePoint": [NSString stringWithFormat:@"%d", _servicePointView.selectedIndex],
+                            @"type": [NSString stringWithFormat:@"%d", _order.type],
+                            @"content": _contentTextView.text,
+                            @"ifAnony": [NSString stringWithFormat:@"%d", _isAnonymity]
+                            };
+    [[ALEngine shareEngine]  pathURL:JR_TRADE_APPRAISE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            [self showTip:@"评价成功!"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        }
+    }];
 }
-*/
 
+- (IBAction)onAnonymity:(id)sender{
+    _isAnonymity = !_isAnonymity;
+    [_anonymityButton setImage:[UIImage imageNamed:_isAnonymity?@"order_point_selected.png":@"order_point_unselected.png"] forState:UIControlStateNormal];
+}
+
+#pragma mark - CommentStarViewDelegate
+
+- (void)didSelectedStarView:(CommentStarView *)starView{
+    if (starView == _capacityPointView) {
+        self.capacityLabel.text = [NSString stringWithFormat:@"%d星", starView.selectedIndex];
+    }else if (starView == _servicePointView){
+        self.serviceLabel.text = [NSString stringWithFormat:@"%d星", starView.selectedIndex];
+    }
+}
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 2;
@@ -158,15 +213,15 @@
 
 
 - (void)keyboardWillShow:(NSNotification *)notification{
-//    NSDictionary *info = [notification userInfo];
-//    NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
-//    CGSize keyboardSize = [value CGRectValue].size;
+    NSDictionary *info = [notification userInfo];
+    NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
+    CGSize keyboardSize = [value CGRectValue].size;
     
 //    CGRect contentFrame = [self.view convertRect:_contentTextView.frame fromView:self.tableView];
     
     
     CGRect frame = _tableView.frame;
-    frame.origin.y = 0 - 217 + (kWindowHeight > 500?88:0);
+    frame.origin.y = 36 - keyboardSize.height + (kWindowHeight > 500?88:0);
     _tableView.frame = frame;
 }
 
@@ -175,5 +230,22 @@
     _tableView.frame = CGRectMake(0, 0, kWindowWidth, kWindowHeightWithoutNavigationBar - 40);
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    NSString * toBeString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    if (toBeString.length > 200) {
+        [self showTip:@"内容长度不能超过200个字!"];
+        return NO;
+    }
+    return YES;
+}
 
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 @end

@@ -18,16 +18,12 @@
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
 
-#ifdef kJuranDesigner
-
+//Designer
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UIButton *leftButton;
 @property (nonatomic, strong) IBOutlet UIButton *rightButton;
 @property (nonatomic, assign) BOOL isLeft;
-
 @property (nonatomic, strong) UIButton *filterButton;
-
-#endif
 
 @end
 

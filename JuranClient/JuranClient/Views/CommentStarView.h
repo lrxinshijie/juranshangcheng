@@ -7,10 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CommentStarView;
+
+@protocol CommentStarViewDelegate <NSObject>
+
+@optional
+
+- (void)didSelectedStarView:(CommentStarView*)starView;
+
+@end
 
 @interface CommentStarView : UIView
 
 @property (nonatomic, assign) NSInteger selectedIndex;
+@property (nonatomic, weak) id<CommentStarViewDelegate> delegate;
 
 
 @end

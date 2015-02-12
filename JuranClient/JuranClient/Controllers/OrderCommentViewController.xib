@@ -7,13 +7,22 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderCommentViewController">
             <connections>
+                <outlet property="anonymityButton" destination="OTO-Q4-yQS" id="IaV-ps-bBf"/>
+                <outlet property="capacityLabel" destination="jDc-vs-guj" id="1mR-Ha-3Bf"/>
                 <outlet property="capacityPointView" destination="crY-3Y-ZYd" id="jpm-uc-IUE"/>
                 <outlet property="contentTextView" destination="Bwr-MV-JC9" id="y3r-SK-Csm"/>
                 <outlet property="footerView" destination="UJn-wy-m0X" id="RwT-K0-IUc"/>
                 <outlet property="headerImageView" destination="hw6-Aj-rbK" id="LTx-4q-KEh"/>
                 <outlet property="headerView" destination="hXO-b6-Pod" id="zRq-Uc-fLC"/>
+                <outlet property="idImageView" destination="ABv-b2-uE2" id="Lcy-Ea-Q6F"/>
+                <outlet property="mobileNumLabel" destination="fCo-pm-c82" id="Zcc-8A-HnV"/>
+                <outlet property="nameLabel" destination="FWq-5g-vQq" id="zVa-VX-Bsb"/>
+                <outlet property="orderNumberLabel" destination="cqP-1O-zrO" id="iP3-KQ-RfP"/>
+                <outlet property="serviceLabel" destination="J7u-Mq-iJb" id="cJp-yu-m3G"/>
                 <outlet property="servicePointView" destination="44K-so-HYx" id="ELa-Ww-TrC"/>
+                <outlet property="submitButton" destination="aHx-A8-veZ" id="P9o-t9-2Vw"/>
                 <outlet property="toolView" destination="YWA-sN-YTs" id="WiU-QY-8oH"/>
+                <outlet property="userLevelImageView" destination="zDv-Lf-VxS" id="jBp-PL-RAx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -117,18 +126,35 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="sflkjsldfjlskjfl" id="Bwr-MV-JC9" customClass="ASPlaceholderTextView">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Bwr-MV-JC9" customClass="ASPlaceholderTextView">
                             <rect key="frame" x="15" y="117" width="290" height="128"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="TTh-oa-DwC"/>
+                            </connections>
                         </textView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jDc-vs-guj">
+                            <rect key="frame" x="271" y="41" width="31" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="J7u-Mq-iJb">
+                            <rect key="frame" x="271" y="80" width="31" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="deviceRGB"/>
+            <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="deviceRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="573" y="138"/>
         </view>
@@ -137,7 +163,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="cgl-it-Mlf">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="0.5"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -149,20 +175,26 @@
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="onAnonymity:" destination="-1" eventType="touchUpInside" id="LHk-KB-Tr8"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aHx-A8-veZ">
-                    <rect key="frame" x="240" y="5.5" width="65" height="29.5"/>
+                    <rect key="frame" x="240" y="6" width="65" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="发表评论">
                         <color key="titleColor" red="0.13725490196078433" green="0.24313725490196078" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="onSubmit:" destination="-1" eventType="touchUpInside" id="uZ3-gi-ZU8"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="580" y="327"/>
+            <point key="canvasLocation" x="573" y="328"/>
         </view>
     </objects>
     <resources>

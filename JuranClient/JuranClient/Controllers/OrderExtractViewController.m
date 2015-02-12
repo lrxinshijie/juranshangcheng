@@ -14,6 +14,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *orderLabel;
 @property (nonatomic, strong) IBOutlet UILabel *amountLabel;
 @property (nonatomic, strong) IBOutlet UILabel *payAmountLabel;
+@property (nonatomic, strong) IBOutlet UILabel *noteLabel;
 @property (nonatomic, strong) IBOutlet ASPlaceholderTextView *textView;
 @property (nonatomic, assign) NSInteger applyAmount;
 
@@ -44,6 +45,8 @@
             self.applyAmount = [data getIntValueForKey:@"applyAmount" defaultValue:0];
             _amountLabel.text = [NSString stringWithFormat:@"￥%d", [data getIntValueForKey:@"amount" defaultValue:0]];
             _payAmountLabel.text = [NSString stringWithFormat:@"￥%d", _applyAmount];
+            
+            _noteLabel.text = [NSString stringWithFormat:@"温馨提示：\n提取量房费后，将无法再进行下一步签订设计合同，请确认是否提取；\n未签订设计合同就申请提取量房费，将扣除%d%%服务费；申请成功并审核通过后，经平台周期结算量词费用将转至您的帐户，届时您可进行提现操作。", (NSInteger)([data getDoubleValueForKey:@"designMeasureDrawDeduction" defaultValue:0]*100)];
         }
     }];
     
@@ -71,6 +74,11 @@
     NSString *content = _textView.text;
     if (content.length == 0) {
         [self showTip:@"提取理由不能为空"];
+        return;
+    }
+    
+    if (_applyAmount == 0) {
+        [self showTip:@"可提取金额为0"];
         return;
     }
     

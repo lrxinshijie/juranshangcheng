@@ -160,12 +160,17 @@
             }
             
             NSDictionary *param = @{@"measurePayAmount": [NSString stringWithFormat:@"%d", _order.amount],
-                                    @"id": [NSString stringWithFormat:@"%d", _order.key]};
+                                    @"id": [NSString stringWithFormat:@"%d", _order.key],
+                                    @"serviceDate": _order.serviceDate};
             [self.viewController showHUD];
             [[ALEngine shareEngine] pathURL:JR_DESIGNER_CONFIRM_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self.viewController responseHandler:^(NSError *error, id data, NSDictionary *other) {
                 [self.viewController hideHUD];
                 if (!error) {
-                    _order.status = @"wait_consumer_pay";
+                    if (_order.amount == 0) {
+                        _order.status = @"wait_designer_measure";
+                    }else{
+                        _order.status = @"wait_consumer_pay";
+                    }
                     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
                 }
             }];
@@ -212,7 +217,7 @@
         }else{
             //评价
             OrderCommentViewController  *ov = [[OrderCommentViewController alloc] init];
-            //            ov.order = _order;
+            ov.order = _order;
             [self.viewController.navigationController pushViewController:ov animated:YES];
         }
     }else if (button.tag == OrderActionReject){

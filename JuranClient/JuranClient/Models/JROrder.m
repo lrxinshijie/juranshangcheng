@@ -39,6 +39,7 @@
         self.customerWechat = @"";
         self.houseType = @"";
         self.serviceDate = @"";
+        self.customerHeadUrl = @"";
     }
     return self;
 }
@@ -76,6 +77,9 @@
         self.customerMobile = [dict getStringValueForKey:@"customerMobile" defaultValue:@""];
         self.houseArea = [dict getStringValueForKey:@"houseArea" defaultValue:@""];
         self.addressInfo = [dict getStringValueForKey:@"addressInfo" defaultValue:@""];
+        
+        self.customerHeadUrl = [dict getStringValueForKey:@"customerHeadUrl" defaultValue:@""];
+        self.serviceDate = [dict getStringValueForKey:@"serviceDate" defaultValue:@""];
         
     }
     
@@ -174,5 +178,16 @@
     self.decoratorId = [dict getIntValueForKey:@"decoratorId" defaultValue:0];
     self.customerHeadUrl = [dict getStringValueForKey:@"customerHeadUrl" defaultValue:@""];
 }
+
+- (NSString *)serviceDateString{
+    NSArray *rows = @[@"只工作日",@"工作日、双休日与假日均可",@"只双休日、假日"];
+    NSString *retVal = [rows objectAtTheIndex:[_serviceDate integerValue]];
+    if (retVal) {
+        return retVal;
+    }
+    
+    return @"";
+}
+
 
 @end

@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderExtractViewController">
             <connections>
                 <outlet property="amountLabel" destination="Vt1-PI-iA8" id="XgE-MA-DYd"/>
+                <outlet property="noteLabel" destination="amG-am-dMn" id="0dC-AL-eUN"/>
                 <outlet property="orderLabel" destination="I2d-Dr-1wE" id="XYL-x0-1ZK"/>
                 <outlet property="payAmountLabel" destination="dNu-80-Vwq" id="k9N-dn-3CX"/>
                 <outlet property="textView" destination="jfP-h7-J4C" id="O3I-Dj-ApN"/>
@@ -70,7 +71,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vt1-PI-iA8">
-                            <rect key="frame" x="84" y="39" width="73" height="21"/>
+                            <rect key="frame" x="84" y="39" width="106" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

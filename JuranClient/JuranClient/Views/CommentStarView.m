@@ -41,6 +41,9 @@
             [b setImage:[UIImage imageNamed:@"order_star_unselected.png"] forState:UIControlStateNormal];
         }
     }
+    if (_delegate && [_delegate respondsToSelector:@selector(didSelectedStarView:)]) {
+        [_delegate didSelectedStarView:self];
+    }
 }
 
 @end
