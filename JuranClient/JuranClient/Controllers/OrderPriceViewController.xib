@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderPriceViewController">
             <connections>
                 <outlet property="amountTextField" destination="B8Y-4q-bgP" id="w4a-c1-5ZT"/>
+                <outlet property="dateLabel" destination="Y6T-bS-Alj" id="VHT-cU-KdA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

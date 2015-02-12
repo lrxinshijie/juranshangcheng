@@ -13,6 +13,7 @@
 @interface OrderPriceViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) IBOutlet UITextField *amountTextField;
+@property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 
 - (IBAction)onSubmit:(id)sender;
 
@@ -27,6 +28,7 @@
     self.navigationItem.title = @"修改价格";
     
     _amountTextField.text = [NSString stringWithFormat:@"%d", _order.amount];
+    _dateLabel.text = [NSString stringWithFormat:@"期望量房时间：%@", _order.serviceDateString];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -47,12 +49,18 @@
         }
         
         NSDictionary *param = @{@"measurePayAmount": [NSString stringWithFormat:@"%@", amount],
-                                @"id": [NSString stringWithFormat:@"%d", _order.key]};
+                                @"id": [NSString stringWithFormat:@"%d", _order.key],
+                                @"serviceDate": _order.serviceDate};
         [self showHUD];
         [[ALEngine shareEngine] pathURL:JR_DESIGNER_CONFIRM_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
             [self hideHUD];
             if (!error) {
-                _order.status = @"wait_consumer_pay";
+                if (_order.amount == 0) {
+                    _order.status = @"wait_designer_measure";
+                }else{
+                    _order.status = @"wait_consumer_pay";
+                }
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self.navigationController popViewControllerAnimated:YES];
