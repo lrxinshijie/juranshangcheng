@@ -54,6 +54,7 @@
 @property (nonatomic, copy) NSString *customerWechat;
 @property (nonatomic, copy) NSString *houseType;
 @property (nonatomic, copy) NSString *serviceDate;
+@property (nonatomic, copy) NSString *customerHeadUrl;
 
 
 - (NSString *)statusName;

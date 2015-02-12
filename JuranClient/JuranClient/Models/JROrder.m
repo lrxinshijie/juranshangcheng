@@ -174,6 +174,8 @@
     self.houseArea = [dict getStringValueForKey:@"houseArea" defaultValue:@""];
     self.addressInfo = [dict getStringValueForKey:@"addressInfo" defaultValue:@""];
     self.serviceDate = [dict getStringValueForKey:@"serviceDate" defaultValue:@""];
+    self.decoratorId = [dict getIntValueForKey:@"decoratorId" defaultValue:0];
+    self.customerHeadUrl = [dict getStringValueForKey:@"customerHeadUrl" defaultValue:@""];
 }
 
 - (NSString *)serviceDateString{

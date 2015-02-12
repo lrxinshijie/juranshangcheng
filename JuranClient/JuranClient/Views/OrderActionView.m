@@ -13,6 +13,7 @@
 #import "OrderPriceViewController.h"
 #import "OrderExtractViewController.h"
 #import "UIAlertView+Blocks.h"
+#import "OrderCommentViewController.h"
 
 @interface OrderActionView ()
 
@@ -210,8 +211,14 @@
         //消费者评论
         if (_order.ifCanViewCredit) {
             //查看评价
+            OrderCommentViewController  *ov = [[OrderCommentViewController alloc] init];
+//            ov.order = _order;
+            [self.viewController.navigationController pushViewController:ov animated:YES];
         }else{
             //评价
+            OrderCommentViewController  *ov = [[OrderCommentViewController alloc] init];
+            //            ov.order = _order;
+            [self.viewController.navigationController pushViewController:ov animated:YES];
         }
     }else if (button.tag == OrderActionReject){
         //设计师拒绝

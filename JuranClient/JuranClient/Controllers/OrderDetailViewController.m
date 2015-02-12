@@ -11,6 +11,7 @@
 #import "PrivateLetterViewController.h"
 #import "JRDesigner.h"
 #import "OrderActionView.h"
+#import "OrderPhotoViewController.h"
 
 @interface OrderDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -148,12 +149,34 @@
 }
 
 - (IBAction)onPrivateLetter:(id)sender{
+#ifdef kJuranDesigner
+    return;
+#endif
     PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
     JRDesigner *designer = [[JRDesigner alloc] init];
-    designer.userId = 0;
+    designer.userId = _order.decoratorId;
     
     pv.designer = designer;
-//    [self.navigationController pushViewController:pv animated:YES];
+    [self.navigationController pushViewController:pv animated:YES];
+}
+
+- (IBAction)onRoomTypePhoto:(id)sender{
+    if (_order.measurefileSrc.count == 0) {
+        return;
+    }
+    OrderPhotoViewController *vc = [[OrderPhotoViewController alloc] init];
+    vc.order = _order;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)onEffectPhoto:(id)sender{
+    if (_order.fileSrc.count == 0) {
+        return;
+    }
+    OrderPhotoViewController *vc = [[OrderPhotoViewController alloc] init];
+    vc.order = _order;
+    vc.type = 1;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITableViewDataSource/UITableViewDelegate BEGIN
@@ -267,7 +290,7 @@
             _designerNameLabel.text = [NSString stringWithFormat:@"用户名 %@", _order.decoratorName];
             [cell.contentView addSubview:_designerInfoView];
         }else if (indexPath.row == 0 && indexPath.section == [self customerSection]){
-            [_customerHeaderImgView setImageWithURLString:_order.headUrl];
+            [_customerHeaderImgView setImageWithURLString:_order.customerHeadUrl];
             _customerRealNameLabel.text = [NSString stringWithFormat:@"真实姓名 %@", _order.customerRealName];
             _customerNameLabel.text = [NSString stringWithFormat:@"用户名 %@", _order.customerName];
             [cell.contentView addSubview:_customerInfoView];
