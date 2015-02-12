@@ -77,6 +77,9 @@
         self.houseArea = [dict getStringValueForKey:@"houseArea" defaultValue:@""];
         self.addressInfo = [dict getStringValueForKey:@"addressInfo" defaultValue:@""];
         
+        self.customerHeadUrl = [dict getStringValueForKey:@"customerHeadUrl" defaultValue:@""];
+        self.serviceDate = [dict getStringValueForKey:@"serviceDate" defaultValue:@""];
+        
     }
     
     return self;
@@ -172,5 +175,16 @@
     self.addressInfo = [dict getStringValueForKey:@"addressInfo" defaultValue:@""];
     self.serviceDate = [dict getStringValueForKey:@"serviceDate" defaultValue:@""];
 }
+
+- (NSString *)serviceDateString{
+    NSArray *rows = @[@"只工作日",@"工作日、双休日与假日均可",@"只双休日、假日"];
+    NSString *retVal = [rows objectAtTheIndex:[_serviceDate integerValue]];
+    if (retVal) {
+        return retVal;
+    }
+    
+    return @"";
+}
+
 
 @end

@@ -27,6 +27,7 @@
 @property (nonatomic, assign) BOOL isAuth;
 @property (nonatomic, copy) NSString *decoratorName;
 @property (nonatomic, copy) NSString *levelCode;
+@property (nonatomic, copy) NSString *customerHeadUrl;
 
 @property (nonatomic, assign) BOOL ifCanCredit;
 @property (nonatomic, assign) BOOL ifCanViewCredit;
@@ -57,6 +58,7 @@
 
 - (NSString *)statusName;
 - (NSString *)houseAreaString;
+- (NSString *)serviceDateString;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (void)buildUpWithValueForDetail:(id)dict;
 
