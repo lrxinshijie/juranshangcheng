@@ -14,6 +14,7 @@
 #import "OrderExtractViewController.h"
 #import "UIAlertView+Blocks.h"
 #import "OrderCommentViewController.h"
+#import "OrderCommentReadViewController.h"
 
 @interface OrderActionView ()
 
@@ -211,7 +212,7 @@
         //消费者评论
         if (_order.ifCanViewCredit) {
             //查看评价
-            OrderCommentViewController  *ov = [[OrderCommentViewController alloc] init];
+            OrderCommentReadViewController  *ov = [[OrderCommentReadViewController alloc] init];
             ov.order = _order;
             [self.viewController.navigationController pushViewController:ov animated:YES];
         }else{

@@ -23,4 +23,6 @@
 @property (nonatomic, weak) id<CommentStarViewDelegate> delegate;
 
 
+- (void)setEnable:(BOOL)isEnadbel;
+
 @end

@@ -46,4 +46,20 @@
     }
 }
 
+- (void)setEnable:(BOOL)isEnadbel{
+    self.userInteractionEnabled = isEnadbel;
+}
+
+- (void)setSelectedIndex:(NSInteger)selectedIndex{
+    _selectedIndex = selectedIndex;
+    for (NSInteger i = 1; i < 6; i++) {
+        UIButton *b = (UIButton*)[self viewWithTag:1100 + i ];
+        if (i <= _selectedIndex) {
+            [b setImage:[UIImage imageNamed:@"order_star_selected.png"] forState:UIControlStateNormal];
+        }else{
+            [b setImage:[UIImage imageNamed:@"order_star_unselected.png"] forState:UIControlStateNormal];
+        }
+    }
+}
+
 @end

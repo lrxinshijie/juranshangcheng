@@ -55,11 +55,16 @@
 @property (nonatomic, copy) NSString *houseType;
 @property (nonatomic, copy) NSString *serviceDate;
 
+//评论
+@property (nonatomic, assign) NSInteger capacityPoint;
+@property (nonatomic, assign) NSInteger servicePoint;
+@property (nonatomic, copy) NSString *content;
 
 - (NSString *)statusName;
 - (NSString *)houseAreaString;
 - (NSString *)serviceDateString;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (void)buildUpWithValueForDetail:(id)dict;
+- (void)buildUpWithValueForComment:(id)dict;
 
 @end

@@ -10,6 +10,7 @@
 #import "CommentStarView.h"
 #import "JROrder.h"
 #import "JRDesigner.h"
+#import "DesignerDetailViewController.h"
 
 @interface OrderCommentViewController ()<UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, CommentStarViewDelegate>
 
@@ -126,6 +127,13 @@
 - (IBAction)onAnonymity:(id)sender{
     _isAnonymity = !_isAnonymity;
     [_anonymityButton setImage:[UIImage imageNamed:_isAnonymity?@"order_point_selected.png":@"order_point_unselected.png"] forState:UIControlStateNormal];
+}
+
+- (IBAction)onDesignerView:(id)sender{
+    DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
+//    detailVC.designer = _datas[indexPath.row];
+    detailVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark - CommentStarViewDelegate

@@ -143,7 +143,7 @@
 
 
 
-
+#define JR_VIEW_APPRAISED [NSString stringWithFormat:@"%@/trade/viewAppraisedTrade.json",JR_SERVICE]
 #define JR_TRADE_APPRAISE [NSString stringWithFormat:@"%@/trade/appraiseTrade.json",JR_SERVICE]
 #define JR_CREATE_PROJECT [NSString stringWithFormat:@"%@/project/createProjectReq.json",JR_SERVICE]
 #define JR_DELETE_PROJECT [NSString stringWithFormat:@"%@/design/delDeProjectReq.json",JR_SERVICE]

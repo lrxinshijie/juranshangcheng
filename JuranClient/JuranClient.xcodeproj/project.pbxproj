@@ -668,6 +668,10 @@
 		37D885761A8B8E5B0030F846 /* CommentStarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D885741A8B8E5B0030F846 /* CommentStarView.m */; };
 		37D885781A8BB0EA0030F846 /* order_point_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D885771A8BB0EA0030F846 /* order_point_selected@2x.png */; };
 		37D885791A8BB0EA0030F846 /* order_point_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D885771A8BB0EA0030F846 /* order_point_selected@2x.png */; };
+		37DA110A1A8CDDCC00BC71A6 /* OrderCommentReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DA11081A8CDDCC00BC71A6 /* OrderCommentReadViewController.m */; };
+		37DA110B1A8CDDCC00BC71A6 /* OrderCommentReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DA11081A8CDDCC00BC71A6 /* OrderCommentReadViewController.m */; };
+		37DA110C1A8CDDCC00BC71A6 /* OrderCommentReadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DA11091A8CDDCC00BC71A6 /* OrderCommentReadViewController.xib */; };
+		37DA110D1A8CDDCC00BC71A6 /* OrderCommentReadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DA11091A8CDDCC00BC71A6 /* OrderCommentReadViewController.xib */; };
 		37DBFA4C1A8A33E7003749E8 /* OrderPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DBFA4A1A8A33E7003749E8 /* OrderPhotoViewController.m */; };
 		37DBFA4D1A8A33E7003749E8 /* OrderPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DBFA4A1A8A33E7003749E8 /* OrderPhotoViewController.m */; };
 		37DBFA4E1A8A33E7003749E8 /* OrderPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DBFA4B1A8A33E7003749E8 /* OrderPhotoViewController.xib */; };
@@ -1829,6 +1833,9 @@
 		37D885731A8B8E5B0030F846 /* CommentStarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentStarView.h; sourceTree = "<group>"; };
 		37D885741A8B8E5B0030F846 /* CommentStarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentStarView.m; sourceTree = "<group>"; };
 		37D885771A8BB0EA0030F846 /* order_point_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_point_selected@2x.png"; sourceTree = "<group>"; };
+		37DA11071A8CDDCC00BC71A6 /* OrderCommentReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCommentReadViewController.h; sourceTree = "<group>"; };
+		37DA11081A8CDDCC00BC71A6 /* OrderCommentReadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCommentReadViewController.m; sourceTree = "<group>"; };
+		37DA11091A8CDDCC00BC71A6 /* OrderCommentReadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCommentReadViewController.xib; sourceTree = "<group>"; };
 		37DBFA491A8A33E7003749E8 /* OrderPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPhotoViewController.h; sourceTree = "<group>"; };
 		37DBFA4A1A8A33E7003749E8 /* OrderPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPhotoViewController.m; sourceTree = "<group>"; };
 		37DBFA4B1A8A33E7003749E8 /* OrderPhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderPhotoViewController.xib; sourceTree = "<group>"; };
@@ -2856,6 +2863,9 @@
 				37DBFA501A8A3433003749E8 /* OrderPhotoBrowserViewController.h */,
 				37DBFA511A8A3433003749E8 /* OrderPhotoBrowserViewController.m */,
 				37DBFA521A8A3433003749E8 /* OrderPhotoBrowserViewController.xib */,
+				37DA11071A8CDDCC00BC71A6 /* OrderCommentReadViewController.h */,
+				37DA11081A8CDDCC00BC71A6 /* OrderCommentReadViewController.m */,
+				37DA11091A8CDDCC00BC71A6 /* OrderCommentReadViewController.xib */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -4700,6 +4710,7 @@
 				BD5185DA1A5D0ED700BE508A /* case-icon-comment@2x.png in Resources */,
 				BD5187A81A5D344D00BE508A /* icon_countdown@2x.png in Resources */,
 				BD5186BC1A5D0ED700BE508A /* icon_image1@2x.png in Resources */,
+				37DA110D1A8CDDCC00BC71A6 /* OrderCommentReadViewController.xib in Resources */,
 				A95DB70E1A5EF0BC00F543CE /* guide_2@2x.png in Resources */,
 				1415FA831A5CD1CB003D0C29 /* ResetEmailViewController.xib in Resources */,
 				BD5185DE1A5D0ED700BE508A /* case-icon-order@2x.png in Resources */,
@@ -4856,6 +4867,7 @@
 				A907F2B71A38884A00DEB8EA /* DemandEditTextViewController.xib in Resources */,
 				BD5185E31A5D0ED700BE508A /* case_icon_collect@2x.png in Resources */,
 				BD5186B51A5D0ED700BE508A /* icon_ camera@2x.png in Resources */,
+				37DA110C1A8CDDCC00BC71A6 /* OrderCommentReadViewController.xib in Resources */,
 				BD48B58E1A5283340041725C /* JRServiceViewController.xib in Resources */,
 				BD5186551A5D0ED700BE508A /* login-icon-email@2x.png in Resources */,
 				14321E691A6125F70065E8C3 /* case_edit_replace@2x.png in Resources */,
@@ -5298,6 +5310,7 @@
 				1415F99A1A5CD1CB003D0C29 /* MKNetworkEngine.m in Sources */,
 				1415F99B1A5CD1CB003D0C29 /* SelfIntrodutionCell.m in Sources */,
 				1415F99D1A5CD1CB003D0C29 /* EScrollerView.m in Sources */,
+				37DA110B1A8CDDCC00BC71A6 /* OrderCommentReadViewController.m in Sources */,
 				1415F99E1A5CD1CB003D0C29 /* AnswerCell.m in Sources */,
 				1415F99F1A5CD1CB003D0C29 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				1415F9A01A5CD1CB003D0C29 /* AccountSecurityViewController.m in Sources */,
@@ -5640,6 +5653,7 @@
 				37F0E6A11A7D1F4E004CCCB2 /* PSTCollectionView.m in Sources */,
 				371FBEF21A6A379B00635D3D /* WikiCell.m in Sources */,
 				A987EE521A2098AF00CED7CD /* WikiViewController.m in Sources */,
+				37DA110A1A8CDDCC00BC71A6 /* OrderCommentReadViewController.m in Sources */,
 				14C953A91A2DC0E800FE6F8D /* SubjectCell.m in Sources */,
 				37D18DB71A5829EC00B41048 /* CaseImageHeaderView.m in Sources */,
 				A987EE1C1A20928B00CED7CD /* NSData+MKBase64.m in Sources */,

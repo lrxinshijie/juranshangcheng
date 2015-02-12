@@ -179,6 +179,16 @@
     self.customerHeadUrl = [dict getStringValueForKey:@"customerHeadUrl" defaultValue:@""];
 }
 
+- (void)buildUpWithValueForComment:(id)dict{
+    if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+        return ;
+    }
+    self.content = [dict getStringValueForKey:@"content" defaultValue:@""];
+    self.capacityPoint = [dict getIntValueForKey:@"capacityPoint" defaultValue:0];
+    self.servicePoint = [dict getIntValueForKey:@"servicePoint" defaultValue:0];
+    self.levelCode = [dict getStringValueForKey:@"userLevel" defaultValue:@""];
+}
+
 - (NSString *)serviceDateString{
     NSArray *rows = @[@"只工作日",@"工作日、双休日与假日均可",@"只双休日、假日"];
     NSString *retVal = [rows objectAtTheIndex:[_serviceDate integerValue]];
