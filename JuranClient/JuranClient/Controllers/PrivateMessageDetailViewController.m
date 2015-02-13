@@ -193,6 +193,8 @@
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
     
+//    [_tableView scrollToBottom];
+    
     [_tableView addGestureRecognizer:_tapHide];
 }
 
@@ -206,6 +208,7 @@
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
     
+//    [_tableView scrollToBottom];
 
     [_tableView removeGestureRecognizer:_tapHide];
 }
