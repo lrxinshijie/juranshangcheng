@@ -44,8 +44,11 @@
     self.view.backgroundColor = kViewBackgroundColor;
     self.navigationItem.title = _message.receiverNickName;
     
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
+    _firstView.backgroundColor = [UIColor clearColor];
+    _firstContactLabel.text = [NSString stringWithFormat:@"%@\n%@\n%@|%@平米", _message.receiverNickName, _message.mobilePhone, _message.likeStyleString, _message.houseArea];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
     
 #ifndef kJuranDesigner
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"private_message_more"] rightBarButtonItemAction:@selector(onDetail)];
@@ -72,6 +75,8 @@
     [_tableView setHeaderReleaseToRefreshText:@"正在加载..."];
     
     [self.tableView footerBeginRefreshing];
+    
+    
 }
 
 - (void)onDetail{
@@ -157,12 +162,17 @@
     NSDate *date = [NSDate dateFromString:detail.publishTime dateFormat:kDateFormatHorizontalLineLong];
     
     NSBubbleData *bubble = nil;
-    NSBubbleType type = detail.fromUserId == [JRUser currentUser].userId ? BubbleTypeMine : BubbleTypeSomeoneElse;
-//    if (detail.isFirstFlag) {
-//        bubble = [NSBubbleData dataWithView:_firstView date:date type:type insets:UIEdgeInsetsZero];
-//    }else{
-        bubble = [NSBubbleData dataWithText:detail.content date:date type:detail.fromUserId == [JRUser currentUser].userId ? BubbleTypeMine : BubbleTypeSomeoneElse];
-//    }
+    BOOL me = detail.fromUserId == [JRUser currentUser].userId;
+#ifdef kJuranDesigner
+    me = !me;
+#endif
+    NSBubbleType type = me ? BubbleTypeMine : BubbleTypeSomeoneElse;
+    if (detail.isFirstFlag) {
+        _firstContentLabel.text = detail.content;
+        bubble = [NSBubbleData dataWithView:_firstView date:date type:type insets:UIEdgeInsetsZero];
+    }else{
+        bubble = [NSBubbleData dataWithText:detail.content date:date type:type];
+    }
     
     return bubble;
 }
@@ -196,6 +206,19 @@
 //    [_tableView scrollToBottom];
     
     [_tableView addGestureRecognizer:_tapHide];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        CGFloat y = _tableView.contentOffset.y + keyboardSize.height;
+        if ((y+CGRectGetHeight(_tableView.frame)) > _tableView.contentSize.height) {
+            y = _tableView.contentSize.height - CGRectGetHeight(_tableView.frame);
+        }
+        
+        if (y < 0) {
+            y = 0;
+        }
+        
+        [_tableView setContentOffset:CGPointMake(0, y) animated:YES];
+    });
+    
 }
 
 -(void)keyboardWillBeHidden:(NSNotification *)aNotification{

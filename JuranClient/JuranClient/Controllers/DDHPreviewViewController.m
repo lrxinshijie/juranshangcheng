@@ -58,8 +58,13 @@
     
     UILabel *label = [self.view labelWithFrame:CGRectMake(0, CGRectGetHeight(_imageView.frame)-80, CGRectGetWidth(_imageView.frame), 80) text:@"" textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:17]];
     label.numberOfLines=0;
-
-    [_imageView setImageWithURL:[Public imageURL:_url Width:512] placeholderImage:[UIImage imageNamed:@"case_default_image.png"]];
+    if (_url && _url.length > 0) {
+        [_imageView setImageWithURL:[Public imageURL:_url Width:512] placeholderImage:[UIImage imageNamed:@"case_default_image.png"]];
+    }
+    if (_image) {
+        [_imageView setImage:_image];
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{

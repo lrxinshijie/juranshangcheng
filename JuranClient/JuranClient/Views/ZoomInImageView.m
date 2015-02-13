@@ -39,6 +39,11 @@
     [super setImageWithURLString:url];
 }
 
+- (void)setImageWithFile:(UIImage*)image{
+    _url = nil;
+    [self setImage:image];
+}
+
 - (void)awakeFromNib{
     [self configureImageView];
 }
@@ -52,19 +57,32 @@
 }
 
 - (void)handleTap:(UIGestureRecognizer*)gesture{
-    if (!(_url && _url.length > 0)) {
-        return;
-    }
     DDHPreviewViewController *viewController = [[DDHPreviewViewController alloc] init];
-    viewController.url = _url;
-    
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
-    longPress.minimumPressDuration = 1.f;
-    [viewController.view addGestureRecognizer:longPress];
-    
-    UIViewController *vc = [self viewController];
-    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [vc presentViewController:viewController animated:YES completion:nil];
+    if (!(_url && _url.length > 0)) {
+        if (self.image) {
+            viewController.image = self.image;
+            UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+            longPress.minimumPressDuration = 1.f;
+            [viewController.view addGestureRecognizer:longPress];
+            
+            UIViewController *vc = [self viewController];
+            vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [vc presentViewController:viewController animated:YES completion:nil];
+        }else{
+            return;
+        }
+        
+    }else{
+        
+        viewController.url = _url;
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+        longPress.minimumPressDuration = 1.f;
+        [viewController.view addGestureRecognizer:longPress];
+        
+        UIViewController *vc = [self viewController];
+        vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [vc presentViewController:viewController animated:YES completion:nil];
+    }
 }
 
 - (void)handleLongPress:(UIGestureRecognizer*)gesture{

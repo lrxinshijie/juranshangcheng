@@ -106,7 +106,10 @@
 
 - (NSURL *)imageURL;
 
+//分享的内容
 - (NSString*)shareImagePath;
+- (NSString*)shareTitle;
+- (NSString*)shareContent;
 
 - (NSString*)formatUserName;
 /*
@@ -117,7 +120,7 @@
 - (NSString*)experienceString;
 
 + (NSString*)userLevelImage:(NSString*)userLevel;
-
++ (NSString*)userLevelTitle:(NSString*)userLevel;
 
 //实名认证
 - (id)initWithDictionaryForRealNameAuth:(NSDictionary *)dict;

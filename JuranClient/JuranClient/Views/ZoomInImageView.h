@@ -10,4 +10,6 @@
 
 @interface ZoomInImageView : UIImageView
 
+- (void)setImageWithFile:(UIImage*)image;
+
 @end

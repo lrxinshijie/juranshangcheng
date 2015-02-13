@@ -425,7 +425,8 @@
 //分享
 - (IBAction)doShare:(id)sender{
     ASLog(@"分享");
-    [[ShareView sharedView] showWithContent:_designer.selfIntroduction image:_designer.shareImagePath title:[_designer formatUserName] url:[NSString stringWithFormat:@"http://apph5.juran.cn/designers/%d%@", _designer.userId, [Public shareEnv]]];
+    
+    [[ShareView sharedView] showWithContent:[_designer shareContent] image:_designer.shareImagePath title:[_designer shareTitle] url:[NSString stringWithFormat:@"http://apph5.juran.cn/designers/%d%@", _designer.userId, [Public shareEnv]]];
 }
 
 - (void)handleSwipes:(UISwipeGestureRecognizer*) gesture{

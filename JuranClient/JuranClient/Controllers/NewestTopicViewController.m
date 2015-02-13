@@ -18,7 +18,9 @@
 
 
 @interface NewestTopicViewController ()<UITableViewDataSource, UITableViewDelegate, CommentCellDelegate, UITextFieldDelegate, ALWebViewDelegate, CanRemoveImageViewDelegate>
-
+{
+    BOOL firstLoadHtml;
+}
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, strong) IBOutlet UIView *tableHeaderView;
@@ -185,12 +187,11 @@
     _commentCountLabel.text = [NSString stringWithFormat:@"%d", _topic.commentCount];
     
     ASLog(@"%@", _topic.contentDescription);
-    static BOOL first = NO;
-    if (!first) {
+    if (!firstLoadHtml) {
         [_contentWebView reset];
         [_contentWebView loadHTMLString:_topic.contentDescription baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
         [self setupTableHeaderView];
-        first = YES;
+        firstLoadHtml = YES;
     }
     
     [_tableView reloadData];

@@ -128,24 +128,6 @@
     }
     
     return @"";
-    
-//    NSDictionary *styles = @{@"mashup": @"混搭风格",
-//                             @"european": @"欧式风格",
-//                             @"chinese": @"中式风格",
-//                             @"newClassical": @"新古典风格",
-//                             @"eastSourthAsia": @"东南亚风格",
-//                             @"america": @"美式风格",
-//                             @"countryside": @"田园风格",
-//                             @"mediterranean": @"地中海风格",
-//                             @"modern": @"现代风格",
-//                             @"other": @"其他",
-//                             };
-//    NSString *style = [styles objectForKey:self.projectStyle];
-//    if (style && style.length > 0) {
-//        return style;
-//    }
-//    
-//    return @"其他";
 }
 
 - (NSString*)styleNamesString{
@@ -243,7 +225,11 @@
 }
 
 - (void)doShare{
-    [[ShareView sharedView] showWithContent:self.desc image:[Public imageURLString:self.imageUrl] title:self.title url:self.shareURL];
+    NSString *content = self.desc;
+    if (content.length == 0) {
+        content = @"这里有满满的美家案例，总有一张适合你，点我收藏，做为您的灵感储备。";
+    }
+    [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.imageUrl] title:self.title url:self.shareURL];
 }
 
 + (NSMutableArray*)buildUpWithValueForManagement:(id)value{

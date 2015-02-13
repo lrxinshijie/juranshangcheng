@@ -97,10 +97,15 @@
 + (void)initApp{
     
 	NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSString *old_version = [NSString stringWithFormat:@"%@", [ud objectForKey:@"version"]];
+    NSString *old_version = [ud objectForKey:@"version"];
+    
+    if (!old_version) {
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+        old_version = @"";
+    }
+    
     if ([Public versionEqualString:old_version NewVersion:[Public versionString]]) {    
         [ud setValue:[Public versionString] forKey:@"version"];
-        
     }
     
 	[ud synchronize];

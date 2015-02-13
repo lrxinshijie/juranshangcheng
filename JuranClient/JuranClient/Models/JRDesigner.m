@@ -281,8 +281,15 @@
     return name;
 }
 
-- (NSURL *)imageURL{
-    return [NSURL URLWithString:self.headUrl relativeToURL:[NSURL URLWithString:JR_IMAGE_SERVICE]];
+- (NSString*)shareContent{
+    if (self.selfIntroduction.length == 0) {
+        return [NSString stringWithFormat:@"我在居然之家看到%@的个人主页，分享给小伙伴们！", [self formatUserName]];
+    }
+    return self.selfIntroduction;
+}
+
+- (NSString*)shareTitle{
+    return [NSString stringWithFormat:@"居然之家%@设计师%@",[JRDesigner userLevelTitle:self.userLevel], [self formatUserName]];
 }
 
 - (NSString*)shareImagePath{
@@ -291,6 +298,10 @@
     }else{
         return [Public imageURLString:_headUrl];
     }
+}
+
+- (NSURL *)imageURL{
+    return [NSURL URLWithString:self.headUrl relativeToURL:[NSURL URLWithString:JR_IMAGE_SERVICE]];
 }
 
 - (NSString*)styleNamesWithType:(NSInteger)type{
@@ -327,6 +338,13 @@
     
     NSInteger index = [levels containsObject:userLevel] ? [levels indexOfObject:userLevel] : 0;
     return [NSString stringWithFormat:@"userlevel%d", index];
+}
+
++ (NSString*)userLevelTitle:(NSString*)userLevel{
+    NSArray *levels = @[@"design_one", @"design_two", @"design_three", @"design_four", @"design_five"];
+    NSArray *levelNames = @[@"普通", @"优秀", @"资深", @"主任", @"首席"];
+    NSInteger index = [levels containsObject:userLevel] ? [levels indexOfObject:userLevel] : 0;
+    return levelNames[index];
 }
 
 - (NSString*)realNameAuthDescription{
@@ -402,7 +420,7 @@
 
 - (NSString*)sexyString{
     if (self.sex.length == 0) {
-        return @"未设置";
+        return @"";
     }
     NSArray *sexs = [DefaultData sharedData].sex;
     NSDictionary *dic = sexs[[_sex integerValue]];
@@ -429,7 +447,7 @@
             return dic[@"k"];
         }
     }
-    return @"未设置";
+    return @"";
 }
 
 
@@ -477,7 +495,7 @@
 
 - (NSString*)measureForPersonal{
     if (self.freeMeasure.length == 0) {
-        return @"未设置";
+        return @"";
     }else if (self.freeMeasure.integerValue == 0) {
         return @"免费";
     }else{
@@ -486,7 +504,7 @@
 }
 - (NSString*)designPriceForPersonal{
     if (self.faceToFace.length == 0) {
-        return @"未设置";
+        return @"";
     }else if (self.faceToFace.integerValue == 0) {
         return @"面议";
     }else{

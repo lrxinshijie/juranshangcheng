@@ -55,6 +55,8 @@
 #define kNotificationNameEventReloadData @"kNotificationNameEventReloadData"
 #define kNotificationNameMyDemandReloadData @"kNotificationNameMyDemandReloadData"
 
+#define kNotificationNameOrderReloadData @"kNotificationNameOrderReloadData"
+
 #define kBlueColor RGBColor(15, 82, 167)
 //:@"100543115"8
 //appSecret:@"9cc782277d5b8084f073599d72ba08c3"
