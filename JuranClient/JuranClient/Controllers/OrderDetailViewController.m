@@ -26,7 +26,9 @@
 @property (nonatomic, strong) IBOutlet UILabel *payAmountLabel;
 
 @property (nonatomic, strong) IBOutlet UIView *deliveryInfoView;
+@property (nonatomic, strong) IBOutlet UIView *roomTypeView;
 @property (nonatomic, strong) IBOutlet UILabel *roomTypeCountLabel;
+@property (nonatomic, strong) IBOutlet UIView *fileView;
 @property (nonatomic, strong) IBOutlet UILabel *fileCountLabel;
 
 @property (nonatomic, strong) IBOutlet UIView *customerInfoView;
@@ -193,6 +195,11 @@
     if (section == 1) {
         return rows.count + 1;
     }
+    if (section == 0) {
+        if (_order.measurefileSrc.count == 0 && _order.fileSrc.count == 0) {
+            return 1;
+        }
+    }
     return rows.count;
 }
 
@@ -201,7 +208,12 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         return _order.type == 0?75:185;
     }else if (indexPath.section == 0 && indexPath.row == 1) {
-        return _order.type == 0?90:160;
+        if (_order.measurefileSrc.count && _order.fileSrc.count) {
+            return 160;
+        }else if (_order.measurefileSrc.count || _order.fileSrc.count){
+            return 90;
+        }
+        return 0;
     }else if (indexPath.row == 0 && (indexPath.section == 1 || indexPath.section == 2)){
         return 70;
     }else if (indexPath.section == [self customerSection] && indexPath.row == 7) {
@@ -273,7 +285,24 @@
             }
             [cell.contentView addSubview:_paymentInfoView];
         }else if (indexPath.section == 0 && indexPath.row == 1){
+            if (_order.measurefileSrc.count && _order.fileSrc.count) {
+                _roomTypeView.frame = CGRectMake(0, 26, CGRectGetWidth(_roomTypeView.frame), CGRectGetHeight(_roomTypeView.frame));
+                [_deliveryInfoView addSubview:_roomTypeView];
+                
+                _fileView.frame = CGRectMake(0, 92, CGRectGetWidth(_fileView.frame), CGRectGetHeight(_fileView.frame));
+                [_deliveryInfoView addSubview:_fileView];
+            }else if (_order.measurefileSrc.count || _order.fileSrc.count){
+                if (_order.measurefileSrc.count) {
+                    _roomTypeView.frame = CGRectMake(0, 26, CGRectGetWidth(_roomTypeView.frame), CGRectGetHeight(_roomTypeView.frame));
+                    [_deliveryInfoView addSubview:_roomTypeView];
+                }
+                if (_order.fileSrc.count) {
+                    _fileView.frame = CGRectMake(0, 26, CGRectGetWidth(_fileView.frame), CGRectGetHeight(_fileView.frame));
+                }
+            }
+            _roomTypeCountLabel.hidden = _order.measurefileSrc.count <= 3;
             _roomTypeCountLabel.text = [NSString stringWithFormat:@"共%d张", _order.measurefileSrc.count];
+            _fileCountLabel.hidden = _order.fileSrc.count <= 3;
             _fileCountLabel.text = [NSString stringWithFormat:@"共%d张", _order.fileSrc.count];
             for (NSInteger i = 0; i < _order.measurefileSrc.count; i++) {
                 UIImageView *imageView = (UIImageView*)[_deliveryInfoView viewWithTag:1300 + i];

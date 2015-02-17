@@ -69,6 +69,7 @@
     if (!imageView) {
         imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 65, 65)];
         imageView.tag = 5555;
+        imageView.backgroundColor = RGBColor(232, 232, 232);
         [cell.contentView addSubview:imageView];
     }
     NSArray *rows = _type?_order.fileSrc:_order.measurefileSrc;

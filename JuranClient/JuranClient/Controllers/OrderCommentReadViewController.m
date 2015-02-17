@@ -52,6 +52,7 @@
 - (void)setupUI{
     self.scrollView = [[UIScrollView alloc] initWithFrame:kContentFrameWithoutNavigationBar];
     [self.view addSubview:self.scrollView];
+    _scrollView.backgroundColor = RGBColor(241, 241, 241);
     
     [_scrollView addSubview:_contentView];
     
