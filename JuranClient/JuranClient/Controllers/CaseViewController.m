@@ -128,8 +128,9 @@
         }];
     }
     
-//    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
-//    self.fullScreenScroll.delegate = self;
+    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
+    self.fullScreenScroll.delegate = self;
+    self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

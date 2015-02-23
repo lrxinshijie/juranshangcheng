@@ -32,6 +32,8 @@
 
 @property (nonatomic, strong) IBOutlet UIView *effectView;
 @property (nonatomic, strong) IBOutlet UIImageView *effectImageView;
+@property (nonatomic, strong) IBOutlet UIButton *sizeButton;
+@property (nonatomic, strong) IBOutlet UIButton *effectButton;
 
 @property (nonatomic, strong) IBOutlet UIView *actionBgView;
 @property (nonatomic, strong) IBOutlet UIImageView *actionImageView;
@@ -76,6 +78,14 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (IBAction)onEffect:(UIButton *)btn{
+    if ([btn isEqual:_sizeButton]) {
+        //户型图
+    }else if ([btn isEqual:_effectButton]){
+        //效果图
+    }
 }
 
 - (void)fillCellWithOrder:(JROrder *)order{
@@ -127,14 +137,11 @@
         [_payAmountLabel setText:content afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
             NSRange payRange = [[mutableAttributedString string] rangeOfString:payAmount  options:NSCaseInsensitiveSearch];
             [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[RGBColor(120, 120, 120) CGColor] range:payRange];
-            UIFont *payFont = [UIFont systemFontOfSize:11];
+            UIFont *payFont = [UIFont systemFontOfSize:13];
             CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)payFont.fontName, payFont.pointSize, NULL);
             [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)font range:payRange];
-            CFRelease(font);
             
             NSRange unPaidRange = [[mutableAttributedString string] rangeOfString:unPaidAmount  options:NSCaseInsensitiveSearch];
-            payFont = [UIFont systemFontOfSize:13];
-            font = CTFontCreateWithName((__bridge CFStringRef)payFont.fontName, payFont.pointSize, NULL);
             [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)font range:unPaidRange];
             CFRelease(font);
             
@@ -149,9 +156,17 @@
     _amountLabel.text = @"";
     _designerAmountLabel.text = [NSString stringWithFormat:@"￥%d", order.amount];
     _designerStatusLabel.text = _order.statusName;
+    CGRect frame = _designerStatusLabel.frame;
+    frame.size.width = [_order.statusName widthWithFont:_designerStatusLabel.font constrainedToHeight:CGRectGetHeight(frame)];
+    _designerStatusLabel.frame = frame;
+    
+    frame = _designerOrderLabel.frame;
+    frame.origin.x = CGRectGetMaxX(_designerStatusLabel.frame) + 5;
+    _designerOrderLabel.frame = frame;
+    
     _designerOrderLabel.text = _order.type == 0 ? _order.measureTid : _order.designTid;
     _addressLabel.text = _order.addressInfo;
-    _houseAreaLabel.text = [NSString stringWithFormat:@"面积：%@", _order.houseArea];
+    _houseAreaLabel.text = [NSString stringWithFormat:@"面积：%@m²", _order.houseArea];
     _timeLabel.text = _order.gmtCreate;
     
     [_avtarImageView setImageWithURLString:order.headUrl];
@@ -161,6 +176,21 @@
 }
 
 - (void)layoutFrame{
+    if (_order.type == 0) {
+        _effectButton.hidden = YES;
+        _sizeButton.hidden = NO;
+        
+        CGRect frame = _sizeButton.frame;
+        frame.origin.x = 240;
+        _sizeButton.frame = frame;
+    }else{
+        _effectButton.hidden = NO;
+        _sizeButton.hidden = NO;
+        
+        CGRect frame = _sizeButton.frame;
+        frame.origin.x = 157;
+        _sizeButton.frame = frame;
+    }
 #ifdef kJuranDesigner
     [_designerOrderView removeFromSuperview];
     [_authorView removeFromSuperview];

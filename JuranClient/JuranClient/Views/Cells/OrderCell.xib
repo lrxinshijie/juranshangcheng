@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -30,6 +30,7 @@
                 <outlet property="designerOrderLabel" destination="fun-Aq-FFH" id="L6g-FQ-XSe"/>
                 <outlet property="designerOrderView" destination="uij-Z5-1dI" id="Vfq-ht-SrX"/>
                 <outlet property="designerStatusLabel" destination="9Bc-Gs-vOO" id="uMr-Pt-cvg"/>
+                <outlet property="effectButton" destination="9k2-NP-2na" id="MQF-dB-QT5"/>
                 <outlet property="effectImageView" destination="3Yr-du-Ncy" id="hSM-Cw-59V"/>
                 <outlet property="effectView" destination="Ijw-cv-xet" id="KxB-QO-BD7"/>
                 <outlet property="houseAreaLabel" destination="BUK-gZ-CcP" id="TBc-eY-ucc"/>
@@ -39,6 +40,7 @@
                 <outlet property="nameLabel" destination="BmR-Hu-q5H" id="zZe-aq-zTH"/>
                 <outlet property="orderImageView" destination="Y31-jw-244" id="6p4-ZL-beP"/>
                 <outlet property="orderView" destination="l2k-yH-oLH" id="Ine-jU-3Q1"/>
+                <outlet property="sizeButton" destination="e9h-aa-ZdU" id="3df-bt-mls"/>
                 <outlet property="statusLabel" destination="JTB-wi-DxO" id="aGS-Wb-O8X"/>
                 <outlet property="timeLabel" destination="hav-gt-IXr" id="NQq-dT-499"/>
             </connections>
@@ -152,6 +154,9 @@
                         <color key="titleColor" red="0.56078431370000004" green="0.56078431370000004" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="onEffect:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rDg-9S-7yE"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="e9h-aa-ZdU">
                     <rect key="frame" x="157" y="10" width="75" height="17"/>
@@ -161,6 +166,9 @@
                         <color key="titleColor" red="0.5450980392" green="0.5450980392" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="onEffect:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vUt-UR-0Yy"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -187,8 +195,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="101010101010101" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fun-Aq-FFH">
-                    <rect key="frame" x="10" y="7" width="199" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="101010101010101" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fun-Aq-FFH">
+                    <rect key="frame" x="67" y="7" width="156" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

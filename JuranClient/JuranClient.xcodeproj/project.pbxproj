@@ -777,6 +777,10 @@
 		A90459D91A278B2D00F8CD74 /* SubjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459D71A278B2D00F8CD74 /* SubjectViewController.xib */; };
 		A907F2B61A38884A00DEB8EA /* DemandEditTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A907F2B41A38884A00DEB8EA /* DemandEditTextViewController.m */; };
 		A907F2B71A38884A00DEB8EA /* DemandEditTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A907F2B51A38884A00DEB8EA /* DemandEditTextViewController.xib */; };
+		A911009C1A9B5FF500F75AF5 /* OrderFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A911009A1A9B5FF500F75AF5 /* OrderFilterViewController.m */; };
+		A911009D1A9B5FF500F75AF5 /* OrderFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A911009A1A9B5FF500F75AF5 /* OrderFilterViewController.m */; };
+		A911009E1A9B5FF500F75AF5 /* OrderFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A911009B1A9B5FF500F75AF5 /* OrderFilterViewController.xib */; };
+		A911009F1A9B5FF500F75AF5 /* OrderFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A911009B1A9B5FF500F75AF5 /* OrderFilterViewController.xib */; };
 		A9224E281A6CB779002974ED /* UIViewController+YIFullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E251A6CB779002974ED /* UIViewController+YIFullScreenScroll.m */; };
 		A9224E291A6CB779002974ED /* UIViewController+YIFullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E251A6CB779002974ED /* UIViewController+YIFullScreenScroll.m */; };
 		A9224E2A1A6CB779002974ED /* YIFullScreenScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = A9224E271A6CB779002974ED /* YIFullScreenScroll.m */; };
@@ -1960,6 +1964,9 @@
 		A907F2B31A38884A00DEB8EA /* DemandEditTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemandEditTextViewController.h; sourceTree = "<group>"; };
 		A907F2B41A38884A00DEB8EA /* DemandEditTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemandEditTextViewController.m; sourceTree = "<group>"; };
 		A907F2B51A38884A00DEB8EA /* DemandEditTextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemandEditTextViewController.xib; sourceTree = "<group>"; };
+		A91100991A9B5FF500F75AF5 /* OrderFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderFilterViewController.h; sourceTree = "<group>"; };
+		A911009A1A9B5FF500F75AF5 /* OrderFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderFilterViewController.m; sourceTree = "<group>"; };
+		A911009B1A9B5FF500F75AF5 /* OrderFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderFilterViewController.xib; sourceTree = "<group>"; };
 		A9224E241A6CB779002974ED /* UIViewController+YIFullScreenScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YIFullScreenScroll.h"; sourceTree = "<group>"; };
 		A9224E251A6CB779002974ED /* UIViewController+YIFullScreenScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YIFullScreenScroll.m"; sourceTree = "<group>"; };
 		A9224E261A6CB779002974ED /* YIFullScreenScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YIFullScreenScroll.h; sourceTree = "<group>"; };
@@ -2888,6 +2895,9 @@
 				37BF0BCC1A8FA0B3001BA9E6 /* OrderCommentManageViewController.h */,
 				37BF0BCD1A8FA0B3001BA9E6 /* OrderCommentManageViewController.m */,
 				37BF0BCE1A8FA0B3001BA9E6 /* OrderCommentManageViewController.xib */,
+				A91100991A9B5FF500F75AF5 /* OrderFilterViewController.h */,
+				A911009A1A9B5FF500F75AF5 /* OrderFilterViewController.m */,
+				A911009B1A9B5FF500F75AF5 /* OrderFilterViewController.xib */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -4448,6 +4458,7 @@
 				BD51874A1A5D0ED700BE508A /* sns_icon_1_s@2x.png in Resources */,
 				1415FA3F1A5CD1CB003D0C29 /* SelfIntrodutionCell.xib in Resources */,
 				BD5186AA1A5D0ED700BE508A /* answer_no_data@2x.png in Resources */,
+				A911009F1A9B5FF500F75AF5 /* OrderFilterViewController.xib in Resources */,
 				1415FA401A5CD1CB003D0C29 /* ForgetViewController.xib in Resources */,
 				1415FA411A5CD1CB003D0C29 /* WikiViewController.xib in Resources */,
 				1415FA421A5CD1CB003D0C29 /* AboutViewController.xib in Resources */,
@@ -5013,6 +5024,7 @@
 				1456C8931A5E22750061F0FD /* BidListViewController.xib in Resources */,
 				14FE2DE81A38313800B31FBA /* PrivateMessageCell.xib in Resources */,
 				BD51861D1A5D0ED700BE508A /* icon-designer-badge2@2x.png in Resources */,
+				A911009E1A9B5FF500F75AF5 /* OrderFilterViewController.xib in Resources */,
 				BD5185EF1A5D0ED700BE508A /* icon-back@2x.png in Resources */,
 				BD51876D1A5D0ED700BE508A /* tabbar_subject@2x.png in Resources */,
 				BD5186E11A5D0ED700BE508A /* publish_image_default@2x.png in Resources */,
@@ -5418,6 +5430,7 @@
 				37F0E7181A7D2735004CCCB2 /* UIImage+WebP.m in Sources */,
 				1415F9D41A5CD1CB003D0C29 /* JRSubject.m in Sources */,
 				37F0E6B21A7D1F4E004CCCB2 /* PSTGridLayoutInfo.m in Sources */,
+				A911009D1A9B5FF500F75AF5 /* OrderFilterViewController.m in Sources */,
 				1415F9D51A5CD1CB003D0C29 /* SMPageControl.m in Sources */,
 				1415F9D61A5CD1CB003D0C29 /* ASDataHelper.m in Sources */,
 				1415F9D71A5CD1CB003D0C29 /* ModifyViewController.m in Sources */,
@@ -5578,6 +5591,7 @@
 				144354801A8892870093C943 /* OrderExtractViewController.m in Sources */,
 				14C4872D1A6F7E0C0042A3D6 /* ALNavigationController.m in Sources */,
 				A987EE1E1A20928B00CED7CD /* NSDictionary+RequestEncoding.m in Sources */,
+				A911009C1A9B5FF500F75AF5 /* OrderFilterViewController.m in Sources */,
 				14C953A01A2DBC4600FE6F8D /* UIImageView+Download.m in Sources */,
 				A9C3983B1A29842D006A8AAB /* CommentCell.m in Sources */,
 				14FE2DE71A38313800B31FBA /* PrivateMessageCell.m in Sources */,

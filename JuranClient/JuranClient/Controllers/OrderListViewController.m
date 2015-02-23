@@ -11,6 +11,7 @@
 #import "OrderCell.h"
 #import "MJRefresh.h"
 #import "OrderDetailViewController.h"
+#import "OrderFilterViewController.h"
 
 @interface OrderListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *rightButton;
 @property (nonatomic, assign) BOOL isLeft;
 @property (nonatomic, strong) UIButton *filterButton;
+@property (nonatomic, strong) NSMutableArray *filterSelecteds;
 
 @end
 
@@ -48,7 +50,7 @@
     frame.size.height = CGRectGetHeight(frame) - CGRectGetHeight(_headerView.frame);
     frame.origin.y = CGRectGetHeight(_headerView.frame);
     
-    self.filterButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onFilter) title:@"筛选" image:[UIImage imageNamed:@"case-icon-filter"]];
+    self.filterButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onFilter) title:@"筛选" image:nil];
     [_filterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 #endif
     
@@ -96,7 +98,9 @@
 }
 
 - (void)onFilter{
-    
+    OrderFilterViewController *ov = [[OrderFilterViewController alloc] init];
+    ov.selecteds = self.filterSelecteds;
+    [self.navigationController pushViewController:ov animated:YES];
 }
 
 #endif
@@ -146,6 +150,7 @@
                             }];
 #ifdef kJuranDesigner
     [param setObject:[NSString stringWithFormat:@"%d", !_isLeft] forKey:@"type"];
+//    [param addEntriesFromDictionary:_filterDict];
 #endif
     
     [[ALEngine shareEngine]  pathURL:JR_ORDER_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -162,6 +167,14 @@
         [_tableView footerEndRefreshing];
         [_tableView reloadData];
     }];
+}
+
+- (NSMutableArray *)filterSelecteds{
+    if (!_filterSelecteds) {
+        _filterSelecteds = [NSMutableArray arrayWithArray:@[@(0), @(0)]];
+    }
+    
+    return _filterSelecteds;
 }
 
 - (void)didReceiveMemoryWarning {
