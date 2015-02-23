@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSDictionary *selected;
 @property (nonatomic, strong) NSMutableDictionary *openDic;
 
+@property (nonatomic, strong) IBOutlet UIView *bottomView;
+
 - (IBAction)onDone:(id)sender;
 
 @end
@@ -33,6 +35,9 @@
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 50, 30) target:self action:@selector(onCancel) title:@"取消" backgroundImage:nil];
     [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    
+    self.bottomView.frame = CGRectMake(0, kWindowHeightWithoutNavigationBarAndTabbar, kWindowWidth, 49);
+    [self.view addSubview:_bottomView];
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     //    _tableView.backgroundColor = RGBColor(202, 202, 202);

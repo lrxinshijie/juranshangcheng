@@ -300,7 +300,7 @@
 
 
 - (IBAction)onChooseImageWithCamera:(id)sender{
-    [[ALGetPhoto sharedPhoto] showInViewController:self sourceType:UIImagePickerControllerSourceTypeCamera allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+    [[ALGetPhoto sharedPhoto] showInViewController:self sourceType:UIImagePickerControllerSourceTypeCamera allowsEditing:NO MaxNumber:1 Handler:^(NSArray *images) {
         _chooseImageButtonView.hidden = YES;
         self.fileImage = images.firstObject;
         
@@ -312,7 +312,7 @@
 }
 
 - (IBAction)onChooseImageWithPhoto:(id)sender{
-    [[ALGetPhoto sharedPhoto] showInViewController:self sourceType:UIImagePickerControllerSourceTypePhotoLibrary allowsEditing:YES MaxNumber:1 Handler:^(NSArray *images) {
+    [[ALGetPhoto sharedPhoto] showInViewController:self sourceType:UIImagePickerControllerSourceTypePhotoLibrary allowsEditing:NO MaxNumber:1 Handler:^(NSArray *images) {
         _chooseImageButtonView.hidden = YES;
         self.fileImage = images.firstObject;
         

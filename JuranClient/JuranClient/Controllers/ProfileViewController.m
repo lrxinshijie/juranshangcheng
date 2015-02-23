@@ -27,10 +27,10 @@
 #import "JRDesigner.h"
 #import "BidManagementViewController.h"
 #import "PersonalDataForDesignerViewController.h"
+#import "OrderCommentManageViewController.h"
 #else
 #import "PrivateMessageViewController.h"
 #import "MyDemandViewController.h"
-
 #endif
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -87,6 +87,7 @@
                     , @"实名认证"
                     , @"账户安全"
                     , @"账户管理"
+                    , @"评价管理"
                     ];
 //
     imageArray = @[@"icon_case_manage"
@@ -96,6 +97,7 @@
                     , @"icon_dingdan.png"
                     , @"icon_realname_auth.png"
                     , @"icon_personal_zhaq"
+                    , @"icon_personal_zhgl"
                     , @"icon_personal_zhgl"];
     self.navigationItem.title = @"个人中心";
 #else
@@ -530,6 +532,14 @@
         {
             //        账户管理
             AccountManageViewController *vc = [[AccountManageViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 9:
+        {
+            //        评价管理
+            OrderCommentManageViewController *vc = [[OrderCommentManageViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;

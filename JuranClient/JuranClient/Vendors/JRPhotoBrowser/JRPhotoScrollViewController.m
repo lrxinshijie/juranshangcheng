@@ -57,6 +57,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImageWithColor:RGBAColor(1, 1, 1, .5f)];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor whiteColor]}];
 #ifndef kJuranDesigner
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 #endif
@@ -67,6 +68,7 @@
     
     [self.navigationController setNavigationBarHidden:NO];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeTextColor: [ALTheme sharedTheme].navigationTitleColor}];
 #ifdef kJuranDesigner
     [self.navigationController.navigationBar setBackgroundImageWithColor:[UIColor blackColor]];
 #else

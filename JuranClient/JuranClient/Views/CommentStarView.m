@@ -23,8 +23,12 @@
 }
 
 - (void)configureView{
+    CGFloat xMargin = 36;
+    CGFloat yMargin = 36;
+    yMargin = CGRectGetHeight(self.frame);
+    xMargin = CGRectGetWidth(self.frame)/5;
     for (NSInteger i = 1; i < 6; i++) {
-        UIButton *btn = [self buttonWithFrame:CGRectMake((i - 1) * 36, 0, 36, 36) target:self action:@selector(onSelected:) image:[UIImage imageNamed:@"order_star_unselected.png"]];
+        UIButton *btn = [self buttonWithFrame:CGRectMake((i - 1) * xMargin, 0, xMargin, yMargin) target:self action:@selector(onSelected:) image:[UIImage imageNamed:@"order_star_unselected.png"]];
         btn.tag = 1100 + i;
         [self addSubview:btn];
     }

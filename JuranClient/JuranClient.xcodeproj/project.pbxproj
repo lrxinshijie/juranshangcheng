@@ -626,6 +626,13 @@
 		37A0F81D1A6B96C300611760 /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A0F81A1A6B96C300611760 /* ActivityDetailViewController.m */; };
 		37A0F81E1A6B96C300611760 /* ActivityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */; };
 		37A0F81F1A6B96C300611760 /* ActivityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */; };
+		37BF0BCF1A8FA0B3001BA9E6 /* OrderCommentManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BF0BCD1A8FA0B3001BA9E6 /* OrderCommentManageViewController.m */; };
+		37BF0BD01A8FA0B3001BA9E6 /* OrderCommentManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BF0BCE1A8FA0B3001BA9E6 /* OrderCommentManageViewController.xib */; };
+		37BF0BD31A8FA2A4001BA9E6 /* JROrderManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BF0BD21A8FA2A4001BA9E6 /* JROrderManage.m */; };
+		37BF0BD61A8FA580001BA9E6 /* JRCreditPointsDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BF0BD51A8FA580001BA9E6 /* JRCreditPointsDto.m */; };
+		37BF0BD91A8FAD7A001BA9E6 /* JRDesignCreditDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BF0BD81A8FAD7A001BA9E6 /* JRDesignCreditDto.m */; };
+		37BF0BDF1A90C613001BA9E6 /* OrderCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BF0BDD1A90C613001BA9E6 /* OrderCommentCell.m */; };
+		37BF0BE01A90C613001BA9E6 /* OrderCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BF0BDE1A90C613001BA9E6 /* OrderCommentCell.xib */; };
 		37C0700A1A87337200EBAD08 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C070081A87337200EBAD08 /* OrderDetailViewController.m */; };
 		37C0700B1A87337200EBAD08 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C070081A87337200EBAD08 /* OrderDetailViewController.m */; };
 		37C0700C1A87337200EBAD08 /* OrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37C070091A87337200EBAD08 /* OrderDetailViewController.xib */; };
@@ -1789,6 +1796,18 @@
 		37A0F8191A6B96C300611760 /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailViewController.h; sourceTree = "<group>"; };
 		37A0F81A1A6B96C300611760 /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailViewController.m; sourceTree = "<group>"; };
 		37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityDetailViewController.xib; sourceTree = "<group>"; };
+		37BF0BCC1A8FA0B3001BA9E6 /* OrderCommentManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCommentManageViewController.h; sourceTree = "<group>"; };
+		37BF0BCD1A8FA0B3001BA9E6 /* OrderCommentManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCommentManageViewController.m; sourceTree = "<group>"; };
+		37BF0BCE1A8FA0B3001BA9E6 /* OrderCommentManageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCommentManageViewController.xib; sourceTree = "<group>"; };
+		37BF0BD11A8FA2A4001BA9E6 /* JROrderManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JROrderManage.h; sourceTree = "<group>"; };
+		37BF0BD21A8FA2A4001BA9E6 /* JROrderManage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JROrderManage.m; sourceTree = "<group>"; };
+		37BF0BD41A8FA580001BA9E6 /* JRCreditPointsDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRCreditPointsDto.h; sourceTree = "<group>"; };
+		37BF0BD51A8FA580001BA9E6 /* JRCreditPointsDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRCreditPointsDto.m; sourceTree = "<group>"; };
+		37BF0BD71A8FAD7A001BA9E6 /* JRDesignCreditDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRDesignCreditDto.h; sourceTree = "<group>"; };
+		37BF0BD81A8FAD7A001BA9E6 /* JRDesignCreditDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRDesignCreditDto.m; sourceTree = "<group>"; };
+		37BF0BDC1A90C613001BA9E6 /* OrderCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCommentCell.h; sourceTree = "<group>"; };
+		37BF0BDD1A90C613001BA9E6 /* OrderCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCommentCell.m; sourceTree = "<group>"; };
+		37BF0BDE1A90C613001BA9E6 /* OrderCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCommentCell.xib; sourceTree = "<group>"; };
 		37C070071A87337200EBAD08 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		37C070081A87337200EBAD08 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		37C070091A87337200EBAD08 /* OrderDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailViewController.xib; sourceTree = "<group>"; };
@@ -2866,6 +2885,9 @@
 				37DA11071A8CDDCC00BC71A6 /* OrderCommentReadViewController.h */,
 				37DA11081A8CDDCC00BC71A6 /* OrderCommentReadViewController.m */,
 				37DA11091A8CDDCC00BC71A6 /* OrderCommentReadViewController.xib */,
+				37BF0BCC1A8FA0B3001BA9E6 /* OrderCommentManageViewController.h */,
+				37BF0BCD1A8FA0B3001BA9E6 /* OrderCommentManageViewController.m */,
+				37BF0BCE1A8FA0B3001BA9E6 /* OrderCommentManageViewController.xib */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -3390,6 +3412,12 @@
 				37A0F8161A6B89A800611760 /* JRActivity.m */,
 				14FB07F41A835BBA00428DE5 /* JROrder.h */,
 				14FB07F51A835BBA00428DE5 /* JROrder.m */,
+				37BF0BD11A8FA2A4001BA9E6 /* JROrderManage.h */,
+				37BF0BD21A8FA2A4001BA9E6 /* JROrderManage.m */,
+				37BF0BD41A8FA580001BA9E6 /* JRCreditPointsDto.h */,
+				37BF0BD51A8FA580001BA9E6 /* JRCreditPointsDto.m */,
+				37BF0BD71A8FAD7A001BA9E6 /* JRDesignCreditDto.h */,
+				37BF0BD81A8FAD7A001BA9E6 /* JRDesignCreditDto.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3634,6 +3662,9 @@
 				14BCD7851A85DFFB00825A90 /* OrderCell.h */,
 				14BCD7861A85DFFB00825A90 /* OrderCell.m */,
 				14BCD7871A85DFFB00825A90 /* OrderCell.xib */,
+				37BF0BDC1A90C613001BA9E6 /* OrderCommentCell.h */,
+				37BF0BDD1A90C613001BA9E6 /* OrderCommentCell.m */,
+				37BF0BDE1A90C613001BA9E6 /* OrderCommentCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -4520,6 +4551,7 @@
 				BD5186F61A5D0ED700BE508A /* menu_about_select@2x.png in Resources */,
 				BD5187AE1A5D344D00BE508A /* icon_topic@2x.png in Resources */,
 				BD5187841A5D0ED700BE508A /* nav-home-active@2x.png in Resources */,
+				37BF0BD01A8FA0B3001BA9E6 /* OrderCommentManageViewController.xib in Resources */,
 				BD322BCD1A6E090800DDC1C0 /* image_quality_unselected_disabled@2x.png in Resources */,
 				BD51862C1A5D0ED700BE508A /* menu_icon_cancel_follow@2x.png in Resources */,
 				BD5186701A5D0ED700BE508A /* cellIndicator@2x.png in Resources */,
@@ -4629,6 +4661,7 @@
 				BD5186E81A5D0ED700BE508A /* publish_point_default@2x.png in Resources */,
 				BD5186C41A5D0ED700BE508A /* question_input@2x.png in Resources */,
 				BD5187301A5D0ED700BE508A /* service_normal_2@2x.png in Resources */,
+				37BF0BE01A90C613001BA9E6 /* OrderCommentCell.xib in Resources */,
 				BD5186BA1A5D0ED700BE508A /* icon_camera3@2x.png in Resources */,
 				BD6189EB1A5E261B00FBE4E1 /* BidManagementViewController.xib in Resources */,
 				371D68761A5D72CA00172AC9 /* icon_setting_white@2x.png in Resources */,
@@ -5183,6 +5216,7 @@
 			files = (
 				144354811A8892870093C943 /* OrderExtractViewController.m in Sources */,
 				37F0E6311A7D1AFE004CCCB2 /* MWGridViewController.m in Sources */,
+				37BF0BD91A8FAD7A001BA9E6 /* JRDesignCreditDto.m in Sources */,
 				37F0E6351A7D1AFE004CCCB2 /* MWPhotoBrowser.m in Sources */,
 				1415F9381A5CD1CB003D0C29 /* MJRefreshFooterView.m in Sources */,
 				1415F9391A5CD1CB003D0C29 /* JRTopic.m in Sources */,
@@ -5190,9 +5224,11 @@
 				1415F93B1A5CD1CB003D0C29 /* RealNameAuthViewController.m in Sources */,
 				1415F93C1A5CD1CB003D0C29 /* ALLoadingView.m in Sources */,
 				1415F93E1A5CD1CB003D0C29 /* UIImage+ASCategory.m in Sources */,
+				37BF0BD61A8FA580001BA9E6 /* JRCreditPointsDto.m in Sources */,
 				37F0E6A81A7D1F4E004CCCB2 /* PSTCollectionViewData.m in Sources */,
 				1415F93F1A5CD1CB003D0C29 /* ActionSheetMultiPicker.m in Sources */,
 				1415F9401A5CD1CB003D0C29 /* UIProgressView+ASCategory.m in Sources */,
+				37BF0BCF1A8FA0B3001BA9E6 /* OrderCommentManageViewController.m in Sources */,
 				1415F9411A5CD1CB003D0C29 /* ForgetViewController.m in Sources */,
 				1415F9421A5CD1CB003D0C29 /* ASPlaceholderTextView.m in Sources */,
 				1415F9431A5CD1CB003D0C29 /* JRDesigner.m in Sources */,
@@ -5240,6 +5276,7 @@
 				1415F9661A5CD1CB003D0C29 /* SerciceDetailViewController.m in Sources */,
 				37F0E63D1A7D1AFE004CCCB2 /* DACircularProgressView.m in Sources */,
 				37F0E7041A7D2735004CCCB2 /* SDImageCache.m in Sources */,
+				37BF0BD31A8FA2A4001BA9E6 /* JROrderManage.m in Sources */,
 				1415F9671A5CD1CB003D0C29 /* ALViewController.m in Sources */,
 				1415F9681A5CD1CB003D0C29 /* SetPasswordViewController.m in Sources */,
 				1415F9691A5CD1CB003D0C29 /* UIActionSheet+Blocks.m in Sources */,
@@ -5441,6 +5478,7 @@
 				1415F9FD1A5CD1CB003D0C29 /* ALEngine.m in Sources */,
 				A9224E331A6CB829002974ED /* ViewUtils.m in Sources */,
 				37F0E63B1A7D1AFE004CCCB2 /* MWZoomingScrollView.m in Sources */,
+				37BF0BDF1A90C613001BA9E6 /* OrderCommentCell.m in Sources */,
 				37F0E7001A7D2735004CCCB2 /* MKAnnotationView+WebCache.m in Sources */,
 				1415F9FE1A5CD1CB003D0C29 /* ResetPasswordViewController.m in Sources */,
 				1415F9FF1A5CD1CB003D0C29 /* JRWebViewController.m in Sources */,

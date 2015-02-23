@@ -31,6 +31,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *tableHeaderView;
+@property (nonatomic, strong) IBOutlet UIView *tempView;
 @property (nonatomic, assign) NSInteger currentPage;
 
 @property (nonatomic, strong) NSMutableArray *adInfos;
@@ -141,12 +142,11 @@
             if (bannerList.count > 0) {
                 self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
                 //                [_adInfos addObjectsFromArray:_adInfos];
-                self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentCenter];
-                _bannerView.delegate = self;
-                
-                [_tableHeaderView addSubview:_bannerView];
             }
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self reSetAdView];
+        });
     }];
 }
 
@@ -189,10 +189,23 @@
     }];
 }
 
+- (void)reSetAdView{
+    if (self.adInfos.count > 0) {
+        self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentCenter];
+        _bannerView.delegate = self;
+        [_tableHeaderView addSubview:_bannerView];
+        _tempView.frame = CGRectMake(0, CGRectGetMaxY(_bannerView.frame),  CGRectGetWidth(_tempView.frame), CGRectGetHeight(_tempView.frame));
+    }else{
+        _tempView.frame = CGRectMake(0, 0, CGRectGetWidth(_tempView.frame), CGRectGetHeight(_tempView.frame));
+    }
+    _tableHeaderView.frame = CGRectMake(0, 0, CGRectGetMaxY(_tempView.frame), CGRectGetHeight(_tempView.frame));
+    _tableView.tableHeaderView = _tableHeaderView;
+}
+
 - (void)reloadNesestDesignerData{
     NSInteger i = 0;
     for (JRDesigner *d in _designerDatas) {
-        UIImageView *imageView = (UIImageView*)[_tableHeaderView viewWithTag:kDesignerViewTag + i * 2];
+        UIImageView *imageView = (UIImageView*)[_tempView viewWithTag:kDesignerViewTag + i * 2];
         if (d.headUrl.length > 0) {
             [imageView setImageWithURLString:d.headUrl];
         }else{
@@ -200,23 +213,23 @@
         }
         
         
-        UILabel *label = (UILabel*)[_tableHeaderView viewWithTag:kDesignerViewTag + i*2 + 1];
+        UILabel *label = (UILabel*)[_tempView viewWithTag:kDesignerViewTag + i*2 + 1];
         label.text = [d formatUserName];
         
-        UIButton *btn = (UIButton*)[_tableHeaderView viewWithTag:kDesignerViewTag + 8 + i];
+        UIButton *btn = (UIButton*)[_tempView viewWithTag:kDesignerViewTag + 8 + i];
         btn.enabled = YES;
         
         i++;
     }
     
     for (; i < 4; i++) {
-        UIImageView *imageView = (UIImageView*)[_tableHeaderView viewWithTag:kDesignerViewTag + i * 2];
+        UIImageView *imageView = (UIImageView*)[_tempView viewWithTag:kDesignerViewTag + i * 2];
         imageView.image = nil;
         
-        UILabel *label = (UILabel*)[_tableHeaderView viewWithTag:kDesignerViewTag + i*2 + 1];
+        UILabel *label = (UILabel*)[_tempView viewWithTag:kDesignerViewTag + i*2 + 1];
         label.text = @"";
         
-        UIButton *btn = (UIButton*)[_tableHeaderView viewWithTag:kDesignerViewTag + 8 + i];
+        UIButton *btn = (UIButton*)[_tempView viewWithTag:kDesignerViewTag + 8 + i];
         btn.enabled = NO;
     }
 }
