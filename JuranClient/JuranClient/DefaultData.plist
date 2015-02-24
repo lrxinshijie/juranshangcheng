@@ -641,37 +641,37 @@
 			<key>k</key>
 			<string>全部</string>
 			<key>v</key>
-			<string>0</string>
+			<string></string>
 		</dict>
 		<dict>
 			<key>k</key>
 			<string>待付款</string>
 			<key>v</key>
-			<string>1</string>
+			<string>wait_consumer_pay</string>
 		</dict>
 		<dict>
 			<key>k</key>
 			<string>待付首款</string>
 			<key>v</key>
-			<string>2</string>
+			<string>wait_first_pay</string>
 		</dict>
 		<dict>
 			<key>k</key>
 			<string>待付尾款</string>
 			<key>v</key>
-			<string>2</string>
+			<string>wait_last_pay</string>
 		</dict>
 		<dict>
 			<key>k</key>
 			<string>待消费者确认</string>
 			<key>v</key>
-			<string>2</string>
+			<string>wait_confirm_design</string>
 		</dict>
 		<dict>
 			<key>k</key>
 			<string>交易完成</string>
 			<key>v</key>
-			<string>2</string>
+			<string>complete</string>
 		</dict>
 	</array>
 	<key>orderTime</key>

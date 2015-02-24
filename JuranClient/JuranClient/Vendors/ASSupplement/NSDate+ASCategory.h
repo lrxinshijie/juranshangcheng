@@ -42,6 +42,7 @@
 + (NSString *)genderFromIDNumber:(NSString *)number;    //male results "M", female returns "F"
 + (NSDate *)birthdayFromIDNumber:(NSString *)number;    //returns the date with format like "yyyyMMdd"
 
+- (NSDate *)dateAfterMonth:(int)month;
 - (NSDate *)dateAfterDay:(int)day;
 - (NSUInteger)daysAgo;
 - (NSString *)weekString;

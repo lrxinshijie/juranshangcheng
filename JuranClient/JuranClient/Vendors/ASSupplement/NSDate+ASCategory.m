@@ -267,6 +267,14 @@
 	return dateAfterDay;
 }
 
+- (NSDate *)dateAfterMonth:(int)month{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *componentsToAdd = [[NSDateComponents alloc] init];
+    [componentsToAdd setMonth:month];
+    NSDate *dateAfterDay = [calendar dateByAddingComponents:componentsToAdd toDate:self options:0];
+    return dateAfterDay;
+}
+
 - (NSString *)weekString{
 	NSString *retVal = @"";
 	switch ([self weekday]) {

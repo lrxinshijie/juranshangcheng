@@ -13,7 +13,7 @@
 #import "OrderDetailViewController.h"
 #import "OrderFilterViewController.h"
 
-@interface OrderListViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface OrderListViewController () <UITableViewDataSource, UITableViewDelegate, OrderFilterViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -100,7 +100,12 @@
 - (void)onFilter{
     OrderFilterViewController *ov = [[OrderFilterViewController alloc] init];
     ov.selecteds = self.filterSelecteds;
+    ov.delegate = self;
     [self.navigationController pushViewController:ov animated:YES];
+}
+
+- (void)clickOrderFilterViewReturnData:(NSMutableArray *)selecteds{
+    [_tableView headerBeginRefreshing];
 }
 
 #endif
@@ -151,6 +156,26 @@
 #ifdef kJuranDesigner
     [param setObject:[NSString stringWithFormat:@"%d", !_isLeft] forKey:@"type"];
 //    [param addEntriesFromDictionary:_filterDict];
+    NSInteger status = [[self.filterSelecteds firstObject] integerValue];
+    if (status > 0) {
+        NSArray *statuses = [[DefaultData sharedData] objectForKey:@"orderStatus"];
+        [param setObject:statuses[status][@"v"] forKey:@"status"];
+    }
+    
+    NSInteger time = [[self.filterSelecteds lastObject] integerValue];
+    if (time > 0) {
+        NSDate *today = [NSDate date];
+        NSString *createDateTo = [today stringWithFormat:kDateFormatHorizontalLineLong];
+        NSString *createDateFrom = [[today dateAfterDay:-7] stringWithFormat:kDateFormatHorizontalLineLong];
+        if (time == 2){
+            createDateFrom = [[today dateAfterMonth:-1]  stringWithFormat:kDateFormatHorizontalLineLong];
+        }else if (time == 3){
+            createDateFrom = [[today dateAfterMonth:-3]  stringWithFormat:kDateFormatHorizontalLineLong];
+        }
+        
+        [param setObject:createDateTo forKey:@"createDateTo"];
+        [param setObject:createDateFrom forKey:@"createDateFrom"];
+    }
 #endif
     
     [[ALEngine shareEngine]  pathURL:JR_ORDER_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {

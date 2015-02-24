@@ -22,12 +22,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    
     self.navigationItem.title = @"筛选";
     
     self.orderStatuses = [[DefaultData sharedData] objectForKey:@"orderStatus"];
     self.orderTimes = [[DefaultData sharedData] objectForKey:@"orderTime"];
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     [self.view addSubview:_tableView];
     
     UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 50, 30) target:self action:@selector(back:) title:@"取消" backgroundImage:nil];
