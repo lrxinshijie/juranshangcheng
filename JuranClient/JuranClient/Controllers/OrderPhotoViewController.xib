@@ -33,8 +33,8 @@
                     </connections>
                 </collectionView>
                 <view hidden="YES" contentMode="scaleToFill" id="7IQ-8U-Kxl">
-                    <rect key="frame" x="64" y="220" width="192" height="128"/>
-                    <autoresizingMask key="autoresizingMask"/>
+                    <rect key="frame" x="64" y="184" width="192" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="answer_no_data.png" id="w06-3O-05s">
                             <rect key="frame" x="49" y="0.0" width="94" height="92"/>
