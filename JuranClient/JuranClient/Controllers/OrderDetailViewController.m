@@ -12,6 +12,7 @@
 #import "JRDesigner.h"
 #import "OrderActionView.h"
 #import "OrderPhotoViewController.h"
+#import "JRWebViewController.h"
 
 @interface OrderDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -178,6 +179,13 @@
     OrderPhotoViewController *vc = [[OrderPhotoViewController alloc] init];
     vc.order = _order;
     vc.type = 1;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)onContract:(id)sender{
+    JRWebViewController *vc = [[JRWebViewController alloc] init];
+    vc.urlString = @"http://apph5.juran.cn/contract?fromApp=1";
+    vc.title = @"居然在线设计师合同条款";
     [self.navigationController pushViewController:vc animated:YES];
 }
 

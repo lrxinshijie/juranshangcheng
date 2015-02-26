@@ -52,6 +52,10 @@
     
 #ifndef kJuranDesigner
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"private_message_more"] rightBarButtonItemAction:@selector(onDetail)];
+    _firstContactLabel.textColor = [UIColor blackColor];
+    _firstContentLabel.textColor = [UIColor blackColor];
+    UIView *line = [_firstView viewWithTag:2233];
+    line.backgroundColor = [UIColor blackColor];
 #endif
     
     self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
