@@ -96,9 +96,9 @@
                     , @"icon_personal_shouchang.png"
                     , @"icon_dingdan.png"
                     , @"icon_realname_auth.png"
-                    , @"icon_personal_zhaq"
-                    , @"icon_personal_zhgl"
-                    , @"icon_personal_zhgl"];
+                    , @"icon_personal_zhaq.png"
+                    , @"icon_personal_zhgl.png"
+                    , @"icon_praise_manage.png"];
     self.navigationItem.title = @"个人中心";
 #else
     titleArray = @[@"互动管理"
