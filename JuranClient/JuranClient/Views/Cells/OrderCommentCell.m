@@ -47,6 +47,7 @@
     _servicePointView.selectedIndex = dto.servicePoint;
     _contentLabel.text = dto.content;
     _tIdLabel.text = [NSString stringWithFormat:@"设计合同订单号：%@", dto.tid];
+    [_avtarImageView setImageWithURLString:dto.customerHeadUrl];
     
     CGRect frame = _contentLabel.frame;
     frame.size.height = [_contentLabel.text heightWithFont:_contentLabel.font constrainedToWidth:CGRectGetWidth(_contentLabel.frame)];

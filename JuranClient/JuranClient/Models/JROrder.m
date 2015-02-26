@@ -113,15 +113,15 @@
  */
 
 - (NSString *)statusName{
-    NSDictionary *statuses = @{@"wait_designer_confirm":@"待设计师确认",
+    NSDictionary *statuses = @{@"wait_designer_confirm":@"待设计师确认量房",
                                @"construction_complete":@"施工完成",
                                @"convert_to_design":@"量房转设计",
                                @"cancel":@"交易取消",
-                               @"wait_first_pay":@"待支付",
+                               @"wait_first_pay":@"待支付首款",
                                @"wait_confirm_design":@"待确认交付物",
                                @"wait_last_pay":@"待确认交付物",
                                @"wait_designer_measure":@"待设计师量房",
-                               @"wait_consumer_pay":@"待支付",
+                               @"wait_consumer_pay":@"待支付尾款",
                                @"complete":@"设计完成",
                                };
     return [statuses getStringValueForKey:self.status defaultValue:@""];

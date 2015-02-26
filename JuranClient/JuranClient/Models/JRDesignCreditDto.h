@@ -29,6 +29,7 @@
 @property (nonatomic, copy) NSString *appendContent;
 @property (nonatomic, copy) NSString *replyAppendContent;
 @property (nonatomic, copy) NSString *ifAddCredit;
+@property (nonatomic, copy) NSString *customerHeadUrl;
 
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (id)initWithDictionary:(NSDictionary *)dict;

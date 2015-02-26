@@ -28,7 +28,7 @@
         self.servicePoint = [dict getIntValueForKey:@"servicePoint" defaultValue:0];
         self.punctualityPoint = [dict getIntValueForKey:@"punctualityPoint" defaultValue:0];
         self.content = [dict getStringValueForKey:@"content" defaultValue:@""];
-        self.gmtCreate = [dict getStringValueForKey:@"gmtCreate" defaultValue:@""];
+        self.gmtCreate = [dict getStringValueForKey:@"appGmtCreate" defaultValue:@""];
         self.ifAnony = [dict getIntValueForKey:@"ifAnony" defaultValue:0];
         self.ifHide = [dict getIntValueForKey:@"ifHide" defaultValue:0];
         self.status = [dict getIntValueForKey:@"status" defaultValue:0];
@@ -36,6 +36,7 @@
         self.appendContent = [dict getStringValueForKey:@"appendContent" defaultValue:@""];
         self.replyAppendContent = [dict getStringValueForKey:@"replyAppendContent" defaultValue:@""];
         self.ifAddCredit = [dict getStringValueForKey:@"ifAddCredit" defaultValue:@""];
+        self.customerHeadUrl = [dict getStringValueForKey:@"customerHeadUrl" defaultValue:@""];
     }
     return self;
 }
