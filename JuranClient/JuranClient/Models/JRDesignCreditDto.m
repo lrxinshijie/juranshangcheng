@@ -36,6 +36,7 @@
         self.appendContent = [dict getStringValueForKey:@"appendContent" defaultValue:@""];
         self.replyAppendContent = [dict getStringValueForKey:@"replyAppendContent" defaultValue:@""];
         self.ifAddCredit = [dict getStringValueForKey:@"ifAddCredit" defaultValue:@""];
+        self.customerHeadUrl = [dict getStringValueForKey:@"customerHeadUrl" defaultValue:@""];
     }
     return self;
 }
