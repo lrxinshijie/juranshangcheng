@@ -76,6 +76,11 @@
     _contentTextView.layer.masksToBounds = YES;
     _contentTextView.layer.borderColor = RGBColor(241, 241, 241).CGColor;
     _contentTextView.layer.borderWidth = 1.f;
+//    CGSize size = _contentTextView.contentSize;
+//    size.width -= 100;
+//    _contentTextView.contentSize = size;
+//    _contentTextView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
+//    size = _contentTextView.contentSize;
     
     _toolView.frame = CGRectMake(0, kWindowHeightWithoutNavigationBar - 40, kWindowWidth, 40);
     [self.view addSubview:_toolView];

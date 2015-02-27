@@ -687,6 +687,10 @@
 		37DBFA541A8A3433003749E8 /* OrderPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DBFA511A8A3433003749E8 /* OrderPhotoBrowserViewController.m */; };
 		37DBFA551A8A3433003749E8 /* OrderPhotoBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DBFA521A8A3433003749E8 /* OrderPhotoBrowserViewController.xib */; };
 		37DBFA561A8A3433003749E8 /* OrderPhotoBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DBFA521A8A3433003749E8 /* OrderPhotoBrowserViewController.xib */; };
+		37DC90F61A9F591E004C7898 /* ContractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC90F41A9F591E004C7898 /* ContractViewController.m */; };
+		37DC90F71A9F591E004C7898 /* ContractViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DC90F51A9F591E004C7898 /* ContractViewController.xib */; };
+		37DC90F81A9F5A3C004C7898 /* ContractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC90F41A9F591E004C7898 /* ContractViewController.m */; };
+		37DC90F91A9F5A3C004C7898 /* ContractViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DC90F51A9F591E004C7898 /* ContractViewController.xib */; };
 		37F0E5CC1A7D1AC6004CCCB2 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F0E5CB1A7D1AC6004CCCB2 /* AssetsLibrary.framework */; };
 		37F0E62C1A7D1AFE004CCCB2 /* MWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F0E5D01A7D1AFE004CCCB2 /* MWCaptionView.m */; };
 		37F0E62D1A7D1AFE004CCCB2 /* MWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F0E5D01A7D1AFE004CCCB2 /* MWCaptionView.m */; };
@@ -1866,6 +1870,9 @@
 		37DBFA501A8A3433003749E8 /* OrderPhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPhotoBrowserViewController.h; sourceTree = "<group>"; };
 		37DBFA511A8A3433003749E8 /* OrderPhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPhotoBrowserViewController.m; sourceTree = "<group>"; };
 		37DBFA521A8A3433003749E8 /* OrderPhotoBrowserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderPhotoBrowserViewController.xib; sourceTree = "<group>"; };
+		37DC90F31A9F591E004C7898 /* ContractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractViewController.h; sourceTree = "<group>"; };
+		37DC90F41A9F591E004C7898 /* ContractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractViewController.m; sourceTree = "<group>"; };
+		37DC90F51A9F591E004C7898 /* ContractViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContractViewController.xib; sourceTree = "<group>"; };
 		37F0E5CB1A7D1AC6004CCCB2 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		37F0E5CF1A7D1AFE004CCCB2 /* MWCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWCaptionView.h; sourceTree = "<group>"; };
 		37F0E5D01A7D1AFE004CCCB2 /* MWCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWCaptionView.m; sourceTree = "<group>"; };
@@ -2900,6 +2907,9 @@
 				A91100991A9B5FF500F75AF5 /* OrderFilterViewController.h */,
 				A911009A1A9B5FF500F75AF5 /* OrderFilterViewController.m */,
 				A911009B1A9B5FF500F75AF5 /* OrderFilterViewController.xib */,
+				37DC90F31A9F591E004C7898 /* ContractViewController.h */,
+				37DC90F41A9F591E004C7898 /* ContractViewController.m */,
+				37DC90F51A9F591E004C7898 /* ContractViewController.xib */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -4638,6 +4648,7 @@
 				1415FA6A1A5CD1CB003D0C29 /* ZYQAssetPicker.Bundle in Resources */,
 				BD5186E01A5D0ED700BE508A /* publish_designer_top@2x.png in Resources */,
 				BD51867E1A5D0ED700BE508A /* empty_privateletter@2x.png in Resources */,
+				37DC90F71A9F591E004C7898 /* ContractViewController.xib in Resources */,
 				BD5448261A9D661D000EFA77 /* icon_praise_manage@2x.png in Resources */,
 				BD5185D01A5D0ED700BE508A /* ad_page_action@2x.png in Resources */,
 				BD5187A61A5D344D00BE508A /* icon_bid@2x.png in Resources */,
@@ -5084,6 +5095,7 @@
 				37DBFA4E1A8A33E7003749E8 /* OrderPhotoViewController.xib in Resources */,
 				A987EE441A20984200CED7CD /* HomeViewController.xib in Resources */,
 				BD51870B1A5D0ED700BE508A /* menu_topic_default@2x.png in Resources */,
+				37DC90F91A9F5A3C004C7898 /* ContractViewController.xib in Resources */,
 				BD5185F31A5D0ED700BE508A /* icon-detail@2x.png in Resources */,
 				BD5185CD1A5D0ED700BE508A /* Icon@2x.png in Resources */,
 				BD51872D1A5D0ED700BE508A /* service_normal_1@2x.png in Resources */,
@@ -5282,6 +5294,7 @@
 				37D6796F1A6016B900C6DFAC /* PriceModifyCell.m in Sources */,
 				1415F95E1A5CD1CB003D0C29 /* UIImageView+Block.m in Sources */,
 				1415F95F1A5CD1CB003D0C29 /* PrivateMessageDetailViewController.m in Sources */,
+				37DC90F61A9F591E004C7898 /* ContractViewController.m in Sources */,
 				1415F9601A5CD1CB003D0C29 /* JSONAPI.m in Sources */,
 				1415F9611A5CD1CB003D0C29 /* DesignerViewController.m in Sources */,
 				1415F9621A5CD1CB003D0C29 /* ASMaskdView.m in Sources */,
@@ -5684,6 +5697,7 @@
 				37CF672C1A4FE11D0044F709 /* NewestBidInfoCell.m in Sources */,
 				14587E101A35D5E300D41236 /* DetailAddressViewController.m in Sources */,
 				14C8554E1A2E1A1600A15ED9 /* InteractionCell.m in Sources */,
+				37DC90F81A9F5A3C004C7898 /* ContractViewController.m in Sources */,
 				A9D654B21A27642800A80253 /* NSArray+JSONModel.m in Sources */,
 				37F0E6341A7D1AFE004CCCB2 /* MWPhotoBrowser.m in Sources */,
 				378BB2C31A4B1C6E00E8358D /* JRBidInfo.m in Sources */,
