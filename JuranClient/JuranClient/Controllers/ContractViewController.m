@@ -106,7 +106,7 @@
         label.text = @"设计师（乙方）";
     }
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:_hiddenSectionDic[[NSString stringWithFormat:@"%d", section]]?@"arrow_down.png":@"arrow_up.png"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:_hiddenSectionDic[[NSString stringWithFormat:@"%d", section]]?@"arrow_up.png":@"arrow_down.png"]];
     imageView.center = CGPointMake(kWindowWidth - 10 - CGRectGetWidth(imageView.frame), CGRectGetHeight(view.frame)/2.f);
     [view addSubview:imageView];
     return view;
