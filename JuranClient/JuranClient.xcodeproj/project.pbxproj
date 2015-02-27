@@ -773,6 +773,10 @@
 		37F165E71A89005700F624FA /* OrderCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F165E41A89005700F624FA /* OrderCommentViewController.m */; };
 		37F165E81A89005700F624FA /* OrderCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F165E51A89005700F624FA /* OrderCommentViewController.xib */; };
 		37F165E91A89005700F624FA /* OrderCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F165E51A89005700F624FA /* OrderCommentViewController.xib */; };
+		37F2176E1AA0A4EB00664DB4 /* order_call_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F2176C1AA0A4EB00664DB4 /* order_call_disable@2x.png */; };
+		37F2176F1AA0A4EB00664DB4 /* order_call_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F2176C1AA0A4EB00664DB4 /* order_call_disable@2x.png */; };
+		37F217701AA0A4EB00664DB4 /* order_private_letter_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F2176D1AA0A4EB00664DB4 /* order_private_letter_disable@2x.png */; };
+		37F217711AA0A4EB00664DB4 /* order_private_letter_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37F2176D1AA0A4EB00664DB4 /* order_private_letter_disable@2x.png */; };
 		A90459CE1A27874800F8CD74 /* CaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */; };
 		A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */; };
 		A90459D31A278A6100F8CD74 /* PublishDesignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459D11A278A6100F8CD74 /* PublishDesignViewController.m */; };
@@ -1960,6 +1964,8 @@
 		37F165E31A89005700F624FA /* OrderCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCommentViewController.h; sourceTree = "<group>"; };
 		37F165E41A89005700F624FA /* OrderCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCommentViewController.m; sourceTree = "<group>"; };
 		37F165E51A89005700F624FA /* OrderCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCommentViewController.xib; sourceTree = "<group>"; };
+		37F2176C1AA0A4EB00664DB4 /* order_call_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_call_disable@2x.png"; sourceTree = "<group>"; };
+		37F2176D1AA0A4EB00664DB4 /* order_private_letter_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_private_letter_disable@2x.png"; sourceTree = "<group>"; };
 		A90459CB1A27874800F8CD74 /* CaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseDetailViewController.h; sourceTree = "<group>"; };
 		A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseDetailViewController.m; sourceTree = "<group>"; };
 		A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseDetailViewController.xib; sourceTree = "<group>"; };
@@ -2813,6 +2819,8 @@
 		14BCD78C1A8605B400825A90 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				37F2176C1AA0A4EB00664DB4 /* order_call_disable@2x.png */,
+				37F2176D1AA0A4EB00664DB4 /* order_private_letter_disable@2x.png */,
 				BD30494E1A8C957300B3C88F /* order_point_unselected@2x.png */,
 				37D885771A8BB0EA0030F846 /* order_point_selected@2x.png */,
 				37C0700F1A87A2E300EBAD08 /* order_call@2x.png */,
@@ -4408,6 +4416,7 @@
 				BD5186BE1A5D0ED700BE508A /* img_adopt _bf@2x.png in Resources */,
 				1415FA2E1A5CD1CB003D0C29 /* FeedBackViewController.xib in Resources */,
 				1415FA2F1A5CD1CB003D0C29 /* RealNameAuthViewController.xib in Resources */,
+				37F217711AA0A4EB00664DB4 /* order_private_letter_disable@2x.png in Resources */,
 				BD5186201A5D0ED700BE508A /* icon-designer-id@2x.png in Resources */,
 				BD5187261A5D0ED700BE508A /* service_highlighted_9@2x.png in Resources */,
 				BD5187121A5D0ED700BE508A /* service_highlighted_10@2x.png in Resources */,
@@ -4422,6 +4431,7 @@
 				BD5186FA1A5D0ED700BE508A /* menu_activity_select@2x.png in Resources */,
 				BD5186121A5D0ED700BE508A /* checkbox_checked@2x.png in Resources */,
 				1415FA331A5CD1CB003D0C29 /* DemandCell.xib in Resources */,
+				37F2176F1AA0A4EB00664DB4 /* order_call_disable@2x.png in Resources */,
 				A95DB70F1A5EF0BC00F543CE /* guide_3@2x.png in Resources */,
 				371D68741A5D6E7E00172AC9 /* icon_homepage@2x.png in Resources */,
 				37CE57281A6D346D00C75E65 /* WikiOrActivityViewController.xib in Resources */,
@@ -4823,6 +4833,7 @@
 				A9A4E35D1A62C46D00BB9F68 /* Icon-Small-50.png in Resources */,
 				37A0F80B1A6B856100611760 /* ActivityViewController.xib in Resources */,
 				BD51861F1A5D0ED700BE508A /* icon-designer-id@2x.png in Resources */,
+				37F2176E1AA0A4EB00664DB4 /* order_call_disable@2x.png in Resources */,
 				BD5187251A5D0ED700BE508A /* service_highlighted_9@2x.png in Resources */,
 				BD5187111A5D0ED700BE508A /* service_highlighted_10@2x.png in Resources */,
 				37D18DB81A5829EC00B41048 /* CaseImageHeaderView.xib in Resources */,
@@ -5156,6 +5167,7 @@
 				BD5187571A5D0ED700BE508A /* nav_backbtn_white@2x.png in Resources */,
 				1416C8B91A242FD100FA9999 /* CaseCollectionCell.xib in Resources */,
 				375635221A60E78C00D120C8 /* icon_unfollowed@2x.png in Resources */,
+				37F217701AA0A4EB00664DB4 /* order_private_letter_disable@2x.png in Resources */,
 				BD5185D51A5D0ED700BE508A /* case-detail-send@2x.png in Resources */,
 				14490CAA1A2B5D50001CB160 /* AccountManageViewController.xib in Resources */,
 				BD5186DB1A5D0ED700BE508A /* private_message_empty@2x.png in Resources */,

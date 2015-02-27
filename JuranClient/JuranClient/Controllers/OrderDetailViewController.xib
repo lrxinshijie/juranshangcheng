@@ -8,6 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderDetailViewController">
             <connections>
                 <outlet property="actionView" destination="JKq-yI-UBz" id="95r-OL-QYR"/>
+                <outlet property="addressLabel" destination="RpV-GB-sxK" id="5a6-d3-ZJq"/>
+                <outlet property="addressView" destination="DZb-t9-fYC" id="lWs-Rn-YX8"/>
                 <outlet property="amountLabel" destination="fA9-Gs-ZrF" id="vpk-rl-avA"/>
                 <outlet property="customerHeaderImgView" destination="wqM-dL-cPv" id="fx4-cO-Ggu"/>
                 <outlet property="customerInfoView" destination="S1N-wD-Kwh" id="f3q-xB-JG1"/>
@@ -25,10 +27,11 @@
                 <outlet property="measureAmountLabel" destination="5U4-eG-qwk" id="cyO-iA-eJT"/>
                 <outlet property="orderNumberLabel" destination="x5l-h0-SRs" id="sbq-IY-bl3"/>
                 <outlet property="payAmountLabel" destination="7Si-Qw-XKO" id="Dyg-Mp-i71"/>
+                <outlet property="payStatusLabel" destination="nNa-us-TcY" id="ODN-DL-dmp"/>
                 <outlet property="paymentInfoView" destination="2Fi-u4-ul2" id="jEy-hm-HVv"/>
                 <outlet property="roomTypeCountLabel" destination="abE-1z-BWK" id="EMM-La-Vg2"/>
                 <outlet property="roomTypeView" destination="1Lw-cG-hsE" id="8hO-qQ-FEu"/>
-                <outlet property="statusLabel" destination="nNa-us-TcY" id="iVi-M3-hkK"/>
+                <outlet property="statusLabel" destination="3RF-8t-bOR" id="Iwu-fk-B3W"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="watiPayAmountLabel" destination="xhl-nU-AIQ" id="xlS-R8-2ZC"/>
             </connections>
@@ -60,7 +63,7 @@
                             <color key="textColor" red="0.0" green="0.25882352941176473" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付状态：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nNa-us-TcY">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付状态：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nNa-us-TcY" customClass="TTTAttributedLabel">
                             <rect key="frame" x="37" y="33" width="273" height="12"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -211,7 +214,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="658" y="393"/>
+            <point key="canvasLocation" x="658" y="299"/>
         </view>
         <view tag="5555" contentMode="scaleToFill" id="i5p-OU-rf9">
             <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
@@ -253,6 +256,9 @@
                         <color key="titleColor" red="0.19215686274509805" green="0.34901960784313724" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="disabled" image="order_call_disable.png">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
                         <action selector="onCall:" destination="-1" eventType="touchUpInside" id="Gdi-kc-Iqs"/>
                     </connections>
@@ -272,7 +278,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="658" y="608.5"/>
+            <point key="canvasLocation" x="658" y="399.5"/>
         </view>
         <view contentMode="scaleToFill" id="Xy5-MG-465">
             <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
@@ -320,7 +326,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1015" y="274"/>
+            <point key="canvasLocation" x="658" y="189"/>
         </view>
         <view contentMode="scaleToFill" id="1Lw-cG-hsE">
             <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
@@ -370,12 +376,36 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="1015" y="173"/>
         </view>
+        <view tag="5555" contentMode="scaleToFill" id="DZb-t9-fYC">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="装修地址" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PJU-zJ-ces">
+                    <rect key="frame" x="15" y="10" width="240" height="15"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数量将发的" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RpV-GB-sxK">
+                    <rect key="frame" x="15" y="30" width="290" height="12"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="639" y="488"/>
+        </view>
     </objects>
     <resources>
         <image name="order_btn_accessory.png" width="18" height="15"/>
-        <image name="order_call.png" width="16" height="16"/>
+        <image name="order_call.png" width="20" height="20"/>
+        <image name="order_call_disable.png" width="20" height="20"/>
         <image name="order_payment.png" width="14" height="17"/>
-        <image name="order_private_letter.png" width="16" height="17"/>
+        <image name="order_private_letter.png" width="20" height="20"/>
         <image name="unlogin_head.png" width="60" height="60"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
