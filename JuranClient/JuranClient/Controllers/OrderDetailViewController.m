@@ -284,12 +284,12 @@
                 _orderNumberLabel.text = [NSString stringWithFormat:@"订单号：%@", _order.measureTid];;
             }else{
                 _orderNumberLabel.text = [NSString stringWithFormat:@"订单号：%@", _order.designTid];
-                _measureAmountLabel.text = [NSString stringWithFormat:@"量房费 ￥%d", _order.measurePayAmount];
-                _firstAmountLabel.text = [NSString stringWithFormat:@"首款 ￥%d", _order.firstPayAmount];
-                _finalAmountLabel.text = [NSString stringWithFormat:@"尾款 ￥%d", _order.finalPayAmount];
-                _amountLabel.text = [NSString stringWithFormat:@"总金额 ￥%d", _order.amount];
-                _payAmountLabel.text = [NSString stringWithFormat:@"已付 ￥%d", _order.payAmount];
-                _watiPayAmountLabel.text = [NSString stringWithFormat:@"实付 ￥%d", _order.waitPayAmount];
+                _measureAmountLabel.text = [NSString stringWithFormat:@"量房费 ￥%@", _order.measurePayAmount];
+                _firstAmountLabel.text = [NSString stringWithFormat:@"首款 ￥%@", _order.firstPayAmount];
+                _finalAmountLabel.text = [NSString stringWithFormat:@"尾款 ￥%@", _order.finalPayAmount];
+                _amountLabel.text = [NSString stringWithFormat:@"总金额 ￥%@", _order.amount];
+                _payAmountLabel.text = [NSString stringWithFormat:@"已付 ￥%@", _order.payAmount];
+                _watiPayAmountLabel.text = [NSString stringWithFormat:@"实付 ￥%@", _order.waitPayAmount];
             }
             [cell.contentView addSubview:_paymentInfoView];
         }else if (indexPath.section == 0 && indexPath.row == 1){

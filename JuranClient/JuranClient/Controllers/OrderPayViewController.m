@@ -39,9 +39,9 @@
     [_avtarImageView setImageWithURLString:_order.headUrl];
     _nameLabel.text = _order.decoratorName;
     
-    _amountLabel.text = [NSString stringWithFormat:@"￥%d", _order.amount];
-    _payAmountLabel.text = [NSString stringWithFormat:@"￥%d", _order.payAmount];
-    _waitPayAmountLabel.text = [NSString stringWithFormat:@"￥%d", _order.waitPayAmount];
+    _amountLabel.text = [NSString stringWithFormat:@"￥%@", _order.amount];
+    _payAmountLabel.text = [NSString stringWithFormat:@"￥%@", _order.payAmount];
+    _waitPayAmountLabel.text = [NSString stringWithFormat:@"￥%@", _order.waitPayAmount];
 }
 
 - (IBAction)onNext:(id)sender{

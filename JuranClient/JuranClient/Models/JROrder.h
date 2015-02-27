@@ -14,11 +14,11 @@
 @property (nonatomic, copy) NSString *measureTid;
 @property (nonatomic, copy) NSString *designTid;
 @property (nonatomic, copy) NSString *status;
-@property (nonatomic, assign) NSInteger measurePayAmount;
-@property (nonatomic, assign) NSInteger amount;
-@property (nonatomic, assign) NSInteger payAmount;
-@property (nonatomic, assign) NSInteger waitPayAmount;
-@property (nonatomic, assign) NSInteger unPaidAmount;
+@property (nonatomic, copy) NSString *measurePayAmount;
+@property (nonatomic, copy) NSString *amount;
+@property (nonatomic, copy) NSString *payAmount;
+@property (nonatomic, copy) NSString *waitPayAmount;
+@property (nonatomic, copy) NSString *unPaidAmount;
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, assign) NSInteger decoratorId;
 @property (nonatomic, copy) NSString *headUrl;
@@ -40,8 +40,8 @@
 
 //Detail
 @property (nonatomic, copy) NSString *payStatus;
-@property (nonatomic, assign) NSInteger firstPayAmount;
-@property (nonatomic, assign) NSInteger finalPayAmount;
+@property (nonatomic, copy) NSString *firstPayAmount;
+@property (nonatomic, copy) NSString *finalPayAmount;
 @property (nonatomic, strong) NSArray *measurefileSrc;
 @property (nonatomic, strong) NSArray *fileSrc;
 @property (nonatomic, copy) NSString *decoratorRealName;
@@ -67,6 +67,8 @@
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (void)buildUpWithValueForDetail:(id)dict;
 - (void)buildUpWithValueForComment:(id)dict;
+
+- (NSString *)orderSpec;
 
 
 @end

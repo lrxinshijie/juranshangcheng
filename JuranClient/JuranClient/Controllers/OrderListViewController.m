@@ -104,11 +104,11 @@
     [self.navigationController pushViewController:ov animated:YES];
 }
 
+#endif
+
 - (void)clickOrderFilterViewReturnData:(NSMutableArray *)selecteds{
     [_tableView headerBeginRefreshing];
 }
-
-#endif
 
 - (void)reloadData:(NSNotification *)noti{
     if (noti.object) {
