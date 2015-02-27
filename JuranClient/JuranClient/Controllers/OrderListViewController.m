@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
 
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
+
 //Designer
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UIButton *leftButton;
@@ -59,6 +61,10 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = RGBColor(237, 237, 237);
     [self.view addSubview:_tableView];
+    
+    _emptyView.center = self.view.center;
+    _emptyView.hidden = YES;
+    [self.view addSubview:_emptyView];
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -186,6 +192,8 @@
                 [_datas addObjectsFromArray:rows];
             }
         }
+        
+        _emptyView.hidden = _datas.count != 0;
         
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
