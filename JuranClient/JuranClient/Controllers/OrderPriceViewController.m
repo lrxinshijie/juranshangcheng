@@ -27,7 +27,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"修改价格";
     
-    _amountTextField.text = [NSString stringWithFormat:@"%d", _order.amount];
+    _amountTextField.text = [NSString stringWithFormat:@"%@", _order.amount];
     _dateLabel.text = [NSString stringWithFormat:@"期望量房时间：%@", _order.serviceDateString];
 }
 

@@ -16,6 +16,7 @@
 #import "OrderCommentViewController.h"
 #import "OrderCommentReadViewController.h"
 #import "ContractViewController.h"
+#import "UIActionSheet+Blocks.h"
 
 @interface OrderActionView ()
 
@@ -144,15 +145,22 @@
 - (void)onAction:(UIButton *)button{
     if (button.tag == OrderActionCancel) {
         //消费者取消订单
-        NSDictionary *param = @{@"measureTid": _order.measureTid};
-        [self.viewController showHUD];
-        [[ALEngine shareEngine] pathURL:JR_CANCEL_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-            [self.viewController hideHUD];
-            if (!error) {
-                _order.status = @"cancel";
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
+        [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"您确定要取消订单么?" cancelButtonTitle:@"否" destructiveButtonTitle:nil otherButtonTitles:@[@"是"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+            if (buttonIndex == [actionSheet cancelButtonIndex]) {
+                return;
             }
+            
+            NSDictionary *param = @{@"measureTid": _order.measureTid};
+            [self.viewController showHUD];
+            [[ALEngine shareEngine] pathURL:JR_CANCEL_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                [self.viewController hideHUD];
+                if (!error) {
+                    _order.status = @"cancel";
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
+                }
+            }];
         }];
+        
     }else if (button.tag == OrderActionConfirm){
         //设计师确认订单
 #ifdef kJuranDesigner
@@ -178,15 +186,22 @@
             }];
         }];
 #else
-        NSDictionary *param = @{@"designTid": _order.designTid};
-        [self.viewController showHUD];
-        [[ALEngine shareEngine] pathURL:JR_CONFIRM_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-            [self.viewController hideHUD];
-            if (!error) {
-                _order.status = @"complete";
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
+        [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"是否确认设计交付物已达要求?" cancelButtonTitle:@"否" destructiveButtonTitle:nil otherButtonTitles:@[@"是"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+            if (buttonIndex == [actionSheet cancelButtonIndex]) {
+                return ;
             }
+            
+            NSDictionary *param = @{@"designTid": _order.designTid};
+            [self.viewController showHUD];
+            [[ALEngine shareEngine] pathURL:JR_CONFIRM_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                [self.viewController hideHUD];
+                if (!error) {
+                    _order.status = @"complete";
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
+                }
+            }];
         }];
+        
 #endif
     }else if (button.tag == OrderActionPay){
         //消费者支付

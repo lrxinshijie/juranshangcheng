@@ -116,7 +116,7 @@
     
     _nameLabel.text = order.decoratorName;
     _mobileLabel.text = order.decoratorMobile;
-    _amountLabel.text = [NSString stringWithFormat:@"￥%d", order.amount];
+    _amountLabel.text = [NSString stringWithFormat:@"￥%@", order.amount];
     if (order.type == 0) {
         _desigOrderLabel.text = [NSString stringWithFormat:@"量房订单：%@", order.measureTid];;
         _measureOrderLabel.text = @"";
@@ -127,7 +127,7 @@
     _statusLabel.text = order.statusName;
     
     if (order.type == 0) {
-        NSString *measurePay = [NSString stringWithFormat:@"￥%d", order.measurePayAmount];
+        NSString *measurePay = [NSString stringWithFormat:@"￥%@", order.measurePayAmount];
         NSString *content = [NSString stringWithFormat:@"量房费 实%@：%@", pay, measurePay];
         
         [_payAmountLabel setText:content afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
@@ -138,9 +138,9 @@
             return mutableAttributedString;
         }];
     }else{
-        NSString *payAmount = [NSString stringWithFormat:@"已%@：￥%d",pay, order.payAmount];
-        NSString *unPaidAmount = [NSString stringWithFormat:@"未%@：￥%d",pay, order.unPaidAmount];
-        NSString *waitPayAmount = [NSString stringWithFormat:@"￥%d", order.waitPayAmount];
+        NSString *payAmount = [NSString stringWithFormat:@"已%@：￥%@",pay, order.payAmount];
+        NSString *unPaidAmount = [NSString stringWithFormat:@"未%@：￥%@",pay, order.unPaidAmount];
+        NSString *waitPayAmount = [NSString stringWithFormat:@"￥%@", order.waitPayAmount];
         
         NSString *content = [NSString stringWithFormat:@"%@   %@\n实%@：%@", payAmount, unPaidAmount, pay, waitPayAmount];
         
@@ -155,7 +155,7 @@
             [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)font range:unPaidRange];
             CFRelease(font);
             
-            NSRange waitPayRange = [[mutableAttributedString string] rangeOfString:waitPayAmount  options:NSCaseInsensitiveSearch];
+            NSRange waitPayRange = [[mutableAttributedString string] rangeOfString:waitPayAmount  options:NSBackwardsSearch];
             [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[kBlueColor CGColor] range:waitPayRange];
             
             return mutableAttributedString;
