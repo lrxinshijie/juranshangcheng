@@ -15,6 +15,7 @@
 #import "UIAlertView+Blocks.h"
 #import "OrderCommentViewController.h"
 #import "OrderCommentReadViewController.h"
+#import "ContractViewController.h"
 #import "UIActionSheet+Blocks.h"
 
 @interface OrderActionView ()
@@ -254,7 +255,9 @@
         }];
     }else if (button.tag == OrderActionDesigner){
         //签设计合同
-        
+        ContractViewController *vc = [[ContractViewController alloc] init];
+        vc.order = _order;
+        [self.viewController.navigationController pushViewController:vc animated:YES];
     }
     
     if ([_delegate respondsToSelector:@selector(clickOrderAction:Action:)]) {

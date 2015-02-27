@@ -65,6 +65,7 @@
 
 
 - (NSString *)statusName;
+- (NSString *)payStatusString;
 - (NSString *)houseAreaString;
 - (NSString *)serviceDateString;
 + (NSMutableArray *)buildUpWithValue:(id)value;

@@ -138,6 +138,16 @@
     return retVal;
 }
 
+- (NSString *)payStatusString{
+    NSDictionary *payStatuses = @{@"no_pay": @"未付款",
+                                  @"portion": @"部分支付",
+                                  @"waite_confirm": @"等待平台确认支付",
+                                  @"paid": @"已付款",
+                                  @"trade_pay_init" :@"交易付款开始"
+                               };
+    return [payStatuses getStringValueForKey:self.payStatus defaultValue:@""];
+}
+
 - (NSString *)houseAreaString{
     if (self.houseArea.length != 0) {
         return [NSString stringWithFormat:@"%@㎡", self.houseArea];
