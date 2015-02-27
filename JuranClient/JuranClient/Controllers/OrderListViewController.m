@@ -52,6 +52,7 @@
     
     self.filterButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onFilter) title:@"筛选" image:nil];
     [_filterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_filterButton];
 #endif
     
     self.tableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
@@ -83,8 +84,6 @@
     
     [_leftButton setTitleColor:_isLeft ? kBlueColor : RGBColor(64, 65, 64) forState:UIControlStateNormal];
     [_rightButton setTitleColor:_isLeft ? RGBColor(64, 65, 64) : kBlueColor forState:UIControlStateNormal];
-    
-    self.navigationItem.rightBarButtonItem = _isLeft ? nil : [[UIBarButtonItem alloc] initWithCustomView:_filterButton];
     
     [_tableView headerBeginRefreshing];
 }

@@ -645,31 +645,61 @@
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>待付款</string>
+			<string>待设计师确认量房</string>
 			<key>v</key>
-			<string>wait_consumer_pay</string>
+			<string>wait_designer_confirm</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>待付首款</string>
+			<string>施工完成</string>
+			<key>v</key>
+			<string>construction_complete</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>量房转设计</string>
+			<key>v</key>
+			<string>convert_to_design</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>交易取消</string>
+			<key>v</key>
+			<string>cancel</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>待支付首款</string>
 			<key>v</key>
 			<string>wait_first_pay</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>待付尾款</string>
-			<key>v</key>
-			<string>wait_last_pay</string>
-		</dict>
-		<dict>
-			<key>k</key>
-			<string>待消费者确认</string>
+			<string>待确认交付物</string>
 			<key>v</key>
 			<string>wait_confirm_design</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>交易完成</string>
+			<string>待支付尾款</string>
+			<key>v</key>
+			<string>wait_last_pay</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>待设计师量房</string>
+			<key>v</key>
+			<string>wait_designer_measure</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>待支付</string>
+			<key>v</key>
+			<string>wait_consumer_pay</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>设计完成</string>
 			<key>v</key>
 			<string>complete</string>
 		</dict>
@@ -949,63 +979,63 @@
 	<array>
 		<dict>
 			<key>k</key>
-			<string>人气（浏览量）</string>
+			<string>默认排序</string>
 			<key>v</key>
-			<string>1</string>
+			<string></string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>作品量</string>
+			<string>作品数从高到低排序</string>
 			<key>v</key>
 			<string>0</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>默认</string>
+			<string>人气数从高到低排序</string>
 			<key>v</key>
-			<string></string>
+			<string>1</string>
 		</dict>
 	</array>
 	<key>caseOrder</key>
 	<array>
 		<dict>
 			<key>k</key>
-			<string>人气量降序 </string>
+			<string>默认排序</string>
 			<key>v</key>
-			<string>11</string>
+			<string>0</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>点赞量</string>
+			<string>点赞数从高到低排序</string>
 			<key>v</key>
 			<string>10</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>默认</string>
+			<string>人气数从高到低排序</string>
 			<key>v</key>
-			<string>0</string>
+			<string>11</string>
 		</dict>
 	</array>
 	<key>designerSearchOrder</key>
 	<array>
 		<dict>
 			<key>k</key>
-			<string>人气（浏览量）</string>
+			<string>默认排序</string>
 			<key>v</key>
-			<string>2</string>
+			<string>4</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>作品量</string>
+			<string>作品数从高到低排序</string>
 			<key>v</key>
 			<string>0</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>综合（默认）</string>
+			<string>人气数从高到低排序</string>
 			<key>v</key>
-			<string>4</string>
+			<string>2</string>
 		</dict>
 	</array>
 	<key>bidInfoOrder</key>
@@ -1134,7 +1164,7 @@
 	<array>
 		<dict>
 			<key>k</key>
-			<string>擅长风格</string>
+			<string>风格</string>
 			<key>v</key>
 			<string>style</string>
 		</dict>
@@ -1176,7 +1206,7 @@
 	<array>
 		<dict>
 			<key>k</key>
-			<string>擅长风格</string>
+			<string>风格</string>
 			<key>v</key>
 			<string>style</string>
 		</dict>
