@@ -255,6 +255,7 @@
         }];
     }else if (button.tag == OrderActionDesigner){
         //签设计合同
+        return;
         ContractViewController *vc = [[ContractViewController alloc] init];
         vc.order = _order;
         [self.viewController.navigationController pushViewController:vc animated:YES];
