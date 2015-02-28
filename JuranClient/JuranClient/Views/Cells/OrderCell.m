@@ -164,7 +164,7 @@
     
 #ifdef kJuranDesigner
     _amountLabel.text = @"";
-    _designerAmountLabel.text = [NSString stringWithFormat:@"￥%d", order.amount];
+    _designerAmountLabel.text = [NSString stringWithFormat:@"￥%@", order.amount];
     _designerStatusLabel.text = _order.statusName;
     CGRect frame = _designerStatusLabel.frame;
     frame.size.width = [_order.statusName widthWithFont:_designerStatusLabel.font constrainedToHeight:CGRectGetHeight(frame)];
@@ -179,28 +179,35 @@
     _houseAreaLabel.text = [NSString stringWithFormat:@"面积：%@m²", _order.houseArea];
     _timeLabel.text = _order.gmtCreate;
     
-    [_avtarImageView setImageWithURLString:order.headUrl];
+    [_avtarImageView setImageWithURLString:order.customerHeadUrl];
     _nameLabel.text = order.customerName;
     _mobileLabel.text = order.customerMobile;
 #endif
 }
 
 - (void)layoutFrame{
-    if (_order.type == 0) {
-        _effectButton.hidden = YES;
-        _sizeButton.hidden = NO;
-        
-        CGRect frame = _sizeButton.frame;
-        frame.origin.x = 240;
-        _sizeButton.frame = frame;
-    }else{
-        _effectButton.hidden = NO;
-        _sizeButton.hidden = NO;
-        
-        CGRect frame = _sizeButton.frame;
-        frame.origin.x = 157;
-        _sizeButton.frame = frame;
+    if (_order.measurefileExist || _order.fileExist) {
+        _effectButton.hidden = !_order.fileExist;
+        _sizeButton.hidden = !_order.measurefileExist;
+        if (_order.measurefileExist && _order.fileExist) {
+            CGRect frame = _sizeButton.frame;
+            frame.origin.x = 157;
+            _sizeButton.frame = frame;
+            
+            frame = _effectButton.frame;
+            frame.origin.x = 240;
+            _effectButton.frame = frame;
+        }else if (_order.measurefileExist){
+            CGRect frame = _sizeButton.frame;
+            frame.origin.x = 240;
+            _sizeButton.frame = frame;
+        }else{
+            CGRect frame = _effectButton.frame;
+            frame.origin.x = 240;
+            _effectButton.frame = frame;
+        }
     }
+    
 #ifdef kJuranDesigner
     [_designerOrderView removeFromSuperview];
     [_authorView removeFromSuperview];
@@ -242,7 +249,7 @@
         
         CGFloat y = CGRectGetMaxY(_amountView.frame);
         
-        if ([_order.status isEqualToString:@"wait_designer_measure"] || [_order.status isEqualToString:@"complete"]) {
+        if (_order.measurefileExist || _order.fileExist) {
             frame = _effectView.frame;
             frame.origin.y = CGRectGetMaxY(_amountView.frame);
             _effectView.frame = frame;
@@ -276,14 +283,20 @@
         [self addSubview:_amountView];
         
         
-        frame = _effectView.frame;
-        frame.origin.y = CGRectGetMaxY(_amountView.frame);
-        _effectView.frame = frame;
-        [self addSubview:_effectView];
+        CGFloat y = CGRectGetMaxY(_amountView.frame);
         
-        if ([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) {
+        if (_order.measurefileExist || _order.fileExist) {
+            frame = _effectView.frame;
+            frame.origin.y = CGRectGetMaxY(_amountView.frame);
+            _effectView.frame = frame;
+            [self addSubview:_effectView];
+            
+            y = CGRectGetMaxY(frame);
+        }
+        
+        if (([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) && [_order.measurePayAmount doubleValue] > 0) {
             frame = _actionBgView.frame;
-            frame.origin.y = CGRectGetMaxY(_effectView.frame);
+            frame.origin.y = y;
             _actionBgView.frame = frame;
             [self addSubview:_actionBgView];
         }
@@ -327,7 +340,7 @@
         
         
         CGFloat y = CGRectGetMaxY(_amountView.frame);
-        if ([_order.status isEqualToString:@"wait_designer_measure"] || [_order.status isEqualToString:@"complete"]) {
+        if (_order.measurefileExist || _order.fileExist) {
             frame = _effectView.frame;
             frame.origin.y = CGRectGetMaxY(_amountView.frame);
             _effectView.frame = frame;
@@ -375,14 +388,18 @@
         [self addSubview:_amountView];
         
         
-        frame = _effectView.frame;
-        frame.origin.y = CGRectGetMaxY(_amountView.frame);
-        _effectView.frame = frame;
-        [self addSubview:_effectView];
-        
+        CGFloat y = CGRectGetMaxY(_amountView.frame);
+        if (_order.measurefileExist || _order.fileExist) {
+            frame = _effectView.frame;
+            frame.origin.y = CGRectGetMaxY(_amountView.frame);
+            _effectView.frame = frame;
+            [self addSubview:_effectView];
+            
+            y = CGRectGetMaxY(frame);
+        }
         
         frame = _actionBgView.frame;
-        frame.origin.y = CGRectGetMaxY(_effectView.frame);
+        frame.origin.y = y;
         _actionBgView.frame = frame;
         [self addSubview:_actionBgView];
     }
@@ -398,7 +415,7 @@
 #ifdef kJuranDesigner
     if (order.type == 0) {
         height += (37+70+55+37);
-        if ([order.status isEqualToString:@"wait_designer_measure"] || [order.status isEqualToString:@"complete"]) {
+        if (order.measurefileExist || order.fileExist) {
             height += 37;
         }
         
@@ -406,15 +423,20 @@
             height += 37;
         }
     }else{
-        height += (37+70+55+55+37);
-        if ([order.status isEqualToString:@"wait_first_pay"] || [order.status isEqualToString:@"wait_last_pay"]) {
+        height += (37+70+55+55);
+        
+        if (order.measurefileExist || order.fileExist) {
+            height += 37;
+        }
+        
+        if (([order.status isEqualToString:@"wait_first_pay"] || [order.status isEqualToString:@"wait_last_pay"]) && [order.measurePayAmount doubleValue] > 0) {
             height += 37;
         }
     }
 #else
     if (order.type == 0) {
         height += (37+70+37);
-        if ([order.status isEqualToString:@"wait_designer_measure"] || [order.status isEqualToString:@"complete"]) {
+        if (order.measurefileExist || order.fileExist) {
             height += 37;
         }
         
@@ -422,7 +444,11 @@
             height += 37;
         }
     }else{
-        height += (55+70+55+37+37);
+        height += (55+70+55+37);
+        
+        if (order.measurefileExist || order.fileExist) {
+            height += 37;
+        }
     }
 #endif
     

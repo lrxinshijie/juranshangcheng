@@ -44,12 +44,14 @@
             [self addSubview:[self buttonWithAction:OrderActionReject]];
             [self addSubview:[self buttonWithAction:OrderActionPrice]];
         }else if ([_order.status isEqualToString:@"wait_designer_measure"]) {
-            [self addSubview:[self buttonWithAction:OrderActionExtract]];
+            if ([order.measurePayAmount doubleValue] > 0) {
+                [self addSubview:[self buttonWithAction:OrderActionExtract]];
+            }
             [self addSubview:[self buttonWithAction:OrderActionDesigner]];
         }
     }else if (_order.type == 1){
-        if ([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) {
-            [self addSubview:[self buttonWithAction:OrderActionExtract]];
+        if (([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) && [order.measurePayAmount doubleValue] > 0) {
+                [self addSubview:[self buttonWithAction:OrderActionExtract]];
         }
     }
 #else
@@ -95,6 +97,9 @@
             break;
         case OrderActionConfirm:
             title = @"确认";
+#ifdef kJuranDesigner
+            textColor = RGBColor(0, 49, 159);
+#endif
             break;
         case OrderActionComment:
             title = _order.ifCanViewCredit ? @"查看评价" : @"评价设计";
@@ -169,7 +174,7 @@
                 return ;
             }
             
-            NSDictionary *param = @{@"measurePayAmount": [NSString stringWithFormat:@"%d", _order.amount],
+            NSDictionary *param = @{@"measurePayAmount": [NSString stringWithFormat:@"%@", _order.amount],
                                     @"id": [NSString stringWithFormat:@"%d", _order.key],
                                     @"serviceDate": _order.serviceDate};
             [self.viewController showHUD];

@@ -72,6 +72,9 @@
         self.ifCanCredit = [dict getBoolValueForKey:@"ifCanCredit" defaultValue:NO];
         self.ifCanViewCredit = [dict getBoolValueForKey:@"ifCanViewCredit" defaultValue:NO];
         
+        self.measurefileExist = [dict getBoolValueForKey:@"measurefileExist" defaultValue:NO];
+        self.fileExist = [dict getBoolValueForKey:@"fileExist" defaultValue:NO];
+        
         self.gmtCreate = [dict getStringValueForKey:@"gmtCreate" defaultValue:@""];
         self.customerName = [dict getStringValueForKey:@"customerName" defaultValue:@""];
         self.customerMobile = [dict getStringValueForKey:@"customerMobile" defaultValue:@""];
@@ -113,18 +116,36 @@
  */
 
 - (NSString *)statusName{
-    NSDictionary *statuses = @{@"wait_designer_confirm":@"待设计师确认",
-                               @"construction_complete":@"施工完成",
-                               @"convert_to_design":@"量房转设计",
-                               @"cancel":@"交易取消",
-                               @"wait_first_pay":@"待支付首款",
-                               @"wait_confirm_design":@"待确认交付物",
-                               @"wait_last_pay":@"待支付尾款",
-                               @"wait_designer_measure":@"待设计师量房",
-                               @"wait_consumer_pay":@"待支付",
-                               @"complete":@"设计完成",
+//    NSDictionary *statuses = @{@"wait_designer_confirm":@"待设计师确认量房",
+//                               @"construction_complete":@"施工完成",
+//                               @"convert_to_design":@"量房转设计",
+//                               @"cancel":@"交易取消",
+//                               @"wait_first_pay":@"待支付首款",
+//                               @"wait_confirm_design":@"待确认交付物",
+//                               @"wait_last_pay":@"待支付尾款",
+//                               @"wait_designer_measure":@"待设计师量房",
+//                               @"wait_consumer_pay":@"待支付",
+//                               @"complete":@"设计完成",
+//                               };
+    NSArray *statuses = [[DefaultData sharedData] objectForKey:@"orderStatus"];
+    __block NSString *retVal = @"";
+    [statuses enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+        if ([[dict objectForKey:@"v"] isEqualToString:self.status]) {
+            retVal = [dict objectForKey:@"k"];
+            *stop = YES;
+        }
+    }];
+    return retVal;
+}
+
+- (NSString *)payStatusString{
+    NSDictionary *payStatuses = @{@"no_pay": @"未付款",
+                                  @"portion": @"部分支付",
+                                  @"waite_confirm": @"等待平台确认支付",
+                                  @"paid": @"已付款",
+                                  @"trade_pay_init" :@"交易付款开始"
                                };
-    return [statuses getStringValueForKey:self.status defaultValue:@""];
+    return [payStatuses getStringValueForKey:self.payStatus defaultValue:@""];
 }
 
 - (NSString *)payStatusString{

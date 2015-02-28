@@ -32,6 +32,9 @@
 @property (nonatomic, assign) BOOL ifCanCredit;
 @property (nonatomic, assign) BOOL ifCanViewCredit;
 
+@property (nonatomic, assign) BOOL measurefileExist;
+@property (nonatomic, assign) BOOL fileExist;
+
 @property (nonatomic, copy) NSString *gmtCreate;
 @property (nonatomic, copy) NSString *customerName;
 @property (nonatomic, copy) NSString *customerMobile;
