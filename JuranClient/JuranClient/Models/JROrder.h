@@ -63,6 +63,23 @@
 @property (nonatomic, assign) NSInteger servicePoint;
 @property (nonatomic, copy) NSString *content;
 
+//Contract
+@property (nonatomic, assign) NSInteger customerId;
+@property (nonatomic, copy) NSString *decoratorQQ;
+@property (nonatomic, copy) NSString *designReqId;
+@property (nonatomic, assign) NSInteger diyPageNum;
+@property (nonatomic, assign) NSInteger designPageNum;
+@property (nonatomic, assign) NSInteger addPagePrice;
+@property (nonatomic, copy) NSString *comments;
+@property (nonatomic, copy) NSString *customerQQ;
+@property (nonatomic, copy) NSString *roomNum;
+@property (nonatomic, copy) NSString *livingroomNum;
+@property (nonatomic, copy) NSString *bathroomNum;
+@property (nonatomic, copy) NSString *province;
+@property (nonatomic, copy) NSString *city;
+@property (nonatomic, copy) NSString *district;
+@property (nonatomic, copy) NSString *address;
+
 
 - (NSString *)statusName;
 - (NSString *)payStatusString;
@@ -73,6 +90,9 @@
 - (void)buildUpWithValueForComment:(id)dict;
 
 - (NSString *)orderSpec;
+
+- (NSString *)roomTypeString;
+- (NSString *)measureAddressString;
 
 
 @end

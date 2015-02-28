@@ -62,11 +62,18 @@
 
 @implementation OrderDetailViewController
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"订单详情";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameOrderReloadData object:nil];
+    
 #ifdef kJuranDesigner
     self.keys = @[@[@"",@""], @[@"", @"手机号码", @"电子邮箱", @"会员卡号", @"微信号", @"户型", @"面积", @"装修地址"], @[@"", @"手机号码", @"电子邮箱", @"微信号"]];
 #else
@@ -104,6 +111,9 @@
 
 - (void)reloadData{
     [self resetValues];
+    for (UIView *v in _footerView.subviews) {
+        [v removeFromSuperview];
+    }
     [_footerView fillViewWithOrder:_order];
     [_tableView reloadData];
     if (_footerView.subviews.count == 0) {
@@ -113,6 +123,10 @@
         _footerView.hidden = NO;
         _tableView.frame = CGRectMake(0, 0, kWindowWidth, kWindowHeightWithoutNavigationBar - 37);
     }
+}
+
+- (void)receiveReloadDataNotification:(NSNotification*)notification{
+    [self loadData];
 }
 
 - (void)resetValues{

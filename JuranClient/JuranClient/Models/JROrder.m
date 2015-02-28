@@ -238,4 +238,12 @@
     return [array componentsJoinedByString:@"&"];
 }
 
+- (NSString *)roomTypeString{
+    return @"一室一厅一卫";
+}
+
+- (NSString *)measureAddressString{
+    return @"";
+}
+
 @end

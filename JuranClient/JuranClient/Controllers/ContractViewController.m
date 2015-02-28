@@ -44,13 +44,18 @@
     self.keys = @[@[@"量房合同编号", @"合同金额（元）", @"量房日期", @"待支付首款", @"尾款", @"设计工作内容"]
                   , @[@"真实姓名", @"用户名", @"手机号", @"微信号", @"会员卡号", @"电子邮箱", @"户型", @"面积", @"装修地址", @"小区名称"]
                   , @[@"真实姓名", @"用户名", @"手机号", @"微信号", @"电子邮箱"]];
-    self.values = @[];
     self.tags = @[@[@"", @"1200", @"", @"", @"", @""]
                   , @[@"1201", @"1202", @"1203", @"1204", @"1205", @"1206", @"", @"1207", @"", @"1208"]
                   , @[@"1209", @"1210", @"1211", @"1212", @"1213"]];
     self.hiddenSectionDic = [NSMutableDictionary dictionary];
-    
+    [self reSetValue];
     [self setupUI];
+}
+
+- (void)reSetValue{
+    self.values = @[@[_order.type?_order.designTid:_order.measureTid, _order.amount, _order.serviceDate, _order.firstPayAmount, _order.finalPayAmount, @""]
+                    , @[_order.customerRealName, _order.customerName, _order.customerMobile, _order.customerWechat, _order.customerCardNo, _order.customerEmail, _order.roomTypeString, _order.houseArea, _order.measureAddressString, _order.address]
+                    , @[_order.decoratorRealName, _order.decoratorName, _order.decoratorMobile, _order.decoratorWechat, _order.decoratorEmail]];
 }
 
 - (void)setupUI{
@@ -253,20 +258,47 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-//    if (textField.tag == 1100) {
-//        self.oldAccount = _user.account;
-//        accountChangeTip = NO;
-//        _user.account = textField.text;
-//    }else if (textField.tag == 1101){
-//        _user.nickName = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    }else if (textField.tag == 1102){
-//        _user.homeTel = textField.text;
-//    }else if (textField.tag == 1103){
-//        _user.qq = textField.text;
-//    }else if (textField.tag == 1104){
-//        _user.weixin = textField.text;
-//    }
-//    [self reSetData];
+    /*
+     self.keys = @[@[@"量房合同编号", @"合同金额（元）", @"量房日期", @"待支付首款", @"尾款", @"设计工作内容"]
+     , @[@"真实姓名", @"用户名", @"手机号", @"微信号", @"会员卡号", @"电子邮箱", @"户型", @"面积", @"装修地址", @"小区名称"]
+     , @[@"真实姓名", @"用户名", @"手机号", @"微信号", @"电子邮箱"]];
+     self.values = @[@[]
+     , @[]
+     , @[]];
+     self.tags = @[@[@"", @"1200", @"", @"", @"", @""]
+     , @[@"1201", @"1202", @"1203", @"1204", @"1205", @"1206", @"", @"1207", @"", @"1208"]
+     , @[@"1209", @"1210", @"1211", @"1212", @"1213"]];
+     */
+    if (textField.tag == 1200) {
+        _order.amount = textField.text;
+    }else if (textField.tag == 1201){
+        _order.customerRealName = textField.text;
+    }else if (textField.tag == 1202){
+        _order.customerName = textField.text;
+    }else if (textField.tag == 1203){
+        _order.customerMobile = textField.text;
+    }else if (textField.tag == 1204){
+        _order.customerWechat = textField.text;
+    }else if (textField.tag == 1205){
+        _order.customerCardNo = textField.text;
+    }else if (textField.tag == 1206){
+        _order.customerEmail = textField.text;
+    }else if (textField.tag == 1207){
+        _order.houseArea = textField.text;
+    }else if (textField.tag == 1208){
+        _order.address = textField.text;
+    }else if (textField.tag == 1209){
+        _order.decoratorRealName = textField.text;
+    }else if (textField.tag == 1210){
+        _order.decoratorName = textField.text;
+    }else if (textField.tag == 1211){
+        _order.decoratorMobile = textField.text;
+    }else if (textField.tag == 1212){
+        _order.decoratorWechat = textField.text;
+    }else if (textField.tag == 1213){
+        _order.decoratorEmail = textField.text;
+    }
+    [self reSetValue];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
