@@ -43,7 +43,7 @@
     [_avtarImageView setImageWithURLString:_order.headUrl];
     _nameLabel.text = _order.decoratorName;
     
-    _payAmountLabel.text = [NSString stringWithFormat:@"￥%d", _order.waitPayAmount];
+    _payAmountLabel.text = [NSString stringWithFormat:@"￥%@", _order.waitPayAmount];
     
     self.isPayAli = YES;
 }

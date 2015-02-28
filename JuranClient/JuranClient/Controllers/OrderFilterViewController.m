@@ -43,10 +43,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 6;
+        return [_orderStatuses count];
     }
     
-    return 4;
+    return [_orderTimes count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -81,6 +81,15 @@
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }else{
         cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+        
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
     }
     
     return cell;

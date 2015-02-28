@@ -55,10 +55,10 @@
         self.measureTid = [dict getStringValueForKey:@"measureTid" defaultValue:@""];
         self.designTid = [dict getStringValueForKey:@"designTid" defaultValue:@""];
         self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
-        self.measurePayAmount = [dict getIntValueForKey:@"measurePayAmount" defaultValue:0];
-        self.amount = [dict getIntValueForKey:@"amount" defaultValue:0];
-        self.payAmount = [dict getIntValueForKey:@"payAmount" defaultValue:0];
-        self.waitPayAmount = [dict getIntValueForKey:@"waitPayAmount" defaultValue:0];
+        self.measurePayAmount = [dict getStringValueForKey:@"measurePayAmount" defaultValue:@""];
+        self.amount = [dict getStringValueForKey:@"amount" defaultValue:@""];
+        self.payAmount = [dict getStringValueForKey:@"payAmount" defaultValue:@""];
+        self.waitPayAmount = [dict getStringValueForKey:@"waitPayAmount" defaultValue:@""];
         self.type = [dict getIntValueForKey:@"type" defaultValue:0];
         self.decoratorId = [dict getIntValueForKey:@"decoratorId" defaultValue:0];
         self.headUrl = [dict getStringValueForKey:@"headUrl" defaultValue:@""];
@@ -67,10 +67,13 @@
         self.isAuth = [dict getBoolValueForKey:@"isAuth" defaultValue:NO];
         self.decoratorName = [dict getStringValueForKey:@"decoratorName" defaultValue:@""];
         self.levelCode = [dict getStringValueForKey:@"levelCode" defaultValue:@""];
-        self.unPaidAmount = [dict getIntValueForKey:@"unPaidAmount" defaultValue:0];
+        self.unPaidAmount = [dict getStringValueForKey:@"unPaidAmount" defaultValue:@""];
         
         self.ifCanCredit = [dict getBoolValueForKey:@"ifCanCredit" defaultValue:NO];
         self.ifCanViewCredit = [dict getBoolValueForKey:@"ifCanViewCredit" defaultValue:NO];
+        
+        self.measurefileExist = [dict getBoolValueForKey:@"measurefileExist" defaultValue:NO];
+        self.fileExist = [dict getBoolValueForKey:@"fileExist" defaultValue:NO];
         
         self.gmtCreate = [dict getStringValueForKey:@"gmtCreate" defaultValue:@""];
         self.customerName = [dict getStringValueForKey:@"customerName" defaultValue:@""];
@@ -113,18 +116,46 @@
  */
 
 - (NSString *)statusName{
-    NSDictionary *statuses = @{@"wait_designer_confirm":@"待设计师确认",
-                               @"construction_complete":@"施工完成",
-                               @"convert_to_design":@"量房转设计",
-                               @"cancel":@"交易取消",
-                               @"wait_first_pay":@"待支付首款",
-                               @"wait_confirm_design":@"待确认交付物",
-                               @"wait_last_pay":@"待支付尾款",
-                               @"wait_designer_measure":@"待设计师量房",
-                               @"wait_consumer_pay":@"待支付",
-                               @"complete":@"设计完成",
+//    NSDictionary *statuses = @{@"wait_designer_confirm":@"待设计师确认量房",
+//                               @"construction_complete":@"施工完成",
+//                               @"convert_to_design":@"量房转设计",
+//                               @"cancel":@"交易取消",
+//                               @"wait_first_pay":@"待支付首款",
+//                               @"wait_confirm_design":@"待确认交付物",
+//                               @"wait_last_pay":@"待支付尾款",
+//                               @"wait_designer_measure":@"待设计师量房",
+//                               @"wait_consumer_pay":@"待支付",
+//                               @"complete":@"设计完成",
+//                               };
+    NSArray *statuses = [[DefaultData sharedData] objectForKey:@"orderStatus"];
+    __block NSString *retVal = @"";
+    [statuses enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+        if ([[dict objectForKey:@"v"] isEqualToString:self.status]) {
+            retVal = [dict objectForKey:@"k"];
+            *stop = YES;
+        }
+    }];
+    return retVal;
+}
+
+- (NSString *)payStatusString{
+    NSDictionary *payStatuses = @{@"no_pay": @"未付款",
+                                  @"portion": @"部分支付",
+                                  @"waite_confirm": @"等待平台确认支付",
+                                  @"paid": @"已付款",
+                                  @"trade_pay_init" :@"交易付款开始"
                                };
-    return [statuses getStringValueForKey:self.status defaultValue:@""];
+    return [payStatuses getStringValueForKey:self.payStatus defaultValue:@""];
+}
+
+- (NSString *)payStatusString{
+    NSDictionary *payStatuses = @{@"no_pay": @"未付款",
+                                  @"portion": @"部分支付",
+                                  @"waite_confirm": @"等待平台确认支付",
+                                  @"paid": @"已付款",
+                                  @"trade_pay_init" :@"交易付款开始"
+                               };
+    return [payStatuses getStringValueForKey:self.payStatus defaultValue:@""];
 }
 
 - (NSString *)houseAreaString{
@@ -144,13 +175,13 @@
     }
     self.status = [dict getStringValueForKey:@"status" defaultValue:@""];
     self.payStatus = [dict getStringValueForKey:@"payStatus" defaultValue:@""];
-    self.measurePayAmount = [dict getIntValueForKey:@"measurePayAmount" defaultValue:0];
-    self.firstPayAmount = [dict getIntValueForKey:@"firstPayAmount" defaultValue:0];
-    self.finalPayAmount = [dict getIntValueForKey:@"finalPayAmount" defaultValue:0];
-    self.amount = [dict getIntValueForKey:@"amount" defaultValue:0];
-    self.payAmount = [dict getIntValueForKey:@"payAmount" defaultValue:0];
-    self.waitPayAmount = [dict getIntValueForKey:@"waitPayAmount" defaultValue:0];
-    self.unPaidAmount = [dict getIntValueForKey:@"unPaidAmount" defaultValue:0];
+    self.measurePayAmount = [dict getStringValueForKey:@"measurePayAmount" defaultValue:@""];
+    self.firstPayAmount = [dict getStringValueForKey:@"firstPayAmount" defaultValue:@""];
+    self.finalPayAmount = [dict getStringValueForKey:@"finalPayAmount" defaultValue:@""];
+    self.amount = [dict getStringValueForKey:@"amount" defaultValue:@""];
+    self.payAmount = [dict getStringValueForKey:@"payAmount" defaultValue:@""];
+    self.waitPayAmount = [dict getStringValueForKey:@"waitPayAmount" defaultValue:@""];
+    self.unPaidAmount = [dict getStringValueForKey:@"unPaidAmount" defaultValue:@""];
     self.measurefileSrc = dict[@"measurefileSrc"];
     if(![self.measurefileSrc isKindOfClass:[NSArray class]]){
         self.measurefileSrc = @[];
@@ -197,6 +228,24 @@
     }
     
     return @"";
+}
+
+- (NSString *)orderSpec{
+    NSArray *array = @[@{@"partner": @""},
+                       @{@"seller_id": @""},
+                       @{@"out_trade_no": @""},
+                       @{@"subject": @""},
+                       @{@"body": @""},
+                       @{@"total_fee": @""},
+                       @{@"notify_url": @""},
+                       @{@"service": @""},
+                       @{@"payment_type": @""},
+                       @{@"_input_charset": @""},
+                       @{@"it_b_pay": @""},
+                       @{@"show_url": @""},
+                       @{@"sign_date": @""},
+                       @{@"app_id": @""},];
+    return [array componentsJoinedByString:@"&"];
 }
 
 @end

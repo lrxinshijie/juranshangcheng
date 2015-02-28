@@ -14,11 +14,11 @@
 @property (nonatomic, copy) NSString *measureTid;
 @property (nonatomic, copy) NSString *designTid;
 @property (nonatomic, copy) NSString *status;
-@property (nonatomic, assign) NSInteger measurePayAmount;
-@property (nonatomic, assign) NSInteger amount;
-@property (nonatomic, assign) NSInteger payAmount;
-@property (nonatomic, assign) NSInteger waitPayAmount;
-@property (nonatomic, assign) NSInteger unPaidAmount;
+@property (nonatomic, copy) NSString *measurePayAmount;
+@property (nonatomic, copy) NSString *amount;
+@property (nonatomic, copy) NSString *payAmount;
+@property (nonatomic, copy) NSString *waitPayAmount;
+@property (nonatomic, copy) NSString *unPaidAmount;
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, assign) NSInteger decoratorId;
 @property (nonatomic, copy) NSString *headUrl;
@@ -32,6 +32,9 @@
 @property (nonatomic, assign) BOOL ifCanCredit;
 @property (nonatomic, assign) BOOL ifCanViewCredit;
 
+@property (nonatomic, assign) BOOL measurefileExist;
+@property (nonatomic, assign) BOOL fileExist;
+
 @property (nonatomic, copy) NSString *gmtCreate;
 @property (nonatomic, copy) NSString *customerName;
 @property (nonatomic, copy) NSString *customerMobile;
@@ -40,8 +43,8 @@
 
 //Detail
 @property (nonatomic, copy) NSString *payStatus;
-@property (nonatomic, assign) NSInteger firstPayAmount;
-@property (nonatomic, assign) NSInteger finalPayAmount;
+@property (nonatomic, copy) NSString *firstPayAmount;
+@property (nonatomic, copy) NSString *finalPayAmount;
 @property (nonatomic, strong) NSArray *measurefileSrc;
 @property (nonatomic, strong) NSArray *fileSrc;
 @property (nonatomic, copy) NSString *decoratorRealName;
@@ -62,11 +65,14 @@
 
 
 - (NSString *)statusName;
+- (NSString *)payStatusString;
 - (NSString *)houseAreaString;
 - (NSString *)serviceDateString;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (void)buildUpWithValueForDetail:(id)dict;
 - (void)buildUpWithValueForComment:(id)dict;
+
+- (NSString *)orderSpec;
 
 
 @end

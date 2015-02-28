@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
 
+@property (nonatomic, strong) IBOutlet UIView *emptyView;
+
 //Designer
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UIButton *leftButton;
@@ -52,12 +54,17 @@
     
     self.filterButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onFilter) title:@"筛选" image:nil];
     [_filterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_filterButton];
 #endif
     
     self.tableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = RGBColor(237, 237, 237);
     [self.view addSubview:_tableView];
+    
+    _emptyView.center = self.view.center;
+    _emptyView.hidden = YES;
+    [self.view addSubview:_emptyView];
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -84,8 +91,6 @@
     [_leftButton setTitleColor:_isLeft ? kBlueColor : RGBColor(64, 65, 64) forState:UIControlStateNormal];
     [_rightButton setTitleColor:_isLeft ? RGBColor(64, 65, 64) : kBlueColor forState:UIControlStateNormal];
     
-    self.navigationItem.rightBarButtonItem = _isLeft ? nil : [[UIBarButtonItem alloc] initWithCustomView:_filterButton];
-    
     [_tableView headerBeginRefreshing];
 }
 
@@ -104,11 +109,11 @@
     [self.navigationController pushViewController:ov animated:YES];
 }
 
+#endif
+
 - (void)clickOrderFilterViewReturnData:(NSMutableArray *)selecteds{
     [_tableView headerBeginRefreshing];
 }
-
-#endif
 
 - (void)reloadData:(NSNotification *)noti{
     if (noti.object) {
@@ -187,6 +192,8 @@
                 [_datas addObjectsFromArray:rows];
             }
         }
+        
+        _emptyView.hidden = _datas.count != 0;
         
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
