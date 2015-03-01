@@ -153,8 +153,8 @@
 #define JR_INTERACT_TOPIC [NSString stringWithFormat:@"%@/interact/get_commented_topic_list.json",JR_SERVICE]
 #define JR_ORDER_LIST [NSString stringWithFormat:@"%@/trade/getTradeList.json",JR_SERVICE]
 #define JR_ORDER_DETAIL [NSString stringWithFormat:@"%@/trade/getTradeDetail.json",JR_SERVICE]
-
-
+#define JR_ORDER_APPLE_DESIGNTRADE [NSString stringWithFormat:@"%@/trade/applyDesignTrade.json",JR_SERVICE]
+#define JR_ORDER_APPLE_DESIGN_TRADE_INIT [NSString stringWithFormat:@"%@/trade/applyDesignTradeInit.json",JR_SERVICE]
 #define JR_CANCEL_ORDER [NSString stringWithFormat:@"%@/trade/cancelTrade.json",JR_SERVICE]
 #define JR_CONFIRM_ORDER [NSString stringWithFormat:@"%@/trade/confirmResult.json",JR_SERVICE]
 #define JR_REJECT_ORDER [NSString stringWithFormat:@"%@/trade/refuseMeasureApply.json",JR_SERVICE]
