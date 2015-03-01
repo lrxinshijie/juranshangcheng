@@ -80,6 +80,9 @@
 @property (nonatomic, copy) NSString *district;
 @property (nonatomic, copy) NSString *address;
 
+@property (nonatomic, strong) NSDictionary *roomMap;
+@property (nonatomic, strong) NSDictionary *livingMap;
+@property (nonatomic, strong) NSDictionary *washMap;
 
 - (NSString *)statusName;
 - (NSString *)payStatusString;
@@ -88,6 +91,7 @@
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (void)buildUpWithValueForDetail:(id)dict;
 - (void)buildUpWithValueForComment:(id)dict;
+- (void)buildUpWithValueForContractInit:(id)dict;
 
 - (NSString *)orderSpec;
 

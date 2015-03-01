@@ -17,29 +17,52 @@
         self.measureTid = @"";
         self.designTid = @"";
         self.status = @"";
+        self.measurePayAmount = @"";
+        self.amount = @"";
+        self.payAmount = @"";
+        self.waitPayAmount = @"";
         self.headUrl = @"";
         self.decoratorMobile = @"";
         self.account = @"";
         self.decoratorName = @"";
         self.levelCode = @"";
+        self.customerHeadUrl = @"";
+        
         self.gmtCreate = @"";
         self.customerName = @"";
         self.customerMobile = @"";
         self.houseArea = @"";
         self.addressInfo = @"";
+        
         self.payStatus = @"";
+        self.firstPayAmount = @"";
+        self.finalPayAmount = @"";
         self.measurefileSrc = @[];
         self.fileSrc = @[];
         self.decoratorRealName = @"";
         self.decoratorEmail = @"";
         self.decoratorWechat = @"";
+        
         self.customerRealName = @"";
         self.customerEmail = @"";
         self.customerCardNo = @"";
         self.customerWechat = @"";
         self.houseType = @"";
         self.serviceDate = @"";
-        self.customerHeadUrl = @"";
+        
+        self.content = @"";
+        
+        self.decoratorQQ = @"";
+        self.designReqId = @"";
+        self.comments = @"";
+        self.customerQQ = @"";
+        self.roomNum = @"";
+        self.livingroomNum = @"";
+        self.bathroomNum = @"";
+        self.province = @"";
+        self.city = @"";
+        self.district = @"";
+        self.address = @"";
     }
     return self;
 }
@@ -239,11 +262,85 @@
 }
 
 - (NSString *)roomTypeString{
-    return @"一室一厅一卫";
+    NSMutableArray *retVals = [NSMutableArray array];
+    //    if (_roomNum.length > 0) {
+    //        return _roomNum;
+    //    }
+    
+    NSArray *roomNum = [[DefaultData sharedData] roomNum];
+    for (int i = 0; i<[roomNum count]; i++) {
+        NSDictionary *row = [roomNum objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.roomNum]) {
+            [retVals addObject:[row objectForKey:@"k"]];
+        }
+    }
+    
+    NSArray *livingroomCount = [[DefaultData sharedData] livingroomCount];
+    for (int i = 0; i<[livingroomCount count]; i++) {
+        NSDictionary *row = [livingroomCount objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.livingroomNum]) {
+            [retVals addObject:[row objectForKey:@"k"]];
+        }
+    }
+    
+    NSArray *bathroomCount = [[DefaultData sharedData] bathroomCount];
+    for (int i = 0; i<[bathroomCount count]; i++) {
+        NSDictionary *row = [bathroomCount objectAtIndex:i];
+        if ([[row objectForKey:@"v"] isEqualToString:self.bathroomNum]) {
+            [retVals addObject:[row objectForKey:@"k"]];
+        }
+    }
+    
+    return [retVals componentsJoinedByString:@""];
 }
 
 - (NSString *)measureAddressString{
-    return @"";
+    return [NSString stringWithFormat:@"%@%@%@", self.province, self.city, self.district];
+}
+
+- (void)buildUpWithValueForContractInit:(id)dict{
+    if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+        return ;
+    }
+    self.measureTid = [dict getStringValueForKey:@"tid" defaultValue:@""];
+    NSDictionary *tradeInfo = dict[@"tradeInfo"];
+    self.decoratorId = [tradeInfo getIntValueForKey:@"decoratorId" defaultValue:0];
+    self.decoratorName = [tradeInfo getStringValueForKey:@"decoratorName" defaultValue:@""];
+    self.decoratorRealName = [tradeInfo getStringValueForKey:@"decoratorRealName" defaultValue:@""];
+    self.decoratorMobile = [tradeInfo getStringValueForKey:@"decoratorMobile" defaultValue:@""];
+    self.decoratorQQ = [tradeInfo getStringValueForKey:@"decoratorQQ" defaultValue:@""];
+    self.decoratorWechat = [tradeInfo getStringValueForKey:@"decoratorWechat" defaultValue:@""];
+    self.decoratorEmail = [tradeInfo getStringValueForKey:@"decoratorEmail" defaultValue:@""];
+    self.customerId = [tradeInfo getIntValueForKey:@"customerId" defaultValue:0];
+    self.measureTid = [tradeInfo getStringValueForKey:@"measureTid" defaultValue:@""];
+//    self.measurePayAmount = [tradeInfo getStringValueForKey:@"measurePayAmount" defaultValue:@""];
+    self.finalPayAmount = [tradeInfo getStringValueForKey:@"finalPayAmount" defaultValue:@""];
+    self.designReqId = [tradeInfo getStringValueForKey:@"designReqId" defaultValue:@""];
+    self.amount = [tradeInfo getStringValueForKey:@"amountStr" defaultValue:@""];
+    self.firstPayAmount = [tradeInfo getStringValueForKey:@"firstPayAmountStr" defaultValue:@""];
+    self.diyPageNum = [tradeInfo getIntValueForKey:@"diyPageNum" defaultValue:0];
+    self.designPageNum = [tradeInfo getIntValueForKey:@"designPageNum" defaultValue:0];
+    self.addPagePrice = [tradeInfo getIntValueForKey:@"addPagePrice" defaultValue:0];
+    self.serviceDate = [tradeInfo getStringValueForKey:@"serviceDate" defaultValue:@""];
+    self.comments = [tradeInfo getStringValueForKey:@"comments" defaultValue:@""];
+    self.customerName = [tradeInfo getStringValueForKey:@"customerName" defaultValue:@""];
+    self.customerRealName = [tradeInfo getStringValueForKey:@"customerRealName" defaultValue:@""];
+    self.customerMobile = [tradeInfo getStringValueForKey:@"customerMobile" defaultValue:@""];
+    self.customerCardNo = [tradeInfo getStringValueForKey:@"customerCardNo" defaultValue:@""];
+    self.customerQQ = [tradeInfo getStringValueForKey:@"customerQQ" defaultValue:@""];
+    self.customerWechat = [tradeInfo getStringValueForKey:@"customerWechat" defaultValue:@""];
+    self.customerEmail = [tradeInfo getStringValueForKey:@"customerEmail" defaultValue:@""];
+    self.roomNum = [tradeInfo getStringValueForKey:@"roomNum" defaultValue:@""];
+    self.livingroomNum = [tradeInfo getStringValueForKey:@"livingroomNum" defaultValue:@""];
+    self.bathroomNum = [tradeInfo getStringValueForKey:@"bathroomNum" defaultValue:@""];
+    self.houseArea = [tradeInfo getStringValueForKey:@"houseArea" defaultValue:@""];
+    self.province = [tradeInfo getStringValueForKey:@"province" defaultValue:@""];
+    self.city = [tradeInfo getStringValueForKey:@"city" defaultValue:@""];
+    self.district = [tradeInfo getStringValueForKey:@"district" defaultValue:@""];
+    self.address = [tradeInfo getStringValueForKey:@"address" defaultValue:@""];
+    self.roomMap = dict[@"roomMap"];
+    self.livingMap = dict[@"livingMap"];
+    self.washMap = dict[@"washMap"];
 }
 
 @end
