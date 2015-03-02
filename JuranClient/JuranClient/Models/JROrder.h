@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JRAreaInfo.h"
 
 @interface JROrder : NSObject
 
@@ -75,9 +76,7 @@
 @property (nonatomic, copy) NSString *roomNum;
 @property (nonatomic, copy) NSString *livingroomNum;
 @property (nonatomic, copy) NSString *bathroomNum;
-@property (nonatomic, copy) NSString *province;
-@property (nonatomic, copy) NSString *city;
-@property (nonatomic, copy) NSString *district;
+@property (nonatomic, strong) JRAreaInfo *areaInfo;
 @property (nonatomic, copy) NSString *address;
 
 @property (nonatomic, strong) NSDictionary *roomMap;
@@ -96,7 +95,6 @@
 - (NSString *)orderSpec;
 
 - (NSString *)roomTypeString;
-- (NSString *)measureAddressString;
 
 
 @end

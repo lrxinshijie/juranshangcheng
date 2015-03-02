@@ -57,7 +57,7 @@
 
 - (void)reSetValue{
     self.values = @[@[@"", [NSString stringWithFormat:@"￥ %@", _order.amount], _order.firstPayAmount, [NSString stringWithFormat:@"￥ %@", _order.finalPayAmount], @"", @""]
-                    , @[_order.customerRealName, _order.customerName, _order.customerMobile, _order.customerWechat, _order.customerCardNo, _order.customerEmail, _order.roomTypeString, _order.houseArea, _order.measureAddressString, _order.address]
+                    , @[_order.customerRealName, _order.customerName, _order.customerMobile, _order.customerWechat, _order.customerCardNo, _order.customerEmail, _order.roomTypeString, _order.houseArea, _order.areaInfo.title, _order.address]
                     , @[_order.decoratorRealName, _order.decoratorName, _order.decoratorMobile, _order.decoratorWechat, _order.decoratorEmail]];
 }
 
@@ -118,47 +118,58 @@
     [self showHUD];
     NSDictionary *param = @{@"tid": _order.type?_order.designTid:_order.measureTid
                             , @"tradeInfo" : @{@"decoratorId": [NSString stringWithFormat:@"%d", _order.decoratorId]
-                                      , @"decoratorName": _order.decoratorName
-                                      , @"decoratorRealName": _order.decoratorRealName
-                                      , @"decoratorMobile": _order.decoratorMobile
-                                      , @"decoratorQQ": _order.decoratorQQ
-                                      , @"decoratorWechat": _order.decoratorWechat
-                                      , @"decoratorEmail": _order.decoratorEmail
-                                      , @"customerId": [NSString stringWithFormat:@"%d", _order.customerId]
-                                      , @"measureTid": _order.measureTid
-                                      , @"measurePayAmount": _order.measurePayAmount
-                                      , @"finalPayAmount": _order.finalPayAmount
-                                      , @"designReqId": _order.designReqId
-                                      //                            , @"amount": _order.amount
-                                      , @"amountStr": _order.amount
-                                      , @"firstPayAmountStr": _order.firstPayAmount
-                                      , @"firstPayAmount": _order.firstPayAmount
-                                      , @"diyPageNum": [NSString stringWithFormat:@"%d", _order.diyPageNum]
-                                      , @"designPageNum": [NSString stringWithFormat:@"%d", _order.designPageNum]
-                                      , @"addPagePriceStr": [NSString stringWithFormat:@"%d", _order.addPagePrice]
-                                      , @"addPagePrice": [NSString stringWithFormat:@"%d", _order.addPagePrice]
-                                      //                            , @"serviceDate": _order.serviceDate
-                                      , @"comments": _order.comments
-                                      , @"customerName": _order.customerName
-                                      , @"customerRealName": _order.customerRealName
-                                      , @"customerMobile": _order.customerMobile
-                                      , @"customerCardNo": _order.customerCardNo
-                                      , @"customerQQ": _order.customerQQ
-                                      , @"customerWechat": _order.customerWechat
-                                      , @"customerEmail": _order.customerEmail
-                                      , @"roomNum": _order.roomNum
-                                      , @"livingroomNum": _order.livingroomNum
-                                      , @"bathroomNum": _order.bathroomNum
-                                      , @"houseArea": _order.houseArea
-                                      , @"province": _order.province
-                                      , @"city": _order.city
-                                      , @"district": _order.district
-                                      , @"address": _order.address}
+                                               , @"decoratorName": _order.decoratorName
+                                               , @"decoratorRealName": _order.decoratorRealName
+                                               , @"decoratorMobile": _order.decoratorMobile
+                                               , @"decoratorQQ": _order.decoratorQQ
+                                               , @"decoratorWechat": _order.decoratorWechat
+                                               , @"decoratorEmail": _order.decoratorEmail
+                                               , @"customerId": [NSString stringWithFormat:@"%d", _order.customerId]
+                                               , @"measureTid": _order.measureTid
+                                               , @"measurePayAmountStr": _order.measurePayAmount
+                                               , @"finalPayAmountStr": _order.finalPayAmount
+                                               , @"designReqId": _order.designReqId
+                                               //                            , @"amount": _order.amount
+                                               , @"amountStr": _order.amount
+                                               , @"firstPayAmountStr": _order.firstPayAmount
+//                                               , @"firstPayAmount": _order.firstPayAmount
+                                               , @"diyPageNum": [NSString stringWithFormat:@"%d", _order.diyPageNum]
+                                               , @"designPageNum": [NSString stringWithFormat:@"%d", _order.designPageNum]
+                                               , @"addPagePriceStr": [NSString stringWithFormat:@"%d", _order.addPagePrice]
+//                                               , @"addPagePrice": [NSString stringWithFormat:@"%d", _order.addPagePrice]
+                                               //                            , @"serviceDate": _order.serviceDate
+                                               , @"comments": _order.comments
+                                               , @"customerName": _order.customerName
+                                               , @"customerRealName": _order.customerRealName
+                                               , @"customerMobile": _order.customerMobile
+                                               , @"customerCardNo": _order.customerCardNo
+                                               , @"customerQQ": _order.customerQQ
+                                               , @"customerWechat": _order.customerWechat
+                                               , @"customerEmail": _order.customerEmail
+                                               , @"roomNum": _order.roomNum
+                                               , @"livingroomNum": _order.livingroomNum
+                                               , @"bathroomNum": _order.bathroomNum
+                                               , @"houseArea": _order.houseArea
+                                               , @"areaInfo": @{@"provinceCode": _order.areaInfo.provinceCode
+                                                                , @"provinceName": _order.areaInfo.provinceName
+                                                                , @"cityCode": _order.areaInfo.cityCode
+                                                                , @"cityName": _order.areaInfo.cityName
+                                                                , @"districtCode": _order.areaInfo.districtCode
+                                                                , @"districtName": _order.areaInfo.districtName
+                                                                }
+                                               , @"address": _order.address}
                             };
     [[ALEngine shareEngine]  pathURL:JR_ORDER_APPLE_DESIGNTRADE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            
+            [self showTip:@"提交成功"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:@""];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                NSArray *vcs = self.navigationController.viewControllers;
+                if (vcs.count > 2) {
+                    [self.navigationController popToViewController:vcs[vcs.count - 3] animated:YES];
+                }
+            });
         }
     }];
 }

@@ -8,6 +8,7 @@
 
 #import "JROrder.h"
 
+
 @implementation JROrder
 
 
@@ -59,9 +60,7 @@
         self.roomNum = @"";
         self.livingroomNum = @"";
         self.bathroomNum = @"";
-        self.province = @"";
-        self.city = @"";
-        self.district = @"";
+        self.areaInfo = [[JRAreaInfo alloc] init];
         self.address = @"";
     }
     return self;
@@ -294,9 +293,7 @@
     return [retVals componentsJoinedByString:@""];
 }
 
-- (NSString *)measureAddressString{
-    return [NSString stringWithFormat:@"%@%@%@", self.province, self.city, self.district];
-}
+
 
 - (void)buildUpWithValueForContractInit:(id)dict{
     if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
@@ -313,8 +310,8 @@
     self.decoratorEmail = [tradeInfo getStringValueForKey:@"decoratorEmail" defaultValue:@""];
     self.customerId = [tradeInfo getIntValueForKey:@"customerId" defaultValue:0];
     self.measureTid = [tradeInfo getStringValueForKey:@"measureTid" defaultValue:@""];
-//    self.measurePayAmount = [tradeInfo getStringValueForKey:@"measurePayAmount" defaultValue:@""];
-    self.finalPayAmount = [tradeInfo getStringValueForKey:@"finalPayAmount" defaultValue:@""];
+    self.measurePayAmount = [tradeInfo getStringValueForKey:@"measurePayAmountStr" defaultValue:@""];
+    self.finalPayAmount = [tradeInfo getStringValueForKey:@"finalPayAmountStr" defaultValue:@""];
     self.designReqId = [tradeInfo getStringValueForKey:@"designReqId" defaultValue:@""];
     self.amount = [tradeInfo getStringValueForKey:@"amountStr" defaultValue:@""];
     self.firstPayAmount = [tradeInfo getStringValueForKey:@"firstPayAmountStr" defaultValue:@""];
@@ -334,9 +331,8 @@
     self.livingroomNum = [tradeInfo getStringValueForKey:@"livingroomNum" defaultValue:@""];
     self.bathroomNum = [tradeInfo getStringValueForKey:@"bathroomNum" defaultValue:@""];
     self.houseArea = [tradeInfo getStringValueForKey:@"houseArea" defaultValue:@""];
-    self.province = [tradeInfo getStringValueForKey:@"province" defaultValue:@""];
-    self.city = [tradeInfo getStringValueForKey:@"city" defaultValue:@""];
-    self.district = [tradeInfo getStringValueForKey:@"district" defaultValue:@""];
+    NSDictionary *areaDic = tradeInfo[@"areaInfo"];
+    self.areaInfo = [[JRAreaInfo alloc] initWithDictionary:areaDic];
     self.address = [tradeInfo getStringValueForKey:@"address" defaultValue:@""];
     self.roomMap = dict[@"roomMap"];
     self.livingMap = dict[@"livingMap"];

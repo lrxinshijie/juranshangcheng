@@ -95,20 +95,20 @@
 }
 
 - (void)reSetValue{
-    _order.amount = @"1000";
-    _order.firstPayAmount = @"100";
-    _order.measurePayAmount = @"10";
-    _order.designPageNum = 1;
-    _order.diyPageNum = 10;
-    _order.addPagePrice = 100;
-    _order.customerCardNo = @"23847234";
-    _order.customerEmail = @"23402834@qq.com";
-    _order.decoratorMobile = @"13589092736";
-    _order.decoratorWechat = @"sjkdlf";
-    _order.decoratorEmail = @"942023487@qq.com";
+//    _order.amount = @"1000";
+//    _order.firstPayAmount = @"1100";
+//    _order.measurePayAmount = @"10";
+//    _order.designPageNum = 1;
+//    _order.diyPageNum = 10;
+//    _order.addPagePrice = 100;
+//    _order.customerCardNo = @"23847234";
+//    _order.customerEmail = @"23402834@qq.com";
+//    _order.decoratorMobile = @"13589092736";
+//    _order.decoratorWechat = @"sjkdlf";
+//    _order.decoratorEmail = @"942023487@qq.com";
     _order.finalPayAmount = [NSString stringWithFormat:@"%.3f", _order.amount.floatValue - _order.firstPayAmount.floatValue];
     self.values = @[@[@"", _order.amount, _order.serviceDateString, _order.firstPayAmount, _order.finalPayAmount, @""]
-                    , @[_order.customerRealName, _order.customerName, _order.customerMobile, _order.customerWechat, _order.customerCardNo, _order.customerEmail, _order.roomTypeString, _order.houseArea, _order.measureAddressString, _order.address]
+                    , @[_order.customerRealName, _order.customerName, _order.customerMobile, _order.customerWechat, _order.customerCardNo, _order.customerEmail, _order.roomTypeString, _order.houseArea, _order.areaInfo.title, _order.address]
                     , @[_order.decoratorRealName, _order.decoratorName, _order.decoratorMobile, _order.decoratorWechat, _order.decoratorEmail]];
 }
 
@@ -251,7 +251,7 @@
         [self showTip:@"消费者房屋面积不能为空！"];
         return;
     }
-    if (!(_order.measureAddressString.length > 0)) {
+    if (!(_order.areaInfo.title > 0)) {
         [self showTip:@"消费者装修地址不能为空！"];
         return;
     }
@@ -281,6 +281,12 @@
     }
     if (!_isReadContact) {
         [self showTip:@"请阅读《住宅室内装饰设计合同》！"];
+        return;
+    }
+    
+    CGFloat value = _order.amount.floatValue * 0.2f;
+    if (_order.firstPayAmount.floatValue < value || _order.firstPayAmount.floatValue > _order.amount.floatValue) {
+        [self showTip:@"首付定金不低于合同金额的20%并且不高于合同金！"];
         return;
     }
     
@@ -536,9 +542,7 @@
     }else if (indexPath.section == 1 && row == 8){
         BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
         [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
-            _order.province = areaInfo.provinceName;
-            _order.city = areaInfo.cityName;
-            _order.district = areaInfo.districtName;
+            _order.areaInfo = areaInfo;
             [self reloadData];
         }];
         [self.navigationController pushViewController:vc animated:YES];
@@ -559,6 +563,19 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     NSArray *rows = _keys[0];
     [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isContainsEmoji]) {
+        return NO;
+    }
+    NSString * toBeString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    if (toBeString.length > 200) {
+        [self showTip:@"内容长度不能超过200个字!"];
+        return NO;
+    }
+    
+    return YES;
 }
 
 #pragma mark - UITextFieldDelegate
