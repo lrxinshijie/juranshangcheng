@@ -991,7 +991,7 @@
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>人气数从高到低排序</string>
+			<string>人气从高到低排序</string>
 			<key>v</key>
 			<string>1</string>
 		</dict>
@@ -1033,7 +1033,7 @@
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>人气数从高到低排序</string>
+			<string>人气从高到低排序</string>
 			<key>v</key>
 			<string>2</string>
 		</dict>

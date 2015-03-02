@@ -164,7 +164,9 @@
     
 #ifdef kJuranDesigner
     _amountLabel.text = @"";
-    _designerAmountLabel.text = [NSString stringWithFormat:@"￥%@", order.amount];
+    NSString *amount = [NSString stringWithFormat:@"￥%@", order.amount];
+    _designerAmountLabel.text = amount;
+    
     _designerStatusLabel.text = _order.statusName;
     CGRect frame = _designerStatusLabel.frame;
     frame.size.width = [_order.statusName widthWithFont:_designerStatusLabel.font constrainedToHeight:CGRectGetHeight(frame)];
@@ -175,6 +177,15 @@
     _designerOrderLabel.frame = frame;
     
     _designerOrderLabel.text = _order.type == 0 ? _order.measureTid : _order.designTid;
+    
+    CGFloat width = 300 - [amount widthWithFont:_designerAmountLabel.font constrainedToHeight:CGRectGetHeight(_designerAmountLabel.frame)] - 5;
+    if (width <= 0) {
+        width = 20;
+    }
+    frame = _addressLabel.frame;
+    frame.size.width = width;
+    _addressLabel.frame = frame;
+    
     _addressLabel.text = _order.addressInfo;
     _houseAreaLabel.text = [NSString stringWithFormat:@"面积：%@m²", _order.houseArea];
     _timeLabel.text = _order.gmtCreate;
