@@ -8,7 +8,7 @@
 
 #import "OrderConfirmPayViewController.h"
 #import "JROrder.h"
-
+#import <AlipaySDK/AlipaySDK.h>
 @interface OrderConfirmPayViewController ()
 
 @property (nonatomic, strong) IBOutlet UILabel *orderLabel;
@@ -66,7 +66,63 @@
 }
 
 - (IBAction)onPay:(id)sender{
-    
+    [self showHUD];
+    NSDictionary *param = @{@"tid": _order.type == 0 ? _order.measureTid : _order.designTid,
+                            @"status": _order.status,
+                            @"type": _isPayAli ? @"ALIPAY" : @"wechat"};
+    [[ALEngine shareEngine] pathURL:JR_PAY_RESPONE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSDictionary *aliPayDto = data;//[data objectForKey:@"aliPayDto"];
+            NSString *totalFee = [aliPayDto getStringValueForKey:@"totalFee" defaultValue:@""];
+            NSString *subject = [aliPayDto getStringValueForKey:@"subject" defaultValue:@""];
+            NSString *body = [aliPayDto getStringValueForKey:@"body" defaultValue:@""];
+            NSString *notifyUrl = [aliPayDto getStringValueForKey:@"notifyUrl" defaultValue:@""];
+            NSString *partner = [aliPayDto getStringValueForKey:@"partner" defaultValue:@""];
+            NSString *sellerEmail = [aliPayDto getStringValueForKey:@"sellerEmail" defaultValue:@""];
+            NSString *outTrade_no = [aliPayDto getStringValueForKey:@"outTrade_no" defaultValue:@""];
+//            NSString *returnUrl = [aliPayDto getStringValueForKey:@"returnUrl" defaultValue:@""];
+            NSString *paymentType = [aliPayDto getStringValueForKey:@"paymentType" defaultValue:@""];
+            NSString *service = [aliPayDto getStringValueForKey:@"service" defaultValue:@""];
+            NSString *inputCharset = [aliPayDto getStringValueForKey:@"inputCharset" defaultValue:@""];
+            
+            NSString *sign = [aliPayDto getStringValueForKey:@"sign" defaultValue:@""];
+            NSString *signType = [aliPayDto getStringValueForKey:@"signType" defaultValue:@""];
+            
+            
+            NSDictionary *orderData = @{@"partner": partner,
+                                        @"seller_id": sellerEmail,
+                                        @"out_trade_no": outTrade_no,
+                                        @"subject": subject,
+                                        @"body": body,
+                                        @"total_fee": totalFee,
+                                        @"notify_url": notifyUrl,
+                                        @"service": service,
+                                        @"payment_type": paymentType,
+                                        @"_input_charset": inputCharset,
+//                                        @"it_b_pay": @"30m",
+//                                        @"show_url": @"m.alipay.com",
+//                                        @"sign": sign,
+//                                        @"sign_type": signType
+                                        };
+            __block NSMutableString *orderString = [NSMutableString string];
+            NSString *appScheme = @"JuranClient";
+            [orderData enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                if (orderString.length > 0) {
+                    [orderString appendFormat:@"&"];
+                }
+                [orderString appendFormat:@"%@=\"%@\"", key, obj];
+            }];
+            
+            [orderString appendFormat:@"&sign=\"%@\"&sign_type=\"%@\"", sign, signType];
+            
+            ASLog(@"%@,%@",[[AlipaySDK defaultService] currentVersion],orderString);
+            
+            [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+                ASLog(@"resultDic:%@", resultDic);
+            }];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

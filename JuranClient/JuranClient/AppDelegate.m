@@ -25,6 +25,7 @@
 #import "WikiOrActivityViewController.h"
 #import "APService.h"
 #import "MobClick.h"
+#import <AlipaySDK/AlipaySDK.h>
 
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
@@ -314,6 +315,16 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
+    if ([url.host isEqualToString:@"safepay"]) {
+        ASLog(@"url:%@", url);
+        [[AlipaySDK defaultService] processAuth_V2Result:url
+                                         standbyCallback:^(NSDictionary *resultDic) {
+                                             ASLog(@"result = %@",resultDic);
+//                                             NSString *resultStr = resultDic[@"result"];
+                                         }];
+        
+    }
+    
     return [ShareSDK handleOpenURL:url
                  sourceApplication:sourceApplication
                         annotation:annotation
