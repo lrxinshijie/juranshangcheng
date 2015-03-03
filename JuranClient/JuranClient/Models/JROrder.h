@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JRAreaInfo.h"
 
 @interface JROrder : NSObject
 
@@ -62,7 +63,26 @@
 @property (nonatomic, assign) NSInteger capacityPoint;
 @property (nonatomic, assign) NSInteger servicePoint;
 @property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *commentGmtCreate;
 
+//Contract
+@property (nonatomic, assign) NSInteger customerId;
+@property (nonatomic, copy) NSString *decoratorQQ;
+@property (nonatomic, copy) NSString *designReqId;
+@property (nonatomic, assign) NSInteger diyPageNum;
+@property (nonatomic, assign) NSInteger designPageNum;
+@property (nonatomic, assign) NSInteger addPagePrice;
+@property (nonatomic, copy) NSString *comments;
+@property (nonatomic, copy) NSString *customerQQ;
+@property (nonatomic, copy) NSString *roomNum;
+@property (nonatomic, copy) NSString *livingroomNum;
+@property (nonatomic, copy) NSString *bathroomNum;
+@property (nonatomic, strong) JRAreaInfo *areaInfo;
+@property (nonatomic, copy) NSString *address;
+
+@property (nonatomic, strong) NSDictionary *roomMap;
+@property (nonatomic, strong) NSDictionary *livingMap;
+@property (nonatomic, strong) NSDictionary *washMap;
 
 - (NSString *)statusName;
 - (NSString *)payStatusString;
@@ -71,8 +91,11 @@
 + (NSMutableArray *)buildUpWithValue:(id)value;
 - (void)buildUpWithValueForDetail:(id)dict;
 - (void)buildUpWithValueForComment:(id)dict;
+- (void)buildUpWithValueForContractInit:(id)dict;
 
 - (NSString *)orderSpec;
+
+- (NSString *)roomTypeString;
 
 
 @end

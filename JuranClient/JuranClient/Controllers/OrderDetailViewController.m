@@ -62,11 +62,18 @@
 
 @implementation OrderDetailViewController
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"订单详情";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameOrderReloadData object:nil];
+    
 #ifdef kJuranDesigner
     self.keys = @[@[@"",@""], @[@"", @"手机号码", @"电子邮箱", @"会员卡号", @"微信号", @"户型", @"面积", @"装修地址"], @[@"", @"手机号码", @"电子邮箱", @"微信号"]];
 #else
@@ -104,6 +111,9 @@
 
 - (void)reloadData{
     [self resetValues];
+    for (UIView *v in _footerView.subviews) {
+        [v removeFromSuperview];
+    }
     [_footerView fillViewWithOrder:_order];
     [_tableView reloadData];
     if (_footerView.subviews.count == 0) {
@@ -113,6 +123,10 @@
         _footerView.hidden = NO;
         _tableView.frame = CGRectMake(0, 0, kWindowWidth, kWindowHeightWithoutNavigationBar - 37);
     }
+}
+
+- (void)receiveReloadDataNotification:(NSNotification*)notification{
+    [self loadData];
 }
 
 - (void)resetValues{
@@ -161,6 +175,8 @@
     }
     if (number.length > 0) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"tel://%@",number]]];
+    }else{
+        [self showTip:@"设计师未绑定手机号码，不能拨出电话"];
     }
 }
 
@@ -366,6 +382,7 @@
         _customerNameLabel.text = [NSString stringWithFormat:@"用户名 %@", _order.customerName];
         [cell.contentView addSubview:_customerInfoView];
     }else if (indexPath.row == rows.count && indexPath.section == 1){
+        /*
         NSString *number = nil;
         if ([self customerSection] == 1) {
             number = _order.customerMobile;
@@ -379,7 +396,7 @@
         }else{
             btn.enabled = YES;
             btn.layer.borderColor = RGBColor(49, 89, 143).CGColor;
-        }
+        }*/
         [cell.contentView addSubview:_actionView];
     }else if (indexPath.section == [self customerSection] && indexPath.row == 7){
         _addressLabel.text = _values[indexPath.section][indexPath.row];

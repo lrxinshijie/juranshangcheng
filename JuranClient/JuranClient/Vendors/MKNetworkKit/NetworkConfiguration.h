@@ -13,10 +13,11 @@
 /* Dev/TEST */
 //#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
 //#define JR_SERVICE  @"http://124.207.66.50:10005"
+#define JR_SERVICE  @"http://124.193.207.194:8070"
 
 /* UAT */
 #define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
-#define JR_SERVICE  @"http://54.223.161.28:8080"
+//#define JR_SERVICE  @"http://54.223.161.28:8080"
 
 /* Production */
 //#define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
@@ -153,14 +154,14 @@
 #define JR_INTERACT_TOPIC [NSString stringWithFormat:@"%@/interact/get_commented_topic_list.json",JR_SERVICE]
 #define JR_ORDER_LIST [NSString stringWithFormat:@"%@/trade/getTradeList.json",JR_SERVICE]
 #define JR_ORDER_DETAIL [NSString stringWithFormat:@"%@/trade/getTradeDetail.json",JR_SERVICE]
-
-
+#define JR_ORDER_APPLE_DESIGNTRADE [NSString stringWithFormat:@"%@/trade/applyDesignTrade.json",JR_SERVICE]
+#define JR_ORDER_APPLE_DESIGN_TRADE_INIT [NSString stringWithFormat:@"%@/trade/applyDesignTradeInit.json",JR_SERVICE]
 #define JR_CANCEL_ORDER [NSString stringWithFormat:@"%@/trade/cancelTrade.json",JR_SERVICE]
 #define JR_CONFIRM_ORDER [NSString stringWithFormat:@"%@/trade/confirmResult.json",JR_SERVICE]
 #define JR_REJECT_ORDER [NSString stringWithFormat:@"%@/trade/refuseMeasureApply.json",JR_SERVICE]
 #define JR_DESIGNER_CONFIRM_ORDER [NSString stringWithFormat:@"%@/trade/confirmMeasure.json",JR_SERVICE]
 #define JR_GET_EXTRACT_AMOUNT [NSString stringWithFormat:@"%@/trade/measureDrawApplyInit.json",JR_SERVICE]
 #define JR_EXTRACT_AMOUNT [NSString stringWithFormat:@"%@/trade/measureDrawApply.json",JR_SERVICE]
-
+#define JR_PAY_RESPONE [NSString stringWithFormat:@"%@/pay/pay_req.json",JR_SERVICE]
 
 #endif

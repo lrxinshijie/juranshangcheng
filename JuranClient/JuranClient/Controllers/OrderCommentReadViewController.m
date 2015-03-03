@@ -82,6 +82,7 @@
     [_headerImageView setImageWithURLString:_order.headUrl];
     _nameLabel.text = _order.decoratorName;
     _mobileNumLabel.text = _order.decoratorMobile;
+    _timeLabel.text = _order.commentGmtCreate;
     
     CGRect frame = _nameLabel.frame;
     CGFloat width = [_nameLabel.text widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(frame)];
