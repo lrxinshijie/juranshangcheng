@@ -52,17 +52,18 @@
     frame.size.height = CGRectGetHeight(frame) - CGRectGetHeight(_headerView.frame);
     frame.origin.y = CGRectGetHeight(_headerView.frame);
     
-    self.filterButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onFilter) title:@"筛选" image:nil];
+    self.filterButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onFilter) title:@"筛选" image:[UIImage imageNamed:@"order_filter"]];
     [_filterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_filterButton];
 #endif
+    
     
     self.tableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = RGBColor(237, 237, 237);
     [self.view addSubview:_tableView];
     
-    _emptyView.center = self.view.center;
+    _emptyView.center = _tableView.center;
     _emptyView.hidden = YES;
     [self.view addSubview:_emptyView];
     

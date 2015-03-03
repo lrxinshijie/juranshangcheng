@@ -9,6 +9,9 @@
 #import "OrderConfirmPayViewController.h"
 #import "JROrder.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "DataSigner.h"
+#import "OrderListViewController.h"
+
 @interface OrderConfirmPayViewController ()
 
 @property (nonatomic, strong) IBOutlet UILabel *orderLabel;
@@ -86,9 +89,8 @@
             NSString *service = [aliPayDto getStringValueForKey:@"service" defaultValue:@""];
             NSString *inputCharset = [aliPayDto getStringValueForKey:@"inputCharset" defaultValue:@""];
             
-            NSString *sign = [aliPayDto getStringValueForKey:@"sign" defaultValue:@""];
+//            NSString *sign = [aliPayDto getStringValueForKey:@"sign" defaultValue:@""];
             NSString *signType = [aliPayDto getStringValueForKey:@"signType" defaultValue:@""];
-            
             
             NSDictionary *orderData = @{@"partner": partner,
                                         @"seller_id": sellerEmail,
@@ -114,12 +116,28 @@
                 [orderString appendFormat:@"%@=\"%@\"", key, obj];
             }];
             
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"rsa_private_key" ofType:@"txt"];
+            NSString *privateKey = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+            
+            id<DataSigner> signer = CreateRSADataSigner(privateKey);
+            NSString *sign = [signer signString:orderString];
+            
             [orderString appendFormat:@"&sign=\"%@\"&sign_type=\"%@\"", sign, signType];
             
             ASLog(@"%@,%@",[[AlipaySDK defaultService] currentVersion],orderString);
             
             [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-                ASLog(@"resultDic:%@", resultDic);
+                NSInteger resultStatus = [resultDic getIntValueForKey:@"resultStatus" defaultValue:0];
+                if (resultStatus == 9000) {
+                    //交易成功
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:@(YES)];
+                    
+                    OrderListViewController *cm = (OrderListViewController *)[self.navigationController.viewControllers objectAtTheIndex:1];
+                    if (cm && [cm isKindOfClass:[OrderListViewController class]]) {
+                        [self.navigationController popToViewController:cm animated:YES];
+                    }
+                }
+//                ASLog(@"resultDic:%@", resultDic);
             }];
         }
     }];

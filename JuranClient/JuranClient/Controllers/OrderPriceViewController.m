@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) IBOutlet UITextField *amountTextField;
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
+@property (nonatomic, strong) IBOutlet UILabel *orderLabel;
 
 - (IBAction)onSubmit:(id)sender;
 
@@ -29,6 +30,7 @@
     
     _amountTextField.text = [NSString stringWithFormat:@"%@", _order.amount];
     _dateLabel.text = [NSString stringWithFormat:@"期望量房时间：%@", _order.serviceDateString];
+    _orderLabel.text = [NSString stringWithFormat:@"量房订单：%@", _order.measureTid];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -60,6 +62,7 @@
                 }else{
                     _order.status = @"wait_consumer_pay";
                 }
+                _order.amount = amount;
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
