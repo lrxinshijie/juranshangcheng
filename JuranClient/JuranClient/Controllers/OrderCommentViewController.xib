@@ -181,7 +181,7 @@
                     <rect key="frame" x="15" y="9" width="85" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="  匿名评价" image="order_point_selected.png">
+                    <state key="normal" title="  匿名评价" image="order_point_unselected.png">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -210,7 +210,7 @@
     <resources>
         <image name="avtar_default.png" width="60" height="60"/>
         <image name="icon-designer-id.png" width="18" height="12"/>
-        <image name="order_point_selected.png" width="20" height="20"/>
+        <image name="order_point_unselected.png" width="20" height="20"/>
         <image name="userlevel0.png" width="25" height="11"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

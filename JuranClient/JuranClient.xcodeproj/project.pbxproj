@@ -573,6 +573,8 @@
 		14FE2E571A38549200B31FBA /* PrivateMessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FE2E551A38549200B31FBA /* PrivateMessageDetailViewController.xib */; };
 		3710D5AE1A557DF00028D32A /* RealNameAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */; };
 		3710D5AF1A557DF00028D32A /* RealNameAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */; };
+		371907BA1AA5FA8900A76192 /* order_create@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371907B91AA5FA8900A76192 /* order_create@2x.png */; };
+		371907BB1AA5FA9F00A76192 /* order_create@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371907B91AA5FA8900A76192 /* order_create@2x.png */; };
 		371D686F1A5D6E2000172AC9 /* icon_case_manage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D686B1A5D6E2000172AC9 /* icon_case_manage@2x.png */; };
 		371D68701A5D6E2000172AC9 /* icon_dingdan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D686C1A5D6E2000172AC9 /* icon_dingdan@2x.png */; };
 		371D68721A5D6E2000172AC9 /* icon_realname_auth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D686E1A5D6E2000172AC9 /* icon_realname_auth@2x.png */; };
@@ -1775,6 +1777,7 @@
 		3710D5AB1A557DF00028D32A /* RealNameAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealNameAuthViewController.h; sourceTree = "<group>"; };
 		3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealNameAuthViewController.m; sourceTree = "<group>"; };
 		3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RealNameAuthViewController.xib; sourceTree = "<group>"; };
+		371907B91AA5FA8900A76192 /* order_create@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_create@2x.png"; sourceTree = "<group>"; };
 		371D686B1A5D6E2000172AC9 /* icon_case_manage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_case_manage@2x.png"; sourceTree = "<group>"; };
 		371D686C1A5D6E2000172AC9 /* icon_dingdan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_dingdan@2x.png"; sourceTree = "<group>"; };
 		371D686E1A5D6E2000172AC9 /* icon_realname_auth@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_realname_auth@2x.png"; sourceTree = "<group>"; };
@@ -4276,6 +4279,7 @@
 				14321E631A6125F70065E8C3 /* case_edit_delete@2x.png */,
 				14321E641A6125F70065E8C3 /* case_edit_replace@2x.png */,
 				14A6DA801A5F768C00D40CB3 /* case_create_success@2x.png */,
+				371907B91AA5FA8900A76192 /* order_create@2x.png */,
 				A95DB7061A5EF0BC00F543CE /* Guide */,
 				371D686A1A5D6E2000172AC9 /* Personal */,
 				1415FAA71A5D249E003D0C29 /* Icon-Small.png */,
@@ -4627,6 +4631,7 @@
 				BD5187221A5D0ED700BE508A /* service_highlighted_7@2x.png in Resources */,
 				BD5186F61A5D0ED700BE508A /* menu_about_select@2x.png in Resources */,
 				BD5187AE1A5D344D00BE508A /* icon_topic@2x.png in Resources */,
+				371907BA1AA5FA8900A76192 /* order_create@2x.png in Resources */,
 				BD5187841A5D0ED700BE508A /* nav-home-active@2x.png in Resources */,
 				37BF0BD01A8FA0B3001BA9E6 /* OrderCommentManageViewController.xib in Resources */,
 				BD322BCD1A6E090800DDC1C0 /* image_quality_unselected_disabled@2x.png in Resources */,
@@ -5233,6 +5238,7 @@
 				BD51874F1A5D0ED700BE508A /* sns_icon_24_s@2x.png in Resources */,
 				14361E561A343F5F00F9BD94 /* BaseAddressViewController.xib in Resources */,
 				37D18DBD1A583AF600B41048 /* CaseIntroduceViewController.xib in Resources */,
+				371907BB1AA5FA9F00A76192 /* order_create@2x.png in Resources */,
 				BD5187271A5D0ED700BE508A /* service_normal_0@2x.png in Resources */,
 				14D973901A334C4F00E771ED /* PushMessageViewController.xib in Resources */,
 				BD5186C91A5D0ED700BE508A /* question_type_selected@2x.png in Resources */,

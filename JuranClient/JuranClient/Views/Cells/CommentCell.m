@@ -67,7 +67,7 @@
     _nameLabel.text = nickName;
     
     _typeButton.hidden = YES;
-    if ([[data.userType lowercaseString] isEqualToString:@"designer"]) {
+    if ([[data.userType lowercaseString] isEqualToString:@"designer"] || data.userType.integerValue == 2) {
         _typeButton.hidden = NO;
         CGRect frame = _typeButton.frame;
         frame.origin.x = CGRectGetMinX(_nameLabel.frame) + [nickName widthWithFont:_nameLabel.font constrainedToHeight:CGRectGetHeight(_nameLabel.frame)] + 5;

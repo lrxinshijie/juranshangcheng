@@ -343,6 +343,8 @@
         }
         [cell.contentView addSubview:_paymentInfoView];
     }else if (indexPath.section == 0 && indexPath.row == 1){
+        [_roomTypeView removeFromSuperview];
+        [_fileView removeFromSuperview];
         if (_order.measurefileSrc.count && _order.fileSrc.count) {
             _roomTypeView.frame = CGRectMake(0, 26, CGRectGetWidth(_roomTypeView.frame), CGRectGetHeight(_roomTypeView.frame));
             [_deliveryInfoView addSubview:_roomTypeView];
@@ -356,6 +358,7 @@
             }
             if (_order.fileSrc.count) {
                 _fileView.frame = CGRectMake(0, 26, CGRectGetWidth(_fileView.frame), CGRectGetHeight(_fileView.frame));
+                [_deliveryInfoView addSubview:_fileView];
             }
         }
         _roomTypeCountLabel.hidden = _order.measurefileSrc.count <= 3;
