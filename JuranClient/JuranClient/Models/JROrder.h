@@ -63,6 +63,7 @@
 @property (nonatomic, assign) NSInteger capacityPoint;
 @property (nonatomic, assign) NSInteger servicePoint;
 @property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *commentGmtCreate;
 
 //Contract
 @property (nonatomic, assign) NSInteger customerId;
