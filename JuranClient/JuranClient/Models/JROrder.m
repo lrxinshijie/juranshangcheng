@@ -230,6 +230,7 @@
     self.capacityPoint = [dict getIntValueForKey:@"capacityPoint" defaultValue:0];
     self.servicePoint = [dict getIntValueForKey:@"servicePoint" defaultValue:0];
     self.levelCode = [dict getStringValueForKey:@"userLevel" defaultValue:@""];
+    self.commentGmtCreate = [dict getStringValueForKey:@"gmtCreate" defaultValue:@""];
 }
 
 - (NSString *)serviceDateString{

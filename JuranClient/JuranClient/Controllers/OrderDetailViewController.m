@@ -175,6 +175,8 @@
     }
     if (number.length > 0) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[[NSString alloc] initWithFormat:@"tel://%@",number]]];
+    }else{
+        [self showTip:@"设计师未绑定手机号码，不能拨出电话"];
     }
 }
 
@@ -380,6 +382,7 @@
         _customerNameLabel.text = [NSString stringWithFormat:@"用户名 %@", _order.customerName];
         [cell.contentView addSubview:_customerInfoView];
     }else if (indexPath.row == rows.count && indexPath.section == 1){
+        /*
         NSString *number = nil;
         if ([self customerSection] == 1) {
             number = _order.customerMobile;
@@ -393,7 +396,7 @@
         }else{
             btn.enabled = YES;
             btn.layer.borderColor = RGBColor(49, 89, 143).CGColor;
-        }
+        }*/
         [cell.contentView addSubview:_actionView];
     }else if (indexPath.section == [self customerSection] && indexPath.row == 7){
         _addressLabel.text = _values[indexPath.section][indexPath.row];
