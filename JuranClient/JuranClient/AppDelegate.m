@@ -317,10 +317,25 @@
 {
     if ([url.host isEqualToString:@"safepay"]) {
         ASLog(@"url:%@", url);
-        [[AlipaySDK defaultService] processAuth_V2Result:url
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url
                                          standbyCallback:^(NSDictionary *resultDic) {
                                              ASLog(@"result = %@",resultDic);
 //                                             NSString *resultStr = resultDic[@"result"];
+                                             NSInteger resultStatus = [resultDic getIntValueForKey:@"resultStatus" defaultValue:0];
+                                             
+                                             NSDictionary *tips = @{@"9000": @"支付成功",
+                                                                    @"8000": @"订单支付成功",
+                                                                    @"4000": @"订单支付失败",
+                                                                    @"6001": @"用户中途取消",
+                                                                    @"6002": @"网络连接出错"
+                                                                    };
+                                             NSString *tip = [tips getStringValueForKey:[NSString stringWithFormat:@"%d", resultStatus] defaultValue:@""];
+                                             if (tip.length > 0) {
+                                                 [Public alertOK:nil Message:tip];
+                                             }
+                                             if (resultStatus == 9000) {
+                                                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderPaySuccess object:nil];
+                                             }
                                          }];
         
     }
