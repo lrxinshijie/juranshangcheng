@@ -88,6 +88,9 @@
         }
         
         [self addSubview:pageControl];
+        
+        scrollView.scrollEnabled = imgArr.count > 1;
+        pageControl.hidden = !(imgArr.count > 1);
 	}
 	return self;
 }

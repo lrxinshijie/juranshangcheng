@@ -46,7 +46,7 @@
                     HTTPMethod:(NSString *)method
                otherParameters:(NSDictionary *)other
                       delegate:(id)delegate
-               responseHandler:(ResponseBlock)responseBlock{
+               responseHandler:(ALResponseBlock)responseBlock{
     
     return [self pathURL:URL parameters:parameters HTTPMethod:method otherParameters:other delegate:delegate imageDict:nil completionHandler:^(id data) {
         responseBlock(nil,data,nil);
@@ -72,7 +72,7 @@
                 otherParameters:(NSDictionary *)other
                        delegate:(id)delegate
                     imageDict:(NSDictionary *)imageDict
-                responseHandler:(ResponseBlock)responseBlock{
+                responseHandler:(ALResponseBlock)responseBlock{
     
     return [self pathURL:URL parameters:parameters HTTPMethod:method otherParameters:other delegate:delegate imageDict:imageDict completionHandler:^(id data) {
         responseBlock(nil,data,nil);
@@ -104,7 +104,7 @@
                otherParameters:(NSDictionary *) other
                       delegate:(id)delegate
                 imageDict:(NSDictionary *)imageDict
-             completionHandler:(CompletionBlock) completionBlock
+             completionHandler:(ALCompletionBlock) completionBlock
                   errorHandler:(MKNKErrorBlock) errorBlock{
     
     MKNetworkOperation *op = nil;

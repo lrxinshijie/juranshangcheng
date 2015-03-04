@@ -15,6 +15,7 @@
 #import "JRAreaInfo.h"
 #import "TTTAttributedLabel.h"
 #import "ContractPreviewViewController.h"
+#import "JRWebViewController.h"
 
 @interface ContractViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 
@@ -96,7 +97,7 @@
 
 - (void)reSetValue{
 //    _order.amount = @"1000";
-//    _order.firstPayAmount = @"1100";
+//    _order.firstPayAmount = @"300";
 //    _order.measurePayAmount = @"10";
 //    _order.designPageNum = 1;
 //    _order.diyPageNum = 10;
@@ -106,7 +107,7 @@
 //    _order.decoratorMobile = @"13589092736";
 //    _order.decoratorWechat = @"sjkdlf";
 //    _order.decoratorEmail = @"942023487@qq.com";
-    _order.finalPayAmount = [NSString stringWithFormat:@"%.3f", _order.amount.floatValue - _order.firstPayAmount.floatValue];
+    _order.finalPayAmount = [NSString stringWithFormat:@"%.2f", _order.amount.floatValue - _order.firstPayAmount.floatValue];
     self.values = @[@[@"", _order.amount, _order.serviceDateString, _order.firstPayAmount, _order.finalPayAmount, @""]
                     , @[_order.customerRealName, _order.customerName, _order.customerMobile, _order.customerWechat, _order.customerCardNo, _order.customerEmail, _order.roomTypeString, _order.houseArea, _order.areaInfo.title, _order.address]
                     , @[_order.decoratorRealName, _order.decoratorName, _order.decoratorMobile, _order.decoratorWechat, _order.decoratorEmail]];
@@ -197,8 +198,21 @@
     }
 }
 
+- (IBAction)onDesignContract:(id)sender{
+    JRWebViewController *vc = [[JRWebViewController alloc] init];
+    vc.urlString = @"http://apph5.juran.cn/contract?fromApp=1";
+    vc.title = @"居然在线设计师合同条款";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 - (IBAction)onSubmit:(id)sender{
-    
+    if (_selectedTextField) {
+        [_selectedTextField resignFirstResponder];
+    }
+    if (_selectedTextView) {
+        [_selectedTextView resignFirstResponder];
+    }
+    /*
     if (!(_order.amount.floatValue > 0.f)) {
         [self showTip:@"合同金额不能小于0！"];
         return;
@@ -278,7 +292,7 @@
     if (!(_order.decoratorEmail.length > 0)) {
         [self showTip:@"设计师电子邮箱不能为空！"];
         return;
-    }
+    }*/
     if (!_isReadContact) {
         [self showTip:@"请阅读《住宅室内装饰设计合同》！"];
         return;
@@ -318,7 +332,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 30;
+    return 35;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -336,13 +350,13 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 35)];
-    view.backgroundColor = RGBColor(226, 226, 226);
+    view.backgroundColor = RGBColor(232, 232, 232);
     
     UIButton *btn = [view buttonWithFrame:view.bounds target:self action:@selector(onHiddenSection:) image:nil];
     btn.tag = section;
     [view addSubview:btn];
     
-    UILabel *label = [view labelWithFrame:CGRectMake(10, 5, 100, 15) text:@"" textColor:[UIColor darkGrayColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
+    UILabel *label = [view labelWithFrame:CGRectMake(10, 10, 100, 15) text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
     [view addSubview:label];
     
     if (section == 0) {
@@ -364,7 +378,7 @@
     if (indexPath.section == 0 && _isImmediate) {
         row = row + 1;
     }
-    if ((indexPath.section == 0 && (row == 1)) || (indexPath.section == 1 && row != 6 && row != 8) || (indexPath.section == 2)) {
+    if ((indexPath.section == 0 && row == 1) || (_isImmediate && ((indexPath.section == 1 && row != 6 && row != 8) || (indexPath.section == 2)))) {
         static NSString *CellIdentifier = @"TextFieldCell";
         TextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
@@ -417,6 +431,8 @@
         cell.detailTextLabel.text = @"";
         cell.detailTextLabel.textColor = [UIColor darkGrayColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryView = nil;
+        
         if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
             cell.layoutMargins = UIEdgeInsetsZero;
         }
@@ -426,7 +442,6 @@
             [view removeFromSuperview];
         }
         
-        cell.accessoryView = nil;
         if (indexPath.section == 0 && row == 3) {
             _firstPayAmountTextField.text = _order.firstPayAmount;
             _measureAmountTextField.text = _order.measurePayAmount;
@@ -447,7 +462,7 @@
         }else if (indexPath.section == 0 && row == 4) {
             cell.textLabel.text = _keys[indexPath.section][row];
             cell.detailTextLabel.text = _values[indexPath.section][row];
-        }else{
+        }else if (indexPath.section == 0 || _isImmediate){
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellIndicator.png"]];
             
             cell.textLabel.text = _keys[indexPath.section][row];
@@ -458,6 +473,9 @@
             }else{
                 cell.detailTextLabel.text = value;
             }
+        }else{
+            cell.textLabel.text = _keys[indexPath.section][row];
+            cell.detailTextLabel.text = _values[indexPath.section][row];
         }
         
         return cell;

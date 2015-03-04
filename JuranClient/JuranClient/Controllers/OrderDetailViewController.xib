@@ -186,7 +186,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="658" y="227"/>
+            <point key="canvasLocation" x="1023" y="327"/>
         </view>
         <view tag="5555" contentMode="scaleToFill" id="S1N-wD-Kwh">
             <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>

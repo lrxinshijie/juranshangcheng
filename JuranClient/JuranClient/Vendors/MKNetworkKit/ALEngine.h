@@ -22,9 +22,9 @@ static NSString * const kNetworkErrorCodeKey             = @"errcode";
 
 @interface ALEngine : MKNetworkEngine
 
-typedef void (^CompletionBlock)(id data);
+typedef void (^ALCompletionBlock)(id data);
 
-typedef void (^ResponseBlock)(NSError *error, id data, NSDictionary *other);
+typedef void (^ALResponseBlock)(NSError *error, id data, NSDictionary *other);
 
 - (id)initWithDefaultSettings;
 
@@ -35,7 +35,7 @@ typedef void (^ResponseBlock)(NSError *error, id data, NSDictionary *other);
                     HTTPMethod:(NSString *)method
                otherParameters:(NSDictionary *)other
                       delegate:(id)delegate
-            responseHandler:(ResponseBlock)responseBlock;
+            responseHandler:(ALResponseBlock)responseBlock;
 
 -(MKNetworkOperation *) pathURL:(NSString*) URL
                      parameters:(NSDictionary *) parameters
@@ -43,7 +43,7 @@ typedef void (^ResponseBlock)(NSError *error, id data, NSDictionary *other);
                 otherParameters:(NSDictionary *)other
                        delegate:(id)delegate
                       imageDict:(NSDictionary *)imageDict
-                responseHandler:(ResponseBlock)responseBlock;
+                responseHandler:(ALResponseBlock)responseBlock;
 
 + (void) cancelOperationsWithClass:(id)Class;
 

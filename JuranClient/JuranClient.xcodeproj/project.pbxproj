@@ -477,6 +477,12 @@
 		14646DB21A3C76D000E5D6F6 /* BidDesignerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14646DB01A3C76D000E5D6F6 /* BidDesignerCell.xib */; };
 		14646DB61A3CA1A500E5D6F6 /* OldTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14646DB41A3CA1A500E5D6F6 /* OldTopicViewController.m */; };
 		14646DB71A3CA1A500E5D6F6 /* OldTopicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14646DB51A3CA1A500E5D6F6 /* OldTopicViewController.xib */; };
+		146858091AA54DD30089A0CE /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 146858071AA54DD30089A0CE /* AlipaySDK.bundle */; };
+		1468580A1AA54DD30089A0CE /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 146858071AA54DD30089A0CE /* AlipaySDK.bundle */; };
+		1468580B1AA54DD30089A0CE /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146858081AA54DD30089A0CE /* AlipaySDK.framework */; };
+		1468580C1AA54DD30089A0CE /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146858081AA54DD30089A0CE /* AlipaySDK.framework */; };
+		1468580E1AA554A40089A0CE /* rsa_private_key.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1468580D1AA554A40089A0CE /* rsa_private_key.txt */; };
+		1468580F1AA554A40089A0CE /* rsa_private_key.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1468580D1AA554A40089A0CE /* rsa_private_key.txt */; };
 		146CE9C51A47EB0700FAA87F /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 146CE9C31A47EB0700FAA87F /* TextFieldCell.m */; };
 		146CE9C61A47EB0700FAA87F /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */; };
 		147282C71A67673500FB0CFB /* AHReach.m in Sources */ = {isa = PBXBuildFile; fileRef = 147282C61A67673500FB0CFB /* AHReach.m */; };
@@ -567,6 +573,8 @@
 		14FE2E571A38549200B31FBA /* PrivateMessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FE2E551A38549200B31FBA /* PrivateMessageDetailViewController.xib */; };
 		3710D5AE1A557DF00028D32A /* RealNameAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */; };
 		3710D5AF1A557DF00028D32A /* RealNameAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */; };
+		371907BA1AA5FA8900A76192 /* order_create@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371907B91AA5FA8900A76192 /* order_create@2x.png */; };
+		371907BB1AA5FA9F00A76192 /* order_create@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371907B91AA5FA8900A76192 /* order_create@2x.png */; };
 		371D686F1A5D6E2000172AC9 /* icon_case_manage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D686B1A5D6E2000172AC9 /* icon_case_manage@2x.png */; };
 		371D68701A5D6E2000172AC9 /* icon_dingdan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D686C1A5D6E2000172AC9 /* icon_dingdan@2x.png */; };
 		371D68721A5D6E2000172AC9 /* icon_realname_auth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D686E1A5D6E2000172AC9 /* icon_realname_auth@2x.png */; };
@@ -1635,6 +1643,9 @@
 		14646DB31A3CA1A500E5D6F6 /* OldTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OldTopicViewController.h; sourceTree = "<group>"; };
 		14646DB41A3CA1A500E5D6F6 /* OldTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OldTopicViewController.m; sourceTree = "<group>"; };
 		14646DB51A3CA1A500E5D6F6 /* OldTopicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OldTopicViewController.xib; sourceTree = "<group>"; };
+		146858071AA54DD30089A0CE /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		146858081AA54DD30089A0CE /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		1468580D1AA554A40089A0CE /* rsa_private_key.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_private_key.txt; sourceTree = "<group>"; };
 		146CE9C21A47EB0700FAA87F /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
 		146CE9C31A47EB0700FAA87F /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
@@ -1766,6 +1777,7 @@
 		3710D5AB1A557DF00028D32A /* RealNameAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealNameAuthViewController.h; sourceTree = "<group>"; };
 		3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealNameAuthViewController.m; sourceTree = "<group>"; };
 		3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RealNameAuthViewController.xib; sourceTree = "<group>"; };
+		371907B91AA5FA8900A76192 /* order_create@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_create@2x.png"; sourceTree = "<group>"; };
 		371D686B1A5D6E2000172AC9 /* icon_case_manage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_case_manage@2x.png"; sourceTree = "<group>"; };
 		371D686C1A5D6E2000172AC9 /* icon_dingdan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_dingdan@2x.png"; sourceTree = "<group>"; };
 		371D686E1A5D6E2000172AC9 /* icon_realname_auth@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_realname_auth@2x.png"; sourceTree = "<group>"; };
@@ -2536,6 +2548,7 @@
 				1415FA171A5CD1CB003D0C29 /* libstdc++.dylib in Frameworks */,
 				1415FA181A5CD1CB003D0C29 /* libsqlite3.dylib in Frameworks */,
 				1415FA191A5CD1CB003D0C29 /* MessageUI.framework in Frameworks */,
+				1468580C1AA54DD30089A0CE /* AlipaySDK.framework in Frameworks */,
 				1415FA1A1A5CD1CB003D0C29 /* WeChatConnection.framework in Frameworks */,
 				1415FA1C1A5CD1CB003D0C29 /* libWeChatSDK.a in Frameworks */,
 				1415FA1D1A5CD1CB003D0C29 /* libSinaWeiboSDK.a in Frameworks */,
@@ -2578,6 +2591,7 @@
 				1441A1741A29E3CD004A038E /* libSinaWeiboSDK.a in Frameworks */,
 				1441A1781A29E3CD004A038E /* ShareSDK.framework in Frameworks */,
 				BDA4E5021A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */,
+				1468580B1AA54DD30089A0CE /* AlipaySDK.framework in Frameworks */,
 				A971BC991A20825800C018D6 /* UIKit.framework in Frameworks */,
 				1441A1691A29E3CD004A038E /* QZoneConnection.framework in Frameworks */,
 				1441A1721A29E3CD004A038E /* TencentOpenAPI.framework in Frameworks */,
@@ -2818,6 +2832,16 @@
 				14610C6C1A39D2F9008A52C7 /* QuestionDetailViewController.xib */,
 			);
 			name = Question;
+			sourceTree = "<group>";
+		};
+		146858061AA54DD30089A0CE /* AlipaySDK */ = {
+			isa = PBXGroup;
+			children = (
+				1468580D1AA554A40089A0CE /* rsa_private_key.txt */,
+				146858071AA54DD30089A0CE /* AlipaySDK.bundle */,
+				146858081AA54DD30089A0CE /* AlipaySDK.framework */,
+			);
+			path = AlipaySDK;
 			sourceTree = "<group>";
 		};
 		147282C41A67673500FB0CFB /* AHReach */ = {
@@ -3474,6 +3498,7 @@
 		A987ED6F1A20920500CED7CD /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				146858061AA54DD30089A0CE /* AlipaySDK */,
 				143EF3971A81B8C400A88386 /* UMAnalytics */,
 				37F0E6DD1A7D2735004CCCB2 /* SDWebImage */,
 				A9224E231A6CB779002974ED /* YIFullScreenScroll */,
@@ -4254,6 +4279,7 @@
 				14321E631A6125F70065E8C3 /* case_edit_delete@2x.png */,
 				14321E641A6125F70065E8C3 /* case_edit_replace@2x.png */,
 				14A6DA801A5F768C00D40CB3 /* case_create_success@2x.png */,
+				371907B91AA5FA8900A76192 /* order_create@2x.png */,
 				A95DB7061A5EF0BC00F543CE /* Guide */,
 				371D686A1A5D6E2000172AC9 /* Personal */,
 				1415FAA71A5D249E003D0C29 /* Icon-Small.png */,
@@ -4381,6 +4407,7 @@
 					};
 					A971BCAB1A20825800C018D6 = {
 						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = QHWR2FWBM6;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -4495,6 +4522,7 @@
 				BD51877E1A5D0ED700BE508A /* nav-case-default@2x.png in Resources */,
 				1415FA3E1A5CD1CB003D0C29 /* CommentCell.xib in Resources */,
 				BD5187A41A5D344D00BE508A /* icon_add_image@2x.png in Resources */,
+				1468580F1AA554A40089A0CE /* rsa_private_key.txt in Resources */,
 				BD5186101A5D0ED700BE508A /* nav-icon-share@2x.png in Resources */,
 				BD51874A1A5D0ED700BE508A /* sns_icon_1_s@2x.png in Resources */,
 				1415FA3F1A5CD1CB003D0C29 /* SelfIntrodutionCell.xib in Resources */,
@@ -4580,6 +4608,7 @@
 				BD5187041A5D0ED700BE508A /* menu_qr_default@2x.png in Resources */,
 				BD5187341A5D0ED700BE508A /* service_normal_4@2x.png in Resources */,
 				BD5185F81A5D0ED700BE508A /* icon-filter-active@2x.png in Resources */,
+				1468580A1AA54DD30089A0CE /* AlipaySDK.bundle in Resources */,
 				BD51860E1A5D0ED700BE508A /* image_default@2x.png in Resources */,
 				37F165E91A89005700F624FA /* OrderCommentViewController.xib in Resources */,
 				37D885791A8BB0EA0030F846 /* order_point_selected@2x.png in Resources */,
@@ -4603,6 +4632,7 @@
 				BD5187221A5D0ED700BE508A /* service_highlighted_7@2x.png in Resources */,
 				BD5186F61A5D0ED700BE508A /* menu_about_select@2x.png in Resources */,
 				BD5187AE1A5D344D00BE508A /* icon_topic@2x.png in Resources */,
+				371907BA1AA5FA8900A76192 /* order_create@2x.png in Resources */,
 				BD5187841A5D0ED700BE508A /* nav-home-active@2x.png in Resources */,
 				37BF0BD01A8FA0B3001BA9E6 /* OrderCommentManageViewController.xib in Resources */,
 				BD322BCD1A6E090800DDC1C0 /* image_quality_unselected_disabled@2x.png in Resources */,
@@ -4908,6 +4938,7 @@
 				A9C3983C1A29842D006A8AAB /* CommentCell.xib in Resources */,
 				BD51860F1A5D0ED700BE508A /* nav-icon-share@2x.png in Resources */,
 				3721D0981AA23089008ADB34 /* ContractPreviewViewController.xib in Resources */,
+				1468580E1AA554A40089A0CE /* rsa_private_key.txt in Resources */,
 				BD5187491A5D0ED700BE508A /* sns_icon_1_s@2x.png in Resources */,
 				BD5185CB1A5D0ED700BE508A /* Icon7.png in Resources */,
 				1476DA971A21DFBE0006E9E0 /* SelfIntrodutionCell.xib in Resources */,
@@ -5034,6 +5065,7 @@
 				14C855481A2E196B00A15ED9 /* InteractionViewController.xib in Resources */,
 				375635241A60EE6300D120C8 /* service_page@2x.png in Resources */,
 				BD5187451A5D0ED700BE508A /* image_quality_unselected@2x.png in Resources */,
+				146858091AA54DD30089A0CE /* AlipaySDK.bundle in Resources */,
 				144354741A88860B0093C943 /* order_pay_wx@2x.png in Resources */,
 				A987EE4E1A20987800CED7CD /* DesignerViewController.xib in Resources */,
 				BD5186811A5D0ED700BE508A /* icon_personal_case@2x.png in Resources */,
@@ -5207,6 +5239,7 @@
 				BD51874F1A5D0ED700BE508A /* sns_icon_24_s@2x.png in Resources */,
 				14361E561A343F5F00F9BD94 /* BaseAddressViewController.xib in Resources */,
 				37D18DBD1A583AF600B41048 /* CaseIntroduceViewController.xib in Resources */,
+				371907BB1AA5FA9F00A76192 /* order_create@2x.png in Resources */,
 				BD5187271A5D0ED700BE508A /* service_normal_0@2x.png in Resources */,
 				14D973901A334C4F00E771ED /* PushMessageViewController.xib in Resources */,
 				BD5186C91A5D0ED700BE508A /* question_type_selected@2x.png in Resources */,
@@ -5912,6 +5945,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Core",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/QQConnectSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK",
+					"$(PROJECT_DIR)/JuranClient/Vendors/AlipaySDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JuranClient/JuranClient-Prefix.pch";
@@ -5932,7 +5966,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = JuranDesigner;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -5952,6 +5986,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Core",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/QQConnectSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK",
+					"$(PROJECT_DIR)/JuranClient/Vendors/AlipaySDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JuranClient/JuranClient-Prefix.pch";
@@ -5972,7 +6007,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = JuranDesigner;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -6060,6 +6095,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Core",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/QQConnectSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK",
+					"$(PROJECT_DIR)/JuranClient/Vendors/AlipaySDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JuranClient/JuranClient-Prefix.pch";
@@ -6082,6 +6118,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
 				VERSIONING_SYSTEM = "";
@@ -6101,6 +6138,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Core",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/QQConnectSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK",
+					"$(PROJECT_DIR)/JuranClient/Vendors/AlipaySDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JuranClient/JuranClient-Prefix.pch";

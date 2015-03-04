@@ -12,6 +12,7 @@
 #import "MJRefresh.h"
 #import "OrderDetailViewController.h"
 #import "OrderFilterViewController.h"
+#import "ContractViewController.h"
 
 @interface OrderListViewController () <UITableViewDataSource, UITableViewDelegate, OrderFilterViewControllerDelegate>
 
@@ -23,6 +24,7 @@
 
 //Designer
 @property (nonatomic, strong) IBOutlet UIView *headerView;
+@property (nonatomic, strong) IBOutlet UIView *footerView;
 @property (nonatomic, strong) IBOutlet UIButton *leftButton;
 @property (nonatomic, strong) IBOutlet UIButton *rightButton;
 @property (nonatomic, assign) BOOL isLeft;
@@ -51,6 +53,10 @@
     [self.view addSubview:_headerView];
     frame.size.height = CGRectGetHeight(frame) - CGRectGetHeight(_headerView.frame);
     frame.origin.y = CGRectGetHeight(_headerView.frame);
+    
+    _footerView.hidden = YES;
+    _footerView.frame = CGRectMake(0, kWindowHeightWithoutNavigationBar - 40, kWindowWidth, 40);
+    [self.view addSubview:_footerView];
     
     self.filterButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onFilter) title:@"筛选" image:nil];
     [_filterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -91,6 +97,12 @@
     [_leftButton setTitleColor:_isLeft ? kBlueColor : RGBColor(64, 65, 64) forState:UIControlStateNormal];
     [_rightButton setTitleColor:_isLeft ? RGBColor(64, 65, 64) : kBlueColor forState:UIControlStateNormal];
     
+    CGRect frame = kContentFrameWithoutNavigationBar;
+    frame.size.height = CGRectGetHeight(frame) - CGRectGetHeight(_headerView.frame) - (_isLeft?0:(CGRectGetHeight(_footerView.frame)));
+    frame.origin.y = CGRectGetHeight(_headerView.frame);
+    _tableView.frame = frame;
+    _footerView.hidden = _isLeft;
+    
     [_tableView headerBeginRefreshing];
 }
 
@@ -110,6 +122,12 @@
 }
 
 #endif
+
+- (IBAction)onContract:(id)sender{
+    ContractViewController *vc =[[ContractViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 - (void)clickOrderFilterViewReturnData:(NSMutableArray *)selecteds{
     [_tableView headerBeginRefreshing];

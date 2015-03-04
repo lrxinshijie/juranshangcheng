@@ -116,7 +116,7 @@
 
 - (IBAction)onSubmit:(id)sender{
     [self showHUD];
-    NSDictionary *param = @{@"tid": _order.type?_order.designTid:_order.measureTid
+    NSDictionary *param = @{@"tid": _order.measureTid.length > 0?_order.measureTid:@""
                             , @"tradeInfo" : @{@"decoratorId": [NSString stringWithFormat:@"%d", _order.decoratorId]
                                                , @"decoratorName": _order.decoratorName
                                                , @"decoratorRealName": _order.decoratorRealName
@@ -213,13 +213,13 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 35)];
-    view.backgroundColor = RGBColor(226, 226, 226);
+    view.backgroundColor = RGBColor(232, 232, 232);
     
     UIButton *btn = [view buttonWithFrame:view.bounds target:self action:@selector(onHiddenSection:) image:nil];
     btn.tag = section;
     [view addSubview:btn];
     
-    UILabel *label = [view labelWithFrame:CGRectMake(10, 5, 100, 15) text:@"" textColor:[UIColor darkGrayColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
+    UILabel *label = [view labelWithFrame:CGRectMake(10, 10, 100, 15) text:@"" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:kSystemFontSize]];
     [view addSubview:label];
     
     if (section == 0) {

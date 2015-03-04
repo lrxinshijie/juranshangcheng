@@ -37,15 +37,15 @@
         self.titles = @[@"面议", @"元/平米"];
         if (_designer.faceToFace.integerValue) {
             _selectedRow = 1;
-            self.designMaxTextField.text = [NSString stringWithFormat:@"%d",(NSInteger)_designer.designFeeMax];
-            self.designMinTextField.text = [NSString stringWithFormat:@"%d",(NSInteger)_designer.designFeeMin];
+            self.designMaxTextField.text = [NSString stringWithFormat:@"%.2f",_designer.designFeeMax];
+            self.designMinTextField.text = [NSString stringWithFormat:@"%.2f",_designer.designFeeMin];
         }
     }else if (_type == 1){
         self.navigationItem.title = @"量房费用";
         self.titles = @[@"免费", @"元"];
         if (_designer.freeMeasure.integerValue) {
             _selectedRow = 1;
-            self.measureTextField.text = [NSString stringWithFormat:@"%d", (NSInteger)_designer.priceMeasure];
+            self.measureTextField.text = [NSString stringWithFormat:@"%.2f", _designer.priceMeasure];
         }
     }
     

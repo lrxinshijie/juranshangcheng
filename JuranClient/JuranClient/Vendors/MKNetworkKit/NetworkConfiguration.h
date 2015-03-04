@@ -13,6 +13,7 @@
 /* Dev/TEST */
 //#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
 //#define JR_SERVICE  @"http://124.207.66.50:10005"
+//#define JR_SERVICE  @"http://124.193.207.194:8070"
 
 /* UAT */
 #define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
@@ -161,6 +162,6 @@
 #define JR_DESIGNER_CONFIRM_ORDER [NSString stringWithFormat:@"%@/trade/confirmMeasure.json",JR_SERVICE]
 #define JR_GET_EXTRACT_AMOUNT [NSString stringWithFormat:@"%@/trade/measureDrawApplyInit.json",JR_SERVICE]
 #define JR_EXTRACT_AMOUNT [NSString stringWithFormat:@"%@/trade/measureDrawApply.json",JR_SERVICE]
-
+#define JR_PAY_RESPONE [NSString stringWithFormat:@"%@/pay/pay_req.json",JR_SERVICE]
 
 #endif
