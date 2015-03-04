@@ -326,7 +326,7 @@
         if (_order.type == 0) {
             _orderNumberLabel.text = [NSString stringWithFormat:@"订单号：%@", _order.measureTid];
             __weak typeof(self.order) weakOrder = self.order;
-            [_payStatusLabel setText:[NSString stringWithFormat:@"量房金额：￥%@", _order.measurePayAmount]afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+            [_payStatusLabel setText:[NSString stringWithFormat:@"量房金额：￥%@", _order.amount]afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
                 NSRange range = [[mutableAttributedString string] rangeOfString:[NSString stringWithFormat:@"￥%@", weakOrder.measurePayAmount] options:NSCaseInsensitiveSearch];
                 [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[kBlueColor CGColor] range:range];
                 return mutableAttributedString;
