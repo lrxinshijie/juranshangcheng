@@ -651,15 +651,15 @@
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>施工完成</string>
+			<string>待支付</string>
 			<key>v</key>
-			<string>construction_complete</string>
+			<string>wait_consumer_pay</string>
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>量房转设计</string>
+			<string>待上门量房</string>
 			<key>v</key>
-			<string>convert_to_design</string>
+			<string>wait_designer_measure</string>
 		</dict>
 		<dict>
 			<key>k</key>
@@ -669,9 +669,42 @@
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>待支付首款</string>
+			<string>设计完成</string>
+			<key>v</key>
+			<string>complete</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>量房转设计</string>
+			<key>v</key>
+			<string>convert_to_design</string>
+		</dict>
+	</array>
+	<key>orderDesignerStatus</key>
+	<array>
+		<dict>
+			<key>k</key>
+			<string>全部</string>
+			<key>v</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>设计完成</string>
+			<key>v</key>
+			<string>complete</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>待付首款</string>
 			<key>v</key>
 			<string>wait_first_pay</string>
+		</dict>
+		<dict>
+			<key>k</key>
+			<string>待付尾款</string>
+			<key>v</key>
+			<string>wait_last_pay</string>
 		</dict>
 		<dict>
 			<key>k</key>
@@ -681,27 +714,9 @@
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>待支付尾款</string>
+			<string>施工完成</string>
 			<key>v</key>
-			<string>wait_last_pay</string>
-		</dict>
-		<dict>
-			<key>k</key>
-			<string>待设计师量房</string>
-			<key>v</key>
-			<string>wait_designer_measure</string>
-		</dict>
-		<dict>
-			<key>k</key>
-			<string>待支付</string>
-			<key>v</key>
-			<string>wait_consumer_pay</string>
-		</dict>
-		<dict>
-			<key>k</key>
-			<string>设计完成</string>
-			<key>v</key>
-			<string>complete</string>
+			<string>construction_complete</string>
 		</dict>
 	</array>
 	<key>orderTime</key>
