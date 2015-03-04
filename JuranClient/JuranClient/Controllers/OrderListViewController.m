@@ -59,11 +59,15 @@
     _footerView.frame = CGRectMake(0, kWindowHeightWithoutNavigationBar - 40, kWindowWidth, 40);
     [self.view addSubview:_footerView];
     
+    UIView *view = [_footerView viewWithTag:1200];
+    view.layer.borderColor = kBlueColor.CGColor;
+    view.layer.borderWidth = 1.0f;
+    view.layer.cornerRadius = 2.f;
+    
     self.filterButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(onFilter) title:@"筛选" image:[UIImage imageNamed:@"order_filter"]];
     [_filterButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_filterButton];
 #endif
-    
     
     self.tableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

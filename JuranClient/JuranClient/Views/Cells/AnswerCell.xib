@@ -74,7 +74,7 @@
                 <outlet property="userNameLabel" destination="bIq-HW-rd0" id="Ph4-vv-7uf"/>
                 <outlet property="userTypeLabel" destination="hWd-ik-ZBc" id="nmZ-MD-ckT"/>
             </connections>
-            <point key="canvasLocation" x="210" y="225"/>
+            <point key="canvasLocation" x="161" y="223"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -10,6 +10,9 @@
 #import "JRAreaInfo.h"
 #import "AppDelegate.h"
 #import "UIAlertView+Blocks.h"
+#import "PrivateLetterViewController.h"
+#import "PrivateMessageDetailViewController.h"
+#import "PrivateMessage.h"
 
 #define kLocalUserData @"kLocalUserData"
 
@@ -329,6 +332,29 @@
     }
     
     return self.account;
+}
+
+- (void)postPrivateLetterWithUserId:(NSInteger)userId VC:(UIViewController*)vc{
+    [vc showHUD];
+    NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", userId]
+                            };
+    [[ALEngine shareEngine]  pathURL:JR_CHECK_PRIVATE_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [vc hideHUD];
+        if (!error) {
+            NSString *privateLetterid = [data getStringValueForKey:@"privateLetterId" defaultValue:@""];
+            if (privateLetterid.length == 0) {
+                PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+                //                pv.designer = _designer;
+                [vc.navigationController pushViewController:pv animated:YES];
+            }else{
+                PrivateMessageDetailViewController *vc = [[PrivateMessageDetailViewController alloc] init];
+                PrivateMessage *message = [[PrivateMessage alloc] init];
+                message.letterId = privateLetterid.integerValue;
+                vc.message = message;
+                [vc.navigationController pushViewController:vc animated:YES];
+            }
+        }
+    }];
 }
 
 @end

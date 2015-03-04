@@ -638,6 +638,8 @@
 		37A0F81D1A6B96C300611760 /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A0F81A1A6B96C300611760 /* ActivityDetailViewController.m */; };
 		37A0F81E1A6B96C300611760 /* ActivityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */; };
 		37A0F81F1A6B96C300611760 /* ActivityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */; };
+		37BA1E6D1AA73F0200A3232C /* ScoreProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BA1E6C1AA73F0200A3232C /* ScoreProgress.m */; };
+		37BA1E6E1AA73F0200A3232C /* ScoreProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BA1E6C1AA73F0200A3232C /* ScoreProgress.m */; };
 		37BF0BCF1A8FA0B3001BA9E6 /* OrderCommentManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BF0BCD1A8FA0B3001BA9E6 /* OrderCommentManageViewController.m */; };
 		37BF0BD01A8FA0B3001BA9E6 /* OrderCommentManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37BF0BCE1A8FA0B3001BA9E6 /* OrderCommentManageViewController.xib */; };
 		37BF0BD31A8FA2A4001BA9E6 /* JROrderManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BF0BD21A8FA2A4001BA9E6 /* JROrderManage.m */; };
@@ -1854,6 +1856,8 @@
 		37A0F8191A6B96C300611760 /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityDetailViewController.h; sourceTree = "<group>"; };
 		37A0F81A1A6B96C300611760 /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityDetailViewController.m; sourceTree = "<group>"; };
 		37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityDetailViewController.xib; sourceTree = "<group>"; };
+		37BA1E6B1AA73F0200A3232C /* ScoreProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreProgress.h; sourceTree = "<group>"; };
+		37BA1E6C1AA73F0200A3232C /* ScoreProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreProgress.m; sourceTree = "<group>"; };
 		37BF0BCC1A8FA0B3001BA9E6 /* OrderCommentManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCommentManageViewController.h; sourceTree = "<group>"; };
 		37BF0BCD1A8FA0B3001BA9E6 /* OrderCommentManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCommentManageViewController.m; sourceTree = "<group>"; };
 		37BF0BCE1A8FA0B3001BA9E6 /* OrderCommentManageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCommentManageViewController.xib; sourceTree = "<group>"; };
@@ -3891,6 +3895,8 @@
 				1419DD001A874AB900B9E47B /* OrderActionView.m */,
 				37D885731A8B8E5B0030F846 /* CommentStarView.h */,
 				37D885741A8B8E5B0030F846 /* CommentStarView.m */,
+				37BA1E6B1AA73F0200A3232C /* ScoreProgress.h */,
+				37BA1E6C1AA73F0200A3232C /* ScoreProgress.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4640,7 +4646,6 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
 						DevelopmentTeam = QHWR2FWBM6;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
@@ -5670,6 +5675,7 @@
 				1415F98F1A5CD1CB003D0C29 /* JSONModelError.m in Sources */,
 				375B465A1A5EE76300D7E74B /* StyleModifyViewController.m in Sources */,
 				37CE57271A6D346D00C75E65 /* WikiOrActivityViewController.m in Sources */,
+				37BA1E6E1AA73F0200A3232C /* ScoreProgress.m in Sources */,
 				1415F9901A5CD1CB003D0C29 /* UIView+MJExtension.m in Sources */,
 				1415F9911A5CD1CB003D0C29 /* CaseManagementViewController.m in Sources */,
 				1415F9921A5CD1CB003D0C29 /* JSONModel+networking.m in Sources */,
@@ -6014,6 +6020,7 @@
 				14D973981A33545000E771ED /* JRPushInfoMsg.m in Sources */,
 				A987EDDF1A20920500CED7CD /* NSDate+ASCategory.m in Sources */,
 				37CF672C1A4FE11D0044F709 /* NewestBidInfoCell.m in Sources */,
+				37BA1E6D1AA73F0200A3232C /* ScoreProgress.m in Sources */,
 				14587E101A35D5E300D41236 /* DetailAddressViewController.m in Sources */,
 				14C8554E1A2E1A1600A15ED9 /* InteractionCell.m in Sources */,
 				37DC90F81A9F5A3C004C7898 /* ContractViewController.m in Sources */,
@@ -6389,7 +6396,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";

@@ -11,6 +11,7 @@
 #import "CommentStarView.h"
 #import "OrderCommentCell.h"
 #import "JRDesignCreditDto.h"
+#import "ScoreProgress.h"
 
 @interface OrderCommentManageViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -20,8 +21,8 @@
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, strong) IBOutlet UIView *praiseView;
-@property (nonatomic, strong) IBOutlet CommentStarView *capacityPointView;
-@property (nonatomic, strong) IBOutlet CommentStarView *servicePointView;
+@property (nonatomic, strong) IBOutlet ScoreProgress *capacityPointView;
+@property (nonatomic, strong) IBOutlet ScoreProgress *servicePointView;
 @property (nonatomic, strong) IBOutlet UILabel *capacityLabel;
 @property (nonatomic, strong) IBOutlet UILabel *serviceLabel;
 @property (nonatomic, strong) IBOutlet UILabel *capacityDescLabel;
@@ -60,10 +61,6 @@
 //    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = RGBColor(237, 237, 237);
     [self.view addSubview:_tableView];
-    
-    [self.capacityPointView setEnable:NO];
-    [self.servicePointView setEnable:NO];
-    
 }
 
 
@@ -159,12 +156,12 @@
         }else if (indexPath.section == 1){
             cell.textLabel.text = @"收到的评价";
         }else if (indexPath.section == 0&& indexPath.row == 1){
-            _capacityPointView.selectedIndex = _manage.capacityPointInfo.averageCredit;
+            _capacityPointView.selectedIndex = _manage.capacityPointInfo.averageCredit/5.f;
             _capacityLabel.text = [NSString stringWithFormat:@"%d分", _manage.capacityPointInfo.averageCredit];
             _capacityDescLabel.text = _manage.capacityPointInfo.descForDto;
             _capacityNumLabel.text = [NSString stringWithFormat:@"%d人", _manage.capacityPointInfo.sellerTotal];
             
-            _servicePointView.selectedIndex = _manage.servicePointInfo.averageCredit;
+            _servicePointView.selectedIndex = _manage.servicePointInfo.averageCredit/5.f;
             _serviceLabel.text = [NSString stringWithFormat:@"%d分", _manage.servicePointInfo.averageCredit];
             _serviceDescLabel.text = _manage.servicePointInfo.descForDto;
             _serviceNumLabel.text = [NSString stringWithFormat:@"%d人", _manage.servicePointInfo.sellerTotal];
