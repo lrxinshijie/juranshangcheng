@@ -26,7 +26,7 @@
     
     self.navigationItem.title = @"筛选";
     
-    self.orderStatuses = [[DefaultData sharedData] objectForKey:@"orderStatus"];
+    self.orderStatuses = [[DefaultData sharedData] objectForKey:_isDesigner ? @"orderDesignerStatus" : @"orderStatus"];
     self.orderTimes = [[DefaultData sharedData] objectForKey:@"orderTime"];
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];

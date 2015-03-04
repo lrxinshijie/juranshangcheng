@@ -117,7 +117,8 @@
 
 - (void)onFilter{
     OrderFilterViewController *ov = [[OrderFilterViewController alloc] init];
-    ov.selecteds = self.filterSelecteds;
+    ov.selecteds = _isLeft ? self.filterSelecteds : self.designerFilterSelecteds;
+    ov.isDesigner = !_isLeft;
     ov.delegate = self;
     [self.navigationController pushViewController:ov animated:YES];
 }
@@ -180,13 +181,16 @@
 #ifdef kJuranDesigner
     [param setObject:[NSString stringWithFormat:@"%d", !_isLeft] forKey:@"type"];
 //    [param addEntriesFromDictionary:_filterDict];
-    NSInteger status = [[self.filterSelecteds firstObject] integerValue];
+    
+    NSMutableArray *selecteds = _isLeft ? _filterSelecteds : _designerFilterSelecteds;
+    
+    NSInteger status = [[selecteds firstObject] integerValue];
     if (status > 0) {
-        NSArray *statuses = [[DefaultData sharedData] objectForKey:@"orderStatus"];
+        NSArray *statuses = [[DefaultData sharedData] objectForKey:_isLeft ? @"orderStatus" : @"orderDesignerStatus"];
         [param setObject:statuses[status][@"v"] forKey:@"status"];
     }
     
-    NSInteger time = [[self.filterSelecteds lastObject] integerValue];
+    NSInteger time = [[selecteds lastObject] integerValue];
     if (time > 0) {
         NSDate *today = [NSDate date];
         NSString *createDateTo = [today stringWithFormat:kDateFormatHorizontalLineLong];
