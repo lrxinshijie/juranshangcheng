@@ -30,6 +30,7 @@
 @property (nonatomic, assign) BOOL isLeft;
 @property (nonatomic, strong) UIButton *filterButton;
 @property (nonatomic, strong) NSMutableArray *filterSelecteds;
+@property (nonatomic, strong) NSMutableArray *designerFilterSelecteds;
 
 @end
 
@@ -225,6 +226,14 @@
     }
     
     return _filterSelecteds;
+}
+
+- (NSMutableArray *)designerFilterSelecteds{
+    if (!_designerFilterSelecteds) {
+        _designerFilterSelecteds = [NSMutableArray arrayWithArray:@[@(0), @(0)]];
+    }
+    
+    return _designerFilterSelecteds;
 }
 
 - (void)didReceiveMemoryWarning {

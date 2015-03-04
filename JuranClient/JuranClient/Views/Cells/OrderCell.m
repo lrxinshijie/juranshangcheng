@@ -127,7 +127,7 @@
     _statusLabel.text = order.statusName;
     
     if (order.type == 0) {
-        NSString *measurePay = [NSString stringWithFormat:@"￥%@", order.measurePayAmount];
+        NSString *measurePay = [NSString stringWithFormat:@"￥%@", order.waitPayAmount];
         NSString *content = [NSString stringWithFormat:@"量房费 实%@：%@", pay, measurePay];
         
         [_payAmountLabel setText:content afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
@@ -305,7 +305,7 @@
             y = CGRectGetMaxY(frame);
         }
         
-        if (([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) && [_order.measurePayAmount doubleValue] > 0) {
+        if (([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) && [_order.payAmount doubleValue] > 0) {
             frame = _actionBgView.frame;
             frame.origin.y = y;
             _actionBgView.frame = frame;
@@ -440,7 +440,7 @@
             height += 37;
         }
         
-        if (([order.status isEqualToString:@"wait_first_pay"] || [order.status isEqualToString:@"wait_last_pay"]) && [order.measurePayAmount doubleValue] > 0) {
+        if (([order.status isEqualToString:@"wait_first_pay"] || [order.status isEqualToString:@"wait_last_pay"]) && [order.payAmount doubleValue] > 0) {
             height += 37;
         }
     }
