@@ -13,11 +13,11 @@
 /* Dev/TEST */
 //#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
 //#define JR_SERVICE  @"http://124.207.66.50:10005"
-#define JR_SERVICE  @"http://124.193.207.194:8070"
+//#define JR_SERVICE  @"http://124.193.207.194:8070"
 
 /* UAT */
 #define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
-//#define JR_SERVICE  @"http://54.223.161.28:8080"
+#define JR_SERVICE  @"http://54.223.161.28:8080"
 
 /* Production */
 //#define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
@@ -135,7 +135,7 @@
 #define JR_EDIT_BID_MEMO [NSString stringWithFormat:@"%@/design/editDeDesignerBidMemoReq.json",JR_SERVICE]
 #define JR_BID_DESIGNREQ [NSString stringWithFormat:@"%@/design/bidDesignReq.json",JR_SERVICE]
 #define JR_OTHER_APP [NSString stringWithFormat:@"%@/index/otherApp.json",JR_SERVICE]
-
+#define JR_CHECK_PRIVATE_LETTER [NSString stringWithFormat:@"%@/member/checkPrivateLetter.json",JR_SERVICE]
 
 
 

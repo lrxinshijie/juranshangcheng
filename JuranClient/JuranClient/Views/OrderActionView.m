@@ -44,13 +44,13 @@
             [self addSubview:[self buttonWithAction:OrderActionReject]];
             [self addSubview:[self buttonWithAction:OrderActionPrice]];
         }else if ([_order.status isEqualToString:@"wait_designer_measure"]) {
-            if ([order.measurePayAmount doubleValue] > 0) {
+            if ([order.payAmount doubleValue] > 0) {
                 [self addSubview:[self buttonWithAction:OrderActionExtract]];
             }
             [self addSubview:[self buttonWithAction:OrderActionDesigner]];
         }
     }else if (_order.type == 1){
-        if (([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) && [order.measurePayAmount doubleValue] > 0) {
+        if (([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) && [order.payAmount doubleValue] > 0) {
                 [self addSubview:[self buttonWithAction:OrderActionExtract]];
         }
     }

@@ -152,10 +152,6 @@
                 _topic = [[JRTopic alloc] initWithDictionaryForDetail:data];
             }
             
-            if (_topic.topicId.length > 0) {
-                self.navigationItem.title = _topic.theme.length>0?_topic.theme:_topic.title;
-            }
-            
             if (!data) {
                 _emptyView.hidden = NO;
             }
@@ -173,12 +169,15 @@
 - (void)reloadData{
     if (![_topic isNewestTopic]) {
         _tableView.frame = kContentFrameWithoutNavigationBar;
+        self.navigationItem.title = _topic.theme.length>0?_topic.theme:_topic.title;
 //        _commentView.hidden = YES;
         _bottomView.hidden = YES;
     }else{
         _tableView.frame = kContentFrameWithoutNavigationBarAndTabBar;
 //        _commentView.hidden = NO;
+        self.navigationItem.title = @"最新话题";
         _bottomView.hidden = NO;
+        
     }
     
     _titleLabel.text = _topic.theme;

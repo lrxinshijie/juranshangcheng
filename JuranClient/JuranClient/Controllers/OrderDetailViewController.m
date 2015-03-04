@@ -15,6 +15,8 @@
 #import "OrderPhotoBrowserViewController.h"
 #import "JRWebViewController.h"
 #import "TTTAttributedLabel.h"
+#import "PrivateMessageDetailViewController.h"
+#import "PrivateMessage.h"
 
 @interface OrderDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -143,8 +145,8 @@
                             @"userType": [[ALTheme sharedTheme]userType]
                             };
     [[ALEngine shareEngine]  pathURL:JR_ORDER_DETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
         if (!error) {
-            [self hideHUD];
             [_order buildUpWithValueForDetail:data];
             [self reloadData];
         }
@@ -184,12 +186,33 @@
 #ifdef kJuranDesigner
     return;
 #endif
-    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
-    JRDesigner *designer = [[JRDesigner alloc] init];
-    designer.userId = _order.decoratorId;
-    
-    pv.designer = designer;
-    [self.navigationController pushViewController:pv animated:YES];
+//    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+//    JRDesigner *designer = [[JRDesigner alloc] init];
+//    designer.userId = _order.decoratorId;
+//    
+//    pv.designer = designer;
+//    [self.navigationController pushViewController:pv animated:YES];
+    /*
+    [self showHUD];
+    NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", [[ALTheme sharedTheme].userType isEqualToString:@"designer"]?_order.customerId:_order.decoratorId],
+                            };
+    [[ALEngine shareEngine]  pathURL:JR_CHECK_PRIVATE_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+         [self hideHUD];
+        if (!error) {
+            NSString *privateLetterid = [data getStringValueForKey:@"privateLetterId" defaultValue:@""];
+            if (privateLetterid.length == 0) {
+                PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+//                pv.designer = _designer;
+                [self.navigationController pushViewController:pv animated:YES];
+            }else{
+                PrivateMessageDetailViewController *vc = [[PrivateMessageDetailViewController alloc] init];
+                PrivateMessage *message = [[PrivateMessage alloc] init];
+                message.letterId = privateLetterid.integerValue;
+                vc.message = message;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }
+    }];*/
 }
 
 - (IBAction)onRoomTypePhoto:(id)sender{
@@ -326,7 +349,7 @@
         if (_order.type == 0) {
             _orderNumberLabel.text = [NSString stringWithFormat:@"订单号：%@", _order.measureTid];
             __weak typeof(self.order) weakOrder = self.order;
-            [_payStatusLabel setText:[NSString stringWithFormat:@"量房金额：￥%@", _order.measurePayAmount]afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+            [_payStatusLabel setText:[NSString stringWithFormat:@"量房金额：￥%@", _order.amount]afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
                 NSRange range = [[mutableAttributedString string] rangeOfString:[NSString stringWithFormat:@"￥%@", weakOrder.measurePayAmount] options:NSCaseInsensitiveSearch];
                 [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[kBlueColor CGColor] range:range];
                 return mutableAttributedString;
@@ -343,6 +366,8 @@
         }
         [cell.contentView addSubview:_paymentInfoView];
     }else if (indexPath.section == 0 && indexPath.row == 1){
+        [_roomTypeView removeFromSuperview];
+        [_fileView removeFromSuperview];
         if (_order.measurefileSrc.count && _order.fileSrc.count) {
             _roomTypeView.frame = CGRectMake(0, 26, CGRectGetWidth(_roomTypeView.frame), CGRectGetHeight(_roomTypeView.frame));
             [_deliveryInfoView addSubview:_roomTypeView];
@@ -356,6 +381,7 @@
             }
             if (_order.fileSrc.count) {
                 _fileView.frame = CGRectMake(0, 26, CGRectGetWidth(_fileView.frame), CGRectGetHeight(_fileView.frame));
+                [_deliveryInfoView addSubview:_fileView];
             }
         }
         _roomTypeCountLabel.hidden = _order.measurefileSrc.count <= 3;

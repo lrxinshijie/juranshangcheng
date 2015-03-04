@@ -51,7 +51,7 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"订单评价";
-    self.isAnonymity = YES;
+    self.isAnonymity = NO;
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
@@ -91,6 +91,8 @@
     
     _capacityPointView.delegate = self;
     _servicePointView.delegate = self;
+    _capacityPointView.selectedIndex = 4;
+    _servicePointView.selectedIndex = 4;
 }
 
 

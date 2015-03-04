@@ -19,6 +19,7 @@
 
 @interface OrderFilterViewController : ALViewController
 
+@property (nonatomic, assign) BOOL isDesigner;
 @property (nonatomic, strong) NSMutableArray *selecteds;
 @property (nonatomic, assign) id<OrderFilterViewControllerDelegate> delegate;
 
