@@ -30,6 +30,7 @@
 @property (nonatomic, strong) IBOutlet UIView *waitFirstPayView;
 @property (nonatomic, strong) IBOutlet UIView *designContentView;
 @property (nonatomic, strong) IBOutlet UIView *tableFooterView;
+@property (nonatomic, strong) IBOutlet UIView *addressView;
 @property (nonatomic, strong) UITextField *selectedTextField;
 @property (nonatomic, strong) UITextView *selectedTextView;
 
@@ -39,6 +40,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *diyPageNumTextField;
 @property (nonatomic, strong) IBOutlet UITextField *addPagePriceTextField;
 @property (nonatomic, strong) IBOutlet ASPlaceholderTextView *commentTextView;
+@property (nonatomic, strong) IBOutlet ASPlaceholderTextView *addessTextView;
 @property (nonatomic, strong) IBOutlet TTTAttributedLabel *waitFirstPayAmountLabel;
 @property (nonatomic, assign) BOOL isReadContact;
 @property (nonatomic, strong) IBOutlet UIImageView *readFlagImgView;
@@ -147,6 +149,9 @@
     view.layer.cornerRadius = 2.f;
     
     _commentTextView.placeholder = @"请输入200字以内的备注说明";
+    _addessTextView.placeholder = @"请输入详细地址";
+    _addessTextView.layer.borderWidth = 1.f;
+    _addessTextView.layer.borderColor = RGBColor(241, 241, 241).CGColor;
     
     TTTAttributedLabel *label = (TTTAttributedLabel*)[_designContentView viewWithTag:1300];
     [label setText:@"说明：设计师还需提供详细施工图纸，具体详见《住宅室内装饰设计合同》中的合同条款。" afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
@@ -344,13 +349,15 @@
         return 140;
     }else if (indexPath.section == 0 && row == 5){
         return 285;
+    }else if (indexPath.section == 1 && row == 9){
+        return 80;
     }
     return 36;
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 35)];
-    view.backgroundColor = RGBColor(232, 232, 232);
+    view.backgroundColor = RGBColor(241, 241, 241);
     
     UIButton *btn = [view buttonWithFrame:view.bounds target:self action:@selector(onHiddenSection:) image:nil];
     btn.tag = section;
@@ -378,7 +385,7 @@
     if (indexPath.section == 0 && _isImmediate) {
         row = row + 1;
     }
-    if ((indexPath.section == 0 && row == 1) || (_isImmediate && ((indexPath.section == 1 && row != 6 && row != 8) || (indexPath.section == 2)))) {
+    if ((indexPath.section == 0 && row == 1) || (_isImmediate && ((indexPath.section == 1 && row != 6 && row != 8 && row != 9) || (indexPath.section == 2)))) {
         static NSString *CellIdentifier = @"TextFieldCell";
         TextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
@@ -462,6 +469,10 @@
         }else if (indexPath.section == 0 && row == 4) {
             cell.textLabel.text = _keys[indexPath.section][row];
             cell.detailTextLabel.text = _values[indexPath.section][row];
+        }else if (indexPath.section == 1 && indexPath.row == 9){
+            _addessTextView.text = _order.address;
+            _addessTextView.userInteractionEnabled = _isImmediate;
+            [cell.contentView addSubview:_addressView];
         }else if (indexPath.section == 0 || _isImmediate){
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellIndicator.png"]];
             
@@ -575,12 +586,23 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
-     _order.comments = textView.text;
+    if (textView == self.commentTextView) {
+        _order.comments = textView.text;
+    }else if (textView == self.addessTextView){
+        _order.address = textView.text;
+    }
+    
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
-    NSArray *rows = _keys[0];
-    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:rows.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    if (textView == self.commentTextView) {
+        NSArray *rows = _keys[0];
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:rows.count - 1 - (_isImmediate?1:0) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }else if (textView == self.addessTextView){
+        NSArray *rows = _keys[1];
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:rows.count - 1 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+   
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{

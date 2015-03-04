@@ -15,6 +15,8 @@
 #import "OrderPhotoBrowserViewController.h"
 #import "JRWebViewController.h"
 #import "TTTAttributedLabel.h"
+#import "PrivateMessageDetailViewController.h"
+#import "PrivateMessage.h"
 
 @interface OrderDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -143,8 +145,8 @@
                             @"userType": [[ALTheme sharedTheme]userType]
                             };
     [[ALEngine shareEngine]  pathURL:JR_ORDER_DETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
         if (!error) {
-            [self hideHUD];
             [_order buildUpWithValueForDetail:data];
             [self reloadData];
         }
@@ -184,12 +186,33 @@
 #ifdef kJuranDesigner
     return;
 #endif
-    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
-    JRDesigner *designer = [[JRDesigner alloc] init];
-    designer.userId = _order.decoratorId;
-    
-    pv.designer = designer;
-    [self.navigationController pushViewController:pv animated:YES];
+//    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+//    JRDesigner *designer = [[JRDesigner alloc] init];
+//    designer.userId = _order.decoratorId;
+//    
+//    pv.designer = designer;
+//    [self.navigationController pushViewController:pv animated:YES];
+    /*
+    [self showHUD];
+    NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", [[ALTheme sharedTheme].userType isEqualToString:@"designer"]?_order.customerId:_order.decoratorId],
+                            };
+    [[ALEngine shareEngine]  pathURL:JR_CHECK_PRIVATE_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+         [self hideHUD];
+        if (!error) {
+            NSString *privateLetterid = [data getStringValueForKey:@"privateLetterId" defaultValue:@""];
+            if (privateLetterid.length == 0) {
+                PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+//                pv.designer = _designer;
+                [self.navigationController pushViewController:pv animated:YES];
+            }else{
+                PrivateMessageDetailViewController *vc = [[PrivateMessageDetailViewController alloc] init];
+                PrivateMessage *message = [[PrivateMessage alloc] init];
+                message.letterId = privateLetterid.integerValue;
+                vc.message = message;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }
+    }];*/
 }
 
 - (IBAction)onRoomTypePhoto:(id)sender{

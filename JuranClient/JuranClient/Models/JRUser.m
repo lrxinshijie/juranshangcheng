@@ -38,6 +38,7 @@
         self.idCardNum = @"";
         self.qq = @"";
         self.weixin = @"";
+        
     }
     return self;
 }
