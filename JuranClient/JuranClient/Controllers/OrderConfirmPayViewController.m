@@ -32,10 +32,15 @@
 
 @implementation OrderConfirmPayViewController
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySuccess) name:kNotificationNameOrderPaySuccess object:nil];
     
     self.navigationItem.title = @"支付订单";
     
@@ -89,7 +94,7 @@
             NSString *service = [aliPayDto getStringValueForKey:@"service" defaultValue:@""];
             NSString *inputCharset = [aliPayDto getStringValueForKey:@"inputCharset" defaultValue:@""];
             
-//            NSString *sign = [aliPayDto getStringValueForKey:@"sign" defaultValue:@""];
+            NSString *sign = [aliPayDto getStringValueForKey:@"sign" defaultValue:@""];
             NSString *signType = [aliPayDto getStringValueForKey:@"signType" defaultValue:@""];
             
             NSDictionary *orderData = @{@"partner": partner,
@@ -104,43 +109,68 @@
                                         @"_input_charset": inputCharset,
 //                                        @"it_b_pay": @"30m",
 //                                        @"show_url": @"m.alipay.com",
-//                                        @"sign": sign,
-//                                        @"sign_type": signType
+                                        @"sign": sign,
+                                        @"sign_type": signType
                                         };
+            
+            NSArray *sorts = @[@"_input_charset",@"body",@"notify_url",@"out_trade_no",@"partner",@"payment_type",@"seller_id",@"service",@"subject", @"total_fee", @"sign", @"sign_type"];
             __block NSMutableString *orderString = [NSMutableString string];
-            NSString *appScheme = @"JuranClient";
-            [orderData enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            [sorts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 if (orderString.length > 0) {
                     [orderString appendFormat:@"&"];
                 }
-                [orderString appendFormat:@"%@=\"%@\"", key, obj];
+                [orderString appendFormat:@"%@=\"%@\"", obj, orderData[obj]];
             }];
+//            __block NSMutableString *orderString = [NSMutableString string];
+            NSString *appScheme = @"JuranClient";
+//            [orderData enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+//                if (orderString.length > 0) {
+//                    [orderString appendFormat:@"&"];
+//                }
+//                [orderString appendFormat:@"%@=\"%@\"", key, obj];
+//            }];
+
+//            NSString *path = [[NSBundle mainBundle] pathForResource:@"rsa_private_key" ofType:@"txt"];
+//            NSString *privateKey = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
             
-            NSString *path = [[NSBundle mainBundle] pathForResource:@"rsa_private_key" ofType:@"txt"];
-            NSString *privateKey = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+//            id<DataSigner> signer = CreateRSADataSigner(privateKey);
+//            NSString *sign = [signer signString:orderString];
             
-            id<DataSigner> signer = CreateRSADataSigner(privateKey);
-            NSString *sign = [signer signString:orderString];
-            
-            [orderString appendFormat:@"&sign=\"%@\"&sign_type=\"%@\"", sign, signType];
+//            [orderString appendFormat:@"&sign=\"%@\"&sign_type=\"%@\"", sign, signType];
             
             ASLog(@"%@,%@",[[AlipaySDK defaultService] currentVersion],orderString);
             
             [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
                 NSInteger resultStatus = [resultDic getIntValueForKey:@"resultStatus" defaultValue:0];
+                
+                NSDictionary *tips = @{@"9000": @"支付成功",
+                                       @"8000": @"订单支付成功",
+                                       @"4000": @"订单支付失败",
+                                       @"6001": @"用户中途取消",
+                                       @"6002": @"网络连接出错"
+                                       };
+                NSString *tip = [tips getStringValueForKey:[NSString stringWithFormat:@"%d", resultStatus] defaultValue:@""];
+                if (tip.length > 0) {
+                    [self showTip:tip];
+                }
+                
                 if (resultStatus == 9000) {
                     //交易成功
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:@(YES)];
-                    
-                    OrderListViewController *cm = (OrderListViewController *)[self.navigationController.viewControllers objectAtTheIndex:1];
-                    if (cm && [cm isKindOfClass:[OrderListViewController class]]) {
-                        [self.navigationController popToViewController:cm animated:YES];
-                    }
+                    [self paySuccess];
                 }
-//                ASLog(@"resultDic:%@", resultDic);
+                ASLog(@"resultDic:%@", resultDic);
             }];
         }
     }];
+}
+
+- (void)paySuccess{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:@(YES)];
+    
+    OrderListViewController *cm = (OrderListViewController *)[self.navigationController.viewControllers objectAtTheIndex:1];
+    if (cm && [cm isKindOfClass:[OrderListViewController class]]) {
+        [self.navigationController popToViewController:cm animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
