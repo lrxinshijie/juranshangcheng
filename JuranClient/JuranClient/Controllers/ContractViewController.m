@@ -166,6 +166,7 @@
         return mutableAttributedString;
     }];
     
+    _measureAmountTextField.enabled = _isImmediate;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -298,6 +299,21 @@
         [self showTip:@"设计师电子邮箱不能为空！"];
         return;
     }*/
+    if (_isImmediate) {
+        if (_order.decoratorEmail.length > 0) {
+            if (!_order.decoratorEmail.validateEmail) {
+                [self showTip:@"请输入正确地设计师电子邮箱!"];
+                return;
+            }
+        }
+        if (_order.customerEmail.length > 0) {
+            if (!_order.decoratorEmail.validateEmail) {
+                [self showTip:@"请输入正确地消费者电子邮箱!"];
+                return;
+            }
+        }
+    }
+    
     if (!_isReadContact) {
         [self showTip:@"请阅读《住宅室内装饰设计合同》！"];
         return;
@@ -357,7 +373,7 @@
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 35)];
-    view.backgroundColor = RGBColor(241, 241, 241);
+    view.backgroundColor = RGBColor(232, 232, 232);
     
     UIButton *btn = [view buttonWithFrame:view.bounds target:self action:@selector(onHiddenSection:) image:nil];
     btn.tag = section;

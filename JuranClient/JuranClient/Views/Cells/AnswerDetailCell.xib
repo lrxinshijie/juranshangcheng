@@ -48,7 +48,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="best_answer.png" id="0Sj-un-0yu">
-                        <rect key="frame" x="280" y="0.0" width="30" height="40"/>
+                        <rect key="frame" x="286" y="0.0" width="24" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Labeljsldjflksjdflkjslkjdflksjdfkljslkdjfkjskldjfkljsdklfjklsjdfkjslkdjfkljdsflkjskldjfkljsdkljfklsjdkfjlksdjflkjsdklfjlksdjf" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FU8-xP-sSE">
@@ -89,7 +89,7 @@
                 <outlet property="timeLabel" destination="WPs-iA-9kt" id="uGz-22-qa2"/>
                 <outlet property="userTypeLabel" destination="H6L-ux-Wg9" id="JpH-gF-cOe"/>
             </connections>
-            <point key="canvasLocation" x="140" y="228"/>
+            <point key="canvasLocation" x="124" y="228"/>
         </tableViewCell>
     </objects>
     <resources>

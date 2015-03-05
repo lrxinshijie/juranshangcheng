@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 @class JRAreaInfo;
 
 @interface JRUser : NSObject
@@ -59,6 +60,7 @@
 + (JRUser *)currentUser;
 - (id)initWithDictionary:(NSDictionary*)dict;
 + (void)refreshToken:(VoidBlock)finished;
+- (void)postPrivateLetterWithUserId:(NSInteger)userId VC:(UIViewController*)vc;
 
 //ProfileData
 - (void)buildUpProfileDataWithDictionary:(NSDictionary*)dict;

@@ -202,7 +202,7 @@
     }else{
         _tempView.frame = CGRectMake(0, 0, CGRectGetWidth(_tempView.frame), CGRectGetHeight(_tempView.frame));
     }
-    _tableHeaderView.frame = CGRectMake(0, 0, CGRectGetMaxY(_tempView.frame), CGRectGetHeight(_tempView.frame));
+    _tableHeaderView.frame = CGRectMake(0, 0, CGRectGetWidth(_tableHeaderView.frame), CGRectGetMaxY(_tempView.frame));
     _tableView.tableHeaderView = _tableHeaderView;
 }
 

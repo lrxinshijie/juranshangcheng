@@ -235,7 +235,7 @@
 
 - (NSString *)serviceDateString{
     NSArray *rows = @[@"只工作日",@"工作日、双休日与假日均可",@"只双休日、假日"];
-    NSString *retVal = [rows objectAtTheIndex:[_serviceDate integerValue]];
+    NSString *retVal = [rows objectAtTheIndex:[_serviceDate integerValue]-1];
     if (retVal) {
         return retVal;
     }

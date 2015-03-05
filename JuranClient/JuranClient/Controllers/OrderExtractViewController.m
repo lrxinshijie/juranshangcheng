@@ -77,10 +77,10 @@
         return;
     }
     
-    if (_applyAmount == 0) {
-        [self showTip:@"可提取金额为0"];
-        return;
-    }
+//    if (_applyAmount == 0) {
+//        [self showTip:@"可提取金额为0"];
+//        return;
+//    }
     
     NSDictionary *param = @{@"tid": _order.measureTid,
                             @"applyAmount": [NSString stringWithFormat:@"%d", _applyAmount],
