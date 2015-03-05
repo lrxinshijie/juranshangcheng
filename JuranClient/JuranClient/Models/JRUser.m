@@ -250,7 +250,7 @@
         address = [NSString stringWithFormat:@"%@-%@", address, self.areaInfo.districtName];
     }
     if (address.length == 0) {
-        return @"未设置";
+        return @"";
     }
     return address;
 }
@@ -308,9 +308,9 @@
 
 - (NSString*)sexyString{
     if (self.sex == -1) {
-        return @"未设置";
+        return @"";
     }else if (self.sex == 0){
-        return @"未设置";
+        return @"";
     }
     NSArray *sexs = [DefaultData sharedData].sex;
     NSDictionary *dic = sexs[_sex];

@@ -299,36 +299,84 @@
         [self showTip:@"设计师电子邮箱不能为空！"];
         return;
     }*/
-    if (_isImmediate) {
-        if (_order.decoratorEmail.length > 0) {
-            if (!_order.decoratorEmail.validateEmail) {
-                [self showTip:@"请输入正确地设计师电子邮箱!"];
-                return;
-            }
+//    if (_isImmediate) {
+//        if (_order.decoratorEmail.length > 0) {
+//            if (!_order.decoratorEmail.validateEmail) {
+//                [self showTip:@"请输入正确地设计师电子邮箱!"];
+//                return;
+//            }
+//        }
+//        if (_order.customerEmail.length > 0) {
+//            if (!_order.decoratorEmail.validateEmail) {
+//                [self showTip:@"请输入正确地消费者电子邮箱!"];
+//                return;
+//            }
+//        }
+//    }
+//    
+//    if (!_isReadContact) {
+//        [self showTip:@"请阅读《住宅室内装饰设计合同》！"];
+//        return;
+//    }
+//    
+//    CGFloat value = _order.amount.floatValue * 0.2f;
+//    if (_order.firstPayAmount.floatValue < value || _order.firstPayAmount.floatValue > _order.amount.floatValue) {
+//        [self showTip:@"首付定金不低于合同金额的20%并且不高于合同金！"];
+//        return;
+//    }
+    
+    NSDictionary *param = @{@"tid": _order.measureTid.length > 0?_order.measureTid:@""
+                            , @"flag" : @"true"
+                            , @"tradeInfo" : @{@"decoratorId": [NSString stringWithFormat:@"%d", _order.decoratorId]
+                                               , @"decoratorName": _order.decoratorName
+                                               , @"decoratorRealName": _order.decoratorRealName
+                                               , @"decoratorMobile": _order.decoratorMobile
+                                               , @"decoratorQQ": _order.decoratorQQ
+                                               , @"decoratorWechat": _order.decoratorWechat
+                                               , @"decoratorEmail": _order.decoratorEmail
+                                               , @"customerId": [NSString stringWithFormat:@"%d", _order.customerId]
+                                               , @"measureTid": _order.measureTid
+                                               , @"measurePayAmountStr": _order.measurePayAmount
+                                               , @"finalPayAmountStr": _order.finalPayAmount
+                                               , @"designReqId": _order.designReqId
+                                               //                            , @"amount": _order.amount
+                                               , @"amountStr": _order.amount
+                                               , @"firstPayAmountStr": _order.firstPayAmount
+                                               //                                               , @"firstPayAmount": _order.firstPayAmount
+                                               , @"diyPageNum": [NSString stringWithFormat:@"%d", _order.diyPageNum]
+                                               , @"designPageNum": [NSString stringWithFormat:@"%d", _order.designPageNum]
+                                               , @"addPagePriceStr": [NSString stringWithFormat:@"%d", _order.addPagePrice]
+                                               //                                               , @"addPagePrice": [NSString stringWithFormat:@"%d", _order.addPagePrice]
+                                               //                            , @"serviceDate": _order.serviceDate
+                                               , @"comments": _order.comments
+                                               , @"customerName": _order.customerName
+                                               , @"customerRealName": _order.customerRealName
+                                               , @"customerMobile": _order.customerMobile
+                                               , @"customerCardNo": _order.customerCardNo
+                                               , @"customerQQ": _order.customerQQ
+                                               , @"customerWechat": _order.customerWechat
+                                               , @"customerEmail": _order.customerEmail
+                                               , @"roomNum": _order.roomNum
+                                               , @"livingroomNum": _order.livingroomNum
+                                               , @"bathroomNum": _order.bathroomNum
+                                               , @"houseArea": _order.houseArea
+                                               , @"areaInfo": @{@"provinceCode": _order.areaInfo.provinceCode
+                                                                , @"provinceName": _order.areaInfo.provinceName
+                                                                , @"cityCode": _order.areaInfo.cityCode
+                                                                , @"cityName": _order.areaInfo.cityName
+                                                                , @"districtCode": _order.areaInfo.districtCode
+                                                                , @"districtName": _order.areaInfo.districtName
+                                                                }
+                                               , @"address": _order.address}
+                            };
+    [[ALEngine shareEngine]  pathURL:JR_ORDER_APPLE_DESIGNTRADE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            ContractPreviewViewController *vc = [[ContractPreviewViewController alloc] init];
+            vc.order = _order;
+            [self.navigationController pushViewController:vc animated:YES];
         }
-        if (_order.customerEmail.length > 0) {
-            if (!_order.decoratorEmail.validateEmail) {
-                [self showTip:@"请输入正确地消费者电子邮箱!"];
-                return;
-            }
-        }
-    }
-    
-    if (!_isReadContact) {
-        [self showTip:@"请阅读《住宅室内装饰设计合同》！"];
-        return;
-    }
-    
-    CGFloat value = _order.amount.floatValue * 0.2f;
-    if (_order.firstPayAmount.floatValue < value || _order.firstPayAmount.floatValue > _order.amount.floatValue) {
-        [self showTip:@"首付定金不低于合同金额的20%并且不高于合同金！"];
-        return;
-    }
-    
-    ContractPreviewViewController *vc = [[ContractPreviewViewController alloc] init];
-    vc.order = _order;
-    [self.navigationController pushViewController:vc animated:YES];
-    
+    }];
 }
 
 #pragma mark - UITableViewDataSource

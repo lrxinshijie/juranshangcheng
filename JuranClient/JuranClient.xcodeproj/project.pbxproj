@@ -697,6 +697,8 @@
 		37DAFCFB1AA2CCD900923CF9 /* box_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DAFCF81AA2CCD900923CF9 /* box_selected@2x.png */; };
 		37DAFCFC1AA2CCD900923CF9 /* box_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DAFCF91AA2CCD900923CF9 /* box_unselected@2x.png */; };
 		37DAFCFD1AA2CCD900923CF9 /* box_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DAFCF91AA2CCD900923CF9 /* box_unselected@2x.png */; };
+		37DBEECF1AA8A21D00B485A8 /* look_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DBEECE1AA8A21D00B485A8 /* look_image@2x.png */; };
+		37DBEED01AA8A21D00B485A8 /* look_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37DBEECE1AA8A21D00B485A8 /* look_image@2x.png */; };
 		37DBFA4C1A8A33E7003749E8 /* OrderPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DBFA4A1A8A33E7003749E8 /* OrderPhotoViewController.m */; };
 		37DBFA4D1A8A33E7003749E8 /* OrderPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DBFA4A1A8A33E7003749E8 /* OrderPhotoViewController.m */; };
 		37DBFA4E1A8A33E7003749E8 /* OrderPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DBFA4B1A8A33E7003749E8 /* OrderPhotoViewController.xib */; };
@@ -1919,6 +1921,7 @@
 		37DA11091A8CDDCC00BC71A6 /* OrderCommentReadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCommentReadViewController.xib; sourceTree = "<group>"; };
 		37DAFCF81AA2CCD900923CF9 /* box_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "box_selected@2x.png"; sourceTree = "<group>"; };
 		37DAFCF91AA2CCD900923CF9 /* box_unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "box_unselected@2x.png"; sourceTree = "<group>"; };
+		37DBEECE1AA8A21D00B485A8 /* look_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "look_image@2x.png"; sourceTree = "<group>"; };
 		37DBFA491A8A33E7003749E8 /* OrderPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPhotoViewController.h; sourceTree = "<group>"; };
 		37DBFA4A1A8A33E7003749E8 /* OrderPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPhotoViewController.m; sourceTree = "<group>"; };
 		37DBFA4B1A8A33E7003749E8 /* OrderPhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderPhotoViewController.xib; sourceTree = "<group>"; };
@@ -4345,6 +4348,7 @@
 		BD5185421A5D0ED700BE508A /* Question */ = {
 			isa = PBXGroup;
 			children = (
+				37DBEECE1AA8A21D00B485A8 /* look_image@2x.png */,
 				BD5185431A5D0ED700BE508A /* answer_no_data@2x.png */,
 				BD5185441A5D0ED700BE508A /* answer_wati_accept@2x.png */,
 				BD5185451A5D0ED700BE508A /* best_answer@2x.png */,
@@ -4647,7 +4651,6 @@
 					};
 					A971BCAB1A20825800C018D6 = {
 						DevelopmentTeam = D2JB8K885C;
-						DevelopmentTeam = QHWR2FWBM6;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -4922,6 +4925,7 @@
 				BD51866A1A5D0ED700BE508A /* arrow_down@2x.png in Resources */,
 				BD5186C81A5D0ED700BE508A /* question_resolved@2x.png in Resources */,
 				371FBF001A6A5B4600635D3D /* WikiFilterViewController.xib in Resources */,
+				37DBEED01AA8A21D00B485A8 /* look_image@2x.png in Resources */,
 				BD51878C1A5D0ED700BE508A /* nav-wiki-active@2x.png in Resources */,
 				1415FA671A5CD1CB003D0C29 /* InteractionCell.xib in Resources */,
 				BD5186361A5D0ED700BE508A /* menu_paixu@2x.png in Resources */,
@@ -5336,6 +5340,7 @@
 				371FBEF71A6A394B00635D3D /* icon_video_play@2x.png in Resources */,
 				BD5186CF1A5D0ED700BE508A /* question_wati_resolve@2x.png in Resources */,
 				BD5185EB1A5D0ED700BE508A /* case_icon_sixin@2x.png in Resources */,
+				37DBEECF1AA8A21D00B485A8 /* look_image@2x.png in Resources */,
 				BD5187011A5D0ED700BE508A /* menu_baike_select@2x.png in Resources */,
 				37D885781A8BB0EA0030F846 /* order_point_selected@2x.png in Resources */,
 				BD5186571A5D0ED700BE508A /* login-icon-netease@2x.png in Resources */,
@@ -6398,7 +6403,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
 				VERSIONING_SYSTEM = "";
