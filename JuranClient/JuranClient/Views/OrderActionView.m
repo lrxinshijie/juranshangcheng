@@ -226,6 +226,10 @@
         [self.viewController.navigationController pushViewController:ov animated:YES];
     }else if (button.tag == OrderActionExtract){
         //设计师提取量房费用
+        if (!_order.measurefileExist) {
+            [UIAlertView showWithTitle:nil message:@"量房交付物尚未提交，请提交后再做申请" cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:nil];
+            return;
+        }
         OrderExtractViewController *ov = [[OrderExtractViewController alloc] init];
         ov.order = _order;
         [self.viewController.navigationController pushViewController:ov animated:YES];

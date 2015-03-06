@@ -149,7 +149,7 @@
 //                               @"wait_consumer_pay":@"待支付",
 //                               @"complete":@"设计完成",
 //                               };
-    NSArray *statuses = [[DefaultData sharedData] objectForKey:@"orderStatus"];
+    NSArray *statuses = [[DefaultData sharedData] orderStatus];
     __block NSString *retVal = @"";
     [statuses enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
         if ([[dict objectForKey:@"v"] isEqualToString:self.status]) {
@@ -157,6 +157,7 @@
             *stop = YES;
         }
     }];
+    
     return retVal;
 }
 

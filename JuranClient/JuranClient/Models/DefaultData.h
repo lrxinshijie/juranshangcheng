@@ -24,6 +24,7 @@
 - (NSArray*)sex;
 
 - (id)objectForKey:(NSString *)key;
+- (NSArray *)orderStatus;
 
 - (NSNumber *)imageQuality;
 - (void)setImageQuality:(NSNumber *)imageQuality;

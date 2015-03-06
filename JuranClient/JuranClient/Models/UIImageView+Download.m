@@ -27,7 +27,7 @@
     
     
     NSURL *URL = [Public imageURL:url Width:CGRectGetWidth(self.frame)*scale Height:CGRectGetHeight(self.frame)*scale];
-    ASLog(@"%@",URL);
+//    ASLog(@"%@",URL);
     [self sd_setImageWithURL:URL placeholderImage:self.image];
 }
 
