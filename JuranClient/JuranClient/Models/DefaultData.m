@@ -41,6 +41,12 @@
     return sharedInstance;
 }
 
+- (NSArray *)orderStatus{
+    NSMutableArray *retVal = [NSMutableArray arrayWithArray:[self objectForKey:@"orderStatus"]];
+    [retVal addObjectsFromArray:[self objectForKey:@"orderDesignerStatus"]];
+    return retVal;
+}
+
 - (NSArray *)houseType{
     return [_defaultData objectForKey:@"houseType"];
 }
