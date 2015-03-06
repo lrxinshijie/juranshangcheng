@@ -221,6 +221,7 @@
     self.serviceDate = [dict getStringValueForKey:@"serviceDate" defaultValue:@""];
     self.decoratorId = [dict getIntValueForKey:@"decoratorId" defaultValue:0];
     self.customerHeadUrl = [dict getStringValueForKey:@"customerHeadUrl" defaultValue:@""];
+    self.customerId = [dict getIntValueForKey:@"customerId" defaultValue:0];
 }
 
 - (void)buildUpWithValueForComment:(id)dict{

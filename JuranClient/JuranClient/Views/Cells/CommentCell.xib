@@ -74,10 +74,25 @@
                                     <action selector="onReply:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6Qb-Fy-Gi6"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default.png" id="Xf7-ok-c21" customClass="ZoomInImageView">
-                                <rect key="frame" x="10" y="77" width="60" height="45"/>
+                            <view contentMode="scaleToFill" id="XK7-tm-of0">
+                                <rect key="frame" x="10" y="80" width="196" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" tag="2300" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default.png" id="Xf7-ok-c21" customClass="ZoomInImageView">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" tag="2301" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default.png" id="IGB-qk-hyb" customClass="ZoomInImageView">
+                                        <rect key="frame" x="68" y="0.0" width="60" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" tag="2302" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default.png" id="x8B-eA-lHB" customClass="ZoomInImageView">
+                                        <rect key="frame" x="136" y="0.0" width="60" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -86,7 +101,7 @@
             <connections>
                 <outlet property="avtarImageView" destination="GrT-kC-9e9" id="vJI-hL-wMX"/>
                 <outlet property="commentButton" destination="cT1-Fw-6vt" id="09d-AQ-Kfw"/>
-                <outlet property="contentImageView" destination="Xf7-ok-c21" id="JRb-Zt-5wI"/>
+                <outlet property="contentImageView" destination="XK7-tm-of0" id="egm-r7-agL"/>
                 <outlet property="contentLabel" destination="syV-kM-K0K" id="4R8-8k-qDb"/>
                 <outlet property="mainView" destination="5i9-9X-LMP" id="iDY-BZ-QOX"/>
                 <outlet property="nameLabel" destination="4wj-qg-7Pq" id="ALG-v7-G4J"/>
