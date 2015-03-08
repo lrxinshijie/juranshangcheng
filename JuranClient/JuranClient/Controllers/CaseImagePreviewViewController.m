@@ -29,7 +29,7 @@
     if (_caseImage.image) {
         _imageView.image = _caseImage.image;
     }else if (_caseImage.imageUrl.length > 0){
-        [_imageView setImageWithURLString:_caseImage.imageUrl];
+        [_imageView setImageWithURLString:_caseImage.imageUrl Editing:YES];
     }
     
     

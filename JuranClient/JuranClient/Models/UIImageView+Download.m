@@ -26,10 +26,29 @@
     }
     
     
-    NSURL *URL = [Public imageURL:url Width:CGRectGetWidth(self.frame)*scale Height:CGRectGetHeight(self.frame)*scale];
+    NSURL *URL = [Public imageURL:url Width:CGRectGetWidth(self.frame)*scale Height:CGRectGetHeight(self.frame)*scale Editing:NO];
 //    ASLog(@"%@",URL);
     [self sd_setImageWithURL:URL placeholderImage:self.image];
 }
 
+
+- (void)setImageWithURLString:(NSString *)url Editing:(BOOL)editing{
+    NSInteger scale = 2;
+    
+    if ([[Public intelligentModeForImageQuality] boolValue]) {
+        if ([AHReach reachForDefaultHost].isReachableViaWWAN) {
+            scale = 1;
+        }
+    }else{
+        if ([[DefaultData sharedData].imageQuality integerValue] == 0) {
+            scale = 1;
+        }
+    }
+    
+    
+    NSURL *URL = [Public imageURL:url Width:CGRectGetWidth(self.frame)*scale Height:CGRectGetHeight(self.frame)*scale Editing:editing];
+    //    ASLog(@"%@",URL);
+    [self sd_setImageWithURL:URL placeholderImage:self.image];
+}
 
 @end

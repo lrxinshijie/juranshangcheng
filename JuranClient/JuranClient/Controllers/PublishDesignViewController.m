@@ -90,7 +90,7 @@
             NSArray *bannerList = [data objectForKey:@"bannerList"];
             NSDictionary *list = [bannerList firstObject];
             if (list) {
-                [_imageView setImageWithURLString:[list objectForKey:@"mediaCode"]];
+                [_imageView setImageWithURLString:[list objectForKey:@"mediaCode"] Editing:YES];
             }
         }
     }];

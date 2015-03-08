@@ -77,7 +77,7 @@
     NSInteger i = 0;
     for (NSString *url in data.frontImageUrlList) {
         UIImageView *imageView = (UIImageView*)[self.contentView viewWithTag:i + kCaseImageViewTag];
-        [imageView setImageWithURLString:url];
+        [imageView setImageWithURLString:url Editing:YES];
         i++;
     }
 //    for (; i < 4; i++) {

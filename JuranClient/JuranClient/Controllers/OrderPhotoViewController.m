@@ -73,7 +73,7 @@
         [cell.contentView addSubview:imageView];
     }
     NSArray *rows = _type?_order.fileSrc:_order.measurefileSrc;
-    [imageView setImageWithURLString:rows[indexPath.row]];
+    [imageView setImageWithURLString:rows[indexPath.row] Editing:YES];
     return cell;
 }
 

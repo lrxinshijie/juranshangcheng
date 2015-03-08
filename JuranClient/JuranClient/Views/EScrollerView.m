@@ -63,7 +63,7 @@
             UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(viewSize.size.width*i, 0, viewSize.size.width, viewSize.size.height)];
             JRAdInfo *ad = [imageArray objectAtTheIndex:i];
             
-            [imgView setImageWithURLString:ad.mediaCode];
+            [imgView setImageWithURLString:ad.mediaCode Editing:YES];
             
             imgView.contentMode = UIViewContentModeScaleAspectFill;
             imgView.clipsToBounds = YES;

@@ -65,7 +65,7 @@
     }else{
         _reasonView.hidden = YES;
     }
-    [_frontImageView setImageWithURLString:jc.frontImgUrl];
+    [_frontImageView setImageWithURLString:jc.frontImgUrl Editing:YES];
 }
 
 @end

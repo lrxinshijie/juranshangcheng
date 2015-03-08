@@ -174,9 +174,9 @@
         self.timeLabel.text = _designer.realNameGmtCreate;
         self.userNameLabel.text = _designer.userName;
         self.idCardNumLabel.text = _designer.idCardNum;
-        [self.positiveIdImageView setImageWithURLString:_designer.positiveIdPhoto];
-        [self.backIdImageView setImageWithURLString:_designer.backIdphoto];
-        [self.handImageView setImageWithURLString:_designer.handHeldIdPhoto];
+        [self.positiveIdImageView setImageWithURLString:_designer.positiveIdPhoto Editing:YES];
+        [self.backIdImageView setImageWithURLString:_designer.backIdphoto Editing:YES];
+        [self.handImageView setImageWithURLString:_designer.handHeldIdPhoto Editing:YES];
         self.statusLabel.text = [_designer realNameAuthStatusString];
         self.statusLabel.textColor = _designer.realNameAuthStatus == 1?[UIColor redColor]:RGBColor(28, 79, 166);
         self.descLabel.textColor = _designer.realNameAuthStatus == 1?[UIColor redColor]:RGBColor(28, 79, 166);
