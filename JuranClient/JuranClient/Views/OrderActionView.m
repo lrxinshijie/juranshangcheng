@@ -97,6 +97,8 @@
             break;
         case OrderActionConfirm:
             title = @"确认";
+            width = 40;
+            x = 270;
 #ifdef kJuranDesigner
             textColor = RGBColor(0, 49, 159);
 #endif
@@ -107,11 +109,12 @@
             break;
         case OrderActionReject:
             title = @"拒绝";
-            x = 160;
+            width = 40;
+            x = 220;
             break;
         case OrderActionPrice:
             title = @"修改价格";
-            x = 80;
+            x = 140;
             break;
         case OrderActionExtract:
             title = @"申请提取量房费";

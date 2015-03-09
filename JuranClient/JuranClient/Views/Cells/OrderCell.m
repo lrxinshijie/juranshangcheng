@@ -66,7 +66,7 @@
     _actionView.delegate = self;
     [_actionBgView addSubview:_actionView];
     
-    self.payAmountLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(72, 8, 238, 21)];
+    self.payAmountLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(10, 8, 300, 21)];
     _payAmountLabel.backgroundColor = [UIColor clearColor];
     _payAmountLabel.numberOfLines = 0;
     _payAmountLabel.font = [UIFont systemFontOfSize:14];
