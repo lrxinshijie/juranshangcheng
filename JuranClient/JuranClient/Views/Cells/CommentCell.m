@@ -20,7 +20,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *contentLabel;
 @property (nonatomic, strong) ReplyView *replyView;
 @property (nonatomic, strong) IBOutlet UIButton *replyButton;
-@property (nonatomic, strong) IBOutlet UIImageView *contentImageView;
+@property (nonatomic, strong) IBOutlet UIView *contentImageView;
 
 - (IBAction)onComment:(id)sender;
 - (IBAction)onReply:(id)sender;
@@ -85,7 +85,20 @@
     
     if (data.imageUrlList.count > 0) {
         _contentImageView.hidden = NO;
-        [_contentImageView setImageWithURLString:data.imageUrlList.firstObject];
+        NSInteger i = 0;
+        for (NSString *name in data.imageUrlList) {
+            UIImageView *imgView = (UIImageView*)[_contentImageView viewWithTag:2300 + i];
+            imgView.hidden = NO;
+            imgView.image = [UIImage imageNamed:@"image_default.png"];
+            [imgView setImageWithURLString:name];
+            i++;
+        }
+        
+        for (; i < 3; i ++) {
+            UIImageView *imgView = (UIImageView*)[_contentImageView viewWithTag:2300 + i];
+            imgView.hidden = YES;
+            imgView.image = nil;
+        }
         
         frame = _contentImageView.frame;
         frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;

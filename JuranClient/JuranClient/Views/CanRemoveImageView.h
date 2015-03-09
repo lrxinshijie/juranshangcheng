@@ -20,5 +20,8 @@
 @property (nonatomic, weak) id<CanRemoveImageViewDelegate> delegate;
 
 - (void)setImage:(UIImage*)image;
+- (void)setImageViewContentMode:(UIViewContentMode)mode;
+- (void)setImageViewBackgroundColor:(UIColor*)color;
+
 
 @end

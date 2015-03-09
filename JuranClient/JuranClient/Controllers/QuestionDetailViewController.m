@@ -32,12 +32,14 @@
 @property (nonatomic, strong) IBOutlet UILabel *resolvedContentLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *resolvedIconImageView;
 @property (nonatomic, strong) IBOutlet ZoomInImageView *resolvedHeaderImageView;
+@property (nonatomic, strong) IBOutlet UIView *resolvedHeaderImageContentView;
 
 //unResolvedView
 @property (nonatomic, strong) IBOutlet UIView *unResolvedTableHeaderView;
 @property (nonatomic, strong) IBOutlet UILabel *unResolvedTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *unResolvedContentLabel;
 @property (nonatomic, strong) IBOutlet ZoomInImageView *unResolvedHeaderImageView;
+@property (nonatomic, strong) IBOutlet UIView *unResolvedHeaderImageContentView;
 
 //AnswerView
 @property (nonatomic, strong) IBOutlet UIView *answerView;
@@ -157,17 +159,17 @@
     
     frame = _unResolvedTableHeaderView.frame;
     if (_question.imageUrl.length) {
-        _unResolvedHeaderImageView.hidden = NO;
-        frame = _unResolvedHeaderImageView.frame;
+        _unResolvedHeaderImageContentView.hidden = NO;
+        frame = _unResolvedHeaderImageContentView.frame;
         frame.origin.y = CGRectGetMaxY(_unResolvedContentLabel.frame) + 5;
-        _unResolvedHeaderImageView.frame = frame;
+        _unResolvedHeaderImageContentView.frame = frame;
         
         frame = _unResolvedTableHeaderView.frame;
-        frame.size.height = CGRectGetMaxY(_unResolvedHeaderImageView.frame) + 10;
+        frame.size.height = CGRectGetMaxY(_unResolvedHeaderImageContentView.frame) + 10;
         _unResolvedTableHeaderView.frame = frame;
         
     }else{
-        _unResolvedHeaderImageView.hidden = YES;
+        _unResolvedHeaderImageContentView.hidden = YES;
         frame = _unResolvedTableHeaderView.frame;
         frame.size.height = CGRectGetMaxY(_unResolvedContentLabel.frame) + 10;
         _unResolvedTableHeaderView.frame = frame;
@@ -194,16 +196,16 @@
     _resolvedContentLabel.frame = frame;
     
     if (_question.imageUrl.length) {
-        _resolvedHeaderImageView.hidden = NO;
-        frame = _resolvedHeaderImageView.frame;
+        _resolvedHeaderImageContentView.hidden = NO;
+        frame = _resolvedHeaderImageContentView.frame;
         frame.origin.y = CGRectGetMaxY(_resolvedContentLabel.frame) + 5;
-        _resolvedHeaderImageView.frame = frame;
+        _resolvedHeaderImageContentView.frame = frame;
         
         frame = _resolvedTableHeaderView.frame;
-        frame.size.height = CGRectGetMaxY(_resolvedHeaderImageView.frame) + 10;
+        frame.size.height = CGRectGetMaxY(_resolvedHeaderImageContentView.frame) + 10;
         _resolvedTableHeaderView.frame = frame;
     }else{
-        _resolvedHeaderImageView.hidden = YES;
+        _resolvedHeaderImageContentView.hidden = YES;
         frame = _resolvedTableHeaderView.frame;
         frame.size.height = CGRectGetMaxY(_resolvedContentLabel.frame) + 10;
         _resolvedTableHeaderView.frame = frame;

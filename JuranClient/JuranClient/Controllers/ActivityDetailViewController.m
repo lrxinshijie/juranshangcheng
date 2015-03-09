@@ -52,7 +52,6 @@
     }else{
         [_webView loadURLString:[NSString stringWithFormat:@"%@?fromApp=1", _urlString]];
     }
-    
 }
 
 - (void)doShare{

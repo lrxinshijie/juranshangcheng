@@ -40,7 +40,9 @@
 @property (nonatomic, strong) IBOutlet UIView *chooseImageButtonView;
 
 @property (nonatomic, strong) JRComment *selectComment;
-@property (nonatomic, strong) UIImage *fileImage;
+@property (nonatomic, strong) NSMutableArray *fileImages;
+@property (nonatomic, strong) NSMutableArray *fileNames;
+
 @property (nonatomic, strong) NSString *comment;
 @property (nonatomic, strong) IBOutlet UILabel *fileImageCountLabel;
 
@@ -69,12 +71,15 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     }
     
+    self.fileImages = [NSMutableArray array];
+    self.fileNames = [NSMutableArray array];
+    
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
     self.contentWebView.delegate = self;
     
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.tableFooterView = [[UIView alloc] init];
@@ -217,25 +222,27 @@
     _tableView.tableHeaderView = _tableHeaderView;
 }
 
-- (void)uploadCommentImage{
-    [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":_fileImage} responseHandler:^(NSError *error, id data, NSDictionary *other) {
+- (void)uploadCommentImageWithIndex:(NSInteger)index{
+    [self showHUDFromTitle:@"发送中..."];
+    [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":_fileImages[index]} responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            [self submitComment:[data objectForKey:@"imgUrl"]];
-            for (UIView *v in _commentImageView.subviews) {
-                if ([v isKindOfClass:[CanRemoveImageView class]]) {
-                    [v removeFromSuperview];
-                }
+            [_fileNames addObject:[data objectForKey:@"imgUrl"]];
+            if (index == _fileImages.count - 1) {
+                [self submitComment];
+            }else{
+                [self uploadCommentImageWithIndex:index+1];
             }
-            _chooseImageButtonView.hidden = NO;
-            self.fileImage = nil;
         }else{
             [self hideHUD];
         }
     }];
 }
 
-- (void)submitComment:(NSString*)imageUrl{
+- (void)submitComment{
+    NSString *imageUrl = @"";
+    if (_fileNames.count > 0) {
+        imageUrl = [_fileNames componentsJoinedByString:@"|"];
+    }
     NSDictionary *param = @{@"topicId": _topic.topicId,
                             @"commentContent": _comment,
                             @"imgUrl":imageUrl};
@@ -245,10 +252,13 @@
                   @"commentId": [NSString stringWithFormat:@"%d", _selectComment.commentId],
                   @"imgUrl":imageUrl};
     }
-    [self showHUD];
+    [self showHUDFromTitle:@"发送中..."];
     [[ALEngine shareEngine] pathURL:JR_COMMIT_TOPIC parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
+            [self.fileImages removeAllObjects];
+            [self.fileNames removeAllObjects];
+            [self layoutInputImageView];
             _commentTextField.text = @"";
             if (self.selectComment) {
                 if (![_openStatusDic objectForKey:[NSString stringWithFormat:@"%d", self.selectComment.commentId]]) {
@@ -268,9 +278,33 @@
     }];
 }
 
-- (void)setFileImage:(UIImage *)fileImage{
-    _fileImage = fileImage;
-    _fileImageCountLabel.hidden = fileImage == nil;
+- (void)layoutInputImageView{
+    _fileImageCountLabel.hidden = _fileImages.count == 0;
+    _fileImageCountLabel.text = [NSString stringWithFormat:@"%d", _fileImages.count];
+    self.chooseImageButtonView.hidden = NO;
+    
+    for (UIView *v in _commentImageView.subviews) {
+        if ([v isKindOfClass:[CanRemoveImageView class]]) {
+            [v removeFromSuperview];
+        }
+    }
+    
+    CGRect frame = CGRectMake(15, 20, 65, 65);
+    NSInteger i = 0;
+    for (UIImage *image in _fileImages) {
+        
+        CanRemoveImageView *imgView = [[CanRemoveImageView alloc] initWithFrame:frame];
+        imgView.delegate = self;
+        [imgView setImageViewBackgroundColor:[UIColor whiteColor]];
+        [imgView setImageViewContentMode:UIViewContentModeScaleAspectFit];
+        [imgView setImage:image];
+        [_commentImageView addSubview:imgView];
+        imgView.tag = 100+i;
+        i++;
+        frame.origin.x = 15 + (65 + 15)*i;
+    }
+    self.chooseImageButtonView.frame = frame;
+    self.chooseImageButtonView.hidden = (i == 3);
 }
 
 #pragma mark - Target Action
@@ -282,45 +316,29 @@
     }
     _comment = _commentTextField.text;
     
-    [_commentTextField resignFirstResponder];
-    [self hiddenCommentView];
-    
     if (_comment.length == 0) {
         [self showTip:@"评论内容不能为空"];
         return;
     }
     
-    if (self.fileImage) {
-        [self uploadCommentImage];
+    [_commentTextField resignFirstResponder];
+    [self hiddenCommentView];
+    
+    if (self.fileImages.count > 0) {
+        [self uploadCommentImageWithIndex:0];
     }else{
-        [self submitComment:@""];
+        [self submitComment];
     }
 }
 
 
-- (IBAction)onChooseImageWithCamera:(id)sender{
-    [[ALGetPhoto sharedPhoto] showInViewController:self sourceType:UIImagePickerControllerSourceTypeCamera allowsEditing:NO MaxNumber:1 Handler:^(NSArray *images) {
-        _chooseImageButtonView.hidden = YES;
-        self.fileImage = images.firstObject;
-        
-        CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:CGRectMake(25, 15, 80, 120)];
-        imageView.delegate = self;
-        [imageView setImage:images[0]];
-        [_commentImageView addSubview:imageView];
+- (IBAction)onChooseImage:(id)sender{
+    [[ALGetPhoto sharedPhoto] showInViewController:self allowsEditing:NO MaxNumber:3-_fileImages.count Handler:^(NSArray *images) {
+        [self.fileImages addObjectsFromArray:images];
+        [self layoutInputImageView];
     }];
 }
 
-- (IBAction)onChooseImageWithPhoto:(id)sender{
-    [[ALGetPhoto sharedPhoto] showInViewController:self sourceType:UIImagePickerControllerSourceTypePhotoLibrary allowsEditing:NO MaxNumber:1 Handler:^(NSArray *images) {
-        _chooseImageButtonView.hidden = YES;
-        self.fileImage = images.firstObject;
-        
-        CanRemoveImageView *imageView = [[CanRemoveImageView alloc] initWithFrame:CGRectMake(25, 15, 80, 120)];
-        imageView.delegate = self;
-        [imageView setImage:images[0]];
-        [_commentImageView addSubview:imageView];
-    }];
-}
 
 - (IBAction)onShowCommentImageView:(id)sender{
     [_commentTextField resignFirstResponder];
@@ -389,8 +407,8 @@
 #pragma mark - CanRemoveImageViewDelegate
 
 - (void)deleteCanRemoveImageView:(CanRemoveImageView *)view{
-    self.fileImage = nil;
-    _chooseImageButtonView.hidden = NO;
+    [self.fileImages removeObjectAtIndex:view.tag - 100];
+    [self layoutInputImageView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -411,6 +429,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 35;
 }
+
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (_topic) {

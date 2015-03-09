@@ -26,7 +26,7 @@
 @property (nonatomic, copy) NSString *likeStyle;
 @property (nonatomic, copy) NSString *houseArea;
 - (NSString *)likeStyleString;
-
+- (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
 @end

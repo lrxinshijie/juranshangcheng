@@ -29,7 +29,12 @@
 }
 
 - (NSString*)descForDto{
-    return @"满意";
+    NSArray *scores = @[@"非常不满意", @"不满意", @"一般", @"满意", @"非常满意"];
+    NSInteger index = _averageCredit - 1;
+    if (index >= 0 && index < scores.count) {
+        return scores[index];
+    }
+    return @"";
 }
 
 @end

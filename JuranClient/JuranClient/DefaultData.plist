@@ -645,7 +645,7 @@
 		</dict>
 		<dict>
 			<key>k</key>
-			<string>待设计师确认量房</string>
+			<string>待设计师确认</string>
 			<key>v</key>
 			<string>wait_designer_confirm</string>
 		</dict>

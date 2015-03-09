@@ -56,7 +56,8 @@
 - (void)fillCellWithCase:(JRCase *)data{
     self.jrCase = data;
     
-    [_photoImageView setImageWithURLString:data.imageUrl];
+    [_photoImageView setImageWithURLString:data.imageUrl Editing:YES];
+//    [_photoImageView setImageWithURLString:data.imageUrl];
     [_avtarImageView setImageWithURLString:data.headUrl];
     
     _titleLabel.text = data.title;

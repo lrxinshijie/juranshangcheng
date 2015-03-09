@@ -33,6 +33,7 @@
         _deleteButton.frame = CGRectMake(0, 0, 22, 22);
         _deleteButton.center = CGPointMake(CGRectGetWidth(frame), kMargin);
         [self addSubview:_deleteButton];
+        
     }
     return self;
 }
@@ -48,5 +49,14 @@
 - (void)setImage:(UIImage*)image{
     _imageView.image = image;
 }
+
+- (void)setImageViewContentMode:(UIViewContentMode)mode{
+    _imageView.contentMode = mode;
+}
+
+- (void)setImageViewBackgroundColor:(UIColor*)color{
+    _imageView.backgroundColor = color;
+}
+
 
 @end

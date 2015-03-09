@@ -202,7 +202,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="rZH-J8-Zzs">
-                    <rect key="frame" x="15" y="20" width="142" height="65"/>
+                    <rect key="frame" x="15" y="20" width="65" height="65"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bZy-3f-sDl">
@@ -212,37 +212,17 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="onChooseImageWithCamera:" destination="-1" eventType="touchUpInside" id="5U4-rf-ncr"/>
+                                <action selector="onChooseImage:" destination="-1" eventType="touchUpInside" id="X2a-cj-bj0"/>
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_ camera.png" id="Nig-8K-PAt">
                             <rect key="frame" x="17" y="14" width="30" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拍照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dmI-Jx-u0g">
-                            <rect key="frame" x="17" y="42" width="30" height="14"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加图片" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dmI-Jx-u0g">
+                            <rect key="frame" x="8" y="42" width="48" height="14"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dyk-HM-jEX">
-                            <rect key="frame" x="75" y="0.0" width="65" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" backgroundImage="picker_bg.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onChooseImageWithPhoto:" destination="-1" eventType="touchUpInside" id="Jlo-GH-pNs"/>
-                            </connections>
-                        </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_image1.png" id="Ut9-4z-kAu">
-                            <rect key="frame" x="92" y="14" width="30" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图片" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iZi-t7-cb4">
-                            <rect key="frame" x="92" y="42" width="30" height="14"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -281,7 +261,6 @@
         <image name="case-icon-comment.png" width="22" height="21"/>
         <image name="icon_ camera.png" width="29" height="26"/>
         <image name="icon_camera3.png" width="16" height="14"/>
-        <image name="icon_image1.png" width="29" height="24"/>
         <image name="look_count.png" width="17" height="10"/>
         <image name="menu_icon_fenxiang.png" width="17" height="19"/>
         <image name="picker_bg.png" width="65" height="65"/>

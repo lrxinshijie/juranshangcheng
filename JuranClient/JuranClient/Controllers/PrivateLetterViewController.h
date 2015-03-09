@@ -11,6 +11,8 @@
 @class JRDesigner;
 @interface PrivateLetterViewController : ALViewController
 
-@property (nonatomic, strong) JRDesigner *designer;
+//@property (nonatomic, strong) JRDesigner *designer;
+@property (nonatomic, assign) NSInteger receiverId;
+
 
 @end

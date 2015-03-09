@@ -10,6 +10,9 @@
 #import "JRAreaInfo.h"
 #import "AppDelegate.h"
 #import "UIAlertView+Blocks.h"
+#import "PrivateLetterViewController.h"
+#import "PrivateMessageDetailViewController.h"
+#import "PrivateMessage.h"
 
 #define kLocalUserData @"kLocalUserData"
 
@@ -247,7 +250,7 @@
         address = [NSString stringWithFormat:@"%@-%@", address, self.areaInfo.districtName];
     }
     if (address.length == 0) {
-        return @"未设置";
+        return @"";
     }
     return address;
 }
@@ -305,9 +308,9 @@
 
 - (NSString*)sexyString{
     if (self.sex == -1) {
-        return @"未设置";
+        return @"";
     }else if (self.sex == 0){
-        return @"未设置";
+        return @"";
     }
     NSArray *sexs = [DefaultData sharedData].sex;
     NSDictionary *dic = sexs[_sex];
@@ -329,6 +332,28 @@
     }
     
     return self.account;
+}
+
+- (void)postPrivateLetterWithUserId:(NSInteger)userId VC:(UIViewController*)vc{
+    [vc showHUD];
+    NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", userId]
+                            };
+    [[ALEngine shareEngine]  pathURL:JR_CHECK_PRIVATE_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [vc hideHUD];
+        if (!error) {
+            NSDictionary *dic = data[@"privateLetterGeneral"];
+            if (dic && [dic isKindOfClass:[NSDictionary class]]) {
+                PrivateMessageDetailViewController *detailVC = [[PrivateMessageDetailViewController alloc] init];
+                PrivateMessage *message = [[PrivateMessage alloc] initWithDictionary:dic];
+                detailVC.message = message;
+                [vc.navigationController pushViewController:detailVC animated:YES];
+            }else{
+                PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+                //                pv.designer = _designer;
+                [vc.navigationController pushViewController:pv animated:YES];
+            }
+        }
+    }];
 }
 
 @end

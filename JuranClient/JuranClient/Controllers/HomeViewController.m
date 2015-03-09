@@ -202,7 +202,7 @@
     }else{
         _tempView.frame = CGRectMake(0, 0, CGRectGetWidth(_tempView.frame), CGRectGetHeight(_tempView.frame));
     }
-    _tableHeaderView.frame = CGRectMake(0, 0, CGRectGetMaxY(_tempView.frame), CGRectGetHeight(_tempView.frame));
+    _tableHeaderView.frame = CGRectMake(0, 0, CGRectGetWidth(_tableHeaderView.frame), CGRectGetMaxY(_tempView.frame));
     _tableView.tableHeaderView = _tableHeaderView;
 }
 
@@ -213,7 +213,7 @@
         if (d.headUrl.length > 0) {
             [imageView setImageWithURLString:d.headUrl];
         }else{
-            imageView.image = [UIImage imageNamed:@"unlogin_head.png"];
+            imageView.image = [UIImage imageNamed:@"img_default_head.png"];
         }
         
         

@@ -106,6 +106,14 @@
         self.customerHeadUrl = [dict getStringValueForKey:@"customerHeadUrl" defaultValue:@""];
         self.serviceDate = [dict getStringValueForKey:@"serviceDate" defaultValue:@""];
         
+        self.measurefileSrc = dict[@"measurefileSrc"];
+        if(![self.measurefileSrc isKindOfClass:[NSArray class]]){
+            self.measurefileSrc = @[];
+        }
+        self.fileSrc = dict[@"fileSrc"];
+        if (![self.fileSrc isKindOfClass:[NSArray class]]) {
+            self.fileSrc = @[];
+        }
     }
     
     return self;
@@ -149,7 +157,7 @@
 //                               @"wait_consumer_pay":@"待支付",
 //                               @"complete":@"设计完成",
 //                               };
-    NSArray *statuses = [[DefaultData sharedData] objectForKey:@"orderStatus"];
+    NSArray *statuses = [[DefaultData sharedData] orderStatus];
     __block NSString *retVal = @"";
     [statuses enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
         if ([[dict objectForKey:@"v"] isEqualToString:self.status]) {
@@ -157,6 +165,7 @@
             *stop = YES;
         }
     }];
+    
     return retVal;
 }
 
@@ -220,6 +229,7 @@
     self.serviceDate = [dict getStringValueForKey:@"serviceDate" defaultValue:@""];
     self.decoratorId = [dict getIntValueForKey:@"decoratorId" defaultValue:0];
     self.customerHeadUrl = [dict getStringValueForKey:@"customerHeadUrl" defaultValue:@""];
+    self.customerId = [dict getIntValueForKey:@"customerId" defaultValue:0];
 }
 
 - (void)buildUpWithValueForComment:(id)dict{

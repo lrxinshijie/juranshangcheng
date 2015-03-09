@@ -16,7 +16,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *payAmountLabel;
 @property (nonatomic, strong) IBOutlet UILabel *noteLabel;
 @property (nonatomic, strong) IBOutlet ASPlaceholderTextView *textView;
-@property (nonatomic, assign) NSInteger applyAmount;
+@property (nonatomic, strong) NSString *applyAmount;
 
 - (IBAction)onSubmit:(id)sender;
 
@@ -42,9 +42,9 @@
     [[ALEngine shareEngine] pathURL:JR_GET_EXTRACT_AMOUNT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            self.applyAmount = [data getIntValueForKey:@"applyAmount" defaultValue:0];
-            _amountLabel.text = [NSString stringWithFormat:@"￥%d", [data getIntValueForKey:@"amount" defaultValue:0]];
-            _payAmountLabel.text = [NSString stringWithFormat:@"￥%d", _applyAmount];
+            self.applyAmount = [data getStringValueForKey:@"applyAmountStr" defaultValue:@""];
+            _amountLabel.text = [NSString stringWithFormat:@"￥%@", [data getStringValueForKey:@"amountStr" defaultValue:@""]];
+            _payAmountLabel.text = [NSString stringWithFormat:@"￥%@", _applyAmount];
             
             _noteLabel.text = [NSString stringWithFormat:@"温馨提示：\n提取量房费后，将无法再进行下一步签订设计合同，请确认是否提取；\n未签订设计合同就申请提取量房费，将扣除%d%%服务费；申请成功并审核通过后，经平台周期结算量词费用将转至您的帐户，届时您可进行提现操作。", (NSInteger)([data getDoubleValueForKey:@"designMeasureDrawDeduction" defaultValue:0]*100)];
         }
@@ -83,7 +83,7 @@
 //    }
     
     NSDictionary *param = @{@"tid": _order.measureTid,
-                            @"applyAmount": [NSString stringWithFormat:@"%d", _applyAmount],
+                            @"applyAmount": [NSString stringWithFormat:@"%@", _applyAmount],
                             @"applyReason": content};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_EXTRACT_AMOUNT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {

@@ -170,14 +170,14 @@
         if (_jrCase.roomTypeImage) {
             [cell setImage:_jrCase.roomTypeImage];
         }else{
-            [cell.imageView setImageWithURLString:_jrCase.roomTypeImageUrl];
+            [cell.imageView setImageWithURLString:_jrCase.roomTypeImageUrl Editing:YES];
         }
     }else if (indexPath.section == 1 && indexPath.row > 0){
         JRCaseImage *caseImage = _jrCase.imageList[indexPath.row-1];
         if (caseImage.image) {
             [cell setImage:caseImage.image];
         }else{
-            [cell.imageView setImageWithURLString:caseImage.imageUrl];
+            [cell.imageView setImageWithURLString:caseImage.imageUrl Editing:YES];
         }
         
     }else{

@@ -22,8 +22,9 @@
 #import "JRSubject.h"
 #import "CaseCollectionCell.h"
 #import "YIFullScreenScroll.h"
+#import "UIViewController+ScrollingNavbar.h"
 
-@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, YIFullScreenScrollDelegate>
+@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, YIFullScreenScrollDelegate, AMScrollingNavbarDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -34,7 +35,7 @@
 @property (nonatomic, strong) FilterView *filterView;
 
 @property (nonatomic, strong) IBOutlet UIView *emptyView;
-
+@property (weak, nonatomic) NSLayoutConstraint *headerConstraint;
 @end
 
 @implementation CaseViewController
@@ -128,13 +129,40 @@
         }];
     }
     
-//    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
-//    self.fullScreenScroll.delegate = self;
-//    self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
+    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
+    self.fullScreenScroll.delegate = self;
+    self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
+    
+    // Just call this line to enable the scrolling navbar
+//    [self.navigationController.navigationBar setTranslucent:NO];
+//    [self.navigationController.navigationBar setBarTintColor:UIColorFromRGB(0x000000)];
+//    [self followScrollView:_tableView withDelay:60];
+//    [self setUseSuperview:YES];
+//    [self setScrollableViewConstraint:self.headerConstraint withOffset:60];
+//    [self setShouldScrollWhenContentFits:NO];
+//    
+//    [self setScrollingNavbarDelegate:self];
+}
+
+- (void)navigationBarDidChangeToCollapsed:(BOOL)collapsed{
+    ASLog();
+}
+
+- (void)navigationBarDidChangeToExpanded:(BOOL)expanded{
+    ASLog();
+}
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    // This enables the user to scroll down the navbar by tapping the status bar.
+    [self showNavbar];
+    
+    return YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self showNavBarAnimated:NO];
     if ([_filterView isShow]) {
         [_filterView showSort];
     }
@@ -350,11 +378,23 @@
 
 - (void)fullScreenScrollDidLayoutUIBars:(YIFullScreenScroll *)fullScreenScroll{
 
-    CGFloat y = 20 - self.navigationController.navigationBar.frame.origin.y;
-    CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
+//    ASLog(@"offset:%f,%f", _tableView.contentOffset.y,self.navigationController.navigationBar.frame.origin.y);
+    
+//    CGFloat y = 20 - self.navigationController.navigationBar.frame.origin.y;
+    CGFloat y = _tableView.contentOffset.y;
+    if (self.navigationController.navigationBar.frame.origin.y == 20) {
+        y = 0;
+    }else
+        if (y > 88) {
+        y = 88;
+    }
+    
+    
     CGRect frame = _filterView.frame;
     frame.origin.y = -y;
     _filterView.frame = frame;
+    
+    CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
     
     frame = _tableView.frame;
     frame.origin.y = CGRectGetMaxY(_filterView.frame);
