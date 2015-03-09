@@ -985,6 +985,8 @@
 		A9D654B51A27642800A80253 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654A81A27642800A80253 /* JSONModel+networking.m */; };
 		A9D654B61A27642800A80253 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654AB1A27642800A80253 /* JSONKeyMapper.m */; };
 		A9D654B71A27642800A80253 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654AD1A27642800A80253 /* JSONValueTransformer.m */; };
+		BD23FE681AAD91850019E46E /* img_default_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD23FE671AAD91850019E46E /* img_default_head@2x.png */; };
+		BD23FE691AAD91850019E46E /* img_default_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD23FE671AAD91850019E46E /* img_default_head@2x.png */; };
 		BD30494F1A8C957300B3C88F /* order_point_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD30494E1A8C957300B3C88F /* order_point_unselected@2x.png */; };
 		BD3049501A8C957600B3C88F /* order_point_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD30494E1A8C957300B3C88F /* order_point_unselected@2x.png */; };
 		BD322BC71A6E07A400DDC1C0 /* image_quality_selected_disabled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD322BC51A6E07A400DDC1C0 /* image_quality_selected_disabled@2x.png */; };
@@ -2401,6 +2403,7 @@
 		A9D654AB1A27642800A80253 /* JSONKeyMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKeyMapper.m; sourceTree = "<group>"; };
 		A9D654AC1A27642800A80253 /* JSONValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValueTransformer.h; sourceTree = "<group>"; };
 		A9D654AD1A27642800A80253 /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
+		BD23FE671AAD91850019E46E /* img_default_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_default_head@2x.png"; sourceTree = "<group>"; };
 		BD30494E1A8C957300B3C88F /* order_point_unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_point_unselected@2x.png"; sourceTree = "<group>"; };
 		BD322BC51A6E07A400DDC1C0 /* image_quality_selected_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_quality_selected_disabled@2x.png"; sourceTree = "<group>"; };
 		BD322BCB1A6E090800DDC1C0 /* image_quality_unselected_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_quality_unselected_disabled@2x.png"; sourceTree = "<group>"; };
@@ -4574,6 +4577,7 @@
 		BD51879C1A5D344D00BE508A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				BD23FE671AAD91850019E46E /* img_default_head@2x.png */,
 				371FBF011A6A6F2F00635D3D /* icon_filter_selected@2x.png */,
 				371FBEF61A6A394B00635D3D /* icon_video_play@2x.png */,
 				BD51879D1A5D344D00BE508A /* icon_add_image@2x.png */,
@@ -4664,7 +4668,7 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = QHWR2FWBM6;
+						DevelopmentTeam = D2JB8K885C;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -4752,6 +4756,7 @@
 				BD5186AE1A5D0ED700BE508A /* best_answer@2x.png in Resources */,
 				375635361A60FF8F00D120C8 /* icon_check_ok@2x.png in Resources */,
 				BD5185C21A5D0ED700BE508A /* Default.png in Resources */,
+				BD23FE691AAD91850019E46E /* img_default_head@2x.png in Resources */,
 				1415FA371A5CD1CB003D0C29 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				37C070191A87A2E300EBAD08 /* order_private_letter@2x.png in Resources */,
 				BD5186C21A5D0ED700BE508A /* question_commited@2x.png in Resources */,
@@ -5199,6 +5204,7 @@
 				3721D0981AA23089008ADB34 /* ContractPreviewViewController.xib in Resources */,
 				1468580E1AA554A40089A0CE /* rsa_private_key.txt in Resources */,
 				BD5187491A5D0ED700BE508A /* sns_icon_1_s@2x.png in Resources */,
+				BD23FE681AAD91850019E46E /* img_default_head@2x.png in Resources */,
 				BD5185CB1A5D0ED700BE508A /* Icon7.png in Resources */,
 				1476DA971A21DFBE0006E9E0 /* SelfIntrodutionCell.xib in Resources */,
 				BD5186A91A5D0ED700BE508A /* answer_no_data@2x.png in Resources */,
@@ -6255,7 +6261,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = JuranDesigner;
-				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -6418,7 +6424,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
 				VERSIONING_SYSTEM = "";

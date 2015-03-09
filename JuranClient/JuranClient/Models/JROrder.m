@@ -106,6 +106,14 @@
         self.customerHeadUrl = [dict getStringValueForKey:@"customerHeadUrl" defaultValue:@""];
         self.serviceDate = [dict getStringValueForKey:@"serviceDate" defaultValue:@""];
         
+        self.measurefileSrc = dict[@"measurefileSrc"];
+        if(![self.measurefileSrc isKindOfClass:[NSArray class]]){
+            self.measurefileSrc = @[];
+        }
+        self.fileSrc = dict[@"fileSrc"];
+        if (![self.fileSrc isKindOfClass:[NSArray class]]) {
+            self.fileSrc = @[];
+        }
     }
     
     return self;

@@ -417,9 +417,10 @@
 
 //私信
 - (IBAction)doPrivateLetter:(id)sender{
-    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
-    pv.designer = _designer;
-    [self.navigationController pushViewController:pv animated:YES];
+    [[JRUser currentUser] postPrivateLetterWithUserId:_designer.userId VC:self];
+//    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+//    pv.designer = _designer;
+//    [self.navigationController pushViewController:pv animated:YES];
 }
 
 //分享

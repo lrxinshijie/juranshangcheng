@@ -341,19 +341,17 @@
     [[ALEngine shareEngine]  pathURL:JR_CHECK_PRIVATE_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [vc hideHUD];
         if (!error) {
-            
-        }
-        NSString *privateLetterid = [data getStringValueForKey:@"privateLetterId" defaultValue:@""];
-        if (privateLetterid.length == 0) {
-            PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
-            //                pv.designer = _designer;
-            [vc.navigationController pushViewController:pv animated:YES];
-        }else{
-            PrivateMessageDetailViewController *vc = [[PrivateMessageDetailViewController alloc] init];
-            PrivateMessage *message = [[PrivateMessage alloc] init];
-            message.letterId = privateLetterid.integerValue;
-            vc.message = message;
-            [vc.navigationController pushViewController:vc animated:YES];
+            NSDictionary *dic = data[@"privateLetterGeneral"];
+            if (dic && [dic isKindOfClass:[NSDictionary class]]) {
+                PrivateMessageDetailViewController *detailVC = [[PrivateMessageDetailViewController alloc] init];
+                PrivateMessage *message = [[PrivateMessage alloc] initWithDictionary:dic];
+                detailVC.message = message;
+                [vc.navigationController pushViewController:detailVC animated:YES];
+            }else{
+                PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+                //                pv.designer = _designer;
+                [vc.navigationController pushViewController:pv animated:YES];
+            }
         }
     }];
 }

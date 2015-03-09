@@ -271,7 +271,7 @@
     }
 #endif
     
-    NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _designer.userId],
+    NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _receiverId],
                             @"senderName":_senderName,
                             @"mobilePhone":_mobilePhone,
                             @"likeStyle":_likeStyle,

@@ -343,13 +343,15 @@
     if (![self checkLogin]) {
         return;
     }
+    /*
     PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
     JRDesigner *designer = [[JRDesigner alloc] init];
     designer.userId = _jrCase.userId;
     designer.headUrl = _jrCase.headUrl;
     designer.nickName = _jrCase.nickName;
     pv.designer = designer;
-    [self.navigationController pushViewController:pv animated:YES];
+    [self.navigationController pushViewController:pv animated:YES];*/
+    [[JRUser currentUser] postPrivateLetterWithUserId:_jrCase.userId VC:self];
 }
 
 

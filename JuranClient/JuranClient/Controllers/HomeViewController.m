@@ -213,7 +213,7 @@
         if (d.headUrl.length > 0) {
             [imageView setImageWithURLString:d.headUrl];
         }else{
-            imageView.image = [UIImage imageNamed:@"unlogin_head.png"];
+            imageView.image = [UIImage imageNamed:@"img_default_head.png"];
         }
         
         

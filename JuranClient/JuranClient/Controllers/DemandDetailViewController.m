@@ -307,9 +307,10 @@
 #pragma mark - 拒绝、私信、选TA量房
 
 - (void)privateLetter:(BidDesignerCell *)cell andBidInfo:(JRBidInfo *)bidInfo{
-    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
-    pv.designer = bidInfo.userBase;
-    [self.navigationController pushViewController:pv animated:YES];
+//    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+//    pv.designer = bidInfo.userBase;
+//    [self.navigationController pushViewController:pv animated:YES];
+    [[JRUser currentUser] postPrivateLetterWithUserId:bidInfo.userBase.userId VC:self];
 }
 
 - (void)takeMeasure:(BidDesignerCell *)cell andBidInfo:(JRBidInfo *)bidInfo{
