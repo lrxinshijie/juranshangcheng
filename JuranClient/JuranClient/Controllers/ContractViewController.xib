@@ -263,7 +263,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="633" y="249.5"/>
+            <point key="canvasLocation" x="641" y="192.5"/>
         </view>
         <view tag="5555" contentMode="scaleToFill" id="TUU-S9-osC">
             <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
@@ -360,7 +360,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="K9t-FB-NF5" customClass="ASPlaceholderTextView">
-                    <rect key="frame" x="15" y="10" width="290" height="60"/>
+                    <rect key="frame" x="15" y="5" width="290" height="70"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
