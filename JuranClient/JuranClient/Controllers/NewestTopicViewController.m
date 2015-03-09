@@ -223,7 +223,7 @@
 }
 
 - (void)uploadCommentImageWithIndex:(NSInteger)index{
-    [self showHUD];
+    [self showHUDFromTitle:@"发送中..."];
     [[ALEngine shareEngine] pathURL:JR_UPLOAD_IMAGE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self imageDict:@{@"files":_fileImages[index]} responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             [_fileNames addObject:[data objectForKey:@"imgUrl"]];
@@ -241,7 +241,7 @@
 - (void)submitComment{
     NSString *imageUrl = @"";
     if (_fileNames.count > 0) {
-        imageUrl = [_fileNames componentsJoinedByString:@","];
+        imageUrl = [_fileNames componentsJoinedByString:@"|"];
     }
     NSDictionary *param = @{@"topicId": _topic.topicId,
                             @"commentContent": _comment,
@@ -252,7 +252,7 @@
                   @"commentId": [NSString stringWithFormat:@"%d", _selectComment.commentId],
                   @"imgUrl":imageUrl};
     }
-    [self showHUD];
+    [self showHUDFromTitle:@"发送中..."];
     [[ALEngine shareEngine] pathURL:JR_COMMIT_TOPIC parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {

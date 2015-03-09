@@ -121,6 +121,8 @@
         NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:parameters];
         [param setValue:[JRUser currentUser].guid forKey:@"guid"];
         [param setValue:[JRUser currentUser].token forKey:@"token"];
+//        [param setValue:@"75CE5431E086E3CAD2C6757EC8E8F80B" forKey:@"guid"];
+//        [param setValue:@"7B9A456C628C91D4B0BFC8D6D94A7E7A" forKey:@"token"];
         parameters = param;
     }
     
