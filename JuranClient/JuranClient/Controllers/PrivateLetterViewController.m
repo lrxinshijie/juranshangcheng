@@ -228,7 +228,7 @@
         return;
     }
     
-//    if (_isCheck) {
+    if (_isCheck) {
         if (_senderName.length == 0) {
             [self showTip:@"姓名不能为空"];
             return;
@@ -253,12 +253,12 @@
             [self showTip:@"房屋面积不能为空"];
             return;
         }
-//    }else{
-//        _senderName = @"";
-//        _mobilePhone = @"";
-//        _likeStyle = @"";
-//        _houseArea = @"";
-//    }
+    }else{
+        _senderName = @"";
+        _mobilePhone = @"";
+        _likeStyle = @"";
+        _houseArea = @"";
+    }
     
     NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _designer.userId],
                             @"senderName":_senderName,
