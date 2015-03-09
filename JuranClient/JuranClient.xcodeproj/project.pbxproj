@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1403802E1A44247300221398 /* MeasureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1403802C1A44247300221398 /* MeasureViewController.m */; };
 		1403802F1A44247300221398 /* MeasureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1403802D1A44247300221398 /* MeasureViewController.xib */; };
+		1403809D1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1403809C1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m */; };
+		1403809E1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1403809C1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m */; };
 		140C46E81A2A296A003317AD /* ModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 140C46E61A2A296A003317AD /* ModifyViewController.m */; };
 		140C46E91A2A296A003317AD /* ModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 140C46E71A2A296A003317AD /* ModifyViewController.xib */; };
 		140C46ED1A2A3741003317AD /* MyFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 140C46EB1A2A3741003317AD /* MyFollowViewController.m */; };
@@ -1490,6 +1492,8 @@
 		1403802B1A44247300221398 /* MeasureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeasureViewController.h; sourceTree = "<group>"; };
 		1403802C1A44247300221398 /* MeasureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeasureViewController.m; sourceTree = "<group>"; };
 		1403802D1A44247300221398 /* MeasureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeasureViewController.xib; sourceTree = "<group>"; };
+		1403809B1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ScrollingNavbar.h"; sourceTree = "<group>"; };
+		1403809C1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ScrollingNavbar.m"; sourceTree = "<group>"; };
 		140C46E51A2A296A003317AD /* ModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyViewController.h; sourceTree = "<group>"; };
 		140C46E61A2A296A003317AD /* ModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyViewController.m; sourceTree = "<group>"; };
 		140C46E71A2A296A003317AD /* ModifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyViewController.xib; sourceTree = "<group>"; };
@@ -2751,6 +2755,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1403809A1AAD391D007AA4B4 /* AMScrollingNavbar */ = {
+			isa = PBXGroup;
+			children = (
+				1403809B1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.h */,
+				1403809C1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m */,
+			);
+			path = AMScrollingNavbar;
+			sourceTree = "<group>";
+		};
 		1415FA931A5D144B003D0C29 /* JPush */ = {
 			isa = PBXGroup;
 			children = (
@@ -3739,6 +3752,7 @@
 		A987ED6F1A20920500CED7CD /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				1403809A1AAD391D007AA4B4 /* AMScrollingNavbar */,
 				146858061AA54DD30089A0CE /* AlipaySDK */,
 				143EF3971A81B8C400A88386 /* UMAnalytics */,
 				37F0E6DD1A7D2735004CCCB2 /* SDWebImage */,
@@ -4650,7 +4664,7 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = QHWR2FWBM6;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -5725,6 +5739,7 @@
 				371FBEF91A6A443D00635D3D /* JRWiki.m in Sources */,
 				1415F9B11A5CD1CB003D0C29 /* JRMemberDetail.m in Sources */,
 				1415F9B21A5CD1CB003D0C29 /* JRPushInfoMsg.m in Sources */,
+				1403809E1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m in Sources */,
 				1415F9B31A5CD1CB003D0C29 /* NSDate+ASCategory.m in Sources */,
 				14321E6F1A612E6A0065E8C3 /* CaseEditStyleViewController.m in Sources */,
 				1415F9B41A5CD1CB003D0C29 /* NewestBidInfoCell.m in Sources */,
@@ -6017,6 +6032,7 @@
 				37F0E62C1A7D1AFE004CCCB2 /* MWCaptionView.m in Sources */,
 				37F0E6A71A7D1F4E004CCCB2 /* PSTCollectionViewData.m in Sources */,
 				A987EDE11A20920500CED7CD /* NSMutableArray+ASCategory.m in Sources */,
+				1403809D1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m in Sources */,
 				A9A0671F1A3D79A10059D73B /* DefaultData.m in Sources */,
 				14D973941A334DFC00E771ED /* PushMessageCell.m in Sources */,
 				A971BCA11A20825800C018D6 /* main.m in Sources */,
@@ -6239,7 +6255,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = JuranDesigner;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -6402,7 +6418,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
 				VERSIONING_SYSTEM = "";

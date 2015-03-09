@@ -79,8 +79,9 @@
     _emptyView.center = _tableView.center;
     [self.view addSubview:_emptyView];
     
-//    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
-//    self.fullScreenScroll.delegate = self;
+    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
+    self.fullScreenScroll.delegate = self;
+    self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -184,11 +185,20 @@
 
 - (void)fullScreenScrollDidLayoutUIBars:(YIFullScreenScroll *)fullScreenScroll{
     
-    CGFloat y = 20 - self.navigationController.navigationBar.frame.origin.y;
-    CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
+    CGFloat y = _tableView.contentOffset.y;
+    if (self.navigationController.navigationBar.frame.origin.y == 20) {
+        y = 0;
+    }else
+        if (y > 88) {
+            y = 88;
+        }
+    
+    
     CGRect frame = _filterView.frame;
     frame.origin.y = -y;
     _filterView.frame = frame;
+    
+    CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
     
     frame = _tableView.frame;
     frame.origin.y = CGRectGetMaxY(_filterView.frame);

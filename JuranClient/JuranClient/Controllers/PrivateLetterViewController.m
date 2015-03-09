@@ -272,12 +272,10 @@
 #endif
     
     NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _designer.userId],
-#ifndef kJuranDesigner
                             @"senderName":_senderName,
                             @"mobilePhone":_mobilePhone,
                             @"likeStyle":_likeStyle,
                             @"houseArea": _houseArea,
-#endif
                             @"memo": memo};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_SEND_PRIVATE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
