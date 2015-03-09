@@ -449,7 +449,7 @@
     if (indexPath.section == 0 && _isImmediate) {
         row = row + 1;
     }
-    if ((indexPath.section == 0 && row == 1) || (_isImmediate && ((indexPath.section == 1 && row != 6 && row != 8 && row != 9) || (indexPath.section == 2)))) {
+    if ((indexPath.section == 0 && row == 1) || (_isImmediate && ((indexPath.section == 1 && row != 6 && row != 8 && row != 9) ))) {//|| (indexPath.section == 2)
         static NSString *CellIdentifier = @"TextFieldCell";
         TextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
@@ -537,7 +537,7 @@
             _addessTextView.text = _order.address;
             _addessTextView.userInteractionEnabled = _isImmediate;
             [cell.contentView addSubview:_addressView];
-        }else if (indexPath.section == 0 || _isImmediate){
+        }else if (indexPath.section == 0 || (_isImmediate && indexPath.section == 1)){
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellIndicator.png"]];
             
             cell.textLabel.text = _keys[indexPath.section][row];
