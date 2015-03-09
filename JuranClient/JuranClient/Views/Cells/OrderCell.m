@@ -11,6 +11,7 @@
 #import "TTTAttributedLabel.h"
 #import "OrderActionView.h"
 #import "OrderPhotoViewController.h"
+#import "OrderPhotoBrowserViewController.h"
 
 @interface OrderCell () <OrderActionViewDelegate>
 
@@ -84,17 +85,27 @@
 - (IBAction)onEffect:(UIButton *)btn{
     if ([btn isEqual:_sizeButton]) {
         //户型图
-        OrderPhotoViewController *vc = [[OrderPhotoViewController alloc] init];
-        vc.order = _order;
-        vc.needLoadData = YES;
-        [self.viewController.navigationController pushViewController:vc animated:YES];
+        if (_order.measurefileSrc.count == 1) {
+            OrderPhotoBrowserViewController *vc = [[OrderPhotoBrowserViewController alloc] initWithPhotos:_order.measurefileSrc andStartWithPhotoAtIndex:0];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.viewController.navigationController pushViewController:vc animated:YES];
+        }else{
+            OrderPhotoViewController *vc = [[OrderPhotoViewController alloc] init];
+            vc.order = _order;
+            [self.viewController.navigationController pushViewController:vc animated:YES];
+        }
     }else if ([btn isEqual:_effectButton]){
         //效果图
-        OrderPhotoViewController *vc = [[OrderPhotoViewController alloc] init];
-        vc.order = _order;
-        vc.needLoadData = YES;
-        vc.type = 1;
-        [self.viewController.navigationController pushViewController:vc animated:YES];
+        if (_order.measurefileSrc.count == 1) {
+            OrderPhotoBrowserViewController *vc = [[OrderPhotoBrowserViewController alloc] initWithPhotos:_order.fileSrc andStartWithPhotoAtIndex:0];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.viewController.navigationController pushViewController:vc animated:YES];
+        }else{
+            OrderPhotoViewController *vc = [[OrderPhotoViewController alloc] init];
+            vc.order = _order;
+            vc.type = 1;
+            [self.viewController.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 

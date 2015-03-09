@@ -145,13 +145,11 @@
     
     view = [_tableFooterView viewWithTag:1101];
     view.layer.borderWidth = .5f;
-    view.layer.borderColor = RGBColor(0, 54, 114).CGColor;
+    view.layer.borderColor = kBlueColor.CGColor;
     view.layer.cornerRadius = 2.f;
     
     _commentTextView.placeholder = @"请输入200字以内的备注说明";
     _addessTextView.placeholder = @"请输入详细地址";
-    _addessTextView.layer.borderWidth = 1.f;
-    _addessTextView.layer.borderColor = RGBColor(241, 241, 241).CGColor;
     
     TTTAttributedLabel *label = (TTTAttributedLabel*)[_designContentView viewWithTag:1300];
     [label setText:@"说明：设计师还需提供详细施工图纸，具体详见《住宅室内装饰设计合同》中的合同条款。" afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
@@ -160,7 +158,7 @@
         return mutableAttributedString;
     }];
     label = (TTTAttributedLabel*)[_tableFooterView viewWithTag:1300];
-    [label setText:@"已阅读并接受《住宅室内装饰设计合同》中得合同条款" afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+    [label setText:@"已阅读并接受《住宅室内装饰设计合同》中的合同条款" afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
         NSRange range = [[mutableAttributedString string] rangeOfString:@"《住宅室内装饰设计合同》" options:NSCaseInsensitiveSearch];
         [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[kBlueColor CGColor] range:range];
         return mutableAttributedString;
