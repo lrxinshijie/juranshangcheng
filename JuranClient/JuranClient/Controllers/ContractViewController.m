@@ -145,7 +145,7 @@
     
     view = [_tableFooterView viewWithTag:1101];
     view.layer.borderWidth = .5f;
-    view.layer.borderColor = RGBColor(0, 54, 114).CGColor;
+    view.layer.borderColor = kBlueColor.CGColor;
     view.layer.cornerRadius = 2.f;
     
     _commentTextView.placeholder = @"请输入200字以内的备注说明";
