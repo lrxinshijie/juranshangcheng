@@ -66,6 +66,12 @@
     _tableView.backgroundColor = RGBColor(237, 237, 237);
     [self.view addSubview:_tableView];
     self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+#ifdef kJuranDesigner
+    CGRect frame = _headerView.frame;
+    frame.size.height = 140;
+    _headerView.frame = frame;
+#endif
+    
     _tableView.tableHeaderView = _headerView;
     
     self.isCheck = YES;
@@ -99,7 +105,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+#ifdef kJuranDesigner
+    return 0;
+#else
     return 4;
+#endif
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -227,7 +237,7 @@
         [self showTip:@"私信内容不能为空"];
         return;
     }
-    
+#ifndef kJuranDesigner
     if (_isCheck) {
         if (_senderName.length == 0) {
             [self showTip:@"姓名不能为空"];
@@ -259,6 +269,7 @@
         _likeStyle = @"";
         _houseArea = @"";
     }
+#endif
     
     NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _designer.userId],
                             @"senderName":_senderName,
