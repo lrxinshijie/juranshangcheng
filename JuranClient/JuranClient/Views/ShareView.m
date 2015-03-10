@@ -58,10 +58,33 @@
                   title:(NSString *)title
                     url:(NSString *)url{
     
-    _content = content;
-    _title = title;
-    _url = url;
-    _imagePath = imagePath;
+    self.content = content;
+    self.title = title;
+    self.url = url;
+    self.imagePath = imagePath;
+    
+    self.alpha = 0;
+    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [app.window addSubview:self];
+    
+    [UIView animateWithDuration:.5 animations:^{
+        self.alpha = 1;
+    }];
+}
+
+- (void)showWithDefaultContent:(NSString *)content
+                         image:(NSString *)imagePath
+                         title:(NSString *)title
+                           url:(NSString *)url
+                  WeiboContent:(NSString*)weiboContent
+                         title:(NSString*)weiboTitle{
+    self.content = content;
+    self.title = title;
+    self.url = url;
+    self.imagePath = imagePath;
+    self.weiboContent = weiboContent;
+    self.weiboTitle = weiboTitle;
+    self.hasWeiboContent = YES;
     
     self.alpha = 0;
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -124,7 +147,11 @@
         case 3:
         {
             shareType = ShareTypeTencentWeibo;
-            _content = [NSString stringWithFormat:@"%@\n%@", _content, _url];
+            if (self.hasWeiboContent) {
+                _content = _weiboContent;
+            }else{
+                _content = [NSString stringWithFormat:@"%@\n%@", _content, _url];
+            }
             break;
         }
         case 4:
@@ -144,11 +171,15 @@
         case 5:
         {
             shareType = ShareTypeSinaWeibo;
-            if (_content.length + _url.length > kSinaWeiboContentLength) {
-                _content = [_content substringToIndex:kSinaWeiboContentLength - _url.length - 4];
-                _content = [NSString stringWithFormat:@"%@...",_content];
+            if (self.hasWeiboContent) {
+                _content = _weiboContent;
+            }else{
+                if (_content.length + _url.length > kSinaWeiboContentLength) {
+                    _content = [_content substringToIndex:kSinaWeiboContentLength - _url.length - 4];
+                    _content = [NSString stringWithFormat:@"%@...",_content];
+                }
+                _content = [NSString stringWithFormat:@"%@\n%@", _content, _url];
             }
-            _content = [NSString stringWithFormat:@"%@\n%@", _content, _url];
             break;
         }
         case 6:

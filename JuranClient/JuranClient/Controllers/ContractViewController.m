@@ -145,13 +145,11 @@
     
     view = [_tableFooterView viewWithTag:1101];
     view.layer.borderWidth = .5f;
-    view.layer.borderColor = RGBColor(0, 54, 114).CGColor;
+    view.layer.borderColor = kBlueColor.CGColor;
     view.layer.cornerRadius = 2.f;
     
     _commentTextView.placeholder = @"请输入200字以内的备注说明";
     _addessTextView.placeholder = @"请输入详细地址";
-    _addessTextView.layer.borderWidth = 1.f;
-    _addessTextView.layer.borderColor = RGBColor(241, 241, 241).CGColor;
     
     TTTAttributedLabel *label = (TTTAttributedLabel*)[_designContentView viewWithTag:1300];
     [label setText:@"说明：设计师还需提供详细施工图纸，具体详见《住宅室内装饰设计合同》中的合同条款。" afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
@@ -160,7 +158,7 @@
         return mutableAttributedString;
     }];
     label = (TTTAttributedLabel*)[_tableFooterView viewWithTag:1300];
-    [label setText:@"已阅读并接受《住宅室内装饰设计合同》中得合同条款" afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+    [label setText:@"已阅读并接受《住宅室内装饰设计合同》中的合同条款" afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
         NSRange range = [[mutableAttributedString string] rangeOfString:@"《住宅室内装饰设计合同》" options:NSCaseInsensitiveSearch];
         [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[kBlueColor CGColor] range:range];
         return mutableAttributedString;
@@ -451,7 +449,7 @@
     if (indexPath.section == 0 && _isImmediate) {
         row = row + 1;
     }
-    if ((indexPath.section == 0 && row == 1) || (_isImmediate && ((indexPath.section == 1 && row != 6 && row != 8 && row != 9) || (indexPath.section == 2)))) {
+    if ((indexPath.section == 0 && row == 1) || (_isImmediate && ((indexPath.section == 1 && row != 6 && row != 8 && row != 9) ))) {//|| (indexPath.section == 2)
         static NSString *CellIdentifier = @"TextFieldCell";
         TextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
@@ -539,7 +537,7 @@
             _addessTextView.text = _order.address;
             _addessTextView.userInteractionEnabled = _isImmediate;
             [cell.contentView addSubview:_addressView];
-        }else if (indexPath.section == 0 || _isImmediate){
+        }else if (indexPath.section == 0 || (_isImmediate && indexPath.section == 1)){
             cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellIndicator.png"]];
             
             cell.textLabel.text = _keys[indexPath.section][row];

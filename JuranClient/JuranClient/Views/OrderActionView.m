@@ -141,6 +141,7 @@
     UIButton *button = [self buttonWithFrame:frame target:self action:@selector(onAction:) title:title backgroundImage:nil];
     [button setTitleColor:textColor forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:14];
+    button.backgroundColor = [UIColor whiteColor];
     button.tag = action;
     button.layer.masksToBounds = YES;
     button.layer.cornerRadius = 2;

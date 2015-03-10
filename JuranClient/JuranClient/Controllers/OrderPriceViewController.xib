@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderPriceViewController">
             <connections>
                 <outlet property="amountTextField" destination="B8Y-4q-bgP" id="w4a-c1-5ZT"/>
+                <outlet property="bgImageView" destination="B9N-Bo-5EG" id="VgF-Dp-Gvs"/>
                 <outlet property="dateLabel" destination="Y6T-bS-Alj" id="VHT-cU-KdA"/>
                 <outlet property="orderLabel" destination="HN2-fO-STX" id="I4f-An-Oi5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -36,8 +37,8 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="500" borderStyle="line" minimumFontSize="17" id="B8Y-4q-bgP">
-                            <rect key="frame" x="72" y="68" width="98" height="30"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="500" minimumFontSize="17" id="B8Y-4q-bgP">
+                            <rect key="frame" x="80" y="68" width="160" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -45,15 +46,19 @@
                                 <outlet property="delegate" destination="-1" id="eeA-v6-lo1"/>
                             </connections>
                         </textField>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="B9N-Bo-5EG">
+                            <rect key="frame" x="10" y="68" width="300" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="量房费用" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="88V-GL-Jhn">
-                            <rect key="frame" x="10" y="72" width="73" height="21"/>
+                            <rect key="frame" x="15" y="72" width="73" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Ya-f8-Yfc">
-                            <rect key="frame" x="174" y="72" width="31" height="21"/>
+                            <rect key="frame" x="284" y="72" width="18" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -66,6 +71,11 @@
                             <color key="textColor" red="0.0" green="0.32156862745098042" blue="0.67450980392156867" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="wXk-IM-Hzb">
+                            <rect key="frame" x="0.0" y="34" width="320" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>

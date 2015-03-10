@@ -12,19 +12,26 @@
 {
     NSMutableArray *_oneKeyShareListArray;
 }
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *content;
-@property (nonatomic, strong) NSString *url;
-@property (nonatomic, strong) NSString *imagePath;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *url;
+@property (nonatomic, copy) NSString *imagePath;
+@property (nonatomic, copy) NSString *weiboContent;
+@property (nonatomic, copy) NSString *weiboTitle;
+@property (nonatomic, assign) BOOL hasWeiboContent;
 
 + (ShareView *)sharedView;
 
-
 - (void)showWithContent:(NSString *)content
-        // defaultContent:(NSString *)defaultContent
                   image:(NSString *)imagePath
                   title:(NSString *)title
                     url:(NSString *)url;
-             // mediaType:(SSPublishContentMediaType)mediaType;
+
+- (void)showWithDefaultContent:(NSString *)content
+                         image:(NSString *)imagePath
+                         title:(NSString *)title
+                           url:(NSString *)url
+                  WeiboContent:(NSString*)weiboContent
+                         title:(NSString*)weiboTitle;
 
 @end

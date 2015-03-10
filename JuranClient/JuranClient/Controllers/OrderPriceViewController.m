@@ -15,6 +15,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *amountTextField;
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 @property (nonatomic, strong) IBOutlet UILabel *orderLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *bgImageView;
 
 - (IBAction)onSubmit:(id)sender;
 
@@ -27,6 +28,11 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"修改价格";
+    
+    _bgImageView.layer.borderColor = [RGBColor(249, 249, 249) CGColor];
+    _bgImageView.layer.borderWidth = 1;
+    _bgImageView.layer.masksToBounds = YES;
+    _bgImageView.layer.cornerRadius = 2;
     
     _amountTextField.text = [NSString stringWithFormat:@"%@", _order.amount];
     _dateLabel.text = [NSString stringWithFormat:@"期望量房时间：%@", _order.serviceDateString];

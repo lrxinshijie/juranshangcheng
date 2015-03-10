@@ -263,7 +263,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="633" y="249.5"/>
+            <point key="canvasLocation" x="641" y="192.5"/>
         </view>
         <view tag="5555" contentMode="scaleToFill" id="TUU-S9-osC">
             <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
@@ -314,6 +314,7 @@
                         <button opaque="NO" tag="1100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZKx-IF-9Te">
                             <rect key="frame" x="57" y="8" width="90" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="取  消">
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -326,6 +327,7 @@
                         <button opaque="NO" tag="1101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="aYp-mA-1IX">
                             <rect key="frame" x="173" y="8" width="90" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="下一步">
                                 <color key="titleColor" red="0.0" green="0.21176470588235294" blue="0.44705882352941179" alpha="1" colorSpace="calibratedRGB"/>
@@ -351,14 +353,14 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="633" y="518"/>
+            <point key="canvasLocation" x="635" y="727"/>
         </view>
         <view tag="5555" contentMode="scaleToFill" id="35v-pZ-qyN">
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="K9t-FB-NF5" customClass="ASPlaceholderTextView">
-                    <rect key="frame" x="15" y="10" width="290" height="60"/>
+                    <rect key="frame" x="9" y="8" width="300" height="64"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -371,7 +373,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="635" y="668"/>
+            <point key="canvasLocation" x="635" y="575"/>
         </view>
     </objects>
     <resources>
