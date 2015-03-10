@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JRAdInfo : NSObject
+@interface JRAdInfo : NSObject<NSCoding>
 
 @property (nonatomic, assign) NSInteger key;
 @property (nonatomic, assign) NSInteger adId;

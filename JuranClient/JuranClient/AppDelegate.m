@@ -197,8 +197,7 @@
 #else
 
 - (void)setupTabbar{
-//    [WelcomeView fecthData];
-    
+    [WelcomeView fecthData];
     CaseViewController *cs = [[CaseViewController alloc] init];
     cs.isHome = YES;
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
@@ -223,9 +222,10 @@
     
     self.tabBarController = [[UITabBarController alloc] init];
     _tabBarController.viewControllers = @[csNav,topicNav,publishNav,desNav,profileNav];
+//    WelcomeView *view = [[WelcomeView alloc] init];
+//    [_tabBarController.view addSubview:view];
+//    [view show];
     self.window.rootViewController = _tabBarController;
-    
-//    [[WelcomeView sharedView] show];
 }
 #endif
 

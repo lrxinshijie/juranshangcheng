@@ -546,23 +546,23 @@
     }
 }
 
-+ (BOOL)saveWelcomeInfo:(NSDictionary*)dict{
-    NSDictionary *d = [kUD objectForKey:@"kWelcomeInfo"];
++ (BOOL)saveWelcomeInfo:(JRAdInfo*)info{
+    NSData *d = [kUD objectForKey:@"kWelcomeInfo"];
     if (d) {
-        JRAdInfo *newInfo = [[JRAdInfo alloc] initWithDictionary:d];
-        JRAdInfo *oldInfo = [[JRAdInfo alloc] initWithDictionary:dict];
-        if (newInfo.adId == oldInfo.adId) {
+        JRAdInfo *oldInfo = [NSKeyedUnarchiver unarchiveObjectWithData:d];;
+        if (info.adId == oldInfo.adId) {
             return NO;
         }
     }
-    [kUD setObject:dict forKey:@"kWelcomeInfo"];
+    NSData *newData = [NSKeyedArchiver archivedDataWithRootObject:info];
+    [kUD setObject:newData forKey:@"kWelcomeInfo"];
     [kUD synchronize];
     return YES;
 }
 + (JRAdInfo*)welcomeInfo{
-    NSDictionary *dict = [kUD objectForKey:@"kWelcomeInfo"];
-    if (dict) {
-        JRAdInfo *info = [[JRAdInfo alloc] initWithDictionary:dict];
+    NSData *data = [kUD objectForKey:@"kWelcomeInfo"];
+    if (data) {
+        JRAdInfo *info = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         return info;
     }
     return nil;

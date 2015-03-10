@@ -10,7 +10,6 @@
 
 @interface WelcomeView : UIView
 
-+ (WelcomeView *)sharedView;
 + (void)fecthData;
 - (void)show;
 

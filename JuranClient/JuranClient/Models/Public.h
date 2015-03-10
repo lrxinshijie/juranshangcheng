@@ -104,7 +104,7 @@
 
 + (NSString *)shareEnv;
 
-+ (BOOL)saveWelcomeInfo:(NSDictionary*)dict;
++ (BOOL)saveWelcomeInfo:(JRAdInfo*)info;
 + (JRAdInfo*)welcomeInfo;
 
 @end
