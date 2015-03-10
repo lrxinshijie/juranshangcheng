@@ -13,6 +13,8 @@
 #define kDefaultCityNumber @"860515"
 #define kDefaultCityName @"深圳"
 
+@class JRAdInfo;
+
 @interface Public : NSObject 
 //简单的弹出窗
 + (void)alertOK:(NSString *)title Message:(NSString *)message;
@@ -101,5 +103,8 @@
 + (BOOL)isDesignerApp;
 
 + (NSString *)shareEnv;
+
++ (BOOL)saveWelcomeInfo:(NSDictionary*)dict;
++ (JRAdInfo*)welcomeInfo;
 
 @end

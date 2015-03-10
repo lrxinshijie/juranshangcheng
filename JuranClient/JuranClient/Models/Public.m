@@ -29,6 +29,7 @@
 #import "PushMessageViewController.h"
 #import "PrivateMessageViewController.h"
 #import "ALNavigationController.h"
+#import "JRAdInfo.h"
 
 @implementation Public
 
@@ -545,5 +546,26 @@
     }
 }
 
++ (BOOL)saveWelcomeInfo:(NSDictionary*)dict{
+    NSDictionary *d = [kUD objectForKey:@"kWelcomeInfo"];
+    if (d) {
+        JRAdInfo *newInfo = [[JRAdInfo alloc] initWithDictionary:d];
+        JRAdInfo *oldInfo = [[JRAdInfo alloc] initWithDictionary:dict];
+        if (newInfo.adId == oldInfo.adId) {
+            return NO;
+        }
+    }
+    [kUD setObject:dict forKey:@"kWelcomeInfo"];
+    [kUD synchronize];
+    return YES;
+}
++ (JRAdInfo*)welcomeInfo{
+    NSDictionary *dict = [kUD objectForKey:@"kWelcomeInfo"];
+    if (dict) {
+        JRAdInfo *info = [[JRAdInfo alloc] initWithDictionary:dict];
+        return info;
+    }
+    return nil;
+}
 
 @end

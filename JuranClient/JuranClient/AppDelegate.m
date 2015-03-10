@@ -26,6 +26,7 @@
 #import "APService.h"
 #import "MobClick.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "WelcomeView.h"
 
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
@@ -196,7 +197,8 @@
 #else
 
 - (void)setupTabbar{
-
+//    [WelcomeView fecthData];
+    
     CaseViewController *cs = [[CaseViewController alloc] init];
     cs.isHome = YES;
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
@@ -222,6 +224,8 @@
     self.tabBarController = [[UITabBarController alloc] init];
     _tabBarController.viewControllers = @[csNav,topicNav,publishNav,desNav,profileNav];
     self.window.rootViewController = _tabBarController;
+    
+//    [[WelcomeView sharedView] show];
 }
 #endif
 

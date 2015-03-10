@@ -18,7 +18,7 @@
 @property (nonatomic, copy) NSString *mediaType;
 
 
-
+- (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
 @end

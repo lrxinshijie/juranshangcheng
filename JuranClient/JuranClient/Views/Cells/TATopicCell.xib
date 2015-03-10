@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -53,11 +53,25 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default.png" id="DGD-dR-UJ1" customClass="ZoomInImageView">
-                                <rect key="frame" x="10" y="58" width="60" height="45"/>
+                            <view contentMode="scaleToFill" id="hvr-l4-iR4">
+                                <rect key="frame" x="10" y="60" width="196" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" tag="2300" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default.png" id="lBT-fh-xfO" customClass="ZoomInImageView">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" tag="2301" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default.png" id="Vkt-Nk-0r6" customClass="ZoomInImageView">
+                                        <rect key="frame" x="68" y="0.0" width="60" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" tag="2302" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default.png" id="bcy-Kn-l9f" customClass="ZoomInImageView">
+                                        <rect key="frame" x="136" y="0.0" width="60" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -69,7 +83,7 @@
                 <outlet property="backView" destination="MYH-Qi-g9B" id="DbW-kG-OJi"/>
                 <outlet property="ideaContentLabel" destination="3cn-Lg-34c" id="Ogw-9W-SYK"/>
                 <outlet property="ideaLabel" destination="pRZ-Db-wpe" id="8mB-fm-2rh"/>
-                <outlet property="relateImageView" destination="DGD-dR-UJ1" id="qhV-eN-dLX"/>
+                <outlet property="relateImageView" destination="hvr-l4-iR4" id="cbL-4K-7re"/>
                 <outlet property="timeLabel" destination="Xx6-eI-ZEx" id="Ell-nk-Cma"/>
                 <outlet property="topicContentLabel" destination="fHG-NZ-bOa" id="Fa6-Wh-Av9"/>
                 <outlet property="topicLabel" destination="WGB-gV-RCC" id="Ymk-bl-NRg"/>
