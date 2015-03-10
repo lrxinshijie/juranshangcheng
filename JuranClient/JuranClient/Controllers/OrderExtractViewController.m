@@ -89,6 +89,8 @@
     [[ALEngine shareEngine] pathURL:JR_EXTRACT_AMOUNT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
+            _order.ifCanDraw = NO;
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }];

@@ -44,14 +44,15 @@
             [self addSubview:[self buttonWithAction:OrderActionReject]];
             [self addSubview:[self buttonWithAction:OrderActionPrice]];
         }else if ([_order.status isEqualToString:@"wait_designer_measure"]) {
-            if ([order.payAmount doubleValue] > 0) {
+            if (order.ifCanDraw) {
                 [self addSubview:[self buttonWithAction:OrderActionExtract]];
             }
             [self addSubview:[self buttonWithAction:OrderActionDesigner]];
         }
     }else if (_order.type == 1){
-        if (([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) && [order.payAmount doubleValue] > 0) {
-                [self addSubview:[self buttonWithAction:OrderActionExtract]];
+//        if (([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) && [order.payAmount doubleValue] > 0) {
+        if (order.ifCanDraw) {
+            [self addSubview:[self buttonWithAction:OrderActionExtract]];
         }
     }
 #else
@@ -252,15 +253,23 @@
         }
     }else if (button.tag == OrderActionReject){
         //设计师拒绝
-        NSDictionary *param = @{@"measureTid": _order.measureTid};
-        [self.viewController showHUD];
-        [[ALEngine shareEngine] pathURL:JR_REJECT_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-            [self.viewController hideHUD];
-            if (!error) {
-                _order.status = @"cancel";
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
+        [UIAlertView showWithTitle:nil message:@"您确定要拒绝该订单吗？" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确认"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (alertView.cancelButtonIndex == buttonIndex) {
+                return ;
             }
+            
+            NSDictionary *param = @{@"measureTid": _order.measureTid};
+            [self.viewController showHUD];
+            [[ALEngine shareEngine] pathURL:JR_REJECT_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                [self.viewController hideHUD];
+                if (!error) {
+                    _order.status = @"cancel";
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
+                }
+            }];
         }];
+        
+        
     }else if (button.tag == OrderActionDesigner){
         //签设计合同
         ContractViewController *vc = [[ContractViewController alloc] init];

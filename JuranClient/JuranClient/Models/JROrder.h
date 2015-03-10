@@ -33,6 +33,7 @@
 @property (nonatomic, assign) BOOL ifCanCredit;
 @property (nonatomic, assign) BOOL ifCanViewCredit;
 
+@property (nonatomic, assign) BOOL ifCanDraw; //是否可提现
 @property (nonatomic, assign) BOOL measurefileExist;
 @property (nonatomic, assign) BOOL fileExist;
 
