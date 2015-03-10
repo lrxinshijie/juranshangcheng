@@ -91,7 +91,6 @@
 #ifndef kJuranDesigner
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 #endif
-    
     [Public initApp];
     
     self.clientId = @"";
