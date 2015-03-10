@@ -316,7 +316,8 @@
             y = CGRectGetMaxY(frame);
         }
         
-        if (([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) && [_order.payAmount doubleValue] > 0) {
+//        if (([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) && [_order.payAmount doubleValue] > 0) {
+        if (_order.ifCanDraw){
             frame = _actionBgView.frame;
             frame.origin.y = y;
             _actionBgView.frame = frame;
@@ -451,7 +452,8 @@
             height += 37;
         }
         
-        if (([order.status isEqualToString:@"wait_first_pay"] || [order.status isEqualToString:@"wait_last_pay"]) && [order.payAmount doubleValue] > 0) {
+//        if (([order.status isEqualToString:@"wait_first_pay"] || [order.status isEqualToString:@"wait_last_pay"]) && [order.payAmount doubleValue] > 0) {
+        if (order.ifCanDraw){
             height += 37;
         }
     }
