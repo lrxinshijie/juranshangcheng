@@ -128,12 +128,18 @@
 }
 
 - (void)jumpToMain{
+    [WelcomeView fecthData];
     if ([GuideViewController showGuide]) {
         GuideViewController *gv = [[GuideViewController alloc] init];
         gv.isHome = YES;
         self.window.rootViewController = gv;
     }else{
         [self setupTabbar];
+    }
+    if ([WelcomeView isShowView]) {
+        WelcomeView *view = [[WelcomeView alloc] init];
+        [_tabBarController.view addSubview:view];
+        [view show];
     }
 }
 
@@ -197,7 +203,6 @@
 #else
 
 - (void)setupTabbar{
-    [WelcomeView fecthData];
     CaseViewController *cs = [[CaseViewController alloc] init];
     cs.isHome = YES;
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
@@ -222,9 +227,6 @@
     
     self.tabBarController = [[UITabBarController alloc] init];
     _tabBarController.viewControllers = @[csNav,topicNav,publishNav,desNav,profileNav];
-//    WelcomeView *view = [[WelcomeView alloc] init];
-//    [_tabBarController.view addSubview:view];
-//    [view show];
     self.window.rootViewController = _tabBarController;
 }
 #endif

@@ -11,6 +11,7 @@
 @interface WelcomeView : UIView
 
 + (void)fecthData;
++ (BOOL)isShowView;
 - (void)show;
 
 @end

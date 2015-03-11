@@ -23,9 +23,15 @@
 @implementation WelcomeView
 
 + (void)fecthData{
+#ifdef kJuranDesigner
     NSDictionary *param = @{@"adCode": @"app_designer_index_roll",
                             @"areaCode": @"110000",
-                            @"type": @(8)};
+                            @"type": @(7)};
+#else
+    NSDictionary *param = @{@"adCode": @"app_consumer_index_roll",
+                            @"areaCode": @"110000",
+                            @"type": @(7)};
+#endif
     
     [[ALEngine shareEngine] pathURL:JR_GET_BANNER_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
@@ -45,6 +51,18 @@
             }
         }
     }];
+}
+
++ (BOOL)isShowView{
+    JRAdInfo *info = [Public welcomeInfo];
+    if (!info) {
+        return NO;
+    }
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    if ([manager diskImageExistsForURL:[self imageUrlWithAdInfo:info]]) {
+        return YES;
+    }
+    return NO;
 }
 
 + (NSURL*)imageUrlWithAdInfo:(JRAdInfo*)info{
@@ -103,7 +121,11 @@
 
 - (void)unShow{
     [self stopTimeOut];
-    [self removeFromSuperview];
+    [UIView animateWithDuration:.5 animations:^{
+        self.alpha = 0.f;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
 }
 
 @end
