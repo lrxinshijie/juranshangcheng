@@ -372,7 +372,7 @@
             y = CGRectGetMaxY(frame);
         }
         
-        if ([_order.status isEqualToString:@"wait_designer_confirm"] || [_order.status isEqualToString:@"wait_consumer_pay"]) {
+        if ([_order.status isEqualToString:@"wait_designer_confirm"] || [_order.status isEqualToString:@"wait_consumer_pay"] || [_order.status isEqualToString:@"complete"] ) {
             frame = _actionBgView.frame;
             frame.origin.y = y;
             _actionBgView.frame = frame;
@@ -464,7 +464,7 @@
             height += 37;
         }
         
-        if ([order.status isEqualToString:@"wait_designer_confirm"] || [order.status isEqualToString:@"wait_consumer_pay"]) {
+        if ([order.status isEqualToString:@"wait_designer_confirm"] || [order.status isEqualToString:@"wait_consumer_pay"] || [order.status isEqualToString:@"complete"]) {
             height += 37;
         }
     }else{

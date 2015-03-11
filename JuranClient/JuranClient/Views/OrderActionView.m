@@ -62,6 +62,8 @@
         }else if ([_order.status isEqualToString:@"wait_consumer_pay"]) {
             [self addSubview:[self buttonWithAction:OrderActionCancel]];
             [self addSubview:[self buttonWithAction:OrderActionPay]];
+        }else if ([_order.status isEqualToString:@"complete"]){
+            [self addSubview:[self buttonWithAction:OrderActionComment]];
         }
     }else if (_order.type == 1){
         if ([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) {

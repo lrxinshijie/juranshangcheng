@@ -16,6 +16,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 @property (nonatomic, strong) IBOutlet UILabel *orderLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *bgImageView;
+@property (nonatomic, strong) IBOutlet UIButton *submitButton;
 
 - (IBAction)onSubmit:(id)sender;
 
@@ -28,6 +29,12 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"修改价格";
+    
+    [_submitButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    _submitButton.layer.masksToBounds = YES;
+    _submitButton.layer.cornerRadius = 2;
+    _submitButton.layer.borderColor = [kBlueColor CGColor];
+    _submitButton.layer.borderWidth = 1;
     
     _bgImageView.layer.borderColor = [RGBColor(249, 249, 249) CGColor];
     _bgImageView.layer.borderWidth = 1;

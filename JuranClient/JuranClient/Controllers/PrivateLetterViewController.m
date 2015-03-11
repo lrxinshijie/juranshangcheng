@@ -207,6 +207,7 @@
     }
     
     if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
         return NO;
     }
     return YES;
