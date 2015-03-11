@@ -31,5 +31,6 @@
 + (UIImage *)imageFromColor:(UIColor *)color;
 
 + (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
+- (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize;
 
 @end

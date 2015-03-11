@@ -11,9 +11,10 @@
 #import "JRAdInfo.h"
 #import "AppDelegate.h"
 
-@interface WelcomeView()
+@interface WelcomeView()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, copy) VoidBlock block;
 @property (nonatomic, strong) JRAdInfo *info;
 @property (nonatomic, strong) NSTimer *timer;
@@ -24,9 +25,9 @@
 
 + (void)fecthData{
 #ifdef kJuranDesigner
-    NSDictionary *param = @{@"adCode": @"app_designer_index_roll",
+    NSDictionary *param = @{@"adCode": @"app_designer_init_index",
                             @"areaCode": @"110000",
-                            @"type": @(7)};
+                            @"type": @(8)};
 #else
     NSDictionary *param = @{@"adCode": @"app_consumer_index_roll",
                             @"areaCode": @"110000",
@@ -62,11 +63,18 @@
     if ([manager diskImageExistsForURL:[self imageUrlWithAdInfo:info]]) {
         return YES;
     }
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [manager downloadImageWithURL:[self imageUrlWithAdInfo:info] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+            
+        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        }];
+    });
     return NO;
 }
 
 + (NSURL*)imageUrlWithAdInfo:(JRAdInfo*)info{
-    return [Public imageURL:info.mediaCode Width:kWindowWidth Height:kWindowHeight + 20 Editing:NO];
+    NSLog(@"%@", [Public imageURL:info.mediaCode Width:1080 Height:1920 Editing:YES]);
+    return [Public imageURL:info.mediaCode Width:1080 Height:1920 Editing:YES];
 }
 
 - (id)init{
@@ -74,10 +82,22 @@
     if (self) {
         self.frame = kContentFrame;
         self.hidden = YES;
+        
+        self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+        self.scrollView.delegate = self;
+        self.scrollView.contentSize = CGSizeMake(kWindowWidth, CGRectGetHeight(kContentFrame)*2);
+        self.scrollView.pagingEnabled = YES;
+        [self addSubview:_scrollView];
+        
         self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        [self addSubview:self.imageView];
+        self.imageView.clipsToBounds = YES;
+        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        [_scrollView addSubview:self.imageView];
+        
+        
         UIButton *btn = [self buttonWithFrame:self.bounds target:self action:@selector(onTouch:) image:nil];
-        [self addSubview:btn];
+        [_scrollView addSubview:btn];
+        
         self.info = [Public welcomeInfo];
     }
     return self;
@@ -94,12 +114,9 @@
         UIImage *image = [cache imageFromDiskCacheForKey:[manager cacheKeyForURL:[WelcomeView imageUrlWithAdInfo:_info]]];
         self.imageView.image = image;
         self.hidden = NO;
+        
         [self startTimeOut];
     }else{
-        [manager downloadImageWithURL:[WelcomeView imageUrlWithAdInfo:_info] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-            
-        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-        }];
         [self unShow];
     }
 }
@@ -127,5 +144,13 @@
         [self removeFromSuperview];
     }];
 }
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGPoint point = scrollView.contentOffset;
+    if (point.y > kWindowHeight/2) {
+        [self unShow];
+    }
+}
+
 
 @end

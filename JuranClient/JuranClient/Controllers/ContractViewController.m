@@ -164,7 +164,7 @@
         return mutableAttributedString;
     }];
     
-    _measureAmountTextField.enabled = _isImmediate;
+    _measureAmountTextField.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -543,7 +543,12 @@
             cell.textLabel.text = _keys[indexPath.section][row];
             NSString *value = _values[indexPath.section][row];
             if (value.length == 0) {
-                cell.detailTextLabel.text = @"请选择";
+                if (indexPath.section == 1 && row == 8) {
+                    cell.detailTextLabel.text = @"请选择省/市/区";
+                }else{
+                    cell.detailTextLabel.text = @"请选择";
+                }
+                
                 cell.detailTextLabel.textColor = [UIColor lightGrayColor];
             }else{
                 cell.detailTextLabel.text = value;
