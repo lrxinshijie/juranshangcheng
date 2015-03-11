@@ -222,9 +222,9 @@
     
     self.tabBarController = [[UITabBarController alloc] init];
     _tabBarController.viewControllers = @[csNav,topicNav,publishNav,desNav,profileNav];
-//    WelcomeView *view = [[WelcomeView alloc] init];
-//    [_tabBarController.view addSubview:view];
-//    [view show];
+    WelcomeView *view = [[WelcomeView alloc] init];
+    [_tabBarController.view addSubview:view];
+    [view show];
     self.window.rootViewController = _tabBarController;
 }
 #endif
