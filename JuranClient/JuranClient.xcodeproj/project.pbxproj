@@ -1469,6 +1469,8 @@
 		BD6189ED1A5E51CB00FBE4E1 /* DesignerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1476DA851A21DAC50006E9E0 /* DesignerDetailViewController.xib */; };
 		BD6C74261A63B70C0054BAC9 /* status_rejected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD6C74251A63B70C0054BAC9 /* status_rejected@2x.png */; };
 		BD6C74271A63B7130054BAC9 /* status_rejected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD6C74251A63B70C0054BAC9 /* status_rejected@2x.png */; };
+		BD8B9C411AAEEAEC0063BCFD /* WelcomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8B9C401AAEEAEC0063BCFD /* WelcomeView.m */; };
+		BD8B9C421AAEEDC80063BCFD /* WelcomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8B9C401AAEEAEC0063BCFD /* WelcomeView.m */; };
 		BDA4E5011A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BDA4E4FF1A5395380005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle */; };
 		BDA4E5021A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA4E5001A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework */; };
 /* End PBXBuildFile section */
@@ -2660,6 +2662,8 @@
 		BD6189E61A5E239200FBE4E1 /* BidManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BidManagementViewController.m; sourceTree = "<group>"; };
 		BD6189E71A5E239200FBE4E1 /* BidManagementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BidManagementViewController.xib; sourceTree = "<group>"; };
 		BD6C74251A63B70C0054BAC9 /* status_rejected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status_rejected@2x.png"; sourceTree = "<group>"; };
+		BD8B9C3F1AAEEAEC0063BCFD /* WelcomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeView.h; sourceTree = "<group>"; };
+		BD8B9C401AAEEAEC0063BCFD /* WelcomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeView.m; sourceTree = "<group>"; };
 		BDA4E4FF1A5395380005FF93 /* ShareSDKiPhoneDefaultShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKiPhoneDefaultShareViewUI.bundle; sourceTree = "<group>"; };
 		BDA4E5001A5395390005FF93 /* ShareSDKiPhoneDefaultShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneDefaultShareViewUI.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3917,6 +3921,8 @@
 				37D885741A8B8E5B0030F846 /* CommentStarView.m */,
 				37BA1E6B1AA73F0200A3232C /* ScoreProgress.h */,
 				37BA1E6C1AA73F0200A3232C /* ScoreProgress.m */,
+				BD8B9C3F1AAEEAEC0063BCFD /* WelcomeView.h */,
+				BD8B9C401AAEEAEC0063BCFD /* WelcomeView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5647,6 +5653,7 @@
 				A94525241AA5ED1F002DFA2A /* openssl_wrapper.m in Sources */,
 				1415F9691A5CD1CB003D0C29 /* UIActionSheet+Blocks.m in Sources */,
 				371FBEF51A6A37A400635D3D /* WikiCell.m in Sources */,
+				BD8B9C421AAEEDC80063BCFD /* WelcomeView.m in Sources */,
 				1415F96A1A5CD1CB003D0C29 /* JSONKeyMapper.m in Sources */,
 				1415F96B1A5CD1CB003D0C29 /* UIBubbleHeaderTableViewCell.m in Sources */,
 				1415F96C1A5CD1CB003D0C29 /* NSMutableString+ASCategory.m in Sources */,
@@ -6145,6 +6152,7 @@
 				14ABFBE91A25C7F400C4AF65 /* JRUser.m in Sources */,
 				1416C8B81A242FD100FA9999 /* CaseCollectionCell.m in Sources */,
 				1415FA9B1A5D1844003D0C29 /* ALTheme.m in Sources */,
+				BD8B9C411AAEEAEC0063BCFD /* WelcomeView.m in Sources */,
 				A987EDEA1A20920500CED7CD /* UIDevice+ASCategory.m in Sources */,
 				37F0E7051A7D2735004CCCB2 /* SDWebImageCompat.m in Sources */,
 				371FBEFD1A6A5B4600635D3D /* WikiFilterViewController.m in Sources */,

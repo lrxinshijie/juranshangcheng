@@ -9,6 +9,7 @@
 #import "ContractPreviewViewController.h"
 #import "TTTAttributedLabel.h"
 #import "JROrder.h"
+#import "JRWebViewController.h"
 
 @interface ContractPreviewViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -99,6 +100,13 @@
 }
 
 #pragma mark - Target Action
+
+- (IBAction)onDesignContract:(id)sender{
+    JRWebViewController *vc = [[JRWebViewController alloc] init];
+    vc.urlString = @"http://apph5.juran.cn/contract?fromApp=1";
+    vc.title = @"居然在线设计师合同条款";
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (void)onHiddenSection:(id)sender{
     UIButton *btn = (UIButton*)sender;

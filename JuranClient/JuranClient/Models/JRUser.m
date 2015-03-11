@@ -349,6 +349,7 @@
                 [vc.navigationController pushViewController:detailVC animated:YES];
             }else{
                 PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+                pv.receiverId = userId;
                 //                pv.designer = _designer;
                 [vc.navigationController pushViewController:pv animated:YES];
             }

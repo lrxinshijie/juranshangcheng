@@ -96,16 +96,10 @@
         }
     }else if ([btn isEqual:_effectButton]){
         //效果图
-        if (_order.measurefileSrc.count == 1) {
-            OrderPhotoBrowserViewController *vc = [[OrderPhotoBrowserViewController alloc] initWithPhotos:_order.fileSrc andStartWithPhotoAtIndex:0];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.viewController.navigationController pushViewController:vc animated:YES];
-        }else{
-            OrderPhotoViewController *vc = [[OrderPhotoViewController alloc] init];
-            vc.order = _order;
-            vc.type = 1;
-            [self.viewController.navigationController pushViewController:vc animated:YES];
-        }
+        OrderPhotoViewController *vc = [[OrderPhotoViewController alloc] init];
+        vc.order = _order;
+        vc.type = 1;
+        [self.viewController.navigationController pushViewController:vc animated:YES];
     }
 }
 

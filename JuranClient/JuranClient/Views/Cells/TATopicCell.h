@@ -18,7 +18,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *ideaContentLabel;
 @property (nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property (nonatomic, weak) IBOutlet UIView *backView;
-@property (nonatomic, weak) IBOutlet UIImageView *relateImageView;
+@property (nonatomic, weak) IBOutlet UIView *relateImageView;
 
 @property (nonatomic, strong) JRTopic *topic;
 

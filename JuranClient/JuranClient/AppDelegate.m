@@ -26,6 +26,7 @@
 #import "APService.h"
 #import "MobClick.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "WelcomeView.h"
 
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
@@ -91,7 +92,6 @@
 #ifndef kJuranDesigner
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 #endif
-    
     [Public initApp];
     
     self.clientId = @"";
@@ -197,7 +197,7 @@
 #else
 
 - (void)setupTabbar{
-
+    [WelcomeView fecthData];
     CaseViewController *cs = [[CaseViewController alloc] init];
     cs.isHome = YES;
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
@@ -222,6 +222,9 @@
     
     self.tabBarController = [[UITabBarController alloc] init];
     _tabBarController.viewControllers = @[csNav,topicNav,publishNav,desNav,profileNav];
+//    WelcomeView *view = [[WelcomeView alloc] init];
+//    [_tabBarController.view addSubview:view];
+//    [view show];
     self.window.rootViewController = _tabBarController;
 }
 #endif

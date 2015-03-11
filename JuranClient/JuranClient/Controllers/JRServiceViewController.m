@@ -33,7 +33,7 @@
 }
 
 - (void)setupData{
-    _titles = @[@"先行赔付", @"绿色环保", @"一个月无理由退换货", @"送货安装 零延迟", @"统一收银 统一退换货", @"同一品牌 同一价", @"家装零增项", @"红木全保真", @"进口家具百分百纯进口", @"明码实价", @"三包服务期延至三年", @"清单式报价"];
+    _titles = @[@"先行赔付", @"绿色环保", @"一个月无理\n由退换货", @"送货安装\n零延迟", @"统一收银\n统一退换货", @"同一品牌\n同一价", @"家装零增项", @"红木全保真", @"进口家具\n百分百纯进口", @"明码实价", @"三包服务期\n延至三年", @"O2O线上线下一体化服务"];
 }
 
 - (void)setupUI{
@@ -64,11 +64,13 @@
         btn.titleLabel.numberOfLines = 0;
         NSString *title = _titles[i];
         [btn setTitle:title forState:UIControlStateNormal];
+        btn.titleLabel.textAlignment = NSTextAlignmentCenter;
         [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [btn setTitleColor:kBlueColor forState:UIControlStateHighlighted];
         edge = btn.titleEdgeInsets;
         edge.top = 66 + (title.length > 5?12:0);
-        edge.left = -55;
+        edge.left -= 65;
+        edge.right -= 5;
         btn.titleEdgeInsets = edge;
         
         [_scrollView addSubview:btn];

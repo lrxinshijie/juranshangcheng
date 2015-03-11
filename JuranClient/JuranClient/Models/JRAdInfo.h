@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JRAdInfo : NSObject
+@interface JRAdInfo : NSObject<NSCoding>
 
 @property (nonatomic, assign) NSInteger key;
 @property (nonatomic, assign) NSInteger adId;
@@ -18,7 +18,7 @@
 @property (nonatomic, copy) NSString *mediaType;
 
 
-
+- (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray *)buildUpWithValue:(id)value;
 
 @end

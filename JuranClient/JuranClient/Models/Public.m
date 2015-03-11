@@ -29,6 +29,7 @@
 #import "PushMessageViewController.h"
 #import "PrivateMessageViewController.h"
 #import "ALNavigationController.h"
+#import "JRAdInfo.h"
 
 @implementation Public
 
@@ -545,5 +546,26 @@
     }
 }
 
++ (BOOL)saveWelcomeInfo:(JRAdInfo*)info{
+    NSData *d = [kUD objectForKey:@"kWelcomeInfo"];
+    if (d) {
+        JRAdInfo *oldInfo = [NSKeyedUnarchiver unarchiveObjectWithData:d];;
+        if (info.adId == oldInfo.adId) {
+            return NO;
+        }
+    }
+    NSData *newData = [NSKeyedArchiver archivedDataWithRootObject:info];
+    [kUD setObject:newData forKey:@"kWelcomeInfo"];
+    [kUD synchronize];
+    return YES;
+}
++ (JRAdInfo*)welcomeInfo{
+    NSData *data = [kUD objectForKey:@"kWelcomeInfo"];
+    if (data) {
+        JRAdInfo *info = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        return info;
+    }
+    return nil;
+}
 
 @end

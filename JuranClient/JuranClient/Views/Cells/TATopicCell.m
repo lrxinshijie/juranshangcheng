@@ -30,7 +30,20 @@
     _ideaContentLabel.text = data.content;
     _timeLabel.text = data.commentDate;
     if (data.commentImageUrlList.count > 0) {
-        [_relateImageView setImageWithURLString:data.commentImageUrlList[0]];
+        NSInteger i = 0;
+        for (NSString *name in data.commentImageUrlList) {
+            UIImageView *imgView = (UIImageView*)[_relateImageView viewWithTag:2300 + i];
+            imgView.hidden = NO;
+            imgView.image = [UIImage imageNamed:@"image_default.png"];
+            [imgView setImageWithURLString:name];
+            i++;
+        }
+        
+        for (; i < 3; i ++) {
+            UIImageView *imgView = (UIImageView*)[_relateImageView viewWithTag:2300 + i];
+            imgView.hidden = YES;
+            imgView.image = nil;
+        }
     }
     [self changeFrame];
 }

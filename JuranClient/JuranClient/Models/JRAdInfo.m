@@ -28,6 +28,26 @@
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:self.link forKey:@"kAdLink"];
+    [aCoder encodeObject:self.mediaCode forKey:@"kAdMediaCode"];
+    [aCoder encodeObject:self.mediaType forKey:@"kAdMediaType"];
+    [aCoder encodeInteger:self.key forKey:@"kAdKey"];
+    [aCoder encodeInteger:self.adId forKey:@"kAdId"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super init];
+    if (self) {
+        self.link = [aDecoder decodeObjectForKey:@"kAdLink"];
+        self.mediaCode = [aDecoder decodeObjectForKey:@"kAdMediaCode"];
+        self.mediaType = [aDecoder decodeObjectForKey:@"kAdMediaType"];
+        self.key = [aDecoder decodeIntegerForKey:@"kAdKey"];
+        self.adId = [aDecoder decodeIntegerForKey:@"kAdId"];
+    }
+    return self;
+}
+
 + (NSMutableArray *)buildUpWithValue:(id)value{
     NSMutableArray *retVal = [NSMutableArray array];
     

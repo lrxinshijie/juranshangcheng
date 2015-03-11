@@ -87,6 +87,7 @@
 - (void)setupUI{
     self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 0, kWindowWidth, kWindowHeightWithoutNavigationBar - 37) style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = RGBColor(241, 241, 241);
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
     
@@ -412,6 +413,18 @@
         cell.textLabel.text = _keys[indexPath.section][indexPath.row];
         cell.detailTextLabel.text = _values[indexPath.section][indexPath.row];
     }
+    
+//    UIView *line = [cell viewWithTag:3333];
+//    if (!line) {
+//        line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 0.5f)];
+//        line.tag = 3333;
+//        line.backgroundColor = RGBColor(198, 198, 203);
+//        [cell.contentView addSubview:line];
+//    }
+//    CGRect frame = line.frame;
+//    frame.origin.y = CGRectGetHeight(cell.frame) - 1.f;
+//    line.frame = frame;
+    
     return cell;
     /*
      }*/
