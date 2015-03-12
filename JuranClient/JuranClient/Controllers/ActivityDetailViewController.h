@@ -8,10 +8,12 @@
 
 #import "ALViewController.h"
 
+@class JRActivity;
 @interface ActivityDetailViewController : ALViewController
 
+@property (nonatomic, strong) JRActivity *activity;
+@property (nonatomic, copy) NSString *activityId;
 @property (nonatomic, copy) NSString *urlString;
 
-- (void)setShareTitle:(NSString *)title Content:(NSString*)content ImagePath:(NSString*) imagePath;
 
 @end

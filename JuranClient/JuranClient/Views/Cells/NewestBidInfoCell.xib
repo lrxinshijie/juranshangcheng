@@ -48,7 +48,7 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已有3人应标" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="duZ-E2-rLy">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已有3人应标" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="duZ-E2-rLy" customClass="TTTAttributedLabel">
                                 <rect key="frame" x="13" y="60" width="76" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -89,7 +89,7 @@
                 <outlet property="timeLabel" destination="yqJ-Pk-ptp" id="sgJ-ir-yKS"/>
                 <outlet property="titleLabel" destination="ux5-ov-PKy" id="otm-qF-2Bl"/>
             </connections>
-            <point key="canvasLocation" x="367" y="220.5"/>
+            <point key="canvasLocation" x="255" y="158.5"/>
         </tableViewCell>
     </objects>
     <resources>

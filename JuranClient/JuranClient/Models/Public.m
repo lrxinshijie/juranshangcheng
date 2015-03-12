@@ -29,6 +29,9 @@
 #import "PushMessageViewController.h"
 #import "PrivateMessageViewController.h"
 #import "ALNavigationController.h"
+#import "ActivityDetailViewController.h"
+#import "WikiDetailViewController.h"
+#import "WikiViewController.h"
 #import "JRAdInfo.h"
 
 @implementation Public
@@ -519,9 +522,26 @@
         pv.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:pv animated:YES];
     }else if (type == 4){
-        
+        if ([param.allKeys containsObject:@"id"]) {
+            WikiDetailViewController *vc = [[WikiDetailViewController alloc] init];
+            vc.wikiId = [param getStringValueForKey:@"id" defaultValue:@""];
+            vc.hidesBottomBarWhenPushed = YES;
+            [navigationController pushViewController:vc animated:YES];
+        }else{
+            WikiViewController *vc = [[WikiViewController alloc] init];
+            NSMutableDictionary *filterData = [NSMutableDictionary dictionaryWithDictionary:[[DefaultData sharedData] objectForKey:@"wikiDefaultParam"]];
+            [filterData addEntriesFromDictionary:param];
+            vc.filterData  = filterData;
+            vc.hidesBottomBarWhenPushed = YES;
+            [navigationController pushViewController:vc animated:YES];
+        }
     }else if (type == 5){
-        
+        if ([param.allKeys containsObject:@"id"]) {
+            ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
+            vc.activityId = [param getStringValueForKey:@"id" defaultValue:@""];
+            vc.hidesBottomBarWhenPushed = YES;
+            [navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 

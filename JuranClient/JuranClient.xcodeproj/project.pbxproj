@@ -713,6 +713,10 @@
 		37DC90F71A9F591E004C7898 /* ContractViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DC90F51A9F591E004C7898 /* ContractViewController.xib */; };
 		37DC90F81A9F5A3C004C7898 /* ContractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DC90F41A9F591E004C7898 /* ContractViewController.m */; };
 		37DC90F91A9F5A3C004C7898 /* ContractViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DC90F51A9F591E004C7898 /* ContractViewController.xib */; };
+		37E589821AB1B73200CB5FA4 /* WikiDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */; };
+		37E589831AB1B73200CB5FA4 /* WikiDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */; };
+		37E589841AB1B73200CB5FA4 /* WikiDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */; };
+		37E589851AB1B73200CB5FA4 /* WikiDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */; };
 		37F0E5CC1A7D1AC6004CCCB2 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F0E5CB1A7D1AC6004CCCB2 /* AssetsLibrary.framework */; };
 		37F0E62C1A7D1AFE004CCCB2 /* MWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F0E5D01A7D1AFE004CCCB2 /* MWCaptionView.m */; };
 		37F0E62D1A7D1AFE004CCCB2 /* MWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F0E5D01A7D1AFE004CCCB2 /* MWCaptionView.m */; };
@@ -1939,6 +1943,9 @@
 		37DC90F31A9F591E004C7898 /* ContractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractViewController.h; sourceTree = "<group>"; };
 		37DC90F41A9F591E004C7898 /* ContractViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractViewController.m; sourceTree = "<group>"; };
 		37DC90F51A9F591E004C7898 /* ContractViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContractViewController.xib; sourceTree = "<group>"; };
+		37E5897F1AB1B73200CB5FA4 /* WikiDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiDetailViewController.h; sourceTree = "<group>"; };
+		37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiDetailViewController.m; sourceTree = "<group>"; };
+		37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WikiDetailViewController.xib; sourceTree = "<group>"; };
 		37F0E5CB1A7D1AC6004CCCB2 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		37F0E5CF1A7D1AFE004CCCB2 /* MWCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWCaptionView.h; sourceTree = "<group>"; };
 		37F0E5D01A7D1AFE004CCCB2 /* MWCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWCaptionView.m; sourceTree = "<group>"; };
@@ -3682,6 +3689,9 @@
 				37A0F8191A6B96C300611760 /* ActivityDetailViewController.h */,
 				37A0F81A1A6B96C300611760 /* ActivityDetailViewController.m */,
 				37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */,
+				37E5897F1AB1B73200CB5FA4 /* WikiDetailViewController.h */,
+				37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */,
+				37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */,
 				37CE57241A6D346D00C75E65 /* WikiOrActivityViewController.h */,
 				37CE57251A6D346D00C75E65 /* WikiOrActivityViewController.m */,
 				37CE57261A6D346D00C75E65 /* WikiOrActivityViewController.xib */,
@@ -4674,7 +4684,7 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = QHWR2FWBM6;
+						DevelopmentTeam = D2JB8K885C;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -4793,6 +4803,7 @@
 				1468580F1AA554A40089A0CE /* rsa_private_key.txt in Resources */,
 				BD5186101A5D0ED700BE508A /* nav-icon-share@2x.png in Resources */,
 				BD51874A1A5D0ED700BE508A /* sns_icon_1_s@2x.png in Resources */,
+				37E589851AB1B73200CB5FA4 /* WikiDetailViewController.xib in Resources */,
 				1415FA3F1A5CD1CB003D0C29 /* SelfIntrodutionCell.xib in Resources */,
 				BD5186AA1A5D0ED700BE508A /* answer_no_data@2x.png in Resources */,
 				A911009F1A9B5FF500F75AF5 /* OrderFilterViewController.xib in Resources */,
@@ -5457,6 +5468,7 @@
 				BD5186A31A5D0ED700BE508A /* signleChocie@2x.png in Resources */,
 				BD5187671A5D0ED700BE508A /* tabbar_personal@2x.png in Resources */,
 				145471D81A3897D800428BCB /* QuestionCell.xib in Resources */,
+				37E589841AB1B73200CB5FA4 /* WikiDetailViewController.xib in Resources */,
 				BD51865F1A5D0ED700BE508A /* login-icon-wx@2x.png in Resources */,
 				375635351A60FF8F00D120C8 /* icon_check_ok@2x.png in Resources */,
 				BD5185FB1A5D0ED700BE508A /* icon-grid@2x.png in Resources */,
@@ -5803,6 +5815,7 @@
 				3721D0971AA23089008ADB34 /* ContractPreviewViewController.m in Sources */,
 				1415F9D61A5CD1CB003D0C29 /* ASDataHelper.m in Sources */,
 				1415F9D71A5CD1CB003D0C29 /* ModifyViewController.m in Sources */,
+				37E589831AB1B73200CB5FA4 /* WikiDetailViewController.m in Sources */,
 				144354661A885C240093C943 /* OrderPayViewController.m in Sources */,
 				1415F9D81A5CD1CB003D0C29 /* MyAskOrAnswerViewController.m in Sources */,
 				1415F9D91A5CD1CB003D0C29 /* InteractionViewController.m in Sources */,
@@ -6172,6 +6185,7 @@
 				A987EE481A20986100CED7CD /* CaseViewController.m in Sources */,
 				A987EDE81A20920500CED7CD /* UIButton+ASCategory.m in Sources */,
 				37F0E6AB1A7D1F4E004CCCB2 /* PSTCollectionViewItemKey.m in Sources */,
+				37E589821AB1B73200CB5FA4 /* WikiDetailViewController.m in Sources */,
 				14587E1F1A35DD4300D41236 /* BindMailViewController.m in Sources */,
 				14D9738F1A334C4F00E771ED /* PushMessageViewController.m in Sources */,
 				A9224E321A6CB829002974ED /* ViewUtils.m in Sources */,
@@ -6432,7 +6446,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
 				VERSIONING_SYSTEM = "";
