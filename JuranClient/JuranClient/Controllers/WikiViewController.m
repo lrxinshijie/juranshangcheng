@@ -11,7 +11,7 @@
 #import "JRWiki.h"
 #import "WikiCell.h"
 #import "JRWebViewController.h"
-#import "ActivityDetailViewController.h"
+#import "WikiDetailViewController.h"
 
 @interface WikiViewController ()<UITableViewDataSource, UITableViewDelegate, WikiFilterViewControllerDelegate>{
 }
@@ -164,13 +164,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-//    JRWebViewController *vc = [[JRWebViewController alloc] init];
-    ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
-    vc.title = @"家装百科";
+    WikiDetailViewController *vc = [[WikiDetailViewController alloc] init];
     JRWiki *wiki = [_datas objectAtIndex:indexPath.row];
-    vc.urlString = [NSString stringWithFormat:@"http://apph5.juran.cn/wikis/%d%@", wiki.wikiId,[Public shareEnv]];
-    [vc setShareTitle:wiki.title Content:wiki.title ImagePath:wiki.shareImagePath];
+    vc.wiki = wiki;
     wiki.browseCount++;
     [self.navigationController pushViewController:vc animated:YES];
 }
