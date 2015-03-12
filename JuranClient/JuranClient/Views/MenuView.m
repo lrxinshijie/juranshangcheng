@@ -107,12 +107,18 @@ static CGFloat kAnimateDuration = 0.25f;
     UIView *supview = [(AppDelegate *)[UIApplication sharedApplication].delegate tabBarController].view;
     [supview addSubview:self];
     
+    
+    
     [UIView animateWithDuration:kAnimateDuration animations:^{
         CGRect frame = self.frame;
         frame.origin.x = 0;
         self.frame = frame;
+        
     } completion:^(BOOL finished) {
-        self.backgroundColor = [UIColor colorWithWhite:0 alpha:.5];
+        self.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
+        [UIView animateWithDuration:kAnimateDuration animations:^{
+            self.backgroundColor = [UIColor colorWithWhite:0 alpha:.5];
+        }];
     }];
 }
 

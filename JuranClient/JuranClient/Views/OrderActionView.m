@@ -176,8 +176,9 @@
     }else if (button.tag == OrderActionConfirm){
         //设计师确认订单
 #ifdef kJuranDesigner
-        [UIAlertView showWithTitle:nil message:@"请确认量房费用，确认后无法修改" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确认"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-            if (alertView.cancelButtonIndex == buttonIndex) {
+        [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"请确认量房费用，确认后无法修改" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"确认"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+
+            if (actionSheet.cancelButtonIndex == buttonIndex) {
                 return ;
             }
             
@@ -188,7 +189,7 @@
             [[ALEngine shareEngine] pathURL:JR_DESIGNER_CONFIRM_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self.viewController responseHandler:^(NSError *error, id data, NSDictionary *other) {
                 [self.viewController hideHUD];
                 if (!error) {
-                    if (_order.amount == 0) {
+                    if ([_order.amount doubleValue] == 0) {
                         _order.status = @"wait_designer_measure";
                     }else{
                         _order.status = @"wait_consumer_pay";
@@ -199,7 +200,8 @@
         }];
 #else
         [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"是否确认设计交付物已达要求?" cancelButtonTitle:@"否" destructiveButtonTitle:nil otherButtonTitles:@[@"是"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-            if (buttonIndex == [actionSheet cancelButtonIndex]) {
+            
+            if (actionSheet.cancelButtonIndex == buttonIndex) {
                 return ;
             }
             
@@ -255,8 +257,9 @@
         }
     }else if (button.tag == OrderActionReject){
         //设计师拒绝
-        [UIAlertView showWithTitle:nil message:@"您确定要拒绝该订单吗？" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确认"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-            if (alertView.cancelButtonIndex == buttonIndex) {
+        [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"您确定要拒绝该订单吗？" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"确认"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+            
+            if (actionSheet.cancelButtonIndex == buttonIndex) {
                 return ;
             }
             
