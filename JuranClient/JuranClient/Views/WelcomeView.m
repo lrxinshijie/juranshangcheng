@@ -29,7 +29,7 @@
                             @"areaCode": @"110000",
                             @"type": @(8)};
 #else
-    NSDictionary *param = @{@"adCode": @"app_consumer_index_roll",
+    NSDictionary *param = @{@"adCode": @"app_consumer_init_index",
                             @"areaCode": @"110000",
                             @"type": @(7)};
 #endif
@@ -73,8 +73,8 @@
 }
 
 + (NSURL*)imageUrlWithAdInfo:(JRAdInfo*)info{
-    NSLog(@"%@", [Public imageURL:info.mediaCode Width:1080 Height:1920 Editing:YES]);
-    return [Public imageURL:info.mediaCode Width:1080 Height:1920 Editing:YES];
+    NSLog(@"%@", [Public imageURL:info.mediaCode]);
+    return [Public imageURL:info.mediaCode];// Width:1080 Height:1920 Editing:YES
 }
 
 - (id)init{
@@ -86,6 +86,8 @@
         self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         self.scrollView.delegate = self;
         self.scrollView.contentSize = CGSizeMake(kWindowWidth, CGRectGetHeight(kContentFrame)*2);
+        self.scrollView.showsHorizontalScrollIndicator = NO;
+        self.scrollView.showsVerticalScrollIndicator = NO;
         self.scrollView.pagingEnabled = YES;
         [self addSubview:_scrollView];
         
@@ -139,7 +141,7 @@
 - (void)unShow{
     [self stopTimeOut];
     [UIView animateWithDuration:.5 animations:^{
-        self.alpha = 0.f;
+        self.scrollView.contentOffset = CGPointMake(0, CGRectGetHeight(kContentFrame));
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];
