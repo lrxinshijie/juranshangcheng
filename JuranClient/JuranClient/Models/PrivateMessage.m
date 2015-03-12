@@ -32,6 +32,7 @@
         self.mobilePhone = [dict getStringValueForKey:@"mobilePhone" defaultValue:@""];
         self.likeStyle = [dict getStringValueForKey:@"likeStyle" defaultValue:@""];
         self.houseArea = [dict getStringValueForKey:@"houseArea" defaultValue:@""];
+        self.senderName = [dict getStringValueForKey:@"senderName" defaultValue:@""];
         
     }
     return self;

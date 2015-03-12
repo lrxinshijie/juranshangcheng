@@ -32,7 +32,7 @@
     
     _textView.backgroundColor = [UIColor clearColor];
     _textView.placeholder = @"请输入120字以内的提取理由";
-    _textView.layer.borderColor = [RGBColor(249, 249, 249) CGColor];
+    _textView.layer.borderColor = [RGBColor(216, 216, 216) CGColor];
     _textView.layer.borderWidth = 1;
     _orderLabel.text = [NSString stringWithFormat:@"量房订单：%@", _order.measureTid];
     
