@@ -8,7 +8,7 @@
 
 #import "OrderPriceViewController.h"
 #import "JROrder.h"
-#import "UIAlertView+Blocks.h"
+#import "UIActionSheet+Blocks.h"
 
 @interface OrderPriceViewController () <UITextFieldDelegate>
 
@@ -58,8 +58,9 @@
 - (IBAction)onSubmit:(id)sender{
     NSString *amount = _amountTextField.text;
     
-    [UIAlertView showWithTitle:nil message:@"请确认量房费用，确认后无法修改" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确认"] tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        if (alertView.cancelButtonIndex == buttonIndex) {
+    [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"请确认量房费用，确认后无法修改" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"确认"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        
+        if (actionSheet.cancelButtonIndex == buttonIndex) {
             return ;
         }
         

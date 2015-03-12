@@ -293,6 +293,13 @@
     }
 }
 
+- (void)showMenu{
+#ifndef kJuranDesigner
+    [self.fullScreenScroll showUIBarsAnimated:YES];
+#endif
+    [super showMenu];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
