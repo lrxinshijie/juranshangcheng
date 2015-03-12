@@ -171,7 +171,7 @@
     me = !me;
 #endif
     NSBubbleType type = me ? BubbleTypeMine : BubbleTypeSomeoneElse;
-    if (detail.isFirstFlag) {
+    if (detail.isFirstFlag &&  _message.mobilePhone.length > 0) {
         _firstContentLabel.text = detail.content;
         bubble = [NSBubbleData dataWithView:_firstView date:date type:type insets:UIEdgeInsetsZero];
     }else{
