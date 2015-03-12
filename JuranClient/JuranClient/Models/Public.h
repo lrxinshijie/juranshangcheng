@@ -106,5 +106,6 @@
 
 + (BOOL)saveWelcomeInfo:(JRAdInfo*)info;
 + (JRAdInfo*)welcomeInfo;
++ (void)clearWelcomeInfo;
 
 @end

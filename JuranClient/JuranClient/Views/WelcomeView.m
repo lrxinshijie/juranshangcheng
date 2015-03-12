@@ -49,6 +49,8 @@
                         
                     }];
                 }
+            }else{
+                [Public clearWelcomeInfo];
             }
         }
     }];

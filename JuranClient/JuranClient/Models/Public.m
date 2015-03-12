@@ -518,6 +518,10 @@
         PrivateMessageViewController *pv = [[PrivateMessageViewController alloc] init];
         pv.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:pv animated:YES];
+    }else if (type == 4){
+        
+    }else if (type == 5){
+        
     }
 }
 
@@ -566,6 +570,10 @@
         return info;
     }
     return nil;
+}
+
++ (void)clearWelcomeInfo{
+    [kUD removeObjectForKey:@"kWelcomeInfo"];
 }
 
 @end
