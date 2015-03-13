@@ -19,6 +19,7 @@
 @property (nonatomic, assign) NSInteger currentPage;
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) IBOutlet UIView *footerView;
 
 @property (nonatomic, strong) IBOutlet UIView *praiseView;
 @property (nonatomic, strong) IBOutlet ScoreProgress *capacityPointView;
@@ -59,7 +60,7 @@
 - (void)setupUI{
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
 //    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor = RGBColor(237, 237, 237);
+    _tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_tableView];
 }
 
@@ -75,10 +76,19 @@
                 [self.manage addDesignCreditList:data[@"designCreditList"]];
             }
         }
-        [_tableView reloadData];
+        [self reloadData];
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
     }];
+}
+
+- (void)reloadData{
+    if (_manage.designCreditList.count > 0) {
+        _tableView.tableFooterView = [[UIView alloc] init];
+    }else{
+        _tableView.tableFooterView = _footerView;
+    }
+    [_tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -110,8 +120,20 @@
     }
 }
 
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 10)];
+    view.backgroundColor = RGBColor(237, 237, 237);
+    return view;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 1)];
+    view.backgroundColor = RGBColor(237, 237, 237);
+    return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

@@ -52,6 +52,7 @@
     
     _userNameLabel.text = nickName.length == 0 ? account : nickName;
     _timeLabel.text = commentTime;
+    _headImgeView.image = [UIImage imageNamed:@"unlogin_head.png"];
     [_headImgeView setImageWithURLString:headUrl];
     _contentLabel.text = [NSString stringWithFormat:@"评论:%@", commentContent];
     
@@ -60,9 +61,6 @@
     }else{
         _titleLabel.text = [NSString stringWithFormat:@"原案例:%@", projectTitle];
     }
-    
-    
-    
 }
 
 @end
