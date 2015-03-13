@@ -96,7 +96,7 @@
         
         self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
         self.imageView.clipsToBounds = YES;
-        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+//        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
         [_scrollView addSubview:self.imageView];
         
         
@@ -117,7 +117,7 @@
     if ([manager diskImageExistsForURL:[WelcomeView imageUrlWithAdInfo:_info]]) {
         SDImageCache *cache = [manager imageCache];
         UIImage *image = [cache imageFromDiskCacheForKey:[manager cacheKeyForURL:[WelcomeView imageUrlWithAdInfo:_info]]];
-        self.imageView.image = image;
+        self.imageView.image = [image imageByScalingAndCroppingForSize:self.imageView.frame.size];
         self.hidden = NO;
         
         [self startTimeOut];
@@ -157,5 +157,13 @@
     }
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    NSLog(@"WillBeginDragging");
+    [self stopTimeOut];
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+    NSLog(@"WillEndDragging");
+}
 
 @end

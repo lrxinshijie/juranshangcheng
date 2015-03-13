@@ -326,7 +326,7 @@
     }
     
     NSDictionary *param = @{@"tid": _order.measureTid.length > 0?_order.measureTid:@""
-                            , @"flag" : @"true"
+                            , @"flag" : @"false"
                             , @"tradeInfo" : @{@"decoratorId": [NSString stringWithFormat:@"%d", _order.decoratorId]
                                                , @"decoratorName": _order.decoratorName
                                                , @"decoratorRealName": _order.decoratorRealName
