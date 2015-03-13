@@ -509,9 +509,26 @@
         }
         case 5:{
             //        订单管理
-            OrderListViewController *vc = [[OrderListViewController alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
+            [self showHUD];
+            [[ALEngine shareEngine] pathURL:JR_GET_REALNAMEAPPLY parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken: @"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                [self hideHUD];
+                if (!error) {
+                    if ([data isKindOfClass:[NSDictionary class]]) {
+                        NSInteger status = [data getIntValueForKey:@"status" defaultValue:-1];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            if (status == 2) {
+                                OrderListViewController *vc = [[OrderListViewController alloc] init];
+                                vc.hidesBottomBarWhenPushed = YES;
+                                [self.navigationController pushViewController:vc animated:YES];
+                            }else{
+                                [self showTip:@"您尚未通过实名认证！"];
+                            }
+                        });
+                    }
+                }
+            }];
+            
+            
             break;
         }
         case 6:
