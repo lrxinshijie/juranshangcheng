@@ -13,6 +13,7 @@
 #import "ActivityDetailViewController.h"
 #import "JRActivity.h"
 #import "ActivityCell.h"
+#import "WikiDetailViewController.h"
 
 
 @interface WikiOrActivityViewController ()<UITableViewDataSource, UITableViewDelegate, WikiFilterViewControllerDelegate, UIScrollViewDelegate>{
@@ -286,21 +287,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _wikiTableView) {
-        ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
-        vc.title = @"家装百科";
+        WikiDetailViewController *vc = [[WikiDetailViewController alloc] init];
         JRWiki *wiki = [_wikiDatas objectAtIndex:indexPath.row];
-        vc.urlString = [NSString stringWithFormat:@"http://apph5.juran.cn/wikis/%d%@", wiki.wikiId,[Public shareEnv]];
+        vc.wiki = wiki;
+//        vc.wikiId = @"349";
         vc.hidesBottomBarWhenPushed = YES;
-        [vc setShareTitle:wiki.title Content:wiki.title ImagePath:wiki.shareImagePath];
-        wiki.browseCount++;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         JRActivity *a = [_activityDatas objectAtIndex:indexPath.row];
         ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
-        vc.title = @"精品活动";
-        vc.urlString = [NSString stringWithFormat:@"http://apph5.juran.cn/events/%d%@", a.activityId, [Public shareEnv]];
-        [vc setShareTitle:a.activityName Content:a.activityIntro ImagePath:a.shareImagePath];
+        vc.activity = a;
+//        vc.activityId = @"7";
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

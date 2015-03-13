@@ -21,7 +21,7 @@
 @property (nonatomic, copy) NSString *receiverHeadUrl;
 @property (nonatomic, copy) NSString *senderNickName;
 @property (nonatomic, copy) NSString *receiverNickName;
-
+@property (nonatomic, copy) NSString *senderName;
 @property (nonatomic, copy) NSString *mobilePhone;
 @property (nonatomic, copy) NSString *likeStyle;
 @property (nonatomic, copy) NSString *houseArea;

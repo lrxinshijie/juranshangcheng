@@ -17,6 +17,7 @@
 
 #import "UIAlertView+Blocks.h"
 #import "JRServiceViewController.h"
+#import "AHReach.h"
 
 @interface SettingsViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
@@ -183,12 +184,12 @@
         if (indexPath.row == 0) {
             cell.accessoryView = _intelligentModeSwitch;
         }else if (indexPath.row == 1){
-            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:intelligentMode.integerValue?(imageQuality.integerValue?@"image_quality_selected_disabled":@"image_quality_unselected_disabled"):(imageQuality.integerValue?@"image_quality_selected":@"image_quality_unselected")]];
+            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:intelligentMode.integerValue?(![AHReach reachForDefaultHost].isReachableViaWWAN?@"image_quality_selected_disabled":@"image_quality_unselected_disabled"):(imageQuality.integerValue?@"image_quality_selected":@"image_quality_unselected")]];
             if (intelligentMode.integerValue) {
                 cell.textLabel.textColor = [UIColor lightGrayColor];
             }
         }else{
-            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:intelligentMode.integerValue?(imageQuality.integerValue?@"image_quality_unselected_disabled":@"image_quality_selected_disabled"):(imageQuality.integerValue?@"image_quality_unselected":@"image_quality_selected")]];
+            cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 23, 23) image:[UIImage imageNamed:intelligentMode.integerValue?(![AHReach reachForDefaultHost].isReachableViaWWAN?@"image_quality_unselected_disabled":@"image_quality_selected_disabled"):(imageQuality.integerValue?@"image_quality_unselected":@"image_quality_selected")]];
             if (intelligentMode.integerValue) {
                 cell.textLabel.textColor = [UIColor lightGrayColor];
             }

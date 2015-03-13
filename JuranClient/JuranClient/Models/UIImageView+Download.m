@@ -12,7 +12,7 @@
 
 @implementation UIImageView (Download)
 
-- (void)setImageWithURLString:(NSString *)url{
+- (void)setImageWithURLString:(NSString *)url placeholderImage:(UIImage *)image{
     NSInteger scale = 2;
     
     if ([[Public intelligentModeForImageQuality] boolValue]) {
@@ -27,8 +27,12 @@
     
     
     NSURL *URL = [Public imageURL:url Width:CGRectGetWidth(self.frame)*scale Height:CGRectGetHeight(self.frame)*scale Editing:NO];
-//    ASLog(@"%@",URL);
-    [self sd_setImageWithURL:URL placeholderImage:self.image];
+    //    ASLog(@"%@",URL);
+    [self sd_setImageWithURL:URL placeholderImage:image];
+}
+
+- (void)setImageWithURLString:(NSString *)url{
+    [self setImageWithURLString:url placeholderImage:self.image];
 }
 
 

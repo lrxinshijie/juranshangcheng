@@ -45,7 +45,7 @@
     self.navigationItem.title = _message.receiverNickName;
     
     _firstView.backgroundColor = [UIColor clearColor];
-    _firstContactLabel.text = [NSString stringWithFormat:@"%@\n%@\n%@|%@平米", _message.receiverNickName, _message.mobilePhone, _message.likeStyleString, _message.houseArea];
+    _firstContactLabel.text = [NSString stringWithFormat:@"%@\n%@\n%@|%@平米", _message.senderName, _message.mobilePhone, _message.likeStyleString, _message.houseArea];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];

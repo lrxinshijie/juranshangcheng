@@ -11,6 +11,7 @@
 @interface UIImageView (Download)
 
 - (void)setImageWithURLString:(NSString *)url;
+- (void)setImageWithURLString:(NSString *)url placeholderImage:(UIImage *)image;
 - (void)setImageWithURLString:(NSString *)url Editing:(BOOL)editing;
 
 @end

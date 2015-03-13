@@ -576,7 +576,11 @@
     
     if (indexPath.section == 0 && row == 2) {
         NSArray *rows = @[@"只工作日",@"工作日、双休日与假日均可",@"只双休日、假日"];
-        [ActionSheetStringPicker showPickerWithTitle:nil rows:rows initialSelection:self.order.serviceDate.integerValue - 1 doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+        NSInteger index = 0;
+        if (self.order.serviceDate.integerValue > 0 && self.order.serviceDate.integerValue < 4) {
+            index = self.order.serviceDate.integerValue - 1;
+        }
+        [ActionSheetStringPicker showPickerWithTitle:nil rows:rows initialSelection:index doneBlock:^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
             self.order.serviceDate = [@[@"1",@"2",@"3"] objectAtIndex:selectedIndex];
             [self reloadData];
             

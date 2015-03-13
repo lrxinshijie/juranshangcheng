@@ -36,6 +36,7 @@
 
 @property (nonatomic, strong) IBOutlet UIView *emptyView;
 @property (weak, nonatomic) NSLayoutConstraint *headerConstraint;
+
 @end
 
 @implementation CaseViewController
@@ -132,16 +133,7 @@
     self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
     self.fullScreenScroll.delegate = self;
     self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
-    
-    // Just call this line to enable the scrolling navbar
-//    [self.navigationController.navigationBar setTranslucent:NO];
-//    [self.navigationController.navigationBar setBarTintColor:UIColorFromRGB(0x000000)];
-//    [self followScrollView:_tableView withDelay:60];
-//    [self setUseSuperview:YES];
-//    [self setScrollableViewConstraint:self.headerConstraint withOffset:60];
-//    [self setShouldScrollWhenContentFits:NO];
-//    
-//    [self setScrollingNavbarDelegate:self];
+//    self.fullScreenScroll.additionalOffsetYToStartShowing = -44;
 }
 
 - (void)navigationBarDidChangeToCollapsed:(BOOL)collapsed{
@@ -260,26 +252,27 @@
 
 - (void)clickFilterView:(FilterView *)view actionType:(FilterViewAction)action returnData:(NSDictionary *)data{
     if (action == FilterViewActionGrid) {
-//        [UIView setAnimationDelegate:self];
-//        [UIView setAnimationDidStopSelector:@selector(animationDidStop:animationIDfinished:finished:context:)];
-//        [UIView beginAnimations:nil context:nil];
-//        [UIView setAnimationDuration:0.75];
-//        
-//        [UIView setAnimationTransition:([_collectionView superview] ? UIViewAnimationTransitionFlipFromLeft : UIViewAnimationTransitionFlipFromRight)
-//                               forView:self.view
-//                                 cache:YES];
-        
         if ([_collectionView superview]) {
             [_collectionView removeFromSuperview];
             [self.view addSubview:_tableView];
             [self reloadData];
+            
+//            self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
+//            self.fullScreenScroll.delegate = self;
+//            self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
+            self.fullScreenScroll.scrollView = _tableView;
         } else {
             [_tableView removeFromSuperview];
             [self.view addSubview:_collectionView];
             [self reloadData];
+            
+            self.fullScreenScroll.scrollView = _collectionView;
+//            self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.collectionView style:YIFullScreenScrollStyleFacebook];
+//            self.fullScreenScroll.delegate = self;
+//            self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
+
         }
         
-//        [UIView commitAnimations];
     }else{
         [data.allKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
             [_filterData setObject:data[key] forKey:key];
@@ -388,14 +381,16 @@
 //    ASLog(@"offset:%f,%f", _tableView.contentOffset.y,self.navigationController.navigationBar.frame.origin.y);
     
 //    CGFloat y = 20 - self.navigationController.navigationBar.frame.origin.y;
-    CGFloat y = _tableView.contentOffset.y;
+    
+    UIScrollView *view = [_tableView superview] ? _tableView : _collectionView;
+    
+    CGFloat y = view.contentOffset.y;
+
     if (self.navigationController.navigationBar.frame.origin.y == 20) {
         y = 0;
-    }else
-        if (y > 88) {
+    }else if (y > 88) {
         y = 88;
     }
-    
     
     CGRect frame = _filterView.frame;
     frame.origin.y = -y;
@@ -403,10 +398,15 @@
     
     CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
     
-    frame = _tableView.frame;
+    frame = view.frame;
     frame.origin.y = CGRectGetMaxY(_filterView.frame);
     frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
-    _tableView.frame = frame;
+    view.frame = frame;
+    
+//    if (y <= 88) {
+//        [view setContentOffset:CGPointMake(0, 0)];
+//    }
+    
 //    ASLog(@"size;%f,%f",y, height);
 }
 

@@ -36,7 +36,7 @@
     _submitButton.layer.borderColor = [kBlueColor CGColor];
     _submitButton.layer.borderWidth = 1;
     
-    _bgImageView.layer.borderColor = [RGBColor(249, 249, 249) CGColor];
+    _bgImageView.layer.borderColor = [RGBColor(216, 216, 216) CGColor];
     _bgImageView.layer.borderWidth = 1;
     _bgImageView.layer.masksToBounds = YES;
     _bgImageView.layer.cornerRadius = 2;

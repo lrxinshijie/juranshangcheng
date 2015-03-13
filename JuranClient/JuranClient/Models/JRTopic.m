@@ -25,16 +25,10 @@
         self.commentDate = [dict getStringValueForKey:@"commentDate" defaultValue:@""];
         id obj = dict[@"commentImageUrlList"];
         if ([obj isKindOfClass:[NSArray class]]) {
-            if ([(NSArray*)obj count] > 0) {
-                NSString *imgs = [(NSArray*)obj firstObject];
-                self.commentImageUrlList = [imgs componentsSeparatedByString:@","];
-            }else{
-                self.commentImageUrlList = obj;
-            }
+            self.commentImageUrlList = obj;
         }else{
             self.commentImageUrlList = @[];
         }
-        
     }
     
     return self;

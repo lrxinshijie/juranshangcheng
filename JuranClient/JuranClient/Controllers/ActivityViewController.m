@@ -117,9 +117,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     JRActivity *a = [_datas objectAtIndex:indexPath.row];
     ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
-    vc.title = @"精品活动";
-    vc.urlString = [NSString stringWithFormat:@"http://apph5.juran.cn/events/%d%@", a.activityId, [Public shareEnv]];
-    [vc setShareTitle:a.activityName Content:a.activityIntro ImagePath:a.shareImagePath];
+    vc.activity = a;
+//    [vc setShareTitle:a.activityName Content:a.activityIntro ImagePath:a.shareImagePath];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
