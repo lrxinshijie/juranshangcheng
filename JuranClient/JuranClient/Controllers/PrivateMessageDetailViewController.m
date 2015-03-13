@@ -52,10 +52,6 @@
     
 #ifndef kJuranDesigner
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"private_message_more"] rightBarButtonItemAction:@selector(onDetail)];
-    _firstContactLabel.textColor = [UIColor blackColor];
-    _firstContentLabel.textColor = [UIColor blackColor];
-    UIView *line = [_firstView viewWithTag:2233];
-    line.backgroundColor = [UIColor blackColor];
 #endif
     
     self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
@@ -174,6 +170,21 @@
     if (detail.isFirstFlag &&  _message.mobilePhone.length > 0) {
         _firstContentLabel.text = detail.content;
         bubble = [NSBubbleData dataWithView:_firstView date:date type:type insets:UIEdgeInsetsZero];
+        
+        UIView *line = [_firstView viewWithTag:2233];
+        if (me) {
+            _firstContactLabel.textColor = [UIColor whiteColor];
+            _firstContentLabel.textColor = [UIColor whiteColor];
+            
+            line.backgroundColor = [UIColor colorWithWhite:1 alpha:.8];
+        }else{
+            _firstContactLabel.textColor = [UIColor blackColor];
+            _firstContentLabel.textColor = [UIColor blackColor];
+            
+            line.backgroundColor = [UIColor colorWithWhite:0 alpha:.8];
+        }
+        
+        
     }else{
         bubble = [NSBubbleData dataWithText:detail.content date:date type:type];
     }

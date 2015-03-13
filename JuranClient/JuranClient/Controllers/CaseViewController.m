@@ -378,19 +378,42 @@
 
 - (void)fullScreenScrollDidLayoutUIBars:(YIFullScreenScroll *)fullScreenScroll{
 
-//    ASLog(@"offset:%f,%f", _tableView.contentOffset.y,self.navigationController.navigationBar.frame.origin.y);
+    
     
 //    CGFloat y = 20 - self.navigationController.navigationBar.frame.origin.y;
     
     UIScrollView *view = [_tableView superview] ? _tableView : _collectionView;
     
+    ASLog(@"offset:%f,%f", view.contentOffset.y,self.navigationController.navigationBar.frame.origin.y);
+    
     CGFloat y = view.contentOffset.y;
-
-    if (self.navigationController.navigationBar.frame.origin.y == 20) {
-        y = 0;
-    }else if (y > 88) {
-        y = 88;
+    if (y <= 88) {
+//        y = 88;
+        
+        if (self.navigationController.navigationBar.frame.origin.y == 20) {
+            y = 0;
+        }
+        
+        CGRect frame = _filterView.frame;
+        frame.origin.y = -y;
+        _filterView.frame = frame;
+        
+        CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
+        
+        frame = view.frame;
+        frame.origin.y = CGRectGetMaxY(_filterView.frame);
+        frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
+        view.frame = frame;
+    }else if (self.navigationController.navigationBar.frame.origin.y != -24){
+        
     }
+//    CGFloat y = self.navigationController.navigationBar.frame.origin.y - 20;
+    
+//    if (self.navigationController.navigationBar.frame.origin.y == 20) {
+//        y = 0;
+//    }else if (y > 88) {
+//        y = 88;
+//    }
     
     CGRect frame = _filterView.frame;
     frame.origin.y = -y;
