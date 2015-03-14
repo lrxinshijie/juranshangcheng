@@ -314,14 +314,14 @@
 //    
     
 //
-//    CGFloat value = _order.amount.floatValue * 0.2f;
-//    if (_order.firstPayAmount.floatValue < value || _order.firstPayAmount.floatValue > _order.amount.floatValue) {
-//        [self showTip:@"首付定金不低于合同金额的20%并且不高于合同金！"];
-//        return;
-//    }
-    
     if (!_isReadContact) {
         [self showTip:@"请阅读《住宅室内装饰设计合同》！"];
+        return;
+    }
+    
+    CGFloat value = _order.amount.floatValue * 0.2f;
+    if (_order.firstPayAmount.floatValue < value || _order.firstPayAmount.floatValue > _order.amount.floatValue) {
+        [self showTip:@"首付定金不低于合同金额的20%并且不高于合同金！"];
         return;
     }
     

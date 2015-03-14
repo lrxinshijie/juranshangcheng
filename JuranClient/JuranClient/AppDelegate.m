@@ -128,7 +128,6 @@
 }
 
 - (void)jumpToMain{
-    [WelcomeView fecthData];
     if ([GuideViewController showGuide]) {
         GuideViewController *gv = [[GuideViewController alloc] init];
         gv.isHome = YES;
@@ -141,6 +140,7 @@
         [_tabBarController.view addSubview:view];
         [view show];
     }
+    [WelcomeView fecthData];
 }
 
 - (UITabBarItem *)setupTabbarItemTitle:(NSString *)title image:(NSString *)image selected:(NSString *)imageSel{
