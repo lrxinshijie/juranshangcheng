@@ -87,12 +87,8 @@
     if ([UINavigationBar instancesRespondToSelector:@selector(setShadowImage:)]){
         [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:[UIColor clearColor] size:CGSizeMake(320, 3)]];
     }
-    
-#ifdef kJuranDesigner
-    _favImageViewForDesigner.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
-#else
+#ifndef kJuranDesigner
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"case_icon_share_white.png"] rightBarButtonItemAction:@selector(doShare)];
-    _favImageView.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
 #endif
     [self setBottomView];
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
@@ -121,6 +117,17 @@
             [super back:nil];
         }
     }];
+}
+
+- (void)reloadData{
+    
+#ifdef kJuranDesigner
+    _favImageViewForDesigner.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
+#else
+    
+    _favImageView.image = [UIImage imageNamed:_jrCase.isFav ? @"case_collect_selected" : @"case_icon_collect"];
+#endif
+    [super reloadData];
 }
 
 - (UILabel*)lastPageLabel{
