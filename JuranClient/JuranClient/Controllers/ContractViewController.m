@@ -587,7 +587,7 @@
         } cancelBlock:^(ActionSheetStringPicker *picker) {
             
         } origin:[UIApplication sharedApplication].keyWindow];
-    }else if (indexPath.section == 1 && row == 6){
+    }else if (_isImmediate && indexPath.section == 1 && row == 6){
         NSMutableArray *rows = [NSMutableArray array];
         NSMutableArray *selects = [NSMutableArray array];
         
@@ -641,7 +641,7 @@
         } cancelBlock:^(ActionSheetMultiPicker *picker) {
             
         } origin:[UIApplication sharedApplication].keyWindow];
-    }else if (indexPath.section == 1 && row == 8){
+    }else if (_isImmediate && indexPath.section == 1 && row == 8){
         BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
         [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
             _order.areaInfo = areaInfo;
