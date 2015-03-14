@@ -176,28 +176,32 @@
     }else if (button.tag == OrderActionConfirm){
         //设计师确认订单
 #ifdef kJuranDesigner
-        [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"请确认量房费用，确认后无法修改" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"确认"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-
-            if (actionSheet.cancelButtonIndex == buttonIndex) {
-                return ;
-            }
-            
-            NSDictionary *param = @{@"measurePayAmount": [NSString stringWithFormat:@"%@", _order.amount],
-                                    @"id": [NSString stringWithFormat:@"%d", _order.key],
-                                    @"serviceDate": _order.serviceDate};
-            [self.viewController showHUD];
-            [[ALEngine shareEngine] pathURL:JR_DESIGNER_CONFIRM_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self.viewController responseHandler:^(NSError *error, id data, NSDictionary *other) {
-                [self.viewController hideHUD];
-                if (!error) {
-                    if ([_order.amount doubleValue] == 0) {
-                        _order.status = @"wait_designer_measure";
-                    }else{
-                        _order.status = @"wait_consumer_pay";
-                    }
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
-                }
-            }];
-        }];
+        OrderPriceViewController *ov = [[OrderPriceViewController alloc] init];
+        ov.order = _order;
+        [self.viewController.navigationController pushViewController:ov animated:YES];
+        
+//        [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"请确认量房费用，确认后无法修改" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"确认"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+//
+//            if (actionSheet.cancelButtonIndex == buttonIndex) {
+//                return ;
+//            }
+//            
+//            NSDictionary *param = @{@"measurePayAmount": [NSString stringWithFormat:@"%@", _order.amount],
+//                                    @"id": [NSString stringWithFormat:@"%d", _order.key],
+//                                    @"serviceDate": _order.serviceDate};
+//            [self.viewController showHUD];
+//            [[ALEngine shareEngine] pathURL:JR_DESIGNER_CONFIRM_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self.viewController responseHandler:^(NSError *error, id data, NSDictionary *other) {
+//                [self.viewController hideHUD];
+//                if (!error) {
+//                    if ([_order.amount doubleValue] == 0) {
+//                        _order.status = @"wait_designer_measure";
+//                    }else{
+//                        _order.status = @"wait_consumer_pay";
+//                    }
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderReloadData object:nil];
+//                }
+//            }];
+//        }];
 #else
         [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"是否确认设计交付物已达要求?" cancelButtonTitle:@"否" destructiveButtonTitle:nil otherButtonTitles:@[@"是"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
             

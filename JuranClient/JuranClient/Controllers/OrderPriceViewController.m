@@ -28,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    self.navigationItem.title = @"修改价格";
+    self.navigationItem.title = @"确认量房";
     
     [_submitButton setTitleColor:kBlueColor forState:UIControlStateNormal];
     _submitButton.layer.masksToBounds = YES;
@@ -58,7 +58,7 @@
 - (IBAction)onSubmit:(id)sender{
     NSString *amount = _amountTextField.text;
     
-    [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"请确认量房费用，确认后无法修改" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"确认"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+    [UIActionSheet showInView:[UIApplication sharedApplication].keyWindow withTitle:@"量房地址、金额确定后将无法修改" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"确认"] tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
         
         if (actionSheet.cancelButtonIndex == buttonIndex) {
             return ;
@@ -71,7 +71,7 @@
         [[ALEngine shareEngine] pathURL:JR_DESIGNER_CONFIRM_ORDER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
             [self hideHUD];
             if (!error) {
-                if (_order.amount == 0) {
+                if ([_order.amount doubleValue] == 0) {
                     _order.status = @"wait_designer_measure";
                 }else{
                     _order.status = @"wait_consumer_pay";

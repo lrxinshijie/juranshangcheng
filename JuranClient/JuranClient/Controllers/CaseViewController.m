@@ -103,7 +103,7 @@
     
     [_tableView headerBeginRefreshing];
     
-    if ([Public isDesignerApp]  || !_isHome) {
+//    if ([Public isDesignerApp]  || !_isHome) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
         layout.itemSize = CGSizeMake(152, 133);
@@ -118,7 +118,7 @@
         
         [_collectionView registerNib:[UINib nibWithNibName:@"CaseCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"CaseCollectionCell"];
         
-        __weak typeof(self) weakSelf = self;
+//        __weak typeof(self) weakSelf = self;
         [_collectionView addHeaderWithCallback:^{
             weakSelf.currentPage = 1;
             [weakSelf loadData];
@@ -128,7 +128,7 @@
             weakSelf.currentPage++;
             [weakSelf loadData];
         }];
-    }
+//    }
     
     self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
     self.fullScreenScroll.delegate = self;
