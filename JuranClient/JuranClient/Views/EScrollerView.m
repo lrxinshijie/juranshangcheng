@@ -14,6 +14,7 @@
 @interface EScrollerView () <UIScrollViewDelegate> {
     CGRect viewSize;
     UIScrollView *scrollView;
+    
     NSArray *imageArray;
     
     SMPageControl *pageControl;
@@ -21,6 +22,8 @@
     int currentPageIndex;
     PageControlAligment _aligment;
 }
+
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -40,7 +43,7 @@
         }
         
         if ([imgArr count] > 1) {
-            [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+            [self startTimer];
         }
         
         self.userInteractionEnabled=YES;
@@ -80,6 +83,7 @@
         pageControl.numberOfPages = ([imageArray count]-2);
         pageControl.pageIndicatorImage = [UIImage imageNamed:@"ad_page_inactive"];
         pageControl.currentPageIndicatorImage = [UIImage imageNamed:@"ad_page_action"];
+        [pageControl addTarget:self action:@selector(pageChange:) forControlEvents:UIControlEventValueChanged];
         [pageControl sizeToFit];
         if (_aligment == PageControlAligmentRight) {
             pageControl.center = CGPointMake(rect.size.width - CGRectGetWidth(pageControl.frame)/2 - 10, CGRectGetHeight(rect)-10);
@@ -93,6 +97,19 @@
         pageControl.hidden = !(imgArr.count > 1);
 	}
 	return self;
+}
+
+- (void)startTimer{
+    [_timer invalidate];
+    _timer = nil;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(runTimePage) userInfo:nil repeats:YES];
+}
+
+- (void)pageChange:(UIPageControl *)pageCtl{
+    ASLog(@"%d", pageCtl.currentPage);
+    return;
+    [self startTimer];
+    [scrollView setContentOffset:CGPointMake(pageCtl.currentPage*viewSize.size.width , 0) animated:YES];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender{

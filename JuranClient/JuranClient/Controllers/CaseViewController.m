@@ -257,9 +257,6 @@
             [self.view addSubview:_tableView];
             [self reloadData];
             
-//            self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
-//            self.fullScreenScroll.delegate = self;
-//            self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
             self.fullScreenScroll.scrollView = _tableView;
         } else {
             [_tableView removeFromSuperview];
@@ -267,10 +264,6 @@
             [self reloadData];
             
             self.fullScreenScroll.scrollView = _collectionView;
-//            self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.collectionView style:YIFullScreenScrollStyleFacebook];
-//            self.fullScreenScroll.delegate = self;
-//            self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
-
         }
         
     }else{
@@ -386,7 +379,7 @@
     
     ASLog(@"offset:%f,%f", view.contentOffset.y,self.navigationController.navigationBar.frame.origin.y);
     
-    CGFloat y = view.contentOffset.y;
+//    CGFloat y = view.contentOffset.y;
 //    if (y <= 88) {
 ////        y = 88;
 //        
@@ -408,6 +401,8 @@
 //        
 //    }
 //    CGFloat y = self.navigationController.navigationBar.frame.origin.y - 20;
+    
+    CGFloat y = view.contentOffset.y;
     
     if (self.navigationController.navigationBar.frame.origin.y == 20) {
         y = 0;

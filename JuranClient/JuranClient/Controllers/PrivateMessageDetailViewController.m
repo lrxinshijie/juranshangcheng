@@ -171,17 +171,17 @@
         _firstContentLabel.text = detail.content;
         bubble = [NSBubbleData dataWithView:_firstView date:date type:type insets:UIEdgeInsetsZero];
         
-        UIView *line = [_firstView viewWithTag:2233];
+        UIImageView *line = (UIImageView *)[_firstView viewWithTag:2233];
         if (me) {
             _firstContactLabel.textColor = [UIColor whiteColor];
             _firstContentLabel.textColor = [UIColor whiteColor];
             
-            line.backgroundColor = [UIColor colorWithWhite:1 alpha:.8];
+            line.image = [UIImage imageNamed:@"line_white"];
         }else{
             _firstContactLabel.textColor = [UIColor blackColor];
             _firstContentLabel.textColor = [UIColor blackColor];
             
-            line.backgroundColor = [UIColor colorWithWhite:0 alpha:.8];
+            line.image = [UIImage imageNamed:@"line_gray"];
         }
         
         
