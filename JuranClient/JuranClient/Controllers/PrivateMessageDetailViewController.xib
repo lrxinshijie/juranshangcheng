@@ -85,7 +85,6 @@
                 <imageView userInteractionEnabled="NO" tag="2233" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="r0Z-Ga-Wpj">
                     <rect key="frame" x="11" y="41" width="198" height="1"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vvD-Wn-23b">
                     <rect key="frame" x="14" y="48" width="198" height="51"/>

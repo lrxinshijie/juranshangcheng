@@ -24,6 +24,10 @@
 
 @implementation PrivateMessageViewController
 
+- (void)dealloc{
+    _tableView.delegate = nil; _tableView.dataSource = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
