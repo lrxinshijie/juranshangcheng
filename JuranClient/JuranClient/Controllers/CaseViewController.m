@@ -219,6 +219,12 @@
     [_emptyView removeFromSuperview];
     _tableView.tableFooterView = [[UIView alloc] init];
     
+    if ([_datas count] > 5) {
+        self.fullScreenScroll.scrollView = [_tableView superview] ? _tableView : _collectionView;
+    }else{
+        self.fullScreenScroll.scrollView = nil;
+    }
+    
     if (_datas.count == 0) {
         if (_tableView.superview) {
             CGRect frame = CGRectMake(0, 0, kWindowWidth, (!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44);
@@ -256,14 +262,10 @@
             [_collectionView removeFromSuperview];
             [self.view addSubview:_tableView];
             [self reloadData];
-            
-            self.fullScreenScroll.scrollView = _tableView;
         } else {
             [_tableView removeFromSuperview];
             [self.view addSubview:_collectionView];
             [self reloadData];
-            
-            self.fullScreenScroll.scrollView = _collectionView;
         }
         
     }else{

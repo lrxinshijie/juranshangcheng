@@ -135,6 +135,13 @@
             }
             [_tableView reloadData];
         }
+        
+        if ([_datas count] > 5) {
+            self.fullScreenScroll.scrollView = _tableView;
+        }else{
+            self.fullScreenScroll.scrollView = nil;
+        }
+        
         _emptyView.hidden = _datas.count != 0;
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
