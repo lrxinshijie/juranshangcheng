@@ -476,7 +476,7 @@
     }else if (textField.tag == 7){
         _demand.neighbourhoods = textField.text;
     }
-    [self reSetValue];
+    [self reloadData];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
