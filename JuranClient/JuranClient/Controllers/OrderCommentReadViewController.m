@@ -79,6 +79,7 @@
 
 - (void)reloadData{
     _orderNumberLabel.text = [NSString stringWithFormat:@"设计订单：%@", _order.designTid];
+    _headerImageView.image = [UIImage imageNamed:@"avtar_default.png"];
     [_headerImageView setImageWithURLString:_order.headUrl];
     _nameLabel.text = _order.decoratorName;
     _mobileNumLabel.text = _order.decoratorMobile;

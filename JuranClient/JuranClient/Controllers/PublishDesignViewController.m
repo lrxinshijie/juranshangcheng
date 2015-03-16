@@ -96,8 +96,12 @@
     }];
 }
 
-- (void)reloadData{
+- (void)reSetValue{
     self.values = @[_demand.contactsName,_demand.contactsMobile, _demand.houseTypeString, _demand.budget,_demand.houseArea,_demand.renovationStyleString,_demand.areaInfo.title,_demand.neighbourhoods,_demand.roomNumString,@"可选"];
+}
+
+- (void)reloadData{
+    [self reSetValue];
     
     if (_fileImage) {
         _photoImageView.image = _fileImage;
@@ -477,7 +481,6 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
-    
     return YES;
 }
 
@@ -486,19 +489,19 @@
     NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
     CGSize keyboardSize = [value CGRectValue].size;
     
-//    NSValue *animationDurationValue = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-//    NSTimeInterval animationDuration;
-//    [animationDurationValue getValue:&animationDuration];
-//    NSTimeInterval animation = animationDuration;
-//    
-//    //视图移动的动画开始
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationDuration:animation];
+    NSValue *animationDurationValue = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    NSTimeInterval animation = animationDuration;
+    
+    //视图移动的动画开始
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:animation];
     CGRect frame = _tableView.frame;
     frame.size.height = kWindowHeightWithoutNavigationBar - keyboardSize.height;
     _tableView.frame = frame;
     
-//    [UIView commitAnimations];
+    [UIView commitAnimations];
 }
 
 -(void)keyboardWillBeHidden:(NSNotification *)aNotification{

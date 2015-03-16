@@ -40,13 +40,13 @@
 }
 
 - (void)fillCellWithDesigneCreditDto:(JRDesignCreditDto *)dto{
-//    [_avtarImageView setImageWithURLString:@""];
     _nameLabel.text = dto.consumerNickname;
     _timeLabel.text = dto.gmtCreate;
     _capacityPointView.selectedIndex = dto.capacityPoint;
     _servicePointView.selectedIndex = dto.servicePoint;
     _contentLabel.text = dto.content;
     _tIdLabel.text = [NSString stringWithFormat:@"设计合同订单号：%@", dto.tid];
+    _avtarImageView.image = [UIImage imageNamed:@"avtar_default.png"];
     [_avtarImageView setImageWithURLString:dto.customerHeadUrl];
     
     CGRect frame = _contentLabel.frame;

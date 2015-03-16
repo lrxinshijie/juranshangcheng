@@ -4692,7 +4692,11 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
+<<<<<<< HEAD
 						DevelopmentTeam = K7N89S4ZM6;
+=======
+						DevelopmentTeam = QHWR2FWBM6;
+>>>>>>> a9f67d34008c5b66b4d1b26903e49e80f3f1309d
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -6458,7 +6462,11 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
 				PROVISIONING_PROFILE = "52657c77-bd2b-4e6b-96ce-0b0ad9451c14";
+=======
+				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
+>>>>>>> a9f67d34008c5b66b4d1b26903e49e80f3f1309d
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
 				VERSIONING_SYSTEM = "";
