@@ -46,9 +46,10 @@
         }else if ([_order.status isEqualToString:@"wait_designer_measure"]) {
             if (order.ifCanDraw) {
                 [self addSubview:[self buttonWithAction:OrderActionExtract]];
-            }else{
-                [self addSubview:[self buttonWithAction:OrderActionDesigner]];
             }
+//            else{
+                [self addSubview:[self buttonWithAction:OrderActionDesigner]];
+//            }
         }
     }else if (_order.type == 1){
 //        if (([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) && [order.payAmount doubleValue] > 0) {
@@ -124,9 +125,9 @@
             title = @"申请提取量房费";
             width = 110;
             x = 200;
-//            if ([_order.status isEqualToString:@"wait_designer_measure"]) {
-//                x = 105;
-//            }
+            if ([_order.status isEqualToString:@"wait_designer_measure"]) {
+                x = 105;
+            }
             break;
         case OrderActionDesigner:
             title = @"签设计合同";
