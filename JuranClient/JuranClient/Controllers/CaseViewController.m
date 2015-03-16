@@ -219,6 +219,12 @@
     [_emptyView removeFromSuperview];
     _tableView.tableFooterView = [[UIView alloc] init];
     
+    if ([_datas count] > 5) {
+        self.fullScreenScroll.scrollView = [_tableView superview] ? _tableView : _collectionView;
+    }else{
+        self.fullScreenScroll.scrollView = nil;
+    }
+    
     if (_datas.count == 0) {
         if (_tableView.superview) {
             CGRect frame = CGRectMake(0, 0, kWindowWidth, (!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44);
@@ -256,14 +262,10 @@
             [_collectionView removeFromSuperview];
             [self.view addSubview:_tableView];
             [self reloadData];
-            
-            self.fullScreenScroll.scrollView = _tableView;
         } else {
             [_tableView removeFromSuperview];
             [self.view addSubview:_collectionView];
             [self reloadData];
-            
-            self.fullScreenScroll.scrollView = _collectionView;
         }
         
     }else{
@@ -377,8 +379,6 @@
     
     UIScrollView *view = [_tableView superview] ? _tableView : _collectionView;
     
-    ASLog(@"offset:%f,%f", view.contentOffset.y,self.navigationController.navigationBar.frame.origin.y);
-    
 //    CGFloat y = view.contentOffset.y;
 //    if (y <= 88) {
 ////        y = 88;
@@ -402,6 +402,7 @@
 //    }
 //    CGFloat y = self.navigationController.navigationBar.frame.origin.y - 20;
     
+    /*
     CGFloat y = view.contentOffset.y;
     
     if (self.navigationController.navigationBar.frame.origin.y == 20) {
@@ -420,8 +421,24 @@
     frame.origin.y = CGRectGetMaxY(_filterView.frame);
     frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
     view.frame = frame;
+     */
     
-//    if (y <= 88) {
+    CGFloat y = -(self.navigationController.navigationBar.frame.origin.y - 20)*2;
+    
+    ASLog(@"offset:%f,%f,%f", view.contentOffset.y,self.navigationController.navigationBar.frame.origin.y, y);
+    
+    CGRect frame = _filterView.frame;
+    frame.origin.y = -y;
+    _filterView.frame = frame;
+    
+    CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
+    
+    frame = view.frame;
+    frame.origin.y = CGRectGetMaxY(_filterView.frame);
+    frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
+    view.frame = frame;
+    
+//    if (y <> 88) {
 //        [view setContentOffset:CGPointMake(0, 0)];
 //    }
     

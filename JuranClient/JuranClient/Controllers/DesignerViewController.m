@@ -135,6 +135,13 @@
             }
             [_tableView reloadData];
         }
+        
+        if ([_datas count] > 5) {
+            self.fullScreenScroll.scrollView = _tableView;
+        }else{
+            self.fullScreenScroll.scrollView = nil;
+        }
+        
         _emptyView.hidden = _datas.count != 0;
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
@@ -185,14 +192,32 @@
 
 - (void)fullScreenScrollDidLayoutUIBars:(YIFullScreenScroll *)fullScreenScroll{
     
-    CGFloat y = _tableView.contentOffset.y;
-    if (self.navigationController.navigationBar.frame.origin.y == 20) {
-        y = 0;
-    }else
-        if (y > 88) {
-            y = 88;
-        }
+//    CGFloat y = _tableView.contentOffset.y;
+//    if (self.navigationController.navigationBar.frame.origin.y == 20) {
+//        y = 0;
+//    }else
+//        if (y > 88) {
+//            y = 88;
+//        }
+//    
+//    
+//    CGRect frame = _filterView.frame;
+//    frame.origin.y = -y;
+//    _filterView.frame = frame;
+//    
+//    CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
+//    
+//    frame = _tableView.frame;
+//    frame.origin.y = CGRectGetMaxY(_filterView.frame);
+//    frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
+//    _tableView.frame = frame;
+//    ASLog(@"size;%f,%f",y, height);
     
+    UIScrollView *view = _tableView;
+    
+    CGFloat y = -(self.navigationController.navigationBar.frame.origin.y - 20)*2;
+    
+    ASLog(@"offset:%f,%f,%f", view.contentOffset.y,self.navigationController.navigationBar.frame.origin.y, y);
     
     CGRect frame = _filterView.frame;
     frame.origin.y = -y;
@@ -200,11 +225,11 @@
     
     CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
     
-    frame = _tableView.frame;
+    frame = view.frame;
     frame.origin.y = CGRectGetMaxY(_filterView.frame);
     frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
-    _tableView.frame = frame;
-//    ASLog(@"size;%f,%f",y, height);
+    view.frame = frame;
+
 }
 
 @end
