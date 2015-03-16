@@ -44,7 +44,8 @@
         
         CGFloat width = kWindowWidth;
         
-        if (([Public isDesignerApp] && type == FilterViewTypeCase) || type == FilterViewTypeCaseSearch) {
+//        if (([Public isDesignerApp] && type == FilterViewTypeCase) || type == FilterViewTypeCaseSearch) {
+        if (type == FilterViewTypeCase || type == FilterViewTypeCaseSearch) {
             width = kWindowWidth - 44;
             UIView *gridView = [[UIView alloc] initWithFrame:CGRectMake(width, 0, 44, 44)];
             gridView.backgroundColor = [UIColor clearColor];
