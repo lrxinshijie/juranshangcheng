@@ -238,6 +238,35 @@
         [self showTip:@"私信内容不能为空"];
         return;
     }
+    
+    if (_senderName.length > 0 || _mobilePhone.length > 0 || _likeStyle.length > 0 || _houseArea.length > 0) {
+        if (_senderName.length == 0) {
+            [self showTip:@"姓名不能为空"];
+            return;
+        }
+        
+        if (_mobilePhone.length == 0) {
+            [self showTip:@"手机号码不能为空"];
+            return;
+        }
+        
+        if (![Public validateMobile:_mobilePhone]) {
+            [self showTip:@"手机号码不合法"];
+            return;
+        }
+        
+        if (_likeStyle.length == 0) {
+            [self showTip:@"喜欢的风格不能为空"];
+            return;
+        }
+        
+        if (_houseArea.length == 0) {
+            [self showTip:@"房屋面积不能为空"];
+            return;
+        }
+    }
+    
+    
 //#ifndef kJuranDesigner
 //    if (_isCheck) {
 //        if (_senderName.length == 0) {
