@@ -217,8 +217,8 @@
         msg = err.localizedDescription;//[NSString stringWithFormat:@"%d,%@",err.code,err.localizedDescription];
     }
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [GlobalPopupAlert show:msg andFadeOutAfter:1.5];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [GlobalPopupAlert show:msg andFadeOutAfter:2];
     });
     
 //    [self performSelector:@selector(showTip:) withObject:msg afterDelay:.3];
