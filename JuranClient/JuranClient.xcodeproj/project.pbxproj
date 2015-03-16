@@ -6296,7 +6296,6 @@
 				);
 				PRODUCT_NAME = JuranDesigner;
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
