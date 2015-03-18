@@ -73,7 +73,7 @@
 #pragma mark- UITableViewDataSource/Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    return 1;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -83,9 +83,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellIndicator.png"]];
-    if (indexPath.row == 0) {
+    if (indexPath.row == 1) {
         cell.textLabel.text = @"检查更新";
-    }else if (indexPath.row == 1){
+    }else if (indexPath.row == 0){
         cell.textLabel.text = @"欢迎页";
     }
     return cell;
@@ -93,9 +93,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 0) {
+    if (indexPath.row == 1) {
         [self checkUpdate];
-    }else if (indexPath.row == 1) {
+    }else if (indexPath.row == 0) {
         GuideViewController *gv = [[GuideViewController alloc] init];
         gv.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 #ifndef kJuranDesigner
