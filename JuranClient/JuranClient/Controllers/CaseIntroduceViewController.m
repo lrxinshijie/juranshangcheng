@@ -31,8 +31,8 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     
     _keys = @[@"方案名称", @"地区", @"楼盘", @"户型", @"风格", @"面积(㎡)", @"参考价格(万元)", @"描述"];
     self.placeholders = @[@"请输入方案名称",@"请选择",@"请输入文字", @"请选择",@"请选择",@"请输入数字",@"请输入数字",@"请输入文字"];

@@ -170,17 +170,17 @@
 - (void)refreshUI{
     if (![JRUser isLogin]) {
         _unLoginLabel.hidden = NO;
-        _loginNameLabel.hidden = YES;
+//        _loginNameLabel.hidden = YES;
         _userNameLabel.hidden = YES;
         [_headerImageView setImage:[UIImage imageNamed:@"unlogin_head.png"]];
         _signedButton.enabled = YES;
         [_signedButton setTitle:@" 签到" forState:UIControlStateNormal];
     }else{
         _unLoginLabel.hidden = YES;
-        _loginNameLabel.hidden = NO;
+//        _loginNameLabel.hidden = NO;
         _userNameLabel.hidden = NO;
         _userNameLabel.text = _user.showName;
-        _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _user.account];
+//        _loginNameLabel.text = [NSString stringWithFormat:@"用户名：%@", _user.account];
         [_headerImageView setImageWithURLString:_user.headUrl];
         
         _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _user.newPrivateLetterCount];
@@ -203,7 +203,7 @@
 - (void)loadData{
     if (![JRUser isLogin]) {
         _unLoginLabel.hidden = NO;
-        _loginNameLabel.hidden = YES;
+//        _loginNameLabel.hidden = YES;
         _userNameLabel.hidden = YES;
         return;
     }

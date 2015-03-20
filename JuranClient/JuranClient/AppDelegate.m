@@ -27,6 +27,7 @@
 #import "MobClick.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WelcomeView.h"
+#import "IQKeyboardManager.h"
 
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
@@ -92,6 +93,13 @@
 #ifndef kJuranDesigner
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 #endif
+    
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.shouldToolbarUsesTextFieldTintColor = YES;
+    manager.enableAutoToolbar = NO;
+    
     [Public initApp];
     
     self.clientId = @"";

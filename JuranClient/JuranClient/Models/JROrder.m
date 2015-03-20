@@ -352,4 +352,8 @@
     self.washMap = dict[@"washMap"];
 }
 
+- (BOOL)showAction{
+    return YES;
+}
+
 @end
