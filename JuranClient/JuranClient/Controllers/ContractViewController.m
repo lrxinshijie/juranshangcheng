@@ -751,6 +751,19 @@
         _order.addPagePrice = textField.text.integerValue;
     }
     [self reSetValue];
+    if (textField.tag == 1200 || textField.tag == 1250) {
+        NSArray *rows = _keys[0];
+        [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:rows.count - 2 - (_isImmediate?1:0) inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+    }
+    if (textField.tag == 1250) {
+        __weak typeof(self.order) weakOrder = self.order;
+        [_waitFirstPayAmountLabel setText:[NSString stringWithFormat:@"=  %.2f 元", (_order.firstPayAmount.floatValue - _order.measurePayAmount.floatValue)] afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+            NSRange range = [[mutableAttributedString string] rangeOfString:[NSString stringWithFormat:@"%.2f", (weakOrder.firstPayAmount.floatValue - weakOrder.measurePayAmount.floatValue)] options:NSCaseInsensitiveSearch];
+            [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[kBlueColor CGColor] range:range];
+            return mutableAttributedString;
+        }];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

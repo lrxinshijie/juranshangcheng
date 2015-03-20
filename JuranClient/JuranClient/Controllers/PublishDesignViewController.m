@@ -290,11 +290,13 @@
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
     cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.accessoryView = nil;
     cell.textField.enabled = YES;
     cell.textField.delegate = self;
     cell.textField.tag = indexPath.row;
     if (indexPath.row == 2 || indexPath.row == 5 || indexPath.row == 6 || indexPath.row == 8) {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryView = [cell imageViewWithFrame:CGRectMake(0, 0, 8, 15) image:[UIImage imageNamed:@"cellIndicator.png"]];
         cell.textField.enabled = NO;
     }
     
@@ -476,7 +478,7 @@
     }else if (textField.tag == 7){
         _demand.neighbourhoods = textField.text;
     }
-    [self reloadData];
+    [self reSetValue];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
