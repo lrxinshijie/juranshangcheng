@@ -30,8 +30,8 @@
         self.hidden = YES;
         self.frame = kContentFrameWithoutNavigationBar;
         self.backgroundColor = RGBAColor(0, 0, 0, .5f);
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
+//        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+//        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
         
         UIButton *btn = [self buttonWithFrame:self.frame target:self action:@selector(onHidden) image:nil];
         [self addSubview:btn];

@@ -105,7 +105,7 @@
         param = @{@"msgId": [NSString stringWithFormat:@"%d", msg.msgId]};
     }
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_SET_MSG_READ parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_SET_MSG_READ parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if (msg) {
@@ -116,7 +116,7 @@
                 }
                 self.rightButton.hidden = YES;
             }
-            [ApplicationDelegate minusBadgeNumber:1];
+//            [ApplicationDelegate minusBadgeNumber:1];
             [_tableView reloadData];
         }
     }];
