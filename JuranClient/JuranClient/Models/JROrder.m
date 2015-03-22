@@ -98,6 +98,7 @@
         self.fileExist = [dict getBoolValueForKey:@"fileExist" defaultValue:NO];
         self.ifCanDraw = [dict getBoolValueForKey:@"ifCanDraw" defaultValue:NO];
         self.ifCanReDraw = [dict getBoolValueForKey:@"ifCanReDraw" defaultValue:NO];
+        self.ifCanDesign = [dict getBoolValueForKey:@"ifCanDesign" defaultValue:NO];
         
         self.gmtCreate = [dict getStringValueForKey:@"gmtCreate" defaultValue:@""];
         self.customerName = [dict getStringValueForKey:@"customerName" defaultValue:@""];

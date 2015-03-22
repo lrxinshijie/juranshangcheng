@@ -274,7 +274,7 @@
             y = CGRectGetMaxY(frame);
         }
         
-        if ([_order.status isEqualToString:@"wait_designer_confirm"] || [_order.status isEqualToString:@"wait_designer_measure"]) {
+        if ([_order.status isEqualToString:@"wait_designer_confirm"] || _order.ifCanDraw || _order.ifCanDesign) {
             frame = _actionBgView.frame;
             frame.origin.y = y;
             _actionBgView.frame = frame;
@@ -311,7 +311,7 @@
         }
         
 //        if (([_order.status isEqualToString:@"wait_first_pay"] || [_order.status isEqualToString:@"wait_last_pay"]) && [_order.payAmount doubleValue] > 0) {
-        if (_order.ifCanDraw){
+        if (_order.ifCanDraw || _order.ifCanDesign){
             frame = _actionBgView.frame;
             frame.origin.y = y;
             _actionBgView.frame = frame;
@@ -436,7 +436,7 @@
             height += 37;
         }
         
-        if ([order.status isEqualToString:@"wait_designer_confirm"] || [order.status isEqualToString:@"wait_designer_measure"]) {
+        if ([order.status isEqualToString:@"wait_designer_confirm"] || order.ifCanDraw || order.ifCanDesign) {
             height += 37;
         }
     }else{
@@ -447,7 +447,7 @@
         }
         
 //        if (([order.status isEqualToString:@"wait_first_pay"] || [order.status isEqualToString:@"wait_last_pay"]) && [order.payAmount doubleValue] > 0) {
-        if (order.ifCanDraw){
+        if (order.ifCanDraw || order.ifCanDesign){
             height += 37;
         }
     }

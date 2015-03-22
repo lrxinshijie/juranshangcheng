@@ -35,7 +35,7 @@
 
 @property (nonatomic, assign) BOOL ifCanDraw; //是否可提现
 @property (nonatomic, assign) BOOL ifCanReDraw; //是否可取消提现
-
+@property (nonatomic, assign) BOOL ifCanDesign;
 @property (nonatomic, assign) BOOL measurefileExist;
 @property (nonatomic, assign) BOOL fileExist;
 
