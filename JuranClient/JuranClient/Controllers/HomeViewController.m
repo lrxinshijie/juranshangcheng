@@ -113,10 +113,10 @@
         [weakSelf loadPrivateMsgData];
     }];
     
-    [_tableView addFooterWithCallback:^{
-        weakSelf.currentPage++;
-        [weakSelf loadDemandData];
-    }];
+//    [_tableView addFooterWithCallback:^{
+//        weakSelf.currentPage++;
+//        [weakSelf loadDemandData];
+//    }];
 }
 
 - (void)loadPrivateMsgData{
@@ -152,7 +152,7 @@
 
 - (void)loadDemandData{
     NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
-                            @"onePageCount": kOnePageCount};
+                            @"onePageCount": @"5"};
     [self showHUD];
     
     [[ALEngine shareEngine] pathURL:JR_GET_INDEX_DESIGN_REQ_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
