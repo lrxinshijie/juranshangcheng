@@ -52,7 +52,11 @@
 #define kShareWeChatKey @"wx338441f4726af98d"
 #define kShareWeChatSecret @"599f3a84d5377b1a1848ebf2c7515330"
 
-#define kUMengKey @"54d180f2fd98c587df0009d6"
+//设计师生产
+//#define kUMengKey @"55103068fd98c5b947000817"
+
+//UAT
+#define kUMengKey @"5511194bfd98c5e1e2000283"
 
 #else
 
@@ -77,7 +81,12 @@
 #define kShareWeChatKey @"wx3e32aa05bb32f554"
 #define kShareWeChatSecret @"f2c0d5958e633bdee9c25c33bb4e913c"
 
-#define kUMengKey @"54d180b1fd98c50a77000e95"
+//消费者生产
+//#define kUMengKey @"55102ebbfd98c5148a000182"
+
+//UAT
+#define kUMengKey @"5511191dfd98c576640005fe"
+
 
 #endif
 
@@ -122,7 +131,23 @@
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         ASLog(@"registrationID:%@",[APService registrationID]);
-        [JRUser refreshToken:nil];
+        [JRUser refreshToken:^{
+            NSDictionary *param = @{@"imei": [APService registrationID],
+                                    @"mac": @"",
+                                    @"model": [Public deviceModel],
+                                    @"dpi": [NSString stringWithFormat:@"%dx%d", (int)([[UIScreen mainScreen] bounds].size.width*[UIScreen mainScreen].scale), (int)([[UIScreen mainScreen] bounds].size.height*[UIScreen mainScreen].scale)],
+                                    @"sysVersion": [Public deviceSystemVersion],
+                                    @"token": [JRUser currentUser].token,
+                                    @"userId": [NSString stringWithFormat:@"%d", [JRUser currentUser].userId],
+                                    @"appVersion": [NSString stringWithFormat:@"%@|%@", [Public isDesignerApp] ? @"designer" : @"member", [self bundleVersion] ],
+                                    @"createTimes": [[NSDate date] stringWithFormat:kDateFormatHorizontalLineLong]};
+            ASLog(@"Log:%@",param);
+            [[ALEngine shareEngine] pathURL:JR_START_LOG parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyShowErrorDefaultMessage:@(NO), kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                if (error) {
+                    ASLog(@"err:%@",error);
+                }
+            }];
+        }];
     });
     
     [self jumpToMain];

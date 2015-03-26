@@ -80,7 +80,7 @@
 #define JR_GET_ACTIVITY_LIST [NSString stringWithFormat:@"%@/info/get_activity_list.json",JR_SERVICE]
 #define JR_GET_ACTIVITY_DETAIL [NSString stringWithFormat:@"%@/info/get_activity_detail.json",JR_SERVICE]
 #define JR_GET_ARTICLE_DETAIL [NSString stringWithFormat:@"%@/knowledge/get_article_detail_info.json",JR_SERVICE]
-
+#define JR_START_LOG [NSString stringWithFormat:@"%@/info/startLog.json",JR_SERVICE]
 
 
 
