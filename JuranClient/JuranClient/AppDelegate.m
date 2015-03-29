@@ -28,6 +28,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "WelcomeView.h"
 #import "IQKeyboardManager.h"
+#import "WXApi.h"
 
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
@@ -91,7 +92,7 @@
 #endif
 
 
-@interface AppDelegate () <UINavigationControllerDelegate>
+@interface AppDelegate () <UINavigationControllerDelegate, WXApiDelegate>
 
 @end
 
@@ -348,6 +349,31 @@
                         wxDelegate:self];
 }
 
+- (void)onResp:(BaseResp *)resp{
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        NSString *strTitle = @"";
+        
+        switch (resp.errCode) {
+            case WXSuccess:
+                strTitle = @"支付成功";
+                break;
+            case WXErrCodeUserCancel:
+                strTitle = @"用户中途取消";
+                break;
+            default:
+                strTitle = resp.errStr;
+                break;
+        }
+        
+        [Public alertOK:nil Message:strTitle];
+        
+        if (resp.errCode == WXSuccess) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderPaySuccess object:nil];
+        }
+    }
+}
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -376,6 +402,8 @@
                                              }
                                          }];
         
+    }else if ([url.host isEqualToString:@"pay"]){
+        return  [WXApi handleOpenURL:url delegate:self];
     }
     
     return [ShareSDK handleOpenURL:url
