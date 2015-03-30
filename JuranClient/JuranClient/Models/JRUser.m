@@ -150,6 +150,9 @@
     NSString *account = [JRUser currentUser].account;
     NSString *password = [JRUser currentUser].password;
     if (account.length == 0 || password.length == 0) {
+        if (finished) {
+            finished();
+        }
         return;
     }
     
@@ -180,6 +183,9 @@
                     user.userId = 0;
                     [user saveLocal];
                     [user resetCurrentUser];
+                }
+                if (finished) {
+                    finished();
                 }
             }];
         }

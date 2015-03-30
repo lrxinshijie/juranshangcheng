@@ -56,6 +56,7 @@
     [self insertSubview:_selectedBackgroundView atIndex:0];
 }
 
+
 - (void)onSelected:(id)sender{
     UIButton *btn = (UIButton*)sender;
     NSInteger index = btn.tag - kButtonTag;
@@ -75,6 +76,7 @@
         }];
     }
 }
+
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex{
     if (selectedIndex < _titleList.count && selectedIndex >= 0) {

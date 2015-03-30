@@ -12,6 +12,7 @@
 #import "LoginViewController.h"
 #import "AppDelegate.h"
 #import "UIAlertView+Blocks.h"
+#import "APService.h"
 
 @interface ALEngine ()
 
@@ -135,6 +136,8 @@
                                    params:parameters
                                httpMethod:method];
     }
+    
+    [op addHeader:@"deviceInfo" withValue:[NSString stringWithFormat:@"{IMEI:%@|MAC:%@|token:%@}",[APService registrationID], @"", [JRUser currentUser].token]];
     
     [op setPostDataEncoding:MKNKPostDataEncodingTypeJSON];
 

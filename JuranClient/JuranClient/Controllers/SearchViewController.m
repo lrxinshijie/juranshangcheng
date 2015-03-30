@@ -10,6 +10,7 @@
 #import "DesignerViewController.h"
 #import "CaseViewController.h"
 #import "QuestionViewController.h"
+#import "IQKeyboardManager.h"
 
 #define kKeywordsButtonTag 3330
 
@@ -42,7 +43,7 @@
 
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChangeNotification:) name:UITextFieldTextDidChangeNotification object:nil];
     
@@ -57,6 +58,12 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self reloadData];
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = NO;
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
 }
 
 - (void)loadData{

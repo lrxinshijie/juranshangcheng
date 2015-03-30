@@ -18,6 +18,7 @@
 @property (nonatomic, strong) PushMessageCell *msgCell;
 
 @property (nonatomic, strong) IBOutlet UIView *emptyView;
+@property (nonatomic, strong) UIButton *rightButton;
 
 @end
 
@@ -36,9 +37,9 @@
     _tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
     
-    UIButton *rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 60, 30) target:self action:@selector(setAllReaded:) title:@"全部已读" backgroundImage:nil];
-    [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 90, 30) target:self action:@selector(setAllReaded:) title:@"全部设置已读" backgroundImage:nil];
+    [_rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightButton];
     
     _emptyView.hidden = YES;
     _emptyView.center = _tableView.center;
@@ -74,7 +75,7 @@
                 
                 self.datas = [JRPushInfoMsg buildUpWithValue:list];
             }
-            
+            self.rightButton.hidden = ![data getBoolValueForKey:@"ifRead" defaultValue:YES];
             [_tableView reloadData];
         }
         _emptyView.hidden = _datas.count != 0;
@@ -113,6 +114,7 @@
                 for (JRPushInfoMsg *msg in _datas) {
                     msg.isUnread = NO;
                 }
+                self.rightButton.hidden = YES;
             }
 //            [ApplicationDelegate minusBadgeNumber:1];
             [_tableView reloadData];

@@ -63,8 +63,8 @@
     
     self.navigationItem.title = @"方案描述";
     [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onShare)];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
     self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard)];
     self.keys = @[@"地区", @"楼盘", @"户型", @"风格", @"面积", @"参考价", @"描述"];
     self.values = @[@"", @"", @"", @"", @"", @"", @""];

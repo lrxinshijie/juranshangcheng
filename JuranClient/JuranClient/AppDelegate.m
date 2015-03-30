@@ -27,6 +27,8 @@
 #import "MobClick.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WelcomeView.h"
+#import "IQKeyboardManager.h"
+#import "WXApi.h"
 
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
@@ -51,7 +53,11 @@
 #define kShareWeChatKey @"wx338441f4726af98d"
 #define kShareWeChatSecret @"599f3a84d5377b1a1848ebf2c7515330"
 
-#define kUMengKey @"54d180f2fd98c587df0009d6"
+//设计师生产
+//#define kUMengKey @"55103068fd98c5b947000817"
+
+//UAT
+#define kUMengKey @"5511194bfd98c5e1e2000283"
 
 #else
 
@@ -76,12 +82,17 @@
 #define kShareWeChatKey @"wx3e32aa05bb32f554"
 #define kShareWeChatSecret @"f2c0d5958e633bdee9c25c33bb4e913c"
 
-#define kUMengKey @"54d180b1fd98c50a77000e95"
+//消费者生产
+//#define kUMengKey @"55102ebbfd98c5148a000182"
+
+//UAT
+#define kUMengKey @"5511191dfd98c576640005fe"
+
 
 #endif
 
 
-@interface AppDelegate () <UINavigationControllerDelegate>
+@interface AppDelegate () <UINavigationControllerDelegate, WXApiDelegate>
 
 @end
 
@@ -92,6 +103,13 @@
 #ifndef kJuranDesigner
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 #endif
+    
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.shouldToolbarUsesTextFieldTintColor = YES;
+    manager.enableAutoToolbar = NO;
+    
     [Public initApp];
     
     self.clientId = @"";
@@ -114,7 +132,23 @@
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         ASLog(@"registrationID:%@",[APService registrationID]);
-        [JRUser refreshToken:nil];
+        [JRUser refreshToken:^{
+            NSDictionary *param = @{@"imei": [APService registrationID],
+                                    @"mac": @"",
+                                    @"model": [Public deviceModel],
+                                    @"dpi": [NSString stringWithFormat:@"%dx%d", (int)([[UIScreen mainScreen] bounds].size.width*[UIScreen mainScreen].scale), (int)([[UIScreen mainScreen] bounds].size.height*[UIScreen mainScreen].scale)],
+                                    @"sysVersion": [Public deviceSystemVersion],
+                                    @"token": [JRUser currentUser].token,
+                                    @"userId": [NSString stringWithFormat:@"%d", [JRUser currentUser].userId],
+                                    @"appVersion": [NSString stringWithFormat:@"%@|%@", [Public isDesignerApp] ? @"designer" : @"member", [self bundleVersion] ],
+                                    @"createTimes": [[NSDate date] stringWithFormat:kDateFormatHorizontalLineLong]};
+            ASLog(@"Log:%@",param);
+            [[ALEngine shareEngine] pathURL:JR_START_LOG parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyShowErrorDefaultMessage:@(NO), kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+                if (error) {
+                    ASLog(@"err:%@",error);
+                }
+            }];
+        }];
     });
     
     [self jumpToMain];
@@ -315,6 +349,31 @@
                         wxDelegate:self];
 }
 
+- (void)onResp:(BaseResp *)resp{
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        NSString *strTitle = @"";
+        
+        switch (resp.errCode) {
+            case WXSuccess:
+                strTitle = @"支付成功";
+                break;
+            case WXErrCodeUserCancel:
+                strTitle = @"用户中途取消";
+                break;
+            default:
+                strTitle = resp.errStr;
+                break;
+        }
+        
+        [Public alertOK:nil Message:strTitle];
+        
+        if (resp.errCode == WXSuccess) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameOrderPaySuccess object:nil];
+        }
+    }
+}
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -343,6 +402,8 @@
                                              }
                                          }];
         
+    }else if ([url.host isEqualToString:@"pay"]){
+        return  [WXApi handleOpenURL:url delegate:self];
     }
     
     return [ShareSDK handleOpenURL:url

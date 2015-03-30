@@ -11,6 +11,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "DataSigner.h"
 #import "OrderListViewController.h"
+#import "WXApi.h"
 
 @interface OrderConfirmPayViewController ()
 
@@ -77,89 +78,107 @@
     [self showHUD];
     NSDictionary *param = @{@"tid": _order.type == 0 ? _order.measureTid : _order.designTid,
                             @"status": _order.status,
-                            @"type": _isPayAli ? @"ALIPAY" : @"wechat"};
+                            @"type": _isPayAli ? @"ALIPAY" : @"WXPAY"};
     [[ALEngine shareEngine] pathURL:JR_PAY_RESPONE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSDictionary *aliPayDto = data;//[data objectForKey:@"aliPayDto"];
-            NSString *totalFee = [aliPayDto getStringValueForKey:@"totalFee" defaultValue:@""];
-            NSString *subject = [aliPayDto getStringValueForKey:@"subject" defaultValue:@""];
-            NSString *body = [aliPayDto getStringValueForKey:@"body" defaultValue:@""];
-            NSString *notifyUrl = [aliPayDto getStringValueForKey:@"notifyUrl" defaultValue:@""];
-            NSString *partner = [aliPayDto getStringValueForKey:@"partner" defaultValue:@""];
-            NSString *sellerEmail = [aliPayDto getStringValueForKey:@"sellerEmail" defaultValue:@""];
-            NSString *outTrade_no = [aliPayDto getStringValueForKey:@"outTrade_no" defaultValue:@""];
-//            NSString *returnUrl = [aliPayDto getStringValueForKey:@"returnUrl" defaultValue:@""];
-            NSString *paymentType = [aliPayDto getStringValueForKey:@"paymentType" defaultValue:@""];
-            NSString *service = [aliPayDto getStringValueForKey:@"service" defaultValue:@""];
-            NSString *inputCharset = [aliPayDto getStringValueForKey:@"inputCharset" defaultValue:@""];
-            
-            NSString *sign = [aliPayDto getStringValueForKey:@"sign" defaultValue:@""];
-            NSString *signType = [aliPayDto getStringValueForKey:@"signType" defaultValue:@""];
-            
-            NSDictionary *orderData = @{@"partner": partner,
-                                        @"seller_id": sellerEmail,
-                                        @"out_trade_no": outTrade_no,
-                                        @"subject": subject,
-                                        @"body": body,
-                                        @"total_fee": totalFee,
-                                        @"notify_url": notifyUrl,
-                                        @"service": service,
-                                        @"payment_type": paymentType,
-                                        @"_input_charset": inputCharset,
-//                                        @"it_b_pay": @"30m",
-//                                        @"show_url": @"m.alipay.com",
-                                        @"sign": sign,
-                                        @"sign_type": signType
-                                        };
-            
-            NSArray *sorts = @[@"_input_charset",@"body",@"notify_url",@"out_trade_no",@"partner",@"payment_type",@"seller_id",@"service",@"subject", @"total_fee", @"sign", @"sign_type"];
-            __block NSMutableString *orderString = [NSMutableString string];
-            [sorts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                if (orderString.length > 0) {
-                    [orderString appendFormat:@"&"];
-                }
-                [orderString appendFormat:@"%@=\"%@\"", obj, orderData[obj]];
-            }];
-//            __block NSMutableString *orderString = [NSMutableString string];
-            NSString *appScheme = @"JuranClient";
-//            [orderData enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-//                if (orderString.length > 0) {
-//                    [orderString appendFormat:@"&"];
-//                }
-//                [orderString appendFormat:@"%@=\"%@\"", key, obj];
-//            }];
-
-//            NSString *path = [[NSBundle mainBundle] pathForResource:@"rsa_private_key" ofType:@"txt"];
-//            NSString *privateKey = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-            
-//            id<DataSigner> signer = CreateRSADataSigner(privateKey);
-//            NSString *sign = [signer signString:orderString];
-            
-//            [orderString appendFormat:@"&sign=\"%@\"&sign_type=\"%@\"", sign, signType];
-            
-            ASLog(@"%@,%@",[[AlipaySDK defaultService] currentVersion],orderString);
-            
-            [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-                NSInteger resultStatus = [resultDic getIntValueForKey:@"resultStatus" defaultValue:0];
+            if (_isPayAli) {
+                NSDictionary *aliPayDto = data;//[data objectForKey:@"aliPayDto"];
+                NSString *totalFee = [aliPayDto getStringValueForKey:@"totalFee" defaultValue:@""];
+                NSString *subject = [aliPayDto getStringValueForKey:@"subject" defaultValue:@""];
+                NSString *body = [aliPayDto getStringValueForKey:@"body" defaultValue:@""];
+                NSString *notifyUrl = [aliPayDto getStringValueForKey:@"notifyUrl" defaultValue:@""];
+                NSString *partner = [aliPayDto getStringValueForKey:@"partner" defaultValue:@""];
+                NSString *sellerEmail = [aliPayDto getStringValueForKey:@"sellerEmail" defaultValue:@""];
+                NSString *outTrade_no = [aliPayDto getStringValueForKey:@"outTrade_no" defaultValue:@""];
+                //            NSString *returnUrl = [aliPayDto getStringValueForKey:@"returnUrl" defaultValue:@""];
+                NSString *paymentType = [aliPayDto getStringValueForKey:@"paymentType" defaultValue:@""];
+                NSString *service = [aliPayDto getStringValueForKey:@"service" defaultValue:@""];
+                NSString *inputCharset = [aliPayDto getStringValueForKey:@"inputCharset" defaultValue:@""];
                 
-                NSDictionary *tips = @{@"9000": @"支付成功",
-                                       @"8000": @"订单支付成功",
-                                       @"4000": @"订单支付失败",
-                                       @"6001": @"用户中途取消",
-                                       @"6002": @"网络连接出错"
-                                       };
-                NSString *tip = [tips getStringValueForKey:[NSString stringWithFormat:@"%d", resultStatus] defaultValue:@""];
-                if (tip.length > 0) {
-                    [self showTip:tip];
-                }
+                NSString *sign = [aliPayDto getStringValueForKey:@"sign" defaultValue:@""];
+                NSString *signType = [aliPayDto getStringValueForKey:@"signType" defaultValue:@""];
                 
-                if (resultStatus == 9000) {
-                    //交易成功
-                    [self paySuccess];
+                NSDictionary *orderData = @{@"partner": partner,
+                                            @"seller_id": sellerEmail,
+                                            @"out_trade_no": outTrade_no,
+                                            @"subject": subject,
+                                            @"body": body,
+                                            @"total_fee": totalFee,
+                                            @"notify_url": notifyUrl,
+                                            @"service": service,
+                                            @"payment_type": paymentType,
+                                            @"_input_charset": inputCharset,
+                                            //                                        @"it_b_pay": @"30m",
+                                            //                                        @"show_url": @"m.alipay.com",
+                                            @"sign": sign,
+                                            @"sign_type": signType
+                                            };
+                
+                NSArray *sorts = @[@"_input_charset",@"body",@"notify_url",@"out_trade_no",@"partner",@"payment_type",@"seller_id",@"service",@"subject", @"total_fee", @"sign", @"sign_type"];
+                __block NSMutableString *orderString = [NSMutableString string];
+                [sorts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    if (orderString.length > 0) {
+                        [orderString appendFormat:@"&"];
+                    }
+                    [orderString appendFormat:@"%@=\"%@\"", obj, orderData[obj]];
+                }];
+                //            __block NSMutableString *orderString = [NSMutableString string];
+                NSString *appScheme = @"JuranClient";
+                //            [orderData enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                //                if (orderString.length > 0) {
+                //                    [orderString appendFormat:@"&"];
+                //                }
+                //                [orderString appendFormat:@"%@=\"%@\"", key, obj];
+                //            }];
+                
+                //            NSString *path = [[NSBundle mainBundle] pathForResource:@"rsa_private_key" ofType:@"txt"];
+                //            NSString *privateKey = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+                
+                //            id<DataSigner> signer = CreateRSADataSigner(privateKey);
+                //            NSString *sign = [signer signString:orderString];
+                
+                //            [orderString appendFormat:@"&sign=\"%@\"&sign_type=\"%@\"", sign, signType];
+                
+                ASLog(@"%@,%@",[[AlipaySDK defaultService] currentVersion],orderString);
+                
+                [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+                    NSInteger resultStatus = [resultDic getIntValueForKey:@"resultStatus" defaultValue:0];
+                    
+                    NSDictionary *tips = @{@"9000": @"支付成功",
+                                           @"8000": @"订单支付成功",
+                                           @"4000": @"订单支付失败",
+                                           @"6001": @"用户中途取消",
+                                           @"6002": @"网络连接出错"
+                                           };
+                    NSString *tip = [tips getStringValueForKey:[NSString stringWithFormat:@"%d", resultStatus] defaultValue:@""];
+                    if (tip.length > 0) {
+                        [self showTip:tip];
+                    }
+                    
+                    if (resultStatus == 9000) {
+                        //交易成功
+                        [self paySuccess];
+                    }
+                    ASLog(@"resultDic:%@", resultDic);
+                }];
+            }else{
+                NSDictionary *dict = data;
+                
+                PayReq *req = [[PayReq alloc] init];
+                req.openID = [dict objectForKey:@"appid"];
+                req.partnerId = [dict objectForKey:@"partnerid"];
+                req.prepayId = [dict objectForKey:@"prepayid"];
+                req.nonceStr = [dict objectForKey:@"noncestr"];
+                req.timeStamp = [[dict objectForKey:@"timestamp"] intValue];
+                req.package = [dict objectForKey:@"packageValue"];
+                req.sign = [dict objectForKey:@"sign"];
+                BOOL bol = [WXApi safeSendReq:req];
+                if (!bol) {
+                    [self showTip:@"支付失败"];
                 }
-                ASLog(@"resultDic:%@", resultDic);
-            }];
+            }
+            
         }
     }];
 }
