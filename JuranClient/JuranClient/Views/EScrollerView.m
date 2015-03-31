@@ -120,8 +120,17 @@
     currentPageIndex = page;
     
     pageControl.currentPage = (page-1);
+    
+    if (scrollView.contentOffset.x == 0) {
+        [scrollView setContentOffset:CGPointMake(([imageArray count]-2)*viewSize.size.width , 0)];
+    }
+    
+    if (scrollView.contentOffset.x == ([imageArray count]-1)*pageWidth) {
+        [scrollView setContentOffset:CGPointMake(viewSize.size.width , 0)];
+    }
 }
 
+/*
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView
 {
     if (currentPageIndex==0) {
@@ -132,20 +141,16 @@
        [_scrollView setContentOffset:CGPointMake(viewSize.size.width , 0)];
     }
 }
+*/
 
 - (void)turnPage
 {
-    int page = pageControl.currentPage;
-    [scrollView scrollRectToVisible:CGRectMake(viewSize.size.width*(page+1),0,viewSize.size.width,viewSize.size.height) animated:YES];
+    [scrollView scrollRectToVisible:CGRectMake(viewSize.size.width*(currentPageIndex),0,viewSize.size.width,viewSize.size.height) animated:YES];
 }
 
 - (void)runTimePage
 {
-    int page = pageControl.currentPage;
-    page++;
-    //NSLog(@"%i",page);
-    page = page > [imageArray count]-3 ? 0 : page ;
-    pageControl.currentPage = page;
+    currentPageIndex++;
     [self turnPage];
 }
 
