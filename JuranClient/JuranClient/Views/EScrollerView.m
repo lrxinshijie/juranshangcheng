@@ -56,6 +56,7 @@
         
         scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, viewSize.size.width, viewSize.size.height)];
         scrollView.pagingEnabled = YES;
+        scrollView.bounces = NO;
         scrollView.contentSize = CGSizeMake(viewSize.size.width * [imageArray count], viewSize.size.height);
         scrollView.showsHorizontalScrollIndicator = NO;
         scrollView.showsVerticalScrollIndicator = NO;
@@ -142,7 +143,6 @@
     }
 }
 */
-
 - (void)turnPage
 {
     [scrollView scrollRectToVisible:CGRectMake(viewSize.size.width*(currentPageIndex),0,viewSize.size.width,viewSize.size.height) animated:YES];
@@ -156,7 +156,6 @@
 
 - (void)imagePressed:(UITapGestureRecognizer *)sender
 {
-
     if ([_delegate respondsToSelector:@selector(EScrollerViewDidClicked:)]) {
         [_delegate EScrollerViewDidClicked:sender.view.tag-1];
     }
