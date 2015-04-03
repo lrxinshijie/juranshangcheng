@@ -29,6 +29,7 @@
 #import "WelcomeView.h"
 #import "IQKeyboardManager.h"
 #import "WXApi.h"
+#import "DeviceHardware.h"
 
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
@@ -136,7 +137,7 @@
             NSDictionary *param = @{@"imei": [APService registrationID],
                                     @"mac": @"",
                                     @"model": [Public deviceModel],
-                                    @"dpi": [NSString stringWithFormat:@"%dx%d", (int)([[UIScreen mainScreen] bounds].size.width*[UIScreen mainScreen].scale), (int)([[UIScreen mainScreen] bounds].size.height*[UIScreen mainScreen].scale)],
+                                    @"dpi": [NSString stringWithFormat:@"%dx%d", (int)[DeviceHardware deviceWidth], (int)[DeviceHardware deviceHeight]],
                                     @"sysVersion": [Public deviceSystemVersion],
                                     @"token": [JRUser currentUser].token,
                                     @"userId": [NSString stringWithFormat:@"%d", [JRUser currentUser].userId],

@@ -523,6 +523,8 @@
 		14ABFBEC1A25CFFD00C4AF65 /* UIViewController+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEB1A25CFFD00C4AF65 /* UIViewController+Login.m */; };
 		14ABFBF01A25DADC00C4AF65 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */; };
 		14ABFBF11A25DADC00C4AF65 /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */; };
+		14B5C04A1ACE31D70043BB44 /* DeviceHardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B5C0491ACE31D70043BB44 /* DeviceHardware.m */; };
+		14B5C04B1ACE31D70043BB44 /* DeviceHardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B5C0491ACE31D70043BB44 /* DeviceHardware.m */; };
 		14BCD7881A85DFFB00825A90 /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BCD7861A85DFFB00825A90 /* OrderCell.m */; };
 		14BCD7891A85DFFB00825A90 /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BCD7861A85DFFB00825A90 /* OrderCell.m */; };
 		14BCD78A1A85DFFB00825A90 /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14BCD7871A85DFFB00825A90 /* OrderCell.xib */; };
@@ -1769,6 +1771,8 @@
 		14ABFBED1A25DADC00C4AF65 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		14ABFBEE1A25DADC00C4AF65 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		14ABFBEF1A25DADC00C4AF65 /* RegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
+		14B5C0481ACE31D70043BB44 /* DeviceHardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceHardware.h; sourceTree = "<group>"; };
+		14B5C0491ACE31D70043BB44 /* DeviceHardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceHardware.m; sourceTree = "<group>"; };
 		14BCD7851A85DFFB00825A90 /* OrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCell.h; sourceTree = "<group>"; };
 		14BCD7861A85DFFB00825A90 /* OrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCell.m; sourceTree = "<group>"; };
 		14BCD7871A85DFFB00825A90 /* OrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
@@ -3760,6 +3764,8 @@
 		A987ED6C1A20920500CED7CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				14B5C0481ACE31D70043BB44 /* DeviceHardware.h */,
+				14B5C0491ACE31D70043BB44 /* DeviceHardware.m */,
 				A9A067231A3D92EB0059D73B /* ALGetPhoto.h */,
 				A9A067241A3D92EB0059D73B /* ALGetPhoto.m */,
 				1441A1441A29E156004A038E /* JRMemberDetail.h */,
@@ -4824,8 +4830,6 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
-						DevelopmentTeam = K7N89S4ZM6;
 						DevelopmentTeam = QHWR2FWBM6;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
@@ -5787,6 +5791,7 @@
 				1415F9551A5CD1CB003D0C29 /* ALGetPhoto.m in Sources */,
 				1415F9561A5CD1CB003D0C29 /* UINavigationBar+ASCategory.m in Sources */,
 				1415F9571A5CD1CB003D0C29 /* DesignerCell.m in Sources */,
+				14B5C04B1ACE31D70043BB44 /* DeviceHardware.m in Sources */,
 				1415F9581A5CD1CB003D0C29 /* JRAnswer.m in Sources */,
 				1415F9591A5CD1CB003D0C29 /* NSString+ASCategory.m in Sources */,
 				1415F95A1A5CD1CB003D0C29 /* MBProgressHUD.m in Sources */,
@@ -6242,6 +6247,7 @@
 				378BB2C31A4B1C6E00E8358D /* JRBidInfo.m in Sources */,
 				37F0E70B1A7D2735004CCCB2 /* SDWebImageDownloaderOperation.m in Sources */,
 				A9A067171A3D76DA0059D73B /* ActionSheetLocalePicker.m in Sources */,
+				14B5C04A1ACE31D70043BB44 /* DeviceHardware.m in Sources */,
 				141A1D3B1A2CC09600C073C5 /* AskOrAnswerCell.m in Sources */,
 				37D3EADF1A52FF330091B3BB /* PushMsgDetailViewController.m in Sources */,
 				A93BF2951A262A290070B72A /* ServiceViewController.m in Sources */,
@@ -6616,8 +6622,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE = "52657c77-bd2b-4e6b-96ce-0b0ad9451c14";
 				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
