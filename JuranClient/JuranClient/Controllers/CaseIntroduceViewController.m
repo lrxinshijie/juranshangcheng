@@ -25,14 +25,19 @@
 
 @implementation CaseIntroduceViewController
 
+- (void)dealloc{
+    _tableView.delegate = nil; _tableView.dataSource = nil;
+}
+
+- (void)loadView{
+    [super loadView];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
+//    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     _keys = @[@"方案名称", @"地区", @"楼盘", @"户型", @"风格", @"面积(㎡)", @"参考价格(万元)", @"描述"];
     self.placeholders = @[@"请输入方案名称",@"请选择",@"请输入文字", @"请选择",@"请选择",@"请输入数字",@"请输入数字",@"请输入文字"];
@@ -134,7 +139,6 @@
     if (!cell) {
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
         cell = (TextFieldCell *)[nibs firstObject];
-//        cell = [[TextFieldCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
     }
     cell.accessoryView = UITableViewCellAccessoryNone;
     
@@ -163,8 +167,9 @@
     return cell;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    [self.view endEditing:YES];
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+//    self.selectedTextField = textField;
+    return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
@@ -201,7 +206,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.view endEditing:YES];
     
     if (indexPath.row == 1) {
         BaseAddressViewController *vc = [[BaseAddressViewController alloc] init];
@@ -292,30 +296,6 @@
     [textField resignFirstResponder];
     
     return YES;
-}
-
-- (void)keyboardWillShow:(NSNotification *)notification{
-    NSDictionary *info = [notification userInfo];
-    NSValue *value = [info objectForKey:@"UIKeyboardFrameEndUserInfoKey"];
-    CGSize keyboardSize = [value CGRectValue].size;
-    
-    NSValue *animationDurationValue = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-    NSTimeInterval animationDuration;
-    [animationDurationValue getValue:&animationDuration];
-    NSTimeInterval animation = animationDuration;
-    
-    //视图移动的动画开始
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:animation];
-    CGRect frame = _tableView.frame;
-    frame.size.height = kWindowHeightWithoutNavigationBar - keyboardSize.height;
-    _tableView.frame = frame;
-    
-    [UIView commitAnimations];
-}
-
--(void)keyboardWillBeHidden:(NSNotification *)aNotification{
-    _tableView.frame = kContentFrameWithoutNavigationBar;
 }
 
 @end
