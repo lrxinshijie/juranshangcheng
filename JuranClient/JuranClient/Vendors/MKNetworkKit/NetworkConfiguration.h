@@ -164,4 +164,12 @@
 #define JR_EXTRACT_AMOUNT [NSString stringWithFormat:@"%@/trade/measureDrawApply.json",JR_SERVICE]
 #define JR_PAY_RESPONE [NSString stringWithFormat:@"%@/pay/pay_req.json",JR_SERVICE]
 
+
+
+
+
+
+#define JR_SHOP_FIRSTPAGE [NSString stringWithFormat:@"%@/shop/shopFirstPage.json",JR_SERVICE]
+
+
 #endif

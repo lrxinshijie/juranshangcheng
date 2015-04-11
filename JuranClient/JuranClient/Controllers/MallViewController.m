@@ -7,6 +7,7 @@
 //
 
 #import "MallViewController.h"
+#import "ShopHomeViewController.h"
 
 @interface MallViewController ()
 
@@ -18,6 +19,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"商城";
+}
+
+- (IBAction)onShop:(id)sender{
+    ShopHomeViewController *vc = [[ShopHomeViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
