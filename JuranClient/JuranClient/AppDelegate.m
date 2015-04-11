@@ -112,7 +112,6 @@
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     manager.enable = YES;
     manager.shouldResignOnTouchOutside = YES;
-    manager.shouldToolbarUsesTextFieldTintColor = YES;
     manager.enableAutoToolbar = NO;
     
     [Public initApp];
@@ -265,7 +264,6 @@
     self.tabBarController = [[UITabBarController alloc] init];
     _tabBarController.viewControllers = @[csNav,desNav,topicNav,publishNav,profileNav];
     self.window.rootViewController = _tabBarController;
-    
     
 //    CaseViewController *cs = [[CaseViewController alloc] init];
 //    cs.isHome = YES;

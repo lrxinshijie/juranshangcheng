@@ -11,6 +11,8 @@
 
 @interface MallViewController ()
 
+
+
 @end
 
 @implementation MallViewController
@@ -25,6 +27,7 @@
     ShopHomeViewController *vc = [[ShopHomeViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {
