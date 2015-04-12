@@ -33,6 +33,10 @@
 #import "WikiDetailViewController.h"
 #import "WikiViewController.h"
 #import "JRAdInfo.h"
+#import "OrderDetailViewController.h"
+#import "JROrder.h"
+#import "RealNameAuthViewController.h"
+#import "BidListViewController.h"
 
 @implementation Public
 
@@ -542,7 +546,23 @@
             vc.hidesBottomBarWhenPushed = YES;
             [navigationController pushViewController:vc animated:YES];
         }
+    }else if (type == 10 && [param.allKeys containsObject:@"tid"]){
+        OrderDetailViewController *od = [[OrderDetailViewController alloc] init];
+        JROrder *order = [[JROrder alloc] init];
+        order.measureTid = [param getStringValueForKey:@"tid" defaultValue:@""];
+        od.order = order;
+        od.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:od animated:YES];
+    }else if (type == 11){
+        RealNameAuthViewController *rn = [[RealNameAuthViewController alloc] init];
+        rn.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:rn animated:YES];
+    }else if (type == 12){
+        BidListViewController *vc = [[BidListViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:vc animated:YES];
     }
+    
 }
 
 + (NSDictionary *)deviceInfo{
