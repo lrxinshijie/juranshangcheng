@@ -34,6 +34,9 @@
 #import "DiscoverViewController.h"
 #import "MallViewController.h"
 #import "FitmentViewController.h"
+#ifndef kJuranDesigner
+#import <BaiduMapAPI/BMKMapManager.h>
+#endif
 
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
@@ -92,6 +95,12 @@
 
 //UAT
 #define kUMengKey @"5511191dfd98c576640005fe"
+
+//百度地图API
+//UAT
+#define kBaiduMapKey @"4cGeGYys4cxdVd8DE9jMQslH"
+//生产
+//#define kBaiduMapKey @"MadY3qvvgFGNqZAqNEmE8nlP";
 
 
 #endif
@@ -243,27 +252,28 @@
 - (void)setupTabbar{
     RootViewController *cs = [[RootViewController alloc] init];
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
-    csNav.tabBarItem = [self setupTabbarItemTitle:@"首页" image:@"tabbar_case" selected:@"tabbar_case_hl"];
+    csNav.tabBarItem = [self setupTabbarItemTitle:@"首页" image:@"icon-nav-home" selected:@"icon-nav-home-active"];
     
     FitmentViewController *des = [[FitmentViewController alloc] init];
     UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
-    desNav.tabBarItem = [self setupTabbarItemTitle:@"家装" image:@"tabbar_designer" selected:@"tabbar_designer_hl"];
+    desNav.tabBarItem = [self setupTabbarItemTitle:@"家装" image:@"icon-nav-finish" selected:@"icon-nav-finish-active"];
     
     MallViewController *topic = [[MallViewController alloc] init];
     UINavigationController *topicNav = [Public navigationControllerFromRootViewController:topic];
-    topicNav.tabBarItem = [self setupTabbarItemTitle:@"商城" image:@"tabbar_subject" selected:@"tabbar_subject_hl"];
+    topicNav.tabBarItem = [self setupTabbarItemTitle:@"商城" image:@"icon-nav-mall" selected:@"icon-nav-mall-active"];
     
     DiscoverViewController *publish = [[DiscoverViewController alloc] init];
     UINavigationController *publishNav = [Public navigationControllerFromRootViewController:publish];
-    publishNav.tabBarItem = [self setupTabbarItemTitle:@"发现" image:@"tabbar_demands" selected:@"tabbar_demands_hl"];
+    publishNav.tabBarItem = [self setupTabbarItemTitle:@"发现" image:@"icon-nav-explore" selected:@"icon-nav-explore-active"];
     
     ProfileViewController *profile = [[ProfileViewController alloc] init];
     UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
-    profileNav.tabBarItem = [self setupTabbarItemTitle:@"我" image:@"tabbar_personal" selected:@"tabbar_personal_hl"];
+    profileNav.tabBarItem = [self setupTabbarItemTitle:@"我" image:@"icon-nav-profile" selected:@"icon-nav-profile-active"];
     
     self.tabBarController = [[UITabBarController alloc] init];
     _tabBarController.viewControllers = @[csNav,desNav,topicNav,publishNav,profileNav];
     self.window.rootViewController = _tabBarController;
+    
     
 //    CaseViewController *cs = [[CaseViewController alloc] init];
 //    cs.isHome = YES;
@@ -340,6 +350,17 @@
     id<ISSQZoneApp> app =(id<ISSQZoneApp>)[ShareSDK getClientWithType:ShareTypeQQSpace];
     [app setIsAllowWebAuthorize:YES];
     
+}
+
+
+- (void)setupBaiduMapAPI {
+#ifndef kJuranDesigner
+    BMKMapManager* _mapManager = [[BMKMapManager alloc]init];
+    BOOL ret = [_mapManager start:kBaiduMapKey generalDelegate:nil];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
+#endif
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
