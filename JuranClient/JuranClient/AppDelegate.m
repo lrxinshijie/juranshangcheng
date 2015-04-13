@@ -34,6 +34,7 @@
 #import "DiscoverViewController.h"
 #import "MallViewController.h"
 #import "FitmentViewController.h"
+#import <BaiduMapAPI/BMKMapManager.h>
 
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
@@ -92,6 +93,12 @@
 
 //UAT
 #define kUMengKey @"5511191dfd98c576640005fe"
+
+//百度地图API
+//UAT
+#define kBaiduMapKey @"4cGeGYys4cxdVd8DE9jMQslH"
+//生产
+//#define kBaiduMapKey @"MadY3qvvgFGNqZAqNEmE8nlP";
 
 
 #endif
@@ -341,6 +348,14 @@
     id<ISSQZoneApp> app =(id<ISSQZoneApp>)[ShareSDK getClientWithType:ShareTypeQQSpace];
     [app setIsAllowWebAuthorize:YES];
     
+}
+
+- (void)setupBaiduMapAPI {
+    BMKMapManager* _mapManager = [[BMKMapManager alloc]init];
+    BOOL ret = [_mapManager start:kBaiduMapKey generalDelegate:nil];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
