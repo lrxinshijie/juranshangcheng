@@ -12,11 +12,19 @@
 
 @interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
+@property (nonatomic, strong) NSArray *datas;
+
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 
 @property (nonatomic, strong) IBOutlet UIImageView *shopLogoImageView;
 @property (nonatomic, strong) UIImageView *indexShopLogoImageView;
+
+@property (nonatomic, strong) IBOutlet UILabel *nameLabel;
+@property (nonatomic, strong) IBOutlet UILabel *gradeLabel;
+
+
+
 
 @end
 
@@ -38,10 +46,11 @@
     _collectionView.backgroundView = bgView;
     
     [self loadData];
+    [self loadRecommendData];
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"shopId": @"4"};
+    NSDictionary *param = @{@"shopId": @"5"};
     [self showHUD];
     
     [[ALEngine shareEngine] pathURL:JR_SHOP_FIRSTPAGE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -53,9 +62,26 @@
     }];
 }
 
+- (void)loadRecommendData{
+    NSDictionary *param = @{@"shopId": @"6"};
+    [self showHUD];
+    
+    [[ALEngine shareEngine] pathURL:JR_SHOP_RECOMMEND parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            id obj = data[@"recommendProductsList"];
+            if ([obj isKindOfClass:[NSArray class]]) {
+                self.datas = obj;
+            }
+            [self reloadData];
+        }
+    }];
+}
+
 - (void)reloadData{
     [self.shopLogoImageView setImageWithURLString:_shop.shopLogo];
     [self.indexShopLogoImageView setImageWithURLString:_shop.indexShopLogo];
+    [_collectionView reloadData];
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -65,13 +91,14 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 6;
+    return _datas.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"ShopCell";
     ShopCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    NSDictionary *dic = _datas[indexPath.row];
+    [cell fillCellWithValue:dic];
     return cell;
 }
 
