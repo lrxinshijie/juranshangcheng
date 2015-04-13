@@ -8,6 +8,7 @@
 
 #import "MallViewController.h"
 #import "ShopHomeViewController.h"
+#import "NaviStoreListViewController.h"
 
 @interface MallViewController ()
 
@@ -22,9 +23,17 @@
 }
 
 - (IBAction)onShop:(id)sender{
-    ShopHomeViewController *vc = [[ShopHomeViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+//    ShopHomeViewController *vc = [[ShopHomeViewController alloc] init];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)onNavi:(id)sender{
+    ///////////////////////////////////////////////////////////////////--Add by PC Temp
+    NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
+    navi.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:navi animated:YES];
+    ///////////////////////////////////////////////////////////////////
 }
 
 - (void)didReceiveMemoryWarning {
