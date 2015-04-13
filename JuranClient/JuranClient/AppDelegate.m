@@ -34,7 +34,9 @@
 #import "DiscoverViewController.h"
 #import "MallViewController.h"
 #import "FitmentViewController.h"
+#ifndef kJuranDesigner
 #import <BaiduMapAPI/BMKMapManager.h>
+#endif
 
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
@@ -350,12 +352,15 @@
     
 }
 
+
 - (void)setupBaiduMapAPI {
+#ifndef kJuranDesigner
     BMKMapManager* _mapManager = [[BMKMapManager alloc]init];
     BOOL ret = [_mapManager start:kBaiduMapKey generalDelegate:nil];
     if (!ret) {
         NSLog(@"manager start failed!");
     }
+#endif
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
