@@ -702,6 +702,10 @@
 		3721D0971AA23089008ADB34 /* ContractPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3721D0941AA23089008ADB34 /* ContractPreviewViewController.m */; };
 		3721D0981AA23089008ADB34 /* ContractPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3721D0951AA23089008ADB34 /* ContractPreviewViewController.xib */; };
 		3721D0991AA23089008ADB34 /* ContractPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3721D0951AA23089008ADB34 /* ContractPreviewViewController.xib */; };
+		372DEA131ADCB30A0059DE27 /* MyCollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 372DEA111ADCB30A0059DE27 /* MyCollectViewController.m */; };
+		372DEA141ADCB30A0059DE27 /* MyCollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 372DEA111ADCB30A0059DE27 /* MyCollectViewController.m */; };
+		372DEA151ADCB30A0059DE27 /* MyCollectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 372DEA121ADCB30A0059DE27 /* MyCollectViewController.xib */; };
+		372DEA161ADCB30A0059DE27 /* MyCollectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 372DEA121ADCB30A0059DE27 /* MyCollectViewController.xib */; };
 		3756351C1A60E6FF00D120C8 /* icon_followed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3756351A1A60E6FF00D120C8 /* icon_followed@2x.png */; };
 		3756351D1A60E6FF00D120C8 /* icon_unfollowed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3756351B1A60E6FF00D120C8 /* icon_unfollowed@2x.png */; };
 		3756351F1A60E78300D120C8 /* icon_follow_unenable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3756351E1A60E78300D120C8 /* icon_follow_unenable@2x.png */; };
@@ -2084,6 +2088,9 @@
 		3721D0931AA23089008ADB34 /* ContractPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractPreviewViewController.h; sourceTree = "<group>"; };
 		3721D0941AA23089008ADB34 /* ContractPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractPreviewViewController.m; sourceTree = "<group>"; };
 		3721D0951AA23089008ADB34 /* ContractPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContractPreviewViewController.xib; sourceTree = "<group>"; };
+		372DEA101ADCB30A0059DE27 /* MyCollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectViewController.h; sourceTree = "<group>"; };
+		372DEA111ADCB30A0059DE27 /* MyCollectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectViewController.m; sourceTree = "<group>"; };
+		372DEA121ADCB30A0059DE27 /* MyCollectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectViewController.xib; sourceTree = "<group>"; };
 		3756351A1A60E6FF00D120C8 /* icon_followed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_followed@2x.png"; sourceTree = "<group>"; };
 		3756351B1A60E6FF00D120C8 /* icon_unfollowed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_unfollowed@2x.png"; sourceTree = "<group>"; };
 		3756351E1A60E78300D120C8 /* icon_follow_unenable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_follow_unenable@2x.png"; sourceTree = "<group>"; };
@@ -3270,6 +3277,9 @@
 				375B46531A5EE70F00D7E74B /* StyleModifyViewController.h */,
 				375B46541A5EE70F00D7E74B /* StyleModifyViewController.m */,
 				375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */,
+				372DEA101ADCB30A0059DE27 /* MyCollectViewController.h */,
+				372DEA111ADCB30A0059DE27 /* MyCollectViewController.m */,
+				372DEA121ADCB30A0059DE27 /* MyCollectViewController.xib */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -5733,6 +5743,7 @@
 				BD5186241A5D0ED700BE508A /* icon_isauth@2x.png in Resources */,
 				BD5187501A5D0ED700BE508A /* sns_icon_24_s@2x.png in Resources */,
 				1415FA851A5CD1CB003D0C29 /* BaseAddressViewController.xib in Resources */,
+				372DEA161ADCB30A0059DE27 /* MyCollectViewController.xib in Resources */,
 				1415FA861A5CD1CB003D0C29 /* CaseIntroduceViewController.xib in Resources */,
 				BD5187281A5D0ED700BE508A /* service_normal_0@2x.png in Resources */,
 				1415FA871A5CD1CB003D0C29 /* PushMessageViewController.xib in Resources */,
@@ -5851,6 +5862,7 @@
 				BD5186A91A5D0ED700BE508A /* answer_no_data@2x.png in Resources */,
 				BD5185C71A5D0ED700BE508A /* Icon-Small@2x.png in Resources */,
 				A9C398411A29BC24006A8AAB /* ForgetViewController.xib in Resources */,
+				372DEA151ADCB30A0059DE27 /* MyCollectViewController.xib in Resources */,
 				A987EE531A2098AF00CED7CD /* WikiViewController.xib in Resources */,
 				BD5187A91A5D344D00BE508A /* icon_letter@2x.png in Resources */,
 				144354721A88860B0093C943 /* order_pay_ali@2x.png in Resources */,
@@ -6311,6 +6323,7 @@
 				1415F94F1A5CD1CB003D0C29 /* JRProfileData.m in Sources */,
 				37F0E6B61A7D1F4E004CCCB2 /* PSTGridLayoutRow.m in Sources */,
 				1415F9501A5CD1CB003D0C29 /* PublishDesignViewController.m in Sources */,
+				372DEA141ADCB30A0059DE27 /* MyCollectViewController.m in Sources */,
 				1415F9511A5CD1CB003D0C29 /* DemandEditTextViewController.m in Sources */,
 				A9C012051ABC601900DCF9C3 /* IQUIView+Hierarchy.m in Sources */,
 				375B46581A5EE75C00D7E74B /* PriceModifyViewController.m in Sources */,
@@ -6673,6 +6686,7 @@
 				A9224E281A6CB779002974ED /* UIViewController+YIFullScreenScroll.m in Sources */,
 				1FD3B8491AD8F878004E849F /* FMDatabasePool.m in Sources */,
 				A93BF29A1A2633D90070B72A /* SetPasswordViewController.m in Sources */,
+				372DEA131ADCB30A0059DE27 /* MyCollectViewController.m in Sources */,
 				A98015091AD6B23F002CB4C9 /* MallViewController.m in Sources */,
 				A987EDE51A20920500CED7CD /* UIActionSheet+Blocks.m in Sources */,
 				37F0E6301A7D1AFE004CCCB2 /* MWGridViewController.m in Sources */,
@@ -7187,7 +7201,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8ff8e1b2-afbd-40bc-9dcc-4ef6164050f4";
+				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s";
 				VERSIONING_SYSTEM = "";

@@ -548,8 +548,11 @@
         }
     }else if (type == 10 && [param.allKeys containsObject:@"tid"]){
         OrderDetailViewController *od = [[OrderDetailViewController alloc] init];
+        NSInteger tradeType = [param getIntValueForKey:@"tradeType" defaultValue:0];
+        
         JROrder *order = [[JROrder alloc] init];
         order.measureTid = [param getStringValueForKey:@"tid" defaultValue:@""];
+        order.type = tradeType - 1;
         od.order = order;
         od.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:od animated:YES];
