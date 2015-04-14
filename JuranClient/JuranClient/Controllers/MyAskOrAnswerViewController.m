@@ -157,7 +157,7 @@
         height += (indexPath.row == (_questionDatas.count - 1))?5:0;
     }else{
         JRAnswer *a = _answerDatas[indexPath.row];
-        content = a.content;
+        content = a.title;
         height += (indexPath.row == (_answerDatas.count - 1))?5:0;
     }
     return height + [content heightWithFont:[UIFont systemFontOfSize:kSystemFontSize] constrainedToWidth:290];
