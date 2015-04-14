@@ -8,8 +8,11 @@
 
 #import "MallViewController.h"
 #import "ShopHomeViewController.h"
+#import "NaviStoreListViewController.h"
 
 @interface MallViewController ()
+
+
 
 @end
 

@@ -8,7 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShopHomeViewController">
             <connections>
                 <outlet property="collectionView" destination="Fwa-Ee-GJw" id="zPG-1w-xk7"/>
+                <outlet property="gradeLabel" destination="6hQ-J6-yC2" id="A2S-lL-cuU"/>
                 <outlet property="headerView" destination="qO6-9s-ra5" id="AIb-gK-EoE"/>
+                <outlet property="nameLabel" destination="ICM-HO-2Wq" id="IxN-sG-Pjh"/>
                 <outlet property="shopLogoImageView" destination="0Yh-dW-wP2" id="UDh-ZN-6KQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

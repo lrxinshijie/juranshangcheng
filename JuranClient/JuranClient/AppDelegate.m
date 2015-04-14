@@ -135,6 +135,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [self setupShareSDK];
+    [self setupBaiduMapAPI];
 
     [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                                    UIRemoteNotificationTypeSound |
@@ -355,7 +356,7 @@
 
 - (void)setupBaiduMapAPI {
 #ifndef kJuranDesigner
-    BMKMapManager* _mapManager = [[BMKMapManager alloc]init];
+    _mapManager = [[BMKMapManager alloc]init];
     BOOL ret = [_mapManager start:kBaiduMapKey generalDelegate:nil];
     if (!ret) {
         NSLog(@"manager start failed!");
