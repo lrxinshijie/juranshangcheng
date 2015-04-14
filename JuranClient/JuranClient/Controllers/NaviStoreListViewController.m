@@ -30,7 +30,9 @@
     self.navigationItem.title = @"门店导航";
     self.navigationController.navigationBarHidden = YES;
     [_tableViewStore registerNib:[UINib nibWithNibName:@"NaviStoreCell" bundle:nil] forCellReuseIdentifier:@"NaviStoreCell"];
+    
     _locService = [[BMKLocationService alloc]init];
+    [BMKLocationService setLocationDistanceFilter:100.f];
     _locService.delegate = (id)self;
     [_locService startUserLocationService];
     _mapView.showsUserLocation = YES;//显示定位图层
@@ -45,9 +47,9 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"cityCode": @"北京市"};
+    NSDictionary *param = @{@"cityCode": @"110000"};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:@"http://54.223.161.28:8080/shop/storeList.json" parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:@"http://54.223.161.28:8080/shop/storeList.json" parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             
@@ -59,18 +61,16 @@
 {
     [_mapView viewWillAppear];
     _mapView.delegate = (id)self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+    _locService.delegate = (id)self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [_mapView viewWillDisappear];
     _mapView.delegate = nil; // 不用时，置nil
+    _locService.delegate = nil;
 }
 
-- (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
-{
-    //NSLog(@"heading is %@",userLocation.heading);
-}
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
@@ -79,6 +79,9 @@
     CLLocationCoordinate2D coor = userLocation.location.coordinate;
     _selfAnnotation.coordinate = coor;
     _selfAnnotation.title = @"你在这里";
+    _mapView.centerCoordinate = _selfAnnotation.coordinate;
+    _mapView.zoomLevel = 12;
+    [_locService stopUserLocationService];
 }
 
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
@@ -92,15 +95,15 @@
     return nil;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 10;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 38;
 }
 
@@ -117,7 +120,7 @@
 
 - (IBAction)naviLeftClick:(id)sender {
     NSLog(@"LeftClick");
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)naviRightClick:(id)sender {

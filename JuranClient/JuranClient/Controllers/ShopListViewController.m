@@ -8,6 +8,7 @@
 
 #import "ShopListViewController.h"
 #import "ShopListCell.h"
+#import "NaviStoreListViewController.h"
 
 @interface ShopListViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -41,12 +42,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ShopListCell *cell = (ShopListCell *)[tableView dequeueReusableCellWithIdentifier:@"ShopListCell"];
+    [cell.btnNavi addTarget:self action:@selector(btnNaviClick:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+- (void)btnNaviClick:(id)sender {
+    NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
+    [self.navigationController pushViewController:navi animated:YES];
+}
+
+
 
 
 @end
