@@ -19,6 +19,7 @@
 #import "CaseCollectViewController.h"
 #import "SettingsViewController.h"
 #import "OrderListViewController.h"
+#import "MyCollectViewController.h"
 
 #ifdef kJuranDesigner
 #import "RealNameAuthViewController.h"
@@ -433,6 +434,7 @@
         {
             //        我的收藏
             CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
+//            MyCollectViewController *vc = [[MyCollectViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
