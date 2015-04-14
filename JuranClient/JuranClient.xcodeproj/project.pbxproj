@@ -575,6 +575,20 @@
 		14C953AD1A2DC1B200FE6F8D /* JRSubject.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C953AC1A2DC1B200FE6F8D /* JRSubject.m */; };
 		14C953B21A2DC60B00FE6F8D /* SubjectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C953B01A2DC60B00FE6F8D /* SubjectDetailViewController.m */; };
 		14C953B31A2DC60B00FE6F8D /* SubjectDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C953B11A2DC60B00FE6F8D /* SubjectDetailViewController.xib */; };
+		14CCB2FB1ADCFEF30041AA38 /* bg-gray-down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14CCB2F81ADCFEF30041AA38 /* bg-gray-down@2x.png */; };
+		14CCB2FC1ADCFEF30041AA38 /* bg-gray-down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14CCB2F81ADCFEF30041AA38 /* bg-gray-down@2x.png */; };
+		14CCB2FD1ADCFEF30041AA38 /* icon-brandlist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14CCB2F91ADCFEF30041AA38 /* icon-brandlist@2x.png */; };
+		14CCB2FE1ADCFEF30041AA38 /* icon-brandlist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14CCB2F91ADCFEF30041AA38 /* icon-brandlist@2x.png */; };
+		14CCB2FF1ADCFEF30041AA38 /* icon-goods@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14CCB2FA1ADCFEF30041AA38 /* icon-goods@2x.png */; };
+		14CCB3001ADCFEF30041AA38 /* icon-goods@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14CCB2FA1ADCFEF30041AA38 /* icon-goods@2x.png */; };
+		14CCB3041ADD06B50041AA38 /* TopShopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CCB3021ADD06B50041AA38 /* TopShopCell.m */; };
+		14CCB3051ADD06B50041AA38 /* TopShopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CCB3021ADD06B50041AA38 /* TopShopCell.m */; };
+		14CCB3061ADD06B50041AA38 /* TopShopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14CCB3031ADD06B50041AA38 /* TopShopCell.xib */; };
+		14CCB3071ADD06B50041AA38 /* TopShopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14CCB3031ADD06B50041AA38 /* TopShopCell.xib */; };
+		14CCB30B1ADD074F0041AA38 /* TopProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CCB3091ADD074F0041AA38 /* TopProductCell.m */; };
+		14CCB30C1ADD074F0041AA38 /* TopProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14CCB3091ADD074F0041AA38 /* TopProductCell.m */; };
+		14CCB30D1ADD074F0041AA38 /* TopProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14CCB30A1ADD074F0041AA38 /* TopProductCell.xib */; };
+		14CCB30E1ADD074F0041AA38 /* TopProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14CCB30A1ADD074F0041AA38 /* TopProductCell.xib */; };
 		14D973821A32CAE400E771ED /* AskDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D973801A32CAE400E771ED /* AskDetailViewController.m */; };
 		14D973831A32CAE400E771ED /* AskDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14D973811A32CAE400E771ED /* AskDetailViewController.xib */; };
 		14D973871A32CBC000E771ED /* AnswerDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D973851A32CBC000E771ED /* AnswerDetailCell.m */; };
@@ -1927,6 +1941,15 @@
 		14C953AF1A2DC60B00FE6F8D /* SubjectDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectDetailViewController.h; sourceTree = "<group>"; };
 		14C953B01A2DC60B00FE6F8D /* SubjectDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectDetailViewController.m; sourceTree = "<group>"; };
 		14C953B11A2DC60B00FE6F8D /* SubjectDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubjectDetailViewController.xib; sourceTree = "<group>"; };
+		14CCB2F81ADCFEF30041AA38 /* bg-gray-down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-gray-down@2x.png"; sourceTree = "<group>"; };
+		14CCB2F91ADCFEF30041AA38 /* icon-brandlist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-brandlist@2x.png"; sourceTree = "<group>"; };
+		14CCB2FA1ADCFEF30041AA38 /* icon-goods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-goods@2x.png"; sourceTree = "<group>"; };
+		14CCB3011ADD06B50041AA38 /* TopShopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopShopCell.h; sourceTree = "<group>"; };
+		14CCB3021ADD06B50041AA38 /* TopShopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopShopCell.m; sourceTree = "<group>"; };
+		14CCB3031ADD06B50041AA38 /* TopShopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopShopCell.xib; sourceTree = "<group>"; };
+		14CCB3081ADD074F0041AA38 /* TopProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopProductCell.h; sourceTree = "<group>"; };
+		14CCB3091ADD074F0041AA38 /* TopProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopProductCell.m; sourceTree = "<group>"; };
+		14CCB30A1ADD074F0041AA38 /* TopProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopProductCell.xib; sourceTree = "<group>"; };
 		14D9737F1A32CAE400E771ED /* AskDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AskDetailViewController.h; sourceTree = "<group>"; };
 		14D973801A32CAE400E771ED /* AskDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AskDetailViewController.m; sourceTree = "<group>"; };
 		14D973811A32CAE400E771ED /* AskDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AskDetailViewController.xib; sourceTree = "<group>"; };
@@ -3348,6 +3371,16 @@
 			name = Subject;
 			sourceTree = "<group>";
 		};
+		14CCB2F71ADCFEF30041AA38 /* Mall */ = {
+			isa = PBXGroup;
+			children = (
+				14CCB2F81ADCFEF30041AA38 /* bg-gray-down@2x.png */,
+				14CCB2F91ADCFEF30041AA38 /* icon-brandlist@2x.png */,
+				14CCB2FA1ADCFEF30041AA38 /* icon-goods@2x.png */,
+			);
+			path = Mall;
+			sourceTree = "<group>";
+		};
 		14EDB3891A3B4F9A00E5AC77 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -4492,6 +4525,12 @@
 				2C91E9141ADB790C00B542DC /* NaviStoreCell.h */,
 				2C91E9151ADB790C00B542DC /* NaviStoreCell.m */,
 				2C91E9161ADB790C00B542DC /* NaviStoreCell.xib */,
+				14CCB3011ADD06B50041AA38 /* TopShopCell.h */,
+				14CCB3021ADD06B50041AA38 /* TopShopCell.m */,
+				14CCB3031ADD06B50041AA38 /* TopShopCell.xib */,
+				14CCB3081ADD074F0041AA38 /* TopProductCell.h */,
+				14CCB3091ADD074F0041AA38 /* TopProductCell.m */,
+				14CCB30A1ADD074F0041AA38 /* TopProductCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -4774,6 +4813,7 @@
 		BD5184CF1A5D0ED600BE508A /* JuranCustomer */ = {
 			isa = PBXGroup;
 			children = (
+				14CCB2F71ADCFEF30041AA38 /* Mall */,
 				2C91E8FB1ADB746F00B542DC /* Navi */,
 				140C9ECC1ADB630C0079391A /* Root */,
 				14BCD78C1A8605B400825A90 /* Order */,
@@ -5242,7 +5282,7 @@
 		A971BC891A20825800C018D6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = Juran;
 				TargetAttributes = {
 					1415F9361A5CD1CB003D0C29 = {
@@ -5363,6 +5403,7 @@
 				BD51877C1A5D0ED700BE508A /* nav-case-active@2x.png in Resources */,
 				BD5186EA1A5D0ED700BE508A /* publish_point_selected@2x.png in Resources */,
 				BD5187321A5D0ED700BE508A /* service_normal_3@2x.png in Resources */,
+				14CCB30E1ADD074F0041AA38 /* TopProductCell.xib in Resources */,
 				1415FA3C1A5CD1CB003D0C29 /* BindMailViewController.xib in Resources */,
 				BD5186541A5D0ED700BE508A /* login-icon-account@2x.png in Resources */,
 				1415FA3D1A5CD1CB003D0C29 /* FilterViewController.xib in Resources */,
@@ -5401,6 +5442,7 @@
 				1415FA481A5CD1CB003D0C29 /* UploadCardImageViewController.xib in Resources */,
 				BD5185FA1A5D0ED700BE508A /* icon-filter-default@2x.png in Resources */,
 				BD5187601A5D0ED700BE508A /* tabbar_demands@2x.png in Resources */,
+				14CCB3001ADCFEF30041AA38 /* icon-goods@2x.png in Resources */,
 				A932326F1A61AC2E00C85AE7 /* iTunesArtwork in Resources */,
 				1415FA491A5CD1CB003D0C29 /* SubjectViewController.xib in Resources */,
 				BD51876A1A5D0ED700BE508A /* tabbar_personal_hl-1@2x.png in Resources */,
@@ -5439,6 +5481,7 @@
 				BD5185E41A5D0ED700BE508A /* case_icon_collect@2x.png in Resources */,
 				BD5186B61A5D0ED700BE508A /* icon_ camera@2x.png in Resources */,
 				14321E611A61235B0065E8C3 /* CaseImagePreviewViewController.xib in Resources */,
+				14CCB3071ADD06B50041AA38 /* TopShopCell.xib in Resources */,
 				37DBFA561A8A3433003749E8 /* OrderPhotoBrowserViewController.xib in Resources */,
 				1415FA561A5CD1CB003D0C29 /* JRServiceViewController.xib in Resources */,
 				A945252D1AA5F9BE002DFA2A /* order_filter@2x.png in Resources */,
@@ -5446,6 +5489,7 @@
 				3721D0991AA23089008ADB34 /* ContractPreviewViewController.xib in Resources */,
 				BD5187141A5D0ED700BE508A /* service_highlighted_11@2x.png in Resources */,
 				BD51862A1A5D0ED700BE508A /* look_count@2x.png in Resources */,
+				14CCB2FE1ADCFEF30041AA38 /* icon-brandlist@2x.png in Resources */,
 				BD51873E1A5D0ED700BE508A /* service_normal_9@2x.png in Resources */,
 				37D679741A60188200C6DFAC /* icon_circle_unselected@2x.png in Resources */,
 				140C9EC61ADB5DAD0079391A /* icon-nav-profile-active@2x.png in Resources */,
@@ -5603,6 +5647,7 @@
 				BD5186FE1A5D0ED700BE508A /* menu_answer_select@2x.png in Resources */,
 				3756351C1A60E6FF00D120C8 /* icon_followed@2x.png in Resources */,
 				1415FA711A5CD1CB003D0C29 /* CaseCell.xib in Resources */,
+				14CCB2FC1ADCFEF30041AA38 /* bg-gray-down@2x.png in Resources */,
 				BD5186881A5D0ED700BE508A /* icon_personal_guanzhu@2x.png in Resources */,
 				1415FA721A5CD1CB003D0C29 /* SubjectDetailViewController.xib in Resources */,
 				1415FA731A5CD1CB003D0C29 /* DesignerDetailViewController.xib in Resources */,
@@ -5924,6 +5969,7 @@
 				BD5187431A5D0ED700BE508A /* image_quality_selected@2x.png in Resources */,
 				BD5187A51A5D344D00BE508A /* icon_bid@2x.png in Resources */,
 				140C9EC71ADB5DAD0079391A /* icon-nav-profile@2x.png in Resources */,
+				14CCB2FB1ADCFEF30041AA38 /* bg-gray-down@2x.png in Resources */,
 				14610C6E1A39D2F9008A52C7 /* QuestionDetailViewController.xib in Resources */,
 				37D18DA91A56CD7F00B41048 /* CaseManagementCell.xib in Resources */,
 				1476DA921A21DB850006E9E0 /* DesignerCell.xib in Resources */,
@@ -5967,6 +6013,7 @@
 				BD5186851A5D0ED700BE508A /* icon_personal_demands@2x.png in Resources */,
 				BD5187411A5D0ED700BE508A /* icon_mobile@2x.png in Resources */,
 				BD51864F1A5D0ED700BE508A /* login-bg@2x.png in Resources */,
+				14CCB3061ADD06B50041AA38 /* TopShopCell.xib in Resources */,
 				A971BC9F1A20825800C018D6 /* InfoPlist.strings in Resources */,
 				BD5185F51A5D0ED700BE508A /* icon-eye@2x.png in Resources */,
 				BD5185C91A5D0ED700BE508A /* Icon.png in Resources */,
@@ -6009,6 +6056,7 @@
 				371FBEF71A6A394B00635D3D /* icon_video_play@2x.png in Resources */,
 				BD5186CF1A5D0ED700BE508A /* question_wati_resolve@2x.png in Resources */,
 				BD5185EB1A5D0ED700BE508A /* case_icon_sixin@2x.png in Resources */,
+				14CCB2FD1ADCFEF30041AA38 /* icon-brandlist@2x.png in Resources */,
 				1F2D4FFF1AD77F9E005486D2 /* moveLine@2x.png in Resources */,
 				37DBEECF1AA8A21D00B485A8 /* look_image@2x.png in Resources */,
 				140C9ED41ADB630C0079391A /* icon-search@2x.png in Resources */,
@@ -6022,6 +6070,7 @@
 				BD5186151A5D0ED700BE508A /* default_case@2x.png in Resources */,
 				1456C8931A5E22750061F0FD /* BidListViewController.xib in Resources */,
 				14FE2DE81A38313800B31FBA /* PrivateMessageCell.xib in Resources */,
+				14CCB30D1ADD074F0041AA38 /* TopProductCell.xib in Resources */,
 				BD51861D1A5D0ED700BE508A /* icon-designer-badge2@2x.png in Resources */,
 				A945252C1AA5F9BE002DFA2A /* order_filter@2x.png in Resources */,
 				A911009E1A9B5FF500F75AF5 /* OrderFilterViewController.xib in Resources */,
@@ -6192,6 +6241,7 @@
 				14D973831A32CAE400E771ED /* AskDetailViewController.xib in Resources */,
 				BD5187371A5D0ED700BE508A /* service_normal_6@2x.png in Resources */,
 				14321E671A6125F70065E8C3 /* case_edit_delete@2x.png in Resources */,
+				14CCB2FF1ADCFEF30041AA38 /* icon-goods@2x.png in Resources */,
 				BD51875B1A5D0ED700BE508A /* tabbar_case@2x.png in Resources */,
 				BD5186731A5D0ED700BE508A /* chat_sender_bg@2x.png in Resources */,
 				BD51870D1A5D0ED700BE508A /* menu_topic_select@2x.png in Resources */,
@@ -6315,6 +6365,7 @@
 				1415F9631A5CD1CB003D0C29 /* SubjectDetailViewController.m in Sources */,
 				1415F9641A5CD1CB003D0C29 /* SubjectViewController.m in Sources */,
 				1415F9651A5CD1CB003D0C29 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
+				14CCB30C1ADD074F0041AA38 /* TopProductCell.m in Sources */,
 				14BCD7891A85DFFB00825A90 /* OrderCell.m in Sources */,
 				1415F9661A5CD1CB003D0C29 /* SerciceDetailViewController.m in Sources */,
 				37F0E63D1A7D1AFE004CCCB2 /* DACircularProgressView.m in Sources */,
@@ -6404,6 +6455,7 @@
 				A94525261AA5ED1F002DFA2A /* RSADataSigner.m in Sources */,
 				37DA110B1A8CDDCC00BC71A6 /* OrderCommentReadViewController.m in Sources */,
 				1415F99E1A5CD1CB003D0C29 /* AnswerCell.m in Sources */,
+				14CCB3051ADD06B50041AA38 /* TopShopCell.m in Sources */,
 				1415F99F1A5CD1CB003D0C29 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				1415F9A01A5CD1CB003D0C29 /* AccountSecurityViewController.m in Sources */,
 				1415F9A11A5CD1CB003D0C29 /* JSONHTTPClient.m in Sources */,
@@ -6632,6 +6684,7 @@
 				144354791A8892690093C943 /* OrderPriceViewController.m in Sources */,
 				A987EDED1A20920500CED7CD /* UIImageView+Block.m in Sources */,
 				14321E6E1A612E6A0065E8C3 /* CaseEditStyleViewController.m in Sources */,
+				14CCB3041ADD06B50041AA38 /* TopShopCell.m in Sources */,
 				37F0E6A31A7D1F4E004CCCB2 /* PSTCollectionViewCell.m in Sources */,
 				14FE2E561A38549200B31FBA /* PrivateMessageDetailViewController.m in Sources */,
 				A9D654B31A27642800A80253 /* JSONAPI.m in Sources */,
@@ -6902,6 +6955,7 @@
 				14D9738F1A334C4F00E771ED /* PushMessageViewController.m in Sources */,
 				A9224E321A6CB829002974ED /* ViewUtils.m in Sources */,
 				141C564D1A23613900A57971 /* TATopicCell.m in Sources */,
+				14CCB30B1ADD074F0041AA38 /* TopProductCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6955,7 +7009,6 @@
 		1415FA8F1A5CD1CB003D0C29 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -6996,7 +7049,7 @@
 				);
 				PRODUCT_NAME = JuranDesigner;
 				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -7004,7 +7057,6 @@
 		1415FA901A5CD1CB003D0C29 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -7045,7 +7097,7 @@
 				);
 				PRODUCT_NAME = JuranDesigner;
 				PROVISIONING_PROFILE = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -7125,7 +7177,6 @@
 		A971BCBE1A20825800C018D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7159,11 +7210,12 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/UMAnalytics",
 					"$(PROJECT_DIR)/JuranClient/Vendors/AlipaySDK",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv64";
 				VERSIONING_SYSTEM = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -7172,7 +7224,6 @@
 		A971BCBF1A20825800C018D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7210,7 +7261,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7 armv64";
 				VERSIONING_SYSTEM = "";
 				WRAPPER_EXTENSION = app;
 			};

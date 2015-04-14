@@ -14,8 +14,11 @@
 - (BOOL)checkLogin;
 
 
+- (void)configureCityTitle:(NSString *)title;
 - (void)configureMenu;
 - (void)configureSearch;
+- (void)configureScan;
+- (void)configureSearchAndMore;
 - (void)showMenu;
 
 @end

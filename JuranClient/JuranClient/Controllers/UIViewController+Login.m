@@ -47,9 +47,44 @@
 #endif
 }
 
-//- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
-//    return YES;
-//}
+- (void)configureCityTitle:(NSString *)title{
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, 30)];
+    UILabel *titleLabel = [titleView labelWithFrame:CGRectMake(0, 0, 40, 30) text:title textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:13]];
+    UIButton *cityButton = [titleView buttonWithFrame:CGRectMake(46, 0, 74, 30) target:self action:@selector(onCity:) title:@"北京市" backgroundImage:[UIImage imageNamed:@"bg-gray-down"]];
+    cityButton.titleEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
+    cityButton.titleLabel.font = [UIFont systemFontOfSize:13];
+    [cityButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [titleView addSubview:cityButton];
+    [titleView addSubview:titleLabel];
+    self.navigationItem.titleView = titleView;
+}
+
+- (void)onCity:(UIButton *)btn{
+    
+}
+
+
+- (void)configureScan{
+    [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"icon-scan"] leftBarButtonItemAction:@selector(onScan)];
+}
+
+- (void)configureSearchAndMore{
+    UIButton *searchButton = [self.view buttonWithFrame:CGRectMake(0, 0, 35, 35) target:self action:@selector(onSearch) image:[UIImage imageNamed:@"icon-search"]];
+    UIButton *moreButton = [self.view buttonWithFrame:CGRectMake(35, 0, 35, 35) target:self action:@selector(onMore) image:[UIImage imageNamed:@"icon-dot"]];
+    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 70, 35)];
+    [rightView addSubview:searchButton];
+    [rightView addSubview:moreButton];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightView];
+}
+
+- (void)onScan{
+    
+}
+
+- (void)onMore{
+    
+}
 
 - (void)configureSearch{
     [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
