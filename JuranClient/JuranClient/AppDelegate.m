@@ -38,6 +38,10 @@
 #import <BaiduMapAPI/BMKMapManager.h>
 #endif
 
+#ifndef kJuranVersion12
+//#define kJuranVersion12
+#endif
+
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
 
@@ -251,30 +255,31 @@
 #else
 
 - (void)setupTabbar{
-//    RootViewController *cs = [[RootViewController alloc] init];
-//    UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
-//    csNav.tabBarItem = [self setupTabbarItemTitle:@"首页" image:@"icon-nav-home" selected:@"icon-nav-home-active"];
-//    
-//    FitmentViewController *des = [[FitmentViewController alloc] init];
-//    UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
-//    desNav.tabBarItem = [self setupTabbarItemTitle:@"家装" image:@"icon-nav-finish" selected:@"icon-nav-finish-active"];
-//    
-//    MallViewController *topic = [[MallViewController alloc] init];
-//    UINavigationController *topicNav = [Public navigationControllerFromRootViewController:topic];
-//    topicNav.tabBarItem = [self setupTabbarItemTitle:@"商城" image:@"icon-nav-mall" selected:@"icon-nav-mall-active"];
-//    
-//    DiscoverViewController *publish = [[DiscoverViewController alloc] init];
-//    UINavigationController *publishNav = [Public navigationControllerFromRootViewController:publish];
-//    publishNav.tabBarItem = [self setupTabbarItemTitle:@"发现" image:@"icon-nav-explore" selected:@"icon-nav-explore-active"];
-//    
-//    ProfileViewController *profile = [[ProfileViewController alloc] init];
-//    UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
-//    profileNav.tabBarItem = [self setupTabbarItemTitle:@"我" image:@"icon-nav-profile" selected:@"icon-nav-profile-active"];
-//    
-//    self.tabBarController = [[UITabBarController alloc] init];
-//    _tabBarController.viewControllers = @[csNav,desNav,topicNav,publishNav,profileNav];
-//    self.window.rootViewController = _tabBarController;
+#ifndef kJuranVersion12
+    RootViewController *cs = [[RootViewController alloc] init];
+    UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
+    csNav.tabBarItem = [self setupTabbarItemTitle:@"首页" image:@"icon-nav-home" selected:@"icon-nav-home-active"];
     
+    FitmentViewController *des = [[FitmentViewController alloc] init];
+    UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
+    desNav.tabBarItem = [self setupTabbarItemTitle:@"家装" image:@"icon-nav-finish" selected:@"icon-nav-finish-active"];
+    
+    MallViewController *topic = [[MallViewController alloc] init];
+    UINavigationController *topicNav = [Public navigationControllerFromRootViewController:topic];
+    topicNav.tabBarItem = [self setupTabbarItemTitle:@"商城" image:@"icon-nav-mall" selected:@"icon-nav-mall-active"];
+    
+    DiscoverViewController *publish = [[DiscoverViewController alloc] init];
+    UINavigationController *publishNav = [Public navigationControllerFromRootViewController:publish];
+    publishNav.tabBarItem = [self setupTabbarItemTitle:@"发现" image:@"icon-nav-explore" selected:@"icon-nav-explore-active"];
+    
+    ProfileViewController *profile = [[ProfileViewController alloc] init];
+    UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
+    profileNav.tabBarItem = [self setupTabbarItemTitle:@"我" image:@"icon-nav-profile" selected:@"icon-nav-profile-active"];
+    
+    self.tabBarController = [[UITabBarController alloc] init];
+    _tabBarController.viewControllers = @[csNav,desNav,topicNav,publishNav,profileNav];
+    self.window.rootViewController = _tabBarController;
+#else
     
     CaseViewController *cs = [[CaseViewController alloc] init];
     cs.isHome = YES;
@@ -301,6 +306,7 @@
     self.tabBarController = [[UITabBarController alloc] init];
     _tabBarController.viewControllers = @[csNav,topicNav,publishNav,desNav,profileNav];
     self.window.rootViewController = _tabBarController;
+#endif
 }
 #endif
 

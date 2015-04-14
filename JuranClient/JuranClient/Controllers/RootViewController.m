@@ -36,27 +36,8 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav_logo"]];
     
-    [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"icon-scan"] leftBarButtonItemAction:@selector(onScan)];
-    
-    UIButton *searchButton = [self.view buttonWithFrame:CGRectMake(0, 0, 35, 35) target:self action:@selector(onSearch) image:[UIImage imageNamed:@"icon-search"]];
-    UIButton *moreButton = [self.view buttonWithFrame:CGRectMake(35, 0, 35, 35) target:self action:@selector(onMore) image:[UIImage imageNamed:@"icon-dot"]];
-    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 70, 35)];
-    [rightView addSubview:searchButton];
-    [rightView addSubview:moreButton];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightView];
-}
-
-- (void)onScan{
-    //TODO: 扫一扫入口
-}
-
-- (void)onSearch{
-    
-}
-
-- (void)onMore{
-    
+    [self configureScan];
+    [self configureSearchAndMore];
 }
 
 - (void)didReceiveMemoryWarning {
