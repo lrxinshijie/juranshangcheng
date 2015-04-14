@@ -16,7 +16,8 @@
 #import "JRWebViewController.h"
 
 
-@interface RootViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate>
+@interface RootViewController ()
+//<UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
