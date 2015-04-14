@@ -39,6 +39,7 @@
     _locService = [[BMKLocationService alloc]init];
     _locService.delegate = (id)self;
     [_locService startUserLocationService];
+    [self loadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,5 +64,17 @@
 {
     [_mapView viewWillDisappear];
     _mapView.delegate = nil; // 不用时，置nil
+}
+
+- (void)loadData{
+    NSDictionary *param = @{@"storeCode": [NSString stringWithFormat:@"%d",1001],
+                            };
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:@"http://54.223.161.28:8080/shop/platformCustomerService.json" parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            
+        }
+    }];
 }
 @end

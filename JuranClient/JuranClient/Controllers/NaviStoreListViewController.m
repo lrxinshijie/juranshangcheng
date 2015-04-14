@@ -36,11 +36,23 @@
     _mapView.showsUserLocation = YES;//显示定位图层
     _selfAnnotation = [[BMKPointAnnotation alloc]init];
     [_mapView addAnnotation:_selfAnnotation];
+    [self loadData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadData{
+    NSDictionary *param = @{@"cityCode": @"北京市"};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:@"http://54.223.161.28:8080/shop/storeList.json" parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            
+        }
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -105,6 +117,7 @@
 
 - (IBAction)naviLeftClick:(id)sender {
     NSLog(@"LeftClick");
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)naviRightClick:(id)sender {

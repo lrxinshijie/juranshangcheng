@@ -646,6 +646,13 @@
 		1FD3B84B1AD8F878004E849F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8461AD8F878004E849F /* FMResultSet.m */; };
 		1FD3B84F1AD8FB58004E849F /* TestSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */; };
 		1FD3B8501AD8FB58004E849F /* TestSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3B84E1AD8FB58004E849F /* TestSearchViewController.xib */; };
+		2C602C741ADCE6FD0037105E /* ShopListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C721ADCE6FD0037105E /* ShopListViewController.m */; };
+		2C602C751ADCE6FD0037105E /* ShopListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C731ADCE6FD0037105E /* ShopListViewController.xib */; };
+		2C602C791ADCEA960037105E /* ShopListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C771ADCEA950037105E /* ShopListCell.m */; };
+		2C602C7A1ADCEA960037105E /* ShopListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C781ADCEA950037105E /* ShopListCell.xib */; };
+		2C602C7D1ADCED230037105E /* shoplist-image-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C7C1ADCED230037105E /* shoplist-image-bg@2x.png */; };
+		2C602C801ADCEE820037105E /* shoplist-icon-level@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C7E1ADCEE820037105E /* shoplist-icon-level@2x.png */; };
+		2C602C811ADCEE820037105E /* shoplist-navi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C7F1ADCEE820037105E /* shoplist-navi@2x.png */; };
 		2C91E8E51ADB63C200B542DC /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C91E8E41ADB63C200B542DC /* BaiduMapAPI.framework */; };
 		2C91E8E81ADB64CF00B542DC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C91E8E61ADB647900B542DC /* CoreLocation.framework */; };
 		2C91E8E91ADB64D700B542DC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1441A19E1A29E463004A038E /* QuartzCore.framework */; };
@@ -2021,6 +2028,15 @@
 		1FD3B84C1AD8FB58004E849F /* TestSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSearchViewController.h; sourceTree = "<group>"; };
 		1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSearchViewController.m; sourceTree = "<group>"; };
 		1FD3B84E1AD8FB58004E849F /* TestSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestSearchViewController.xib; sourceTree = "<group>"; };
+		2C602C711ADCE6FD0037105E /* ShopListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopListViewController.h; sourceTree = "<group>"; };
+		2C602C721ADCE6FD0037105E /* ShopListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopListViewController.m; sourceTree = "<group>"; };
+		2C602C731ADCE6FD0037105E /* ShopListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopListViewController.xib; sourceTree = "<group>"; };
+		2C602C761ADCEA950037105E /* ShopListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopListCell.h; sourceTree = "<group>"; };
+		2C602C771ADCEA950037105E /* ShopListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopListCell.m; sourceTree = "<group>"; };
+		2C602C781ADCEA950037105E /* ShopListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopListCell.xib; sourceTree = "<group>"; };
+		2C602C7C1ADCED230037105E /* shoplist-image-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shoplist-image-bg@2x.png"; path = "Shop/shoplist-image-bg@2x.png"; sourceTree = "<group>"; };
+		2C602C7E1ADCEE820037105E /* shoplist-icon-level@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shoplist-icon-level@2x.png"; path = "Shop/shoplist-icon-level@2x.png"; sourceTree = "<group>"; };
+		2C602C7F1ADCEE820037105E /* shoplist-navi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shoplist-navi@2x.png"; path = "Shop/shoplist-navi@2x.png"; sourceTree = "<group>"; };
 		2C91E8E41ADB63C200B542DC /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI.framework; path = BaiduMapAPI/BaiduMapAPI.framework; sourceTree = "<group>"; };
 		2C91E8E61ADB647900B542DC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2C91E8EA1ADB64DF00B542DC /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -3515,6 +3531,16 @@
 			path = FMDB;
 			sourceTree = "<group>";
 		};
+		2C602C7B1ADCECF10037105E /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				2C602C7E1ADCEE820037105E /* shoplist-icon-level@2x.png */,
+				2C602C7F1ADCEE820037105E /* shoplist-navi@2x.png */,
+				2C602C7C1ADCED230037105E /* shoplist-image-bg@2x.png */,
+			);
+			name = Shop;
+			sourceTree = "<group>";
+		};
 		2C91E8E31ADB63AA00B542DC /* BaiduMapAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -3717,6 +3743,9 @@
 				37F491EA1AD94C6D0068A99B /* ShopHomeViewController.h */,
 				37F491EB1AD94C6D0068A99B /* ShopHomeViewController.m */,
 				37F491EC1AD94C6D0068A99B /* ShopHomeViewController.xib */,
+				2C602C711ADCE6FD0037105E /* ShopListViewController.h */,
+				2C602C721ADCE6FD0037105E /* ShopListViewController.m */,
+				2C602C731ADCE6FD0037105E /* ShopListViewController.xib */,
 			);
 			name = Shop;
 			sourceTree = "<group>";
@@ -4482,6 +4511,9 @@
 				2C91E9141ADB790C00B542DC /* NaviStoreCell.h */,
 				2C91E9151ADB790C00B542DC /* NaviStoreCell.m */,
 				2C91E9161ADB790C00B542DC /* NaviStoreCell.xib */,
+				2C602C761ADCEA950037105E /* ShopListCell.h */,
+				2C602C771ADCEA950037105E /* ShopListCell.m */,
+				2C602C781ADCEA950037105E /* ShopListCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -4764,6 +4796,7 @@
 		BD5184CF1A5D0ED600BE508A /* JuranCustomer */ = {
 			isa = PBXGroup;
 			children = (
+				2C602C7B1ADCECF10037105E /* Shop */,
 				2C91E8FB1ADB746F00B542DC /* Navi */,
 				140C9ECC1ADB630C0079391A /* Root */,
 				14BCD78C1A8605B400825A90 /* Order */,
@@ -5748,6 +5781,7 @@
 				3710D5AF1A557DF00028D32A /* RealNameAuthViewController.xib in Resources */,
 				A9A4E35D1A62C46D00BB9F68 /* Icon-Small-50.png in Resources */,
 				37A0F80B1A6B856100611760 /* ActivityViewController.xib in Resources */,
+				2C602C751ADCE6FD0037105E /* ShopListViewController.xib in Resources */,
 				BD51861F1A5D0ED700BE508A /* icon-designer-id@2x.png in Resources */,
 				37F2176E1AA0A4EB00664DB4 /* order_call_disable@2x.png in Resources */,
 				2C91E9101ADB754400B542DC /* icon-map-node@2x.png in Resources */,
@@ -5793,6 +5827,7 @@
 				A987EE491A20986100CED7CD /* CaseViewController.xib in Resources */,
 				BD51876B1A5D0ED700BE508A /* tabbar_personal_hl@2x.png in Resources */,
 				BD51877B1A5D0ED700BE508A /* nav-case-active@2x.png in Resources */,
+				2C602C7A1ADCEA960037105E /* ShopListCell.xib in Resources */,
 				BD5186E91A5D0ED700BE508A /* publish_point_selected@2x.png in Resources */,
 				BD5187311A5D0ED700BE508A /* service_normal_3@2x.png in Resources */,
 				14587E201A35DD4300D41236 /* BindMailViewController.xib in Resources */,
@@ -5828,6 +5863,7 @@
 				BD5186ED1A5D0ED700BE508A /* request_reviewing@2x.png in Resources */,
 				37D18DAE1A5819F300B41048 /* CaseImageManagemanetViewController.xib in Resources */,
 				14FBC9E11A495143000A789C /* arrow@2x.png in Resources */,
+				2C602C7D1ADCED230037105E /* shoplist-image-bg@2x.png in Resources */,
 				BD5186951A5D0ED700BE508A /* icon_personal_zhgl@2x.png in Resources */,
 				37F491EE1AD94C6D0068A99B /* ShopHomeViewController.xib in Resources */,
 				37D010121A566AF900EC658D /* UploadCardImageViewController.xib in Resources */,
@@ -5840,6 +5876,7 @@
 				BD30494F1A8C957300B3C88F /* order_point_unselected@2x.png in Resources */,
 				BD5186B11A5D0ED700BE508A /* filter_kind@2x.png in Resources */,
 				14646DB21A3C76D000E5D6F6 /* BidDesignerCell.xib in Resources */,
+				2C602C811ADCEE820037105E /* shoplist-navi@2x.png in Resources */,
 				BD5186471A5D0ED700BE508A /* check-off@2x.png in Resources */,
 				37F491F31AD954460068A99B /* ShopCell.xib in Resources */,
 				14587E111A35D5E300D41236 /* DetailAddressViewController.xib in Resources */,
@@ -6018,12 +6055,12 @@
 				BD51876D1A5D0ED700BE508A /* tabbar_subject@2x.png in Resources */,
 				BD5186E11A5D0ED700BE508A /* publish_image_default@2x.png in Resources */,
 				140C9EC31ADB5DAD0079391A /* icon-nav-mall@2x.png in Resources */,
-				2C91E8EF1ADB654900B542DC /* mapapi.bundle in Resources */,
 				BD5186431A5D0ED700BE508A /* guide_h_2@2x.png in Resources */,
 				BD51868D1A5D0ED700BE508A /* icon_personal_msg@2x.png in Resources */,
 				BD51865D1A5D0ED700BE508A /* login-icon-tencent@2x.png in Resources */,
 				A9A0672A1A3D92F70059D73B /* ZYQAssetPicker.Bundle in Resources */,
 				BD5186DF1A5D0ED700BE508A /* publish_designer_top@2x.png in Resources */,
+				2C602C801ADCEE820037105E /* shoplist-icon-level@2x.png in Resources */,
 				BD51867D1A5D0ED700BE508A /* empty_privateletter@2x.png in Resources */,
 				BD5185CF1A5D0ED700BE508A /* ad_page_action@2x.png in Resources */,
 				BD51863F1A5D0ED700BE508A /* guide_3@2x.png in Resources */,
@@ -6762,6 +6799,7 @@
 				141A1D3B1A2CC09600C073C5 /* AskOrAnswerCell.m in Sources */,
 				37D3EADF1A52FF330091B3BB /* PushMsgDetailViewController.m in Sources */,
 				1FD3B8391AD8F83E004E849F /* DatabaseItem.m in Sources */,
+				2C602C791ADCEA960037105E /* ShopListCell.m in Sources */,
 				2C91E8F41ADB682900B542DC /* NaviStoreListViewController.m in Sources */,
 				A93BF2951A262A290070B72A /* ServiceViewController.m in Sources */,
 				14EDB3921A3B519000E5AC77 /* VersionInfoViewController.m in Sources */,
@@ -6793,6 +6831,7 @@
 				147395AE1A4E634E00CB34E7 /* JRPageControl.m in Sources */,
 				A987EE211A20928B00CED7CD /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				14D973821A32CAE400E771ED /* AskDetailViewController.m in Sources */,
+				2C602C741ADCE6FD0037105E /* ShopListViewController.m in Sources */,
 				A987EDD71A20920500CED7CD /* ASAlertView.m in Sources */,
 				A987EDE01A20920500CED7CD /* NSDictionary+ASCategory.m in Sources */,
 				A9C012021ABC601900DCF9C3 /* IQNSArray+Sort.m in Sources */,
