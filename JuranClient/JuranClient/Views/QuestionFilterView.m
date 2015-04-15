@@ -74,10 +74,12 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView = [self tableViewWithFrame:CGRectMake(0, 108, kWindowWidth, CGRectGetHeight(self.viewController.view.frame)-44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+        UINavigationController *nav = self.viewController.navigationController;
+        CGRect frame = [self convertRect:self.frame toView:nav.view];
+        self.tableView = [self tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(frame), kWindowWidth, CGRectGetHeight(nav.view.frame) - CGRectGetMaxY(frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
         _tableView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8];
         _tableView.hidden = YES;
-        UINavigationController *nav = self.viewController.navigationController;
+        
         [nav.view addSubview:_tableView];
         UIView *bgView = [[UIView alloc] initWithFrame:self.tableView.bounds];
         bgView.backgroundColor = [UIColor clearColor];

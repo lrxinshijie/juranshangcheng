@@ -9,6 +9,10 @@
 #import "DiscoverViewController.h"
 #import "JRSegmentControl.h"
 
+#import "SubjectCell.h"
+#import "JRSubject.h"
+#import "SubjectDetailViewController.h"
+
 #import "NewQuestionViewController.h"
 #import "QuestionFilterView.h"
 #import "JRQuestion.h"
@@ -20,6 +24,8 @@
 #import "JRWiki.h"
 #import "WikiCell.h"
 
+
+
 @interface DiscoverViewController ()<JRSegmentControlDelegate,UITableViewDataSource, UITableViewDelegate, QuestionFilterViewDelegate, WikiFilterViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -30,6 +36,7 @@
 
 @property (nonatomic, strong) NSMutableDictionary *wikiFilterData;
 @property (nonatomic, strong) UINavigationController *wikiFilterViewNav;
+@property (nonatomic, strong) IBOutlet UIButton *wikiFilterButton;
 
 @property (nonatomic, strong) QuestionFilterView *quesgtionFilterView;
 @property (nonatomic, strong) NSMutableDictionary *questionFilterData;
@@ -70,6 +77,11 @@
     _quesgtionFilterView.delegate = self;
     [_questionHeaderView addSubview:_quesgtionFilterView];
     
+    UIView *view = [_questionHeaderView viewWithTag:1100];
+    view.layer.cornerRadius = 2.f;
+    view.layer.borderWidth = 1.f;
+    view.layer.borderColor = RGBColor(14, 101, 180).CGColor;
+    
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -86,8 +98,6 @@
     }];
     
     _emptyView.hidden = YES;
-    _emptyView.center = _tableView.center;
-    [self.view addSubview:_emptyView];
 }
 
 - (void)recieveReloadNotification:(NSNotification*)noti{
@@ -101,7 +111,7 @@
 
 - (NSString *)urlString{
     if (_segment.selectedIndex == 0) {
-        
+        return JR_SUBJECT_LIST;
     }else if (_segment.selectedIndex == 1){
         return JR_GET_KNOWLEDGE_LIST;
     }else if (_segment.selectedIndex == 2){
@@ -114,7 +124,7 @@
 
 - (NSDictionary*)filterData{
     if (_segment.selectedIndex == 0) {
-        
+        return @{@"subjectScope": @"2"};
     }else if (_segment.selectedIndex == 1){
         return self.wikiFilterData;
     }else if (_segment.selectedIndex == 2){
@@ -128,13 +138,11 @@
 - (void)loadData{
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": kOnePageCount}];
     [param addEntriesFromDictionary:[self filterData]];
-    [self showHUD];
     [[ALEngine shareEngine] pathURL:[self urlString] parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
         if (!error) {
             NSMutableArray *rows = nil;
             if (_segment.selectedIndex == 0) {
-                
+                rows = [JRSubject buildUpWithValue:[data objectForKey:@"infoSubjectRespList"]];
             }else if (_segment.selectedIndex == 1){
                 rows = [JRWiki buildUpWithValue:[data objectForKey:@"knowledgeList"]];
             }else if (_segment.selectedIndex == 2){
@@ -163,16 +171,19 @@
         [_datas removeAllObjects];
         [_tableView reloadData];
     }
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (index == 0) {
-        
+        _tableView.tableHeaderView = nil;
     }else if (index == 1){
         _tableView.tableHeaderView = nil;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }else if (index == 2){
         _tableView.tableHeaderView = _questionHeaderView;
         
     }else if (index == 3){
         
     }
+    _wikiFilterButton.hidden = index != 1;
     [_tableView headerBeginRefreshing];
 }
 
@@ -184,7 +195,19 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_segment.selectedIndex == 0) {
+        static NSString *CellIdentifier = @"SubjectCell";
+        SubjectCell *cell = (SubjectCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+            cell = (SubjectCell *)[nibs firstObject];
+        }
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        JRSubject *c = [_datas objectAtIndex:indexPath.row];
+        [cell fillCellWithSubject:c];
+        
+        return cell;
     }else if (_segment.selectedIndex == 1){
         static NSString *CellIdentifier = @"WikiCell";
         WikiCell *cell = (WikiCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -221,7 +244,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_segment.selectedIndex == 0) {
-        
+        return 170;
     }else if (_segment.selectedIndex == 1){
         return 80;
     }else if (_segment.selectedIndex == 2){
@@ -236,7 +259,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_segment.selectedIndex == 0) {
-        
+        SubjectDetailViewController *detail = [[SubjectDetailViewController alloc] init];
+        detail.hidesBottomBarWhenPushed = YES;
+        JRSubject *c = [_datas objectAtIndex:indexPath.row];
+        detail.subject = c;
+        [self.navigationController pushViewController:detail animated:YES];
     }else if (_segment.selectedIndex == 1){
         WikiDetailViewController *vc = [[WikiDetailViewController alloc] init];
         JRWiki *wiki = [_datas objectAtIndex:indexPath.row];
@@ -267,11 +294,16 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (IBAction)onWikiFilter:(id)sender{
+    [self presentViewController:self.wikiFilterViewNav animated:YES completion:NULL];
+}
+
 #pragma mark - WikiFilterViewDelegate
 
 - (void)clickWikiFilterViewReturnData:(NSDictionary *)data{
+    self.wikiFilterData = nil;
     [data.allKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
-        [_wikiFilterData setObject:data[key] forKey:key];
+        [self.wikiFilterData setObject:data[key] forKey:key];
     }];
     
     [_tableView headerBeginRefreshing];
