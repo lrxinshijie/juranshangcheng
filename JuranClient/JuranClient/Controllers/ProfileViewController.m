@@ -433,8 +433,8 @@
         case 3:
         {
             //        我的收藏
-            CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
-//            MyCollectViewController *vc = [[MyCollectViewController alloc] init];
+//            CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
+            MyCollectViewController *vc = [[MyCollectViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
