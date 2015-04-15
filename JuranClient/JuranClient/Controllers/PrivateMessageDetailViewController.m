@@ -169,7 +169,6 @@
     NSBubbleType type = me ? BubbleTypeMine : BubbleTypeSomeoneElse;
     if (detail.isFirstFlag &&  _message.mobilePhone.length > 0) {
         _firstContentLabel.text = detail.content;
-        bubble = [NSBubbleData dataWithView:_firstView date:date type:type insets:UIEdgeInsetsZero];
         
         UIImageView *line = (UIImageView *)[_firstView viewWithTag:2233];
         if (me) {
@@ -184,6 +183,23 @@
             line.image = [UIImage imageNamed:@"line_gray"];
         }
         
+        CGRect frame = _firstContentLabel.frame;
+        frame.size.height = [_firstContentLabel.text heightWithFont:_firstContentLabel.font constrainedToWidth:CGRectGetWidth(_firstContentLabel.frame)];
+        _firstContentLabel.frame = frame;
+        
+        frame = line.frame;
+        frame.origin.y = CGRectGetMaxY(_firstContentLabel.frame) + 10;
+        line.frame = frame;
+        
+        frame = _firstContactLabel.frame;
+        frame.origin.y = CGRectGetMaxY(line.frame) + 6;
+        _firstContactLabel.frame = frame;
+        
+        frame = _firstView.frame;
+        frame.size.height = CGRectGetMaxY(_firstContactLabel.frame) + 9;
+        _firstView.frame = frame;
+        
+        bubble = [NSBubbleData dataWithView:_firstView date:date type:type insets:UIEdgeInsetsZero];
         
     }else{
         bubble = [NSBubbleData dataWithText:detail.content date:date type:type];

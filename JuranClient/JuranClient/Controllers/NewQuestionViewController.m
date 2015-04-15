@@ -160,9 +160,7 @@
         if (!error) {
             step = 3;
             [self reloadData];
-            if (_delegate && [_delegate respondsToSelector:@selector(newQuestionViewController:)]) {
-                [_delegate newQuestionViewController:self];
-            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameQuestionReloadData object:nil];
         }
         
     }];

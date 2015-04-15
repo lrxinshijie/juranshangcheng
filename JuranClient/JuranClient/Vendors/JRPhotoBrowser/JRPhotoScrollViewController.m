@@ -26,7 +26,7 @@
 @property (nonatomic, strong) IBOutlet UIView *toolBarForDesigner;
 @property (nonatomic, strong) IBOutlet UIImageView *favImageViewForDesigner;
 @property (nonatomic, strong) UILabel *lastPageLabel;
-@property (nonatomic, strong) UIView *bottomView;
+//@property (nonatomic, strong) UIView *bottomView;
 
 @end
 

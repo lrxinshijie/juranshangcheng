@@ -10,4 +10,6 @@
 
 @interface ShopCell : UICollectionViewCell
 
+- (void)fillCellWithValue:(id)value;
+
 @end

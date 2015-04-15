@@ -7,8 +7,24 @@
 //
 
 #import "RootViewController.h"
+#import "JRCase.h"
+#import "CaseCell.h"
+#import "CaseDetailViewController.h"
+#import "JRAdInfo.h"
+#import "EScrollerView.h"
+#import "JRPhotoScrollViewController.h"
+#import "JRWebViewController.h"
+
 
 @interface RootViewController ()
+//<UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate>
+
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, strong) NSMutableArray *adInfos;
+@property (nonatomic, strong) EScrollerView *bannerView;
+@property (nonatomic, strong) IBOutlet UIView *menuView;
+
 
 @end
 
@@ -19,6 +35,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav_logo"]];
+    
+    [self configureScan];
+    [self configureSearchAndMore];
 }
 
 - (void)didReceiveMemoryWarning {

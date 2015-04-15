@@ -85,6 +85,7 @@
 
 - (void)setupUI{
     [_segment setTitleList:@[@"作品案例", @"个人资料", @"TA参与的话题"]];
+    _segment.isDesigner = YES;
     _segment.delegate = self;
     
     _headImageView.layer.masksToBounds = YES;
