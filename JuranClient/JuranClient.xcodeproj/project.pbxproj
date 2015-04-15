@@ -1097,6 +1097,16 @@
 		A9A0672A1A3D92F70059D73B /* ZYQAssetPicker.Bundle in Resources */ = {isa = PBXBuildFile; fileRef = A9A067271A3D92F70059D73B /* ZYQAssetPicker.Bundle */; };
 		A9A0672B1A3D92F70059D73B /* ZYQAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A067291A3D92F70059D73B /* ZYQAssetPickerController.m */; };
 		A9A2A3FF1A2B1F0900DFA49B /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A2A3FE1A2B1F0900DFA49B /* BannerView.m */; };
+		A9A4134F1ADE94BD00074BB0 /* ProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A4134D1ADE94BD00074BB0 /* ProductDetailViewController.m */; };
+		A9A413501ADE94BD00074BB0 /* ProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A4134D1ADE94BD00074BB0 /* ProductDetailViewController.m */; };
+		A9A413511ADE94BD00074BB0 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9A4134E1ADE94BD00074BB0 /* ProductDetailViewController.xib */; };
+		A9A413521ADE94BD00074BB0 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9A4134E1ADE94BD00074BB0 /* ProductDetailViewController.xib */; };
+		A9A413561ADE94C800074BB0 /* ProductListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A413541ADE94C800074BB0 /* ProductListViewController.m */; };
+		A9A413571ADE94C800074BB0 /* ProductListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A413541ADE94C800074BB0 /* ProductListViewController.m */; };
+		A9A413581ADE94C800074BB0 /* ProductListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9A413551ADE94C800074BB0 /* ProductListViewController.xib */; };
+		A9A413591ADE94C800074BB0 /* ProductListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9A413551ADE94C800074BB0 /* ProductListViewController.xib */; };
+		A9A4135D1ADE9EEE00074BB0 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A4135C1ADE9EEE00074BB0 /* HMSegmentedControl.m */; };
+		A9A4135E1ADE9EEE00074BB0 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A4135C1ADE9EEE00074BB0 /* HMSegmentedControl.m */; };
 		A9A4E35B1A62C46D00BB9F68 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = A9A4E3571A62C46D00BB9F68 /* Icon-72.png */; };
 		A9A4E35C1A62C46D00BB9F68 /* Icon-80.png in Resources */ = {isa = PBXBuildFile; fileRef = A9A4E3581A62C46D00BB9F68 /* Icon-80.png */; };
 		A9A4E35D1A62C46D00BB9F68 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = A9A4E3591A62C46D00BB9F68 /* Icon-Small-50.png */; };
@@ -2654,6 +2664,14 @@
 		A9A067291A3D92F70059D73B /* ZYQAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYQAssetPickerController.m; sourceTree = "<group>"; };
 		A9A2A3FD1A2B1F0900DFA49B /* BannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
 		A9A2A3FE1A2B1F0900DFA49B /* BannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
+		A9A4134C1ADE94BD00074BB0 /* ProductDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductDetailViewController.h; sourceTree = "<group>"; };
+		A9A4134D1ADE94BD00074BB0 /* ProductDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductDetailViewController.m; sourceTree = "<group>"; };
+		A9A4134E1ADE94BD00074BB0 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductDetailViewController.xib; sourceTree = "<group>"; };
+		A9A413531ADE94C800074BB0 /* ProductListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductListViewController.h; sourceTree = "<group>"; };
+		A9A413541ADE94C800074BB0 /* ProductListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductListViewController.m; sourceTree = "<group>"; };
+		A9A413551ADE94C800074BB0 /* ProductListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductListViewController.xib; sourceTree = "<group>"; };
+		A9A4135B1ADE9EEE00074BB0 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
+		A9A4135C1ADE9EEE00074BB0 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		A9A4E3571A62C46D00BB9F68 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		A9A4E3581A62C46D00BB9F68 /* Icon-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-80.png"; sourceTree = "<group>"; };
 		A9A4E3591A62C46D00BB9F68 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -4142,6 +4160,7 @@
 		A987ED671A20920500CED7CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A9A413441ADE944100074BB0 /* Product */,
 				2C91E8F01ADB67E000B542DC /* Navi */,
 				1FD3B8091AD8B558004E849F /* Search */,
 				1F2D4FE71AD77F9E005486D2 /* QRCode */,
@@ -4300,6 +4319,7 @@
 		A987ED6F1A20920500CED7CD /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				A9A4135A1ADE9EEE00074BB0 /* HMSegmentedControl */,
 				2C91E8E31ADB63AA00B542DC /* BaiduMapAPI */,
 				A9C011E11ABC601900DCF9C3 /* IQKeyBoardManager */,
 				1403809A1AAD391D007AA4B4 /* AMScrollingNavbar */,
@@ -4652,6 +4672,28 @@
 				A9A067291A3D92F70059D73B /* ZYQAssetPickerController.m */,
 			);
 			path = ZYQAssetPickerController;
+			sourceTree = "<group>";
+		};
+		A9A413441ADE944100074BB0 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				A9A4134C1ADE94BD00074BB0 /* ProductDetailViewController.h */,
+				A9A4134D1ADE94BD00074BB0 /* ProductDetailViewController.m */,
+				A9A4134E1ADE94BD00074BB0 /* ProductDetailViewController.xib */,
+				A9A413531ADE94C800074BB0 /* ProductListViewController.h */,
+				A9A413541ADE94C800074BB0 /* ProductListViewController.m */,
+				A9A413551ADE94C800074BB0 /* ProductListViewController.xib */,
+			);
+			name = Product;
+			sourceTree = "<group>";
+		};
+		A9A4135A1ADE9EEE00074BB0 /* HMSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				A9A4135B1ADE9EEE00074BB0 /* HMSegmentedControl.h */,
+				A9A4135C1ADE9EEE00074BB0 /* HMSegmentedControl.m */,
+			);
+			path = HMSegmentedControl;
 			sourceTree = "<group>";
 		};
 		A9A53B001A46FE7C008D75B8 /* UIBubbleTableView */ = {
@@ -5644,6 +5686,7 @@
 				BD51861E1A5D0ED700BE508A /* icon-designer-badge2@2x.png in Resources */,
 				BD5185F01A5D0ED700BE508A /* icon-back@2x.png in Resources */,
 				BD51876E1A5D0ED700BE508A /* tabbar_subject@2x.png in Resources */,
+				A9A413591ADE94C800074BB0 /* ProductListViewController.xib in Resources */,
 				BD5186E21A5D0ED700BE508A /* publish_image_default@2x.png in Resources */,
 				1415FAAD1A5D249E003D0C29 /* Icon-Small@2x.png in Resources */,
 				BD51868E1A5D0ED700BE508A /* icon_personal_msg@2x.png in Resources */,
@@ -5741,6 +5784,7 @@
 				BD5186601A5D0ED700BE508A /* login-icon-wx@2x.png in Resources */,
 				37C0701D1A87A2E300EBAD08 /* order_star_unselected@2x.png in Resources */,
 				BD5185FC1A5D0ED700BE508A /* icon-grid@2x.png in Resources */,
+				A9A413521ADE94BD00074BB0 /* ProductDetailViewController.xib in Resources */,
 				BD5186841A5D0ED700BE508A /* icon_personal_ddgl@2x.png in Resources */,
 				1415FA7B1A5CD1CB003D0C29 /* ResetPasswordViewController.xib in Resources */,
 				BD51866C1A5D0ED700BE508A /* arrow_up@2x.png in Resources */,
@@ -5855,6 +5899,7 @@
 				1FD3B8171AD8B558004E849F /* search_magnifying_glass@2x.png in Resources */,
 				BD5186E51A5D0ED700BE508A /* publish_line_selected@2x.png in Resources */,
 				BD5186B31A5D0ED700BE508A /* filter_kind_selected@2x.png in Resources */,
+				A9A413581ADE94C800074BB0 /* ProductListViewController.xib in Resources */,
 				BD5186F91A5D0ED700BE508A /* menu_activity_select@2x.png in Resources */,
 				BD5186111A5D0ED700BE508A /* checkbox_checked@2x.png in Resources */,
 				14A3FDC71A2C9EDF002BEFF4 /* DemandCell.xib in Resources */,
@@ -5959,6 +6004,7 @@
 				37DAFCFC1AA2CCD900923CF9 /* box_unselected@2x.png in Resources */,
 				BD5186AB1A5D0ED700BE508A /* answer_wati_accept@2x.png in Resources */,
 				BD5186E31A5D0ED700BE508A /* publish_line_default@2x.png in Resources */,
+				A9A413511ADE94BD00074BB0 /* ProductDetailViewController.xib in Resources */,
 				14C8554A1A2E196B00A15ED9 /* SettingsViewController.xib in Resources */,
 				BD5185C51A5D0ED700BE508A /* Icon-Small.png in Resources */,
 				A907F2B71A38884A00DEB8EA /* DemandEditTextViewController.xib in Resources */,
@@ -6373,6 +6419,7 @@
 				1415F94F1A5CD1CB003D0C29 /* JRProfileData.m in Sources */,
 				37F0E6B61A7D1F4E004CCCB2 /* PSTGridLayoutRow.m in Sources */,
 				1415F9501A5CD1CB003D0C29 /* PublishDesignViewController.m in Sources */,
+				A9A413501ADE94BD00074BB0 /* ProductDetailViewController.m in Sources */,
 				372DEA141ADCB30A0059DE27 /* MyCollectViewController.m in Sources */,
 				1415F9511A5CD1CB003D0C29 /* DemandEditTextViewController.m in Sources */,
 				A9C012051ABC601900DCF9C3 /* IQUIView+Hierarchy.m in Sources */,
@@ -6393,6 +6440,7 @@
 				37F0E62D1A7D1AFE004CCCB2 /* MWCaptionView.m in Sources */,
 				1415F95D1A5CD1CB003D0C29 /* QuestionFilterView.m in Sources */,
 				37D6796F1A6016B900C6DFAC /* PriceModifyCell.m in Sources */,
+				A9A413571ADE94C800074BB0 /* ProductListViewController.m in Sources */,
 				A9C012091ABC601900DCF9C3 /* IQKeyboardManager.m in Sources */,
 				1415F95E1A5CD1CB003D0C29 /* UIImageView+Block.m in Sources */,
 				1415F95F1A5CD1CB003D0C29 /* PrivateMessageDetailViewController.m in Sources */,
@@ -6499,6 +6547,7 @@
 				1415F9A11A5CD1CB003D0C29 /* JSONHTTPClient.m in Sources */,
 				1415F9A21A5CD1CB003D0C29 /* UIViewController+ASCategory.m in Sources */,
 				37F0E6A61A7D1F4E004CCCB2 /* PSTCollectionViewController.m in Sources */,
+				A9A4135E1ADE9EEE00074BB0 /* HMSegmentedControl.m in Sources */,
 				1415F9A31A5CD1CB003D0C29 /* JRDemand.m in Sources */,
 				1415F9A41A5CD1CB003D0C29 /* CaseCell.m in Sources */,
 				1415F9A51A5CD1CB003D0C29 /* OldTopicViewController.m in Sources */,
@@ -6812,6 +6861,7 @@
 				A987EDE61A20920500CED7CD /* UIAlertView+ASCategory.m in Sources */,
 				A987EDD41A20920500CED7CD /* Public.m in Sources */,
 				A94525231AA5ED1F002DFA2A /* openssl_wrapper.m in Sources */,
+				A9A4135D1ADE9EEE00074BB0 /* HMSegmentedControl.m in Sources */,
 				A9902CA61A3432A500F08DA1 /* FilterViewController.m in Sources */,
 				BD48B58D1A5283340041725C /* JRServiceViewController.m in Sources */,
 				A987EE221A20928B00CED7CD /* MKNetworkEngine.m in Sources */,
@@ -6838,6 +6888,7 @@
 				37F0E6FF1A7D2735004CCCB2 /* MKAnnotationView+WebCache.m in Sources */,
 				A987EE1D1A20928B00CED7CD /* NSDate+RFC1123.m in Sources */,
 				37F0E62C1A7D1AFE004CCCB2 /* MWCaptionView.m in Sources */,
+				A9A4134F1ADE94BD00074BB0 /* ProductDetailViewController.m in Sources */,
 				37F0E6A71A7D1F4E004CCCB2 /* PSTCollectionViewData.m in Sources */,
 				A987EDE11A20920500CED7CD /* NSMutableArray+ASCategory.m in Sources */,
 				1403809D1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m in Sources */,
@@ -6860,6 +6911,7 @@
 				A9D654B21A27642800A80253 /* NSArray+JSONModel.m in Sources */,
 				37F0E6341A7D1AFE004CCCB2 /* MWPhotoBrowser.m in Sources */,
 				378BB2C31A4B1C6E00E8358D /* JRBidInfo.m in Sources */,
+				A9A413561ADE94C800074BB0 /* ProductListViewController.m in Sources */,
 				37F0E70B1A7D2735004CCCB2 /* SDWebImageDownloaderOperation.m in Sources */,
 				A9A067171A3D76DA0059D73B /* ActionSheetLocalePicker.m in Sources */,
 				14B5C04A1ACE31D70043BB44 /* DeviceHardware.m in Sources */,
