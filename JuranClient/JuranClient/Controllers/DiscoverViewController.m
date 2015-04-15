@@ -7,8 +7,12 @@
 //
 
 #import "DiscoverViewController.h"
+#import "JRSegmentControl.h"
 
-@interface DiscoverViewController ()
+@interface DiscoverViewController ()<JRSegmentControlDelegate>
+
+@property (nonatomic, strong) IBOutlet JRSegmentControl *segment;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 @end
 
@@ -17,7 +21,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"发现";
+    
+    [self configureSearchAndMore];
+    
+    [self setupUI];
+}
+
+- (void)setupUI{
+    [_segment setTitleList:@[@"专题", @"百科", @"问答", @"话题"]];
+}
+
+#pragma mark - JRSegmentControlDelegate
+
+- (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
+    
 }
 
 - (void)didReceiveMemoryWarning {

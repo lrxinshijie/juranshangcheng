@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @protocol JRSegmentControlDelegate;
 
 @interface JRSegmentControl : UIView
@@ -16,6 +15,7 @@
 @property (nonatomic, strong) NSArray *titleList;
 @property (nonatomic, assign) NSInteger selectedIndex;
 @property(nonatomic, readonly) NSInteger numberOfSegments;
+@property (nonatomic, assign) BOOL isDesigner;
 
 @end
 
