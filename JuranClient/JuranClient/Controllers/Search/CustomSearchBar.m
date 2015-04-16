@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSMutableArray * dataArray_History;
 @property (strong, nonatomic) NSMutableArray * dataArray_SearchRange;
 @property (assign, nonatomic) BOOL isHistory;
+@property (assign, nonatomic) BOOL isReloadHistory;
 
 @property (strong, nonatomic) UIView * footerView;
 
@@ -52,9 +53,10 @@
     NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:@"在XXX中搜索",@"searchRange",@"123",@"count",nil];
     self.dataArray_SearchRange = [NSMutableArray arrayWithArray:@[dict,dict,dict,dict,dict]];
     
+    self.isReloadHistory = NO;
     self.isHistory = YES;
     [self initHistoryData];
-    NSLog(@"%@",self.dataArray_History);
+//    NSLog(@"%@",self.dataArray_History);
 }
 
 - (void)initHistoryData
@@ -64,6 +66,13 @@
         
         [wSelf.dataArray_History removeAllObjects];
         [wSelf.dataArray_History addObjectsFromArray:list];
+        
+        //对于清除历史后重载历史列表不及时的暂时处理方法，添加属性isReloadHistory判断是不是重载历史列表，如果是则刷新列表并调整列表高度
+        if (wSelf.isReloadHistory) {
+            [wSelf.listTableView reloadData];
+            [wSelf showAnimation];
+            wSelf.isReloadHistory = NO;
+        }
         
     }];
 }
@@ -186,8 +195,8 @@
 - (void)cleanHistory
 {
     [[SearchHistoryManager sharedDataBase] deleteAllLocalHistory];
+    self.isReloadHistory = YES;
     [self initHistoryData];
-    [self showAnimation];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -223,7 +232,9 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    [self changeListStyleAnimation];
+    if (range.location == 0) {
+        [self changeListStyleAnimation];
+    }
     return YES;
 }
 
@@ -256,6 +267,11 @@
             break;
         }
     }
+    
+    if (self.inputTextField.text == nil || self.inputTextField.text.length ==  0) {
+        isExist = YES;
+    }
+    
     //搜索历史入库
     if (!isExist) {
         [[SearchHistoryManager sharedDataBase] insertSearchItem:@"商品名称"];
@@ -330,12 +346,14 @@
     
     float height = 0.0;
     
-    if (self.dataArray_History.count>0) {
+    int tempCount = self.isHistory?self.dataArray_History.count:self.dataArray_SearchRange.count;
+    
+    if (tempCount>0) {
         
-        if (self.dataArray_History.count*36+50>200) {
+        if (tempCount*36+50>200) {
             height = 200.0;
         }else{
-            height = self.dataArray_History.count * 36 + 50;
+            height = tempCount * 36 + 50;
         }
         
     }
@@ -394,29 +412,5 @@
         
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @end

@@ -16,7 +16,7 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *scanLine;
 
-@property (assign, nonatomic) BOOL isLightOn;
+
 
 @end
 
