@@ -697,6 +697,8 @@
 		2C91E9221ADBA1F900B542DC /* trans-navi-right-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C91E9201ADBA1F900B542DC /* trans-navi-right-button@2x.png */; };
 		3710D5AE1A557DF00028D32A /* RealNameAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */; };
 		3710D5AF1A557DF00028D32A /* RealNameAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */; };
+		3713F9B31ADF909800785B39 /* flter-button-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3713F9B11ADF909800785B39 /* flter-button-bg@2x.png */; };
+		3713F9B41ADF909800785B39 /* icon-new-question@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3713F9B21ADF909800785B39 /* icon-new-question@2x.png */; };
 		371907BA1AA5FA8900A76192 /* order_create@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371907B91AA5FA8900A76192 /* order_create@2x.png */; };
 		371907BB1AA5FA9F00A76192 /* order_create@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371907B91AA5FA8900A76192 /* order_create@2x.png */; };
 		371D686F1A5D6E2000172AC9 /* icon_case_manage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371D686B1A5D6E2000172AC9 /* icon_case_manage@2x.png */; };
@@ -2118,6 +2120,8 @@
 		3710D5AB1A557DF00028D32A /* RealNameAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealNameAuthViewController.h; sourceTree = "<group>"; };
 		3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealNameAuthViewController.m; sourceTree = "<group>"; };
 		3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RealNameAuthViewController.xib; sourceTree = "<group>"; };
+		3713F9B11ADF909800785B39 /* flter-button-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flter-button-bg@2x.png"; sourceTree = "<group>"; };
+		3713F9B21ADF909800785B39 /* icon-new-question@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-new-question@2x.png"; sourceTree = "<group>"; };
 		371907B91AA5FA8900A76192 /* order_create@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_create@2x.png"; sourceTree = "<group>"; };
 		371D686B1A5D6E2000172AC9 /* icon_case_manage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_case_manage@2x.png"; sourceTree = "<group>"; };
 		371D686C1A5D6E2000172AC9 /* icon_dingdan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_dingdan@2x.png"; sourceTree = "<group>"; };
@@ -5105,6 +5109,8 @@
 		BD5185421A5D0ED700BE508A /* Question */ = {
 			isa = PBXGroup;
 			children = (
+				3713F9B11ADF909800785B39 /* flter-button-bg@2x.png */,
+				3713F9B21ADF909800785B39 /* icon-new-question@2x.png */,
 				37DBEECE1AA8A21D00B485A8 /* look_image@2x.png */,
 				BD5185431A5D0ED700BE508A /* answer_no_data@2x.png */,
 				BD5185441A5D0ED700BE508A /* answer_wati_accept@2x.png */,
@@ -6151,6 +6157,7 @@
 				A971BC9F1A20825800C018D6 /* InfoPlist.strings in Resources */,
 				BD5185F51A5D0ED700BE508A /* icon-eye@2x.png in Resources */,
 				BD5185C91A5D0ED700BE508A /* Icon.png in Resources */,
+				3713F9B31ADF909800785B39 /* flter-button-bg@2x.png in Resources */,
 				14C855481A2E196B00A15ED9 /* InteractionViewController.xib in Resources */,
 				375635241A60EE6300D120C8 /* service_page@2x.png in Resources */,
 				BD5187451A5D0ED700BE508A /* image_quality_unselected@2x.png in Resources */,
@@ -6248,6 +6255,7 @@
 				BD5186FD1A5D0ED700BE508A /* menu_answer_select@2x.png in Resources */,
 				BD322BC71A6E07A400DDC1C0 /* image_quality_selected_disabled@2x.png in Resources */,
 				A987EE601A209E7900CED7CD /* CaseCell.xib in Resources */,
+				3713F9B41ADF909800785B39 /* icon-new-question@2x.png in Resources */,
 				BD5186871A5D0ED700BE508A /* icon_personal_guanzhu@2x.png in Resources */,
 				14C953B31A2DC60B00FE6F8D /* SubjectDetailViewController.xib in Resources */,
 				2C91E9211ADBA1F900B542DC /* trans-navi-left-button@2x.png in Resources */,
