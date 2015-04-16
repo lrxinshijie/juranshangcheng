@@ -28,8 +28,12 @@
 @property (strong, nonatomic) AVCaptureSession *session;
 @property (strong, nonatomic) AVCaptureDevice * lightDevice;
 
+@property (assign, nonatomic) BOOL isLightOn;
 
 - (void)configBackground;
 - (void)removeBackground;
+
+-(void) turnOnLed;
+-(void) turnOffLed;
 
 @end

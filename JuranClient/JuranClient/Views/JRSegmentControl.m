@@ -31,10 +31,16 @@
     _titleList = titleList;
     NSInteger i = 0;
     for (NSString *title in _titleList) {
-        CGRect frame = CGRectMake(95*i, 0, 95, CGRectGetHeight(self.frame));
-        if (i == _titleList.count - 1) {
-            frame = CGRectMake(95*i, 0, CGRectGetWidth(self.frame) - 95*i, CGRectGetHeight(self.frame));
+        CGRect frame;
+        if (_isDesigner) {
+            frame = CGRectMake(95*i, 0, 95, CGRectGetHeight(self.frame));
+            if (i == _titleList.count - 1) {
+                frame = CGRectMake(95*i, 0, CGRectGetWidth(self.frame) - 95*i, CGRectGetHeight(self.frame));
+            }
+        }else{
+            frame = CGRectMake(CGRectGetWidth(self.frame)/titleList.count * i, 0, CGRectGetWidth(self.frame)/titleList.count, CGRectGetHeight(self.frame));
         }
+        
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag = kButtonTag+i;
         btn.frame = frame;
@@ -55,7 +61,6 @@
     _selectedBackgroundView.backgroundColor = [UIColor colorWithRed:35/255.f green:104/255.f blue:182/255.f alpha:1.0f];
     [self insertSubview:_selectedBackgroundView atIndex:0];
 }
-
 
 - (void)onSelected:(id)sender{
     UIButton *btn = (UIButton*)sender;

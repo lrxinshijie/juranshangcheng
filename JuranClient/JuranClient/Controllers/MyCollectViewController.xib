@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="collectionView" destination="WL2-CW-dZV" id="O8B-zL-ZYJ"/>
                 <outlet property="emptyView" destination="FgD-70-553" id="BOp-fk-F1Q"/>
+                <outlet property="segment" destination="pXx-uP-2EQ" id="5uV-sC-5Me"/>
                 <outlet property="view" destination="aAV-iI-Def" id="i8u-b4-kU6"/>
             </connections>
         </placeholder>
@@ -18,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" id="WL2-CW-dZV">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="40" width="320" height="520"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="wLt-Mw-2XM">
                         <size key="itemSize" width="152" height="133"/>
@@ -27,6 +28,11 @@
                         <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <view contentMode="scaleToFill" id="pXx-uP-2EQ" customClass="JRSegmentControl">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedTopBarMetrics"/>

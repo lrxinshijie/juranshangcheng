@@ -1,43 +1,20 @@
-# Xcode
-#
-build/
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-xcuserdata
-*.xccheckout
-*.moved-aside
-DerivedData
-*.hmap
-*.xcuserstate
-
-# CocoaPods
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
-#
-# Pods/
-
-/JuranClient/.DS_Store
-/.DS_Store
+/JuranClient/JuranClient/Vendors/JSMessagesTableViewController/Resources/.DS_Store
 .DS_Store
-/JuranClient/JuranClient/.DS_Store
-/JuranClient/JuranClient/Images/JuranDesigner/Guide/.DS_Store
+/JuranClient/JuranClient.xcodeproj/project (Kowloon's MBP 的冲突副本 2015-01-04).pbxproj
 /JuranClient/JuranClient.xcodeproj/project.xcworkspace/xcuserdata/Kowloon.xcuserdatad/UserInterfaceState.xcuserstate
+/JuranClient/JuranClient.xcodeproj/project.xcworkspace/xcuserdata/Kowloon.xcuserdatad/
 /JuranClient/JuranClient.xcodeproj/project.xcworkspace/xcuserdata/Sean.xcuserdatad/UserInterfaceState.xcuserstate
-/JuranClient/JuranClient.xcodeproj/xcuserdata/hesong.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
-/JuranClient/JuranClient.xcodeproj/xcuserdata/hesong.xcuserdatad/xcschemes/JuranClient.xcscheme
-/JuranClient/JuranClient.xcodeproj/xcuserdata/hesong.xcuserdatad/xcschemes/xcschememanagement.plist
 /JuranClient/JuranClient.xcodeproj/xcuserdata/Kowloon.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+/JuranClient/JuranClient.xcodeproj/xcuserdata/Kowloon.xcuserdatad/xcschemes/JuranDesigner.xcscheme
 /JuranClient/JuranClient.xcodeproj/xcuserdata/Kowloon.xcuserdatad/xcschemes/xcschememanagement.plist
 /JuranClient/JuranClient.xcodeproj/xcuserdata/Sean.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+/JuranClient/JuranClient.xcodeproj/xcuserdata/Sean.xcuserdatad/xcschemes/JuranDesigner.xcscheme
 /JuranClient/JuranClient.xcodeproj/xcuserdata/Sean.xcuserdatad/xcschemes/xcschememanagement.plist
+/JuranClient/JuranClient/.DS_Store
+/JuranClient/JuranClient/Images.xcassets/.DS_Store
+/JuranClient/JuranClient/Images/JuranCustomer/Share/.DS_Store
+/JuranClient/JuranClient/service副本.html
 /JuranClient/JuranClient/Vendors/.DS_Store
-/JuranClient/JuranClient/Views/.DS_Store
-/JuranClient/JuranClient.xcodeproj/xcuserdata/Sean.xcuserdatad/xcschemes/JuranClient.xcscheme
+/JuranClient/JuranClient/Vendors/AlipaySDK/.DS_Store
+/JuranClient/.DS_Store
+/.DS_Store

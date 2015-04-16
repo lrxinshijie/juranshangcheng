@@ -102,11 +102,15 @@
         
         if (index == 0) {
             
+            if (wSelf.qrCodeViewController.isLightOn) {
+                [wSelf.qrCodeViewController turnOnLed];
+            }
             [wSelf.inputCodeViewController removeBackgroundLayer];
             [wSelf.qrCodeViewController configBackground];
             
         }else{
             
+            [wSelf.qrCodeViewController turnOffLed];
             [wSelf.qrCodeViewController removeBackground];
             [wSelf.inputCodeViewController configBackgroundLayer];
             

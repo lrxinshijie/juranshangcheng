@@ -10,12 +10,15 @@
 #import "JRCase.h"
 #import "CaseCollectionCell.h"
 #import "JRPhotoScrollViewController.h"
+#import "JRSegmentControl.h"
 
-@interface MyCollectViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface MyCollectViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, JRSegmentControlDelegate>
 
-@property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
+
+@property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, strong) IBOutlet JRSegmentControl *segment;
 
 @property (nonatomic, strong) IBOutlet UIView *emptyView;
 
@@ -29,12 +32,18 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"我的收藏";
     
+    [self setupUI];
+    
+    [_collectionView headerBeginRefreshing];
+}
+
+- (void)setupUI{
+    [_segment setTitleList:@[@"案例收藏" ,@"商品收藏", @"店铺收藏"]];
+    
     _collectionView.backgroundColor = RGBColor(237, 237, 237);
     _collectionView.alwaysBounceVertical = YES;
     
     [_collectionView registerNib:[UINib nibWithNibName:@"CaseCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"CaseCollectionCell"];
-    
-    _emptyView.hidden = YES;
     
     __weak typeof(self) weakSelf = self;
     [_collectionView addHeaderWithCallback:^{
@@ -47,7 +56,9 @@
         [weakSelf loadData];
     }];
     
-    [_collectionView headerBeginRefreshing];
+    _emptyView.hidden = YES;
+    [self.view addSubview:_emptyView];
+    _emptyView.center = _collectionView.center;
 }
 
 - (void)loadData{
@@ -65,14 +76,33 @@
                 self.datas = rows;
             }
             
-            [_collectionView reloadData];
+            [self reloadData];
         }
-        _emptyView.hidden = _datas.count != 0;
+        
         [_collectionView headerEndRefreshing];
         [_collectionView footerEndRefreshing];
         
     }];
 }
+
+- (void)reloadData{
+    if (_segment.selectedIndex == 0) {
+        [_collectionView reloadData];
+    }else if (_segment.selectedIndex == 1){
+        
+    }else if (_segment.selectedIndex == 2){
+        
+    }
+    _emptyView.hidden = _datas.count != 0;
+}
+
+#pragma mark - JRSegmentControl
+
+- (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
+    
+}
+
+#pragma mark - UICollectionViewDataSource/Delegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return [_datas count];

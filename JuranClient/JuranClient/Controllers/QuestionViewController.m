@@ -13,7 +13,7 @@
 #import "QuestionCell.h"
 #import "QuestionDetailViewController.h"
 
-@interface QuestionViewController ()<UITableViewDataSource, UITableViewDelegate, QuestionFilterViewDelegate, NewQuestionViewControllerDelegate, QuestionDetailViewControllerDelegate, UIScrollViewDelegate>{
+@interface QuestionViewController ()<UITableViewDataSource, UITableViewDelegate, QuestionFilterViewDelegate, UIScrollViewDelegate>{
     CGFloat startOffsetY;
 }
 
@@ -31,9 +31,15 @@
 
 @implementation QuestionViewController
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadDataNotification:) name:kNotificationNameQuestionReloadData object:nil];
+    
     if (!_isSearchResult) {
 #ifdef kJuranDesigner
         self.navigationItem.title = @"问答";
@@ -89,6 +95,10 @@
     }
 }
 
+- (void)reloadDataNotification:(NSNotification*)notification{
+    [_tableView headerBeginRefreshing];
+}
+
 - (NSMutableDictionary *)filterData{
     if (!_filterData) {
         _filterData = [NSMutableDictionary dictionaryWithDictionary:@{
@@ -139,7 +149,6 @@
         return;
     }
     NewQuestionViewController *vc = [[NewQuestionViewController alloc] init];
-    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -174,7 +183,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     JRQuestion *q = [_datas objectAtIndex:indexPath.row];
     QuestionDetailViewController *vc = [[QuestionDetailViewController alloc] init];
-    vc.delegate = self;
     vc.question = q;
     vc.isResolved = [q isResolved];
     [self.navigationController pushViewController:vc animated:YES];
@@ -192,18 +200,6 @@
         _questionCell = (QuestionCell *)[nibs firstObject];
     }
     return _questionCell;
-}
-
-#pragma mark - NewQuestionViewControllerDelegate
-
-- (void)newQuestionViewController:(NewQuestionViewController *)vc{
-    [_tableView headerBeginRefreshing];
-}
-
-#pragma mark - QuestionDetailViewControllerDelegate
-
-- (void)valueChangedWithQuestionDetailViewController:(QuestionDetailViewController *)vc{
-    [_tableView headerBeginRefreshing];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
