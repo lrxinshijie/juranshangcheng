@@ -171,5 +171,8 @@
 
 #define JR_SHOP_FIRSTPAGE [NSString stringWithFormat:@"%@/shop/shopFirstPage.json",JR_SERVICE]
 #define JR_SHOP_RECOMMEND [NSString stringWithFormat:@"%@/shop/shopRecommend.json",JR_SERVICE]
-
+#define JR_SHOP_CLASSIFICATION [NSString stringWithFormat:@"%@/shop/goodsClassification.json",JR_SERVICE]
+//Navi
+#define JR_NAVI_STORE_LIST [NSString stringWithFormat:@"%@/shop/storeList.json",JR_SERVICE]
+#define JR_NAVI_STORE_INFO [NSString stringWithFormat:@"%@/shop/storeInfo.json",JR_SERVICE]
 #endif

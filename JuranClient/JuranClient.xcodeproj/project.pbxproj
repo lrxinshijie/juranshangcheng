@@ -667,6 +667,12 @@
 		2C602C7D1ADCED230037105E /* shoplist-image-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C7C1ADCED230037105E /* shoplist-image-bg@2x.png */; };
 		2C602C801ADCEE820037105E /* shoplist-icon-level@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C7E1ADCEE820037105E /* shoplist-icon-level@2x.png */; };
 		2C602C811ADCEE820037105E /* shoplist-navi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C7F1ADCEE820037105E /* shoplist-navi@2x.png */; };
+		2C602C8F1ADE0E200037105E /* FilterInShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C8D1ADE0E200037105E /* FilterInShopViewController.m */; };
+		2C602C901ADE0E200037105E /* FilterInShopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C8E1ADE0E200037105E /* FilterInShopViewController.xib */; };
+		2C602C931ADE345A0037105E /* filter-icon-dropdown-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C911ADE345A0037105E /* filter-icon-dropdown-1.png */; };
+		2C602C941ADE345A0037105E /* filter-icon-dropdown-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C921ADE345A0037105E /* filter-icon-dropdown-2.png */; };
+		2C602C9A1ADE3E8F0037105E /* JRStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C991ADE3E8F0037105E /* JRStore.m */; };
+		2C602C9C1ADE57FB0037105E /* icon-map-indoor-navi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C9B1ADE57FB0037105E /* icon-map-indoor-navi@2x.png */; };
 		2C91E8E51ADB63C200B542DC /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C91E8E41ADB63C200B542DC /* BaiduMapAPI.framework */; };
 		2C91E8E81ADB64CF00B542DC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C91E8E61ADB647900B542DC /* CoreLocation.framework */; };
 		2C91E8E91ADB64D700B542DC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1441A19E1A29E463004A038E /* QuartzCore.framework */; };
@@ -2064,6 +2070,14 @@
 		2C602C7C1ADCED230037105E /* shoplist-image-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shoplist-image-bg@2x.png"; path = "Shop/shoplist-image-bg@2x.png"; sourceTree = "<group>"; };
 		2C602C7E1ADCEE820037105E /* shoplist-icon-level@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shoplist-icon-level@2x.png"; path = "Shop/shoplist-icon-level@2x.png"; sourceTree = "<group>"; };
 		2C602C7F1ADCEE820037105E /* shoplist-navi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shoplist-navi@2x.png"; path = "Shop/shoplist-navi@2x.png"; sourceTree = "<group>"; };
+		2C602C8C1ADE0E200037105E /* FilterInShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterInShopViewController.h; sourceTree = "<group>"; };
+		2C602C8D1ADE0E200037105E /* FilterInShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterInShopViewController.m; sourceTree = "<group>"; };
+		2C602C8E1ADE0E200037105E /* FilterInShopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterInShopViewController.xib; sourceTree = "<group>"; };
+		2C602C911ADE345A0037105E /* filter-icon-dropdown-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "filter-icon-dropdown-1.png"; path = "Shop/filter-icon-dropdown-1.png"; sourceTree = "<group>"; };
+		2C602C921ADE345A0037105E /* filter-icon-dropdown-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "filter-icon-dropdown-2.png"; path = "Shop/filter-icon-dropdown-2.png"; sourceTree = "<group>"; };
+		2C602C981ADE3E8F0037105E /* JRStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRStore.h; sourceTree = "<group>"; };
+		2C602C991ADE3E8F0037105E /* JRStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRStore.m; sourceTree = "<group>"; };
+		2C602C9B1ADE57FB0037105E /* icon-map-indoor-navi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-map-indoor-navi@2x.png"; path = "Navi/icon-map-indoor-navi@2x.png"; sourceTree = "<group>"; };
 		2C91E8E41ADB63C200B542DC /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BaiduMapAPI.framework; path = BaiduMapAPI/BaiduMapAPI.framework; sourceTree = "<group>"; };
 		2C91E8E61ADB647900B542DC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2C91E8EA1ADB64DF00B542DC /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -3577,6 +3591,8 @@
 		2C602C7B1ADCECF10037105E /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				2C602C911ADE345A0037105E /* filter-icon-dropdown-1.png */,
+				2C602C921ADE345A0037105E /* filter-icon-dropdown-2.png */,
 				2C602C7E1ADCEE820037105E /* shoplist-icon-level@2x.png */,
 				2C602C7F1ADCEE820037105E /* shoplist-navi@2x.png */,
 				2C602C7C1ADCED230037105E /* shoplist-image-bg@2x.png */,
@@ -3609,6 +3625,7 @@
 		2C91E8FB1ADB746F00B542DC /* Navi */ = {
 			isa = PBXGroup;
 			children = (
+				2C602C9B1ADE57FB0037105E /* icon-map-indoor-navi@2x.png */,
 				2C91E91F1ADBA1F900B542DC /* trans-navi-left-button@2x.png */,
 				2C91E9201ADBA1F900B542DC /* trans-navi-right-button@2x.png */,
 				2C91E9081ADB754400B542DC /* icon-map-navi@2x.png */,
@@ -3789,6 +3806,9 @@
 				2C602C711ADCE6FD0037105E /* ShopListViewController.h */,
 				2C602C721ADCE6FD0037105E /* ShopListViewController.m */,
 				2C602C731ADCE6FD0037105E /* ShopListViewController.xib */,
+				2C602C8C1ADE0E200037105E /* FilterInShopViewController.h */,
+				2C602C8D1ADE0E200037105E /* FilterInShopViewController.m */,
+				2C602C8E1ADE0E200037105E /* FilterInShopViewController.xib */,
 			);
 			name = Shop;
 			sourceTree = "<group>";
@@ -4293,6 +4313,8 @@
 				37BF0BD81A8FAD7A001BA9E6 /* JRDesignCreditDto.m */,
 				37F491F41AD97A440068A99B /* JRShop.h */,
 				37F491F51AD97A440068A99B /* JRShop.m */,
+				2C602C981ADE3E8F0037105E /* JRStore.h */,
+				2C602C991ADE3E8F0037105E /* JRStore.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -5901,6 +5923,7 @@
 				1468580E1AA554A40089A0CE /* rsa_private_key.txt in Resources */,
 				BD5187491A5D0ED700BE508A /* sns_icon_1_s@2x.png in Resources */,
 				BD23FE681AAD91850019E46E /* img_default_head@2x.png in Resources */,
+				2C602C9C1ADE57FB0037105E /* icon-map-indoor-navi@2x.png in Resources */,
 				BD5185CB1A5D0ED700BE508A /* Icon7.png in Resources */,
 				1476DA971A21DFBE0006E9E0 /* SelfIntrodutionCell.xib in Resources */,
 				2C91E90E1ADB754400B542DC /* icon-map-navi@2x.png in Resources */,
@@ -6137,6 +6160,7 @@
 				BD5186EB1A5D0ED700BE508A /* request_doing@2x.png in Resources */,
 				14587E1B1A35DD2600D41236 /* BindPhoneNumberViewController.xib in Resources */,
 				14D973951A334DFC00E771ED /* PushMessageCell.xib in Resources */,
+				2C602C901ADE0E200037105E /* FilterInShopViewController.xib in Resources */,
 				BD5186651A5D0ED700BE508A /* regist-icon-mobile@2x.png in Resources */,
 				A90459D41A278A6100F8CD74 /* PublishDesignViewController.xib in Resources */,
 				BD51877F1A5D0ED700BE508A /* nav-designer-active@2x.png in Resources */,
@@ -6173,6 +6197,7 @@
 				37DBFA4E1A8A33E7003749E8 /* OrderPhotoViewController.xib in Resources */,
 				A987EE441A20984200CED7CD /* HomeViewController.xib in Resources */,
 				BD51870B1A5D0ED700BE508A /* menu_topic_default@2x.png in Resources */,
+				2C602C941ADE345A0037105E /* filter-icon-dropdown-2.png in Resources */,
 				37DC90F91A9F5A3C004C7898 /* ContractViewController.xib in Resources */,
 				BD5185F31A5D0ED700BE508A /* icon-detail@2x.png in Resources */,
 				BD5185CD1A5D0ED700BE508A /* Icon@2x.png in Resources */,
@@ -6226,6 +6251,7 @@
 				BD5186931A5D0ED700BE508A /* icon_personal_zhaq@2x.png in Resources */,
 				A9A4E35C1A62C46D00BB9F68 /* Icon-80.png in Resources */,
 				BD5186DD1A5D0ED700BE508A /* private_message_more@2x.png in Resources */,
+				2C602C931ADE345A0037105E /* filter-icon-dropdown-1.png in Resources */,
 				37A0F81E1A6B96C300611760 /* ActivityDetailViewController.xib in Resources */,
 				BD5186771A5D0ED700BE508A /* email_password_ok@2x.png in Resources */,
 				14646DB71A3CA1A500E5D6F6 /* OldTopicViewController.xib in Resources */,
@@ -6764,6 +6790,7 @@
 				A9A2A3FF1A2B1F0900DFA49B /* BannerView.m in Sources */,
 				1403802E1A44247300221398 /* MeasureViewController.m in Sources */,
 				14555D341A36EB4100E36339 /* JRAreaInfo.m in Sources */,
+				2C602C8F1ADE0E200037105E /* FilterInShopViewController.m in Sources */,
 				A987EE1F1A20928B00CED7CD /* NSString+MKNetworkKitAdditions.m in Sources */,
 				A9A067181A3D76DA0059D73B /* ActionSheetStringPicker.m in Sources */,
 				1FD3B8481AD8F878004E849F /* FMDatabaseAdditions.m in Sources */,
@@ -6994,6 +7021,7 @@
 				14587E1F1A35DD4300D41236 /* BindMailViewController.m in Sources */,
 				14D9738F1A334C4F00E771ED /* PushMessageViewController.m in Sources */,
 				A9224E321A6CB829002974ED /* ViewUtils.m in Sources */,
+				2C602C9A1ADE3E8F0037105E /* JRStore.m in Sources */,
 				141C564D1A23613900A57971 /* TATopicCell.m in Sources */,
 				14CCB30B1ADD074F0041AA38 /* TopProductCell.m in Sources */,
 			);

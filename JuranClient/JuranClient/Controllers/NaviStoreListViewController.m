@@ -10,15 +10,21 @@
 #import <BaiduMapAPI/BMapKit.h>
 #import "NaviStoreCell.h"
 #import "NaviStoreInfoViewController.h"
+#import "JRStore.h"
 
 @interface NaviStoreListViewController ()
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UILabel *labelCity;
 @property (strong, nonatomic) IBOutlet UITableView *tableViewStore;
+@property (strong, nonatomic) IBOutlet UIView *viewCitySelection;
+@property (strong, nonatomic) IBOutlet UIButton *btnChangeCity;
+@property (strong, nonatomic) IBOutlet UITextField *textFieldCity;
 @property (strong, nonatomic) BMKLocationService *locService;
 @property (strong, nonatomic) BMKPointAnnotation* selfAnnotation;
+@property (strong, nonatomic) NSMutableArray* dataList;
 - (IBAction)naviLeftClick:(id)sender;
 - (IBAction)naviRightClick:(id)sender;
+- (IBAction)changeCityClick:(id)sender;
 
 @end
 
@@ -30,14 +36,11 @@
     self.navigationItem.title = @"门店导航";
     self.navigationController.navigationBarHidden = YES;
     [_tableViewStore registerNib:[UINib nibWithNibName:@"NaviStoreCell" bundle:nil] forCellReuseIdentifier:@"NaviStoreCell"];
-    
+    _textFieldCity.inputView = _viewCitySelection;
     _locService = [[BMKLocationService alloc]init];
     [BMKLocationService setLocationDistanceFilter:100.f];
     _locService.delegate = (id)self;
-    [_locService startUserLocationService];
     _mapView.showsUserLocation = YES;//显示定位图层
-    _selfAnnotation = [[BMKPointAnnotation alloc]init];
-    [_mapView addAnnotation:_selfAnnotation];
     [self loadData];
 }
 
@@ -47,14 +50,23 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"cityCode": @"110000"};
+    NSDictionary *param = @{@"cityName": @"北京市"};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:@"http://54.223.161.28:8080/shop/storeList.json" parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_NAVI_STORE_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            
+            _dataList = [JRStore buildUpWithValueForList:[data objectForKey:@"shopAddDtoList"]];
         }
     }];
+}
+
+- (void)reloadUI {
+    _mapView.zoomLevel = 12;
+    if (_selfAnnotation != nil) {
+        [_mapView removeAnnotation:_selfAnnotation];
+    }
+    [_locService startUserLocationService];
+    [_tableViewStore reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -74,13 +86,11 @@
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
-    //_mapView.showsUserLocation = YES;
-    //[_mapView updateLocationData:userLocation];
-    CLLocationCoordinate2D coor = userLocation.location.coordinate;
-    _selfAnnotation.coordinate = coor;
+    [_mapView updateLocationData:userLocation];
+    _selfAnnotation.coordinate = userLocation.location.coordinate;
     _selfAnnotation.title = @"你在这里";
     _mapView.centerCoordinate = _selfAnnotation.coordinate;
-    _mapView.zoomLevel = 12;
+    [_mapView addAnnotation:_selfAnnotation];
     [_locService stopUserLocationService];
 }
 
@@ -100,7 +110,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return _dataList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,6 +119,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NaviStoreCell *cell = (NaviStoreCell *)[tableView dequeueReusableCellWithIdentifier:@"NaviStoreCell"];
+    int index = [indexPath row];
+    JRStore *store = [_dataList objectAtIndex:index];
+    cell.labelName.text = store.storeShortName;
+    BMKMapPoint pointStore = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(39.915,116.404));
+    BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
+    CLLocationDistance distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
+    cell.labelDistance.text = [NSString stringWithFormat:@"%.2f",distance];
     return cell;
 }
 
@@ -118,12 +135,29 @@
     [self.navigationController pushViewController:info animated:YES];
 }
 
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 2;
+}
+-(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return 10;
+}
+-(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    return @"XX市";
+}
+
 - (IBAction)naviLeftClick:(id)sender {
-    NSLog(@"LeftClick");
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)naviRightClick:(id)sender {
     NSLog(@"RightClick");
+}
+
+- (IBAction)changeCityClick:(id)sender {
+    if ([_textFieldCity isFirstResponder]) {
+        [_textFieldCity resignFirstResponder];
+    }else {
+        [_textFieldCity becomeFirstResponder];
+    }
 }
 @end
