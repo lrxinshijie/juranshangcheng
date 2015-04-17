@@ -101,7 +101,7 @@
 }
 
 - (void)recieveReloadNotification:(NSNotification*)noti{
-    
+    [self loadData];
 }
 
 - (void)reloadData{
