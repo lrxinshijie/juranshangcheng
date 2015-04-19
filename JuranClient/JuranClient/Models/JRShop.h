@@ -17,6 +17,7 @@
  是否已收藏	业务	Y	isStored
  */
 
+@property (nonatomic, assign) NSInteger shopId;
 @property (nonatomic, copy) NSString *shopLogo;
 @property (nonatomic, copy) NSString *indexShopLogo;
 @property (nonatomic, copy) NSString *shopDsr;

@@ -10,6 +10,9 @@
 #import "JRSegmentControl.h"
 #import "JRProduct.h"
 #import "ALWebView.h"
+#import "ProductCell.h"
+#import "JRShop.h"
+#import "ShopHomeViewController.h"
 
 @interface ProductDetailViewController () <UITableViewDelegate, UITableViewDataSource, JRSegmentControlDelegate>
 
@@ -35,6 +38,7 @@
 
 @property (nonatomic, strong) UITableView *detailTableView;
 @property (nonatomic, strong) ALWebView *webView;
+@property (nonatomic, strong) NSArray *products;
 
 @property (nonatomic, strong) JRSegmentControl *segCtl;
 
@@ -56,6 +60,8 @@
     _scrollView.contentSize = CGSizeMake(CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)*2);
     _scrollView.backgroundColor = RGBColor(237, 237, 237);
     _scrollView.delegate = self;
+    _imageScrollView.delegate = self;
+    
     self.baseTableView = [self.scrollView tableViewWithFrame:CGRectMake(0, 0, CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame) - CGRectGetHeight(_tipsView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _baseTableView.backgroundColor = [UIColor clearColor];
     _baseTableView.tableHeaderView = _titleView;
@@ -98,6 +104,20 @@
         
         _priceLabel.text = [NSString stringWithFormat:@"%@ ~ %@", _product.priceMin, _product.priceMax];
 //        [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-star-active" : @"icon-star"] forState:UIControlStateNormal];
+        
+        [_imageScrollView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
+            [subview removeFromSuperview];
+        }];
+        [_imageScrollView setContentOffset:CGPointZero];
+        
+        _imageScrollView.contentSize = CGSizeMake(CGRectGetWidth(_imageScrollView.frame) * _product.goodsImagesList.count, CGRectGetHeight(_imageScrollView.frame));
+        [_product.goodsImagesList enumerateObjectsUsingBlock:^(NSString *imageUrl, NSUInteger idx, BOOL *stop) {
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_imageScrollView.frame)*idx, 0, CGRectGetWidth(_imageScrollView.frame), CGRectGetHeight(_imageScrollView.frame))];
+            [imageView setImageWithURLString:imageUrl];
+            [_imageScrollView addSubview:imageView];
+        }];
+        
+        _countLabel.text = [NSString stringWithFormat:@"1/%d", _product.goodsImagesList.count];
     }];
     
     [_product loadShop:^(BOOL result) {
@@ -105,6 +125,12 @@
             [_shopLogoImageView setImageWithURLString:_product.shopLogo];
             _shopNameLabel.text = _product.shopName;
             _shopScoreLabel.text = [NSString stringWithFormat:@"店铺评分：%@", _product.score];
+        }
+    }];
+    
+    [_product loadStore:^(BOOL result) {
+        if (result) {
+            
         }
     }];
     
@@ -120,6 +146,17 @@
 }
 
 - (IBAction)onMore:(id)sender{
+}
+
+- (IBAction)onShop:(id)sender{
+    ShopHomeViewController *sv = [[ShopHomeViewController alloc] init];
+    JRShop *shop = [[JRShop alloc] init];
+    shop.shopId = _product.shopId;
+    sv.shop = shop;
+    [self.navigationController pushViewController:sv animated:YES];
+}
+
+- (IBAction)onPrivate:(id)sender{
 }
 
 - (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
@@ -140,6 +177,17 @@
                 [_detailTableView reloadData];
             }
         }];
+    }else if (segment.selectedIndex == 2 && _products == nil){
+        NSDictionary *param = @{@"shopId": @(_product.shopId)};
+        [self showHUD];
+        [[ALEngine shareEngine] pathURL:JR_SHOP_RECOMMEND parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            [self hideHUD];
+            if (!error) {
+                NSArray *recommendProductsList = [data objectForKey:@"recommendProductsList"];
+                self.products = [JRProduct buildUpWithValueForList:recommendProductsList];
+                [_detailTableView reloadData];
+            }
+        }];
     }
 }
 
@@ -154,7 +202,11 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    if ([tableView isEqual:_baseTableView]) {
+        return 3;
+    }
+    
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -170,6 +222,8 @@
     }else if ([tableView isEqual:_detailTableView]){
         if (_segCtl.selectedIndex == 1) {
             count = _product.goodsAttributesInfoList.count;
+        }else{
+            count = _products.count;
         }
     }
     
@@ -177,69 +231,101 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
+    if ([tableView isEqual:_baseTableView]) {
+        if (section == 0) {
+            return 1;
+        }
+        return 10;
+    }else{
+        if (_segCtl.selectedIndex == 1) {
+            return 10;
+        }
+        
         return 1;
     }
-    return 10;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat heigth = 44;
-    if (indexPath.section == 2) {
-        return CGRectGetHeight(_shopView.frame);
+    if ([tableView isEqual:_baseTableView] && indexPath.section == 2) {
+        heigth = CGRectGetHeight(_shopView.frame);
+    }else if ([tableView isEqual:_detailTableView] && _segCtl.selectedIndex == 2){
+        heigth = 100;
     }
     return heigth;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    
-    cell.textLabel.font = [UIFont systemFontOfSize:15];
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:15];
-    cell.detailTextLabel.textColor = [UIColor darkGrayColor];
-    
-    if ([tableView isEqual:_baseTableView]) {
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
-        
-        if (indexPath.section == 0) {
-            if (indexPath.row == 0) {
-                cell.textLabel.text = @"查看颜色/尺寸";
-            }else if (indexPath.row == 1){
-                cell.textLabel.text = @"可售门店";
-                _locationView.backgroundColor = [UIColor clearColor];
-                [_locationView removeFromSuperview];
-                [cell addSubview:_locationView];
-            }
-        }else if (indexPath.section == 1){
-            if (indexPath.row == 0) {
-                cell.textLabel.text = @"商品评价";
-            }
-        }else if (indexPath.section == 2){
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [_shopView removeFromSuperview];
-            [cell addSubview:_shopView];
+    if ([tableView isEqual:_detailTableView] && _segCtl.selectedIndex == 2) {
+        static NSString *CellIdentifier = @"ProductCell";
+        ProductCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+            cell = (ProductCell *)[nibs firstObject];
         }
+        
+        JRProduct *product = _products[indexPath.row];
+        [cell fillCellWithProduct:product];
+        
+        return cell;
     }else{
-        if (_segCtl.selectedIndex == 1) {
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            NSDictionary *dict = _product.goodsAttributesInfoList[indexPath.row];
-            cell.textLabel.text = dict[@"attributeKey"];
-            cell.detailTextLabel.text = dict[@"attributeValue"];
+        static NSString *CellIdentifier = @"Cell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
+        
+        cell.textLabel.font = [UIFont systemFontOfSize:15];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:15];
+        cell.detailTextLabel.textColor = [UIColor darkGrayColor];
+        
+        if ([tableView isEqual:_baseTableView]) {
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            
+            if (indexPath.section == 0) {
+                if (indexPath.row == 0) {
+                    cell.textLabel.text = @"查看颜色/尺寸";
+                }else if (indexPath.row == 1){
+                    cell.textLabel.text = @"可售门店";
+                    _locationView.backgroundColor = [UIColor clearColor];
+                    [_locationView removeFromSuperview];
+                    [cell addSubview:_locationView];
+                }
+            }else if (indexPath.section == 1){
+                if (indexPath.row == 0) {
+                    cell.textLabel.text = @"商品评价";
+                }
+            }else if (indexPath.section == 2){
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                [_shopView removeFromSuperview];
+                [cell addSubview:_shopView];
+            }
+        }else{
+            if (_segCtl.selectedIndex == 1) {
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                NSDictionary *dict = _product.goodsAttributesInfoList[indexPath.row];
+                cell.textLabel.text = dict[@"attributeKey"];
+                cell.detailTextLabel.text = dict[@"attributeValue"];
+            }
+        }
+        
+        
+        return cell;
     }
     
     
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([tableView isEqual:_detailTableView] && _segCtl.selectedIndex == 2) {
+        ProductDetailViewController *pd = [[ProductDetailViewController alloc] init];
+        pd.product = _products[indexPath.row];
+        [self.navigationController pushViewController:pd animated:YES];
+    }
     
 }
 
@@ -248,6 +334,12 @@
         _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
     }else if ([scrollView isEqual:_baseTableView]){
         _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:_baseTableView.contentOffset.y/320.0];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if ([scrollView isEqual:_imageScrollView]) {
+        _countLabel.text = [NSString stringWithFormat:@"%d/%d", (NSInteger)(scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame) + 1), _product.goodsImagesList.count];
     }
 }
 

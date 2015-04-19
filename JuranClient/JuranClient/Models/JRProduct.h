@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) NSArray *goodsAttributesInfoList;
 @property (nonatomic, strong) NSArray *attributeList;
+@property (nonatomic, strong) NSArray *shopAddDtoList;
 @property (nonatomic, strong) NSArray *goodsImagesList;
 @property (nonatomic, copy) NSString *goodsIntroduce;
 @property (nonatomic, copy) NSString *priceMax;
@@ -36,4 +37,5 @@
 - (void)loadDesc:(BOOLBlock)finished;
 - (void)loadAttribute:(BOOLBlock)finished;
 - (void)favority:(BOOLBlock)finished;
+- (void)loadStore:(BOOLBlock)finished;
 @end

@@ -119,4 +119,19 @@
     }];
 }
 
+- (void)loadStore:(BOOLBlock)finished{
+    NSDictionary *param = @{@"goodsAnchoredId": self.linkProductId
+                            };
+    [[ALEngine shareEngine] pathURL:JR_PRODUCT_SELL_STORE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            self.shopAddDtoList = data[@"shopAddDtoList"];
+        }
+        
+        if (finished) {
+            finished(error == nil);
+        }
+        
+    }];
+}
+
 @end
