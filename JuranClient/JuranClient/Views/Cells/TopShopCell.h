@@ -10,4 +10,6 @@
 
 @interface TopShopCell : UICollectionViewCell
 
+- (void)fillCellWithData:(NSDictionary *)dict;
+
 @end

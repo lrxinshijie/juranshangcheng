@@ -619,4 +619,8 @@
     [kUD removeObjectForKey:@"kWelcomeInfo"];
 }
 
++ (NSString *)defaultCityName{
+    return @"北京市";
+}
+
 @end
