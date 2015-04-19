@@ -8,10 +8,22 @@
 
 #import "TopShopCell.h"
 
+@interface TopShopCell ()
+
+@property (nonatomic, strong) IBOutlet UIImageView *logoImageView;
+@property (nonatomic, strong) IBOutlet UILabel *nameLabel;
+
+@end
+
 @implementation TopShopCell
 
 - (void)awakeFromNib {
     // Initialization code
+}
+
+- (void)fillCellWithData:(NSDictionary *)dict{
+    [_logoImageView setImageWithURLString:dict[@"shopLogo"]];
+    _nameLabel.text = dict[@"shopName"];
 }
 
 @end

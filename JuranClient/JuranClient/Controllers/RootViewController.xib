@@ -7,6 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RootViewController">
             <connections>
+                <outlet property="footerView" destination="8B8-BV-ytF" id="MkO-tr-Mo0"/>
+                <outlet property="headerView" destination="sBg-TC-tmv" id="V7n-VN-LLA"/>
+                <outlet property="menuView" destination="f1r-iL-9eS" id="Rli-MW-wuS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,23 +22,12 @@
             <point key="canvasLocation" x="356" y="280"/>
         </view>
         <view autoresizesSubviews="NO" contentMode="scaleToFill" id="sBg-TC-tmv">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="316"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="309"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view autoresizesSubviews="NO" contentMode="scaleToFill" id="f1r-iL-9eS">
-                    <rect key="frame" x="-1" y="173" width="322" height="143"/>
+                    <rect key="frame" x="0.0" y="165" width="320" height="144"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ebd-L0-zvu">
-                            <rect key="frame" x="24" y="50" width="72" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <state key="normal" title="热卖商品">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
-                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
@@ -44,7 +36,35 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="188" y="-353"/>
+            <point key="canvasLocation" x="-107" y="-338.5"/>
+        </view>
+        <view contentMode="scaleToFill" id="8B8-BV-ytF">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看更多案例" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MT9-Ho-cH2">
+                    <rect key="frame" x="5" y="0.0" width="310" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cxy-s3-KMZ">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onMore:" destination="-1" eventType="touchUpInside" id="yPx-vm-egr"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-183" y="150"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -22,7 +22,7 @@
     if (self = [super initWithFrame:CGRectMake(point.x, point.y, 125, 16)]) {
         self.backgroundColor = [UIColor clearColor];
         for (int i = 0; i<5; i++) {
-            UIImage *image = [UIImage imageNamed:@"icon-star"];
+            UIImage *image = [UIImage imageNamed:@"product-icon-star"];
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i*(10+image.size.width), 0, image.size.width, image.size.height)];
             imageView.image = image;
             imageView.tag = 0;
