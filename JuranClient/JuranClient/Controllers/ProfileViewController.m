@@ -32,6 +32,8 @@
 #else
 #import "PrivateMessageViewController.h"
 #import "MyDemandViewController.h"
+
+#import "MyDemandCopyViewController.h"
 #endif
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -294,7 +296,9 @@
 #ifndef kJuranDesigner
     //需求
     _user.hasNewBidCount = 0;
-    MyDemandViewController *vc = [[MyDemandViewController alloc] init];
+    
+//    MyDemandViewController *vc = [[MyDemandViewController alloc] init];
+    MyDemandCopyViewController *vc = [[MyDemandCopyViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 #else
