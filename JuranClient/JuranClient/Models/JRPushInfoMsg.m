@@ -16,6 +16,9 @@
         if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
             return self;
         }
+        /*
+         {"ifRead":false,"webMessageList":[{"msgId":702,"msgType":2,"isUnread":0,"gmtMsgExpire":null,"msgTitle":"设计师已为您创建设计订单","gmtCreate":"2015/04/20 12:30:55","msgAbstract":null,"msgContent":null}
+         */
         self.msgId = [dict getIntValueForKey:@"msgId" defaultValue:0];
         self.msgType = [dict getIntValueForKey:@"msgType" defaultValue:0];
         self.isUnread = [dict getIntValueForKey:@"isUnread" defaultValue:0];
@@ -24,6 +27,7 @@
         self.msgTitle = [dict getStringValueForKey:@"msgTitle" defaultValue:@""];
         self.gmtCreate = [dict getStringValueForKey:@"gmtCreate" defaultValue:@""];
         self.msgAbstract = [dict getStringValueForKey:@"msgAbstract" defaultValue:@""];
+        
     }
     
     return self;
