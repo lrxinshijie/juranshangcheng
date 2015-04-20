@@ -521,6 +521,12 @@
 		146CE9C61A47EB0700FAA87F /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */; };
 		147282C71A67673500FB0CFB /* AHReach.m in Sources */ = {isa = PBXBuildFile; fileRef = 147282C61A67673500FB0CFB /* AHReach.m */; };
 		147282C81A67673500FB0CFB /* AHReach.m in Sources */ = {isa = PBXBuildFile; fileRef = 147282C61A67673500FB0CFB /* AHReach.m */; };
+		1472FF7C1AE4AB8E00735929 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1472FF7B1AE4AB8E00735929 /* LocationManager.m */; };
+		1472FF7D1AE4AB8E00735929 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1472FF7B1AE4AB8E00735929 /* LocationManager.m */; };
+		1472FF811AE4EC5900735929 /* ProductLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1472FF7F1AE4EC5900735929 /* ProductLetterViewController.m */; };
+		1472FF821AE4EC5900735929 /* ProductLetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1472FF7F1AE4EC5900735929 /* ProductLetterViewController.m */; };
+		1472FF831AE4EC5900735929 /* ProductLetterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1472FF801AE4EC5900735929 /* ProductLetterViewController.xib */; };
+		1472FF841AE4EC5900735929 /* ProductLetterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1472FF801AE4EC5900735929 /* ProductLetterViewController.xib */; };
 		147395AE1A4E634E00CB34E7 /* JRPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 147395AD1A4E634E00CB34E7 /* JRPageControl.m */; };
 		147395B11A4EAFC600CB34E7 /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 147395B01A4EAFC600CB34E7 /* SMPageControl.m */; };
 		1476DA861A21DAC50006E9E0 /* DesignerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1476DA841A21DAC50006E9E0 /* DesignerDetailViewController.m */; };
@@ -1942,6 +1948,11 @@
 		146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		147282C51A67673500FB0CFB /* AHReach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHReach.h; sourceTree = "<group>"; };
 		147282C61A67673500FB0CFB /* AHReach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHReach.m; sourceTree = "<group>"; };
+		1472FF7A1AE4AB8E00735929 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		1472FF7B1AE4AB8E00735929 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		1472FF7E1AE4EC5900735929 /* ProductLetterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductLetterViewController.h; sourceTree = "<group>"; };
+		1472FF7F1AE4EC5900735929 /* ProductLetterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductLetterViewController.m; sourceTree = "<group>"; };
+		1472FF801AE4EC5900735929 /* ProductLetterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductLetterViewController.xib; sourceTree = "<group>"; };
 		147395AC1A4E634E00CB34E7 /* JRPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRPageControl.h; sourceTree = "<group>"; };
 		147395AD1A4E634E00CB34E7 /* JRPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRPageControl.m; sourceTree = "<group>"; };
 		147395AF1A4EAFC600CB34E7 /* SMPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPageControl.h; sourceTree = "<group>"; };
@@ -4068,9 +4079,6 @@
 				14A3FDBE1A2C9EB7002BEFF4 /* MyDemandViewController.h */,
 				14A3FDBF1A2C9EB7002BEFF4 /* MyDemandViewController.m */,
 				14A3FDC01A2C9EB7002BEFF4 /* MyDemandViewController.xib */,
-				37ECDD181AE1418F00BE6027 /* MyDemandCopyViewController.h */,
-				37ECDD191AE1418F00BE6027 /* MyDemandCopyViewController.m */,
-				37ECDD1A1AE1418F00BE6027 /* MyDemandCopyViewController.xib */,
 				145471C31A3885DB00428BCB /* DemandDetailViewController.h */,
 				145471C41A3885DB00428BCB /* DemandDetailViewController.m */,
 				145471C51A3885DB00428BCB /* DemandDetailViewController.xib */,
@@ -4421,6 +4429,8 @@
 		A987ED6C1A20920500CED7CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1472FF7A1AE4AB8E00735929 /* LocationManager.h */,
+				1472FF7B1AE4AB8E00735929 /* LocationManager.m */,
 				14B5C0481ACE31D70043BB44 /* DeviceHardware.h */,
 				14B5C0491ACE31D70043BB44 /* DeviceHardware.m */,
 				A9A067231A3D92EB0059D73B /* ALGetPhoto.h */,
@@ -4871,6 +4881,9 @@
 				A9A413531ADE94C800074BB0 /* ProductListViewController.h */,
 				A9A413541ADE94C800074BB0 /* ProductListViewController.m */,
 				A9A413551ADE94C800074BB0 /* ProductListViewController.xib */,
+				1472FF7E1AE4EC5900735929 /* ProductLetterViewController.h */,
+				1472FF7F1AE4EC5900735929 /* ProductLetterViewController.m */,
+				1472FF801AE4EC5900735929 /* ProductLetterViewController.xib */,
 			);
 			name = Product;
 			sourceTree = "<group>";
@@ -5783,6 +5796,7 @@
 				BD5187041A5D0ED700BE508A /* menu_qr_default@2x.png in Resources */,
 				BD5187341A5D0ED700BE508A /* service_normal_4@2x.png in Resources */,
 				BD5185F81A5D0ED700BE508A /* icon-filter-active@2x.png in Resources */,
+				1472FF841AE4EC5900735929 /* ProductLetterViewController.xib in Resources */,
 				1468580A1AA54DD30089A0CE /* AlipaySDK.bundle in Resources */,
 				BD51860E1A5D0ED700BE508A /* image_default@2x.png in Resources */,
 				37F165E91A89005700F624FA /* OrderCommentViewController.xib in Resources */,
@@ -6352,6 +6366,7 @@
 				BD5187591A5D0ED700BE508A /* navbar_leftbtn_logo@2x.png in Resources */,
 				BD5186891A5D0ED700BE508A /* icon_personal_hudong@2x.png in Resources */,
 				BD5185E11A5D0ED700BE508A /* case_default_image@2x.png in Resources */,
+				1472FF831AE4EC5900735929 /* ProductLetterViewController.xib in Resources */,
 				14BCD78E1A8605B400825A90 /* order_btn_accessory@2x.png in Resources */,
 				1F2D500D1AD7C882005486D2 /* QRBaseViewController.xib in Resources */,
 				371FBEF71A6A394B00635D3D /* icon_video_play@2x.png in Resources */,
@@ -6728,6 +6743,7 @@
 				A98015111AD6B267002CB4C9 /* DiscoverViewController.m in Sources */,
 				1415F97A1A5CD1CB003D0C29 /* RegistViewController.m in Sources */,
 				1415F97B1A5CD1CB003D0C29 /* UIBubbleTableViewCell.m in Sources */,
+				1472FF7D1AE4AB8E00735929 /* LocationManager.m in Sources */,
 				1415F97C1A5CD1CB003D0C29 /* DDHPreviewViewController.m in Sources */,
 				1415F97D1A5CD1CB003D0C29 /* QuestionDetailViewController.m in Sources */,
 				1415F97E1A5CD1CB003D0C29 /* PrivateLetterViewController.m in Sources */,
@@ -6790,6 +6806,7 @@
 				1415F9A51A5CD1CB003D0C29 /* OldTopicViewController.m in Sources */,
 				37A0F81D1A6B96C300611760 /* ActivityDetailViewController.m in Sources */,
 				1415F9A61A5CD1CB003D0C29 /* UploadCardImageViewController.m in Sources */,
+				1472FF821AE4EC5900735929 /* ProductLetterViewController.m in Sources */,
 				1415F9A71A5CD1CB003D0C29 /* ResetEmailViewController.m in Sources */,
 				1415F9A81A5CD1CB003D0C29 /* UIBubbleTypingTableViewCell.m in Sources */,
 				1415F9A91A5CD1CB003D0C29 /* NSDate+RFC1123.m in Sources */,
@@ -7128,6 +7145,7 @@
 				14646DB61A3CA1A500E5D6F6 /* OldTopicViewController.m in Sources */,
 				37F0E7011A7D2735004CCCB2 /* NSData+ImageContentType.m in Sources */,
 				37F0E7191A7D2735004CCCB2 /* UIImageView+HighlightedWebCache.m in Sources */,
+				1472FF811AE4EC5900735929 /* ProductLetterViewController.m in Sources */,
 				37D010111A566AF900EC658D /* UploadCardImageViewController.m in Sources */,
 				A9C3984A1A29D98C006A8AAB /* ResetEmailViewController.m in Sources */,
 				A9A9F2DD1AE361CC00A03C9B /* ProductCell.m in Sources */,
@@ -7282,6 +7300,7 @@
 				A9C398451A29D25F006A8AAB /* ResetPasswordViewController.m in Sources */,
 				A9A7D4AB1A503715001A70FF /* JRWebViewController.m in Sources */,
 				A9D654B71A27642800A80253 /* JSONValueTransformer.m in Sources */,
+				1472FF7C1AE4AB8E00735929 /* LocationManager.m in Sources */,
 				14EDB38D1A3B4FE200E5AC77 /* FeedBackViewController.m in Sources */,
 				A987EE5B1A209E6100CED7CD /* JRCase.m in Sources */,
 				A9B4EB791A371F120091AAAF /* CaseCollectViewController.m in Sources */,
@@ -7561,7 +7580,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8ff8e1b2-afbd-40bc-9dcc-4ef6164050f4";
+				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv64";
 				VERSIONING_SYSTEM = "";

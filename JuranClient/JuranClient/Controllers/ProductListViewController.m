@@ -35,7 +35,7 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"shopId": @(6)};
+    NSDictionary *param = @{@"shopId": @(5)};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_SHOP_RECOMMEND parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

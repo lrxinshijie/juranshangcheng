@@ -136,14 +136,6 @@
 //    self.fullScreenScroll.additionalOffsetYToStartShowing = -44;
 }
 
-- (void)navigationBarDidChangeToCollapsed:(BOOL)collapsed{
-    ASLog();
-}
-
-- (void)navigationBarDidChangeToExpanded:(BOOL)expanded{
-    ASLog();
-}
-
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
 {
     // This enables the user to scroll down the navbar by tapping the status bar.

@@ -13,6 +13,8 @@
 #import "ProductCell.h"
 #import "JRShop.h"
 #import "ShopHomeViewController.h"
+#import "LocationManager.h"
+#import "ProductLetterViewController.h"
 
 @interface ProductDetailViewController () <UITableViewDelegate, UITableViewDataSource, JRSegmentControlDelegate>
 
@@ -157,6 +159,9 @@
 }
 
 - (IBAction)onPrivate:(id)sender{
+    ProductLetterViewController *pl = [[ProductLetterViewController alloc] init];
+    pl.product = _product;
+    [self.navigationController pushViewController:pl animated:YES];
 }
 
 - (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
@@ -203,7 +208,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if ([tableView isEqual:_baseTableView]) {
-        return 3;
+        return 2;
     }
     
     return 1;
@@ -213,8 +218,6 @@
     NSInteger count = 0;
     if ([tableView isEqual:_baseTableView]) {
         if (section == 0) {
-            count = 2;
-        }else if (section == 1){
             count = 2;
         }else{
             count = 1;
@@ -248,7 +251,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat heigth = 44;
-    if ([tableView isEqual:_baseTableView] && indexPath.section == 2) {
+    if ([tableView isEqual:_baseTableView] && indexPath.section == 1) {
         heigth = CGRectGetHeight(_shopView.frame);
     }else if ([tableView isEqual:_detailTableView] && _segCtl.selectedIndex == 2){
         heigth = 100;
@@ -295,10 +298,6 @@
                     [cell addSubview:_locationView];
                 }
             }else if (indexPath.section == 1){
-                if (indexPath.row == 0) {
-                    cell.textLabel.text = @"商品评价";
-                }
-            }else if (indexPath.section == 2){
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 [_shopView removeFromSuperview];
                 [cell addSubview:_shopView];
@@ -330,11 +329,12 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if ([scrollView isEqual:_scrollView] && scrollView.contentOffset.y >= CGRectGetHeight(_scrollView.frame)) {
-        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
-    }else if ([scrollView isEqual:_baseTableView]){
-        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:_baseTableView.contentOffset.y/320.0];
+    if ([scrollView isEqual:_scrollView]) {
+        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha: (scrollView.contentOffset.y >= CGRectGetHeight(scrollView.frame) ? 1 : 0)];
     }
+//    else if ([scrollView isEqual:_baseTableView]){
+//        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:_baseTableView.contentOffset.y/320.0];
+//    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
