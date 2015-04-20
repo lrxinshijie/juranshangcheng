@@ -39,6 +39,9 @@
                     <state key="normal" backgroundImage="trans-navi-left-button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="leftNaviClick:" destination="-1" eventType="touchUpInside" id="2Ly-lF-hxL"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="L9a-gw-WIa">
                     <rect key="frame" x="277" y="32" width="34" height="34"/>
@@ -46,6 +49,9 @@
                     <state key="normal" backgroundImage="trans-navi-right-button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="rightNaviClick:" destination="-1" eventType="touchUpInside" id="HEb-wo-gKW"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -60,8 +66,17 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yjB-rn-94p" userLabel="室内导航">
+                    <rect key="frame" x="0.0" y="1" width="160" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="  室内导航" image="icon-map-indoor-navi.png">
+                        <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="379-Qg-ode">
-                    <rect key="frame" x="0.0" y="1" width="320" height="50"/>
+                    <rect key="frame" x="160" y="1" width="160" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <state key="normal" title="  为我导航" image="icon-map-navi.png">
@@ -93,7 +108,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="549" y="468.5"/>
+            <point key="canvasLocation" x="549" y="468"/>
         </view>
         <view contentMode="scaleToFill" id="w2N-P4-Vac">
             <rect key="frame" x="0.0" y="0.0" width="320" height="29"/>
@@ -125,6 +140,7 @@
         </view>
     </objects>
     <resources>
+        <image name="icon-map-indoor-navi.png" width="19" height="19"/>
         <image name="icon-map-navi.png" width="20" height="19"/>
         <image name="icon-map-node.png" width="10" height="13"/>
         <image name="trans-navi-left-button.png" width="34" height="34"/>

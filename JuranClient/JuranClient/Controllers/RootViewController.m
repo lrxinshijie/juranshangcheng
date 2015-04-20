@@ -14,17 +14,19 @@
 #import "EScrollerView.h"
 #import "JRPhotoScrollViewController.h"
 #import "JRWebViewController.h"
+#import "SDWebImageDownloader.h"
+#import "UIButton+WebCache.h"
 
-
-@interface RootViewController ()
-//<UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate>
+@interface RootViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, strong) NSMutableArray *adInfos;
 @property (nonatomic, strong) EScrollerView *bannerView;
 @property (nonatomic, strong) IBOutlet UIView *menuView;
-
+@property (nonatomic, strong) IBOutlet UIView *headerView;
+@property (nonatomic, strong) IBOutlet UIView *footerView;
+@property (nonatomic, strong) NSArray *iconInfoList;
 
 @end
 
@@ -38,6 +40,171 @@
     
     [self configureScan];
     [self configureSearchAndMore];
+    
+    [self setupUI];
+}
+
+- (void)setupUI{
+    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    _tableView.backgroundColor = RGBColor(237, 237, 237);
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:_tableView];
+    
+    _tableView.tableHeaderView = _headerView;
+    _tableView.tableFooterView = _footerView;
+    
+    [self loadMenu];
+    [self loadAd];
+}
+
+- (void)loadAd{
+    NSDictionary *param = @{@"adCode": @"app_consumer_index_roll",
+                            @"areaCode": @"110000",
+                            @"type": @(7)};
+    [self showHUD];
+    
+    [[ALEngine shareEngine] pathURL:JR_GET_BANNER_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSArray *bannerList = [data objectForKey:@"bannerList"];
+            if (bannerList.count > 0) {
+                if (_bannerView) {
+                    [_bannerView removeFromSuperview];
+                }
+                
+                self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
+                self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentRight];
+                _bannerView.delegate = self;
+                [_headerView addSubview:_bannerView];
+            }
+            
+        }
+        [self loadData];
+    }];
+}
+
+- (void)loadMenu{
+//    [self showHUD];
+    
+    [[ALEngine shareEngine] pathURL:JR_HOME_NAVIGATION parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            [_menuView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
+                [subview removeFromSuperview];
+            }];
+            
+            self.iconInfoList = [data objectForKey:@"iconInfoList"];
+            UIImage *defaultImage = [UIImage imageWithColor:RGBColor(190, 190, 190) size:CGSizeMake(30, 30)];
+            
+            [_iconInfoList enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+                NSString *iconImage = [dict getStringValueForKey:@"iconImage" defaultValue:@""];
+//                NSString *link = [dict getStringValueForKey:@"link" defaultValue:@""];
+                NSString *name = [dict getStringValueForKey:@"name" defaultValue:@""];
+                
+                
+                UIButton *btn = [_menuView buttonWithFrame:CGRectMake(80 * (idx % 4), (idx/4)*72, 80, 72) target:self action:@selector(onMenu:) title:name image:defaultImage];
+                [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                btn.tag = idx;
+//                btn.backgroundColor = [UIColor redColor];
+                btn.titleEdgeInsets = UIEdgeInsetsMake(35, -25, 0, 0);
+                btn.imageEdgeInsets = UIEdgeInsetsMake(-15, 25, 0, 0);
+                NSString *imageUrl = [NSString stringWithFormat:@"%@/%@", JR_IMAGE_SERVICE, iconImage];
+                NSLog(@"%@", imageUrl);
+                
+                [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageUrl] options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                    if (finished && image) {
+                        UIImage *i = [UIImage image:image fitInSize:CGSizeMake(30, 30)];
+                        [btn setImage:i forState:UIControlStateNormal];
+                    }
+                }];
+                [_menuView addSubview:btn];
+                
+//                *stop = YES;
+                
+            }];
+            
+            
+        }
+    }];
+}
+
+- (void)onMenu:(UIButton *)btn{
+    NSDictionary *dict = _iconInfoList[btn.tag];
+    NSString *link = [dict getStringValueForKey:@"link" defaultValue:@""];
+    [Public jumpFromLink:link];
+}
+
+- (IBAction)onMore:(id)sender{
+    
+    
+}
+
+- (void)loadData{
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", 0],@"onePageCount": kOnePageCount}];
+    [param addEntriesFromDictionary:[[DefaultData sharedData] objectForKey:@"caseDefaultParam"]];
+    
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_HOME_CASE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSArray *projectList = [data objectForKey:@"projectGeneralDtoList"];
+            NSMutableArray *rows = [JRCase buildUpWithValue:projectList];
+            self.datas = rows;
+        }
+        
+        [_tableView reloadData];
+    }];
+}
+
+- (void)EScrollerViewDidClicked:(NSUInteger)index{
+    JRAdInfo *ad = [_adInfos objectAtIndex:index];
+    ASLog(@"index:%d,%@",index,ad.link);
+    [Public jumpFromLink:ad.link];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [_datas count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == [_datas count] - 1) {
+        return 275;
+    }
+    
+    return 270;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    cell.backgroundColor = [UIColor clearColor];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"CaseCell";
+    CaseCell *cell = (CaseCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        cell = (CaseCell *)[nibs firstObject];
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    JRCase *c = [_datas objectAtIndex:indexPath.row];
+    [cell fillCellWithCase:c];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    JRCase *cs = [_datas objectAtIndex:indexPath.row];
+    
+    JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -38,6 +38,10 @@
                     </view>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="labelDistance" destination="SpG-Cx-Ze2" id="Rvf-Ta-aXh"/>
+                <outlet property="labelName" destination="GcQ-YW-wJ5" id="47N-Ze-8TE"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

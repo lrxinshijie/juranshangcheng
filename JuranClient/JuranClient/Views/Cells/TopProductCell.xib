@@ -28,6 +28,10 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <connections>
+                <outlet property="logoImageView" destination="rlc-bc-E04" id="h4G-Yi-lWN"/>
+                <outlet property="nameLabel" destination="HcL-Lj-dq8" id="fJl-Em-NEY"/>
+            </connections>
             <point key="canvasLocation" x="182.5" y="200.5"/>
         </collectionViewCell>
     </objects>

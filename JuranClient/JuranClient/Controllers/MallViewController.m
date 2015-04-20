@@ -9,10 +9,13 @@
 #import "MallViewController.h"
 #import "ShopHomeViewController.h"
 #import "NaviStoreListViewController.h"
+#import "FilterInShopViewController.h"
+#import "NaviStoreInfoViewController.h"
 #import "JRAdInfo.h"
 #import "EScrollerView.h"
 #import "TopProductCell.h"
 #import "TopShopCell.h"
+#import "ProductListViewController.h"
 
 @interface MallViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -38,6 +41,7 @@
 @implementation MallViewController
 
 - (void)viewDidLoad {
+    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
@@ -47,6 +51,7 @@
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.tableHeaderView = _headerView;
+    _tableView.backgroundColor = RGBColor(237, 237, 237);
     [self.view addSubview:_tableView];
     
     [_shopCollectionView registerNib:[UINib nibWithNibName:@"TopShopCell" bundle:nil] forCellWithReuseIdentifier:@"TopShopCell"];
@@ -58,6 +63,34 @@
     [self loadAd];
 }
 
+- (void)loadData{
+    NSDictionary *param = @{@"cityName": [Public defaultCityName]};
+    [[ALEngine shareEngine] pathURL:JR_MALL_ACTIVITY_SHOP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (error || ![data isKindOfClass:[NSDictionary class]]) {
+            [self hideHUD];
+            return;
+        }
+        
+        NSArray *activeShopList = [data objectForKey:@"activeShopList"];
+        if (activeShopList && [activeShopList isKindOfClass:[NSArray class]]) {
+            self.shops = activeShopList;
+            [_shopCollectionView reloadData];
+        }
+        
+        
+        [[ALEngine shareEngine] pathURL:JR_MALL_ACTIVITY_PRODUCT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            [self hideHUD];
+            if (!error && [data isKindOfClass:[NSDictionary class]]) {
+                NSArray *activeGoodsList = [data objectForKey:@"activeGoodsList"];
+                if (activeGoodsList && [activeGoodsList isKindOfClass:[NSArray class]]) {
+                    self.products = activeGoodsList;
+                    [_productCollectionView reloadData];
+                }
+            }
+        }];
+    }];
+}
+
 - (void)loadAd{
     NSDictionary *param = @{@"adCode": @"app_designer_index_roll",
                             @"areaCode": @"110000",
@@ -65,21 +98,23 @@
     [self showHUD];
     
     [[ALEngine shareEngine] pathURL:JR_GET_BANNER_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
-        if (!error) {
-            NSArray *bannerList = [data objectForKey:@"bannerList"];
-            if (bannerList.count > 0) {
-                self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
-                self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentCenter];
-                _bannerView.delegate = self;
-                [_headerView addSubview:_bannerView];
-            }
+        if (error) {
+            [self hideHUD];
+            return;
         }
+        
+        NSArray *bannerList = [data objectForKey:@"bannerList"];
+        if (bannerList.count > 0) {
+            self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
+            self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentRight];
+            _bannerView.delegate = self;
+            [_headerView addSubview:_bannerView];
+        }
+        [self loadData];
     }];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 10;
     if ([collectionView isEqual:_shopCollectionView]) {
         return [_shops count];
     }
@@ -90,11 +125,13 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if ([collectionView isEqual:_shopCollectionView]) {
         TopShopCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TopShopCell" forIndexPath:indexPath];
-        
+        NSDictionary *dict = _shops[indexPath.row];
+        [cell fillCellWithData:dict];
         return cell;
     }else{
         TopProductCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TopProductCell" forIndexPath:indexPath];
-        
+        NSDictionary *dict = _products[indexPath.row];
+        [cell fillCellWithData:dict];
         return cell;
     }
 }
@@ -146,13 +183,24 @@
 }
 
 - (void)onCity:(UIButton *)sender{
-    
+    ProductListViewController *pl = [[ProductListViewController alloc] init];
+    pl.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:pl animated:YES];
 }
 
 - (IBAction)onShop:(id)sender{
-    ShopHomeViewController *vc = [[ShopHomeViewController alloc] init];
+//    ShopHomeViewController *vc = [[ShopHomeViewController alloc] init];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+    FilterInShopViewController *vc = [[FilterInShopViewController alloc]init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+//    NaviStoreListViewController *vc = [[NaviStoreListViewController alloc]init];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+//    NaviStoreInfoViewController *vc = [[NaviStoreInfoViewController alloc]init];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

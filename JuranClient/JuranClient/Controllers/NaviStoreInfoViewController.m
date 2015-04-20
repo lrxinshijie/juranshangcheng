@@ -15,6 +15,8 @@
 @property (strong, nonatomic) IBOutlet UIView *mapBottomView;
 @property (strong, nonatomic) IBOutlet UIView *storeInfoView;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+- (IBAction)leftNaviClick:(id)sender;
+- (IBAction)rightNaviClick:(id)sender;
 @end
 
 @implementation NaviStoreInfoViewController
@@ -22,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationItem.title = @"门店导航";
+    self.navigationItem.title = @"门店详情";
     self.navigationController.navigationBarHidden = YES;
     _scrollView.contentSize = CGSizeMake(kWindowWidth, kWindowHeight+kWindowWidth+20);
     _scrollView.canCancelContentTouches = NO;//是否可以中断touches
@@ -67,14 +69,20 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"storeCode": [NSString stringWithFormat:@"%d",1001],
+    NSDictionary *param = @{@"storeCode": [NSString stringWithFormat:@"%@",@"DS1"],
                             };
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:@"http://54.223.161.28:8080/shop/platformCustomerService.json" parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_NAVI_STORE_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             
         }
     }];
+}
+- (IBAction)leftNaviClick:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)rightNaviClick:(id)sender {
 }
 @end

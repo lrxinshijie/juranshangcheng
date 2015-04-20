@@ -29,6 +29,10 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <size key="customSize" width="128" height="140"/>
+            <connections>
+                <outlet property="logoImageView" destination="rLv-bV-xYe" id="v5Q-hY-zHP"/>
+                <outlet property="nameLabel" destination="HjC-9n-WBH" id="cd7-RK-PjE"/>
+            </connections>
             <point key="canvasLocation" x="401.5" y="240"/>
         </collectionViewCell>
     </objects>

@@ -10,4 +10,6 @@
 
 @interface TopProductCell : UICollectionViewCell
 
+- (void)fillCellWithData:(NSDictionary *)dict;
+
 @end

@@ -8,6 +8,9 @@
 
 #import "ALViewController.h"
 
+@class JRProduct;
 @interface ProductDetailViewController : ALViewController
+
+@property (nonatomic, strong) JRProduct *product;
 
 @end
