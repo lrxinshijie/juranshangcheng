@@ -16,6 +16,7 @@
 #import "JRWebViewController.h"
 #import "SDWebImageDownloader.h"
 #import "UIButton+WebCache.h"
+#import "CaseViewController.h"
 
 @interface RootViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate>
 
@@ -135,7 +136,9 @@
 }
 
 - (IBAction)onMore:(id)sender{
-    
+    CaseViewController *cv = [[CaseViewController alloc] init];
+    cv.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:cv animated:YES];
     
 }
 
