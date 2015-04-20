@@ -859,6 +859,10 @@
 		37DC90F91A9F5A3C004C7898 /* ContractViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DC90F51A9F591E004C7898 /* ContractViewController.xib */; };
 		37DD3CA41AE202C60075F3AA /* OrderListCopyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DD3CA21AE202C60075F3AA /* OrderListCopyViewController.m */; };
 		37DD3CA51AE202C60075F3AA /* OrderListCopyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DD3CA31AE202C60075F3AA /* OrderListCopyViewController.xib */; };
+		37DDB1BF1AE54BE4003475B9 /* PreDisclosureInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDB1BD1AE54BE4003475B9 /* PreDisclosureInfoViewController.m */; };
+		37DDB1C01AE54BE4003475B9 /* PreDisclosureInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDB1BD1AE54BE4003475B9 /* PreDisclosureInfoViewController.m */; };
+		37DDB1C11AE54BE4003475B9 /* PreDisclosureInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DDB1BE1AE54BE4003475B9 /* PreDisclosureInfoViewController.xib */; };
+		37DDB1C21AE54BE4003475B9 /* PreDisclosureInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DDB1BE1AE54BE4003475B9 /* PreDisclosureInfoViewController.xib */; };
 		37E589821AB1B73200CB5FA4 /* WikiDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */; };
 		37E589831AB1B73200CB5FA4 /* WikiDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */; };
 		37E589841AB1B73200CB5FA4 /* WikiDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */; };
@@ -2329,6 +2333,9 @@
 		37DD3CA11AE202C60075F3AA /* OrderListCopyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListCopyViewController.h; sourceTree = "<group>"; };
 		37DD3CA21AE202C60075F3AA /* OrderListCopyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListCopyViewController.m; sourceTree = "<group>"; };
 		37DD3CA31AE202C60075F3AA /* OrderListCopyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderListCopyViewController.xib; sourceTree = "<group>"; };
+		37DDB1BC1AE54BE4003475B9 /* PreDisclosureInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreDisclosureInfoViewController.h; sourceTree = "<group>"; };
+		37DDB1BD1AE54BE4003475B9 /* PreDisclosureInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreDisclosureInfoViewController.m; sourceTree = "<group>"; };
+		37DDB1BE1AE54BE4003475B9 /* PreDisclosureInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreDisclosureInfoViewController.xib; sourceTree = "<group>"; };
 		37E5897F1AB1B73200CB5FA4 /* WikiDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiDetailViewController.h; sourceTree = "<group>"; };
 		37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiDetailViewController.m; sourceTree = "<group>"; };
 		37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WikiDetailViewController.xib; sourceTree = "<group>"; };
@@ -3628,6 +3635,9 @@
 				3721D0931AA23089008ADB34 /* ContractPreviewViewController.h */,
 				3721D0941AA23089008ADB34 /* ContractPreviewViewController.m */,
 				3721D0951AA23089008ADB34 /* ContractPreviewViewController.xib */,
+				37DDB1BC1AE54BE4003475B9 /* PreDisclosureInfoViewController.h */,
+				37DDB1BD1AE54BE4003475B9 /* PreDisclosureInfoViewController.m */,
+				37DDB1BE1AE54BE4003475B9 /* PreDisclosureInfoViewController.xib */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -5824,6 +5834,7 @@
 				BD5186281A5D0ED700BE508A /* icon_xunzhang_2@2x.png in Resources */,
 				BD5187221A5D0ED700BE508A /* service_highlighted_7@2x.png in Resources */,
 				BD5186F61A5D0ED700BE508A /* menu_about_select@2x.png in Resources */,
+				37DDB1C21AE54BE4003475B9 /* PreDisclosureInfoViewController.xib in Resources */,
 				BD5187AE1A5D344D00BE508A /* icon_topic@2x.png in Resources */,
 				371907BA1AA5FA8900A76192 /* order_create@2x.png in Resources */,
 				BD5187841A5D0ED700BE508A /* nav-home-active@2x.png in Resources */,
@@ -6374,6 +6385,7 @@
 				BD5185EB1A5D0ED700BE508A /* case_icon_sixin@2x.png in Resources */,
 				14CCB2FD1ADCFEF30041AA38 /* icon-brandlist@2x.png in Resources */,
 				1F2D4FFF1AD77F9E005486D2 /* moveLine@2x.png in Resources */,
+				37DDB1C11AE54BE4003475B9 /* PreDisclosureInfoViewController.xib in Resources */,
 				37DBEECF1AA8A21D00B485A8 /* look_image@2x.png in Resources */,
 				140C9ED41ADB630C0079391A /* icon-search@2x.png in Resources */,
 				BD5187011A5D0ED700BE508A /* menu_baike_select@2x.png in Resources */,
@@ -6714,6 +6726,7 @@
 				371FBEF51A6A37A400635D3D /* WikiCell.m in Sources */,
 				BD8B9C421AAEEDC80063BCFD /* WelcomeView.m in Sources */,
 				1415F96A1A5CD1CB003D0C29 /* JSONKeyMapper.m in Sources */,
+				37DDB1C01AE54BE4003475B9 /* PreDisclosureInfoViewController.m in Sources */,
 				1415F96B1A5CD1CB003D0C29 /* UIBubbleHeaderTableViewCell.m in Sources */,
 				1415F96C1A5CD1CB003D0C29 /* NSMutableString+ASCategory.m in Sources */,
 				1415F96D1A5CD1CB003D0C29 /* NSDictionary+RequestEncoding.m in Sources */,
@@ -7236,6 +7249,7 @@
 				1F2D50021AD77F9E005486D2 /* QRCodeViewController.m in Sources */,
 				A987EDF31A20920500CED7CD /* UIView+ASCategory.m in Sources */,
 				1FD3B83A1AD8F83E004E849F /* SearchHistoryManager.m in Sources */,
+				37DDB1BF1AE54BE4003475B9 /* PreDisclosureInfoViewController.m in Sources */,
 				14FB07F61A835BBA00428DE5 /* JROrder.m in Sources */,
 				149BE7121A4567F800A9E1EC /* ZoomInImageView.m in Sources */,
 				14490CA91A2B5D50001CB160 /* AccountManageViewController.m in Sources */,

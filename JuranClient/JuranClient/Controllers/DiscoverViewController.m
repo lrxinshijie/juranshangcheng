@@ -24,7 +24,8 @@
 #import "JRWiki.h"
 #import "WikiCell.h"
 
-
+#import "JRTopic.h"
+#import "NewestTopicViewController.h"
 
 @interface DiscoverViewController ()<JRSegmentControlDelegate,UITableViewDataSource, UITableViewDelegate, QuestionFilterViewDelegate, WikiFilterViewControllerDelegate>
 
@@ -70,6 +71,7 @@
 }
 
 - (void)setupUI{
+    _segment.showUnderLine = YES;
     [_segment setTitleList:@[@"专题", @"百科", @"问答", @"话题"]];
     _segment.delegate = self;
     
@@ -117,7 +119,7 @@
     }else if (_segment.selectedIndex == 2){
         return JR_GET_QUESTIONLIST;
     }else if (_segment.selectedIndex == 3){
-        
+        return JR_GET_OLDTOPICLIST;
     }
     return @"";
 }
@@ -148,7 +150,7 @@
             }else if (_segment.selectedIndex == 2){
                 rows = [JRQuestion buildUpWithValue:[data objectForKey:@"questionList"]];
             }else if (_segment.selectedIndex == 3){
-                
+                rows = [JRTopic buildUpDetailWithValue:[data objectForKey:@"topicList"]];
             }
             
             if (_currentPage > 1) {
@@ -171,17 +173,17 @@
         [_datas removeAllObjects];
         [_tableView reloadData];
     }
+    _tableView.tableHeaderView = nil;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (index == 0) {
-        _tableView.tableHeaderView = nil;
+        
     }else if (index == 1){
-        _tableView.tableHeaderView = nil;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }else if (index == 2){
         _tableView.tableHeaderView = _questionHeaderView;
         
     }else if (index == 3){
-        
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
     _wikiFilterButton.hidden = index != 1;
     [_tableView headerBeginRefreshing];
@@ -215,7 +217,9 @@
             NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
             cell = (WikiCell *)[nibs firstObject];
         }
-        
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+            cell.layoutMargins = UIEdgeInsetsZero;
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         JRWiki *wiki = [_datas objectAtIndex:indexPath.row];
@@ -237,7 +241,22 @@
         
         return cell;
     }else if (_segment.selectedIndex == 3){
+        static NSString *CellIdentifier = @"OldTopicCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+            cell.layoutMargins = UIEdgeInsetsZero;
+        }
+
+        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellIndicator.png"]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        JRTopic *topic = _datas[indexPath.row];
+        cell.textLabel.text = topic.theme;
+        
+        return cell;
     }
     return nil;
 }
@@ -252,7 +271,7 @@
         [self.questionCell fillCellWithQuestion:q];
         return self.questionCell.contentView.frame.size.height + ((indexPath.row == _datas.count - 1)?5:0);
     }else if (_segment.selectedIndex == 3){
-        
+        return 44;
     }
     return 0;
 }
@@ -266,6 +285,7 @@
         [self.navigationController pushViewController:detail animated:YES];
     }else if (_segment.selectedIndex == 1){
         WikiDetailViewController *vc = [[WikiDetailViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
         JRWiki *wiki = [_datas objectAtIndex:indexPath.row];
         vc.wiki = wiki;
         wiki.browseCount++;
@@ -278,7 +298,11 @@
         vc.isResolved = [q isResolved];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (_segment.selectedIndex == 3){
-        
+        JRTopic *t = _datas[indexPath.row];
+        NewestTopicViewController *vc = [[NewestTopicViewController alloc] init];
+        vc.topic = t;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
 }

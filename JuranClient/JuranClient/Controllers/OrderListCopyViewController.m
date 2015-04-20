@@ -14,6 +14,7 @@
 #import "OrderFilterViewController.h"
 #import "ContractViewController.h"
 #import "JRSegmentControl.h"
+#import "PreDisclosureInfoViewController.h"
 
 @interface OrderListCopyViewController () <UITableViewDataSource, UITableViewDelegate, OrderFilterViewControllerDelegate, JRSegmentControlDelegate>
 
@@ -116,7 +117,11 @@
 #endif
 
 - (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
-    
+    if (_datas) {
+        [_datas removeAllObjects];
+        [_tableView reloadData];
+    }
+    [_tableView headerBeginRefreshing];
 }
 
 - (IBAction)onContract:(id)sender{
