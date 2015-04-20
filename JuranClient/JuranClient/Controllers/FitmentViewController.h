@@ -10,4 +10,6 @@
 
 @interface FitmentViewController : ALViewController
 
+@property (nonatomic, strong) NSMutableDictionary *filterData;
+
 @end
