@@ -12,8 +12,9 @@
 
 @property (nonatomic, copy) NSString *onSaleMinPrice;
 @property (nonatomic, copy) NSString *defaultImage;
-@property (nonatomic, copy) NSString *productName;
-@property (nonatomic, copy) NSString *linkProductId;
+@property (nonatomic, copy) NSString *goodsName;
+@property (nonatomic, copy) NSString *goodsLogo;
+@property (nonatomic, assign) NSInteger linkProductId;
 @property (nonatomic, copy) NSString *pcDesc;
 @property (nonatomic, assign) NSInteger shopId;
 
@@ -21,7 +22,6 @@
 @property (nonatomic, strong) NSArray *attributeList;
 @property (nonatomic, strong) NSArray *shopAddDtoList;
 @property (nonatomic, strong) NSArray *goodsImagesList;
-@property (nonatomic, copy) NSString *goodsIntroduce;
 @property (nonatomic, copy) NSString *priceMax;
 @property (nonatomic, copy) NSString *priceMin;
 @property (nonatomic, assign) BOOL type;

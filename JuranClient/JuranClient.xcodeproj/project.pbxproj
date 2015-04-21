@@ -1000,6 +1000,8 @@
 		A93BF2961A262A290070B72A /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93BF2941A262A290070B72A /* ServiceViewController.xib */; };
 		A93BF29A1A2633D90070B72A /* SetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93BF2981A2633D90070B72A /* SetPasswordViewController.m */; };
 		A93BF29B1A2633D90070B72A /* SetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93BF2991A2633D90070B72A /* SetPasswordViewController.xib */; };
+		A9451F0E1AE6A1AE0073418D /* icon-collection-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9451F0D1AE6A1AE0073418D /* icon-collection-active@2x.png */; };
+		A9451F0F1AE6A1AE0073418D /* icon-collection-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9451F0D1AE6A1AE0073418D /* icon-collection-active@2x.png */; };
 		A94525151AA5ED1F002DFA2A /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A94524B51AA5ED1F002DFA2A /* libcrypto.a */; };
 		A94525161AA5ED1F002DFA2A /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A94524B51AA5ED1F002DFA2A /* libcrypto.a */; };
 		A94525171AA5ED1F002DFA2A /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A94524B61AA5ED1F002DFA2A /* libssl.a */; };
@@ -2480,6 +2482,7 @@
 		A93BF2971A2633D90070B72A /* SetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPasswordViewController.h; sourceTree = "<group>"; };
 		A93BF2981A2633D90070B72A /* SetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPasswordViewController.m; sourceTree = "<group>"; };
 		A93BF2991A2633D90070B72A /* SetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetPasswordViewController.xib; sourceTree = "<group>"; };
+		A9451F0D1AE6A1AE0073418D /* icon-collection-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-collection-active@2x.png"; sourceTree = "<group>"; };
 		A94524B51AA5ED1F002DFA2A /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		A94524B61AA5ED1F002DFA2A /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		A94524B81AA5ED1F002DFA2A /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
@@ -3544,6 +3547,7 @@
 		14CCB2F71ADCFEF30041AA38 /* Mall */ = {
 			isa = PBXGroup;
 			children = (
+				A9451F0D1AE6A1AE0073418D /* icon-collection-active@2x.png */,
 				A9A9F2EB1AE399D700A03C9B /* product-icon-message@2x.png */,
 				A9A9F2EC1AE399D700A03C9B /* product-icon-star-active@2x.png */,
 				A9A9F2ED1AE399D700A03C9B /* product-icon-star@2x.png */,
@@ -5790,6 +5794,7 @@
 				1415FA581A5CD1CB003D0C29 /* AccountSecurityViewController.xib in Resources */,
 				BD5187521A5D0ED700BE508A /* sns_icon_2_s@2x.png in Resources */,
 				1415FA591A5CD1CB003D0C29 /* PrivateMessageViewController.xib in Resources */,
+				A9451F0F1AE6A1AE0073418D /* icon-collection-active@2x.png in Resources */,
 				BD5185D81A5D0ED700BE508A /* case-detail-text@2x.png in Resources */,
 				A9A9F2EA1AE3893C00A03C9B /* product-icon-more@2x.png in Resources */,
 				BD5185F21A5D0ED700BE508A /* icon-check-active@2x.png in Resources */,
@@ -6332,6 +6337,7 @@
 				14321E651A6125F70065E8C3 /* case_edit_cover@2x.png in Resources */,
 				37DD3CA51AE202C60075F3AA /* OrderListCopyViewController.xib in Resources */,
 				BD5186031A5D0ED700BE508A /* icon-sorting-active@2x.png in Resources */,
+				A9451F0E1AE6A1AE0073418D /* icon-collection-active@2x.png in Resources */,
 				BD5186EF1A5D0ED700BE508A /* status_end@2x.png in Resources */,
 				BD5186851A5D0ED700BE508A /* icon_personal_demands@2x.png in Resources */,
 				BD5187411A5D0ED700BE508A /* icon_mobile@2x.png in Resources */,

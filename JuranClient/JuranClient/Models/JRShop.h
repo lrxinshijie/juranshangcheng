@@ -19,10 +19,12 @@
 
 @property (nonatomic, assign) NSInteger shopId;
 @property (nonatomic, copy) NSString *shopLogo;
+@property (nonatomic, copy) NSString *shopName;
 @property (nonatomic, copy) NSString *indexShopLogo;
 @property (nonatomic, copy) NSString *shopDsr;
 @property (nonatomic, assign) BOOL isStored;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
 
 @end
