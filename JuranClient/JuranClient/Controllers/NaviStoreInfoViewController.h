@@ -7,7 +7,8 @@
 //
 
 #import "ALViewController.h"
+@class JRStore;
 
 @interface NaviStoreInfoViewController : ALViewController
-
+@property (strong, nonatomic) JRStore *store;
 @end

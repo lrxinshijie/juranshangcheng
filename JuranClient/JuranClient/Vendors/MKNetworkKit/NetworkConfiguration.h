@@ -14,6 +14,7 @@
 //#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
 //#define JR_SERVICE  @"http://124.207.66.50:10005"
 //#define JR_SERVICE  @"http://124.193.207.194:8070"
+//#define JR_SERVICE  @"http://10.199.5.238:8083"
 
 /* UAT */
 #define JR_IMAGE_SERVICE  @"http://image1.juran.cn"

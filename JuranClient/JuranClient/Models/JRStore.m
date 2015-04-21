@@ -17,13 +17,21 @@
     return self;
 }
 
-- (id)initWithDictionary:(NSDictionary*)dict {
+- (id)initWithDictionaryForList:(NSDictionary*)dict {
     if (self=[self init]) {
         if (dict && [dict isKindOfClass:[NSDictionary class]]) {
             _storeCode = [dict getStringValueForKey:@"storeCode" defaultValue:@""];
             _storeShortName = [dict getStringValueForKey:@"storeShortName" defaultValue:@""];
             _latitude = [dict getDoubleValueForKey:@"latitude" defaultValue:0];
             _longitude = [dict getDoubleValueForKey:@"longitude" defaultValue:0];
+        }
+    }
+    return self;
+}
+
+- (id)initWithDictionaryForInfo:(NSDictionary*)dict {
+    if (self=[self init]) {
+        if (dict && [dict isKindOfClass:[NSDictionary class]]) {
             _storeAdd = [dict getStringValueForKey:@"storeAdd" defaultValue:@""];
             _saleTime = [dict getStringValueForKey:@"saleTime" defaultValue:@""];
             _busRoute = [dict getStringValueForKey:@"busRoute" defaultValue:@""];
@@ -33,11 +41,12 @@
     return self;
 }
 
+
 + (NSMutableArray*)buildUpWithValueForList:(id)value {
     NSMutableArray *retVal = [NSMutableArray array];
     if (value && [value isKindOfClass:[NSArray class]]) {
         for (id obj in value) {
-            JRStore *store = [[JRStore alloc]initWithDictionary:obj];
+            JRStore *store = [[JRStore alloc]initWithDictionaryForList:obj];
             [retVal addObject:store];
         }
     }
