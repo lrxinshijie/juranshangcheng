@@ -166,8 +166,6 @@
     
     imageView = (UIImageView*)[_headerView viewWithTag:2010];
     imageView.image = [UIImage imageNamed:@"personal_bg.png"];
-#else
-    _signedButton.hidden = YES;
 #endif
 }
 
