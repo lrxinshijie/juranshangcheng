@@ -37,6 +37,7 @@
 #import "JROrder.h"
 #import "RealNameAuthViewController.h"
 #import "BidListViewController.h"
+#import "NaviStoreListViewController.h"
 
 @implementation Public
 
@@ -566,6 +567,10 @@
         [navigationController pushViewController:rn animated:YES];
     }else if (type == 12){
         BidListViewController *vc = [[BidListViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:vc animated:YES];
+    }else if (type == 19){
+        NaviStoreListViewController *vc = [[NaviStoreListViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
     }
