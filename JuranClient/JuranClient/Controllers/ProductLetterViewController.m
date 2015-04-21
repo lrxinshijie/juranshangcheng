@@ -39,7 +39,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     [_photoImageView setImageWithURLString:_product.defaultImage];
-    _nameLabel.text = _product.productName;
+    _nameLabel.text = _product.goodsIntroduce;
     _priceLabel.text = [NSString stringWithFormat:@"￥%@",_product.priceMax];
     _priceLabel.textColor = kBlueColor;
     

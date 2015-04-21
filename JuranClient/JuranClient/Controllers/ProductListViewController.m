@@ -20,6 +20,10 @@
 
 @implementation ProductListViewController
 
+- (void)dealloc{
+    _tableView.delegate = nil; _tableView.dataSource = nil;
+}
+
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];

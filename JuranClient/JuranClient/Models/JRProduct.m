@@ -41,7 +41,8 @@
                             };
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            self.goodsImagesList = data[@"goodsImagesList"];
+            self.goodsImagesList = [data getArrayValueForKey:@"goodsImagesList" defaultValue:nil];
+            
             self.goodsIntroduce = [data getStringValueForKey:@"goodsIntroduce" defaultValue:@""];
             self.priceMax = [data getStringValueForKey:@"priceMax" defaultValue:@""];
             self.priceMin = [data getStringValueForKey:@"priceMin" defaultValue:@""];
@@ -92,7 +93,7 @@
                             };
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_ATTRIBUTE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            self.goodsAttributesInfoList = data[@"goodsAttributesInfoList"];
+            self.goodsAttributesInfoList = [data getArrayValueForKey:@"goodsAttributesInfoList" defaultValue:nil];
         }
         
         if (finished) {
@@ -124,7 +125,7 @@
                             };
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_SELL_STORE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            self.shopAddDtoList = data[@"shopAddDtoList"];
+            self.shopAddDtoList = [data getArrayValueForKey:@"shopAddDtoList" defaultValue:nil];
         }
         
         if (finished) {
