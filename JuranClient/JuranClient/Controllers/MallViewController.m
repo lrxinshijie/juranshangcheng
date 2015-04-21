@@ -16,6 +16,10 @@
 #import "TopProductCell.h"
 #import "TopShopCell.h"
 #import "ProductListViewController.h"
+#import "ProductDetailViewController.h"
+#import "ShopHomeViewController.h"
+#import "JRProduct.h"
+#import "JRShop.h"
 
 @interface MallViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -133,6 +137,28 @@
         NSDictionary *dict = _products[indexPath.row];
         [cell fillCellWithData:dict];
         return cell;
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if ([collectionView isEqual:_shopCollectionView]) {
+        NSDictionary *dict = _shops[indexPath.row];
+        JRShop *shop = [[JRShop alloc] init];
+        shop.shopId = [dict getIntValueForKey:@"shopId" defaultValue:0];
+        
+        ShopHomeViewController *sv = [[ShopHomeViewController alloc] init];
+        sv.shop = shop;
+        sv.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:sv animated:YES];
+    }else{
+        NSDictionary *dict = _products[indexPath.row];
+        JRProduct *product = [[JRProduct alloc] init];
+        product.linkProductId = [NSString stringWithFormat:@"%@", dict[@"goodsId"]];
+        product.shopId = 5;
+        ProductDetailViewController *pd = [[ProductDetailViewController alloc] init];
+        pd.product = product;
+        pd.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:pd animated:YES];
     }
 }
 

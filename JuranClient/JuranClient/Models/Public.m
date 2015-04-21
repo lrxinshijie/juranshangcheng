@@ -552,8 +552,12 @@
         NSInteger tradeType = [param getIntValueForKey:@"tradeType" defaultValue:0];
         
         JROrder *order = [[JROrder alloc] init];
-        order.measureTid = [param getStringValueForKey:@"tid" defaultValue:@""];
-        order.type = tradeType - 1;
+        order.type = tradeType;
+        if (tradeType) {
+            order.designTid = [param getStringValueForKey:@"tid" defaultValue:@""];
+        }else{
+            order.measureTid = [param getStringValueForKey:@"tid" defaultValue:@""];
+        }
         od.order = order;
         od.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:od animated:YES];
