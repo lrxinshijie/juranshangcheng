@@ -50,6 +50,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="btnNavi" destination="22a-T4-NHD" id="fvF-w4-pkT"/>
+                <outlet property="imageGrade" destination="GDP-V6-avs" id="vAo-1r-epl"/>
                 <outlet property="imageLogo" destination="rmH-eQ-yDY" id="zUL-QJ-4Ai"/>
                 <outlet property="labelMainBrand" destination="gjE-nv-XNR" id="WVy-zD-Jxh"/>
                 <outlet property="labelName" destination="1oA-bD-CSD" id="Dp3-Fg-i25"/>

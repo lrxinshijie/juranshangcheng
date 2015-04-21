@@ -9,6 +9,8 @@
 #import "ShopHomeViewController.h"
 #import "JRShop.h"
 #import "ShopCell.h"
+#import "FilterInShopViewController.h"
+#import "ShopListViewController.h"
 
 @interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -22,6 +24,7 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *gradeLabel;
+- (IBAction)onClassification:(id)sender;
 
 
 
@@ -130,4 +133,13 @@
 }
 */
 
+- (IBAction)onClassification:(id)sender {
+//    FilterInShopViewController *filter = [[FilterInShopViewController alloc]init];
+//    [filter setFinishBlock:^(long catId) {
+//        //获取分类后
+//    }];
+//    [self.navigationController pushViewController:filter animated:YES];
+    ShopListViewController *vc = [[ShopListViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end

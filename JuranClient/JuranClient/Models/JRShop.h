@@ -22,7 +22,13 @@
 @property (nonatomic, copy) NSString *indexShopLogo;
 @property (nonatomic, copy) NSString *shopDsr;
 @property (nonatomic, assign) BOOL isStored;
+@property (nonatomic, copy) NSString *shopName;
+@property (nonatomic, copy) NSString *grade;
+//search
+@property (nonatomic, copy) NSString *brands;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
+- (id)initWithDictionaryForList:(NSDictionary *)dict;
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
 
 @end

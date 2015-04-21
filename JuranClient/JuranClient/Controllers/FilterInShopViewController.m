@@ -14,6 +14,7 @@
 @property (assign, nonatomic) int selectedIndex;
 @property (strong, nonatomic) NSMutableArray *openSatusList;
 @property (strong, nonatomic) NSMutableArray *dataList;
+@property (assign, nonatomic) long selFilterCode;
 @end
 
 @implementation FilterInShopViewController
@@ -31,7 +32,7 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%@",@"9"]};
+    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%@",@"1002"]};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_SHOP_CLASSIFICATION parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
@@ -121,6 +122,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    FilterInShop *filters = [_dataList objectAtIndex:[indexPath section]];
+    FilterInShop *filter = [filters.childList objectAtIndex:[indexPath row]];
+    if (_block) {
+        [self.navigationController popViewControllerAnimated:YES];
+        _block(filter.Id);
+    }
 }
 
 - (void)headerViewClick:(id)sender {
@@ -133,6 +140,11 @@
     }
     [_tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+
+- (void)setFinishBlock:(FilterSelected)finished{
+    self.block = finished;
+}
+
 @end
 
 @implementation FilterInShop

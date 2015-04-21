@@ -13,4 +13,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelName;
 @property (strong, nonatomic) IBOutlet UILabel *labelMainBrand;
 @property (strong, nonatomic) IBOutlet UIButton *btnNavi;
+@property (strong, nonatomic) IBOutlet UIImageView *imageGrade;
 @end

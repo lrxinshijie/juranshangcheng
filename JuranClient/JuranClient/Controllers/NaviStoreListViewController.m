@@ -39,7 +39,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"门店导航";
-    self.navigationController.navigationBarHidden = YES;
     [_tableViewStore registerNib:[UINib nibWithNibName:@"NaviStoreCell" bundle:nil] forCellReuseIdentifier:@"NaviStoreCell"];
     _textFieldCity.inputView = _viewCitySelection;
     _btnChangeCity.hidden = YES;
@@ -106,6 +105,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    self.navigationController.navigationBarHidden = NO;
     [_mapView viewWillDisappear];
     _mapView.delegate = nil; // 不用时，置nil
     _locService.delegate = nil;
@@ -211,8 +211,6 @@
         _currentCity = areaInfo.cityName;
         [self loadData];
     }];
-    
     [self.navigationController pushViewController:vc animated:YES];
-    vc.navigationController.navigationBarHidden = NO;
 }
 @end
