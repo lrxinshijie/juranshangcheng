@@ -26,7 +26,7 @@ typedef void (^FilterSelected)(long catId);
 @property (nonatomic, assign) long parentId;
 @property (nonatomic, assign) int depth;
 @property (nonatomic, assign) long Id;
-@property (nonatomic, strong) NSArray *childList;
+@property (nonatomic, strong) NSMutableArray *childList;
 
 - (id)initWithDictionary:(NSDictionary*)dict;
 + (NSMutableArray*)buildUpWithValueForList:(id)value;

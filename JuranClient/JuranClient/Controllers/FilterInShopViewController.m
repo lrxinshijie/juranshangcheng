@@ -40,6 +40,13 @@
             _dataList = [FilterInShop buildUpWithValueForList:[data objectForKey:@"childrenCats"]];
             for (FilterInShop *filter in _dataList) {
                 filter.childList = [FilterInShop buildUpWithValueForList:filter.childList];
+                FilterInShop *all = [[FilterInShop alloc]init];
+                all.name = @"全部";
+                all.parentId = filter.parentId;
+                all.depth = filter.depth;
+                all.Id = filter.Id;
+                all.childList = filter.childList;
+                [filter.childList insertObject:all atIndex:0];
             }
             _openSatusList = [[NSMutableArray alloc] init];
             for (int i=0; i<_dataList.count; i++) {
@@ -126,6 +133,7 @@
     FilterInShop *filter = [filters.childList objectAtIndex:[indexPath row]];
     if (_block) {
         [self.navigationController popViewControllerAnimated:YES];
+        NSLog(@"filter id = %ld",filter.Id);
         _block(filter.Id);
     }
 }
