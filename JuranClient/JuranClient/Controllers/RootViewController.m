@@ -107,7 +107,7 @@
                 [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 btn.tag = idx;
 //                btn.backgroundColor = [UIColor redColor];
-                btn.titleEdgeInsets = UIEdgeInsetsMake(35, -25, 0, 0);
+                btn.titleEdgeInsets = UIEdgeInsetsMake(35, -20, 0, 0);
                 btn.imageEdgeInsets = UIEdgeInsetsMake(-15, 25, 0, 0);
                 NSString *imageUrl = [NSString stringWithFormat:@"%@/%@", JR_IMAGE_SERVICE, iconImage];
                 NSLog(@"%@", imageUrl);

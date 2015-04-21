@@ -7,6 +7,7 @@
 //
 
 #import "TopShopCell.h"
+#import "JRShop.h"
 
 @interface TopShopCell ()
 
@@ -21,9 +22,9 @@
     // Initialization code
 }
 
-- (void)fillCellWithData:(NSDictionary *)dict{
-    [_logoImageView setImageWithURLString:dict[@"shopLogo"]];
-    _nameLabel.text = dict[@"shopName"];
+- (void)fillCellWithData:(JRShop *)shop{
+    [_logoImageView setImageWithURLString:shop.shopLogo];
+    _nameLabel.text = shop.shopName;
 }
 
 @end

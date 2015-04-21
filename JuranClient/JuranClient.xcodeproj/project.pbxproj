@@ -675,6 +675,8 @@
 		1FD3B84B1AD8F878004E849F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8461AD8F878004E849F /* FMResultSet.m */; };
 		1FD3B84F1AD8FB58004E849F /* TestSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */; };
 		1FD3B8501AD8FB58004E849F /* TestSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3B84E1AD8FB58004E849F /* TestSearchViewController.xib */; };
+		2C3D51C61AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D51C41AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m */; };
+		2C3D51C71AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D51C51AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib */; };
 		2C602C741ADCE6FD0037105E /* ShopListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C721ADCE6FD0037105E /* ShopListViewController.m */; };
 		2C602C751ADCE6FD0037105E /* ShopListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C731ADCE6FD0037105E /* ShopListViewController.xib */; };
 		2C602C791ADCEA960037105E /* ShopListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C771ADCEA950037105E /* ShopListCell.m */; };
@@ -1008,6 +1010,8 @@
 		A93BF2961A262A290070B72A /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93BF2941A262A290070B72A /* ServiceViewController.xib */; };
 		A93BF29A1A2633D90070B72A /* SetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93BF2981A2633D90070B72A /* SetPasswordViewController.m */; };
 		A93BF29B1A2633D90070B72A /* SetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A93BF2991A2633D90070B72A /* SetPasswordViewController.xib */; };
+		A9451F0E1AE6A1AE0073418D /* icon-collection-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9451F0D1AE6A1AE0073418D /* icon-collection-active@2x.png */; };
+		A9451F0F1AE6A1AE0073418D /* icon-collection-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9451F0D1AE6A1AE0073418D /* icon-collection-active@2x.png */; };
 		A94525151AA5ED1F002DFA2A /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A94524B51AA5ED1F002DFA2A /* libcrypto.a */; };
 		A94525161AA5ED1F002DFA2A /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A94524B51AA5ED1F002DFA2A /* libcrypto.a */; };
 		A94525171AA5ED1F002DFA2A /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A94524B61AA5ED1F002DFA2A /* libssl.a */; };
@@ -2164,6 +2168,9 @@
 		1FD3B84C1AD8FB58004E849F /* TestSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSearchViewController.h; sourceTree = "<group>"; };
 		1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSearchViewController.m; sourceTree = "<group>"; };
 		1FD3B84E1AD8FB58004E849F /* TestSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestSearchViewController.xib; sourceTree = "<group>"; };
+		2C3D51C31AE63E7C0000F3F4 /* NaviStoreSelCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviStoreSelCityViewController.h; sourceTree = "<group>"; };
+		2C3D51C41AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaviStoreSelCityViewController.m; sourceTree = "<group>"; };
+		2C3D51C51AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NaviStoreSelCityViewController.xib; sourceTree = "<group>"; };
 		2C602C711ADCE6FD0037105E /* ShopListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopListViewController.h; sourceTree = "<group>"; };
 		2C602C721ADCE6FD0037105E /* ShopListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopListViewController.m; sourceTree = "<group>"; };
 		2C602C731ADCE6FD0037105E /* ShopListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopListViewController.xib; sourceTree = "<group>"; };
@@ -2494,6 +2501,7 @@
 		A93BF2971A2633D90070B72A /* SetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPasswordViewController.h; sourceTree = "<group>"; };
 		A93BF2981A2633D90070B72A /* SetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPasswordViewController.m; sourceTree = "<group>"; };
 		A93BF2991A2633D90070B72A /* SetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetPasswordViewController.xib; sourceTree = "<group>"; };
+		A9451F0D1AE6A1AE0073418D /* icon-collection-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-collection-active@2x.png"; sourceTree = "<group>"; };
 		A94524B51AA5ED1F002DFA2A /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		A94524B61AA5ED1F002DFA2A /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		A94524B81AA5ED1F002DFA2A /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
@@ -3558,6 +3566,7 @@
 		14CCB2F71ADCFEF30041AA38 /* Mall */ = {
 			isa = PBXGroup;
 			children = (
+				A9451F0D1AE6A1AE0073418D /* icon-collection-active@2x.png */,
 				A9A9F2EB1AE399D700A03C9B /* product-icon-message@2x.png */,
 				A9A9F2EC1AE399D700A03C9B /* product-icon-star-active@2x.png */,
 				A9A9F2ED1AE399D700A03C9B /* product-icon-star@2x.png */,
@@ -3815,6 +3824,9 @@
 				2C91E8F61ADB684800B542DC /* NaviStoreInfoViewController.h */,
 				2C91E8F71ADB684800B542DC /* NaviStoreInfoViewController.m */,
 				2C91E8F81ADB684800B542DC /* NaviStoreInfoViewController.xib */,
+				2C3D51C31AE63E7C0000F3F4 /* NaviStoreSelCityViewController.h */,
+				2C3D51C41AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m */,
+				2C3D51C51AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib */,
 			);
 			name = Navi;
 			sourceTree = "<group>";
@@ -5811,6 +5823,7 @@
 				1415FA581A5CD1CB003D0C29 /* AccountSecurityViewController.xib in Resources */,
 				BD5187521A5D0ED700BE508A /* sns_icon_2_s@2x.png in Resources */,
 				1415FA591A5CD1CB003D0C29 /* PrivateMessageViewController.xib in Resources */,
+				A9451F0F1AE6A1AE0073418D /* icon-collection-active@2x.png in Resources */,
 				BD5185D81A5D0ED700BE508A /* case-detail-text@2x.png in Resources */,
 				A9A9F2EA1AE3893C00A03C9B /* product-icon-more@2x.png in Resources */,
 				BD5185F21A5D0ED700BE508A /* icon-check-active@2x.png in Resources */,
@@ -6356,6 +6369,7 @@
 				14321E651A6125F70065E8C3 /* case_edit_cover@2x.png in Resources */,
 				37DD3CA51AE202C60075F3AA /* OrderListCopyViewController.xib in Resources */,
 				BD5186031A5D0ED700BE508A /* icon-sorting-active@2x.png in Resources */,
+				A9451F0E1AE6A1AE0073418D /* icon-collection-active@2x.png in Resources */,
 				BD5186EF1A5D0ED700BE508A /* status_end@2x.png in Resources */,
 				BD5186851A5D0ED700BE508A /* icon_personal_demands@2x.png in Resources */,
 				BD5187411A5D0ED700BE508A /* icon_mobile@2x.png in Resources */,
@@ -6454,6 +6468,7 @@
 				1FD3B8181AD8B558004E849F /* search_scancode@2x.png in Resources */,
 				14587E161A35DC9000D41236 /* ModifyPasswordViewController.xib in Resources */,
 				BD5186EB1A5D0ED700BE508A /* request_doing@2x.png in Resources */,
+				2C3D51C71AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib in Resources */,
 				14587E1B1A35DD2600D41236 /* BindPhoneNumberViewController.xib in Resources */,
 				14D973951A334DFC00E771ED /* PushMessageCell.xib in Resources */,
 				A9A9F2F11AE399D700A03C9B /* product-icon-star-active@2x.png in Resources */,
@@ -7014,6 +7029,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C3D51C61AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m in Sources */,
 				A987EE391A2093C900CED7CD /* MJRefreshFooterView.m in Sources */,
 				1437F2B81A30B09B00E7C077 /* JRTopic.m in Sources */,
 				37ECDD211AE166D500BE6027 /* ConstructActionView.m in Sources */,

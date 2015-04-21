@@ -11,5 +11,6 @@
 @interface NaviStoreCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *labelName;
 @property (strong, nonatomic) IBOutlet UILabel *labelDistance;
+@property (strong, nonatomic) IBOutlet UIImageView *imageNode;
 
 @end

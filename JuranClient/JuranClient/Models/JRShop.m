@@ -31,8 +31,25 @@
         }
         self.shopDsr = [dict getStringValueForKey:@"shopDsr" defaultValue:@""];
         self.isStored = [dict getBoolValueForKey:@"isStored" defaultValue:NO];
+        
+        if (_shopLogo.length == 0) {
+            self.shopLogo = [dict getStringValueForKey:@"shopLogo" defaultValue:@""];
+        }
+        
+        self.shopName = [dict getStringValueForKey:@"shopName" defaultValue:@""];
     }
     return self;
+}
+
++ (NSMutableArray*)buildUpWithValueForList:(id)value {
+    NSMutableArray *retVal = [NSMutableArray array];
+    if (value && [value isKindOfClass:[NSArray class]]) {
+        for (id obj in value) {
+            JRShop *s = [[JRShop alloc] initWithDictionary:obj];
+            [retVal addObject:s];
+        }
+    }
+    return retVal;
 }
 
 

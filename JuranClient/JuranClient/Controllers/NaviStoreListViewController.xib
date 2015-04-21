@@ -13,7 +13,6 @@
                 <outlet property="tableViewStore" destination="Fk8-Uf-zH7" id="JWd-77-Tnq"/>
                 <outlet property="textFieldCity" destination="2UX-ve-R52" id="BIf-qZ-wcH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="viewCitySelection" destination="L56-Se-0bl" id="uPG-1t-1PC"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -99,33 +98,6 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="2" y="326"/>
-        </view>
-        <view contentMode="scaleToFill" id="L56-Se-0bl">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="188"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="3PM-AQ-w1y">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <items>
-                        <barButtonItem title="取消" id="ef0-z7-EcU"/>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="UHv-gK-Yph"/>
-                        <barButtonItem title="完成" id="ZLR-Di-wap"/>
-                    </items>
-                </toolbar>
-                <pickerView contentMode="scaleToFill" id="WBk-YA-Gq8">
-                    <rect key="frame" x="0.0" y="44" width="320" height="144"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="NUF-9N-Tfd"/>
-                        <outlet property="delegate" destination="-1" id="dpq-uY-c10"/>
-                    </connections>
-                </pickerView>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-11" y="761"/>
         </view>
     </objects>
     <resources>

@@ -20,6 +20,7 @@
 @property(nonatomic, copy)NSString *busRoute;
 @property(nonatomic, copy)NSString *contactTelephone;
 
-- (id)initWithDictionary:(NSDictionary *)dict;
+- (id)initWithDictionaryForList:(NSDictionary *)dict;
+- (id)initWithDictionaryForInfo:(NSDictionary *)dict;
 + (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
