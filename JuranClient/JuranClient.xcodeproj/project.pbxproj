@@ -769,6 +769,14 @@
 		375B465B1A5EE76700D7E74B /* StyleModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */; };
 		3765C7491AE3ABCA007BD3D4 /* FilterInShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C8D1ADE0E200037105E /* FilterInShopViewController.m */; };
 		3765C74A1AE3ABCA007BD3D4 /* FilterInShopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C8E1ADE0E200037105E /* FilterInShopViewController.xib */; };
+		376791891AE6859A0019E04D /* ConstructPriceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376791871AE6859A0019E04D /* ConstructPriceListViewController.m */; };
+		3767918A1AE6859A0019E04D /* ConstructPriceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376791871AE6859A0019E04D /* ConstructPriceListViewController.m */; };
+		3767918B1AE6859A0019E04D /* ConstructPriceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376791881AE6859A0019E04D /* ConstructPriceListViewController.xib */; };
+		3767918C1AE6859A0019E04D /* ConstructPriceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376791881AE6859A0019E04D /* ConstructPriceListViewController.xib */; };
+		376791901AE688DA0019E04D /* ConstructPriceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3767918E1AE688DA0019E04D /* ConstructPriceListCell.m */; };
+		376791911AE688DA0019E04D /* ConstructPriceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3767918E1AE688DA0019E04D /* ConstructPriceListCell.m */; };
+		376791921AE688DA0019E04D /* ConstructPriceListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3767918F1AE688DA0019E04D /* ConstructPriceListCell.xib */; };
+		376791931AE688DA0019E04D /* ConstructPriceListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3767918F1AE688DA0019E04D /* ConstructPriceListCell.xib */; };
 		378BB2C31A4B1C6E00E8358D /* JRBidInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 378BB2C21A4B1C6E00E8358D /* JRBidInfo.m */; };
 		37A0F80A1A6B856100611760 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A0F8081A6B856100611760 /* ActivityViewController.m */; };
 		37A0F80B1A6B856100611760 /* ActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A0F8091A6B856100611760 /* ActivityViewController.xib */; };
@@ -2251,6 +2259,12 @@
 		375B46531A5EE70F00D7E74B /* StyleModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleModifyViewController.h; sourceTree = "<group>"; };
 		375B46541A5EE70F00D7E74B /* StyleModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleModifyViewController.m; sourceTree = "<group>"; };
 		375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleModifyViewController.xib; sourceTree = "<group>"; };
+		376791861AE6859A0019E04D /* ConstructPriceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstructPriceListViewController.h; sourceTree = "<group>"; };
+		376791871AE6859A0019E04D /* ConstructPriceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstructPriceListViewController.m; sourceTree = "<group>"; };
+		376791881AE6859A0019E04D /* ConstructPriceListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConstructPriceListViewController.xib; sourceTree = "<group>"; };
+		3767918D1AE688DA0019E04D /* ConstructPriceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstructPriceListCell.h; sourceTree = "<group>"; };
+		3767918E1AE688DA0019E04D /* ConstructPriceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstructPriceListCell.m; sourceTree = "<group>"; };
+		3767918F1AE688DA0019E04D /* ConstructPriceListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConstructPriceListCell.xib; sourceTree = "<group>"; };
 		378BB2C11A4B1C6E00E8358D /* JRBidInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRBidInfo.h; sourceTree = "<group>"; };
 		378BB2C21A4B1C6E00E8358D /* JRBidInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRBidInfo.m; sourceTree = "<group>"; };
 		37A0F8071A6B856100611760 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
@@ -3647,6 +3661,9 @@
 				37DDB1BC1AE54BE4003475B9 /* PreDisclosureInfoViewController.h */,
 				37DDB1BD1AE54BE4003475B9 /* PreDisclosureInfoViewController.m */,
 				37DDB1BE1AE54BE4003475B9 /* PreDisclosureInfoViewController.xib */,
+				376791861AE6859A0019E04D /* ConstructPriceListViewController.h */,
+				376791871AE6859A0019E04D /* ConstructPriceListViewController.m */,
+				376791881AE6859A0019E04D /* ConstructPriceListViewController.xib */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -4803,6 +4820,9 @@
 				37ECDD231AE167D600BE6027 /* ConstructCell.h */,
 				37ECDD241AE167D600BE6027 /* ConstructCell.m */,
 				37ECDD251AE167D600BE6027 /* ConstructCell.xib */,
+				3767918D1AE688DA0019E04D /* ConstructPriceListCell.h */,
+				3767918E1AE688DA0019E04D /* ConstructPriceListCell.m */,
+				3767918F1AE688DA0019E04D /* ConstructPriceListCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -5772,6 +5792,7 @@
 				1415FA511A5CD1CB003D0C29 /* APPRecommendViewController.xib in Resources */,
 				BD5186261A5D0ED700BE508A /* icon_xunzhang_1@2x.png in Resources */,
 				140C9EB61ADB5DAD0079391A /* icon-nav-explore-active@2x.png in Resources */,
+				3767918C1AE6859A0019E04D /* ConstructPriceListViewController.xib in Resources */,
 				1415FA521A5CD1CB003D0C29 /* SubjectCell.xib in Resources */,
 				1415FA531A5CD1CB003D0C29 /* DemandDetailViewController.xib in Resources */,
 				BD5186AC1A5D0ED700BE508A /* answer_wati_accept@2x.png in Resources */,
@@ -5898,6 +5919,7 @@
 				BD51875E1A5D0ED700BE508A /* tabbar_case_hl@2x.png in Resources */,
 				1415FA661A5CD1CB003D0C29 /* NewestTopicViewController.xib in Resources */,
 				BD5186D41A5D0ED700BE508A /* bubble-other@2x.png in Resources */,
+				376791931AE688DA0019E04D /* ConstructPriceListCell.xib in Resources */,
 				BD51871E1A5D0ED700BE508A /* service_highlighted_5@2x.png in Resources */,
 				BD51866A1A5D0ED700BE508A /* arrow_down@2x.png in Resources */,
 				BD5186C81A5D0ED700BE508A /* question_resolved@2x.png in Resources */,
@@ -6150,6 +6172,7 @@
 				A9A9F2E71AE3893C00A03C9B /* product-icon-back@2x.png in Resources */,
 				BD5187171A5D0ED700BE508A /* service_highlighted_2@2x.png in Resources */,
 				BD322BCC1A6E090800DDC1C0 /* image_quality_unselected_disabled@2x.png in Resources */,
+				3767918B1AE6859A0019E04D /* ConstructPriceListViewController.xib in Resources */,
 				BD5186CD1A5D0ED700BE508A /* question_unresolved@2x.png in Resources */,
 				1441A16F1A29E3CD004A038E /* ShareSDKLocalizable.strings in Resources */,
 				2C91E9181ADB790C00B542DC /* NaviStoreCell.xib in Resources */,
@@ -6331,6 +6354,7 @@
 				BD5187831A5D0ED700BE508A /* nav-home-active@2x.png in Resources */,
 				BD51862B1A5D0ED700BE508A /* menu_icon_cancel_follow@2x.png in Resources */,
 				1F2A0A941ADF65BD00C73784 /* thirdLevelBG_middle@2x.png in Resources */,
+				376791921AE688DA0019E04D /* ConstructPriceListCell.xib in Resources */,
 				BD51866F1A5D0ED700BE508A /* cellIndicator@2x.png in Resources */,
 				A98015151AD6C657002CB4C9 /* nav_logo@2x.png in Resources */,
 				BD5186BF1A5D0ED700BE508A /* picker_bg@2x.png in Resources */,
@@ -6789,6 +6813,7 @@
 				37F0E7141A7D2735004CCCB2 /* UIImage+GIF.m in Sources */,
 				37F0E7021A7D2735004CCCB2 /* NSData+ImageContentType.m in Sources */,
 				A9A71D691ADFF1F400804AF9 /* StarView.m in Sources */,
+				3767918A1AE6859A0019E04D /* ConstructPriceListViewController.m in Sources */,
 				1415F9881A5CD1CB003D0C29 /* ActionSheetCustomPicker.m in Sources */,
 				A9A9F2DE1AE361CC00A03C9B /* ProductCell.m in Sources */,
 				1415F9891A5CD1CB003D0C29 /* NSArray+ASCategory.m in Sources */,
@@ -6988,6 +7013,7 @@
 				1415FA071A5CD1CB003D0C29 /* CLLocation+ASCategory.m in Sources */,
 				1415FA081A5CD1CB003D0C29 /* BaseAddressViewController.m in Sources */,
 				1415FA091A5CD1CB003D0C29 /* JSONModel.m in Sources */,
+				376791911AE688DA0019E04D /* ConstructPriceListCell.m in Sources */,
 				37F0E7121A7D2735004CCCB2 /* UIButton+WebCache.m in Sources */,
 				140C9ECA1ADB5E1B0079391A /* ShopHomeViewController.m in Sources */,
 				1415FA0A1A5CD1CB003D0C29 /* CaseViewController.m in Sources */,
@@ -7149,6 +7175,7 @@
 				A9D654B51A27642800A80253 /* JSONModel+networking.m in Sources */,
 				14361E5A1A344E6100F9BD94 /* pinyin.c in Sources */,
 				A987EE431A20984200CED7CD /* HomeViewController.m in Sources */,
+				376791891AE6859A0019E04D /* ConstructPriceListViewController.m in Sources */,
 				37F0E7151A7D2735004CCCB2 /* UIImage+MultiFormat.m in Sources */,
 				A987EDE61A20920500CED7CD /* UIAlertView+ASCategory.m in Sources */,
 				A987EDD41A20920500CED7CD /* Public.m in Sources */,
@@ -7290,6 +7317,7 @@
 				A9A53B0E1A46FE7C008D75B8 /* UIBubbleTableView.m in Sources */,
 				A98014FB1AD6B121002CB4C9 /* RootViewController.m in Sources */,
 				37F0E7131A7D2735004CCCB2 /* UIImage+GIF.m in Sources */,
+				376791901AE688DA0019E04D /* ConstructPriceListCell.m in Sources */,
 				14A3FDC61A2C9EDF002BEFF4 /* DemandCell.m in Sources */,
 				37F0E7111A7D2735004CCCB2 /* UIButton+WebCache.m in Sources */,
 				A94525251AA5ED1F002DFA2A /* RSADataSigner.m in Sources */,

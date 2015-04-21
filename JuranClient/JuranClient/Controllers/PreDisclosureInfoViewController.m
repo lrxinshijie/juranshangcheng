@@ -87,9 +87,15 @@
         cell.textLabel.text = _keys[indexPath.row];
         cell.detailTextLabel.text = _values[indexPath.row];
     }
+#ifdef kJuranDesigner
+    if (indexPath.row == 1 || indexPath.row == 7 || indexPath.row == 9 || indexPath.row == 11) {
+        cell.detailTextLabel.textColor = kBlueColor;
+    }
+#else
     if (indexPath.row == 4 || indexPath.row == 7 || indexPath.row == 9 || indexPath.row == 11) {
         cell.detailTextLabel.textColor = kBlueColor;
     }
+#endif
     return cell;
 }
 
