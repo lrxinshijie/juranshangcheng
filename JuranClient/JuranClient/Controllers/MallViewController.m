@@ -69,27 +69,25 @@
 
 - (void)loadData{
     NSDictionary *param = @{@"cityName": [Public defaultCityName]};
-    [[ALEngine shareEngine] pathURL:JR_MALL_ACTIVITY_SHOP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_MALL_ACTIVITY_SHOP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (error || ![data isKindOfClass:[NSDictionary class]]) {
             [self hideHUD];
             return;
         }
         
-        NSArray *activeShopList = [data objectForKey:@"activeShopList"];
-        if (activeShopList && [activeShopList isKindOfClass:[NSArray class]]) {
-            self.shops = activeShopList;
-            [_shopCollectionView reloadData];
-        }
+        NSArray *activeShopList = [data getArrayValueForKey:@"activeShopList" defaultValue:nil];
+        
+        self.shops = [JRShop buildUpWithValueForList:activeShopList];
+        [_shopCollectionView reloadData];
         
         
-        [[ALEngine shareEngine] pathURL:JR_MALL_ACTIVITY_PRODUCT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [[ALEngine shareEngine] pathURL:JR_MALL_ACTIVITY_PRODUCT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
             [self hideHUD];
             if (!error && [data isKindOfClass:[NSDictionary class]]) {
-                NSArray *activeGoodsList = [data objectForKey:@"activeGoodsList"];
-                if (activeGoodsList && [activeGoodsList isKindOfClass:[NSArray class]]) {
-                    self.products = activeGoodsList;
-                    [_productCollectionView reloadData];
-                }
+                NSArray *activeGoodsList = [data getArrayValueForKey:@"activeGoodsList" defaultValue:nil];
+                
+                self.products = [JRProduct buildUpWithValueForList:activeGoodsList];
+                [_productCollectionView reloadData];
             }
         }];
     }];
@@ -129,34 +127,24 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if ([collectionView isEqual:_shopCollectionView]) {
         TopShopCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TopShopCell" forIndexPath:indexPath];
-        NSDictionary *dict = _shops[indexPath.row];
-        [cell fillCellWithData:dict];
+        [cell fillCellWithData:_shops[indexPath.row]];
         return cell;
     }else{
         TopProductCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TopProductCell" forIndexPath:indexPath];
-        NSDictionary *dict = _products[indexPath.row];
-        [cell fillCellWithData:dict];
+        [cell fillCellWithData:_products[indexPath.row]];
         return cell;
     }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if ([collectionView isEqual:_shopCollectionView]) {
-        NSDictionary *dict = _shops[indexPath.row];
-        JRShop *shop = [[JRShop alloc] init];
-        shop.shopId = [dict getIntValueForKey:@"shopId" defaultValue:0];
-        
         ShopHomeViewController *sv = [[ShopHomeViewController alloc] init];
-        sv.shop = shop;
+        sv.shop = _shops[indexPath.row];;
         sv.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:sv animated:YES];
     }else{
-        NSDictionary *dict = _products[indexPath.row];
-        JRProduct *product = [[JRProduct alloc] init];
-        product.linkProductId = [NSString stringWithFormat:@"%@", dict[@"goodsId"]];
-        product.shopId = 5;
         ProductDetailViewController *pd = [[ProductDetailViewController alloc] init];
-        pd.product = product;
+        pd.product = _products[indexPath.row];
         pd.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:pd animated:YES];
     }
@@ -208,11 +196,11 @@
     return cell;
 }
 
-- (void)onCity:(UIButton *)sender{
-    ProductListViewController *pl = [[ProductListViewController alloc] init];
-    pl.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:pl animated:YES];
-}
+//- (void)onCity:(UIButton *)sender{
+//    ProductListViewController *pl = [[ProductListViewController alloc] init];
+//    pl.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:pl animated:YES];
+//}
 
 - (IBAction)onShop:(id)sender{
 //    ShopHomeViewController *vc = [[ShopHomeViewController alloc] init];

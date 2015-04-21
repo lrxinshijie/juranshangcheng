@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class JRShop;
 @interface TopShopCell : UICollectionViewCell
 
-- (void)fillCellWithData:(NSDictionary *)dict;
+- (void)fillCellWithData:(JRShop *)shop;
 
 @end

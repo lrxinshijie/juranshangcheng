@@ -64,7 +64,7 @@
     [[ALEngine shareEngine] pathURL:JR_SEARCH_SHOP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSMutableArray *rows =[JRShop buildUpWithValueForList:[data objectForKey:@"appShopInfoList"]];
+            NSMutableArray *rows =[JRShop buildUpWithValueForShopList:[data objectForKey:@"appShopInfoList"]];
             
             if (_currentPage > 1) {
                 [_dataList addObjectsFromArray:rows];

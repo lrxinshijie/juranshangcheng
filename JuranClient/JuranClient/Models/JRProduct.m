@@ -18,8 +18,10 @@
         
         self.onSaleMinPrice = [dict getStringValueForKey:@"onSaleMinPrice" defaultValue:@""];
         self.defaultImage = [dict getStringValueForKey:@"defaultImage" defaultValue:@""];
-        self.productName = [dict getStringValueForKey:@"productName" defaultValue:@""];
-        self.linkProductId = [dict getStringValueForKey:@"linkProductId" defaultValue:@""];
+        self.goodsLogo = [dict getStringValueForKey:@"goodsLogo" defaultValue:@""];
+        self.goodsName = [dict getStringValueForKey:@"goodsName" defaultValue:@""];
+        self.linkProductId = [dict getIntValueForKey:@"linkProductId" defaultValue:0];
+        self.shopId = [dict getIntValueForKey:@"shopId" defaultValue:0];
     }
     return self;
 }
@@ -36,14 +38,14 @@
 }
 
 - (void)loadInfo:(BOOLBlock)finished{
-    NSDictionary *param = @{@"goodsAnchoredId": self.linkProductId,
+    NSDictionary *param = @{@"linkProductId": @(self.linkProductId),
                             @"shopId": @(self.shopId)
                             };
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             self.goodsImagesList = [data getArrayValueForKey:@"goodsImagesList" defaultValue:nil];
             
-            self.goodsIntroduce = [data getStringValueForKey:@"goodsIntroduce" defaultValue:@""];
+//            self.goodsName = [data getStringValueForKey:@"goodsName" defaultValue:@""];
             self.priceMax = [data getStringValueForKey:@"priceMax" defaultValue:@""];
             self.priceMin = [data getStringValueForKey:@"priceMin" defaultValue:@""];
             self.type = [data getBoolValueForKey:@"type" defaultValue:NO];
@@ -57,7 +59,7 @@
 }
 
 - (void)loadDesc:(BOOLBlock)finished{
-    NSDictionary *param = @{@"goodsAnchoredId": self.linkProductId
+    NSDictionary *param = @{@"linkProductId": @(self.linkProductId)
                             };
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_DESC parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
@@ -72,9 +74,10 @@
 }
 
 - (void)favority:(BOOLBlock)finished{
-    NSDictionary *param = @{@"linkProductId": self.linkProductId,
+    NSDictionary *param = @{@"linkProductId": @(self.linkProductId),
                             @"shopId": @(self.shopId),
-                            @"type": @(!self.type)
+//                            @"type": @(!self.type)
+                            @"type": self.type ? @"del" : @"add"
                             };
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_FAVORITY parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
@@ -89,7 +92,7 @@
 }
 
 - (void)loadAttribute:(BOOLBlock)finished{
-    NSDictionary *param = @{@"goodsAnchoredId": self.linkProductId
+    NSDictionary *param = @{@"linkProductId": @(self.linkProductId)
                             };
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_ATTRIBUTE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
@@ -121,7 +124,7 @@
 }
 
 - (void)loadStore:(BOOLBlock)finished{
-    NSDictionary *param = @{@"goodsAnchoredId": self.linkProductId
+    NSDictionary *param = @{@"linkProductId": @(self.linkProductId)
                             };
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_SELL_STORE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {

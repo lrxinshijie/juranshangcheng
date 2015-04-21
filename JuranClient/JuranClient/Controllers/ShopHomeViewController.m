@@ -10,7 +10,6 @@
 #import "JRShop.h"
 #import "ShopCell.h"
 #import "FilterInShopViewController.h"
-#import "ShopListViewController.h"
 
 @interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -134,12 +133,10 @@
 */
 
 - (IBAction)onClassification:(id)sender {
-//    FilterInShopViewController *filter = [[FilterInShopViewController alloc]init];
-//    [filter setFinishBlock:^(long catId) {
-//        //获取分类后
-//    }];
-//    [self.navigationController pushViewController:filter animated:YES];
-    ShopListViewController *vc = [[ShopListViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    FilterInShopViewController *filter = [[FilterInShopViewController alloc]init];
+    [filter setFinishBlock:^(long catId) {
+        //获取分类后处理
+    }];
+    [self.navigationController pushViewController:filter animated:YES];
 }
 @end

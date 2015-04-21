@@ -95,7 +95,13 @@
     [self showHUD];
     [_product loadInfo:^(BOOL result) {
         [self hideHUD];
-        _nameLabel.text = _product.goodsIntroduce;
+        if (!result) {
+            return ;
+        }
+        
+        [self setupFavority];
+        
+        _nameLabel.text = _product.goodsName;
         CGRect frame = _nameLabel.frame;
         CGFloat height = [_nameLabel.text heightWithFont:_nameLabel.font constrainedToWidth:CGRectGetWidth(frame)];
         if (height >= 35) {
@@ -164,6 +170,21 @@
     [self.navigationController pushViewController:pl animated:YES];
 }
 
+- (IBAction)onFavority:(id)sender{
+    [_product favority:^(BOOL result) {
+        if (result) {
+            [self setupFavority];
+        }
+    }];
+}
+
+- (void)setupFavority{
+    [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-collection-active" : @"icon-collection"] forState:UIControlStateNormal];
+    [_favorityButton setTitle:_product.type ? @"已收藏" : @"收藏" forState:UIControlStateNormal];
+    _favorityButton.titleEdgeInsets = UIEdgeInsetsMake(30, -20, 0, 0);
+    _favorityButton.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 20, 0);
+}
+
 - (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
     [_webView removeFromSuperview];
     [_detailTableView removeFromSuperview];
@@ -172,6 +193,7 @@
         [_scrollView addSubview:_webView];
     }else{
         [_scrollView addSubview:_detailTableView];
+        [_detailTableView reloadData];
     }
     
     if (segment.selectedIndex == 1 && !_product.goodsAttributesInfoList) {
@@ -330,7 +352,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if ([scrollView isEqual:_scrollView]) {
-        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha: (scrollView.contentOffset.y >= CGRectGetHeight(scrollView.frame) ? 1 : 0)];
+        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha: (scrollView.contentOffset.y >= 320 ? 1 : 0)];
     }
 //    else if ([scrollView isEqual:_baseTableView]){
 //        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:_baseTableView.contentOffset.y/320.0];

@@ -38,9 +38,9 @@
     [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
-    [_photoImageView setImageWithURLString:_product.defaultImage];
-    _nameLabel.text = _product.goodsIntroduce;
-    _priceLabel.text = [NSString stringWithFormat:@"￥%@",_product.priceMax];
+    [_photoImageView setImageWithURLString:_product.goodsLogo];
+    _nameLabel.text = _product.goodsName;
+    _priceLabel.text = [NSString stringWithFormat:@"￥%@",_product.onSaleMinPrice];
     _priceLabel.textColor = kBlueColor;
     
     self.senderName = @"";
