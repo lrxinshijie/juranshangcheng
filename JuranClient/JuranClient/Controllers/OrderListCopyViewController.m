@@ -15,6 +15,7 @@
 #import "ContractViewController.h"
 #import "JRSegmentControl.h"
 #import "PreDisclosureInfoViewController.h"
+#import "ConstructPriceListViewController.h"
 
 @interface OrderListCopyViewController () <UITableViewDataSource, UITableViewDelegate, OrderFilterViewControllerDelegate, JRSegmentControlDelegate>
 
@@ -276,6 +277,9 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    ConstructPriceListViewController *cp = [[ConstructPriceListViewController alloc] init];
+    [self.navigationController pushViewController:cp animated:YES];
+    return;
     JROrder *order = [_datas objectAtIndex:indexPath.row];
     OrderDetailViewController *vc = [[OrderDetailViewController alloc] init];
     vc.order = order;
