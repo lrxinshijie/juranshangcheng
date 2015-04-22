@@ -52,7 +52,7 @@
     _mapBottomView.frame = CGRectMake(0, kWindowWidth-29, kWindowWidth, 29);
     _mapBottomView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"navi-bottom-bg.png"]];
     [_scrollView addSubview:_mapBottomView];
-
+    
     _naviControlView.frame = CGRectMake(0, kWindowWidth, kWindowWidth, 52);
     [_scrollView addSubview:_naviControlView];
     
@@ -124,7 +124,13 @@
     _selfAnnotation.title = @"你的位置";
     //_mapView.centerCoordinate = _selfAnnotation.coordinate;
     [_mapView addAnnotation:_selfAnnotation];
-    [self reloadView];
+    
+    _imageNode.image = [UIImage imageNamed:@"icon-map-node.png"];
+    BMKMapPoint pointStore = BMKMapPointForCoordinate(_storeAnnotation.coordinate);
+    BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
+    _distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
+    _labelDistance.text = [NSString stringWithFormat:@"%.2fkm",_distance/1000];
+    //[self reloadView];
 }
 
 - (void) didFailToLocateUserWithError:(NSError *)error {
@@ -166,9 +172,7 @@
     _storeAnnotation.coordinate = CLLocationCoordinate2DMake(_store.latitude, _store.longitude);
     _storeAnnotation.title = _store.storeShortName;
     [_mapView addAnnotation:_storeAnnotation];
-    BMKMapPoint pointStore = BMKMapPointForCoordinate(_storeAnnotation.coordinate);
-    BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
-    _distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
+    
     _labelName.text = _store.storeShortName;
     if (_isLocSuccess) {
         _imageNode.image = [UIImage imageNamed:@"icon-map-node.png"];

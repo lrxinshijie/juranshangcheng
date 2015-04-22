@@ -89,7 +89,7 @@
     for (JRStore *store in _dataList) {
         BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
         annotation.coordinate = CLLocationCoordinate2DMake(store.latitude, store.longitude);
-        annotation.title = store.storeCode;
+        annotation.title = store.storeShortName;
         [_mapView addAnnotation:annotation];
     }
     [_tableViewStore reloadData];
