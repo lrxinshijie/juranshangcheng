@@ -47,7 +47,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChangeNotification:) name:UITextFieldTextDidChangeNotification object:nil];
     
-    searchOptions = @[@"在设计师中搜索", @"在作品案例中搜索", @"在答疑解惑中搜索"];
+    searchOptions = @[@"在作品案例中搜索", @"在商品中搜索", @"在店铺中搜索", @"在设计师中搜索", @"在答疑解惑中搜索"];
     self.navigationItem.title = @"搜索";
     step = 1;
     [self setupUI];
@@ -189,6 +189,14 @@
         vc.searchKeyWord = _searchKeyWord;
         vc.isSearchResult = YES;
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (_type == SearchTypeGoods){
+        
+        
+        
+    }else if (_type == SearchTypeShop){
+        
+        
+        
     }
 }
 

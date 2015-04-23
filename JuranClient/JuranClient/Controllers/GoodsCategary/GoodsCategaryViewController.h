@@ -10,4 +10,6 @@
 
 @interface GoodsCategaryViewController : ALViewController
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isPopNavHide:(BOOL)hide;
+
 @end

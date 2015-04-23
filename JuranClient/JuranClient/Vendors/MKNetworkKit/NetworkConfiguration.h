@@ -172,4 +172,9 @@
 #define JR_SHOP_FIRSTPAGE [NSString stringWithFormat:@"%@/shop/shopFirstPage.json",JR_SERVICE]
 #define JR_SHOP_RECOMMEND [NSString stringWithFormat:@"%@/shop/shopRecommend.json",JR_SERVICE]
 
+
+#define JR_SEARCH [NSString stringWithFormat:@"%@/search/searchGoods.json",JR_SERVICE]
+
+
+
 #endif

@@ -7,6 +7,20 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GoodsCategaryViewController">
             <connections>
+                <outlet property="fir_btn" destination="mSd-ca-Seq" id="fBE-dV-8LF"/>
+                <outlet property="fir_line" destination="jd3-Lb-Up4" id="Pt6-GP-pe1"/>
+                <outlet property="fir_line_across" destination="AsU-sk-cai" id="Bqc-nY-JR3"/>
+                <outlet property="for_btn" destination="hJd-ap-A7W" id="gqC-C7-GiA"/>
+                <outlet property="for_line" destination="ME3-0U-vp8" id="J3v-7F-sFk"/>
+                <outlet property="for_line_across" destination="dxu-DS-fCY" id="T0f-lq-a1g"/>
+                <outlet property="listTableView" destination="Txf-8m-0pI" id="SZV-1J-ZvU"/>
+                <outlet property="locationButton" destination="m7O-EO-ghA" id="feP-oV-ifQ"/>
+                <outlet property="sec_btn" destination="zRE-fx-Yz6" id="8df-UR-lZJ"/>
+                <outlet property="sec_line" destination="DP2-YT-qjj" id="riT-bn-vY3"/>
+                <outlet property="sec_line_across" destination="SGv-7u-mXl" id="EiE-U6-ELY"/>
+                <outlet property="th_btn" destination="ICr-pq-6zo" id="47T-hv-B2N"/>
+                <outlet property="th_line" destination="NbG-0L-Xne" id="Dka-3K-DNg"/>
+                <outlet property="th_line_across" destination="gTb-yu-hMF" id="Cxk-S3-bof"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,12 +44,15 @@
                             <state key="normal" image="search_goback.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="goBackButtonDidClick:" destination="-1" eventType="touchUpInside" id="M6n-8X-qS3"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品所在地" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6L4-bn-7lv">
                             <rect key="frame" x="76" y="32" width="77" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4Oj-ev-Hmq">
@@ -44,6 +61,9 @@
                             <state key="normal" image="search_more.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="moreFunctionButtonDidClick:" destination="-1" eventType="touchUpInside" id="qoN-yE-1Xp"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" id="let-yQ-OzL">
                             <rect key="frame" x="160" y="25" width="70" height="34"/>
@@ -55,9 +75,12 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="北京市">
-                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="locationButtonDidClick:" destination="-1" eventType="touchUpInside" id="r5D-wq-Aqt"/>
+                                    </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectArrow.png" id="VPA-Py-edW">
                                     <rect key="frame" x="55" y="15" width="6" height="4"/>
@@ -70,8 +93,8 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mSd-ca-Seq">
-                    <rect key="frame" x="0.0" y="64" width="61" height="50"/>
+                <button opaque="NO" tag="6780" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mSd-ca-Seq">
+                    <rect key="frame" x="0.0" y="64" width="77" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -79,9 +102,12 @@
                         <color key="titleColor" red="0.0" green="0.27450980392156865" blue="0.64313725490196072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="firstLevelItemDidSelect:" destination="-1" eventType="touchUpInside" id="m9r-n2-nge"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hJd-ap-A7W">
-                    <rect key="frame" x="0.0" y="214" width="61" height="50"/>
+                <button opaque="NO" tag="6783" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hJd-ap-A7W">
+                    <rect key="frame" x="0.0" y="214" width="77" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
@@ -90,9 +116,12 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="firstLevelItemDidSelect:" destination="-1" eventType="touchUpInside" id="fK9-ho-Ydr"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ICr-pq-6zo">
-                    <rect key="frame" x="0.0" y="164" width="61" height="50"/>
+                <button opaque="NO" tag="6782" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ICr-pq-6zo">
+                    <rect key="frame" x="0.0" y="164" width="77" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
@@ -101,9 +130,12 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="firstLevelItemDidSelect:" destination="-1" eventType="touchUpInside" id="u1w-ZL-bS6"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zRE-fx-Yz6">
-                    <rect key="frame" x="0.0" y="114" width="61" height="50"/>
+                <button opaque="NO" tag="6781" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zRE-fx-Yz6">
+                    <rect key="frame" x="0.0" y="114" width="77" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
@@ -112,73 +144,77 @@
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="firstLevelItemDidSelect:" destination="-1" eventType="touchUpInside" id="37R-qP-PxJ"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" id="jd3-Lb-Up4" userLabel="line1">
-                    <rect key="frame" x="61" y="64" width="1" height="50"/>
+                    <rect key="frame" x="76" y="64" width="1" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
                 <view contentMode="scaleToFill" id="DP2-YT-qjj" userLabel="line2">
-                    <rect key="frame" x="61" y="114" width="1" height="50"/>
+                    <rect key="frame" x="76" y="114" width="1" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
                 <view contentMode="scaleToFill" id="NbG-0L-Xne" userLabel="line3">
-                    <rect key="frame" x="61" y="164" width="1" height="50"/>
+                    <rect key="frame" x="76" y="164" width="1" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
                 <view contentMode="scaleToFill" id="ME3-0U-vp8" userLabel="line4">
-                    <rect key="frame" x="61" y="214" width="1" height="50"/>
+                    <rect key="frame" x="76" y="214" width="1" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
                 <view contentMode="scaleToFill" id="baH-EC-KVs" userLabel="line5">
-                    <rect key="frame" x="61" y="264" width="1" height="305"/>
+                    <rect key="frame" x="76" y="264" width="1" height="305"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.81176470588235294" green="0.81176470588235294" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
                 <view contentMode="scaleToFill" id="AsU-sk-cai" userLabel="line_1">
-                    <rect key="frame" x="0.0" y="114" width="61" height="1"/>
+                    <rect key="frame" x="0.0" y="114" width="77" height="1"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
                 <view contentMode="scaleToFill" id="SGv-7u-mXl" userLabel="line_2">
-                    <rect key="frame" x="0.0" y="164" width="61" height="1"/>
+                    <rect key="frame" x="0.0" y="164" width="77" height="1"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
                 <view contentMode="scaleToFill" id="gTb-yu-hMF" userLabel="line_3">
-                    <rect key="frame" x="0.0" y="214" width="61" height="1"/>
+                    <rect key="frame" x="0.0" y="214" width="77" height="1"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
                 <view contentMode="scaleToFill" id="dxu-DS-fCY" userLabel="line_4">
-                    <rect key="frame" x="0.0" y="264" width="61" height="1"/>
+                    <rect key="frame" x="0.0" y="264" width="77" height="1"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="j0N-a6-1Zm">
-                    <rect key="frame" x="61" y="64" width="259" height="504"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Txf-8m-0pI">
+                    <rect key="frame" x="77" y="64" width="243" height="504"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="0.0"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="rVX-KT-laS"/>
+                        <outlet property="dataSource" destination="-1" id="xYB-wd-Jzw"/>
+                        <outlet property="delegate" destination="-1" id="hQ2-5q-v0W"/>
                     </connections>
-                </scrollView>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="270" y="334"/>
+            <point key="canvasLocation" x="751" y="423"/>
         </view>
     </objects>
     <resources>
