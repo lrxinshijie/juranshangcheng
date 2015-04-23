@@ -1,47 +1,47 @@
 //
-//  ConstructPriceListViewController.m
+//  ConfirmItemViewController.m
 //  JuranClient
 //
 //  Created by HuangKai on 15/4/23.
 //  Copyright (c) 2015年 Juran. All rights reserved.
 //
 
-#import "ConstructPriceListViewController.h"
+#import "ConfirmItemViewController.h"
 #import "ConstructPriceListCell.h"
 #import "TTTAttributedLabel.h"
 
-@interface ConstructPriceListViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface ConfirmItemViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *sections;
 
 @property (nonatomic, strong) NSMutableDictionary *openDictionary;
-@property (nonatomic, strong) IBOutlet UIView *totalView;
+@property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UIView *footerView;
 
 @end
 
-@implementation ConstructPriceListViewController
+@implementation ConfirmItemViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    self.navigationItem.title = @"施工报价清单";
+    self.navigationItem.title = @"确认增减项";
     
-    self.sections = @[@"拆除工程", @"墙面工程", @"门窗工程", @""];
+    self.sections = @[@"拆除工程", @"墙面工程", @"门窗工程"];
     self.openDictionary = [NSMutableDictionary dictionary];
-    
     [self setupUI];
+
 }
 
 - (void)setupUI{
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = _footerView;
+    _tableView.tableHeaderView = _headerView;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     [self.view addSubview:_tableView];
-    
 }
 
 - (void)reloadData{
@@ -96,7 +96,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 3) {
-        return CGRectGetHeight(_totalView.frame);
     }
     return [ConstructPriceListCell cellHeightWithValue:nil isHead:indexPath.row == 0];
 }
@@ -120,9 +119,7 @@
         cell = (ConstructPriceListCell*)objs.firstObject;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    [_totalView removeFromSuperview];
     if (indexPath.section == 3) {
-        [cell addSubview:_totalView];
     }else{
         [cell fillCellWithValue:nil isHead:indexPath.row == 0];
     }
@@ -136,13 +133,13 @@
 }
 
 /*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

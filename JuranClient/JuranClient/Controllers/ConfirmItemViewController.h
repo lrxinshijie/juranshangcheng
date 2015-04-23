@@ -1,5 +1,5 @@
 //
-//  ConstructPriceListViewController.h
+//  ConfirmItemViewController.h
 //  JuranClient
 //
 //  Created by HuangKai on 15/4/23.
@@ -8,6 +8,6 @@
 
 #import "ALViewController.h"
 
-@interface ConstructPriceListViewController : ALViewController
+@interface ConfirmItemViewController : ALViewController
 
 @end

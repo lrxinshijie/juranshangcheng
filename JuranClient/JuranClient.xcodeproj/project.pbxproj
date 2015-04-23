@@ -770,10 +770,6 @@
 		375B465B1A5EE76700D7E74B /* StyleModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */; };
 		3765C7491AE3ABCA007BD3D4 /* FilterInShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C8D1ADE0E200037105E /* FilterInShopViewController.m */; };
 		3765C74A1AE3ABCA007BD3D4 /* FilterInShopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C8E1ADE0E200037105E /* FilterInShopViewController.xib */; };
-		376791891AE6859A0019E04D /* ConstructPriceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376791871AE6859A0019E04D /* ConstructPriceListViewController.m */; };
-		3767918A1AE6859A0019E04D /* ConstructPriceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 376791871AE6859A0019E04D /* ConstructPriceListViewController.m */; };
-		3767918B1AE6859A0019E04D /* ConstructPriceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376791881AE6859A0019E04D /* ConstructPriceListViewController.xib */; };
-		3767918C1AE6859A0019E04D /* ConstructPriceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376791881AE6859A0019E04D /* ConstructPriceListViewController.xib */; };
 		376791901AE688DA0019E04D /* ConstructPriceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3767918E1AE688DA0019E04D /* ConstructPriceListCell.m */; };
 		376791911AE688DA0019E04D /* ConstructPriceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3767918E1AE688DA0019E04D /* ConstructPriceListCell.m */; };
 		376791921AE688DA0019E04D /* ConstructPriceListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3767918F1AE688DA0019E04D /* ConstructPriceListCell.xib */; };
@@ -874,6 +870,12 @@
 		37DDB1C01AE54BE4003475B9 /* PreDisclosureInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DDB1BD1AE54BE4003475B9 /* PreDisclosureInfoViewController.m */; };
 		37DDB1C11AE54BE4003475B9 /* PreDisclosureInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DDB1BE1AE54BE4003475B9 /* PreDisclosureInfoViewController.xib */; };
 		37DDB1C21AE54BE4003475B9 /* PreDisclosureInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DDB1BE1AE54BE4003475B9 /* PreDisclosureInfoViewController.xib */; };
+		37DFE3931AE91EAF00268278 /* ConfirmItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DFE3911AE91EAF00268278 /* ConfirmItemViewController.m */; };
+		37DFE3941AE91EAF00268278 /* ConfirmItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DFE3921AE91EAF00268278 /* ConfirmItemViewController.xib */; };
+		37DFE3981AE924CF00268278 /* ConstructPriceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DFE3961AE924CF00268278 /* ConstructPriceListViewController.m */; };
+		37DFE3991AE924CF00268278 /* ConstructPriceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DFE3961AE924CF00268278 /* ConstructPriceListViewController.m */; };
+		37DFE39A1AE924CF00268278 /* ConstructPriceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DFE3971AE924CF00268278 /* ConstructPriceListViewController.xib */; };
+		37DFE39B1AE924CF00268278 /* ConstructPriceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DFE3971AE924CF00268278 /* ConstructPriceListViewController.xib */; };
 		37E589821AB1B73200CB5FA4 /* WikiDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */; };
 		37E589831AB1B73200CB5FA4 /* WikiDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */; };
 		37E589841AB1B73200CB5FA4 /* WikiDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */; };
@@ -2262,9 +2264,6 @@
 		375B46531A5EE70F00D7E74B /* StyleModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleModifyViewController.h; sourceTree = "<group>"; };
 		375B46541A5EE70F00D7E74B /* StyleModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleModifyViewController.m; sourceTree = "<group>"; };
 		375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleModifyViewController.xib; sourceTree = "<group>"; };
-		376791861AE6859A0019E04D /* ConstructPriceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstructPriceListViewController.h; sourceTree = "<group>"; };
-		376791871AE6859A0019E04D /* ConstructPriceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstructPriceListViewController.m; sourceTree = "<group>"; };
-		376791881AE6859A0019E04D /* ConstructPriceListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConstructPriceListViewController.xib; sourceTree = "<group>"; };
 		3767918D1AE688DA0019E04D /* ConstructPriceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstructPriceListCell.h; sourceTree = "<group>"; };
 		3767918E1AE688DA0019E04D /* ConstructPriceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstructPriceListCell.m; sourceTree = "<group>"; };
 		3767918F1AE688DA0019E04D /* ConstructPriceListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConstructPriceListCell.xib; sourceTree = "<group>"; };
@@ -2360,6 +2359,12 @@
 		37DDB1BC1AE54BE4003475B9 /* PreDisclosureInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreDisclosureInfoViewController.h; sourceTree = "<group>"; };
 		37DDB1BD1AE54BE4003475B9 /* PreDisclosureInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreDisclosureInfoViewController.m; sourceTree = "<group>"; };
 		37DDB1BE1AE54BE4003475B9 /* PreDisclosureInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreDisclosureInfoViewController.xib; sourceTree = "<group>"; };
+		37DFE3901AE91EAF00268278 /* ConfirmItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmItemViewController.h; sourceTree = "<group>"; };
+		37DFE3911AE91EAF00268278 /* ConfirmItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmItemViewController.m; sourceTree = "<group>"; };
+		37DFE3921AE91EAF00268278 /* ConfirmItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmItemViewController.xib; sourceTree = "<group>"; };
+		37DFE3951AE924CF00268278 /* ConstructPriceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstructPriceListViewController.h; sourceTree = "<group>"; };
+		37DFE3961AE924CF00268278 /* ConstructPriceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstructPriceListViewController.m; sourceTree = "<group>"; };
+		37DFE3971AE924CF00268278 /* ConstructPriceListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConstructPriceListViewController.xib; sourceTree = "<group>"; };
 		37E5897F1AB1B73200CB5FA4 /* WikiDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiDetailViewController.h; sourceTree = "<group>"; };
 		37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiDetailViewController.m; sourceTree = "<group>"; };
 		37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WikiDetailViewController.xib; sourceTree = "<group>"; };
@@ -3664,9 +3669,12 @@
 				37DDB1BC1AE54BE4003475B9 /* PreDisclosureInfoViewController.h */,
 				37DDB1BD1AE54BE4003475B9 /* PreDisclosureInfoViewController.m */,
 				37DDB1BE1AE54BE4003475B9 /* PreDisclosureInfoViewController.xib */,
-				376791861AE6859A0019E04D /* ConstructPriceListViewController.h */,
-				376791871AE6859A0019E04D /* ConstructPriceListViewController.m */,
-				376791881AE6859A0019E04D /* ConstructPriceListViewController.xib */,
+				37DFE3951AE924CF00268278 /* ConstructPriceListViewController.h */,
+				37DFE3961AE924CF00268278 /* ConstructPriceListViewController.m */,
+				37DFE3971AE924CF00268278 /* ConstructPriceListViewController.xib */,
+				37DFE3901AE91EAF00268278 /* ConfirmItemViewController.h */,
+				37DFE3911AE91EAF00268278 /* ConfirmItemViewController.m */,
+				37DFE3921AE91EAF00268278 /* ConfirmItemViewController.xib */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -5754,6 +5762,7 @@
 				1415FA411A5CD1CB003D0C29 /* WikiViewController.xib in Resources */,
 				1415FA421A5CD1CB003D0C29 /* AboutViewController.xib in Resources */,
 				37DBFA4F1A8A33E7003749E8 /* OrderPhotoViewController.xib in Resources */,
+				37DFE39B1AE924CF00268278 /* ConstructPriceListViewController.xib in Resources */,
 				BD51865A1A5D0ED700BE508A /* login-icon-password@2x.png in Resources */,
 				1415FA431A5CD1CB003D0C29 /* LoginViewController.xib in Resources */,
 				1415FA441A5CD1CB003D0C29 /* service.html in Resources */,
@@ -5797,7 +5806,6 @@
 				1415FA511A5CD1CB003D0C29 /* APPRecommendViewController.xib in Resources */,
 				BD5186261A5D0ED700BE508A /* icon_xunzhang_1@2x.png in Resources */,
 				140C9EB61ADB5DAD0079391A /* icon-nav-explore-active@2x.png in Resources */,
-				3767918C1AE6859A0019E04D /* ConstructPriceListViewController.xib in Resources */,
 				1415FA521A5CD1CB003D0C29 /* SubjectCell.xib in Resources */,
 				1415FA531A5CD1CB003D0C29 /* DemandDetailViewController.xib in Resources */,
 				BD5186AC1A5D0ED700BE508A /* answer_wati_accept@2x.png in Resources */,
@@ -6177,7 +6185,6 @@
 				A9A9F2E71AE3893C00A03C9B /* product-icon-back@2x.png in Resources */,
 				BD5187171A5D0ED700BE508A /* service_highlighted_2@2x.png in Resources */,
 				BD322BCC1A6E090800DDC1C0 /* image_quality_unselected_disabled@2x.png in Resources */,
-				3767918B1AE6859A0019E04D /* ConstructPriceListViewController.xib in Resources */,
 				BD5186CD1A5D0ED700BE508A /* question_unresolved@2x.png in Resources */,
 				1441A16F1A29E3CD004A038E /* ShareSDKLocalizable.strings in Resources */,
 				2C91E9181ADB790C00B542DC /* NaviStoreCell.xib in Resources */,
@@ -6242,6 +6249,7 @@
 				37ECDD1D1AE1418F00BE6027 /* MyDemandCopyViewController.xib in Resources */,
 				37D18DAE1A5819F300B41048 /* CaseImageManagemanetViewController.xib in Resources */,
 				14FBC9E11A495143000A789C /* arrow@2x.png in Resources */,
+				37DFE3941AE91EAF00268278 /* ConfirmItemViewController.xib in Resources */,
 				2C602C7D1ADCED230037105E /* shoplist-image-bg@2x.png in Resources */,
 				BD5186951A5D0ED700BE508A /* icon_personal_zhgl@2x.png in Resources */,
 				37F491EE1AD94C6D0068A99B /* ShopHomeViewController.xib in Resources */,
@@ -6550,6 +6558,7 @@
 				375635351A60FF8F00D120C8 /* icon_check_ok@2x.png in Resources */,
 				BD5185FB1A5D0ED700BE508A /* icon-grid@2x.png in Resources */,
 				BD5186831A5D0ED700BE508A /* icon_personal_ddgl@2x.png in Resources */,
+				37DFE39A1AE924CF00268278 /* ConstructPriceListViewController.xib in Resources */,
 				A9A4E35B1A62C46D00BB9F68 /* Icon-72.png in Resources */,
 				A9C398461A29D25F006A8AAB /* ResetPasswordViewController.xib in Resources */,
 				BD51866B1A5D0ED700BE508A /* arrow_up@2x.png in Resources */,
@@ -6818,7 +6827,6 @@
 				37F0E7141A7D2735004CCCB2 /* UIImage+GIF.m in Sources */,
 				37F0E7021A7D2735004CCCB2 /* NSData+ImageContentType.m in Sources */,
 				A9A71D691ADFF1F400804AF9 /* StarView.m in Sources */,
-				3767918A1AE6859A0019E04D /* ConstructPriceListViewController.m in Sources */,
 				1415F9881A5CD1CB003D0C29 /* ActionSheetCustomPicker.m in Sources */,
 				A9A9F2DE1AE361CC00A03C9B /* ProductCell.m in Sources */,
 				1415F9891A5CD1CB003D0C29 /* NSArray+ASCategory.m in Sources */,
@@ -6900,6 +6908,7 @@
 				1415F9BF1A5CD1CB003D0C29 /* JSONModelClassProperty.m in Sources */,
 				1415F9C01A5CD1CB003D0C29 /* BindPhoneNumberViewController.m in Sources */,
 				A9C012111ABC601900DCF9C3 /* IQBarButtonItem.m in Sources */,
+				37DFE3991AE924CF00268278 /* ConstructPriceListViewController.m in Sources */,
 				1415F9C11A5CD1CB003D0C29 /* DistancePickerView.m in Sources */,
 				1415F9C31A5CD1CB003D0C29 /* MyFollowViewController.m in Sources */,
 				1415F9C41A5CD1CB003D0C29 /* CaseIntroduceViewController.m in Sources */,
@@ -7181,11 +7190,11 @@
 				A9D654B51A27642800A80253 /* JSONModel+networking.m in Sources */,
 				14361E5A1A344E6100F9BD94 /* pinyin.c in Sources */,
 				A987EE431A20984200CED7CD /* HomeViewController.m in Sources */,
-				376791891AE6859A0019E04D /* ConstructPriceListViewController.m in Sources */,
 				37F0E7151A7D2735004CCCB2 /* UIImage+MultiFormat.m in Sources */,
 				A987EDE61A20920500CED7CD /* UIAlertView+ASCategory.m in Sources */,
 				A987EDD41A20920500CED7CD /* Public.m in Sources */,
 				A94525231AA5ED1F002DFA2A /* openssl_wrapper.m in Sources */,
+				37DFE3931AE91EAF00268278 /* ConfirmItemViewController.m in Sources */,
 				A9A4135D1ADE9EEE00074BB0 /* HMSegmentedControl.m in Sources */,
 				A9902CA61A3432A500F08DA1 /* FilterViewController.m in Sources */,
 				BD48B58D1A5283340041725C /* JRServiceViewController.m in Sources */,
@@ -7361,6 +7370,7 @@
 				37F0E6A91A7D1F4E004CCCB2 /* PSTCollectionViewFlowLayout.m in Sources */,
 				A9C012081ABC601900DCF9C3 /* IQKeyboardManager.m in Sources */,
 				A987EE1A1A20928B00CED7CD /* ALEngine.m in Sources */,
+				37DFE3981AE924CF00268278 /* ConstructPriceListViewController.m in Sources */,
 				A9C398451A29D25F006A8AAB /* ResetPasswordViewController.m in Sources */,
 				A9A7D4AB1A503715001A70FF /* JRWebViewController.m in Sources */,
 				A9D654B71A27642800A80253 /* JSONValueTransformer.m in Sources */,

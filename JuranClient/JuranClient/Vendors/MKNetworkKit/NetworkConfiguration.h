@@ -195,4 +195,6 @@
 #define JR_NAVI_STORE_INFO [NSString stringWithFormat:@"%@/shop/storeInfo.json",JR_SERVICE]
 //Search
 #define JR_SEARCH_SHOP [NSString stringWithFormat:@"%@/search/searchShop.json",JR_SERVICE]
+#define JR_SHOP_COLLECTION [NSString stringWithFormat:@"%@/shop/shopAddAndDel.json",JR_SERVICE]
+
 #endif

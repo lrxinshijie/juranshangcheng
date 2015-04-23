@@ -32,4 +32,5 @@
 + (NSMutableArray*)buildUpWithValueForList:(id)value;
 - (id)initWithDictionaryForShopList:(NSDictionary *)dict;
 + (NSMutableArray*)buildUpWithValueForShopList:(id)value;
+- (void)buildUpWithDictionary:(NSDictionary *)dict;
 @end
