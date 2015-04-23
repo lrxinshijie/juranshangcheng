@@ -9,5 +9,5 @@
 #import "ALViewController.h"
 
 @interface NaviStoreListViewController : ALViewController
-
+@property (nonatomic, strong) NSArray *dataList;
 @end

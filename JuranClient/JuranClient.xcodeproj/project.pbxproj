@@ -709,6 +709,7 @@
 		2C91E91E1ADB904B00B542DC /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C91E91D1ADB904B00B542DC /* mapapi.bundle */; };
 		2C91E9211ADBA1F900B542DC /* trans-navi-left-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C91E91F1ADBA1F900B542DC /* trans-navi-left-button@2x.png */; };
 		2C91E9221ADBA1F900B542DC /* trans-navi-right-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C91E9201ADBA1F900B542DC /* trans-navi-right-button@2x.png */; };
+		2CFCD6E01AE8A9740011DFF9 /* UserLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFCD6DF1AE8A9740011DFF9 /* UserLocation.m */; };
 		3710D5AE1A557DF00028D32A /* RealNameAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */; };
 		3710D5AF1A557DF00028D32A /* RealNameAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */; };
 		3713F9B31ADF909800785B39 /* flter-button-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3713F9B11ADF909800785B39 /* flter-button-bg@2x.png */; };
@@ -2209,6 +2210,8 @@
 		2C91E91D1ADB904B00B542DC /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = BaiduMapAPI/BaiduMapAPI.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
 		2C91E91F1ADBA1F900B542DC /* trans-navi-left-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trans-navi-left-button@2x.png"; path = "Navi/trans-navi-left-button@2x.png"; sourceTree = "<group>"; };
 		2C91E9201ADBA1F900B542DC /* trans-navi-right-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trans-navi-right-button@2x.png"; path = "Navi/trans-navi-right-button@2x.png"; sourceTree = "<group>"; };
+		2CFCD6DE1AE8A9740011DFF9 /* UserLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocation.h; sourceTree = "<group>"; };
+		2CFCD6DF1AE8A9740011DFF9 /* UserLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocation.m; sourceTree = "<group>"; };
 		3710D5AB1A557DF00028D32A /* RealNameAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealNameAuthViewController.h; sourceTree = "<group>"; };
 		3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealNameAuthViewController.m; sourceTree = "<group>"; };
 		3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RealNameAuthViewController.xib; sourceTree = "<group>"; };
@@ -4536,6 +4539,8 @@
 				2C602C991ADE3E8F0037105E /* JRStore.m */,
 				A9A9F2E11AE3679E00A03C9B /* JRProduct.h */,
 				A9A9F2E21AE3679E00A03C9B /* JRProduct.m */,
+				2CFCD6DE1AE8A9740011DFF9 /* UserLocation.h */,
+				2CFCD6DF1AE8A9740011DFF9 /* UserLocation.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -7030,6 +7035,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C3D51C61AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m in Sources */,
+				2CFCD6E01AE8A9740011DFF9 /* UserLocation.m in Sources */,
 				A987EE391A2093C900CED7CD /* MJRefreshFooterView.m in Sources */,
 				1437F2B81A30B09B00E7C077 /* JRTopic.m in Sources */,
 				37ECDD211AE166D500BE6027 /* ConstructActionView.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "NaviStoreSelCityViewController.h"
 #import "JRAreaInfo.h"
+#import "pinyin.h"
 
 @interface NaviStoreSelCityViewController ()
 {
@@ -231,6 +232,7 @@
         cell.textLabel.text = dic.allValues.firstObject;
     }else if (type == 1){
         cell.textLabel.text = cityDic.allValues[indexPath.row];
+        cell.accessoryView = nil;
     }else{
         cell.textLabel.text = districtDic.allValues[indexPath.row];
         cell.accessoryView = nil;

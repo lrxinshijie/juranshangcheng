@@ -37,6 +37,7 @@
 #ifndef kJuranDesigner
 #import <BaiduMapAPI/BMKMapManager.h>
 #endif
+#import "UserLocation.h"
 
 #ifndef kJuranVersion12
 //#define kJuranVersion12
@@ -101,8 +102,8 @@
 #define kUMengKey @"5511191dfd98c576640005fe"
 
 //百度地图API
-//UAT
-#define kBaiduMapKey @"4cGeGYys4cxdVd8DE9jMQslH"
+//DEV
+#define kBaiduMapKey @"u47QpGFlx3CgEmRnL0iN33YX"
 //生产
 //#define kBaiduMapKey @"MadY3qvvgFGNqZAqNEmE8nlP";
 
@@ -362,10 +363,14 @@
 
 - (void)setupBaiduMapAPI {
 #ifndef kJuranDesigner
-    _mapManager = [[BMKMapManager alloc]init];
-    BOOL ret = [_mapManager start:kBaiduMapKey generalDelegate:nil];
+    BMKMapManager* mapManager = [[BMKMapManager alloc]init];
+    BOOL ret = [mapManager start:kBaiduMapKey generalDelegate:nil];
     if (!ret) {
         NSLog(@"manager start failed!");
+    }
+    else {
+        _gLocation = [[UserLocation alloc]init];
+        [_gLocation startLocationHandler:nil];
     }
 #endif
 }

@@ -58,6 +58,7 @@
             self.shopName = [dict getStringValueForKey:@"shopName" defaultValue:@""];
             self.brands = [dict getStringValueForKey:@"brands" defaultValue:@""];
             self.grade = [dict getStringValueForKey:@"grade" defaultValue:@""];
+            self.logo = [dict getStringValueForKey:@"logo" defaultValue:@""];
         }
     }
     return self;

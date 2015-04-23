@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #ifndef kJuranDesigner
-@class BMKMapManager;
+@class UserLocation;
 #endif
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
@@ -17,9 +17,7 @@
 
 @property (nonatomic, strong) UITabBarController *tabBarController;
 @property (nonatomic, strong) NSString *clientId;
-#ifndef kJuranDesigner
-@property (strong, nonatomic) BMKMapManager* mapManager;
-#endif
+@property (nonatomic, strong) UserLocation *gLocation;
 - (void)minusBadgeNumber:(NSInteger)num;
 - (void)jumpToMain;
 
