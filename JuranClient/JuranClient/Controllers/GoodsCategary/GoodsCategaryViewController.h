@@ -8,8 +8,15 @@
 
 #import "ALViewController.h"
 
+typedef enum {
+    
+    CategaryStyle_Goods = 0,
+    CategaryStyle_Shop
+    
+}CategaryStyle;
+
 @interface GoodsCategaryViewController : ALViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isPopNavHide:(BOOL)hide;
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isPopNavHide:(BOOL)hide style:(CategaryStyle)style;
 
 @end

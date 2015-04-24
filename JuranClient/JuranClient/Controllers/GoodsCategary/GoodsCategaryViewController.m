@@ -10,8 +10,12 @@
 #import "SecondLevelItem.h"
 #import "CustomSecLevelView.h"
 #import "CustomThirdLevelCell.h"
+#import "DataItem.h"
+#import "CustomBrandView.h"
+#import "CategaryTableViewCell.h"
+#import "pinyin.h"
 
-@interface GoodsCategaryViewController ()<UITableViewDataSource,UITableViewDelegate,CustomSecLevelViewDelegate,CustomThirdLevelCellDelegate>
+@interface GoodsCategaryViewController ()<UITableViewDataSource,UITableViewDelegate,CustomSecLevelViewDelegate,CustomThirdLevelCellDelegate,CustomShopViewDelegate>
 {
     //记录数组位置
     int cslv_i;
@@ -24,29 +28,16 @@
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *locationButton;
-@property (strong, nonatomic) IBOutlet UIButton *fir_btn;
-@property (strong, nonatomic) IBOutlet UIButton *sec_btn;
-@property (strong, nonatomic) IBOutlet UIButton *th_btn;
-@property (strong, nonatomic) IBOutlet UIButton *for_btn;
-
-@property (strong, nonatomic) IBOutlet UIView *fir_line;
-@property (strong, nonatomic) IBOutlet UIView *sec_line;
-@property (strong, nonatomic) IBOutlet UIView *th_line;
-@property (strong, nonatomic) IBOutlet UIView *for_line;
-
-@property (strong, nonatomic) IBOutlet UIView *fir_line_across;
-@property (strong, nonatomic) IBOutlet UIView *sec_line_across;
-@property (strong, nonatomic) IBOutlet UIView *th_line_across;
-@property (strong, nonatomic) IBOutlet UIView *for_line_across;
 
 @property (strong, nonatomic) IBOutlet UITableView *listTableView;
+@property (strong, nonatomic) IBOutlet UITableView *fistLevelTableView;
 
 @property (strong, nonatomic) NSMutableArray * dateArray_firstLevel;
 @property (strong, nonatomic) NSMutableArray * dataArray_secondLevel;
 @property (strong, nonatomic) NSMutableArray * dataArray_thirdLevel;
 
 //记录一级类目点击的Button
-@property (strong, nonatomic) UIButton * old_btn;
+@property (strong, nonatomic) CategaryTableViewCell * old_cell;
 @property (assign, nonatomic) BOOL isPopNavHide;
 @property (assign, nonatomic) NSInteger sectionNumber;
 
@@ -61,18 +52,18 @@
 
 @property (strong, nonatomic) NSMutableArray * finalDataArray;
 
+@property (strong, nonatomic) NSMutableIndexSet * old_IndexSet;
 @property (assign, nonatomic) int cellCount;
 
+@property (assign, nonatomic) CategaryStyle vcStyle;
 
-
-@property (assign, nonatomic) BOOL test;
-
+@property (assign, nonatomic) int pageNo;
 
 @end
 
 @implementation GoodsCategaryViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isPopNavHide:(BOOL)hide
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isPopNavHide:(BOOL)hide style:(CategaryStyle)style
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -82,6 +73,8 @@
         _old_location.viewNum = -1;
         _old_location.index = Location_None;
         _old_view = nil;
+        _vcStyle = style;
+        _pageNo = 1;
     }
     return self;
 }
@@ -95,124 +88,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
-    //下面两句是等页面初次进入是默认选中一级类目的第一个标签，此处配置其UI
-    self.old_btn = self.fir_btn;
-    self.fir_line.hidden = YES;
     //初始状态没有cell。
     self.cellCount = 0;
-    //TODO:测试数据
-    [self JiaShuJu];
+    //初始化数组什么的
+    [self initData];
+    if (self.vcStyle == CategaryStyle_Shop) {
+        
+        [self requestDataForBrandClass];
+        
+    }else if (self.vcStyle == CategaryStyle_Goods){
+        
+        [self requestDataWithRequestID:@"-1" city:self.locationButton.titleLabel.text level:1];
+    }
     
-    
-    
-    [self initUI];
     
 }
 
-- (void)JiaShuJu
+- (void)initData
 {
     self.sectionNumber = -1;
-    self.dateArray_firstLevel = [NSMutableArray arrayWithArray:@[@"11",@"22",@"33"]];
+    self.dateArray_firstLevel = [NSMutableArray arrayWithCapacity:0];
     self.dataArray_secondLevel = [NSMutableArray arrayWithCapacity:0];
     self.dataArray_thirdLevel = [NSMutableArray arrayWithCapacity:0];
-    
-    
-    for (int i = 0; i<9; i++) {
-        SecondLevelItem * item = [[SecondLevelItem alloc] init];
-        item.lImage = @"aaa";
-        item.lText = [NSString stringWithFormat:@"%@",@"aaaa"];
-        item.mImage = @"aaa";
-        item.mText = [NSString stringWithFormat:@"%@",@"aaaa"];
-        item.rImage = @"aaa";
-        item.rText = [NSString stringWithFormat:@"%@",@"aaaa"];
-        item.isSelect = NO;
-        item.selectLocation = Location_None;
-        
-        [self.dataArray_secondLevel addObject:item];
-    }
-}
-
-- (void)initUI
-{
-    [self configFirstLevelItem];
-}
-
-- (void)configFirstLevelItem
-{
-    switch (self.dateArray_firstLevel.count) {
-        case 1:
-        {
-            self.fir_btn.hidden = NO;
-            self.fir_line_across.hidden = NO;
-            [self.fir_btn setTitle:self.dateArray_firstLevel[0] forState:UIControlStateNormal];
-            
-            self.sec_btn.hidden = YES;
-            self.sec_line_across.hidden = YES;
-            
-            self.th_btn.hidden = YES;
-            self.th_line_across.hidden = YES;
-            
-            self.for_btn.hidden = YES;
-            self.for_line_across.hidden = YES;
-        }
-            break;
-        case 2:
-        {
-            self.fir_btn.hidden = NO;
-            self.fir_line_across.hidden = NO;
-            [self.fir_btn setTitle:self.dateArray_firstLevel[0] forState:UIControlStateNormal];
-            
-            self.sec_btn.hidden = NO;
-            self.sec_line_across.hidden = NO;
-            [self.sec_btn setTitle:self.dateArray_firstLevel[1] forState:UIControlStateNormal];
-            
-            self.th_btn.hidden = YES;
-            self.th_line_across.hidden = YES;
-            
-            self.for_btn.hidden = YES;
-            self.for_line_across.hidden = YES;
-        }
-            break;
-        case 3:
-        {
-            self.fir_btn.hidden = NO;
-            self.fir_line_across.hidden = NO;
-            [self.fir_btn setTitle:self.dateArray_firstLevel[0] forState:UIControlStateNormal];
-            
-            self.sec_btn.hidden = NO;
-            self.sec_line_across.hidden = NO;
-            [self.sec_btn setTitle:self.dateArray_firstLevel[1] forState:UIControlStateNormal];
-            
-            self.th_btn.hidden = NO;
-            self.th_line_across.hidden = NO;
-            [self.th_btn setTitle:self.dateArray_firstLevel[2] forState:UIControlStateNormal];
-            
-            self.for_btn.hidden = YES;
-            self.for_line_across.hidden = YES;
-        }
-            break;
-        case 4:
-        {
-            self.fir_btn.hidden = NO;
-            self.fir_line_across.hidden = NO;
-            [self.fir_btn setTitle:self.dateArray_firstLevel[0] forState:UIControlStateNormal];
-            
-            self.sec_btn.hidden = NO;
-            self.sec_line_across.hidden = NO;
-            [self.sec_btn setTitle:self.dateArray_firstLevel[1] forState:UIControlStateNormal];
-            
-            self.th_btn.hidden = NO;
-            self.th_line_across.hidden = NO;
-            [self.th_btn setTitle:self.dateArray_firstLevel[2] forState:UIControlStateNormal];
-            
-            self.for_btn.hidden = NO;
-            self.for_line_across.hidden = NO;
-            [self.for_btn setTitle:self.dateArray_firstLevel[3] forState:UIControlStateNormal];
-        }
-            break;
-        default:
-            break;
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -222,6 +119,9 @@
 }
 
 - (IBAction)locationButtonDidClick:(id)sender {
+    
+    //首先修改地址，
+    //完成之后重新请求
     
 }
 
@@ -236,77 +136,39 @@
     
 }
 
-- (IBAction)firstLevelItemDidSelect:(id)sender {
-    //6780 6781 6782 6783
-    UIButton * button = (UIButton *)sender;
-    if (self.old_btn == button) {
-        return;
-    }
-    
-    //TODO:重新做数组
-    [button setBackgroundColor:[UIColor whiteColor]];
-    [self.old_btn setBackgroundColor:[UIColor colorWithRed:237.0/255.0 green:237.0/255.0 blue:237.0/255.0 alpha:1.0]];
-    switch (button.tag-6780) {
-        case 0:
-            self.fir_line.hidden = YES;
-            break;
-        case 1:
-            self.sec_line.hidden = YES;
-            break;
-        case 2:
-            self.th_line.hidden = YES;
-            break;
-        case 3:
-            self.for_line.hidden = YES;
-            break;
-        default:
-            break;
-    }
-    
-    switch (self.old_btn.tag-6780) {
-        case 0:
-            self.fir_line.hidden = NO;
-            break;
-        case 1:
-            self.sec_line.hidden = NO;
-            break;
-        case 2:
-            self.th_line.hidden = NO;
-            break;
-        case 3:
-            self.for_line.hidden = NO;
-            break;
-        default:
-            break;
-    }
-    
-    
-    self.old_btn = button;
-    
-    [self initUI];
-    
-}
-
-
 #pragma mark - UITableViewDataSource/UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    //多少段
-    return self.dataArray_secondLevel.count;
+    if (tableView == _listTableView) {
+        //多少段
+        return self.dataArray_secondLevel.count;
+        
+    }
+    
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CellHeight;
+    if (tableView == _listTableView) {
+        return CellHeight;
+    }else{
+        return 51;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == self.currentSection) {
-        return self.cellCount;
+    
+    if (tableView == _listTableView) {
+        if (section == self.currentSection) {
+            return self.cellCount;
+        }
+        return 0;
+    }else{
+        return self.dateArray_firstLevel.count;
     }
-    return 0;
 }
 
 //计算cell的个数
@@ -314,7 +176,8 @@
 {
     NSString * str;
     if (cslv_i<self.dataArray_thirdLevel.count) {
-        str = [self.dataArray_thirdLevel objectAtIndex:cslv_i];
+        DataItem * item = [self.dataArray_thirdLevel objectAtIndex:cslv_i];
+        str = item.name;
         cslv_strLength += str.length*11;
         
         if (cslv_strLength<213) {
@@ -378,38 +241,96 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * cellID = @"CustomThirdLevelCell";
-    CustomThirdLevelCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"CustomThirdLevelCell" owner:self options:nil] lastObject];
-        cell.delegate = self;
+    if (tableView == _listTableView) {
+        static NSString * cellID = @"CustomThirdLevelCell";
+        CustomThirdLevelCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"CustomThirdLevelCell" owner:self options:nil] lastObject];
+            cell.delegate = self;
+        }
+        [cell dynamicCreateUIWithData:[self.finalDataArray objectAtIndex:indexPath.row]];
+        if (indexPath.row == self.finalDataArray.count-1) {
+            [cell addLine];
+        }
+        
+        return cell;
+    }else{
+        
+        static NSString * cellID = @"CategaryTableViewCell";
+        CategaryTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"CategaryTableViewCell" owner:self options:nil] lastObject];
+        }
+        [cell configCellUIWithItem:self.dateArray_firstLevel[indexPath.row]];
+        if (indexPath.row == 0) {
+            [cell setCellTitleSelect];
+            if (!self.old_cell) {
+                self.old_cell = cell;
+            }
+        }
+        
+        return cell;
     }
-    [cell dynamicCreateUIWithData:[self.finalDataArray objectAtIndex:indexPath.row]];
-    if (indexPath.row == self.finalDataArray.count-1) {
-        [cell addLine];
-    }
-    
-    return cell;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 95;
+    if (tableView == _listTableView) {
+        return 95;
+    }
+    return 1;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    CustomSecLevelView * cView = [[[NSBundle mainBundle] loadNibNamed:@"CustomSecLevelView" owner:self options:nil] lastObject];
-    cView.tag = 9000+section;
-    cView.delegate = self;
-    [cView initSecondLevelViewWithItem:self.dataArray_secondLevel[section]];
+    if (tableView == _listTableView) {
+        
+        if (self.vcStyle == CategaryStyle_Goods) {
+            CustomSecLevelView * cView = [[[NSBundle mainBundle] loadNibNamed:@"CustomSecLevelView" owner:self options:nil] lastObject];
+            cView.tag = 9000+section;
+            cView.delegate = self;
+            [cView initSecondLevelViewWithItem:self.dataArray_secondLevel[section]];
+            
+            return cView;
+        }else if (self.vcStyle == CategaryStyle_Shop){
+            
+            CustomBrandView * csView = [[[NSBundle mainBundle] loadNibNamed:@"CustomBrandView" owner:self options:nil] lastObject];
+            csView.delegate = self;
+            [csView configViewUIWithItem:self.dataArray_secondLevel[section]];
+            
+        }
+        
+        
+    }
     
-    return cView;
+    return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView == _fistLevelTableView) {
+        
+        CategaryTableViewCell * cell = (CategaryTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+        //请求数据
+        if (self.vcStyle == CategaryStyle_Shop) {
+            [self requestDataForBrand:cell.cell_id pageNo:self.pageNo];
+        }else if (self.vcStyle == CategaryStyle_Goods){
+            [self requestDataWithRequestID:cell.cell_id city:self.locationButton.titleLabel.text level:2];
+        }
+        
+        if (self.old_cell) {
+            [self.old_cell setCellTitleNormal];
+        }
+        [cell setCellTitleSelect];
+        
+        self.old_cell = cell;
+        
+    }
 }
 
 #pragma mark - CustomSecLevelViewDelegate
-- (void)secondLevelView:(CustomSecLevelView *)view didClickAtIndex:(struct SelectLocation)location
+- (void)secondLevelView:(CustomSecLevelView *)view didClickAtIndex:(struct SelectLocation)location requestID:(NSString *)rquestID
 {
     //设置section，在最前边是因为还要调整上次收起的哪一行
     NSUInteger num = view.tag - 9000;
@@ -448,9 +369,11 @@
         _old_location.viewNum = -1;
         self.old_view = nil;
         
+        [self refreashSectionAtIndexSet:indexSet sectionLocation:location];
+        
     }else{
-        //请求数据
-        [self requestData];
+        //记录下需要刷新的section，用于请求完成之后刷新。
+        self.old_IndexSet = indexSet;
         
         //修改字体颜色
         [self.old_view setTextNormalColor:self.old_location.index];
@@ -462,32 +385,152 @@
         
         self.old_view = view;
         self.old_location = location;
+        
+        //请求数据
+        [self requestDataWithRequestID:rquestID city:self.locationButton.titleLabel.text level:3];
     }
     
+    
+    
+   
+}
+
+- (void)refreashSectionAtIndexSet:(NSIndexSet *)indexSet sectionLocation:(struct SelectLocation)location
+{
     [_listTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
     
     int distance = (location.viewNum-9000+1)*95+self.cellCount*31-self.listTableView.contentOffset.y-([UIScreen mainScreen].bounds.size.height - 64);
     if (distance>0) {
         [self.listTableView setContentOffset:CGPointMake(0, self.listTableView.contentOffset.y+distance+10) animated:YES];
     }
-    
-   
 }
 
-- (void)requestData
+//其中level表示请求的是第几级类目，取值1、2、3。
+- (void)requestDataWithRequestID:(NSString *)requestID city:(NSString *)city level:(int)level
 {
-    [self.dataArray_thirdLevel removeAllObjects];
-    [self.finalDataArray removeAllObjects];
-    if (self.test) {
-        [self.dataArray_thirdLevel addObjectsFromArray:@[@"噶哈哈",@"噶哈哈哈",@"噶哈哈哈哈哈哈哈",@"噶哈哈哈哈哈",@"噶哈哈",@"噶哈哈哈哈哈哈",@"噶哈哈哈哈哈哈",@"噶哈哈哈哈哈",@"噶哈哈",@"噶哈",@"噶哈哈哈",@"噶哈哈哈哈",@"噶哈哈哈哈哈哈哈"]];
-    }else{
-        [self.dataArray_thirdLevel addObjectsFromArray:@[@"哈哈哈",@"哈哈哈哈",@"哈哈哈哈哈哈哈哈",@"哈哈哈哈哈哈",@"哈哈哈",@"哈哈哈哈哈哈哈",@"哈哈哈哈哈哈哈",@"哈哈哈哈哈哈",@"哈哈哈",@"哈哈",@"哈哈哈哈",@"哈哈哈哈哈",@"哈哈哈哈哈哈哈哈",@"哈哈哈哈哈哈哈哈",@"哈哈哈哈哈",@"哈哈哈哈",@"哈哈哈哈哈",@"哈哈哈哈哈",@"哈哈",@"哈哈哈"]];
-    }
-    self.test = !self.test;
+    NSDictionary * dict = @{@"cityName":city, @"upperCategoryCode":requestID};
     
-    //计算多少有个cell
-    self.cellCount = [self calculateCellNumber];
-    [self cleanData];
+    __weak GoodsCategaryViewController * wSelf = self;
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_GOODS_CATEGARY parameters:dict HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [wSelf hideHUD];
+        if (!error) {
+            
+            //处理data
+            NSMutableArray * dataArr;
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                
+                dataArr = [NSMutableArray arrayWithArray:[(NSDictionary *)data objectForKey:@"categoryList"]];
+                
+            }
+            
+            if (level == 1) {
+                //请求一级类目完成，立马请求二级类目
+                [wSelf.dateArray_firstLevel removeAllObjects];
+                [wSelf.dataArray_secondLevel removeAllObjects];
+                [wSelf.dataArray_thirdLevel removeAllObjects];
+                [wSelf.finalDataArray removeAllObjects];
+                
+                for (int i=0; i<dataArr.count; i++) {
+                    CategaryTableViewCellItem * dItem = [CategaryTableViewCellItem createCategaryTableViewCellItemWithDictionary:dataArr[i]];
+                    [wSelf.dateArray_firstLevel addObject:dItem];
+                }
+                
+                [wSelf showHUD];
+                CategaryTableViewCellItem * dataItem = wSelf.dateArray_firstLevel[0];
+                [wSelf requestDataWithRequestID:dataItem.code city:city level:2];
+                [wSelf.fistLevelTableView reloadData];
+                
+            }else if (level == 2){
+                //请求二级类目完成
+                [wSelf.dataArray_secondLevel removeAllObjects];
+                [wSelf.dataArray_thirdLevel removeAllObjects];
+                [wSelf.finalDataArray removeAllObjects];
+                
+                NSMutableArray * tempArr = [NSMutableArray arrayWithCapacity:0];
+                for (int i=0; i<dataArr.count; i++) {
+                    DataItem * dItem = [DataItem createDataItemWithDictionary:dataArr[i]];
+                    [tempArr addObject:dItem];
+                }
+                
+                int count = tempArr.count/3;
+                if (tempArr.count%3 != 0) {
+                    count += 1;
+                }
+                
+                for (int j = 0; j<count; j++) {
+                    
+                    SecondLevelItem * sItem = [[SecondLevelItem alloc] initSecondLevelItem];
+                    
+                    if (j == count-1) {
+                        
+                        if (tempArr.count>j*3) {
+                            DataItem * dItem1 = tempArr[j*3];
+                            sItem.lImage = dItem1.imgStr;
+                            sItem.lText = dItem1.name;
+                            sItem.lID = dItem1.categoryCode;
+                        }
+                        
+                        if (tempArr.count>(j*3+1)) {
+                            DataItem * dItem2 = tempArr[j*3+1];
+                            sItem.mImage = dItem2.imgStr;
+                            sItem.mText = dItem2.name;
+                            sItem.mID = dItem2.categoryCode;
+                        }
+                        
+                        if (tempArr.count>(j*3+2)) {
+                            DataItem * dItem3 = tempArr[j*3+2];
+                            sItem.rImage = dItem3.imgStr;
+                            sItem.rText = dItem3.name;
+                            sItem.rID = dItem3.categoryCode;
+                        }
+                        
+                    }else{
+                        
+                        DataItem * dItem1 = tempArr[j*3];
+                        DataItem * dItem2 = tempArr[j*3+1];
+                        DataItem * dItem3 = tempArr[j*3+2];
+                        
+                        sItem.lImage = dItem1.imgStr;
+                        sItem.lText = dItem1.name;
+                        sItem.lID = dItem1.categoryCode;
+                        sItem.mImage = dItem2.imgStr;
+                        sItem.mText = dItem2.name;
+                        sItem.mID = dItem2.categoryCode;
+                        sItem.rImage = dItem3.imgStr;
+                        sItem.rText = dItem3.name;
+                        sItem.rID = dItem3.categoryCode;
+                        
+                    }
+                    
+                    [wSelf.dataArray_secondLevel addObject:sItem];
+                    [wSelf.listTableView reloadData];
+                }
+                
+            }else if (level == 3){
+                //请求三级类目完成
+                [wSelf.dataArray_thirdLevel removeAllObjects];
+                [wSelf.finalDataArray removeAllObjects];
+                
+                for (int i=0; i<dataArr.count; i++) {
+                    DataItem * dItem = [DataItem createDataItemWithDictionary:dataArr[i]];
+                    [wSelf.dataArray_thirdLevel addObject:dItem];
+                }
+                
+                //计算多少有个cell
+                wSelf.cellCount = [wSelf calculateCellNumber];
+                [wSelf cleanData];
+                
+                
+                //刷新section
+                [wSelf refreashSectionAtIndexSet:wSelf.old_IndexSet sectionLocation:self.old_location];
+                
+            }
+            
+        }
+        
+    }];
+    
 }
 
 #pragma mark - CustomThirdLevelCellDelegate
@@ -495,6 +538,119 @@
 {
     NSLog(@"%@",msg);
 }
+
+
+
+
+#pragma mark - 品牌分类的东西
+- (void)requestDataForBrandClass
+{
+    //http://54.223.161.28:8080/mall/brandClassification.json
+    __weak GoodsCategaryViewController * wSelf = self;
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_BRAND_CLASS parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [wSelf hideHUD];
+        [wSelf.dateArray_firstLevel removeAllObjects];
+        [wSelf.dataArray_secondLevel removeAllObjects];
+        
+        NSMutableArray * tempArr = [NSMutableArray arrayWithCapacity:0];
+        if ([data isKindOfClass:[NSDictionary class]]) {
+            [tempArr addObjectsFromArray:[(NSDictionary*)data objectForKey:@"getAttriList"]];
+        }
+        for (int i=0; i<tempArr.count; i++) {
+            CategaryTableViewCellItem * item = [CategaryTableViewCellItem createCategaryTableViewCellItemWithDictionary:tempArr[i]];
+            [wSelf.dateArray_firstLevel addObject:item];
+            if (i == 0) {
+                [wSelf requestDataForBrand:[wSelf getFirstLetter:item.name] pageNo:wSelf.pageNo];
+            }
+            
+        }
+        
+        
+        
+        [wSelf.fistLevelTableView reloadData];
+    }];
+    
+    
+}
+
+- (NSString *)getFirstLetter:(NSString *)str
+{
+    NSMutableString * firstLetter = [NSMutableString stringWithString:@""];
+    for (int i=0; i<str.length; i++) {
+        [firstLetter appendString:[NSString stringWithFormat:@"%c",pinyinFirstLetter([str characterAtIndex:i])]];
+        str = [str substringFromIndex:1];
+    }
+    return firstLetter;
+}
+
+- (void)requestDataForBrand:(NSString *)brandClass pageNo:(int)pageNo
+{
+    //http://54.223.161.28:8080/mall/getByBrandClassification.json
+    [self showHUD];
+    __weak GoodsCategaryViewController * wSelf = self;
+    //假数据
+    NSDictionary * dict = @{@"pinYin":@"L",
+                            @"pageNo":@"1",
+                            @"onePageCount":kOnePageCount
+                            };
+    [[ALEngine shareEngine] pathURL:JR_BRAND_LIST parameters:dict HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [wSelf hideHUD];
+        [wSelf.dataArray_secondLevel removeAllObjects];
+        NSMutableArray * tempArr = [NSMutableArray arrayWithCapacity:0];
+        if ([data isKindOfClass:[NSDictionary class]]) {
+            [tempArr addObjectsFromArray:[(NSDictionary *)data objectForKey:@"brandForMallDtoList"]];
+        }
+        int count = tempArr.count%2?tempArr.count/2+1:tempArr.count/2;
+        for (int i=0; i<count; i++) {
+            ShopViewItem * sItem = [[ShopViewItem alloc] init];
+            
+            if (i == count-1) {
+                
+                if (!tempArr.count%2) {
+                    sItem.lImageURL = [tempArr[i*2] objectForKey:@"brandLogo"];
+                    sItem.lText = [tempArr[i*2] objectForKey:@"brandName"];
+                    
+                    sItem.rImageURL = [tempArr[i*2+1] objectForKey:@"brandLogo"];
+                    sItem.rText = [tempArr[i*2+1] objectForKey:@"brandName"];
+                }else{
+                    sItem.lImageURL = [tempArr[i*2] objectForKey:@"brandLogo"];
+                    sItem.lText = [tempArr[i*2] objectForKey:@"brandName"];
+                }
+                
+            }else{
+                
+                sItem.lImageURL = [tempArr[i*2] objectForKey:@"brandLogo"];
+                sItem.lText = [tempArr[i*2] objectForKey:@"brandName"];
+                
+                sItem.rImageURL = [tempArr[i*2+1] objectForKey:@"brandLogo"];
+                sItem.rText = [tempArr[i*2+1] objectForKey:@"brandName"];
+                
+            }
+            
+            [self.dataArray_secondLevel addObject:sItem];
+            
+        }
+        
+        
+        [wSelf.listTableView reloadData];
+    }];
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -10,26 +10,14 @@
 
 @implementation SecondLevelItem
 
-- (SecondLevelItem *)initSecondLevelItemWithDict:(NSDictionary *)dict
+- (SecondLevelItem *)initSecondLevelItem
 {
     self = [super init];
     if (self) {
-        
-        self.lImage = [NSString stringWithFormat:@"%@",[dict objectForKey:@""]];
-        self.lText = [NSString stringWithFormat:@"%@",[dict objectForKey:@""]];
-        self.mImage = [NSString stringWithFormat:@"%@",[dict objectForKey:@""]];
-        self.mText = [NSString stringWithFormat:@"%@",[dict objectForKey:@""]];
-        self.rImage = [NSString stringWithFormat:@"%@",[dict objectForKey:@""]];
-        self.rText = [NSString stringWithFormat:@"%@",[dict objectForKey:@""]];
-        self.isSelect = NO;
-        self.selectLocation = Location_None;
+        _isSelect = NO;
+        _selectLocation = Location_None;
     }
     return self;
-}
-
-+ (SecondLevelItem *)createSecondLevelItemWithDict:(NSDictionary *)dict
-{
-    return [[self alloc] initSecondLevelItemWithDict:dict];
 }
 
 @end

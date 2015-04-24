@@ -18,7 +18,7 @@ struct SelectLocation{
 
 @protocol CustomSecLevelViewDelegate <NSObject>
 
-- (void)secondLevelView:(CustomSecLevelView *)view didClickAtIndex:(struct SelectLocation)location;
+- (void)secondLevelView:(CustomSecLevelView *)view didClickAtIndex:(struct SelectLocation)location requestID:(NSString *)rquestID;
 
 @end
 

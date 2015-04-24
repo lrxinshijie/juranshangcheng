@@ -17,6 +17,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *lLabel;
 @property (strong, nonatomic) IBOutlet UILabel *mLabel;
 @property (strong, nonatomic) IBOutlet UILabel *rLabel;
+@property (strong, nonatomic) NSString * lRequestID;
+@property (strong, nonatomic) NSString * mRequestID;
+@property (strong, nonatomic) NSString * rRequestID;
 @property (strong, nonatomic) IBOutlet UIImageView *selectBGImage;
 
 @property (strong, nonatomic) NSMutableArray * dataArray;
@@ -39,8 +42,38 @@
 - (void)initSecondLevelViewWithItem:(SecondLevelItem *)item
 {
     //TODO:需要检测item是不是左中右三个都有参数，然后配置UI，此处等接口
+    [self.lImage setImageWithURLString:item.lImage];
+    self.lLabel.text = item.lText;
+    self.lRequestID = item.lID;
+    if ((!item.lID || item.lID.length==0) && (!item.lImage || item.lImage.length==0) && (!item.lText || item.lText.length==0)) {
+        self.lImage.hidden = YES;
+        self.lLabel.hidden = YES;
+    }else{
+        self.lImage.hidden = NO;
+        self.lLabel.hidden = NO;
+    }
     
+    [self.mImage setImageWithURLString:item.mImage];
+    self.mLabel.text = item.mText;
+    self.mRequestID = item.mID;
+    if ((!item.mID || item.mID.length==0) && (!item.mImage || item.mImage.length==0) && (!item.mText || item.mText.length==0)) {
+        self.mImage.hidden = YES;
+        self.mLabel.hidden = YES;
+    }else{
+        self.mImage.hidden = NO;
+        self.mLabel.hidden = NO;
+    }
     
+    [self.rImage setImageWithURLString:item.rImage];
+    self.rLabel.text = item.rText;
+    self.rRequestID = item.rID;
+    if ((!item.rID || item.rID.length==0) && (!item.rImage || item.rImage.length==0) && (!item.rText || item.rText.length==0)) {
+        self.rImage.hidden = YES;
+        self.rLabel.hidden = YES;
+    }else{
+        self.rImage.hidden = NO;
+        self.rLabel.hidden = NO;
+    }
     
     //首先下边的尖角选择的灰色图片隐藏
     self.selectBGImage.hidden = !item.isSelect;
@@ -53,22 +86,26 @@
     //6101、6102、6103
     struct SelectLocation loc;
     loc.viewNum = self.tag;
+    NSString * req_ID;
     switch (sender.tag-6100) {
         case 1:
             loc.index = Location_Left;
+            req_ID = self.lRequestID;
             break;
         case 2:
             loc.index = Location_Middle;
+            req_ID = self.mRequestID;
             break;
         case 3:
             loc.index = Location_Right;
+            req_ID = self.rRequestID;
             break;
         default:
             break;
     }
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(secondLevelView:didClickAtIndex:)]) {
-        [self.delegate secondLevelView:self didClickAtIndex:loc];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(secondLevelView:didClickAtIndex:requestID:)]) {
+        [self.delegate secondLevelView:self didClickAtIndex:loc requestID:req_ID];
     }
     
     self.old_loc = loc;

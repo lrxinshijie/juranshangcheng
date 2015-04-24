@@ -21,9 +21,9 @@
 #import "OrderListViewController.h"
 #import "MyCollectViewController.h"
 
-#import "GoodsCategaryViewController.h"
-#import "QRBaseViewController.h"
-#import "TestSearchViewController.h"
+//#import "GoodsCategaryViewController.h"
+//#import "QRBaseViewController.h"
+//#import "TestSearchViewController.h"
 
 #ifdef kJuranDesigner
 #import "RealNameAuthViewController.h"
@@ -274,24 +274,24 @@
     
 //    GoodsCategaryViewController * good = [[GoodsCategaryViewController alloc] initWithNibName:@"GoodsCategaryViewController" bundle:nil isPopNavHide:NO];
 //    QRBaseViewController * good = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
-    TestSearchViewController * good = [[TestSearchViewController alloc] initWithNibName:@"TestSearchViewController" bundle:nil];
-    [self.navigationController pushViewController:good animated:YES];
+//    TestSearchViewController * good = [[TestSearchViewController alloc] initWithNibName:@"TestSearchViewController" bundle:nil];
+//    [self.navigationController pushViewController:good animated:YES];
     
-//    if (![self checkLogin:^{
-//        [self loadData];
-//    }]) {
-//        return;
-//    }
-//#ifdef kJuranDesigner
-//
-//    PersonalDataForDesignerViewController *vc = [[PersonalDataForDesignerViewController alloc] init];
-//    vc.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:vc animated:YES];
-//#else
-//    PersonalDataViewController *vc = [[PersonalDataViewController alloc] init];
-//    vc.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:vc animated:YES];
-//#endif
+    if (![self checkLogin:^{
+        [self loadData];
+    }]) {
+        return;
+    }
+#ifdef kJuranDesigner
+
+    PersonalDataForDesignerViewController *vc = [[PersonalDataForDesignerViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+#else
+    PersonalDataViewController *vc = [[PersonalDataViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+#endif
 }
 
 

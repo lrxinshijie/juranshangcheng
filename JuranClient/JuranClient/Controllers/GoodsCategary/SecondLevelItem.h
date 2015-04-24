@@ -24,15 +24,16 @@ typedef enum {
 
 @property (strong, nonatomic) NSString * lImage;
 @property (strong, nonatomic) NSString * lText;
+@property (strong, nonatomic) NSString * lID;
 
 @property (strong, nonatomic) NSString * mImage;
 @property (strong, nonatomic) NSString * mText;
+@property (strong, nonatomic) NSString * mID;
 
 @property (strong, nonatomic) NSString * rImage;
 @property (strong, nonatomic) NSString * rText;
+@property (strong, nonatomic) NSString * rID;
 
-
-
-+ (SecondLevelItem *)createSecondLevelItemWithDict:(NSDictionary *)dict;
+- (SecondLevelItem *)initSecondLevelItem;
 
 @end

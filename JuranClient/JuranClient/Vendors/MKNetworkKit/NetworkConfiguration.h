@@ -173,7 +173,9 @@
 #define JR_SHOP_RECOMMEND [NSString stringWithFormat:@"%@/shop/shopRecommend.json",JR_SERVICE]
 
 
-#define JR_SEARCH [NSString stringWithFormat:@"%@/search/searchGoods.json",JR_SERVICE]
+#define JR_GOODS_CATEGARY [NSString stringWithFormat:@"%@/category/queryShowCategory.json",JR_SERVICE]
+#define JR_BRAND_CLASS [NSString stringWithFormat:@"%@/mall/brandClassification.json",JR_SERVICE]
+#define JR_BRAND_LIST [NSString stringWithFormat:@"%@/mall/getByBrandClassification.json",JR_SERVICE]
 
 
 

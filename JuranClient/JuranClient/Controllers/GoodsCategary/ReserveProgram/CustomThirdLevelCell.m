@@ -7,6 +7,7 @@
 //
 
 #import "CustomThirdLevelCell.h"
+#import "DataItem.h"
 
 @interface CustomThirdLevelCell ()
 
@@ -29,7 +30,10 @@
     //记录下一个label的x的位置
     int lastLabelLoc = 15;
     for (int i = 0; i<arr.count; i++) {
-        NSString * str = [arr objectAtIndex:i];
+        
+        DataItem * item = arr[i];
+        
+        NSString * str = item.name;
         int lWidth = str.length*11;
         
         UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(lastLabelLoc, 15, lWidth, 11)];
