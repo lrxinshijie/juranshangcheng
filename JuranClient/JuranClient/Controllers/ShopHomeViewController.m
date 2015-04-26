@@ -11,10 +11,12 @@
 #import "ShopCell.h"
 #import "FilterInShopViewController.h"
 #import "JRWebViewController.h"
+#import "JRProduct.h"
+#import "ProductDetailViewController.h"
 
 @interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong) NSArray *datas;
+@property (nonatomic, strong) NSMutableArray *datas;
 
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
@@ -76,10 +78,8 @@
     [[ALEngine shareEngine] pathURL:JR_SHOP_RECOMMEND parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            id obj = data[@"recommendProductsList"];
-            if ([obj isKindOfClass:[NSArray class]]) {
-                self.datas = obj;
-            }
+            NSArray *items = data[@"recommendProductsList"];
+            self.datas = [JRProduct buildUpWithValueForList:items];
             [self reloadData];
         }
     }];
@@ -96,21 +96,11 @@
 }
 
 - (IBAction)onCollection:(id)sender{
-    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId]
-                            , @"type": _shop.isStored?@"del":@"add"};
-    [self showHUD];
-    
-    [[ALEngine shareEngine] pathURL:JR_SHOP_COLLECTION parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkMessageKey:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
-        if (!error) {
-            _shop.isStored = !_shop.isStored;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                 [self reloadData];
-            });
-        }
+    [_shop collectionWithViewCotnroller:self finishBlock:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self reloadData];
+        });
     }];
-    
-    
 }
 
 - (IBAction)onIntroduce:(id)sender{
@@ -143,8 +133,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"ShopCell";
     ShopCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    NSDictionary *dic = _datas[indexPath.row];
-    [cell fillCellWithValue:dic];
+    JRProduct *p = _datas[indexPath.row];
+    [cell fillCellWithValue:p];
     return cell;
 }
 
@@ -160,6 +150,12 @@
     return header;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    JRProduct *p = _datas[indexPath.row];
+    ProductDetailViewController *vc = [[ProductDetailViewController alloc] init];
+    vc.product = p;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

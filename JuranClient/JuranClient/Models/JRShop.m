@@ -92,4 +92,46 @@
     }
     return retVal;
 }
+
+- (id)initWithDictionaryForCollection:(NSDictionary *)dict{
+    if (self=[self init]) {
+        if (dict && [dict isKindOfClass:[NSDictionary class]]) {
+            self.shopId = [dict getIntValueForKey:@"shopId" defaultValue:0];
+            self.shopName = [dict getStringValueForKey:@"shopName" defaultValue:@""];
+            self.brands = [dict getStringValueForKey:@"brands" defaultValue:@""];
+            self.grade = [dict getStringValueForKey:@"grade" defaultValue:@""];
+            self.logo = [dict getStringValueForKey:@"logo" defaultValue:@""];
+            self.isStored = YES;
+        }
+    }
+    return self;
+}
+
++ (NSMutableArray*)buildUpWithValueForCollection:(id)value {
+    NSMutableArray *retVal = [NSMutableArray array];
+    if (value && [value isKindOfClass:[NSArray class]]) {
+        for (id obj in value) {
+            JRShop *shop = [[JRShop alloc] initWithDictionaryForCollection:obj];
+            [retVal addObject:shop];
+        }
+    }
+    return retVal;
+}
+
+- (void)collectionWithViewCotnroller:(UIViewController*)vc finishBlock:(VoidBlock)finish{
+    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", self.shopId]
+                            , @"type": self.isStored?@"del":@"add"};
+    [vc showHUD];
+    
+    [[ALEngine shareEngine] pathURL:JR_SHOP_COLLECTION parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkMessageKey:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [vc hideHUD];
+        if (!error) {
+            self.isStored = !self.isStored;
+            if (finish) {
+                finish();
+            }
+        }
+    }];
+}
+
 @end
