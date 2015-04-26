@@ -196,5 +196,6 @@
 //Search
 #define JR_SEARCH_SHOP [NSString stringWithFormat:@"%@/search/searchShop.json",JR_SERVICE]
 #define JR_SHOP_COLLECTION [NSString stringWithFormat:@"%@/shop/shopAddAndDel.json",JR_SERVICE]
+#define JR_SHOP_INTRODUCE [NSString stringWithFormat:@"%@/shop/shopIntroduce.json",JR_SERVICE]
 
 #endif

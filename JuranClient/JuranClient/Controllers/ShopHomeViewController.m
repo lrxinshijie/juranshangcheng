@@ -10,6 +10,7 @@
 #import "JRShop.h"
 #import "ShopCell.h"
 #import "FilterInShopViewController.h"
+#import "JRWebViewController.h"
 
 @interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -110,6 +111,23 @@
     }];
     
     
+}
+
+- (IBAction)onIntroduce:(id)sender{
+    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId]};
+    [self showHUD];
+    
+    [[ALEngine shareEngine] pathURL:JR_SHOP_INTRODUCE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                JRWebViewController *vc = [[JRWebViewController alloc] init];
+                vc.title = @"店铺介绍";
+                vc.htmlString = [data getStringValueForKey:@"shopDesc" defaultValue:@""];
+                [self.navigationController pushViewController:vc animated:YES];
+            });
+        }
+    }];
 }
 
 #pragma mark - UICollectionViewDelegate
