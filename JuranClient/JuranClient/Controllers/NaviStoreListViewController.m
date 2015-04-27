@@ -17,7 +17,7 @@
 #import "UserLocation.h"
 #import "AppDelegate.h"
 
-@interface NaviStoreListViewController ()
+@interface NaviStoreListViewController ()<BMKMapViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *labelCity;
 @property (strong, nonatomic) IBOutlet UITableView *tableViewStore;
@@ -99,7 +99,7 @@
 {
     self.navigationController.navigationBarHidden = YES;
     [_mapView viewWillAppear];
-    _mapView.delegate = (id)self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+    _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
 }
 
 - (void)viewWillDisappear:(BOOL)animated

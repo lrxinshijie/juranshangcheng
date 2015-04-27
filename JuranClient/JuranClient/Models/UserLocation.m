@@ -20,9 +20,9 @@
     self = [super init];
     if (self) {
         _locService = [[BMKLocationService alloc]init];
-        _locService.delegate = (id)self;
+        _locService.delegate = self;
         _geoSearch = [[BMKGeoCodeSearch alloc]init];
-        _geoSearch.delegate = (id)self;
+        _geoSearch.delegate = self;
         _isSuccessLocation = NO;
         _isSuccessGeoCode = NO;
         _isSuccessReverseGeoCode = NO;

@@ -13,7 +13,7 @@
 #import "UserLocation.h"
 #import "NaviStoreIndoorViewController.h"
 
-@interface NaviStoreInfoViewController ()
+@interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate>
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UIView *mapBottomView;
 @property (strong, nonatomic) IBOutlet UIView *naviControlView;
@@ -101,7 +101,7 @@
 {
     self.navigationController.navigationBarHidden = YES;
     [_mapView viewWillAppear];
-    _mapView.delegate = (id)self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+    _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -275,7 +275,7 @@
     }
     [action addButtonWithTitle:@"取消"];
     action.cancelButtonIndex = self.availableMaps.count + 1;
-    action.delegate = (id)self;
+    action.delegate = self;
     [action showInView:self.view];
 }
 
