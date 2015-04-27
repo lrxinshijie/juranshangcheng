@@ -419,7 +419,7 @@
     if (style == RightBtnStyle_Scan) {
         
         [self.rightButton setTitle:nil forState:UIControlStateNormal];
-        [self.rightButton setImage:[UIImage imageNamed:@"search_scancode@2x"] forState:UIControlStateNormal];
+        [self.rightButton setImage:[UIImage imageNamed:@"search_scancode"] forState:UIControlStateNormal];
         
     }else if (style == RightBtnStyle_Search){
         
@@ -430,7 +430,7 @@
     }else if (style == RightBtnStyle_More){
         
         [self.rightButton setTitle:nil forState:UIControlStateNormal];
-        [self.rightButton setImage:[UIImage imageNamed:@"search_scancode@2x"] forState:UIControlStateNormal];
+        [self.rightButton setImage:[UIImage imageNamed:@"search_more"] forState:UIControlStateNormal];
         
     }
 }
