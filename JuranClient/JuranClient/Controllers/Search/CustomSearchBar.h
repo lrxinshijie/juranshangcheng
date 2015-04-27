@@ -22,6 +22,8 @@ typedef enum {
 
 - (void)pushToQRCodeVCDidTriggered;
 
+- (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index;
+
 @end
 
 @interface CustomSearchBar : UIView

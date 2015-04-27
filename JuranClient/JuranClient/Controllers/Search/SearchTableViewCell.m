@@ -40,10 +40,10 @@
     }else if (model == SearchTableViewCellModel_SearchRange){
         
         self.nameLabel.hidden = NO;
-        self.countLabel.hidden = NO;
+        self.countLabel.hidden = YES;
         
         self.nameLabel.text = name;
-        self.countLabel.text = [NSString stringWithFormat:@"%@个结果",count];
+//        self.countLabel.text = [NSString stringWithFormat:@"%@个结果",count];
         
     }
     

@@ -84,16 +84,16 @@
     }else if (btn.tag == 1003){
         type = ShareTypeWeixiSession;
     }
-    if (![[ShareSDK getClientWithType:type]isClientInstalled]) {
-        if (type == ShareTypeQQSpace) {
-            [Public alertOK:nil Message:@"尚未安装QQ客户端，请安装后重试"];
-        }else if(type == ShareTypeSinaWeibo){
-            [Public alertOK:nil Message:@"尚未安装新浪微博客户端，请安装后重试"];
-        }else if(type == ShareTypeWeixiSession){
-            [Public alertOK:nil Message:@"尚未安装微信客户端，请安装后重试"];
-        }
-        return;
-    };
+//    if (![[ShareSDK getClientWithType:type]isClientInstalled]) {
+//        if (type == ShareTypeQQSpace) {
+//            [Public alertOK:nil Message:@"尚未安装QQ客户端，请安装后重试"];
+//        }else if(type == ShareTypeSinaWeibo){
+//            [Public alertOK:nil Message:@"尚未安装新浪微博客户端，请安装后重试"];
+//        }else if(type == ShareTypeWeixiSession){
+//            [Public alertOK:nil Message:@"尚未安装微信客户端，请安装后重试"];
+//        }
+//        return;
+//    };
     
     ASLog(@"version:%@", [ShareSDK version]);
     [ShareSDK cancelAuthWithType:type];
