@@ -108,8 +108,6 @@
             });
         }
     }];
-    
-    
 }
 
 #pragma mark - UICollectionViewDelegate

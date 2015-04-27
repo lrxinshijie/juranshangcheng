@@ -709,7 +709,9 @@
 		2C91E91E1ADB904B00B542DC /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2C91E91D1ADB904B00B542DC /* mapapi.bundle */; };
 		2C91E9211ADBA1F900B542DC /* trans-navi-left-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C91E91F1ADBA1F900B542DC /* trans-navi-left-button@2x.png */; };
 		2C91E9221ADBA1F900B542DC /* trans-navi-right-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C91E9201ADBA1F900B542DC /* trans-navi-right-button@2x.png */; };
-		2CFCD6E01AE8A9740011DFF9 /* UserLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFCD6DF1AE8A9740011DFF9 /* UserLocation.m */; };
+		2C9FCC201AEA12FC001DBEEB /* UserLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFCD6DF1AE8A9740011DFF9 /* UserLocation.m */; };
+		2C9FCC241AEA2F0C001DBEEB /* NaviStoreIndoorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9FCC221AEA2F0C001DBEEB /* NaviStoreIndoorViewController.m */; };
+		2C9FCC251AEA2F0C001DBEEB /* NaviStoreIndoorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C9FCC231AEA2F0C001DBEEB /* NaviStoreIndoorViewController.xib */; };
 		3710D5AE1A557DF00028D32A /* RealNameAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */; };
 		3710D5AF1A557DF00028D32A /* RealNameAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */; };
 		3713F9B31ADF909800785B39 /* flter-button-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3713F9B11ADF909800785B39 /* flter-button-bg@2x.png */; };
@@ -2212,6 +2214,9 @@
 		2C91E91D1ADB904B00B542DC /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = BaiduMapAPI/BaiduMapAPI.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
 		2C91E91F1ADBA1F900B542DC /* trans-navi-left-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trans-navi-left-button@2x.png"; path = "Navi/trans-navi-left-button@2x.png"; sourceTree = "<group>"; };
 		2C91E9201ADBA1F900B542DC /* trans-navi-right-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trans-navi-right-button@2x.png"; path = "Navi/trans-navi-right-button@2x.png"; sourceTree = "<group>"; };
+		2C9FCC211AEA2F0C001DBEEB /* NaviStoreIndoorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviStoreIndoorViewController.h; sourceTree = "<group>"; };
+		2C9FCC221AEA2F0C001DBEEB /* NaviStoreIndoorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaviStoreIndoorViewController.m; sourceTree = "<group>"; };
+		2C9FCC231AEA2F0C001DBEEB /* NaviStoreIndoorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NaviStoreIndoorViewController.xib; sourceTree = "<group>"; };
 		2CFCD6DE1AE8A9740011DFF9 /* UserLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocation.h; sourceTree = "<group>"; };
 		2CFCD6DF1AE8A9740011DFF9 /* UserLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocation.m; sourceTree = "<group>"; };
 		3710D5AB1A557DF00028D32A /* RealNameAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealNameAuthViewController.h; sourceTree = "<group>"; };
@@ -3838,6 +3843,9 @@
 				2C3D51C31AE63E7C0000F3F4 /* NaviStoreSelCityViewController.h */,
 				2C3D51C41AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m */,
 				2C3D51C51AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib */,
+				2C9FCC211AEA2F0C001DBEEB /* NaviStoreIndoorViewController.h */,
+				2C9FCC221AEA2F0C001DBEEB /* NaviStoreIndoorViewController.m */,
+				2C9FCC231AEA2F0C001DBEEB /* NaviStoreIndoorViewController.xib */,
 			);
 			name = Navi;
 			sourceTree = "<group>";
@@ -6159,6 +6167,7 @@
 				3710D5AF1A557DF00028D32A /* RealNameAuthViewController.xib in Resources */,
 				A9A4E35D1A62C46D00BB9F68 /* Icon-Small-50.png in Resources */,
 				37A0F80B1A6B856100611760 /* ActivityViewController.xib in Resources */,
+				2C9FCC251AEA2F0C001DBEEB /* NaviStoreIndoorViewController.xib in Resources */,
 				2C602C751ADCE6FD0037105E /* ShopListViewController.xib in Resources */,
 				BD51861F1A5D0ED700BE508A /* icon-designer-id@2x.png in Resources */,
 				37F2176E1AA0A4EB00664DB4 /* order_call_disable@2x.png in Resources */,
@@ -7044,7 +7053,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C3D51C61AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m in Sources */,
-				2CFCD6E01AE8A9740011DFF9 /* UserLocation.m in Sources */,
 				A987EE391A2093C900CED7CD /* MJRefreshFooterView.m in Sources */,
 				1437F2B81A30B09B00E7C077 /* JRTopic.m in Sources */,
 				37ECDD211AE166D500BE6027 /* ConstructActionView.m in Sources */,
@@ -7253,6 +7261,7 @@
 				37F0E70B1A7D2735004CCCB2 /* SDWebImageDownloaderOperation.m in Sources */,
 				A9A067171A3D76DA0059D73B /* ActionSheetLocalePicker.m in Sources */,
 				14B5C04A1ACE31D70043BB44 /* DeviceHardware.m in Sources */,
+				2C9FCC201AEA12FC001DBEEB /* UserLocation.m in Sources */,
 				141A1D3B1A2CC09600C073C5 /* AskOrAnswerCell.m in Sources */,
 				37D3EADF1A52FF330091B3BB /* PushMsgDetailViewController.m in Sources */,
 				1FD3B8391AD8F83E004E849F /* DatabaseItem.m in Sources */,
@@ -7300,6 +7309,7 @@
 				140C46E81A2A296A003317AD /* ModifyViewController.m in Sources */,
 				14A3FDCB1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.m in Sources */,
 				14C855471A2E196B00A15ED9 /* InteractionViewController.m in Sources */,
+				2C9FCC241AEA2F0C001DBEEB /* NaviStoreIndoorViewController.m in Sources */,
 				A9224E2E1A6CB7D5002974ED /* JRSwizzle.m in Sources */,
 				37A0F80A1A6B856100611760 /* ActivityViewController.m in Sources */,
 				37F0E71B1A7D2735004CCCB2 /* UIImageView+WebCache.m in Sources */,
