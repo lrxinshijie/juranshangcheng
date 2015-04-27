@@ -91,7 +91,6 @@
                 NSString *partner = [aliPayDto getStringValueForKey:@"partner" defaultValue:@""];
                 NSString *sellerEmail = [aliPayDto getStringValueForKey:@"sellerEmail" defaultValue:@""];
                 NSString *outTrade_no = [aliPayDto getStringValueForKey:@"outTrade_no" defaultValue:@""];
-                //            NSString *returnUrl = [aliPayDto getStringValueForKey:@"returnUrl" defaultValue:@""];
                 NSString *paymentType = [aliPayDto getStringValueForKey:@"paymentType" defaultValue:@""];
                 NSString *service = [aliPayDto getStringValueForKey:@"service" defaultValue:@""];
                 NSString *inputCharset = [aliPayDto getStringValueForKey:@"inputCharset" defaultValue:@""];

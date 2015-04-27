@@ -107,8 +107,10 @@
 }
 
 - (void)btnNaviClick:(id)sender {
+#ifndef kJuranDesigner
     NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
     [self.navigationController pushViewController:navi animated:YES];
+#endif
 }
 
 @end

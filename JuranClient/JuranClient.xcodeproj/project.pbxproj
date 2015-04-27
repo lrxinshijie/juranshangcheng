@@ -565,6 +565,29 @@
 		14BCD78B1A85DFFB00825A90 /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14BCD7871A85DFFB00825A90 /* OrderCell.xib */; };
 		14BCD78E1A8605B400825A90 /* order_btn_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14BCD78D1A8605B400825A90 /* order_btn_accessory@2x.png */; };
 		14BCD78F1A8605B400825A90 /* order_btn_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14BCD78D1A8605B400825A90 /* order_btn_accessory@2x.png */; };
+		14BF81951AEDF4E100D6A10F /* GoodsCategaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A0A841ADF65BD00C73784 /* GoodsCategaryViewController.m */; };
+		14BF81961AEDF4E100D6A10F /* SecondLevelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A0A8D1ADF65BD00C73784 /* SecondLevelView.m */; };
+		14BF81991AEDF4E100D6A10F /* NaviStoreSelCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D51C41AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m */; };
+		14BF819A1AEDF4E100D6A10F /* CustomSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B81F1AD8B8E9004E849F /* CustomSearchBar.m */; };
+		14BF819B1AEDF4E100D6A10F /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8241AD8C38F004E849F /* SearchTableViewCell.m */; };
+		14BF819C1AEDF4E100D6A10F /* DatabaseCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8331AD8F83E004E849F /* DatabaseCenter.m */; };
+		14BF819D1AEDF4E100D6A10F /* DatabaseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8351AD8F83E004E849F /* DatabaseItem.m */; };
+		14BF819E1AEDF4E100D6A10F /* SearchHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8371AD8F83E004E849F /* SearchHistoryManager.m */; };
+		14BF819F1AEDF4E100D6A10F /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B83D1AD8F878004E849F /* FMDatabase.m */; };
+		14BF81A01AEDF4E100D6A10F /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B83F1AD8F878004E849F /* FMDatabaseAdditions.m */; };
+		14BF81A11AEDF4E100D6A10F /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8411AD8F878004E849F /* FMDatabasePool.m */; };
+		14BF81A21AEDF4E100D6A10F /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8431AD8F878004E849F /* FMDatabaseQueue.m */; };
+		14BF81A31AEDF4E100D6A10F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8461AD8F878004E849F /* FMResultSet.m */; };
+		14BF81A41AEDF4E100D6A10F /* TestSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */; };
+		14BF81A51AEDF4E100D6A10F /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D4FF51AD77F9E005486D2 /* QRCodeViewController.m */; };
+		14BF81A61AEDF4E100D6A10F /* InputCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D50051AD7847D005486D2 /* InputCodeViewController.m */; };
+		14BF81A71AEDF4E100D6A10F /* QRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D500A1AD7C882005486D2 /* QRBaseViewController.m */; };
+		14BF81A81AEDF4E100D6A10F /* PersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E3D171A2792B200AA952F /* PersonalDataViewController.m */; };
+		14BF81A91AEDF4E100D6A10F /* ShopListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C721ADCE6FD0037105E /* ShopListViewController.m */; };
+		14BF81AA1AEDF4E100D6A10F /* JRStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C991ADE3E8F0037105E /* JRStore.m */; };
+		14BF81AB1AEDF4E100D6A10F /* ShopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F491F01AD954460068A99B /* ShopCell.m */; };
+		14BF81AC1AEDF4E100D6A10F /* NaviStoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C91E9151ADB790C00B542DC /* NaviStoreCell.m */; };
+		14BF81AD1AEDF4E100D6A10F /* ShopListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C771ADCEA950037105E /* ShopListCell.m */; };
 		14C4872D1A6F7E0C0042A3D6 /* ALNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C4872C1A6F7E0C0042A3D6 /* ALNavigationController.m */; };
 		14C4872E1A6F7E0C0042A3D6 /* ALNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C4872C1A6F7E0C0042A3D6 /* ALNavigationController.m */; };
 		14C855471A2E196B00A15ED9 /* InteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855421A2E196B00A15ED9 /* InteractionViewController.m */; };
@@ -6684,6 +6707,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14BF81951AEDF4E100D6A10F /* GoodsCategaryViewController.m in Sources */,
+				14BF81961AEDF4E100D6A10F /* SecondLevelView.m in Sources */,
+				14BF81991AEDF4E100D6A10F /* NaviStoreSelCityViewController.m in Sources */,
+				14BF819A1AEDF4E100D6A10F /* CustomSearchBar.m in Sources */,
+				14BF819B1AEDF4E100D6A10F /* SearchTableViewCell.m in Sources */,
+				14BF819C1AEDF4E100D6A10F /* DatabaseCenter.m in Sources */,
+				14BF819D1AEDF4E100D6A10F /* DatabaseItem.m in Sources */,
+				14BF819E1AEDF4E100D6A10F /* SearchHistoryManager.m in Sources */,
+				14BF819F1AEDF4E100D6A10F /* FMDatabase.m in Sources */,
+				14BF81A01AEDF4E100D6A10F /* FMDatabaseAdditions.m in Sources */,
+				14BF81A11AEDF4E100D6A10F /* FMDatabasePool.m in Sources */,
+				14BF81A21AEDF4E100D6A10F /* FMDatabaseQueue.m in Sources */,
+				14BF81A31AEDF4E100D6A10F /* FMResultSet.m in Sources */,
+				14BF81A41AEDF4E100D6A10F /* TestSearchViewController.m in Sources */,
+				14BF81A51AEDF4E100D6A10F /* QRCodeViewController.m in Sources */,
+				14BF81A61AEDF4E100D6A10F /* InputCodeViewController.m in Sources */,
+				14BF81A71AEDF4E100D6A10F /* QRBaseViewController.m in Sources */,
+				14BF81A81AEDF4E100D6A10F /* PersonalDataViewController.m in Sources */,
+				14BF81A91AEDF4E100D6A10F /* ShopListViewController.m in Sources */,
+				14BF81AA1AEDF4E100D6A10F /* JRStore.m in Sources */,
+				14BF81AB1AEDF4E100D6A10F /* ShopCell.m in Sources */,
+				14BF81AC1AEDF4E100D6A10F /* NaviStoreCell.m in Sources */,
+				14BF81AD1AEDF4E100D6A10F /* ShopListCell.m in Sources */,
 				144354811A8892870093C943 /* OrderExtractViewController.m in Sources */,
 				37F0E6311A7D1AFE004CCCB2 /* MWGridViewController.m in Sources */,
 				37BF0BD91A8FAD7A001BA9E6 /* JRDesignCreditDto.m in Sources */,
@@ -7638,7 +7684,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8ff8e1b2-afbd-40bc-9dcc-4ef6164050f4";
+				PROVISIONING_PROFILE = "3ca46e83-3791-4ac6-a5a2-9b919d1c5090";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv64";
 				VERSIONING_SYSTEM = "";
