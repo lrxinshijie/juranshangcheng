@@ -25,6 +25,10 @@
 @property (assign, nonatomic) BOOL isHistory;
 @property (assign, nonatomic) BOOL isReloadHistory;
 
+
+@property (assign, nonatomic) NSInteger currentPageNo;
+@property (strong, nonatomic) NSString * requestKeyWord;
+
 @property (strong, nonatomic) UIView * footerView;
 
 @property (assign, nonatomic) RightBtnStyle rightBtnStyle;
@@ -44,6 +48,8 @@
     
     self.listTableView.frame = CGRectMake(0, 64, 320, 0);
     self.frame = CGRectMake(0, 0, 320, 64);
+    
+    self.currentPageNo = 1;
     
     [self cleanBtnHide];
     
@@ -104,8 +110,8 @@
         }
         
     }else if (self.rightBtnStyle == RightBtnStyle_Search){
-        
-        [self startSearch];
+        //默认按照下拉列表中的第一个搜索
+        [self startSearchAtIndex:0];
         
     }else if (self.rightBtnStyle == RightBtnStyle_More){
         //TODO:添加弹出菜单
@@ -211,7 +217,7 @@
     }else{
         
         [self hideAnimation];
-        [self startSearch];
+        [self startSearchAtIndex:indexPath.row];
         
     }
 }
@@ -253,13 +259,15 @@
 
 
 #pragma mark - 搜索的方法
-- (void)startSearch
+- (void)startSearchAtIndex:(int)index
 {
     [self.inputTextField resignFirstResponder];
     
     
-    //TODO:入库去重
-    NSString * str = @"商品名称";
+    //入库去重
+    NSString * str = self.inputTextField.text;
+    //每次都更新一下历史记录的数据，以防同一次搜索多次点击
+    [self initHistoryData];
     BOOL isExist = NO;
     for (int i=0; i<self.dataArray_History.count; i++) {
         if ([str isEqualToString:self.dataArray_History[i]]) {
@@ -272,12 +280,16 @@
         isExist = YES;
     }
     
-    //搜索历史入库
-    if (!isExist) {
-        [[SearchHistoryManager sharedDataBase] insertSearchItem:@"商品名称"];
+    if (![self.requestKeyWord isEqualToString:str] && str.length!=0 && str != nil) {
+        self.requestKeyWord = str;
     }
     
-    //TODO:等待接口，实现代码
+    //搜索历史入库
+    if (!isExist) {
+        [[SearchHistoryManager sharedDataBase] insertSearchItem:str];
+    }
+    
+    
 }
 
 #pragma mark - 动画方法
@@ -411,6 +423,12 @@
         [self.rightButton setImage:[UIImage imageNamed:@"search_scancode@2x"] forState:UIControlStateNormal];
         
     }
+}
+
+- (void)requestForNewDataWithCurrentPageNo:(NSInteger)pageNo
+{
+    self.currentPageNo = pageNo;
+    
 }
 
 @end

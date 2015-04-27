@@ -17,7 +17,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *scanLine;
 
 
-
 @end
 
 @implementation QRCodeViewController
@@ -138,8 +137,6 @@
 {
     //扫描结果
     [self.preview removeFromSuperlayer];
-    
-    //TODO:后期添加数据之后详细处理扫描完成之后的操作
     [self.session stopRunning];
     
     NSString *val = nil;
@@ -149,16 +146,68 @@
         
         val = obj.stringValue;
         
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"OK" message:val delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
         
-        if ([self.delegate respondsToSelector:@selector(qrCodeComplete:)]) {
-            [self.delegate qrCodeComplete:val];
+        NSLog(@"%d",[self needShowWithWebView:val]);
+        
+        
+        //判断是不是连接
+        if ([self isURL:val]) {
+            //是连接，判断是解析还是用webView展示
+            
+            if ([self needShowWithWebView:val]) {
+                //webView展示
+                
+                
+            }else{
+                if ([self.delegate respondsToSelector:@selector(qrCodeComplete:)]) {
+                    [self.delegate qrCodeComplete:[self getNumberFrom:val]];
+                }
+            }
+        }else{
+            //不是连接，直接展示
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Tips" message:val delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+            
         }
     }
 }
 
+- (BOOL)isURL:(NSString *)str
+{
+    if ([str length] == 0) {
+        return NO;
+    }
+    NSString *regex = @"((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    BOOL isMatch = [pred evaluateWithObject:str];
+    if (!isMatch) {
+        return NO;
+    }
+    return YES;
+}
 
+- (BOOL)needShowWithWebView:(NSString *)str
+{
+    //http://mall.juran.cn/goods/10678.htm
+    //http://mall.juran.cn/shop/1101.htm
+    NSString * regex1 = @"^[h][t]{2}[p]://[m][a][l]{2}\.[j][u][r][a][n]\.[c][n]/(([g][o]{2}[d][s])|([s][h][o][p]))/[0-9]{1,}\.[h][t][m]";
+    NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex1];
+    BOOL isMatch1 = [pred1 evaluateWithObject:str];
+    if (isMatch1) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (NSString *)getNumberFrom:(NSString *)str
+{
+    NSRange range = [str rangeOfString:@"[[0-9]{1,}" options:NSRegularExpressionSearch];
+    if (range.location != NSNotFound) {
+        return [str substringWithRange:range];
+    }
+    return nil;
+}
 
 - (void)animation
 {
@@ -177,9 +226,6 @@
     }];
     
 }
-
-#pragma mark - ios7以下版本调用二维码
-
 
 
 
