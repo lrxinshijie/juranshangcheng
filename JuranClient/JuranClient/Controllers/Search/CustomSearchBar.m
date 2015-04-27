@@ -116,6 +116,7 @@
         
     }else if (self.rightBtnStyle == RightBtnStyle_Search){
         //默认按照下拉列表中的第一个搜索
+        [self hideAnimation];
         [self startSearchAtIndex:0];
         
     }else if (self.rightBtnStyle == RightBtnStyle_More){
@@ -438,6 +439,13 @@
 {
     self.currentPageNo = pageNo;
     
+}
+
+- (void)setTextFieldText:(NSString *)text
+{
+    self.inputTextField.text = text;
+    
+    [self magnifyingGlassHide];
 }
 
 @end

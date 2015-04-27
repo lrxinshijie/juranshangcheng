@@ -73,34 +73,39 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.searchBar setTextFieldText:@"XXXXX"];
+}
+
 - (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index
 {
-    if (index == 0) {
-        //作品案例
-        CaseViewController *vc = [[CaseViewController alloc] init];
-        vc.searchKey = keyWord;
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }else if (index == 1){
-        //商品
-        
-    }else if (index == 2){
-        //店铺
-        ShopListViewController * vc = [[ShopListViewController alloc] init];
-        vc.keyword = keyWord;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (index == 3){
-        //设计师
-        DesignerViewController *vc = [[DesignerViewController alloc] init];
-        vc.searchKeyWord = keyWord;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (index == 4){
-        //答疑
-        QuestionViewController *vc = [[QuestionViewController alloc] init];
-        vc.searchKeyWord = keyWord;
-        vc.isSearchResult = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+//    if (index == 0) {
+//        //作品案例
+//        CaseViewController *vc = [[CaseViewController alloc] init];
+//        vc.searchKey = keyWord;
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
+//    }else if (index == 1){
+//        //商品
+//        
+//    }else if (index == 2){
+//        //店铺
+//        ShopListViewController * vc = [[ShopListViewController alloc] init];
+//        vc.keyword = keyWord;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }else if (index == 3){
+//        //设计师
+//        DesignerViewController *vc = [[DesignerViewController alloc] init];
+//        vc.searchKeyWord = keyWord;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }else if (index == 4){
+//        //答疑
+//        QuestionViewController *vc = [[QuestionViewController alloc] init];
+//        vc.searchKeyWord = keyWord;
+//        vc.isSearchResult = YES;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
