@@ -570,9 +570,11 @@
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
     }else if (type == 19){
+#ifndef kJuranDesigner
         NaviStoreListViewController *vc = [[NaviStoreListViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
+#endif
     }
     
 }

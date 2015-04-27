@@ -100,6 +100,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
     ShopHomeViewController *vc = [[ShopHomeViewController alloc]init];
     JRShop *shop = [_dataList objectAtIndex:[indexPath row]];
     vc.shop.shopId = shop.shopId;

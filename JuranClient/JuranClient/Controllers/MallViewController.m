@@ -8,7 +8,6 @@
 
 #import "MallViewController.h"
 #import "ShopHomeViewController.h"
-#import "NaviStoreListViewController.h"
 #import "FilterInShopViewController.h"
 #import "NaviStoreInfoViewController.h"
 #import "JRAdInfo.h"
