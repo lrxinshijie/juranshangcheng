@@ -23,6 +23,10 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *gradeLabel;
+
+@property (nonatomic, strong) IBOutlet UIImageView *collectionImageView;
+@property (nonatomic, strong) IBOutlet UILabel *collectionLabel;
+
 - (IBAction)onClassification:(id)sender;
 
 
@@ -52,20 +56,20 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"shopId": @"5"};
+    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId]};
     [self showHUD];
     
     [[ALEngine shareEngine] pathURL:JR_SHOP_FIRSTPAGE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            self.shop = [[JRShop alloc] initWithDictionary:data];
+            [_shop buildUpWithDictionary:data];
             [self reloadData];
         }
     }];
 }
 
 - (void)loadRecommendData{
-    NSDictionary *param = @{@"shopId": @"6"};
+    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId]};
     [self showHUD];
     
     [[ALEngine shareEngine] pathURL:JR_SHOP_RECOMMEND parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -83,7 +87,27 @@
 - (void)reloadData{
     [self.shopLogoImageView setImageWithURLString:_shop.shopLogo];
     [self.indexShopLogoImageView setImageWithURLString:_shop.indexShopLogo];
+    _nameLabel.text = _shop.shopName;
+    _collectionImageView.image = [UIImage imageNamed:_shop.isStored?@"icon-collection-active.png":@"icon-collection.png"];
+    _collectionLabel.text = _shop.isStored?@"已收藏":@"收藏";
+    self.navigationItem.title = _shop.shopName;
     [_collectionView reloadData];
+}
+
+- (IBAction)onCollection:(id)sender{
+    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId]
+                            , @"type": _shop.isStored?@"del":@"add"};
+    [self showHUD];
+    
+    [[ALEngine shareEngine] pathURL:JR_SHOP_COLLECTION parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkMessageKey:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            _shop.isStored = !_shop.isStored;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                 [self reloadData];
+            });
+        }
+    }];
 }
 
 #pragma mark - UICollectionViewDelegate

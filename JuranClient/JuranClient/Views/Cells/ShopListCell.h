@@ -7,11 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class JRShop;
 @interface ShopListCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet UIImageView *imageLogo;
-@property (strong, nonatomic) IBOutlet UILabel *labelName;
-@property (strong, nonatomic) IBOutlet UILabel *labelMainBrand;
-@property (strong, nonatomic) IBOutlet UIButton *btnNavi;
-@property (strong, nonatomic) IBOutlet UIImageView *imageGrade;
+- (void)fillCellWithJRShop:(JRShop *)shop;
 @end

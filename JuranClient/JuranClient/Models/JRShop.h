@@ -26,9 +26,11 @@
 @property (nonatomic, copy) NSString *grade;
 //search
 @property (nonatomic, copy) NSString *brands;
+@property (nonatomic, copy) NSString *logo;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray*)buildUpWithValueForList:(id)value;
 - (id)initWithDictionaryForShopList:(NSDictionary *)dict;
 + (NSMutableArray*)buildUpWithValueForShopList:(id)value;
+- (void)buildUpWithDictionary:(NSDictionary *)dict;
 @end

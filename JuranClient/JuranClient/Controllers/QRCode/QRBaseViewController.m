@@ -43,6 +43,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    //需求：去除条形码输入，此处为调整，其他还有注释有“需求调整”的部分与此为同一调整。
+    self.bottomBaseView.hidden = YES;
 }
 
 - (void)viewDidLoad {
@@ -67,8 +69,10 @@
 - (void)initChildViewController
 {
     [self initQRCodeViewController];
-    [self initInputCodeViewController];
-    self.vcArray = @[self.qrCodeViewController,self.inputCodeViewController];
+    //需求调整
+//    [self initInputCodeViewController];
+    //需求调整
+    self.vcArray = @[self.qrCodeViewController/*,self.inputCodeViewController*/];
 }
 
 - (void)initQRCodeViewController

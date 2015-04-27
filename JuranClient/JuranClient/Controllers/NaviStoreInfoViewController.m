@@ -9,6 +9,9 @@
 #import "NaviStoreInfoViewController.h"
 #import <BaiduMapAPI/BMapKit.h>
 #import "JRStore.h"
+#import "AppDelegate.h"
+#import "UserLocation.h"
+#import "NaviStoreIndoorViewController.h"
 
 @interface NaviStoreInfoViewController ()
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
@@ -28,14 +31,14 @@
 @property (strong, nonatomic) IBOutlet UIButton *buttonLeft;
 @property (strong, nonatomic) IBOutlet UIButton *buttonRight;
 @property (strong, nonatomic) IBOutlet UIImageView *imageNode;
-@property (strong, nonatomic) BMKLocationService *locService;
 @property (strong, nonatomic) BMKPointAnnotation *selfAnnotation;
 @property (strong, nonatomic) BMKPointAnnotation *storeAnnotation;
-@property (assign, nonatomic) CLLocationDistance distance;
-@property (assign, nonatomic) BOOL isLocSuccess;
+@property (strong, nonatomic) NSMutableArray *availableMaps;
 
 - (IBAction)leftNaviClick:(id)sender;
 - (IBAction)rightNaviClick:(id)sender;
+- (IBAction)SystemNaviClick:(id)sender;
+- (IBAction)IndoorNaviClick:(id)sender;
 @end
 
 @implementation NaviStoreInfoViewController
@@ -48,7 +51,6 @@
     _scrollView.contentSize = CGSizeMake(kWindowWidth, kWindowHeight+kWindowWidth/2);
     _scrollView.canCancelContentTouches = NO;//是否可以中断touches
     //_scrollView.delaysContentTouches = NO;//是否延迟touches事件
-    _mapView.showsUserLocation = YES;//显示定位图层
     _mapBottomView.frame = CGRectMake(0, kWindowWidth-29, kWindowWidth, 29);
     _mapBottomView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"navi-bottom-bg.png"]];
     [_scrollView addSubview:_mapBottomView];
@@ -81,9 +83,6 @@
     _telView.frame = frame;
     [_scrollView addSubview:_telView];
     
-    _locService = [[BMKLocationService alloc]init];
-    [BMKLocationService setLocationDistanceFilter:100.f];
-    _locService.delegate = (id)self;
     [self loadData];
 }
 
@@ -93,7 +92,6 @@
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSLog(@"%f",scrollView.contentOffset.y);
     CGRect mapFrame = _mapView.frame;
     mapFrame.origin.y = scrollView.contentOffset.y/2;
     _mapView.frame = mapFrame;
@@ -104,7 +102,6 @@
     self.navigationController.navigationBarHidden = YES;
     [_mapView viewWillAppear];
     _mapView.delegate = (id)self; // 此处记得不用的时候需要置nil，否则影响内存的释放
-    _locService.delegate = (id)self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -112,31 +109,6 @@
     self.navigationController.navigationBarHidden = NO;
     [_mapView viewWillDisappear];
     _mapView.delegate = nil; // 不用时，置nil
-    _locService.delegate = nil;
-}
-
-- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation {
-    [_locService stopUserLocationService];
-    _isLocSuccess = YES;
-    //[_mapView updateLocationData:userLocation];
-    _selfAnnotation = [[BMKPointAnnotation alloc]init];
-    _selfAnnotation.coordinate = userLocation.location.coordinate;
-    _selfAnnotation.title = @"你的位置";
-    //_mapView.centerCoordinate = _selfAnnotation.coordinate;
-    [_mapView addAnnotation:_selfAnnotation];
-    
-    _imageNode.image = [UIImage imageNamed:@"icon-map-node.png"];
-    BMKMapPoint pointStore = BMKMapPointForCoordinate(_storeAnnotation.coordinate);
-    BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
-    _distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
-    _labelDistance.text = [NSString stringWithFormat:@"%.2fkm",_distance/1000];
-    //[self reloadView];
-}
-
-- (void) didFailToLocateUserWithError:(NSError *)error {
-    _isLocSuccess = NO;
-    [_locService stopUserLocationService];
-    //[self reloadView];
 }
 
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
@@ -144,7 +116,7 @@
     if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
         BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
         newAnnotationView.pinColor = annotation==_selfAnnotation?BMKPinAnnotationColorRed:BMKPinAnnotationColorGreen;
-        newAnnotationView.animatesDrop = NO;// 设置该标注点动画显示
+        newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
         return newAnnotationView;
     }
     return nil;
@@ -158,13 +130,21 @@
         [self hideHUD];
         if (!error) {
             _store = [_store initWithDictionaryForInfo:data];
-            [_locService startUserLocationService];
             [self reloadView];
         }
     }];
 }
 
 - (void)reloadView {
+    if (_selfAnnotation) {
+        [_mapView removeAnnotation:_selfAnnotation];
+    }
+    _selfAnnotation = [[BMKPointAnnotation alloc]init];
+    _selfAnnotation.coordinate = ApplicationDelegate.gLocation.location;
+    _selfAnnotation.title = @"你的位置";
+    //_mapView.centerCoordinate = _selfAnnotation.coordinate;
+    [_mapView addAnnotation:_selfAnnotation];
+    
     if (_storeAnnotation) {
         [_mapView removeAnnotation:_storeAnnotation];
     }
@@ -174,9 +154,11 @@
     [_mapView addAnnotation:_storeAnnotation];
     
     _labelName.text = _store.storeShortName;
-    if (_isLocSuccess) {
+    if (ApplicationDelegate.gLocation.isSuccessLocation) {
         _imageNode.image = [UIImage imageNamed:@"icon-map-node.png"];
-        _labelDistance.text = [NSString stringWithFormat:@"%.2fkm",_distance/1000];
+        BMKMapPoint pointStore = BMKMapPointForCoordinate(_storeAnnotation.coordinate);
+        BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
+        _labelDistance.text = [NSString stringWithFormat:@"%.2fkm",BMKMetersBetweenMapPoints(pointStore,pointSelf)/1000];
     }else {
         _imageNode.image = nil;
         _labelDistance.text = @"";
@@ -220,10 +202,86 @@
     return string;
 }
 
+- (void)availableMapsApps {
+    [self.availableMaps removeAllObjects];
+    
+    CLLocationCoordinate2D startCoor = _selfAnnotation.coordinate;
+    CLLocationCoordinate2D endCoor = _storeAnnotation.coordinate;
+    NSString *toName = _store.storeShortName;
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://map/"]]){
+        NSString *urlString = [NSString stringWithFormat:@"baidumap://map/direction?origin=latlng:%f,%f|name:我的位置&destination=latlng:%f,%f|name:%@&mode=transit",
+                               startCoor.latitude, startCoor.longitude, endCoor.latitude, endCoor.longitude, toName];
+        
+        NSDictionary *dic = @{@"name": @"百度地图",
+                              @"url": urlString};
+        [self.availableMaps addObject:dic];
+    }
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]) {
+        NSString *urlString = [NSString stringWithFormat:@"iosamap://navi?sourceApplication=%@&backScheme=applicationScheme&poiname=fangheng&poiid=BGVIS&lat=%f&lon=%f&dev=0&style=3",
+                               @"云华时代", endCoor.latitude, endCoor.longitude];
+        
+        NSDictionary *dic = @{@"name": @"高德地图",
+                              @"url": urlString};
+        [self.availableMaps addObject:dic];
+    }
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
+        NSString *urlString = [NSString stringWithFormat:@"comgooglemaps://?saddr=&daddr=%f,%f¢er=%f,%f&directionsmode=transit", endCoor.latitude, endCoor.longitude, startCoor.latitude, startCoor.longitude];
+        
+        NSDictionary *dic = @{@"name": @"Google Maps",
+                              @"url": urlString};
+        [self.availableMaps addObject:dic];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        //CLLocationCoordinate2D startCoor = _selfAnnotation.coordinate;
+        CLLocationCoordinate2D endCoor = _storeAnnotation.coordinate;
+        MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:endCoor addressDictionary:nil];
+        MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:placemark];
+        toLocation.name = _store.storeShortName;
+        
+        [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
+                       launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
+        
+        
+    }else if (buttonIndex < self.availableMaps.count+1) {
+        NSDictionary *mapDic = self.availableMaps[buttonIndex-1];
+        NSString *urlString = mapDic[@"url"];
+        urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *url = [NSURL URLWithString:urlString];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
+
+
+
 - (IBAction)leftNaviClick:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)rightNaviClick:(id)sender {
 }
+
+- (IBAction)SystemNaviClick:(id)sender {
+    [self availableMapsApps];
+    UIActionSheet *action = [[UIActionSheet alloc] init];
+    
+    [action addButtonWithTitle:@"使用系统自带地图导航"];
+    for (NSDictionary *dic in self.availableMaps) {
+        [action addButtonWithTitle:[NSString stringWithFormat:@"使用%@导航", dic[@"name"]]];
+    }
+    [action addButtonWithTitle:@"取消"];
+    action.cancelButtonIndex = self.availableMaps.count + 1;
+    action.delegate = (id)self;
+    [action showInView:self.view];
+}
+
+- (IBAction)IndoorNaviClick:(id)sender {
+    NaviStoreIndoorViewController *vc = [[NaviStoreIndoorViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 @end

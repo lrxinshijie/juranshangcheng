@@ -72,15 +72,15 @@
     if (error==BMK_SEARCH_NO_ERROR) {
         if (![result.addressDetail.city isEqual:@""]) {
             _cityName = result.addressDetail.city;
-            _isSuccessGeoCode = YES;
-            ASLog(@"地理位置反编译成功");
+            _isSuccessReverseGeoCode = YES;
+            ASLog(@"地理位置反编码成功");
         }else{
-            _isSuccessGeoCode = NO;
-            ASLog(@"地理位置反编译失败");
+            _isSuccessReverseGeoCode = NO;
+            ASLog(@"地理位置反编码失败");
         }
     }else {
-        _isSuccessGeoCode = NO;
-        ASLog(@"地理位置反编译失败");
+        _isSuccessReverseGeoCode = NO;
+        ASLog(@"地理位置反编码失败");
     }
     if (_block) {
         _block(self);
@@ -91,22 +91,24 @@
     _block = finished;
     BMKGeoCodeSearchOption *opt = [[BMKGeoCodeSearchOption alloc]init];
     opt.city = cityName;
-    opt.address = @"";
-    [_geoSearch geoCode:opt];
+    opt.address = @"市政府";
+    BOOL ret = [_geoSearch geoCode:opt];
+    ASLog(@"ret = %d",ret);
 }
 
 - (void)onGetGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error {
     if (error==BMK_SEARCH_NO_ERROR) {
         _location = result.location;
-        _isSuccessReverseGeoCode = YES;
-        ASLog(@"地理位置编译成功");
+        _isSuccessGeoCode = YES;
+        ASLog(@"地理位置编码成功");
     }else {
-        _isSuccessReverseGeoCode = NO;
-        ASLog(@"地理位置编译失败");
+        _isSuccessGeoCode = NO;
+        ASLog(@"地理位置编码失败");
     }
     if (_block) {
         _block(self);
     }
 }
+
 
 @end

@@ -11,22 +11,20 @@
 #import "NaviStoreCell.h"
 #import "NaviStoreInfoViewController.h"
 #import "JRStore.h"
-#import "NaviStoreSelCityViewController.h"
 #import "JRAreaInfo.h"
+#import "NaviStoreSelCityViewController.h"
+#import "ShopListViewController.h"
+#import "UserLocation.h"
+#import "AppDelegate.h"
 
 @interface NaviStoreListViewController ()
-@property (strong, nonatomic) IBOutlet BMKMapView *mapView;
+
 @property (strong, nonatomic) IBOutlet UILabel *labelCity;
 @property (strong, nonatomic) IBOutlet UITableView *tableViewStore;
-@property (strong, nonatomic) IBOutlet UIView *viewCitySelection;
 @property (strong, nonatomic) IBOutlet UIButton *btnChangeCity;
-@property (strong, nonatomic) IBOutlet UITextField *textFieldCity;
-@property (strong, nonatomic) BMKLocationService *locService;
+@property (strong, nonatomic) IBOutlet BMKMapView *mapView;
 @property (strong, nonatomic) BMKPointAnnotation *selfAnnotation;
-@property (strong, nonatomic) BMKGeoCodeSearch *geoSearch;
-@property (strong, nonatomic) NSArray *dataList;
-@property (copy, nonatomic) NSString *currentCity;
-@property (assign, nonatomic) BOOL isLocSuccess;
+@property (strong, nonatomic) UserLocation *location;
 - (IBAction)naviLeftClick:(id)sender;
 - (IBAction)naviRightClick:(id)sender;
 - (IBAction)changeCityClick:(id)sender;
@@ -38,19 +36,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    //latitude=39.944213,longitude=116.438717
     self.navigationItem.title = @"门店导航";
     [_tableViewStore registerNib:[UINib nibWithNibName:@"NaviStoreCell" bundle:nil] forCellReuseIdentifier:@"NaviStoreCell"];
-    _textFieldCity.inputView = _viewCitySelection;
     _btnChangeCity.hidden = YES;
-    _geoSearch = [[BMKGeoCodeSearch alloc]init];
-    _geoSearch.delegate = (id)self;
-    //_mapView.showsUserLocation = YES;//显示定位图层
-    _locService = [[BMKLocationService alloc]init];
     [BMKLocationService setLocationDistanceFilter:100.f];
-    _locService.delegate = (id)self;
-    [self showHUD];
-    _currentCity = @"北京市";
-    [self loadData];
+    _location = ApplicationDelegate.gLocation;
+    if (!_dataList)
+        [self loadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,38 +52,45 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"cityName": _currentCity};
+    NSDictionary *param = @{@"cityName": ApplicationDelegate.gLocation.cityName};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_NAVI_STORE_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if ((NSNull *)data != [NSNull null]) {
                 _dataList = [JRStore buildUpWithValueForList:[data objectForKey:@"shopAddDtoList"]];
-                [_locService startUserLocationService];
             }
             else {
                 _dataList = nil;
-                [_locService startUserLocationService];
             }
+            [self reloadView];
         }
     }];
 }
 
-
-
 - (void)reloadView {
     _mapView.zoomLevel = 11;
-    
+    if (ApplicationDelegate.gLocation.isSuccessLocation) {
+        _mapView.centerCoordinate = ApplicationDelegate.gLocation.location;
+    }
     for (BMKPointAnnotation* ann in _mapView.annotations) {
-        if (ann && ann!=_selfAnnotation) {
-            [_mapView removeAnnotation:ann];
-        }
+        [_mapView removeAnnotation:ann];
+    }
+    if (ApplicationDelegate.gLocation.isSuccessLocation) {
+        _selfAnnotation = [[BMKPointAnnotation alloc]init];
+        _selfAnnotation.coordinate = ApplicationDelegate.gLocation.location;
+        _selfAnnotation.title = @"我的位置";
+        [_mapView addAnnotation:_selfAnnotation];
     }
     for (JRStore *store in _dataList) {
         BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
         annotation.coordinate = CLLocationCoordinate2DMake(store.latitude, store.longitude);
         annotation.title = store.storeShortName;
         [_mapView addAnnotation:annotation];
+    }
+    _labelCity.text = [NSString stringWithFormat:@"当前城市：%@",ApplicationDelegate.gLocation.cityName];
+    if (!ApplicationDelegate.gLocation.isSuccessLocation) {
+        _btnChangeCity.hidden = NO;
     }
     [_tableViewStore reloadData];
 }
@@ -100,7 +100,6 @@
     self.navigationController.navigationBarHidden = YES;
     [_mapView viewWillAppear];
     _mapView.delegate = (id)self; // 此处记得不用的时候需要置nil，否则影响内存的释放
-    _locService.delegate = (id)self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -108,39 +107,6 @@
     self.navigationController.navigationBarHidden = NO;
     [_mapView viewWillDisappear];
     _mapView.delegate = nil; // 不用时，置nil
-    _locService.delegate = nil;
-}
-
-//处理位置坐标更新
-- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
-{
-    [self hideHUD];
-    [_locService stopUserLocationService];
-        _isLocSuccess = true;
-    //[_mapView updateLocationData:userLocation];
-    _selfAnnotation = [[BMKPointAnnotation alloc]init];
-    _selfAnnotation.coordinate = userLocation.location.coordinate;
-    _selfAnnotation.title = @"你的位置";
-    _mapView.centerCoordinate = _selfAnnotation.coordinate;
-    [_mapView addAnnotation:_selfAnnotation];
-    BMKReverseGeoCodeOption *geo = [[BMKReverseGeoCodeOption alloc]init];
-    geo.reverseGeoPoint = userLocation.location.coordinate;
-    [_geoSearch reverseGeoCode:geo];
-}
-
-- (void) didFailToLocateUserWithError:(NSError *)error {
-    [self hideHUD];
-    [_locService stopUserLocationService];
-    _isLocSuccess = NO;
-    _btnChangeCity.hidden = NO;
-    [self reloadView];
-}
-
-- (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error {
-    if (!error) {
-        _labelCity.text = [NSString stringWithFormat:@"当前城市：%@",result.addressDetail.city];
-    }
-    [self reloadView];
 }
 
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
@@ -148,7 +114,7 @@
     if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
         BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
         newAnnotationView.pinColor = annotation==_selfAnnotation?BMKPinAnnotationColorRed:BMKPinAnnotationColorGreen;
-        newAnnotationView.animatesDrop = NO;// 设置该标注点动画显示
+        newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
         return newAnnotationView;
     }
     return nil;
@@ -174,7 +140,7 @@
     BMKMapPoint pointStore = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(store.latitude, store.longitude));
     BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
     CLLocationDistance distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
-    if (_isLocSuccess) {
+    if (ApplicationDelegate.gLocation.isSuccessLocation) {
         cell.imageNode.image = [UIImage imageNamed:@"icon-map-node-2.png"];
         cell.labelDistance.text = [NSString stringWithFormat:@"%.2fkm",distance/1000];
     }else {
@@ -201,16 +167,17 @@
 }
 
 - (IBAction)changeCityClick:(id)sender {
-//    if ([_textFieldCity isFirstResponder]) {
-//        [_textFieldCity resignFirstResponder];
-//    }else {
-//        [_textFieldCity becomeFirstResponder];
-//    }
     NaviStoreSelCityViewController *vc = [[NaviStoreSelCityViewController alloc] init];
     [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
-        _currentCity = areaInfo.cityName;
-        [self loadData];
+        ApplicationDelegate.gLocation.cityName = areaInfo.cityName;
+        UserLocation *location = [[UserLocation alloc]init];
+        [location startGeoCode:areaInfo.cityName Handler:^(UserLocation *loc) {
+            _mapView.centerCoordinate = loc.location;
+            [self loadData];
+        }];
     }];
     [self.navigationController pushViewController:vc animated:YES];
+    //    ShopListViewController *vc = [[ShopListViewController alloc]init];
+    //    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

@@ -2,7 +2,7 @@
 //  ConstructPriceListViewController.m
 //  JuranClient
 //
-//  Created by HuangKai on 15/4/21.
+//  Created by HuangKai on 15/4/23.
 //  Copyright (c) 2015年 Juran. All rights reserved.
 //
 
@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) NSMutableDictionary *openDictionary;
 @property (nonatomic, strong) IBOutlet UIView *totalView;
+@property (nonatomic, strong) IBOutlet UIView *footerView;
 
 @end
 
@@ -36,7 +37,7 @@
 
 - (void)setupUI{
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
-    _tableView.tableFooterView = [[UIView alloc] init];
+    _tableView.tableFooterView = _footerView;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = RGBColor(241, 241, 241);
     [self.view addSubview:_tableView];
@@ -135,13 +136,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

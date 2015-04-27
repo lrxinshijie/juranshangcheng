@@ -8,7 +8,7 @@
 
 #import "ShopListViewController.h"
 #import "ShopListCell.h"
-#import "NaviStoreListViewController.h"
+#import "ShopHomeViewController.h"
 #import "JRShop.h"
 
 @interface ShopListViewController ()
@@ -58,10 +58,10 @@
                             @"keyword": _keyword,
                             @"sort": @(_sort),
                             @"pageNo": @(_currentPage),
-                            @"onePageCount": @(20)
+                            @"onePageCount": @(10)
                             };
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_SEARCH_SHOP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_SEARCH_SHOP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"No"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             NSMutableArray *rows =[JRShop buildUpWithValueForShopList:[data objectForKey:@"appShopInfoList"]];
@@ -92,25 +92,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ShopListCell *cell = (ShopListCell *)[tableView dequeueReusableCellWithIdentifier:@"ShopListCell"];
-    [cell.btnNavi addTarget:self action:@selector(btnNaviClick:) forControlEvents:UIControlEventTouchUpInside];
+    
     NSInteger row = [indexPath row];
     JRShop *shop = [_dataList objectAtIndex:row];
-    cell.labelName.text = shop.shopName;
-    cell.labelMainBrand.text = shop.brands;
-    //cell.imageLogo.image = nil;
-    //cell.imageGrade.image = nil;
+    [cell fillCellWithJRShop:shop];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [_tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
 
-- (void)btnNaviClick:(id)sender {
-#ifndef kJuranDesigner
-    NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
-    [self.navigationController pushViewController:navi animated:YES];
-#endif
+    ShopHomeViewController *vc = [[ShopHomeViewController alloc]init];
+    JRShop *shop = [_dataList objectAtIndex:[indexPath row]];
+    vc.shop.shopId = shop.shopId;
+    [self.navigationController pushViewController:vc animated:YES];
 }
-
 @end

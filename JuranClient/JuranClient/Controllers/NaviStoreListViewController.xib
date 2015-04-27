@@ -10,8 +10,7 @@
                 <outlet property="btnChangeCity" destination="Zoi-7F-OhN" id="fg6-yh-qIz"/>
                 <outlet property="labelCity" destination="CEg-bJ-oCH" id="sbF-XA-qkp"/>
                 <outlet property="mapView" destination="nl8-Gx-UWp" id="YKM-cd-yIn"/>
-                <outlet property="tableViewStore" destination="Fk8-Uf-zH7" id="JWd-77-Tnq"/>
-                <outlet property="textFieldCity" destination="2UX-ve-R52" id="BIf-qZ-wcH"/>
+                <outlet property="tableViewStore" destination="Fk8-Uf-zH7" id="UJb-uF-FDj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

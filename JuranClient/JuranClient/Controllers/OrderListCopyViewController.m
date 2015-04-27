@@ -16,6 +16,7 @@
 #import "JRSegmentControl.h"
 #import "PreDisclosureInfoViewController.h"
 #import "ConstructPriceListViewController.h"
+#import "ConfirmItemViewController.h"
 
 @interface OrderListCopyViewController () <UITableViewDataSource, UITableViewDelegate, OrderFilterViewControllerDelegate, JRSegmentControlDelegate>
 
@@ -277,8 +278,10 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ConstructPriceListViewController *cp = [[ConstructPriceListViewController alloc] init];
-    [self.navigationController pushViewController:cp animated:YES];
+    ConstructPriceListViewController *cplvc = [[ConstructPriceListViewController alloc] init];
+    [self.navigationController pushViewController:cplvc animated:YES];
+    ConfirmItemViewController *cv = [[ConfirmItemViewController alloc] init];
+    [self.navigationController pushViewController:cv animated:YES];
     return;
     JROrder *order = [_datas objectAtIndex:indexPath.row];
     OrderDetailViewController *vc = [[OrderDetailViewController alloc] init];

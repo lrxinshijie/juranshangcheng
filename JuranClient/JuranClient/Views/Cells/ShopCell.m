@@ -26,7 +26,7 @@
     if (!value || ![value isKindOfClass:[NSDictionary class]]) {
         return;
     }
-    self.nameLabel.text = [value getStringValueForKey:@"productName" defaultValue:@""];
+    self.nameLabel.text = [value getStringValueForKey:@"goodsName" defaultValue:@""];
     [self.defaultImageView setImageWithURLString:[value getStringValueForKey:@"defaultImage" defaultValue:@""]];
     self.priceLabel.text = [value getStringValueForKey:@"onSaleMinPrice" defaultValue:@""];
 }

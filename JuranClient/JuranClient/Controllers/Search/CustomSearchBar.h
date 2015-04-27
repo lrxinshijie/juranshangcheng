@@ -32,4 +32,7 @@ typedef enum {
 //初始化的时候这个方法必须调用
 - (void)rightButtonChangeStyleWithKey:(RightBtnStyle)style;
 
+//设置当前的是第几页，必须在刷新前掉这个方法。
+- (void)setPageNo:(NSInteger)pageNo;
+
 @end
