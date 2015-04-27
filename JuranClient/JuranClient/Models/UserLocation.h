@@ -18,11 +18,11 @@ typedef void (^LocationFinished)(UserLocation *loc);
 @property (nonatomic, assign) BOOL isSuccessLocation;//成功获取定位信息
 @property (nonatomic, assign) BOOL isSuccessGeoCode;//成功编码
 @property (nonatomic, assign) BOOL isSuccessReverseGeoCode;//成功反编码
-@property (nonatomic, assign) CLLocationCoordinate2D location;
+@property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, copy) NSString *cityName;
 
 - (void)startLocationHandler:(LocationFinished)finished;
-- (void)startGeoCode:(NSString *)cityName Handler:(LocationFinished)finished;
-- (void)startReverseGeoCode:(CLLocationCoordinate2D)coordinate Handler:(LocationFinished)finished;
+- (void)GeoCode:(NSString *)cityName Handler:(LocationFinished)finished;
+- (void)ReverseGeoCode:(CLLocation *)location Handler:(LocationFinished)finished;
 
 @end
