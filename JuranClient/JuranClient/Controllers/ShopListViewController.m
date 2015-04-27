@@ -10,12 +10,14 @@
 #import "ShopListCell.h"
 #import "ShopHomeViewController.h"
 #import "JRShop.h"
+#import "CustomSearchBar.h"
 
-@interface ShopListViewController ()
+@interface ShopListViewController ()<CustomSearchBarDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (assign, nonatomic) int currentPage;
 @property (strong, nonatomic) NSMutableArray *dataList;
+@property (strong, nonatomic) CustomSearchBar *searchBar;
 
 @end
 
@@ -34,6 +36,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
+    self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
+    [self.view addSubview:self.searchBar];
+    [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_Scan];
+    self.searchBar.delegate = self;
+    
     [_tableView registerNib:[UINib nibWithNibName:@"ShopListCell" bundle:nil] forCellReuseIdentifier:@"ShopListCell"];
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -46,6 +54,27 @@
         [weakSelf loadData];
     }];
     [_tableView headerBeginRefreshing];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = NO;
+}
+
+- (void)pushToQRCodeVCDidTriggered
+{
+//    QRBaseViewController * QRVC = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:YES];
+//    [self.navigationController pushViewController:QRVC animated:YES];
+}
+
+- (void)goBackButtonDidSelect
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
