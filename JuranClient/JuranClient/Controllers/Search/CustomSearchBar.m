@@ -56,8 +56,13 @@
     self.dataArray_History = [NSMutableArray arrayWithCapacity:0];
     self.dataArray_SearchRange = [NSMutableArray arrayWithCapacity:0];
     //TODO:测试数据，请删除
-    NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:@"在XXX中搜索",@"searchRange",@"123",@"count",nil];
-    self.dataArray_SearchRange = [NSMutableArray arrayWithArray:@[dict,dict,dict,dict,dict]];
+    NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:@"在作品案例中搜索",@"searchRange",@"",@"count",nil];
+    NSDictionary * dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"在商品中搜索",@"searchRange",@"",@"count",nil];
+    NSDictionary * dict2 = [NSDictionary dictionaryWithObjectsAndKeys:@"在店铺中搜索",@"searchRange",@"",@"count",nil];
+    NSDictionary * dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"在设计师中搜索",@"searchRange",@"",@"count",nil];
+    NSDictionary * dict4 = [NSDictionary dictionaryWithObjectsAndKeys:@"在答疑解惑中搜索",@"searchRange",@"",@"count",nil];
+    
+    self.dataArray_SearchRange = [NSMutableArray arrayWithArray:@[dict,dict1,dict2,dict3,dict4]];
     
     self.isReloadHistory = NO;
     self.isHistory = YES;
@@ -289,6 +294,10 @@
         [[SearchHistoryManager sharedDataBase] insertSearchItem:str];
     }
     
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(startSearchWithKeyWord:index:)]) {
+        [self.delegate startSearchWithKeyWord:_inputTextField.text index:index];
+    }
     
 }
 
