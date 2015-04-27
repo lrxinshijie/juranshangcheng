@@ -9,5 +9,7 @@
 #import "ALViewController.h"
 
 @interface ShopListViewController : ALViewController
-
+@property (nonatomic, copy) NSString *cityName;
+@property (nonatomic, copy) NSString *keyword;
+@property (nonatomic, assign) int sort;
 @end

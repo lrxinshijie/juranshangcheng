@@ -7,9 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NaviStoreListViewController">
             <connections>
+                <outlet property="btnChangeCity" destination="Zoi-7F-OhN" id="fg6-yh-qIz"/>
                 <outlet property="labelCity" destination="CEg-bJ-oCH" id="sbF-XA-qkp"/>
                 <outlet property="mapView" destination="nl8-Gx-UWp" id="YKM-cd-yIn"/>
-                <outlet property="tableViewStore" destination="Fk8-Uf-zH7" id="JWd-77-Tnq"/>
+                <outlet property="tableViewStore" destination="Fk8-Uf-zH7" id="UJb-uF-FDj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -45,7 +46,7 @@
                             <rect key="frame" x="13" y="18" width="108" height="14"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Zoi-7F-OhN">
@@ -56,6 +57,9 @@
                                 <color key="titleColor" red="0.54117647058823526" green="0.54117647058823526" blue="0.54117647058823526" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="changeCityClick:" destination="-1" eventType="touchUpInside" id="Jbs-Bj-bfJ"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -85,6 +89,11 @@
                         <action selector="naviRightClick:" destination="-1" eventType="touchUpInside" id="U72-vj-Jao"/>
                     </connections>
                 </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="2UX-ve-R52">
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="2" y="326"/>

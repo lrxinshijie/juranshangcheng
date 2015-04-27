@@ -37,6 +37,7 @@
 #import "JROrder.h"
 #import "RealNameAuthViewController.h"
 #import "BidListViewController.h"
+#import "NaviStoreListViewController.h"
 
 @implementation Public
 
@@ -551,8 +552,12 @@
         NSInteger tradeType = [param getIntValueForKey:@"tradeType" defaultValue:0];
         
         JROrder *order = [[JROrder alloc] init];
-        order.measureTid = [param getStringValueForKey:@"tid" defaultValue:@""];
-        order.type = tradeType - 1;
+        order.type = tradeType;
+        if (tradeType) {
+            order.designTid = [param getStringValueForKey:@"tid" defaultValue:@""];
+        }else{
+            order.measureTid = [param getStringValueForKey:@"tid" defaultValue:@""];
+        }
         od.order = order;
         od.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:od animated:YES];
@@ -562,6 +567,10 @@
         [navigationController pushViewController:rn animated:YES];
     }else if (type == 12){
         BidListViewController *vc = [[BidListViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:vc animated:YES];
+    }else if (type == 19){
+        NaviStoreListViewController *vc = [[NaviStoreListViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
     }
@@ -617,6 +626,10 @@
 
 + (void)clearWelcomeInfo{
     [kUD removeObjectForKey:@"kWelcomeInfo"];
+}
+
++ (NSString *)defaultCityName{
+    return @"北京市";
 }
 
 @end

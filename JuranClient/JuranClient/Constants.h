@@ -31,8 +31,6 @@
 #define kContentBackgroundColor  [UIColor colorWithRed:234.0/255 green:247.0/255 blue:252.0/255 alpha:1]
 #define kDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 
-#define UMENG_KEY @"53a7cf7f56240bbe65195bfd"
-
 #ifdef kJuranDesigner
 #define kAppleID 954983948
 #else
@@ -61,10 +59,6 @@
 
 
 #define kBlueColor RGBColor(15, 82, 167)
-//:@"100543115"8
-//appSecret:@"9cc782277d5b8084f073599d72ba08c3"
-#define QQHLSDKAppKey @"100543115"
-#define QQHLSDKAppSecret @"9cc782277d5b8084f073599d72ba08c3"
 
 #define kPasswordMaxNumber 20
 #define kAccountMaxNumber 24

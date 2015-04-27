@@ -15,7 +15,7 @@
 #import "CategaryTableViewCell.h"
 #import "pinyin.h"
 
-@interface GoodsCategaryViewController ()<UITableViewDataSource,UITableViewDelegate,CustomSecLevelViewDelegate,CustomThirdLevelCellDelegate,CustomShopViewDelegate>
+@interface GoodsCategaryViewController ()<UITableViewDataSource,UITableViewDelegate,CustomSecLevelViewDelegate,CustomThirdLevelCellDelegate,CustomShopViewDelegate,UIScrollViewDelegate>
 {
     //记录数组位置
     int cslv_i;
@@ -82,6 +82,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.listTableView setContentSize:CGSizeMake(243, 500)];
     
 }
 
@@ -273,11 +274,15 @@
     }
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (tableView == _listTableView) {
-        return 95;
+        
+        if (self.vcStyle == CategaryStyle_Goods) {
+            return 95;
+        }else{
+            return 83;
+        }
     }
     return 1;
 }
@@ -298,6 +303,8 @@
             CustomBrandView * csView = [[[NSBundle mainBundle] loadNibNamed:@"CustomBrandView" owner:self options:nil] lastObject];
             csView.delegate = self;
             [csView configViewUIWithItem:self.dataArray_secondLevel[section]];
+            
+            return csView;
             
         }
         
@@ -566,9 +573,8 @@
             
         }
         
-        
-        
         [wSelf.fistLevelTableView reloadData];
+        
     }];
     
     
@@ -641,7 +647,20 @@
 
 
 
-
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (scrollView == _listTableView && self.vcStyle == CategaryStyle_Shop) {
+        
+        if (scrollView.contentOffset.y>scrollView.contentSize.height) {
+            
+            self.pageNo++;
+            [self requestDataForBrand:nil pageNo:self.pageNo];
+            
+        }
+        
+    }
+}
 
 
 

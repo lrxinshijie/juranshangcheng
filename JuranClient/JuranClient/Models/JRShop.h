@@ -17,11 +17,20 @@
  是否已收藏	业务	Y	isStored
  */
 
+@property (nonatomic, assign) NSInteger shopId;
 @property (nonatomic, copy) NSString *shopLogo;
+@property (nonatomic, copy) NSString *shopName;
 @property (nonatomic, copy) NSString *indexShopLogo;
 @property (nonatomic, copy) NSString *shopDsr;
 @property (nonatomic, assign) BOOL isStored;
+@property (nonatomic, copy) NSString *grade;
+//search
+@property (nonatomic, copy) NSString *brands;
+@property (nonatomic, copy) NSString *logo;
 
 - (id)initWithDictionary:(NSDictionary *)dict;
-
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
+- (id)initWithDictionaryForShopList:(NSDictionary *)dict;
++ (NSMutableArray*)buildUpWithValueForShopList:(id)value;
+- (void)buildUpWithDictionary:(NSDictionary *)dict;
 @end

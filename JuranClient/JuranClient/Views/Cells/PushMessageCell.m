@@ -100,7 +100,7 @@
     _contentLabel.frame = frame;
     
    height = CGRectGetMaxY(_contentLabel.frame) + 10;
-    if (_pushInfoMsg.isExpand && _pushInfoMsg.msgType == 1) {
+    if (_pushInfoMsg.isExpand) {
         _detailButton.hidden = NO;
         
         frame = _detailButton.frame;

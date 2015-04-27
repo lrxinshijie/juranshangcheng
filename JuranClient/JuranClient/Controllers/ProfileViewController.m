@@ -19,11 +19,12 @@
 #import "CaseCollectViewController.h"
 #import "SettingsViewController.h"
 #import "OrderListViewController.h"
+#import "OrderListCopyViewController.h"
 #import "MyCollectViewController.h"
 
-//#import "GoodsCategaryViewController.h"
-//#import "QRBaseViewController.h"
-//#import "TestSearchViewController.h"
+#import "GoodsCategaryViewController.h"
+#import "QRBaseViewController.h"
+#import "TestSearchViewController.h"
 
 #ifdef kJuranDesigner
 #import "RealNameAuthViewController.h"
@@ -36,6 +37,8 @@
 #else
 #import "PrivateMessageViewController.h"
 #import "MyDemandViewController.h"
+
+#import "MyDemandCopyViewController.h"
 #endif
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -167,8 +170,6 @@
     
     imageView = (UIImageView*)[_headerView viewWithTag:2010];
     imageView.image = [UIImage imageNamed:@"personal_bg.png"];
-#else
-    _signedButton.hidden = YES;
 #endif
 }
 
@@ -272,7 +273,7 @@
 
 - (IBAction)doTouchHeaderView:(id)sender{
     
-//    GoodsCategaryViewController * good = [[GoodsCategaryViewController alloc] initWithNibName:@"GoodsCategaryViewController" bundle:nil isPopNavHide:NO];
+//    GoodsCategaryViewController * good = [[GoodsCategaryViewController alloc] initWithNibName:@"GoodsCategaryViewController" bundle:nil isPopNavHide:NO style:CategaryStyle_Shop];
 //    QRBaseViewController * good = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
 //    TestSearchViewController * good = [[TestSearchViewController alloc] initWithNibName:@"TestSearchViewController" bundle:nil];
 //    [self.navigationController pushViewController:good animated:YES];
@@ -304,7 +305,11 @@
 #ifndef kJuranDesigner
     //需求
     _user.hasNewBidCount = 0;
+#ifdef kJuranVersion12
     MyDemandViewController *vc = [[MyDemandViewController alloc] init];
+#else
+    MyDemandCopyViewController *vc = [[MyDemandCopyViewController alloc] init];
+#endif
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 #else
@@ -443,8 +448,11 @@
         case 3:
         {
             //        我的收藏
-//            CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
+#ifdef kJuranVersion12
+            CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
+#else
             MyCollectViewController *vc = [[MyCollectViewController alloc] init];
+#endif
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
@@ -452,7 +460,11 @@
         
         case 4:{
             //        订单管理
+#ifdef kJuranVersion12
             OrderListViewController *vc = [[OrderListViewController alloc] init];
+#else
+            OrderListCopyViewController *vc = [[OrderListCopyViewController alloc] init];
+#endif
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
@@ -529,7 +541,11 @@
                         NSInteger status = [data getIntValueForKey:@"status" defaultValue:-1];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             if (status == 2) {
+#ifdef kJuranVersion12
                                 OrderListViewController *vc = [[OrderListViewController alloc] init];
+#else
+                                OrderListCopyViewController *vc = [[OrderListCopyViewController alloc] init];
+#endif
                                 vc.hidesBottomBarWhenPushed = YES;
                                 [self.navigationController pushViewController:vc animated:YES];
                             }else{

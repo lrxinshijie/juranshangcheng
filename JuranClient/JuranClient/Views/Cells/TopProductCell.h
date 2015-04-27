@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class JRProduct;
 @interface TopProductCell : UICollectionViewCell
+
+- (void)fillCellWithData:(JRProduct *)product;
 
 @end

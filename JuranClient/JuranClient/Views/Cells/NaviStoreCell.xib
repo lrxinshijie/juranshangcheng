@@ -21,10 +21,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-map-node-2.png" translatesAutoresizingMaskIntoConstraints="NO" id="8HK-rn-HSb">
-                        <rect key="frame" x="235" y="12" width="10" height="14"/>
+                        <rect key="frame" x="223" y="12" width="10" height="14"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.0km" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SpG-Cx-Ze2">
-                        <rect key="frame" x="254" y="12" width="50" height="13"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.0km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SpG-Cx-Ze2">
+                        <rect key="frame" x="236" y="12" width="58" height="13"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -38,6 +38,12 @@
                     </view>
                 </subviews>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="imageNode" destination="8HK-rn-HSb" id="EM4-Oi-0J0"/>
+                <outlet property="labelDistance" destination="SpG-Cx-Ze2" id="Rvf-Ta-aXh"/>
+                <outlet property="labelName" destination="GcQ-YW-wJ5" id="47N-Ze-8TE"/>
+            </connections>
+            <point key="canvasLocation" x="254" y="231"/>
         </tableViewCell>
     </objects>
     <resources>

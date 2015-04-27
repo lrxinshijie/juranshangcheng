@@ -16,6 +16,9 @@
 @property (nonatomic, assign) NSInteger selectedIndex;
 @property(nonatomic, readonly) NSInteger numberOfSegments;
 @property (nonatomic, assign) BOOL isDesigner;
+@property (nonatomic, assign) BOOL showUnderLine;
+@property (nonatomic, assign) BOOL showVerticalSeparator;
+
 
 @end
 

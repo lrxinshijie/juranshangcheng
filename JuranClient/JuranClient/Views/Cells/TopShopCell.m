@@ -7,11 +7,24 @@
 //
 
 #import "TopShopCell.h"
+#import "JRShop.h"
+
+@interface TopShopCell ()
+
+@property (nonatomic, strong) IBOutlet UIImageView *logoImageView;
+@property (nonatomic, strong) IBOutlet UILabel *nameLabel;
+
+@end
 
 @implementation TopShopCell
 
 - (void)awakeFromNib {
     // Initialization code
+}
+
+- (void)fillCellWithData:(JRShop *)shop{
+    [_logoImageView setImageWithURLString:shop.shopLogo];
+    _nameLabel.text = shop.shopName;
 }
 
 @end

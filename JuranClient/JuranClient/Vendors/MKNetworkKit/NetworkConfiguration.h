@@ -14,10 +14,17 @@
 //#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
 //#define JR_SERVICE  @"http://124.207.66.50:10005"
 //#define JR_SERVICE  @"http://124.193.207.194:8070"
+//#define JR_SERVICE  @"http://10.199.5.238:8083"
+
+
+
 
 /* UAT */
 #define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
 #define JR_SERVICE  @"http://54.223.161.28:8080"
+//#define JR_SERVICE  @"http://124.202.155.21:81"
+//预生产环境
+//#define JR_SERVICE  @"http://124.202.155.217:81"
 
 /* Production */
 //#define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
@@ -81,8 +88,18 @@
 #define JR_GET_ACTIVITY_DETAIL [NSString stringWithFormat:@"%@/info/get_activity_detail.json",JR_SERVICE]
 #define JR_GET_ARTICLE_DETAIL [NSString stringWithFormat:@"%@/knowledge/get_article_detail_info.json",JR_SERVICE]
 #define JR_START_LOG [NSString stringWithFormat:@"%@/info/startLog.json",JR_SERVICE]
+#define JR_HOME_NAVIGATION [NSString stringWithFormat:@"%@/home/navigationButton.json",JR_SERVICE]
+#define JR_HOME_CASE [NSString stringWithFormat:@"%@/design/getHotProjectList.json",JR_SERVICE]
+#define JR_MALL_ACTIVITY_SHOP [NSString stringWithFormat:@"%@/mall/getActivityShop.json",JR_SERVICE]
+#define JR_MALL_ACTIVITY_PRODUCT [NSString stringWithFormat:@"%@/mall/getActivityGoods.json",JR_SERVICE]
 
-
+#define JR_PRODUCT_INFO [NSString stringWithFormat:@"%@/goods/getGoodsInfo.json",JR_SERVICE]
+#define JR_PRODUCT_BUY_ATTRIBUTE [NSString stringWithFormat:@"%@/goods/getGoodsBuyAttributes.json",JR_SERVICE]
+#define JR_PRODUCT_SHOP_INFO [NSString stringWithFormat:@"%@/goods/getShopInfo.json",JR_SERVICE]
+#define JR_PRODUCT_FAVORITY [NSString stringWithFormat:@"%@/goods/goodsIsCollection.json",JR_SERVICE]
+#define JR_PRODUCT_DESC [NSString stringWithFormat:@"%@/goods/getGoodsDesc.json",JR_SERVICE]
+#define JR_PRODUCT_SELL_STORE [NSString stringWithFormat:@"%@/goods/canSellStore.json",JR_SERVICE]
+#define JR_PRODUCT_ATTRIBUTE [NSString stringWithFormat:@"%@/goods/getGoodsAttributes.json",JR_SERVICE]
 
 
 
@@ -171,6 +188,14 @@
 
 #define JR_SHOP_FIRSTPAGE [NSString stringWithFormat:@"%@/shop/shopFirstPage.json",JR_SERVICE]
 #define JR_SHOP_RECOMMEND [NSString stringWithFormat:@"%@/shop/shopRecommend.json",JR_SERVICE]
+#define JR_SHOP_CLASSIFICATION [NSString stringWithFormat:@"%@/shop/goodsClassification.json",JR_SERVICE]
+#define JR_SHOP_LOCATION [NSString stringWithFormat:@"%@/shop/shopLocation.json",JR_SERVICE]
+//Navi
+#define JR_NAVI_STORE_LIST [NSString stringWithFormat:@"%@/shop/storeList.json",JR_SERVICE]
+#define JR_NAVI_STORE_INFO [NSString stringWithFormat:@"%@/shop/storeInfo.json",JR_SERVICE]
+//Search
+#define JR_SEARCH_SHOP [NSString stringWithFormat:@"%@/search/searchShop.json",JR_SERVICE]
+#define JR_SHOP_COLLECTION [NSString stringWithFormat:@"%@/shop/shopAddAndDel.json",JR_SERVICE]
 
 
 #define JR_GOODS_CATEGARY [NSString stringWithFormat:@"%@/category/queryShowCategory.json",JR_SERVICE]

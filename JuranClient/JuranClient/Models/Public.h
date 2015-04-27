@@ -107,5 +107,5 @@
 + (BOOL)saveWelcomeInfo:(JRAdInfo*)info;
 + (JRAdInfo*)welcomeInfo;
 + (void)clearWelcomeInfo;
-
++ (NSString *)defaultCityName;
 @end

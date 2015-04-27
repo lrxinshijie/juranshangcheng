@@ -7,11 +7,24 @@
 //
 
 #import "TopProductCell.h"
+#import "JRProduct.h"
+
+@interface TopProductCell ()
+
+@property (nonatomic, strong) IBOutlet UIImageView *logoImageView;
+@property (nonatomic, strong) IBOutlet UILabel *nameLabel;
+
+@end
 
 @implementation TopProductCell
 
 - (void)awakeFromNib {
     // Initialization code
+}
+
+- (void)fillCellWithData:(JRProduct *)product{
+    [_logoImageView setImageWithURLString:product.goodsLogo];
+    _nameLabel.text = product.goodsName;
 }
 
 @end

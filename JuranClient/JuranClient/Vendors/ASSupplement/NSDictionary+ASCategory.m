@@ -81,6 +81,15 @@ static NSString * PercentEscapedQueryStringPairMemberFromStringWithEncoding(NSSt
     }
 }
 
+- (NSArray *)getArrayValueForKey:(NSString *)key defaultValue:(NSArray *)defaultValue{
+    NSArray *value = [self objectForKey:key];
+    if (value && [value isKindOfClass:[NSArray class]]) {
+        return value;
+    }
+    
+    return defaultValue;
+}
+
 - (NSString *)buildUpWithParameters
 {
     NSDictionary *parameters = self;

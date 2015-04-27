@@ -10,15 +10,24 @@
 #import <BaiduMapAPI/BMapKit.h>
 #import "NaviStoreCell.h"
 #import "NaviStoreInfoViewController.h"
+#import "JRStore.h"
+#import "JRAreaInfo.h"
+#import "NaviStoreSelCityViewController.h"
+#import "ShopListViewController.h"
+#import "UserLocation.h"
+#import "AppDelegate.h"
 
 @interface NaviStoreListViewController ()
-@property (strong, nonatomic) IBOutlet BMKMapView *mapView;
+
 @property (strong, nonatomic) IBOutlet UILabel *labelCity;
 @property (strong, nonatomic) IBOutlet UITableView *tableViewStore;
-@property (strong, nonatomic) BMKLocationService *locService;
-@property (strong, nonatomic) BMKPointAnnotation* selfAnnotation;
+@property (strong, nonatomic) IBOutlet UIButton *btnChangeCity;
+@property (strong, nonatomic) IBOutlet BMKMapView *mapView;
+@property (strong, nonatomic) BMKPointAnnotation *selfAnnotation;
+@property (strong, nonatomic) UserLocation *location;
 - (IBAction)naviLeftClick:(id)sender;
 - (IBAction)naviRightClick:(id)sender;
+- (IBAction)changeCityClick:(id)sender;
 
 @end
 
@@ -27,18 +36,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    //latitude=39.944213,longitude=116.438717
     self.navigationItem.title = @"门店导航";
-    self.navigationController.navigationBarHidden = YES;
     [_tableViewStore registerNib:[UINib nibWithNibName:@"NaviStoreCell" bundle:nil] forCellReuseIdentifier:@"NaviStoreCell"];
-    
-    _locService = [[BMKLocationService alloc]init];
+    _btnChangeCity.hidden = YES;
     [BMKLocationService setLocationDistanceFilter:100.f];
-    _locService.delegate = (id)self;
-    [_locService startUserLocationService];
-    _mapView.showsUserLocation = YES;//显示定位图层
-    _selfAnnotation = [[BMKPointAnnotation alloc]init];
-    [_mapView addAnnotation:_selfAnnotation];
-    [self loadData];
+    _location = ApplicationDelegate.gLocation;
+    if (!_dataList)
+        [self loadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,48 +52,68 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"cityCode": @"110000"};
+    NSDictionary *param = @{@"cityName": ApplicationDelegate.gLocation.cityName};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:@"http://54.223.161.28:8080/shop/storeList.json" parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_NAVI_STORE_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            
+            if ((NSNull *)data != [NSNull null]) {
+                _dataList = [JRStore buildUpWithValueForList:[data objectForKey:@"shopAddDtoList"]];
+            }
+            else {
+                _dataList = nil;
+            }
+            [self reloadView];
         }
     }];
 }
 
+- (void)reloadView {
+    _mapView.zoomLevel = 11;
+    if (ApplicationDelegate.gLocation.isSuccessLocation) {
+        _mapView.centerCoordinate = ApplicationDelegate.gLocation.location;
+    }
+    for (BMKPointAnnotation* ann in _mapView.annotations) {
+        [_mapView removeAnnotation:ann];
+    }
+    if (ApplicationDelegate.gLocation.isSuccessLocation) {
+        _selfAnnotation = [[BMKPointAnnotation alloc]init];
+        _selfAnnotation.coordinate = ApplicationDelegate.gLocation.location;
+        _selfAnnotation.title = @"我的位置";
+        [_mapView addAnnotation:_selfAnnotation];
+    }
+    for (JRStore *store in _dataList) {
+        BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
+        annotation.coordinate = CLLocationCoordinate2DMake(store.latitude, store.longitude);
+        annotation.title = store.storeShortName;
+        [_mapView addAnnotation:annotation];
+    }
+    _labelCity.text = [NSString stringWithFormat:@"当前城市：%@",ApplicationDelegate.gLocation.cityName];
+    if (!ApplicationDelegate.gLocation.isSuccessLocation) {
+        _btnChangeCity.hidden = NO;
+    }
+    [_tableViewStore reloadData];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.navigationController.navigationBarHidden = YES;
     [_mapView viewWillAppear];
     _mapView.delegate = (id)self; // 此处记得不用的时候需要置nil，否则影响内存的释放
-    _locService.delegate = (id)self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    self.navigationController.navigationBarHidden = NO;
     [_mapView viewWillDisappear];
     _mapView.delegate = nil; // 不用时，置nil
-    _locService.delegate = nil;
-}
-
-//处理位置坐标更新
-- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
-{
-    //_mapView.showsUserLocation = YES;
-    //[_mapView updateLocationData:userLocation];
-    CLLocationCoordinate2D coor = userLocation.location.coordinate;
-    _selfAnnotation.coordinate = coor;
-    _selfAnnotation.title = @"你在这里";
-    _mapView.centerCoordinate = _selfAnnotation.coordinate;
-    _mapView.zoomLevel = 12;
-    [_locService stopUserLocationService];
 }
 
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
 {
     if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
         BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
-        newAnnotationView.pinColor = BMKPinAnnotationColorPurple;
+        newAnnotationView.pinColor = annotation==_selfAnnotation?BMKPinAnnotationColorRed:BMKPinAnnotationColorGreen;
         newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
         return newAnnotationView;
     }
@@ -100,7 +125,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return _dataList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,21 +134,50 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NaviStoreCell *cell = (NaviStoreCell *)[tableView dequeueReusableCellWithIdentifier:@"NaviStoreCell"];
+    int index = [indexPath row];
+    JRStore *store = [_dataList objectAtIndex:index];
+    cell.labelName.text = store.storeShortName;
+    BMKMapPoint pointStore = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(store.latitude, store.longitude));
+    BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
+    CLLocationDistance distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
+    if (ApplicationDelegate.gLocation.isSuccessLocation) {
+        cell.imageNode.image = [UIImage imageNamed:@"icon-map-node-2.png"];
+        cell.labelDistance.text = [NSString stringWithFormat:@"%.2fkm",distance/1000];
+    }else {
+        cell.imageNode.image = nil;
+        cell.labelDistance.text = @"";
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [_tableViewStore deselectRowAtIndexPath:indexPath animated:YES];
+    JRStore *store = [_dataList objectAtIndex:[indexPath row]];
     NaviStoreInfoViewController *info = [[NaviStoreInfoViewController alloc]init];
+    info.store = store;
     [self.navigationController pushViewController:info animated:YES];
 }
 
 - (IBAction)naviLeftClick:(id)sender {
-    NSLog(@"LeftClick");
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)naviRightClick:(id)sender {
     NSLog(@"RightClick");
+}
+
+- (IBAction)changeCityClick:(id)sender {
+    NaviStoreSelCityViewController *vc = [[NaviStoreSelCityViewController alloc] init];
+    [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
+        ApplicationDelegate.gLocation.cityName = areaInfo.cityName;
+        UserLocation *location = [[UserLocation alloc]init];
+        [location startGeoCode:areaInfo.cityName Handler:^(UserLocation *loc) {
+            _mapView.centerCoordinate = loc.location;
+            [self loadData];
+        }];
+    }];
+    [self.navigationController pushViewController:vc animated:YES];
+    //    ShopListViewController *vc = [[ShopListViewController alloc]init];
+    //    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
