@@ -68,7 +68,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //_labelHeader.text = _tableView.r
+    _labelHeader.text = [NSString stringWithFormat:@"1号厅%ldF ▼",(long)[indexPath row]];
+    [self headerViewClick:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

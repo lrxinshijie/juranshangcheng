@@ -11,6 +11,7 @@
 #import "CaseViewController.h"
 #import "QuestionViewController.h"
 #import "IQKeyboardManager.h"
+#import "ShopListViewController.h"
 
 #define kKeywordsButtonTag 3330
 
@@ -195,7 +196,9 @@
         
     }else if (_type == SearchTypeShop){
         
-        
+        ShopListViewController * vc = [[ShopListViewController alloc] init];
+        vc.keyword = _searchKeyWord;
+        [self.navigationController pushViewController:vc animated:YES];
         
     }
 }
