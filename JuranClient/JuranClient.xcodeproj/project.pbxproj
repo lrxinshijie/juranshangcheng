@@ -1101,7 +1101,6 @@
 		A98015041AD6B22D002CB4C9 /* FitmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A98015011AD6B22D002CB4C9 /* FitmentViewController.xib */; };
 		A98015051AD6B22D002CB4C9 /* FitmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A98015011AD6B22D002CB4C9 /* FitmentViewController.xib */; };
 		A98015091AD6B23F002CB4C9 /* MallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A98015071AD6B23F002CB4C9 /* MallViewController.m */; };
-		A980150A1AD6B23F002CB4C9 /* MallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A98015071AD6B23F002CB4C9 /* MallViewController.m */; };
 		A980150B1AD6B23F002CB4C9 /* MallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A98015081AD6B23F002CB4C9 /* MallViewController.xib */; };
 		A980150C1AD6B23F002CB4C9 /* MallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A98015081AD6B23F002CB4C9 /* MallViewController.xib */; };
 		A98015101AD6B267002CB4C9 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A980150E1AD6B267002CB4C9 /* DiscoverViewController.m */; };
@@ -7119,7 +7118,6 @@
 				37F0E6371A7D1AFE004CCCB2 /* MWTapDetectingImageView.m in Sources */,
 				1415F9F71A5CD1CB003D0C29 /* ProfileViewController.m in Sources */,
 				1415F9F81A5CD1CB003D0C29 /* GlobalPopupAlert.m in Sources */,
-				A980150A1AD6B23F002CB4C9 /* MallViewController.m in Sources */,
 				A9C0120F1ABC601900DCF9C3 /* IQTextView.m in Sources */,
 				1415F9F91A5CD1CB003D0C29 /* TextFieldCell.m in Sources */,
 				1415F9FA1A5CD1CB003D0C29 /* JRUser.m in Sources */,
