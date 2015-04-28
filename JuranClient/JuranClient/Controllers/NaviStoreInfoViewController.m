@@ -140,7 +140,7 @@
         [_mapView removeAnnotation:_selfAnnotation];
     }
     _selfAnnotation = [[BMKPointAnnotation alloc]init];
-    _selfAnnotation.coordinate = ApplicationDelegate.gLocation.location;
+    _selfAnnotation.coordinate = ApplicationDelegate.gLocation.location.coordinate;
     _selfAnnotation.title = @"你的位置";
     //_mapView.centerCoordinate = _selfAnnotation.coordinate;
     [_mapView addAnnotation:_selfAnnotation];
