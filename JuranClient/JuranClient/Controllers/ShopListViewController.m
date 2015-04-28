@@ -42,7 +42,7 @@
     // Do any additional setup after loading the view from its nib.
     self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
     self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
-    [self.view addSubview:self.searchBar];
+    [self.searchBar setTextFieldText:_keyword];
     [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
     self.searchBar.delegate = self;
     
@@ -62,11 +62,13 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self.view addSubview:self.searchBar];
     self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [self.searchBar removeFromSuperview];
     self.navigationController.navigationBarHidden = NO;
 }
 

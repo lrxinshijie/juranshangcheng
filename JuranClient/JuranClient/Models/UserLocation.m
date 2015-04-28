@@ -7,11 +7,12 @@
 //
 
 #import "UserLocation.h"
-#import <BaiduMapAPI/BMapKit.h>
+//#import <BaiduMapAPI/BMapKit.h>
 
-@interface UserLocation()<BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
-@property (nonatomic, strong) BMKLocationService *locService;
-@property (nonatomic, strong) BMKGeoCodeSearch *geoSearch;
+@interface UserLocation()<CLLocationManagerDelegate>
+@property (nonatomic, strong) CLLocationManager *locService;
+@property (nonatomic, strong) CLGeocoder *geoService;
+
 @end
 
 @implementation UserLocation
@@ -19,14 +20,20 @@
 {
     self = [super init];
     if (self) {
-        _locService = [[BMKLocationService alloc]init];
+        _locService = [[CLLocationManager alloc]init];
         _locService.delegate = self;
-        _geoSearch = [[BMKGeoCodeSearch alloc]init];
-        _geoSearch.delegate = self;
+        _locService.desiredAccuracy = kCLLocationAccuracyBest;
+        _locService.distanceFilter = 10;
+        if (SystemVersionGreaterThanOrEqualTo(8.0f)) {
+            //[_locService requestAlwaysAuthorization];
+            [_locService requestWhenInUseAuthorization];
+        }
+        _geoService = [[CLGeocoder alloc]init];
+        //_geoSearch.delegate = self;
         _isSuccessLocation = NO;
         _isSuccessGeoCode = NO;
         _isSuccessReverseGeoCode = NO;
-        _location = CLLocationCoordinate2DMake(0, 0);
+        _location = [[CLLocation alloc]init];
         _cityName = @"北京市";
     }
     return self;
@@ -35,25 +42,25 @@
 - (void)dealloc
 {
     _locService.delegate = nil;
-    _geoSearch.delegate = nil;
+    //_geoSearch.delegate = nil;
 }
 
 - (void)startLocationHandler:(LocationFinished)finished {
     _block = finished;
-    [BMKLocationService setLocationDistanceFilter:100.f];
-    [_locService startUserLocationService];
+    //[BMKLocationService setLocationDistanceFilter:100.f];
+    [_locService startUpdatingLocation];
 }
 
-- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
-    [_locService stopUserLocationService];
-    _location = userLocation.location.coordinate;
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    [_locService stopUpdatingLocation];
+    _location = [locations lastObject];
     _isSuccessLocation = YES;
-    ASLog(@"定位成功,latitude=%f,longitude=%f",_location.latitude,_location.longitude);
-    [self startReverseGeoCode:_location Handler:_block];
+    ASLog(@"定位成功,latitude=%f,longitude=%f",_location.coordinate.latitude,_location.coordinate.longitude);
+    [self ReverseGeoCode:_location Handler:_block];
 }
 
-- (void)didFailToLocateUserWithError:(NSError *)error{
-    [_locService stopUserLocationService];
+- (void)locationManager:(CLLocationManager *)manager{
+    [_locService stopUpdatingLocation];
     _isSuccessLocation = NO;
     ASLog(@"定位失败");
     if (_block) {
@@ -61,53 +68,51 @@
     }
 }
 
-- (void)startReverseGeoCode:(CLLocationCoordinate2D)coordinate Handler:(LocationFinished)finished{
+- (void)ReverseGeoCode:(CLLocation *)location Handler:(LocationFinished)finished{
     _block = finished;
-    BMKReverseGeoCodeOption *opt = [[BMKReverseGeoCodeOption alloc]init];
-    opt.reverseGeoPoint = coordinate;
-    [_geoSearch reverseGeoCode:opt];
-}
-
-- (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error {
-    if (error==BMK_SEARCH_NO_ERROR) {
-        if (![result.addressDetail.city isEqual:@""]) {
-            _cityName = result.addressDetail.city;
-            _isSuccessReverseGeoCode = YES;
-            ASLog(@"地理位置反编码成功");
-        }else{
+    [_geoService reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (error||placemarks.count==0) {
             _isSuccessReverseGeoCode = NO;
             ASLog(@"地理位置反编码失败");
+        }else {
+            _isSuccessReverseGeoCode = YES;
+            CLPlacemark *firstPlacemark=[placemarks firstObject];
+            NSString *name = firstPlacemark.locality;
+            if ([name isEqual:@"北京市市辖区"]) {
+                _cityName = @"北京市";
+            }else if ([name isEqual:@"天津市市辖区"]) {
+                _cityName = @"天津市";
+            }else if ([name isEqual:@"上海市市辖区"]) {
+                _cityName = @"上海市";
+            }else if ([name isEqual:@"重庆市市辖区"]) {
+                _cityName = @"重庆市";
+            }else {
+                _cityName = name;
+            }
+            ASLog(@"地理位置反编码成功,当前定位城市[%@]",_cityName);
         }
-    }else {
-        _isSuccessReverseGeoCode = NO;
-        ASLog(@"地理位置反编码失败");
-    }
-    if (_block) {
-        _block(self);
-    }
+        if (_block) {
+            _block(self);
+        }
+    }];
 }
 
-- (void)startGeoCode:(NSString *)cityName Handler:(LocationFinished)finished{
+- (void)GeoCode:(NSString *)cityName Handler:(LocationFinished)finished{
     _block = finished;
-    BMKGeoCodeSearchOption *opt = [[BMKGeoCodeSearchOption alloc]init];
-    opt.city = cityName;
-    opt.address = @"市政府";
-    BOOL ret = [_geoSearch geoCode:opt];
-    ASLog(@"ret = %d",ret);
-}
-
-- (void)onGetGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error {
-    if (error==BMK_SEARCH_NO_ERROR) {
-        _location = result.location;
-        _isSuccessGeoCode = YES;
-        ASLog(@"地理位置编码成功");
-    }else {
-        _isSuccessGeoCode = NO;
-        ASLog(@"地理位置编码失败");
-    }
-    if (_block) {
-        _block(self);
-    }
+    [_geoService geocodeAddressString:[NSString stringWithFormat:@"%@市政府",cityName] completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (error || placemarks.count==0) {
+            _isSuccessGeoCode = NO;
+            ASLog(@"地理位置编码失败");
+        }else {
+            _isSuccessGeoCode = YES;
+            CLPlacemark *firstPlacemark=[placemarks firstObject];
+            _location = firstPlacemark.location;
+            ASLog(@"地理位置编码成功,当天城市[%@],纬度=%f,经度=%f",firstPlacemark.locality,_location.coordinate.latitude,_location.coordinate.longitude);
+        }
+        if (_block) {
+            _block(self);
+        }
+    }];
 }
 
 
