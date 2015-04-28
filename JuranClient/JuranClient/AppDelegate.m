@@ -40,7 +40,7 @@
 #import "UserLocation.h"
 
 #ifndef kJuranVersion12
-//#define kJuranVersion12
+#define kJuranVersion12
 #endif
 
 //Share SDK

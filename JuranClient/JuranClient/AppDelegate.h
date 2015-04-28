@@ -17,7 +17,10 @@
 
 @property (nonatomic, strong) UITabBarController *tabBarController;
 @property (nonatomic, strong) NSString *clientId;
+
+#ifndef kJuranDesigner
 @property (nonatomic, strong) UserLocation *gLocation;
+#endif
 - (void)minusBadgeNumber:(NSInteger)num;
 - (void)jumpToMain;
 
