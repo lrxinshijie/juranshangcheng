@@ -266,17 +266,25 @@
 }
 
 - (IBAction)SystemNaviClick:(id)sender {
-    [self availableMapsApps];
-    UIActionSheet *action = [[UIActionSheet alloc] init];
+//    [self availableMapsApps];
+//    UIActionSheet *action = [[UIActionSheet alloc] init];
+//    
+//    [action addButtonWithTitle:@"使用系统自带地图导航"];
+//    for (NSDictionary *dic in self.availableMaps) {
+//        [action addButtonWithTitle:[NSString stringWithFormat:@"使用%@导航", dic[@"name"]]];
+//    }
+//    [action addButtonWithTitle:@"取消"];
+//    action.cancelButtonIndex = self.availableMaps.count + 1;
+//    action.delegate = self;
+//    [action showInView:self.view];
+    CLLocationCoordinate2D endCoor = _storeAnnotation.coordinate;
+    MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:endCoor addressDictionary:nil];
+    MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:placemark];
+    toLocation.name = _store.storeShortName;
     
-    [action addButtonWithTitle:@"使用系统自带地图导航"];
-    for (NSDictionary *dic in self.availableMaps) {
-        [action addButtonWithTitle:[NSString stringWithFormat:@"使用%@导航", dic[@"name"]]];
-    }
-    [action addButtonWithTitle:@"取消"];
-    action.cancelButtonIndex = self.availableMaps.count + 1;
-    action.delegate = self;
-    [action showInView:self.view];
+    [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
+                   launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
 }
 
 - (IBAction)IndoorNaviClick:(id)sender {
