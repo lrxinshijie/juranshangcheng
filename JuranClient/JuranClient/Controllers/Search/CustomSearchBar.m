@@ -25,6 +25,10 @@
 @property (assign, nonatomic) BOOL isHistory;
 @property (assign, nonatomic) BOOL isReloadHistory;
 
+
+@property (assign, nonatomic) NSInteger currentPageNo;
+@property (strong, nonatomic) NSString * requestKeyWord;
+
 @property (strong, nonatomic) UIView * footerView;
 
 @property (assign, nonatomic) RightBtnStyle rightBtnStyle;
@@ -45,13 +49,20 @@
     self.listTableView.frame = CGRectMake(0, 64, 320, 0);
     self.frame = CGRectMake(0, 0, 320, 64);
     
+    self.currentPageNo = 1;
+    
     [self cleanBtnHide];
     
     self.dataArray_History = [NSMutableArray arrayWithCapacity:0];
     self.dataArray_SearchRange = [NSMutableArray arrayWithCapacity:0];
     //TODO:测试数据，请删除
-    NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:@"在XXX中搜索",@"searchRange",@"123",@"count",nil];
-    self.dataArray_SearchRange = [NSMutableArray arrayWithArray:@[dict,dict,dict,dict,dict]];
+    NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:@"在作品案例中搜索",@"searchRange",@"",@"count",nil];
+    NSDictionary * dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"在商品中搜索",@"searchRange",@"",@"count",nil];
+    NSDictionary * dict2 = [NSDictionary dictionaryWithObjectsAndKeys:@"在店铺中搜索",@"searchRange",@"",@"count",nil];
+    NSDictionary * dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"在设计师中搜索",@"searchRange",@"",@"count",nil];
+    NSDictionary * dict4 = [NSDictionary dictionaryWithObjectsAndKeys:@"在答疑解惑中搜索",@"searchRange",@"",@"count",nil];
+    
+    self.dataArray_SearchRange = [NSMutableArray arrayWithArray:@[dict,dict1,dict2,dict3,dict4]];
     
     self.isReloadHistory = NO;
     self.isHistory = YES;
@@ -104,8 +115,9 @@
         }
         
     }else if (self.rightBtnStyle == RightBtnStyle_Search){
-        
-        [self startSearch];
+        //默认按照下拉列表中的第一个搜索
+        [self hideAnimation];
+        [self startSearchAtIndex:0];
         
     }else if (self.rightBtnStyle == RightBtnStyle_More){
         //TODO:添加弹出菜单
@@ -211,7 +223,7 @@
     }else{
         
         [self hideAnimation];
-        [self startSearch];
+        [self startSearchAtIndex:indexPath.row];
         
     }
 }
@@ -253,13 +265,15 @@
 
 
 #pragma mark - 搜索的方法
-- (void)startSearch
+- (void)startSearchAtIndex:(int)index
 {
     [self.inputTextField resignFirstResponder];
     
     
-    //TODO:入库去重
-    NSString * str = @"商品名称";
+    //入库去重
+    NSString * str = self.inputTextField.text;
+    //每次都更新一下历史记录的数据，以防同一次搜索多次点击
+    [self initHistoryData];
     BOOL isExist = NO;
     for (int i=0; i<self.dataArray_History.count; i++) {
         if ([str isEqualToString:self.dataArray_History[i]]) {
@@ -272,12 +286,20 @@
         isExist = YES;
     }
     
-    //搜索历史入库
-    if (!isExist) {
-        [[SearchHistoryManager sharedDataBase] insertSearchItem:@"商品名称"];
+    if (![self.requestKeyWord isEqualToString:str] && str.length!=0 && str != nil) {
+        self.requestKeyWord = str;
     }
     
-    //TODO:等待接口，实现代码
+    //搜索历史入库
+    if (!isExist) {
+        [[SearchHistoryManager sharedDataBase] insertSearchItem:str];
+    }
+    
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(startSearchWithKeyWord:index:)]) {
+        [self.delegate startSearchWithKeyWord:_inputTextField.text index:index];
+    }
+    
 }
 
 #pragma mark - 动画方法
@@ -397,7 +419,7 @@
     if (style == RightBtnStyle_Scan) {
         
         [self.rightButton setTitle:nil forState:UIControlStateNormal];
-        [self.rightButton setImage:[UIImage imageNamed:@"search_scancode@2x"] forState:UIControlStateNormal];
+        [self.rightButton setImage:[UIImage imageNamed:@"search_scancode"] forState:UIControlStateNormal];
         
     }else if (style == RightBtnStyle_Search){
         
@@ -408,9 +430,22 @@
     }else if (style == RightBtnStyle_More){
         
         [self.rightButton setTitle:nil forState:UIControlStateNormal];
-        [self.rightButton setImage:[UIImage imageNamed:@"search_scancode@2x"] forState:UIControlStateNormal];
+        [self.rightButton setImage:[UIImage imageNamed:@"search_more"] forState:UIControlStateNormal];
         
     }
+}
+
+- (void)requestForNewDataWithCurrentPageNo:(NSInteger)pageNo
+{
+    self.currentPageNo = pageNo;
+    
+}
+
+- (void)setTextFieldText:(NSString *)text
+{
+    self.inputTextField.text = text;
+    
+    [self magnifyingGlassHide];
 }
 
 @end

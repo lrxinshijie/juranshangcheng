@@ -39,10 +39,6 @@
 #endif
 #import "UserLocation.h"
 
-#ifndef kJuranVersion12
-//#define kJuranVersion12
-#endif
-
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
 

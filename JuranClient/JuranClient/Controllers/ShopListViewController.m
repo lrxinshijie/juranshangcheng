@@ -10,12 +10,16 @@
 #import "ShopListCell.h"
 #import "ShopHomeViewController.h"
 #import "JRShop.h"
+#import "CustomSearchBar.h"
+#import "AppDelegate.h"
+#import "UserLocation.h"
 
-@interface ShopListViewController ()
+@interface ShopListViewController ()<CustomSearchBarDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (assign, nonatomic) int currentPage;
 @property (strong, nonatomic) NSMutableArray *dataList;
+@property (strong, nonatomic) CustomSearchBar *searchBar;
 
 @end
 
@@ -24,7 +28,9 @@
 {
     self = [super init];
     if (self) {
-        _cityName = @"北京市";
+#ifndef kJuranDesigner
+        _cityName = ApplicationDelegate.gLocation.cityName;
+#endif
         _keyword = @"";
         _sort = 1;
     }
@@ -34,6 +40,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
+    self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
+    [self.searchBar setTextFieldText:_keyword];
+    [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
+    self.searchBar.delegate = self;
+    
     [_tableView registerNib:[UINib nibWithNibName:@"ShopListCell" bundle:nil] forCellReuseIdentifier:@"ShopListCell"];
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -48,6 +60,34 @@
     [_tableView headerBeginRefreshing];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.view addSubview:self.searchBar];
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.searchBar removeFromSuperview];
+    self.navigationController.navigationBarHidden = NO;
+}
+
+- (void)pushToQRCodeVCDidTriggered
+{
+//    QRBaseViewController * QRVC = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:YES];
+//    [self.navigationController pushViewController:QRVC animated:YES];
+}
+
+- (void)goBackButtonDidSelect
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index {
+    _keyword = keyWord;
+    [_tableView headerBeginRefreshing];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -58,7 +98,7 @@
                             @"keyword": _keyword,
                             @"sort": @(_sort),
                             @"pageNo": @(_currentPage),
-                            @"onePageCount": @(10)
+                            @"onePageCount": kOnePageCount
                             };
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_SEARCH_SHOP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"No"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -100,9 +140,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
     ShopHomeViewController *vc = [[ShopHomeViewController alloc]init];
     JRShop *shop = [_dataList objectAtIndex:[indexPath row]];
-    vc.shop.shopId = shop.shopId;
+    vc.shop = shop;
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end

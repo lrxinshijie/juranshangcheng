@@ -34,7 +34,10 @@
 - (void)fillCellWithJRShop:(JRShop *)shop {
     _labelName.text = shop.shopName;
     [_labelName sizeToFit];
-    CGRect frame = _imageGrade.frame;
+    CGRect frame = _labelName.frame;
+    frame.size.width = _labelName.frame.size.width<155?_labelName.frame.size.width:155;
+    _labelName.frame = frame;
+    frame = _imageGrade.frame;
     frame.origin.x = _labelName.frame.origin.x + _labelName.frame.size.width + 5;
     _imageGrade.frame = frame;
     //_imageGrade.image = nil;
@@ -59,7 +62,9 @@
 
 
 - (void)btnNaviClick:(id)sender {
+#ifndef kJuranDesigner
     NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
     [self.viewController.navigationController pushViewController:navi animated:YES];
+#endif
 }
 @end

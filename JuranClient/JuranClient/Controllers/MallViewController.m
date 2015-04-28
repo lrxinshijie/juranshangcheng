@@ -8,9 +8,6 @@
 
 #import "MallViewController.h"
 #import "ShopHomeViewController.h"
-#import "NaviStoreListViewController.h"
-#import "FilterInShopViewController.h"
-#import "NaviStoreInfoViewController.h"
 #import "JRAdInfo.h"
 #import "EScrollerView.h"
 #import "TopProductCell.h"
@@ -20,6 +17,7 @@
 #import "ShopHomeViewController.h"
 #import "JRProduct.h"
 #import "JRShop.h"
+#import "GoodsCategaryViewController.h"
 
 @interface MallViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -94,9 +92,9 @@
 }
 
 - (void)loadAd{
-    NSDictionary *param = @{@"adCode": @"app_designer_index_roll",
+    NSDictionary *param = @{@"adCode": @"app_consumer_mall_index_roll",
                             @"areaCode": @"110000",
-                            @"type": @(8)};
+                            @"type": @(7)};
     [self showHUD];
     
     [[ALEngine shareEngine] pathURL:JR_GET_BANNER_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -202,19 +200,14 @@
 //    [self.navigationController pushViewController:pl animated:YES];
 //}
 
-- (IBAction)onShop:(id)sender{
-//    ShopHomeViewController *vc = [[ShopHomeViewController alloc] init];
-//    vc.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:vc animated:YES];
-    FilterInShopViewController *vc = [[FilterInShopViewController alloc]init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-//    NaviStoreListViewController *vc = [[NaviStoreListViewController alloc]init];
-//    vc.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:vc animated:YES];
-//    NaviStoreInfoViewController *vc = [[NaviStoreInfoViewController alloc]init];
-//    vc.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:vc animated:YES];
+- (IBAction)onBrandList:(id)sender{
+    GoodsCategaryViewController * good = [[GoodsCategaryViewController alloc] initWithNibName:@"GoodsCategaryViewController" bundle:nil isPopNavHide:NO style:CategaryStyle_Shop];
+    [self.navigationController pushViewController:good animated:YES];
+}
+
+- (IBAction)onGoodsList:(id)sender{
+    GoodsCategaryViewController * good = [[GoodsCategaryViewController alloc] initWithNibName:@"GoodsCategaryViewController" bundle:nil isPopNavHide:NO style:CategaryStyle_Goods];
+    [self.navigationController pushViewController:good animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

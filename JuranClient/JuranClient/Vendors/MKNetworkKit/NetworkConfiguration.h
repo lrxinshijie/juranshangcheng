@@ -200,4 +200,11 @@
 #define JR_GOODS_COLLECTION [NSString stringWithFormat:@"%@/member/getGoodsCollection.json",JR_SERVICE]
 #define JR_GET_SHOP_COLLECTION_LIST [NSString stringWithFormat:@"%@/member/getShopCollection.json",JR_SERVICE]
 
+
+#define JR_GOODS_CATEGARY [NSString stringWithFormat:@"%@/category/queryShowCategory.json",JR_SERVICE]
+#define JR_BRAND_CLASS [NSString stringWithFormat:@"%@/mall/brandClassification.json",JR_SERVICE]
+#define JR_BRAND_LIST [NSString stringWithFormat:@"%@/mall/getByBrandClassification.json",JR_SERVICE]
+
+
+
 #endif

@@ -22,6 +22,10 @@
 #import "OrderListCopyViewController.h"
 #import "MyCollectViewController.h"
 
+//#import "GoodsCategaryViewController.h"
+#import "QRBaseViewController.h"
+#import "TestSearchViewController.h"
+
 #ifdef kJuranDesigner
 #import "RealNameAuthViewController.h"
 #import "CaseManagementViewController.h"
@@ -268,6 +272,12 @@
 }
 
 - (IBAction)doTouchHeaderView:(id)sender{
+    
+//    GoodsCategaryViewController * good = [[GoodsCategaryViewController alloc] initWithNibName:@"GoodsCategaryViewController" bundle:nil isPopNavHide:NO style:CategaryStyle_Shop];
+//    QRBaseViewController * good = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
+//    TestSearchViewController * good = [[TestSearchViewController alloc] initWithNibName:@"TestSearchViewController" bundle:nil];
+//    [self.navigationController pushViewController:good animated:YES];
+    
     if (![self checkLogin:^{
         [self loadData];
     }]) {

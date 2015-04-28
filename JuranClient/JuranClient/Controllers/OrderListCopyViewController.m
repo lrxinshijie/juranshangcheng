@@ -278,11 +278,14 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+#ifndef kJuranDesigner
     ConstructPriceListViewController *cplvc = [[ConstructPriceListViewController alloc] init];
     [self.navigationController pushViewController:cplvc animated:YES];
     ConfirmItemViewController *cv = [[ConfirmItemViewController alloc] init];
     [self.navigationController pushViewController:cv animated:YES];
+#endif
     return;
+    
     JROrder *order = [_datas objectAtIndex:indexPath.row];
     OrderDetailViewController *vc = [[OrderDetailViewController alloc] init];
     vc.order = order;

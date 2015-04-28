@@ -11,8 +11,9 @@
 #import "JRStore.h"
 #import "AppDelegate.h"
 #import "UserLocation.h"
+#import "NaviStoreIndoorViewController.h"
 
-@interface NaviStoreInfoViewController ()
+@interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate>
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UIView *mapBottomView;
 @property (strong, nonatomic) IBOutlet UIView *naviControlView;
@@ -32,9 +33,12 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageNode;
 @property (strong, nonatomic) BMKPointAnnotation *selfAnnotation;
 @property (strong, nonatomic) BMKPointAnnotation *storeAnnotation;
+@property (strong, nonatomic) NSMutableArray *availableMaps;
 
 - (IBAction)leftNaviClick:(id)sender;
 - (IBAction)rightNaviClick:(id)sender;
+- (IBAction)SystemNaviClick:(id)sender;
+- (IBAction)IndoorNaviClick:(id)sender;
 @end
 
 @implementation NaviStoreInfoViewController
@@ -97,7 +101,7 @@
 {
     self.navigationController.navigationBarHidden = YES;
     [_mapView viewWillAppear];
-    _mapView.delegate = (id)self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+    _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -136,7 +140,7 @@
         [_mapView removeAnnotation:_selfAnnotation];
     }
     _selfAnnotation = [[BMKPointAnnotation alloc]init];
-    _selfAnnotation.coordinate = ApplicationDelegate.gLocation.location;
+    _selfAnnotation.coordinate = ApplicationDelegate.gLocation.location.coordinate;
     _selfAnnotation.title = @"你的位置";
     //_mapView.centerCoordinate = _selfAnnotation.coordinate;
     [_mapView addAnnotation:_selfAnnotation];
@@ -198,10 +202,86 @@
     return string;
 }
 
+- (void)availableMapsApps {
+    [self.availableMaps removeAllObjects];
+    
+    CLLocationCoordinate2D startCoor = _selfAnnotation.coordinate;
+    CLLocationCoordinate2D endCoor = _storeAnnotation.coordinate;
+    NSString *toName = _store.storeShortName;
+    
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://map/"]]){
+        NSString *urlString = [NSString stringWithFormat:@"baidumap://map/direction?origin=latlng:%f,%f|name:我的位置&destination=latlng:%f,%f|name:%@&mode=transit",
+                               startCoor.latitude, startCoor.longitude, endCoor.latitude, endCoor.longitude, toName];
+        
+        NSDictionary *dic = @{@"name": @"百度地图",
+                              @"url": urlString};
+        [self.availableMaps addObject:dic];
+    }
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"iosamap://"]]) {
+        NSString *urlString = [NSString stringWithFormat:@"iosamap://navi?sourceApplication=%@&backScheme=applicationScheme&poiname=fangheng&poiid=BGVIS&lat=%f&lon=%f&dev=0&style=3",
+                               @"云华时代", endCoor.latitude, endCoor.longitude];
+        
+        NSDictionary *dic = @{@"name": @"高德地图",
+                              @"url": urlString};
+        [self.availableMaps addObject:dic];
+    }
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"comgooglemaps://"]]) {
+        NSString *urlString = [NSString stringWithFormat:@"comgooglemaps://?saddr=&daddr=%f,%f¢er=%f,%f&directionsmode=transit", endCoor.latitude, endCoor.longitude, startCoor.latitude, startCoor.longitude];
+        
+        NSDictionary *dic = @{@"name": @"Google Maps",
+                              @"url": urlString};
+        [self.availableMaps addObject:dic];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        //CLLocationCoordinate2D startCoor = _selfAnnotation.coordinate;
+        CLLocationCoordinate2D endCoor = _storeAnnotation.coordinate;
+        MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:endCoor addressDictionary:nil];
+        MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:placemark];
+        toLocation.name = _store.storeShortName;
+        
+        [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
+                       launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
+        
+        
+    }else if (buttonIndex < self.availableMaps.count+1) {
+        NSDictionary *mapDic = self.availableMaps[buttonIndex-1];
+        NSString *urlString = mapDic[@"url"];
+        urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *url = [NSURL URLWithString:urlString];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
+
+
+
 - (IBAction)leftNaviClick:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)rightNaviClick:(id)sender {
 }
+
+- (IBAction)SystemNaviClick:(id)sender {
+    [self availableMapsApps];
+    UIActionSheet *action = [[UIActionSheet alloc] init];
+    
+    [action addButtonWithTitle:@"使用系统自带地图导航"];
+    for (NSDictionary *dic in self.availableMaps) {
+        [action addButtonWithTitle:[NSString stringWithFormat:@"使用%@导航", dic[@"name"]]];
+    }
+    [action addButtonWithTitle:@"取消"];
+    action.cancelButtonIndex = self.availableMaps.count + 1;
+    action.delegate = self;
+    [action showInView:self.view];
+}
+
+- (IBAction)IndoorNaviClick:(id)sender {
+    NaviStoreIndoorViewController *vc = [[NaviStoreIndoorViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 @end

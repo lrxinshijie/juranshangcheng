@@ -17,14 +17,14 @@
 #import "UserLocation.h"
 #import "AppDelegate.h"
 
-@interface NaviStoreListViewController ()
+@interface NaviStoreListViewController ()<BMKMapViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *labelCity;
 @property (strong, nonatomic) IBOutlet UITableView *tableViewStore;
 @property (strong, nonatomic) IBOutlet UIButton *btnChangeCity;
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
 @property (strong, nonatomic) BMKPointAnnotation *selfAnnotation;
-@property (strong, nonatomic) UserLocation *location;
+//@property (strong, nonatomic) UserLocation *location;
 - (IBAction)naviLeftClick:(id)sender;
 - (IBAction)naviRightClick:(id)sender;
 - (IBAction)changeCityClick:(id)sender;
@@ -39,9 +39,8 @@
     //latitude=39.944213,longitude=116.438717
     self.navigationItem.title = @"门店导航";
     [_tableViewStore registerNib:[UINib nibWithNibName:@"NaviStoreCell" bundle:nil] forCellReuseIdentifier:@"NaviStoreCell"];
-    _btnChangeCity.hidden = YES;
-    [BMKLocationService setLocationDistanceFilter:100.f];
-    _location = ApplicationDelegate.gLocation;
+    if(ApplicationDelegate.gLocation.isSuccessLocation)
+        _btnChangeCity.hidden = YES;
     if (!_dataList)
         [self loadData];
 }
@@ -71,14 +70,17 @@
 - (void)reloadView {
     _mapView.zoomLevel = 11;
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
-        _mapView.centerCoordinate = ApplicationDelegate.gLocation.location;
+        UserLocation *location = [[UserLocation alloc]init];
+        [location GeoCode:ApplicationDelegate.gLocation.cityName Handler:^(UserLocation *loc) {
+            _mapView.centerCoordinate = loc.location.coordinate;
+        }];
     }
     for (BMKPointAnnotation* ann in _mapView.annotations) {
         [_mapView removeAnnotation:ann];
     }
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
         _selfAnnotation = [[BMKPointAnnotation alloc]init];
-        _selfAnnotation.coordinate = ApplicationDelegate.gLocation.location;
+        _selfAnnotation.coordinate = ApplicationDelegate.gLocation.location.coordinate;
         _selfAnnotation.title = @"我的位置";
         [_mapView addAnnotation:_selfAnnotation];
     }
@@ -99,7 +101,7 @@
 {
     self.navigationController.navigationBarHidden = YES;
     [_mapView viewWillAppear];
-    _mapView.delegate = (id)self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+    _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -171,8 +173,8 @@
     [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
         ApplicationDelegate.gLocation.cityName = areaInfo.cityName;
         UserLocation *location = [[UserLocation alloc]init];
-        [location startGeoCode:areaInfo.cityName Handler:^(UserLocation *loc) {
-            _mapView.centerCoordinate = loc.location;
+        [location GeoCode:areaInfo.cityName Handler:^(UserLocation *loc) {
+            _mapView.centerCoordinate = loc.location.coordinate;
             [self loadData];
         }];
     }];
