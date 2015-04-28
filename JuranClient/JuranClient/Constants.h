@@ -87,10 +87,10 @@ typedef enum : NSUInteger {
 
 typedef enum : NSUInteger {
     SearchTypeCase = 0,
-    SearchTypeGoods,
-    SearchTypeShop,
     SearchTypeDesigner,
     SearchTypeQuestion,
+    SearchTypeGoods,
+    SearchTypeShop,
 } SearchType;
 
 #endif
