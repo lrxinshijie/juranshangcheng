@@ -24,7 +24,10 @@
         _locService.delegate = self;
         _locService.desiredAccuracy = kCLLocationAccuracyBest;
         _locService.distanceFilter = 10;
-        [_locService requestAlwaysAuthorization];
+        if (SystemVersionGreaterThanOrEqualTo(8.0f)) {
+            //[_locService requestAlwaysAuthorization];
+            [_locService requestWhenInUseAuthorization];
+        }
         _geoService = [[CLGeocoder alloc]init];
         //_geoSearch.delegate = self;
         _isSuccessLocation = NO;
