@@ -26,6 +26,7 @@
 
 #import "JRTopic.h"
 #import "NewestTopicViewController.h"
+#import "TopicDetailViewController.h"
 
 @interface DiscoverViewController ()<JRSegmentControlDelegate,UITableViewDataSource, UITableViewDelegate, QuestionFilterViewDelegate, WikiFilterViewControllerDelegate>
 
@@ -299,7 +300,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else if (_segment.selectedIndex == 3){
         JRTopic *t = _datas[indexPath.row];
-        NewestTopicViewController *vc = [[NewestTopicViewController alloc] init];
+        TopicDetailViewController *vc = [[TopicDetailViewController alloc] init];
         vc.topic = t;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];

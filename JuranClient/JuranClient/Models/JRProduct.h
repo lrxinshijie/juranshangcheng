@@ -30,7 +30,13 @@
 @property (nonatomic, copy) NSString *shopName;
 @property (nonatomic, copy) NSString *score;
 
+@property (nonatomic, copy) NSString *isExperience;
+@property (nonatomic, copy) NSString *isFailure;
+@property (nonatomic, strong) NSArray *stallInfoList;
+
+
 + (NSMutableArray*)buildUpWithValueForList:(id)value;
++ (NSMutableArray*)buildUpWithValueForCollection:(id)value;
 
 - (void)loadInfo:(BOOLBlock)finished;
 - (void)loadShop:(BOOLBlock)finished;

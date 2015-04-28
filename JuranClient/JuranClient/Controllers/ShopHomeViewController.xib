@@ -106,6 +106,9 @@
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="onIntroduce:" destination="-1" eventType="touchUpInside" id="pgu-dF-YN7"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" id="bc9-sg-8dQ">
                             <rect key="frame" x="108" y="76" width="0.5" height="15"/>

@@ -33,4 +33,8 @@
 - (id)initWithDictionaryForShopList:(NSDictionary *)dict;
 + (NSMutableArray*)buildUpWithValueForShopList:(id)value;
 - (void)buildUpWithDictionary:(NSDictionary *)dict;
++ (NSMutableArray*)buildUpWithValueForCollection:(id)value;
+
+- (void)collectionWithViewCotnroller:(UIViewController*)vc finishBlock:(VoidBlock)finish;
+
 @end

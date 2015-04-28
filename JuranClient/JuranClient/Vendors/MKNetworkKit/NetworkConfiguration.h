@@ -196,6 +196,9 @@
 //Search
 #define JR_SEARCH_SHOP [NSString stringWithFormat:@"%@/search/searchShop.json",JR_SERVICE]
 #define JR_SHOP_COLLECTION [NSString stringWithFormat:@"%@/shop/shopAddAndDel.json",JR_SERVICE]
+#define JR_SHOP_INTRODUCE [NSString stringWithFormat:@"%@/shop/shopIntroduce.json",JR_SERVICE]
+#define JR_GOODS_COLLECTION [NSString stringWithFormat:@"%@/member/getGoodsCollection.json",JR_SERVICE]
+#define JR_GET_SHOP_COLLECTION_LIST [NSString stringWithFormat:@"%@/member/getShopCollection.json",JR_SERVICE]
 
 
 #define JR_GOODS_CATEGARY [NSString stringWithFormat:@"%@/category/queryShowCategory.json",JR_SERVICE]
