@@ -14,6 +14,11 @@
 #import "CustomBrandView.h"
 #import "CategaryTableViewCell.h"
 #import "pinyin.h"
+#import "UserLocation.h"
+#import "AppDelegate.h"
+#import "NaviStoreSelCityViewController.h"
+#import "JRAreaInfo.h"
+
 
 @interface GoodsCategaryViewController ()<UITableViewDataSource,UITableViewDelegate,CustomSecLevelViewDelegate,CustomThirdLevelCellDelegate,CustomShopViewDelegate,UIScrollViewDelegate>
 {
@@ -82,13 +87,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
     [self.listTableView setContentSize:CGSizeMake(243, 500)];
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES];
+    
     //初始状态没有cell。
     self.cellCount = 0;
     //初始化数组什么的
@@ -102,7 +108,43 @@
         [self requestDataWithRequestID:@"-1" city:self.locationButton.titleLabel.text level:1];
     }
     
-    
+    [self setLocation];
+}
+
+- (void)setLocation
+{
+    if (ApplicationDelegate.gLocation.isSuccessLocation) {
+        [self.locationButton setTitle:ApplicationDelegate.gLocation.cityName forState:UIControlStateNormal];
+    }else{
+        
+    }
+}
+
+- (void)resetLocation
+{
+    if (ApplicationDelegate.gLocation.isSuccessLocation) {
+        
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Tips" message:@"已定位到当前位置" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil];
+        [alert show];
+        
+    }else{
+        NaviStoreSelCityViewController *vc = [[NaviStoreSelCityViewController alloc] init];
+        __weak GoodsCategaryViewController * wSelf = self;
+        [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
+            ApplicationDelegate.gLocation.cityName = areaInfo.cityName;
+            [wSelf.locationButton setTitle:ApplicationDelegate.gLocation.cityName forState:UIControlStateNormal];
+            if (wSelf.vcStyle == CategaryStyle_Shop) {
+                
+                [wSelf requestDataForBrandClass];
+                
+            }else if (wSelf.vcStyle == CategaryStyle_Goods){
+                
+                [wSelf requestDataWithRequestID:@"-1" city:wSelf.locationButton.titleLabel.text level:1];
+            }
+        }];
+        [self.navigationController setNavigationBarHidden:NO];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)initData
@@ -122,6 +164,7 @@
 - (IBAction)locationButtonDidClick:(id)sender {
     
     //首先修改地址，
+    [self resetLocation];
     //完成之后重新请求
     
 }
