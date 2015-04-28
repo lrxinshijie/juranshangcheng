@@ -122,7 +122,6 @@
     NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", self.shopId]
                             , @"type": self.isStored?@"del":@"add"};
     [vc showHUD];
-    
     [[ALEngine shareEngine] pathURL:JR_SHOP_COLLECTION parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkMessageKey:@"YES"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [vc hideHUD];
         if (!error) {

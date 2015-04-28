@@ -466,7 +466,6 @@
     cell.delegate = self;
     JRComment *commnet = [_topic.commitList objectAtIndex:indexPath.row];
     commnet.unfold = [_openStatusDic objectForKey:[NSString stringWithFormat:@"%d", commnet.commentId]]?YES:NO;
-    cell.commentButton.hidden = ![_topic isNewestTopic];
     [cell fillCellWithComment:commnet];
     
     return cell;

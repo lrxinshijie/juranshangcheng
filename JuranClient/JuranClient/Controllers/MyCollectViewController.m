@@ -59,6 +59,7 @@
     _tableView.hidden = YES;
     _tableView.tableFooterView = [[UIView alloc] init];
     [_tableView registerNib:[UINib nibWithNibName:@"ProductCollectionCell" bundle:nil] forCellReuseIdentifier:@"ProductCollectionCell"];
+    [_tableView registerNib:[UINib nibWithNibName:@"ShopCollectionCell" bundle:nil] forCellReuseIdentifier:@"ShopCollectionCell"];
     [self.view addSubview:_tableView];
     
     [_collectionView registerNib:[UINib nibWithNibName:@"CaseCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"CaseCollectionCell"];
@@ -71,6 +72,10 @@
     
     [_collectionView addFooterWithCallback:^{
         weakSelf.currentPage++;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView addHeaderWithCallback:^{
         [weakSelf loadData];
     }];
     
@@ -122,6 +127,7 @@
         [self reloadData];
         [_collectionView headerEndRefreshing];
         [_collectionView footerEndRefreshing];
+        [_tableView headerEndRefreshing];
     }];
 }
 
@@ -147,7 +153,7 @@
     if (index == 0) {
         [_collectionView headerBeginRefreshing];
     }else{
-        [self loadData];
+        [_tableView headerBeginRefreshing];
     }
 }
 
@@ -179,6 +185,7 @@
     }else if (_segment.selectedIndex == 2){
         ShopCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ShopCollectionCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.viewController = self;
         if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
             cell.layoutMargins = UIEdgeInsetsZero;
         }

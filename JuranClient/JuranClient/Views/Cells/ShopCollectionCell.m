@@ -33,8 +33,9 @@
 }
 
 - (void)fillCellWithValue:(JRShop*)shop{
-    self.shop = _shop;
-    
+    self.shop = shop;
+    _nameLabel.text = shop.shopName;
+    [_collectionButton setImage:[UIImage imageNamed:_shop.isStored?@"icon-collection-active.png":@"icon-collection.png"] forState:UIControlStateNormal];
 }
 
 - (IBAction)onCollection:(id)sender{

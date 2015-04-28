@@ -72,11 +72,15 @@
             frame.origin.y = CGRectGetMaxY(frame) + 5;
             frame.size.height = 45;
             frame.size.width = 60;
-            ZoomInImageView *imageView = [[ZoomInImageView alloc] initWithFrame:frame];
-            imageView.image = [UIImage imageNamed:@"image_default.png"];
-            [imageView setImageWithURLString:comment.imageUrlList.firstObject];
-            [self addSubview:imageView];
-            
+            NSInteger i = 0;
+            for (NSString *str in comment.imageUrlList) {
+                frame.origin.x += 68*i;
+                ZoomInImageView *imageView = [[ZoomInImageView alloc] initWithFrame:frame];
+                imageView.image = [UIImage imageNamed:@"image_default.png"];
+                [imageView setImageWithURLString:str];
+                [self addSubview:imageView];
+                i++;
+            }
             frame.size.width = label.frame.size.width;
         }
     }
