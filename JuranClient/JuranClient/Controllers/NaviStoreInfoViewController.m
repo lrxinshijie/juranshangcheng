@@ -150,10 +150,10 @@
     }
     _storeAnnotation = [[BMKPointAnnotation alloc]init];
     _storeAnnotation.coordinate = CLLocationCoordinate2DMake(_store.latitude, _store.longitude);
-    _storeAnnotation.title = _store.storeShortName;
+    _storeAnnotation.title = _store.storeName;
     [_mapView addAnnotation:_storeAnnotation];
     
-    _labelName.text = _store.storeShortName;
+    _labelName.text = _store.storeName;
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
         _imageNode.image = [UIImage imageNamed:@"icon-map-node.png"];
         BMKMapPoint pointStore = BMKMapPointForCoordinate(_storeAnnotation.coordinate);
@@ -207,7 +207,7 @@
     
     CLLocationCoordinate2D startCoor = _selfAnnotation.coordinate;
     CLLocationCoordinate2D endCoor = _storeAnnotation.coordinate;
-    NSString *toName = _store.storeShortName;
+    NSString *toName = _store.storeName;
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://map/"]]){
         NSString *urlString = [NSString stringWithFormat:@"baidumap://map/direction?origin=latlng:%f,%f|name:我的位置&destination=latlng:%f,%f|name:%@&mode=transit",
@@ -241,7 +241,7 @@
         MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
         MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:endCoor addressDictionary:nil];
         MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:placemark];
-        toLocation.name = _store.storeShortName;
+        toLocation.name = _store.storeName;
         
         [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
                        launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
@@ -281,7 +281,7 @@
     MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
     MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:endCoor addressDictionary:nil];
     MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:placemark];
-    toLocation.name = _store.storeShortName;
+    toLocation.name = _store.storeName;
     
     [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
                    launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];

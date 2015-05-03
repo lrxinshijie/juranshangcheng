@@ -21,9 +21,11 @@
     if (self=[self init]) {
         if (dict && [dict isKindOfClass:[NSDictionary class]]) {
             _storeCode = [dict getStringValueForKey:@"storeCode" defaultValue:@""];
-            _storeShortName = [dict getStringValueForKey:@"storeShortName" defaultValue:@""];
+            _storeName = [dict getStringValueForKey:@"storeName" defaultValue:@""];
             _latitude = [dict getDoubleValueForKey:@"latitude" defaultValue:0];
             _longitude = [dict getDoubleValueForKey:@"longitude" defaultValue:0];
+            _stallCode = [dict getStringValueForKey:@"stallCode" defaultValue:@""];
+            _stallName = [dict getStringValueForKey:@"stallName" defaultValue:@""];
         }
     }
     return self;
