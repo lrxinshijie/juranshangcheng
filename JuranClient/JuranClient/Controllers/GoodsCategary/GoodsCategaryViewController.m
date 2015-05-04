@@ -618,7 +618,7 @@
         if ([data isKindOfClass:[NSDictionary class]]) {
             
             
-            if (([(NSDictionary *)data objectForKey:@"categoryList"] == nil) || ([[(NSDictionary *)data objectForKey:@"categoryList"] isKindOfClass:[NSNull class]])) {
+            if (([(NSDictionary *)data objectForKey:@"getAttriList"] == nil) || ([[(NSDictionary *)data objectForKey:@"getAttriList"] isKindOfClass:[NSNull class]])) {
                 
                 [tempArr addObjectsFromArray:@[]];
                 
