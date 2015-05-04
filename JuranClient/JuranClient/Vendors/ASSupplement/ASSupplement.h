@@ -33,3 +33,4 @@
 #import "UIProgressView+ASCategory.h"
 #import "UIDevice+ASCategory.h"
 #import "CLLocation+ASCategory.h"
+#import "NSNumber+ASCategory.h"
