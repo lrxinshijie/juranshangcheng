@@ -22,7 +22,7 @@
 #import "OrderListCopyViewController.h"
 #import "MyCollectViewController.h"
 
-#import "GoodsCategaryViewController.h"
+//#import "GoodsCategaryViewController.h"
 #import "QRBaseViewController.h"
 #import "TestSearchViewController.h"
 

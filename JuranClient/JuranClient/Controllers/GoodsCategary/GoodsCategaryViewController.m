@@ -63,6 +63,7 @@
 @property (assign, nonatomic) CategaryStyle vcStyle;
 
 @property (assign, nonatomic) int pageNo;
+@property (strong, nonatomic) NSString * brandName;
 
 @end
 
@@ -615,7 +616,18 @@
         
         NSMutableArray * tempArr = [NSMutableArray arrayWithCapacity:0];
         if ([data isKindOfClass:[NSDictionary class]]) {
-            [tempArr addObjectsFromArray:[(NSDictionary*)data objectForKey:@"getAttriList"]];
+            
+            
+            if (([(NSDictionary *)data objectForKey:@"categoryList"] == nil) || ([[(NSDictionary *)data objectForKey:@"categoryList"] isKindOfClass:[NSNull class]])) {
+                
+                [tempArr addObjectsFromArray:@[]];
+                
+            }else{
+                
+                [tempArr addObjectsFromArray:[(NSDictionary*)data objectForKey:@"getAttriList"]];
+                
+            }
+            
         }
         for (int i=0; i<tempArr.count; i++) {
             CategaryTableViewCellItem * item = [CategaryTableViewCellItem createCategaryTableViewCellItemWithDictionary:tempArr[i]];
@@ -648,9 +660,9 @@
     //http://54.223.161.28:8080/mall/getByBrandClassification.json
     [self showHUD];
     __weak GoodsCategaryViewController * wSelf = self;
-    //假数据
-    NSDictionary * dict = @{@"pinYin":@"L",
-                            @"pageNo":@"1",
+    self.brandName = brandClass;
+    NSDictionary * dict = @{@"pinYin":[self getFirstLetter:brandClass],
+                            @"pageNo":[NSString stringWithFormat:@"%d",self.pageNo],
                             @"onePageCount":kOnePageCount
                             };
     [[ALEngine shareEngine] pathURL:JR_BRAND_LIST parameters:dict HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -708,7 +720,7 @@
         if (scrollView.contentOffset.y>scrollView.contentSize.height) {
             
             self.pageNo++;
-            [self requestDataForBrand:nil pageNo:self.pageNo];
+            [self requestDataForBrand:self.brandName pageNo:self.pageNo];
             
         }
         

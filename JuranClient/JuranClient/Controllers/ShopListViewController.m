@@ -28,7 +28,9 @@
 {
     self = [super init];
     if (self) {
+#ifndef kJuranDesigner
         _cityName = ApplicationDelegate.gLocation.cityName;
+#endif
         _keyword = @"";
         _sort = 1;
     }

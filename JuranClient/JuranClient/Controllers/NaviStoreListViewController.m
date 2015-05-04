@@ -16,6 +16,7 @@
 #import "ShopListViewController.h"
 #import "UserLocation.h"
 #import "AppDelegate.h"
+#import "UIViewController+Login.h"
 
 @interface NaviStoreListViewController ()<BMKMapViewDelegate>
 
@@ -57,7 +58,7 @@
         [self hideHUD];
         if (!error) {
             if ((NSNull *)data != [NSNull null]) {
-                _dataList = [JRStore buildUpWithValueForList:[data objectForKey:@"shopAddDtoList"]];
+                _dataList = [JRStore buildUpWithValueForList:[data objectForKey:@"stallInfoList"]];
             }
             else {
                 _dataList = nil;
@@ -87,7 +88,7 @@
     for (JRStore *store in _dataList) {
         BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
         annotation.coordinate = CLLocationCoordinate2DMake(store.latitude, store.longitude);
-        annotation.title = store.storeShortName;
+        annotation.title = store.storeName;
         [_mapView addAnnotation:annotation];
     }
     _labelCity.text = [NSString stringWithFormat:@"当前城市：%@",ApplicationDelegate.gLocation.cityName];
@@ -138,7 +139,7 @@
     NaviStoreCell *cell = (NaviStoreCell *)[tableView dequeueReusableCellWithIdentifier:@"NaviStoreCell"];
     int index = [indexPath row];
     JRStore *store = [_dataList objectAtIndex:index];
-    cell.labelName.text = store.storeShortName;
+    cell.labelName.text = store.storeName;
     BMKMapPoint pointStore = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(store.latitude, store.longitude));
     BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
     CLLocationDistance distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
@@ -165,7 +166,7 @@
 }
 
 - (IBAction)naviRightClick:(id)sender {
-    NSLog(@"RightClick");
+    //[self showAppMenu:sender];
 }
 
 - (IBAction)changeCityClick:(id)sender {
