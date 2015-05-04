@@ -151,7 +151,8 @@
 }
 
 - (void)loadStore:(BOOLBlock)finished{
-    NSDictionary *param = @{@"linkProductId": @(self.linkProductId)
+    NSDictionary *param = @{@"linkProductId": @(self.linkProductId),
+                            @"cityName":@"北京市"
                             };
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_SELL_STORE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {

@@ -111,6 +111,7 @@
 - (void) onHome:(id)sender
 {
     [ApplicationDelegate.tabBarController setSelectedIndex:0];
+    [[ApplicationDelegate tabBarController].viewControllers[0] popToRootViewControllerAnimated:YES];
 }
 
 //JR_CUSTOMER_SERVICE
