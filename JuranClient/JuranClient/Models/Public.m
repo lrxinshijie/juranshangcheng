@@ -38,6 +38,8 @@
 #import "RealNameAuthViewController.h"
 #import "BidListViewController.h"
 #import "NaviStoreListViewController.h"
+#import "QRBaseViewController.h"
+#import "MyDemandCopyViewController.h"
 
 @implementation Public
 
@@ -575,7 +577,22 @@
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
 #endif
+    }else if (type == 28){
+#ifndef kJuranDesigner
+        MyDemandCopyViewController *vc = [[MyDemandCopyViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:vc animated:YES];
+#endif
+    }else if (type == 40){
+#ifndef kJuranDesigner
+        QRBaseViewController *vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
+        vc.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:vc animated:YES];
+#endif
     }
+    
+    
+    
     
 }
 

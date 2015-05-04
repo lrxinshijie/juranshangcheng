@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "UserLocation.h"
 #import "NaviStoreIndoorViewController.h"
+#import "UIViewController+Menu.h"
 
 @interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate>
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
@@ -24,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UILabel *labelName;
 @property (strong, nonatomic) IBOutlet UILabel *labelDistance;
+@property (strong, nonatomic) IBOutlet UILabel *labelAddrTitle;
 @property (strong, nonatomic) IBOutlet UILabel *labelAddr;
 @property (strong, nonatomic) IBOutlet UILabel *labelTime;
 @property (strong, nonatomic) IBOutlet UILabel *labelBus;
@@ -150,10 +152,14 @@
     }
     _storeAnnotation = [[BMKPointAnnotation alloc]init];
     _storeAnnotation.coordinate = CLLocationCoordinate2DMake(_store.latitude, _store.longitude);
-    _storeAnnotation.title = _store.storeShortName;
+    _storeAnnotation.title = _store.storeName;
     [_mapView addAnnotation:_storeAnnotation];
+    if (_naviType == NaviTypeStore) {
+        _labelName.text = _store.storeName;
+    }else {
+        _labelName.text = _store.stallName;
+    }
     
-    _labelName.text = _store.storeShortName;
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
         _imageNode.image = [UIImage imageNamed:@"icon-map-node.png"];
         BMKMapPoint pointStore = BMKMapPointForCoordinate(_storeAnnotation.coordinate);
@@ -165,7 +171,11 @@
     }
     
     CGRect frame = CGRectZero;
-    
+    if (_naviType == NaviTypeStore) {
+        _labelAddrTitle.text = @"门店地址";
+    }else {
+        _labelAddrTitle.text = @"摊位地址";
+    }
     _labelAddr.text = _store.storeAdd;
     [_labelAddr sizeToFit];
     frame = _naviControlView.frame;
@@ -207,7 +217,7 @@
     
     CLLocationCoordinate2D startCoor = _selfAnnotation.coordinate;
     CLLocationCoordinate2D endCoor = _storeAnnotation.coordinate;
-    NSString *toName = _store.storeShortName;
+    NSString *toName = _store.storeName;
     
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"baidumap://map/"]]){
         NSString *urlString = [NSString stringWithFormat:@"baidumap://map/direction?origin=latlng:%f,%f|name:我的位置&destination=latlng:%f,%f|name:%@&mode=transit",
@@ -241,7 +251,7 @@
         MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
         MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:endCoor addressDictionary:nil];
         MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:placemark];
-        toLocation.name = _store.storeShortName;
+        toLocation.name = _store.storeName;
         
         [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
                        launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
@@ -263,20 +273,33 @@
 }
 
 - (IBAction)rightNaviClick:(id)sender {
+    [self showAppMenuIsShare:NO];
 }
 
 - (IBAction)SystemNaviClick:(id)sender {
-    [self availableMapsApps];
-    UIActionSheet *action = [[UIActionSheet alloc] init];
-    
-    [action addButtonWithTitle:@"使用系统自带地图导航"];
-    for (NSDictionary *dic in self.availableMaps) {
-        [action addButtonWithTitle:[NSString stringWithFormat:@"使用%@导航", dic[@"name"]]];
+//    [self availableMapsApps];
+//    UIActionSheet *action = [[UIActionSheet alloc] init];
+//    
+//    [action addButtonWithTitle:@"使用系统自带地图导航"];
+//    for (NSDictionary *dic in self.availableMaps) {
+//        [action addButtonWithTitle:[NSString stringWithFormat:@"使用%@导航", dic[@"name"]]];
+//    }
+//    [action addButtonWithTitle:@"取消"];
+//    action.cancelButtonIndex = self.availableMaps.count + 1;
+//    action.delegate = self;
+//    [action showInView:self.view];
+    if (ApplicationDelegate.gLocation.isSuccessLocation) {
+        [self showTip:@"定位失败"];
+        return;
     }
-    [action addButtonWithTitle:@"取消"];
-    action.cancelButtonIndex = self.availableMaps.count + 1;
-    action.delegate = self;
-    [action showInView:self.view];
+    CLLocationCoordinate2D endCoor = _storeAnnotation.coordinate;
+    MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+    MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:endCoor addressDictionary:nil];
+    MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:placemark];
+    toLocation.name = _store.storeName;
+    
+    [MKMapItem openMapsWithItems:@[currentLocation, toLocation]
+                   launchOptions:@{MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsShowsTrafficKey: [NSNumber numberWithBool:YES]}];
 }
 
 - (IBAction)IndoorNaviClick:(id)sender {

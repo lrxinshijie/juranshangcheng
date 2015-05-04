@@ -11,9 +11,11 @@
 @interface JRStore : NSObject
 //navi
 @property(nonatomic, copy)NSString *storeCode;
-@property(nonatomic, copy)NSString *storeShortName;
+@property(nonatomic, copy)NSString *storeName;
 @property(nonatomic, assign)double latitude;
 @property(nonatomic, assign)double longitude;
+@property(nonatomic, copy)NSString *stallCode;
+@property(nonatomic, copy)NSString *stallName;
 //info
 @property(nonatomic, copy)NSString *storeAdd;
 @property(nonatomic, copy)NSString *saleTime;

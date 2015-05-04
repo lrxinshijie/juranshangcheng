@@ -76,20 +76,20 @@
             ASLog(@"地理位置反编码失败");
         }else {
             _isSuccessReverseGeoCode = YES;
-            CLPlacemark *firstPlacemark=[placemarks firstObject];
-            NSString *name = firstPlacemark.locality;
-            if ([name isEqual:@"北京市市辖区"]) {
-                _cityName = @"北京市";
-            }else if ([name isEqual:@"天津市市辖区"]) {
-                _cityName = @"天津市";
-            }else if ([name isEqual:@"上海市市辖区"]) {
-                _cityName = @"上海市";
-            }else if ([name isEqual:@"重庆市市辖区"]) {
-                _cityName = @"重庆市";
-            }else {
-                _cityName = name;
-            }
-            ASLog(@"地理位置反编码成功,当前定位城市[%@]",_cityName);
+//            CLPlacemark *firstPlacemark=[placemarks firstObject];
+//            NSString *name = firstPlacemark.locality;
+//            if ([name isEqual:@"北京市市辖区"]) {
+//                _cityName = @"北京市";
+//            }else if ([name isEqual:@"天津市市辖区"]) {
+//                _cityName = @"天津市";
+//            }else if ([name isEqual:@"上海市市辖区"]) {
+//                _cityName = @"上海市";
+//            }else if ([name isEqual:@"重庆市市辖区"]) {
+//                _cityName = @"重庆市";
+//            }else {
+//                _cityName = name;
+//            }
+//            ASLog(@"地理位置反编码成功,当前定位城市[%@]",_cityName);
         }
         if (_block) {
             _block(self);

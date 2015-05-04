@@ -11,6 +11,8 @@ typedef void (^FilterSelected)(long catId);
 @interface FilterInShopViewController : ALViewController
 @property (nonatomic, copy) FilterSelected block;
 - (void)setFinishBlock:(FilterSelected)finished;
+
+@property (nonatomic, assign) long shopId;
 @end
 
 @interface FilterInShop : NSObject

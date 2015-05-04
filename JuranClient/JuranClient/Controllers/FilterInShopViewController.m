@@ -32,28 +32,31 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%@",@"1002"]};
+    NSDictionary *param = @{@"shopId": @(_shopId)};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_SHOP_CLASSIFICATION parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            _dataList = [FilterInShop buildUpWithValueForList:[data objectForKey:@"childrenCats"]];
-            for (FilterInShop *filter in _dataList) {
-                filter.childList = [FilterInShop buildUpWithValueForList:filter.childList];
-                FilterInShop *all = [[FilterInShop alloc]init];
-                all.name = @"全部";
-                all.parentId = filter.parentId;
-                all.depth = filter.depth;
-                all.Id = filter.Id;
-                all.childList = filter.childList;
-                [filter.childList insertObject:all atIndex:0];
+            if (data != [NSNull null]) {
+                _dataList = [FilterInShop buildUpWithValueForList:[data objectForKey:@"childrenCats"]];
+                for (FilterInShop *filter in _dataList) {
+                    filter.childList = [FilterInShop buildUpWithValueForList:filter.childList];
+                    FilterInShop *all = [[FilterInShop alloc]init];
+                    all.name = @"全部";
+                    all.parentId = filter.parentId;
+                    all.depth = filter.depth;
+                    all.Id = filter.Id;
+                    all.childList = filter.childList;
+                    [filter.childList insertObject:all atIndex:0];
+                }
+                _openSatusList = [[NSMutableArray alloc] init];
+                for (int i=0; i<_dataList.count; i++) {
+                    [_openSatusList addObject:@(NO)];
+                }
+                _selectedSection = 0;
+                _selectedIndex = 0;
+                
             }
-            _openSatusList = [[NSMutableArray alloc] init];
-            for (int i=0; i<_dataList.count; i++) {
-                [_openSatusList addObject:@(NO)];
-            }
-            _selectedSection = 0;
-            _selectedIndex = 0;
             [_tableView reloadData];
         }
     }];

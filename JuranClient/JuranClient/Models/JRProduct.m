@@ -26,11 +26,38 @@
     return self;
 }
 
+- (id)initWithDictionaryForCollection:(NSDictionary*)dict{
+    if (self=[self init]) {
+        if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
+            return self;
+        }
+        self.onSaleMinPrice = [dict getStringValueForKey:@"price" defaultValue:@""];
+        self.defaultImage = [dict getStringValueForKey:@"img" defaultValue:@""];
+        self.goodsName = [dict getStringValueForKey:@"goodsName" defaultValue:@""];
+        self.linkProductId = [dict getIntValueForKey:@"linkProductId" defaultValue:0];
+        self.isExperience = [dict getStringValueForKey:@"isExperience" defaultValue:@""];
+        self.isFailure = [dict getStringValueForKey:@"isFailure" defaultValue:@""];
+        self.stallInfoList = @[];
+    }
+    return self;
+}
+
 + (NSMutableArray*)buildUpWithValueForList:(id)value {
     NSMutableArray *retVal = [NSMutableArray array];
     if (value && [value isKindOfClass:[NSArray class]]) {
         for (id obj in value) {
             JRProduct *s = [[JRProduct alloc] initWithDictionary:obj];
+            [retVal addObject:s];
+        }
+    }
+    return retVal;
+}
+
++ (NSMutableArray*)buildUpWithValueForCollection:(id)value {
+    NSMutableArray *retVal = [NSMutableArray array];
+    if (value && [value isKindOfClass:[NSArray class]]) {
+        for (id obj in value) {
+            JRProduct *s = [[JRProduct alloc] initWithDictionaryForCollection:obj];
             [retVal addObject:s];
         }
     }
@@ -124,7 +151,8 @@
 }
 
 - (void)loadStore:(BOOLBlock)finished{
-    NSDictionary *param = @{@"linkProductId": @(self.linkProductId)
+    NSDictionary *param = @{@"linkProductId": @(self.linkProductId),
+                            @"cityName":@"北京市"
                             };
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_SELL_STORE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {

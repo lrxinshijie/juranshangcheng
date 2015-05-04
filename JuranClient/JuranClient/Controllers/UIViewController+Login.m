@@ -10,6 +10,8 @@
 #import "LoginViewController.h"
 #import "MenuView.h"
 #import "SearchViewController.h"
+#import "UIViewController+Menu.h"
+#import "QRBaseViewController.h"
 
 @interface UIViewController () <UIGestureRecognizerDelegate>
 
@@ -79,11 +81,13 @@
 }
 
 - (void)onScan{
-    
+    QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)onMore{
-    
+    [self showAppMenuIsShare:NO];
 }
 
 - (void)configureSearch{
