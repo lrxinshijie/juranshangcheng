@@ -174,6 +174,7 @@
 
 - (IBAction)onClassification:(id)sender {
     FilterInShopViewController *filter = [[FilterInShopViewController alloc]init];
+    filter.shopId = _shop.shopId;
     [filter setFinishBlock:^(long catId) {
         //获取分类后处理
     }];
