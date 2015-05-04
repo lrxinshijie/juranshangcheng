@@ -38,6 +38,7 @@
 #import "RealNameAuthViewController.h"
 #import "BidListViewController.h"
 #import "NaviStoreListViewController.h"
+#import "QRBaseViewController.h"
 
 @implementation Public
 
@@ -572,6 +573,12 @@
     }else if (type == 19){
 #ifndef kJuranDesigner
         NaviStoreListViewController *vc = [[NaviStoreListViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:vc animated:YES];
+#endif
+    }else if (type == 40){
+#ifndef kJuranDesigner
+        QRBaseViewController *vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
 #endif
