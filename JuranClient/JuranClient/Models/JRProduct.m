@@ -38,7 +38,8 @@
         self.linkProductId = [dict getIntValueForKey:@"linkProductId" defaultValue:0];
         self.isExperience = [dict getStringValueForKey:@"isExperience" defaultValue:@""];
         self.isFailure = [dict getStringValueForKey:@"isFailure" defaultValue:@""];
-        self.stallInfoList = @[];
+        self.stallInfoList = [JRStore buildUpWithValueForList:dict[@"stallInfoList"]];
+        self.type = YES;
     }
     return self;
 }

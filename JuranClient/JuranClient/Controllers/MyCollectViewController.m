@@ -76,6 +76,12 @@
     }];
     
     [_tableView addHeaderWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView addFooterWithCallback:^{
+        weakSelf.currentPage++;
         [weakSelf loadData];
     }];
     
@@ -99,7 +105,11 @@
     if (_segment.selectedIndex == 0) {
         return @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": kOnePageCount, @"projectType" : @"01"};
     }else if (_segment.selectedIndex == 1){
-        return @{@"cityName": [(AppDelegate*)ApplicationDelegate gLocation].cityName};
+        return @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": kOnePageCount};
+//        return @{@"cityName": [(AppDelegate*)ApplicationDelegate gLocation].cityName};
+    }else if (_segment.selectedIndex == 2){
+        return @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": kOnePageCount};
+//        return @{@"cityName": [(AppDelegate*)ApplicationDelegate gLocation].cityName};
     }
     return nil;
 }
@@ -110,18 +120,19 @@
     [[ALEngine shareEngine] pathURL:[self urlString] parameters:[self param] HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
+            NSMutableArray *rows = nil;
             if (_segment.selectedIndex == 0) {
-                NSArray *projectList = [data objectForKey:@"projectGeneralDtoList"];
-                NSMutableArray *rows = [JRCase buildUpWithValue:projectList];
-                if (_currentPage > 1) {
-                    [_datas addObjectsFromArray:rows];
-                }else{
-                    self.datas = rows;
-                }
+                rows = [JRCase buildUpWithValue:[data objectForKey:@"projectGeneralDtoList"]];
+                
             }else if (_segment.selectedIndex == 1) {
-                self.datas = [JRProduct buildUpWithValueForCollection:[data objectForKey:@"goodsList"]];
+                rows = [JRProduct buildUpWithValueForCollection:[data objectForKey:@"goodsList"]];
             }else if (_segment.selectedIndex == 2) {
-                self.datas = [JRShop buildUpWithValueForCollection:[data objectForKey:@"shopList"]];
+                rows = [JRShop buildUpWithValueForCollection:[data objectForKey:@"shopList"]];
+            }
+            if (_currentPage > 1) {
+                [_datas addObjectsFromArray:rows];
+            }else{
+                self.datas = rows;
             }
         }
         [self reloadData];
@@ -185,7 +196,6 @@
     }else if (_segment.selectedIndex == 2){
         ShopCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ShopCollectionCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.viewController = self;
         if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
             cell.layoutMargins = UIEdgeInsetsZero;
         }

@@ -812,6 +812,9 @@
 		375B46591A5EE76000D7E74B /* PriceModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375B46501A5EE6D000D7E74B /* PriceModifyViewController.xib */; };
 		375B465A1A5EE76300D7E74B /* StyleModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375B46541A5EE70F00D7E74B /* StyleModifyViewController.m */; };
 		375B465B1A5EE76700D7E74B /* StyleModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */; };
+		375D05C01AF79D62004E2286 /* NSNumber+ASCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D05BF1AF79D62004E2286 /* NSNumber+ASCategory.m */; };
+		375D05C21AF7AF51004E2286 /* icon-shop-location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375D05C11AF7AF51004E2286 /* icon-shop-location@2x.png */; };
+		375D05C61AF7AFB0004E2286 /* icon_shop_letter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375D05C51AF7AFB0004E2286 /* icon_shop_letter@2x.png */; };
 		3765C7491AE3ABCA007BD3D4 /* FilterInShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C8D1ADE0E200037105E /* FilterInShopViewController.m */; };
 		3765C74A1AE3ABCA007BD3D4 /* FilterInShopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C8E1ADE0E200037105E /* FilterInShopViewController.xib */; };
 		376791901AE688DA0019E04D /* ConstructPriceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3767918E1AE688DA0019E04D /* ConstructPriceListCell.m */; };
@@ -2363,6 +2366,10 @@
 		375B46531A5EE70F00D7E74B /* StyleModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleModifyViewController.h; sourceTree = "<group>"; };
 		375B46541A5EE70F00D7E74B /* StyleModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleModifyViewController.m; sourceTree = "<group>"; };
 		375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleModifyViewController.xib; sourceTree = "<group>"; };
+		375D05BE1AF79D62004E2286 /* NSNumber+ASCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+ASCategory.h"; sourceTree = "<group>"; };
+		375D05BF1AF79D62004E2286 /* NSNumber+ASCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+ASCategory.m"; sourceTree = "<group>"; };
+		375D05C11AF7AF51004E2286 /* icon-shop-location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-shop-location@2x.png"; path = "Shop/icon-shop-location@2x.png"; sourceTree = "<group>"; };
+		375D05C51AF7AFB0004E2286 /* icon_shop_letter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_shop_letter@2x.png"; path = "Shop/icon_shop_letter@2x.png"; sourceTree = "<group>"; };
 		3767918D1AE688DA0019E04D /* ConstructPriceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstructPriceListCell.h; sourceTree = "<group>"; };
 		3767918E1AE688DA0019E04D /* ConstructPriceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstructPriceListCell.m; sourceTree = "<group>"; };
 		3767918F1AE688DA0019E04D /* ConstructPriceListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConstructPriceListCell.xib; sourceTree = "<group>"; };
@@ -3957,6 +3964,8 @@
 		2C602C7B1ADCECF10037105E /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				375D05C51AF7AFB0004E2286 /* icon_shop_letter@2x.png */,
+				375D05C11AF7AF51004E2286 /* icon-shop-location@2x.png */,
 				2C5B75BE1AEF5F310085FA56 /* icon-grade-1@2x.png */,
 				2C5B75BF1AEF5F310085FA56 /* icon-grade-2@2x.png */,
 				2C602C911ADE345A0037105E /* filter-icon-dropdown-1.png */,
@@ -6667,6 +6676,7 @@
 				BD5186DF1A5D0ED700BE508A /* publish_designer_top@2x.png in Resources */,
 				BD51867D1A5D0ED700BE508A /* empty_privateletter@2x.png in Resources */,
 				BD5185CF1A5D0ED700BE508A /* ad_page_action@2x.png in Resources */,
+				375D05C61AF7AFB0004E2286 /* icon_shop_letter@2x.png in Resources */,
 				BD51863F1A5D0ED700BE508A /* guide_3@2x.png in Resources */,
 				A9A9F2F31AE399D700A03C9B /* product-icon-star@2x.png in Resources */,
 				BD51863B1A5D0ED700BE508A /* guide_1@2x.png in Resources */,
@@ -6679,6 +6689,7 @@
 				37ECDD2F1AE16CFD00BE6027 /* ConstructDetailViewController.xib in Resources */,
 				BD5186331A5D0ED700BE508A /* menu_icon_yuyue@2x.png in Resources */,
 				A9A9F2E91AE3893C00A03C9B /* product-icon-more@2x.png in Resources */,
+				375D05C21AF7AF51004E2286 /* icon-shop-location@2x.png in Resources */,
 				BD5186131A5D0ED700BE508A /* checkbox_checked_okk@2x.png in Resources */,
 				1FD3B8181AD8B558004E849F /* search_scancode@2x.png in Resources */,
 				14587E161A35DC9000D41236 /* ModifyPasswordViewController.xib in Resources */,
