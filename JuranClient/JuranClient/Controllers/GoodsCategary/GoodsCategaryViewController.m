@@ -470,7 +470,15 @@
             NSMutableArray * dataArr;
             if ([data isKindOfClass:[NSDictionary class]]) {
                 
-                dataArr = [NSMutableArray arrayWithArray:[(NSDictionary *)data objectForKey:@"categoryList"]];
+                if (([(NSDictionary *)data objectForKey:@"categoryList"] == nil) || ([[(NSDictionary *)data objectForKey:@"categoryList"] isKindOfClass:[NSNull class]])) {
+                    
+                    dataArr = [NSMutableArray arrayWithArray:@[]];
+                    
+                }else{
+                    
+                    dataArr = [NSMutableArray arrayWithArray:[(NSDictionary *)data objectForKey:@"categoryList"]];
+                    
+                }
                 
             }
             
@@ -554,8 +562,10 @@
                     }
                     
                     [wSelf.dataArray_secondLevel addObject:sItem];
-                    [wSelf.listTableView reloadData];
+                    
                 }
+                [wSelf.listTableView reloadData];
+                
                 
             }else if (level == 3){
                 //请求三级类目完成
