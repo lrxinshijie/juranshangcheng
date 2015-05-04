@@ -263,6 +263,7 @@
 }
 
 - (IBAction)rightNaviClick:(id)sender {
+    
 }
 
 - (IBAction)SystemNaviClick:(id)sender {
