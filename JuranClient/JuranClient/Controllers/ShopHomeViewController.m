@@ -212,6 +212,8 @@
     filter.shopId = _shop.shopId;
     [filter setFinishBlock:^(long catId) {
         //获取分类后处理
+        ProductListViewController *vc = [[ProductListViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
     [self.navigationController pushViewController:filter animated:YES];
 }

@@ -812,7 +812,6 @@
 		375B46591A5EE76000D7E74B /* PriceModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375B46501A5EE6D000D7E74B /* PriceModifyViewController.xib */; };
 		375B465A1A5EE76300D7E74B /* StyleModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375B46541A5EE70F00D7E74B /* StyleModifyViewController.m */; };
 		375B465B1A5EE76700D7E74B /* StyleModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */; };
-		375D05C01AF79D62004E2286 /* NSNumber+ASCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 375D05BF1AF79D62004E2286 /* NSNumber+ASCategory.m */; };
 		375D05C21AF7AF51004E2286 /* icon-shop-location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375D05C11AF7AF51004E2286 /* icon-shop-location@2x.png */; };
 		375D05C61AF7AFB0004E2286 /* icon_shop_letter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375D05C51AF7AFB0004E2286 /* icon_shop_letter@2x.png */; };
 		3765C7491AE3ABCA007BD3D4 /* FilterInShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C8D1ADE0E200037105E /* FilterInShopViewController.m */; };
@@ -2366,8 +2365,6 @@
 		375B46531A5EE70F00D7E74B /* StyleModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleModifyViewController.h; sourceTree = "<group>"; };
 		375B46541A5EE70F00D7E74B /* StyleModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleModifyViewController.m; sourceTree = "<group>"; };
 		375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleModifyViewController.xib; sourceTree = "<group>"; };
-		375D05BE1AF79D62004E2286 /* NSNumber+ASCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+ASCategory.h"; sourceTree = "<group>"; };
-		375D05BF1AF79D62004E2286 /* NSNumber+ASCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+ASCategory.m"; sourceTree = "<group>"; };
 		375D05C11AF7AF51004E2286 /* icon-shop-location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-shop-location@2x.png"; path = "Shop/icon-shop-location@2x.png"; sourceTree = "<group>"; };
 		375D05C51AF7AFB0004E2286 /* icon_shop_letter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_shop_letter@2x.png"; path = "Shop/icon_shop_letter@2x.png"; sourceTree = "<group>"; };
 		3767918D1AE688DA0019E04D /* ConstructPriceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstructPriceListCell.h; sourceTree = "<group>"; };
@@ -7915,7 +7912,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "52657c77-bd2b-4e6b-96ce-0b0ad9451c14";
+				PROVISIONING_PROFILE = "8ff8e1b2-afbd-40bc-9dcc-4ef6164050f4";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv64";
 				VERSIONING_SYSTEM = "";
