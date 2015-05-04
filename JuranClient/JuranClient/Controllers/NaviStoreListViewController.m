@@ -17,6 +17,7 @@
 #import "UserLocation.h"
 #import "AppDelegate.h"
 #import "UIViewController+Login.h"
+#import "UIViewController+Menu.h"
 
 @interface NaviStoreListViewController ()<BMKMapViewDelegate>
 
@@ -166,7 +167,7 @@
 }
 
 - (IBAction)naviRightClick:(id)sender {
-    //[self showAppMenu:sender];
+    [self showAppMenuIsShare:NO];
 }
 
 - (IBAction)changeCityClick:(id)sender {
