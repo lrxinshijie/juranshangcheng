@@ -20,10 +20,10 @@
 
 @property (nonatomic, strong) NSArray *goodsAttributesInfoList;
 @property (nonatomic, strong) NSArray *attributeList;
-@property (nonatomic, strong) NSArray *shopAddDtoList;
 @property (nonatomic, strong) NSArray *goodsImagesList;
 @property (nonatomic, copy) NSString *priceMax;
 @property (nonatomic, copy) NSString *priceMin;
+@property (nonatomic, strong) NSArray *stallInfoList;
 @property (nonatomic, assign) BOOL type;
 
 @property (nonatomic, copy) NSString *shopLogo;
@@ -32,7 +32,6 @@
 
 @property (nonatomic, copy) NSString *isExperience;
 @property (nonatomic, copy) NSString *isFailure;
-@property (nonatomic, strong) NSArray *stallInfoList;
 
 
 + (NSMutableArray*)buildUpWithValueForList:(id)value;
@@ -44,4 +43,5 @@
 - (void)loadAttribute:(BOOLBlock)finished;
 - (void)favority:(BOOLBlock)finished;
 - (void)loadStore:(BOOLBlock)finished;
+- (void)loadAttributeList:(BOOLBlock)finished;
 @end
