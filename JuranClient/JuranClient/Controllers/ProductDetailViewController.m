@@ -19,6 +19,7 @@
 #import "AppDelegate.h"
 #import "UserLocation.h"
 #import "NaviStoreInfoViewController.h"
+#import "AttributeCell.h"
 
 @interface ProductDetailViewController () <UITableViewDelegate, UITableViewDataSource, JRSegmentControlDelegate>
 
@@ -44,6 +45,14 @@
 
 @property (nonatomic, strong) UITableView *baseTableView;
 
+@property (nonatomic, strong) IBOutlet UIView *attributePopView;
+@property (nonatomic, strong) IBOutlet UITableView *attributeTableView;
+@property (nonatomic, strong) IBOutlet UIView *attributeHeaderView;
+@property (nonatomic, strong) IBOutlet UIView *attributeFooterView;
+@property (nonatomic, strong) IBOutlet UIImageView *attributeImageView;
+@property (nonatomic, strong) IBOutlet UILabel *attributeNameLabel;
+@property (nonatomic, strong) IBOutlet UILabel *attributePriceLabel;
+
 
 @property (nonatomic, strong) UITableView *detailTableView;
 @property (nonatomic, strong) ALWebView *webView;
@@ -62,6 +71,8 @@
     _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     
     [self setupUI];
+    [self setupAttributeView];
+    
     [self loadData];
 }
 
@@ -202,6 +213,34 @@
     _favorityButton.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 20, 0);
 }
 
+- (void)setupAttributeView{
+    _attributeNameLabel.text = _product.goodsName;
+    [_attributeImageView setImageWithURLString:_product.goodsLogo];
+    _attributePriceLabel.text = [NSString stringWithFormat:@"￥%@ ~ ￥%@", [@([_product.priceMin intValue]) decimalNumberFormatter], [@([_product.priceMax intValue]) decimalNumberFormatter]];
+    
+    CGRect frame = _attributeNameLabel.frame;
+    frame.size.height = [_attributeNameLabel.text heightWithFont:_attributeNameLabel.font constrainedToWidth:CGRectGetWidth(frame)];
+    _attributeNameLabel.frame = frame;
+    frame = _attributePriceLabel.frame;
+    frame.origin.y = CGRectGetMaxY(_attributeNameLabel.frame) + 3;
+    _attributePriceLabel.frame = frame;
+    
+    frame = _attributePopView.frame;
+    frame = _scrollView.bounds;
+    _attributePopView.frame = frame;
+    
+    _attributeTableView.tableHeaderView = _attributeHeaderView;
+    _attributeTableView.tableFooterView = [[UIView alloc] init];
+}
+
+- (void)showAttributeView{
+    [self.view addSubview:_attributePopView];
+}
+
+- (IBAction)hideAttributeView:(id)sender{
+    [_attributePopView removeFromSuperview];
+}
+
 - (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
     [_webView removeFromSuperview];
     [_detailTableView removeFromSuperview];
@@ -267,6 +306,8 @@
         }else{
             count = _products.count;
         }
+    }else if ([tableView isEqual:_attributeTableView]){
+        count = _product.attributeList.count;
     }
     
     return count;
@@ -278,13 +319,15 @@
             return 1;
         }
         return 10;
-    }else{
+    }else {
         if (_segCtl.selectedIndex == 1) {
             return 10;
         }
         
         return 1;
     }
+    
+    return 0;
     
 }
 
@@ -294,6 +337,8 @@
         heigth = CGRectGetHeight(_shopView.frame);
     }else if ([tableView isEqual:_detailTableView] && _segCtl.selectedIndex == 2){
         heigth = 100;
+    }else if ([tableView isEqual:_attributeTableView]){
+        heigth = [AttributeCell cellHeight];
     }
     return heigth;
 }
@@ -311,7 +356,19 @@
         [cell fillCellWithProduct:product];
         
         return cell;
-    }else{
+    }else if ([tableView isEqual:_attributeTableView]){
+        static NSString *CellIdentifier = @"AttributeCell";
+        AttributeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+            cell = (AttributeCell *)[nibs firstObject];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        NSDictionary *dict = _product.attributeList[indexPath.row];
+        [cell fillCellWithDict:dict];
+        
+        return cell;
+    }else {
         static NSString *CellIdentifier = @"Cell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
@@ -340,7 +397,7 @@
                 [_shopView removeFromSuperview];
                 [cell addSubview:_shopView];
             }
-        }else{
+        }else {
             if (_segCtl.selectedIndex == 1) {
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSDictionary *dict = _product.goodsAttributesInfoList[indexPath.row];
@@ -365,10 +422,19 @@
     }else if ([tableView isEqual:_baseTableView]){
         if (indexPath.section == 0 && indexPath.row == 0) {
             if (_product.attributeList) {
-                
+                [self showAttributeView];
             }else{
+                [self showHUD];
                 [_product loadAttributeList:^(BOOL result) {
-                    
+                    [self hideHUD];
+                    if (result) {
+                        CGRect frame = _attributeTableView.frame;
+                        frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame);
+                        frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
+                        _attributeTableView.frame = frame;
+                        [_attributeTableView reloadData];
+                        [self showAttributeView];
+                    }
                 }];
             }
             
