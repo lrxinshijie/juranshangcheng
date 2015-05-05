@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "UserLocation.h"
 #import "NaviStoreIndoorViewController.h"
+#import "UIViewController+Menu.h"
 
 @interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate>
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
@@ -24,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UILabel *labelName;
 @property (strong, nonatomic) IBOutlet UILabel *labelDistance;
+@property (strong, nonatomic) IBOutlet UILabel *labelAddrTitle;
 @property (strong, nonatomic) IBOutlet UILabel *labelAddr;
 @property (strong, nonatomic) IBOutlet UILabel *labelTime;
 @property (strong, nonatomic) IBOutlet UILabel *labelBus;
@@ -152,8 +154,12 @@
     _storeAnnotation.coordinate = CLLocationCoordinate2DMake(_store.latitude, _store.longitude);
     _storeAnnotation.title = _store.storeName;
     [_mapView addAnnotation:_storeAnnotation];
+    if (_naviType == NaviTypeStore) {
+        _labelName.text = _store.storeName;
+    }else {
+        _labelName.text = _store.stallName;
+    }
     
-    _labelName.text = _store.storeName;
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
         _imageNode.image = [UIImage imageNamed:@"icon-map-node.png"];
         BMKMapPoint pointStore = BMKMapPointForCoordinate(_storeAnnotation.coordinate);
@@ -165,7 +171,11 @@
     }
     
     CGRect frame = CGRectZero;
-    
+    if (_naviType == NaviTypeStore) {
+        _labelAddrTitle.text = @"门店地址";
+    }else {
+        _labelAddrTitle.text = @"摊位地址";
+    }
     _labelAddr.text = _store.storeAdd;
     [_labelAddr sizeToFit];
     frame = _naviControlView.frame;
@@ -263,7 +273,7 @@
 }
 
 - (IBAction)rightNaviClick:(id)sender {
-    
+    [self showAppMenuIsShare:NO];
 }
 
 - (IBAction)SystemNaviClick:(id)sender {
@@ -278,6 +288,10 @@
 //    action.cancelButtonIndex = self.availableMaps.count + 1;
 //    action.delegate = self;
 //    [action showInView:self.view];
+    if (ApplicationDelegate.gLocation.isSuccessLocation) {
+        [self showTip:@"定位失败"];
+        return;
+    }
     CLLocationCoordinate2D endCoor = _storeAnnotation.coordinate;
     MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
     MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:endCoor addressDictionary:nil];

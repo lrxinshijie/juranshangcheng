@@ -7,13 +7,14 @@
 //
 
 #import "JRShop.h"
+#import "JRStore.h"
 
 @implementation JRShop
 
 - (id)init{
     self = [super init];
     if (self) {
-        
+        self.stallInfoList = @[];
     }
     return self;
 }
@@ -102,6 +103,9 @@
             self.grade = [dict getStringValueForKey:@"grade" defaultValue:@""];
             self.logo = [dict getStringValueForKey:@"logo" defaultValue:@""];
             self.isStored = YES;
+            self.isFailure = [dict getBoolValueForKey:@"isFailure" defaultValue:NO];
+            self.isExperience = [dict getBoolValueForKey:@"isExperience" defaultValue:NO];
+            self.stallInfoList = [JRStore buildUpWithValueForList:dict[@"stallInfoList"]];
         }
     }
     return self;

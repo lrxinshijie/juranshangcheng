@@ -37,6 +37,9 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onLocation:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Toz-Yi-WfP"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cellIndicator.png" translatesAutoresizingMaskIntoConstraints="NO" id="kRK-Yz-UmY">
                                 <rect key="frame" x="153" y="7" width="8" height="15"/>
@@ -70,6 +73,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="addressLabel" destination="MS8-Hn-X0U" id="XIe-gv-Nnq"/>
+                <outlet property="addressView" destination="HdT-hs-2OB" id="rrJ-tY-eOz"/>
                 <outlet property="collectionButton" destination="kXx-RV-JK2" id="ucl-KX-DqY"/>
                 <outlet property="imgView" destination="LpE-51-W0Z" id="lUQ-WV-p7q"/>
                 <outlet property="nameLabel" destination="awy-fg-mai" id="nPe-Lf-RpU"/>

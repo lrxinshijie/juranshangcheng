@@ -15,6 +15,10 @@
 #import "ShopHomeViewController.h"
 #import "LocationManager.h"
 #import "ProductLetterViewController.h"
+#import "JRStore.h"
+#import "AppDelegate.h"
+#import "UserLocation.h"
+#import "NaviStoreInfoViewController.h"
 
 @interface ProductDetailViewController () <UITableViewDelegate, UITableViewDataSource, JRSegmentControlDelegate>
 
@@ -33,6 +37,9 @@
 
 @property (nonatomic, strong) IBOutlet UIView *navigationView;
 @property (nonatomic, strong) IBOutlet UIView *locationView;
+@property (nonatomic, strong) IBOutlet UILabel *storeNameLabel;
+@property (nonatomic, strong) IBOutlet UILabel *storeLocationLabel;
+
 @property (nonatomic, strong) IBOutlet UIView *shopView;
 
 @property (nonatomic, strong) UITableView *baseTableView;
@@ -62,7 +69,9 @@
     _scrollView.contentSize = CGSizeMake(CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)*2);
     _scrollView.backgroundColor = RGBColor(237, 237, 237);
     _scrollView.delegate = self;
+
     _imageScrollView.delegate = self;
+    _imageScrollView.pagingEnabled = YES;
     
     self.baseTableView = [self.scrollView tableViewWithFrame:CGRectMake(0, 0, CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame) - CGRectGetHeight(_tipsView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _baseTableView.backgroundColor = [UIColor clearColor];
@@ -110,7 +119,7 @@
         frame.size.height = height;
         _nameLabel.frame = frame;
         
-        _priceLabel.text = [NSString stringWithFormat:@"%@ ~ %@", _product.priceMin, _product.priceMax];
+        _priceLabel.text = [NSString stringWithFormat:@"￥%@ ~ ￥%@", [@([_product.priceMin intValue]) decimalNumberFormatter], [@([_product.priceMax intValue]) decimalNumberFormatter]];
 //        [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-star-active" : @"icon-star"] forState:UIControlStateNormal];
         
         [_imageScrollView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
@@ -119,8 +128,10 @@
         [_imageScrollView setContentOffset:CGPointZero];
         
         _imageScrollView.contentSize = CGSizeMake(CGRectGetWidth(_imageScrollView.frame) * _product.goodsImagesList.count, CGRectGetHeight(_imageScrollView.frame));
+        _imageScrollView.backgroundColor = RGBColor(237, 237, 237);
         [_product.goodsImagesList enumerateObjectsUsingBlock:^(NSString *imageUrl, NSUInteger idx, BOOL *stop) {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_imageScrollView.frame)*idx, 0, CGRectGetWidth(_imageScrollView.frame), CGRectGetHeight(_imageScrollView.frame))];
+            imageView.backgroundColor = RGBColor(237, 237, 237);
             [imageView setImageWithURLString:imageUrl];
             [_imageScrollView addSubview:imageView];
         }];
@@ -138,7 +149,13 @@
     
     [_product loadStore:^(BOOL result) {
         if (result) {
-            
+            JRStore *store = [_product.stallInfoList firstObject];
+            if (store) {
+                _storeNameLabel.text = store.stallName;
+                CLLocation *location = [[CLLocation alloc] initWithLatitude:store.latitude longitude:store.longitude];
+                double distance = [ApplicationDelegate.gLocation.location distanceFromLocation:location];
+                _storeLocationLabel.text = [NSString stringWithFormat:@"%.2fkm", distance/1000];
+            }
         }
     }];
     
@@ -298,17 +315,16 @@
         static NSString *CellIdentifier = @"Cell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         }
         
-        cell.textLabel.font = [UIFont systemFontOfSize:15];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:15];
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
         cell.detailTextLabel.textColor = [UIColor darkGrayColor];
         
         if ([tableView isEqual:_baseTableView]) {
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            
             
             if (indexPath.section == 0) {
                 if (indexPath.row == 0) {
@@ -346,6 +362,26 @@
         ProductDetailViewController *pd = [[ProductDetailViewController alloc] init];
         pd.product = _products[indexPath.row];
         [self.navigationController pushViewController:pd animated:YES];
+    }else if ([tableView isEqual:_baseTableView]){
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            if (_product.attributeList) {
+                
+            }else{
+                [_product loadAttributeList:^(BOOL result) {
+                    
+                }];
+            }
+            
+        }else if (indexPath.section == 0 && indexPath.row == 1){
+            JRStore *store = [_product.stallInfoList firstObject];
+            if (store) {
+                NaviStoreInfoViewController *st = [[NaviStoreInfoViewController alloc] init];
+                st.store = store;
+                st.naviType = NaviTypeStall;
+                [self.navigationController pushViewController:st animated:YES];
+            }
+            
+        }
     }
     
 }

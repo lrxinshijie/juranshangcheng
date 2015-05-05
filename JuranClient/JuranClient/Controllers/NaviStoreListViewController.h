@@ -8,6 +8,12 @@
 
 #import "ALViewController.h"
 
+typedef enum : NSUInteger {
+    NaviTypeStore,
+    NaviTypeStall,
+} NaviType;
+
 @interface NaviStoreListViewController : ALViewController
 @property (nonatomic, strong) NSArray *dataList;
+@property (nonatomic, assign) NaviType naviType;
 @end

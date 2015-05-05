@@ -12,8 +12,6 @@
 
 @interface ShopCollectionCell : UITableViewCell
 
-@property (nonatomic, weak) UIViewController *viewController;
-
 - (void)fillCellWithValue:(JRShop*)shop;
 
 @end
