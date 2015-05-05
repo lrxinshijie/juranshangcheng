@@ -565,6 +565,10 @@
                     [wSelf.dataArray_secondLevel addObject:sItem];
                     
                 }
+                _old_location.viewNum = -1;
+                _old_location.index = Location_None;
+                wSelf.old_view = nil;
+                wSelf.cellCount = 0;
                 [wSelf.listTableView reloadData];
                 
                 

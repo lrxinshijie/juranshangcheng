@@ -8,6 +8,11 @@
 
 #import "QRBaseViewController.h"
 #import "InputCodeViewController.h"
+#import "ProductDetailViewController.h"
+#import "ShopHomeViewController.h"
+#import "QRCodeWebViewController.h"
+#import "JRShop.h"
+#import "JRProduct.h"
 
 @interface QRBaseViewController ()<QRCodeViewControllerDelegate,InputCodeViewControllerDelegate>
 
@@ -43,6 +48,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [self.navigationController setNavigationBarHidden:YES];
+    self.qrCodeViewController = nil;
+    [self initChildViewController];
+    
     //需求：去除条形码输入，此处为调整，其他还有注释有“需求调整”的部分与此为同一调整。
     self.bottomBaseView.hidden = YES;
 }
@@ -50,8 +62,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
-    [self initSelectButtonStyle];
-    [self initChildViewController];
+    //底部选择框被隐藏
+//    [self initSelectButtonStyle];
     
 }
 
@@ -188,9 +200,39 @@
 
 #pragma mark - QRCodeViewControllerDelegate
 
--(void)qrCodeComplete:(NSString *)codeString
+-(void)qrCodeComplete:(NSString *)codeString childVCStyle:(ChildVCStyle)style
 {
-    
+    if (style == ChildVCStyle_Web) {
+        
+        QRCodeWebViewController * qrVC = [[QRCodeWebViewController alloc] init];
+        qrVC.requestURL = codeString;
+        
+        [self.navigationController setNavigationBarHidden:self.isPopNavHide];
+        [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
+        [self.navigationController pushViewController:qrVC animated:YES];
+        
+    }else if (style == ChildVCStyle_Shop){
+        
+        ShopHomeViewController * shopVC = [[ShopHomeViewController alloc] init];
+        JRShop * jrShop = [[JRShop alloc] init];
+        jrShop.shopId = [codeString integerValue];
+        shopVC.shop = jrShop;
+        
+        [self.navigationController setNavigationBarHidden:self.isPopNavHide];
+        [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
+        [self.navigationController pushViewController:shopVC animated:YES];
+        
+    }else if (style == ChildVCStyle_Product){
+        
+        ProductDetailViewController * pVC = [[ProductDetailViewController alloc] init];
+        JRProduct * jrProduct = [[JRProduct alloc] init];
+        jrProduct.linkProductId = [codeString integerValue];
+        pVC.product = jrProduct;
+        
+        [self.navigationController setNavigationBarHidden:self.isPopNavHide];
+        [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
+        [self.navigationController pushViewController:pVC animated:YES];
+    }
 }
 
 -(void)qrCodeError:(NSError *)error
