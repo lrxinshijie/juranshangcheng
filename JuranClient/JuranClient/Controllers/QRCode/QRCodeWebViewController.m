@@ -24,6 +24,7 @@
     
     _webView = [[ALWebView alloc] initWithFrame:kContentFrameWithoutNavigationBar];
     _webView.delegate = self;
+    [self.view addSubview:_webView];
     [_webView loadURLString:self.requestURL];
 }
 
