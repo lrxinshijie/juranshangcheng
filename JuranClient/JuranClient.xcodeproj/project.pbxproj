@@ -11,6 +11,8 @@
 		1403802F1A44247300221398 /* MeasureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1403802D1A44247300221398 /* MeasureViewController.xib */; };
 		1403809D1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1403809C1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m */; };
 		1403809E1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1403809C1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m */; };
+		1406F3841AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1406F3831AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m */; };
+		1406F3851AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1406F3831AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m */; };
 		140C46E81A2A296A003317AD /* ModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 140C46E61A2A296A003317AD /* ModifyViewController.m */; };
 		140C46E91A2A296A003317AD /* ModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 140C46E71A2A296A003317AD /* ModifyViewController.xib */; };
 		140C46ED1A2A3741003317AD /* MyFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 140C46EB1A2A3741003317AD /* MyFollowViewController.m */; };
@@ -1838,6 +1840,8 @@
 		1403802D1A44247300221398 /* MeasureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeasureViewController.xib; sourceTree = "<group>"; };
 		1403809B1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ScrollingNavbar.h"; sourceTree = "<group>"; };
 		1403809C1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ScrollingNavbar.m"; sourceTree = "<group>"; };
+		1406F3821AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
+		1406F3831AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
 		140C46E51A2A296A003317AD /* ModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyViewController.h; sourceTree = "<group>"; };
 		140C46E61A2A296A003317AD /* ModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyViewController.m; sourceTree = "<group>"; };
 		140C46E71A2A296A003317AD /* ModifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyViewController.xib; sourceTree = "<group>"; };
@@ -4662,6 +4666,8 @@
 		A987ED6C1A20920500CED7CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1406F3821AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.h */,
+				1406F3831AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m */,
 				1472FF7A1AE4AB8E00735929 /* LocationManager.h */,
 				1472FF7B1AE4AB8E00735929 /* LocationManager.m */,
 				14B5C0481ACE31D70043BB44 /* DeviceHardware.h */,
@@ -7087,6 +7093,7 @@
 				1415F9881A5CD1CB003D0C29 /* ActionSheetCustomPicker.m in Sources */,
 				A9A9F2DE1AE361CC00A03C9B /* ProductCell.m in Sources */,
 				1415F9891A5CD1CB003D0C29 /* NSArray+ASCategory.m in Sources */,
+				1406F3851AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				37A0F8181A6B89A800611760 /* JRActivity.m in Sources */,
 				1415F98A1A5CD1CB003D0C29 /* UIScrollView+MJExtension.m in Sources */,
 				1415F98B1A5CD1CB003D0C29 /* UITextField+ASCategory.m in Sources */,
@@ -7437,6 +7444,7 @@
 				37F0E6B31A7D1F4E004CCCB2 /* PSTGridLayoutItem.m in Sources */,
 				A9A067141A3D76DA0059D73B /* ActionSheetCustomPicker.m in Sources */,
 				1FD3B8471AD8F878004E849F /* FMDatabase.m in Sources */,
+				1406F3841AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				371FBEEB1A6A357700635D3D /* JRWiki.m in Sources */,
 				A9C012061ABC601900DCF9C3 /* IQUIWindow+Hierarchy.m in Sources */,
 				A987EDDE1A20920500CED7CD /* NSArray+ASCategory.m in Sources */,

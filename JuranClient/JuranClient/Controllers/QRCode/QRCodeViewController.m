@@ -174,7 +174,7 @@
                 
             }
             
-            if ([self.delegate respondsToSelector:@selector(qrCodeComplete:childVCStyle:)]) {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(qrCodeComplete:childVCStyle:)]) {
                 [self.delegate qrCodeComplete:code childVCStyle:vcStyle];
             }
             
@@ -205,8 +205,9 @@
 {
     //http://mall.juran.cn/goods/10678.htm
     //http://mall.juran.cn/shop/1101.htm
-    NSString * regex_shop = @"^[h][t]{2}[p]://[m][a][l]{2}\.[j][u][r][a][n]\.[c][n]/[g][o]{2}[d][s]/[0-9]{1,}\.[h][t][m]";
-    NSString * regex_product = @"^[h][t]{2}[p]://[m][a][l]{2}\.[j][u][r][a][n]\.[c][n]/[s][h][o][p]/[0-9]{1,}\.[h][t][m]";
+
+    NSString * regex_product = @"^http://mall\.juran\.cn/goods/([0-9]{1,})\.htm$";
+    NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm$";
     
     NSPredicate *pred_shop = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex_shop];
     BOOL isMatch_shop = [pred_shop evaluateWithObject:str];

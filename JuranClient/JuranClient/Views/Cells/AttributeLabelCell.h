@@ -12,4 +12,6 @@
 
 - (void)fillCellWithData:(NSString *)title;
 
++ (CGSize)cellSizeWithTitle:(NSString *)title;
+
 @end
