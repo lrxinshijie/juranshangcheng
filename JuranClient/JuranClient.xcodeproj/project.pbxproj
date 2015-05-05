@@ -704,6 +704,7 @@
 		1FD3B84B1AD8F878004E849F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8461AD8F878004E849F /* FMResultSet.m */; };
 		1FD3B84F1AD8FB58004E849F /* TestSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */; };
 		1FD3B8501AD8FB58004E849F /* TestSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3B84E1AD8FB58004E849F /* TestSearchViewController.xib */; };
+		1FE1394D1AF8616B001BDF05 /* QRCodeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1394C1AF8616B001BDF05 /* QRCodeWebViewController.m */; };
 		1FF00FA51AE4B74300D54914 /* third_bg_cell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF00FA11AE4B74300D54914 /* third_bg_cell@2x.png */; };
 		1FF00FA61AE4B74300D54914 /* third_bg_header_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF00FA21AE4B74300D54914 /* third_bg_header_left@2x.png */; };
 		1FF00FA71AE4B74300D54914 /* third_bg_header_middle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF00FA31AE4B74300D54914 /* third_bg_header_middle@2x.png */; };
@@ -2241,6 +2242,8 @@
 		1FD3B84C1AD8FB58004E849F /* TestSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSearchViewController.h; sourceTree = "<group>"; };
 		1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSearchViewController.m; sourceTree = "<group>"; };
 		1FD3B84E1AD8FB58004E849F /* TestSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestSearchViewController.xib; sourceTree = "<group>"; };
+		1FE1394B1AF8616B001BDF05 /* QRCodeWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeWebViewController.h; sourceTree = "<group>"; };
+		1FE1394C1AF8616B001BDF05 /* QRCodeWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeWebViewController.m; sourceTree = "<group>"; };
 		1FF00FA11AE4B74300D54914 /* third_bg_cell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "third_bg_cell@2x.png"; sourceTree = "<group>"; };
 		1FF00FA21AE4B74300D54914 /* third_bg_header_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "third_bg_header_left@2x.png"; sourceTree = "<group>"; };
 		1FF00FA31AE4B74300D54914 /* third_bg_header_middle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "third_bg_header_middle@2x.png"; sourceTree = "<group>"; };
@@ -3831,6 +3834,8 @@
 				1F2D50091AD7C882005486D2 /* QRBaseViewController.h */,
 				1F2D500A1AD7C882005486D2 /* QRBaseViewController.m */,
 				1F2D500B1AD7C882005486D2 /* QRBaseViewController.xib */,
+				1FE1394B1AF8616B001BDF05 /* QRCodeWebViewController.h */,
+				1FE1394C1AF8616B001BDF05 /* QRCodeWebViewController.m */,
 			);
 			path = QRCode;
 			sourceTree = "<group>";
@@ -7403,6 +7408,7 @@
 				A94525231AA5ED1F002DFA2A /* openssl_wrapper.m in Sources */,
 				37DFE3931AE91EAF00268278 /* ConfirmItemViewController.m in Sources */,
 				A9A4135D1ADE9EEE00074BB0 /* HMSegmentedControl.m in Sources */,
+				1FE1394D1AF8616B001BDF05 /* QRCodeWebViewController.m in Sources */,
 				A9902CA61A3432A500F08DA1 /* FilterViewController.m in Sources */,
 				BD48B58D1A5283340041725C /* JRServiceViewController.m in Sources */,
 				A987EE221A20928B00CED7CD /* MKNetworkEngine.m in Sources */,
@@ -7868,7 +7874,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8ff8e1b2-afbd-40bc-9dcc-4ef6164050f4";
+				PROVISIONING_PROFILE = "034a2c8f-c302-429e-a7a2-cfcc189987f5";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv64";
 				VERSIONING_SYSTEM = "";
