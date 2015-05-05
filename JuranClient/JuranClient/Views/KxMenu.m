@@ -45,6 +45,7 @@ const CGFloat kArrowSize = 12.f;
 ////////////////////////////////////////////////////////////////////////////////
 
 @interface KxMenuView : UIView
+- (void)dismissMenu:(BOOL) animated;
 @end
 
 @interface KxMenuOverlay : UIView
@@ -104,13 +105,15 @@ const CGFloat kArrowSize = 12.f;
               numOfUnread:(NSInteger)num
                    target:(id)target
                    action:(SEL) action
+                    block:(VoidBlock)shareBlock
 {
     return [[KxMenuItem alloc] init:title
                               image:image
                              isRead:flag
                         numOfUnread:num
                              target:target
-                             action:action];
+                             action:action
+                              block:shareBlock];
 }
 
 - (id) init:(NSString *) title
@@ -119,7 +122,7 @@ const CGFloat kArrowSize = 12.f;
      action:(SEL) action
 {
     NSParameterAssert(title.length || image);
-    return [self init:title image:image isRead:YES numOfUnread:0 target:target action:action];
+    return [self init:title image:image isRead:YES numOfUnread:0 target:target action:action block:nil];
 }
 
 - (id) init:(NSString *) title
@@ -128,6 +131,7 @@ const CGFloat kArrowSize = 12.f;
 numOfUnread:(NSInteger)num
      target:(id)target
      action:(SEL) action
+      block:(VoidBlock)shareBlock
 {
     NSParameterAssert(title.length || image);
     
@@ -137,9 +141,10 @@ numOfUnread:(NSInteger)num
         _title = title;
         _image = image;
         _isRead = flag;
-        _unreadNum = num;
+        _msgNum = num;
         _target = target;
         _action = action;
+        _block = shareBlock;
     }
     return self;
 }
@@ -359,8 +364,7 @@ typedef enum {
     
     [UIView animateWithDuration:0.2
                      animations:^(void) {
-                         
-                         self.alpha = 0.85f;
+                         self.alpha = 0.8f;
                          self.frame = toFrame;
                          
                      } completion:^(BOOL completed) {
@@ -397,6 +401,11 @@ typedef enum {
                 [self.superview removeFromSuperview];
             [self removeFromSuperview];
         }
+    }
+    ASLog(@"%@",[NSString
+                 stringWithUTF8String:object_getClassName(self.viewController)]);
+    if(self.viewController) {
+        [self.viewController.view setClipsToBounds:YES];
     }
 }
 
@@ -546,9 +555,9 @@ typedef enum {
                 [itemView addSubview:readLabel];
             }
             
-            if (menuItem.unreadNum!=0) {
+            if (menuItem.msgNum!=0) {
                 UILabel *numLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, 8, 24, 16)];
-                numLabel.text = [NSString stringWithFormat:@"%d",menuItem.unreadNum] ;
+                numLabel.text = [NSString stringWithFormat:@"%d",menuItem.msgNum] ;
                 numLabel.textColor = [UIColor whiteColor];
                 numLabel.font = [UIFont systemFontOfSize:12];
                 numLabel.textAlignment = NSTextAlignmentCenter;
@@ -673,8 +682,10 @@ typedef enum {
 - (void)drawBackground:(CGRect)frame
              inContext:(CGContextRef) context
 {
-    CGFloat R0 = 0.267, G0 = 0.303, B0 = 0.335;
-    CGFloat R1 = 0.040, G1 = 0.040, B1 = 0.040;
+    //CGFloat R0 = 0.267, G0 = 0.303, B0 = 0.335;
+    //CGFloat R1 = 0.040, G1 = 0.040, B1 = 0.040;
+    CGFloat R0 = 0, G0 = 0, B0 = 0;
+    CGFloat R1 = 0, G1 = 0, B1 = 0;
     
     UIColor *tintColor = [KxMenu tintColor];
     if (tintColor) {

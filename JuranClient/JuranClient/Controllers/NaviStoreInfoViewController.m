@@ -273,7 +273,7 @@
 }
 
 - (IBAction)rightNaviClick:(id)sender {
-    [self showAppMenuIsShare:NO];
+    [self showAppMenu:nil];
 }
 
 - (IBAction)SystemNaviClick:(id)sender {

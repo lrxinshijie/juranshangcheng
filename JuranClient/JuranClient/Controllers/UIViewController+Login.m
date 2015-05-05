@@ -87,7 +87,7 @@
 }
 
 - (void)onMore{
-    [self showAppMenuIsShare:NO];
+    [self showAppMenu:nil];
 }
 
 - (void)configureSearch{

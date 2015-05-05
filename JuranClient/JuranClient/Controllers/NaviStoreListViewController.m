@@ -185,7 +185,7 @@
 }
 
 - (IBAction)naviRightClick:(id)sender {
-    [self showAppMenuIsShare:NO];
+    [self showAppMenu:nil];
 }
 
 - (IBAction)changeCityClick:(id)sender {

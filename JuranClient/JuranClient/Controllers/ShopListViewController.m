@@ -32,7 +32,7 @@
         _cityName = ApplicationDelegate.gLocation.cityName;
 #endif
         _keyword = @"";
-        _sort = 1;
+        _sort = 9;
     }
     return self;
 }
