@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class JRProduct;
 
 @interface ShopCell : UICollectionViewCell
 
-- (void)fillCellWithValue:(id)value;
+- (void)fillCellWithValue:(JRProduct*)product;
 
 @end

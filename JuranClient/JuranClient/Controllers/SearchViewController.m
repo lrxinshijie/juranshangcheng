@@ -12,6 +12,7 @@
 #import "QuestionViewController.h"
 #import "IQKeyboardManager.h"
 #import "ShopListViewController.h"
+#import "ProductListViewController.h"
 
 #define kKeywordsButtonTag 3330
 
@@ -48,7 +49,12 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChangeNotification:) name:UITextFieldTextDidChangeNotification object:nil];
     
-    searchOptions = @[@"在作品案例中搜索", @"在商品中搜索", @"在店铺中搜索", @"在设计师中搜索", @"在答疑解惑中搜索"];
+#ifdef kJuranVersion12
+    searchOptions = @[@"在作品案例中搜索", @"在设计师中搜索", @"在答疑解惑中搜索"];
+#else
+    searchOptions = @[@"在作品案例中搜索", @"在设计师中搜索", @"在答疑解惑中搜索", @"在商品中搜索", @"在店铺中搜索"];
+#endif
+    
     self.navigationItem.title = @"搜索";
     step = 1;
     [self setupUI];
@@ -190,9 +196,12 @@
         vc.searchKeyWord = _searchKeyWord;
         vc.isSearchResult = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (_type == SearchTypeGoods){
         
-        
+    }
+#ifndef kJuranVersion12
+    else if (_type == SearchTypeGoods){
+        ProductListViewController *vc = [[ProductListViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
         
     }else if (_type == SearchTypeShop){
         
@@ -201,6 +210,7 @@
         [self.navigationController pushViewController:vc animated:YES];
         
     }
+#endif
 }
 
 #pragma mark - Target Action

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface JRShop : NSObject
 /*
  店铺信息	业务	N	shopInfo
@@ -28,9 +29,17 @@
 @property (nonatomic, copy) NSString *brands;
 @property (nonatomic, copy) NSString *logo;
 
+@property (nonatomic, assign) BOOL isExperience;
+@property (nonatomic, assign) BOOL isFailure;
+@property (nonatomic, strong) NSArray *stallInfoList;
+
 - (id)initWithDictionary:(NSDictionary *)dict;
 + (NSMutableArray*)buildUpWithValueForList:(id)value;
 - (id)initWithDictionaryForShopList:(NSDictionary *)dict;
 + (NSMutableArray*)buildUpWithValueForShopList:(id)value;
 - (void)buildUpWithDictionary:(NSDictionary *)dict;
++ (NSMutableArray*)buildUpWithValueForCollection:(id)value;
+
+- (void)collectionWithViewCotnroller:(UIViewController*)vc finishBlock:(VoidBlock)finish;
+
 @end

@@ -9,10 +9,19 @@
 #import "ALViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
+typedef enum {
+ 
+    ChildVCStyle_None,
+    ChildVCStyle_Web,
+    ChildVCStyle_Shop,
+    ChildVCStyle_Product
+    
+}ChildVCStyle;
+
 @protocol QRCodeViewControllerDelegate <NSObject>
 
 //扫描成功时的回调
-- (void)qrCodeComplete:(NSString *)codeString;
+- (void)qrCodeComplete:(NSString *)codeString childVCStyle:(ChildVCStyle)style;
 //扫描失败时的回调
 - (void)qrCodeError:(NSError *)error;
 

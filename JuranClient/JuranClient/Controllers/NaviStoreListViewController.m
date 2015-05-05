@@ -16,6 +16,8 @@
 #import "ShopListViewController.h"
 #import "UserLocation.h"
 #import "AppDelegate.h"
+#import "UIViewController+Login.h"
+#import "UIViewController+Menu.h"
 
 @interface NaviStoreListViewController ()<BMKMapViewDelegate>
 
@@ -33,16 +35,29 @@
 
 @implementation NaviStoreListViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _dataList = nil;
+        _naviType = NaviTypeStore;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    //latitude=39.944213,longitude=116.438717
-    self.navigationItem.title = @"门店导航";
     [_tableViewStore registerNib:[UINib nibWithNibName:@"NaviStoreCell" bundle:nil] forCellReuseIdentifier:@"NaviStoreCell"];
     if(ApplicationDelegate.gLocation.isSuccessLocation)
         _btnChangeCity.hidden = YES;
-    if (!_dataList)
+    if (_naviType == NaviTypeStore) {
+        self.navigationItem.title = @"门店导航";
         [self loadData];
+    }
+    else {
+        [self reloadView];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,7 +72,7 @@
         [self hideHUD];
         if (!error) {
             if ((NSNull *)data != [NSNull null]) {
-                _dataList = [JRStore buildUpWithValueForList:[data objectForKey:@"shopAddDtoList"]];
+                _dataList = [JRStore buildUpWithValueForList:[data objectForKey:@"stallInfoList"]];
             }
             else {
                 _dataList = nil;
@@ -87,7 +102,7 @@
     for (JRStore *store in _dataList) {
         BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
         annotation.coordinate = CLLocationCoordinate2DMake(store.latitude, store.longitude);
-        annotation.title = store.storeShortName;
+        annotation.title = store.storeName;
         [_mapView addAnnotation:annotation];
     }
     _labelCity.text = [NSString stringWithFormat:@"当前城市：%@",ApplicationDelegate.gLocation.cityName];
@@ -99,14 +114,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.hidden = YES;
     [_mapView viewWillAppear];
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.hidden = NO;
     [_mapView viewWillDisappear];
     _mapView.delegate = nil; // 不用时，置nil
 }
@@ -138,11 +153,15 @@
     NaviStoreCell *cell = (NaviStoreCell *)[tableView dequeueReusableCellWithIdentifier:@"NaviStoreCell"];
     int index = [indexPath row];
     JRStore *store = [_dataList objectAtIndex:index];
-    cell.labelName.text = store.storeShortName;
-    BMKMapPoint pointStore = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(store.latitude, store.longitude));
-    BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
-    CLLocationDistance distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
+    if (_naviType == NaviTypeStore) {
+        cell.labelName.text = store.storeName;
+    }else {
+        cell.labelName.text = store.stallName;
+    }
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
+        BMKMapPoint pointStore = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(store.latitude, store.longitude));
+        BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
+        CLLocationDistance distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
         cell.imageNode.image = [UIImage imageNamed:@"icon-map-node-2.png"];
         cell.labelDistance.text = [NSString stringWithFormat:@"%.2fkm",distance/1000];
     }else {
@@ -156,6 +175,7 @@
     [_tableViewStore deselectRowAtIndexPath:indexPath animated:YES];
     JRStore *store = [_dataList objectAtIndex:[indexPath row]];
     NaviStoreInfoViewController *info = [[NaviStoreInfoViewController alloc]init];
+    info.naviType = _naviType;
     info.store = store;
     [self.navigationController pushViewController:info animated:YES];
 }
@@ -165,13 +185,13 @@
 }
 
 - (IBAction)naviRightClick:(id)sender {
-    NSLog(@"RightClick");
+    [self showAppMenuIsShare:NO];
 }
 
 - (IBAction)changeCityClick:(id)sender {
     NaviStoreSelCityViewController *vc = [[NaviStoreSelCityViewController alloc] init];
     [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
-        ApplicationDelegate.gLocation.cityName = areaInfo.cityName;
+        //ApplicationDelegate.gLocation.cityName = areaInfo.cityName;
         UserLocation *location = [[UserLocation alloc]init];
         [location GeoCode:areaInfo.cityName Handler:^(UserLocation *loc) {
             _mapView.centerCoordinate = loc.location.coordinate;

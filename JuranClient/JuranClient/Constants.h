@@ -37,6 +37,10 @@
 #define kAppleID 954983948
 #endif
 
+#ifndef kJuranVersion12
+//#define kJuranVersion12
+#endif
+
 #define kAppURL [NSString stringWithFormat:@"http://itunes.apple.com/app/id%d?mt=8",kAppleID]
 //#define kImageBackgroundColor RGBColor(242, 242, 242)
 #define kImageBackgroundColor [UIColor grayColor]
@@ -87,10 +91,10 @@ typedef enum : NSUInteger {
 
 typedef enum : NSUInteger {
     SearchTypeCase = 0,
-    SearchTypeGoods,
-    SearchTypeShop,
     SearchTypeDesigner,
     SearchTypeQuestion,
+    SearchTypeGoods,
+    SearchTypeShop,
 } SearchType;
 
 #endif

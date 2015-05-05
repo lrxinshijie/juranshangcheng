@@ -7,6 +7,7 @@
 //
 
 #import "ShopCell.h"
+#import "JRProduct.h"
 
 @interface ShopCell()
 
@@ -22,13 +23,13 @@
     // Initialization code
 }
 
-- (void)fillCellWithValue:(id)value{
-    if (!value || ![value isKindOfClass:[NSDictionary class]]) {
+- (void)fillCellWithValue:(JRProduct *)product{
+    if (!product) {
         return;
     }
-    self.nameLabel.text = [value getStringValueForKey:@"goodsName" defaultValue:@""];
-    [self.defaultImageView setImageWithURLString:[value getStringValueForKey:@"defaultImage" defaultValue:@""]];
-    self.priceLabel.text = [value getStringValueForKey:@"onSaleMinPrice" defaultValue:@""];
+    self.nameLabel.text = product.goodsName;
+    [self.defaultImageView setImageWithURLString:product.defaultImage];
+    self.priceLabel.text = [NSString stringWithFormat:@"￥%@", product.onSaleMinPrice];
 }
 
 @end

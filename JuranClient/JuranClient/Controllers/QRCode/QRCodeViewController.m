@@ -152,17 +152,32 @@
         
         //判断是不是连接
         if ([self isURL:val]) {
-            //是连接，判断是解析还是用webView展示
             
-            if ([self needShowWithWebView:val]) {
+            ChildVCStyle vcStyle = ChildVCStyle_None;
+            NSString * code;
+            
+            //是连接，判断是解析还是用webView展示
+            if ([self needShowWithWebView:val] == 0) {
                 //webView展示
+                vcStyle = ChildVCStyle_Web;
+                code = val;
                 
+            }else if ([self needShowWithWebView:val] == 1){
+                //跳转至店铺首页
+                vcStyle = ChildVCStyle_Shop;
+                code = [self getNumberFrom:val];
                 
-            }else{
-                if ([self.delegate respondsToSelector:@selector(qrCodeComplete:)]) {
-                    [self.delegate qrCodeComplete:[self getNumberFrom:val]];
-                }
+            }else if ([self needShowWithWebView:val] == 2){
+                //跳转至商品详情页
+                vcStyle = ChildVCStyle_Product;
+                code = [self getNumberFrom:val];
+                
             }
+            
+            if ([self.delegate respondsToSelector:@selector(qrCodeComplete:childVCStyle:)]) {
+                [self.delegate qrCodeComplete:code childVCStyle:vcStyle];
+            }
+            
         }else{
             //不是连接，直接展示
             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Tips" message:val delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -186,18 +201,29 @@
     return YES;
 }
 
-- (BOOL)needShowWithWebView:(NSString *)str
+- (int)needShowWithWebView:(NSString *)str
 {
     //http://mall.juran.cn/goods/10678.htm
     //http://mall.juran.cn/shop/1101.htm
-    NSString * regex1 = @"^[h][t]{2}[p]://[m][a][l]{2}\.[j][u][r][a][n]\.[c][n]/(([g][o]{2}[d][s])|([s][h][o][p]))/[0-9]{1,}\.[h][t][m]";
-    NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex1];
-    BOOL isMatch1 = [pred1 evaluateWithObject:str];
-    if (isMatch1) {
-        return NO;
+    NSString * regex_shop = @"^[h][t]{2}[p]://[m][a][l]{2}\.[j][u][r][a][n]\.[c][n]/[g][o]{2}[d][s]/[0-9]{1,}\.[h][t][m]";
+    NSString * regex_product = @"^[h][t]{2}[p]://[m][a][l]{2}\.[j][u][r][a][n]\.[c][n]/[s][h][o][p]/[0-9]{1,}\.[h][t][m]";
+    
+    NSPredicate *pred_shop = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex_shop];
+    BOOL isMatch_shop = [pred_shop evaluateWithObject:str];
+    if (isMatch_shop) {
+        //跳转至店铺首页
+        return 1;
     }
     
-    return YES;
+    
+    NSPredicate *pred_product = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex_product];
+    BOOL isMatch_product = [pred_product evaluateWithObject:str];
+    if (isMatch_product) {
+        //跳转至商品详情页
+        return 2;
+    }
+    //使用webView展示
+    return 0;
 }
 
 - (NSString *)getNumberFrom:(NSString *)str
