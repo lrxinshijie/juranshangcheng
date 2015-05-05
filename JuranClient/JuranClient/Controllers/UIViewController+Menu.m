@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "PushMessageViewController.h"
 #import "PrivateMessageViewController.h"
+//#import "UIViewController+Login.h"
 
 @interface UIViewController ()
 
@@ -49,32 +50,32 @@
                                            action:@selector(onShare:)]];
     }
     
-    NSArray *menus =
-    @[[KxMenuItem menuItem:@"通知"
-                     image:[UIImage imageNamed:@"menu-icon-notice"]
-                    isRead:isRead
-               numOfUnread:0
-                    target:self
-                    action:@selector(onNotice:)],
-      
-      [KxMenuItem menuItem:@"私信"
-                     image:[UIImage imageNamed:@"menu-icon-msg"]
-                    isRead:YES
-               numOfUnread:num
-                    target:self
-                    action:@selector(onMsg:)],
-      
-      [KxMenuItem menuItem:@"平台客服"
-                     image:[UIImage imageNamed:@"menu-icon-svr"]
-                    target:self
-                    action:@selector(onCustomService:)],
-      
-      [KxMenuItem menuItem:@"首页"
-                     image:[UIImage imageNamed:@"menu-icon-home"]
-                    target:self
-                    action:@selector(onHome:)],
-      ];
-    [menuItems addObjectsFromArray:menus];
+    [menuItems addObject:[KxMenuItem menuItem:@"通知"
+                                        image:[UIImage imageNamed:@"menu-icon-notice"]
+                                       isRead:isRead
+                                  numOfUnread:0
+                                       target:self
+                                       action:@selector(onNotice:)]];
+    
+    [menuItems addObject:[KxMenuItem menuItem:@"私信"
+                                        image:[UIImage imageNamed:@"menu-icon-msg"]
+                                       isRead:YES
+                                  numOfUnread:num
+                                       target:self
+                                       action:@selector(onMsg:)]];
+    
+    [menuItems addObject:[KxMenuItem menuItem:@"平台客服"
+                                        image:[UIImage imageNamed:@"menu-icon-svr"]
+                                       target:self
+                                       action:@selector(onCustomService:)]];
+    
+    if (![[NSString
+          stringWithUTF8String:object_getClassName(self)]  isEqual: @"RootViewController"]) {
+        [menuItems addObject:[KxMenuItem menuItem:@"首页"
+                                            image:[UIImage imageNamed:@"menu-icon-home"]
+                                           target:self
+                                           action:@selector(onHome:)]];
+    }
     
     [self.navigationController.view setClipsToBounds:NO];
     [KxMenu showMenuInView:self.navigationController.view
@@ -89,6 +90,9 @@
 
 - (void) onNotice:(id)sender
 {
+    if (![self checkLogin]) {
+        return;
+    }
     PushMessageViewController *vc = [[PushMessageViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [[ApplicationDelegate tabBarController].viewControllers[4] pushViewController:vc animated:YES];
@@ -97,6 +101,9 @@
 
 - (void) onMsg:(id)sender
 {
+    if (![self checkLogin]) {
+        return;
+    }
     PrivateMessageViewController *vc = [[PrivateMessageViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [[ApplicationDelegate tabBarController].viewControllers[4] pushViewController:vc animated:YES];
@@ -110,8 +117,9 @@
 
 - (void) onHome:(id)sender
 {
+    [[ApplicationDelegate tabBarController].viewControllers[0] setNavigationBarHidden:NO];
+    [[ApplicationDelegate tabBarController].viewControllers[0] popToRootViewControllerAnimated:NO];
     [ApplicationDelegate.tabBarController setSelectedIndex:0];
-    [[ApplicationDelegate tabBarController].viewControllers[0] popToRootViewControllerAnimated:YES];
 }
 
 //JR_CUSTOMER_SERVICE

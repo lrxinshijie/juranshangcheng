@@ -114,14 +114,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBar.hidden = YES;
+    [self.navigationController setNavigationBarHidden:YES];
     [_mapView viewWillAppear];
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    self.navigationController.navigationBar.hidden = NO;
+    [self.navigationController setNavigationBarHidden:NO];
     [_mapView viewWillDisappear];
     _mapView.delegate = nil; // 不用时，置nil
 }
