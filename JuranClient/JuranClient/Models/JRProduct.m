@@ -7,6 +7,7 @@
 //
 
 #import "JRProduct.h"
+#import "JRStore.h"
 
 @implementation JRProduct
 
@@ -37,7 +38,8 @@
         self.linkProductId = [dict getIntValueForKey:@"linkProductId" defaultValue:0];
         self.isExperience = [dict getStringValueForKey:@"isExperience" defaultValue:@""];
         self.isFailure = [dict getStringValueForKey:@"isFailure" defaultValue:@""];
-        self.stallInfoList = @[];
+        self.stallInfoList = [JRStore buildUpWithValueForList:dict[@"stallInfoList"]];
+        self.type = YES;
     }
     return self;
 }
@@ -151,11 +153,29 @@
 }
 
 - (void)loadStore:(BOOLBlock)finished{
-    NSDictionary *param = @{@"linkProductId": @(self.linkProductId)
+    NSDictionary *param = @{@"linkProductId": @(self.linkProductId),
+                            @"cityName":@"北京市"
                             };
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_SELL_STORE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            self.shopAddDtoList = [data getArrayValueForKey:@"shopAddDtoList" defaultValue:nil];
+            NSArray *stallInfoList = [data getArrayValueForKey:@"stallInfoList" defaultValue:nil];
+            self.stallInfoList = [JRStore buildUpWithValueForList:stallInfoList];
+        }
+        
+        if (finished) {
+            finished(error == nil);
+        }
+        
+    }];
+}
+
+- (void)loadAttributeList:(BOOLBlock)finished{
+    NSDictionary *param = @{@"linkProductId": @(self.linkProductId)
+                            };
+    [[ALEngine shareEngine] pathURL:JR_PRODUCT_BUY_ATTRIBUTE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            NSArray *attributeList = [data getArrayValueForKey:@"attributeList" defaultValue:nil];
+            self.attributeList = attributeList;
         }
         
         if (finished) {

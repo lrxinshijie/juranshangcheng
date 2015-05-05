@@ -39,12 +39,15 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"shopId": @(5)};
+    NSDictionary *param = @{@"sort": @(-1),
+                            @"pageNo":@(1),
+                            @"onePageCount":kOnePageCount
+                            };
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_SHOP_RECOMMEND parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_SEARCH_PRODUCT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"No"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *recommendProductsList = [data objectForKey:@"recommendProductsList"];
+            NSArray *recommendProductsList = [data objectForKey:@"emallGoodsInfoList"];
             self.products = [JRProduct buildUpWithValueForList:recommendProductsList];
             [_tableView reloadData];
         }

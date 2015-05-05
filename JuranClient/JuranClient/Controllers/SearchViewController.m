@@ -12,6 +12,7 @@
 #import "QuestionViewController.h"
 #import "IQKeyboardManager.h"
 #import "ShopListViewController.h"
+#import "ProductListViewController.h"
 
 #define kKeywordsButtonTag 3330
 
@@ -199,8 +200,8 @@
     }
 #ifndef kJuranVersion12
     else if (_type == SearchTypeGoods){
-        
-        
+        ProductListViewController *vc = [[ProductListViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
         
     }else if (_type == SearchTypeShop){
         

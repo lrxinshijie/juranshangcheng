@@ -33,7 +33,7 @@
 - (void)fillCellWithProduct:(JRProduct *)product{
     [_photoImageView setImageWithURLString:product.defaultImage];
     _nameLabel.text = product.goodsName;
-    _priceLabel.text = [NSString stringWithFormat:@"￥%@", product.onSaleMinPrice];
+    _priceLabel.text = [NSString stringWithFormat:@"￥%@", [@([product.onSaleMinPrice integerValue]) decimalNumberFormatter]];
     
     CGRect frame = _nameLabel.frame;
     CGFloat height = [_nameLabel.text heightWithFont:_nameLabel.font constrainedToWidth:CGRectGetWidth(frame)];

@@ -35,16 +35,29 @@
 
 @implementation NaviStoreListViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _dataList = nil;
+        _naviType = NaviTypeStore;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    //latitude=39.944213,longitude=116.438717
-    self.navigationItem.title = @"门店导航";
     [_tableViewStore registerNib:[UINib nibWithNibName:@"NaviStoreCell" bundle:nil] forCellReuseIdentifier:@"NaviStoreCell"];
     if(ApplicationDelegate.gLocation.isSuccessLocation)
         _btnChangeCity.hidden = YES;
-    if (!_dataList)
+    if (_naviType == NaviTypeStore) {
+        self.navigationItem.title = @"门店导航";
         [self loadData];
+    }
+    else {
+        [self reloadView];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,11 +153,15 @@
     NaviStoreCell *cell = (NaviStoreCell *)[tableView dequeueReusableCellWithIdentifier:@"NaviStoreCell"];
     int index = [indexPath row];
     JRStore *store = [_dataList objectAtIndex:index];
-    cell.labelName.text = store.storeName;
-    BMKMapPoint pointStore = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(store.latitude, store.longitude));
-    BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
-    CLLocationDistance distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
+    if (_naviType == NaviTypeStore) {
+        cell.labelName.text = store.storeName;
+    }else {
+        cell.labelName.text = store.stallName;
+    }
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
+        BMKMapPoint pointStore = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(store.latitude, store.longitude));
+        BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
+        CLLocationDistance distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
         cell.imageNode.image = [UIImage imageNamed:@"icon-map-node-2.png"];
         cell.labelDistance.text = [NSString stringWithFormat:@"%.2fkm",distance/1000];
     }else {
@@ -158,6 +175,7 @@
     [_tableViewStore deselectRowAtIndexPath:indexPath animated:YES];
     JRStore *store = [_dataList objectAtIndex:[indexPath row]];
     NaviStoreInfoViewController *info = [[NaviStoreInfoViewController alloc]init];
+    info.naviType = _naviType;
     info.store = store;
     [self.navigationController pushViewController:info animated:YES];
 }
@@ -173,7 +191,7 @@
 - (IBAction)changeCityClick:(id)sender {
     NaviStoreSelCityViewController *vc = [[NaviStoreSelCityViewController alloc] init];
     [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
-        ApplicationDelegate.gLocation.cityName = areaInfo.cityName;
+        //ApplicationDelegate.gLocation.cityName = areaInfo.cityName;
         UserLocation *location = [[UserLocation alloc]init];
         [location GeoCode:areaInfo.cityName Handler:^(UserLocation *loc) {
             _mapView.centerCoordinate = loc.location.coordinate;

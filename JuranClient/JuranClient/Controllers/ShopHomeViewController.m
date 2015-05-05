@@ -13,6 +13,7 @@
 #import "JRWebViewController.h"
 #import "JRProduct.h"
 #import "ProductDetailViewController.h"
+#import "ProductListViewController.h"
 
 @interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -26,13 +27,14 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *gradeLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *gradeImageView;
 
 @property (nonatomic, strong) IBOutlet UIImageView *collectionImageView;
 @property (nonatomic, strong) IBOutlet UILabel *collectionLabel;
+@property (nonatomic, strong) IBOutlet UIView *searchView;
+@property (nonatomic, strong) IBOutlet UIView *searchTextField;
 
 - (IBAction)onClassification:(id)sender;
-
-
 
 
 @end
@@ -44,6 +46,8 @@
     // Do any additional setup after loading the view from its nib.
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:NULL];
+
     
     [_collectionView registerNib:[UINib nibWithNibName:@"ShopCell" bundle:nil] forCellWithReuseIdentifier:@"ShopCell"];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ShopHeadView"];
@@ -53,6 +57,9 @@
     self.indexShopLogoImageView = [[UIImageView alloc] initWithFrame:bgView.bounds];
     [bgView addSubview:_indexShopLogoImageView];
     _collectionView.backgroundView = bgView;
+    
+    _searchView.layer.cornerRadius = 2.f;
+    self.navigationItem.titleView = self.searchView;
     
     [self loadData];
     [self loadRecommendData];
@@ -88,19 +95,28 @@
 - (void)reloadData{
     [self.shopLogoImageView setImageWithURLString:_shop.shopLogo];
     [self.indexShopLogoImageView setImageWithURLString:_shop.indexShopLogo];
+    _gradeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon-grade-%@.png", _shop.grade.integerValue?@"1":@"2"]];
+    _gradeLabel.text = [NSString stringWithFormat:@"店铺评分：%@", _shop.shopDsr];
     _nameLabel.text = _shop.shopName;
     _collectionImageView.image = [UIImage imageNamed:_shop.isStored?@"icon-collection-active.png":@"icon-collection.png"];
     _collectionLabel.text = _shop.isStored?@"已收藏":@"收藏";
-    self.navigationItem.title = _shop.shopName;
     [_collectionView reloadData];
 }
 
 - (IBAction)onCollection:(id)sender{
-    [_shop collectionWithViewCotnroller:self finishBlock:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self reloadData];
-        });
-    }];
+    if ([self checkLogin:^{
+        [_shop collectionWithViewCotnroller:self finishBlock:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self reloadData];
+            });
+        }];
+    }]) {
+        [_shop collectionWithViewCotnroller:self finishBlock:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self reloadData];
+            });
+        }];
+    }
 }
 
 - (IBAction)onIntroduce:(id)sender{
@@ -118,6 +134,25 @@
             });
         }
     }];
+}
+
+- (IBAction)onAllProduct:(id)sender{
+    ProductListViewController *vc = [[ProductListViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)onSearchProduct:(id)sender{
+    ProductListViewController *vc = [[ProductListViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)onLocation:(id)sender{
+    
+    
+}
+
+- (IBAction)onPrivateLetter:(id)sender{
+    
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -177,6 +212,8 @@
     filter.shopId = _shop.shopId;
     [filter setFinishBlock:^(long catId) {
         //获取分类后处理
+        ProductListViewController *vc = [[ProductListViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
     [self.navigationController pushViewController:filter animated:YES];
 }

@@ -812,6 +812,8 @@
 		375B46591A5EE76000D7E74B /* PriceModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375B46501A5EE6D000D7E74B /* PriceModifyViewController.xib */; };
 		375B465A1A5EE76300D7E74B /* StyleModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 375B46541A5EE70F00D7E74B /* StyleModifyViewController.m */; };
 		375B465B1A5EE76700D7E74B /* StyleModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */; };
+		375D05C21AF7AF51004E2286 /* icon-shop-location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375D05C11AF7AF51004E2286 /* icon-shop-location@2x.png */; };
+		375D05C61AF7AFB0004E2286 /* icon_shop_letter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 375D05C51AF7AFB0004E2286 /* icon_shop_letter@2x.png */; };
 		3765C7491AE3ABCA007BD3D4 /* FilterInShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C8D1ADE0E200037105E /* FilterInShopViewController.m */; };
 		3765C74A1AE3ABCA007BD3D4 /* FilterInShopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C8E1ADE0E200037105E /* FilterInShopViewController.xib */; };
 		376791901AE688DA0019E04D /* ConstructPriceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3767918E1AE688DA0019E04D /* ConstructPriceListCell.m */; };
@@ -1309,6 +1311,16 @@
 		A9D654B51A27642800A80253 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654A81A27642800A80253 /* JSONModel+networking.m */; };
 		A9D654B61A27642800A80253 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654AB1A27642800A80253 /* JSONKeyMapper.m */; };
 		A9D654B71A27642800A80253 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654AD1A27642800A80253 /* JSONValueTransformer.m */; };
+		A9F1F6821AF7C75600A6838D /* NSNumber+ASCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F1F6811AF7C75600A6838D /* NSNumber+ASCategory.m */; };
+		A9F1F6831AF7C75600A6838D /* NSNumber+ASCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F1F6811AF7C75600A6838D /* NSNumber+ASCategory.m */; };
+		A9F1F6871AF7D3C700A6838D /* AttributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F1F6851AF7D3C700A6838D /* AttributeCell.m */; };
+		A9F1F6881AF7D3C700A6838D /* AttributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F1F6851AF7D3C700A6838D /* AttributeCell.m */; };
+		A9F1F6891AF7D3C700A6838D /* AttributeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9F1F6861AF7D3C700A6838D /* AttributeCell.xib */; };
+		A9F1F68A1AF7D3C700A6838D /* AttributeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9F1F6861AF7D3C700A6838D /* AttributeCell.xib */; };
+		A9F1F68E1AF7D5F800A6838D /* AttributeLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F1F68C1AF7D5F800A6838D /* AttributeLabelCell.m */; };
+		A9F1F68F1AF7D5F800A6838D /* AttributeLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F1F68C1AF7D5F800A6838D /* AttributeLabelCell.m */; };
+		A9F1F6901AF7D5F800A6838D /* AttributeLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9F1F68D1AF7D5F800A6838D /* AttributeLabelCell.xib */; };
+		A9F1F6911AF7D5F800A6838D /* AttributeLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9F1F68D1AF7D5F800A6838D /* AttributeLabelCell.xib */; };
 		BD23FE681AAD91850019E46E /* img_default_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD23FE671AAD91850019E46E /* img_default_head@2x.png */; };
 		BD23FE691AAD91850019E46E /* img_default_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD23FE671AAD91850019E46E /* img_default_head@2x.png */; };
 		BD30494F1A8C957300B3C88F /* order_point_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD30494E1A8C957300B3C88F /* order_point_unselected@2x.png */; };
@@ -2353,6 +2365,8 @@
 		375B46531A5EE70F00D7E74B /* StyleModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleModifyViewController.h; sourceTree = "<group>"; };
 		375B46541A5EE70F00D7E74B /* StyleModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleModifyViewController.m; sourceTree = "<group>"; };
 		375B46551A5EE70F00D7E74B /* StyleModifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyleModifyViewController.xib; sourceTree = "<group>"; };
+		375D05C11AF7AF51004E2286 /* icon-shop-location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-shop-location@2x.png"; path = "Shop/icon-shop-location@2x.png"; sourceTree = "<group>"; };
+		375D05C51AF7AFB0004E2286 /* icon_shop_letter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_shop_letter@2x.png"; path = "Shop/icon_shop_letter@2x.png"; sourceTree = "<group>"; };
 		3767918D1AE688DA0019E04D /* ConstructPriceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstructPriceListCell.h; sourceTree = "<group>"; };
 		3767918E1AE688DA0019E04D /* ConstructPriceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstructPriceListCell.m; sourceTree = "<group>"; };
 		3767918F1AE688DA0019E04D /* ConstructPriceListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConstructPriceListCell.xib; sourceTree = "<group>"; };
@@ -3018,6 +3032,14 @@
 		A9D654AB1A27642800A80253 /* JSONKeyMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKeyMapper.m; sourceTree = "<group>"; };
 		A9D654AC1A27642800A80253 /* JSONValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValueTransformer.h; sourceTree = "<group>"; };
 		A9D654AD1A27642800A80253 /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
+		A9F1F6801AF7C75600A6838D /* NSNumber+ASCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+ASCategory.h"; sourceTree = "<group>"; };
+		A9F1F6811AF7C75600A6838D /* NSNumber+ASCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+ASCategory.m"; sourceTree = "<group>"; };
+		A9F1F6841AF7D3C700A6838D /* AttributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeCell.h; sourceTree = "<group>"; };
+		A9F1F6851AF7D3C700A6838D /* AttributeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributeCell.m; sourceTree = "<group>"; };
+		A9F1F6861AF7D3C700A6838D /* AttributeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttributeCell.xib; sourceTree = "<group>"; };
+		A9F1F68B1AF7D5F800A6838D /* AttributeLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeLabelCell.h; sourceTree = "<group>"; };
+		A9F1F68C1AF7D5F800A6838D /* AttributeLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributeLabelCell.m; sourceTree = "<group>"; };
+		A9F1F68D1AF7D5F800A6838D /* AttributeLabelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttributeLabelCell.xib; sourceTree = "<group>"; };
 		BD23FE671AAD91850019E46E /* img_default_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_default_head@2x.png"; sourceTree = "<group>"; };
 		BD30494E1A8C957300B3C88F /* order_point_unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_point_unselected@2x.png"; sourceTree = "<group>"; };
 		BD322BC51A6E07A400DDC1C0 /* image_quality_selected_disabled@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_quality_selected_disabled@2x.png"; sourceTree = "<group>"; };
@@ -3939,6 +3961,8 @@
 		2C602C7B1ADCECF10037105E /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				375D05C51AF7AFB0004E2286 /* icon_shop_letter@2x.png */,
+				375D05C11AF7AF51004E2286 /* icon-shop-location@2x.png */,
 				2C5B75BE1AEF5F310085FA56 /* icon-grade-1@2x.png */,
 				2C5B75BF1AEF5F310085FA56 /* icon-grade-2@2x.png */,
 				2C602C911ADE345A0037105E /* filter-icon-dropdown-1.png */,
@@ -4734,6 +4758,8 @@
 		A987ED701A20920500CED7CD /* ASSupplement */ = {
 			isa = PBXGroup;
 			children = (
+				A9F1F6801AF7C75600A6838D /* NSNumber+ASCategory.h */,
+				A9F1F6811AF7C75600A6838D /* NSNumber+ASCategory.m */,
 				A987ED711A20920500CED7CD /* ALLoadingView.h */,
 				A987ED721A20920500CED7CD /* ALLoadingView.m */,
 				A987ED731A20920500CED7CD /* ALWebView.h */,
@@ -4992,6 +5018,12 @@
 				37D7FEAD1AECD24D00288C1E /* ShopCollectionCell.h */,
 				37D7FEAE1AECD24D00288C1E /* ShopCollectionCell.m */,
 				37D7FEAF1AECD24D00288C1E /* ShopCollectionCell.xib */,
+				A9F1F6841AF7D3C700A6838D /* AttributeCell.h */,
+				A9F1F6851AF7D3C700A6838D /* AttributeCell.m */,
+				A9F1F6861AF7D3C700A6838D /* AttributeCell.xib */,
+				A9F1F68B1AF7D5F800A6838D /* AttributeLabelCell.h */,
+				A9F1F68C1AF7D5F800A6838D /* AttributeLabelCell.m */,
+				A9F1F68D1AF7D5F800A6838D /* AttributeLabelCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -5856,6 +5888,7 @@
 				BD5186B41A5D0ED700BE508A /* filter_kind_selected@2x.png in Resources */,
 				BD5186FA1A5D0ED700BE508A /* menu_activity_select@2x.png in Resources */,
 				BD5186121A5D0ED700BE508A /* checkbox_checked@2x.png in Resources */,
+				A9F1F6911AF7D5F800A6838D /* AttributeLabelCell.xib in Resources */,
 				1415FA331A5CD1CB003D0C29 /* DemandCell.xib in Resources */,
 				140C9ED31ADB630C0079391A /* icon-scan@2x.png in Resources */,
 				37F2176F1AA0A4EB00664DB4 /* order_call_disable@2x.png in Resources */,
@@ -6071,6 +6104,7 @@
 				1415FA601A5CD1CB003D0C29 /* InfoPlist.strings in Resources */,
 				37ECDD301AE16CFD00BE6027 /* ConstructDetailViewController.xib in Resources */,
 				BD5185F61A5D0ED700BE508A /* icon-eye@2x.png in Resources */,
+				A9F1F68A1AF7D3C700A6838D /* AttributeCell.xib in Resources */,
 				1415FA611A5CD1CB003D0C29 /* InteractionViewController.xib in Resources */,
 				BD5187461A5D0ED700BE508A /* image_quality_unselected@2x.png in Resources */,
 				1415FA621A5CD1CB003D0C29 /* DesignerViewController.xib in Resources */,
@@ -6355,6 +6389,7 @@
 				BD5185E51A5D0ED700BE508A /* case_icon_detail@2x.png in Resources */,
 				BD5187051A5D0ED700BE508A /* menu_qr_select@2x.png in Resources */,
 				14EDB3931A3B519000E5AC77 /* VersionInfoViewController.xib in Resources */,
+				A9F1F6891AF7D3C700A6838D /* AttributeCell.xib in Resources */,
 				A9A71D641ADFF10600804AF9 /* ProductCommentCell.xib in Resources */,
 				14A3FDCC1A2CBA95002BEFF4 /* MyAskOrAnswerViewController.xib in Resources */,
 				BD5187711A5D0ED700BE508A /* userlevel0@2x.png in Resources */,
@@ -6523,6 +6558,7 @@
 				1FD3B8151AD8B558004E849F /* search_clean_history@2x.png in Resources */,
 				140C46EE1A2A3741003317AD /* MyFollowViewController.xib in Resources */,
 				BD5186211A5D0ED700BE508A /* icon-right@2x.png in Resources */,
+				A9F1F6901AF7D5F800A6838D /* AttributeLabelCell.xib in Resources */,
 				BD5187551A5D0ED700BE508A /* nav_backbtn@2x.png in Resources */,
 				BD5185DB1A5D0ED700BE508A /* case-icon-filter@2x.png in Resources */,
 				BD5186271A5D0ED700BE508A /* icon_xunzhang_2@2x.png in Resources */,
@@ -6637,6 +6673,7 @@
 				BD5186DF1A5D0ED700BE508A /* publish_designer_top@2x.png in Resources */,
 				BD51867D1A5D0ED700BE508A /* empty_privateletter@2x.png in Resources */,
 				BD5185CF1A5D0ED700BE508A /* ad_page_action@2x.png in Resources */,
+				375D05C61AF7AFB0004E2286 /* icon_shop_letter@2x.png in Resources */,
 				BD51863F1A5D0ED700BE508A /* guide_3@2x.png in Resources */,
 				A9A9F2F31AE399D700A03C9B /* product-icon-star@2x.png in Resources */,
 				BD51863B1A5D0ED700BE508A /* guide_1@2x.png in Resources */,
@@ -6649,6 +6686,7 @@
 				37ECDD2F1AE16CFD00BE6027 /* ConstructDetailViewController.xib in Resources */,
 				BD5186331A5D0ED700BE508A /* menu_icon_yuyue@2x.png in Resources */,
 				A9A9F2E91AE3893C00A03C9B /* product-icon-more@2x.png in Resources */,
+				375D05C21AF7AF51004E2286 /* icon-shop-location@2x.png in Resources */,
 				BD5186131A5D0ED700BE508A /* checkbox_checked_okk@2x.png in Resources */,
 				1FD3B8181AD8B558004E849F /* search_scancode@2x.png in Resources */,
 				14587E161A35DC9000D41236 /* ModifyPasswordViewController.xib in Resources */,
@@ -6897,6 +6935,7 @@
 				14BF81AB1AEDF4E100D6A10F /* ShopCell.m in Sources */,
 				14BF81AC1AEDF4E100D6A10F /* NaviStoreCell.m in Sources */,
 				14BF81AD1AEDF4E100D6A10F /* ShopListCell.m in Sources */,
+				A9F1F6881AF7D3C700A6838D /* AttributeCell.m in Sources */,
 				144354811A8892870093C943 /* OrderExtractViewController.m in Sources */,
 				37F0E6311A7D1AFE004CCCB2 /* MWGridViewController.m in Sources */,
 				37BF0BD91A8FAD7A001BA9E6 /* JRDesignCreditDto.m in Sources */,
@@ -6925,6 +6964,7 @@
 				1415F94A1A5CD1CB003D0C29 /* CaseManagementCell.m in Sources */,
 				1415F94B1A5CD1CB003D0C29 /* ActionSheetDatePicker.m in Sources */,
 				1415F94D1A5CD1CB003D0C29 /* UIScrollView+MJRefresh.m in Sources */,
+				A9F1F68F1AF7D5F800A6838D /* AttributeLabelCell.m in Sources */,
 				1415F94E1A5CD1CB003D0C29 /* MyDemandViewController.m in Sources */,
 				37F0E7101A7D2735004CCCB2 /* SDWebImagePrefetcher.m in Sources */,
 				1415F94F1A5CD1CB003D0C29 /* JRProfileData.m in Sources */,
@@ -7095,6 +7135,7 @@
 				1415F9B51A5CD1CB003D0C29 /* DetailAddressViewController.m in Sources */,
 				A9A71D631ADFF10600804AF9 /* ProductCommentCell.m in Sources */,
 				1415F9B61A5CD1CB003D0C29 /* InteractionCell.m in Sources */,
+				A9F1F6831AF7C75600A6838D /* NSNumber+ASCategory.m in Sources */,
 				1415F9B71A5CD1CB003D0C29 /* NSArray+JSONModel.m in Sources */,
 				1415F9B81A5CD1CB003D0C29 /* JRBidInfo.m in Sources */,
 				1415F9B91A5CD1CB003D0C29 /* ActionSheetLocalePicker.m in Sources */,
@@ -7438,6 +7479,7 @@
 				37F0E6A71A7D1F4E004CCCB2 /* PSTCollectionViewData.m in Sources */,
 				A987EDE11A20920500CED7CD /* NSMutableArray+ASCategory.m in Sources */,
 				1403809D1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m in Sources */,
+				A9F1F6821AF7C75600A6838D /* NSNumber+ASCategory.m in Sources */,
 				A9A0671F1A3D79A10059D73B /* DefaultData.m in Sources */,
 				14D973941A334DFC00E771ED /* PushMessageCell.m in Sources */,
 				A971BCA11A20825800C018D6 /* main.m in Sources */,
@@ -7449,6 +7491,7 @@
 				14D973981A33545000E771ED /* JRPushInfoMsg.m in Sources */,
 				A987EDDF1A20920500CED7CD /* NSDate+ASCategory.m in Sources */,
 				37CF672C1A4FE11D0044F709 /* NewestBidInfoCell.m in Sources */,
+				A9F1F6871AF7D3C700A6838D /* AttributeCell.m in Sources */,
 				37BA1E6D1AA73F0200A3232C /* ScoreProgress.m in Sources */,
 				1F2D500C1AD7C882005486D2 /* QRBaseViewController.m in Sources */,
 				14587E101A35D5E300D41236 /* DetailAddressViewController.m in Sources */,
@@ -7538,6 +7581,7 @@
 				A987EE3A1A2093C900CED7CD /* MJRefreshHeaderView.m in Sources */,
 				A9A71D681ADFF1F400804AF9 /* StarView.m in Sources */,
 				145471CB1A3887A400428BCB /* NewestTopicViewController.m in Sources */,
+				A9F1F68E1AF7D5F800A6838D /* AttributeLabelCell.m in Sources */,
 				1FD3B8261AD8C38F004E849F /* SearchTableViewCell.m in Sources */,
 				37D18DAD1A5819F300B41048 /* CaseImageManagemanetViewController.m in Sources */,
 				145987731A3DDDE5002AE413 /* AboutViewController.m in Sources */,
