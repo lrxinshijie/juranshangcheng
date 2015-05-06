@@ -18,6 +18,7 @@
 @property (nonatomic, assign) BOOL isDesigner;
 @property (nonatomic, assign) BOOL showUnderLine;
 @property (nonatomic, assign) BOOL showVerticalSeparator;
+@property (nonatomic, assign) NSInteger selectedBackgroundViewXMargin;
 
 
 @end

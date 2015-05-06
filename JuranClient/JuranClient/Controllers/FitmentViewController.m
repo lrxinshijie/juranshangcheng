@@ -21,16 +21,21 @@
 #import "JRDesigner.h"
 #import "CaseCollectionCell.h"
 #import "YIFullScreenScroll.h"
+#import "JRSegmentControl.h"
+#import "DesignerCell.h"
 
-@interface FitmentViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, YIFullScreenScrollDelegate,  UIScrollViewDelegate>
+@interface FitmentViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate, YIFullScreenScrollDelegate, JRSegmentControlDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableArray *datas;
-@property (nonatomic, assign) NSInteger currentPage;
-@property (nonatomic, strong) FilterView *filterView;
 
+@property (nonatomic, strong) NSMutableArray *datas;
+
+@property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, strong) JRSegmentControl *segment;
 @property (nonatomic, strong) IBOutlet UIView *emptyView;
+
+@property (nonatomic, strong) FilterView *filterView;
+@property (nonatomic, strong) FilterView *designerFilterView;
 
 @end
 
@@ -40,17 +45,12 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationItem.title = @"家装";
+    self.navigationItem.title = @"装修";
     
-    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCase defaultData:_filterData];
-    _filterView.delegate = self;
-    [self.view addSubview:_filterView];
+    [self configureSearchAndMore];
+    [self configureScan];
     
-    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 44, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar - 44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
-    _tableView.tableFooterView = [[UIView alloc] init];
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor = RGBColor(236, 236, 236);
-    [self.view addSubview:_tableView];
+    [self setupUI];
     
     __weak typeof(self) weakSelf = self;
     [_tableView addHeaderWithCallback:^{
@@ -64,30 +64,6 @@
     }];
     
     [_tableView headerBeginRefreshing];
-    
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
-    layout.itemSize = CGSizeMake(152, 133);
-    layout.minimumLineSpacing = 5;
-    layout.minimumInteritemSpacing = 5;
-    
-    self.collectionView = [[UICollectionView alloc] initWithFrame:_tableView.frame collectionViewLayout:layout];
-    _collectionView.delegate = self;
-    _collectionView.dataSource = self;
-    _collectionView.alwaysBounceVertical = YES;
-    _collectionView.backgroundColor = RGBColor(236, 236, 236);
-    
-    [_collectionView registerNib:[UINib nibWithNibName:@"CaseCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"CaseCollectionCell"];
-    
-    [_collectionView addHeaderWithCallback:^{
-        weakSelf.currentPage = 1;
-        [weakSelf loadData];
-    }];
-    
-    [_collectionView addFooterWithCallback:^{
-        weakSelf.currentPage++;
-        [weakSelf loadData];
-    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -96,18 +72,58 @@
     if ([_filterView isShow]) {
         [_filterView showSort];
     }
+    if ([_designerFilterView isShow]) {
+        [_designerFilterView showSort];
+    }
+}
+
+- (void)setupUI{
+    self.segment = [[JRSegmentControl alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 40)];
+    _segment.delegate = self;
+    _segment.selectedBackgroundViewXMargin = 8;
+    [_segment setTitleList:@[@"案例", @"设计师"]];
+    [self.view addSubview:_segment];
+    
+    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCase defaultData:self.filterData];
+    _filterView.xMargin = CGRectGetHeight(_segment.frame);
+    _filterView.frame = CGRectMake(0, CGRectGetMaxY(_segment.frame), kWindowWidth, 44);
+    _filterView.delegate = self;
+    [self.view addSubview:_filterView];
+    
+    self.designerFilterView = [[FilterView alloc] initWithType:FilterViewTypeDesigner defaultData:self.designerFilterData];
+    _designerFilterView.xMargin = CGRectGetHeight(_segment.frame);
+    _designerFilterView.frame = _filterView.frame;
+    _designerFilterView.delegate = self;
+    
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterView.frame), kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar - CGRectGetMaxY(_filterView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    _tableView.tableFooterView = [[UIView alloc] init];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.backgroundColor = RGBColor(236, 236, 236);
+    [self.view addSubview:_tableView];
+    
 }
 
 - (void)loadData{
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": kOnePageCount}];
-    [param addEntriesFromDictionary:self.filterData];
+    NSString *url = nil;
+    if (_segment.selectedIndex == 0) {
+        url = JR_PROLIST;
+        [param addEntriesFromDictionary:self.filterData];
+    }else{
+        url = JR_DESIGNERLIST;
+        [param addEntriesFromDictionary:self.designerFilterData];
+    }
     
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_PROLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *projectList = [data objectForKey:@"projectGeneralDtoList"];
-            NSMutableArray *rows = [JRCase buildUpWithValue:projectList];
+            NSMutableArray *rows = nil;
+            if (_segment.selectedIndex == 0) {
+                rows = [JRCase buildUpWithValue:[data objectForKey:@"projectGeneralDtoList"]];
+            }else{
+                rows = [JRDesigner buildUpWithValue:[data objectForKey:@"designerSearchResDtoList"]];
+            }
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];
             }else{
@@ -119,9 +135,6 @@
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
         
-        [_collectionView headerEndRefreshing];
-        [_collectionView footerEndRefreshing];
-        
     }];
 }
 
@@ -130,28 +143,25 @@
     _tableView.tableFooterView = [[UIView alloc] init];
     
     if ([_datas count] > 5) {
-        self.fullScreenScroll.scrollView = [_tableView superview] ? _tableView : _collectionView;
+        self.fullScreenScroll.scrollView = _tableView;
     }else{
         self.fullScreenScroll.scrollView = nil;
     }
     
     if (_datas.count == 0) {
-        if (_tableView.superview) {
-            CGRect frame = CGRectMake(0, 0, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar - 44);
-            frame.size.height -= CGRectGetHeight(_tableView.tableHeaderView.frame);
-            UIView *view = [[UIView alloc] initWithFrame:frame];
-            _emptyView.center = view.center;
-            [view addSubview:_emptyView];
-            _tableView.tableFooterView = view;
-        }else if (_collectionView.superview){
-            _emptyView.center = _collectionView.center;
-            [self.view addSubview:_emptyView];
-        }
+        CGRect frame = CGRectMake(0, 0, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar - 44);
+        frame.size.height -= CGRectGetHeight(_tableView.tableHeaderView.frame);
+        UIView *view = [[UIView alloc] initWithFrame:frame];
+        _emptyView.center = view.center;
+        [view addSubview:_emptyView];
+        _tableView.tableFooterView = view;
+        
     }
     
     [_tableView reloadData];
-    [_collectionView reloadData];
 }
+
+#pragma mark - CaseFilter
 
 - (NSMutableDictionary *)filterData{
     if (!_filterData) {
@@ -161,30 +171,54 @@
     return _filterData;
 }
 
+- (NSMutableDictionary*)designerFilterData{
+    if (!_designerFilterData) {
+        NSDictionary *param = [[DefaultData sharedData] objectForKey:@"designerDefaultParam"];
+        _designerFilterData = [NSMutableDictionary dictionaryWithDictionary:param];
+    }
+    return _designerFilterData;
+}
+
 - (void)clickFilterView:(FilterView *)view actionType:(FilterViewAction)action returnData:(NSDictionary *)data{
-    if (action == FilterViewActionGrid) {
-        if ([_collectionView superview]) {
-            [_collectionView removeFromSuperview];
-            [self.view addSubview:_tableView];
-            [self reloadData];
-        } else {
-            [_tableView removeFromSuperview];
-            [self.view addSubview:_collectionView];
-            [self reloadData];
+    if (view == _filterView) {
+        if (action != FilterViewActionGrid) {
+            [data.allKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
+                [_filterData setObject:data[key] forKey:key];
+            }];
         }
-        
     }else{
         [data.allKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
-            [_filterData setObject:data[key] forKey:key];
+            [_designerFilterData setObject:data[key] forKey:key];
         }];
-        
-        if (view.isGrid) {
-            [_collectionView headerBeginRefreshing];
-        }else{
-            [_tableView headerBeginRefreshing];
-        }
     }
+     [_tableView headerBeginRefreshing];
+    
 }
+
+#pragma mark - JRSegmentControlDelegate
+
+- (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
+    if (_datas) {
+        [_datas removeAllObjects];
+        [_tableView reloadData];
+    }
+    if ([_filterView isShow]) {
+        [_filterView showSort];
+    }
+    if ([_designerFilterView isShow]) {
+        [_designerFilterView showSort];
+    }
+    if (index == 0) {
+        [self.designerFilterView removeFromSuperview];
+        [self.view addSubview:self.filterView];
+    }else if (index == 1){
+        [self.filterView removeFromSuperview];
+        [self.view addSubview:self.designerFilterView];
+    }
+    [_tableView headerBeginRefreshing];
+}
+
+#pragma mark - UITableViewDelegateDataSource/Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -195,11 +229,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == [_datas count] - 1) {
-        return 275;
+    if (_segment.selectedIndex == 0) {
+        return 270 + ((indexPath.row == [_datas count] - 1)?5:0);
+    }else{
+        return 135 + ((indexPath.row == _datas.count - 1)?5:0);
     }
-    
-    return 270;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -207,58 +241,55 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIdentifier = @"CaseCell";
-    CaseCell *cell = (CaseCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-        cell = (CaseCell *)[nibs firstObject];
+    if (_segment.selectedIndex == 0) {
+        static NSString *CellIdentifier = @"CaseCell";
+        CaseCell *cell = (CaseCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+            cell = (CaseCell *)[nibs firstObject];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        JRCase *c = [_datas objectAtIndex:indexPath.row];
+        [cell fillCellWithCase:c];
+        
+        return cell;
+    }else{
+        static NSString *CellIdentifier = @"DesignerCell";
+        DesignerCell *cell = (DesignerCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+            cell = (DesignerCell *)[nibs firstObject];
+        }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        JRDesigner *d = [_datas objectAtIndex:indexPath.row];
+        [cell fillCellWithDesigner:d];
+        
+        return cell;
     }
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    JRCase *c = [_datas objectAtIndex:indexPath.row];
-    [cell fillCellWithCase:c];
-    
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    JRCase *cs = [_datas objectAtIndex:indexPath.row];
-    
-    JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-    
+    if (_segment.selectedIndex == 0) {
+        JRCase *cs = [_datas objectAtIndex:indexPath.row];
+        if ([cs isKindOfClass:[JRCase class]]) {
+            JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else{
+        JRDesigner *designer = [_datas objectAtIndex:indexPath.row];
+        if ([designer isKindOfClass:[JRDesigner class]]) {
+            DesignerDetailViewController *detailVC = [[DesignerDetailViewController alloc] init];
+            detailVC.designer = _datas[indexPath.row];
+            detailVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }
+    }
     [self.fullScreenScroll showUIBarsAnimated:YES];
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return [_datas count];
-}
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 1;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIdentifier = @"CaseCollectionCell";
-    CaseCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    JRCase *cs = [_datas objectAtIndex:indexPath.row];
-    [cell fillCellWithCase:cs];
-    
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    JRCase *cs = [_datas objectAtIndex:indexPath.row];
-    
-    JRPhotoScrollViewController *vc = [[JRPhotoScrollViewController alloc] initWithJRCase:cs andStartWithPhotoAtIndex:0];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-    
-    [self.fullScreenScroll showUIBarsAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning {

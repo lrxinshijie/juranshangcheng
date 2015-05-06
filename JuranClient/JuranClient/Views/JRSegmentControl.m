@@ -71,7 +71,8 @@
     UIButton *selectedBtn = (UIButton*)[self viewWithTag:kButtonTag];
     _selectedIndex = 0;
     [selectedBtn setSelected:YES];
-    CGRect frame = CGRectMake(0, CGRectGetHeight(self.frame) - 2, CGRectGetWidth(selectedBtn.frame), 2);
+    
+    CGRect frame = CGRectMake(_selectedBackgroundViewXMargin, CGRectGetHeight(self.frame) - 2, CGRectGetWidth(selectedBtn.frame)-2*_selectedBackgroundViewXMargin, 2);
     _selectedBackgroundView = [[UIView alloc] initWithFrame:frame];
     _selectedBackgroundView.backgroundColor = [UIColor colorWithRed:35/255.f green:104/255.f blue:182/255.f alpha:1.0f];
     _selectedBackgroundView.hidden = _showVerticalSeparator;
@@ -84,8 +85,8 @@
     if (index != _selectedIndex) {
         [UIView animateWithDuration:.3f animations:^{
             CGRect frame = _selectedBackgroundView.frame;
-            frame.origin.x = btn.frame.origin.x;
-            frame.size.width = btn.frame.size.width;
+            frame.origin.x = btn.frame.origin.x+_selectedBackgroundViewXMargin;
+            frame.size.width = btn.frame.size.width - 2*_selectedBackgroundViewXMargin;
             _selectedBackgroundView.frame = frame;
         } completion:^(BOOL finished) {
             [(UIButton*)[self viewWithTag:kButtonTag+_selectedIndex] setSelected:NO];
