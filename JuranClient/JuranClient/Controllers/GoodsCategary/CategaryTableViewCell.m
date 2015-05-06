@@ -27,7 +27,11 @@
 {
     self.titleLabel.text = item.name;
     self.cell_id = item.code;
-    [self setCellTitleNormal];
+    if (item.isSelect) {
+        [self setCellTitleSelect];
+    }else{
+        [self setCellTitleNormal];
+    }
 }
 
 - (void)setCellTitleSelect

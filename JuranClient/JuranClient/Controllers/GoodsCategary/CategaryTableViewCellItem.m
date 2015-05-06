@@ -35,6 +35,7 @@
         
         self.imgStr = [NSString stringWithFormat:@"%@",[dict objectForKey:@"imgStr"]];
         self.isOrNoFatherNode = [NSString stringWithFormat:@"%@",[dict objectForKey:@"isOrNoFatherNode"]];
+        self.isSelect = NO;
     }
     return self;
 }

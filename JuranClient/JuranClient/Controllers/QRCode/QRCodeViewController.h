@@ -24,6 +24,8 @@ typedef enum {
 - (void)qrCodeComplete:(NSString *)codeString childVCStyle:(ChildVCStyle)style;
 //扫描失败时的回调
 - (void)qrCodeError:(NSError *)error;
+//提示消失的代理
+- (void)qrCodeDismissTips;
 
 @end
 

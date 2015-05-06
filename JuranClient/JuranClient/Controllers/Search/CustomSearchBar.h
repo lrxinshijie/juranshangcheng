@@ -24,6 +24,8 @@ typedef enum {
 
 - (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index;
 
+- (void)showMenuList;
+
 @end
 
 @interface CustomSearchBar : UIView
