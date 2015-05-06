@@ -11,6 +11,8 @@
 		1403802F1A44247300221398 /* MeasureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1403802D1A44247300221398 /* MeasureViewController.xib */; };
 		1403809D1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1403809C1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m */; };
 		1403809E1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1403809C1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m */; };
+		1406F3841AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1406F3831AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m */; };
+		1406F3851AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1406F3831AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m */; };
 		140C46E81A2A296A003317AD /* ModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 140C46E61A2A296A003317AD /* ModifyViewController.m */; };
 		140C46E91A2A296A003317AD /* ModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 140C46E71A2A296A003317AD /* ModifyViewController.xib */; };
 		140C46ED1A2A3741003317AD /* MyFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 140C46EB1A2A3741003317AD /* MyFollowViewController.m */; };
@@ -755,6 +757,9 @@
 		2C9FCC251AEA2F0C001DBEEB /* NaviStoreIndoorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C9FCC231AEA2F0C001DBEEB /* NaviStoreIndoorViewController.xib */; };
 		2CC3C5AC1AF1E71C005D3208 /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC3C5AA1AF1E71C005D3208 /* BaiduMapAPI.framework */; };
 		2CC3C5AF1AF1E766005D3208 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2CC3C5AE1AF1E766005D3208 /* mapapi.bundle */; };
+		2CD7B4EB1AF8A41F00B31074 /* case-image-header@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7B4EA1AF8A41F00B31074 /* case-image-header@2x.png */; };
+		2CD7B4ED1AF913ED00B31074 /* icon_personal_setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7B4EC1AF913ED00B31074 /* icon_personal_setting@2x.png */; };
+		2CD7B4EF1AF9163500B31074 /* icon_personal_svr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD7B4EE1AF9163500B31074 /* icon_personal_svr@2x.png */; };
 		3710D5AE1A557DF00028D32A /* RealNameAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3710D5AC1A557DF00028D32A /* RealNameAuthViewController.m */; };
 		3710D5AF1A557DF00028D32A /* RealNameAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3710D5AD1A557DF00028D32A /* RealNameAuthViewController.xib */; };
 		3713F9B31ADF909800785B39 /* flter-button-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3713F9B11ADF909800785B39 /* flter-button-bg@2x.png */; };
@@ -1835,6 +1840,8 @@
 		1403802D1A44247300221398 /* MeasureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeasureViewController.xib; sourceTree = "<group>"; };
 		1403809B1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ScrollingNavbar.h"; sourceTree = "<group>"; };
 		1403809C1AAD391D007AA4B4 /* UIViewController+ScrollingNavbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ScrollingNavbar.m"; sourceTree = "<group>"; };
+		1406F3821AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHTCollectionViewWaterfallLayout.h; sourceTree = "<group>"; };
+		1406F3831AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHTCollectionViewWaterfallLayout.m; sourceTree = "<group>"; };
 		140C46E51A2A296A003317AD /* ModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyViewController.h; sourceTree = "<group>"; };
 		140C46E61A2A296A003317AD /* ModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyViewController.m; sourceTree = "<group>"; };
 		140C46E71A2A296A003317AD /* ModifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyViewController.xib; sourceTree = "<group>"; };
@@ -2316,6 +2323,9 @@
 		2C9FCC231AEA2F0C001DBEEB /* NaviStoreIndoorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NaviStoreIndoorViewController.xib; sourceTree = "<group>"; };
 		2CC3C5AA1AF1E71C005D3208 /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI.framework; sourceTree = "<group>"; };
 		2CC3C5AE1AF1E766005D3208 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = BaiduMapAPI.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
+		2CD7B4EA1AF8A41F00B31074 /* case-image-header@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "case-image-header@2x.png"; sourceTree = "<group>"; };
+		2CD7B4EC1AF913ED00B31074 /* icon_personal_setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_personal_setting@2x.png"; sourceTree = "<group>"; };
+		2CD7B4EE1AF9163500B31074 /* icon_personal_svr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_personal_svr@2x.png"; sourceTree = "<group>"; };
 		2CFCD6DE1AE8A9740011DFF9 /* UserLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocation.h; sourceTree = "<group>"; };
 		2CFCD6DF1AE8A9740011DFF9 /* UserLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocation.m; sourceTree = "<group>"; };
 		3710D5AB1A557DF00028D32A /* RealNameAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealNameAuthViewController.h; sourceTree = "<group>"; };
@@ -4656,6 +4666,8 @@
 		A987ED6C1A20920500CED7CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1406F3821AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.h */,
+				1406F3831AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m */,
 				1472FF7A1AE4AB8E00735929 /* LocationManager.h */,
 				1472FF7B1AE4AB8E00735929 /* LocationManager.m */,
 				14B5C0481ACE31D70043BB44 /* DeviceHardware.h */,
@@ -5361,6 +5373,7 @@
 		BD5184D01A5D0ED600BE508A /* Case */ = {
 			isa = PBXGroup;
 			children = (
+				2CD7B4EA1AF8A41F00B31074 /* case-image-header@2x.png */,
 				14172EBF1AB43EE800E60BD1 /* line_gray@2x.png */,
 				14172EC01AB43EE800E60BD1 /* line_white@2x.png */,
 				BD5184D11A5D0ED600BE508A /* ad_page_action@2x.png */,
@@ -5468,6 +5481,8 @@
 		BD5185211A5D0ED700BE508A /* Personal */ = {
 			isa = PBXGroup;
 			children = (
+				2CD7B4EE1AF9163500B31074 /* icon_personal_svr@2x.png */,
+				2CD7B4EC1AF913ED00B31074 /* icon_personal_setting@2x.png */,
 				37D7FEAA1AECC2EC00288C1E /* icon_location1@2x.png */,
 				BD5185221A5D0ED700BE508A /* arrow_down@2x.png */,
 				BD5185231A5D0ED700BE508A /* arrow_up@2x.png */,
@@ -6449,6 +6464,7 @@
 				14ABFBE61A25B63400C4AF65 /* LoginViewController.xib in Resources */,
 				14FE2DED1A384E2700B31FBA /* service.html in Resources */,
 				BD51876F1A5D0ED700BE508A /* tabbar_subject_hl@2x.png in Resources */,
+				2CD7B4EB1AF8A41F00B31074 /* case-image-header@2x.png in Resources */,
 				BD5186ED1A5D0ED700BE508A /* request_reviewing@2x.png in Resources */,
 				37ECDD1D1AE1418F00BE6027 /* MyDemandCopyViewController.xib in Resources */,
 				37D18DAE1A5819F300B41048 /* CaseImageManagemanetViewController.xib in Resources */,
@@ -6618,6 +6634,7 @@
 				140C9EB91ADB5DAD0079391A /* icon-nav-finish-active@2x.png in Resources */,
 				1FD3B8501AD8FB58004E849F /* TestSearchViewController.xib in Resources */,
 				1FD3B8141AD8B558004E849F /* search_cancel@2x.png in Resources */,
+				2CD7B4ED1AF913ED00B31074 /* icon_personal_setting@2x.png in Resources */,
 				145471D31A38944F00428BCB /* QuestionViewController.xib in Resources */,
 				A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */,
 				14321E601A61235B0065E8C3 /* CaseImagePreviewViewController.xib in Resources */,
@@ -6831,6 +6848,7 @@
 				BD5185DD1A5D0ED700BE508A /* case-icon-order@2x.png in Resources */,
 				1453C8C41A24A74200D817BC /* TATopicCell.xib in Resources */,
 				BD5186231A5D0ED700BE508A /* icon_isauth@2x.png in Resources */,
+				2CD7B4EF1AF9163500B31074 /* icon_personal_svr@2x.png in Resources */,
 				BD51874F1A5D0ED700BE508A /* sns_icon_24_s@2x.png in Resources */,
 				14361E561A343F5F00F9BD94 /* BaseAddressViewController.xib in Resources */,
 				37D18DBD1A583AF600B41048 /* CaseIntroduceViewController.xib in Resources */,
@@ -7075,6 +7093,7 @@
 				1415F9881A5CD1CB003D0C29 /* ActionSheetCustomPicker.m in Sources */,
 				A9A9F2DE1AE361CC00A03C9B /* ProductCell.m in Sources */,
 				1415F9891A5CD1CB003D0C29 /* NSArray+ASCategory.m in Sources */,
+				1406F3851AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				37A0F8181A6B89A800611760 /* JRActivity.m in Sources */,
 				1415F98A1A5CD1CB003D0C29 /* UIScrollView+MJExtension.m in Sources */,
 				1415F98B1A5CD1CB003D0C29 /* UITextField+ASCategory.m in Sources */,
@@ -7425,6 +7444,7 @@
 				37F0E6B31A7D1F4E004CCCB2 /* PSTGridLayoutItem.m in Sources */,
 				A9A067141A3D76DA0059D73B /* ActionSheetCustomPicker.m in Sources */,
 				1FD3B8471AD8F878004E849F /* FMDatabase.m in Sources */,
+				1406F3841AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m in Sources */,
 				371FBEEB1A6A357700635D3D /* JRWiki.m in Sources */,
 				A9C012061ABC601900DCF9C3 /* IQUIWindow+Hierarchy.m in Sources */,
 				A987EDDE1A20920500CED7CD /* NSArray+ASCategory.m in Sources */,
@@ -7918,7 +7938,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "034a2c8f-c302-429e-a7a2-cfcc189987f5";
+				PROVISIONING_PROFILE = "8ff8e1b2-afbd-40bc-9dcc-4ef6164050f4";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv64";
 				VERSIONING_SYSTEM = "";

@@ -43,7 +43,8 @@
 @property (readwrite, nonatomic, strong) UIColor *foreColor;
 @property (readwrite, nonatomic) NSTextAlignment alignment;
 @property (readwrite, nonatomic ,assign) BOOL isRead;
-@property (readwrite, nonatomic ,assign) NSInteger unreadNum;
+@property (readwrite, nonatomic ,assign) NSInteger msgNum;
+@property (readwrite, nonatomic, copy) VoidBlock block;
 
 + (instancetype) menuItem:(NSString *) title
                     image:(UIImage *) image
@@ -55,7 +56,9 @@
                    isRead:(BOOL)flag
               numOfUnread:(NSInteger)num
                    target:(id)target
-                   action:(SEL) action;
+                   action:(SEL) action
+                    block:(VoidBlock)shareBlock;
+                
 
 @end
 

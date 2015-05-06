@@ -55,7 +55,7 @@
     
     self.dataArray_History = [NSMutableArray arrayWithCapacity:0];
     self.dataArray_SearchRange = [NSMutableArray arrayWithCapacity:0];
-    //TODO:测试数据，请删除
+
     NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:@"在作品案例中搜索",@"searchRange",@"",@"count",nil];
     NSDictionary * dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"在商品中搜索",@"searchRange",@"",@"count",nil];
     NSDictionary * dict2 = [NSDictionary dictionaryWithObjectsAndKeys:@"在店铺中搜索",@"searchRange",@"",@"count",nil];

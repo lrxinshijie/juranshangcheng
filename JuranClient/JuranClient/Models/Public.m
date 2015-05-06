@@ -40,6 +40,8 @@
 #import "NaviStoreListViewController.h"
 #import "QRBaseViewController.h"
 #import "MyDemandCopyViewController.h"
+#import "JRServiceViewController.h"
+#import "SearchViewController.h"
 
 @implementation Public
 
@@ -571,19 +573,27 @@
         BidListViewController *vc = [[BidListViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
-    }else if (type == 19){
+    }else if (type == 19){//门店导航
 #ifndef kJuranDesigner
         NaviStoreListViewController *vc = [[NaviStoreListViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
 #endif
-    }else if (type == 28){
+    }else if (type == 25){//居然服务
+        JRServiceViewController *vc = [[JRServiceViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:vc animated:YES];
+    }else if (type == 26){//全站搜索
+        SearchViewController *vc = [[SearchViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:vc animated:YES];
+    }else if (type == 28){//会员需求
 #ifndef kJuranDesigner
         MyDemandCopyViewController *vc = [[MyDemandCopyViewController alloc]init];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
 #endif
-    }else if (type == 40){
+    }else if (type == 40){//扫一扫
 #ifndef kJuranDesigner
         QRBaseViewController *vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
         vc.hidesBottomBarWhenPushed = YES;

@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "PushMessageViewController.h"
 #import "PrivateMessageViewController.h"
+//#import "UIViewController+Login.h"
 
 @interface UIViewController ()
 
@@ -18,89 +19,109 @@
 
 @implementation UIViewController (Menu)
 
-- (void)showAppMenuIsShare:(BOOL)isFlag
+- (void)showAppMenu:(VoidBlock)shareBlock
 {
     if (![JRUser isLogin]) {
-        [self createAppMenuIsShare:isFlag isRead:YES numOfMsg:0];
+        [self createAppMenuWithShareBlock:shareBlock isRead:YES numOfMsg:0];
     }else {
         [self showHUD];
-        NSString *url = JR_MYCENTERINFO;
-        [[ALEngine shareEngine] pathURL:url parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
             [self hideHUD];
             if (!error) {
                 if ([data isKindOfClass:[NSDictionary class]]) {
                     BOOL isRead = ![data getBoolValueForKey:@"newPushMsgCount" defaultValue:NO];
                     NSInteger num = [data getIntValueForKey:@"newPrivateLetterCount" defaultValue:0];
-                    [self createAppMenuIsShare:isFlag isRead:isRead numOfMsg:num];
+                    [self createAppMenuWithShareBlock:shareBlock isRead:isRead numOfMsg:num];
                 }
+            }else{
+                [self createAppMenuWithShareBlock:shareBlock isRead:YES numOfMsg:0];
             }
         }];
     }
     
 }
 
-- (void)createAppMenuIsShare:(BOOL)isFlag isRead:(BOOL)isRead numOfMsg:(NSInteger)num {
+- (void)createAppMenuWithShareBlock:(VoidBlock)shareBlock
+                             isRead:(BOOL)isRead
+                           numOfMsg:(NSInteger)num {
     [KxMenu dismissMenu];
     NSMutableArray *menuItems = [[NSMutableArray alloc]init];
-    if (isFlag) {
+    if (shareBlock) {
         [menuItems addObject:[KxMenuItem menuItem:@"分享"
                                             image:[UIImage imageNamed:@"menu-icon-share"]
+                                           isRead:YES
+                                      numOfUnread:0
                                            target:self
-                                           action:@selector(onShare:)]];
+                                           action:@selector(onShare:)
+                                            block:shareBlock]];
     }
     
-    NSArray *menus =
-    @[[KxMenuItem menuItem:@"通知"
-                     image:[UIImage imageNamed:@"menu-icon-notice"]
-                    isRead:isRead
-               numOfUnread:0
-                    target:self
-                    action:@selector(onNotice:)],
-      
-      [KxMenuItem menuItem:@"私信"
-                     image:[UIImage imageNamed:@"menu-icon-msg"]
-                    isRead:YES
-               numOfUnread:num
-                    target:self
-                    action:@selector(onMsg:)],
-      
-      [KxMenuItem menuItem:@"平台客服"
-                     image:[UIImage imageNamed:@"menu-icon-svr"]
-                    target:self
-                    action:@selector(onCustomService:)],
-      
-      [KxMenuItem menuItem:@"首页"
-                     image:[UIImage imageNamed:@"menu-icon-home"]
-                    target:self
-                    action:@selector(onHome:)],
-      ];
-    [menuItems addObjectsFromArray:menus];
+    [menuItems addObject:[KxMenuItem menuItem:@"通知"
+                                        image:[UIImage imageNamed:@"menu-icon-notice"]
+                                       isRead:isRead
+                                  numOfUnread:0
+                                       target:self
+                                       action:@selector(onNotice:)
+                                        block:nil]];
+    
+    [menuItems addObject:[KxMenuItem menuItem:@"私信"
+                                        image:[UIImage imageNamed:@"menu-icon-msg"]
+                                       isRead:YES
+                                  numOfUnread:num
+                                       target:self
+                                       action:@selector(onMsg:)
+                                        block:nil]];
+    
+    [menuItems addObject:[KxMenuItem menuItem:@"平台客服"
+                                        image:[UIImage imageNamed:@"menu-icon-svr"]
+                                       target:self
+                                       action:@selector(onCustomService:)]];
+    
+    if (![[NSString
+           stringWithUTF8String:object_getClassName(self)]  isEqual: @"RootViewController"]) {
+        [menuItems addObject:[KxMenuItem menuItem:@"首页"
+                                            image:[UIImage imageNamed:@"menu-icon-home"]
+                                           target:self
+                                           action:@selector(onHome:)]];
+    }
     
     [self.navigationController.view setClipsToBounds:NO];
     [KxMenu showMenuInView:self.navigationController.view
                   fromRect:CGRectMake(kWindowWidth-35, 52, 0, 0)
                  menuItems:menuItems];
+    
 }
 
 - (void) onShare:(id)sender
 {
-    NSLog(@"%@", sender);
+    KxMenuItem *shareItem = (KxMenuItem *)sender;
+    if (shareItem.block) {
+        shareItem.block();
+    }
 }
 
 - (void) onNotice:(id)sender
 {
+    if (![self checkLogin]) {
+        return;
+    }
     PushMessageViewController *vc = [[PushMessageViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
-    [[ApplicationDelegate tabBarController].viewControllers[4] pushViewController:vc animated:YES];
-    [ApplicationDelegate.tabBarController setSelectedIndex:4];
+//    [[ApplicationDelegate tabBarController].viewControllers[4] pushViewController:vc animated:YES];
+//    [ApplicationDelegate.tabBarController setSelectedIndex:4];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void) onMsg:(id)sender
 {
+    if (![self checkLogin]) {
+        return;
+    }
     PrivateMessageViewController *vc = [[PrivateMessageViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
-    [[ApplicationDelegate tabBarController].viewControllers[4] pushViewController:vc animated:YES];
-    [ApplicationDelegate.tabBarController setSelectedIndex:4];
+//    [[ApplicationDelegate tabBarController].viewControllers[4] pushViewController:vc animated:YES];
+//    [ApplicationDelegate.tabBarController setSelectedIndex:4];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void) onCustomService:(id)sender
@@ -110,8 +131,9 @@
 
 - (void) onHome:(id)sender
 {
+    [[ApplicationDelegate tabBarController].viewControllers[0] setNavigationBarHidden:NO];
+    [[ApplicationDelegate tabBarController].viewControllers[0] popToRootViewControllerAnimated:NO];
     [ApplicationDelegate.tabBarController setSelectedIndex:0];
-    [[ApplicationDelegate tabBarController].viewControllers[0] popToRootViewControllerAnimated:YES];
 }
 
 //JR_CUSTOMER_SERVICE
