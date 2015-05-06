@@ -712,6 +712,9 @@
 		1FF00FA71AE4B74300D54914 /* third_bg_header_middle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF00FA31AE4B74300D54914 /* third_bg_header_middle@2x.png */; };
 		1FF00FA81AE4B74300D54914 /* third_bg_header_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF00FA41AE4B74300D54914 /* third_bg_header_right@2x.png */; };
 		1FF00FAE1AE5020600D54914 /* SecondLevelItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF00FAD1AE5020600D54914 /* SecondLevelItem.m */; };
+		2C1D10481AFA26D7005712D2 /* ProductFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D10461AFA26D7005712D2 /* ProductFilterViewController.m */; };
+		2C1D10491AFA26D7005712D2 /* ProductFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D10471AFA26D7005712D2 /* ProductFilterViewController.xib */; };
+		2C1D104C1AFA3063005712D2 /* ProductFilterData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D104B1AFA3063005712D2 /* ProductFilterData.m */; };
 		2C3D51C61AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D51C41AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m */; };
 		2C3D51C71AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D51C51AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib */; };
 		2C5B75C01AEF5F310085FA56 /* icon-grade-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5B75BE1AEF5F310085FA56 /* icon-grade-1@2x.png */; };
@@ -2269,6 +2272,11 @@
 		1FF00FA41AE4B74300D54914 /* third_bg_header_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "third_bg_header_right@2x.png"; sourceTree = "<group>"; };
 		1FF00FAC1AE5020600D54914 /* SecondLevelItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondLevelItem.h; sourceTree = "<group>"; };
 		1FF00FAD1AE5020600D54914 /* SecondLevelItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondLevelItem.m; sourceTree = "<group>"; };
+		2C1D10451AFA26D7005712D2 /* ProductFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductFilterViewController.h; sourceTree = "<group>"; };
+		2C1D10461AFA26D7005712D2 /* ProductFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductFilterViewController.m; sourceTree = "<group>"; };
+		2C1D10471AFA26D7005712D2 /* ProductFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductFilterViewController.xib; sourceTree = "<group>"; };
+		2C1D104A1AFA3063005712D2 /* ProductFilterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductFilterData.h; sourceTree = "<group>"; };
+		2C1D104B1AFA3063005712D2 /* ProductFilterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductFilterData.m; sourceTree = "<group>"; };
 		2C3D51C31AE63E7C0000F3F4 /* NaviStoreSelCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviStoreSelCityViewController.h; sourceTree = "<group>"; };
 		2C3D51C41AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaviStoreSelCityViewController.m; sourceTree = "<group>"; };
 		2C3D51C51AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NaviStoreSelCityViewController.xib; sourceTree = "<group>"; };
@@ -4738,6 +4746,8 @@
 				A9A9F2E21AE3679E00A03C9B /* JRProduct.m */,
 				2CFCD6DE1AE8A9740011DFF9 /* UserLocation.h */,
 				2CFCD6DF1AE8A9740011DFF9 /* UserLocation.m */,
+				2C1D104A1AFA3063005712D2 /* ProductFilterData.h */,
+				2C1D104B1AFA3063005712D2 /* ProductFilterData.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -5144,6 +5154,9 @@
 				1472FF7E1AE4EC5900735929 /* ProductLetterViewController.h */,
 				1472FF7F1AE4EC5900735929 /* ProductLetterViewController.m */,
 				1472FF801AE4EC5900735929 /* ProductLetterViewController.xib */,
+				2C1D10451AFA26D7005712D2 /* ProductFilterViewController.h */,
+				2C1D10461AFA26D7005712D2 /* ProductFilterViewController.m */,
+				2C1D10471AFA26D7005712D2 /* ProductFilterViewController.xib */,
 			);
 			name = Product;
 			sourceTree = "<group>";
@@ -6378,6 +6391,7 @@
 				2C602C751ADCE6FD0037105E /* ShopListViewController.xib in Resources */,
 				BD51861F1A5D0ED700BE508A /* icon-designer-id@2x.png in Resources */,
 				37F2176E1AA0A4EB00664DB4 /* order_call_disable@2x.png in Resources */,
+				2C1D10491AFA26D7005712D2 /* ProductFilterViewController.xib in Resources */,
 				2C91E9101ADB754400B542DC /* icon-map-node@2x.png in Resources */,
 				BD5187251A5D0ED700BE508A /* service_highlighted_9@2x.png in Resources */,
 				BD5187111A5D0ED700BE508A /* service_highlighted_10@2x.png in Resources */,
@@ -7397,6 +7411,7 @@
 				A9A53B0D1A46FE7C008D75B8 /* UIBubbleHeaderTableViewCell.m in Sources */,
 				1419DD011A874AB900B9E47B /* OrderActionView.m in Sources */,
 				1FCD24C01AE5FDD500FF18E9 /* CustomSecLevelView.m in Sources */,
+				2C1D104C1AFA3063005712D2 /* ProductFilterData.m in Sources */,
 				1FD3B84A1AD8F878004E849F /* FMDatabaseQueue.m in Sources */,
 				A987EDE21A20920500CED7CD /* NSMutableString+ASCategory.m in Sources */,
 				A9C0120A1ABC601900DCF9C3 /* IQKeyboardReturnKeyHandler.m in Sources */,
@@ -7427,6 +7442,7 @@
 				37F165E61A89005700F624FA /* OrderCommentViewController.m in Sources */,
 				147A9FB21A415DD400132804 /* PrivateLetterViewController.m in Sources */,
 				1456C8941A5E227A0061F0FD /* BidListViewController.m in Sources */,
+				2C1D10481AFA26D7005712D2 /* ProductFilterViewController.m in Sources */,
 				1FAC01191AE8E44C0067E12A /* DataItem.m in Sources */,
 				A987EE241A20928B00CED7CD /* Reachability.m in Sources */,
 				A9A067131A3D76DA0059D73B /* AbstractActionSheetPicker.m in Sources */,
