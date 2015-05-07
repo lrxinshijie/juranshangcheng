@@ -164,8 +164,10 @@
             if (store) {
                 _storeNameLabel.text = store.stallName;
                 CLLocation *location = [[CLLocation alloc] initWithLatitude:store.latitude longitude:store.longitude];
+#ifndef kJuranDesigner
                 double distance = [ApplicationDelegate.gLocation.location distanceFromLocation:location];
                 _storeLocationLabel.text = [NSString stringWithFormat:@"%.2fkm", distance/1000];
+#endif
             }
         }
     }];
