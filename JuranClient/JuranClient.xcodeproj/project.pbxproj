@@ -942,6 +942,7 @@
 		37DFE3991AE924CF00268278 /* ConstructPriceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DFE3961AE924CF00268278 /* ConstructPriceListViewController.m */; };
 		37DFE39A1AE924CF00268278 /* ConstructPriceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DFE3971AE924CF00268278 /* ConstructPriceListViewController.xib */; };
 		37DFE39B1AE924CF00268278 /* ConstructPriceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DFE3971AE924CF00268278 /* ConstructPriceListViewController.xib */; };
+		37E16D4B1AF9F4F3005713DA /* icon_comment_number@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E16D4A1AF9F4F3005713DA /* icon_comment_number@2x.png */; };
 		37E589821AB1B73200CB5FA4 /* WikiDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */; };
 		37E589831AB1B73200CB5FA4 /* WikiDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */; };
 		37E589841AB1B73200CB5FA4 /* WikiDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */; };
@@ -2491,6 +2492,7 @@
 		37DFE3951AE924CF00268278 /* ConstructPriceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstructPriceListViewController.h; sourceTree = "<group>"; };
 		37DFE3961AE924CF00268278 /* ConstructPriceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstructPriceListViewController.m; sourceTree = "<group>"; };
 		37DFE3971AE924CF00268278 /* ConstructPriceListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConstructPriceListViewController.xib; sourceTree = "<group>"; };
+		37E16D4A1AF9F4F3005713DA /* icon_comment_number@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_comment_number@2x.png"; sourceTree = "<group>"; };
 		37E5897F1AB1B73200CB5FA4 /* WikiDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiDetailViewController.h; sourceTree = "<group>"; };
 		37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiDetailViewController.m; sourceTree = "<group>"; };
 		37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WikiDetailViewController.xib; sourceTree = "<group>"; };
@@ -5373,6 +5375,7 @@
 		BD5184D01A5D0ED600BE508A /* Case */ = {
 			isa = PBXGroup;
 			children = (
+				37E16D4A1AF9F4F3005713DA /* icon_comment_number@2x.png */,
 				2CD7B4EA1AF8A41F00B31074 /* case-image-header@2x.png */,
 				14172EBF1AB43EE800E60BD1 /* line_gray@2x.png */,
 				14172EC01AB43EE800E60BD1 /* line_white@2x.png */,
@@ -6614,6 +6617,7 @@
 				14CCB3061ADD06B50041AA38 /* TopShopCell.xib in Resources */,
 				A971BC9F1A20825800C018D6 /* InfoPlist.strings in Resources */,
 				BD5185F51A5D0ED700BE508A /* icon-eye@2x.png in Resources */,
+				37E16D4B1AF9F4F3005713DA /* icon_comment_number@2x.png in Resources */,
 				BD5185C91A5D0ED700BE508A /* Icon.png in Resources */,
 				3713F9B31ADF909800785B39 /* flter-button-bg@2x.png in Resources */,
 				14C855481A2E196B00A15ED9 /* InteractionViewController.xib in Resources */,
