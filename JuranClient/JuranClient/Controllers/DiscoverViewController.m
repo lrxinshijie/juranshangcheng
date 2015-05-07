@@ -71,6 +71,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveReloadNotification:) name:kNotificationNameQuestionReloadData object:nil];
     
+    [self configureScan];
     [self configureSearchAndMore];
     
     [self setupUI];

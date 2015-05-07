@@ -133,8 +133,8 @@
     _tableView.hidden = isHide;
     [UIView animateWithDuration:.2 animations:^{
         _tableView.alpha = isHide ? 0 : 1;
-        _sortButton.selected = !isHide;
     } completion:^(BOOL finished) {
+        _sortButton.selected = !isHide;
         _tableView.hidden = isHide;
     }];
     
