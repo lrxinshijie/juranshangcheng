@@ -146,6 +146,9 @@
             case FilterViewTypeBidInfo:
                 _sections = [[DefaultData sharedData] objectForKey:@"bidInfoSection"];
                 break;
+            case FilterViewTypeCaseWithoutGrid:
+                _sections = [[DefaultData sharedData] objectForKey:@"caseSection"];
+                break;
             default:
                 break;
         }

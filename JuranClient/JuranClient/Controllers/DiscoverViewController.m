@@ -71,6 +71,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveReloadNotification:) name:kNotificationNameQuestionReloadData object:nil];
     
+    [self configureScan];
     [self configureSearchAndMore];
     
     [self setupUI];
@@ -84,6 +85,7 @@
     _segment.delegate = self;
     
     self.quesgtionFilterView = [[QuestionFilterView alloc] initWithDefaultData:self.questionFilterData];
+    _quesgtionFilterView.xMargin = 40;
     _quesgtionFilterView.delegate = self;
     [_questionHeaderView addSubview:_quesgtionFilterView];
     
@@ -177,6 +179,9 @@
 #pragma mark - JRSegmentControlDelegate
 
 - (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
+    if ([_quesgtionFilterView isShow]) {
+        [_quesgtionFilterView showSort];
+    }
     if (_datas) {
         [_datas removeAllObjects];
         [_tableView reloadData];
@@ -193,11 +198,9 @@
     }else if (index == 3){
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
-    if ([_quesgtionFilterView isShow]) {
-        [_quesgtionFilterView showSort];
-    }
     _wikiFilterButton.hidden = index != 1;
     [_tableView headerBeginRefreshing];
+    
 }
 
 #pragma mark - UITableViewDataSource/Delegate

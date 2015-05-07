@@ -18,6 +18,7 @@
 
 @interface QuestionFilterView : UIView
 
+@property (nonatomic, assign) NSInteger xMargin;
 @property (nonatomic, assign) id<QuestionFilterViewDelegate> delegate;
 
 -(id)initWithDefaultData:(NSDictionary *)defaultData;
