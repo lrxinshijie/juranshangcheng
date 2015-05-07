@@ -21,5 +21,6 @@
 - (NSDate *)getDateValueForKey:(NSString *)key defaultValue:(NSDate *)defaultValue;
 - (NSString *)buildUpWithParameters;
 - (NSArray *)getArrayValueForKey:(NSString *)key defaultValue:(NSArray *)defaultValue;
-
+- (NSInteger)getIntegerValueForKey:(NSString *)key defaultValue:(NSInteger)defaultValue;
+- (long)getLongValueForKey:(NSString *)key defaultValue:(long)defaultValue;
 @end

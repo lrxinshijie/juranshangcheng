@@ -45,18 +45,19 @@
         CGFloat width = kWindowWidth;
         
 //        if (([Public isDesignerApp] && type == FilterViewTypeCase) || type == FilterViewTypeCaseSearch) {
-        if (type == FilterViewTypeCase || type == FilterViewTypeCaseSearch) {
-            width = kWindowWidth - 44;
-            UIView *gridView = [[UIView alloc] initWithFrame:CGRectMake(width, 0, 44, 44)];
-            gridView.backgroundColor = [UIColor clearColor];
-            UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 1, 44)];
-            lineImageView.backgroundColor = RGBColor(213, 213, 213);
-            [gridView addSubview:lineImageView];
-            
-            self.listButton = [gridView buttonWithFrame:gridView.bounds target:self action:@selector(onList) image:[UIImage imageNamed:@"icon-list"]];
-            [gridView addSubview:_listButton];
-            [self addSubview:gridView];
-        }
+        
+//        if (type == FilterViewTypeCase || type == FilterViewTypeCaseSearch) {
+//            width = kWindowWidth - 44;
+//            UIView *gridView = [[UIView alloc] initWithFrame:CGRectMake(width, 0, 44, 44)];
+//            gridView.backgroundColor = [UIColor clearColor];
+//            UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 1, 44)];
+//            lineImageView.backgroundColor = RGBColor(213, 213, 213);
+//            [gridView addSubview:lineImageView];
+//            
+//            self.listButton = [gridView buttonWithFrame:gridView.bounds target:self action:@selector(onList) image:[UIImage imageNamed:@"icon-list"]];
+//            [gridView addSubview:_listButton];
+//            [self addSubview:gridView];
+//        }
         
         width /= 2;
         self.sortButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -94,13 +95,24 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        self.tableView = [self tableViewWithFrame:CGRectMake(0, 108, kWindowWidth, CGRectGetHeight(self.viewController.view.frame)-44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+        self.tableView = [self tableViewWithFrame:CGRectMake(0, 108+_xMargin, kWindowWidth, CGRectGetHeight(self.viewController.view.frame)-44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
         _tableView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8];
         _tableView.hidden = YES;
         UINavigationController *nav = self.viewController.navigationController;
+        
+        UIView *bgView = [[UIView alloc] initWithFrame:self.tableView.bounds];
+        bgView.backgroundColor = [UIColor clearColor];
+        UIButton *btn = [bgView buttonWithFrame:bgView.bounds target:self action:@selector(onHidden:) image:nil];
+        [bgView addSubview:btn];
+        _tableView.backgroundView = bgView;
+        
         [nav.view addSubview:_tableView];
     }
     return _tableView;
+}
+
+- (void)onHidden:(id)sender{
+    [self showSort];
 }
 
 - (void)clickButton:(UIButton *)btn{
@@ -121,8 +133,8 @@
     _tableView.hidden = isHide;
     [UIView animateWithDuration:.2 animations:^{
         _tableView.alpha = isHide ? 0 : 1;
-        _sortButton.selected = !isHide;
     } completion:^(BOOL finished) {
+        _sortButton.selected = !isHide;
         _tableView.hidden = isHide;
     }];
     

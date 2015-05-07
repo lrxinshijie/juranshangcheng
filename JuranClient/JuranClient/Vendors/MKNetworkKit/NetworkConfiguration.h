@@ -20,12 +20,12 @@
 
 
 /* UAT */
-//#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
-//#define JR_SERVICE  @"http://54.223.161.28:8080"
+#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
+#define JR_SERVICE  @"http://54.223.161.28:8080"
 
 //SIT内网
-#define JR_SERVICE  @"http://10.199.5.241:8083"
-#define JR_IMAGE_SERVICE  @"http://10.199.5.57:8080"
+//#define JR_SERVICE  @"http://10.199.5.241:8083"
+//#define JR_IMAGE_SERVICE  @"http://10.199.5.57:8080"
 //SIT外网
 //#define JR_SERVICE  @"http://124.193.207.194:8093"
 //#define JR_IMAGE_SERVICE  @"http://124.193.207.194:8081"
@@ -36,6 +36,9 @@
 /* Production */
 //#define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
 //#define JR_SERVICE  @"http://app.juran.cn:81"
+
+//接口联调环境
+//#define JR_SERVICE  @"http://10.199.38.140:9080"
 
 #define JR_LOGIN [NSString stringWithFormat:@"%@/member/login.json",JR_SERVICE]
 #define JR_REGIST_SENDSMS [NSString stringWithFormat:@"%@/member/sendSmsAuth.json",JR_SERVICE]
@@ -213,5 +216,5 @@
 #define JR_BRAND_LIST [NSString stringWithFormat:@"%@/mall/getByBrandClassification.json",JR_SERVICE]
 #define JR_CUSTOMER_SERVICE [NSString stringWithFormat:@"%@/shop/platformCustomerService.json",JR_SERVICE]
 #define JR_SEARCH_PRODUCT [NSString stringWithFormat:@"%@/search/searchGoods.json",JR_SERVICE]
-
+#define JR_SEARCH_PRODUCT_IN_SHOP [NSString stringWithFormat:@"%@/search/searchShopGoods.json",JR_SERVICE]
 #endif

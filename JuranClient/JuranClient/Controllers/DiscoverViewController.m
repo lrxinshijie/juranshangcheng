@@ -56,6 +56,13 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if ([_quesgtionFilterView isShow]) {
+        [_quesgtionFilterView showSort];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -64,6 +71,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveReloadNotification:) name:kNotificationNameQuestionReloadData object:nil];
     
+    [self configureScan];
     [self configureSearchAndMore];
     
     [self setupUI];
@@ -185,6 +193,9 @@
         
     }else if (index == 3){
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    }
+    if ([_quesgtionFilterView isShow]) {
+        [_quesgtionFilterView showSort];
     }
     _wikiFilterButton.hidden = index != 1;
     [_tableView headerBeginRefreshing];

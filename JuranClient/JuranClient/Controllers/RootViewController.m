@@ -68,17 +68,28 @@
         [self hideHUD];
         if (!error) {
             NSArray *bannerList = [data objectForKey:@"bannerList"];
+            if (_bannerView) {
+                [_bannerView removeFromSuperview];
+            }
             if (bannerList.count > 0) {
-                if (_bannerView) {
-                    [_bannerView removeFromSuperview];
-                }
-                
                 self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
                 self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentRight];
                 _bannerView.delegate = self;
                 [_headerView addSubview:_bannerView];
+                
+                CGRect frame = _menuView.frame;
+                frame.origin.y = CGRectGetMaxY(self.bannerView.frame);
+                _menuView.frame = frame;
+            }else{
+                CGRect frame = _menuView.frame;
+                frame.origin.y = 0;
+                _menuView.frame = frame;
             }
             
+            CGRect frame = _headerView.frame;
+            frame.size.height = CGRectGetMaxY(_menuView.frame);
+            _headerView.frame = frame;
+            _tableView.tableHeaderView = _headerView;
         }
         [self loadData];
     }];

@@ -18,6 +18,7 @@
 #import "AppDelegate.h"
 #import "UIViewController+Login.h"
 #import "UIViewController+Menu.h"
+#import "ProductFilterViewController.h"
 
 @interface NaviStoreListViewController ()<BMKMapViewDelegate>
 
@@ -26,6 +27,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnChangeCity;
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
 @property (strong, nonatomic) BMKPointAnnotation *selfAnnotation;
+@property (strong, nonatomic) NSString *cityName;
 //@property (strong, nonatomic) UserLocation *location;
 - (IBAction)naviLeftClick:(id)sender;
 - (IBAction)naviRightClick:(id)sender;
@@ -53,6 +55,7 @@
         _btnChangeCity.hidden = YES;
     if (_naviType == NaviTypeStore) {
         self.navigationItem.title = @"门店导航";
+        _cityName = @"北京市";
         [self loadData];
     }
     else {
@@ -66,7 +69,7 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"cityName": ApplicationDelegate.gLocation.cityName};
+    NSDictionary *param = @{@"cityName": _cityName};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_NAVI_STORE_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
@@ -105,7 +108,7 @@
         annotation.title = store.storeName;
         [_mapView addAnnotation:annotation];
     }
-    _labelCity.text = [NSString stringWithFormat:@"当前城市：%@",ApplicationDelegate.gLocation.cityName];
+    _labelCity.text = [NSString stringWithFormat:@"当前城市：%@",_cityName];
     if (!ApplicationDelegate.gLocation.isSuccessLocation) {
         _btnChangeCity.hidden = NO;
     }
@@ -185,13 +188,16 @@
 }
 
 - (IBAction)naviRightClick:(id)sender {
-    [self showAppMenu:nil];
+    //[self showAppMenu:nil];
+    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:@"1" IsInShop:NO];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)changeCityClick:(id)sender {
     NaviStoreSelCityViewController *vc = [[NaviStoreSelCityViewController alloc] init];
     [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
         //ApplicationDelegate.gLocation.cityName = areaInfo.cityName;
+        _cityName = areaInfo.cityName;
         UserLocation *location = [[UserLocation alloc]init];
         [location GeoCode:areaInfo.cityName Handler:^(UserLocation *loc) {
             _mapView.centerCoordinate = loc.location.coordinate;
