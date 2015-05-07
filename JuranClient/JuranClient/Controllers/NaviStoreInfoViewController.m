@@ -101,14 +101,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES];
     [_mapView viewWillAppear];
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO];
     [_mapView viewWillDisappear];
     _mapView.delegate = nil; // 不用时，置nil
 }
@@ -273,7 +273,7 @@
 }
 
 - (IBAction)rightNaviClick:(id)sender {
-    [self showAppMenuIsShare:NO];
+    [self showAppMenu:nil];
 }
 
 - (IBAction)SystemNaviClick:(id)sender {
@@ -288,7 +288,7 @@
 //    action.cancelButtonIndex = self.availableMaps.count + 1;
 //    action.delegate = self;
 //    [action showInView:self.view];
-    if (ApplicationDelegate.gLocation.isSuccessLocation) {
+    if (!ApplicationDelegate.gLocation.isSuccessLocation) {
         [self showTip:@"定位失败"];
         return;
     }

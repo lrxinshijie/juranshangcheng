@@ -20,6 +20,7 @@
 #import "UserLocation.h"
 #import "NaviStoreInfoViewController.h"
 #import "AttributeCell.h"
+#import "UIViewController+Menu.h"
 
 @interface ProductDetailViewController () <UITableViewDelegate, UITableViewDataSource, JRSegmentControlDelegate>
 
@@ -184,6 +185,9 @@
 }
 
 - (IBAction)onMore:(id)sender{
+    [self showAppMenu:^{
+        //分享代码
+    }];
 }
 
 - (IBAction)onShop:(id)sender{

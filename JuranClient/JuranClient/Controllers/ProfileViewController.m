@@ -39,6 +39,8 @@
 #import "MyDemandViewController.h"
 
 #import "MyDemandCopyViewController.h"
+#import "JRServiceViewController.h"
+#import "SettingsViewController.h"
 #endif
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -48,6 +50,7 @@
 }
 @property (nonatomic, strong) IBOutlet UIView *buttonView;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
+@property (nonatomic, strong) IBOutlet UIView *footerView;
 @property (nonatomic, strong) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *loginNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *unLoginLabel;
@@ -114,15 +117,20 @@
                     , @"我的收藏"
                     , @"订单管理"
                     , @"账户安全"
-                    , @"账户管理"];
+                    , @"账户管理"
+                    , @"居然服务"];
     
     imageArray = @[ @"icon_personal_hudong.png"
                     , @"icon_personal_guanzhu.png"
                     , @"icon_personal_shouchang.png"
                     , @"icon_personal_ddgl.png"
                     , @"icon_personal_zhaq"
-                    , @"icon_personal_zhgl"];
-    [self configureMenu];
+                    , @"icon_personal_zhgl"
+                    , @"icon_personal_svr"];
+    //[self configureMenu];
+    self.navigationItem.title = @"我";
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_personal_setting"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(onSetting:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
 #endif
                    
     [self setupUI];
@@ -394,6 +402,18 @@
     return 44;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = nil;
     if (indexPath.row == 0) {
@@ -481,6 +501,14 @@
         {
             //        账户管理
             AccountManageViewController *vc = [[AccountManageViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 7:
+        {
+            //        居然服务
+            JRServiceViewController *vc = [[JRServiceViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
@@ -596,6 +624,12 @@
     }
     
 #endif
+}
+
+- (void)onSetting:(id)sender {
+    SettingsViewController *vc = [[SettingsViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

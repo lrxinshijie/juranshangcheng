@@ -18,6 +18,7 @@
 - (void)configureMenu;
 - (void)configureSearch;
 - (void)configureScan;
+- (void)configureMore;
 - (void)configureSearchAndMore;
 - (void)showMenu;
 

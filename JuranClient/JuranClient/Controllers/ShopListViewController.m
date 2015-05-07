@@ -13,6 +13,7 @@
 #import "CustomSearchBar.h"
 #import "AppDelegate.h"
 #import "UserLocation.h"
+#import "UIViewController+Menu.h"
 
 @interface ShopListViewController ()<CustomSearchBarDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -32,7 +33,7 @@
         _cityName = ApplicationDelegate.gLocation.cityName;
 #endif
         _keyword = @"";
-        _sort = 1;
+        _sort = 9;
     }
     return self;
 }
@@ -76,6 +77,11 @@
 {
 //    QRBaseViewController * QRVC = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:YES];
 //    [self.navigationController pushViewController:QRVC animated:YES];
+}
+
+- (void)showMenuList
+{
+     [self showAppMenu:nil];
 }
 
 - (void)goBackButtonDidSelect

@@ -70,6 +70,10 @@
     [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"icon-scan"] leftBarButtonItemAction:@selector(onScan)];
 }
 
+- (void)configureMore{
+     [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMore)];
+}
+
 - (void)configureSearchAndMore{
     UIButton *searchButton = [self.view buttonWithFrame:CGRectMake(0, 0, 35, 35) target:self action:@selector(onSearch) image:[UIImage imageNamed:@"icon-search"]];
     UIButton *moreButton = [self.view buttonWithFrame:CGRectMake(35, 0, 35, 35) target:self action:@selector(onMore) image:[UIImage imageNamed:@"icon-dot"]];
@@ -87,7 +91,7 @@
 }
 
 - (void)onMore{
-    [self showAppMenuIsShare:NO];
+    [self showAppMenu:nil];
 }
 
 - (void)configureSearch{

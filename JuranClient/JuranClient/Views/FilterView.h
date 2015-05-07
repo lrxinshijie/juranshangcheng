@@ -21,6 +21,7 @@
 
 @property (nonatomic, assign) id<FilterViewDelegate> delegate;
 @property (nonatomic, assign) BOOL isGrid;
+@property (nonatomic, assign) NSInteger xMargin;
 
 -(id)initWithType:(FilterViewType)type defaultData:(NSDictionary *)defaultData;
 

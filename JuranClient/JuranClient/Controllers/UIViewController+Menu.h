@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UIViewController (Menu)
-- (void)showAppMenuIsShare:(BOOL)isFlag;
+- (void)showAppMenu:(VoidBlock)shareBlock;
 @end

@@ -16,7 +16,6 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *scanLine;
 
-
 @end
 
 @implementation QRCodeViewController
@@ -128,10 +127,6 @@
     [self.output setRectOfInterest:CGRectMake(145/ScreenHeight, 80/ScreenWidth, 230/ScreenHeight, 160/ScreenWidth)];
     [self.view.layer insertSublayer:self.preview atIndex:0];
 }
-- (void)removeBackground
-{
-    [self.preview removeFromSuperlayer];
-}
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
 {
@@ -159,8 +154,12 @@
             //是连接，判断是解析还是用webView展示
             if ([self needShowWithWebView:val] == 0) {
                 //webView展示
-                vcStyle = ChildVCStyle_Web;
-                code = val;
+//                vcStyle = ChildVCStyle_Web;
+//                code = val;
+                //新修改：此处不展示，而是弹出窗口提示
+                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Tips" message:val delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alertView show];
+                return;
                 
             }else if ([self needShowWithWebView:val] == 1){
                 //跳转至店铺首页
@@ -208,10 +207,15 @@
 
     NSString * regex_product = @"^http://mall\.juran\.cn/goods/([0-9]{1,})\.htm$";
     NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm$";
+    NSString * regex_shop1 = @"^http://[a-zA-Z]{1,}\.juran\.cn$";
     
     NSPredicate *pred_shop = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex_shop];
     BOOL isMatch_shop = [pred_shop evaluateWithObject:str];
-    if (isMatch_shop) {
+    
+    NSPredicate *pred_shop1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex_shop1];
+    BOOL isMatch_shop1 = [pred_shop1 evaluateWithObject:str];
+    
+    if (isMatch_shop || isMatch_shop1) {
         //跳转至店铺首页
         return 1;
     }
@@ -299,7 +303,12 @@
     [_lightDevice unlockForConfiguration];
 }
 
-
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(qrCodeDismissTips)]) {
+        [self.delegate qrCodeDismissTips];
+    }
+}
 
 
 

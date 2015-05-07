@@ -40,6 +40,16 @@ static NSString * PercentEscapedQueryStringPairMemberFromStringWithEncoding(NSSt
     ? defaultValue : [[self objectForKey:key] intValue];
 }
 
+- (NSInteger)getIntegerValueForKey:(NSString *)key defaultValue:(NSInteger)defaultValue {
+    return [self objectForKey:key] == [NSNull null]
+    ? defaultValue : [[self objectForKey:key] integerValue];
+}
+
+- (long)getLongValueForKey:(NSString *)key defaultValue:(long)defaultValue {
+    return [self objectForKey:key] == [NSNull null]
+    ? defaultValue : [[self objectForKey:key] longValue];
+}
+
 - (time_t)getTimeValueForKey:(NSString *)key defaultValue:(time_t)defaultValue {
 	NSString *stringTime   = [self objectForKey:key];
     if ((id)stringTime == [NSNull null]) {

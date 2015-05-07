@@ -18,6 +18,7 @@
 #import "AppDelegate.h"
 #import "NaviStoreSelCityViewController.h"
 #import "JRAreaInfo.h"
+#import "UIViewController+Menu.h"
 
 
 @interface GoodsCategaryViewController ()<UITableViewDataSource,UITableViewDelegate,CustomSecLevelViewDelegate,CustomThirdLevelCellDelegate,CustomShopViewDelegate,UIScrollViewDelegate>
@@ -36,6 +37,7 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *listTableView;
 @property (strong, nonatomic) IBOutlet UITableView *fistLevelTableView;
+@property (strong, nonatomic) IBOutlet UILabel *viewTitle;
 
 @property (strong, nonatomic) NSMutableArray * dateArray_firstLevel;
 @property (strong, nonatomic) NSMutableArray * dataArray_secondLevel;
@@ -43,6 +45,7 @@
 
 //记录一级类目点击的Button
 @property (strong, nonatomic) CategaryTableViewCell * old_cell;
+@property (assign, nonatomic) int old_cell_location;
 @property (assign, nonatomic) BOOL isPopNavHide;
 @property (assign, nonatomic) NSInteger sectionNumber;
 
@@ -88,6 +91,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    if (_vcStyle == CategaryStyle_Goods) {
+        _viewTitle.text = @"商品所在地";
+    }else if (_vcStyle == CategaryStyle_Shop){
+        _viewTitle.text = @"品牌所在地";
+    }
     [self.navigationController setNavigationBarHidden:YES];
     [self.listTableView setContentSize:CGSizeMake(243, 500)];
     
@@ -178,6 +186,8 @@
 }
 
 - (IBAction)moreFunctionButtonDidClick:(id)sender {
+    
+     [self showAppMenu:nil];
     
 }
 
@@ -306,12 +316,11 @@
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"CategaryTableViewCell" owner:self options:nil] lastObject];
         }
+        
         [cell configCellUIWithItem:self.dateArray_firstLevel[indexPath.row]];
-        if (indexPath.row == 0) {
-            [cell setCellTitleSelect];
-            if (!self.old_cell) {
-                self.old_cell = cell;
-            }
+        if (!self.old_cell) {
+            self.old_cell = cell;
+            self.old_cell_location = (int)indexPath.row;
         }
         
         return cell;
@@ -372,9 +381,17 @@
         
         if (self.old_cell) {
             [self.old_cell setCellTitleNormal];
+            CategaryTableViewCellItem * item = self.dateArray_firstLevel[self.old_cell_location];
+            item.isSelect = NO;
+            
         }
         [cell setCellTitleSelect];
+        int temp = (int)indexPath.row;
+        CategaryTableViewCellItem * tempItem = self.dateArray_firstLevel[temp];
+        tempItem.isSelect = YES;
         
+        
+        self.old_cell_location = (int)indexPath.row;
         self.old_cell = cell;
         
     }
@@ -492,6 +509,9 @@
                 
                 for (int i=0; i<dataArr.count; i++) {
                     CategaryTableViewCellItem * dItem = [CategaryTableViewCellItem createCategaryTableViewCellItemWithDictionary:dataArr[i]];
+                    if (i == 0){
+                        dItem.isSelect = YES;
+                    }
                     [wSelf.dateArray_firstLevel addObject:dItem];
                 }
                 
@@ -635,6 +655,9 @@
         }
         for (int i=0; i<tempArr.count; i++) {
             CategaryTableViewCellItem * item = [CategaryTableViewCellItem createCategaryTableViewCellItemWithDictionary:tempArr[i]];
+            if (i == 0) {
+                item.isSelect = YES;
+            }
             [wSelf.dateArray_firstLevel addObject:item];
             if (i == 0) {
                 [wSelf requestDataForBrand:[wSelf getFirstLetter:item.name] pageNo:wSelf.pageNo];

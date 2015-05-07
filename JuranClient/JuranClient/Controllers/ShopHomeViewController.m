@@ -14,6 +14,10 @@
 #import "JRProduct.h"
 #import "ProductDetailViewController.h"
 #import "ProductListViewController.h"
+#import "JRStore.h"
+#import "NaviStoreListViewController.h"
+#import "AppDelegate.h"
+#import "UserLocation.h"
 
 @interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -33,6 +37,8 @@
 @property (nonatomic, strong) IBOutlet UILabel *collectionLabel;
 @property (nonatomic, strong) IBOutlet UIView *searchView;
 @property (nonatomic, strong) IBOutlet UIView *searchTextField;
+
+@property (nonatomic, strong) NSArray *storeList;
 
 - (IBAction)onClassification:(id)sender;
 
@@ -146,8 +152,29 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)loadStoreData{
+#ifndef kJuranDesigner
+    NSDictionary *param = @{@"shopId": @(_shop.shopId),@"cityName":ApplicationDelegate.gLocation.cityName};
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_SHOP_LOCATION parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            if (data!=[NSNull null]) {
+                _storeList = [JRStore buildUpWithValueForList:[data objectForKey:@"stallInfoList"]];
+            }
+            NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
+            navi.naviType = NaviTypeStall;
+            navi.dataList = _storeList;
+            navi.navigationItem.title = @"店铺位置";
+            [self.navigationController pushViewController:navi animated:YES];
+        }
+    }];
+#endif
+}
+
+
 - (IBAction)onLocation:(id)sender{
-    
+    [self loadStoreData];
     
 }
 

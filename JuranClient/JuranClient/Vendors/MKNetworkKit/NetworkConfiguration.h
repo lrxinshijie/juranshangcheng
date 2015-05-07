@@ -213,5 +213,5 @@
 #define JR_BRAND_LIST [NSString stringWithFormat:@"%@/mall/getByBrandClassification.json",JR_SERVICE]
 #define JR_CUSTOMER_SERVICE [NSString stringWithFormat:@"%@/shop/platformCustomerService.json",JR_SERVICE]
 #define JR_SEARCH_PRODUCT [NSString stringWithFormat:@"%@/search/searchGoods.json",JR_SERVICE]
-
+#define JR_SEARCH_PRODUCT_IN_SHOP [NSString stringWithFormat:@"%@/search/searchShopGoods.json",JR_SERVICE]
 #endif
