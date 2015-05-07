@@ -30,6 +30,8 @@
 @property (nonatomic, strong) IBOutlet UILabel *timeLabel;
 @property (nonatomic, strong) IBOutlet UILabel *viewCountLabel;
 @property (nonatomic, strong) IBOutlet UILabel *commentCountLabel;
+@property (nonatomic, strong) IBOutlet UIButton *viewCountButton;
+@property (nonatomic, strong) IBOutlet UIButton *commentCountButton;
 
 @property (nonatomic, strong) IBOutlet UIView *commentView;
 @property (nonatomic, strong) IBOutlet UITextField *commentTextField;
@@ -172,8 +174,8 @@
     
     _titleLabel.text = _topic.theme;
     _timeLabel.text = _topic.publishTime;
-    _viewCountLabel.text = [NSString stringWithFormat:@"%d", _topic.viewCount];
-    _commentCountLabel.text = [NSString stringWithFormat:@"%d", _topic.commentCount];
+    [_viewCountButton setTitle:[NSString stringWithFormat:@"  %d", _topic.viewCount] forState:UIControlStateNormal];
+    [_commentCountButton setTitle:[NSString stringWithFormat:@"  %d", _topic.commentCount] forState:UIControlStateNormal];
     
     ASLog(@"%@", _topic.contentDescription);
     if (!firstLoadHtml) {

@@ -99,9 +99,20 @@
         _tableView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8];
         _tableView.hidden = YES;
         UINavigationController *nav = self.viewController.navigationController;
+        
+        UIView *bgView = [[UIView alloc] initWithFrame:self.tableView.bounds];
+        bgView.backgroundColor = [UIColor clearColor];
+        UIButton *btn = [bgView buttonWithFrame:bgView.bounds target:self action:@selector(onHidden:) image:nil];
+        [bgView addSubview:btn];
+        _tableView.backgroundView = bgView;
+        
         [nav.view addSubview:_tableView];
     }
     return _tableView;
+}
+
+- (void)onHidden:(id)sender{
+    [self showSort];
 }
 
 - (void)clickButton:(UIButton *)btn{

@@ -199,17 +199,20 @@
 }
 
 - (void)loadDetailWithMsg:(JRPushInfoMsg *)msg{
-    NSDictionary *param = @{@"msgId": [NSString stringWithFormat:@"%d", msg.msgId]};
-    [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_GET_MSG_DETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
-        if (!error) {
-            [msg buildUpDetailWithValue:data[@"infoMsgDetailResp"]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [Public jumpFromLink:msg.msgUrl];
-            });
-        }
-    }];
+//    NSDictionary *param = @{@"msgId": [NSString stringWithFormat:@"%d", msg.msgId]};
+//    [self showHUD];
+//    [[ALEngine shareEngine] pathURL:JR_GET_MSG_DETAIL parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+//        [self hideHUD];
+//        if (!error) {
+//            [msg buildUpDetailWithValue:data[@"infoMsgDetailResp"]];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [Public jumpFromLink:msg.msgUrl];
+//            });
+//        }
+//    }];
+    if (msg.msgUrl.length > 0) {
+        [Public jumpFromLink:msg.msgUrl];
+    }
 }
 
 @end

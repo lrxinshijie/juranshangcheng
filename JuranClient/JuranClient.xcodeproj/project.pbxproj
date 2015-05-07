@@ -947,6 +947,7 @@
 		37DFE3991AE924CF00268278 /* ConstructPriceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DFE3961AE924CF00268278 /* ConstructPriceListViewController.m */; };
 		37DFE39A1AE924CF00268278 /* ConstructPriceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DFE3971AE924CF00268278 /* ConstructPriceListViewController.xib */; };
 		37DFE39B1AE924CF00268278 /* ConstructPriceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37DFE3971AE924CF00268278 /* ConstructPriceListViewController.xib */; };
+		37E16D4B1AF9F4F3005713DA /* icon_comment_number@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37E16D4A1AF9F4F3005713DA /* icon_comment_number@2x.png */; };
 		37E589821AB1B73200CB5FA4 /* WikiDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */; };
 		37E589831AB1B73200CB5FA4 /* WikiDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */; };
 		37E589841AB1B73200CB5FA4 /* WikiDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */; };
@@ -2504,6 +2505,7 @@
 		37DFE3951AE924CF00268278 /* ConstructPriceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstructPriceListViewController.h; sourceTree = "<group>"; };
 		37DFE3961AE924CF00268278 /* ConstructPriceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstructPriceListViewController.m; sourceTree = "<group>"; };
 		37DFE3971AE924CF00268278 /* ConstructPriceListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConstructPriceListViewController.xib; sourceTree = "<group>"; };
+		37E16D4A1AF9F4F3005713DA /* icon_comment_number@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_comment_number@2x.png"; sourceTree = "<group>"; };
 		37E5897F1AB1B73200CB5FA4 /* WikiDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WikiDetailViewController.h; sourceTree = "<group>"; };
 		37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WikiDetailViewController.m; sourceTree = "<group>"; };
 		37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WikiDetailViewController.xib; sourceTree = "<group>"; };
@@ -5394,6 +5396,7 @@
 		BD5184D01A5D0ED600BE508A /* Case */ = {
 			isa = PBXGroup;
 			children = (
+				37E16D4A1AF9F4F3005713DA /* icon_comment_number@2x.png */,
 				2CD7B4EA1AF8A41F00B31074 /* case-image-header@2x.png */,
 				14172EBF1AB43EE800E60BD1 /* line_gray@2x.png */,
 				14172EC01AB43EE800E60BD1 /* line_white@2x.png */,
@@ -5860,7 +5863,7 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = QHWR2FWBM6;
+						DevelopmentTeam = D2JB8K885C;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -6636,6 +6639,7 @@
 				14CCB3061ADD06B50041AA38 /* TopShopCell.xib in Resources */,
 				A971BC9F1A20825800C018D6 /* InfoPlist.strings in Resources */,
 				BD5185F51A5D0ED700BE508A /* icon-eye@2x.png in Resources */,
+				37E16D4B1AF9F4F3005713DA /* icon_comment_number@2x.png in Resources */,
 				BD5185C91A5D0ED700BE508A /* Icon.png in Resources */,
 				3713F9B31ADF909800785B39 /* flter-button-bg@2x.png in Resources */,
 				14C855481A2E196B00A15ED9 /* InteractionViewController.xib in Resources */,
@@ -7928,8 +7932,8 @@
 		A971BCBE1A20825800C018D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Connection",
@@ -7975,8 +7979,8 @@
 		A971BCBF1A20825800C018D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Connection",
@@ -8022,6 +8026,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JuranClient.app/JuranClient";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -8035,6 +8041,7 @@
 				);
 				INFOPLIST_FILE = "JuranClientTests/JuranClientTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -8044,6 +8051,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JuranClient.app/JuranClient";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -8053,6 +8062,7 @@
 				GCC_PREFIX_HEADER = "JuranClient/JuranClient-Prefix.pch";
 				INFOPLIST_FILE = "JuranClientTests/JuranClientTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
