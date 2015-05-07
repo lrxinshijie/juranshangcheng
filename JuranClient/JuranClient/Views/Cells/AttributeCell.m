@@ -10,7 +10,9 @@
 #import "AttributeLabelCell.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 
-@interface AttributeCell () <UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>
+@interface AttributeCell () <UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>{
+    AttributeLabelCell *_sizingCell;
+}
 
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
@@ -23,7 +25,10 @@
     // Initialization code
     
     _collectionView.backgroundColor = [UIColor clearColor];
-    [_collectionView registerNib:[UINib nibWithNibName:@"AttributeLabelCell" bundle:nil] forCellWithReuseIdentifier:@"AttributeLabelCell"];\
+    UINib *cellNib = [UINib nibWithNibName:@"AttributeLabelCell" bundle:nil];
+    [_collectionView registerNib:cellNib forCellWithReuseIdentifier:@"AttributeLabelCell"];
+    
+    _sizingCell = [[cellNib instantiateWithOwner:nil options:nil] objectAtIndex:0];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -41,6 +46,10 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
     return [_attrList count];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
+    cell.backgroundColor = [UIColor redColor];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
