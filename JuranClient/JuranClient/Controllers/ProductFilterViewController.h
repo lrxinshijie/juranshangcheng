@@ -6,8 +6,13 @@
 //  Copyright (c) 2015年 Juran. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "ALViewController.h"
+@class ProductCategory;
+@class ProductClass;
+@class ProductBrand;
 
-@interface ProductFilterViewController : UIViewController
 
+
+@interface ProductFilterViewController : ALViewController
+- (instancetype)initWithKeyword:(NSString *)keyword IsInShop:(BOOL)isInShop;
 @end

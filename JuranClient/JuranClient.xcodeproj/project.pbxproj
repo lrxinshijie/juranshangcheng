@@ -715,6 +715,8 @@
 		2C1D10481AFA26D7005712D2 /* ProductFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D10461AFA26D7005712D2 /* ProductFilterViewController.m */; };
 		2C1D10491AFA26D7005712D2 /* ProductFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D10471AFA26D7005712D2 /* ProductFilterViewController.xib */; };
 		2C1D104C1AFA3063005712D2 /* ProductFilterData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D104B1AFA3063005712D2 /* ProductFilterData.m */; };
+		2C1D10571AFB3CDF005712D2 /* ProductCategaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D10551AFB3CDF005712D2 /* ProductCategaryViewController.m */; };
+		2C1D10581AFB3CDF005712D2 /* ProductCategaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D10561AFB3CDF005712D2 /* ProductCategaryViewController.xib */; };
 		2C3D51C61AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D51C41AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m */; };
 		2C3D51C71AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D51C51AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib */; };
 		2C5B75C01AEF5F310085FA56 /* icon-grade-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5B75BE1AEF5F310085FA56 /* icon-grade-1@2x.png */; };
@@ -2278,6 +2280,9 @@
 		2C1D10471AFA26D7005712D2 /* ProductFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductFilterViewController.xib; sourceTree = "<group>"; };
 		2C1D104A1AFA3063005712D2 /* ProductFilterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductFilterData.h; sourceTree = "<group>"; };
 		2C1D104B1AFA3063005712D2 /* ProductFilterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductFilterData.m; sourceTree = "<group>"; };
+		2C1D10541AFB3CDF005712D2 /* ProductCategaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCategaryViewController.h; sourceTree = "<group>"; };
+		2C1D10551AFB3CDF005712D2 /* ProductCategaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCategaryViewController.m; sourceTree = "<group>"; };
+		2C1D10561AFB3CDF005712D2 /* ProductCategaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCategaryViewController.xib; sourceTree = "<group>"; };
 		2C3D51C31AE63E7C0000F3F4 /* NaviStoreSelCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviStoreSelCityViewController.h; sourceTree = "<group>"; };
 		2C3D51C41AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaviStoreSelCityViewController.m; sourceTree = "<group>"; };
 		2C3D51C51AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NaviStoreSelCityViewController.xib; sourceTree = "<group>"; };
@@ -5159,6 +5164,9 @@
 				2C1D10451AFA26D7005712D2 /* ProductFilterViewController.h */,
 				2C1D10461AFA26D7005712D2 /* ProductFilterViewController.m */,
 				2C1D10471AFA26D7005712D2 /* ProductFilterViewController.xib */,
+				2C1D10541AFB3CDF005712D2 /* ProductCategaryViewController.h */,
+				2C1D10551AFB3CDF005712D2 /* ProductCategaryViewController.m */,
+				2C1D10561AFB3CDF005712D2 /* ProductCategaryViewController.xib */,
 			);
 			name = Product;
 			sourceTree = "<group>";
@@ -6902,6 +6910,7 @@
 				BD5186F71A5D0ED700BE508A /* menu_activity_default@2x.png in Resources */,
 				146CE9C61A47EB0700FAA87F /* TextFieldCell.xib in Resources */,
 				BD5186631A5D0ED700BE508A /* regist-code-bg@2x.png in Resources */,
+				2C1D10581AFB3CDF005712D2 /* ProductCategaryViewController.xib in Resources */,
 				A98014FD1AD6B121002CB4C9 /* RootViewController.xib in Resources */,
 				37D18DA41A56CC6900B41048 /* CaseManagementViewController.xib in Resources */,
 				1F2D4FFE1AD77F9E005486D2 /* light@2x.png in Resources */,
@@ -7431,6 +7440,7 @@
 				37D7FEB81AECDD6C00288C1E /* TopicDetailViewController.m in Sources */,
 				A987EDF11A20920500CED7CD /* UITableView+ASCategory.m in Sources */,
 				A9A2A3FF1A2B1F0900DFA49B /* BannerView.m in Sources */,
+				2C1D10571AFB3CDF005712D2 /* ProductCategaryViewController.m in Sources */,
 				1403802E1A44247300221398 /* MeasureViewController.m in Sources */,
 				14555D341A36EB4100E36339 /* JRAreaInfo.m in Sources */,
 				2C602C8F1ADE0E200037105E /* FilterInShopViewController.m in Sources */,
@@ -7958,7 +7968,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8ff8e1b2-afbd-40bc-9dcc-4ef6164050f4";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv64";
 				VERSIONING_SYSTEM = "";
