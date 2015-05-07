@@ -84,7 +84,7 @@
     [_segment setTitleList:@[@"案例", @"设计师"]];
     [self.view addSubview:_segment];
     
-    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCase defaultData:self.filterData];
+    self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCaseWithoutGrid defaultData:self.filterData];
     _filterView.xMargin = CGRectGetHeight(_segment.frame);
     _filterView.frame = CGRectMake(0, CGRectGetMaxY(_segment.frame), kWindowWidth, 44);
     _filterView.delegate = self;
@@ -94,6 +94,8 @@
     _designerFilterView.xMargin = CGRectGetHeight(_segment.frame);
     _designerFilterView.frame = _filterView.frame;
     _designerFilterView.delegate = self;
+    _designerFilterView.hidden = YES;
+    [self.view addSubview:_designerFilterView];
     
     self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterView.frame), kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar - CGRectGetMaxY(_filterView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
@@ -202,20 +204,15 @@
         [_datas removeAllObjects];
         [_tableView reloadData];
     }
-    if (index == 0) {
-        [self.designerFilterView removeFromSuperview];
-        [self.view addSubview:self.filterView];
-    }else if (index == 1){
-        [self.filterView removeFromSuperview];
-        [self.view addSubview:self.designerFilterView];
-    }
+    _designerFilterView.hidden = index == 0;
+    _filterView.hidden = index != 0;
+    [_tableView headerBeginRefreshing];
     if ([_filterView isShow]) {
         [_filterView showSort];
     }
     if ([_designerFilterView isShow]) {
         [_designerFilterView showSort];
     }
-    [_tableView headerBeginRefreshing];
 }
 
 #pragma mark - UITableViewDelegateDataSource/Delegate
