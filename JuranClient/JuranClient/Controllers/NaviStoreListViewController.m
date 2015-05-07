@@ -189,9 +189,9 @@
 }
 
 - (IBAction)naviRightClick:(id)sender {
-    //[self showAppMenu:nil];
-    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:@"1" IsInShop:NO];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self showAppMenu:nil];
+//    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:@"1" IsInShop:YES];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)changeCityClick:(id)sender {
