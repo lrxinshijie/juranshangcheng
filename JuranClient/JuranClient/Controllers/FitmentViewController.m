@@ -45,7 +45,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationItem.title = @"装修";
+    self.navigationItem.title = @"家装";
     
     [self configureSearchAndMore];
     [self configureScan];
