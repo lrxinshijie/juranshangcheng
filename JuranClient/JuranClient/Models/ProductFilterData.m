@@ -45,6 +45,7 @@
         self.depth = [dict getIntValueForKey:@"depth" defaultValue:0];
         self.parentId = [dict getLongValueForKey:@"parentId" defaultValue:0];
         self.parentCode = [dict getStringValueForKey:@"parentCode" defaultValue:@""];
+        self.urlContent = [dict getStringValueForKey:@"urlContent" defaultValue:@""];
     }
     return self;
 }
@@ -135,40 +136,28 @@
 @end
 
 @implementation ProductFilterData
-- (void)loadFilterDataWithIsInShop:(BOOL)isInShop
-                              Sort:(int)sort
-                           Keyword:(NSString *)keyword
-                          MinPrice:(long)minPrice
-                          MaxPrice:(long)maxPrice
-                            Brands:(NSString *)brands
-                        Attributes:(NSString *)attributes
-                         StoreCode:(NSString *)storeCode
-                            ShopId:(long)shopId
-                      ShopCategory:(long)shopCat
+- (void)loadFilterDataWithFilter:(ProductSelectedFilter *)filter
                            Handler:(BOOLBlock)finished{
-//    NSDictionary *param = @:,
-
-//                            @"brands":brands,
-//                            @"attributes":attributes,
-//                            @"shopId":
-//                            @"shopCategories":
-//                            };
+    
     
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
     [param setObject:@"北京市" forKey:@"cityName"];
     [param setObject:@(1) forKey:@"pageNo"];
     [param setObject:@(1) forKey:@"onePageCount"];
-    [param setObject:@(sort) forKey:@"sort"];
-    if (keyword) [param setObject:keyword forKey:@"keyword"];
-    if (minPrice!=0) [param setObject:[NSString stringWithFormat:@"%ld",minPrice<=maxPrice?minPrice:maxPrice] forKey:@"priceMinYuan"];
-    if (maxPrice!=0) [param setObject:[NSString stringWithFormat:@"%ld",minPrice>maxPrice?minPrice:maxPrice] forKey:@"priceMaxYuan"];
-    if (brands) [param setObject:brands forKey:@"brands"];
-    if (attributes) [param setObject:attributes forKey:@"attributes"];
-    if (shopId!=0) [param setObject:[NSString stringWithFormat:@"%ld",shopId] forKey:@"shopId"];
-    if (shopCat!=0) [param setObject:[NSString stringWithFormat:@"%ld",shopCat] forKey:@"shopCategories"];
-    
+    [param setObject:@(filter.sort) forKey:@"sort"];
+    if (filter.keyword) [param setObject:filter.keyword forKey:@"keyword"];
+    if (filter.pMinPrice!=0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice<=filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMinYuan"];
+    if (filter.pMaxPrice!=0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice>filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMaxYuan"];
+    if (filter.pBrand) [param setObject:filter.pBrand forKey:@"brands"];
+    if (filter.attributeList) [param setObject:filter.attributeList forKey:@"attributes"];
+    if(filter.isInShop) {
+        if (filter.shopId!=0) [param setObject:[NSString stringWithFormat:@"%ld",filter.shopId] forKey:@"shopId"];
+        if (filter.pCategory!=0) [param setObject:@(filter.pCategory.Id) forKey:@"shopCategories"];
+    }else {
+        if (filter.pCategory!=0) [param setObject:filter.pCategory.urlContent forKey:@"urlContent"];
+    }
     NSString *url = nil;
-    if (isInShop) {
+    if (filter.isInShop) {
         url = JR_SEARCH_PRODUCT_IN_SHOP;
     }else{
         url = JR_SEARCH_PRODUCT;
@@ -184,7 +173,6 @@
         if (finished) {
             finished(error == nil);
         }
-        
     }];
 }
 

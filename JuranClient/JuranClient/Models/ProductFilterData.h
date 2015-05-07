@@ -21,6 +21,7 @@
 @property (nonatomic, assign) int depth;
 @property (nonatomic, assign) long parentId;
 @property (nonatomic, copy) NSString *parentCode;
+@property (nonatomic, copy) NSString *urlContent;
 @end
 //------------------------------------------------------------------
 @interface ProductBrand : NSObject
@@ -39,6 +40,19 @@
 @property (nonatomic, copy) NSString *className;
 @end
 //------------------------------------------------------------------
+@interface ProductSelectedFilter : NSObject
+@property (nonatomic, assign) BOOL isInShop;
+@property (nonatomic, assign) int sort;
+@property (nonatomic, copy) NSString *keyword;
+@property (nonatomic, assign) long shopId;
+@property (nonatomic, strong) ProductCategory *pCategory;
+@property (nonatomic, strong) ProductClass *pClass;
+@property (nonatomic, strong) ProductBrand *pBrand;
+@property (nonatomic, assign) long pMinPrice;
+@property (nonatomic, assign) long pMaxPrice;
+@property (nonatomic, strong) NSArray *attributeList;
+@end
+//------------------------------------------------------------------
 @interface ProductFilterData : NSObject
 @property (nonatomic, strong) NSArray *attributeList;
 @property (nonatomic, strong) NSArray *categoryList;
@@ -46,15 +60,6 @@
 @property (nonatomic, strong) NSArray *storeList;
 @property (nonatomic, strong) NSArray *classList;
 
-- (void)loadFilterDataWithIsInShop:(BOOL)isInShop
-                              Sort:(int)sort
-                           Keyword:(NSString *)keyword
-                          MinPrice:(long)minPrice
-                          MaxPrice:(long)maxPrice
-                            Brands:(NSString *)brands
-                        Attributes:(NSString *)attributes
-                         StoreCode:(NSString *)storeCode
-                            ShopId:(long)shopId
-                      ShopCategory:(long)shopCat
-                           Handler:(BOOLBlock)finished;
+- (void)loadFilterDataWithFilter:(ProductSelectedFilter *)filter
+                         Handler:(BOOLBlock)finished;
 @end
