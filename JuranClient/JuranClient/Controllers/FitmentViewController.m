@@ -202,18 +202,18 @@
         [_datas removeAllObjects];
         [_tableView reloadData];
     }
-    if ([_filterView isShow]) {
-        [_filterView showSort];
-    }
-    if ([_designerFilterView isShow]) {
-        [_designerFilterView showSort];
-    }
     if (index == 0) {
         [self.designerFilterView removeFromSuperview];
         [self.view addSubview:self.filterView];
     }else if (index == 1){
         [self.filterView removeFromSuperview];
         [self.view addSubview:self.designerFilterView];
+    }
+    if ([_filterView isShow]) {
+        [_filterView showSort];
+    }
+    if ([_designerFilterView isShow]) {
+        [_designerFilterView showSort];
     }
     [_tableView headerBeginRefreshing];
 }
