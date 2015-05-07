@@ -18,6 +18,7 @@
 #import "AppDelegate.h"
 #import "UIViewController+Login.h"
 #import "UIViewController+Menu.h"
+#import "ProductFilterViewController.h"
 
 @interface NaviStoreListViewController ()<BMKMapViewDelegate>
 
@@ -187,7 +188,9 @@
 }
 
 - (IBAction)naviRightClick:(id)sender {
-    [self showAppMenu:nil];
+    //[self showAppMenu:nil];
+    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:@"1" IsInShop:NO];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)changeCityClick:(id)sender {
