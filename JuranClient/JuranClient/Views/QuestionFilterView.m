@@ -16,10 +16,11 @@
 @property (nonatomic, strong) UIButton *filterButton;
 @property (nonatomic, strong) NSArray *sorts;
 @property (nonatomic, strong) NSArray *filters;
-@property (nonatomic, strong) UITableView *tableView;
+
 @property (nonatomic, assign) UIView *parentView;
 @property (nonatomic, assign) NSDictionary *defaultData;
 @property (nonatomic, strong) UINavigationController *filterViewNav;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -74,11 +75,10 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        UINavigationController *nav = self.viewController.navigationController;
-        CGRect frame = [self convertRect:self.frame toView:nav.view];
-        self.tableView = [self tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(frame), kWindowWidth, CGRectGetHeight(nav.view.frame) - CGRectGetMaxY(frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+        self.tableView = [self tableViewWithFrame:CGRectMake(0, 108+_xMargin, kWindowWidth, CGRectGetHeight(self.viewController.view.frame)-44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
         _tableView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8];
         _tableView.hidden = YES;
+        UINavigationController *nav = self.viewController.navigationController;
         
         [nav.view addSubview:_tableView];
         UIView *bgView = [[UIView alloc] initWithFrame:self.tableView.bounds];
@@ -86,6 +86,8 @@
         UIButton *btn = [bgView buttonWithFrame:bgView.bounds target:self action:@selector(onHidden:) image:nil];
         [bgView addSubview:btn];
         _tableView.backgroundView = bgView;
+        
+
     }
     return _tableView;
 }
@@ -106,7 +108,7 @@
         selectedBtn = btn;
         selectedBtn.selected = YES;
         [self showSort];
-        [self showSort];
+//        [self showSort];
     }
 }
 
@@ -126,10 +128,8 @@
     }else{
         selectedBtn.selected = NO;
         selectedBtn = nil;
-//        [self showSort];
         selectedBtn = btn;
         selectedBtn.selected = YES;
-//        [self showSort];
         [self.tableView reloadData];
     }
 }
@@ -140,16 +140,17 @@
 
 - (void)showSort{
     BOOL isHide = !self.tableView.hidden;
-    _tableView.alpha = isHide ? 1 : 0;
+    
     _tableView.hidden = isHide;
+    _tableView.alpha = isHide ? 1 : 0;
     [_tableView reloadData];
+    
     [UIView animateWithDuration:.2 animations:^{
         _tableView.alpha = isHide ? 0 : 1;
     } completion:^(BOOL finished) {
         _tableView.hidden = isHide;
     }];
-    
-    if (isHide == YES) {
+    if (isHide) {
         _sortButton.selected = NO;
         _filterButton.selected = NO;
         selectedBtn = nil;

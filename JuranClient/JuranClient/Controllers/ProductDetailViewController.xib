@@ -94,12 +94,32 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nwr-a5-D3m">
+                    <rect key="frame" x="10" y="26" width="30" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="product-icon-back.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onBack:" destination="-1" eventType="touchUpInside" id="Nfo-HR-sDp"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YqR-tF-lH5">
+                    <rect key="frame" x="280" y="26" width="30" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="product-icon-more.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onMore:" destination="-1" eventType="touchUpInside" id="0e4-Ms-esr"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-92" y="-15"/>
+            <point key="canvasLocation" x="-123" y="113"/>
         </view>
         <view contentMode="scaleToFill" id="Epg-D2-fEI">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -112,8 +132,8 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Ul-lH-LWD">
-                    <rect key="frame" x="27" y="11" width="191" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Ul-lH-LWD">
+                    <rect key="frame" x="71" y="0.0" width="147" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <nil key="highlightedColor"/>
@@ -178,6 +198,11 @@
                         <action selector="onPrivate:" destination="-1" eventType="touchUpInside" id="hE1-c9-kaA"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="oaE-Fc-2e3">
+                    <rect key="frame" x="159" y="59" width="1" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -205,31 +230,41 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="agu-Zj-T8Y">
-                    <rect key="frame" x="10" y="26" width="30" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VHP-lS-iaW">
+                    <rect key="frame" x="10" y="23" width="21" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="product-icon-back.png">
+                    <state key="normal" image="nav_backbtn.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="onBack:" destination="-1" eventType="touchUpInside" id="tUP-AU-Lhe"/>
+                        <action selector="onBack:" destination="-1" eventType="touchUpInside" id="8iG-RH-CVc"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pma-fk-QM3">
-                    <rect key="frame" x="280" y="26" width="30" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dGR-PK-srs">
+                    <rect key="frame" x="250" y="23" width="23" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="product-icon-more.png">
+                    <state key="normal" image="icon-search.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="onMore:" destination="-1" eventType="touchUpInside" id="kbG-r8-s24"/>
+                        <action selector="onSearch:" destination="-1" eventType="touchUpInside" id="hRC-dz-vhO"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fYq-cV-ha4">
+                    <rect key="frame" x="283" y="23" width="23" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="icon-dot.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onMore:" destination="-1" eventType="touchUpInside" id="N0v-bj-Yer"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-80" y="-53"/>
+            <point key="canvasLocation" x="35" y="-214"/>
         </view>
         <view contentMode="scaleToFill" id="ajm-g1-g9O">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -258,7 +293,7 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="17" y="172"/>
+            <point key="canvasLocation" x="263" y="307"/>
         </view>
         <view contentMode="scaleToFill" id="LSK-1Z-3C5">
             <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
@@ -295,8 +330,11 @@
         </view>
     </objects>
     <resources>
-        <image name="icon-collection.png" width="23" height="22"/>
+        <image name="icon-collection.png" width="20" height="19"/>
+        <image name="icon-dot.png" width="23" height="5"/>
         <image name="icon-location.png" width="11" height="16"/>
+        <image name="icon-search.png" width="23" height="23"/>
+        <image name="nav_backbtn.png" width="12" height="22"/>
         <image name="product-icon-back.png" width="40" height="40"/>
         <image name="product-icon-message.png" width="19" height="14"/>
         <image name="product-icon-more.png" width="40" height="40"/>
