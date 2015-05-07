@@ -179,9 +179,7 @@
 #pragma mark - JRSegmentControlDelegate
 
 - (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
-    if ([_quesgtionFilterView isShow]) {
-        [_quesgtionFilterView showSort];
-    }
+    
     if (_datas) {
         [_datas removeAllObjects];
         [_tableView reloadData];
@@ -194,10 +192,14 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }else if (index == 2){
         _tableView.tableHeaderView = _questionHeaderView;
-        
     }else if (index == 3){
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }
+    
+    if ([_quesgtionFilterView isShow]) {
+        [_quesgtionFilterView showSort];
+    }
+    
     _wikiFilterButton.hidden = index != 1;
     [_tableView headerBeginRefreshing];
     

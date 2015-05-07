@@ -16,10 +16,11 @@
 @property (nonatomic, strong) UIButton *filterButton;
 @property (nonatomic, strong) NSArray *sorts;
 @property (nonatomic, strong) NSArray *filters;
-@property (nonatomic, strong) UITableView *tableView;
+
 @property (nonatomic, assign) UIView *parentView;
 @property (nonatomic, assign) NSDictionary *defaultData;
 @property (nonatomic, strong) UINavigationController *filterViewNav;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -107,7 +108,7 @@
         selectedBtn = btn;
         selectedBtn.selected = YES;
         [self showSort];
-        [self showSort];
+//        [self showSort];
     }
 }
 
@@ -139,15 +140,17 @@
 
 - (void)showSort{
     BOOL isHide = !self.tableView.hidden;
-    _tableView.alpha = isHide ? 1 : 0;
+    
     _tableView.hidden = isHide;
+    _tableView.alpha = isHide ? 1 : 0;
     [_tableView reloadData];
+    
     [UIView animateWithDuration:.2 animations:^{
         _tableView.alpha = isHide ? 0 : 1;
     } completion:^(BOOL finished) {
         _tableView.hidden = isHide;
     }];
-    if (isHide == YES) {
+    if (isHide) {
         _sortButton.selected = NO;
         _filterButton.selected = NO;
         selectedBtn = nil;
