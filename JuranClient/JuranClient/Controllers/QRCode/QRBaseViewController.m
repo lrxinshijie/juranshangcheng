@@ -200,7 +200,7 @@
 
 #pragma mark - QRCodeViewControllerDelegate
 
--(void)qrCodeComplete:(NSString *)codeString childVCStyle:(ChildVCStyle)style
+- (void)qrCodeComplete:(NSString *)codeString childVCStyle:(ChildVCStyle)style
 {
     if (style == ChildVCStyle_Web) {
         
@@ -235,9 +235,15 @@
     }
 }
 
--(void)qrCodeError:(NSError *)error
+- (void)qrCodeError:(NSError *)error
 {
     
+}
+
+- (void)qrCodeDismissTips
+{
+    self.qrCodeViewController = nil;
+    [self initChildViewController];
 }
 
 #pragma mark - InputCodeViewControllerDelegate

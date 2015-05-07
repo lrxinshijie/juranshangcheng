@@ -148,8 +148,7 @@
 
 - (void)setupUI{
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
-    //_tableView.tableFooterView = [[UIView alloc] init];
-    _tableView.tableFooterView = [[UIView alloc]init];
+    _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.tableHeaderView = _headerView;
     [self.view addSubview:_tableView];
     
@@ -401,6 +400,18 @@
     }
 #endif*/
     return 44;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

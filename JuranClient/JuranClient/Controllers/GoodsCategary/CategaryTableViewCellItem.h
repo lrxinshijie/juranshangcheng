@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) NSString * imgStr;
 @property (strong, nonatomic) NSString * isOrNoFatherNode;
+@property (assign, nonatomic) BOOL isSelect;
 
 
 + (CategaryTableViewCellItem *)createCategaryTableViewCellItemWithDictionary:(NSDictionary *)dict;

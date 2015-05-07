@@ -11,6 +11,7 @@
                 <outlet property="listTableView" destination="Txf-8m-0pI" id="SZV-1J-ZvU"/>
                 <outlet property="locationButton" destination="m7O-EO-ghA" id="feP-oV-ifQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewTitle" destination="6L4-bn-7lv" id="zxt-IL-tHp"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -38,7 +39,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品所在地" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6L4-bn-7lv">
-                            <rect key="frame" x="76" y="32" width="77" height="20"/>
+                            <rect key="frame" x="83" y="32" width="77" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -55,7 +56,7 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" id="let-yQ-OzL">
-                            <rect key="frame" x="160" y="25" width="70" height="34"/>
+                            <rect key="frame" x="163" y="25" width="61" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="m7O-EO-ghA">
@@ -67,11 +68,8 @@
                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <connections>
-                                        <action selector="locationButtonDidClick:" destination="-1" eventType="touchUpInside" id="r5D-wq-Aqt"/>
-                                    </connections>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectArrow.png" id="VPA-Py-edW">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selectArrow.png" id="VPA-Py-edW">
                                     <rect key="frame" x="55" y="15" width="6" height="4"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>

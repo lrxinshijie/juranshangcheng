@@ -13,6 +13,7 @@
 #import "CustomSearchBar.h"
 #import "AppDelegate.h"
 #import "UserLocation.h"
+#import "UIViewController+Menu.h"
 
 @interface ShopListViewController ()<CustomSearchBarDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -76,6 +77,11 @@
 {
 //    QRBaseViewController * QRVC = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:YES];
 //    [self.navigationController pushViewController:QRVC animated:YES];
+}
+
+- (void)showMenuList
+{
+     [self showAppMenu:nil];
 }
 
 - (void)goBackButtonDidSelect

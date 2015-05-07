@@ -120,7 +120,10 @@
         [self startSearchAtIndex:0];
         
     }else if (self.rightBtnStyle == RightBtnStyle_More){
-        //TODO:添加弹出菜单
+        //添加弹出菜单
+        if (self.delegate && [self.delegate respondsToSelector:@selector(showMenuList)]) {
+            [self.delegate showMenuList];
+        }
     }
     
 }
@@ -232,7 +235,9 @@
 #pragma mark - TextFieldDalegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    if (self.inputTextField.text == nil || self.inputTextField.text.length == 0) {
+    if (textField.text.length == 0) {
+        self.isHistory = NO;
+    }else{
         self.isHistory = YES;
     }
     [self showAnimation];
@@ -240,6 +245,8 @@
     [self magnifyingGlassHide];
     self.inputTextField.placeholder = nil;
     [self rightButtonChangeStyleWithKey:RightBtnStyle_Search];
+    [self changeListStyleAnimation];
+    
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

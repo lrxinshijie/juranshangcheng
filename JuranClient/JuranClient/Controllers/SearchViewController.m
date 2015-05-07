@@ -16,7 +16,7 @@
 
 #define kKeywordsButtonTag 3330
 
-@interface SearchViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface SearchViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate,UIScrollViewDelegate>
 {
     NSInteger step;
     NSArray *searchHistorys;
@@ -182,6 +182,7 @@
 - (void)doSearch{
     _searchKeyWord = _textField.text;
     [_textField resignFirstResponder];
+    [self hideTableList];
     [Public addSearchHistory:_textField.text];
     if (_type == SearchTypeDesigner) {
         DesignerViewController *vc = [[DesignerViewController alloc] init];
@@ -238,6 +239,9 @@
 
 - (void)handleTap:(id)sender{
     [_textField resignFirstResponder];
+    //下边这个方法是刷新TableView并设置行数为0以达到收起的效果，此收起逻辑为原有逻辑，此处沿用。
+    //此逻辑之所以不放在textField结束编辑的代理中是因为当键盘遮挡住搜索历史的时候需要收起键盘但不能收起列表。
+    [self hideTableList];
 }
 
 #pragma mark - UITableViewDataSource/Delegate
@@ -305,6 +309,11 @@
     }
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [_textField resignFirstResponder];
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -330,8 +339,7 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    step = 1;
-    [self reloadData];
+    
 }
 
 - (void)textFieldTextDidChangeNotification:(NSNotification*)notification{
@@ -342,6 +350,12 @@
         step = 3;
         [self reloadData];
     }
+}
+
+- (void)hideTableList
+{
+    step = 1;
+    [self reloadData];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification{
