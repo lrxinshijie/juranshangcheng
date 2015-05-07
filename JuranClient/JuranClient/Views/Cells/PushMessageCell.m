@@ -101,13 +101,17 @@
     
    height = CGRectGetMaxY(_contentLabel.frame) + 10;
     if (_pushInfoMsg.isExpand) {
-        _detailButton.hidden = NO;
-        
-        frame = _detailButton.frame;
-        frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;
-        _detailButton.frame = frame;
-        
-        height =  CGRectGetMaxY(_detailButton.frame) + 10;
+        if (_pushInfoMsg.msgType == 2 && _pushInfoMsg.msgUrl.length == 0) {
+            _detailButton.hidden = YES;
+        }else{
+            _detailButton.hidden = NO;
+            
+            frame = _detailButton.frame;
+            frame.origin.y = CGRectGetMaxY(_contentLabel.frame) + 5;
+            _detailButton.frame = frame;
+            
+            height =  CGRectGetMaxY(_detailButton.frame) + 10;
+        }
     }else{
         _detailButton.hidden = YES;
     }

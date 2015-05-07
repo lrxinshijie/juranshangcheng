@@ -27,6 +27,7 @@
         self.msgTitle = [dict getStringValueForKey:@"msgTitle" defaultValue:@""];
         self.gmtCreate = [dict getStringValueForKey:@"gmtCreate" defaultValue:@""];
         self.msgAbstract = [dict getStringValueForKey:@"msgAbstract" defaultValue:@""];
+        self.msgUrl = [dict getStringValueForKey:@"msgUrl" defaultValue:@""];
         
     }
     
