@@ -665,7 +665,7 @@
             }
             [wSelf.dateArray_firstLevel addObject:item];
             if (i == 0) {
-                [wSelf requestDataForBrand:[wSelf getFirstLetter:item.name] pageNo:wSelf.pageNo];
+                [wSelf requestDataForBrand:item.code pageNo:wSelf.pageNo];
             }
             
         }
@@ -677,15 +677,15 @@
     
 }
 
-- (NSString *)getFirstLetter:(NSString *)str
-{
-    NSMutableString * firstLetter = [NSMutableString stringWithString:@""];
-    for (int i=0; i<str.length; i++) {
-        [firstLetter appendString:[NSString stringWithFormat:@"%c",pinyinFirstLetter([str characterAtIndex:i])]];
-        str = [str substringFromIndex:1];
-    }
-    return firstLetter;
-}
+//- (NSString *)getFirstLetter:(NSString *)str
+//{
+//    NSMutableString * firstLetter = [NSMutableString stringWithString:@""];
+//    for (int i=0; i<str.length; i++) {
+//        [firstLetter appendString:[NSString stringWithFormat:@"%c",pinyinFirstLetter([str characterAtIndex:i])]];
+//        str = [str substringFromIndex:1];
+//    }
+//    return firstLetter;
+//}
 
 - (void)requestDataForBrand:(NSString *)brandClass pageNo:(int)pageNo
 {
@@ -693,7 +693,7 @@
     [self showHUD];
     __weak GoodsCategaryViewController * wSelf = self;
     self.brandName = brandClass;
-    NSDictionary * dict = @{@"pinYin":[self getFirstLetter:brandClass],
+    NSDictionary * dict = @{@"brandTypeCode":brandClass,
                             @"pageNo":[NSString stringWithFormat:@"%d",self.pageNo],
                             @"onePageCount":kOnePageCount
                             };
