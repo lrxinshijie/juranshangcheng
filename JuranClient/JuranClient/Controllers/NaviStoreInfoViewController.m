@@ -304,6 +304,8 @@
 
 - (IBAction)IndoorNaviClick:(id)sender {
     NaviStoreIndoorViewController *vc = [[NaviStoreIndoorViewController alloc]init];
+    vc.store = _store;
+    vc.navigationItem.title = _store.storeName;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

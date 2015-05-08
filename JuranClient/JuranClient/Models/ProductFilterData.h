@@ -26,7 +26,8 @@
 @property (nonatomic, copy) NSString *catName;
 @property (nonatomic, copy) NSString *parentCode;
 @property (nonatomic, copy) NSString *urlContent;
-@property (nonatomic, strong) NSArray *childList;
+//comm
+@property (nonatomic, strong) NSMutableArray *childList;
 @end
 //------------------------------------------------------------------
 @interface ProductBrand : NSObject

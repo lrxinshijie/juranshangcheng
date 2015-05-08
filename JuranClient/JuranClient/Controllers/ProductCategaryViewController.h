@@ -17,3 +17,8 @@ typedef void (^FilterSelected)(ProductSelectedFilter *filter);
 
 - (void)setFinishBlock:(FilterSelected)finished;
 @end
+
+@interface CellOpenStatus : NSObject
+@property (nonatomic, assign) BOOL isOpen;
+@property (nonatomic, strong) NSMutableArray *childList;
+@end

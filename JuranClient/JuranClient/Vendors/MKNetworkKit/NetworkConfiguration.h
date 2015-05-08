@@ -20,8 +20,8 @@
 
 
 /* UAT */
-#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
-#define JR_SERVICE  @"http://54.223.161.28:8080"
+//#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
+//#define JR_SERVICE  @"http://54.223.161.28:8080"
 
 //SIT内网
 //#define JR_SERVICE  @"http://10.199.5.241:8083"
@@ -200,6 +200,8 @@
 #define JR_SHOP_RECOMMEND [NSString stringWithFormat:@"%@/shop/shopRecommend.json",JR_SERVICE]
 #define JR_SHOP_CLASSIFICATION [NSString stringWithFormat:@"%@/shop/goodsClassification.json",JR_SERVICE]
 #define JR_SHOP_LOCATION [NSString stringWithFormat:@"%@/shop/shopLocation.json",JR_SERVICE]
+#define JR_SHOP_INDOOR [NSString stringWithFormat:@"%@/shop/getFloorIchnography.json",JR_SERVICE]
+
 //Navi
 #define JR_NAVI_STORE_LIST [NSString stringWithFormat:@"%@/shop/storeList.json",JR_SERVICE]
 #define JR_NAVI_STORE_INFO [NSString stringWithFormat:@"%@/shop/storeInfo.json",JR_SERVICE]
