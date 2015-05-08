@@ -8,6 +8,8 @@
 
 #import "JRProduct.h"
 #import "JRStore.h"
+#import "AppDelegate.h"
+#import "UserLocation.h"
 
 @implementation JRProduct
 
@@ -167,6 +169,10 @@
         }
         
     }];
+}
+
+- (BOOL)isShowPrice{
+    return ApplicationDelegate.gLocation.isSuccessLocation;
 }
 
 - (void)loadAttributeList:(BOOLBlock)finished{
