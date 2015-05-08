@@ -7,6 +7,7 @@
 //
 
 #import "NaviStoreIndoorViewController.h"
+#import "JRStore.h"
 
 @interface NaviStoreIndoorViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
@@ -27,11 +28,25 @@
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(headerViewClick:)];
     [_headerView addGestureRecognizer:gesture];
     _openState = NO;
+    [self loadData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadData{
+    NSDictionary *param = @{@"storeCode": _store.storeCode,
+                            };
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_SHOP_INDOOR parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            JRStoreHall *hall = [JRStoreHall buildUpWithValueForList:data];
+            
+        }
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

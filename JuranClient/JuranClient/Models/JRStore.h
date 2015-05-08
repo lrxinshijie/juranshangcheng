@@ -21,8 +21,25 @@
 @property(nonatomic, copy)NSString *saleTime;
 @property(nonatomic, copy)NSString *busRoute;
 @property(nonatomic, copy)NSString *contactTelephone;
+//Indoor
+@property(nonatomic, copy)NSArray *hallList;
 
 - (id)initWithDictionaryForList:(NSDictionary *)dict;
 - (id)initWithDictionaryForInfo:(NSDictionary *)dict;
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
+@end
+
+@interface JRStoreHall : NSObject
+@property(nonatomic, copy)NSString *name;
+@property(nonatomic, copy)NSString *hallCode;
+@property(nonatomic, strong)NSArray *floorList;
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
+@end
+
+@interface JRStoreFloor : NSObject
+@property(nonatomic, copy)NSString *name;
+@property(nonatomic, copy)NSString *floorCode;
+@property(nonatomic, strong)NSString *floorPhoto;
+
 + (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
