@@ -27,6 +27,7 @@
 
 - (void)fillCellWithData:(NSString *)title{
     _titleLabel.text = title;
+    _titleLabel.backgroundColor = [UIColor redColor];
     
     CGRect frame = _titleLabel.frame;
     frame.size = [AttributeLabelCell cellSizeWithTitle:title];
