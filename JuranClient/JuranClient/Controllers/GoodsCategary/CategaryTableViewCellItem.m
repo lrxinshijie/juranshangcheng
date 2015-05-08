@@ -14,10 +14,10 @@
 {
     self = [super init];
     if (self) {
-        NSString * shop_name = [NSString stringWithFormat:@"%@",[dict objectForKey:@"brandName"]];
+        NSString * shop_name = [NSString stringWithFormat:@"%@",[dict objectForKey:@"brandTypeName"]];
         NSString * good_name = [NSString stringWithFormat:@"%@",[dict objectForKey:@"name"]];
         
-        NSString * shop_code = [NSString stringWithFormat:@"%@",[dict objectForKey:@"brandCode"]];
+        NSString * shop_code = [NSString stringWithFormat:@"%@",[dict objectForKey:@"brandTypeCode"]];
         NSString * good_code = [NSString stringWithFormat:@"%@",[dict objectForKey:@"categoryCode"]];
         
         if (![shop_name  isEqual: @"(null)"] && shop_name.length != 0) {
