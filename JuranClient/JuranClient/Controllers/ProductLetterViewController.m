@@ -40,7 +40,7 @@
     
     [_photoImageView setImageWithURLString:_product.goodsLogo];
     _nameLabel.text = _product.goodsName;
-    _priceLabel.text = [NSString stringWithFormat:@"￥%@",_product.onSaleMinPrice];
+    _priceLabel.text = _product.priceString;
     _priceLabel.textColor = kBlueColor;
     
     self.senderName = @"";
@@ -184,12 +184,12 @@
         }
     }
     
-    NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", 0],
+    NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _product.shopId],
                             @"senderName":_senderName,
                             @"mobilePhone":_mobilePhone,
                             @"memo": memo};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_SEND_PRIVATE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_SHOP_PRIVATE_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             [self showTip:@"发送私信成功!"];

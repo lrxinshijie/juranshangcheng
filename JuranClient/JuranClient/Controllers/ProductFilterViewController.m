@@ -43,7 +43,6 @@
 
 - (void)loadData {
     [self showHUD];
-    _selectedFilter.isInShop = YES;
     _selectedFilter.shopId = 18;
     [_filterData loadFilterDataWithFilter:_selectedFilter Handler:^(BOOL result) {
         [self hideHUD];

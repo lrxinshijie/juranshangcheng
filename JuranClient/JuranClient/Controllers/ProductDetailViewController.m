@@ -53,7 +53,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView *attributeImageView;
 @property (nonatomic, strong) IBOutlet UILabel *attributeNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *attributePriceLabel;
-
+@property (nonatomic, strong) NSMutableArray *attributeSelected;
 
 @property (nonatomic, strong) UITableView *detailTableView;
 @property (nonatomic, strong) ALWebView *webView;
@@ -113,6 +113,9 @@
     
     self.detailTableView = [self.scrollView tableViewWithFrame:_webView.frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _detailTableView.backgroundColor = [UIColor clearColor];
+    
+    _attributePriceLabel.hidden = !_product.isShowPrice;
+    _priceLabel.hidden = !_product.isShowPrice;
 }
 
 - (void)loadData{
@@ -126,6 +129,8 @@
         
         [self setupFavority];
         
+        _attributePriceLabel.text = _product.priceString;
+        
         _nameLabel.text = _product.goodsName;
         CGRect frame = _nameLabel.frame;
         CGFloat height = [_nameLabel.text heightWithFont:_nameLabel.font constrainedToWidth:CGRectGetWidth(frame)];
@@ -135,7 +140,7 @@
         frame.size.height = height;
         _nameLabel.frame = frame;
         
-        _priceLabel.text = [NSString stringWithFormat:@"￥%@ ~ ￥%@", [@([_product.priceMin intValue]) decimalNumberFormatter], [@([_product.priceMax intValue]) decimalNumberFormatter]];
+        _priceLabel.text = _product.priceString;
 //        [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-star-active" : @"icon-star"] forState:UIControlStateNormal];
         
         [_imageScrollView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
@@ -148,7 +153,7 @@
         [_product.goodsImagesList enumerateObjectsUsingBlock:^(NSString *imageUrl, NSUInteger idx, BOOL *stop) {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_imageScrollView.frame)*idx, 0, CGRectGetWidth(_imageScrollView.frame), CGRectGetHeight(_imageScrollView.frame))];
             imageView.backgroundColor = RGBColor(237, 237, 237);
-            [imageView setImageWithURLString:imageUrl];
+            [imageView setImageWithURLString:imageUrl placeholderImage:nil editing:YES];
             [_imageScrollView addSubview:imageView];
         }];
         
@@ -190,6 +195,7 @@
 }
 
 - (IBAction)onSearch:(id)sender{
+    [super onSearch];
 }
 
 - (IBAction)onMore:(id)sender{
@@ -230,7 +236,8 @@
 - (void)setupAttributeView{
     _attributeNameLabel.text = _product.goodsName;
     [_attributeImageView setImageWithURLString:_product.goodsLogo];
-    _attributePriceLabel.text = [NSString stringWithFormat:@"￥%@ ~ ￥%@", [@([_product.priceMin intValue]) decimalNumberFormatter], [@([_product.priceMax intValue]) decimalNumberFormatter]];
+//
+//    _attributePriceLabel.text = [NSString stringWithFormat:@"￥%@", [@([_product.onSaleMinPrice intValue]) decimalNumberFormatter]];
     
     CGRect frame = _attributeNameLabel.frame;
     frame.size.height = [_attributeNameLabel.text heightWithFont:_attributeNameLabel.font constrainedToWidth:CGRectGetWidth(frame)];
@@ -443,8 +450,12 @@
                 [_product loadAttributeList:^(BOOL result) {
                     [self hideHUD];
                     if (result) {
+                        self.attributeSelected = [NSMutableArray array];
+                        [_product.attributeList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                            [_attributeSelected addObject:@(0)];
+                        }];
                         CGRect frame = _attributeTableView.frame;
-                        frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame);
+                        frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame) + 1;
                         frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
                         _attributeTableView.frame = frame;
                         [_attributeTableView reloadData];

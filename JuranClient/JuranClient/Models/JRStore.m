@@ -55,3 +55,52 @@
     return retVal;
 }
 @end
+
+@implementation JRStoreHall
+- (id)initWithDictionaryForList:(NSDictionary*)dict {
+    if (self=[self init]) {
+        if (dict && [dict isKindOfClass:[NSDictionary class]]) {
+            _name = [dict getStringValueForKey:@"name" defaultValue:@""];
+            _hallCode = [dict getStringValueForKey:@"hallCode" defaultValue:@""];
+            _floorList = [JRStoreFloor buildUpWithValueForList:[dict objectForKey:@"appFloorList"]];
+            
+        }
+    }
+    return self;
+}
+
++ (NSMutableArray*)buildUpWithValueForList:(id)value {
+    NSMutableArray *retVal = [NSMutableArray array];
+    if (value && [value isKindOfClass:[NSArray class]]) {
+        for (id obj in value) {
+            JRStoreHall *hall = [[JRStoreHall alloc]initWithDictionaryForList:obj];
+            [retVal addObject:hall];
+        }
+    }
+    return retVal;
+}
+@end
+
+@implementation JRStoreFloor
+- (id)initWithDictionaryForList:(NSDictionary*)dict {
+    if (self=[self init]) {
+        if (dict && [dict isKindOfClass:[NSDictionary class]]) {
+            _name = [dict getStringValueForKey:@"name" defaultValue:@""];
+            _floorCode = [dict getStringValueForKey:@"floorCode" defaultValue:@""];
+            _floorPhoto = [dict getStringValueForKey:@"floorPhoto" defaultValue:@""];
+        }
+    }
+    return self;
+}
+
++ (NSMutableArray*)buildUpWithValueForList:(id)value {
+    NSMutableArray *retVal = [NSMutableArray array];
+    if (value && [value isKindOfClass:[NSArray class]]) {
+        for (id obj in value) {
+            JRStoreFloor *floor = [[JRStoreFloor alloc]initWithDictionaryForList:obj];
+            [retVal addObject:floor];
+        }
+    }
+    return retVal;
+}
+@end
