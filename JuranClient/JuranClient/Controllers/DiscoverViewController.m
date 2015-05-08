@@ -184,14 +184,16 @@
         [_datas removeAllObjects];
         [_tableView reloadData];
     }
-    _tableView.tableHeaderView = nil;
+    _questionHeaderView.hidden = YES;
+    _tableView.frame = CGRectMake(0, CGRectGetMaxY(_segment.frame), kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar - CGRectGetMaxY(_segment.frame));
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     if (index == 0) {
         
     }else if (index == 1){
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }else if (index == 2){
-        _tableView.tableHeaderView = _questionHeaderView;
+        _questionHeaderView.hidden = NO;
+        _tableView.frame = CGRectMake(0, CGRectGetMaxY(_questionHeaderView.frame), kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar - CGRectGetMaxY(_questionHeaderView.frame));
     }else if (index == 3){
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }

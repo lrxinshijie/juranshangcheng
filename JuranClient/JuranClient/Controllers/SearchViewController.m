@@ -13,10 +13,13 @@
 #import "IQKeyboardManager.h"
 #import "ShopListViewController.h"
 #import "ProductListViewController.h"
+#import "CustomSearchBar.h"
+#import "QRBaseViewController.h"
+#import "UIViewController+Menu.h"
 
 #define kKeywordsButtonTag 3330
 
-@interface SearchViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate,UIScrollViewDelegate>
+@interface SearchViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate,UIScrollViewDelegate,CustomSearchBarDelegate>
 {
     NSInteger step;
     NSArray *searchHistorys;
@@ -64,12 +67,15 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+    self.headerView.hidden = YES;
     [self reloadData];
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
 }
 
@@ -96,32 +102,85 @@
     UIButton *btn = [self.view buttonWithFrame:kContentFrameWithoutNavigationBar target:self action:@selector(handleTap:) image:nil];
     [self.view addSubview:btn];
     
-    CGRect frame = _headerView.frame;
-    frame.origin = CGPointMake(0, 0);
-    _headerView.frame = frame;
-    [self.view addSubview:_headerView];
     
-    frame = _keywordsFooterView.frame;
-    frame.origin.y = CGRectGetMaxY(_headerView.frame);
-    _keywordsFooterView.frame = frame;
-    [self.view addSubview:_keywordsFooterView];
+    CustomSearchBar * customSB = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
+    customSB.delegate = self;
+    [customSB rightButtonChangeStyleWithKey:RightBtnStyle_Scan];
+    customSB.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 64);
+    [self.view addSubview:customSB];
     
-    frame = kContentFrameWithoutNavigationBar;
-    frame.origin.y = CGRectGetMaxY(_headerView.frame);
-    frame.size.height = 0;
     
-    self.tableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
-    self.tableView.backgroundColor = RGBColor(241, 241, 241);
-    _tableView.tableFooterView = [[UIView alloc] init];
-    _tableView.tableHeaderView = [[UIView alloc] init];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_tableView];
+    //旧逻辑，为避免引起连锁问题暂时不删除
+//    CGRect frame = _headerView.frame;
+//    frame.origin = CGPointMake(0, 0);
+//    _headerView.frame = frame;
+//    [self.view addSubview:_headerView];
+//    
+//    frame = _keywordsFooterView.frame;
+//    frame.origin.y = CGRectGetMaxY(_headerView.frame);
+//    _keywordsFooterView.frame = frame;
+//    [self.view addSubview:_keywordsFooterView];
+//    
+//    frame = kContentFrameWithoutNavigationBar;
+//    frame.origin.y = CGRectGetMaxY(_headerView.frame);
+//    frame.size.height = 0;
+//    
+//    self.tableView = [self.view tableViewWithFrame:frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+//    self.tableView.backgroundColor = RGBColor(241, 241, 241);
+//    _tableView.tableFooterView = [[UIView alloc] init];
+//    _tableView.tableHeaderView = [[UIView alloc] init];
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    [self.view addSubview:_tableView];
     
-    btn = (UIButton*)[_clearHistoryView viewWithTag:3320];
-    btn.layer.masksToBounds = YES;
-    btn.layer.cornerRadius = 2.f;
+//    btn = (UIButton*)[_clearHistoryView viewWithTag:3320];
+//    btn.layer.masksToBounds = YES;
+//    btn.layer.cornerRadius = 2.f;
     
 }
+
+#pragma mark - CustomSearchBarDelegate
+- (void)goBackButtonDidSelect
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)pushToQRCodeVCDidTriggered
+{
+    QRBaseViewController * qrVC = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:YES];
+    [self.navigationController pushViewController:qrVC animated:YES];
+}
+
+- (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index
+{
+    _textField.text = keyWord;
+    switch (index) {
+        case 0:
+            _type = SearchTypeCase;
+            break;
+        case 1:
+            _type = SearchTypeGoods;
+            break;
+        case 2:
+            _type = SearchTypeShop;
+            break;
+        case 3:
+            _type = SearchTypeDesigner;
+            break;
+        case 4:
+            _type = SearchTypeQuestion;
+            break;
+        default:
+            break;
+    }
+    [self doSearch];
+}
+
+- (void)showMenuList
+{
+    [self showAppMenu:nil];
+}
+
+
 
 - (void)setupHotwordsView{
     for (UIView *v in _keywordsFooterView.subviews) {
@@ -181,9 +240,10 @@
 
 - (void)doSearch{
     _searchKeyWord = _textField.text;
-    [_textField resignFirstResponder];
-    [self hideTableList];
-    [Public addSearchHistory:_textField.text];
+    //旧逻辑，暂不删除
+//    [_textField resignFirstResponder];
+//    [self hideTableList];
+//    [Public addSearchHistory:_textField.text];
     if (_type == SearchTypeDesigner) {
         DesignerViewController *vc = [[DesignerViewController alloc] init];
         vc.searchKeyWord = _searchKeyWord;

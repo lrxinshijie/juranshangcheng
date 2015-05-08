@@ -56,7 +56,7 @@
     self.dataArray_History = [NSMutableArray arrayWithCapacity:0];
     self.dataArray_SearchRange = [NSMutableArray arrayWithCapacity:0];
 
-    NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:@"在作品案例中搜索",@"searchRange",@"",@"count",nil];
+    NSDictionary * dict  = [NSDictionary dictionaryWithObjectsAndKeys:@"在作品案例中搜索",@"searchRange",@"",@"count",nil];
     NSDictionary * dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"在商品中搜索",@"searchRange",@"",@"count",nil];
     NSDictionary * dict2 = [NSDictionary dictionaryWithObjectsAndKeys:@"在店铺中搜索",@"searchRange",@"",@"count",nil];
     NSDictionary * dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"在设计师中搜索",@"searchRange",@"",@"count",nil];
@@ -267,6 +267,12 @@
 {
     [self.inputTextField resignFirstResponder];
     [self cleanBtnHide];
+    if (textField.text.length == 0){
+        [self magnifyingGlassShow];
+        self.inputTextField.placeholder = @"      请输入搜索关键字";
+    }
+    
+    
     return YES;
 }
 

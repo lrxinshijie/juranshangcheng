@@ -101,7 +101,7 @@
         UINavigationController *nav = self.viewController.navigationController;
         
         UIView *bgView = [[UIView alloc] initWithFrame:self.tableView.bounds];
-        bgView.backgroundColor = [UIColor redColor];
+        bgView.backgroundColor = [UIColor clearColor];
         UIButton *btn = [bgView buttonWithFrame:bgView.bounds target:self action:@selector(onHidden:) image:nil];
         [bgView addSubview:btn];
         _tableView.backgroundView = bgView;
