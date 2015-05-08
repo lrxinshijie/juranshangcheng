@@ -40,7 +40,7 @@
     
     [_photoImageView setImageWithURLString:_product.goodsLogo];
     _nameLabel.text = _product.goodsName;
-    _priceLabel.text = [NSString stringWithFormat:@"￥%@",_product.onSaleMinPrice];
+    _priceLabel.text = _product.priceString;
     _priceLabel.textColor = kBlueColor;
     
     self.senderName = @"";

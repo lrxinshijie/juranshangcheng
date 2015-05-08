@@ -13,5 +13,5 @@
 - (void)setImageWithURLString:(NSString *)url;
 - (void)setImageWithURLString:(NSString *)url placeholderImage:(UIImage *)image;
 - (void)setImageWithURLString:(NSString *)url Editing:(BOOL)editing;
-
+- (void)setImageWithURLString:(NSString *)url placeholderImage:(UIImage *)image editing:(BOOL)editing;
 @end

@@ -129,7 +129,7 @@
         
         [self setupFavority];
         
-        _attributePriceLabel.text = [NSString stringWithFormat:@"￥%@ ~ ￥%@", [@([_product.priceMin intValue]) decimalNumberFormatter], [@([_product.priceMax intValue]) decimalNumberFormatter]];
+        _attributePriceLabel.text = _product.priceString;
         
         _nameLabel.text = _product.goodsName;
         CGRect frame = _nameLabel.frame;
@@ -140,7 +140,7 @@
         frame.size.height = height;
         _nameLabel.frame = frame;
         
-        _priceLabel.text = [NSString stringWithFormat:@"￥%@ ~ ￥%@", [@([_product.priceMin intValue]) decimalNumberFormatter], [@([_product.priceMax intValue]) decimalNumberFormatter]];
+        _priceLabel.text = _product.priceString;
 //        [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-star-active" : @"icon-star"] forState:UIControlStateNormal];
         
         [_imageScrollView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
@@ -153,7 +153,7 @@
         [_product.goodsImagesList enumerateObjectsUsingBlock:^(NSString *imageUrl, NSUInteger idx, BOOL *stop) {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_imageScrollView.frame)*idx, 0, CGRectGetWidth(_imageScrollView.frame), CGRectGetHeight(_imageScrollView.frame))];
             imageView.backgroundColor = RGBColor(237, 237, 237);
-            [imageView setImageWithURLString:imageUrl];
+            [imageView setImageWithURLString:imageUrl placeholderImage:nil editing:YES];
             [_imageScrollView addSubview:imageView];
         }];
         
