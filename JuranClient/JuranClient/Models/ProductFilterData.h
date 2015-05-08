@@ -15,13 +15,18 @@
 @end
 //------------------------------------------------------------------
 @interface ProductCategory : NSObject
+//inshop
 @property (nonatomic, assign) long Id;
 @property (nonatomic, assign) long shopId;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) int depth;
 @property (nonatomic, assign) long parentId;
+//all
+@property (nonatomic, copy) NSString *catCode;
+@property (nonatomic, copy) NSString *catName;
 @property (nonatomic, copy) NSString *parentCode;
 @property (nonatomic, copy) NSString *urlContent;
+@property (nonatomic, strong) NSArray *childList;
 @end
 //------------------------------------------------------------------
 @interface ProductBrand : NSObject
@@ -63,3 +68,8 @@
 - (void)loadFilterDataWithFilter:(ProductSelectedFilter *)filter
                          Handler:(BOOLBlock)finished;
 @end
+
+//{"id":71,"saleRegionId":1,"saleRegionNmae":null,"catCode":"00000101","catCodeShow":null,"catName":"建材","parentId":null,"parentCode":"-1","isEcShow":"1","isLeaf":"0","pinYin":"J","catImage":null,"image":null,"status":"1","urlContent":"21323"}
+
+
+//"appShopCatList":[{"sort":2,"id":92,"shopId":18,"name":"家居","depth":1,"parentId":null}

@@ -69,7 +69,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
+//    _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     
     [self setupUI];
     [self setupAttributeView];
@@ -90,11 +90,15 @@
     _baseTableView.tableHeaderView = _titleView;
     [_scrollView addSubview:_baseTableView];
     [_scrollView addSubview:_tipsView];
-    [self.view addSubview:_navigationView];
     
     CGRect frame = _tipsView.frame;
     frame.origin.y = CGRectGetMaxY(_baseTableView.frame);
     _tipsView.frame = frame;
+    
+    frame = _navigationView.frame;
+    frame.origin.y = CGRectGetHeight(_scrollView.frame);
+    _navigationView.frame = frame;
+    [_scrollView addSubview:_navigationView];
     
     self.segCtl = [[JRSegmentControl alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_scrollView.frame) + CGRectGetHeight(_navigationView.frame) + 1, CGRectGetWidth(_scrollView.frame), 44)];
     _segCtl.titleList = @[@"商品详情", @"商品参数", @"店铺推荐"];
@@ -165,8 +169,11 @@
             if (store) {
                 _storeNameLabel.text = store.stallName;
                 CLLocation *location = [[CLLocation alloc] initWithLatitude:store.latitude longitude:store.longitude];
+#ifndef kJuranDesigner
                 double distance = [ApplicationDelegate.gLocation.location distanceFromLocation:location];
                 _storeLocationLabel.text = [NSString stringWithFormat:@"%.2fkm", distance/1000];
+                _storeLocationLabel.adjustsFontSizeToFitWidth = YES;
+#endif
             }
         }
     }];
@@ -180,6 +187,9 @@
 
 - (IBAction)onBack:(id)sender{
     [super back:sender];
+}
+
+- (IBAction)onSearch:(id)sender{
 }
 
 - (IBAction)onMore:(id)sender{
@@ -235,6 +245,7 @@
     
     _attributeTableView.tableHeaderView = _attributeHeaderView;
     _attributeTableView.tableFooterView = [[UIView alloc] init];
+    _attributeTableView.bounces = NO;
 }
 
 - (void)showAttributeView{
@@ -457,9 +468,9 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if ([scrollView isEqual:_scrollView]) {
-        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha: (scrollView.contentOffset.y >= 320 ? 1 : 0)];
-    }
+//    if ([scrollView isEqual:_scrollView]) {
+//        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha: (scrollView.contentOffset.y >= 320 ? 1 : 0)];
+//    }
 //    else if ([scrollView isEqual:_baseTableView]){
 //        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:_baseTableView.contentOffset.y/320.0];
 //    }

@@ -46,18 +46,18 @@
         
 //        if (([Public isDesignerApp] && type == FilterViewTypeCase) || type == FilterViewTypeCaseSearch) {
         
-//        if (type == FilterViewTypeCase || type == FilterViewTypeCaseSearch) {
-//            width = kWindowWidth - 44;
-//            UIView *gridView = [[UIView alloc] initWithFrame:CGRectMake(width, 0, 44, 44)];
-//            gridView.backgroundColor = [UIColor clearColor];
-//            UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 1, 44)];
-//            lineImageView.backgroundColor = RGBColor(213, 213, 213);
-//            [gridView addSubview:lineImageView];
-//            
-//            self.listButton = [gridView buttonWithFrame:gridView.bounds target:self action:@selector(onList) image:[UIImage imageNamed:@"icon-list"]];
-//            [gridView addSubview:_listButton];
-//            [self addSubview:gridView];
-//        }
+        if (type == FilterViewTypeCase || type == FilterViewTypeCaseSearch) {
+            width = kWindowWidth - 44;
+            UIView *gridView = [[UIView alloc] initWithFrame:CGRectMake(width, 0, 44, 44)];
+            gridView.backgroundColor = [UIColor clearColor];
+            UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 1, 44)];
+            lineImageView.backgroundColor = RGBColor(213, 213, 213);
+            [gridView addSubview:lineImageView];
+            
+            self.listButton = [gridView buttonWithFrame:gridView.bounds target:self action:@selector(onList) image:[UIImage imageNamed:@"icon-list"]];
+            [gridView addSubview:_listButton];
+            [self addSubview:gridView];
+        }
         
         width /= 2;
         self.sortButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -254,6 +254,9 @@
                 break;
             case FilterViewTypeWiki:
                 _sorts = [[DefaultData sharedData] objectForKey:@"wikiOrder"];
+                break;
+            case FilterViewTypeCaseWithoutGrid:
+                _sorts = [[DefaultData sharedData] objectForKey:@"caseOrder"];
                 break;
             default:
                 break;
