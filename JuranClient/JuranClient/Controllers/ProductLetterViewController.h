@@ -9,8 +9,10 @@
 #import "ALViewController.h"
 
 @class JRProduct;
+@class JRShop;
 @interface ProductLetterViewController : ALViewController
 
 @property (nonatomic, strong) JRProduct *product;
+@property (nonatomic, strong) JRShop *shop;
 
 @end

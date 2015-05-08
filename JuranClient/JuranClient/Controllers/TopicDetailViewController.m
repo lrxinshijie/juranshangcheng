@@ -16,6 +16,7 @@
 #import "CanRemoveImageView.h"
 #import "ShareView.h"
 #import "IQKeyboardManager.h"
+#import "UIViewController+Menu.h"
 
 
 @interface TopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, CommentCellDelegate, UITextFieldDelegate, ALWebViewDelegate, CanRemoveImageViewDelegate>
@@ -65,7 +66,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.openStatusDic = [NSMutableDictionary dictionary];
     self.navigationItem.title = @"话题详情";
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"menu_icon_fenxiang.png"] rightBarButtonItemAction:@selector(onShare:)];
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onShare:)];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
@@ -378,11 +379,13 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (IBAction)onShare:(id)sender{
-    [[ShareView sharedView] showWithContent:_topic.theme image:nil title:_topic.theme url:[NSString stringWithFormat:@"http://apph5.juran.cn/topics/%@%@", _topic.topicId, [Public shareEnv]]];
+- (void)onShare:(id)sender{
+    [self showAppMenu:^{
+        [[ShareView sharedView] showWithContent:_topic.theme image:nil title:_topic.theme url:[NSString stringWithFormat:@"http://apph5.juran.cn/topics/%@%@", _topic.topicId, [Public shareEnv]]];
+    }];
 }
 
-- (IBAction)onComment:(id)sender{
+- (void)onComment:(id)sender{
     self.selectComment = nil;
     _commentView.hidden = NO;
     [_commentTextField becomeFirstResponder];

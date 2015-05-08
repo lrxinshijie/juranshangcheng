@@ -18,6 +18,7 @@
 #import "NaviStoreListViewController.h"
 #import "AppDelegate.h"
 #import "UserLocation.h"
+#import "ProductLetterViewController.h"
 
 @interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -72,7 +73,9 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId]};
+    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId],
+                            @"minisite": @"",
+                            @"flag": @"shop"};
     [self showHUD];
     
     [[ALEngine shareEngine] pathURL:JR_SHOP_FIRSTPAGE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -126,7 +129,8 @@
 }
 
 - (IBAction)onIntroduce:(id)sender{
-    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId]};
+    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId]
+                            };
     [self showHUD];
     
     [[ALEngine shareEngine] pathURL:JR_SHOP_INTRODUCE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -179,7 +183,9 @@
 }
 
 - (IBAction)onPrivateLetter:(id)sender{
-    
+    ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
+    pv.shop = _shop;
+    [self.navigationController pushViewController:pv animated:YES];
 }
 
 #pragma mark - UICollectionViewDelegate

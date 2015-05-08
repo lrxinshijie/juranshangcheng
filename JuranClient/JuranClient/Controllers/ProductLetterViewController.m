@@ -9,6 +9,7 @@
 #import "ProductLetterViewController.h"
 #import "TextFieldCell.h"
 #import "JRProduct.h"
+#import "JRShop.h"
 
 @interface ProductLetterViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView *photoImageView;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *priceLabel;
+@property (nonatomic, strong) IBOutlet UIView *productView;
 @property (nonatomic, assign) BOOL isPopview;
 
 @property (nonatomic, copy) NSString *senderName;
@@ -38,10 +40,15 @@
     [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
-    [_photoImageView setImageWithURLString:_product.goodsLogo];
-    _nameLabel.text = _product.goodsName;
-    _priceLabel.text = _product.priceString;
-    _priceLabel.textColor = kBlueColor;
+    if (_product) {
+        [_photoImageView setImageWithURLString:_product.goodsLogo];
+        _nameLabel.text = _product.goodsName;
+        _priceLabel.text = _product.priceString;
+        _priceLabel.textColor = kBlueColor;
+    }else{
+        _productView.hidden = YES;
+    }
+    
     
     self.senderName = @"";
     self.mobilePhone = @"";
@@ -184,7 +191,7 @@
         }
     }
     
-    NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _product.shopId],
+    NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _product?_product.shopId:_shop.shopId],
                             @"senderName":_senderName,
                             @"mobilePhone":_mobilePhone,
                             @"memo": memo};
