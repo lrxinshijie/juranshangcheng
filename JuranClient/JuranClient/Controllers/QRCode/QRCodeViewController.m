@@ -7,10 +7,15 @@
 //
 
 #import "QRCodeViewController.h"
+#import "MobClick.h"
 
 #define IOS7               [[[UIDevice currentDevice] systemVersion]floatValue]>=7.0
 #define ScreenWidth        self.view.bounds.size.width
 #define ScreenHeight       self.view.bounds.size.height
+
+#define UM_QRScanEvent         @"QRSCANEVENT"
+#define UM_QRScanEvent_Product @"ScanProduct"
+#define UM_QRScanEvent_Shop    @"ScanShop"
 
 @interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate,UIAlertViewDelegate>
 
@@ -154,22 +159,20 @@
             //是连接，判断是解析还是用webView展示
             if ([self needShowWithWebView:val] == 0) {
                 //webView展示
-//                vcStyle = ChildVCStyle_Web;
-//                code = val;
-                //新修改：此处不展示，而是弹出窗口提示
-                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Tips" message:val delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alertView show];
-                return;
+                vcStyle = ChildVCStyle_Web;
+                code = val;
                 
             }else if ([self needShowWithWebView:val] == 1){
                 //跳转至店铺首页
                 vcStyle = ChildVCStyle_Shop;
                 code = [self getNumberFrom:val];
+                [MobClick event:UM_QRScanEvent attributes:@{UM_QRScanEvent_Shop:@"ShopMobile"}];
                 
             }else if ([self needShowWithWebView:val] == 2){
                 //跳转至商品详情页
                 vcStyle = ChildVCStyle_Product;
                 code = [self getNumberFrom:val];
+                [MobClick event:UM_QRScanEvent attributes:@{UM_QRScanEvent_Product:@"ProductMobile"}];
                 
             }
             
@@ -202,12 +205,13 @@
 
 - (int)needShowWithWebView:(NSString *)str
 {
-    //http://mall.juran.cn/goods/10678.htm
-    //http://mall.juran.cn/shop/1101.htm
+    //http://mall.juran.cn/product/10678.htm?ozu_sid=ProductMobile
+    //http://mall.juran.cn/shop/111.htm?ozu_sid=ShopMobile
+    //http://songbao.juran.cn/?ozu_sid=ShopMobile
 
-    NSString * regex_product = @"^http://mall\.juran\.cn/goods/([0-9]{1,})\.htm$";
-    NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm$";
-    NSString * regex_shop1 = @"^http://[a-zA-Z]{1,}\.juran\.cn$";
+    NSString * regex_product = @"^http://mall\.juran\.cn/product/([0-9]{1,})\.htm.ozu_sid=ProductMobile$";
+    NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm.ozu_sid=ShopMobile$";
+    NSString * regex_shop1 = @"^http://[a-zA-Z]{1,}\.juran\.cn/.ozu_sid=ShopMobile$";
     
     NSPredicate *pred_shop = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex_shop];
     BOOL isMatch_shop = [pred_shop evaluateWithObject:str];
