@@ -187,9 +187,13 @@
     if (_segment.selectedIndex == 0) {
         return JR_ORDER_LIST;
     }else{
-        return JR_ORDER_LIST;
+        return JR_NEEDS_LIST;
     }
 #endif
+}
+
+- (NSDictionary *)params{
+    return nil;
 }
 
 - (void)loadData{
