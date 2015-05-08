@@ -53,7 +53,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView *attributeImageView;
 @property (nonatomic, strong) IBOutlet UILabel *attributeNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *attributePriceLabel;
-
+@property (nonatomic, strong) NSMutableArray *attributeSelected;
 
 @property (nonatomic, strong) UITableView *detailTableView;
 @property (nonatomic, strong) ALWebView *webView;
@@ -126,6 +126,8 @@
         
         [self setupFavority];
         
+        _attributePriceLabel.text = [NSString stringWithFormat:@"￥%@ ~ ￥%@", [@([_product.priceMin intValue]) decimalNumberFormatter], [@([_product.priceMax intValue]) decimalNumberFormatter]];
+        
         _nameLabel.text = _product.goodsName;
         CGRect frame = _nameLabel.frame;
         CGFloat height = [_nameLabel.text heightWithFont:_nameLabel.font constrainedToWidth:CGRectGetWidth(frame)];
@@ -190,6 +192,7 @@
 }
 
 - (IBAction)onSearch:(id)sender{
+    [super onSearch];
 }
 
 - (IBAction)onMore:(id)sender{
@@ -230,7 +233,8 @@
 - (void)setupAttributeView{
     _attributeNameLabel.text = _product.goodsName;
     [_attributeImageView setImageWithURLString:_product.goodsLogo];
-    _attributePriceLabel.text = [NSString stringWithFormat:@"￥%@ ~ ￥%@", [@([_product.priceMin intValue]) decimalNumberFormatter], [@([_product.priceMax intValue]) decimalNumberFormatter]];
+//
+//    _attributePriceLabel.text = [NSString stringWithFormat:@"￥%@", [@([_product.onSaleMinPrice intValue]) decimalNumberFormatter]];
     
     CGRect frame = _attributeNameLabel.frame;
     frame.size.height = [_attributeNameLabel.text heightWithFont:_attributeNameLabel.font constrainedToWidth:CGRectGetWidth(frame)];
@@ -443,8 +447,12 @@
                 [_product loadAttributeList:^(BOOL result) {
                     [self hideHUD];
                     if (result) {
+                        self.attributeSelected = [NSMutableArray array];
+                        [_product.attributeList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                            [_attributeSelected addObject:@(0)];
+                        }];
                         CGRect frame = _attributeTableView.frame;
-                        frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame);
+                        frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame) + 1;
                         frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
                         _attributeTableView.frame = frame;
                         [_attributeTableView reloadData];

@@ -23,7 +23,7 @@
 }
 
 - (void)fillCellWithData:(JRProduct *)product{
-    [_logoImageView setImageWithURLString:product.goodsLogo];
+    [_logoImageView setImageWithURLString:product.goodsLogo placeholderImage:nil];
     _nameLabel.text = product.goodsName;
 }
 

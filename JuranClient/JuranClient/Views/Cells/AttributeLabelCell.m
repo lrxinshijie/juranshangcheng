@@ -11,6 +11,7 @@
 @interface AttributeLabelCell ()
 
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (nonatomic, copy) NSString *title;
 
 @end
 
@@ -18,20 +19,34 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
+    
+    self.contentView.frame = self.bounds;
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+//    self.contentView.translatesAutoresizingMaskIntoConstraints = YES;
+//    _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.autoresizesSubviews = YES;
+//    _titleLabel.clipsToBounds = YES;
+    _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 }
 
 - (void)fillCellWithData:(NSString *)title{
+    self.title = title;
+    
     _titleLabel.text = title;
-    _titleLabel.backgroundColor = [UIColor redColor];
     
     CGRect frame = _titleLabel.frame;
-    frame.size = [AttributeLabelCell cellSizeWithTitle:title];
+    frame.size = [AttributeLabelCell cellSizeWithTitle:_title];
     _titleLabel.frame = frame;
+//    _titleLabel.frame = self.bounds;
     
     _titleLabel.layer.borderColor = [[UIColor blackColor] CGColor];
     _titleLabel.layer.borderWidth = 1;
     _titleLabel.layer.masksToBounds = YES;
     _titleLabel.layer.cornerRadius = 3;
+    
+//    [self layoutSubviews];
+//    [self viewDidLayoutSubviews];
 }
 
 + (CGSize)cellSizeWithTitle:(NSString *)title{
