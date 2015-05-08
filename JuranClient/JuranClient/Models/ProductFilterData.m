@@ -41,9 +41,11 @@
         }
         self.Id = [dict getLongValueForKey:@"id" defaultValue:0];
         self.shopId = [dict getLongValueForKey:@"shopId" defaultValue:0];
-        self.name = [dict getStringValueForKey:@"catName" defaultValue:@""];
+        self.name = [dict getStringValueForKey:@"name" defaultValue:@""];
         self.depth = [dict getIntValueForKey:@"depth" defaultValue:0];
         self.parentId = [dict getLongValueForKey:@"parentId" defaultValue:0];
+        self.catCode = [dict getStringValueForKey:@"catCode" defaultValue:@""];
+        self.catName = [dict getStringValueForKey:@"catName" defaultValue:@""];
         self.parentCode = [dict getStringValueForKey:@"parentCode" defaultValue:@""];
         self.urlContent = [dict getStringValueForKey:@"urlContent" defaultValue:@""];
     }
@@ -165,10 +167,14 @@
     [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             self.attributeList = [ProductAttribute buildUpWithValueForList:[data objectForKey:@"showAttributesList"]];
-            self.categoryList = [ProductCategory buildUpWithValueForList:[data objectForKey:@"appOperatingCatList"]];
+            if (filter.isInShop) {
+                self.categoryList = [ProductCategory buildUpWithValueForList:[data objectForKey:@"appShopCatList"]];
+            }else {
+                self.categoryList = [ProductCategory buildUpWithValueForList:[data objectForKey:@"appOperatingCatList"]];
+            }
             self.brandList = [ProductBrand buildUpWithValueForList:[data objectForKey:@"sortBrandList"]];
             self.storeList = [ProductStore buildUpWithValueForList:[data objectForKey:@"appStoreInfoList"]];
-            self.categoryList = [ProductClass buildUpWithValueForList:[data objectForKey:@"appManagementCategoryList"]];
+            self.classList = [ProductClass buildUpWithValueForList:[data objectForKey:@"appManagementCategoryList"]];
         }
         if (finished) {
             finished(error == nil);

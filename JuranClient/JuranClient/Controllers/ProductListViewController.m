@@ -85,7 +85,6 @@
     
     ProductDetailViewController *pd = [[ProductDetailViewController alloc] init];
     pd.product = _products[indexPath.row];
-    pd.product.shopId = 6;
     [self.navigationController pushViewController:pd animated:YES];
 }
 

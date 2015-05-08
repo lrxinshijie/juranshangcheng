@@ -51,14 +51,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [_tableViewStore registerNib:[UINib nibWithNibName:@"NaviStoreCell" bundle:nil] forCellReuseIdentifier:@"NaviStoreCell"];
+    _cityName = @"北京市";
     if(ApplicationDelegate.gLocation.isSuccessLocation)
         _btnChangeCity.hidden = YES;
     if (_naviType == NaviTypeStore) {
         self.navigationItem.title = @"门店导航";
-        _cityName = @"北京市";
         [self loadData];
     }
     else {
+        
         [self reloadView];
     }
 }
@@ -188,9 +189,9 @@
 }
 
 - (IBAction)naviRightClick:(id)sender {
-    //[self showAppMenu:nil];
-    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:@"1" IsInShop:NO];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self showAppMenu:nil];
+//    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:@"1" IsInShop:YES];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)changeCityClick:(id)sender {

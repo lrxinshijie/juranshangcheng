@@ -7765,8 +7765,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Connection",
@@ -7803,7 +7803,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = JuranDesigner;
-				PROVISIONING_PROFILE = "b03a5015-4662-4bdd-a7a1-c112727d38af";
+				PROVISIONING_PROFILE = "8ff8e1b2-afbd-40bc-9dcc-4ef6164050f4";
 				VALID_ARCHS = "armv7 armv64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -7814,8 +7814,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Connection",
@@ -7851,7 +7851,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = JuranDesigner;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8ff8e1b2-afbd-40bc-9dcc-4ef6164050f4";
 				VALID_ARCHS = "armv7 armv64";
 				WRAPPER_EXTENSION = app;
 			};

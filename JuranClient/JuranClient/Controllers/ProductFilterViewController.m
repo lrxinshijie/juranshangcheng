@@ -24,6 +24,7 @@
 {
     self = [super init];
     if (self) {
+        self.selectedFilter = [[ProductSelectedFilter alloc]init];
         self.selectedFilter.keyword = keyword;
         self.selectedFilter.isInShop = isInShop;
         self.selectedFilter.sort = 9;
@@ -37,10 +38,13 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"筛选";
     _filterData = [[ProductFilterData alloc]init];
+    [self loadData];
 }
 
 - (void)loadData {
     [self showHUD];
+    _selectedFilter.isInShop = YES;
+    _selectedFilter.shopId = 18;
     [_filterData loadFilterDataWithFilter:_selectedFilter Handler:^(BOOL result) {
         [self hideHUD];
         if (result) {
@@ -105,12 +109,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     ProductCategaryViewController *vc = [[ProductCategaryViewController alloc]init];
-    vc.navigationItem.title = cell.textLabel.text;
+    vc.navigationItem.title = [NSString stringWithFormat:@"%@",[_conditionArray objectAtIndex:[indexPath row]]];
     vc.filterData = _filterData;
     vc.selectedFilter = _selectedFilter;
-    //cell
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
 
