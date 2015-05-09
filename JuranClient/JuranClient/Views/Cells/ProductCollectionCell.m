@@ -42,6 +42,7 @@
     _nameLabel.text = product.goodsName;
     [_imgView setImageWithURLString:product.defaultImage];
     _priceLabel.text = product.onSaleMinPrice;
+    [_collectionButton setImage:[UIImage imageNamed:product.type?@"icon-collection-active.png":@"icon-collection.png"] forState:UIControlStateNormal];
     
     if (product.stallInfoList.count > 0) {
         JRStore *s = product.stallInfoList.firstObject;
@@ -54,7 +55,7 @@
 
 - (IBAction)onCollection:(id)sender{
     [_product favority:^(BOOL result) {
-        
+        [_collectionButton setImage:[UIImage imageNamed:_product.type?@"icon-collection-active.png":@"icon-collection.png"] forState:UIControlStateNormal];
     }];
 }
 
