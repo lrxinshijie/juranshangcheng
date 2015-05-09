@@ -41,12 +41,12 @@
     
     _nameLabel.text = product.goodsName;
     [_imgView setImageWithURLString:product.defaultImage];
-    _priceLabel.text = product.onSaleMinPrice;
+    _priceLabel.text = [NSString stringWithFormat:@"￥%@", product.onSaleMinPrice];
     [_collectionButton setImage:[UIImage imageNamed:product.type?@"icon-collection-active.png":@"icon-collection.png"] forState:UIControlStateNormal];
     
     if (product.stallInfoList.count > 0) {
         JRStore *s = product.stallInfoList.firstObject;
-        _addressLabel.text = s.storeName;;
+        _addressLabel.text = s.stallName;
         _addressView.hidden = NO;
     }else{
         _addressView.hidden = YES;

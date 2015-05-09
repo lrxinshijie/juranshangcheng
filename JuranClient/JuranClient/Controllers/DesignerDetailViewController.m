@@ -19,7 +19,8 @@
 #import "JRPhotoScrollViewController.h"
 #import "MeasureViewController.h"
 #import "PrivateLetterViewController.h"
-#import "NewestTopicViewController.h"
+//#import "NewestTopicViewController.h"
+#import "TopicDetailViewController.h"
 #import "ZoomInImageView.h"
 #import "TTTAttributedLabel.h"
 
@@ -612,7 +613,7 @@
 
     }else if (_segment.selectedIndex == 2){
         JRTopic *t = _topicDatas[indexPath.row];
-        NewestTopicViewController *vc = [[NewestTopicViewController alloc] init];
+        TopicDetailViewController *vc = [[TopicDetailViewController alloc] init];
         vc.topic = t;
         [self.navigationController pushViewController:vc animated:YES];
     }

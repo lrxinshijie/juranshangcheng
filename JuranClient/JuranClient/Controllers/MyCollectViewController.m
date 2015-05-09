@@ -139,6 +139,7 @@
         [_collectionView headerEndRefreshing];
         [_collectionView footerEndRefreshing];
         [_tableView headerEndRefreshing];
+        [_tableView footerEndRefreshing];
     }];
 }
 
