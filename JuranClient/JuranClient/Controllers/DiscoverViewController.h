@@ -10,4 +10,6 @@
 
 @interface DiscoverViewController : ALViewController
 
+- (void)showSegmentWithIndex:(NSInteger)index;
+
 @end
