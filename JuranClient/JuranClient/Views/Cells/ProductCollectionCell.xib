@@ -84,7 +84,7 @@
     </objects>
     <resources>
         <image name="cellIndicator.png" width="8" height="15"/>
-        <image name="icon-collection-active.png" width="23" height="22"/>
+        <image name="icon-collection-active.png" width="20" height="19"/>
         <image name="icon_location1.png" width="15" height="19"/>
     </resources>
 </document>

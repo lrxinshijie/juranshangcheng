@@ -99,10 +99,10 @@
     NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
                             @"onePageCount": kOnePageCount};
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_GET_MYREQUESTLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:_segment.selectedIndex?JR_NEEDS_LIST:JR_GET_MYREQUESTLIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            NSArray *designReqList = [data objectForKey:@"designReqList"];
+            NSArray *designReqList = [data objectForKey:_segment.selectedIndex==0?@"needsList":@"designReqList"];
             NSMutableArray *rows = [JRDemand buildUpWithValue:designReqList];
             if (_currentPage > 1) {
                 [_datas addObjectsFromArray:rows];

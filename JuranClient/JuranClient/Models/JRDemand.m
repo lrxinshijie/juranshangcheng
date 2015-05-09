@@ -70,6 +70,10 @@
         self.deadBalance = [dict getStringValueForKey:@"deadBalance" defaultValue:@""];
         self.auditDesc = [dict getStringValueForKey:@"auditDesc" defaultValue:@""];
         
+        self.roomNum = [dict getStringValueForKey:@"bedroomCount" defaultValue:@""];
+        self.livingroomCount = [dict getStringValueForKey:@"livingroomCount" defaultValue:@""];
+        self.bathroomCount = [dict getStringValueForKey:@"bathroomCount" defaultValue:@""];
+        
 #ifdef kJuranDesigner
         self.publishNickName = [dict getStringValueForKey:@"publishNickName" defaultValue:@""];
         self.account = [dict getStringValueForKey:@"account" defaultValue:@""];
