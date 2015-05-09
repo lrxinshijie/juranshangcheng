@@ -419,7 +419,7 @@
 
 //私信
 - (IBAction)doPrivateLetter:(id)sender{
-    [[JRUser currentUser] postPrivateLetterWithUserId:_designer.userId VC:self];
+    [[JRUser currentUser] postPrivateLetterWithUserId:_designer.userId Target:nil VC:self];
 //    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
 //    pv.designer = _designer;
 //    [self.navigationController pushViewController:pv animated:YES];
