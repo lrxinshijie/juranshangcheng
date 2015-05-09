@@ -13,4 +13,6 @@
 @property (nonatomic, strong) NSMutableDictionary *filterData;
 @property (nonatomic, strong) NSMutableDictionary *designerFilterData;
 
+- (void)showCase;
+
 @end

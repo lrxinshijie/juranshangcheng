@@ -13,9 +13,8 @@
 #define ScreenWidth        self.view.bounds.size.width
 #define ScreenHeight       self.view.bounds.size.height
 
-#define UM_QRScanEvent         @"QRSCANEVENT"
-#define UM_QRScanEvent_Product @"ScanProduct"
-#define UM_QRScanEvent_Shop    @"ScanShop"
+#define UM_QRScanEvent_Product @"SCANPRODUCT"
+#define UM_QRScanEvent_Shop    @"SCANSHOP"
 
 @interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate,UIAlertViewDelegate>
 
@@ -166,13 +165,13 @@
                 //跳转至店铺首页
                 vcStyle = ChildVCStyle_Shop;
                 code = [self getNumberFrom:val];
-                [MobClick event:UM_QRScanEvent attributes:@{UM_QRScanEvent_Shop:@"ShopMobile"}];
+                [MobClick event:UM_QRScanEvent_Shop];
                 
             }else if ([self needShowWithWebView:val] == 2){
                 //跳转至商品详情页
                 vcStyle = ChildVCStyle_Product;
                 code = [self getNumberFrom:val];
-                [MobClick event:UM_QRScanEvent attributes:@{UM_QRScanEvent_Product:@"ProductMobile"}];
+                [MobClick event:UM_QRScanEvent_Product];
                 
             }
             

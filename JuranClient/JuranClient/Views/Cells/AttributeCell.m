@@ -10,7 +10,7 @@
 #import "AttributeLabelCell.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 
-@interface AttributeCell () <UICollectionViewDataSource, UICollectionViewDelegate, CHTCollectionViewDelegateWaterfallLayout>{
+@interface AttributeCell () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>{
     AttributeLabelCell *_sizingCell;
 }
 
@@ -53,12 +53,15 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     AttributeLabelCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AttributeLabelCell" forIndexPath:indexPath];
     [cell fillCellWithData:_attrList[indexPath.row]];
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return CGSizeMake(85, 25);
+    
     NSString *title = _attrList[indexPath.row];
     CGSize size = [AttributeLabelCell cellSizeWithTitle:title];
     return size;

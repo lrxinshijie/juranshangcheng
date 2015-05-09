@@ -568,7 +568,6 @@
 		14BCD78E1A8605B400825A90 /* order_btn_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14BCD78D1A8605B400825A90 /* order_btn_accessory@2x.png */; };
 		14BCD78F1A8605B400825A90 /* order_btn_accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14BCD78D1A8605B400825A90 /* order_btn_accessory@2x.png */; };
 		14BF81961AEDF4E100D6A10F /* (null) in Sources */ = {isa = PBXBuildFile; };
-		14BF81991AEDF4E100D6A10F /* NaviStoreSelCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D51C41AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m */; };
 		14BF819A1AEDF4E100D6A10F /* CustomSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B81F1AD8B8E9004E849F /* CustomSearchBar.m */; };
 		14BF819B1AEDF4E100D6A10F /* SearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8241AD8C38F004E849F /* SearchTableViewCell.m */; };
 		14BF819C1AEDF4E100D6A10F /* DatabaseCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8331AD8F83E004E849F /* DatabaseCenter.m */; };
@@ -3646,6 +3645,9 @@
 				372DEA101ADCB30A0059DE27 /* MyCollectViewController.h */,
 				372DEA111ADCB30A0059DE27 /* MyCollectViewController.m */,
 				372DEA121ADCB30A0059DE27 /* MyCollectViewController.xib */,
+				14C855411A2E196B00A15ED9 /* InteractionViewController.h */,
+				14C855421A2E196B00A15ED9 /* InteractionViewController.m */,
+				14C855431A2E196B00A15ED9 /* InteractionViewController.xib */,
 			);
 			name = Personal;
 			sourceTree = "<group>";
@@ -4097,6 +4099,31 @@
 				37D855821A7CA08400409805 /* libMWPhotoBrowser.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		37E067BC1AFCF2E90055BD99 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				A987EE4F1A2098AF00CED7CD /* WikiViewController.h */,
+				A987EE501A2098AF00CED7CD /* WikiViewController.m */,
+				A987EE511A2098AF00CED7CD /* WikiViewController.xib */,
+				371FBEFA1A6A5B4600635D3D /* WikiFilterViewController.h */,
+				371FBEFB1A6A5B4600635D3D /* WikiFilterViewController.m */,
+				371FBEFC1A6A5B4600635D3D /* WikiFilterViewController.xib */,
+				37A0F8071A6B856100611760 /* ActivityViewController.h */,
+				37A0F8081A6B856100611760 /* ActivityViewController.m */,
+				37A0F8091A6B856100611760 /* ActivityViewController.xib */,
+				37A0F8191A6B96C300611760 /* ActivityDetailViewController.h */,
+				37A0F81A1A6B96C300611760 /* ActivityDetailViewController.m */,
+				37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */,
+				37E5897F1AB1B73200CB5FA4 /* WikiDetailViewController.h */,
+				37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */,
+				37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */,
+				37CE57241A6D346D00C75E65 /* WikiOrActivityViewController.h */,
+				37CE57251A6D346D00C75E65 /* WikiOrActivityViewController.m */,
+				37CE57261A6D346D00C75E65 /* WikiOrActivityViewController.xib */,
+			);
+			name = Discover;
 			sourceTree = "<group>";
 		};
 		37F0E5CD1A7D1AFE004CCCB2 /* MWPhotoBrowser */ = {
@@ -4614,6 +4641,7 @@
 				14EDB3891A3B4F9A00E5AC77 /* Settings */,
 				37F491E91AD94C4C0068A99B /* Shop */,
 				37D7FEB41AECD7FD00288C1E /* Topic */,
+				37E067BC1AFCF2E90055BD99 /* Discover */,
 				A987ED681A20920500CED7CD /* ALViewController.h */,
 				A987ED691A20920500CED7CD /* ALViewController.m */,
 				A987ED6A1A20920500CED7CD /* UIViewController+HUD.h */,
@@ -4621,16 +4649,10 @@
 				A987EE401A20984200CED7CD /* HomeViewController.h */,
 				A987EE411A20984200CED7CD /* HomeViewController.m */,
 				A987EE421A20984200CED7CD /* HomeViewController.xib */,
-				A987EE4F1A2098AF00CED7CD /* WikiViewController.h */,
-				A987EE501A2098AF00CED7CD /* WikiViewController.m */,
-				A987EE511A2098AF00CED7CD /* WikiViewController.xib */,
 				14ABFBEA1A25CFFD00C4AF65 /* UIViewController+Login.h */,
 				14ABFBEB1A25CFFD00C4AF65 /* UIViewController+Login.m */,
 				2C91421D1AF6187600FD7C69 /* UIViewController+Menu.h */,
 				2C91421E1AF6187600FD7C69 /* UIViewController+Menu.m */,
-				14C855411A2E196B00A15ED9 /* InteractionViewController.h */,
-				14C855421A2E196B00A15ED9 /* InteractionViewController.m */,
-				14C855431A2E196B00A15ED9 /* InteractionViewController.xib */,
 				A9902CA31A3432A500F08DA1 /* FilterViewController.h */,
 				A9902CA41A3432A500F08DA1 /* FilterViewController.m */,
 				A9902CA51A3432A500F08DA1 /* FilterViewController.xib */,
@@ -4650,21 +4672,6 @@
 				149BE7141A4569DE00A9E1EC /* DDHPreviewViewController.m */,
 				A9A7D4A91A503715001A70FF /* JRWebViewController.h */,
 				A9A7D4AA1A503715001A70FF /* JRWebViewController.m */,
-				371FBEFA1A6A5B4600635D3D /* WikiFilterViewController.h */,
-				371FBEFB1A6A5B4600635D3D /* WikiFilterViewController.m */,
-				371FBEFC1A6A5B4600635D3D /* WikiFilterViewController.xib */,
-				37A0F8071A6B856100611760 /* ActivityViewController.h */,
-				37A0F8081A6B856100611760 /* ActivityViewController.m */,
-				37A0F8091A6B856100611760 /* ActivityViewController.xib */,
-				37A0F8191A6B96C300611760 /* ActivityDetailViewController.h */,
-				37A0F81A1A6B96C300611760 /* ActivityDetailViewController.m */,
-				37A0F81B1A6B96C300611760 /* ActivityDetailViewController.xib */,
-				37E5897F1AB1B73200CB5FA4 /* WikiDetailViewController.h */,
-				37E589801AB1B73200CB5FA4 /* WikiDetailViewController.m */,
-				37E589811AB1B73200CB5FA4 /* WikiDetailViewController.xib */,
-				37CE57241A6D346D00C75E65 /* WikiOrActivityViewController.h */,
-				37CE57251A6D346D00C75E65 /* WikiOrActivityViewController.m */,
-				37CE57261A6D346D00C75E65 /* WikiOrActivityViewController.xib */,
 				14C4872B1A6F7E0C0042A3D6 /* ALNavigationController.h */,
 				14C4872C1A6F7E0C0042A3D6 /* ALNavigationController.m */,
 				A98014F81AD6B121002CB4C9 /* RootViewController.h */,
@@ -6973,7 +6980,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				14BF81961AEDF4E100D6A10F /* (null) in Sources */,
-				14BF81991AEDF4E100D6A10F /* NaviStoreSelCityViewController.m in Sources */,
 				14BF819A1AEDF4E100D6A10F /* CustomSearchBar.m in Sources */,
 				14BF819B1AEDF4E100D6A10F /* SearchTableViewCell.m in Sources */,
 				14BF819C1AEDF4E100D6A10F /* DatabaseCenter.m in Sources */,
@@ -7784,6 +7790,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/QQConnectSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/AlipaySDK",
+					"$(PROJECT_DIR)/JuranClient/Vendors/BaiduMapAPI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JuranClient/JuranClient-Prefix.pch";
@@ -7833,6 +7840,7 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Extend/QQConnectSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK",
 					"$(PROJECT_DIR)/JuranClient/Vendors/AlipaySDK",
+					"$(PROJECT_DIR)/JuranClient/Vendors/BaiduMapAPI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JuranClient/JuranClient-Prefix.pch";

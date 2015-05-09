@@ -24,11 +24,11 @@
 //#define JR_SERVICE  @"http://54.223.161.28:8080"
 
 //SIT内网
-#define JR_SERVICE  @"http://10.199.5.241:8083"
-#define JR_IMAGE_SERVICE  @"http://10.199.5.57:8080"
+//#define JR_SERVICE  @"http://10.199.5.241:8083"
+//#define JR_IMAGE_SERVICE  @"http://10.199.5.57:8080"
 //SIT外网
-//#define JR_SERVICE  @"http://124.193.207.194:8093"
-//#define JR_IMAGE_SERVICE  @"http://124.193.207.194:8081"
+#define JR_SERVICE  @"http://124.193.207.194:8093"
+#define JR_IMAGE_SERVICE  @"http://124.193.207.194:8081"
 
 //预生产环境
 //#define JR_SERVICE  @"http://124.202.155.217:81"
@@ -110,7 +110,7 @@
 #define JR_PRODUCT_DESC [NSString stringWithFormat:@"%@/goods/getGoodsDesc.json",JR_SERVICE]
 #define JR_PRODUCT_SELL_STORE [NSString stringWithFormat:@"%@/goods/canSellStore.json",JR_SERVICE]
 #define JR_PRODUCT_ATTRIBUTE [NSString stringWithFormat:@"%@/goods/getGoodsAttributes.json",JR_SERVICE]
-
+#define JR_SHOP_PRIVATE_LETTER [NSString stringWithFormat:@"%@/member/sendShopPrivateLetter.json",JR_SERVICE]
 
 
 
@@ -219,4 +219,19 @@
 #define JR_CUSTOMER_SERVICE [NSString stringWithFormat:@"%@/shop/platformCustomerService.json",JR_SERVICE]
 #define JR_SEARCH_PRODUCT [NSString stringWithFormat:@"%@/search/searchGoods.json",JR_SERVICE]
 #define JR_SEARCH_PRODUCT_IN_SHOP [NSString stringWithFormat:@"%@/search/searchShopGoods.json",JR_SERVICE]
+
+
+
+
+
+
+
+
+
+
+
+#define JR_NEEDS_LIST [NSString stringWithFormat:@"%@/member/getNeedsList.json",JR_SERVICE]
+
+
+
 #endif

@@ -163,6 +163,12 @@
     [_tableView reloadData];
 }
 
+- (void)showCase{
+    if (_segment) {
+        _segment.selectedIndex = 0;
+    }
+}
+
 #pragma mark - CaseFilter
 
 - (NSMutableDictionary *)filterData{
