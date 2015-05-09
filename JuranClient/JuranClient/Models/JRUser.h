@@ -60,7 +60,7 @@
 + (JRUser *)currentUser;
 - (id)initWithDictionary:(NSDictionary*)dict;
 + (void)refreshToken:(VoidBlock)finished;
-- (void)postPrivateLetterWithUserId:(NSInteger)userId VC:(UIViewController*)vc;
+- (void)postPrivateLetterWithUserId:(NSInteger)userId Target:(id)target VC:(UIViewController *)vc;
 
 //ProfileData
 - (void)buildUpProfileDataWithDictionary:(NSDictionary*)dict;

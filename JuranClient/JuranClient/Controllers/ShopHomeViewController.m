@@ -190,9 +190,14 @@
 }
 
 - (IBAction)onPrivateLetter:(id)sender{
-    ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
-    pv.shop = _shop;
-    [self.navigationController pushViewController:pv animated:YES];
+    if ([self checkLogin:^{
+        [[JRUser currentUser] postPrivateLetterWithUserId:_shop.shopId Target:_shop VC:self];
+    }]) {
+        [[JRUser currentUser] postPrivateLetterWithUserId:_shop.shopId Target:_shop VC:self];
+    }
+//    ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
+//    pv.shop = _shop;
+//    [self.navigationController pushViewController:pv animated:YES];
 }
 
 #pragma mark - UICollectionViewDelegate

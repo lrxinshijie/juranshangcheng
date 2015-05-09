@@ -213,9 +213,11 @@
 }
 
 - (IBAction)onPrivate:(id)sender{
-    ProductLetterViewController *pl = [[ProductLetterViewController alloc] init];
-    pl.product = _product;
-    [self.navigationController pushViewController:pl animated:YES];
+    if ([self checkLogin:^{
+        [[JRUser currentUser] postPrivateLetterWithUserId:_product.shopId Target:_product VC:self];
+    }]) {
+        [[JRUser currentUser] postPrivateLetterWithUserId:_product.shopId Target:_product VC:self];
+    }
 }
 
 - (IBAction)onFavority:(id)sender{
