@@ -40,7 +40,7 @@
     self.product = product;
     
     _nameLabel.text = product.goodsName;
-    [_imgView setImageWithURLString:product.defaultImage];
+    [_imgView setImageWithURLString:product.defaultImage Editing:YES];
     _priceLabel.text = [NSString stringWithFormat:@"￥%@", product.onSaleMinPrice];
     [_collectionButton setImage:[UIImage imageNamed:product.type?@"icon-collection-active.png":@"icon-collection.png"] forState:UIControlStateNormal];
     
