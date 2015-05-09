@@ -48,6 +48,8 @@
         self.catName = [dict getStringValueForKey:@"catName" defaultValue:@""];
         self.parentCode = [dict getStringValueForKey:@"parentCode" defaultValue:@""];
         self.urlContent = [dict getStringValueForKey:@"urlContent" defaultValue:@""];
+        self.childList = [[NSMutableArray alloc]init];
+        self.isOpen = NO;
     }
     return self;
 }

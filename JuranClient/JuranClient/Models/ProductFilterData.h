@@ -28,6 +28,7 @@
 @property (nonatomic, copy) NSString *urlContent;
 //comm
 @property (nonatomic, strong) NSMutableArray *childList;
+@property (nonatomic, assign) BOOL isOpen;
 @end
 //------------------------------------------------------------------
 @interface ProductBrand : NSObject
