@@ -32,7 +32,7 @@
 @end
 //------------------------------------------------------------------
 @interface ProductBrand : NSObject
-@property (nonatomic, assign) long catCode;
+@property (nonatomic, copy) NSString *catCode;
 @property (nonatomic, assign) long brandId;
 @property (nonatomic, copy) NSString *brandName;
 @end
@@ -55,9 +55,10 @@
 @property (nonatomic, strong) ProductCategory *pCategory;
 @property (nonatomic, strong) ProductClass *pClass;
 @property (nonatomic, strong) ProductBrand *pBrand;
+@property (nonatomic, strong) ProductStore *pStore;
 @property (nonatomic, assign) long pMinPrice;
 @property (nonatomic, assign) long pMaxPrice;
-@property (nonatomic, strong) NSArray *attributeList;
+@property (nonatomic, strong) NSMutableDictionary *pAttributeDict;
 @end
 //------------------------------------------------------------------
 @interface ProductFilterData : NSObject

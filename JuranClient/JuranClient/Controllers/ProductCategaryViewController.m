@@ -14,22 +14,23 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
 
 @interface ProductCategaryViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableVIew;
-@property (strong, nonatomic) NSMutableArray *topCatgatery;
-//@property (strong, nonatomic) NSMutableArray *openStatusList;
+@property (strong, nonatomic) NSMutableArray *treeCatgatery;
 @end
 
 @implementation ProductCategaryViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _tableVIew.sectionHeaderHeight = 44;
+    self.navigationItem.title = @"类目";
+    _tableVIew.sectionHeaderHeight = 38;
     _tableVIew.sectionFooterHeight = 1;
     [_tableVIew registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
-    if (_selectedFilter.isInShop) {
-        _topCatgatery = [self getCatgaryListByDepth:1];
-    }else {
-        _topCatgatery = [self getCatgaryListByParentCode:@"-1"];
-    }
+    
+    if (_selectedFilter.isInShop)
+        _treeCatgatery = [self CreateCategoryTreeByParentId:-1];
+    else
+        _treeCatgatery = [self CreateCategoryTreeByParentCode:@"-1"];
+    
     ProductCategory *all = [[ProductCategory alloc]init];
     all.name = @"全部";
     all.catName = @"全部";
@@ -40,57 +41,8 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     all.catCode = nil;
     all.parentCode = nil;
     all.urlContent = nil;
-    [_topCatgatery insertObject:all atIndex:0];
-    
-    for (NSObject *obj in _topCatgatery) {
-        ProductCategory *fCat = (ProductCategory *)obj;
-        if (_selectedFilter.isInShop) {
-            fCat.childList = [self getCatgaryListByParentId:fCat.Id];
-        }else {
-            fCat.childList = [self getCatgaryListByParentCode:fCat.catCode];
-        }
-        
-        
-        for (NSObject *o in fCat.childList) {
-            ProductCategory *sCat = (ProductCategory *)o;
-            sCat.childList = [self getCatgaryListByParentCode:sCat.catCode];
-        }
-        
-    }
-    
-    for (NSObject *obj in _topCatgatery) {
-        ProductCategory *fCat =(ProductCategory *)obj;
-        if (fCat.childList && fCat.childList.count>0) {
-            all = [[ProductCategory alloc]init];
-            all.name = @"全部";
-            all.catName = @"全部";
-            all.Id = fCat.Id;
-            all.parentId = fCat.parentId;
-            all.shopId = _selectedFilter.shopId;
-            all.depth = fCat.depth;
-            all.catCode = fCat.catCode;
-            all.parentCode = fCat.parentCode;
-            all.urlContent = fCat.urlContent;
-            [fCat.childList insertObject:all atIndex:0];
-        }
-        for (NSObject *o in fCat.childList) {
-            ProductCategory *sCat =(ProductCategory *)o;
-            if (sCat.childList && sCat.childList.count>0) {
-                all = [[ProductCategory alloc]init];
-                all.name = @"全部";
-                all.catName = @"全部";
-                all.Id = sCat.Id;
-                all.parentId = sCat.parentId;
-                all.shopId = _selectedFilter.shopId;
-                all.depth = sCat.depth;
-                all.catCode = sCat.catCode;
-                all.parentCode = sCat.parentCode;
-                all.urlContent = sCat.urlContent;
-                [sCat.childList insertObject:all atIndex:0];
-            }
-        }
-
-    }
+    all.childList = [[NSMutableArray alloc]init];
+    [_treeCatgatery insertObject:all atIndex:0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,27 +50,83 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     // Dispose of any resources that can be recreated.
 }
 
-- (NSMutableArray *)getCatgaryListByParentId:(long)parentId {
-    NSMutableArray *relArry = [[NSMutableArray alloc]init];
-    for (NSObject *obj in _filterData.categoryList) {
-        ProductCategory *cat = (ProductCategory *)obj;
-        if (cat.parentId == parentId) {
-            [relArry addObject:cat];
-        }
-    }
-    return relArry;
+- (void)setBlock:(FilterSelected)block {
+    _block = block;
 }
 
-- (NSMutableArray *)getCatgaryListByParentCode:(NSString *)parentCode {
+- (void)commit {
+    if (_block) {
+        _block(_selectedFilter);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (ProductCategory *)CreateAllCat:(ProductCategory *)parentCat {
+    ProductCategory *all = [[ProductCategory alloc]init];
+    all.name = @"全部";
+    all.catName = @"全部";
+    all.Id = parentCat.Id;
+    all.parentId = parentCat.parentId;
+    all.shopId = _selectedFilter.shopId;
+    all.depth = parentCat.depth;
+    all.catCode = parentCat.catCode;
+    all.parentCode = parentCat.parentCode;
+    all.urlContent = parentCat.urlContent;
+    all.childList = [[NSMutableArray alloc]init];
+    return all;
+}
+
+- (NSMutableArray *)CreateCategoryTreeByParentCode:(NSString *)parentCode {
     NSMutableArray *relArry = [[NSMutableArray alloc]init];
     for (NSObject *obj in _filterData.categoryList) {
         ProductCategory *cat = (ProductCategory *)obj;
         if ([cat.parentCode isEqual:parentCode]) {
             [relArry addObject:cat];
+            cat.childList = [self CreateCategoryTreeByParentCode:cat.catCode];
+            if (cat.childList.count>0) {
+                [cat.childList insertObject:[self CreateAllCat:cat] atIndex:0];
+            }
         }
     }
     return relArry;
 }
+
+- (NSMutableArray *)CreateCategoryTreeByParentId:(long)parentId {
+    NSMutableArray *relArry = [[NSMutableArray alloc]init];
+    for (NSObject *obj in _filterData.categoryList) {
+        ProductCategory *cat = (ProductCategory *)obj;
+        if (cat.parentId == parentId) {
+            [relArry addObject:cat];
+            cat.childList = [self CreateCategoryTreeByParentId:cat.Id];
+            if (cat.childList.count>0) {
+                [cat.childList insertObject:[self CreateAllCat:cat] atIndex:0];
+            }
+        }
+    }
+    return relArry;
+}
+
+//- (NSMutableArray *)getCatgaryListByParentId:(long)parentId {
+//    NSMutableArray *relArry = [[NSMutableArray alloc]init];
+//    for (NSObject *obj in _filterData.categoryList) {
+//        ProductCategory *cat = (ProductCategory *)obj;
+//        if (cat.parentId == parentId) {
+//            [relArry addObject:cat];
+//        }
+//    }
+//    return relArry;
+//}
+//
+//- (NSMutableArray *)getCatgaryListByParentCode:(NSString *)parentCode {
+//    NSMutableArray *relArry = [[NSMutableArray alloc]init];
+//    for (NSObject *obj in _filterData.categoryList) {
+//        ProductCategory *cat = (ProductCategory *)obj;
+//        if ([cat.parentCode isEqual:parentCode]) {
+//            [relArry addObject:cat];
+//        }
+//    }
+//    return relArry;
+//}
 
 - (NSMutableArray *)getCatgaryListByDepth:(int)depth {
     NSMutableArray *relArry = [[NSMutableArray alloc]init];
@@ -131,48 +139,78 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     return relArry;
 }
 
+- (ProductCategory *)getFstCat:(int)index {
+    ProductCategory *fCat = _treeCatgatery[index];
+    return fCat;
+}
+
+- (ProductCategory *)getSecCat:(int)index1 :(int)index2 {
+    ProductCategory *fCat = _treeCatgatery[index1];
+    ProductCategory *sCat = fCat.childList[index2];
+    return sCat;
+}
+
+- (ProductCategory *)getTrdCat:(int)index1 :(int)index2 :(int)index3 {
+    ProductCategory *fCat = _treeCatgatery[index1];
+    ProductCategory *sCat = fCat.childList[index2];
+    ProductCategory *tCat = sCat.childList[index3];
+    return tCat;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return _topCatgatery.count;
+    return _treeCatgatery.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    int count = [[_topCatgatery[section] childList] count];
-    return [_topCatgatery[section] isOpen] ? count:0;
+    NSMutableArray *secList = [_treeCatgatery[section] childList] ;
+    return [_treeCatgatery[section] isOpen] ? secList.count:0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([_topCatgatery[indexPath.section] isOpen] && [[_topCatgatery[indexPath.section] childList][indexPath.row] isOpen]) {
-        return 100;
+    if([_treeCatgatery[indexPath.section] isOpen] && [[self getSecCat:indexPath.section :indexPath.row] isOpen]) {
+        return 38 + (ceilf([[[self getSecCat:indexPath.section :indexPath.row] childList] count])+1)/3 * 35;
     }else
-        return 44;
+        return 38;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //ProductCatgeryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     ProductCatgeryCell *cell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil] objectAtIndex:0];
-    
-    ProductCategory *cat =[[_topCatgatery[indexPath.section] childList] objectAtIndex:indexPath.row];
+    cell.backgroundColor = RGBColor(247, 247, 247);
+    ProductCategory *cat =[self getSecCat:indexPath.section :indexPath.row];
     if (_selectedFilter.isInShop) {
         cell.labelTitle.text = cat.name;
     }else{
         cell.labelTitle.text = cat.catName;
     }
-    if([_topCatgatery[indexPath.section] isOpen] && [[_topCatgatery[indexPath.section] childList][indexPath.row] isOpen]) {
+    if (cat.isOpen) {
+        cell.labelTitle.textColor = kBlueColor;
+    }else {
+        cell.labelTitle.textColor = [UIColor darkTextColor];
+    }
+    if([_treeCatgatery[indexPath.section] isOpen] && [[self getSecCat:indexPath.section :indexPath.row] isOpen]) {
         for (int i = 0; i<cat.childList.count; i++) {
-            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake(15+100*(i%3), 50+i/3*5, 90, 30);
+            ProductCategory *trdCat = [self getTrdCat:indexPath.section :indexPath.row :i];
+            CatButton *btn = [CatButton buttonWithType:UIButtonTypeCustom];
+            btn.frame = CGRectMake(15+100*(i%3), 38+i/3*35, 90, 30);
             btn.layer.borderWidth = 0.5;
             btn.layer.borderColor = [[UIColor lightGrayColor] CGColor];
             if (_selectedFilter.isInShop) {
-                [btn setTitle:[cat.childList[indexPath.row] name] forState:UIControlStateNormal];
+                [btn setTitle:trdCat.name forState:UIControlStateNormal];
             }else {
-                [btn setTitle:[cat.childList[indexPath.row] catName] forState:UIControlStateNormal];
+                [btn setTitle:trdCat.catName forState:UIControlStateNormal];
             }
+            btn.titleLabel.font = [UIFont systemFontOfSize:11];
             [btn setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+            btn.category = trdCat;
+            [btn addTarget:self action:@selector(onTrdCatgary:) forControlEvents:UIControlEventTouchUpInside];
             [cell addSubview:btn];
+            UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(15, 38+(ceilf([[[self getSecCat:indexPath.section :indexPath.row] childList] count])+1)/3 * 35-0.5, 290, 0.5f)];
+            lineView.backgroundColor = [UIColor lightGrayColor];
+            [cell addSubview:lineView];
         }
     }else {
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, cell.bounds.size.height-0.5f, 320, 0.5f)];
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(15, cell.bounds.size.height-0.5f, 290, 0.5f)];
         lineView.backgroundColor = [UIColor lightGrayColor];
         [cell addSubview:lineView];
     }
@@ -181,13 +219,19 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 0, 320, 44);
+    btn.frame = CGRectMake(0, 0, 320, 38);
     btn.backgroundColor = [UIColor whiteColor];
     btn.tag = 2000+section;
     btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btn.contentEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
-    [btn setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
-    ProductCategory *cat = [_topCatgatery objectAtIndex:section];
+    
+    btn.titleLabel.font = [UIFont systemFontOfSize:13];
+    ProductCategory *cat = _treeCatgatery[section];
+    if (cat.isOpen) {
+        [btn setTitleColor:kBlueColor forState:UIControlStateNormal];
+    }else{
+        [btn setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+    }
     if (_selectedFilter.isInShop) {
         [btn setTitle:cat.name forState:UIControlStateNormal];
     }else {
@@ -197,7 +241,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     //    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 0.5f)];
     //    lineView.backgroundColor = [UIColor lightGrayColor];
     //    [btn addSubview:lineView];
-    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 43.5f, 320, 0.5f)];
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 37.5f, 320, 0.5f)];
     lineView.backgroundColor = [UIColor lightGrayColor];
     [btn addSubview:lineView];
     return btn;
@@ -205,31 +249,34 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ProductCategory *cat = [_topCatgatery[indexPath.section] childList][indexPath.row];
+    ProductCategory *cat = [self getSecCat:indexPath.section :indexPath.row];
     
     if(cat.childList && cat.childList.count>0) {
         cat.isOpen = !cat.isOpen;
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
         //[tableView reloadData];
+    }else {
+        _selectedFilter.pCategory = cat;
+        [self commit];
     }
 }
 
 - (void)onHeader:(id)sender {
     UIButton *btn = (UIButton *)sender;
-    ProductCategory *cat = _topCatgatery[btn.tag-2000];
-    cat.isOpen = !cat.isOpen;
-    [_tableVIew reloadSections:[NSIndexSet indexSetWithIndex:btn.tag-2000] withRowAnimation:UITableViewRowAnimationFade];
+    ProductCategory *cat = _treeCatgatery[btn.tag-2000];
+    if (cat.childList && cat.childList.count>0) {
+        cat.isOpen = !cat.isOpen;
+        [_tableVIew reloadSections:[NSIndexSet indexSetWithIndex:btn.tag-2000] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+- (void)onTrdCatgary:(id)sender {
+    CatButton *btn = (CatButton *)sender;
+    _selectedFilter.pCategory = btn.category;
+    [self commit];
 }
 @end
 
-@implementation CellOpenStatus : NSObject
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.isOpen = NO;
-        self.childList = [[NSMutableArray alloc]init];
-    }
-    return self;
-}
+@implementation CatButton
+
 @end

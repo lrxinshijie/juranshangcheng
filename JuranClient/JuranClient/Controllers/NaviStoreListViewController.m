@@ -190,7 +190,7 @@
 
 - (IBAction)naviRightClick:(id)sender {
     //[self showAppMenu:nil];
-    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:@"1" IsInShop:NO];
+    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:@"" Sort:9 Store:nil IsInShop:NO];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -7,12 +7,17 @@
 //
 
 #import "ALViewController.h"
-@class ProductCategory;
-@class ProductClass;
-@class ProductBrand;
-
-
+@class ProductFilterData;
+@class ProductSelectedFilter;
+@class ProductStore;
 
 @interface ProductFilterViewController : ALViewController
-- (instancetype)initWithKeyword:(NSString *)keyword IsInShop:(BOOL)isInShop;
+
+@property (nonatomic, strong) ProductFilterData *filterData;
+@property (nonatomic, strong) ProductSelectedFilter *selectedFilter;
+
+- (instancetype)initWithKeyword:(NSString *)keyword
+                           Sort:(int)sort
+                          Store:(ProductStore *)store
+                       IsInShop:(BOOL)isInShop;
 @end

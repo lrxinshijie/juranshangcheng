@@ -172,7 +172,7 @@
 }
 
 - (NSString *)priceString{
-    return [NSString stringWithFormat:@"￥%@ ~ ￥%@", [@([self.priceMin intValue]) decimalNumberFormatter], [@([self.priceMax intValue]) decimalNumberFormatter]];
+    return [NSString stringWithFormat:@"￥%@ ~ ￥%@", self.priceMin,self.priceMax];
 }
 
 - (BOOL)isShowPrice{
