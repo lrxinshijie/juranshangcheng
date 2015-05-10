@@ -18,8 +18,8 @@
 @property (nonatomic, strong) ProductFilterData *filterData;
 @property (nonatomic, strong) ProductSelectedFilter *selectedFilter;
 
-@property (nonatomic, strong) JRShop *shop;
-@property (nonatomic, strong) ProductBrand *brand;
-@property (nonatomic, copy) NSString *searchKey;
+//@property (nonatomic, strong) JRShop *shop;
+//@property (nonatomic, strong) ProductBrand *brand;
+//@property (nonatomic, copy) NSString *searchKey;
 
 @end

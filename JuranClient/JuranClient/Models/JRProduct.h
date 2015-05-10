@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSString *onSaleMinPrice;
 @property (nonatomic, copy) NSString *defaultImage;
+@property (nonatomic, copy) NSString *originalImg;
 @property (nonatomic, copy) NSString *goodsName;
 @property (nonatomic, copy) NSString *goodsLogo;
 @property (nonatomic, assign) NSInteger linkProductId;

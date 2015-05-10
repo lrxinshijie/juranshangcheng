@@ -29,6 +29,7 @@
 @property (nonatomic, strong) UIButton *gridButton;
 
 @property (nonatomic, assign) BOOL isGrid;
+@property (nonatomic, assign) BOOL isFilter;
 
 @property (nonatomic, assign) UIView *parentView;
 @property (nonatomic, assign) ProductFilterData *defaultData;
@@ -207,7 +208,11 @@
 }
 
 - (void)clickFilterButton:(UIButton*)btn{
-    
+    _isFilter = YES;
+    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:)]) {
+        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter];
+    }
+    _isFilter = NO;
 }
 
 - (void)clickButton:(UIButton *)btn{
@@ -237,8 +242,8 @@
 - (void)onClearStore:(id)sender{
     _selectedData.pStore = nil;
     
-    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:)]) {
-        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid];
+    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:)]) {
+        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter];
     }
     
     selectedBtn.selected = NO;
@@ -257,6 +262,12 @@
         selectedBtn = nil;
         [self showSort];
     }
+    _isFilter = YES;
+    [self.gridButton setImage:[UIImage imageNamed:_isGrid?@"icon-grid.png":@"icon-list.png"] forState:UIControlStateNormal];
+    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:)]) {
+        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter];
+    }
+    _isFilter = NO;
 }
 
 - (void)showGrid{
@@ -267,8 +278,8 @@
     }
     _isGrid = !_isGrid;
     [self.gridButton setImage:[UIImage imageNamed:_isGrid?@"icon-grid.png":@"icon-list.png"] forState:UIControlStateNormal];
-    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:)]) {
-        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid];
+    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:)]) {
+        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter];
     }
 }
 
@@ -289,8 +300,6 @@
         _filterButton.selected = NO;
         selectedBtn = nil;
     }
-    
-    
 }
 
 - (void)reloadData{
@@ -328,7 +337,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (selectedBtn == _sortButton) {
-        return 0;
+        return [self.defaultData.sortList count];
     }else if(selectedBtn == _storeButton){
         return [self.defaultData.storeList count];
     }else{
@@ -347,7 +356,11 @@
     cell.textLabel.textColor = [UIColor blackColor];
     
     if (selectedBtn == _sortButton) {
-        //排序内容
+        ProductSort *sort = self.defaultData.sortList[indexPath.row];
+        cell.textLabel.text = sort.name;
+        if (_selectedData.sort>0 && _selectedData.sort == sort.sort) {
+            cell.textLabel.textColor = kBlueColor;
+        }
     }else if(selectedBtn == _storeButton){
         ProductStore *store = self.defaultData.storeList[indexPath.row];
         cell.textLabel.text = store.storeName;
@@ -363,18 +376,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (selectedBtn == _sortButton) {
-        
+        ProductSort *sort = self.defaultData.sortList[indexPath.row];
+        _selectedData.sort = sort.sort;
     }else if(selectedBtn == _storeButton){
         ProductStore *store = self.defaultData.storeList[indexPath.row];
         _selectedData.pStore = store;
     }
-    
-    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:)]) {
-        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid];
+    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:)]) {
+        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter];
     }
     selectedBtn.selected = NO;
     selectedBtn = nil;
-    
+    _isFilter = NO;
     [self showSort];
 }
 

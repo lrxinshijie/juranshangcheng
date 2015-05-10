@@ -58,9 +58,15 @@
 + (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
+@interface ProductSort : NSObject
+@property (nonatomic, assign) int sort;
+@property (nonatomic, copy) NSString *name;
+@end
+//------------------------------------------------------------------
 @interface ProductSelectedFilter : NSObject
 @property (nonatomic, assign) BOOL isInShop;
 @property (nonatomic, assign) int sort;
+//@property (nonatomic, strong) ProductSort *pSort;
 @property (nonatomic, copy) NSString *keyword;
 @property (nonatomic, assign) long shopId;
 @property (nonatomic, strong) ProductCategory *pCategory;
@@ -72,11 +78,6 @@
 @property (nonatomic, strong) NSMutableDictionary *pAttributeDict;
 @end
 //------------------------------------------------------------------
-@interface ProductSort : NSObject
-@property (nonatomic, assign) int sort;
-@property (nonatomic, copy) NSString *name;
-@end
-//------------------------------------------------------------------
 @interface ProductFilterData : NSObject
 @property (nonatomic, strong) NSArray *sortList;
 @property (nonatomic, strong) NSArray *attributeList;
@@ -86,8 +87,6 @@
 @property (nonatomic, strong) NSArray *classList;
 
 - (void)loadFilterDataWithFilter:(ProductSelectedFilter *)filter
-                          PageNo:(int)pageNo
-                     OnePageCount:(int)onePageCount
                          Handler:(BOOLBlock)finished;
 @end
 

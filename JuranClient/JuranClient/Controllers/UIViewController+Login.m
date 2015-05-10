@@ -59,6 +59,7 @@
 //    [titleView addSubview:cityButton];
 //    [titleView addSubview:titleLabel];
 //    self.navigationItem.titleView = titleView;
+    self.navigationItem.title = @"当前站点:北京站";
 }
 
 - (void)onCity:(UIButton *)btn{

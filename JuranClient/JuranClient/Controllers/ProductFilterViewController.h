@@ -10,6 +10,7 @@
 @class ProductFilterData;
 @class ProductSelectedFilter;
 @class ProductStore;
+@class ProductSort;
 
 typedef void (^FilterSelected)(ProductSelectedFilter *filter);
 

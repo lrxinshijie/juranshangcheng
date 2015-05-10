@@ -7,6 +7,7 @@
 //
 
 #import "FilterInShopViewController.h"
+#import "ProductFilterData.h"
 
 @interface FilterInShopViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -136,8 +137,15 @@
     FilterInShop *filter = [filters.childList objectAtIndex:[indexPath row]];
     if (_block) {
         [self.navigationController popViewControllerAnimated:YES];
-        NSLog(@"filter id = %ld",filter.Id);
-        _block(filter.Id);
+        ProductSelectedFilter *sel = [[ProductSelectedFilter alloc]init];
+        sel.pCategory = [[ProductCategory alloc]init];
+        sel.pCategory.Id = filter.Id;
+        sel.pCategory.parentId = filter.parentId;
+        sel.pCategory.name = filter.name;
+        sel.pCategory.depth = filter.depth;
+        sel.isInShop = YES;
+        sel.shopId = _shopId;
+        _block(sel);
     }
 }
 

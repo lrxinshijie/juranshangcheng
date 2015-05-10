@@ -144,21 +144,41 @@
 @end
 //------------------------------------------------------------------
 @implementation ProductFilterData
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        ProductSort *sort1 = [[ProductSort alloc]init];
+        sort1.sort = 9;
+        sort1.name = @"综合排序";
+        ProductSort *sort2 = [[ProductSort alloc]init];
+        sort2.sort = 4;
+        sort2.name = @"按销量排序";
+        ProductSort *sort3 = [[ProductSort alloc]init];
+        sort3.sort = 3;
+        sort3.name = @"价格由高到低";
+        ProductSort *sort4 = [[ProductSort alloc]init];
+        sort4.sort = 2;
+        sort4.name = @"价格由低到高";
+        self.sortList = [NSArray arrayWithObjects:sort1, sort2, sort3, sort4, nil];
+    }
+    return self;
+}
+
 - (void)loadFilterDataWithFilter:(ProductSelectedFilter *)filter
-                          PageNo:(int)pageNo
-                    OnePageCount:(int)onePageCount
                          Handler:(BOOLBlock)finished{
     
-    
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    NSString *url;
     [param setObject:@"北京市" forKey:@"cityName"];
-    [param setObject:@(pageNo) forKey:@"pageNo"];
-    [param setObject:@(onePageCount) forKey:@"onePageCount"];
+    [param setObject:@(1) forKey:@"pageNo"];
+    [param setObject:@(1) forKey:@"onePageCount"];
     [param setObject:@(filter.sort) forKey:@"sort"];
-    if (filter.keyword && ![filter.keyword isEqual:@""]) [param setObject:filter.keyword forKey:@"keyword"];
+    if (filter.keyword && filter.keyword.length>0) [param setObject:filter.keyword forKey:@"keyword"];
     if (filter.pMinPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice<=filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMinYuan"];
     if (filter.pMaxPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice>filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMaxYuan"];
     if (filter.pBrand) [param setObject:@(filter.pBrand.brandId) forKey:@"brands"];
+    if (filter.pStore) [param setObject:filter.pStore.storeCode forKey:@"storeCode"];
+    if (filter.pClass) [param setObject:filter.pClass.classCode forKey:@"catCode"];
     if (filter.pAttributeDict && filter.pAttributeDict.count>0) {
         NSEnumerator * enumerator = [filter.pAttributeDict keyEnumerator];
         id object;
@@ -182,15 +202,12 @@
     if(filter.isInShop) {
         if (filter.shopId!=0) [param setObject:[NSString stringWithFormat:@"%ld",filter.shopId] forKey:@"shopId"];
         if (filter.pCategory!=0) [param setObject:@(filter.pCategory.Id) forKey:@"shopCategories"];
+        url = JR_SEARCH_PRODUCT_IN_SHOP;
     }else {
         if (filter.pCategory!=0) [param setObject:filter.pCategory.urlContent forKey:@"urlContent"];
-    }
-    NSString *url = nil;
-    if (filter.isInShop) {
-        url = JR_SEARCH_PRODUCT_IN_SHOP;
-    }else{
         url = JR_SEARCH_PRODUCT;
     }
+
     [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             self.attributeList = [ProductAttribute buildUpWithValueForList:[data objectForKey:@"showAttributesList"]];

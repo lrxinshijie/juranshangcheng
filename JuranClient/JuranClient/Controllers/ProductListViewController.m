@@ -13,6 +13,7 @@
 #import "ProductFilterData.h"
 #import "MJRefresh.h"
 #import "ProductFilterView.h"
+#import "ProductFilterViewController.h"
 
 @interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate, ProductFilterViewDelegate>
 
@@ -70,57 +71,95 @@
 
 - (void)loadData{
     
-    NSDictionary *param = nil;
-    NSString *url = @"";
+    //NSDictionary *param = nil;
+    //NSString *url = @"";
     
     
-    //TODO: 添加接口及参数
-    if (_searchKey.length > 0) {
-        //搜索
-        param = @{@"sort": @(_selectedFilter.sort),
-                  @"pageNo":@(_currentPage),
-                  @"onePageCount":kOnePageCount
-                  };
-        url = JR_SEARCH_PRODUCT;
-    }else if (_shop){
-        //商家全部商品
-        param = @{@"sort": @(_selectedFilter.sort),
-                  @"pageNo":@(_currentPage),
-                  @"onePageCount":kOnePageCount
-                  };
-    }else if (_brand){
-        //品牌
+    //    //TODO: 添加接口及参数
+    //    if (_searchKey.length > 0) {
+    //        //搜索
+    //        param = @{@"sort": @(_selectedFilter.sort),
+    //                  @"pageNo":@(_currentPage),
+    //                  @"onePageCount":kOnePageCount
+    //                  };
+    //        url = JR_SEARCH_PRODUCT;
+    //    }else if (_shop){
+    //        //商家全部商品
+    //        param = @{@"sort": @(_selectedFilter.sort),
+    //                  @"pageNo":@(_currentPage),
+    //                  @"onePageCount":kOnePageCount
+    //                  };
+    //    }else if (_brand){
+    //        //品牌
+    //    }
+    NSString *url = nil;
+    NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
+    [param setObject:@"北京市" forKey:@"cityName"];
+    [param setObject:@(_currentPage) forKey:@"pageNo"];
+    [param setObject:kOnePageCount forKey:@"onePageCount"];
+    [param setObject:@(_selectedFilter.sort) forKey:@"sort"];
+    if (_selectedFilter.keyword && _selectedFilter.keyword.length>0) [param setObject:_selectedFilter.keyword forKey:@"keyword"];
+    if (_selectedFilter.pMinPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",_selectedFilter.pMinPrice<=_selectedFilter.pMinPrice?_selectedFilter.pMinPrice:_selectedFilter.pMaxPrice] forKey:@"priceMinYuan"];
+    if (_selectedFilter.pMaxPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",_selectedFilter.pMinPrice>_selectedFilter.pMinPrice?_selectedFilter.pMinPrice:_selectedFilter.pMaxPrice] forKey:@"priceMaxYuan"];
+    if (_selectedFilter.pBrand) [param setObject:@(_selectedFilter.pBrand.brandId) forKey:@"brands"];
+    if (_selectedFilter.pStore) [param setObject:_selectedFilter.pStore.storeCode forKey:@"storeCode"];
+    if (_selectedFilter.pClass) [param setObject:_selectedFilter.pClass.classCode forKey:@"catCode"];
+    if (_selectedFilter.pAttributeDict && _selectedFilter.pAttributeDict.count>0) {
+        NSEnumerator * enumerator = [_selectedFilter.pAttributeDict keyEnumerator];
+        id object;
+        NSString *attrString = @"";
+        while(object = [enumerator nextObject])
+        {
+            id objectValue = [_selectedFilter.pAttributeDict objectForKey:object];
+            if(objectValue != nil)
+            {
+                if ([attrString isEqual:@""]) {
+                    attrString = [attrString stringByAppendingString:[NSString stringWithFormat:@"%@:%@",object,objectValue]];
+                }else {
+                    attrString = [attrString stringByAppendingString:[NSString stringWithFormat:@";%@:%@",object,objectValue]];
+                }
+            }
+        }
+        attrString = [NSString stringWithFormat:@"[%@]",attrString];
+        [param setObject:attrString forKey:@"attributes"];
     }
-    
+    if(_selectedFilter.isInShop) {
+        if (_selectedFilter.shopId!=0) [param setObject:[NSString stringWithFormat:@"%ld",_selectedFilter.shopId] forKey:@"shopId"];
+        if (_selectedFilter.pCategory) [param setObject:@(_selectedFilter.pCategory.Id) forKey:@"shopCategories"];
+        url = JR_SEARCH_PRODUCT_IN_SHOP;
+    }else {
+        if (_selectedFilter.pCategory && _selectedFilter.pCategory.urlContent) [param setObject:_selectedFilter.pCategory.urlContent forKey:@"urlContent"];
+        url = JR_SEARCH_PRODUCT;
+    }
     
     [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"No"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             
             //TODO: 接口返回值处理
-            if (_searchKey.length > 0) {
-                NSArray *recommendProductsList = [data objectForKey:@"emallGoodsInfoList"];
-                NSMutableArray *products = [JRProduct buildUpWithValueForList:recommendProductsList];
-                if (_currentPage == 1) {
-                    self.products = products;
-                    
-                    _filterData.attributeList = [ProductAttribute buildUpWithValueForList:[data objectForKey:@"showAttributesList"]];
-                    if (_selectedFilter.isInShop) {
-                        _filterData.categoryList = [ProductCategory buildUpWithValueForList:[data objectForKey:@"appShopCatList"]];
-                    }else {
-                        _filterData.categoryList = [ProductCategory buildUpWithValueForList:[data objectForKey:@"appOperatingCatList"]];
-                    }
-                    _filterData.brandList = [ProductBrand buildUpWithValueForList:[data objectForKey:@"sortBrandList"]];
-                    _filterData.storeList = [ProductStore buildUpWithValueForList:[data objectForKey:@"appStoreInfoList"]];
-                    _filterData.classList = [ProductClass buildUpWithValueForList:[data objectForKey:@"appManagementCategoryList"]];
-                }else{
-                    [_products addObject:products];
+            //if (_selectedFilter.keyword.length > 0) {
+            NSArray *recommendProductsList = [data objectForKey:@"emallGoodsInfoList"];
+            NSMutableArray *products = [JRProduct buildUpWithValueForList:recommendProductsList];
+            if (_currentPage == 1) {
+                self.products = products;
+                
+                _filterData.attributeList = [ProductAttribute buildUpWithValueForList:[data objectForKey:@"showAttributesList"]];
+                if (_selectedFilter.isInShop) {
+                    _filterData.categoryList = [ProductCategory buildUpWithValueForList:[data objectForKey:@"appShopCatList"]];
+                }else {
+                    _filterData.categoryList = [ProductCategory buildUpWithValueForList:[data objectForKey:@"appOperatingCatList"]];
                 }
-                
-            }else if (_shop){
-                
-            }else if (_brand){
-                
+                _filterData.brandList = [ProductBrand buildUpWithValueForList:[data objectForKey:@"sortBrandList"]];
+                _filterData.storeList = [ProductStore buildUpWithValueForList:[data objectForKey:@"appStoreInfoList"]];
+                _filterData.classList = [ProductClass buildUpWithValueForList:[data objectForKey:@"appManagementCategoryList"]];
+            }else{
+                [_products addObjectsFromArray:products];
             }
+            //}
+            //            }else if (_shop){
+            //
+            //            }else if (_brand){
+            //
+            //            }
             
             [_tableView reloadData];
         }
@@ -131,8 +170,23 @@
     }];
 }
 
-- (void)clickProductFilterView:(ProductFilterView *)view returnData:(ProductSelectedFilter *)data IsGrid:(BOOL)isGrid{
-    
+- (void)clickProductFilterView:(ProductFilterView *)view returnData:(ProductSelectedFilter *)data IsGrid:(BOOL)isGrid IsFilter:(BOOL)isFilter{
+    if (isFilter) {
+        ProductFilterViewController *vc = [[ProductFilterViewController alloc]init];
+        _selectedFilter = data;
+        vc.selectedFilter = data;
+        vc.filterData = _filterData;
+        [vc setBlock:^(ProductSelectedFilter *filter) {
+            _selectedFilter = filter;
+            [_tableView headerBeginRefreshing];
+        }];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if(isGrid){
+        
+    }else {
+        _selectedFilter = data;
+        [_tableView headerBeginRefreshing];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -175,13 +229,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

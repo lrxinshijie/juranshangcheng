@@ -31,7 +31,7 @@
 }
 
 - (void)fillCellWithProduct:(JRProduct *)product{
-    [_photoImageView setImageWithURLString:product.defaultImage];
+    [_photoImageView setImageWithURLString:product.originalImg];
     _nameLabel.text = product.goodsName;
     _priceLabel.text = [NSString stringWithFormat:@"￥%@", [@([product.onSaleMinPrice integerValue]) decimalNumberFormatter]];
     

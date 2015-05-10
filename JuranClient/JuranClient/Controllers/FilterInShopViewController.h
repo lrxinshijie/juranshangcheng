@@ -7,7 +7,8 @@
 //
 
 #import "ALViewController.h"
-typedef void (^FilterSelected)(long catId);
+@class ProductSelectedFilter;
+typedef void (^FilterSelected)(ProductSelectedFilter *cat);
 @interface FilterInShopViewController : ALViewController
 @property (nonatomic, copy) FilterSelected block;
 - (void)setFinishBlock:(FilterSelected)finished;

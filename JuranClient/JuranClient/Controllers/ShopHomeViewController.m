@@ -21,6 +21,7 @@
 #import "ProductLetterViewController.h"
 #import "UIViewController+Menu.h"
 #import "CustomSearchBar.h"
+#import "ProductFilterData.h"
 
 
 @interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,CustomSearchBarDelegate>
@@ -146,7 +147,7 @@
 }
 
 - (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index {
-    
+
 }
 
 #pragma mark - Target Action
@@ -191,6 +192,8 @@
 
 - (IBAction)onAllProduct:(id)sender{
     ProductListViewController *vc = [[ProductListViewController alloc] init];
+    vc.selectedFilter.isInShop = YES;
+    vc.selectedFilter.shopId = _shop.shopId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -291,9 +294,10 @@
 - (IBAction)onClassification:(id)sender {
     FilterInShopViewController *filter = [[FilterInShopViewController alloc]init];
     filter.shopId = _shop.shopId;
-    [filter setFinishBlock:^(long catId) {
+    [filter setFinishBlock:^(ProductSelectedFilter *filter) {
         //获取分类后处理
         ProductListViewController *vc = [[ProductListViewController alloc] init];
+        vc.selectedFilter = filter;
         [self.navigationController pushViewController:vc animated:YES];
     }];
     [self.navigationController pushViewController:filter animated:YES];

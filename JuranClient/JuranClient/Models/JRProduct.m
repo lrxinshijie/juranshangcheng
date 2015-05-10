@@ -21,6 +21,7 @@
         
         self.onSaleMinPrice = [dict getStringValueForKey:@"onSaleMinPrice" defaultValue:@""];
         self.defaultImage = [dict getStringValueForKey:@"defaultImage" defaultValue:@""];
+        self.originalImg = [dict getStringValueForKey:@"originalImg" defaultValue:@""];
         self.goodsLogo = [dict getStringValueForKey:@"goodsLogo" defaultValue:@""];
         self.goodsName = [dict getStringValueForKey:@"goodsName" defaultValue:@""];
         self.linkProductId = [dict getIntValueForKey:@"linkProductId" defaultValue:0];

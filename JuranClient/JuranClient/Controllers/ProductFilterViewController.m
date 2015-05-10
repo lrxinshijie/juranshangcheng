@@ -63,8 +63,6 @@
 - (void)loadData {
     [self showHUD];
     [_filterData loadFilterDataWithFilter:_selectedFilter
-                                   PageNo:1
-                             OnePageCount:1
                                   Handler:^(BOOL result) {
                                       [self hideHUD];
                                       if (result) {
