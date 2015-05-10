@@ -50,15 +50,15 @@
 }
 
 - (void)configureCityTitle:(NSString *)title{
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, 30)];
-    UILabel *titleLabel = [titleView labelWithFrame:CGRectMake(0, 0, 40, 30) text:title textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:13]];
-    UIButton *cityButton = [titleView buttonWithFrame:CGRectMake(46, 0, 74, 30) target:self action:@selector(onCity:) title:[Public defaultCityName] backgroundImage:[UIImage imageNamed:@"bg-gray-down"]];
-    cityButton.titleEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
-    cityButton.titleLabel.font = [UIFont systemFontOfSize:13];
-    [cityButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [titleView addSubview:cityButton];
-    [titleView addSubview:titleLabel];
-    self.navigationItem.titleView = titleView;
+//    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, 30)];
+//    UILabel *titleLabel = [titleView labelWithFrame:CGRectMake(0, 0, 40, 30) text:title textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:13]];
+//    UIButton *cityButton = [titleView buttonWithFrame:CGRectMake(46, 0, 74, 30) target:self action:@selector(onCity:) title:[Public defaultCityName] backgroundImage:[UIImage imageNamed:@"bg-gray-down"]];
+//    cityButton.titleEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0);
+//    cityButton.titleLabel.font = [UIFont systemFontOfSize:13];
+//    [cityButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [titleView addSubview:cityButton];
+//    [titleView addSubview:titleLabel];
+//    self.navigationItem.titleView = titleView;
 }
 
 - (void)onCity:(UIButton *)btn{
