@@ -12,4 +12,6 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *label;
 
+@property (nonatomic, assign) BOOL isSelect;
+
 @end
