@@ -11,11 +11,14 @@
 #import "ProductCell.h"
 #import "ProductDetailViewController.h"
 #import "ProductFilterData.h"
+#import "ProductFilterView.h"
 
 @interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *products;
+@property (nonatomic, strong) ProductFilterView *filterView;
+
 @end
 
 @implementation ProductListViewController
@@ -34,6 +37,13 @@
     _tableView.delegate = nil; _tableView.dataSource = nil;
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if (_filterView.isShow) {
+        [_filterView showSort];
+    }
+}
+
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];
@@ -44,8 +54,10 @@
 }
 
 - (void)setupUI{
-    self.tableView =
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.filterView = [[ProductFilterView alloc] initWithDefaultData:_filterData SeletedData:_selectedFilter];
+    [self.view addSubview:self.filterView];
+    
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterView.frame), kWindowWidth, kWindowHeightWithoutNavigationBar - CGRectGetMaxY(_filterView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     [self.view addSubview:_tableView];
 }
 
