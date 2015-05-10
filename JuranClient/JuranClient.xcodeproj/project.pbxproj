@@ -5870,7 +5870,7 @@
 						};
 					};
 					A971BCAB1A20825800C018D6 = {
-						DevelopmentTeam = D2JB8K885C;
+						DevelopmentTeam = K7N89S4ZM6;
 						TestTargetID = A971BC901A20825800C018D6;
 					};
 				};
@@ -7978,7 +7978,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "034a2c8f-c302-429e-a7a2-cfcc189987f5";
+				PROVISIONING_PROFILE = "52657c77-bd2b-4e6b-96ce-0b0ad9451c14";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv64";
 				VERSIONING_SYSTEM = "";
@@ -8024,7 +8024,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "034a2c8f-c302-429e-a7a2-cfcc189987f5";
+				PROVISIONING_PROFILE = "52657c77-bd2b-4e6b-96ce-0b0ad9451c14";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv64";
 				VERSIONING_SYSTEM = "";
@@ -8036,8 +8036,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JuranClient.app/JuranClient";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -8051,7 +8051,7 @@
 				);
 				INFOPLIST_FILE = "JuranClientTests/JuranClientTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "034a2c8f-c302-429e-a7a2-cfcc189987f5";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -8061,8 +8061,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JuranClient.app/JuranClient";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -8072,7 +8072,7 @@
 				GCC_PREFIX_HEADER = "JuranClient/JuranClient-Prefix.pch";
 				INFOPLIST_FILE = "JuranClientTests/JuranClientTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "034a2c8f-c302-429e-a7a2-cfcc189987f5";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
