@@ -13,7 +13,7 @@
 static NSString *CellIdentifier = @"ProductCatgeryCell";
 
 @interface ProductCategaryViewController ()<UITableViewDelegate,UITableViewDataSource>
-@property (strong, nonatomic) IBOutlet UITableView *tableVIew;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *treeCatgatery;
 @end
 
@@ -22,9 +22,10 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"类目";
-    _tableVIew.sectionHeaderHeight = 38;
-    _tableVIew.sectionFooterHeight = 1;
-    [_tableVIew registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
+    _tableView.sectionHeaderHeight = 38;
+    _tableView.sectionFooterHeight = 1;
+    _tableView.tableFooterView = [[UIView alloc]init];
+    [_tableView registerNib:[UINib nibWithNibName:CellIdentifier bundle:nil] forCellReuseIdentifier:CellIdentifier];
     
     if (_selectedFilter.isInShop)
         _treeCatgatery = [self CreateCategoryTreeByParentId:-1];
@@ -173,7 +174,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if([_treeCatgatery[indexPath.section] isOpen] && [[self getSecCat:indexPath.section :indexPath.row] isOpen]) {
-        return 38 + (ceilf([[[self getSecCat:indexPath.section :indexPath.row] childList] count])+1)/3 * 35;
+        return 38 + (ceilf([[[self getSecCat:indexPath.section :indexPath.row] childList] count])+1)/3 * 40;
     }else
         return 38;
 }
@@ -210,7 +211,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
             btn.category = trdCat;
             [btn addTarget:self action:@selector(onTrdCatgary:) forControlEvents:UIControlEventTouchUpInside];
             [cell addSubview:btn];
-            UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(15, 38+(ceilf([[[self getSecCat:indexPath.section :indexPath.row] childList] count])+1)/3 * 35-0.5, 290, 0.5f)];
+            UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(15, 38+(ceilf([[[self getSecCat:indexPath.section :indexPath.row] childList] count])+1)/3 * 40-0.5, 290, 0.5f)];
             lineView.backgroundColor = [UIColor lightGrayColor];
             [cell addSubview:lineView];
         }
@@ -271,7 +272,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     ProductCategory *cat = _treeCatgatery[btn.tag-2000];
     if (cat.childList && cat.childList.count>0) {
         cat.isOpen = !cat.isOpen;
-        [_tableVIew reloadSections:[NSIndexSet indexSetWithIndex:btn.tag-2000] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [_tableView reloadSections:[NSIndexSet indexSetWithIndex:btn.tag-2000] withRowAnimation:UITableViewRowAnimationAutomatic];
     }else{
         _selectedFilter.pCategory = [self getCatgary:cat];
         [self commit];

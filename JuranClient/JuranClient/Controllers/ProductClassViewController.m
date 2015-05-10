@@ -19,6 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"类别";
+    _tableView.tableFooterView = [[UIView alloc]init];
     //[_tableView reloadData];
 }
 
@@ -47,7 +48,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44;
+    return 38;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -57,6 +58,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     cell.textLabel.text = [_filterData.classList[indexPath.row] className];
+    cell.textLabel.font = [UIFont systemFontOfSize:13];
     return cell;
 }
 

@@ -51,7 +51,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"筛选";
+    
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(onDone:)];
+    [right setTintColor:[UIColor darkTextColor]];
     self.navigationItem.rightBarButtonItem = right;
     _tableView.tableFooterView = [[UIView alloc]init];
     _filterData = [[ProductFilterData alloc]init];
@@ -165,11 +167,12 @@
     cell.textLabel.font = [UIFont systemFontOfSize:13];
     cell.detailTextLabel.text = _detailArray[indexPath.row] ? _detailArray[indexPath.row]:@"";
     cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([_conditionArray[indexPath.row] isEqual:@"类目"]) {
         ProductCategaryViewController *vc = [[ProductCategaryViewController alloc]init];
         vc.navigationItem.title = [NSString stringWithFormat:@"%@",[_conditionArray objectAtIndex:[indexPath row]]];
@@ -207,7 +210,7 @@
                 vc.filterData = _filterData;
                 vc.selectedFilter = _selectedFilter;
                 [vc setBlock:^(ProductSelectedFilter *filter) {
-                    [self loadData];
+                    //[self loadData];
                 }];
                 [self.navigationController pushViewController:vc animated:YES];
                 break;

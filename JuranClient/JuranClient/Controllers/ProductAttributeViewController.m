@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    //[_tableView reloadData];
+    _tableView.tableFooterView = [[UIView alloc]init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,7 +43,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44;
+    return 38;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -53,6 +53,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     cell.textLabel.text = _currentAttr.attValues[indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:13];
     return cell;
 }
 

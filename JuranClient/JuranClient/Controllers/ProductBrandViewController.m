@@ -20,6 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"品牌";
+    _tableView.tableFooterView = [[UIView alloc]init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,7 +48,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44;
+    return 38;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -57,6 +58,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     cell.textLabel.text = [_filterData.brandList[indexPath.row] brandName];
+    cell.textLabel.font = [UIFont systemFontOfSize:13];
     return cell;
 }
 

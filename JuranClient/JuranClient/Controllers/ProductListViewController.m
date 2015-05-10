@@ -16,7 +16,6 @@
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *products;
-
 @end
 
 @implementation ProductListViewController
@@ -44,6 +43,7 @@
 }
 
 - (void)setupUI{
+    self.tableView =
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     [self.view addSubview:_tableView];
 }
