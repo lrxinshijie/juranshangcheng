@@ -52,11 +52,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChangeNotification:) name:UITextFieldTextDidChangeNotification object:nil];
     
-#ifdef kJuranVersion12
-    searchOptions = @[@"在作品案例中搜索", @"在设计师中搜索", @"在答疑解惑中搜索"];
-#else
     searchOptions = @[@"在作品案例中搜索", @"在设计师中搜索", @"在答疑解惑中搜索", @"在商品中搜索", @"在店铺中搜索"];
-#endif
     
     self.navigationItem.title = @"搜索";
     step = 1;
@@ -259,7 +255,6 @@
         [self.navigationController pushViewController:vc animated:YES];
         
     }
-#ifndef kJuranVersion12
     else if (_type == SearchTypeGoods){
         ProductListViewController *vc = [[ProductListViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -271,7 +266,6 @@
         [self.navigationController pushViewController:vc animated:YES];
         
     }
-#endif
 }
 
 #pragma mark - Target Action

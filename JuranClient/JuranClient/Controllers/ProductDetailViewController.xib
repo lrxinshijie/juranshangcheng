@@ -207,7 +207,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="196" y="623"/>
+            <point key="canvasLocation" x="291" y="678"/>
         </view>
         <view contentMode="scaleToFill" id="i4e-Qd-O2p">
             <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
@@ -304,14 +304,14 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DAv-eh-dyY">
-                    <rect key="frame" x="113" y="15" width="191" height="21"/>
+                    <rect key="frame" x="113" y="35" width="191" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥3600.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iAr-eh-3oj">
-                    <rect key="frame" x="113" y="44" width="178" height="21"/>
+                    <rect key="frame" x="113" y="64" width="178" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.058823529409999999" green="0.32156862749999998" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>

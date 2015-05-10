@@ -25,6 +25,7 @@
     self = [super init];
     if (self) {
         _filterData = [[ProductFilterData alloc]init];
+        _selectedFilter = [[ProductSelectedFilter alloc]init];
     }
     return self;
 }

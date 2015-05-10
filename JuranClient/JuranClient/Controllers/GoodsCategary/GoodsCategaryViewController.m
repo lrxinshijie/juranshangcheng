@@ -19,6 +19,8 @@
 #import "NaviStoreSelCityViewController.h"
 #import "JRAreaInfo.h"
 #import "UIViewController+Menu.h"
+#import "ProductListViewController.h"
+#import "ProductFilterData.h"
 
 
 @interface GoodsCategaryViewController ()<UITableViewDataSource,UITableViewDelegate,CustomSecLevelViewDelegate,CustomThirdLevelCellDelegate,CustomShopViewDelegate,UIScrollViewDelegate>
@@ -626,7 +628,15 @@
 #pragma mark - CustomThirdLevelCellDelegate
 - (void)thirdLevelItemDidSelectedWithMessage:(NSString *)msg
 {
-    NSLog(@"%@",msg);
+    //NSLog(@"%@",msg);
+    ProductListViewController *vc = [[ProductListViewController alloc]init];
+    vc.selectedFilter = [[ProductSelectedFilter alloc]init];
+    vc.selectedFilter.isInShop = NO;
+    vc.selectedFilter.sort = 9;
+    vc.selectedFilter.keyword = @"";
+    vc.selectedFilter.pCategory = [[ProductCategory alloc]init];
+    vc.selectedFilter.pCategory.catCode = msg;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

@@ -21,6 +21,9 @@
 #import "NaviStoreInfoViewController.h"
 #import "AttributeCell.h"
 #import "UIViewController+Menu.h"
+#import "ShareView.h"
+#import "UIImageView+Block.h"
+#import "ProductPhotoBrowserViewController.h"
 
 @interface ProductDetailViewController () <UITableViewDelegate, UITableViewDataSource, JRSegmentControlDelegate>
 
@@ -154,6 +157,11 @@
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_imageScrollView.frame)*idx, 0, CGRectGetWidth(_imageScrollView.frame), CGRectGetHeight(_imageScrollView.frame))];
             imageView.backgroundColor = RGBColor(237, 237, 237);
             [imageView setImageWithURLString:imageUrl placeholderImage:nil editing:YES];
+            [imageView setOnTap:^{
+                ProductPhotoBrowserViewController *vc = [[ProductPhotoBrowserViewController alloc] initWithPhotos:_product.goodsImagesList andStartWithPhotoAtIndex:idx];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }];
             [_imageScrollView addSubview:imageView];
         }];
         
@@ -200,8 +208,16 @@
 
 - (IBAction)onMore:(id)sender{
     [self showAppMenu:^{
-        //分享代码
+        NSString *content = @"商品分享测试";
+        if (content.length == 0) {
+            content = @"商品分享测试";
+        }
+        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:self.product.goodsName url:self.shareURL];
     }];
+}
+
+- (NSString *)shareURL{
+    return [NSString stringWithFormat:@"http://apph5.juran.cn/case/%d%@",self.product.linkProductId, [Public shareEnv]];
 }
 
 - (IBAction)onShop:(id)sender{

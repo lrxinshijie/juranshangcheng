@@ -43,6 +43,9 @@
 #import "JRServiceViewController.h"
 #import "SearchViewController.h"
 #import "DiscoverViewController.h"
+#import "GoodsCategaryViewController.h"
+#import "ProductListViewController.h"
+#import "ProductFilterData.h"
 
 @implementation Public
 
@@ -587,12 +590,23 @@
         BidListViewController *vc = [[BidListViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
+    }else if (type == 17){//热销商品
+        ProductListViewController *vc = [[ProductListViewController alloc]init];
+        vc.selectedFilter = [[ProductSelectedFilter alloc]init];
+        vc.selectedFilter.isInShop = NO;
+        vc.selectedFilter.sort = [param getIntegerValueForKey:@"id" defaultValue:4];
+        vc.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:vc animated:YES];
     }else if (type == 19){//门店导航
 #ifndef kJuranDesigner
         NaviStoreListViewController *vc = [[NaviStoreListViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
 #endif
+    }else if (type == 23){//商品分类
+        GoodsCategaryViewController *vc = [[GoodsCategaryViewController alloc] initWithNibName:@"GoodsCategaryViewController" bundle:nil isPopNavHide:NO style:CategaryStyle_Shop];
+        vc.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:vc animated:YES];
     }else if (type == 25){//居然服务
         JRServiceViewController *vc = [[JRServiceViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
