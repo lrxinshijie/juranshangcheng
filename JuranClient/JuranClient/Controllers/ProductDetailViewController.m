@@ -68,16 +68,41 @@
 
 @implementation ProductDetailViewController
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 //    _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadPrice:) name:kNotificationNameProudctPriceReloadData object:nil];
     [self setupUI];
     [self setupAttributeView];
     
     [self loadData];
+}
+
+- (void)reloadPrice:(NSNotification *)noti{
+    [self showHUD];
+    NSMutableArray *attributeList = [NSMutableArray array];
+    [_product.attributeList enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+        NSString *attValue = [dict[@"attrList"] objectAtTheIndex:[_attributeSelected[idx] intValue]];
+        NSDictionary *row = @{@"attId": dict[@"attrName"],
+                              @"attValue": attValue ? attValue : @""};
+        [attributeList addObject:row];
+    }];
+    NSDictionary *param = @{@"linkProductId": @(_product.linkProductId),
+                            @"attributeList": attributeList};
+    [[ALEngine shareEngine] pathURL:JR_PRODUCT_CHANGE_PRICE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            _attributePriceLabel.text = [NSString stringWithFormat:@"￥%@", data[@"goodsPrice"]];
+            [_attributeImageView setImageWithURLString:data[@"goodsImage"]];
+        }
+        [_attributeTableView reloadData];
+    }];
 }
 
 - (void)setupUI{
@@ -404,6 +429,8 @@
             cell = (AttributeCell *)[nibs firstObject];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.indexPath = indexPath;
+        cell.attributeSelected = _attributeSelected;
         NSDictionary *dict = _product.attributeList[indexPath.row];
         [cell fillCellWithDict:dict];
         
@@ -462,6 +489,14 @@
     }else if ([tableView isEqual:_baseTableView]){
         if (indexPath.section == 0 && indexPath.row == 0) {
             if (_product.attributeList) {
+                if (!_attributeSelected) {
+                    self.attributeSelected = [NSMutableArray array];
+                    [_product.attributeList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                        [_attributeSelected addObject:@(-1)];
+                    }];
+                    [_attributeTableView reloadData];
+                }
+                
                 [self showAttributeView];
             }else{
                 [self showHUD];
@@ -470,7 +505,7 @@
                     if (result) {
                         self.attributeSelected = [NSMutableArray array];
                         [_product.attributeList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                            [_attributeSelected addObject:@(0)];
+                            [_attributeSelected addObject:@(-1)];
                         }];
                         CGRect frame = _attributeTableView.frame;
                         frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame) + 1;

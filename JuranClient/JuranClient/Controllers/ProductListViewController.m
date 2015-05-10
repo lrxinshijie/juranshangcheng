@@ -11,11 +11,16 @@
 #import "ProductCell.h"
 #import "ProductDetailViewController.h"
 #import "ProductFilterData.h"
+#import "MJRefresh.h"
+#import "ProductFilterView.h"
 
-@interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate, ProductFilterViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *products;
+@property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, strong) ProductFilterView *filterView;
+
 @end
 
 @implementation ProductListViewController
@@ -40,40 +45,94 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setupUI];
-    [self loadData];
+    [_tableView headerBeginRefreshing];
 }
 
 - (void)setupUI{
-    self.tableView =
-    self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.filterView = [[ProductFilterView alloc] initWithDefaultData:_filterData SeletedData:_selectedFilter];
+    _filterView.delegate = self;
+    [self.view addSubview:_filterView];
+    
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterView.frame), kWindowWidth, kWindowHeightWithoutNavigationBar - CGRectGetMaxY(_filterView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     [self.view addSubview:_tableView];
+    
+    __weak typeof(self) weakSelf = self;
+    [_tableView addHeaderWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadData];
+    }];
+    
+    [_tableView addFooterWithCallback:^{
+        weakSelf.currentPage++;
+        [weakSelf loadData];
+    }];
 }
 
 - (void)loadData{
     
-    NSDictionary *param = @{@"sort": @(_selectedFilter.sort),
-                            @"pageNo":@(1),
-                            @"onePageCount":kOnePageCount
-                            };
-    [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_SEARCH_PRODUCT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"No"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [self hideHUD];
+    NSDictionary *param = nil;
+    NSString *url = @"";
+    
+    
+    //TODO: 添加接口及参数
+    if (_searchKey.length > 0) {
+        //搜索
+        param = @{@"sort": @(_selectedFilter.sort),
+                  @"pageNo":@(_currentPage),
+                  @"onePageCount":kOnePageCount
+                  };
+        url = JR_SEARCH_PRODUCT;
+    }else if (_shop){
+        //商家全部商品
+        param = @{@"sort": @(_selectedFilter.sort),
+                  @"pageNo":@(_currentPage),
+                  @"onePageCount":kOnePageCount
+                  };
+    }else if (_brand){
+        //品牌
+    }
+    
+    
+    [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"No"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            NSArray *recommendProductsList = [data objectForKey:@"emallGoodsInfoList"];
-            self.products = [JRProduct buildUpWithValueForList:recommendProductsList];
             
-            _filterData.attributeList = [ProductAttribute buildUpWithValueForList:[data objectForKey:@"showAttributesList"]];
-            if (_selectedFilter.isInShop) {
-                _filterData.categoryList = [ProductCategory buildUpWithValueForList:[data objectForKey:@"appShopCatList"]];
-            }else {
-                _filterData.categoryList = [ProductCategory buildUpWithValueForList:[data objectForKey:@"appOperatingCatList"]];
+            //TODO: 接口返回值处理
+            if (_searchKey.length > 0) {
+                NSArray *recommendProductsList = [data objectForKey:@"emallGoodsInfoList"];
+                NSMutableArray *products = [JRProduct buildUpWithValueForList:recommendProductsList];
+                if (_currentPage == 1) {
+                    self.products = products;
+                    
+                    _filterData.attributeList = [ProductAttribute buildUpWithValueForList:[data objectForKey:@"showAttributesList"]];
+                    if (_selectedFilter.isInShop) {
+                        _filterData.categoryList = [ProductCategory buildUpWithValueForList:[data objectForKey:@"appShopCatList"]];
+                    }else {
+                        _filterData.categoryList = [ProductCategory buildUpWithValueForList:[data objectForKey:@"appOperatingCatList"]];
+                    }
+                    _filterData.brandList = [ProductBrand buildUpWithValueForList:[data objectForKey:@"sortBrandList"]];
+                    _filterData.storeList = [ProductStore buildUpWithValueForList:[data objectForKey:@"appStoreInfoList"]];
+                    _filterData.classList = [ProductClass buildUpWithValueForList:[data objectForKey:@"appManagementCategoryList"]];
+                }else{
+                    [_products addObject:products];
+                }
+                
+            }else if (_shop){
+                
+            }else if (_brand){
+                
             }
-            _filterData.brandList = [ProductBrand buildUpWithValueForList:[data objectForKey:@"sortBrandList"]];
-            _filterData.storeList = [ProductStore buildUpWithValueForList:[data objectForKey:@"appStoreInfoList"]];
-            _filterData.classList = [ProductClass buildUpWithValueForList:[data objectForKey:@"appManagementCategoryList"]];
+            
             [_tableView reloadData];
         }
+        
+        
+        [_tableView headerEndRefreshing];
+        [_tableView footerEndRefreshing];
     }];
+}
+
+- (void)clickProductFilterView:(ProductFilterView *)view returnData:(ProductSelectedFilter *)data IsGrid:(BOOL)isGrid{
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

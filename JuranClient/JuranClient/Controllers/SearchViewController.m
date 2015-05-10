@@ -257,6 +257,7 @@
     }
     else if (_type == SearchTypeGoods){
         ProductListViewController *vc = [[ProductListViewController alloc]init];
+        vc.searchKey = _searchKeyWord;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (_type == SearchTypeShop){

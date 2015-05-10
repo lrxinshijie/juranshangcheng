@@ -809,6 +809,10 @@
 		372DEA141ADCB30A0059DE27 /* MyCollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 372DEA111ADCB30A0059DE27 /* MyCollectViewController.m */; };
 		372DEA151ADCB30A0059DE27 /* MyCollectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 372DEA121ADCB30A0059DE27 /* MyCollectViewController.xib */; };
 		372DEA161ADCB30A0059DE27 /* MyCollectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 372DEA121ADCB30A0059DE27 /* MyCollectViewController.xib */; };
+		373F59481AFF9F70005592FF /* ProductFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 373F59471AFF9F70005592FF /* ProductFilterView.m */; };
+		373F594C1AFFA8DB005592FF /* product-arrow-down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 373F594B1AFFA8DB005592FF /* product-arrow-down@2x.png */; };
+		373F594F1AFFB0D6005592FF /* icon-product-filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 373F594D1AFFB0D6005592FF /* icon-product-filter@2x.png */; };
+		373F59501AFFB0D6005592FF /* product-arrow-up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 373F594E1AFFB0D6005592FF /* product-arrow-up@2x.png */; };
 		3756351C1A60E6FF00D120C8 /* icon_followed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3756351A1A60E6FF00D120C8 /* icon_followed@2x.png */; };
 		3756351D1A60E6FF00D120C8 /* icon_unfollowed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3756351B1A60E6FF00D120C8 /* icon_unfollowed@2x.png */; };
 		3756351F1A60E78300D120C8 /* icon_follow_unenable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3756351E1A60E78300D120C8 /* icon_follow_unenable@2x.png */; };
@@ -2402,6 +2406,11 @@
 		372DEA101ADCB30A0059DE27 /* MyCollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectViewController.h; sourceTree = "<group>"; };
 		372DEA111ADCB30A0059DE27 /* MyCollectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectViewController.m; sourceTree = "<group>"; };
 		372DEA121ADCB30A0059DE27 /* MyCollectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCollectViewController.xib; sourceTree = "<group>"; };
+		373F59461AFF9F70005592FF /* ProductFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductFilterView.h; sourceTree = "<group>"; };
+		373F59471AFF9F70005592FF /* ProductFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductFilterView.m; sourceTree = "<group>"; };
+		373F594B1AFFA8DB005592FF /* product-arrow-down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "product-arrow-down@2x.png"; path = "Shop/product-arrow-down@2x.png"; sourceTree = "<group>"; };
+		373F594D1AFFB0D6005592FF /* icon-product-filter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-product-filter@2x.png"; path = "Shop/icon-product-filter@2x.png"; sourceTree = "<group>"; };
+		373F594E1AFFB0D6005592FF /* product-arrow-up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "product-arrow-up@2x.png"; path = "Shop/product-arrow-up@2x.png"; sourceTree = "<group>"; };
 		3756351A1A60E6FF00D120C8 /* icon_followed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_followed@2x.png"; sourceTree = "<group>"; };
 		3756351B1A60E6FF00D120C8 /* icon_unfollowed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_unfollowed@2x.png"; sourceTree = "<group>"; };
 		3756351E1A60E78300D120C8 /* icon_follow_unenable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_follow_unenable@2x.png"; sourceTree = "<group>"; };
@@ -4029,6 +4038,9 @@
 		2C602C7B1ADCECF10037105E /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				373F594D1AFFB0D6005592FF /* icon-product-filter@2x.png */,
+				373F594E1AFFB0D6005592FF /* product-arrow-up@2x.png */,
+				373F594B1AFFA8DB005592FF /* product-arrow-down@2x.png */,
 				375D05C51AF7AFB0004E2286 /* icon_shop_letter@2x.png */,
 				3769E8F71AFDF94600C45E5B /* icon-collection1@2x.png */,
 				375D05C11AF7AF51004E2286 /* icon-shop-location@2x.png */,
@@ -4983,6 +4995,8 @@
 				A9A71D671ADFF1F400804AF9 /* StarView.m */,
 				37ECDD1F1AE166D500BE6027 /* ConstructActionView.h */,
 				37ECDD201AE166D500BE6027 /* ConstructActionView.m */,
+				373F59461AFF9F70005592FF /* ProductFilterView.h */,
+				373F59471AFF9F70005592FF /* ProductFilterView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4990,9 +5004,9 @@
 		A987EDCF1A20920500CED7CD /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				A9BBA36C1AFF90ED0021EFFB /* TagCollectionViewCell.xib */,
 				A9CA70191AFF846400329D9F /* TagCollectionViewCell.h */,
 				A9CA701A1AFF846400329D9F /* TagCollectionViewCell.m */,
+				A9BBA36C1AFF90ED0021EFFB /* TagCollectionViewCell.xib */,
 				14C8554B1A2E1A1500A15ED9 /* InteractionCell.h */,
 				14C8554C1A2E1A1500A15ED9 /* InteractionCell.m */,
 				14C8554D1A2E1A1500A15ED9 /* InteractionCell.xib */,
@@ -6611,6 +6625,7 @@
 				BD5186B51A5D0ED700BE508A /* icon_ camera@2x.png in Resources */,
 				2C91E9111ADB754400B542DC /* icon-navi-right-arrow@2x.png in Resources */,
 				37DA110C1A8CDDCC00BC71A6 /* OrderCommentReadViewController.xib in Resources */,
+				373F594C1AFFA8DB005592FF /* product-arrow-down@2x.png in Resources */,
 				BD48B58E1A5283340041725C /* JRServiceViewController.xib in Resources */,
 				37D7FEB21AECD24D00288C1E /* ShopCollectionCell.xib in Resources */,
 				BD5186551A5D0ED700BE508A /* login-icon-email@2x.png in Resources */,
@@ -6955,6 +6970,7 @@
 				1415FA981A5D144B003D0C29 /* PushConfig.plist in Resources */,
 				2C91E8FA1ADB684800B542DC /* NaviStoreInfoViewController.xib in Resources */,
 				1F2A0A911ADF65BD00C73784 /* chair@2x.png in Resources */,
+				373F594F1AFFB0D6005592FF /* icon-product-filter@2x.png in Resources */,
 				1FD3B8121AD8B558004E849F /* search_more@2x.png in Resources */,
 				1FCD24CF1AE639EB00FF18E9 /* CustomThirdLevelCell.xib in Resources */,
 				BD51867F1A5D0ED700BE508A /* icon_personal_ask@2x.png in Resources */,
@@ -6962,6 +6978,7 @@
 				1F2D50001AD77F9E005486D2 /* scanIcon_highlight@2x.png in Resources */,
 				BD5186971A5D0ED700BE508A /* message_toolbar_split@2x 2.png in Resources */,
 				14A3FDC21A2C9EB7002BEFF4 /* MyDemandViewController.xib in Resources */,
+				373F59501AFFB0D6005592FF /* product-arrow-up@2x.png in Resources */,
 				BD6C74261A63B70C0054BAC9 /* status_rejected@2x.png in Resources */,
 				140C9EB51ADB5DAD0079391A /* icon-nav-explore-active@2x.png in Resources */,
 				A9B4EB7A1A371F120091AAAF /* CaseCollectViewController.xib in Resources */,
@@ -7549,6 +7566,7 @@
 				A9A067141A3D76DA0059D73B /* ActionSheetCustomPicker.m in Sources */,
 				1FD3B8471AD8F878004E849F /* FMDatabase.m in Sources */,
 				1406F3841AF86AE500C0CF8E /* CHTCollectionViewWaterfallLayout.m in Sources */,
+				373F59481AFF9F70005592FF /* ProductFilterView.m in Sources */,
 				371FBEEB1A6A357700635D3D /* JRWiki.m in Sources */,
 				A9C012061ABC601900DCF9C3 /* IQUIWindow+Hierarchy.m in Sources */,
 				A987EDDE1A20920500CED7CD /* NSArray+ASCategory.m in Sources */,
