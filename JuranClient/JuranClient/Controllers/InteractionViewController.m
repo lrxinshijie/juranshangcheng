@@ -9,8 +9,9 @@
 #import "InteractionViewController.h"
 #import "InteractionCell.h"
 #import "JRPhotoScrollViewController.h"
-#import "NewestTopicViewController.h"
+//#import "NewestTopicViewController.h"
 #import "JRTopic.h"
+#import "TopicDetailViewController.h"
 
 @interface InteractionViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -180,7 +181,8 @@
         JRTopic *t = [[JRTopic alloc] init];
         t.topicId = [dict getStringValueForKey:@"topicId" defaultValue:@""];
         t.theme = [dict getStringValueForKey:@"topicTitle" defaultValue:@""];
-        NewestTopicViewController *vc = [[NewestTopicViewController alloc] init];
+        TopicDetailViewController *vc= [[TopicDetailViewController alloc] init];
+//        NewestTopicViewController *vc = [[NewestTopicViewController alloc] init];
         vc.topic = t;
         [self.navigationController pushViewController:vc animated:YES];
     }

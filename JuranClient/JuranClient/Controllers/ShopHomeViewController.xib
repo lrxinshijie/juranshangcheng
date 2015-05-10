@@ -230,7 +230,7 @@
         </view>
     </objects>
     <resources>
-        <image name="icon-collection.png" width="23" height="22"/>
+        <image name="icon-collection.png" width="20" height="19"/>
         <image name="icon-search.png" width="23" height="23"/>
         <image name="icon-shop-location.png" width="12" height="17"/>
         <image name="icon_shop_letter.png" width="20" height="20"/>

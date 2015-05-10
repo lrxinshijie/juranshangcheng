@@ -19,6 +19,7 @@
 #import "AppDelegate.h"
 #import "UserLocation.h"
 #import "ProductLetterViewController.h"
+#import "UIViewController+Menu.h"
 
 @interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -53,7 +54,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:NULL];
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMenu)];
 
     
     [_collectionView registerNib:[UINib nibWithNibName:@"ShopCell" bundle:nil] forCellWithReuseIdentifier:@"ShopCell"];
@@ -107,9 +108,15 @@
     _gradeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon-grade-%@.png", _shop.grade.integerValue?@"1":@"2"]];
     _gradeLabel.text = [NSString stringWithFormat:@"店铺评分：%@", _shop.shopDsr];
     _nameLabel.text = _shop.shopName;
-    _collectionImageView.image = [UIImage imageNamed:_shop.isStored?@"icon-collection-active.png":@"icon-collection.png"];
+    _collectionImageView.image = [UIImage imageNamed:_shop.isStored?@"icon-collection-active.png":@"icon-collection1.png"];
     _collectionLabel.text = _shop.isStored?@"已收藏":@"收藏";
     [_collectionView reloadData];
+}
+
+#pragma mark - Target Action
+
+- (void)onMenu{
+    [self showAppMenu:nil];
 }
 
 - (IBAction)onCollection:(id)sender{
@@ -183,9 +190,14 @@
 }
 
 - (IBAction)onPrivateLetter:(id)sender{
-    ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
-    pv.shop = _shop;
-    [self.navigationController pushViewController:pv animated:YES];
+    if ([self checkLogin:^{
+        [[JRUser currentUser] postPrivateLetterWithUserId:_shop.shopId Target:_shop VC:self];
+    }]) {
+        [[JRUser currentUser] postPrivateLetterWithUserId:_shop.shopId Target:_shop VC:self];
+    }
+//    ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
+//    pv.shop = _shop;
+//    [self.navigationController pushViewController:pv animated:YES];
 }
 
 #pragma mark - UICollectionViewDelegate

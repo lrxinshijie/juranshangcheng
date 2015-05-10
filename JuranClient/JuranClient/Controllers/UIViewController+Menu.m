@@ -21,23 +21,31 @@
 
 - (void)showAppMenu:(VoidBlock)shareBlock
 {
-    if (![JRUser isLogin]) {
-        [self createAppMenuWithShareBlock:shareBlock isRead:YES numOfMsg:0];
-    }else {
-        [self showHUD];
-        [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-            [self hideHUD];
-            if (!error) {
-                if ([data isKindOfClass:[NSDictionary class]]) {
-                    BOOL isRead = ![data getBoolValueForKey:@"newPushMsgCount" defaultValue:NO];
-                    NSInteger num = [data getIntValueForKey:@"newPrivateLetterCount" defaultValue:0];
-                    [self createAppMenuWithShareBlock:shareBlock isRead:isRead numOfMsg:num];
-                }
-            }else{
-                [self createAppMenuWithShareBlock:shareBlock isRead:YES numOfMsg:0];
-            }
-        }];
-    }
+    [self createAppMenuWithShareBlock:shareBlock isRead:[JRUser isLogin] && [JRUser currentUser].newPushMsgCount>0?NO:YES
+                             numOfMsg:[JRUser isLogin] && [JRUser currentUser].newPrivateLetterCount?[JRUser currentUser].newPrivateLetterCount:0];
+    
+    
+    
+    
+    
+    
+//    if (![JRUser isLogin]) {
+//        [self createAppMenuWithShareBlock:shareBlock isRead:YES numOfMsg:0];
+//    }else {
+//        [self showHUD];
+//        [[ALEngine shareEngine] pathURL:JR_MYCENTERINFO parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+//            [self hideHUD];
+//            if (!error) {
+//                if ([data isKindOfClass:[NSDictionary class]]) {
+//                    BOOL isRead = ![data getBoolValueForKey:@"newPushMsgCount" defaultValue:NO];
+//                    NSInteger num = [data getIntValueForKey:@"newPrivateLetterCount" defaultValue:0];
+//                    [self createAppMenuWithShareBlock:shareBlock isRead:isRead numOfMsg:num];
+//                }
+//            }else{
+//                [self createAppMenuWithShareBlock:shareBlock isRead:YES numOfMsg:0];
+//            }
+//        }];
+//    }
     
 }
 

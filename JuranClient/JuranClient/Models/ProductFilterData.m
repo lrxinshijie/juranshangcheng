@@ -43,11 +43,13 @@
         self.shopId = [dict getLongValueForKey:@"shopId" defaultValue:0];
         self.name = [dict getStringValueForKey:@"name" defaultValue:@""];
         self.depth = [dict getIntValueForKey:@"depth" defaultValue:0];
-        self.parentId = [dict getLongValueForKey:@"parentId" defaultValue:0];
+        self.parentId = [dict getLongValueForKey:@"parentId" defaultValue:-1];
         self.catCode = [dict getStringValueForKey:@"catCode" defaultValue:@""];
         self.catName = [dict getStringValueForKey:@"catName" defaultValue:@""];
         self.parentCode = [dict getStringValueForKey:@"parentCode" defaultValue:@""];
         self.urlContent = [dict getStringValueForKey:@"urlContent" defaultValue:@""];
+        self.childList = [[NSMutableArray alloc]init];
+        self.isOpen = NO;
     }
     return self;
 }
@@ -70,7 +72,7 @@
         if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
             return self;
         }
-        self.catCode = [dict getLongValueForKey:@"operatingCatCode" defaultValue:0];
+        self.catCode = [dict getStringValueForKey:@"operatingCatCode" defaultValue:@""];
         self.brandId = [dict getLongValueForKey:@"brandId" defaultValue:0];
         self.brandName = [dict getStringValueForKey:@"brandName" defaultValue:@""];
     }
@@ -139,19 +141,40 @@
 
 @implementation ProductFilterData
 - (void)loadFilterDataWithFilter:(ProductSelectedFilter *)filter
-                           Handler:(BOOLBlock)finished{
+                          PageNo:(int)pageNo
+                    OnePageCount:(int)onePageCount
+                         Handler:(BOOLBlock)finished{
     
     
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
     [param setObject:@"北京市" forKey:@"cityName"];
-    [param setObject:@(1) forKey:@"pageNo"];
-    [param setObject:@(1) forKey:@"onePageCount"];
+    [param setObject:@(pageNo) forKey:@"pageNo"];
+    [param setObject:@(onePageCount) forKey:@"onePageCount"];
     [param setObject:@(filter.sort) forKey:@"sort"];
-    if (filter.keyword) [param setObject:filter.keyword forKey:@"keyword"];
-    if (filter.pMinPrice!=0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice<=filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMinYuan"];
-    if (filter.pMaxPrice!=0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice>filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMaxYuan"];
-    if (filter.pBrand) [param setObject:filter.pBrand forKey:@"brands"];
-    if (filter.attributeList) [param setObject:filter.attributeList forKey:@"attributes"];
+    if (filter.keyword && ![filter.keyword isEqual:@""]) [param setObject:filter.keyword forKey:@"keyword"];
+    if (filter.pMinPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice<=filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMinYuan"];
+    if (filter.pMaxPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice>filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMaxYuan"];
+    if (filter.pBrand) [param setObject:@(filter.pBrand.brandId) forKey:@"brands"];
+    if (filter.pAttributeDict && filter.pAttributeDict.count>0) {
+        NSEnumerator * enumerator = [filter.pAttributeDict keyEnumerator];
+        id object;
+        NSString *attrString = @"";
+        while(object = [enumerator nextObject])
+        {
+            id objectValue = [filter.pAttributeDict objectForKey:object];
+            if(objectValue != nil)
+            {
+                if ([attrString isEqual:@""]) {
+                    attrString = [attrString stringByAppendingString:[NSString stringWithFormat:@"%@:%@",object,objectValue]];
+                }else {
+                    attrString = [attrString stringByAppendingString:[NSString stringWithFormat:@";%@:%@",object,objectValue]];
+                }
+            }
+            
+        }
+        attrString = [NSString stringWithFormat:@"[%@]",attrString];
+        [param setObject:attrString forKey:@"attributes"];
+    }
     if(filter.isInShop) {
         if (filter.shopId!=0) [param setObject:[NSString stringWithFormat:@"%ld",filter.shopId] forKey:@"shopId"];
         if (filter.pCategory!=0) [param setObject:@(filter.pCategory.Id) forKey:@"shopCategories"];

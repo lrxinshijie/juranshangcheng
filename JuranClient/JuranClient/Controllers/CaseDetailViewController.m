@@ -113,8 +113,8 @@
                     _jrCase.neighbourhoods,
                     _jrCase.roomType,
                     _jrCase.styleString,
-                    [NSString stringWithFormat:@"%@平米",_jrCase.houseArea],
-                    [NSString stringWithFormat:@"￥%@万元",_jrCase.projectPrice],
+                    _jrCase.houseArea.length?[NSString stringWithFormat:@"%@平米",_jrCase.houseArea]:@"",
+                    _jrCase.projectPrice.length?[NSString stringWithFormat:@"￥%@万元",_jrCase.projectPrice]:@"",
                     _jrCase.desc
                     ];
     _nameLabel.text = _jrCase.nickName;

@@ -21,6 +21,7 @@
 #import "NaviStoreInfoViewController.h"
 #import "AttributeCell.h"
 #import "UIViewController+Menu.h"
+#import "ShareView.h"
 
 @interface ProductDetailViewController () <UITableViewDelegate, UITableViewDataSource, JRSegmentControlDelegate>
 
@@ -200,8 +201,16 @@
 
 - (IBAction)onMore:(id)sender{
     [self showAppMenu:^{
-        //分享代码
+        NSString *content = @"商品分享测试";
+        if (content.length == 0) {
+            content = @"商品分享测试";
+        }
+        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:self.product.goodsName url:self.shareURL];
     }];
+}
+
+- (NSString *)shareURL{
+    return [NSString stringWithFormat:@"http://apph5.juran.cn/case/%d%@",self.product.linkProductId, [Public shareEnv]];
 }
 
 - (IBAction)onShop:(id)sender{
@@ -213,9 +222,11 @@
 }
 
 - (IBAction)onPrivate:(id)sender{
-    ProductLetterViewController *pl = [[ProductLetterViewController alloc] init];
-    pl.product = _product;
-    [self.navigationController pushViewController:pl animated:YES];
+    if ([self checkLogin:^{
+        [[JRUser currentUser] postPrivateLetterWithUserId:_product.shopId Target:_product VC:self];
+    }]) {
+        [[JRUser currentUser] postPrivateLetterWithUserId:_product.shopId Target:_product VC:self];
+    }
 }
 
 - (IBAction)onFavority:(id)sender{
@@ -227,7 +238,7 @@
 }
 
 - (void)setupFavority{
-    [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-collection-active" : @"icon-collection"] forState:UIControlStateNormal];
+    [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-collection-active" : @"icon-collection1"] forState:UIControlStateNormal];
     [_favorityButton setTitle:_product.type ? @"已收藏" : @"收藏" forState:UIControlStateNormal];
     _favorityButton.titleEdgeInsets = UIEdgeInsetsMake(30, -20, 0, 0);
     _favorityButton.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 20, 0);
