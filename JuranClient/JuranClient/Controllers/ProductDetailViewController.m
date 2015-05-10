@@ -213,9 +213,11 @@
 }
 
 - (IBAction)onPrivate:(id)sender{
-    ProductLetterViewController *pl = [[ProductLetterViewController alloc] init];
-    pl.product = _product;
-    [self.navigationController pushViewController:pl animated:YES];
+    if ([self checkLogin:^{
+        [[JRUser currentUser] postPrivateLetterWithUserId:_product.shopId Target:_product VC:self];
+    }]) {
+        [[JRUser currentUser] postPrivateLetterWithUserId:_product.shopId Target:_product VC:self];
+    }
 }
 
 - (IBAction)onFavority:(id)sender{
@@ -227,7 +229,7 @@
 }
 
 - (void)setupFavority{
-    [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-collection-active" : @"icon-collection"] forState:UIControlStateNormal];
+    [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-collection-active" : @"icon-collection1"] forState:UIControlStateNormal];
     [_favorityButton setTitle:_product.type ? @"已收藏" : @"收藏" forState:UIControlStateNormal];
     _favorityButton.titleEdgeInsets = UIEdgeInsetsMake(30, -20, 0, 0);
     _favorityButton.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 20, 0);

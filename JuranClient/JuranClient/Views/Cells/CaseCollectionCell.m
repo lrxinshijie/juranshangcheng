@@ -29,7 +29,7 @@
 }
 
 - (void)fillCellWithCase:(JRCase *)data{
-    [_photoImageView setImageWithURLString:data.imageUrl placeholderImage:[UIImage imageNamed:@"image_default"]];
+    [_photoImageView setImageWithURLString:data.imageUrl placeholderImage:[UIImage imageNamed:@"image_default"] editing:YES];
     [_avtarImageView setImageWithURLString:data.headUrl];
     _nameLabel.text = data.nickName;
 }

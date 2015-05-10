@@ -74,8 +74,7 @@
             frame.size.width = 60;
             NSInteger i = 0;
             for (NSString *str in comment.imageUrlList) {
-                frame.origin.x += 68*i;
-                ZoomInImageView *imageView = [[ZoomInImageView alloc] initWithFrame:frame];
+                ZoomInImageView *imageView = [[ZoomInImageView alloc] initWithFrame:CGRectMake(frame.origin.x+68*i, frame.origin.y, 60, 45)];
                 imageView.image = [UIImage imageNamed:@"image_default.png"];
                 [imageView setImageWithURLString:str];
                 [self addSubview:imageView];

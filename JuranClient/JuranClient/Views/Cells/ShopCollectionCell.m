@@ -38,10 +38,11 @@
 - (void)fillCellWithValue:(JRShop*)shop{
     self.shop = shop;
     _nameLabel.text = shop.shopName;
+    [_imgView setImageWithURLString:shop.logo];
     [_collectionButton setImage:[UIImage imageNamed:_shop.isStored?@"icon-collection-active.png":@"icon-collection.png"] forState:UIControlStateNormal];
     if (_shop.stallInfoList.count > 0) {
         JRStore *s = _shop.stallInfoList.firstObject;
-        _addressLabel.text = s.storeName;;
+        _addressLabel.text = s.stallName;;
         _addressView.hidden = NO;
     }else{
         _addressView.hidden = YES;
