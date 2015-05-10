@@ -5004,9 +5004,9 @@
 		A987EDCF1A20920500CED7CD /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				A9BBA36C1AFF90ED0021EFFB /* TagCollectionViewCell.xib */,
 				A9CA70191AFF846400329D9F /* TagCollectionViewCell.h */,
 				A9CA701A1AFF846400329D9F /* TagCollectionViewCell.m */,
+				A9BBA36C1AFF90ED0021EFFB /* TagCollectionViewCell.xib */,
 				14C8554B1A2E1A1500A15ED9 /* InteractionCell.h */,
 				14C8554C1A2E1A1500A15ED9 /* InteractionCell.m */,
 				14C8554D1A2E1A1500A15ED9 /* InteractionCell.xib */,

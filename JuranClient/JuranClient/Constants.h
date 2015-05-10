@@ -57,6 +57,7 @@
 #define kNotificationNameEventReloadData @"kNotificationNameEventReloadData"
 #define kNotificationNameMyDemandReloadData @"kNotificationNameMyDemandReloadData"
 #define kNotificationNameQuestionReloadData @"kNotificationNameQuestionReloadData"
+#define kNotificationNameProudctPriceReloadData @"kNotificationNameProudctPriceReloadData"
 
 #define kNotificationNameOrderReloadData @"kNotificationNameOrderReloadData"
 #define kNotificationNameOrderPaySuccess @"kNotificationNameOrderPaySuccess"

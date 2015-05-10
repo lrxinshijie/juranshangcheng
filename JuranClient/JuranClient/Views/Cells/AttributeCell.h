@@ -10,6 +10,9 @@
 
 @interface AttributeCell : UITableViewCell
 
+@property (nonatomic, strong) NSIndexPath *indexPath;
+@property (nonatomic, strong) NSMutableArray *attributeSelected;
+
 - (void)fillCellWithDict:(NSDictionary *)dict;
 + (CGFloat)cellHeight;
 
