@@ -10,6 +10,7 @@
 #import "JRProduct.h"
 #import "ProductCell.h"
 #import "ProductDetailViewController.h"
+#import "ProductFilterData.h"
 
 @interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -39,7 +40,8 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"sort": @(-1),
+    
+    NSDictionary *param = @{@"sort": @(_selectedFilter.sort),
                             @"pageNo":@(1),
                             @"onePageCount":kOnePageCount
                             };

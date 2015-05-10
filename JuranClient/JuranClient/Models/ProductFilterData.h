@@ -29,6 +29,7 @@
 //comm
 @property (nonatomic, strong) NSMutableArray *childList;
 @property (nonatomic, assign) BOOL isOpen;
+@property (nonatomic, assign) BOOL isReal;
 @end
 //------------------------------------------------------------------
 @interface ProductBrand : NSObject
@@ -69,6 +70,8 @@
 @property (nonatomic, strong) NSArray *classList;
 
 - (void)loadFilterDataWithFilter:(ProductSelectedFilter *)filter
+                          PageNo:(int)pageNo
+                     OnePageCount:(int)onePageCount
                          Handler:(BOOLBlock)finished;
 @end
 

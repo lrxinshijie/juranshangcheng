@@ -42,6 +42,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     all.parentCode = nil;
     all.urlContent = nil;
     all.childList = [[NSMutableArray alloc]init];
+    all.isReal = NO;
     [_treeCatgatery insertObject:all atIndex:0];
 }
 
@@ -73,6 +74,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     all.parentCode = parentCat.parentCode;
     all.urlContent = parentCat.urlContent;
     all.childList = [[NSMutableArray alloc]init];
+    all.isReal = NO;
     return all;
 }
 
@@ -80,6 +82,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     NSMutableArray *relArry = [[NSMutableArray alloc]init];
     for (NSObject *obj in _filterData.categoryList) {
         ProductCategory *cat = (ProductCategory *)obj;
+        cat.isReal = YES;
         if ([cat.parentCode isEqual:parentCode]) {
             [relArry addObject:cat];
             cat.childList = [self CreateCategoryTreeByParentCode:cat.catCode];
@@ -95,6 +98,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     NSMutableArray *relArry = [[NSMutableArray alloc]init];
     for (NSObject *obj in _filterData.categoryList) {
         ProductCategory *cat = (ProductCategory *)obj;
+        cat.isReal = YES;
         if (cat.parentId == parentId) {
             [relArry addObject:cat];
             cat.childList = [self CreateCategoryTreeByParentId:cat.Id];
@@ -106,27 +110,28 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     return relArry;
 }
 
-//- (NSMutableArray *)getCatgaryListByParentId:(long)parentId {
-//    NSMutableArray *relArry = [[NSMutableArray alloc]init];
-//    for (NSObject *obj in _filterData.categoryList) {
-//        ProductCategory *cat = (ProductCategory *)obj;
-//        if (cat.parentId == parentId) {
-//            [relArry addObject:cat];
-//        }
-//    }
-//    return relArry;
-//}
-//
-//- (NSMutableArray *)getCatgaryListByParentCode:(NSString *)parentCode {
-//    NSMutableArray *relArry = [[NSMutableArray alloc]init];
-//    for (NSObject *obj in _filterData.categoryList) {
-//        ProductCategory *cat = (ProductCategory *)obj;
-//        if ([cat.parentCode isEqual:parentCode]) {
-//            [relArry addObject:cat];
-//        }
-//    }
-//    return relArry;
-//}
+- (ProductCategory *)getCatgary:(ProductCategory *)cat {
+    ProductCategory *ret;
+    if(cat.isReal) {
+        ret = cat;
+        return ret;
+    }
+    for (NSObject *obj in _filterData.categoryList) {
+        ProductCategory *rCat = (ProductCategory *)obj;
+        if (_selectedFilter.isInShop) {
+            if ((rCat.Id == cat.Id) && rCat!=cat) {
+                ret = rCat;
+                break;
+            }
+        }else {
+            if ([rCat.catCode isEqual:cat.catCode] && rCat!=cat) {
+                ret = rCat;
+                break;
+            }
+        }
+    }
+    return ret;
+}
 
 - (NSMutableArray *)getCatgaryListByDepth:(int)depth {
     NSMutableArray *relArry = [[NSMutableArray alloc]init];
@@ -256,7 +261,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
         //[tableView reloadData];
     }else {
-        _selectedFilter.pCategory = cat;
+        _selectedFilter.pCategory = [self getCatgary:cat];
         [self commit];
     }
 }
@@ -267,12 +272,15 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     if (cat.childList && cat.childList.count>0) {
         cat.isOpen = !cat.isOpen;
         [_tableVIew reloadSections:[NSIndexSet indexSetWithIndex:btn.tag-2000] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else{
+        _selectedFilter.pCategory = [self getCatgary:cat];
+        [self commit];
     }
 }
 
 - (void)onTrdCatgary:(id)sender {
     CatButton *btn = (CatButton *)sender;
-    _selectedFilter.pCategory = btn.category;
+    _selectedFilter.pCategory = [self getCatgary:btn.category];
     [self commit];
 }
 @end

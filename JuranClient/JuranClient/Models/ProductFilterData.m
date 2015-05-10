@@ -141,15 +141,17 @@
 
 @implementation ProductFilterData
 - (void)loadFilterDataWithFilter:(ProductSelectedFilter *)filter
-                           Handler:(BOOLBlock)finished{
+                          PageNo:(int)pageNo
+                    OnePageCount:(int)onePageCount
+                         Handler:(BOOLBlock)finished{
     
     
     NSMutableDictionary *param = [[NSMutableDictionary alloc]init];
     [param setObject:@"北京市" forKey:@"cityName"];
-    [param setObject:@(1) forKey:@"pageNo"];
-    [param setObject:@(1) forKey:@"onePageCount"];
+    [param setObject:@(pageNo) forKey:@"pageNo"];
+    [param setObject:@(onePageCount) forKey:@"onePageCount"];
     [param setObject:@(filter.sort) forKey:@"sort"];
-    if (filter.keyword) [param setObject:filter.keyword forKey:@"keyword"];
+    if (filter.keyword && ![filter.keyword isEqual:@""]) [param setObject:filter.keyword forKey:@"keyword"];
     if (filter.pMinPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice<=filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMinYuan"];
     if (filter.pMaxPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice>filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMaxYuan"];
     if (filter.pBrand) [param setObject:@(filter.pBrand.brandId) forKey:@"brands"];
@@ -171,7 +173,7 @@
             
         }
         attrString = [NSString stringWithFormat:@"[%@]",attrString];
-       [param setObject:attrString forKey:@"attributes"];
+        [param setObject:attrString forKey:@"attributes"];
     }
     if(filter.isInShop) {
         if (filter.shopId!=0) [param setObject:[NSString stringWithFormat:@"%ld",filter.shopId] forKey:@"shopId"];

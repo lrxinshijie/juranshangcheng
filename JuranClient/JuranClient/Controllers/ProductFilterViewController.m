@@ -12,20 +12,28 @@
 #import "ProductBrandViewController.h"
 #import "ProductClassViewController.h"
 #import "ProductAttributeViewController.h"
+#import "AppDelegate.h"
+#import "UserLocation.h"
 
 @interface ProductFilterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UITableViewCell *priceCell;
+@property (strong, nonatomic) IBOutlet UITextField *textFieldMinPrice;
+@property (strong, nonatomic) IBOutlet UITextField *textFieldMaxPrice;
 
 @property (nonatomic, strong) NSMutableArray *conditionArray;
 @property (nonatomic, strong) NSMutableArray *detailArray;
 @end
 
-@implementation ProductFilterViewController
+@implementation ProductFilterViewController {
+    NSString *catTreeString;
+}
 
 - (instancetype)initWithKeyword:(NSString *)keyword
                            Sort:(int)sort
                           Store:(ProductStore *)store
                        IsInShop:(BOOL)isInShop
+                         ShopId:(long)shopId
 {
     self = [super init];
     if (self) {
@@ -34,6 +42,7 @@
         self.selectedFilter.isInShop = isInShop;
         self.selectedFilter.sort = sort;
         self.selectedFilter.pStore = store;
+        self.selectedFilter.shopId = shopId;
     }
     return self;
 }
@@ -42,6 +51,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"筛选";
+    UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(onDone:)];
+    self.navigationItem.rightBarButtonItem = right;
     _tableView.tableFooterView = [[UIView alloc]init];
     _filterData = [[ProductFilterData alloc]init];
     [self loadData];
@@ -49,51 +60,75 @@
 
 - (void)loadData {
     [self showHUD];
-    _selectedFilter.shopId = 17;
-    [_filterData loadFilterDataWithFilter:_selectedFilter Handler:^(BOOL result) {
-        [self hideHUD];
-        if (result) {
-            if (_filterData.categoryList && _filterData.categoryList.count>0) {
-                self.conditionArray = [NSMutableArray arrayWithArray:@[@"类目"]];
-                if (_selectedFilter.isInShop) {
-                    self.detailArray = [NSMutableArray arrayWithArray:@[_selectedFilter.pCategory ? _selectedFilter.pCategory.name:@""]];
-                }else {
-                    self.detailArray = [NSMutableArray arrayWithArray:@[_selectedFilter.pCategory ? _selectedFilter.pCategory.catName:@""]];
-                }
-            }else {
-                _selectedFilter.pCategory = nil;
-            }
-            
-            if (_filterData.classList && _filterData.classList.count>0) {
-                [_conditionArray addObject:@"类别"];
-                [_detailArray addObject:_selectedFilter.pClass ? _selectedFilter.pClass.className:@""];
-            }else {
-                _selectedFilter.pClass = nil;
-            }
-            
-            if (_filterData.brandList && _filterData.brandList.count>0) {
-                [_conditionArray addObject:@"品牌"];
-                [_detailArray addObject:_selectedFilter.pBrand ? _selectedFilter.pBrand.brandName:@""];
-            }else {
-                _selectedFilter.pBrand=nil;
-            }
-            
-            if (_filterData.attributeList && _filterData.attributeList.count>0) {
-                for (NSObject *obj in _filterData.attributeList) {
-                    ProductAttribute *attr = (ProductAttribute *)obj;
-                    [_conditionArray addObject:attr.attName];
-                    [_detailArray addObject:_selectedFilter.pAttributeDict.count>0 ? [_selectedFilter.pAttributeDict objectForKey:attr.attId]:@""];
-                }
-            }else {
-                _selectedFilter.pAttributeDict = [[NSMutableDictionary alloc]init];
-            }
-            [_tableView reloadData];
-        }
-    }];
+    [_filterData loadFilterDataWithFilter:_selectedFilter
+                                   PageNo:1
+                             OnePageCount:1
+                                  Handler:^(BOOL result) {
+                                      [self hideHUD];
+                                      if (result) {
+                                          if (_filterData.categoryList && _filterData.categoryList.count>0) {
+                                              self.conditionArray = [NSMutableArray arrayWithArray:@[@"类目"]];
+                                              if (_selectedFilter.isInShop) {
+                                                  catTreeString = _selectedFilter.pCategory.name;
+                                              }else {
+                                                  catTreeString = _selectedFilter.pCategory.catName;
+                                              }
+                                              [self getParentCatTreeString:_selectedFilter.pCategory];
+                                              self.detailArray = [NSMutableArray arrayWithArray:@[_selectedFilter.pCategory ? catTreeString:@""]];
+                                          }else {
+                                              _selectedFilter.pCategory = nil;
+                                          }
+                                          
+                                          if (_filterData.classList && _filterData.classList.count>0) {
+                                              [_conditionArray addObject:@"类别"];
+                                              [_detailArray addObject:_selectedFilter.pClass ? _selectedFilter.pClass.className:@""];
+                                          }else {
+                                              _selectedFilter.pClass = nil;
+                                          }
+                                          
+                                          if (_filterData.brandList && _filterData.brandList.count>0) {
+                                              [_conditionArray addObject:@"品牌"];
+                                              [_detailArray addObject:_selectedFilter.pBrand ? _selectedFilter.pBrand.brandName:@""];
+                                          }else {
+                                              _selectedFilter.pBrand=nil;
+                                          }
+                                          
+                                          if (_selectedFilter.pCategory && ApplicationDelegate.gLocation.isSuccessLocation) {
+                                              [_conditionArray addObject:@"价格(元)"];
+                                              [_detailArray addObject:@""];
+                                          }else {
+                                              _selectedFilter.pBrand=nil;
+                                          }
+                                          
+                                          if (_filterData.attributeList && _filterData.attributeList.count>0) {
+                                              for (NSObject *obj in _filterData.attributeList) {
+                                                  ProductAttribute *attr = (ProductAttribute *)obj;
+                                                  [_conditionArray addObject:attr.attName];
+                                                  [_detailArray addObject:_selectedFilter.pAttributeDict.count>0 ? [_selectedFilter.pAttributeDict objectForKey:attr.attId]:@""];
+                                              }
+                                          }else {
+                                              _selectedFilter.pAttributeDict = [[NSMutableDictionary alloc]init];
+                                          }
+                                          [_tableView reloadData];
+                                      }
+                                  }];
 }
 
-- (void)relaodVIew {
-    
+- (void)getParentCatTreeString:(ProductCategory *)category {
+    for (NSObject *obj in _filterData.categoryList) {
+        ProductCategory *cat = (ProductCategory *)obj;
+        if(_selectedFilter.isInShop) {
+            if(category.parentId == cat.Id) {
+                catTreeString = [NSString stringWithFormat:@"%@ %@",cat.name,catTreeString];
+                [self getParentCatTreeString:cat];
+            }
+        }else {
+            if ([category.parentCode isEqual:cat.catCode]) {
+                catTreeString = [NSString stringWithFormat:@"%@ %@",cat.catName,catTreeString];
+                [self getParentCatTreeString:cat];
+            }
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -120,7 +155,8 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     NSString *filterName = [_conditionArray objectAtIndex:indexPath.row];
-    if ([filterName  isEqual: @"价格"]) {
+    if ([filterName  isEqual: @"价格(元)"]) {
+        cell = _priceCell;
         cell.textLabel.text = filterName;
     }else {
         cell.textLabel.text = filterName;
@@ -180,6 +216,24 @@
         }
     }
 }
+
+- (void)onDone:(id)sender {
+    _selectedFilter.pMinPrice = _textFieldMinPrice.text.integerValue;
+    _selectedFilter.pMaxPrice = _textFieldMaxPrice.text.integerValue;
+    [self commit];
+}
+
+- (void)setBlock:(FilterSelected)block {
+    _block = block;
+}
+
+- (void)commit {
+    if (_block) {
+        _block(_selectedFilter);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 @end
 
 @implementation ProductSelectedFilter
