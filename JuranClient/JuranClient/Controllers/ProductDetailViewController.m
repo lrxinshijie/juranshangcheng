@@ -21,6 +21,7 @@
 #import "NaviStoreInfoViewController.h"
 #import "AttributeCell.h"
 #import "UIViewController+Menu.h"
+#import "ShareView.h"
 
 @interface ProductDetailViewController () <UITableViewDelegate, UITableViewDataSource, JRSegmentControlDelegate>
 
@@ -200,8 +201,16 @@
 
 - (IBAction)onMore:(id)sender{
     [self showAppMenu:^{
-        //分享代码
+        NSString *content = @"商品分享测试";
+        if (content.length == 0) {
+            content = @"商品分享测试";
+        }
+        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:self.product.goodsName url:self.shareURL];
     }];
+}
+
+- (NSString *)shareURL{
+    return [NSString stringWithFormat:@"http://apph5.juran.cn/case/%d%@",self.product.linkProductId, [Public shareEnv]];
 }
 
 - (IBAction)onShop:(id)sender{
