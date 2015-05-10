@@ -718,6 +718,13 @@
 		2C1D10581AFB3CDF005712D2 /* ProductCategaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D10561AFB3CDF005712D2 /* ProductCategaryViewController.xib */; };
 		2C1D10641AFD16D3005712D2 /* ProductCatgeryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D10621AFD16D3005712D2 /* ProductCatgeryCell.m */; };
 		2C1D10651AFD16D3005712D2 /* ProductCatgeryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D10631AFD16D3005712D2 /* ProductCatgeryCell.xib */; };
+		2C1D10691AFDDD10005712D2 /* VIPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D10681AFDDD10005712D2 /* VIPhotoView.m */; };
+		2C1D106D1AFE63EA005712D2 /* ProductBrandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D106B1AFE63EA005712D2 /* ProductBrandViewController.m */; };
+		2C1D106E1AFE63EA005712D2 /* ProductBrandViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D106C1AFE63EA005712D2 /* ProductBrandViewController.xib */; };
+		2C1D10721AFE6EC7005712D2 /* ProductClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D10701AFE6EC7005712D2 /* ProductClassViewController.m */; };
+		2C1D10731AFE6EC7005712D2 /* ProductClassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D10711AFE6EC7005712D2 /* ProductClassViewController.xib */; };
+		2C1D10771AFE7AAE005712D2 /* ProductAttributeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1D10751AFE7AAE005712D2 /* ProductAttributeViewController.m */; };
+		2C1D10781AFE7AAE005712D2 /* ProductAttributeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C1D10761AFE7AAE005712D2 /* ProductAttributeViewController.xib */; };
 		2C3D51C61AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D51C41AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m */; };
 		2C3D51C71AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C3D51C51AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib */; };
 		2C5B75C01AEF5F310085FA56 /* icon-grade-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5B75BE1AEF5F310085FA56 /* icon-grade-1@2x.png */; };
@@ -2288,6 +2295,17 @@
 		2C1D10611AFD16D3005712D2 /* ProductCatgeryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCatgeryCell.h; sourceTree = "<group>"; };
 		2C1D10621AFD16D3005712D2 /* ProductCatgeryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCatgeryCell.m; sourceTree = "<group>"; };
 		2C1D10631AFD16D3005712D2 /* ProductCatgeryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCatgeryCell.xib; sourceTree = "<group>"; };
+		2C1D10671AFDDD10005712D2 /* VIPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPhotoView.h; sourceTree = "<group>"; };
+		2C1D10681AFDDD10005712D2 /* VIPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPhotoView.m; sourceTree = "<group>"; };
+		2C1D106A1AFE63EA005712D2 /* ProductBrandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductBrandViewController.h; sourceTree = "<group>"; };
+		2C1D106B1AFE63EA005712D2 /* ProductBrandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductBrandViewController.m; sourceTree = "<group>"; };
+		2C1D106C1AFE63EA005712D2 /* ProductBrandViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductBrandViewController.xib; sourceTree = "<group>"; };
+		2C1D106F1AFE6EC7005712D2 /* ProductClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductClassViewController.h; sourceTree = "<group>"; };
+		2C1D10701AFE6EC7005712D2 /* ProductClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductClassViewController.m; sourceTree = "<group>"; };
+		2C1D10711AFE6EC7005712D2 /* ProductClassViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductClassViewController.xib; sourceTree = "<group>"; };
+		2C1D10741AFE7AAE005712D2 /* ProductAttributeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductAttributeViewController.h; sourceTree = "<group>"; };
+		2C1D10751AFE7AAE005712D2 /* ProductAttributeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductAttributeViewController.m; sourceTree = "<group>"; };
+		2C1D10761AFE7AAE005712D2 /* ProductAttributeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductAttributeViewController.xib; sourceTree = "<group>"; };
 		2C3D51C31AE63E7C0000F3F4 /* NaviStoreSelCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviStoreSelCityViewController.h; sourceTree = "<group>"; };
 		2C3D51C41AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaviStoreSelCityViewController.m; sourceTree = "<group>"; };
 		2C3D51C51AE63E7C0000F3F4 /* NaviStoreSelCityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NaviStoreSelCityViewController.xib; sourceTree = "<group>"; };
@@ -4907,6 +4925,8 @@
 		A987EDCE1A20920500CED7CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C1D10671AFDDD10005712D2 /* VIPhotoView.h */,
+				2C1D10681AFDDD10005712D2 /* VIPhotoView.m */,
 				2C9142101AF5D2B800FD7C69 /* KxMenu.h */,
 				2C9142111AF5D2B800FD7C69 /* KxMenu.m */,
 				147395AF1A4EAFC600CB34E7 /* SMPageControl.h */,
@@ -5185,6 +5205,15 @@
 				2C1D10541AFB3CDF005712D2 /* ProductCategaryViewController.h */,
 				2C1D10551AFB3CDF005712D2 /* ProductCategaryViewController.m */,
 				2C1D10561AFB3CDF005712D2 /* ProductCategaryViewController.xib */,
+				2C1D106A1AFE63EA005712D2 /* ProductBrandViewController.h */,
+				2C1D106B1AFE63EA005712D2 /* ProductBrandViewController.m */,
+				2C1D106C1AFE63EA005712D2 /* ProductBrandViewController.xib */,
+				2C1D106F1AFE6EC7005712D2 /* ProductClassViewController.h */,
+				2C1D10701AFE6EC7005712D2 /* ProductClassViewController.m */,
+				2C1D10711AFE6EC7005712D2 /* ProductClassViewController.xib */,
+				2C1D10741AFE7AAE005712D2 /* ProductAttributeViewController.h */,
+				2C1D10751AFE7AAE005712D2 /* ProductAttributeViewController.m */,
+				2C1D10761AFE7AAE005712D2 /* ProductAttributeViewController.xib */,
 			);
 			name = Product;
 			sourceTree = "<group>";
@@ -6570,6 +6599,7 @@
 				14321E691A6125F70065E8C3 /* case_edit_replace@2x.png in Resources */,
 				BD5187131A5D0ED700BE508A /* service_highlighted_11@2x.png in Resources */,
 				BD5186291A5D0ED700BE508A /* look_count@2x.png in Resources */,
+				2C1D106E1AFE63EA005712D2 /* ProductBrandViewController.xib in Resources */,
 				BD51873D1A5D0ED700BE508A /* service_normal_9@2x.png in Resources */,
 				BD5185E71A5D0ED700BE508A /* case_icon_praise@2x.png in Resources */,
 				BD5187A31A5D344D00BE508A /* icon_add_image@2x.png in Resources */,
@@ -6772,6 +6802,7 @@
 				1403802F1A44247300221398 /* MeasureViewController.xib in Resources */,
 				BD5186791A5D0ED700BE508A /* empty_demand@2x.png in Resources */,
 				BD5186071A5D0ED700BE508A /* icon-star@2x.png in Resources */,
+				2C1D10731AFE6EC7005712D2 /* ProductClassViewController.xib in Resources */,
 				1F2D50081AD7847D005486D2 /* InputCodeViewController.xib in Resources */,
 				14BCD78A1A85DFFB00825A90 /* OrderCell.xib in Resources */,
 				BD5186FD1A5D0ED700BE508A /* menu_answer_select@2x.png in Resources */,
@@ -6812,6 +6843,7 @@
 				371FBF021A6A6F2F00635D3D /* icon_filter_selected@2x.png in Resources */,
 				BD5185D11A5D0ED700BE508A /* ad_page_inactive@2x.png in Resources */,
 				BD5187791A5D0ED700BE508A /* userlevel4@2x.png in Resources */,
+				2C1D10781AFE7AAE005712D2 /* ProductAttributeViewController.xib in Resources */,
 				BD5186511A5D0ED700BE508A /* login-btn@2x.png in Resources */,
 				BD5186A51A5D0ED700BE508A /* signleUnChocie@2x.png in Resources */,
 				145471DD1A38A53000428BCB /* NewQuestionViewController.xib in Resources */,
@@ -7358,6 +7390,7 @@
 				2C3D51C61AE63E7C0000F3F4 /* NaviStoreSelCityViewController.m in Sources */,
 				A987EE391A2093C900CED7CD /* MJRefreshFooterView.m in Sources */,
 				1437F2B81A30B09B00E7C077 /* JRTopic.m in Sources */,
+				2C1D10721AFE6EC7005712D2 /* ProductClassViewController.m in Sources */,
 				37ECDD211AE166D500BE6027 /* ConstructActionView.m in Sources */,
 				14ABFBEC1A25CFFD00C4AF65 /* UIViewController+Login.m in Sources */,
 				3710D5AE1A557DF00028D32A /* RealNameAuthViewController.m in Sources */,
@@ -7375,6 +7408,7 @@
 				1476DA8A1A21DAF30006E9E0 /* JRDesigner.m in Sources */,
 				A987EDD61A20920500CED7CD /* ALWebView.m in Sources */,
 				A9A0672B1A3D92F70059D73B /* ZYQAssetPickerController.m in Sources */,
+				2C1D10691AFDDD10005712D2 /* VIPhotoView.m in Sources */,
 				A90459CE1A27874800F8CD74 /* CaseDetailViewController.m in Sources */,
 				144354651A885C240093C943 /* OrderPayViewController.m in Sources */,
 				37ECDD2D1AE16CFD00BE6027 /* ConstructDetailViewController.m in Sources */,
@@ -7508,6 +7542,7 @@
 				A9D654B11A27642800A80253 /* JSONModelError.m in Sources */,
 				37F0E7171A7D2735004CCCB2 /* UIImage+WebP.m in Sources */,
 				A987EE3D1A2093C900CED7CD /* UIView+MJExtension.m in Sources */,
+				2C1D106D1AFE63EA005712D2 /* ProductBrandViewController.m in Sources */,
 				37D18DA31A56CC6900B41048 /* CaseManagementViewController.m in Sources */,
 				A9D654B51A27642800A80253 /* JSONModel+networking.m in Sources */,
 				14361E5A1A344E6100F9BD94 /* pinyin.c in Sources */,
@@ -7722,6 +7757,7 @@
 				A987EDE81A20920500CED7CD /* UIButton+ASCategory.m in Sources */,
 				37F0E6AB1A7D1F4E004CCCB2 /* PSTCollectionViewItemKey.m in Sources */,
 				37E589821AB1B73200CB5FA4 /* WikiDetailViewController.m in Sources */,
+				2C1D10771AFE7AAE005712D2 /* ProductAttributeViewController.m in Sources */,
 				1FD3B8381AD8F83E004E849F /* DatabaseCenter.m in Sources */,
 				1FD3B84B1AD8F878004E849F /* FMResultSet.m in Sources */,
 				14587E1F1A35DD4300D41236 /* BindMailViewController.m in Sources */,

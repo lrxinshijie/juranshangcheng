@@ -7,7 +7,10 @@
 //
 
 #import "ALViewController.h"
+@class ProductFilterData;
+@class ProductSelectedFilter;
 
 @interface ProductListViewController : ALViewController
-
+@property (nonatomic, strong) ProductFilterData *filterData;
+@property (nonatomic, strong) ProductSelectedFilter *selectedFilter;
 @end

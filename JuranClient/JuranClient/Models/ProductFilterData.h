@@ -12,6 +12,8 @@
 @property (nonatomic, copy) NSString *attName;
 @property (nonatomic, copy) NSString *attId;
 @property (nonatomic, copy) NSArray *attValues;
+
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
 @interface ProductCategory : NSObject
@@ -29,22 +31,31 @@
 //comm
 @property (nonatomic, strong) NSMutableArray *childList;
 @property (nonatomic, assign) BOOL isOpen;
+@property (nonatomic, assign) BOOL isReal;
+
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
 @interface ProductBrand : NSObject
-@property (nonatomic, assign) long catCode;
+@property (nonatomic, copy) NSString *catCode;
 @property (nonatomic, assign) long brandId;
 @property (nonatomic, copy) NSString *brandName;
+
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
 @interface ProductStore : NSObject
 @property (nonatomic, copy) NSString *storeCode;
 @property (nonatomic, copy) NSString *storeName;
+
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
 @interface ProductClass : NSObject
 @property (nonatomic, copy) NSString *classCode;
 @property (nonatomic, copy) NSString *className;
+
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
 @interface ProductSelectedFilter : NSObject
@@ -55,9 +66,10 @@
 @property (nonatomic, strong) ProductCategory *pCategory;
 @property (nonatomic, strong) ProductClass *pClass;
 @property (nonatomic, strong) ProductBrand *pBrand;
+@property (nonatomic, strong) ProductStore *pStore;
 @property (nonatomic, assign) long pMinPrice;
 @property (nonatomic, assign) long pMaxPrice;
-@property (nonatomic, strong) NSArray *attributeList;
+@property (nonatomic, strong) NSMutableDictionary *pAttributeDict;
 @end
 //------------------------------------------------------------------
 @interface ProductFilterData : NSObject
@@ -68,6 +80,8 @@
 @property (nonatomic, strong) NSArray *classList;
 
 - (void)loadFilterDataWithFilter:(ProductSelectedFilter *)filter
+                          PageNo:(int)pageNo
+                     OnePageCount:(int)onePageCount
                          Handler:(BOOLBlock)finished;
 @end
 

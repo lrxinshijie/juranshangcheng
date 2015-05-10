@@ -10,15 +10,24 @@
 #import "JRProduct.h"
 #import "ProductCell.h"
 #import "ProductDetailViewController.h"
+#import "ProductFilterData.h"
 
 @interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *products;
-
 @end
 
 @implementation ProductListViewController
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _filterData = [[ProductFilterData alloc]init];
+    }
+    return self;
+}
 
 - (void)dealloc{
     _tableView.delegate = nil; _tableView.dataSource = nil;
@@ -34,12 +43,14 @@
 }
 
 - (void)setupUI{
+    self.tableView =
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     [self.view addSubview:_tableView];
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"sort": @(-1),
+    
+    NSDictionary *param = @{@"sort": @(_selectedFilter.sort),
                             @"pageNo":@(1),
                             @"onePageCount":kOnePageCount
                             };
@@ -49,6 +60,16 @@
         if (!error) {
             NSArray *recommendProductsList = [data objectForKey:@"emallGoodsInfoList"];
             self.products = [JRProduct buildUpWithValueForList:recommendProductsList];
+            
+            _filterData.attributeList = [ProductAttribute buildUpWithValueForList:[data objectForKey:@"showAttributesList"]];
+            if (_selectedFilter.isInShop) {
+                _filterData.categoryList = [ProductCategory buildUpWithValueForList:[data objectForKey:@"appShopCatList"]];
+            }else {
+                _filterData.categoryList = [ProductCategory buildUpWithValueForList:[data objectForKey:@"appOperatingCatList"]];
+            }
+            _filterData.brandList = [ProductBrand buildUpWithValueForList:[data objectForKey:@"sortBrandList"]];
+            _filterData.storeList = [ProductStore buildUpWithValueForList:[data objectForKey:@"appStoreInfoList"]];
+            _filterData.classList = [ProductClass buildUpWithValueForList:[data objectForKey:@"appManagementCategoryList"]];
             [_tableView reloadData];
         }
     }];
