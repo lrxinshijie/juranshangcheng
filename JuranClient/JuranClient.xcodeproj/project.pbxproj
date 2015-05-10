@@ -1289,6 +1289,10 @@
 		A9A9F2F61AE399D700A03C9B /* product-icon-store@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A9A9F2EE1AE399D700A03C9B /* product-icon-store@2x.png */; };
 		A9B4EB791A371F120091AAAF /* CaseCollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B4EB771A371F120091AAAF /* CaseCollectViewController.m */; };
 		A9B4EB7A1A371F120091AAAF /* CaseCollectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B4EB781A371F120091AAAF /* CaseCollectViewController.xib */; };
+		A9BBA36D1AFF90ED0021EFFB /* TagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9BBA36C1AFF90ED0021EFFB /* TagCollectionViewCell.xib */; };
+		A9BBA36E1AFF90ED0021EFFB /* TagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9BBA36C1AFF90ED0021EFFB /* TagCollectionViewCell.xib */; };
+		A9BBA3711AFF978D0021EFFB /* ProductPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9BBA3701AFF978D0021EFFB /* ProductPhotoBrowserViewController.m */; };
+		A9BBA3721AFF978D0021EFFB /* ProductPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9BBA3701AFF978D0021EFFB /* ProductPhotoBrowserViewController.m */; };
 		A9C012021ABC601900DCF9C3 /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C011E41ABC601900DCF9C3 /* IQNSArray+Sort.m */; };
 		A9C012031ABC601900DCF9C3 /* IQNSArray+Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C011E41ABC601900DCF9C3 /* IQNSArray+Sort.m */; };
 		A9C012041ABC601900DCF9C3 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C011E61ABC601900DCF9C3 /* IQUIView+Hierarchy.m */; };
@@ -1322,6 +1326,8 @@
 		A9C398461A29D25F006A8AAB /* ResetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9C398441A29D25F006A8AAB /* ResetPasswordViewController.xib */; };
 		A9C3984A1A29D98C006A8AAB /* ResetEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C398481A29D98C006A8AAB /* ResetEmailViewController.m */; };
 		A9C3984B1A29D98C006A8AAB /* ResetEmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9C398491A29D98C006A8AAB /* ResetEmailViewController.xib */; };
+		A9CA701C1AFF846400329D9F /* TagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9CA701A1AFF846400329D9F /* TagCollectionViewCell.m */; };
+		A9CA701D1AFF846400329D9F /* TagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9CA701A1AFF846400329D9F /* TagCollectionViewCell.m */; };
 		A9D654AE1A27642800A80253 /* JSONModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654971A27642800A80253 /* JSONModel.m */; };
 		A9D654AF1A27642800A80253 /* JSONModelArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654991A27642800A80253 /* JSONModelArray.m */; };
 		A9D654B01A27642800A80253 /* JSONModelClassProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D6549B1A27642800A80253 /* JSONModelClassProperty.m */; };
@@ -3023,6 +3029,9 @@
 		A9B4EB761A371F120091AAAF /* CaseCollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseCollectViewController.h; sourceTree = "<group>"; };
 		A9B4EB771A371F120091AAAF /* CaseCollectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseCollectViewController.m; sourceTree = "<group>"; };
 		A9B4EB781A371F120091AAAF /* CaseCollectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseCollectViewController.xib; sourceTree = "<group>"; };
+		A9BBA36C1AFF90ED0021EFFB /* TagCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TagCollectionViewCell.xib; sourceTree = "<group>"; };
+		A9BBA36F1AFF978D0021EFFB /* ProductPhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductPhotoBrowserViewController.h; sourceTree = "<group>"; };
+		A9BBA3701AFF978D0021EFFB /* ProductPhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductPhotoBrowserViewController.m; sourceTree = "<group>"; };
 		A9C011E31ABC601900DCF9C3 /* IQNSArray+Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQNSArray+Sort.h"; sourceTree = "<group>"; };
 		A9C011E41ABC601900DCF9C3 /* IQNSArray+Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQNSArray+Sort.m"; sourceTree = "<group>"; };
 		A9C011E51ABC601900DCF9C3 /* IQUIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+Hierarchy.h"; sourceTree = "<group>"; };
@@ -3063,6 +3072,8 @@
 		A9C398471A29D98C006A8AAB /* ResetEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetEmailViewController.h; sourceTree = "<group>"; };
 		A9C398481A29D98C006A8AAB /* ResetEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetEmailViewController.m; sourceTree = "<group>"; };
 		A9C398491A29D98C006A8AAB /* ResetEmailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetEmailViewController.xib; sourceTree = "<group>"; };
+		A9CA70191AFF846400329D9F /* TagCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagCollectionViewCell.h; sourceTree = "<group>"; };
+		A9CA701A1AFF846400329D9F /* TagCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagCollectionViewCell.m; sourceTree = "<group>"; };
 		A9D654961A27642800A80253 /* JSONModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModel.h; sourceTree = "<group>"; };
 		A9D654971A27642800A80253 /* JSONModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModel.m; sourceTree = "<group>"; };
 		A9D654981A27642800A80253 /* JSONModelArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelArray.h; sourceTree = "<group>"; };
@@ -4979,6 +4990,9 @@
 		A987EDCF1A20920500CED7CD /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				A9BBA36C1AFF90ED0021EFFB /* TagCollectionViewCell.xib */,
+				A9CA70191AFF846400329D9F /* TagCollectionViewCell.h */,
+				A9CA701A1AFF846400329D9F /* TagCollectionViewCell.m */,
 				14C8554B1A2E1A1500A15ED9 /* InteractionCell.h */,
 				14C8554C1A2E1A1500A15ED9 /* InteractionCell.m */,
 				14C8554D1A2E1A1500A15ED9 /* InteractionCell.xib */,
@@ -5214,6 +5228,8 @@
 				2C1D10741AFE7AAE005712D2 /* ProductAttributeViewController.h */,
 				2C1D10751AFE7AAE005712D2 /* ProductAttributeViewController.m */,
 				2C1D10761AFE7AAE005712D2 /* ProductAttributeViewController.xib */,
+				A9BBA36F1AFF978D0021EFFB /* ProductPhotoBrowserViewController.h */,
+				A9BBA3701AFF978D0021EFFB /* ProductPhotoBrowserViewController.m */,
 			);
 			name = Product;
 			sourceTree = "<group>";
@@ -6073,6 +6089,7 @@
 				375635341A60FF8F00D120C8 /* icon_check_cancel@2x.png in Resources */,
 				1415FA4C1A5CD1CB003D0C29 /* SearchViewController.xib in Resources */,
 				1415FA4D1A5CD1CB003D0C29 /* CaseImageCollectionCell.xib in Resources */,
+				A9BBA36E1AFF90ED0021EFFB /* TagCollectionViewCell.xib in Resources */,
 				37D679701A6016BE00C6DFAC /* PriceModifyCell.xib in Resources */,
 				37A0F8141A6B877900611760 /* ActivityViewController.xib in Resources */,
 				BD51872A1A5D0ED700BE508A /* service_normal_10@2x.png in Resources */,
@@ -6452,6 +6469,7 @@
 				2C1D10491AFA26D7005712D2 /* ProductFilterViewController.xib in Resources */,
 				2C91E9101ADB754400B542DC /* icon-map-node@2x.png in Resources */,
 				BD5187251A5D0ED700BE508A /* service_highlighted_9@2x.png in Resources */,
+				A9BBA36D1AFF90ED0021EFFB /* TagCollectionViewCell.xib in Resources */,
 				BD5187111A5D0ED700BE508A /* service_highlighted_10@2x.png in Resources */,
 				37D18DB81A5829EC00B41048 /* CaseImageHeaderView.xib in Resources */,
 				2C9142181AF5D7E300FD7C69 /* menu-icon-home@2x.png in Resources */,
@@ -7142,6 +7160,7 @@
 				1415F9741A5CD1CB003D0C29 /* UITableView+ASCategory.m in Sources */,
 				37F0E6B81A7D1F4E004CCCB2 /* PSTGridLayoutSection.m in Sources */,
 				1415F9751A5CD1CB003D0C29 /* BannerView.m in Sources */,
+				A9CA701D1AFF846400329D9F /* TagCollectionViewCell.m in Sources */,
 				1415F9761A5CD1CB003D0C29 /* MeasureViewController.m in Sources */,
 				1415F9771A5CD1CB003D0C29 /* JRAreaInfo.m in Sources */,
 				1415F9781A5CD1CB003D0C29 /* NSString+MKNetworkKitAdditions.m in Sources */,
@@ -7236,6 +7255,7 @@
 				1415F9B41A5CD1CB003D0C29 /* NewestBidInfoCell.m in Sources */,
 				1415F9B51A5CD1CB003D0C29 /* DetailAddressViewController.m in Sources */,
 				A9A71D631ADFF10600804AF9 /* ProductCommentCell.m in Sources */,
+				A9BBA3721AFF978D0021EFFB /* ProductPhotoBrowserViewController.m in Sources */,
 				1415F9B61A5CD1CB003D0C29 /* InteractionCell.m in Sources */,
 				A9F1F6831AF7C75600A6838D /* NSNumber+ASCategory.m in Sources */,
 				1415F9B71A5CD1CB003D0C29 /* NSArray+JSONModel.m in Sources */,
@@ -7505,6 +7525,7 @@
 				149BE7151A4569DE00A9E1EC /* DDHPreviewViewController.m in Sources */,
 				14610C6D1A39D2F9008A52C7 /* QuestionDetailViewController.m in Sources */,
 				37F0E70F1A7D2735004CCCB2 /* SDWebImagePrefetcher.m in Sources */,
+				A9BBA3711AFF978D0021EFFB /* ProductPhotoBrowserViewController.m in Sources */,
 				1F880BF11AEA506600992D64 /* ShopViewItem.m in Sources */,
 				37F165E61A89005700F624FA /* OrderCommentViewController.m in Sources */,
 				147A9FB21A415DD400132804 /* PrivateLetterViewController.m in Sources */,
@@ -7616,6 +7637,7 @@
 				1F880BE81AEA3A1C00992D64 /* CategaryTableViewCellItem.m in Sources */,
 				37F0E70B1A7D2735004CCCB2 /* SDWebImageDownloaderOperation.m in Sources */,
 				A9A067171A3D76DA0059D73B /* ActionSheetLocalePicker.m in Sources */,
+				A9CA701C1AFF846400329D9F /* TagCollectionViewCell.m in Sources */,
 				14B5C04A1ACE31D70043BB44 /* DeviceHardware.m in Sources */,
 				2C9FCC201AEA12FC001DBEEB /* UserLocation.m in Sources */,
 				141A1D3B1A2CC09600C073C5 /* AskOrAnswerCell.m in Sources */,

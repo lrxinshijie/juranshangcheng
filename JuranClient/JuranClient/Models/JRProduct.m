@@ -142,7 +142,7 @@
                             };
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_SHOP_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            self.shopLogo = data[@"shopLogo"];
+            self.shopLogo = data[@"logo"];
             self.shopName = data[@"shopName"];
             self.score = data[@"score"];
         }

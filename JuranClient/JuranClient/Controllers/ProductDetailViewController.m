@@ -22,6 +22,8 @@
 #import "AttributeCell.h"
 #import "UIViewController+Menu.h"
 #import "ShareView.h"
+#import "UIImageView+Block.h"
+#import "ProductPhotoBrowserViewController.h"
 
 @interface ProductDetailViewController () <UITableViewDelegate, UITableViewDataSource, JRSegmentControlDelegate>
 
@@ -155,6 +157,11 @@
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_imageScrollView.frame)*idx, 0, CGRectGetWidth(_imageScrollView.frame), CGRectGetHeight(_imageScrollView.frame))];
             imageView.backgroundColor = RGBColor(237, 237, 237);
             [imageView setImageWithURLString:imageUrl placeholderImage:nil editing:YES];
+            [imageView setOnTap:^{
+                ProductPhotoBrowserViewController *vc = [[ProductPhotoBrowserViewController alloc] initWithPhotos:_product.goodsImagesList andStartWithPhotoAtIndex:idx];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }];
             [_imageScrollView addSubview:imageView];
         }];
         

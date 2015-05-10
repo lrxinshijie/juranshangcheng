@@ -9,9 +9,10 @@
 #import "AttributeCell.h"
 #import "AttributeLabelCell.h"
 #import "CHTCollectionViewWaterfallLayout.h"
+#import "TagCollectionViewCell.h"
 
 @interface AttributeCell () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>{
-    AttributeLabelCell *_sizingCell;
+    TagCollectionViewCell *_sizingCell;
 }
 
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
@@ -25,8 +26,14 @@
     // Initialization code
     
     _collectionView.backgroundColor = [UIColor clearColor];
-    UINib *cellNib = [UINib nibWithNibName:@"AttributeLabelCell" bundle:nil];
-    [_collectionView registerNib:cellNib forCellWithReuseIdentifier:@"AttributeLabelCell"];
+//    UINib *cellNib = [UINib nibWithNibName:@"AttributeLabelCell" bundle:nil];
+//    [_collectionView registerNib:cellNib forCellWithReuseIdentifier:@"AttributeLabelCell"];
+    
+//    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([TagCollectionViewCell class]) bundle:nil];
+//    [_collectionView registerNib:cellNib forCellWithReuseIdentifier:NSStringFromClass([TagCollectionViewCell class])];
+    
+    UINib *cellNib = [UINib nibWithNibName:@"TagCollectionViewCell" bundle:nil];
+    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"TagCell"];
     
     _sizingCell = [[cellNib instantiateWithOwner:nil options:nil] objectAtIndex:0];
 }
@@ -35,6 +42,12 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)configureCell:(TagCollectionViewCell *)cell forIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *string = _attrList[indexPath.row];
+    cell.label.text = string;
 }
 
 - (void)fillCellWithDict:(NSDictionary *)dict{
@@ -54,17 +67,23 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    AttributeLabelCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AttributeLabelCell" forIndexPath:indexPath];
-    [cell fillCellWithData:_attrList[indexPath.row]];
+//    TagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([TagCollectionViewCell class]) forIndexPath:indexPath];
+//    [cell fillCellWithData:_attrList[indexPath.row]];
+    TagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TagCell" forIndexPath:indexPath];
+    [self configureCell:cell forIndexPath:indexPath];
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake(85, 25);
+    [self configureCell:_sizingCell forIndexPath:indexPath];
     
-    NSString *title = _attrList[indexPath.row];
-    CGSize size = [AttributeLabelCell cellSizeWithTitle:title];
-    return size;
+    return [_sizingCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    
+//    return CGSizeMake(85, 25);
+//    
+//    NSString *title = _attrList[indexPath.row];
+//    CGSize size = [AttributeLabelCell cellSizeWithTitle:title];
+//    return size;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -72,7 +91,7 @@
 }
 
 + (CGFloat)cellHeight{
-    return 77;
+    return 79;
 }
 
 @end
