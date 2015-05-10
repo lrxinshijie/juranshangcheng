@@ -72,7 +72,13 @@
 @property (nonatomic, strong) NSMutableDictionary *pAttributeDict;
 @end
 //------------------------------------------------------------------
+@interface ProductSort : NSObject
+@property (nonatomic, assign) int sort;
+@property (nonatomic, copy) NSString *name;
+@end
+//------------------------------------------------------------------
 @interface ProductFilterData : NSObject
+@property (nonatomic, strong) NSArray *sortList;
 @property (nonatomic, strong) NSArray *attributeList;
 @property (nonatomic, strong) NSArray *categoryList;
 @property (nonatomic, strong) NSArray *brandList;

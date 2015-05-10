@@ -20,8 +20,10 @@
 #import "UserLocation.h"
 #import "ProductLetterViewController.h"
 #import "UIViewController+Menu.h"
+#import "CustomSearchBar.h"
 
-@interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+
+@interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,CustomSearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray *datas;
 
@@ -40,6 +42,7 @@
 @property (nonatomic, strong) IBOutlet UIView *searchView;
 @property (nonatomic, strong) IBOutlet UIView *searchTextField;
 
+@property (strong, nonatomic) CustomSearchBar *searchBar;
 @property (nonatomic, strong) NSArray *storeList;
 
 - (IBAction)onClassification:(id)sender;
@@ -55,8 +58,13 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMenu)];
-
-    
+///////////////
+    self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
+    self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
+    [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
+    self.searchBar.delegate = self;
+    [self.view addSubview:_searchBar];
+////////////////
     [_collectionView registerNib:[UINib nibWithNibName:@"ShopCell" bundle:nil] forCellWithReuseIdentifier:@"ShopCell"];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ShopHeadView"];
     
@@ -71,6 +79,14 @@
     
     [self loadData];
     [self loadRecommendData];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.hidden = YES;
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    self.navigationController.navigationBar.hidden = NO;
 }
 
 - (void)loadData{
@@ -111,6 +127,26 @@
     _collectionImageView.image = [UIImage imageNamed:_shop.isStored?@"icon-collection-active.png":@"icon-collection1.png"];
     _collectionLabel.text = _shop.isStored?@"已收藏":@"收藏";
     [_collectionView reloadData];
+}
+
+- (void)pushToQRCodeVCDidTriggered
+{
+    //    QRBaseViewController * QRVC = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:YES];
+    //    [self.navigationController pushViewController:QRVC animated:YES];
+}
+
+- (void)showMenuList
+{
+    [self showAppMenu:nil];
+}
+
+- (void)goBackButtonDidSelect
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index {
+    
 }
 
 #pragma mark - Target Action

@@ -138,7 +138,11 @@
     return retVal;
 }
 @end
+//------------------------------------------------------------------
+@implementation ProductSort
 
+@end
+//------------------------------------------------------------------
 @implementation ProductFilterData
 - (void)loadFilterDataWithFilter:(ProductSelectedFilter *)filter
                           PageNo:(int)pageNo

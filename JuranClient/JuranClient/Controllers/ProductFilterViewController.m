@@ -68,52 +68,56 @@
                                   Handler:^(BOOL result) {
                                       [self hideHUD];
                                       if (result) {
-                                          if (_filterData.categoryList && _filterData.categoryList.count>0) {
-                                              self.conditionArray = [NSMutableArray arrayWithArray:@[@"类目"]];
-                                              if (_selectedFilter.isInShop) {
-                                                  catTreeString = _selectedFilter.pCategory.name;
-                                              }else {
-                                                  catTreeString = _selectedFilter.pCategory.catName;
-                                              }
-                                              [self getParentCatTreeString:_selectedFilter.pCategory];
-                                              self.detailArray = [NSMutableArray arrayWithArray:@[_selectedFilter.pCategory ? catTreeString:@""]];
-                                          }else {
-                                              _selectedFilter.pCategory = nil;
-                                          }
-                                          
-                                          if (_filterData.classList && _filterData.classList.count>0) {
-                                              [_conditionArray addObject:@"类别"];
-                                              [_detailArray addObject:_selectedFilter.pClass ? _selectedFilter.pClass.className:@""];
-                                          }else {
-                                              _selectedFilter.pClass = nil;
-                                          }
-                                          
-                                          if (_filterData.brandList && _filterData.brandList.count>0) {
-                                              [_conditionArray addObject:@"品牌"];
-                                              [_detailArray addObject:_selectedFilter.pBrand ? _selectedFilter.pBrand.brandName:@""];
-                                          }else {
-                                              _selectedFilter.pBrand=nil;
-                                          }
-                                          
-                                          if (_selectedFilter.pCategory && ApplicationDelegate.gLocation.isSuccessLocation) {
-                                              [_conditionArray addObject:@"价格(元)"];
-                                              [_detailArray addObject:@""];
-                                          }else {
-                                              _selectedFilter.pBrand=nil;
-                                          }
-                                          
-                                          if (_filterData.attributeList && _filterData.attributeList.count>0) {
-                                              for (NSObject *obj in _filterData.attributeList) {
-                                                  ProductAttribute *attr = (ProductAttribute *)obj;
-                                                  [_conditionArray addObject:attr.attName];
-                                                  [_detailArray addObject:_selectedFilter.pAttributeDict.count>0 ? [_selectedFilter.pAttributeDict objectForKey:attr.attId]:@""];
-                                              }
-                                          }else {
-                                              _selectedFilter.pAttributeDict = [[NSMutableDictionary alloc]init];
-                                          }
-                                          [_tableView reloadData];
+                                          [self reloadView];
                                       }
                                   }];
+}
+
+- (void)reloadView {
+    if (_filterData.categoryList && _filterData.categoryList.count>0) {
+        self.conditionArray = [NSMutableArray arrayWithArray:@[@"类目"]];
+        if (_selectedFilter.isInShop) {
+            catTreeString = _selectedFilter.pCategory.name;
+        }else {
+            catTreeString = _selectedFilter.pCategory.catName;
+        }
+        [self getParentCatTreeString:_selectedFilter.pCategory];
+        self.detailArray = [NSMutableArray arrayWithArray:@[_selectedFilter.pCategory ? catTreeString:@""]];
+    }else {
+        _selectedFilter.pCategory = nil;
+    }
+    
+    if (_filterData.classList && _filterData.classList.count>0) {
+        [_conditionArray addObject:@"类别"];
+        [_detailArray addObject:_selectedFilter.pClass ? _selectedFilter.pClass.className:@""];
+    }else {
+        _selectedFilter.pClass = nil;
+    }
+    
+    if (_filterData.brandList && _filterData.brandList.count>0) {
+        [_conditionArray addObject:@"品牌"];
+        [_detailArray addObject:_selectedFilter.pBrand ? _selectedFilter.pBrand.brandName:@""];
+    }else {
+        _selectedFilter.pBrand=nil;
+    }
+    
+    if (_selectedFilter.pCategory && ApplicationDelegate.gLocation.isSuccessLocation) {
+        [_conditionArray addObject:@"价格(元)"];
+        [_detailArray addObject:@""];
+    }else {
+        _selectedFilter.pBrand=nil;
+    }
+    
+    if (_filterData.attributeList && _filterData.attributeList.count>0) {
+        for (NSObject *obj in _filterData.attributeList) {
+            ProductAttribute *attr = (ProductAttribute *)obj;
+            [_conditionArray addObject:attr.attName];
+            [_detailArray addObject:[_selectedFilter.pAttributeDict objectForKey:attr.attId] ? [_selectedFilter.pAttributeDict objectForKey:attr.attId]:@""];
+        }
+    }else {
+        _selectedFilter.pAttributeDict = [[NSMutableDictionary alloc]init];
+    }
+    [_tableView reloadData];
 }
 
 - (void)getParentCatTreeString:(ProductCategory *)category {
@@ -210,7 +214,7 @@
                 vc.filterData = _filterData;
                 vc.selectedFilter = _selectedFilter;
                 [vc setBlock:^(ProductSelectedFilter *filter) {
-                    //[self loadData];
+                    [self reloadView];
                 }];
                 [self.navigationController pushViewController:vc animated:YES];
                 break;

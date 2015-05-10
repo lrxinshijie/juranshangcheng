@@ -81,13 +81,15 @@ typedef enum : NSUInteger {
     FilterViewTypeCaseSearch,
     FilterViewTypeBidInfo,
     FilterViewTypeWiki,
-    FilterViewTypeCaseWithoutGrid
+    FilterViewTypeCaseWithoutGrid,
+    FilterViewTypeProduct
 } FilterViewType;
 
 typedef enum : NSUInteger {
     FilterViewActionSort,
     FilterViewActionFilter,
     FilterViewActionGrid,
+    FilterViewActionStore
 } FilterViewAction;
 
 typedef enum : NSUInteger {
