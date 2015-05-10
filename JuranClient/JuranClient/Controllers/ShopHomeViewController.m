@@ -22,6 +22,10 @@
 #import "UIViewController+Menu.h"
 #import "CustomSearchBar.h"
 #import "ProductFilterData.h"
+#import "DesignerViewController.h"
+#import "CaseViewController.h"
+#import "QuestionViewController.h"
+#import "ShopListViewController.h"
 
 
 @interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,CustomSearchBarDelegate>
@@ -147,6 +151,29 @@
 }
 
 - (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index {
+    if (index == 0){
+        CaseViewController *vc = [[CaseViewController alloc] init];
+        vc.searchKey = keyWord;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 1){
+        ProductListViewController *vc = [[ProductListViewController alloc]init];
+        vc.selectedFilter.keyword = keyWord;
+        vc.selectedFilter.isInShop = NO;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 2){
+        ShopListViewController * vc = [[ShopListViewController alloc] init];
+        vc.keyword = keyWord;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 3) {
+        DesignerViewController *vc = [[DesignerViewController alloc] init];
+        vc.searchKeyWord = keyWord;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 4){
+        QuestionViewController *vc = [[QuestionViewController alloc] init];
+        vc.searchKeyWord = keyWord;
+        vc.isSearchResult = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 
 }
 

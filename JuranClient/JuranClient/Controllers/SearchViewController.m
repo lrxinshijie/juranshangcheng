@@ -259,7 +259,6 @@
     else if (_type == SearchTypeGoods){
         ProductListViewController *vc = [[ProductListViewController alloc]init];
         vc.selectedFilter.keyword = _searchKeyWord;
-        vc.selectedFilter.sort = 9;
         vc.selectedFilter.isInShop = NO;
         [self.navigationController pushViewController:vc animated:YES];
         

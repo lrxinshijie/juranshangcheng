@@ -14,14 +14,20 @@
 #import "MJRefresh.h"
 #import "ProductFilterView.h"
 #import "ProductFilterViewController.h"
+#import "CustomSearchBar.h"
+#import "DesignerViewController.h"
+#import "CaseViewController.h"
+#import "QuestionViewController.h"
+#import "ShopListViewController.h"
+#import "UIViewController+Menu.h"
 
-@interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate, ProductFilterViewDelegate>
+@interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate, ProductFilterViewDelegate,CustomSearchBarDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *products;
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) ProductFilterView *filterView;
-
+@property (strong, nonatomic) CustomSearchBar *searchBar;
 @end
 
 @implementation ProductListViewController
@@ -50,11 +56,18 @@
 }
 
 - (void)setupUI{
+    self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
+    self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
+    [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
+    self.searchBar.delegate = self;
+    [self.view addSubview:_searchBar];
+    
     self.filterView = [[ProductFilterView alloc] initWithDefaultData:_filterData SeletedData:_selectedFilter];
     _filterView.delegate = self;
+    _filterView.frame = CGRectMake(0, CGRectGetMaxY(_searchBar.frame), kWindowWidth, 44);
     [self.view addSubview:_filterView];
     
-    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterView.frame), kWindowWidth, kWindowHeightWithoutNavigationBar - CGRectGetMaxY(_filterView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterView.frame)-4, kWindowWidth, kWindowHeight - CGRectGetMaxY(_filterView.frame) + 24) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     [self.view addSubview:_tableView];
     
     __weak typeof(self) weakSelf = self;
@@ -226,6 +239,56 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.hidden = YES;
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    self.navigationController.navigationBar.hidden = NO;
+}
+
+- (void)pushToQRCodeVCDidTriggered
+{
+    //    QRBaseViewController * QRVC = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:YES];
+    //    [self.navigationController pushViewController:QRVC animated:YES];
+}
+
+- (void)showMenuList
+{
+    [self showAppMenu:nil];
+}
+
+- (void)goBackButtonDidSelect
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index {
+    if (index == 0){
+        CaseViewController *vc = [[CaseViewController alloc] init];
+        vc.searchKey = keyWord;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 1){
+        ProductListViewController *vc = [[ProductListViewController alloc]init];
+        vc.selectedFilter.keyword = keyWord;
+        vc.selectedFilter.isInShop = NO;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 2){
+        _selectedFilter.keyword = keyWord;
+        [_tableView headerBeginRefreshing];
+    }else if (index == 3) {
+        DesignerViewController *vc = [[DesignerViewController alloc] init];
+        vc.searchKeyWord = keyWord;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 4){
+        QuestionViewController *vc = [[QuestionViewController alloc] init];
+        vc.searchKeyWord = keyWord;
+        vc.isSearchResult = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
 }
 
 /*
