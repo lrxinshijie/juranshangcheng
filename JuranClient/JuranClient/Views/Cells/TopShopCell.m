@@ -23,6 +23,7 @@
 }
 
 - (void)fillCellWithData:(JRShop *)shop{
+    _logoImageView.image = nil;
     [_logoImageView setImageWithURLString:shop.shopLogo placeholderImage:nil editing:YES];
     _nameLabel.text = shop.shopName;
 }
