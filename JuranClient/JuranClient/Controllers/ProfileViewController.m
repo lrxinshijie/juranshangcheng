@@ -468,11 +468,7 @@
         case 3:
         {
             //        我的收藏
-#ifdef kJuranVersion12
-            CaseCollectViewController *vc = [[CaseCollectViewController alloc] init];
-#else
             MyCollectViewController *vc = [[MyCollectViewController alloc] init];
-#endif
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
