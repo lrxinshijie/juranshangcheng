@@ -15,9 +15,13 @@
 
 @interface UIViewController () <UIGestureRecognizerDelegate>
 
+//@property (assign, nonatomic) BOOL couldClick;
+
 @end
 
 @implementation UIViewController (Login)
+
+static BOOL QRIcon_In_RootVC_CouldClick;
 
 - (BOOL)checkLogin:(VoidBlock)finished{
     if ([JRUser isLogin]) {
@@ -69,6 +73,7 @@
 
 - (void)configureScan{
     [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"icon-scan"] leftBarButtonItemAction:@selector(onScan)];
+    QRIcon_In_RootVC_CouldClick = YES;
 }
 
 - (void)configureMore{
@@ -138,9 +143,17 @@
 }
 
 - (void)onScan{
-    QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if (QRIcon_In_RootVC_CouldClick) {
+        
+        QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
+        vc.enableClick = ^(BOOL enabled)
+        {
+            QRIcon_In_RootVC_CouldClick = YES;
+        };
+        [self.navigationController pushViewController:vc animated:YES];
+        QRIcon_In_RootVC_CouldClick = NO;
+    }
 }
 
 - (void)onMore{

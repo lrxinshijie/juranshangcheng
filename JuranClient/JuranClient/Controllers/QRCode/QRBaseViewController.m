@@ -45,6 +45,26 @@
     return self;
 }
 
+- (void)dealloc
+{
+    self.qrCodeViewController = nil;
+    
+    self.qrCodeViewController.preview = nil;
+    self.qrCodeViewController.output = nil;
+    self.qrCodeViewController.device = nil;
+    self.qrCodeViewController.input = nil;
+    self.qrCodeViewController.session = nil;
+    self.qrCodeViewController.lightDevice = nil;
+    
+    
+    self.inputCodeViewController = nil;
+    
+    if (self.enableClick) {
+        self.enableClick(YES);
+        self.enableClick = nil;
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -71,6 +91,7 @@
 {
     [self.navigationController setNavigationBarHidden:self.isPopNavHide];
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
+    [super viewWillDisappear:animated];
 }
 
 - (void)initSelectButtonStyle
@@ -95,7 +116,9 @@
 
 - (void)initQRCodeViewController
 {
-    self.qrCodeViewController = [[QRCodeViewController alloc] initWithNibName:@"QRCodeViewController" bundle:nil];
+    if (!self.qrCodeViewController) {
+        self.qrCodeViewController = [[QRCodeViewController alloc] initWithNibName:@"QRCodeViewController" bundle:nil];
+    }
     self.qrCodeViewController.delegate = self;
     [self addChildViewController:self.qrCodeViewController];
     [self.view insertSubview:self.qrCodeViewController.view belowSubview:self.bottomBaseView];
@@ -149,18 +172,6 @@
 }
 
 - (IBAction)goBackButtonDidClick:(id)sender {
-    
-    self.qrCodeViewController = nil;
-    
-    self.qrCodeViewController.preview = nil;
-    self.qrCodeViewController.output = nil;
-    self.qrCodeViewController.device = nil;
-    self.qrCodeViewController.input = nil;
-    self.qrCodeViewController.session = nil;
-    self.qrCodeViewController.lightDevice = nil;
-    
-    
-    self.inputCodeViewController = nil;
     
     [self.navigationController popViewControllerAnimated:YES];
     
