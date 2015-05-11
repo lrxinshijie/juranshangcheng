@@ -255,6 +255,9 @@
     //[self.searchBar removeFromSuperview];
 //    self.navigationController.navigationBar.clipsToBounds = YES;
     self.navigationController.navigationBarHidden = NO;
+    if ([_filterView isShow]) {
+        [_filterView showSort];
+    }
 }
 
 
