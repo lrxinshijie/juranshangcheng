@@ -67,6 +67,12 @@
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:self.isPopNavHide];
+    [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
 - (void)initSelectButtonStyle
 {
     [self.scanButton setTitleColor:[UIColor colorWithRed:12.0/255.0 green:80.0/255.0 blue:163.0/255.0 alpha:1.0] forState:UIControlStateNormal];
@@ -156,8 +162,6 @@
     
     self.inputCodeViewController = nil;
     
-    [self.navigationController setNavigationBarHidden:self.isPopNavHide];
-    [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
     [self.navigationController popViewControllerAnimated:YES];
     
 }

@@ -11,7 +11,7 @@
 
 @protocol CustomShopViewDelegate <NSObject>
 
-- (void)shopViewItemDidClickAtIndex:(int)index;
+- (void)shopViewItemDidClickWithCode:(NSString *)brandCode Name:(NSString *)brandName ID:(NSString *)brandID;
 
 @end
 

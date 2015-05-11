@@ -38,10 +38,10 @@
                                 <action selector="goBackButtonDidClick:" destination="-1" eventType="touchUpInside" id="M6n-8X-qS3"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品所在地" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6L4-bn-7lv">
-                            <rect key="frame" x="83" y="32" width="77" height="20"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品所在地:北京市" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6L4-bn-7lv">
+                            <rect key="frame" x="90" y="32" width="141" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -55,7 +55,7 @@
                                 <action selector="moreFunctionButtonDidClick:" destination="-1" eventType="touchUpInside" id="qoN-yE-1Xp"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" id="let-yQ-OzL">
+                        <view hidden="YES" contentMode="scaleToFill" id="let-yQ-OzL">
                             <rect key="frame" x="163" y="25" width="61" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>

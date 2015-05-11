@@ -70,6 +70,8 @@
 @property (assign, nonatomic) int pageNo;
 @property (strong, nonatomic) NSString * brandName;
 
+@property (strong, nonatomic) NSString * parentCode_product;
+
 @end
 
 @implementation GoodsCategaryViewController
@@ -86,11 +88,12 @@
         _old_view = nil;
         _vcStyle = style;
         _pageNo = 1;
+        _parentCode_product = [NSString stringWithString:@""];
     }
     return self;
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:self.isPopNavHide];
 }
@@ -99,9 +102,9 @@
 {
     [super viewWillAppear:animated];
     if (_vcStyle == CategaryStyle_Goods) {
-        _viewTitle.text = @"商品所在地";
+        _viewTitle.text = @"商品所在地:北京市";
     }else if (_vcStyle == CategaryStyle_Shop){
-        _viewTitle.text = @"品牌所在地";
+        _viewTitle.text = @"品牌所在地:北京市";
     }
     [self.navigationController setNavigationBarHidden:YES];
     [self.listTableView setContentSize:CGSizeMake(243, 500)];
@@ -187,7 +190,6 @@
 
 - (IBAction)goBackButtonDidClick:(id)sender {
     
-    [self.navigationController setNavigationBarHidden:self.isPopNavHide];
     [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -383,6 +385,7 @@
         if (self.vcStyle == CategaryStyle_Shop) {
             [self requestDataForBrand:cell.cell_id pageNo:self.pageNo];
         }else if (self.vcStyle == CategaryStyle_Goods){
+            self.parentCode_product = cell.cell_id;
             [self requestDataWithRequestID:cell.cell_id city:self.locationButton.titleLabel.text level:2];
         }
         
@@ -524,6 +527,7 @@
                 
                 [wSelf showHUD];
                 CategaryTableViewCellItem * dataItem = wSelf.dateArray_firstLevel[0];
+                self.parentCode_product = dataItem.code;
                 [wSelf requestDataWithRequestID:dataItem.code city:city level:2];
                 [wSelf.fistLevelTableView reloadData];
                 
@@ -626,8 +630,9 @@
 }
 
 #pragma mark - CustomThirdLevelCellDelegate
-- (void)thirdLevelItemDidSelectedWithMessage:(NSString *)msg
+- (void)thirdLevelItemDidSelectedWithCatCode:(NSString *)catCode CatName:(NSString *)catName ParentCode:(NSString *)parentCode UrlContent:(NSString *)urlContent
 {
+    //商品的
     //NSLog(@"%@",msg);
     ProductListViewController *vc = [[ProductListViewController alloc]init];
     vc.selectedFilter = [[ProductSelectedFilter alloc]init];
@@ -635,11 +640,29 @@
     vc.selectedFilter.sort = 9;
     vc.selectedFilter.keyword = @"";
     vc.selectedFilter.pCategory = [[ProductCategory alloc]init];
-    vc.selectedFilter.pCategory.catCode = msg;
+    vc.selectedFilter.pCategory.catCode = catCode;
+    vc.selectedFilter.pCategory.catName = catName;
+    //传参过来的ParentCode暂时无用，暂不使用。
+    vc.selectedFilter.pCategory.parentCode = self.parentCode_product;
+    vc.selectedFilter.pCategory.urlContent = urlContent;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
+#pragma mark - CustomShopViewDelegate
+- (void)shopViewItemDidClickWithCode:(NSString *)brandCode Name:(NSString *)brandName ID:(NSString *)brandID
+{
+    //品牌
+    ProductListViewController *vc = [[ProductListViewController alloc]init];
+    vc.selectedFilter = [[ProductSelectedFilter alloc]init];
+    vc.selectedFilter.isInShop = NO;
+    vc.selectedFilter.sort = 9;
+    vc.selectedFilter.keyword = @"";
+    vc.selectedFilter.pBrand = [[ProductBrand alloc]init];
+    vc.selectedFilter.pBrand.catCode = brandCode;
+    vc.selectedFilter.pBrand.brandId = 0;
+    vc.selectedFilter.pBrand.brandName = brandName;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 #pragma mark - 品牌分类的东西
@@ -723,21 +746,31 @@
                 if (!tempArr.count%2) {
                     sItem.lImageURL = [tempArr[i*2] objectForKey:@"brandLogo"];
                     sItem.lText = [tempArr[i*2] objectForKey:@"brandName"];
+                    sItem.lcode = [tempArr[i*2] objectForKey:@"brandCode"];
+                    sItem.rid = [tempArr[i*2] objectForKey:@"id"];
                     
                     sItem.rImageURL = [tempArr[i*2+1] objectForKey:@"brandLogo"];
                     sItem.rText = [tempArr[i*2+1] objectForKey:@"brandName"];
+                    sItem.rcode = [tempArr[i*2+1] objectForKey:@"brandCode"];
+                    sItem.rid = [tempArr[i*2+1] objectForKey:@"id"];
                 }else{
                     sItem.lImageURL = [tempArr[i*2] objectForKey:@"brandLogo"];
                     sItem.lText = [tempArr[i*2] objectForKey:@"brandName"];
+                    sItem.lcode = [tempArr[i*2] objectForKey:@"brandCode"];
+                    sItem.rid = [tempArr[i*2] objectForKey:@"id"];
                 }
                 
             }else{
                 
                 sItem.lImageURL = [tempArr[i*2] objectForKey:@"brandLogo"];
                 sItem.lText = [tempArr[i*2] objectForKey:@"brandName"];
+                sItem.lcode = [tempArr[i*2] objectForKey:@"brandCode"];
+                sItem.rid = [tempArr[i*2] objectForKey:@"id"];
                 
                 sItem.rImageURL = [tempArr[i*2+1] objectForKey:@"brandLogo"];
                 sItem.rText = [tempArr[i*2+1] objectForKey:@"brandName"];
+                sItem.rcode = [tempArr[i*2+1] objectForKey:@"brandCode"];
+                sItem.rid = [tempArr[i*2+1] objectForKey:@"id"];
                 
             }
             

@@ -12,6 +12,7 @@
 @interface CustomThirdLevelCell ()
 
 @property (strong, nonatomic) NSMutableArray * array;
+@property (strong, nonatomic) DataItem * dItem;
 
 @end
 
@@ -43,13 +44,16 @@
         label.textAlignment = NSTextAlignmentLeft;
         label.text = str;
         
-        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        CustomButton * button = [CustomButton buttonWithType:UIButtonTypeCustom];
         CGRect frame = label.frame;
         frame.origin.y = 0;
         frame.size.height = 31;
         button.frame = frame;
-        //TODO:此处要把需要传参的内容付给Button的Title，用于以后传参使用。
-        [button setTitle:str forState:UIControlStateNormal];
+        //TODO:此处要把需要传参的内容付给Button，用于以后传参使用。
+        [button setCatName:item.name];
+        [button setCatCode:item.categoryCode];
+        [button setParentCode:item.isOrNoFatherNode];
+        [button setUrlContent:item.urlContent];
         [button setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
         [button setBackgroundColor:[UIColor clearColor]];
         [button addTarget:self action:@selector(buttonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
@@ -81,8 +85,10 @@
 
 - (void)buttonDidSelect:(UIButton *)button
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(thirdLevelItemDidSelectedWithMessage:)]) {
-        [self.delegate thirdLevelItemDidSelectedWithMessage:button.titleLabel.text];
+    CustomButton * cButton = (CustomButton *)button;
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(thirdLevelItemDidSelectedWithCatCode:CatName:ParentCode:UrlContent:)]) {
+        [self.delegate thirdLevelItemDidSelectedWithCatCode:cButton.catCode CatName:cButton.catName ParentCode:cButton.parentCode UrlContent:cButton.urlContent];
     }
 }
 

@@ -679,6 +679,7 @@
 		1F880BE51AEA353200992D64 /* CategaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F880BE31AEA353200992D64 /* CategaryTableViewCell.xib */; };
 		1F880BE81AEA3A1C00992D64 /* CategaryTableViewCellItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F880BE71AEA3A1C00992D64 /* CategaryTableViewCellItem.m */; };
 		1F880BF11AEA506600992D64 /* ShopViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F880BF01AEA506600992D64 /* ShopViewItem.m */; };
+		1FA1CE901B00503F0040F392 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1CE8F1B00503F0040F392 /* CustomButton.m */; };
 		1FAC01191AE8E44C0067E12A /* DataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FAC01181AE8E44C0067E12A /* DataItem.m */; };
 		1FCD24C01AE5FDD500FF18E9 /* CustomSecLevelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCD24BF1AE5FDD500FF18E9 /* CustomSecLevelView.m */; };
 		1FCD24C41AE5FE0900FF18E9 /* CustomSecLevelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCD24C31AE5FE0900FF18E9 /* CustomSecLevelView.xib */; };
@@ -2245,6 +2246,8 @@
 		1F880BE71AEA3A1C00992D64 /* CategaryTableViewCellItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategaryTableViewCellItem.m; sourceTree = "<group>"; };
 		1F880BEF1AEA506600992D64 /* ShopViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopViewItem.h; sourceTree = "<group>"; };
 		1F880BF01AEA506600992D64 /* ShopViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopViewItem.m; sourceTree = "<group>"; };
+		1FA1CE8E1B00503F0040F392 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
+		1FA1CE8F1B00503F0040F392 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
 		1FAC01171AE8E44C0067E12A /* DataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataItem.h; sourceTree = "<group>"; };
 		1FAC01181AE8E44C0067E12A /* DataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataItem.m; sourceTree = "<group>"; };
 		1FCD24BE1AE5FDD500FF18E9 /* CustomSecLevelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSecLevelView.h; sourceTree = "<group>"; };
@@ -3962,6 +3965,8 @@
 				1FCD24CB1AE639EB00FF18E9 /* CustomThirdLevelCell.h */,
 				1FCD24CC1AE639EB00FF18E9 /* CustomThirdLevelCell.m */,
 				1FCD24CD1AE639EB00FF18E9 /* CustomThirdLevelCell.xib */,
+				1FA1CE8E1B00503F0040F392 /* CustomButton.h */,
+				1FA1CE8F1B00503F0040F392 /* CustomButton.m */,
 				1F880BD71AEA1E4600992D64 /* CustomBrandView.h */,
 				1F880BD81AEA1E4600992D64 /* CustomBrandView.m */,
 				1F880BDA1AEA1E5A00992D64 /* CustomBrandView.xib */,
@@ -7480,6 +7485,7 @@
 				A987EDF71A20920500CED7CD /* MBProgressHUD.m in Sources */,
 				A9C012041ABC601900DCF9C3 /* IQUIView+Hierarchy.m in Sources */,
 				A987EE381A2093C900CED7CD /* MJRefreshConst.m in Sources */,
+				1FA1CE901B00503F0040F392 /* CustomButton.m in Sources */,
 				A971BCA51A20825800C018D6 /* AppDelegate.m in Sources */,
 				1490772D1A4471E200065EE3 /* QuestionFilterView.m in Sources */,
 				144354791A8892690093C943 /* OrderPriceViewController.m in Sources */,
@@ -7990,7 +7996,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "8ff8e1b2-afbd-40bc-9dcc-4ef6164050f4";
+				PROVISIONING_PROFILE = "034a2c8f-c302-429e-a7a2-cfcc189987f5";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -8023,7 +8029,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				PROVISIONING_PROFILE = "8ff8e1b2-afbd-40bc-9dcc-4ef6164050f4";
+				PROVISIONING_PROFILE = "034a2c8f-c302-429e-a7a2-cfcc189987f5";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -8068,7 +8074,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8ff8e1b2-afbd-40bc-9dcc-4ef6164050f4";
+				PROVISIONING_PROFILE = "034a2c8f-c302-429e-a7a2-cfcc189987f5";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv64";
 				VERSIONING_SYSTEM = "";
@@ -8114,7 +8120,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8ff8e1b2-afbd-40bc-9dcc-4ef6164050f4";
+				PROVISIONING_PROFILE = "034a2c8f-c302-429e-a7a2-cfcc189987f5";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv64";
 				VERSIONING_SYSTEM = "";
@@ -8141,7 +8147,7 @@
 				);
 				INFOPLIST_FILE = "JuranClientTests/JuranClientTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "034a2c8f-c302-429e-a7a2-cfcc189987f5";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -8162,7 +8168,7 @@
 				GCC_PREFIX_HEADER = "JuranClient/JuranClient-Prefix.pch";
 				INFOPLIST_FILE = "JuranClientTests/JuranClientTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "034a2c8f-c302-429e-a7a2-cfcc189987f5";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};

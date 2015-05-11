@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomButton.h"
 
 #define CellHeight 31
 
 @protocol CustomThirdLevelCellDelegate <NSObject>
 
-- (void)thirdLevelItemDidSelectedWithMessage:(NSString *)msg;
+- (void)thirdLevelItemDidSelectedWithCatCode:(NSString *)catCode CatName:(NSString *)catName ParentCode:(NSString *)parentCode UrlContent:(NSString *)urlContent;
 
 @end
 

@@ -16,6 +16,12 @@
 @property (strong, nonatomic) IBOutlet UIButton *lbtn;
 @property (strong, nonatomic) IBOutlet UIButton *rbtn;
 
+@property (strong, nonatomic) NSString * lcode;
+@property (strong, nonatomic) NSString * rcode;
+
+@property (strong, nonatomic) NSString * lid;
+@property (strong, nonatomic) NSString * rid;
+
 @end
 
 @implementation CustomBrandView
@@ -33,6 +39,9 @@
         self.lbtn.hidden = NO;
         [self.lImage setImageWithURLString:item.lImageURL];
         self.lText.text = item.lText;
+        self.lcode = [NSString stringWithFormat:@"%@",item.lcode];
+        self.lid = [NSString stringWithFormat:@"%@",item.lid];
+        
     }else{
         self.lImage.hidden = YES;
         self.lText.hidden = YES;
@@ -44,6 +53,9 @@
         self.rbtn.hidden = NO;
         [self.rImage setImageWithURLString:item.rImageURL];
         self.rtext.text = item.rText;
+        self.rcode = [NSString stringWithFormat:@"%@",item.rcode];
+        self.rid = [NSString stringWithFormat:@"%@",item.rid];
+        
     }else{
         self.rImage.hidden = YES;
         self.rtext.hidden = YES;
@@ -56,8 +68,12 @@
     
     UIButton * button = (UIButton *)sender;
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(shopViewItemDidClickAtIndex:)]) {
-        [self.delegate shopViewItemDidClickAtIndex:button.tag-6000];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(shopViewItemDidClickWithCode:Name:ID:)]) {
+        if (button.tag == 6000) {
+            [self.delegate shopViewItemDidClickWithCode:self.lcode Name:self.lText.text ID:self.lid];
+        }else{
+            [self.delegate shopViewItemDidClickWithCode:self.rcode Name:self.rtext.text ID:self.rid];
+        }
     }
     
 }

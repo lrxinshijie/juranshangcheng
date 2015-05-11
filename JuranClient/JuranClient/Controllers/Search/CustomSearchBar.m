@@ -217,7 +217,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SearchTableViewCell * cell = (SearchTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    [self.inputTextField resignFirstResponder];
     if (self.isHistory) {
         
         self.inputTextField.text = [cell getSearchCellMessage];
@@ -229,6 +228,8 @@
         [self startSearchAtIndex:indexPath.row];
         
     }
+    
+    [self.inputTextField resignFirstResponder];
 }
 
 
@@ -266,14 +267,26 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self.inputTextField resignFirstResponder];
-    [self cleanBtnHide];
-    if (textField.text.length == 0){
+    
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.inputTextField resignFirstResponder];
+    [self hideAnimation];
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+
+    [self rightButtonChangeStyleWithKey:RightBtnStyle_Scan];
+    if (textField.text.length == 0) {
+        [self hideAnimation];
+        [self cleanBtnHide];
         [self magnifyingGlassShow];
         self.inputTextField.placeholder = @"      请输入搜索关键字";
     }
-    
-    
-    return YES;
 }
 
 

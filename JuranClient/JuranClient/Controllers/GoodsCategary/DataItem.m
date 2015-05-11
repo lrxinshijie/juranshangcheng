@@ -18,6 +18,7 @@
         self.imgStr = [NSString stringWithFormat:@"%@",[dict objectForKey:@"imgStr"]];
         self.isOrNoFatherNode = [NSString stringWithFormat:@"%@",[dict objectForKey:@"isOrNoFatherNode"]];
         self.name = [NSString stringWithFormat:@"%@",[dict objectForKey:@"name"]];
+        self.urlContent = [NSString stringWithFormat:@"%@",[dict objectForKey:@"urlContent"]];
     }
     return self;
 }

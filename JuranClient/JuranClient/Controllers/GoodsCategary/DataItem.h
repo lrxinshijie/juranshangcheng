@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSString * imgStr;
 @property (strong, nonatomic) NSString * isOrNoFatherNode;
 @property (strong, nonatomic) NSString * name;
+@property (strong, nonatomic) NSString * urlContent;
 
 
 
