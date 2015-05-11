@@ -38,7 +38,12 @@
 - (void)fillCellWithValue:(JRShop*)shop{
     self.shop = shop;
     _nameLabel.text = shop.shopName;
-    [_imgView setImageWithURLString:shop.logo];
+    if (shop.logo.length > 0) {
+        [_imgView setImageWithURLString:shop.logo];
+    }else{
+        _imgView.image = nil;
+    }
+    
     [_collectionButton setImage:[UIImage imageNamed:_shop.isStored?@"icon-collection-active.png":@"icon-collection.png"] forState:UIControlStateNormal];
     if (_shop.stallInfoList.count > 0) {
         JRStore *s = _shop.stallInfoList.firstObject;

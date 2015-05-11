@@ -421,7 +421,7 @@
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (_topic) {
         UILabel *label = (UILabel*)[_headerView viewWithTag:100];
-        label.text = @"评论";
+        label.text = @"全部评论";
         if (_topic.commitList.count == 0) {
             label.text = @"暂无评论";
         }

@@ -10,6 +10,8 @@
 
 @interface QRBaseViewController : ALViewController
 
+@property (nonatomic, copy) void (^enableClick)(BOOL);
+
 //实例化请使用这个方法，最后一个参数的作用是，表示当从此页面pop会上级页面时，navigation是否隐藏。即push到这个页面的那个页面的navi是否隐藏。
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isPopNavHide:(BOOL)hide;
 
