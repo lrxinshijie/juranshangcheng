@@ -80,6 +80,7 @@
 - (void)setupUI{
     self.segment = [[JRSegmentControl alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 40)];
     _segment.delegate = self;
+    _segment.showUnderLine = YES;
     _segment.selectedBackgroundViewXMargin = 8;
     [_segment setTitleList:@[@"案例", @"设计师"]];
     [self.view addSubview:_segment];
@@ -161,6 +162,12 @@
     }
     
     [_tableView reloadData];
+}
+
+- (void)showCase{
+    if (_segment) {
+        _segment.selectedIndex = 0;
+    }
 }
 
 #pragma mark - CaseFilter

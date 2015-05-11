@@ -12,6 +12,8 @@
 @property (nonatomic, copy) NSString *attName;
 @property (nonatomic, copy) NSString *attId;
 @property (nonatomic, copy) NSArray *attValues;
+
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
 @interface ProductCategory : NSObject
@@ -26,39 +28,58 @@
 @property (nonatomic, copy) NSString *catName;
 @property (nonatomic, copy) NSString *parentCode;
 @property (nonatomic, copy) NSString *urlContent;
-@property (nonatomic, strong) NSArray *childList;
+//comm
+@property (nonatomic, strong) NSMutableArray *childList;
+@property (nonatomic, assign) BOOL isOpen;
+@property (nonatomic, assign) BOOL isReal;
+
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
 @interface ProductBrand : NSObject
-@property (nonatomic, assign) long catCode;
+@property (nonatomic, copy) NSString *catCode;
 @property (nonatomic, assign) long brandId;
 @property (nonatomic, copy) NSString *brandName;
+
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
 @interface ProductStore : NSObject
 @property (nonatomic, copy) NSString *storeCode;
 @property (nonatomic, copy) NSString *storeName;
+
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
 @interface ProductClass : NSObject
 @property (nonatomic, copy) NSString *classCode;
 @property (nonatomic, copy) NSString *className;
+
++ (NSMutableArray*)buildUpWithValueForList:(id)value;
+@end
+//------------------------------------------------------------------
+@interface ProductSort : NSObject
+@property (nonatomic, assign) int sort;
+@property (nonatomic, copy) NSString *name;
 @end
 //------------------------------------------------------------------
 @interface ProductSelectedFilter : NSObject
 @property (nonatomic, assign) BOOL isInShop;
 @property (nonatomic, assign) int sort;
+//@property (nonatomic, strong) ProductSort *pSort;
 @property (nonatomic, copy) NSString *keyword;
 @property (nonatomic, assign) long shopId;
 @property (nonatomic, strong) ProductCategory *pCategory;
 @property (nonatomic, strong) ProductClass *pClass;
 @property (nonatomic, strong) ProductBrand *pBrand;
+@property (nonatomic, strong) ProductStore *pStore;
 @property (nonatomic, assign) long pMinPrice;
 @property (nonatomic, assign) long pMaxPrice;
-@property (nonatomic, strong) NSArray *attributeList;
+@property (nonatomic, strong) NSMutableDictionary *pAttributeDict;
 @end
 //------------------------------------------------------------------
 @interface ProductFilterData : NSObject
+@property (nonatomic, strong) NSArray *sortList;
 @property (nonatomic, strong) NSArray *attributeList;
 @property (nonatomic, strong) NSArray *categoryList;
 @property (nonatomic, strong) NSArray *brandList;

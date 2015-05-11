@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSString *onSaleMinPrice;
 @property (nonatomic, copy) NSString *defaultImage;
+@property (nonatomic, copy) NSString *originalImg;
 @property (nonatomic, copy) NSString *goodsName;
 @property (nonatomic, copy) NSString *goodsLogo;
 @property (nonatomic, assign) NSInteger linkProductId;
@@ -44,4 +45,7 @@
 - (void)favority:(BOOLBlock)finished;
 - (void)loadStore:(BOOLBlock)finished;
 - (void)loadAttributeList:(BOOLBlock)finished;
+
+- (BOOL)isShowPrice;
+- (NSString *)priceString;
 @end

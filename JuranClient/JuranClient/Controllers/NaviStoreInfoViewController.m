@@ -14,7 +14,7 @@
 #import "NaviStoreIndoorViewController.h"
 #import "UIViewController+Menu.h"
 
-@interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate>
+@interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UIView *mapBottomView;
 @property (strong, nonatomic) IBOutlet UIView *naviControlView;
@@ -96,7 +96,27 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGRect mapFrame = _mapView.frame;
     mapFrame.origin.y = scrollView.contentOffset.y/2;
+    ASLog(@"%f",scrollView.contentOffset.y);
+    self.navigationController.navigationBar.backgroundColor = [self.navigationController.navigationBar.backgroundColor colorWithAlphaComponent:scrollView.contentOffset.y/140];
     _mapView.frame = mapFrame;
+}
+
+- (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated  {
+    // 如果进入的是当前视图控制器
+    if (viewController == self) {
+        // 背景设置为黑色
+        self.navigationController.navigationBar. tintColor  = [UIColor colorWithRed:0.000 green:0.000 blue:0.000 alpha:1.000];
+        // 透明度设置为0.3
+        self.navigationController.navigationBar. alpha  = 0.300;
+        // 设置为半透明
+        self.navigationController.navigationBar. translucent  =  YES ;
+    } else {
+        // 进入其他视图控制器
+        self.navigationController.navigationBar.alpha = 1;
+        // 背景颜色设置为系统 默认颜色
+        self.navigationController.navigationBar.tintColor = nil;
+        self.navigationController.navigationBar.translucent = NO;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -304,6 +324,8 @@
 
 - (IBAction)IndoorNaviClick:(id)sender {
     NaviStoreIndoorViewController *vc = [[NaviStoreIndoorViewController alloc]init];
+    vc.store = _store;
+    vc.navigationItem.title = _store.storeName;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

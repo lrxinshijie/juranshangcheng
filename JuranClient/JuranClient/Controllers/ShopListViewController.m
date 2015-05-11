@@ -14,6 +14,12 @@
 #import "AppDelegate.h"
 #import "UserLocation.h"
 #import "UIViewController+Menu.h"
+#import "DesignerViewController.h"
+#import "CaseViewController.h"
+#import "QuestionViewController.h"
+#import "ProductListViewController.h"
+#import "ProductFilterData.h"
+
 
 @interface ShopListViewController ()<CustomSearchBarDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -90,8 +96,28 @@
 }
 
 - (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index {
-    _keyword = keyWord;
-    [_tableView headerBeginRefreshing];
+    if (index == 0){
+        CaseViewController *vc = [[CaseViewController alloc] init];
+        vc.searchKey = keyWord;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 1){
+        ProductListViewController *vc = [[ProductListViewController alloc]init];
+        vc.selectedFilter.keyword = _keyword;
+        vc.selectedFilter.isInShop = NO;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 2){
+        _keyword = keyWord;
+        [_tableView headerBeginRefreshing];
+    }else if (index == 3) {
+        DesignerViewController *vc = [[DesignerViewController alloc] init];
+        vc.searchKeyWord = keyWord;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 4){
+        QuestionViewController *vc = [[QuestionViewController alloc] init];
+        vc.searchKeyWord = keyWord;
+        vc.isSearchResult = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

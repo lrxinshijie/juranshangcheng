@@ -114,6 +114,12 @@
     }];
 }
 
+- (void)EScrollerViewDidClicked:(NSUInteger)index{
+    JRAdInfo *ad = [_adInfos objectAtIndex:index];
+    ASLog(@"index:%d,%@",index,ad.link);
+    [Public jumpFromLink:ad.link];
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if ([collectionView isEqual:_shopCollectionView]) {
         return [_shops count];

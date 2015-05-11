@@ -8,6 +8,18 @@
 
 #import "ALViewController.h"
 
+@class ProductFilterData;
+@class ProductSelectedFilter;
+@class JRShop;
+@class ProductBrand;
+
 @interface ProductListViewController : ALViewController
+
+@property (nonatomic, strong) ProductFilterData *filterData;
+@property (nonatomic, strong) ProductSelectedFilter *selectedFilter;
+
+//@property (nonatomic, strong) JRShop *shop;
+//@property (nonatomic, strong) ProductBrand *brand;
+//@property (nonatomic, copy) NSString *searchKey;
 
 @end

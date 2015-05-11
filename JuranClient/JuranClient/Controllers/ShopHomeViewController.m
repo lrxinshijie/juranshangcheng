@@ -18,8 +18,17 @@
 #import "NaviStoreListViewController.h"
 #import "AppDelegate.h"
 #import "UserLocation.h"
+#import "ProductLetterViewController.h"
+#import "UIViewController+Menu.h"
+#import "CustomSearchBar.h"
+#import "ProductFilterData.h"
+#import "DesignerViewController.h"
+#import "CaseViewController.h"
+#import "QuestionViewController.h"
+#import "ShopListViewController.h"
 
-@interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+
+@interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,CustomSearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray *datas;
 
@@ -38,6 +47,7 @@
 @property (nonatomic, strong) IBOutlet UIView *searchView;
 @property (nonatomic, strong) IBOutlet UIView *searchTextField;
 
+@property (strong, nonatomic) CustomSearchBar *searchBar;
 @property (nonatomic, strong) NSArray *storeList;
 
 - (IBAction)onClassification:(id)sender;
@@ -52,9 +62,14 @@
     // Do any additional setup after loading the view from its nib.
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:NULL];
-
-    
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMenu)];
+///////////////
+    self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
+    self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
+    [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
+    self.searchBar.delegate = self;
+    [self.view addSubview:_searchBar];
+////////////////
     [_collectionView registerNib:[UINib nibWithNibName:@"ShopCell" bundle:nil] forCellWithReuseIdentifier:@"ShopCell"];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ShopHeadView"];
     
@@ -71,8 +86,18 @@
     [self loadRecommendData];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.hidden = YES;
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    self.navigationController.navigationBar.hidden = NO;
+}
+
 - (void)loadData{
-    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId]};
+    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId],
+                            @"minisite": @"",
+                            @"flag": @"shop"};
     [self showHUD];
     
     [[ALEngine shareEngine] pathURL:JR_SHOP_FIRSTPAGE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -104,9 +129,58 @@
     _gradeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon-grade-%@.png", _shop.grade.integerValue?@"1":@"2"]];
     _gradeLabel.text = [NSString stringWithFormat:@"店铺评分：%@", _shop.shopDsr];
     _nameLabel.text = _shop.shopName;
-    _collectionImageView.image = [UIImage imageNamed:_shop.isStored?@"icon-collection-active.png":@"icon-collection.png"];
+    _collectionImageView.image = [UIImage imageNamed:_shop.isStored?@"icon-collection-active.png":@"icon-collection1.png"];
     _collectionLabel.text = _shop.isStored?@"已收藏":@"收藏";
     [_collectionView reloadData];
+}
+
+- (void)pushToQRCodeVCDidTriggered
+{
+    //    QRBaseViewController * QRVC = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:YES];
+    //    [self.navigationController pushViewController:QRVC animated:YES];
+}
+
+- (void)showMenuList
+{
+    [self showAppMenu:nil];
+}
+
+- (void)goBackButtonDidSelect
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index {
+    if (index == 0){
+        CaseViewController *vc = [[CaseViewController alloc] init];
+        vc.searchKey = keyWord;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 1){
+        ProductListViewController *vc = [[ProductListViewController alloc]init];
+        vc.selectedFilter.keyword = keyWord;
+        vc.selectedFilter.isInShop = NO;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 2){
+        ShopListViewController * vc = [[ShopListViewController alloc] init];
+        vc.keyword = keyWord;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 3) {
+        DesignerViewController *vc = [[DesignerViewController alloc] init];
+        vc.searchKeyWord = keyWord;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 4){
+        QuestionViewController *vc = [[QuestionViewController alloc] init];
+        vc.searchKeyWord = keyWord;
+        vc.isSearchResult = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
+}
+
+#pragma mark - Target Action
+
+- (void)onMenu{
+    [self showAppMenu:nil];
 }
 
 - (IBAction)onCollection:(id)sender{
@@ -126,7 +200,8 @@
 }
 
 - (IBAction)onIntroduce:(id)sender{
-    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId]};
+    NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId]
+                            };
     [self showHUD];
     
     [[ALEngine shareEngine] pathURL:JR_SHOP_INTRODUCE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -144,6 +219,8 @@
 
 - (IBAction)onAllProduct:(id)sender{
     ProductListViewController *vc = [[ProductListViewController alloc] init];
+    vc.selectedFilter.isInShop = YES;
+    vc.selectedFilter.shopId = _shop.shopId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -179,7 +256,14 @@
 }
 
 - (IBAction)onPrivateLetter:(id)sender{
-    
+    if ([self checkLogin:^{
+        [[JRUser currentUser] postPrivateLetterWithUserId:_shop.shopId Target:_shop VC:self];
+    }]) {
+        [[JRUser currentUser] postPrivateLetterWithUserId:_shop.shopId Target:_shop VC:self];
+    }
+//    ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
+//    pv.shop = _shop;
+//    [self.navigationController pushViewController:pv animated:YES];
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -237,9 +321,10 @@
 - (IBAction)onClassification:(id)sender {
     FilterInShopViewController *filter = [[FilterInShopViewController alloc]init];
     filter.shopId = _shop.shopId;
-    [filter setFinishBlock:^(long catId) {
+    [filter setFinishBlock:^(ProductSelectedFilter *filter) {
         //获取分类后处理
         ProductListViewController *vc = [[ProductListViewController alloc] init];
+        vc.selectedFilter = filter;
         [self.navigationController pushViewController:vc animated:YES];
     }];
     [self.navigationController pushViewController:filter animated:YES];

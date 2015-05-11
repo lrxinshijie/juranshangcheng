@@ -8,6 +8,8 @@
 
 #import "JRProduct.h"
 #import "JRStore.h"
+#import "AppDelegate.h"
+#import "UserLocation.h"
 
 @implementation JRProduct
 
@@ -19,6 +21,7 @@
         
         self.onSaleMinPrice = [dict getStringValueForKey:@"onSaleMinPrice" defaultValue:@""];
         self.defaultImage = [dict getStringValueForKey:@"defaultImage" defaultValue:@""];
+        self.originalImg = [dict getStringValueForKey:@"originalImg" defaultValue:@""];
         self.goodsLogo = [dict getStringValueForKey:@"goodsLogo" defaultValue:@""];
         self.goodsName = [dict getStringValueForKey:@"goodsName" defaultValue:@""];
         self.linkProductId = [dict getIntValueForKey:@"linkProductId" defaultValue:0];
@@ -140,7 +143,7 @@
                             };
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_SHOP_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            self.shopLogo = data[@"shopLogo"];
+            self.shopLogo = data[@"logo"];
             self.shopName = data[@"shopName"];
             self.score = data[@"score"];
         }
@@ -167,6 +170,17 @@
         }
         
     }];
+}
+
+- (NSString *)priceString{
+    if ([self.priceMin isEqual:self.priceMax])
+        return [NSString stringWithFormat:@"￥%@", self.priceMin];
+    else
+        return [NSString stringWithFormat:@"￥%@ ~ ￥%@", self.priceMin,self.priceMax];
+}
+
+- (BOOL)isShowPrice{
+    return ApplicationDelegate.gLocation.isSuccessLocation;
 }
 
 - (void)loadAttributeList:(BOOLBlock)finished{

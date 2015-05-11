@@ -38,7 +38,7 @@
 #endif
 
 #ifndef kJuranVersion12
-//#define kJuranVersion12
+#define kJuranVersion12
 #endif
 
 #define kAppURL [NSString stringWithFormat:@"http://itunes.apple.com/app/id%d?mt=8",kAppleID]
@@ -57,6 +57,7 @@
 #define kNotificationNameEventReloadData @"kNotificationNameEventReloadData"
 #define kNotificationNameMyDemandReloadData @"kNotificationNameMyDemandReloadData"
 #define kNotificationNameQuestionReloadData @"kNotificationNameQuestionReloadData"
+#define kNotificationNameProudctPriceReloadData @"kNotificationNameProudctPriceReloadData"
 
 #define kNotificationNameOrderReloadData @"kNotificationNameOrderReloadData"
 #define kNotificationNameOrderPaySuccess @"kNotificationNameOrderPaySuccess"
@@ -81,13 +82,15 @@ typedef enum : NSUInteger {
     FilterViewTypeCaseSearch,
     FilterViewTypeBidInfo,
     FilterViewTypeWiki,
-    FilterViewTypeCaseWithoutGrid
+    FilterViewTypeCaseWithoutGrid,
+    FilterViewTypeProduct
 } FilterViewType;
 
 typedef enum : NSUInteger {
     FilterViewActionSort,
     FilterViewActionFilter,
     FilterViewActionGrid,
+    FilterViewActionStore
 } FilterViewAction;
 
 typedef enum : NSUInteger {

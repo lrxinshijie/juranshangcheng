@@ -192,11 +192,29 @@
 #endif
 }
 
+- (NSDictionary *)params{
+#ifdef kJuranDesigner
+    if (_segment.selectedIndex == 0) {
+        return @{@"userType": [[ALTheme sharedTheme] userType]};
+    }else if(_segment.selectedIndex == 1){
+        return JR_ORDER_LIST;
+    }else{
+        return JR_ORDER_LIST;
+    }
+#else
+    if (_segment.selectedIndex == 0) {
+        return @{@"userType": [[ALTheme sharedTheme] userType]};
+    }else{
+        return @{@"userType": [[ALTheme sharedTheme] userType]};
+    }
+#endif
+}
+
 - (void)loadData{
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary: @{@"pageNo": @(_currentPage),
-                                                                                  @"onePageCount": kOnePageCount,
-                                                                                  @"userType": [[ALTheme sharedTheme] userType]
+                                                                                  @"onePageCount": kOnePageCount
                                                                                   }];
+    [param addEntriesFromDictionary:[self params]];
 #ifdef kJuranDesigner
     if (_segment.selectedIndex != 2) {
         [param setObject:[NSString stringWithFormat:@"%d", _segment.selectedIndex] forKey:@"type"];
@@ -229,7 +247,17 @@
     
     [[ALEngine shareEngine]  pathURL:JR_ORDER_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            NSMutableArray *rows = [JROrder buildUpWithValue:[data objectForKey:[Public isDesignerApp] ? @"designerTradeList" : @"memberTradeList"]];
+            
+            NSMutableArray *rows = nil;
+            if (_segment.selectedIndex == 0) {
+                rows = [JROrder buildUpWithValue:[data objectForKey:[Public isDesignerApp] ? @"designerTradeList" : @"memberTradeList"]];
+            }else{
+#ifndef kJuranDesigner
+                
+#else
+                
+#endif
+            }
             if (_currentPage == 1) {
                 self.datas = rows;
             }else{

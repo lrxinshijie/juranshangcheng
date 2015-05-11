@@ -30,6 +30,8 @@
 
 @interface DiscoverViewController ()<JRSegmentControlDelegate,UITableViewDataSource, UITableViewDelegate, QuestionFilterViewDelegate, WikiFilterViewControllerDelegate>
 
+@property (nonatomic, assign) NSInteger segmentSelectedForInit;
+
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
 
@@ -83,6 +85,7 @@
     _segment.showUnderLine = YES;
     [_segment setTitleList:@[@"专题", @"百科", @"问答", @"话题"]];
     _segment.delegate = self;
+    _segment.selectedIndex = _segmentSelectedForInit;
     
     self.quesgtionFilterView = [[QuestionFilterView alloc] initWithDefaultData:self.questionFilterData];
     _quesgtionFilterView.xMargin = 40;
@@ -174,6 +177,14 @@
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
     }];
+}
+
+- (void)showSegmentWithIndex:(NSInteger)index{
+    if (_segment) {
+        _segment.selectedIndex = index;
+    }else{
+        _segmentSelectedForInit = index;
+    }
 }
 
 #pragma mark - JRSegmentControlDelegate

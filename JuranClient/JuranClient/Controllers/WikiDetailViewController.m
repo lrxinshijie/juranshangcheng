@@ -10,6 +10,7 @@
 #import "JRWiki.h"
 #import "ALWebView.h"
 #import "ShareView.h"
+#import "UIViewController+Menu.h"
 
 @interface WikiDetailViewController ()<ALWebViewDelegate>
 
@@ -27,7 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"家装百科";
-    [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(doShare)];
+//    [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(doShare)];
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMenu)];
     
     self.webView = [[ALWebView alloc] initWithFrame:kContentFrameWithoutNavigationBar];
     _webView.delegate = self;
@@ -71,6 +73,12 @@
 
 - (void)doShare{
     [[ShareView sharedView] showWithContent:_wiki.title image:[_wiki shareImagePath] title:_wiki.title url:_urlString];
+}
+
+- (void)onMenu{
+    [self showAppMenu:^{
+        [[ShareView sharedView] showWithContent:_wiki.title image:[_wiki shareImagePath] title:_wiki.title url:_urlString];
+    }];
 }
 
 - (void)webViewDidStartLoad:(ALWebView *)aWebView{

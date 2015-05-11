@@ -252,7 +252,7 @@
 #else
 
 - (void)setupTabbar{
-#ifndef kJuranVersion12
+
     RootViewController *cs = [[RootViewController alloc] init];
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
     csNav.tabBarItem = [self setupTabbarItemTitle:@"首页" image:@"icon-nav-home" selected:@"icon-nav-home-active"];
@@ -276,34 +276,33 @@
     self.tabBarController = [[UITabBarController alloc] init];
     _tabBarController.viewControllers = @[csNav,desNav,topicNav,publishNav,profileNav];
     self.window.rootViewController = _tabBarController;
-#else
-    
-    CaseViewController *cs = [[CaseViewController alloc] init];
-    cs.isHome = YES;
-    UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
-    csNav.tabBarItem = [self setupTabbarItemTitle:@"案例" image:@"tabbar_case" selected:@"tabbar_case_hl"];
-    
-    DesignerViewController *des = [[DesignerViewController alloc] init];
-    des.isHome = YES;
-    UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
-    desNav.tabBarItem = [self setupTabbarItemTitle:@"设计师" image:@"tabbar_designer" selected:@"tabbar_designer_hl"];
-    
-    SubjectViewController *topic = [[SubjectViewController alloc] init];
-    UINavigationController *topicNav = [Public navigationControllerFromRootViewController:topic];
-    topicNav.tabBarItem = [self setupTabbarItemTitle:@"专题" image:@"tabbar_subject" selected:@"tabbar_subject_hl"];
-    
-    PublishDesignViewController *publish = [[PublishDesignViewController alloc] init];
-    UINavigationController *publishNav = [Public navigationControllerFromRootViewController:publish];
-    publishNav.tabBarItem = [self setupTabbarItemTitle:@"发布需求" image:@"tabbar_demands" selected:@"tabbar_demands_hl"];
-    
-    ProfileViewController *profile = [[ProfileViewController alloc] init];
-    UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
-    profileNav.tabBarItem = [self setupTabbarItemTitle:@"个人中心" image:@"tabbar_personal" selected:@"tabbar_personal_hl"];
-    
-    self.tabBarController = [[UITabBarController alloc] init];
-    _tabBarController.viewControllers = @[csNav,topicNav,publishNav,desNav,profileNav];
-    self.window.rootViewController = _tabBarController;
-#endif
+
+//    CaseViewController *cs = [[CaseViewController alloc] init];
+//    cs.isHome = YES;
+//    UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
+//    csNav.tabBarItem = [self setupTabbarItemTitle:@"案例" image:@"tabbar_case" selected:@"tabbar_case_hl"];
+//    
+//    DesignerViewController *des = [[DesignerViewController alloc] init];
+//    des.isHome = YES;
+//    UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
+//    desNav.tabBarItem = [self setupTabbarItemTitle:@"设计师" image:@"tabbar_designer" selected:@"tabbar_designer_hl"];
+//    
+//    SubjectViewController *topic = [[SubjectViewController alloc] init];
+//    UINavigationController *topicNav = [Public navigationControllerFromRootViewController:topic];
+//    topicNav.tabBarItem = [self setupTabbarItemTitle:@"专题" image:@"tabbar_subject" selected:@"tabbar_subject_hl"];
+//    
+//    PublishDesignViewController *publish = [[PublishDesignViewController alloc] init];
+//    UINavigationController *publishNav = [Public navigationControllerFromRootViewController:publish];
+//    publishNav.tabBarItem = [self setupTabbarItemTitle:@"发布需求" image:@"tabbar_demands" selected:@"tabbar_demands_hl"];
+//    
+//    ProfileViewController *profile = [[ProfileViewController alloc] init];
+//    UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
+//    profileNav.tabBarItem = [self setupTabbarItemTitle:@"个人中心" image:@"tabbar_personal" selected:@"tabbar_personal_hl"];
+//    
+//    self.tabBarController = [[UITabBarController alloc] init];
+//    _tabBarController.viewControllers = @[csNav,topicNav,publishNav,desNav,profileNav];
+//    self.window.rootViewController = _tabBarController;
+
 }
 #endif
 

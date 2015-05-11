@@ -15,5 +15,11 @@ typedef void (^FilterSelected)(ProductSelectedFilter *filter);
 @property (nonatomic, strong) ProductFilterData *filterData;
 @property (nonatomic, copy) FilterSelected block;
 
-- (void)setFinishBlock:(FilterSelected)finished;
+- (void)setBlock:(FilterSelected)block;
+@end
+
+@class ProductCategory;
+@interface CatButton : UIButton
+@property (nonatomic, strong) ProductCategory *category;
+
 @end

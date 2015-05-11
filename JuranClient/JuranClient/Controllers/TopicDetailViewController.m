@@ -18,6 +18,7 @@
 #import "IQKeyboardManager.h"
 #import "UIViewController+Menu.h"
 
+
 @interface TopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, CommentCellDelegate, UITextFieldDelegate, ALWebViewDelegate, CanRemoveImageViewDelegate>
 {
     BOOL firstLoadHtml;
@@ -28,11 +29,14 @@
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *timeLabel;
+@property (nonatomic, strong) IBOutlet UILabel *viewCountLabel;
+@property (nonatomic, strong) IBOutlet UILabel *commentCountLabel;
 @property (nonatomic, strong) IBOutlet UIButton *viewCountButton;
 @property (nonatomic, strong) IBOutlet UIButton *commentCountButton;
 
 @property (nonatomic, strong) IBOutlet UIView *commentView;
 @property (nonatomic, strong) IBOutlet UITextField *commentTextField;
+@property (nonatomic, strong) IBOutlet UIView *bottomView;
 @property (nonatomic, strong) IBOutlet ALWebView *contentWebView;
 @property (nonatomic, strong) UIButton *hiddenButton;
 
@@ -62,7 +66,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.openStatusDic = [NSMutableDictionary dictionary];
     self.navigationItem.title = @"话题详情";
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onShare:)];
+    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMenu)];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
@@ -375,11 +379,10 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)onShare:(id)sender{
+- (void)onMenu{
     [self showAppMenu:^{
         [[ShareView sharedView] showWithContent:_topic.theme image:nil title:_topic.theme url:[NSString stringWithFormat:@"http://apph5.juran.cn/topics/%@%@", _topic.topicId, [Public shareEnv]]];
     }];
-    
 }
 
 - (void)onComment:(id)sender{

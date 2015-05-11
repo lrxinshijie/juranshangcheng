@@ -28,7 +28,7 @@
         return;
     }
     self.nameLabel.text = product.goodsName;
-    [self.defaultImageView setImageWithURLString:product.defaultImage];
+    [self.defaultImageView setImageWithURLString:product.defaultImage Editing:YES];
     self.priceLabel.text = [NSString stringWithFormat:@"￥%@", product.onSaleMinPrice];
 }
 

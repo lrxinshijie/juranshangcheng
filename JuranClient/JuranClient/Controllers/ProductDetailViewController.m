@@ -21,6 +21,9 @@
 #import "NaviStoreInfoViewController.h"
 #import "AttributeCell.h"
 #import "UIViewController+Menu.h"
+#import "ShareView.h"
+#import "UIImageView+Block.h"
+#import "ProductPhotoBrowserViewController.h"
 
 @interface ProductDetailViewController () <UITableViewDelegate, UITableViewDataSource, JRSegmentControlDelegate>
 
@@ -53,7 +56,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView *attributeImageView;
 @property (nonatomic, strong) IBOutlet UILabel *attributeNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *attributePriceLabel;
-
+@property (nonatomic, strong) NSMutableArray *attributeSelected;
 
 @property (nonatomic, strong) UITableView *detailTableView;
 @property (nonatomic, strong) ALWebView *webView;
@@ -65,16 +68,41 @@
 
 @implementation ProductDetailViewController
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 //    _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadPrice:) name:kNotificationNameProudctPriceReloadData object:nil];
     [self setupUI];
     [self setupAttributeView];
     
     [self loadData];
+}
+
+- (void)reloadPrice:(NSNotification *)noti{
+    [self showHUD];
+    NSMutableArray *attributeList = [NSMutableArray array];
+    [_product.attributeList enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+        NSString *attValue = [dict[@"attrList"] objectAtTheIndex:[_attributeSelected[idx] intValue]];
+        NSDictionary *row = @{@"attId": dict[@"attrName"],
+                              @"attValue": attValue ? attValue : @""};
+        [attributeList addObject:row];
+    }];
+    NSDictionary *param = @{@"linkProductId": @(_product.linkProductId),
+                            @"attributeList": attributeList};
+    [[ALEngine shareEngine] pathURL:JR_PRODUCT_CHANGE_PRICE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            _attributePriceLabel.text = [NSString stringWithFormat:@"￥%@", data[@"goodsPrice"]];
+            [_attributeImageView setImageWithURLString:data[@"goodsImage"]];
+        }
+        [_attributeTableView reloadData];
+    }];
 }
 
 - (void)setupUI{
@@ -113,6 +141,9 @@
     
     self.detailTableView = [self.scrollView tableViewWithFrame:_webView.frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _detailTableView.backgroundColor = [UIColor clearColor];
+    
+    _attributePriceLabel.hidden = !_product.isShowPrice;
+    _priceLabel.hidden = !_product.isShowPrice;
 }
 
 - (void)loadData{
@@ -126,6 +157,8 @@
         
         [self setupFavority];
         
+        _attributePriceLabel.text = _product.priceString;
+        
         _nameLabel.text = _product.goodsName;
         CGRect frame = _nameLabel.frame;
         CGFloat height = [_nameLabel.text heightWithFont:_nameLabel.font constrainedToWidth:CGRectGetWidth(frame)];
@@ -135,7 +168,7 @@
         frame.size.height = height;
         _nameLabel.frame = frame;
         
-        _priceLabel.text = [NSString stringWithFormat:@"￥%@ ~ ￥%@", [@([_product.priceMin intValue]) decimalNumberFormatter], [@([_product.priceMax intValue]) decimalNumberFormatter]];
+        _priceLabel.text = _product.priceString;
 //        [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-star-active" : @"icon-star"] forState:UIControlStateNormal];
         
         [_imageScrollView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
@@ -148,7 +181,12 @@
         [_product.goodsImagesList enumerateObjectsUsingBlock:^(NSString *imageUrl, NSUInteger idx, BOOL *stop) {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_imageScrollView.frame)*idx, 0, CGRectGetWidth(_imageScrollView.frame), CGRectGetHeight(_imageScrollView.frame))];
             imageView.backgroundColor = RGBColor(237, 237, 237);
-            [imageView setImageWithURLString:imageUrl];
+            [imageView setImageWithURLString:imageUrl placeholderImage:nil editing:YES];
+            [imageView setOnTap:^{
+                ProductPhotoBrowserViewController *vc = [[ProductPhotoBrowserViewController alloc] initWithPhotos:_product.goodsImagesList andStartWithPhotoAtIndex:idx];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }];
             [_imageScrollView addSubview:imageView];
         }];
         
@@ -190,12 +228,21 @@
 }
 
 - (IBAction)onSearch:(id)sender{
+    [super onSearch];
 }
 
 - (IBAction)onMore:(id)sender{
     [self showAppMenu:^{
-        //分享代码
+        NSString *content = @"商品分享测试";
+        if (content.length == 0) {
+            content = @"商品分享测试";
+        }
+        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:self.product.goodsName url:self.shareURL];
     }];
+}
+
+- (NSString *)shareURL{
+    return [NSString stringWithFormat:@"http://apph5.juran.cn/case/%d%@",self.product.linkProductId, [Public shareEnv]];
 }
 
 - (IBAction)onShop:(id)sender{
@@ -207,9 +254,11 @@
 }
 
 - (IBAction)onPrivate:(id)sender{
-    ProductLetterViewController *pl = [[ProductLetterViewController alloc] init];
-    pl.product = _product;
-    [self.navigationController pushViewController:pl animated:YES];
+    if ([self checkLogin:^{
+        [[JRUser currentUser] postPrivateLetterWithUserId:_product.shopId Target:_product VC:self];
+    }]) {
+        [[JRUser currentUser] postPrivateLetterWithUserId:_product.shopId Target:_product VC:self];
+    }
 }
 
 - (IBAction)onFavority:(id)sender{
@@ -221,7 +270,7 @@
 }
 
 - (void)setupFavority{
-    [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-collection-active" : @"icon-collection"] forState:UIControlStateNormal];
+    [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-collection-active" : @"icon-collection1"] forState:UIControlStateNormal];
     [_favorityButton setTitle:_product.type ? @"已收藏" : @"收藏" forState:UIControlStateNormal];
     _favorityButton.titleEdgeInsets = UIEdgeInsetsMake(30, -20, 0, 0);
     _favorityButton.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 20, 0);
@@ -230,7 +279,8 @@
 - (void)setupAttributeView{
     _attributeNameLabel.text = _product.goodsName;
     [_attributeImageView setImageWithURLString:_product.goodsLogo];
-    _attributePriceLabel.text = [NSString stringWithFormat:@"￥%@ ~ ￥%@", [@([_product.priceMin intValue]) decimalNumberFormatter], [@([_product.priceMax intValue]) decimalNumberFormatter]];
+//
+//    _attributePriceLabel.text = [NSString stringWithFormat:@"￥%@", [@([_product.onSaleMinPrice intValue]) decimalNumberFormatter]];
     
     CGRect frame = _attributeNameLabel.frame;
     frame.size.height = [_attributeNameLabel.text heightWithFont:_attributeNameLabel.font constrainedToWidth:CGRectGetWidth(frame)];
@@ -379,6 +429,8 @@
             cell = (AttributeCell *)[nibs firstObject];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.indexPath = indexPath;
+        cell.attributeSelected = _attributeSelected;
         NSDictionary *dict = _product.attributeList[indexPath.row];
         [cell fillCellWithDict:dict];
         
@@ -437,14 +489,26 @@
     }else if ([tableView isEqual:_baseTableView]){
         if (indexPath.section == 0 && indexPath.row == 0) {
             if (_product.attributeList) {
+                if (!_attributeSelected) {
+                    self.attributeSelected = [NSMutableArray array];
+                    [_product.attributeList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                        [_attributeSelected addObject:@(-1)];
+                    }];
+                    [_attributeTableView reloadData];
+                }
+                
                 [self showAttributeView];
             }else{
                 [self showHUD];
                 [_product loadAttributeList:^(BOOL result) {
                     [self hideHUD];
                     if (result) {
+                        self.attributeSelected = [NSMutableArray array];
+                        [_product.attributeList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                            [_attributeSelected addObject:@(-1)];
+                        }];
                         CGRect frame = _attributeTableView.frame;
-                        frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame);
+                        frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame) + 1;
                         frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
                         _attributeTableView.frame = frame;
                         [_attributeTableView reloadData];

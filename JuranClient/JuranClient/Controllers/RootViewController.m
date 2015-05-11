@@ -17,6 +17,7 @@
 #import "SDWebImageDownloader.h"
 #import "UIButton+WebCache.h"
 #import "CaseViewController.h"
+#import "FitmentViewController.h"
 
 @interface RootViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate>
 
@@ -147,9 +148,15 @@
 }
 
 - (IBAction)onMore:(id)sender{
-    CaseViewController *cv = [[CaseViewController alloc] init];
-    cv.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:cv animated:YES];
+    NSArray *vcs = self.tabBarController.viewControllers;
+    if (vcs.count == 5) {
+        UINavigationController *nav = [vcs objectAtIndex:1];
+        UIViewController *vc = nav.viewControllers.firstObject;
+        if ([vc isKindOfClass:[FitmentViewController class]]) {
+            [(FitmentViewController*)vc showCase];
+            [self.tabBarController setSelectedIndex:1];
+        }
+    }
     
 }
 

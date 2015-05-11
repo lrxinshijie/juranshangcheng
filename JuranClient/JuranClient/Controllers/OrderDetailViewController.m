@@ -185,7 +185,7 @@
 #ifdef kJuranDesigner
     
 #endif
-    [[JRUser currentUser] postPrivateLetterWithUserId:([[ALTheme sharedTheme].userType isEqualToString:@"designer"]?_order.customerId:_order.decoratorId) VC:self];
+    [[JRUser currentUser] postPrivateLetterWithUserId:([[ALTheme sharedTheme].userType isEqualToString:@"designer"]?_order.customerId:_order.decoratorId) Target:nil VC:self];
 
 }
 

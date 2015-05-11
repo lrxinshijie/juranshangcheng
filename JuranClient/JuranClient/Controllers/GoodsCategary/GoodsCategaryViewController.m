@@ -19,6 +19,8 @@
 #import "NaviStoreSelCityViewController.h"
 #import "JRAreaInfo.h"
 #import "UIViewController+Menu.h"
+#import "ProductListViewController.h"
+#import "ProductFilterData.h"
 
 
 @interface GoodsCategaryViewController ()<UITableViewDataSource,UITableViewDelegate,CustomSecLevelViewDelegate,CustomThirdLevelCellDelegate,CustomShopViewDelegate,UIScrollViewDelegate>
@@ -626,7 +628,15 @@
 #pragma mark - CustomThirdLevelCellDelegate
 - (void)thirdLevelItemDidSelectedWithMessage:(NSString *)msg
 {
-    NSLog(@"%@",msg);
+    //NSLog(@"%@",msg);
+    ProductListViewController *vc = [[ProductListViewController alloc]init];
+    vc.selectedFilter = [[ProductSelectedFilter alloc]init];
+    vc.selectedFilter.isInShop = NO;
+    vc.selectedFilter.sort = 9;
+    vc.selectedFilter.keyword = @"";
+    vc.selectedFilter.pCategory = [[ProductCategory alloc]init];
+    vc.selectedFilter.pCategory.catCode = msg;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -665,7 +675,7 @@
             }
             [wSelf.dateArray_firstLevel addObject:item];
             if (i == 0) {
-                [wSelf requestDataForBrand:[wSelf getFirstLetter:item.name] pageNo:wSelf.pageNo];
+                [wSelf requestDataForBrand:item.code pageNo:wSelf.pageNo];
             }
             
         }
@@ -677,15 +687,15 @@
     
 }
 
-- (NSString *)getFirstLetter:(NSString *)str
-{
-    NSMutableString * firstLetter = [NSMutableString stringWithString:@""];
-    for (int i=0; i<str.length; i++) {
-        [firstLetter appendString:[NSString stringWithFormat:@"%c",pinyinFirstLetter([str characterAtIndex:i])]];
-        str = [str substringFromIndex:1];
-    }
-    return firstLetter;
-}
+//- (NSString *)getFirstLetter:(NSString *)str
+//{
+//    NSMutableString * firstLetter = [NSMutableString stringWithString:@""];
+//    for (int i=0; i<str.length; i++) {
+//        [firstLetter appendString:[NSString stringWithFormat:@"%c",pinyinFirstLetter([str characterAtIndex:i])]];
+//        str = [str substringFromIndex:1];
+//    }
+//    return firstLetter;
+//}
 
 - (void)requestDataForBrand:(NSString *)brandClass pageNo:(int)pageNo
 {
@@ -693,7 +703,7 @@
     [self showHUD];
     __weak GoodsCategaryViewController * wSelf = self;
     self.brandName = brandClass;
-    NSDictionary * dict = @{@"pinYin":[self getFirstLetter:brandClass],
+    NSDictionary * dict = @{@"brandTypeCode":brandClass,
                             @"pageNo":[NSString stringWithFormat:@"%d",self.pageNo],
                             @"onePageCount":kOnePageCount
                             };

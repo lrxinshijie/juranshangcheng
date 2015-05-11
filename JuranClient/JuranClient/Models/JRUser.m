@@ -12,7 +12,10 @@
 #import "UIAlertView+Blocks.h"
 #import "PrivateLetterViewController.h"
 #import "PrivateMessageDetailViewController.h"
+#import "ProductLetterViewController.h"
 #import "PrivateMessage.h"
+#import "JRProduct.h"
+#import "JRShop.h"
 
 #define kLocalUserData @"kLocalUserData"
 
@@ -340,7 +343,7 @@
     return self.account;
 }
 
-- (void)postPrivateLetterWithUserId:(NSInteger)userId VC:(UIViewController*)vc{
+- (void)postPrivateLetterWithUserId:(NSInteger)userId Target:(id)target VC:(UIViewController *)vc{
     [vc showHUD];
     NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", userId]
                             };
@@ -354,10 +357,19 @@
                 detailVC.message = message;
                 [vc.navigationController pushViewController:detailVC animated:YES];
             }else{
-                PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
-                pv.receiverId = userId;
-                //                pv.designer = _designer;
-                [vc.navigationController pushViewController:pv animated:YES];
+                if (!target) {
+                    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
+                    pv.receiverId = userId;
+                    [vc.navigationController pushViewController:pv animated:YES];
+                }else if ([target isKindOfClass:[JRProduct class]]){
+                    ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
+                    pv.product = target;
+                    [vc.navigationController pushViewController:pv animated:YES];
+                }else if ([target isKindOfClass:[JRShop class]]){
+                    ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
+                    pv.shop = target;
+                    [vc.navigationController pushViewController:pv animated:YES];
+                }
             }
         }
     }];

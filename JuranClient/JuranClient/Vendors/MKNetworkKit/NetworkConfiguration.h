@@ -20,8 +20,8 @@
 
 
 /* UAT */
-#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
-#define JR_SERVICE  @"http://54.223.161.28:8080"
+//#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
+//#define JR_SERVICE  @"http://54.223.161.28:8080"
 
 //SIT内网
 //#define JR_SERVICE  @"http://10.199.5.241:8083"
@@ -110,8 +110,8 @@
 #define JR_PRODUCT_DESC [NSString stringWithFormat:@"%@/goods/getGoodsDesc.json",JR_SERVICE]
 #define JR_PRODUCT_SELL_STORE [NSString stringWithFormat:@"%@/goods/canSellStore.json",JR_SERVICE]
 #define JR_PRODUCT_ATTRIBUTE [NSString stringWithFormat:@"%@/goods/getGoodsAttributes.json",JR_SERVICE]
-
-
+#define JR_SHOP_PRIVATE_LETTER [NSString stringWithFormat:@"%@/member/sendShopPrivateLetter.json",JR_SERVICE]
+#define JR_PRODUCT_CHANGE_PRICE [NSString stringWithFormat:@"%@/goods/changePriceByAttribute.json",JR_SERVICE]
 
 
 
@@ -200,6 +200,8 @@
 #define JR_SHOP_RECOMMEND [NSString stringWithFormat:@"%@/shop/shopRecommend.json",JR_SERVICE]
 #define JR_SHOP_CLASSIFICATION [NSString stringWithFormat:@"%@/shop/goodsClassification.json",JR_SERVICE]
 #define JR_SHOP_LOCATION [NSString stringWithFormat:@"%@/shop/shopLocation.json",JR_SERVICE]
+#define JR_SHOP_INDOOR [NSString stringWithFormat:@"%@/shop/getFloorIchnography.json",JR_SERVICE]
+
 //Navi
 #define JR_NAVI_STORE_LIST [NSString stringWithFormat:@"%@/shop/storeList.json",JR_SERVICE]
 #define JR_NAVI_STORE_INFO [NSString stringWithFormat:@"%@/shop/storeInfo.json",JR_SERVICE]
@@ -217,4 +219,19 @@
 #define JR_CUSTOMER_SERVICE [NSString stringWithFormat:@"%@/shop/platformCustomerService.json",JR_SERVICE]
 #define JR_SEARCH_PRODUCT [NSString stringWithFormat:@"%@/search/searchGoods.json",JR_SERVICE]
 #define JR_SEARCH_PRODUCT_IN_SHOP [NSString stringWithFormat:@"%@/search/searchShopGoods.json",JR_SERVICE]
+
+
+
+
+
+
+
+
+
+
+
+#define JR_NEEDS_LIST [NSString stringWithFormat:@"%@/member/getNeedsList.json",JR_SERVICE]
+
+
+
 #endif

@@ -7,12 +7,25 @@
 //
 
 #import "ALViewController.h"
-@class ProductCategory;
-@class ProductClass;
-@class ProductBrand;
+@class ProductFilterData;
+@class ProductSelectedFilter;
+@class ProductStore;
+@class ProductSort;
 
-
+typedef void (^FilterSelected)(ProductSelectedFilter *filter);
 
 @interface ProductFilterViewController : ALViewController
-- (instancetype)initWithKeyword:(NSString *)keyword IsInShop:(BOOL)isInShop;
+
+@property (nonatomic, copy) FilterSelected block;
+
+@property (nonatomic, strong) ProductFilterData *filterData;
+@property (nonatomic, strong) ProductSelectedFilter *selectedFilter;
+
+- (void)setBlock:(FilterSelected)block;
+
+- (instancetype)initWithKeyword:(NSString *)keyword
+                           Sort:(int)sort
+                          Store:(ProductStore *)store
+                       IsInShop:(BOOL)isInShop
+                         ShopId:(long)shopId;
 @end

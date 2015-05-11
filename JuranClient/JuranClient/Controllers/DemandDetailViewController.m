@@ -310,7 +310,7 @@
 //    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
 //    pv.designer = bidInfo.userBase;
 //    [self.navigationController pushViewController:pv animated:YES];
-    [[JRUser currentUser] postPrivateLetterWithUserId:bidInfo.userBase.userId VC:self];
+    [[JRUser currentUser] postPrivateLetterWithUserId:bidInfo.userBase.userId Target:nil VC:self];
 }
 
 - (void)takeMeasure:(BidDesignerCell *)cell andBidInfo:(JRBidInfo *)bidInfo{

@@ -19,7 +19,8 @@
 #import "JRPhotoScrollViewController.h"
 #import "MeasureViewController.h"
 #import "PrivateLetterViewController.h"
-#import "NewestTopicViewController.h"
+//#import "NewestTopicViewController.h"
+#import "TopicDetailViewController.h"
 #import "ZoomInImageView.h"
 #import "TTTAttributedLabel.h"
 
@@ -418,7 +419,7 @@
 
 //私信
 - (IBAction)doPrivateLetter:(id)sender{
-    [[JRUser currentUser] postPrivateLetterWithUserId:_designer.userId VC:self];
+    [[JRUser currentUser] postPrivateLetterWithUserId:_designer.userId Target:nil VC:self];
 //    PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
 //    pv.designer = _designer;
 //    [self.navigationController pushViewController:pv animated:YES];
@@ -612,7 +613,7 @@
 
     }else if (_segment.selectedIndex == 2){
         JRTopic *t = _topicDatas[indexPath.row];
-        NewestTopicViewController *vc = [[NewestTopicViewController alloc] init];
+        TopicDetailViewController *vc = [[TopicDetailViewController alloc] init];
         vc.topic = t;
         [self.navigationController pushViewController:vc animated:YES];
     }

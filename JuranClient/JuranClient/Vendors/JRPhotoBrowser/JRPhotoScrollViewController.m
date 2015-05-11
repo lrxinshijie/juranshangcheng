@@ -358,7 +358,7 @@
     designer.nickName = _jrCase.nickName;
     pv.designer = designer;
     [self.navigationController pushViewController:pv animated:YES];*/
-    [[JRUser currentUser] postPrivateLetterWithUserId:_jrCase.userId VC:self];
+    [[JRUser currentUser] postPrivateLetterWithUserId:_jrCase.userId Target:nil VC:self];
 }
 
 
