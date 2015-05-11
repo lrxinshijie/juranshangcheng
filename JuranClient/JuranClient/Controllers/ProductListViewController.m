@@ -136,7 +136,7 @@
                 }
             }
         }
-        attrString = [NSString stringWithFormat:@"[%@]",attrString];
+        //attrString = [NSString stringWithFormat:@"[%@]",attrString];
         [param setObject:attrString forKey:@"attributes"];
     }
     if(_selectedFilter.isInShop) {

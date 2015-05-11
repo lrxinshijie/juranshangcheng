@@ -604,7 +604,7 @@
         [navigationController pushViewController:vc animated:YES];
 #endif
     }else if (type == 23){//商品分类
-        GoodsCategaryViewController *vc = [[GoodsCategaryViewController alloc] initWithNibName:@"GoodsCategaryViewController" bundle:nil isPopNavHide:NO style:CategaryStyle_Shop];
+        GoodsCategaryViewController *vc = [[GoodsCategaryViewController alloc] initWithNibName:@"GoodsCategaryViewController" bundle:nil isPopNavHide:NO style:CategaryStyle_Goods];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
     }else if (type == 25){//居然服务

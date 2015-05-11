@@ -11,7 +11,7 @@
 
 @interface ProductAttributeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-
+@property (strong, nonatomic) NSMutableArray *dataList;
 @end
 
 @implementation ProductAttributeViewController
@@ -20,6 +20,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _tableView.tableFooterView = [[UIView alloc]init];
+    _dataList = [NSMutableArray arrayWithArray:_currentAttr.attValues];
+    [_dataList insertObject:@"全部" atIndex:0];
+    //    ProductAttribute *all = [[ProductAttribute alloc]init];
+    //    all.attId = @"-100";
+    //    all.attName = @"全部";
+    //    [_dataList insertObject:all atIndex:0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,7 +45,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _currentAttr.attValues.count;
+    return _dataList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -52,14 +58,20 @@
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = _currentAttr.attValues[indexPath.row];
+    cell.textLabel.text = _dataList[indexPath.row];
     cell.textLabel.font = [UIFont systemFontOfSize:13];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [_selectedFilter.pAttributeDict setObject:_currentAttr.attValues[indexPath.row] forKey:_currentAttr.attId];
+    if ([_dataList[indexPath.row] isEqual:@"全部"]) {
+        if ([_selectedFilter.pAttributeDict.allKeys containsObject:_currentAttr.attId]) {
+            [_selectedFilter.pAttributeDict removeObjectForKey:_currentAttr.attId];
+        }
+    }else {
+        [_selectedFilter.pAttributeDict setObject:_dataList[indexPath.row] forKey:_currentAttr.attId];
+    }
     [self commit];
 }
 @end

@@ -8,6 +8,8 @@
 
 #import "ShopCell.h"
 #import "JRProduct.h"
+#import "AppDelegate.h"
+#import "UserLocation.h"
 
 @interface ShopCell()
 
@@ -29,7 +31,8 @@
     }
     self.nameLabel.text = product.goodsName;
     [self.defaultImageView setImageWithURLString:product.defaultImage Editing:YES];
-    self.priceLabel.text = [NSString stringWithFormat:@"￥%@", product.onSaleMinPrice];
+    self.priceLabel.text = ApplicationDelegate.gLocation.isSuccessLocation ? [NSString stringWithFormat:@"￥%@", product.onSaleMinPrice] : @"";
+    
 }
 
 @end

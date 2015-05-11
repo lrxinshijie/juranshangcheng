@@ -91,7 +91,7 @@
     readLabel.layer.cornerRadius = readLabel.bounds.size.height/2;
     readLabel.layer.masksToBounds = YES;
     if (countLabel.hidden) {
-        readLabel.hidden = [JRUser isLogin] && [JRUser currentUser].newPrivateLetterCount>0 ? NO:YES;
+        readLabel.hidden = [JRUser isLogin] && [JRUser currentUser].newPushMsgCount>0 ? NO:YES;
     }else {
         readLabel.hidden = YES;
     }
@@ -123,7 +123,7 @@
     readLabel.layer.cornerRadius = readLabel.bounds.size.height/2;
     readLabel.layer.masksToBounds = YES;
     if (countLabel.hidden) {
-        readLabel.hidden = [JRUser isLogin] && [JRUser currentUser].newPrivateLetterCount>0 ? NO:YES;
+        readLabel.hidden = [JRUser isLogin] && [JRUser currentUser].newPushMsgCount>0 ? NO:YES;
     }else {
         readLabel.hidden = YES;
     }

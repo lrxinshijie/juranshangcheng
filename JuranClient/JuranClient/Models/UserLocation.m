@@ -24,10 +24,6 @@
         _locService.delegate = self;
         _locService.desiredAccuracy = kCLLocationAccuracyBest;
         _locService.distanceFilter = 10;
-        if (SystemVersionGreaterThanOrEqualTo(8.0f)) {
-            //[_locService requestAlwaysAuthorization];
-            [_locService requestWhenInUseAuthorization];
-        }
         _geoService = [[CLGeocoder alloc]init];
         //_geoSearch.delegate = self;
         _isSuccessLocation = NO;
@@ -39,15 +35,39 @@
     return self;
 }
 
+- (void)requestLocation{
+    if([_locService respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        [_locService requestAlwaysAuthorization]; // 永久授权
+        [_locService requestWhenInUseAuthorization]; //使用中授权
+    }
+}
+
 - (void)dealloc
 {
     _locService.delegate = nil;
     //_geoSearch.delegate = nil;
 }
 
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined:
+        case kCLAuthorizationStatusDenied:
+            if ([_locService respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+                [_locService requestWhenInUseAuthorization];
+            }
+            break;
+        default:
+            break;
+            
+            
+    } 
+}
+
 - (void)startLocationHandler:(LocationFinished)finished {
     _block = finished;
     //[BMKLocationService setLocationDistanceFilter:100.f];
+    [self requestLocation];
     [_locService startUpdatingLocation];
 }
 

@@ -103,7 +103,9 @@
         [_conditionArray addObject:@"价格(元)"];
         [_detailArray addObject:@""];
     }else {
-        _selectedFilter.pBrand=nil;
+        //_selectedFilter.pBrand=nil;
+        _selectedFilter.pMinPrice = 0;
+        _selectedFilter.pMaxPrice = 0;
     }
     
     if (_filterData.attributeList && _filterData.attributeList.count>0) {

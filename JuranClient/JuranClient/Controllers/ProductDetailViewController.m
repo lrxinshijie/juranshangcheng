@@ -518,14 +518,17 @@
             }
             
         }else if (indexPath.section == 0 && indexPath.row == 1){
-            JRStore *store = [_product.stallInfoList firstObject];
-            if (store) {
-                NaviStoreInfoViewController *st = [[NaviStoreInfoViewController alloc] init];
-                st.store = store;
-                st.naviType = NaviTypeStall;
-                [self.navigationController pushViewController:st animated:YES];
-            }
-            
+//            JRStore *store = [_product.stallInfoList firstObject];
+//            if (store) {
+//                NaviStoreInfoViewController *st = [[NaviStoreInfoViewController alloc] init];
+//                st.store = store;
+//                st.naviType = NaviTypeStall;
+//                [self.navigationController pushViewController:st animated:YES];
+//            }
+            NaviStoreListViewController *vc = [[NaviStoreListViewController alloc]init];
+            vc.naviType = NaviTypeStall;
+            vc.shopId = _product.shopId;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
     
