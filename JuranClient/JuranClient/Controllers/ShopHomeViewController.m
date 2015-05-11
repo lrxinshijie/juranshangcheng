@@ -68,7 +68,7 @@
     self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
     [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
     self.searchBar.delegate = self;
-    [self.view addSubview:_searchBar];
+    [self.view addSubview:self.searchBar];
 ////////////////
     [_collectionView registerNib:[UINib nibWithNibName:@"ShopCell" bundle:nil] forCellWithReuseIdentifier:@"ShopCell"];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ShopHeadView"];
@@ -86,13 +86,20 @@
     [self loadRecommendData];
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    self.navigationController.navigationBar.hidden = YES;
+- (void)viewWillAppear:(BOOL)animated
+{
+
+    //self.navigationController.navigationBar.clipsToBounds = NO;
+    self.navigationController.navigationBarHidden = YES;
 }
 
--(void)viewWillDisappear:(BOOL)animated {
-    self.navigationController.navigationBar.hidden = NO;
+- (void)viewWillDisappear:(BOOL)animated
+{
+    //[self.searchBar removeFromSuperview];
+    //self.navigationController.navigationBar.clipsToBounds = YES;
+    self.navigationController.navigationBarHidden = NO;
 }
+
 
 - (void)loadData{
     NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId],

@@ -52,6 +52,7 @@
     [self.searchBar setTextFieldText:_keyword];
     [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
     self.searchBar.delegate = self;
+    [self.view addSubview:self.searchBar];
     
     [_tableView registerNib:[UINib nibWithNibName:@"ShopListCell" bundle:nil] forCellReuseIdentifier:@"ShopListCell"];
     __weak typeof(self) weakSelf = self;
@@ -69,13 +70,15 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.view addSubview:self.searchBar];
+//    [self.navigationController.navigationBar addSubview:self.searchBar];
+//    self.navigationController.navigationBar.clipsToBounds = NO;
     self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self.searchBar removeFromSuperview];
+//    [self.searchBar removeFromSuperview];
+//    self.navigationController.navigationBar.clipsToBounds = YES;
     self.navigationController.navigationBarHidden = NO;
 }
 
