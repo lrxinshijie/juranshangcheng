@@ -149,8 +149,8 @@
             }
             [_emptyView removeFromSuperview];
             if(_dataList.count == 0) {
-                _emptyView.center = self.view.center;
-                [self.view addSubview:_emptyView];
+                _emptyView.center = CGPointMake(_tableView.center.x, 200);
+                [_tableView addSubview:_emptyView];
             }
             [_tableView reloadData];
         }

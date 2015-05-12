@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductFilterViewController">
             <connections>
+                <outlet property="clearButton" destination="pLr-TE-QvB" id="SbM-bZ-o9I"/>
+                <outlet property="footerView" destination="Sah-ae-GsB" id="pbI-oZ-8aC"/>
                 <outlet property="priceCell" destination="Nyy-bx-n5Z" id="y6U-cg-wtf"/>
                 <outlet property="tableView" destination="Luq-tP-Fo0" id="E7y-aa-fW3"/>
                 <outlet property="textFieldMaxPrice" destination="f2L-K0-P99" id="eLy-Zx-aDq"/>
@@ -63,6 +65,28 @@
             </tableViewCellContentView>
             <point key="canvasLocation" x="304" y="49"/>
         </tableViewCell>
+        <view contentMode="scaleToFill" id="Sah-ae-GsB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pLr-TE-QvB">
+                    <rect key="frame" x="113" y="14" width="95" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="清除全部">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onClear:" destination="-1" eventType="touchUpInside" id="97L-F4-H5w"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="76" y="409.5"/>
+        </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

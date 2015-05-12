@@ -20,9 +20,11 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *priceCell;
 @property (strong, nonatomic) IBOutlet UITextField *textFieldMinPrice;
 @property (strong, nonatomic) IBOutlet UITextField *textFieldMaxPrice;
-
+@property (strong, nonatomic) IBOutlet UIView *footerView;
+@property (strong, nonatomic) IBOutlet UIButton *clearButton;
 @property (nonatomic, strong) NSMutableArray *conditionArray;
 @property (nonatomic, strong) NSMutableArray *detailArray;
+- (IBAction)onClear:(id)sender;
 @end
 
 @implementation ProductFilterViewController {
@@ -175,6 +177,16 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 60;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    _clearButton.layer.borderWidth = 0.5f;
+    //_clearButton.
+    return _footerView;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //[tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([_conditionArray[indexPath.row] isEqual:@"类目"]) {
@@ -224,6 +236,7 @@
     }
 }
 
+
 - (void)onDone:(id)sender {
     _selectedFilter.pMinPrice = _textFieldMinPrice.text.integerValue;
     _selectedFilter.pMaxPrice = _textFieldMaxPrice.text.integerValue;
@@ -241,6 +254,8 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)onClear:(id)sender {
+}
 @end
 
 @implementation ProductSelectedFilter
