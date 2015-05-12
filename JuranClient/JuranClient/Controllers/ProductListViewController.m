@@ -24,6 +24,7 @@
 @interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate, ProductFilterViewDelegate,CustomSearchBarDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIView *emptyView;
 @property (nonatomic, strong) NSMutableArray *products;
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) ProductFilterView *filterView;
@@ -176,8 +177,12 @@
             //            }else if (_brand){
             //
             //            }
-            
+            [_emptyView removeFromSuperview];
             [_tableView reloadData];
+            if(_products.count == 0) {
+                _emptyView.center = self.view.center;
+                [self.view addSubview:_emptyView];
+            }
         }
         
         
