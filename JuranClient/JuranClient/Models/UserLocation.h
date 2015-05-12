@@ -20,6 +20,7 @@ typedef void (^LocationFinished)(UserLocation *loc);
 @property (nonatomic, assign) BOOL isSuccessReverseGeoCode;//成功反编码
 @property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, copy) NSString *cityName;
+@property (nonatomic, assign) CLAuthorizationStatus status;
 
 - (void)startLocationHandler:(LocationFinished)finished;
 - (void)GeoCode:(NSString *)cityName Handler:(LocationFinished)finished;

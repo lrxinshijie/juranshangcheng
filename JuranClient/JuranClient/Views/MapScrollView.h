@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class BMKMapView;
 @interface MapScrollView : UIScrollView
-
+@property (nonatomic,strong) BMKMapView *map;
 @end

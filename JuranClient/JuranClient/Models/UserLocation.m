@@ -48,22 +48,6 @@
     //_geoSearch.delegate = nil;
 }
 
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
-{
-    switch (status) {
-        case kCLAuthorizationStatusNotDetermined:
-        case kCLAuthorizationStatusDenied:
-            if ([_locService respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-                [_locService requestWhenInUseAuthorization];
-            }
-            break;
-        default:
-            break;
-            
-            
-    } 
-}
-
 - (void)startLocationHandler:(LocationFinished)finished {
     _block = finished;
     //[BMKLocationService setLocationDistanceFilter:100.f];

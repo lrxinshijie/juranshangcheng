@@ -86,6 +86,7 @@
     _telView.frame = frame;
     [_scrollView addSubview:_telView];
     
+    _scrollView.map = _mapView;
     [self loadData];
 }
 
@@ -93,6 +94,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+//    UIView *result = [self.view.superview hitTest:point withEvent:event];
+//    CGPoint buttonPoint = [_mapView convertPoint:point fromView:_mapView];
+//    if ([_mapView pointInside:buttonPoint withEvent:event]) {
+//        return _mapView;
+//    }
+//    return result;
+//}
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGRect mapFrame = _mapView.frame;

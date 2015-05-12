@@ -24,11 +24,23 @@
 //}
 
 //- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-//    UIView *result = [super hitTest:point withEvent:event];
-//    CGPoint buttonPoint = [underButton convertPoint:point fromView:self];
-//    if ([underButton pointInside:buttonPoint withEvent:event]) {
-//        return underButton;
+//    //UIView *result = [super hitTest:point withEvent:event];
+//    CGPoint buttonPoint = [_map convertPoint:point fromView:_map];
+//    if ([_map pointInside:buttonPoint withEvent:event]) {
+//        return _map;
 //    }
-//    return result;
+//    return self;
 //}
+
+- (UIView*)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+    UIView* result = [super hitTest:point withEvent:event];
+    CGPoint buttonPoint = [_map convertPoint:point fromView:_map];
+    if ([_map pointInside:buttonPoint withEvent:event]){
+        self.scrollEnabled = NO;
+    }else{
+        self.scrollEnabled = YES;
+    }
+    return result;
+}
+
 @end

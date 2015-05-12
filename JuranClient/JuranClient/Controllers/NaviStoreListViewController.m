@@ -19,6 +19,8 @@
 #import "UIViewController+Login.h"
 #import "UIViewController+Menu.h"
 #import "ProductFilterViewController.h"
+#import "GlobalPopupAlert.h"
+#import "UIAlertView+Blocks.h"
 
 @interface NaviStoreListViewController ()<BMKMapViewDelegate>
 
@@ -59,6 +61,7 @@
     }else {
         self.navigationItem.title = @"店铺位置";
     }
+    [self CheckLoctionStatus];
     [self loadData];
 }
 
@@ -200,8 +203,8 @@
 
 - (IBAction)naviRightClick:(id)sender {
     [self showAppMenu:nil];
-//    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:nil Sort:9 Store:nil IsInShop:NO ShopId:0];
-//    [self.navigationController pushViewController:vc animated:YES];
+    //    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:nil Sort:9 Store:nil IsInShop:NO ShopId:0];
+    //    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)changeCityClick:(id)sender {
@@ -218,5 +221,11 @@
     [self.navigationController pushViewController:vc animated:YES];
     //    ShopListViewController *vc = [[ShopListViewController alloc]init];
     //    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)CheckLoctionStatus {
+    if(!ApplicationDelegate.gLocation.isSuccessLocation) {
+        [UIAlertView showWithTitle:nil message:@"当前定位服务未开启,请在设置中启用定位服务" cancelButtonTitle:@"知道了" otherButtonTitles:nil tapBlock:nil];
+    }
 }
 @end
