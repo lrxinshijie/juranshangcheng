@@ -143,13 +143,13 @@
 
 @end
 //------------------------------------------------------------------
-@implementation ProductSelectedFilter
-//- (id)copyWithZone:(NSZone *)zone {
-////    NSData * tempArchive = [NSKeyedArchiver archivedDataWithRootObject:self];
-////    return [NSKeyedUnarchiver unarchiveObjectWithData:tempArchive];
-//    return nil;
-//}
-@end
+//@implementation ProductSelectedFilter
+////- (id)copyWithZone:(NSZone *)zone {
+//////    NSData * tempArchive = [NSKeyedArchiver archivedDataWithRootObject:self];
+//////    return [NSKeyedUnarchiver unarchiveObjectWithData:tempArchive];
+////    return nil;
+////}
+//@end
 @implementation ProductFilterData
 - (instancetype)init {
     self = [super init];
