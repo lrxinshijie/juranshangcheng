@@ -64,7 +64,7 @@
     
     [self.view addSubview:_tableView];
     
-    _tableView.tableHeaderView = _headerView;
+    _tableView.tableHeaderView = nil;
     
     if (!_demand) {
         self.demand = [[JRDemand alloc] init];
@@ -91,6 +91,7 @@
             NSDictionary *list = [bannerList firstObject];
             if (list) {
                 [_imageView setImageWithURLString:[list objectForKey:@"mediaCode"] Editing:YES];
+                _tableView.tableHeaderView = _headerView;
             }
         }
     }];

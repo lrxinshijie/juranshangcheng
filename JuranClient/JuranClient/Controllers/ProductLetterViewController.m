@@ -197,7 +197,7 @@
     NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _product?_product.shopId:_shop.shopId],
                             @"senderName":_senderName,
                             @"mobilePhone":_mobilePhone,
-                            @"memo": memo};
+                            @"memo": [NSString stringWithFormat:@"%@ http://mall.juran.cn/product/%d.htm?ozu_sid=ProductMobile", memo, _product.linkProductId]};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_SHOP_PRIVATE_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

@@ -46,6 +46,9 @@
 #import "GoodsCategaryViewController.h"
 #import "ProductListViewController.h"
 #import "ProductFilterData.h"
+#import "MyDemandViewController.h"
+#import "TopicDetailViewController.h"
+#import "JRTopic.h"
 
 @implementation Public
 
@@ -497,6 +500,18 @@
             cv.hidesBottomBarWhenPushed = YES;
             [navigationController pushViewController:cv animated:YES];
         }
+    }else if (type == 1){//首页
+        NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
+        if (vcs.count == 5) {
+            UINavigationController *nav = [vcs objectAtIndex:3];
+            UIViewController *vc = nav.viewControllers.firstObject;
+            if ([vc isKindOfClass:[DiscoverViewController class]]) {
+                if (navigationController.viewControllers.count > 1) {
+                    [navigationController popToRootViewControllerAnimated:NO];
+                }
+                [ApplicationDelegate.tabBarController setSelectedIndex:0];
+            }
+        }
     }else if (type == 7){
         JRWebViewController *wv = [[JRWebViewController alloc] init];
         wv.urlString = [param getStringValueForKey:@"url" defaultValue:@""];
@@ -603,6 +618,40 @@
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
 #endif
+    }else if (type == 20){//问答
+        NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
+        if (vcs.count == 5) {
+            UINavigationController *nav = [vcs objectAtIndex:3];
+            UIViewController *vc = nav.viewControllers.firstObject;
+            if ([vc isKindOfClass:[DiscoverViewController class]]) {
+                if (navigationController.viewControllers.count > 1) {
+                    [navigationController popToRootViewControllerAnimated:NO];
+                }
+                [(DiscoverViewController*)vc showSegmentWithIndex:2];
+                [ApplicationDelegate.tabBarController setSelectedIndex:3];
+            }
+        }
+    }else if (type == 21){//话题
+        if ([param.allKeys containsObject:@"id"]) {
+            TopicDetailViewController *vc = [[TopicDetailViewController alloc] init];
+            JRTopic *topic = [[JRTopic alloc] init];
+            topic.topicId = [param getStringValueForKey:@"id" defaultValue:@""];
+            vc.hidesBottomBarWhenPushed = YES;
+            [navigationController pushViewController:vc animated:YES];
+        }else{
+            NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
+            if (vcs.count == 5) {
+                UINavigationController *nav = [vcs objectAtIndex:3];
+                UIViewController *vc = nav.viewControllers.firstObject;
+                if ([vc isKindOfClass:[DiscoverViewController class]]) {
+                    if (navigationController.viewControllers.count > 1) {
+                        [navigationController popToRootViewControllerAnimated:NO];
+                    }
+                    [(DiscoverViewController*)vc showSegmentWithIndex:3];
+                    [ApplicationDelegate.tabBarController setSelectedIndex:3];
+                }
+            }
+        }
     }else if (type == 23){//商品分类
         GoodsCategaryViewController *vc = [[GoodsCategaryViewController alloc] initWithNibName:@"GoodsCategaryViewController" bundle:nil isPopNavHide:NO style:CategaryStyle_Goods];
         vc.hidesBottomBarWhenPushed = YES;
@@ -617,7 +666,15 @@
         [navigationController pushViewController:vc animated:YES];
     }else if (type == 28){//会员需求
 #ifndef kJuranDesigner
-        MyDemandCopyViewController *vc = [[MyDemandCopyViewController alloc]init];
+        if (![navigationController checkLogin:^{
+        }]) {
+            return;
+        }
+#ifdef kJuranVersion12
+        MyDemandViewController *vc = [[MyDemandViewController alloc] init];
+#else
+        MyDemandCopyViewController *vc = [[MyDemandCopyViewController alloc] init];
+#endif
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
 #endif
