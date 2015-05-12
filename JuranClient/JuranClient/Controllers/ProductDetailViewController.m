@@ -152,7 +152,7 @@
     _webView.opaque = NO;
     _webView.backgroundColor = [UIColor clearColor];
     [_scrollView addSubview:_webView];
-    
+    //[self.webView setScalesPageToFit:YES];
     self.detailTableView = [self.scrollView tableViewWithFrame:_webView.frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _detailTableView.backgroundColor = [UIColor clearColor];
     

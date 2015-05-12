@@ -62,7 +62,6 @@
     [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
     self.searchBar.delegate = self;
     
-    
     self.filterView = [[ProductFilterView alloc] initWithDefaultData:_filterData SeletedData:_selectedFilter];
     _filterView.delegate = self;
     CGRect frame = _filterView.frame;
@@ -180,8 +179,8 @@
             [_emptyView removeFromSuperview];
             [_tableView reloadData];
             if(_products.count == 0) {
-                _emptyView.center = self.view.center;
-                [self.view addSubview:_emptyView];
+                _emptyView.center = CGPointMake(_tableView.center.x, 200);
+                [_tableView addSubview:_emptyView];
             }
         }
         
@@ -309,6 +308,18 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 /*

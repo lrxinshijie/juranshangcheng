@@ -325,7 +325,7 @@
 - (IBAction)IndoorNaviClick:(id)sender {
     NaviStoreIndoorViewController *vc = [[NaviStoreIndoorViewController alloc]init];
     vc.store = _store;
-    vc.navigationItem.title = _store.storeName;
+    vc.navigationItem.title = [NSString stringWithFormat:@"%@室内地图",_store.storeName];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -143,6 +143,13 @@
 
 @end
 //------------------------------------------------------------------
+//@implementation ProductSelectedFilter
+////- (id)copyWithZone:(NSZone *)zone {
+//////    NSData * tempArchive = [NSKeyedArchiver archivedDataWithRootObject:self];
+//////    return [NSKeyedUnarchiver unarchiveObjectWithData:tempArchive];
+////    return nil;
+////}
+//@end
 @implementation ProductFilterData
 - (instancetype)init {
     self = [super init];
@@ -207,7 +214,7 @@
         if (filter.pCategory!=0) [param setObject:filter.pCategory.urlContent forKey:@"urlContent"];
         url = JR_SEARCH_PRODUCT;
     }
-
+    
     [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             self.attributeList = [ProductAttribute buildUpWithValueForList:[data objectForKey:@"showAttributesList"]];

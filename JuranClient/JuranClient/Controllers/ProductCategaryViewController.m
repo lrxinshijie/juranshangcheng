@@ -57,6 +57,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
 }
 
 - (void)commit {
+    //_selectedFilterCategory = _selectedFilter;
     if (_block) {
         _block(_selectedFilter);
     }
@@ -263,6 +264,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
         //[tableView reloadData];
     }else {
         _selectedFilter.pCategory = [self getCatgary:cat];
+        [self cleanOtherFilters];
         [self commit];
     }
 }
@@ -275,6 +277,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
         [_tableView reloadSections:[NSIndexSet indexSetWithIndex:btn.tag-2000] withRowAnimation:UITableViewRowAnimationAutomatic];
     }else{
         _selectedFilter.pCategory = [self getCatgary:cat];
+        [self cleanOtherFilters];
         [self commit];
     }
 }
@@ -282,9 +285,20 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
 - (void)onTrdCatgary:(id)sender {
     CatButton *btn = (CatButton *)sender;
     _selectedFilter.pCategory = [self getCatgary:btn.category];
+    [self cleanOtherFilters];
     [self commit];
 }
+
+- (void)cleanOtherFilters {
+    _selectedFilter.pClass = nil;
+    _selectedFilter.pBrand = nil;
+    _selectedFilter.pMinPrice = 0;
+    _selectedFilter.pMaxPrice = 0;
+    _selectedFilter.pAttributeDict = [[NSMutableDictionary alloc]init];
+}
 @end
+
+
 
 @implementation CatButton
 
