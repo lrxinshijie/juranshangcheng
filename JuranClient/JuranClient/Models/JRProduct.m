@@ -81,6 +81,10 @@
             self.priceMax = [data getStringValueForKey:@"priceMax" defaultValue:@""];
             self.priceMin = [data getStringValueForKey:@"priceMin" defaultValue:@""];
             self.type = [data getBoolValueForKey:@"type" defaultValue:NO];
+            self.shopId = [data getIntValueForKey:@"shopId" defaultValue:0];
+            self.shopLogo = [data getStringValueForKey:@"shopLogo" defaultValue:@""];
+            self.shopName = [data getStringValueForKey:@"shopName" defaultValue:@""];
+            self.score = [data getStringValueForKey:@"score" defaultValue:@""];
         }
         
         if (finished) {
