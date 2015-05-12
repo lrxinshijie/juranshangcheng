@@ -183,7 +183,8 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     _clearButton.layer.borderWidth = 0.5f;
-    //_clearButton.
+    _clearButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    _clearButton.layer.cornerRadius = 1;
     return _footerView;
 }
 
@@ -255,6 +256,13 @@
 }
 
 - (IBAction)onClear:(id)sender {
+    _selectedFilter.pCategory = nil;
+    _selectedFilter.pClass = nil;
+    _selectedFilter.pBrand = nil;
+    _selectedFilter.pMinPrice = 0;
+    _selectedFilter.pMaxPrice = 0;
+    _selectedFilter.pAttributeDict = [[NSMutableDictionary alloc]init];
+    [self loadData];
 }
 @end
 

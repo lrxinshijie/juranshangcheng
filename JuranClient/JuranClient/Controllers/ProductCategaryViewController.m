@@ -184,7 +184,13 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     //ProductCatgeryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     ProductCatgeryCell *cell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil] objectAtIndex:0];
     cell.backgroundColor = RGBColor(247, 247, 247);
+    //cell.accessoryView = nil;
+    UIImageView *dropImageView = [[UIImageView alloc]initWithFrame:CGRectMake(295, 16, 10, 6)];
     ProductCategory *cat =[self getSecCat:indexPath.section :indexPath.row];
+    if(cat.childList.count>0){
+        dropImageView.image = [cat isOpen] ? [UIImage imageNamed:@"icon-drop-up"] : [UIImage imageNamed:@"icon-drop-down"];
+        [cell addSubview:dropImageView];
+    }
     if (_selectedFilter.isInShop) {
         cell.labelTitle.text = cat.name;
     }else{
@@ -251,6 +257,11 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 37.5f, 320, 0.5f)];
     lineView.backgroundColor = [UIColor lightGrayColor];
     [btn addSubview:lineView];
+    UIImageView *dropImageView = [[UIImageView alloc]initWithFrame:CGRectMake(295, 16, 10, 6)];
+    if (cat.childList.count>0) {
+        dropImageView.image = [cat isOpen] ? [UIImage imageNamed:@"icon-drop-up"] : [UIImage imageNamed:@"icon-drop-down"];
+        [btn addSubview:dropImageView];
+    }
     return btn;
 }
 

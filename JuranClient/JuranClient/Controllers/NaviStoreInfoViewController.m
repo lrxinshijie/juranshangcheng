@@ -13,8 +13,9 @@
 #import "UserLocation.h"
 #import "NaviStoreIndoorViewController.h"
 #import "UIViewController+Menu.h"
+#import "MapScrollView.h"
 
-@interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
+@interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UIView *mapBottomView;
 @property (strong, nonatomic) IBOutlet UIView *naviControlView;
@@ -22,7 +23,7 @@
 @property (strong, nonatomic) IBOutlet UIView *timeView;
 @property (strong, nonatomic) IBOutlet UIView *busView;
 @property (strong, nonatomic) IBOutlet UIView *telView;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet MapScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UILabel *labelName;
 @property (strong, nonatomic) IBOutlet UILabel *labelDistance;
 @property (strong, nonatomic) IBOutlet UILabel *labelAddrTitle;

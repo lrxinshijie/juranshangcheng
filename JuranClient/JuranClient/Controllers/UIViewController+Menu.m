@@ -85,8 +85,7 @@
                                        target:self
                                        action:@selector(onCustomService:)]];
     
-    if (![[NSString
-           stringWithUTF8String:object_getClassName(self)]  isEqual: @"RootViewController"]) {
+    if (![[NSString stringWithUTF8String:object_getClassName(self)]  isEqual: @"RootViewController"]) {
         [menuItems addObject:[KxMenuItem menuItem:@"首页"
                                             image:[UIImage imageNamed:@"menu-icon-home"]
                                            target:self

@@ -140,10 +140,26 @@
 @end
 //------------------------------------------------------------------
 @implementation ProductSort
-
+//- (instancetype)init
+//{
+//    self = [super init];
+//    if (self) {
+//        
+//    }
+//    return self;
+//}
 @end
 //------------------------------------------------------------------
 //@implementation ProductSelectedFilter
+////- (instancetype)init
+////{
+////    self = [super init];
+////    if (self) {
+////
+////    }
+////    return self;
+////}
+//
 ////- (id)copyWithZone:(NSZone *)zone {
 //////    NSData * tempArchive = [NSKeyedArchiver archivedDataWithRootObject:self];
 //////    return [NSKeyedUnarchiver unarchiveObjectWithData:tempArchive];
