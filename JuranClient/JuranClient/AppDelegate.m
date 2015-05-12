@@ -130,6 +130,7 @@
     
     [MobClick startWithAppkey:kUMengKey];
     [MobClick updateOnlineConfig];
+    [MobClick setAppVersion:[self bundleVersion]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
