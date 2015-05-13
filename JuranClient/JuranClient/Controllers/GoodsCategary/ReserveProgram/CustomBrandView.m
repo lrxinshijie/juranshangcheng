@@ -19,8 +19,8 @@
 @property (strong, nonatomic) NSString * lcode;
 @property (strong, nonatomic) NSString * rcode;
 
-@property (strong, nonatomic) NSString * lid;
-@property (strong, nonatomic) NSString * rid;
+@property (assign, nonatomic) long lid;
+@property (assign, nonatomic) long rid;
 
 @end
 
@@ -40,7 +40,7 @@
         [self.lImage setImageWithURLString:item.lImageURL];
         self.lText.text = item.lText;
         self.lcode = [NSString stringWithFormat:@"%@",item.lcode];
-        self.lid = [NSString stringWithFormat:@"%@",item.lid];
+        self.lid = item.lid;
         
     }else{
         self.lImage.hidden = YES;
@@ -54,7 +54,7 @@
         [self.rImage setImageWithURLString:item.rImageURL];
         self.rtext.text = item.rText;
         self.rcode = [NSString stringWithFormat:@"%@",item.rcode];
-        self.rid = [NSString stringWithFormat:@"%@",item.rid];
+        self.rid = item.rid;
         
     }else{
         self.rImage.hidden = YES;

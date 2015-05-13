@@ -46,6 +46,6 @@
 - (void)loadStore:(BOOLBlock)finished;
 - (void)loadAttributeList:(BOOLBlock)finished;
 
-- (BOOL)isShowPrice;
++ (BOOL)isShowPrice;
 - (NSString *)priceString;
 @end

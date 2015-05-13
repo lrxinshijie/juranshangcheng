@@ -14,12 +14,12 @@
 @property (strong, nonatomic)NSString * lImageURL;
 @property (strong, nonatomic)NSString * lText;
 @property (strong, nonatomic)NSString * lcode;
-@property (strong, nonatomic)NSString * lid;
+@property (assign, nonatomic)long lid;
 
 
 @property (strong, nonatomic)NSString * rImageURL;
 @property (strong, nonatomic)NSString * rText;
 @property (strong, nonatomic)NSString * rcode;
-@property (strong, nonatomic)NSString * rid;
+@property (assign, nonatomic)long rid;
 
 @end

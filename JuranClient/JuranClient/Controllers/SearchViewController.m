@@ -101,7 +101,10 @@
     
     
     CustomSearchBar * customSB = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
+    [customSB setSearchButtonType:SearchButtonType_Case];
+    [customSB setEnabled:YES];
     customSB.delegate = self;
+    customSB.parentVC = self;
     [customSB rightButtonChangeStyleWithKey:RightBtnStyle_Scan];
     customSB.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 64);
     [self.view addSubview:customSB];
@@ -139,12 +142,6 @@
 - (void)goBackButtonDidSelect
 {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)pushToQRCodeVCDidTriggered
-{
-    QRBaseViewController * qrVC = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:YES];
-    [self.navigationController pushViewController:qrVC animated:YES];
 }
 
 - (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index

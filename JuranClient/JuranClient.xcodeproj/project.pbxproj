@@ -519,6 +519,10 @@
 		1468580C1AA54DD30089A0CE /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146858081AA54DD30089A0CE /* AlipaySDK.framework */; };
 		1468580E1AA554A40089A0CE /* rsa_private_key.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1468580D1AA554A40089A0CE /* rsa_private_key.txt */; };
 		1468580F1AA554A40089A0CE /* rsa_private_key.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1468580D1AA554A40089A0CE /* rsa_private_key.txt */; };
+		146A97ED1B02EE5C00163432 /* ProductGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A97EB1B02EE5C00163432 /* ProductGridCell.m */; };
+		146A97EE1B02EE5C00163432 /* ProductGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A97EB1B02EE5C00163432 /* ProductGridCell.m */; };
+		146A97EF1B02EE5C00163432 /* ProductGridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146A97EC1B02EE5C00163432 /* ProductGridCell.xib */; };
+		146A97F01B02EE5C00163432 /* ProductGridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146A97EC1B02EE5C00163432 /* ProductGridCell.xib */; };
 		146CE9C51A47EB0700FAA87F /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 146CE9C31A47EB0700FAA87F /* TextFieldCell.m */; };
 		146CE9C61A47EB0700FAA87F /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */; };
 		147282C71A67673500FB0CFB /* AHReach.m in Sources */ = {isa = PBXBuildFile; fileRef = 147282C61A67673500FB0CFB /* AHReach.m */; };
@@ -578,7 +582,6 @@
 		14BF81A11AEDF4E100D6A10F /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8411AD8F878004E849F /* FMDatabasePool.m */; };
 		14BF81A21AEDF4E100D6A10F /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8431AD8F878004E849F /* FMDatabaseQueue.m */; };
 		14BF81A31AEDF4E100D6A10F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8461AD8F878004E849F /* FMResultSet.m */; };
-		14BF81A41AEDF4E100D6A10F /* TestSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */; };
 		14BF81A51AEDF4E100D6A10F /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D4FF51AD77F9E005486D2 /* QRCodeViewController.m */; };
 		14BF81A61AEDF4E100D6A10F /* InputCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D50051AD7847D005486D2 /* InputCodeViewController.m */; };
 		14BF81A71AEDF4E100D6A10F /* QRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D500A1AD7C882005486D2 /* QRBaseViewController.m */; };
@@ -704,8 +707,6 @@
 		1FD3B8491AD8F878004E849F /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8411AD8F878004E849F /* FMDatabasePool.m */; };
 		1FD3B84A1AD8F878004E849F /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8431AD8F878004E849F /* FMDatabaseQueue.m */; };
 		1FD3B84B1AD8F878004E849F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8461AD8F878004E849F /* FMResultSet.m */; };
-		1FD3B84F1AD8FB58004E849F /* TestSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */; };
-		1FD3B8501AD8FB58004E849F /* TestSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3B84E1AD8FB58004E849F /* TestSearchViewController.xib */; };
 		1FE1394D1AF8616B001BDF05 /* QRCodeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1394C1AF8616B001BDF05 /* QRCodeWebViewController.m */; };
 		1FF00FA51AE4B74300D54914 /* third_bg_cell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF00FA11AE4B74300D54914 /* third_bg_cell@2x.png */; };
 		1FF00FA61AE4B74300D54914 /* third_bg_header_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF00FA21AE4B74300D54914 /* third_bg_header_left@2x.png */; };
@@ -2069,6 +2070,9 @@
 		146858071AA54DD30089A0CE /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		146858081AA54DD30089A0CE /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		1468580D1AA554A40089A0CE /* rsa_private_key.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_private_key.txt; sourceTree = "<group>"; };
+		146A97EA1B02EE5C00163432 /* ProductGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductGridCell.h; sourceTree = "<group>"; };
+		146A97EB1B02EE5C00163432 /* ProductGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductGridCell.m; sourceTree = "<group>"; };
+		146A97EC1B02EE5C00163432 /* ProductGridCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductGridCell.xib; sourceTree = "<group>"; };
 		146CE9C21A47EB0700FAA87F /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
 		146CE9C31A47EB0700FAA87F /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
@@ -2290,9 +2294,6 @@
 		1FD3B8441AD8F878004E849F /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		1FD3B8451AD8F878004E849F /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		1FD3B8461AD8F878004E849F /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		1FD3B84C1AD8FB58004E849F /* TestSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSearchViewController.h; sourceTree = "<group>"; };
-		1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSearchViewController.m; sourceTree = "<group>"; };
-		1FD3B84E1AD8FB58004E849F /* TestSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestSearchViewController.xib; sourceTree = "<group>"; };
 		1FE1394B1AF8616B001BDF05 /* QRCodeWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeWebViewController.h; sourceTree = "<group>"; };
 		1FE1394C1AF8616B001BDF05 /* QRCodeWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeWebViewController.m; sourceTree = "<group>"; };
 		1FF00FA11AE4B74300D54914 /* third_bg_cell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "third_bg_cell@2x.png"; sourceTree = "<group>"; };
@@ -3998,9 +3999,6 @@
 				1FD3B8241AD8C38F004E849F /* SearchTableViewCell.m */,
 				1FD3B8251AD8C38F004E849F /* SearchTableViewCell.xib */,
 				1FD3B8311AD8F83E004E849F /* HistoryRecord */,
-				1FD3B84C1AD8FB58004E849F /* TestSearchViewController.h */,
-				1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */,
-				1FD3B84E1AD8FB58004E849F /* TestSearchViewController.xib */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -5142,6 +5140,9 @@
 				2C1D10611AFD16D3005712D2 /* ProductCatgeryCell.h */,
 				2C1D10621AFD16D3005712D2 /* ProductCatgeryCell.m */,
 				2C1D10631AFD16D3005712D2 /* ProductCatgeryCell.xib */,
+				146A97EA1B02EE5C00163432 /* ProductGridCell.h */,
+				146A97EB1B02EE5C00163432 /* ProductGridCell.m */,
+				146A97EC1B02EE5C00163432 /* ProductGridCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -6018,6 +6019,7 @@
 				BD5186201A5D0ED700BE508A /* icon-designer-id@2x.png in Resources */,
 				BD5187261A5D0ED700BE508A /* service_highlighted_9@2x.png in Resources */,
 				BD5187121A5D0ED700BE508A /* service_highlighted_10@2x.png in Resources */,
+				146A97F01B02EE5C00163432 /* ProductGridCell.xib in Resources */,
 				1415FA301A5CD1CB003D0C29 /* CaseImageHeaderView.xib in Resources */,
 				BD51861A1A5D0ED700BE508A /* icon-chat@2x.png in Resources */,
 				BD5187361A5D0ED700BE508A /* service_normal_5@2x.png in Resources */,
@@ -6761,7 +6763,6 @@
 				BD5186A71A5D0ED700BE508A /* unlogin_head@2x.png in Resources */,
 				2C91421C1AF5D7E300FD7C69 /* menu-icon-svr@2x.png in Resources */,
 				140C9EB91ADB5DAD0079391A /* icon-nav-finish-active@2x.png in Resources */,
-				1FD3B8501AD8FB58004E849F /* TestSearchViewController.xib in Resources */,
 				1FD3B8141AD8B558004E849F /* search_cancel@2x.png in Resources */,
 				2CD7B4ED1AF913ED00B31074 /* icon_personal_setting@2x.png in Resources */,
 				145471D31A38944F00428BCB /* QuestionViewController.xib in Resources */,
@@ -6809,6 +6810,7 @@
 				14FE2DE81A38313800B31FBA /* PrivateMessageCell.xib in Resources */,
 				14CCB30D1ADD074F0041AA38 /* TopProductCell.xib in Resources */,
 				BD51861D1A5D0ED700BE508A /* icon-designer-badge2@2x.png in Resources */,
+				146A97EF1B02EE5C00163432 /* ProductGridCell.xib in Resources */,
 				37D7FEBA1AECDD6C00288C1E /* TopicDetailViewController.xib in Resources */,
 				A945252C1AA5F9BE002DFA2A /* order_filter@2x.png in Resources */,
 				A911009E1A9B5FF500F75AF5 /* OrderFilterViewController.xib in Resources */,
@@ -7083,7 +7085,6 @@
 				14BF81A11AEDF4E100D6A10F /* FMDatabasePool.m in Sources */,
 				14BF81A21AEDF4E100D6A10F /* FMDatabaseQueue.m in Sources */,
 				14BF81A31AEDF4E100D6A10F /* FMResultSet.m in Sources */,
-				14BF81A41AEDF4E100D6A10F /* TestSearchViewController.m in Sources */,
 				14BF81A51AEDF4E100D6A10F /* QRCodeViewController.m in Sources */,
 				14BF81A61AEDF4E100D6A10F /* InputCodeViewController.m in Sources */,
 				14BF81A71AEDF4E100D6A10F /* QRBaseViewController.m in Sources */,
@@ -7331,6 +7332,7 @@
 				1415F9CE1A5CD1CB003D0C29 /* QuestionCell.m in Sources */,
 				37F0E6A01A7D1F4E004CCCB2 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				1415F9CF1A5CD1CB003D0C29 /* JRPageControl.m in Sources */,
+				146A97EE1B02EE5C00163432 /* ProductGridCell.m in Sources */,
 				37F0E6B01A7D1F4E004CCCB2 /* PSTCollectionViewUpdateItem.m in Sources */,
 				37ECDD271AE167D600BE6027 /* ConstructCell.m in Sources */,
 				1415F9D01A5CD1CB003D0C29 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
@@ -7521,7 +7523,6 @@
 				37D7FEA61AECBA6700288C1E /* ProductCollectionCell.m in Sources */,
 				A90459D81A278B2D00F8CD74 /* SubjectViewController.m in Sources */,
 				A987EE201A20928B00CED7CD /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
-				1FD3B84F1AD8FB58004E849F /* TestSearchViewController.m in Sources */,
 				BD5F23E61A52A430009F759E /* SerciceDetailViewController.m in Sources */,
 				A987EDD21A20920500CED7CD /* ALViewController.m in Sources */,
 				A9224E281A6CB779002974ED /* UIViewController+YIFullScreenScroll.m in Sources */,
@@ -7810,6 +7811,7 @@
 				1472FF7C1AE4AB8E00735929 /* LocationManager.m in Sources */,
 				14EDB38D1A3B4FE200E5AC77 /* FeedBackViewController.m in Sources */,
 				A987EE5B1A209E6100CED7CD /* JRCase.m in Sources */,
+				146A97ED1B02EE5C00163432 /* ProductGridCell.m in Sources */,
 				A9B4EB791A371F120091AAAF /* CaseCollectViewController.m in Sources */,
 				A987EDDC1A20920500CED7CD /* CLLocation+ASCategory.m in Sources */,
 				37F0E62E1A7D1AFE004CCCB2 /* MWGridCell.m in Sources */,
