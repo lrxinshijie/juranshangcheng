@@ -31,9 +31,6 @@ typedef enum {
 //返回
 - (void)goBackButtonDidSelect;
 
-//跳转到二维码
-- (void)pushToQRCodeVCDidTriggered;
-
 //开始搜索
 - (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index;
 
@@ -48,6 +45,9 @@ typedef enum {
 @interface CustomSearchBar : UIView
 
 @property (assign, nonatomic) id<CustomSearchBarDelegate>delegate;
+
+//用于跳转至二维码页面
+@property (assign, nonatomic) id parentVC;
 
 
 //初始化的时候这个方法必须调用

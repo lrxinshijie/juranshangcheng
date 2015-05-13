@@ -53,6 +53,7 @@
     [self.searchBar setTextFieldText:_keyword];
     [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
     self.searchBar.delegate = self;
+    self.searchBar.parentVC = self;
     [self.view addSubview:self.searchBar];
     
     [_tableView registerNib:[UINib nibWithNibName:@"ShopListCell" bundle:nil] forCellReuseIdentifier:@"ShopListCell"];
@@ -81,12 +82,6 @@
 //    [self.searchBar removeFromSuperview];
 //    self.navigationController.navigationBar.clipsToBounds = YES;
     self.navigationController.navigationBarHidden = NO;
-}
-
-- (void)pushToQRCodeVCDidTriggered
-{
-//    QRBaseViewController * QRVC = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:YES];
-//    [self.navigationController pushViewController:QRVC animated:YES];
 }
 
 - (void)showMenuList

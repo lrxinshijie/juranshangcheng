@@ -68,6 +68,7 @@
     self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
     [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
     self.searchBar.delegate = self;
+    self.searchBar.parentVC = self;
     [self.view addSubview:self.searchBar];
     ////////////////
     [_collectionView registerNib:[UINib nibWithNibName:@"ShopCell" bundle:nil] forCellWithReuseIdentifier:@"ShopCell"];
@@ -139,12 +140,6 @@
     _collectionImageView.image = [UIImage imageNamed:_shop.isStored?@"icon-collection-active.png":@"icon-collection1.png"];
     _collectionLabel.text = _shop.isStored?@"已收藏":@"收藏";
     [_collectionView reloadData];
-}
-
-- (void)pushToQRCodeVCDidTriggered
-{
-    //    QRBaseViewController * QRVC = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:YES];
-    //    [self.navigationController pushViewController:QRVC animated:YES];
 }
 
 - (void)showMenuList
