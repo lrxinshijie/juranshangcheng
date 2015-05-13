@@ -69,6 +69,8 @@
     [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
     self.searchBar.delegate = self;
     self.searchBar.parentVC = self;
+    [self.searchBar setSearchButtonType:SearchButtonType_Product];
+    [self.searchBar setEnabled:NO];
     [self.view addSubview:self.searchBar];
     ////////////////
     [_collectionView registerNib:[UINib nibWithNibName:@"ShopCell" bundle:nil] forCellWithReuseIdentifier:@"ShopCell"];
@@ -114,6 +116,7 @@
             [_shop buildUpWithDictionary:data];
             [self reloadData];
         }
+        [self loadStoreData];
     }];
 }
 
@@ -249,10 +252,14 @@
 
 
 - (IBAction)onLocation:(id)sender{
-    NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
-    navi.naviType = NaviTypeStall;
-    navi.shopId = _shop.shopId;
-    [self.navigationController pushViewController:navi animated:YES];
+    if (_storeList.count>0) {
+        NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
+        navi.naviType = NaviTypeStall;
+        navi.shopId = _shop.shopId;
+        [self.navigationController pushViewController:navi animated:YES];
+    }else {
+        [self showTip:@"该店铺没有关联实体店"];
+    }
 }
 
 - (IBAction)onPrivateLetter:(id)sender{

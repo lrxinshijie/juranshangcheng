@@ -54,6 +54,8 @@
     [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
     self.searchBar.delegate = self;
     self.searchBar.parentVC = self;
+    [self.searchBar setSearchButtonType:SearchButtonType_Shop];
+    [self.searchBar setEnabled:NO];
     [self.view addSubview:self.searchBar];
     
     [_tableView registerNib:[UINib nibWithNibName:@"ShopListCell" bundle:nil] forCellReuseIdentifier:@"ShopListCell"];
