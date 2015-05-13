@@ -110,7 +110,8 @@
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_CHANGE_PRICE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            _attributePriceLabel.text = [NSString stringWithFormat:@"￥%@", data[@"goodsPrice"]];
+            NSString *price = [data getStringValueForKey:@"goodsprice" defaultValue:@""];
+            _attributePriceLabel.text = [price isEqual:@""]?@"":[NSString stringWithFormat:@"￥%@",  price];
             [_attributeImageView setImageWithURLString:data[@"goodsImage"]];
         }
         [_attributeTableView reloadData];
@@ -570,7 +571,6 @@
         _countLabel.text = [NSString stringWithFormat:@"%d/%d", (NSInteger)(scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame) + 1), _product.goodsImagesList.count];
     }
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
