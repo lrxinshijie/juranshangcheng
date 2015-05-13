@@ -10,8 +10,12 @@
 #import "SearchTableViewCell.h"
 #import "SearchHistoryManager.h"
 #import "IQKeyboardManager.h"
+#import "QRBaseViewController.h"
 
 @interface CustomSearchBar ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
+{
+    BOOL couldClick;
+}
 
 @property (strong, nonatomic) IBOutlet UITextField *inputTextField;
 @property (strong, nonatomic) IBOutlet UIImageView *magnifyingGlass;
@@ -52,6 +56,7 @@
 - (void)initUI
 {
     self.enabledShow = YES;
+    couldClick = YES;
     self.listTableView.frame = CGRectMake(0, 64, 320, 0);
     self.frame = CGRectMake(0, 0, 320, 64);
     
@@ -115,8 +120,18 @@
     
     if (self.rightBtnStyle == RightBtnStyle_Scan) {
         
-        if (self.delegate && [self.delegate respondsToSelector: @selector(pushToQRCodeVCDidTriggered)]) {
-            [self.delegate pushToQRCodeVCDidTriggered];
+        if (couldClick) {
+            
+            QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
+            vc.enableClick = ^(BOOL enabled)
+            {
+                couldClick = YES;
+            };
+            if (self.delegate) {
+                UIViewController * parentVC = self.parentVC;
+                [parentVC.navigationController pushViewController:vc animated:YES];
+            }
+            couldClick = NO;
         }
         
     }else if (self.rightBtnStyle == RightBtnStyle_Search){

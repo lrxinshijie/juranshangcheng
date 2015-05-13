@@ -62,6 +62,7 @@
     self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
     [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
     self.searchBar.delegate = self;
+    self.searchBar.parentVC = self;
     
     self.filterView = [[ProductFilterView alloc] initWithDefaultData:_filterData SeletedData:_selectedFilter];
     _filterView.delegate = self;
@@ -263,13 +264,6 @@
     if ([_filterView isShow]) {
         [_filterView showSort];
     }
-}
-
-
-- (void)pushToQRCodeVCDidTriggered
-{
-    //    QRBaseViewController * QRVC = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:YES];
-    //    [self.navigationController pushViewController:QRVC animated:YES];
 }
 
 - (void)showMenuList

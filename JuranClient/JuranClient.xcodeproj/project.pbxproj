@@ -578,7 +578,6 @@
 		14BF81A11AEDF4E100D6A10F /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8411AD8F878004E849F /* FMDatabasePool.m */; };
 		14BF81A21AEDF4E100D6A10F /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8431AD8F878004E849F /* FMDatabaseQueue.m */; };
 		14BF81A31AEDF4E100D6A10F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8461AD8F878004E849F /* FMResultSet.m */; };
-		14BF81A41AEDF4E100D6A10F /* TestSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */; };
 		14BF81A51AEDF4E100D6A10F /* QRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D4FF51AD77F9E005486D2 /* QRCodeViewController.m */; };
 		14BF81A61AEDF4E100D6A10F /* InputCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D50051AD7847D005486D2 /* InputCodeViewController.m */; };
 		14BF81A71AEDF4E100D6A10F /* QRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D500A1AD7C882005486D2 /* QRBaseViewController.m */; };
@@ -704,8 +703,6 @@
 		1FD3B8491AD8F878004E849F /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8411AD8F878004E849F /* FMDatabasePool.m */; };
 		1FD3B84A1AD8F878004E849F /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8431AD8F878004E849F /* FMDatabaseQueue.m */; };
 		1FD3B84B1AD8F878004E849F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8461AD8F878004E849F /* FMResultSet.m */; };
-		1FD3B84F1AD8FB58004E849F /* TestSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */; };
-		1FD3B8501AD8FB58004E849F /* TestSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD3B84E1AD8FB58004E849F /* TestSearchViewController.xib */; };
 		1FE1394D1AF8616B001BDF05 /* QRCodeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1394C1AF8616B001BDF05 /* QRCodeWebViewController.m */; };
 		1FF00FA51AE4B74300D54914 /* third_bg_cell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF00FA11AE4B74300D54914 /* third_bg_cell@2x.png */; };
 		1FF00FA61AE4B74300D54914 /* third_bg_header_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF00FA21AE4B74300D54914 /* third_bg_header_left@2x.png */; };
@@ -2290,9 +2287,6 @@
 		1FD3B8441AD8F878004E849F /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		1FD3B8451AD8F878004E849F /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		1FD3B8461AD8F878004E849F /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		1FD3B84C1AD8FB58004E849F /* TestSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSearchViewController.h; sourceTree = "<group>"; };
-		1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSearchViewController.m; sourceTree = "<group>"; };
-		1FD3B84E1AD8FB58004E849F /* TestSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestSearchViewController.xib; sourceTree = "<group>"; };
 		1FE1394B1AF8616B001BDF05 /* QRCodeWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeWebViewController.h; sourceTree = "<group>"; };
 		1FE1394C1AF8616B001BDF05 /* QRCodeWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeWebViewController.m; sourceTree = "<group>"; };
 		1FF00FA11AE4B74300D54914 /* third_bg_cell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "third_bg_cell@2x.png"; sourceTree = "<group>"; };
@@ -3998,9 +3992,6 @@
 				1FD3B8241AD8C38F004E849F /* SearchTableViewCell.m */,
 				1FD3B8251AD8C38F004E849F /* SearchTableViewCell.xib */,
 				1FD3B8311AD8F83E004E849F /* HistoryRecord */,
-				1FD3B84C1AD8FB58004E849F /* TestSearchViewController.h */,
-				1FD3B84D1AD8FB58004E849F /* TestSearchViewController.m */,
-				1FD3B84E1AD8FB58004E849F /* TestSearchViewController.xib */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -6761,7 +6752,6 @@
 				BD5186A71A5D0ED700BE508A /* unlogin_head@2x.png in Resources */,
 				2C91421C1AF5D7E300FD7C69 /* menu-icon-svr@2x.png in Resources */,
 				140C9EB91ADB5DAD0079391A /* icon-nav-finish-active@2x.png in Resources */,
-				1FD3B8501AD8FB58004E849F /* TestSearchViewController.xib in Resources */,
 				1FD3B8141AD8B558004E849F /* search_cancel@2x.png in Resources */,
 				2CD7B4ED1AF913ED00B31074 /* icon_personal_setting@2x.png in Resources */,
 				145471D31A38944F00428BCB /* QuestionViewController.xib in Resources */,
@@ -7083,7 +7073,6 @@
 				14BF81A11AEDF4E100D6A10F /* FMDatabasePool.m in Sources */,
 				14BF81A21AEDF4E100D6A10F /* FMDatabaseQueue.m in Sources */,
 				14BF81A31AEDF4E100D6A10F /* FMResultSet.m in Sources */,
-				14BF81A41AEDF4E100D6A10F /* TestSearchViewController.m in Sources */,
 				14BF81A51AEDF4E100D6A10F /* QRCodeViewController.m in Sources */,
 				14BF81A61AEDF4E100D6A10F /* InputCodeViewController.m in Sources */,
 				14BF81A71AEDF4E100D6A10F /* QRBaseViewController.m in Sources */,
@@ -7521,7 +7510,6 @@
 				37D7FEA61AECBA6700288C1E /* ProductCollectionCell.m in Sources */,
 				A90459D81A278B2D00F8CD74 /* SubjectViewController.m in Sources */,
 				A987EE201A20928B00CED7CD /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
-				1FD3B84F1AD8FB58004E849F /* TestSearchViewController.m in Sources */,
 				BD5F23E61A52A430009F759E /* SerciceDetailViewController.m in Sources */,
 				A987EDD21A20920500CED7CD /* ALViewController.m in Sources */,
 				A9224E281A6CB779002974ED /* UIViewController+YIFullScreenScroll.m in Sources */,
