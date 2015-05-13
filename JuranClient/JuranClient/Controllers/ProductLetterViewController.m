@@ -42,8 +42,8 @@
     [rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
-    if (_product) {
-        [_photoImageView setImageWithURLString:_product.defaultImage Editing:YES];
+    if (_product && _product.goodsImagesList && _product.goodsImagesList.count>0) {
+        [_photoImageView setImageWithURLString:_product.goodsImagesList[0] Editing:YES];
         _nameLabel.text = _product.goodsName;
         _priceLabel.text = ApplicationDelegate.gLocation.isSuccessLocation ? _product.priceString : @"";
         _priceLabel.textColor = kBlueColor;
