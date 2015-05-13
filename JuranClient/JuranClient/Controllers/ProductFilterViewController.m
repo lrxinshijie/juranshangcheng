@@ -166,6 +166,8 @@
     if ([filterName  isEqual: @"价格(元)"]) {
         cell = _priceCell;
         cell.textLabel.text = filterName;
+        _textFieldMinPrice.text =_selectedFilter.pMinPrice>0 ? [NSString stringWithFormat:@"%ld",_selectedFilter.pMinPrice] : @"";
+        _textFieldMaxPrice.text =_selectedFilter.pMaxPrice>0 ? [NSString stringWithFormat:@"%ld",_selectedFilter.pMaxPrice] : @"";
     }else {
         cell.textLabel.text = filterName;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -264,6 +266,29 @@
     _selectedFilter.pAttributeDict = [[NSMutableDictionary alloc]init];
     [self loadData];
 }
+
+-(void)viewDidLayoutSubviews
+{
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+    }
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
 @end
 
 @implementation ProductSelectedFilter

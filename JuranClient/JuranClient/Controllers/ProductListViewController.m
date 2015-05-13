@@ -65,6 +65,8 @@
     [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
     self.searchBar.delegate = self;
     self.searchBar.parentVC = self;
+    [self.searchBar setSearchButtonType:SearchButtonType_Product];
+    [self.searchBar setEnabled:NO];
     
     self.filterView = [[ProductFilterView alloc] initWithDefaultData:_filterData SeletedData:_selectedFilter];
     _filterView.delegate = self;
@@ -389,16 +391,32 @@
     
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)viewDidLayoutSubviews
 {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
-    {
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+    }
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
         [cell setSeparatorInset:UIEdgeInsetsZero];
     }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
-    {
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
+}
+
+
+- (void)customSearchStartWork {
+    if (_filterView.isShow)
+        [_filterView showSort];
 }
 
 /*

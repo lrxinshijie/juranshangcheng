@@ -120,21 +120,8 @@
 - (IBAction)rightButtonDidClick:(id)sender {
     
     if (self.rightBtnStyle == RightBtnStyle_Scan) {
-        
-        if (couldClick) {
-            
-            QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
-            vc.enableClick = ^(BOOL enabled)
-            {
-                couldClick = YES;
-            };
-            if (self.delegate) {
-                UIViewController * parentVC = self.parentVC;
-                [parentVC.navigationController pushViewController:vc animated:YES];
-            }
-            couldClick = NO;
-        }
-        
+        QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
+        [self.viewController.navigationController pushViewController:vc animated:YES];
     }else if (self.rightBtnStyle == RightBtnStyle_Search){
         //默认按照下拉列表中的第一个搜索
         [self hideAnimation];

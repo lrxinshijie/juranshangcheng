@@ -307,6 +307,18 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     _selectedFilter.pMaxPrice = 0;
     _selectedFilter.pAttributeDict = [[NSMutableDictionary alloc]init];
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
 @end
 
 
