@@ -43,7 +43,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
     if (_product) {
-        [_photoImageView setImageWithURLString:_product.goodsLogo];
+        [_photoImageView setImageWithURLString:_product.defaultImage Editing:YES];
         _nameLabel.text = _product.goodsName;
         _priceLabel.text = ApplicationDelegate.gLocation.isSuccessLocation ? _product.priceString : @"";
         _priceLabel.textColor = kBlueColor;
