@@ -9,6 +9,11 @@
 #import "ProductFilterData.h"
 
 @implementation ProductAttribute
+- (id)copyWithZone:(NSZone *)zone {
+    ProductAttribute *theCopy = [[[self class] allocWithZone:zone]init];
+    return theCopy;
+}
+
 - (id)initWithDictionary:(NSDictionary*)dict {
     if (self=[self init]) {
         if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {

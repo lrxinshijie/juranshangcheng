@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ProductAttribute : NSObject
+@interface ProductAttribute : NSObject<NSCopying>
 @property (nonatomic, copy) NSString *attName;
 @property (nonatomic, copy) NSString *attId;
 @property (nonatomic, copy) NSArray *attValues;
