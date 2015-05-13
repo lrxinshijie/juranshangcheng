@@ -14,7 +14,7 @@
 @protocol ProductFilterViewDelegate <NSObject>
 
 //- (void)clickProductFilterView:(ProductFilterView *)view returnData:(ProductSelectedFilter *)data IsGrid:(BOOL)isGrid;
-- (void)clickProductFilterView:(ProductFilterView *)view returnData:(ProductSelectedFilter *)data IsGrid:(BOOL)isGrid IsFilter:(BOOL)isFilter;
+- (void)clickProductFilterView:(ProductFilterView *)view returnData:(ProductSelectedFilter *)data IsGrid:(BOOL)isGrid IsFilter:(BOOL)isFilter actionType:(FilterViewAction)action;
 @end
 
 @interface ProductFilterView : UIView

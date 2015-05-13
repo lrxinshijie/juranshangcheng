@@ -183,7 +183,7 @@
         return [NSString stringWithFormat:@"￥%@ ~ ￥%@", self.priceMin,self.priceMax];
 }
 
-- (BOOL)isShowPrice{
++ (BOOL)isShowPrice{
     return ApplicationDelegate.gLocation.isSuccessLocation;
 }
 

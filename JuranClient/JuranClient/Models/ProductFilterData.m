@@ -11,6 +11,9 @@
 @implementation ProductAttribute
 - (id)copyWithZone:(NSZone *)zone {
     ProductAttribute *theCopy = [[[self class] allocWithZone:zone]init];
+    theCopy.attName = self.attName.copy;
+    theCopy.attId = self.attId.copy;
+    theCopy.attValues = self.attValues.mutableCopy;
     return theCopy;
 }
 
@@ -39,6 +42,21 @@
 @end
 //------------------------------------------------------------------
 @implementation ProductCategory
+- (id)copyWithZone:(NSZone *)zone {
+    ProductCategory *theCopy = [[[self class] allocWithZone:zone]init];
+    theCopy.Id = self.Id;
+    theCopy.shopId = self.shopId;
+    theCopy.name = self.name.copy;
+    theCopy.depth = self.depth;
+    theCopy.parentId = self.parentId;
+    theCopy.catCode = self.catCode.copy;
+    theCopy.catName = self.catName.copy;
+    theCopy.parentCode = self.parentCode.copy;
+    theCopy.urlContent = self.urlContent.copy;
+    theCopy.childList = self.childList.mutableCopy;
+    return theCopy;
+}
+
 - (id)initWithDictionary:(NSDictionary*)dict {
     if (self=[self init]) {
         if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
@@ -72,6 +90,12 @@
 @end
 //------------------------------------------------------------------
 @implementation ProductBrand
+- (id)copyWithZone:(NSZone *)zone {
+    ProductCategory *theCopy = [[[self class] allocWithZone:zone]init];
+    //theCopy.
+    return theCopy;
+}
+
 - (id)initWithDictionary:(NSDictionary*)dict {
     if (self=[self init]) {
         if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {

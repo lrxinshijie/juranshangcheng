@@ -158,7 +158,6 @@
                                     @"userId": [NSString stringWithFormat:@"%d", [JRUser currentUser].userId],
                                     @"appVersion": [NSString stringWithFormat:@"%@|%@", [Public isDesignerApp] ? @"designer" : @"member", [self bundleVersion] ],
                                     @"createTimes": [[NSDate date] stringWithFormat:kDateFormatHorizontalLineLong]};
-            ASLog(@"Log:%@",param);
             [[ALEngine shareEngine] pathURL:JR_START_LOG parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyShowErrorDefaultMessage:@(NO), kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
                 if (error) {
                     ASLog(@"err:%@",error);

@@ -53,13 +53,13 @@
 @implementation Public
 
 + (NSString *)imagePath{
-	NSArray *searchPaths =
-	NSSearchPathForDirectoriesInDomains
-	(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentFolderPath = [searchPaths objectAtIndex: 0];
-//	NSLog(@"image path:%@/photos", documentFolderPath);
-	documentFolderPath = [NSString stringWithFormat:@"%@",documentFolderPath];
-	return  documentFolderPath;
+    NSArray *searchPaths =
+    NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentFolderPath = [searchPaths objectAtIndex: 0];
+    //	NSLog(@"image path:%@/photos", documentFolderPath);
+    documentFolderPath = [NSString stringWithFormat:@"%@",documentFolderPath];
+    return  documentFolderPath;
 }
 
 + (void)alertAndTime:(NSString *)msg Time:(double)time{
@@ -67,11 +67,11 @@
 }
 
 + (void)alertOK:(NSString *)title Message:(NSString *)message{
-//    if (title && ![title isEqualToString:@""]) {
-//        [GlobalPopupAlert show:[NSString stringWithFormat:@"%@\n%@",title,message] andFadeOutAfter:1.5];
-//    }else {
-//        [GlobalPopupAlert show:message andFadeOutAfter:1.5];
-//    }
+    //    if (title && ![title isEqualToString:@""]) {
+    //        [GlobalPopupAlert show:[NSString stringWithFormat:@"%@\n%@",title,message] andFadeOutAfter:1.5];
+    //    }else {
+    //        [GlobalPopupAlert show:message andFadeOutAfter:1.5];
+    //    }
     
     if (title && ![title isEqualToString:@""]) {
         [GlobalPopupAlert show:[NSString stringWithFormat:@"%@\n%@",title,message] andFadeOutAfter:1.5];
@@ -79,35 +79,35 @@
         [GlobalPopupAlert show:message andFadeOutAfter:1.5];
     }
     
-//	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title 
-//													message:message 
-//												   delegate:self 
-//										  cancelButtonTitle:nil 
-//										  otherButtonTitles: @"确定",nil];
-//	[alert show];	
-//	[alert release];
+    //	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+    //													message:message
+    //												   delegate:self
+    //										  cancelButtonTitle:nil
+    //										  otherButtonTitles: @"确定",nil];
+    //	[alert show];
+    //	[alert release];
 }
 
 
 + (NSString *)devicePhoneNumber{
-	NSString *phone = [[NSUserDefaults standardUserDefaults] valueForKey:@"SBFormattedPhoneNumber"];
-	return phone;
+    NSString *phone = [[NSUserDefaults standardUserDefaults] valueForKey:@"SBFormattedPhoneNumber"];
+    return phone;
 }
 + (NSString *)deviceSystemName{
-	return [[UIDevice currentDevice] systemName];
+    return [[UIDevice currentDevice] systemName];
 }
 + (NSString *)deviceSystemVersion{
-	return [[UIDevice currentDevice] systemVersion];
+    return [[UIDevice currentDevice] systemVersion];
 }
 + (NSString *)deviceUniqueIdentifier{
     return @"";
-//	return [[UIDevice currentDevice] uniqueIdentifier];
+    //	return [[UIDevice currentDevice] uniqueIdentifier];
 }
 + (NSString *)deviceModel{
-	return [[UIDevice currentDevice] model];
+    return [[UIDevice currentDevice] model];
 }
 + (NSString *)deviceName{
-	return [[UIDevice currentDevice] name];
+    return [[UIDevice currentDevice] name];
 }
 
 + (NSString *)deviceToken{
@@ -116,7 +116,7 @@
 
 + (void)initApp{
     
-	NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSString *old_version = [ud objectForKey:@"version"];
     
     if (!old_version) {
@@ -124,11 +124,11 @@
         old_version = @"";
     }
     
-    if ([Public versionEqualString:old_version NewVersion:[Public versionString]]) {    
+    if ([Public versionEqualString:old_version NewVersion:[Public versionString]]) {
         [ud setValue:[Public versionString] forKey:@"version"];
     }
     
-	[ud synchronize];
+    [ud synchronize];
 }
 
 + (BOOL)versionEqualString:(NSString *)old_version NewVersion:(NSString *)new_version{
@@ -164,9 +164,9 @@
 }
 
 + (NSString *)versionString{
-	NSString *file = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
-	NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithContentsOfFile:file];
-	return [NSString stringWithFormat:@"%@",[dict objectForKey:@"CFBundleShortVersionString"]];
+    NSString *file = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithContentsOfFile:file];
+    return [NSString stringWithFormat:@"%@",[dict objectForKey:@"CFBundleShortVersionString"]];
 }
 
 + (UIImage *)imageWithName:(NSString *)aName{
@@ -174,11 +174,11 @@
 }
 
 + (UIImage *)imageWithName:(NSString *)aName ofType:(NSString *)ext{
-	return [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:aName ofType:ext]];
+    return [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:aName ofType:ext]];
 }
 
 + (UIFont *)fontWithContent{
-	return [UIFont systemFontOfSize:kSystemFontSize];
+    return [UIFont systemFontOfSize:kSystemFontSize];
 }
 
 + (UIFont *)fontWithSmall{
@@ -186,11 +186,11 @@
 }
 
 + (UIFont *)fontWithTitle{
-	return [UIFont boldSystemFontOfSize:kASLabelFontSize];
+    return [UIFont boldSystemFontOfSize:kASLabelFontSize];
 }
 
 + (UIFont *)fontWithCover{
-	return [UIFont boldSystemFontOfSize:20];
+    return [UIFont boldSystemFontOfSize:20];
 }
 
 + (UIColor *)mainColor{
@@ -200,11 +200,11 @@
 + (UINavigationController *)navigationControllerFromRootViewController:(UIViewController *)viewController{
     ALNavigationController *navigationController = [[ALNavigationController alloc] initWithRootViewController:viewController];
     [navigationController.navigationBar setBackgroundImageWithColor:[UIColor whiteColor]];
-//#ifdef kJuranDesigner
-//    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-//        navigationController.interactivePopGestureRecognizer.delegate = nil;
-//    }
-//#endif
+    //#ifdef kJuranDesigner
+    //    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+    //        navigationController.interactivePopGestureRecognizer.delegate = nil;
+    //    }
+    //#endif
     
     if (SystemVersionGreaterThanOrEqualTo7) {
         [navigationController.navigationBar setBackgroundImageWithColor:[ALTheme sharedTheme].navigationColor];
@@ -234,7 +234,7 @@
 + (NSString *)carrierCode{
     CTTelephonyNetworkInfo *netInfo = [[CTTelephonyNetworkInfo alloc] init];
     CTCarrier *carrier = [netInfo subscriberCellularProvider];
-
+    
     NSString *carrierCode;
     
     if (carrier == nil) {
@@ -261,8 +261,8 @@
 }
 
 /**
-  * 验证手机号码
-  **/
+ * 验证手机号码
+ **/
 + (BOOL)validateMobile:(NSString *)mobileNum
 {
     return mobileNum.length == 11;
@@ -444,32 +444,32 @@
 }
 
 /*
-+ (NSArray*)searchHistorysWithSearchType:(SearchType)type{
-    id historys = [kUD objectForKey:[NSString stringWithFormat:@"keywordsForSearchHistory%d", type]];
-    if (historys && [historys isKindOfClass:[NSArray class]]) {
-        return (NSArray*)historys;
-    }else{
-        return @[];
-    }
-}
-
-+ (void)addSearchHistory:(NSString*)keyword searchType:(SearchType)type{
-    NSMutableArray *historys = [NSMutableArray arrayWithArray:[self searchHistorysWithSearchType:type]];
-    for (NSString *str in historys) {
-        if ([str isEqualToString:keyword]) {
-            return;
-        }
-    }
-    [historys insertObject:keyword atIndex:0];
-    [kUD setObject:historys forKey:[NSString stringWithFormat:@"keywordsForSearchHistory%d", type]];
-    [kUD synchronize];
-}
-
-+ (void)removeAllSearchHistoryWithSearchType:(SearchType)type{
-    [kUD setObject:@[] forKey:[NSString stringWithFormat:@"keywordsForSearchHistory%d", type]];
-    [kUD synchronize];
-}
-*/
+ + (NSArray*)searchHistorysWithSearchType:(SearchType)type{
+ id historys = [kUD objectForKey:[NSString stringWithFormat:@"keywordsForSearchHistory%d", type]];
+ if (historys && [historys isKindOfClass:[NSArray class]]) {
+ return (NSArray*)historys;
+ }else{
+ return @[];
+ }
+ }
+ 
+ + (void)addSearchHistory:(NSString*)keyword searchType:(SearchType)type{
+ NSMutableArray *historys = [NSMutableArray arrayWithArray:[self searchHistorysWithSearchType:type]];
+ for (NSString *str in historys) {
+ if ([str isEqualToString:keyword]) {
+ return;
+ }
+ }
+ [historys insertObject:keyword atIndex:0];
+ [kUD setObject:historys forKey:[NSString stringWithFormat:@"keywordsForSearchHistory%d", type]];
+ [kUD synchronize];
+ }
+ 
+ + (void)removeAllSearchHistoryWithSearchType:(SearchType)type{
+ [kUD setObject:@[] forKey:[NSString stringWithFormat:@"keywordsForSearchHistory%d", type]];
+ [kUD synchronize];
+ }
+ */
 
 + (void)jumpFromLink:(NSString *)link{
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
@@ -680,15 +680,10 @@
 #endif
     }else if (type == 40){//扫一扫
 #ifndef kJuranDesigner
-        QRBaseViewController *vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
-        vc.hidesBottomBarWhenPushed = YES;
+        QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
         [navigationController pushViewController:vc animated:YES];
 #endif
     }
-    
-    
-    
-    
 }
 
 + (NSDictionary *)deviceInfo{
@@ -696,8 +691,8 @@
 }
 
 + (BOOL)isDesignerApp{
-//    NSString *bundleIdentifier = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-//    return ![bundleIdentifier isEqualToString:@"com.juran.JuranHome"];
+    //    NSString *bundleIdentifier = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+    //    return ![bundleIdentifier isEqualToString:@"com.juran.JuranHome"];
     
 #ifdef kJuranDesigner
     return YES;

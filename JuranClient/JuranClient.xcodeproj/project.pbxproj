@@ -519,6 +519,10 @@
 		1468580C1AA54DD30089A0CE /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146858081AA54DD30089A0CE /* AlipaySDK.framework */; };
 		1468580E1AA554A40089A0CE /* rsa_private_key.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1468580D1AA554A40089A0CE /* rsa_private_key.txt */; };
 		1468580F1AA554A40089A0CE /* rsa_private_key.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1468580D1AA554A40089A0CE /* rsa_private_key.txt */; };
+		146A97ED1B02EE5C00163432 /* ProductGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A97EB1B02EE5C00163432 /* ProductGridCell.m */; };
+		146A97EE1B02EE5C00163432 /* ProductGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 146A97EB1B02EE5C00163432 /* ProductGridCell.m */; };
+		146A97EF1B02EE5C00163432 /* ProductGridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146A97EC1B02EE5C00163432 /* ProductGridCell.xib */; };
+		146A97F01B02EE5C00163432 /* ProductGridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146A97EC1B02EE5C00163432 /* ProductGridCell.xib */; };
 		146CE9C51A47EB0700FAA87F /* TextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 146CE9C31A47EB0700FAA87F /* TextFieldCell.m */; };
 		146CE9C61A47EB0700FAA87F /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */; };
 		147282C71A67673500FB0CFB /* AHReach.m in Sources */ = {isa = PBXBuildFile; fileRef = 147282C61A67673500FB0CFB /* AHReach.m */; };
@@ -2066,6 +2070,9 @@
 		146858071AA54DD30089A0CE /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		146858081AA54DD30089A0CE /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		1468580D1AA554A40089A0CE /* rsa_private_key.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rsa_private_key.txt; sourceTree = "<group>"; };
+		146A97EA1B02EE5C00163432 /* ProductGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductGridCell.h; sourceTree = "<group>"; };
+		146A97EB1B02EE5C00163432 /* ProductGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductGridCell.m; sourceTree = "<group>"; };
+		146A97EC1B02EE5C00163432 /* ProductGridCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductGridCell.xib; sourceTree = "<group>"; };
 		146CE9C21A47EB0700FAA87F /* TextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldCell.h; sourceTree = "<group>"; };
 		146CE9C31A47EB0700FAA87F /* TextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldCell.m; sourceTree = "<group>"; };
 		146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
@@ -5133,6 +5140,9 @@
 				2C1D10611AFD16D3005712D2 /* ProductCatgeryCell.h */,
 				2C1D10621AFD16D3005712D2 /* ProductCatgeryCell.m */,
 				2C1D10631AFD16D3005712D2 /* ProductCatgeryCell.xib */,
+				146A97EA1B02EE5C00163432 /* ProductGridCell.h */,
+				146A97EB1B02EE5C00163432 /* ProductGridCell.m */,
+				146A97EC1B02EE5C00163432 /* ProductGridCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -6009,6 +6019,7 @@
 				BD5186201A5D0ED700BE508A /* icon-designer-id@2x.png in Resources */,
 				BD5187261A5D0ED700BE508A /* service_highlighted_9@2x.png in Resources */,
 				BD5187121A5D0ED700BE508A /* service_highlighted_10@2x.png in Resources */,
+				146A97F01B02EE5C00163432 /* ProductGridCell.xib in Resources */,
 				1415FA301A5CD1CB003D0C29 /* CaseImageHeaderView.xib in Resources */,
 				BD51861A1A5D0ED700BE508A /* icon-chat@2x.png in Resources */,
 				BD5187361A5D0ED700BE508A /* service_normal_5@2x.png in Resources */,
@@ -6799,6 +6810,7 @@
 				14FE2DE81A38313800B31FBA /* PrivateMessageCell.xib in Resources */,
 				14CCB30D1ADD074F0041AA38 /* TopProductCell.xib in Resources */,
 				BD51861D1A5D0ED700BE508A /* icon-designer-badge2@2x.png in Resources */,
+				146A97EF1B02EE5C00163432 /* ProductGridCell.xib in Resources */,
 				37D7FEBA1AECDD6C00288C1E /* TopicDetailViewController.xib in Resources */,
 				A945252C1AA5F9BE002DFA2A /* order_filter@2x.png in Resources */,
 				A911009E1A9B5FF500F75AF5 /* OrderFilterViewController.xib in Resources */,
@@ -7320,6 +7332,7 @@
 				1415F9CE1A5CD1CB003D0C29 /* QuestionCell.m in Sources */,
 				37F0E6A01A7D1F4E004CCCB2 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				1415F9CF1A5CD1CB003D0C29 /* JRPageControl.m in Sources */,
+				146A97EE1B02EE5C00163432 /* ProductGridCell.m in Sources */,
 				37F0E6B01A7D1F4E004CCCB2 /* PSTCollectionViewUpdateItem.m in Sources */,
 				37ECDD271AE167D600BE6027 /* ConstructCell.m in Sources */,
 				1415F9D01A5CD1CB003D0C29 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
@@ -7798,6 +7811,7 @@
 				1472FF7C1AE4AB8E00735929 /* LocationManager.m in Sources */,
 				14EDB38D1A3B4FE200E5AC77 /* FeedBackViewController.m in Sources */,
 				A987EE5B1A209E6100CED7CD /* JRCase.m in Sources */,
+				146A97ED1B02EE5C00163432 /* ProductGridCell.m in Sources */,
 				A9B4EB791A371F120091AAAF /* CaseCollectViewController.m in Sources */,
 				A987EDDC1A20920500CED7CD /* CLLocation+ASCategory.m in Sources */,
 				37F0E62E1A7D1AFE004CCCB2 /* MWGridCell.m in Sources */,
