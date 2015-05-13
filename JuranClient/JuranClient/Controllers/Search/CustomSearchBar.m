@@ -110,9 +110,10 @@
 - (IBAction)cleanButtonDidClick:(id)sender {
     
     self.inputTextField.text = nil;
-    if (!self.isHistory) {
-        [self changeListStyleAnimation];
-    }
+    [_inputTextField becomeFirstResponder];
+//    if (!self.isHistory) {
+//        [self changeListStyleAnimation];
+//    }
     
 }
 
@@ -294,15 +295,14 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.inputTextField resignFirstResponder];
-    [self hideAnimation];
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
 
     [self rightButtonChangeStyleWithKey:RightBtnStyle_Scan];
+    [self hideAnimation];
     if (textField.text.length == 0) {
-        [self hideAnimation];
         [self cleanBtnHide];
         [self magnifyingGlassShow];
         self.inputTextField.placeholder = @"      请输入搜索关键字";

@@ -16,6 +16,9 @@
     if (self) {
         _isSelect = NO;
         _selectLocation = Location_None;
+        _lColor = NormalColor;
+        _mColor = NormalColor;
+        _rColor = NormalColor;
     }
     return self;
 }

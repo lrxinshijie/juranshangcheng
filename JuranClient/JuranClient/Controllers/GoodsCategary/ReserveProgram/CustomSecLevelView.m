@@ -36,12 +36,10 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
 }
 
 - (void)initSecondLevelViewWithItem:(SecondLevelItem *)item
 {
-    //TODO:需要检测item是不是左中右三个都有参数，然后配置UI，此处等接口
     [self.lImage setImageWithURLString:item.lImage];
     self.lLabel.text = item.lText;
     self.lRequestID = item.lID;
@@ -80,6 +78,17 @@
     self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.finalDataArray = [NSMutableArray arrayWithCapacity:0];
     [self setSelectImage:item.selectLocation];
+    
+    //配置字体颜色，因为此View是作为TableView的section的header加载的，每次刷新会不作处理的话字体颜色就会默认成xib设置的黑色。
+    if (item.lColor) {
+        self.lLabel.textColor = item.lColor;
+    }
+    if (item.mColor) {
+        self.mLabel.textColor = item.mColor;
+    }
+    if (item.rColor) {
+        self.rLabel.textColor = item.rColor;
+    }
 }
 
 - (IBAction)didSelect:(UIButton *)sender {
