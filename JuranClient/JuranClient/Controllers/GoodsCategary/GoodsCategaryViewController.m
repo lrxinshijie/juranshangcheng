@@ -128,6 +128,22 @@
     }
     
     [self setLocation];
+    
+    __weak GoodsCategaryViewController * wSelf = self;
+    [_listTableView addHeaderWithCallback:^{
+        if (wSelf.vcStyle == CategaryStyle_Shop) {
+            wSelf.pageNo = 1;
+            [wSelf requestDataForBrand:wSelf.brandName pageNo:wSelf.pageNo];
+        }
+    }];
+    [_listTableView addFooterWithCallback:^{
+        if (wSelf.vcStyle == CategaryStyle_Shop) {
+            wSelf.pageNo++;
+            [wSelf requestDataForBrand:wSelf.brandName pageNo:wSelf.pageNo];
+        }
+    }];
+    
+    
 }
 
 - (void)setLocation
@@ -218,7 +234,7 @@
     if (tableView == _listTableView) {
         return CellHeight;
     }else{
-        return 50;
+        return 51;
     }
 }
 
@@ -732,7 +748,11 @@
                             };
     [[ALEngine shareEngine] pathURL:JR_BRAND_LIST parameters:dict HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [wSelf hideHUD];
-        [wSelf.dataArray_secondLevel removeAllObjects];
+        
+        if (wSelf.pageNo == 1) {
+            [wSelf.dataArray_secondLevel removeAllObjects];
+        }
+        
         NSMutableArray * tempArr = [NSMutableArray arrayWithCapacity:0];
         if ([data isKindOfClass:[NSDictionary class]]) {
             [tempArr addObjectsFromArray:[(NSDictionary *)data objectForKey:@"brandForMallDtoList"]];
@@ -774,33 +794,18 @@
                 
             }
             
-            [self.dataArray_secondLevel addObject:sItem];
+            [wSelf.dataArray_secondLevel addObject:sItem];
             
         }
         
-        
+        [wSelf.listTableView headerEndRefreshing];
+        [wSelf.listTableView footerEndRefreshing];
         [wSelf.listTableView reloadData];
     }];
     
     
 }
 
-
-
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    if (scrollView == _listTableView && self.vcStyle == CategaryStyle_Shop) {
-        
-        if (scrollView.contentOffset.y>scrollView.contentSize.height) {
-            
-            self.pageNo++;
-            [self requestDataForBrand:self.brandName pageNo:self.pageNo];
-            
-        }
-        
-    }
-}
 
 
 
