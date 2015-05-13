@@ -17,6 +17,9 @@ typedef enum {
     
 }Location;
 
+#define NormalColor [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0]
+#define SelectColor [UIColor colorWithRed:11.0/255.0 green:81.0/255.0 blue:168.0/255.0 alpha:1.0]
+
 @interface SecondLevelItem : NSObject
 
 @property (assign, nonatomic) BOOL isSelect;
@@ -25,14 +28,19 @@ typedef enum {
 @property (strong, nonatomic) NSString * lImage;
 @property (strong, nonatomic) NSString * lText;
 @property (strong, nonatomic) NSString * lID;
+@property (strong, nonatomic) UIColor * lColor;
 
 @property (strong, nonatomic) NSString * mImage;
 @property (strong, nonatomic) NSString * mText;
 @property (strong, nonatomic) NSString * mID;
+@property (strong, nonatomic) UIColor * mColor;
 
 @property (strong, nonatomic) NSString * rImage;
 @property (strong, nonatomic) NSString * rText;
 @property (strong, nonatomic) NSString * rID;
+@property (strong, nonatomic) UIColor * rColor;
+
+
 
 - (SecondLevelItem *)initSecondLevelItem;
 

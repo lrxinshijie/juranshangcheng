@@ -452,12 +452,16 @@
         
         self.cellCount = 0;
         
-        //修改字体颜色
-        [view setTextNormalColor:location.index];
-        
         SecondLevelItem * currentItem = [self.dataArray_secondLevel objectAtIndex:location.viewNum-9000];
         currentItem.isSelect = NO;
         currentItem.selectLocation = Location_None;
+        if (location.index == Location_Left) {
+            currentItem.lColor = NormalColor;
+        }else if (location.index == Location_Middle){
+            currentItem.mColor = NormalColor;
+        }else if (location.index == Location_Right){
+            currentItem.rColor = NormalColor;
+        }
         
         _old_location.index = Location_None;
         _old_location.viewNum = -1;
@@ -469,13 +473,28 @@
         //记录下需要刷新的section，用于请求完成之后刷新。
         self.old_IndexSet = indexSet;
         
-        //修改字体颜色
-        [self.old_view setTextNormalColor:self.old_location.index];
-        [view setTextSelectColor:location.index];
+        if (self.old_location.viewNum != -1) {
+            SecondLevelItem * oldItem = [self.dataArray_secondLevel objectAtIndex:self.old_location.viewNum-9000];
+            if (self.old_location.index == Location_Left) {
+                oldItem.lColor = NormalColor;
+            }else if (self.old_location.index == Location_Middle){
+                oldItem.mColor = NormalColor;
+            }else if (self.old_location.index == Location_Right){
+                oldItem.rColor = NormalColor;
+            }
+        }
+        
         
         SecondLevelItem * currentItem = [self.dataArray_secondLevel objectAtIndex:location.viewNum-9000];
         currentItem.isSelect = YES;
         currentItem.selectLocation = location.index;
+        if (location.index == Location_Left) {
+            currentItem.lColor = SelectColor;
+        }else if (location.index == Location_Middle){
+            currentItem.mColor = SelectColor;
+        }else if (location.index == Location_Right){
+            currentItem.rColor = SelectColor;
+        }
         
         self.old_view = view;
         self.old_location = location;
