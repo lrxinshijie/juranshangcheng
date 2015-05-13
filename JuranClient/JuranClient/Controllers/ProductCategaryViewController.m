@@ -9,6 +9,7 @@
 #import "ProductCategaryViewController.h"
 #import "ProductFilterData.h"
 #import "ProductCatgeryCell.h"
+#import "ProductSeletedFilter.h"
 
 static NSString *CellIdentifier = @"ProductCatgeryCell";
 
@@ -84,10 +85,10 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     NSMutableArray *relArry = [[NSMutableArray alloc]init];
     for (NSObject *obj in _filterData.categoryList) {
         ProductCategory *cat = (ProductCategory *)obj;
-        cat.isReal = YES;
         if ([cat.parentCode isEqual:parentCode]) {
             [relArry addObject:cat];
             cat.childList = [self CreateCategoryTreeByParentCode:cat.catCode];
+            cat.isReal = YES;
             if (cat.childList.count>0) {
                 [cat.childList insertObject:[self CreateAllCat:cat] atIndex:0];
             }

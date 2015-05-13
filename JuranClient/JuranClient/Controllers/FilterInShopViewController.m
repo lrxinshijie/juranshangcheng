@@ -8,6 +8,7 @@
 
 #import "FilterInShopViewController.h"
 #import "ProductFilterData.h"
+#import "ProductSeletedFilter.h"
 
 @interface FilterInShopViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

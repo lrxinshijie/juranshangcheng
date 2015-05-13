@@ -46,6 +46,7 @@
 #import "GoodsCategaryViewController.h"
 #import "ProductListViewController.h"
 #import "ProductFilterData.h"
+#import "ProductSeletedFilter.h"
 #import "MyDemandViewController.h"
 #import "TopicDetailViewController.h"
 #import "JRTopic.h"
@@ -609,7 +610,7 @@
         ProductListViewController *vc = [[ProductListViewController alloc]init];
         vc.selectedFilter = [[ProductSelectedFilter alloc]init];
         vc.selectedFilter.isInShop = NO;
-        vc.selectedFilter.sort = [param getIntegerValueForKey:@"id" defaultValue:4];
+        vc.selectedFilter.sort = [param getIntegerValueForKey:@"sort" defaultValue:4];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
     }else if (type == 19){//门店导航

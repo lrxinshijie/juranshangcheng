@@ -8,6 +8,7 @@
 
 #import "ProductClassViewController.h"
 #import "ProductFilterData.h"
+#import "ProductSeletedFilter.h"
 
 @interface ProductClassViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

@@ -14,6 +14,7 @@
 #import "ProductAttributeViewController.h"
 #import "AppDelegate.h"
 #import "UserLocation.h"
+#import "ProductSeletedFilter.h"
 
 @interface ProductFilterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -295,13 +296,13 @@
 
 @end
 
-@implementation ProductSelectedFilter
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _pAttributeDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    }
-    return self;
-}
-@end
+//@implementation ProductSelectedFilter
+//- (instancetype)init
+//{
+//    self = [super init];
+//    if (self) {
+//        _pAttributeDict = [NSMutableDictionary dictionaryWithCapacity:0];
+//    }
+//    return self;
+//}
+//@end

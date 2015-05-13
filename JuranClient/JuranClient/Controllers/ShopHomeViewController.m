@@ -26,6 +26,7 @@
 #import "CaseViewController.h"
 #import "QuestionViewController.h"
 #import "ShopListViewController.h"
+#import "ProductSeletedFilter.h"
 
 
 @interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,CustomSearchBarDelegate>
@@ -163,7 +164,8 @@
     }else if (index == 1){
         ProductListViewController *vc = [[ProductListViewController alloc]init];
         vc.selectedFilter.keyword = keyWord;
-        vc.selectedFilter.isInShop = NO;
+        vc.selectedFilter.isInShop = YES;
+        vc.selectedFilter.shopId = _shop.shopId;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index == 2){
         ShopListViewController * vc = [[ShopListViewController alloc] init];
