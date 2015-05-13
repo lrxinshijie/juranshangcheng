@@ -16,7 +16,7 @@
 + (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
-@interface ProductCategory : NSObject
+@interface ProductCategory : NSObject<NSCopying>
 //inshop
 @property (nonatomic, assign) long Id;
 @property (nonatomic, assign) long shopId;
@@ -36,7 +36,7 @@
 + (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
-@interface ProductBrand : NSObject
+@interface ProductBrand : NSObject<NSCopying>
 @property (nonatomic, copy) NSString *catCode;
 @property (nonatomic, assign) long brandId;
 @property (nonatomic, copy) NSString *brandName;
