@@ -57,6 +57,7 @@
 
 - (void)setupUI{
     self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
+    [self.searchBar setSearchButtonType:SearchButtonType_Product];
     self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
     [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
     self.searchBar.delegate = self;
