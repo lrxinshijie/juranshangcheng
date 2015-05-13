@@ -112,7 +112,7 @@
         if (!error) {
             NSString *price = [data getStringValueForKey:@"goodsprice" defaultValue:@""];
             _attributePriceLabel.text = [price isEqual:@""]?@"":[NSString stringWithFormat:@"￥%@",  price];
-            [_attributeImageView setImageWithURLString:data[@"goodsImage"]];
+            [_attributeImageView setImageWithURLString:data[@"goodsImage"] Editing:YES];
         }
         [_attributeTableView reloadData];
     }];

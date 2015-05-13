@@ -344,35 +344,37 @@
 }
 
 - (void)postPrivateLetterWithUserId:(NSInteger)userId Target:(id)target VC:(UIViewController *)vc{
-    [vc showHUD];
-    NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", userId]
-                            };
-    [[ALEngine shareEngine]  pathURL:JR_CHECK_PRIVATE_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        [vc hideHUD];
-        if (!error) {
-            NSDictionary *dic = data[@"privateLetterGeneral"];
-            if (dic && [dic isKindOfClass:[NSDictionary class]]) {
-                PrivateMessageDetailViewController *detailVC = [[PrivateMessageDetailViewController alloc] init];
-                PrivateMessage *message = [[PrivateMessage alloc] initWithDictionary:dic];
-                detailVC.message = message;
-                [vc.navigationController pushViewController:detailVC animated:YES];
-            }else{
-                if (!target) {
+    if (target) {
+        if ([target isKindOfClass:[JRProduct class]]){
+            ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
+            pv.product = target;
+            [vc.navigationController pushViewController:pv animated:YES];
+        }else if ([target isKindOfClass:[JRShop class]]){
+            ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
+            pv.shop = target;
+            [vc.navigationController pushViewController:pv animated:YES];
+        }
+    }else{
+        [vc showHUD];
+        NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", userId]
+                                };
+        [[ALEngine shareEngine]  pathURL:JR_CHECK_PRIVATE_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+            [vc hideHUD];
+            if (!error) {
+                NSDictionary *dic = data[@"privateLetterGeneral"];
+                if (dic && [dic isKindOfClass:[NSDictionary class]]) {
+                    PrivateMessageDetailViewController *detailVC = [[PrivateMessageDetailViewController alloc] init];
+                    PrivateMessage *message = [[PrivateMessage alloc] initWithDictionary:dic];
+                    detailVC.message = message;
+                    [vc.navigationController pushViewController:detailVC animated:YES];
+                }else{
                     PrivateLetterViewController *pv = [[PrivateLetterViewController alloc] init];
                     pv.receiverId = userId;
                     [vc.navigationController pushViewController:pv animated:YES];
-                }else if ([target isKindOfClass:[JRProduct class]]){
-                    ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
-                    pv.product = target;
-                    [vc.navigationController pushViewController:pv animated:YES];
-                }else if ([target isKindOfClass:[JRShop class]]){
-                    ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
-                    pv.shop = target;
-                    [vc.navigationController pushViewController:pv animated:YES];
                 }
             }
-        }
-    }];
+        }];
+    }
 }
 
 @end
