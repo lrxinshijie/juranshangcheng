@@ -9,6 +9,7 @@
 #import "CustomSearchBar.h"
 #import "SearchTableViewCell.h"
 #import "SearchHistoryManager.h"
+#import "IQKeyboardManager.h"
 
 @interface CustomSearchBar ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
 
@@ -33,6 +34,11 @@
 
 @property (assign, nonatomic) RightBtnStyle rightBtnStyle;
 
+@property (assign, nonatomic) NSInteger searchType;
+
+//用于判断是否需要展示搜索范围列表的属性
+@property (assign, nonatomic) BOOL enabledShow;
+
 @end
 
 @implementation CustomSearchBar
@@ -45,7 +51,7 @@
 
 - (void)initUI
 {
-    
+    self.enabledShow = YES;
     self.listTableView.frame = CGRectMake(0, 64, 320, 0);
     self.frame = CGRectMake(0, 0, 320, 64);
     
@@ -102,7 +108,6 @@
     if (!self.isHistory) {
         [self changeListStyleAnimation];
     }
-   
     
 }
 
@@ -117,7 +122,7 @@
     }else if (self.rightBtnStyle == RightBtnStyle_Search){
         //默认按照下拉列表中的第一个搜索
         [self hideAnimation];
-        [self startSearchAtIndex:0];
+        [self startSearchAtIndex:self.searchType];
         
     }else if (self.rightBtnStyle == RightBtnStyle_More){
         //添加弹出菜单
@@ -135,7 +140,12 @@
     if (self.isHistory) {
         return self.dataArray_History.count;
     }else{
-        return self.dataArray_SearchRange.count;
+        if (self.enabledShow) {
+            return self.dataArray_SearchRange.count;
+        }else{
+            //当逻辑上应该展示搜索范围而设置不允许展示的时候，返回0个cell已达到不展示的效果。
+            return 0;
+        }
     }
 }
 
@@ -226,16 +236,20 @@
         
         [self hideAnimation];
         [self startSearchAtIndex:indexPath.row];
+        [self.inputTextField resignFirstResponder];
         
     }
-    
-    [self.inputTextField resignFirstResponder];
 }
 
 
 #pragma mark - TextFieldDalegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    //通知上层搜索的背景要展开，如果上层有已经展开的浮层可在此代理中酌情处理。
+    if (self.delegate && [self.delegate respondsToSelector:@selector(customSearchStartWork)]) {
+        [self.delegate customSearchStartWork];
+    }
+    
     if (textField.text.length == 0) {
         self.isHistory = NO;
     }else{
@@ -247,6 +261,10 @@
     self.inputTextField.placeholder = nil;
     [self rightButtonChangeStyleWithKey:RightBtnStyle_Search];
     [self changeListStyleAnimation];
+    
+    //此处是为了解决BUG添加的代码，目的是吧奇葩的第三方键盘添加在串口上的手势关掉，否则，会出现响应手势收起键盘而不响应本类中的一些触发事件。
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.shouldResignOnTouchOutside = NO;
     
 }
 
@@ -298,8 +316,7 @@
     
     //入库去重
     NSString * str = self.inputTextField.text;
-    //每次都更新一下历史记录的数据，以防同一次搜索多次点击
-    [self initHistoryData];
+    
     BOOL isExist = NO;
     for (int i=0; i<self.dataArray_History.count; i++) {
         if ([str isEqualToString:self.dataArray_History[i]]) {
@@ -320,12 +337,18 @@
     if (!isExist) {
         [[SearchHistoryManager sharedDataBase] insertSearchItem:str];
     }
-    
+    //每次都更新一下历史记录的数据，以防同一次搜索多次点击
+    [self initHistoryData];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(startSearchWithKeyWord:index:)]) {
         [self.delegate startSearchWithKeyWord:_inputTextField.text index:index];
     }
     
+}
+
+- (void)setSearchButtonType:(SearchButtonType)type
+{
+    self.searchType = type;
 }
 
 #pragma mark - 动画方法
@@ -394,7 +417,7 @@
     
     float height = 0.0;
     
-    int tempCount = self.isHistory?self.dataArray_History.count:self.dataArray_SearchRange.count;
+    int tempCount = self.isHistory?self.dataArray_History.count:(self.enabledShow?self.dataArray_SearchRange.count:0);
     
     if (tempCount>0) {
         
@@ -419,11 +442,23 @@
 
 - (void)cleanBtnShow
 {
+    CGRect frame = self.inputTextField.frame;
+    frame.size.width = 202;
+    __weak CustomSearchBar * wSelf = self;
+    [UIView animateWithDuration:0.1 animations:^{
+        wSelf.inputTextField.frame = frame;
+    }];
     self.cleanButton.hidden = NO;
 }
 
 - (void)cleanBtnHide
 {
+    CGRect frame = self.inputTextField.frame;
+    frame.size.width = 232;
+    __weak CustomSearchBar * wSelf = self;
+    [UIView animateWithDuration:0.1 animations:^{
+        wSelf.inputTextField.frame = frame;
+    }];
     self.cleanButton.hidden = YES;
 }
 
@@ -465,6 +500,11 @@
 {
     self.currentPageNo = pageNo;
     
+}
+
+- (void)setEnabled:(BOOL)enabledShow
+{
+    self.enabledShow = enabledShow;
 }
 
 - (void)setTextFieldText:(NSString *)text

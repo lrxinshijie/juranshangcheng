@@ -101,6 +101,8 @@
     
     
     CustomSearchBar * customSB = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
+    [customSB setSearchButtonType:SearchButtonType_Case];
+    [customSB setEnabled:YES];
     customSB.delegate = self;
     [customSB rightButtonChangeStyleWithKey:RightBtnStyle_Scan];
     customSB.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 64);

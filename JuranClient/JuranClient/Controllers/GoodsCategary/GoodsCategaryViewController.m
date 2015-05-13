@@ -218,7 +218,7 @@
     if (tableView == _listTableView) {
         return CellHeight;
     }else{
-        return 51;
+        return 50;
     }
 }
 
@@ -346,7 +346,7 @@
             return 83;
         }
     }
-    return 1;
+    return 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -649,7 +649,7 @@
 }
 
 #pragma mark - CustomShopViewDelegate
-- (void)shopViewItemDidClickWithCode:(NSString *)brandCode Name:(NSString *)brandName ID:(NSString *)brandID
+- (void)shopViewItemDidClickWithCode:(NSString *)brandCode Name:(NSString *)brandName ID:(long)brandID
 {
     //品牌
     ProductListViewController *vc = [[ProductListViewController alloc]init];
@@ -659,7 +659,7 @@
     vc.selectedFilter.keyword = @"";
     vc.selectedFilter.pBrand = [[ProductBrand alloc]init];
     vc.selectedFilter.pBrand.catCode = brandCode;
-    vc.selectedFilter.pBrand.brandId = 0;
+    vc.selectedFilter.pBrand.brandId = brandID;
     vc.selectedFilter.pBrand.brandName = brandName;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -743,21 +743,21 @@
             
             if (i == count-1) {
                 
-                if (!tempArr.count%2) {
+                if (!(tempArr.count%2)) {
                     sItem.lImageURL = [tempArr[i*2] objectForKey:@"brandLogo"];
                     sItem.lText = [tempArr[i*2] objectForKey:@"brandName"];
                     sItem.lcode = [tempArr[i*2] objectForKey:@"brandCode"];
-                    sItem.rid = [tempArr[i*2] objectForKey:@"id"];
+                    sItem.lid = [[tempArr[i*2] objectForKey:@"id"] longValue];
                     
                     sItem.rImageURL = [tempArr[i*2+1] objectForKey:@"brandLogo"];
                     sItem.rText = [tempArr[i*2+1] objectForKey:@"brandName"];
                     sItem.rcode = [tempArr[i*2+1] objectForKey:@"brandCode"];
-                    sItem.rid = [tempArr[i*2+1] objectForKey:@"id"];
+                    sItem.rid = [[tempArr[i*2+1] objectForKey:@"id"] longValue];
                 }else{
                     sItem.lImageURL = [tempArr[i*2] objectForKey:@"brandLogo"];
                     sItem.lText = [tempArr[i*2] objectForKey:@"brandName"];
                     sItem.lcode = [tempArr[i*2] objectForKey:@"brandCode"];
-                    sItem.rid = [tempArr[i*2] objectForKey:@"id"];
+                    sItem.lid = [[tempArr[i*2] objectForKey:@"id"] longValue];
                 }
                 
             }else{
@@ -765,12 +765,12 @@
                 sItem.lImageURL = [tempArr[i*2] objectForKey:@"brandLogo"];
                 sItem.lText = [tempArr[i*2] objectForKey:@"brandName"];
                 sItem.lcode = [tempArr[i*2] objectForKey:@"brandCode"];
-                sItem.rid = [tempArr[i*2] objectForKey:@"id"];
+                sItem.lid = [[tempArr[i*2] objectForKey:@"id"] longValue];
                 
                 sItem.rImageURL = [tempArr[i*2+1] objectForKey:@"brandLogo"];
                 sItem.rText = [tempArr[i*2+1] objectForKey:@"brandName"];
                 sItem.rcode = [tempArr[i*2+1] objectForKey:@"brandCode"];
-                sItem.rid = [tempArr[i*2+1] objectForKey:@"id"];
+                sItem.rid = [[tempArr[i*2+1] objectForKey:@"id"] longValue];
                 
             }
             

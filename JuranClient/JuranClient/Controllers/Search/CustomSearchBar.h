@@ -16,15 +16,32 @@ typedef enum {
     
 }RightBtnStyle;
 
+typedef enum {
+    
+    SearchButtonType_Case = 0,
+    SearchButtonType_Product,
+    SearchButtonType_Shop,
+    SearchButtonType_Designer,
+    SearchButtonType_Question
+    
+}SearchButtonType;
+
 @protocol CustomSearchBarDelegate <NSObject>
 
+//返回
 - (void)goBackButtonDidSelect;
 
+//跳转到二维码
 - (void)pushToQRCodeVCDidTriggered;
 
+//开始搜索
 - (void)startSearchWithKeyWord:(NSString *)keyWord index:(int)index;
 
+//显示更多按钮
 - (void)showMenuList;
+
+//开始编辑
+- (void)customSearchStartWork;
 
 @end
 
@@ -41,5 +58,11 @@ typedef enum {
 
 //设置输入框文字
 - (void)setTextFieldText:(NSString *)text;
+
+//设置输入文字后右侧的搜索按钮是按照什么类型搜索，取值为SearchButtonType，依次为案例、商品、商店、设计师、问答，不设置默认为案例
+- (void)setSearchButtonType:(SearchButtonType)type;
+
+//设置是否可以展示搜索范围列表，不设置默认为可以展示
+- (void)setEnabled:(BOOL)enabledShow;
 
 @end

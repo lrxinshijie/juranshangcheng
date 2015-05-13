@@ -128,7 +128,7 @@
 
 - (void)configBackground
 {
-    [self.output setRectOfInterest:CGRectMake(145/ScreenHeight, 80/ScreenWidth, 230/ScreenHeight, 160/ScreenWidth)];
+    [self.output setRectOfInterest:CGRectMake(120/ScreenHeight, 55/ScreenWidth, 280/ScreenHeight, 210/ScreenWidth)];
     [self.view.layer insertSublayer:self.preview atIndex:0];
 }
 
@@ -204,13 +204,18 @@
 
 - (int)needShowWithWebView:(NSString *)str
 {
-    //http://mall.juran.cn/product/10678.htm?ozu_sid=ProductMobile
-    //http://mall.juran.cn/shop/111.htm?ozu_sid=ShopMobile
-    //http://songbao.juran.cn/?ozu_sid=ShopMobile
-
-    NSString * regex_product = @"^http://mall\.juran\.cn/product/([0-9]{1,})\.htm.ozu_sid=ProductMobile$";
-    NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm.ozu_sid=ShopMobile$";
+    //正常环境下
+//    NSString * regex_product = @"^http://mall\.juran\.cn/product/([0-9]{1,})\.htm.ozu_sid=ProductMobile$";
+//    NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm.ozu_sid=ShopMobile$";
     NSString * regex_shop1 = @"^http://[a-zA-Z]{1,}\.juran\.cn/.ozu_sid=ShopMobile$";
+    
+    //SIT环境
+    NSString * regex_product = @"^http://mall\.juran.o2o.sit\.com/rankings/([0-9]{1,})\.htm$";
+    NSString * regex_shop = @"^http://mall\.juran.o2o.sit\.com/product/([0-9]{1,})\.htm$";
+    
+    //UAT环境
+//    NSString * regex_product = @"^http://mallo2ouat\.juranzhijia\.cn/shop/([0-9]{1,})\.htm$";
+//    NSString * regex_shop = @"^http://mallo2ouat\.juranzhijia\.cn/product/([0-9]{1,})\.htm$";
     
     NSPredicate *pred_shop = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex_shop];
     BOOL isMatch_shop = [pred_shop evaluateWithObject:str];
