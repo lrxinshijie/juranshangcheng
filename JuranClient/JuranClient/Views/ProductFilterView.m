@@ -209,8 +209,8 @@
 
 - (void)clickFilterButton:(UIButton*)btn{
     _isFilter = YES;
-    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:)]) {
-        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter];
+    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:actionType:)]) {
+        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter actionType:FilterViewActionFilter];
     }
     _isFilter = NO;
 }
@@ -242,8 +242,8 @@
 - (void)onClearStore:(id)sender{
     _selectedData.pStore = nil;
     
-    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:)]) {
-        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter];
+    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:actionType:)]) {
+        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter actionType:FilterViewActionStore];
     }
     
     selectedBtn.selected = NO;
@@ -264,8 +264,8 @@
     }
     _isFilter = YES;
     [self.gridButton setImage:[UIImage imageNamed:_isGrid?@"icon-grid.png":@"icon-list.png"] forState:UIControlStateNormal];
-    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:)]) {
-        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter];
+    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:actionType:)]) {
+        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter actionType:FilterViewActionFilter];
     }
     _isFilter = NO;
 }
@@ -278,8 +278,8 @@
     }
     _isGrid = !_isGrid;
     [self.gridButton setImage:[UIImage imageNamed:_isGrid?@"icon-grid.png":@"icon-list.png"] forState:UIControlStateNormal];
-    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:)]) {
-        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter];
+    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:actionType:)]) {
+        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter actionType:FilterViewActionGrid];
     }
 }
 
@@ -382,8 +382,8 @@
         ProductStore *store = self.defaultData.storeList[indexPath.row];
         _selectedData.pStore = store;
     }
-    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:)]) {
-        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter];
+    if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:actionType:)]) {
+        [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter actionType:FilterViewActionSort];
     }
     selectedBtn.selected = NO;
     selectedBtn = nil;

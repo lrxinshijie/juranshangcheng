@@ -20,10 +20,12 @@
 #import "QuestionViewController.h"
 #import "ShopListViewController.h"
 #import "UIViewController+Menu.h"
+#import "ProductGridCell.h"
 
-@interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate, ProductFilterViewDelegate,CustomSearchBarDelegate>
+@interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate, ProductFilterViewDelegate,CustomSearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UICollectionView *collectionView;
 @property (strong, nonatomic) IBOutlet UIView *emptyView;
 @property (nonatomic, strong) NSMutableArray *products;
 @property (nonatomic, assign) NSInteger currentPage;
@@ -70,7 +72,7 @@
     //_filterView.frame = CGRectMake(0, 0, kWindowWidth, 44);
     [self.view addSubview:_filterView];
     
-    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterView.frame), kWindowWidth, kWindowHeight +20 - CGRectGetMaxY(_filterView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterView.frame), kWindowWidth, kWindowHeightWithoutNavigationBar - 40) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     [self.view addSubview:_tableView];
     [self.view addSubview:self.searchBar];
     __weak typeof(self) weakSelf = self;
@@ -80,6 +82,31 @@
     }];
     
     [_tableView addFooterWithCallback:^{
+        weakSelf.currentPage++;
+        [weakSelf loadData];
+    }];
+    
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    layout.itemSize = CGSizeMake(145, 210);
+    layout.minimumLineSpacing = 10;
+    layout.minimumInteritemSpacing = 10;
+    
+    self.collectionView = [[UICollectionView alloc] initWithFrame:_tableView.frame collectionViewLayout:layout];
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
+    _collectionView.alwaysBounceVertical = YES;
+    _collectionView.backgroundColor = [UIColor whiteColor];
+    
+    [_collectionView registerNib:[UINib nibWithNibName:@"ProductGridCell" bundle:nil] forCellWithReuseIdentifier:@"ProductGridCell"];
+    
+    //        __weak typeof(self) weakSelf = self;
+    [_collectionView addHeaderWithCallback:^{
+        weakSelf.currentPage = 1;
+        [weakSelf loadData];
+    }];
+    
+    [_collectionView addFooterWithCallback:^{
         weakSelf.currentPage++;
         [weakSelf loadData];
     }];
@@ -176,21 +203,46 @@
             //            }else if (_brand){
             //
             //            }
-            [_emptyView removeFromSuperview];
-            [_tableView reloadData];
-            if(_products.count == 0) {
-                _emptyView.center = CGPointMake(_tableView.center.x, 200);
-                [_tableView addSubview:_emptyView];
-            }
+            
+//            [_emptyView removeFromSuperview];
+//            [_tableView reloadData];
+//            if(_products.count == 0) {
+//                _emptyView.center = CGPointMake(_tableView.center.x, 200);
+//                [_tableView addSubview:_emptyView];
+//            }
         }
         
-        
+        [self reloadData];
+        [_collectionView headerEndRefreshing];
+        [_collectionView footerEndRefreshing];
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
     }];
 }
 
-- (void)clickProductFilterView:(ProductFilterView *)view returnData:(ProductSelectedFilter *)data IsGrid:(BOOL)isGrid IsFilter:(BOOL)isFilter{
+- (void)reloadData{
+    [_emptyView removeFromSuperview];
+    _tableView.tableFooterView = [[UIView alloc] init];
+    
+    if (_products.count == 0) {
+        if (_tableView.superview) {
+//            CGRect frame = CGRectMake(0, 0, kWindowWidth, kWindowHeightWithoutNavigationBar - 40);
+//            frame.size.height -= CGRectGetHeight(_tableView.tableHeaderView.frame);
+//            UIView *view = [[UIView alloc] initWithFrame:frame];
+            _emptyView.center = _tableView.center;
+            [self.view addSubview:_emptyView];
+//            _tableView.tableFooterView = view;
+        }else if (_collectionView.superview){
+            _emptyView.center = _collectionView.center;
+            [self.view addSubview:_emptyView];
+        }
+    }
+    
+    [_tableView reloadData];
+    [_collectionView reloadData];
+}
+
+- (void)clickProductFilterView:(ProductFilterView *)view returnData:(ProductSelectedFilter *)data IsGrid:(BOOL)isGrid IsFilter:(BOOL)isFilter actionType:(FilterViewAction)action{
     if (isFilter) {
         ProductFilterViewController *vc = [[ProductFilterViewController alloc]init];
         _selectedFilter = data;
@@ -201,8 +253,15 @@
             [_tableView headerBeginRefreshing];
         }];
         [self.navigationController pushViewController:vc animated:YES];
-    }else if(isGrid){
-        
+    }else if(action == FilterViewActionGrid){
+        if ([_collectionView superview]) {
+            [_collectionView removeFromSuperview];
+            [self.view addSubview:_tableView];
+        } else {
+            [_tableView removeFromSuperview];
+            [self.view addSubview:_collectionView];
+        }
+        [self reloadData];
     }else {
         _selectedFilter = data;
         [_tableView headerBeginRefreshing];
@@ -233,6 +292,31 @@
     [cell fillCellWithProduct:product];
     
     return cell;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return [_products count];
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"ProductGridCell";
+    ProductGridCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    JRProduct *cs = [_products objectAtIndex:indexPath.row];
+    [cell fillCellWithProduct:cs];
+    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    ProductDetailViewController *pd = [[ProductDetailViewController alloc] init];
+    pd.product = _products[indexPath.row];
+    [self.navigationController pushViewController:pd animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
