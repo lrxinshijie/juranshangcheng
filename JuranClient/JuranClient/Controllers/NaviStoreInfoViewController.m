@@ -13,8 +13,9 @@
 #import "UserLocation.h"
 #import "NaviStoreIndoorViewController.h"
 #import "UIViewController+Menu.h"
+#import "MapScrollView.h"
 
-@interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
+@interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UIView *mapBottomView;
 @property (strong, nonatomic) IBOutlet UIView *naviControlView;
@@ -22,7 +23,7 @@
 @property (strong, nonatomic) IBOutlet UIView *timeView;
 @property (strong, nonatomic) IBOutlet UIView *busView;
 @property (strong, nonatomic) IBOutlet UIView *telView;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet MapScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UILabel *labelName;
 @property (strong, nonatomic) IBOutlet UILabel *labelDistance;
 @property (strong, nonatomic) IBOutlet UILabel *labelAddrTitle;
@@ -85,6 +86,7 @@
     _telView.frame = frame;
     [_scrollView addSubview:_telView];
     
+    _scrollView.map = _mapView;
     [self loadData];
 }
 
@@ -92,6 +94,15 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+//    UIView *result = [self.view.superview hitTest:point withEvent:event];
+//    CGPoint buttonPoint = [_mapView convertPoint:point fromView:_mapView];
+//    if ([_mapView pointInside:buttonPoint withEvent:event]) {
+//        return _mapView;
+//    }
+//    return result;
+//}
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGRect mapFrame = _mapView.frame;
@@ -325,7 +336,7 @@
 - (IBAction)IndoorNaviClick:(id)sender {
     NaviStoreIndoorViewController *vc = [[NaviStoreIndoorViewController alloc]init];
     vc.store = _store;
-    vc.navigationItem.title = _store.storeName;
+    vc.navigationItem.title = [NSString stringWithFormat:@"%@室内地图",_store.storeName];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

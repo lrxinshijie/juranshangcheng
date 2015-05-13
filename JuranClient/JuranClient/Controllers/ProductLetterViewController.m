@@ -10,6 +10,8 @@
 #import "TextFieldCell.h"
 #import "JRProduct.h"
 #import "JRShop.h"
+#import "AppDelegate.h"
+#import "UserLocation.h"
 
 @interface ProductLetterViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 
@@ -43,7 +45,7 @@
     if (_product) {
         [_photoImageView setImageWithURLString:_product.goodsLogo];
         _nameLabel.text = _product.goodsName;
-        _priceLabel.text = _product.priceString;
+        _priceLabel.text = ApplicationDelegate.gLocation.isSuccessLocation ? _product.priceString : @"";
         _priceLabel.textColor = kBlueColor;
     }else{
         _productView.hidden = YES;
@@ -99,17 +101,18 @@
     NSString *placeholder = @"";
     NSString *title = @"";
     if (indexPath.row == 0) {
-        placeholder = @"请输入姓名";
-        title = @"姓名";
+        //placeholder = @"请输入姓名";
+        title = @"您的姓名";
         cell.textField.keyboardType = UIKeyboardTypeDefault;
         cell.textField.text = _senderName;
     }else if (indexPath.row == 1) {
-        placeholder = @"请输入11位手机号";
-        title = @"手机号";
+        //placeholder = @"请输入11位手机号";
+        title = @"您的电话";
         cell.textField.text = _mobilePhone;
         cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }
     cell.titleLabel.text = title;
+    cell.titleLabel.textColor = [UIColor grayColor];
     cell.textField.placeholder = placeholder;
     cell.textField.delegate = self;
     cell.textField.tag = indexPath.row;
@@ -194,7 +197,7 @@
     NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _product?_product.shopId:_shop.shopId],
                             @"senderName":_senderName,
                             @"mobilePhone":_mobilePhone,
-                            @"memo": memo};
+                            @"memo": [NSString stringWithFormat:@"%@ http://mall.juran.cn/product/%d.htm?ozu_sid=ProductMobile", memo, _product.linkProductId]};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_SHOP_PRIVATE_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

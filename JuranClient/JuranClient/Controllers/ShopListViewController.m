@@ -23,6 +23,7 @@
 
 @interface ShopListViewController ()<CustomSearchBarDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIView *emptyView;
 
 @property (assign, nonatomic) int currentPage;
 @property (strong, nonatomic) NSMutableArray *dataList;
@@ -145,6 +146,11 @@
                 [_dataList addObjectsFromArray:rows];
             }else{
                 _dataList = rows;
+            }
+            [_emptyView removeFromSuperview];
+            if(_dataList.count == 0) {
+                _emptyView.center = CGPointMake(_tableView.center.x, 200);
+                [_tableView addSubview:_emptyView];
             }
             [_tableView reloadData];
         }

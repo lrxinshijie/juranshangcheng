@@ -57,6 +57,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
 }
 
 - (void)commit {
+    //_selectedFilterCategory = _selectedFilter;
     if (_block) {
         _block(_selectedFilter);
     }
@@ -183,7 +184,13 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     //ProductCatgeryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     ProductCatgeryCell *cell = [[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil] objectAtIndex:0];
     cell.backgroundColor = RGBColor(247, 247, 247);
+    //cell.accessoryView = nil;
+    UIImageView *dropImageView = [[UIImageView alloc]initWithFrame:CGRectMake(295, 16, 10, 6)];
     ProductCategory *cat =[self getSecCat:indexPath.section :indexPath.row];
+    if(cat.childList.count>0){
+        dropImageView.image = [cat isOpen] ? [UIImage imageNamed:@"icon-drop-up"] : [UIImage imageNamed:@"icon-drop-down"];
+        [cell addSubview:dropImageView];
+    }
     if (_selectedFilter.isInShop) {
         cell.labelTitle.text = cat.name;
     }else{
@@ -250,6 +257,11 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 37.5f, 320, 0.5f)];
     lineView.backgroundColor = [UIColor lightGrayColor];
     [btn addSubview:lineView];
+    UIImageView *dropImageView = [[UIImageView alloc]initWithFrame:CGRectMake(295, 16, 10, 6)];
+    if (cat.childList.count>0) {
+        dropImageView.image = [cat isOpen] ? [UIImage imageNamed:@"icon-drop-up"] : [UIImage imageNamed:@"icon-drop-down"];
+        [btn addSubview:dropImageView];
+    }
     return btn;
 }
 
@@ -263,6 +275,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
         //[tableView reloadData];
     }else {
         _selectedFilter.pCategory = [self getCatgary:cat];
+        [self cleanOtherFilters];
         [self commit];
     }
 }
@@ -275,6 +288,7 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
         [_tableView reloadSections:[NSIndexSet indexSetWithIndex:btn.tag-2000] withRowAnimation:UITableViewRowAnimationAutomatic];
     }else{
         _selectedFilter.pCategory = [self getCatgary:cat];
+        [self cleanOtherFilters];
         [self commit];
     }
 }
@@ -282,9 +296,20 @@ static NSString *CellIdentifier = @"ProductCatgeryCell";
 - (void)onTrdCatgary:(id)sender {
     CatButton *btn = (CatButton *)sender;
     _selectedFilter.pCategory = [self getCatgary:btn.category];
+    [self cleanOtherFilters];
     [self commit];
 }
+
+- (void)cleanOtherFilters {
+    _selectedFilter.pClass = nil;
+    _selectedFilter.pBrand = nil;
+    _selectedFilter.pMinPrice = 0;
+    _selectedFilter.pMaxPrice = 0;
+    _selectedFilter.pAttributeDict = [[NSMutableDictionary alloc]init];
+}
 @end
+
+
 
 @implementation CatButton
 

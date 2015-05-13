@@ -23,6 +23,8 @@
 	// red outline
     [_isSelect ? kBlueColor : [UIColor blackColor] setStroke];
 	[path stroke];
+    
+    _label.textColor = _isSelect ? kBlueColor : [UIColor blackColor];
 }
 
 - (void)setSelected:(BOOL)selected{

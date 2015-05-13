@@ -28,6 +28,7 @@
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) NSMutableArray *adInfos;
 @property (nonatomic, strong) EScrollerView *bannerView;
+@property (nonatomic, strong) IBOutlet UIView *menuView;
 
 @property (nonatomic, strong) IBOutlet UIView *shopView;
 @property (nonatomic, strong) IBOutlet UICollectionView *shopCollectionView;
@@ -104,14 +105,34 @@
         }
         
         NSArray *bannerList = [data objectForKey:@"bannerList"];
-        if (bannerList.count > 0) {
-            self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
-            self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentRight];
-            _bannerView.delegate = self;
-            [_headerView addSubview:_bannerView];
-        }
+        self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
+        [self reSetAdView];
+//        if (bannerList.count > 0) {    
+//            self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentRight];
+//            _bannerView.delegate = self;
+//            [_headerView addSubview:_bannerView];
+//        }
         [self loadData];
     }];
+}
+
+- (void)reSetAdView{
+    if (self.bannerView) {
+        [self.bannerView removeFromSuperview];
+        self.bannerView = nil;
+    }
+    
+    if (self.adInfos.count > 0) {
+        self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentCenter];
+        _bannerView.delegate = self;
+        [_headerView addSubview:_bannerView];
+        
+        _menuView.frame = CGRectMake(0, CGRectGetMaxY(_bannerView.frame),  CGRectGetWidth(_menuView.frame), CGRectGetHeight(_menuView.frame));
+    }else{
+        _menuView.frame = CGRectMake(0, 0, CGRectGetWidth(_menuView.frame), CGRectGetHeight(_menuView.frame));
+    }
+    _headerView.frame = CGRectMake(0, 0, CGRectGetWidth(_headerView.frame), CGRectGetMaxY(_menuView.frame));
+    _tableView.tableHeaderView = _headerView;
 }
 
 - (void)EScrollerViewDidClicked:(NSUInteger)index{
@@ -199,12 +220,6 @@
     
     return cell;
 }
-
-//- (void)onCity:(UIButton *)sender{
-//    ProductListViewController *pl = [[ProductListViewController alloc] init];
-//    pl.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:pl animated:YES];
-//}
 
 - (IBAction)onBrandList:(id)sender{
     GoodsCategaryViewController * good = [[GoodsCategaryViewController alloc] initWithNibName:@"GoodsCategaryViewController" bundle:nil isPopNavHide:NO style:CategaryStyle_Shop];

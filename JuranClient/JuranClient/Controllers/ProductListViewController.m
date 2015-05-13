@@ -24,6 +24,7 @@
 @interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate, ProductFilterViewDelegate,CustomSearchBarDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIView *emptyView;
 @property (nonatomic, strong) NSMutableArray *products;
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) ProductFilterView *filterView;
@@ -61,7 +62,6 @@
     self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
     [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
     self.searchBar.delegate = self;
-    
     
     self.filterView = [[ProductFilterView alloc] initWithDefaultData:_filterData SeletedData:_selectedFilter];
     _filterView.delegate = self;
@@ -137,7 +137,7 @@
                 }
             }
         }
-        attrString = [NSString stringWithFormat:@"[%@]",attrString];
+        //attrString = [NSString stringWithFormat:@"[%@]",attrString];
         [param setObject:attrString forKey:@"attributes"];
     }
     if(_selectedFilter.isInShop) {
@@ -177,8 +177,12 @@
             //            }else if (_brand){
             //
             //            }
-            
+            [_emptyView removeFromSuperview];
             [_tableView reloadData];
+            if(_products.count == 0) {
+                _emptyView.center = CGPointMake(_tableView.center.x, 200);
+                [_tableView addSubview:_emptyView];
+            }
         }
         
         
@@ -305,6 +309,18 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 /*

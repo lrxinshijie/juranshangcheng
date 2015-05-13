@@ -19,7 +19,7 @@
 #import "UIViewController+Menu.h"
 
 
-@interface TopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, CommentCellDelegate, UITextFieldDelegate, ALWebViewDelegate, CanRemoveImageViewDelegate>
+@interface TopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, CommentCellDelegate, UITextFieldDelegate, ALWebViewDelegate, CanRemoveImageViewDelegate, UIScrollViewDelegate>
 {
     BOOL firstLoadHtml;
 }
@@ -52,6 +52,8 @@
 
 @property (nonatomic, strong) IBOutlet UIView *emptyView;
 @property (nonatomic, strong) NSMutableDictionary *openStatusDic;
+
+@property (nonatomic, strong) UIButton *scrollToTopButton;
 
 @end
 
@@ -112,6 +114,10 @@
     
     self.hiddenButton = [_tableHeaderView buttonWithFrame:_tableHeaderView.bounds target:self action:@selector(onHiddenCommentImageView) image:nil];
     [_tableHeaderView insertSubview:_hiddenButton atIndex:0];
+    
+    self.scrollToTopButton = [self.view buttonWithFrame:CGRectMake(kWindowWidth - 40 - 15, CGRectGetMaxY(_tableView.frame) - 40 - 30, 40, 40) target:self action:@selector(onScrollToTop) image:[UIImage imageNamed:@"btn-scroll-top.png"]];
+    _scrollToTopButton.hidden = YES;
+    [self.view addSubview:_scrollToTopButton];
 }
 
 - (void)setupCommentView{
@@ -266,6 +272,13 @@
     }];
 }
 
+- (void)resetScrollToTopButton{
+    _scrollToTopButton.hidden = (_tableView.contentOffset.y < CGRectGetHeight(_tableView.frame));
+    CGRect frame = _scrollToTopButton.frame;
+    frame.origin.y = CGRectGetMaxY(_tableView.frame) - 40 - 30;
+    _scrollToTopButton.frame = frame;
+}
+
 - (void)layoutInputImageView{
     _fileImageCountLabel.hidden = _fileImages.count == 0;
     _fileImageCountLabel.text = [NSString stringWithFormat:@"%d", _fileImages.count];
@@ -296,6 +309,10 @@
 }
 
 #pragma mark - Target Action
+
+- (void)onScrollToTop{
+    [_tableView scrollToTop];
+}
 
 - (IBAction)onSend:(id)sender{
     if (![self checkLogin:^{
@@ -339,6 +356,7 @@
     frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
+    [self resetScrollToTopButton];
 }
 
 - (void)onHiddenCommentImageView{
@@ -371,7 +389,7 @@
     frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
-    
+    [self resetScrollToTopButton];
 }
 
 - (void)oldTopic:(id)sender{
@@ -421,7 +439,7 @@
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (_topic) {
         UILabel *label = (UILabel*)[_headerView viewWithTag:100];
-        label.text = @"评论";
+        label.text = @"全部评论";
         if (_topic.commitList.count == 0) {
             label.text = @"暂无评论";
         }
@@ -501,6 +519,7 @@
     if (c.unfold) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+            [self resetScrollToTopButton];
         });
     }
 }
@@ -512,6 +531,10 @@
     }else{
         _commentTextField.placeholder = @"写评论";
     }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    _scrollToTopButton.hidden = (scrollView.contentOffset.y < CGRectGetHeight(_tableView.frame));
 }
 
 #pragma mark - UITextFieldDelegate
@@ -550,8 +573,7 @@
     frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
-    
-    
+    [self resetScrollToTopButton];
 }
 
 -(void)keyboardWillBeHidden:(NSNotification *)aNotification{
@@ -563,6 +585,7 @@
     frame = _commentView.frame;
     frame.origin.y = CGRectGetMaxY(_tableView.frame);
     _commentView.frame = frame;
+    [self resetScrollToTopButton];
 }
 
 #pragma mark - ALWebViewDelegate

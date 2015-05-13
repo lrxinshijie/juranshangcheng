@@ -20,9 +20,11 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *priceCell;
 @property (strong, nonatomic) IBOutlet UITextField *textFieldMinPrice;
 @property (strong, nonatomic) IBOutlet UITextField *textFieldMaxPrice;
-
+@property (strong, nonatomic) IBOutlet UIView *footerView;
+@property (strong, nonatomic) IBOutlet UIButton *clearButton;
 @property (nonatomic, strong) NSMutableArray *conditionArray;
 @property (nonatomic, strong) NSMutableArray *detailArray;
+- (IBAction)onClear:(id)sender;
 @end
 
 @implementation ProductFilterViewController {
@@ -103,7 +105,9 @@
         [_conditionArray addObject:@"价格(元)"];
         [_detailArray addObject:@""];
     }else {
-        _selectedFilter.pBrand=nil;
+        //_selectedFilter.pBrand=nil;
+        _selectedFilter.pMinPrice = 0;
+        _selectedFilter.pMaxPrice = 0;
     }
     
     if (_filterData.attributeList && _filterData.attributeList.count>0) {
@@ -173,6 +177,17 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 60;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    _clearButton.layer.borderWidth = 0.5f;
+    _clearButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    _clearButton.layer.cornerRadius = 1;
+    return _footerView;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //[tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([_conditionArray[indexPath.row] isEqual:@"类目"]) {
@@ -222,6 +237,7 @@
     }
 }
 
+
 - (void)onDone:(id)sender {
     _selectedFilter.pMinPrice = _textFieldMinPrice.text.integerValue;
     _selectedFilter.pMaxPrice = _textFieldMaxPrice.text.integerValue;
@@ -239,6 +255,15 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)onClear:(id)sender {
+    _selectedFilter.pCategory = nil;
+    _selectedFilter.pClass = nil;
+    _selectedFilter.pBrand = nil;
+    _selectedFilter.pMinPrice = 0;
+    _selectedFilter.pMaxPrice = 0;
+    _selectedFilter.pAttributeDict = [[NSMutableDictionary alloc]init];
+    [self loadData];
+}
 @end
 
 @implementation ProductSelectedFilter

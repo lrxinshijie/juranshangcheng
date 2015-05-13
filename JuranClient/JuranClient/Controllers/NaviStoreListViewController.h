@@ -16,4 +16,5 @@ typedef enum : NSUInteger {
 @interface NaviStoreListViewController : ALViewController
 @property (nonatomic, strong) NSArray *dataList;
 @property (nonatomic, assign) NaviType naviType;
+@property (nonatomic, assign) long shopId;
 @end

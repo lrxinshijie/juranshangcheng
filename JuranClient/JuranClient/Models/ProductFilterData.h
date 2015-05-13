@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ProductAttribute : NSObject
+@interface ProductAttribute : NSObject<NSCopying>
 @property (nonatomic, copy) NSString *attName;
 @property (nonatomic, copy) NSString *attId;
 @property (nonatomic, copy) NSArray *attValues;
@@ -63,7 +63,7 @@
 @property (nonatomic, copy) NSString *name;
 @end
 //------------------------------------------------------------------
-@interface ProductSelectedFilter : NSObject
+@interface ProductSelectedFilter : NSObject //<NSCopying>
 @property (nonatomic, assign) BOOL isInShop;
 @property (nonatomic, assign) int sort;
 //@property (nonatomic, strong) ProductSort *pSort;

@@ -9,6 +9,11 @@
 #import "ProductFilterData.h"
 
 @implementation ProductAttribute
+- (id)copyWithZone:(NSZone *)zone {
+    ProductAttribute *theCopy = [[[self class] allocWithZone:zone]init];
+    return theCopy;
+}
+
 - (id)initWithDictionary:(NSDictionary*)dict {
     if (self=[self init]) {
         if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
@@ -140,9 +145,32 @@
 @end
 //------------------------------------------------------------------
 @implementation ProductSort
-
+//- (instancetype)init
+//{
+//    self = [super init];
+//    if (self) {
+//        
+//    }
+//    return self;
+//}
 @end
 //------------------------------------------------------------------
+//@implementation ProductSelectedFilter
+////- (instancetype)init
+////{
+////    self = [super init];
+////    if (self) {
+////
+////    }
+////    return self;
+////}
+//
+////- (id)copyWithZone:(NSZone *)zone {
+//////    NSData * tempArchive = [NSKeyedArchiver archivedDataWithRootObject:self];
+//////    return [NSKeyedUnarchiver unarchiveObjectWithData:tempArchive];
+////    return nil;
+////}
+//@end
 @implementation ProductFilterData
 - (instancetype)init {
     self = [super init];
@@ -196,7 +224,7 @@
             }
             
         }
-        attrString = [NSString stringWithFormat:@"[%@]",attrString];
+        //attrString = [NSString stringWithFormat:@"[%@]",attrString];
         [param setObject:attrString forKey:@"attributes"];
     }
     if(filter.isInShop) {
@@ -207,7 +235,7 @@
         if (filter.pCategory!=0) [param setObject:filter.pCategory.urlContent forKey:@"urlContent"];
         url = JR_SEARCH_PRODUCT;
     }
-
+    
     [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             self.attributeList = [ProductAttribute buildUpWithValueForList:[data objectForKey:@"showAttributesList"]];

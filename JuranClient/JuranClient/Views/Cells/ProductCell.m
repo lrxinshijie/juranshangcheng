@@ -8,6 +8,8 @@
 
 #import "ProductCell.h"
 #import "JRProduct.h"
+#import "AppDelegate.h"
+#import "UserLocation.h"
 
 @interface ProductCell ()
 
@@ -31,9 +33,9 @@
 }
 
 - (void)fillCellWithProduct:(JRProduct *)product{
-    [_photoImageView setImageWithURLString:product.originalImg];
+    [_photoImageView setImageWithURLString:product.defaultImage];
     _nameLabel.text = product.goodsName;
-    _priceLabel.text = [NSString stringWithFormat:@"￥%@", [@([product.onSaleMinPrice integerValue]) decimalNumberFormatter]];
+    _priceLabel.text = ApplicationDelegate.gLocation.isSuccessLocation ? [NSString stringWithFormat:@"￥%@",product.onSaleMinPrice] : @"";
     
     CGRect frame = _nameLabel.frame;
     CGFloat height = [_nameLabel.text heightWithFont:_nameLabel.font constrainedToWidth:CGRectGetWidth(frame)];

@@ -11,7 +11,7 @@
 
 @interface ProductBrandViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-
+@property (strong, nonatomic) NSMutableArray *dataList;
 @end
 
 @implementation ProductBrandViewController
@@ -21,6 +21,12 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"品牌";
     _tableView.tableFooterView = [[UIView alloc]init];
+    _dataList = [NSMutableArray arrayWithArray:_filterData.brandList];
+    ProductBrand *all = [[ProductBrand alloc]init];
+    all.brandId = -100;
+    all.brandName = @"全部";
+    all.catCode = @"";
+    [_dataList insertObject:all atIndex:0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +50,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _filterData.brandList.count;
+    return _dataList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -57,14 +63,18 @@
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = [_filterData.brandList[indexPath.row] brandName];
+    cell.textLabel.text = [_dataList[indexPath.row] brandName];
     cell.textLabel.font = [UIFont systemFontOfSize:13];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    _selectedFilter.pBrand = _filterData.brandList[indexPath.row];
+    if ([_dataList[indexPath.row] brandId]==-100) {
+        _selectedFilter.pBrand = nil;
+    }else {
+        _selectedFilter.pBrand = _dataList[indexPath.row];
+    }
     [self commit];
 }
 @end

@@ -19,6 +19,8 @@
 #import "UIViewController+Login.h"
 #import "UIViewController+Menu.h"
 #import "ProductFilterViewController.h"
+#import "GlobalPopupAlert.h"
+#import "UIAlertView+Blocks.h"
 
 @interface NaviStoreListViewController ()<BMKMapViewDelegate>
 
@@ -56,12 +58,11 @@
         _btnChangeCity.hidden = YES;
     if (_naviType == NaviTypeStore) {
         self.navigationItem.title = @"门店导航";
-        [self loadData];
+    }else {
+        self.navigationItem.title = @"店铺位置";
     }
-    else {
-        
-        [self reloadView];
-    }
+    [self CheckLoctionStatus];
+    [self loadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,9 +71,19 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"cityName": _cityName};
+    
+    NSDictionary *param;
+    NSString *url;
+    if (_naviType == NaviTypeStore) {
+        param = @{@"cityName": _cityName};
+        url = JR_NAVI_STORE_LIST;
+    }else{
+        param = @{@"shopId": @(_shopId),@"cityName": _cityName};
+        url = JR_SHOP_LOCATION;
+    }
+    
     [self showHUD];
-    [[ALEngine shareEngine] pathURL:JR_NAVI_STORE_LIST parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
             if ((NSNull *)data != [NSNull null]) {
@@ -97,6 +108,7 @@
     for (BMKPointAnnotation* ann in _mapView.annotations) {
         [_mapView removeAnnotation:ann];
     }
+    [_mapView removeAnnotation:_selfAnnotation];
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
         _selfAnnotation = [[BMKPointAnnotation alloc]init];
         _selfAnnotation.coordinate = ApplicationDelegate.gLocation.location.coordinate;
@@ -106,7 +118,7 @@
     for (JRStore *store in _dataList) {
         BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
         annotation.coordinate = CLLocationCoordinate2DMake(store.latitude, store.longitude);
-        annotation.title = store.storeName;
+        annotation.title = _naviType == NaviTypeStore ? store.storeName :store.stallName;
         [_mapView addAnnotation:annotation];
     }
     _labelCity.text = [NSString stringWithFormat:@"当前城市：%@",_cityName];
@@ -121,6 +133,7 @@
     [self.navigationController setNavigationBarHidden:YES];
     [_mapView viewWillAppear];
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -189,9 +202,9 @@
 }
 
 - (IBAction)naviRightClick:(id)sender {
-    //[self showAppMenu:nil];
-    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:nil Sort:9 Store:nil IsInShop:NO ShopId:0];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self showAppMenu:nil];
+    //    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:nil Sort:9 Store:nil IsInShop:NO ShopId:0];
+    //    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)changeCityClick:(id)sender {
@@ -208,5 +221,11 @@
     [self.navigationController pushViewController:vc animated:YES];
     //    ShopListViewController *vc = [[ShopListViewController alloc]init];
     //    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)CheckLoctionStatus {
+    if(!ApplicationDelegate.gLocation.isSuccessLocation) {
+        [UIAlertView showWithTitle:nil message:@"当前定位服务未开启,请在设置中启用定位服务" cancelButtonTitle:@"知道了" otherButtonTitles:nil tapBlock:nil];
+    }
 }
 @end

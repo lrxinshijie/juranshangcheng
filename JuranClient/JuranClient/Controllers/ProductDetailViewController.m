@@ -28,6 +28,7 @@
 @interface ProductDetailViewController () <UITableViewDelegate, UITableViewDataSource, JRSegmentControlDelegate>
 
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet UIView *baseTopView;
 @property (nonatomic, strong) IBOutlet UIView *tipsView;
 @property (nonatomic, strong) IBOutlet UIView *titleView;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
@@ -85,14 +86,25 @@
 }
 
 - (void)reloadPrice:(NSNotification *)noti{
-    [self showHUD];
+    
     NSMutableArray *attributeList = [NSMutableArray array];
     [_product.attributeList enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
         NSString *attValue = [dict[@"attrList"] objectAtTheIndex:[_attributeSelected[idx] intValue]];
-        NSDictionary *row = @{@"attId": dict[@"attrName"],
-                              @"attValue": attValue ? attValue : @""};
-        [attributeList addObject:row];
+        NSInteger attrId = [dict[@"attrId"] integerValue];
+        
+        if (attValue.length > 0) {
+            NSDictionary *row = @{@"attId": @(attrId),
+                                  @"attValue": attValue ? attValue : @""};
+            [attributeList addObject:row];
+        }
+        
     }];
+    
+    if (attributeList.count == 0) {
+        return;
+    }
+    
+    [self showHUD];
     NSDictionary *param = @{@"linkProductId": @(_product.linkProductId),
                             @"attributeList": attributeList};
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_CHANGE_PRICE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -113,17 +125,19 @@
     _imageScrollView.delegate = self;
     _imageScrollView.pagingEnabled = YES;
     
-    self.baseTableView = [self.scrollView tableViewWithFrame:CGRectMake(0, 0, CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame) - CGRectGetHeight(_tipsView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.baseTableView = [self.scrollView tableViewWithFrame:CGRectMake(0, 0, CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _baseTableView.backgroundColor = [UIColor clearColor];
     _baseTableView.tableHeaderView = _titleView;
+    _baseTableView.tableFooterView = _tipsView;
     [_scrollView addSubview:_baseTableView];
-    [_scrollView addSubview:_tipsView];
+    [_scrollView addSubview:_baseTopView];
+//    [_scrollView addSubview:_tipsView];
     
-    CGRect frame = _tipsView.frame;
-    frame.origin.y = CGRectGetMaxY(_baseTableView.frame);
-    _tipsView.frame = frame;
+//    CGRect frame = _tipsView.frame;
+//    frame.origin.y = CGRectGetMaxY(_baseTableView.frame);
+//    _tipsView.frame = frame;
     
-    frame = _navigationView.frame;
+    CGRect frame = _navigationView.frame;
     frame.origin.y = CGRectGetHeight(_scrollView.frame);
     _navigationView.frame = frame;
     [_scrollView addSubview:_navigationView];
@@ -138,7 +152,7 @@
     _webView.opaque = NO;
     _webView.backgroundColor = [UIColor clearColor];
     [_scrollView addSubview:_webView];
-    
+    //[self.webView setScalesPageToFit:YES];
     self.detailTableView = [self.scrollView tableViewWithFrame:_webView.frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _detailTableView.backgroundColor = [UIColor clearColor];
     
@@ -158,6 +172,10 @@
         [self setupFavority];
         
         _attributePriceLabel.text = _product.priceString;
+        
+        [_shopLogoImageView setImageWithURLString:_product.shopLogo];
+        _shopNameLabel.text = _product.shopName;
+        _shopScoreLabel.text = [NSString stringWithFormat:@"店铺评分：%@", _product.score];
         
         _nameLabel.text = _product.goodsName;
         CGRect frame = _nameLabel.frame;
@@ -193,13 +211,13 @@
         _countLabel.text = [NSString stringWithFormat:@"1/%d", _product.goodsImagesList.count];
     }];
     
-    [_product loadShop:^(BOOL result) {
-        if (result) {
-            [_shopLogoImageView setImageWithURLString:_product.shopLogo];
-            _shopNameLabel.text = _product.shopName;
-            _shopScoreLabel.text = [NSString stringWithFormat:@"店铺评分：%@", _product.score];
-        }
-    }];
+//    [_product loadShop:^(BOOL result) {
+//        if (result) {
+//            [_shopLogoImageView setImageWithURLString:_product.shopLogo];
+//            _shopNameLabel.text = _product.shopName;
+//            _shopScoreLabel.text = [NSString stringWithFormat:@"店铺评分：%@", _product.score];
+//        }
+//    }];
     
     [_product loadStore:^(BOOL result) {
         if (result) {
@@ -518,14 +536,21 @@
             }
             
         }else if (indexPath.section == 0 && indexPath.row == 1){
-            JRStore *store = [_product.stallInfoList firstObject];
-            if (store) {
-                NaviStoreInfoViewController *st = [[NaviStoreInfoViewController alloc] init];
-                st.store = store;
-                st.naviType = NaviTypeStall;
-                [self.navigationController pushViewController:st animated:YES];
+//            JRStore *store = [_product.stallInfoList firstObject];
+//            if (store) {
+//                NaviStoreInfoViewController *st = [[NaviStoreInfoViewController alloc] init];
+//                st.store = store;
+//                st.naviType = NaviTypeStall;
+//                [self.navigationController pushViewController:st animated:YES];
+//            }
+            if (_product.stallInfoList.count > 0) {
+                NaviStoreListViewController *vc = [[NaviStoreListViewController alloc]init];
+                vc.naviType = NaviTypeStall;
+                vc.shopId = _product.shopId;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else{
+                [self showTip:@"该店铺没有关联实体店"];
             }
-            
         }
     }
     

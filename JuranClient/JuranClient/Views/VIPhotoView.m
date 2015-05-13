@@ -98,7 +98,8 @@
         
         // Center containerView by set insets
         [self centerContent];
-        
+        [self zoomToRect:self.frame animated:NO];
+        [self setContentOffset:CGPointMake(0, 0) animated:YES];
         // Setup other events
         [self setupGestureRecognizer];
         [self setupRotationNotification];
@@ -238,7 +239,7 @@
     CGSize imagePresentationSize = self.imageView.contentSize;
     CGFloat maxScale = MAX(imageSize.height / imagePresentationSize.height, imageSize.width / imagePresentationSize.width);
     self.maximumZoomScale = MAX(1, maxScale); // Should not less than 1
-    self.minimumZoomScale = 1.0;
+    self.minimumZoomScale = MAX(1, self.frame.size.width / imagePresentationSize.width);
 }
 
 - (void)centerContent

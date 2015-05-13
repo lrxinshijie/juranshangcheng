@@ -63,13 +63,13 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMenu)];
-///////////////
+    ///////////////
     self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
     self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
     [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
     self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
-////////////////
+    ////////////////
     [_collectionView registerNib:[UINib nibWithNibName:@"ShopCell" bundle:nil] forCellWithReuseIdentifier:@"ShopCell"];
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ShopHeadView"];
     
@@ -88,7 +88,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-
+    
     //self.navigationController.navigationBar.clipsToBounds = NO;
     self.navigationController.navigationBarHidden = YES;
 }
@@ -181,7 +181,7 @@
         vc.isSearchResult = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
-
+    
 }
 
 #pragma mark - Target Action
@@ -246,11 +246,7 @@
             if (data!=[NSNull null]) {
                 _storeList = [JRStore buildUpWithValueForList:[data objectForKey:@"stallInfoList"]];
             }
-            NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
-            navi.naviType = NaviTypeStall;
-            navi.dataList = _storeList;
-            navi.navigationItem.title = @"店铺位置";
-            [self.navigationController pushViewController:navi animated:YES];
+            
         }
     }];
 #endif
@@ -258,8 +254,10 @@
 
 
 - (IBAction)onLocation:(id)sender{
-    [self loadStoreData];
-    
+    NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
+    navi.naviType = NaviTypeStall;
+    navi.shopId = _shop.shopId;
+    [self.navigationController pushViewController:navi animated:YES];
 }
 
 - (IBAction)onPrivateLetter:(id)sender{
@@ -268,9 +266,9 @@
     }]) {
         [[JRUser currentUser] postPrivateLetterWithUserId:_shop.shopId Target:_shop VC:self];
     }
-//    ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
-//    pv.shop = _shop;
-//    [self.navigationController pushViewController:pv animated:YES];
+    //    ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
+    //    pv.shop = _shop;
+    //    [self.navigationController pushViewController:pv animated:YES];
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -316,14 +314,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (IBAction)onClassification:(id)sender {
     FilterInShopViewController *filter = [[FilterInShopViewController alloc]init];
