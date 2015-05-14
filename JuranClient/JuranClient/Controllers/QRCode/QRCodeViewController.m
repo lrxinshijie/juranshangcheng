@@ -15,6 +15,7 @@
 
 #define UM_QRScanEvent_Product @"SCANPRODUCT"
 #define UM_QRScanEvent_Shop    @"SCANSHOP"
+#define k_UM_Shop_Type         @"SHOPTYPE"
 
 @interface QRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate,UIAlertViewDelegate>
 
@@ -165,7 +166,7 @@
                 //跳转至店铺首页
                 vcStyle = ChildVCStyle_Shop;
                 code = [self getNumberFrom:val];
-                [MobClick event:UM_QRScanEvent_Shop];
+                [MobClick event:UM_QRScanEvent_Shop attributes:@{k_UM_Shop_Type:[self getStatisticsCodeFrom:val]}];
                 
             }else if ([self needShowWithWebView:val] == 2){
                 //跳转至商品详情页
@@ -206,8 +207,8 @@
 {
     //正常环境下
 //    NSString * regex_product = @"^http://mall\.juran\.cn/product/([0-9]{1,})\.htm.ozu_sid=ProductMobile$";
-//    NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm.ozu_sid=ShopMobile$";
-    NSString * regex_shop1 = @"^http://[a-zA-Z]{1,}\.juran\.cn/.ozu_sid=ShopMobile$";
+//    NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm.ozu_sid=.+$";
+    NSString * regex_shop1 = @"^http://[a-zA-Z]{1,}\.juran\.cn/.ozu_sid=.+$";
     
     //SIT环境
     NSString * regex_product = @"^http://mall\.juran.o2o.sit\.com/rankings/([0-9]{1,})\.htm$";
@@ -244,6 +245,15 @@
     NSRange range = [str rangeOfString:@"[[0-9]{1,}" options:NSRegularExpressionSearch];
     if (range.location != NSNotFound) {
         return [str substringWithRange:range];
+    }
+    return nil;
+}
+
+- (NSString *)getStatisticsCodeFrom:(NSString *)str
+{
+    NSRange range = [str rangeOfString:@"ozu_sid=" options:NSRegularExpressionSearch];
+    if (range.location != NSNotFound) {
+        return [str substringFromIndex:range.length+range.location];
     }
     return nil;
 }
