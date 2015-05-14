@@ -51,7 +51,10 @@
     }
     _labelMainBrand.text = [NSString stringWithFormat:@"主营品牌:%@",shop.brands];
     [_labelMainBrand sizeToFit];
-    [_imageLogo setImageWithURLString:shop.logo];
+    _imageLogo.image = nil;
+    if (shop.logo || [shop.logo isEqual:@""]) {
+        [_imageLogo setImageWithURLString:shop.logo];
+    }
     _shopId = shop.shopId;
     [_btnNavi addTarget:self action:@selector(btnNaviClick:) forControlEvents:UIControlEventTouchUpInside];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -67,11 +70,16 @@
             if (data!=[NSNull null]) {
                 _dataList = [JRStore buildUpWithValueForList:[data objectForKey:@"stallInfoList"]];
             }
-            NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
-            navi.naviType = NaviTypeStall;
-            navi.dataList = _dataList;
-            navi.navigationItem.title = @"店铺位置";
-            [self.viewController.navigationController pushViewController:navi animated:YES];
+            if (_dataList.count>0) {
+                NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
+                navi.naviType = NaviTypeStall;
+                //navi.dataList = _dataList;
+                navi.shopId = _shopId;
+                navi.navigationItem.title = @"店铺位置";
+                [self.viewController.navigationController pushViewController:navi animated:YES];
+            }else {
+                [self.viewController showTip:@"该店铺没有关联实体店"];
+            }
         }
     }];
 #endif

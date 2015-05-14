@@ -140,8 +140,8 @@
 }
 
 - (void)onScan{
-    QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
-    if (vc) {
+    if (![QRBaseViewController isRuning]) {
+        QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

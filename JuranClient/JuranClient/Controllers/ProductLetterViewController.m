@@ -194,10 +194,16 @@
         }
     }
     
+    NSString *productUrl;
+    if (_shop) {
+        productUrl = @"";
+    }else {
+        productUrl = [NSString stringWithFormat:@"http://mall.juran.cn/product/%d.htm?ozu_sid=ProductMobile",_product.linkProductId];
+    }
     NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _product?_product.shopId:_shop.shopId],
-                            @"senderName":_senderName,
-                            @"mobilePhone":_mobilePhone,
-                            @"memo": [NSString stringWithFormat:@"%@ http://mall.juran.cn/product/%d.htm?ozu_sid=ProductMobile", memo, _product.linkProductId]};
+                           @"senderName":_senderName,
+                           @"mobilePhone":_mobilePhone,
+                           @"memo": [NSString stringWithFormat:@"%@ %@",memo, productUrl]};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_SHOP_PRIVATE_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
@@ -216,13 +222,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

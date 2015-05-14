@@ -298,9 +298,11 @@
     }];
     if (isHide) {
         _sortButton.selected = NO;
+        _storeButton.selected = NO;
         _filterButton.selected = NO;
         selectedBtn = nil;
     }
+    [self reloadData];
 }
 
 - (void)reloadData{

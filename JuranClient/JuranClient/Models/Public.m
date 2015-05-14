@@ -681,8 +681,10 @@
 #endif
     }else if (type == 40){//扫一扫
 #ifndef kJuranDesigner
-        QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
-        [navigationController pushViewController:vc animated:YES];
+        if (![QRBaseViewController isRuning]) {
+            QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
+            [navigationController pushViewController:vc animated:YES];
+        }
 #endif
     }
 }
