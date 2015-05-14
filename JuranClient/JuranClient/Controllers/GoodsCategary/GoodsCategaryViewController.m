@@ -399,6 +399,7 @@
         CategaryTableViewCell * cell = (CategaryTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         //请求数据
         if (self.vcStyle == CategaryStyle_Shop) {
+            self.pageNo = 1;
             [self requestDataForBrand:cell.cell_id pageNo:self.pageNo];
         }else if (self.vcStyle == CategaryStyle_Goods){
             self.parentCode_product = cell.cell_id;
