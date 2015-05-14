@@ -11,6 +11,7 @@
 #import "ProductCell.h"
 #import "ProductDetailViewController.h"
 #import "ProductFilterData.h"
+#import "ProductSeletedFilter.h"
 #import "MJRefresh.h"
 #import "ProductFilterView.h"
 #import "ProductFilterViewController.h"
@@ -249,8 +250,8 @@
 - (void)clickProductFilterView:(ProductFilterView *)view returnData:(ProductSelectedFilter *)data IsGrid:(BOOL)isGrid IsFilter:(BOOL)isFilter actionType:(FilterViewAction)action{
     if (isFilter) {
         ProductFilterViewController *vc = [[ProductFilterViewController alloc]init];
-        _selectedFilter = data;
-        vc.selectedFilter = data;
+        //_selectedFilter = data;
+        vc.selectedFilter = _selectedFilter.copy;
         vc.filterData = _filterData;
         [vc setBlock:^(ProductSelectedFilter *filter) {
             _selectedFilter = filter;
@@ -267,7 +268,9 @@
         }
         [self reloadData];
     }else {
-        _selectedFilter = data;
+//        if (data) {
+//            _selectedFilter = data;
+//        }
         [_tableView headerBeginRefreshing];
     }
 }

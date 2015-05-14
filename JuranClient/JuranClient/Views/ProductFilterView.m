@@ -8,6 +8,7 @@
 
 #import "ProductFilterView.h"
 #import "ProductFilterData.h"
+#import "ProductSeletedFilter.h"
 
 @interface ProductFilterView()<UITableViewDelegate, UITableViewDataSource>
 {

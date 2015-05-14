@@ -21,6 +21,7 @@
 #import "UIViewController+Menu.h"
 #import "ProductListViewController.h"
 #import "ProductFilterData.h"
+#import "ProductSeletedFilter.h"
 
 
 @interface GoodsCategaryViewController ()<UITableViewDataSource,UITableViewDelegate,CustomSecLevelViewDelegate,CustomThirdLevelCellDelegate,CustomShopViewDelegate,UIScrollViewDelegate>

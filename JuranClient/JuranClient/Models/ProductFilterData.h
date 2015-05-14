@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class ProductSelectedFilter;
 
 @interface ProductAttribute : NSObject<NSCopying>
 @property (nonatomic, copy) NSString *attName;
@@ -44,51 +45,27 @@
 + (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
-@interface ProductStore : NSObject
+@interface ProductStore : NSObject<NSCopying>
 @property (nonatomic, copy) NSString *storeCode;
 @property (nonatomic, copy) NSString *storeName;
 
 + (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
-@interface ProductClass : NSObject
+@interface ProductClass : NSObject<NSCopying>
 @property (nonatomic, copy) NSString *classCode;
 @property (nonatomic, copy) NSString *className;
 
 + (NSMutableArray*)buildUpWithValueForList:(id)value;
 @end
 //------------------------------------------------------------------
-@interface ProductSort : NSObject
+@interface ProductSort : NSObject<NSCopying>
 @property (nonatomic, assign) int sort;
 @property (nonatomic, copy) NSString *name;
 @end
-//------------------------------------------------------------------
-@interface ProductSelectedFilter : NSObject //<NSCopying>
-@property (nonatomic, assign) BOOL isInShop;
-@property (nonatomic, assign) int sort;
-//@property (nonatomic, strong) ProductSort *pSort;
-@property (nonatomic, copy) NSString *keyword;
-@property (nonatomic, assign) long shopId;
-@property (nonatomic, strong) ProductCategory *pCategory;
-@property (nonatomic, strong) ProductClass *pClass;
-@property (nonatomic, strong) ProductBrand *pBrand;
-@property (nonatomic, strong) ProductStore *pStore;
-@property (nonatomic, assign) long pMinPrice;
-@property (nonatomic, assign) long pMaxPrice;
-@property (nonatomic, strong) NSMutableDictionary *pAttributeDict;
-@end
-//------------------------------------------------------------------
-@interface ProductFilterData : NSObject
-@property (nonatomic, strong) NSArray *sortList;
-@property (nonatomic, strong) NSArray *attributeList;
-@property (nonatomic, strong) NSArray *categoryList;
-@property (nonatomic, strong) NSArray *brandList;
-@property (nonatomic, strong) NSArray *storeList;
-@property (nonatomic, strong) NSArray *classList;
 
-- (void)loadFilterDataWithFilter:(ProductSelectedFilter *)filter
-                         Handler:(BOOLBlock)finished;
-@end
+//------------------------------------------------------------------
+
 
 //{"id":71,"saleRegionId":1,"saleRegionNmae":null,"catCode":"00000101","catCodeShow":null,"catName":"建材","parentId":null,"parentCode":"-1","isEcShow":"1","isLeaf":"0","pinYin":"J","catImage":null,"image":null,"status":"1","urlContent":"21323"}
 

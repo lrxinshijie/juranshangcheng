@@ -23,7 +23,7 @@
 
 #define kStatusBGImageViewTag 2933
 
-@interface DemandDetailViewController ()<UITableViewDelegate, UITableViewDataSource, BidDesignerCellDelegate>
+@interface DemandDetailViewController ()<UITableViewDelegate, UITableViewDataSource, BidDesignerCellDelegate, TTTAttributedLabelDelegate>
 {
     NSArray *demandInfoKeys;
     NSArray *demandInfoValues;
@@ -149,6 +149,11 @@
         [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(id)[kBlueColor CGColor] range:range];
         return mutableAttributedString;
     }];
+    if ([_demand statusIndex] == 0) {
+        NSString *str = [_demand descriptionForDetail];
+        NSRange range = [str rangeOfString:@"010-84094000"];
+        [_demandDescribeLabel addLinkToPhoneNumber:@"010-84094000" withRange:range];
+    }
     
     CGRect frame = _demandDescribeLabel.frame;
     frame.size.height = [_demandDescribeLabel.text heightWithFont:_demandDescribeLabel.font constrainedToWidth:CGRectGetWidth(_demandDescribeLabel.frame)];
@@ -179,14 +184,12 @@
     [_scrollView addSubview:_designerTableView];
     
     self.demandDescribeLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(10, 48, 300, 142)];
+    _demandDescribeLabel.delegate = self;
     _demandDescribeLabel.textColor = [UIColor blackColor];
     _demandDescribeLabel.font = [UIFont systemFontOfSize:14];
     _demandDescribeLabel.backgroundColor = [UIColor clearColor];
     _demandDescribeLabel.numberOfLines = 0;
     [_designerTableHeaderView addSubview:_demandDescribeLabel];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    [_designerTableHeaderView addGestureRecognizer:tap];
     
     CGRect frame = _demandInfoTableHeaderView.frame;
     frame.origin = CGPointMake(0, CGRectGetMaxY(_designerTableView.frame));
@@ -249,13 +252,6 @@
 
 #pragma mark - Target Action
 
-- (void)handleTap:(UITapGestureRecognizer*)gesture{
-    if ([_demand statusIndex] == 0) {
-        NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",@"01084094000"];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]];
-    }
-}
-
 - (IBAction)onModifyDemandInfo:(id)sender{
     PublishDesignViewController *vc = [[PublishDesignViewController alloc] init];
     vc.demand = _demand;
@@ -302,6 +298,15 @@
         }
     }];
     
+}
+
+#pragma mark - TTTAttributedLabelDelegate
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithPhoneNumber:(NSString *)phoneNumber{
+    if ([_demand statusIndex] == 0) {
+        NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",@"01084094000"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]];
+    }
 }
 
 #pragma mark - 拒绝、私信、选TA量房

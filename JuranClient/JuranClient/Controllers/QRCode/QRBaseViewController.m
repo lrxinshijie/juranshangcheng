@@ -36,20 +36,20 @@ static BOOL isRuning = NO;
 
 @implementation QRBaseViewController
 
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil isPopNavHide:(BOOL)hide
 {
+    if(isRuning) return nil;
+    isRuning = YES;
+    ASLog(@"init isRuning = %hhd",isRuning);
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.hidesBottomBarWhenPushed = YES;
         self.isPopNavHide = hide;
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        
     }
-    if(isRuning)
-        return nil;
-    else {
-        isRuning = YES;
-        return self;
-    }
+    return self;
 }
 
 - (void)dealloc
@@ -66,6 +66,7 @@ static BOOL isRuning = NO;
     
     self.inputCodeViewController = nil;
     isRuning = NO;
+    ASLog(@"dealloc isRuning = %hhd",isRuning);
 //    if (self.enableClick) {
 //        self.enableClick(YES);
 //        self.enableClick = nil;

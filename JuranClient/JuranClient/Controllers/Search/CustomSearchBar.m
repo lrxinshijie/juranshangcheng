@@ -79,6 +79,14 @@
     self.isHistory = YES;
     [self initHistoryData];
 //    NSLog(@"%@",self.dataArray_History);
+    
+    
+    //输入偏左问题
+    CGRect frame = _inputTextField.frame;
+    frame.size.width  = 15;
+    UIView *leftView = [[UIView alloc]initWithFrame:frame];
+    _inputTextField.leftViewMode = UITextFieldViewModeAlways;
+    _inputTextField.leftView = leftView;
 }
 
 - (void)initHistoryData

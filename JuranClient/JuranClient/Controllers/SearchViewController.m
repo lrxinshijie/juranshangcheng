@@ -17,6 +17,7 @@
 #import "QRBaseViewController.h"
 #import "UIViewController+Menu.h"
 #import "ProductFilterData.h"
+#import "ProductSeletedFilter.h"
 
 #define kKeywordsButtonTag 3330
 

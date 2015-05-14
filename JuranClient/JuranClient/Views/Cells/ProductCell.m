@@ -33,7 +33,7 @@
 }
 
 - (void)fillCellWithProduct:(JRProduct *)product{
-    [_photoImageView setImageWithURLString:product.defaultImage];
+    [_photoImageView setImageWithURLString:product.defaultImage Editing:YES];
     _nameLabel.text = product.goodsName;
     _priceLabel.text = ApplicationDelegate.gLocation.isSuccessLocation ? [NSString stringWithFormat:@"￥%@",product.onSaleMinPrice] : @"";
     

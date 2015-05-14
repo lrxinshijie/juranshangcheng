@@ -124,9 +124,6 @@
                     , @"icon_personal_zhgl"
                     , @"icon_personal_svr"];
     //[self configureMenu];
-    self.navigationItem.title = @"我";
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_personal_setting"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(onSetting:)];
-    self.navigationItem.rightBarButtonItem = rightItem;
 #endif
                    
     [self setupUI];
@@ -140,6 +137,9 @@
     }else{
         [self refreshUI];
     }
+    self.navigationItem.title = @"我";
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_personal_setting"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(onSetting:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 - (void)setupUI{

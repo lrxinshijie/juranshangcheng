@@ -19,6 +19,7 @@
 #import "QuestionViewController.h"
 #import "ProductListViewController.h"
 #import "ProductFilterData.h"
+#import "ProductSeletedFilter.h"
 
 
 @interface ShopListViewController ()<CustomSearchBarDelegate>

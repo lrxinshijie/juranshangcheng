@@ -14,6 +14,7 @@
 #import "ProductAttributeViewController.h"
 #import "AppDelegate.h"
 #import "UserLocation.h"
+#import "ProductSeletedFilter.h"
 
 @interface ProductFilterViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -57,7 +58,11 @@
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(onDone:)];
     [right setTintColor:[UIColor darkTextColor]];
     self.navigationItem.rightBarButtonItem = right;
-    _tableView.tableFooterView = [[UIView alloc]init];
+    //_tableView.tableFooterView = [[UIView alloc]init];
+    _clearButton.layer.borderWidth = 0.5f;
+    _clearButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    _clearButton.layer.cornerRadius = 1;
+    _tableView.tableFooterView = _footerView;
     _filterData = [[ProductFilterData alloc]init];
     [self loadData];
 }
@@ -179,16 +184,16 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 60;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    _clearButton.layer.borderWidth = 0.5f;
-    _clearButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    _clearButton.layer.cornerRadius = 1;
-    return _footerView;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return 60;
+//}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+//    _clearButton.layer.borderWidth = 0.5f;
+//    _clearButton.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+//    _clearButton.layer.cornerRadius = 1;
+//    return _footerView;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //[tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -291,13 +296,13 @@
 
 @end
 
-@implementation ProductSelectedFilter
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _pAttributeDict = [NSMutableDictionary dictionaryWithCapacity:0];
-    }
-    return self;
-}
-@end
+//@implementation ProductSelectedFilter
+//- (instancetype)init
+//{
+//    self = [super init];
+//    if (self) {
+//        _pAttributeDict = [NSMutableDictionary dictionaryWithCapacity:0];
+//    }
+//    return self;
+//}
+//@end
