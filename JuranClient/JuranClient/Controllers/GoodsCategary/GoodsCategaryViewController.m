@@ -71,7 +71,7 @@
 @property (assign, nonatomic) int pageNo;
 @property (strong, nonatomic) NSString * brandName;
 
-@property (strong, nonatomic) NSString * parentCode_product;
+@property (strong, nonatomic) NSString * parentCodeProduct;
 
 @end
 
@@ -89,7 +89,7 @@
         _old_view = nil;
         _vcStyle = style;
         _pageNo = 1;
-        _parentCode_product = [NSString stringWithString:@""];
+        _parentCodeProduct = @"";
     }
     return self;
 }
@@ -403,7 +403,7 @@
             self.pageNo = 1;
             [self requestDataForBrand:cell.cell_id pageNo:self.pageNo];
         }else if (self.vcStyle == CategaryStyle_Goods){
-            self.parentCode_product = cell.cell_id;
+            self.parentCodeProduct = cell.cell_id;
             [self requestDataWithRequestID:cell.cell_id city:self.locationButton.titleLabel.text level:2];
         }
         
@@ -564,7 +564,7 @@
                 
                 [wSelf showHUD];
                 CategaryTableViewCellItem * dataItem = wSelf.dateArray_firstLevel[0];
-                self.parentCode_product = dataItem.code;
+                self.parentCodeProduct = dataItem.code;
                 [wSelf requestDataWithRequestID:dataItem.code city:city level:2];
                 [wSelf.fistLevelTableView reloadData];
                 
@@ -670,7 +670,7 @@
 - (void)thirdLevelItemDidSelectedWithCatCode:(NSString *)catCode CatName:(NSString *)catName ParentCode:(NSString *)parentCode UrlContent:(NSString *)urlContent
 {
     //商品的
-    //NSLog(@"%@",msg);
+//    NSLog(@"%@",msg);
     ProductListViewController *vc = [[ProductListViewController alloc]init];
     vc.selectedFilter = [[ProductSelectedFilter alloc]init];
     vc.selectedFilter.isInShop = NO;
@@ -680,7 +680,7 @@
     vc.selectedFilter.pCategory.catCode = catCode;
     vc.selectedFilter.pCategory.catName = catName;
     //传参过来的ParentCode暂时无用，暂不使用。
-    vc.selectedFilter.pCategory.parentCode = self.parentCode_product;
+    vc.selectedFilter.pCategory.parentCode = self.parentCodeProduct;
     vc.selectedFilter.pCategory.urlContent = urlContent;
     [self.navigationController pushViewController:vc animated:YES];
 }
