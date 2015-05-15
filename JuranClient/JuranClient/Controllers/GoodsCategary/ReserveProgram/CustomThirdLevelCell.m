@@ -37,7 +37,7 @@
         NSString * str = item.name;
         int lWidth = str.length*11;
         
-        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(lastLabelLoc, 15, lWidth, 11)];
+        UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(lastLabelLoc, 10, lWidth, 11)];
         lastLabelLoc += (lWidth+20);
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont systemFontOfSize:11.0];
