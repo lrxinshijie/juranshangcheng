@@ -266,14 +266,18 @@
 
 - (NSString*)idCardInfomation{
     NSArray *arr = @[@"身份证", @"军官证", @"护照"];
+    NSString *typeStr = @"";
     if (!(self.idCardNum && self.idCardNum.length > 0)) {
         return @"";
     }
+    if (self.idCardType.integerValue >= 0 && self.idCardType.integerValue < arr.count) {
+        typeStr = [arr objectAtIndex:self.idCardType.integerValue];
+    }
     if (self.idCardNum.length >= 10) {
-        return [NSString stringWithFormat:@"%@:%@****%@", arr[self.idCardType.intValue], [self.idCardNum substringToIndex:5], [self.idCardNum substringFromIndex:_idCardNum.length - 2]];
+        return [NSString stringWithFormat:@"%@:%@****%@", typeStr, [self.idCardNum substringToIndex:5], [self.idCardNum substringFromIndex:_idCardNum.length - 2]];
     }
     
-    return [NSString stringWithFormat:@"%@:%@", arr[self.idCardType.intValue], self.idCardNum];
+    return [NSString stringWithFormat:@"%@:%@", typeStr, self.idCardNum];
     
 }
 
