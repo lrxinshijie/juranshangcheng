@@ -22,5 +22,4 @@
 - (void)configureSearchAndMore;
 - (void)showMenu;
 - (void)onSearch;
-
 @end

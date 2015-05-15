@@ -256,15 +256,19 @@
         [vc setBlock:^(ProductSelectedFilter *filter) {
             _selectedFilter = filter;
             [_tableView headerBeginRefreshing];
+            [_collectionView headerBeginRefreshing];
         }];
         [self.navigationController pushViewController:vc animated:YES];
     }else if(action == FilterViewActionGrid){
         if ([_collectionView superview]) {
             [_collectionView removeFromSuperview];
-            [self.view addSubview:_tableView];
+            
+            //[self.view addSubview:_tableView];
+            [self.view insertSubview:_tableView belowSubview:_searchBar];
         } else {
             [_tableView removeFromSuperview];
-            [self.view addSubview:_collectionView];
+            //[self.view addSubview:_collectionView];
+            [self.view insertSubview:_collectionView belowSubview:_searchBar];
         }
         [self reloadData];
     }else {
@@ -272,6 +276,7 @@
 //            _selectedFilter = data;
 //        }
         [_tableView headerBeginRefreshing];
+        [_collectionView headerBeginRefreshing];
     }
 }
 

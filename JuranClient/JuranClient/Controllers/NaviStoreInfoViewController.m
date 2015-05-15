@@ -14,6 +14,7 @@
 #import "NaviStoreIndoorViewController.h"
 #import "UIViewController+Menu.h"
 #import "MapScrollView.h"
+#import "UIAlertView+Blocks.h"
 
 @interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
@@ -193,9 +194,11 @@
     
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
         _imageNode.image = [UIImage imageNamed:@"icon-map-node.png"];
-        BMKMapPoint pointStore = BMKMapPointForCoordinate(_storeAnnotation.coordinate);
-        BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
-        _labelDistance.text = [NSString stringWithFormat:@"%.2fkm",BMKMetersBetweenMapPoints(pointStore,pointSelf)/1000];
+//        BMKMapPoint pointStore = BMKMapPointForCoordinate(_storeAnnotation.coordinate);
+//        BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:_store.latitude longitude:_store.longitude];
+        double distance = [ApplicationDelegate.gLocation.location distanceFromLocation:location];
+        _labelDistance.text = [NSString stringWithFormat:@"%.2fkm",distance/1000];
     }else {
         _imageNode.image = nil;
         _labelDistance.text = @"";
@@ -320,7 +323,7 @@
 //    action.delegate = self;
 //    [action showInView:self.view];
     if (!ApplicationDelegate.gLocation.isSuccessLocation) {
-        [self showTip:@"定位失败"];
+        [UIAlertView showWithTitle:nil message:@"当前定位服务未开启,请在设置中启用定位服务" cancelButtonTitle:@"知道了" otherButtonTitles:nil tapBlock:nil];
         return;
     }
     CLLocationCoordinate2D endCoor = _storeAnnotation.coordinate;

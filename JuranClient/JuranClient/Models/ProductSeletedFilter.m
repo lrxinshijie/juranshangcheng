@@ -14,6 +14,7 @@
 {
     self = [super init];
     if (self) {
+        _sort = 9;
         _pAttributeDict = [NSMutableDictionary dictionaryWithCapacity:0];
     }
     return self;

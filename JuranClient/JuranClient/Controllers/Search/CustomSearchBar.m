@@ -132,8 +132,10 @@
 - (IBAction)rightButtonDidClick:(id)sender {
     
     if (self.rightBtnStyle == RightBtnStyle_Scan) {
-        QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
-        [self.viewController.navigationController pushViewController:vc animated:YES];
+        if (![QRBaseViewController isRuning]) {
+            QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
+            [self.viewController.navigationController pushViewController:vc animated:YES];
+        }
     }else if (self.rightBtnStyle == RightBtnStyle_Search){
         //默认按照下拉列表中的第一个搜索
         [self hideAnimation];

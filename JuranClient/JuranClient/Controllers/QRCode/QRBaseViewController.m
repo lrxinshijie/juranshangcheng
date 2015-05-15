@@ -52,6 +52,10 @@ static BOOL isRuning = NO;
     return self;
 }
 
++ (BOOL)isRuning {
+    return  isRuning;
+}
+
 - (void)dealloc
 {
     self.qrCodeViewController = nil;

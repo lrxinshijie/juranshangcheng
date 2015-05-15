@@ -176,9 +176,12 @@
         cell.labelName.text = store.stallName;
     }
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
-        BMKMapPoint pointStore = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(store.latitude, store.longitude));
-        BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
-        CLLocationDistance distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
+//        BMKMapPoint pointStore = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(store.latitude, store.longitude));
+//        BMKMapPoint pointSelf = BMKMapPointForCoordinate(_selfAnnotation.coordinate);
+        
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:store.latitude longitude:store.longitude];
+        double distance = [ApplicationDelegate.gLocation.location distanceFromLocation:location];
+        //CLLocationDistance distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
         cell.imageNode.image = [UIImage imageNamed:@"icon-map-node-2.png"];
         cell.labelDistance.text = [NSString stringWithFormat:@"%.2fkm",distance/1000];
     }else {
