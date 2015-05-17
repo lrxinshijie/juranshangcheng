@@ -256,7 +256,7 @@
 //        if (content.length == 0) {
 //            content = @"商品分享测试";
 //        }
-        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:@"居然在线" url:self.shareURL];
+        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:@"居然有这么好的商品，大家快来看看~" url:self.shareURL];
     }];
 }
 
