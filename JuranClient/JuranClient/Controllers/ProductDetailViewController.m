@@ -380,7 +380,10 @@
     NSInteger count = 0;
     if ([tableView isEqual:_baseTableView]) {
         if (section == 0) {
-            count = 2;
+            if (_product.stallInfoList.count > 0)
+                count = 2;
+            else
+                count = 1;
         }else{
             count = 1;
         }
@@ -550,7 +553,7 @@
                 vc.shopId = _product.shopId;
                 [self.navigationController pushViewController:vc animated:YES];
             }else{
-                [self showTip:@"该店铺没有关联实体店"];
+                //[self showTip:@"该店铺没有关联实体店"];
             }
         }
     }

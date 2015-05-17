@@ -76,6 +76,7 @@
     self.navigationItem.title = _isHomePage?@"我的主页":@"";
     
 #endif
+    
     personDatas = @[@"毕业院校", @"量房费", @"设计费用", @"从业年限", @"擅长风格"];
     _caseCurrentPage = 1;
     _topicCurrentPage = 1;
@@ -83,6 +84,10 @@
     [self loadData];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureMore];
+}
 
 - (void)setupUI{
     [_segment setTitleList:@[@"作品案例", @"个人资料", @"TA参与的话题"]];

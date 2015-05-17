@@ -40,10 +40,15 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"我的收藏";
-    [self configureMore];
+    
     [self setupUI];
     
     [_collectionView headerBeginRefreshing];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureMore];
 }
 
 - (void)setupUI{
