@@ -109,7 +109,7 @@
     CGRect mapFrame = _mapView.frame;
     mapFrame.origin.y = scrollView.contentOffset.y/2;
     ASLog(@"%f",scrollView.contentOffset.y);
-    self.navigationController.navigationBar.backgroundColor = [self.navigationController.navigationBar.backgroundColor colorWithAlphaComponent:scrollView.contentOffset.y/140];
+    //self.navigationController.navigationBar.backgroundColor = [self.navigationController.navigationBar.backgroundColor colorWithAlphaComponent:scrollView.contentOffset.y/140];
     _mapView.frame = mapFrame;
 }
 

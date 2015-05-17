@@ -75,6 +75,7 @@
     [self.navigationController.navigationBar setBackgroundImageWithColor:[UIColor whiteColor]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 #endif
+    
 }
 
 - (void)viewDidLoad

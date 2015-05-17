@@ -86,6 +86,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self configureMore];
     if ([_filterView isShow]) {
         [_filterView showSort];
     }

@@ -45,8 +45,8 @@
     self.navigationItem.title = _message.receiverNickName;
     
     _firstView.backgroundColor = [UIColor clearColor];
-    _firstContactLabel.text = [NSString stringWithFormat:@"%@\n%@\n%@|%@平米", _message.senderName, _message.mobilePhone, _message.likeStyleString, _message.houseArea];
-    
+    _firstContactLabel.text = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@", _message.senderName, _message.senderName.length > 0?@"\n":@"", _message.mobilePhone, (_message.mobilePhone.length > 0 && ( _message.likeStyleString.length > 0 || _message.houseArea.length > 0))?@"\n":@"", _message.likeStyleString, _message.likeStyleString.length > 0?@" | ":@"", _message.houseArea, _message.houseArea.length > 0?@"平米":@""];
+    ASLog(@"%@", _firstContactLabel.text);
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
     
@@ -199,6 +199,7 @@
         
         frame = _firstContactLabel.frame;
         frame.origin.y = CGRectGetMaxY(line.frame) + 6;
+        frame.size.height = [_firstContactLabel.text heightWithFont:_firstContactLabel.font constrainedToWidth:CGRectGetWidth(_firstContactLabel.frame)];
         _firstContactLabel.frame = frame;
         
         frame = _firstView.frame;

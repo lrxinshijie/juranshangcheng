@@ -37,6 +37,8 @@
 @property (strong, nonatomic) UIView * footerView;
 
 @property (assign, nonatomic) RightBtnStyle rightBtnStyle;
+@property (assign, nonatomic) RightBtnStyle initializeStyle;
+@property (assign, nonatomic) BOOL isFirstTimeIn;
 
 @property (assign, nonatomic) NSInteger searchType;
 
@@ -57,6 +59,8 @@
 {
     self.enabledShow = YES;
     couldClick = YES;
+    self.isFirstTimeIn = YES;
+    
     self.listTableView.frame = CGRectMake(0, 64, 320, 0);
     self.frame = CGRectMake(0, 0, 320, 64);
     
@@ -310,7 +314,7 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
 
-    [self rightButtonChangeStyleWithKey:RightBtnStyle_Scan];
+    [self rightButtonChangeStyleWithKey:self.initializeStyle];
     [self hideAnimation];
     if (textField.text.length == 0) {
         [self cleanBtnHide];
@@ -486,6 +490,10 @@
 
 - (void)rightButtonChangeStyleWithKey:(RightBtnStyle)style
 {
+    if (self.isFirstTimeIn) {
+        self.initializeStyle = style;
+        self.isFirstTimeIn = NO;
+    }
     
     self.rightBtnStyle = style;
     

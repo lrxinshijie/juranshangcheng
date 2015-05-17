@@ -20,8 +20,8 @@
 
 
 /* UAT */
-//#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
-//#define JR_SERVICE  @"http://54.223.161.28:8080"
+#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
+#define JR_SERVICE  @"http://54.223.161.28:8080"
 
 //SIT内网
 //#define JR_SERVICE  @"http://10.199.5.241:8083"
@@ -32,6 +32,7 @@
 
 //预生产环境
 //#define JR_SERVICE  @"http://124.202.155.217:81"
+//#define JR_SERVICE  @"http://124.202.155.220:8080"
 
 /* Production */
 //#define JR_IMAGE_SERVICE  @"http://image10.juran.cn"

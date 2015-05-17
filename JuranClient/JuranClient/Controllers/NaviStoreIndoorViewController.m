@@ -28,13 +28,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     //_imageView.backgroundColor = [UIColor greenColor];
-    [self configureMore];
+    
     _tableView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(headerViewClick:)];
     [_headerView addGestureRecognizer:gesture];
     _tableView.tableHeaderView = _headerView;
     _openState = NO;
     [self loadData];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureMore];
 }
 
 - (void)didReceiveMemoryWarning {

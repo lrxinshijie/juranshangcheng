@@ -146,6 +146,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self configureMore];
     [self showNavBarAnimated:NO];
     if ([_filterView isShow]) {
         [_filterView showSort];

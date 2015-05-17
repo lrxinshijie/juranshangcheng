@@ -50,7 +50,6 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameProfileReloadData object:nil];
-    
     self.navigationItem.title = @"账户安全";
     
     keys = @[@"修改密码", @"手机号码", @"邮箱"];
@@ -74,6 +73,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self configureMore];
     [self reloadData];
 }
 

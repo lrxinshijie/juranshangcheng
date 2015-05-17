@@ -241,7 +241,7 @@
                 _sorts = [[DefaultData sharedData] objectForKey:@"caseOrder"];
                 break;
             case FilterViewTypeCaseSearch:
-                _sorts = [[DefaultData sharedData] objectForKey:@"designerSearchOrder"];
+                _sorts = [[DefaultData sharedData] objectForKey:@"caseOrder"];
                 break;
             case FilterViewTypeDesigner:
                 _sorts = [[DefaultData sharedData] objectForKey:@"designerOrder"];

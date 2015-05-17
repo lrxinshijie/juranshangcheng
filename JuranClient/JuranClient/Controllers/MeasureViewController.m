@@ -191,12 +191,12 @@
                 cell.textField.keyboardType = UIKeyboardTypeEmailAddress;
                 title = @"电子邮箱";
             }else if (indexPath.row == 4){
-                placeholder = @"请输入文字";
+                placeholder = @"请输入QQ号";
                 cell.textField.text = _customerQQ;
                 cell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
                 title = @"QQ";
             }else if (indexPath.row == 5){
-                placeholder = @"请输入文字";
+                placeholder = @"请输入微信号";
                 cell.textField.text = _customerWechat;
                 cell.textField.keyboardType = UIKeyboardTypeDefault;
                 title = @"微信号";

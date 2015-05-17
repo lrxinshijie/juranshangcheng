@@ -85,6 +85,12 @@
     
     _scrollView.contentSize = CGSizeMake(kWindowWidth, CGRectGetMaxY(frame) + 20);
 }
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureMore];
+}
+
 - (IBAction)onDetail:(id)sender{
     UIButton *btn = (UIButton*)sender;
     NSInteger index = btn.tag - kButtonTag;

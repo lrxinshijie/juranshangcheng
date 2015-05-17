@@ -42,7 +42,6 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     self.navigationItem.title = @"账户管理";
-    
 #ifndef kJuranDesigner
     _user = [JRUser currentUser];
 #else
@@ -58,6 +57,11 @@
     [self.view addSubview:_tableView];
     
     [self loadData];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureMore];
 }
 
 - (void)reloadData{
