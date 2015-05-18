@@ -10,4 +10,5 @@
 
 @interface UIViewController (Menu)
 - (void)showAppMenu:(VoidBlock)shareBlock;
+- (void)dismissAppMenu;
 @end

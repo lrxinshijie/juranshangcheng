@@ -18,8 +18,9 @@
 #import "UIButton+WebCache.h"
 #import "CaseViewController.h"
 #import "FitmentViewController.h"
+#import "RootMenuCell.h"
 
-@interface RootViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate>
+@interface RootViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -29,6 +30,7 @@
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UIView *footerView;
 @property (nonatomic, strong) NSArray *iconInfoList;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
@@ -39,7 +41,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav_logo"]];
-    
+    _collectionView.backgroundColor = kViewBackgroundColor;
+    [_collectionView registerNib:[UINib nibWithNibName:@"RootMenuCell" bundle:nil] forCellWithReuseIdentifier:@"RootMenuCell"];
     [self configureScan];
     [self configureSearchAndMore];
     
@@ -102,40 +105,40 @@
     [[ALEngine shareEngine] pathURL:JR_HOME_NAVIGATION parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"NO"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];
         if (!error) {
-            [_menuView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
-                [subview removeFromSuperview];
-            }];
+//            [_menuView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
+//                [subview removeFromSuperview];
+//            }];
             
-            self.iconInfoList = [data objectForKey:@"iconInfoList"];
-            UIImage *defaultImage = [UIImage imageWithColor:RGBColor(190, 190, 190) size:CGSizeMake(30, 30)];
-            
-            [_iconInfoList enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-                NSString *iconImage = [dict getStringValueForKey:@"iconImage" defaultValue:@""];
-//                NSString *link = [dict getStringValueForKey:@"link" defaultValue:@""];
-                NSString *name = [dict getStringValueForKey:@"name" defaultValue:@""];
-                
-                
-                UIButton *btn = [_menuView buttonWithFrame:CGRectMake(80 * (idx % 4), (idx/4)*72, 80, 72) target:self action:@selector(onMenu:) title:name image:defaultImage];
-                [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                btn.tag = idx;
-//                btn.backgroundColor = [UIColor redColor];
-                btn.titleEdgeInsets = UIEdgeInsetsMake(35, -20, 0, 0);
-                btn.imageEdgeInsets = UIEdgeInsetsMake(-15, 25, 0, 0);
-                NSString *imageUrl = [NSString stringWithFormat:@"%@/%@", JR_IMAGE_SERVICE, iconImage];
-                NSLog(@"%@", imageUrl);
-                
-                [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageUrl] options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-                    if (finished && image) {
-                        UIImage *i = [UIImage image:image fitInSize:CGSizeMake(30, 30)];
-                        [btn setImage:i forState:UIControlStateNormal];
-                    }
-                }];
-                [_menuView addSubview:btn];
-                
-//                *stop = YES;
-                
-            }];
-            
+            _iconInfoList = [[data objectForKey:@"iconInfoList"] copy];
+            [_collectionView reloadData];
+//            UIImage *defaultImage = [UIImage imageWithColor:RGBColor(190, 190, 190) size:CGSizeMake(30, 30)];
+//            
+//            [_iconInfoList enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+//                NSString *iconImage = [dict getStringValueForKey:@"iconImage" defaultValue:@""];
+////                NSString *link = [dict getStringValueForKey:@"link" defaultValue:@""];
+//                NSString *name = [dict getStringValueForKey:@"name" defaultValue:@""];
+//                
+//                
+//                UIButton *btn = [_menuView buttonWithFrame:CGRectMake(80 * (idx % 4), (idx/4)*72, 80, 72) target:self action:@selector(onMenu:) title:name image:defaultImage];
+//                [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//                btn.tag = idx;
+////                btn.backgroundColor = [UIColor redColor];
+//                btn.titleEdgeInsets = UIEdgeInsetsMake(35, -20, 0, 0);
+//                btn.imageEdgeInsets = UIEdgeInsetsMake(-15, 25, 0, 0);
+//                NSString *imageUrl = [NSString stringWithFormat:@"%@/%@", JR_IMAGE_SERVICE, iconImage];
+//                NSLog(@"%@", imageUrl);
+//                
+//                [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imageUrl] options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+//                    if (finished && image) {
+//                        UIImage *i = [UIImage image:image fitInSize:CGSizeMake(30, 30)];
+//                        [btn setImage:i forState:UIControlStateNormal];
+//                    }
+//                }];
+//                //[_menuView addSubview:btn];
+//                
+////                *stop = YES;
+//                
+//            }];
             
         }
     }];
@@ -242,5 +245,28 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
 
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return _iconInfoList.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    RootMenuCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RootMenuCell" forIndexPath:indexPath];
+    NSDictionary *dict = _iconInfoList[indexPath.row];
+    NSString *iconImage = [dict getStringValueForKey:@"iconImage" defaultValue:@""];
+    NSString *name = [dict getStringValueForKey:@"name" defaultValue:@""];
+    UIImage *defaultImage = [UIImage imageWithColor:RGBColor(190, 190, 190) size:CGSizeMake(30, 30)];
+    [cell.icon setImageWithURLString:iconImage placeholderImage:defaultImage];
+    cell.title.text = name;
+    return  cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *dict = _iconInfoList[indexPath.row];
+    NSString *link = [dict getStringValueForKey:@"link" defaultValue:@""];
+    [Public jumpFromLink:link];
+}
 @end

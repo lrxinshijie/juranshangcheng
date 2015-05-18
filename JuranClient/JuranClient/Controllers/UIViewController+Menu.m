@@ -49,6 +49,10 @@
     
 }
 
+- (void)dismissAppMenu {
+    [KxMenu dismissMenu];
+}
+
 - (void)createAppMenuWithShareBlock:(VoidBlock)shareBlock
                              isRead:(BOOL)isRead
                            numOfMsg:(NSInteger)num {

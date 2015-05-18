@@ -231,6 +231,7 @@
                 _storeLocationLabel.text = [NSString stringWithFormat:@"%.2fkm", distance/1000];
                 _storeLocationLabel.adjustsFontSizeToFitWidth = YES;
 #endif
+                [_baseTableView reloadData];
             }
         }
     }];
@@ -256,7 +257,7 @@
 //        if (content.length == 0) {
 //            content = @"商品分享测试";
 //        }
-        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:@"居然在线" url:self.shareURL];
+        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:@"居然有这么好的商品，大家快来看看~" url:self.shareURL];
     }];
 }
 
@@ -460,9 +461,9 @@
     }else {
         static NSString *CellIdentifier = @"Cell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
+        //if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-        }
+        //}
         
         cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
