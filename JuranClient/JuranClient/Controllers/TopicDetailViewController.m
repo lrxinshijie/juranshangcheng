@@ -68,7 +68,8 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.openStatusDic = [NSMutableDictionary dictionary];
     self.navigationItem.title = @"话题详情";
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMenu)];
+    [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onShare)];
+//    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMenu)];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
@@ -401,6 +402,10 @@
     [self showAppMenu:^{
         [[ShareView sharedView] showWithContent:_topic.theme image:nil title:_topic.theme url:[NSString stringWithFormat:@"http://apph5.juran.cn/topics/%@%@", _topic.topicId, [Public shareEnv]]];
     }];
+}
+
+- (void)onShare{
+    [[ShareView sharedView] showWithContent:_topic.theme image:nil title:_topic.theme url:[NSString stringWithFormat:@"http://apph5.juran.cn/topics/%@%@", _topic.topicId, [Public shareEnv]]];
 }
 
 - (void)onComment:(id)sender{
