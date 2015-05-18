@@ -252,16 +252,16 @@
 
 - (IBAction)onMore:(id)sender{
     [self showAppMenu:^{
-        NSString *content = @"商品分享测试";
-        if (content.length == 0) {
-            content = @"商品分享测试";
-        }
-        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:self.product.goodsName url:self.shareURL];
+        NSString *content = self.product.goodsName;
+//        if (content.length == 0) {
+//            content = @"商品分享测试";
+//        }
+        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:@"居然在线" url:self.shareURL];
     }];
 }
 
 - (NSString *)shareURL{
-    return [NSString stringWithFormat:@"http://apph5.juran.cn/case/%d%@",self.product.linkProductId, [Public shareEnv]];
+    return [NSString stringWithFormat:@"http://mall.juran.cn/product/%d.htm",self.product.linkProductId];
 }
 
 - (IBAction)onShop:(id)sender{
@@ -380,7 +380,10 @@
     NSInteger count = 0;
     if ([tableView isEqual:_baseTableView]) {
         if (section == 0) {
-            count = 2;
+            if (_product.stallInfoList.count > 0)
+                count = 2;
+            else
+                count = 1;
         }else{
             count = 1;
         }
@@ -550,7 +553,7 @@
                 vc.shopId = _product.shopId;
                 [self.navigationController pushViewController:vc animated:YES];
             }else{
-                [self showTip:@"该店铺没有关联实体店"];
+                //[self showTip:@"该店铺没有关联实体店"];
             }
         }
     }

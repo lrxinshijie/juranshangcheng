@@ -50,7 +50,7 @@
     }else{
         self.navigationItem.title = @"搜索结果";
     }
-    
+    [self configureMore];
     self.filterView = [[QuestionFilterView alloc] initWithDefaultData:_filterData];
     _filterView.delegate = self;
     [self.view addSubview:_filterView];
@@ -90,6 +90,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self configureMore];
     if ([_filterView isShow]) {
         [_filterView showSort];
     }

@@ -73,6 +73,12 @@
     [_tableView headerBeginRefreshing];
 }
 
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureMore];
+}
+
 - (void)loadData{
     NSDictionary *param = @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],
                             @"onePageCount": kOnePageCount};

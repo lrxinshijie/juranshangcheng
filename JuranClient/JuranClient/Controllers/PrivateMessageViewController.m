@@ -33,7 +33,7 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"我的私信";
-    
+    [self configureMore];
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     
     [self.view addSubview:_tableView];
@@ -54,6 +54,11 @@
     _emptyView.hidden = YES;
     _emptyView.center = _tableView.center;
     [self.view addSubview:_emptyView];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureMore];
 }
 
 - (void)loadData{
