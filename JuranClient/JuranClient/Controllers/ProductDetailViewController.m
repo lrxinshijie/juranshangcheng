@@ -231,6 +231,7 @@
                 _storeLocationLabel.text = [NSString stringWithFormat:@"%.2fkm", distance/1000];
                 _storeLocationLabel.adjustsFontSizeToFitWidth = YES;
 #endif
+                [_baseTableView reloadData];
             }
         }
     }];
@@ -460,9 +461,9 @@
     }else {
         static NSString *CellIdentifier = @"Cell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (!cell) {
+        //if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-        }
+        //}
         
         cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
