@@ -12,6 +12,8 @@
 #import "IQKeyboardManager.h"
 #import "QRBaseViewController.h"
 
+typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
+
 @interface CustomSearchBar ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     BOOL couldClick;
@@ -24,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *listTableView;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 
+@property (nonatomic, readwrite, copy) InitHistoryDataCompletion initHistoryDataCompletion;
 
 @property (strong, nonatomic) NSMutableArray * dataArray_History;
 @property (strong, nonatomic) NSMutableArray * dataArray_SearchRange;
@@ -81,7 +84,9 @@
     
     self.isReloadHistory = NO;
     self.isHistory = YES;
-    [self initHistoryData];
+    [self initHistoryDataCompleted:^(BOOL isFinish) {
+        
+    }];
 //    NSLog(@"%@",self.dataArray_History);
     
     
@@ -93,9 +98,11 @@
     _inputTextField.leftView = leftView;
 }
 
-- (void)initHistoryData
+- (void)initHistoryDataCompleted:(void(^)(BOOL isFinish))block
 {
+    self.initHistoryDataCompletion = block;
     __weak CustomSearchBar * wSelf = self;
+    
     [[SearchHistoryManager sharedDataBase] localSearchHistoryList:^(NSArray *list) {
         
         [wSelf.dataArray_History removeAllObjects];
@@ -108,7 +115,14 @@
             wSelf.isReloadHistory = NO;
         }
         
+        if (wSelf.initHistoryDataCompletion) {
+            wSelf.initHistoryDataCompletion(YES);
+        }
+        
     }];
+    
+    
+    
 }
 
 - (IBAction)gobackButtonDidClick:(id)sender {
@@ -238,7 +252,9 @@
 {
     [[SearchHistoryManager sharedDataBase] deleteAllLocalHistory];
     self.isReloadHistory = YES;
-    [self initHistoryData];
+    [self initHistoryDataCompleted:^(BOOL isFinish) {
+        
+    }];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -329,36 +345,39 @@
 {
     [self.inputTextField resignFirstResponder];
     
-    
-    //入库去重
-    NSString * str = self.inputTextField.text;
-    
-    BOOL isExist = NO;
-    for (int i=0; i<self.dataArray_History.count; i++) {
-        if ([str isEqualToString:self.dataArray_History[i]]) {
-            isExist = YES;
-            break;
-        }
-    }
-    
-    if (self.inputTextField.text == nil || self.inputTextField.text.length ==  0) {
-        isExist = YES;
-    }
-    
-    if (![self.requestKeyWord isEqualToString:str] && str.length!=0 && str != nil) {
-        self.requestKeyWord = str;
-    }
-    
-    //搜索历史入库
-    if (!isExist) {
-        [[SearchHistoryManager sharedDataBase] insertSearchItem:str];
-    }
+    __weak CustomSearchBar * wSelf = self;
     //每次都更新一下历史记录的数据，以防同一次搜索多次点击
-    [self initHistoryData];
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(startSearchWithKeyWord:index:)]) {
-        [self.delegate startSearchWithKeyWord:_inputTextField.text index:index];
-    }
+    [self initHistoryDataCompleted:^(BOOL isFinish) {
+        
+        //入库去重
+        NSString * str = wSelf.inputTextField.text;
+        
+        BOOL isExist = NO;
+        for (int i=0; i<wSelf.dataArray_History.count; i++) {
+            if ([str isEqualToString:wSelf.dataArray_History[i]]) {
+                isExist = YES;
+                break;
+            }
+        }
+        
+        if (wSelf.inputTextField.text == nil || wSelf.inputTextField.text.length ==  0) {
+            isExist = YES;
+        }
+        
+        if (![wSelf.requestKeyWord isEqualToString:str] && str.length!=0 && str != nil) {
+            wSelf.requestKeyWord = str;
+        }
+        
+        //搜索历史入库
+        if (!isExist) {
+            [[SearchHistoryManager sharedDataBase] insertSearchItem:str];
+        }
+        
+        if (wSelf.delegate && [wSelf.delegate respondsToSelector:@selector(startSearchWithKeyWord:index:)]) {
+            [wSelf.delegate startSearchWithKeyWord:_inputTextField.text index:index];
+        }
+        
+    }];
     
 }
 
