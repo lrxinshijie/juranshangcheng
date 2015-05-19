@@ -150,6 +150,10 @@
     [self showAppMenu:nil];
 }
 
+- (void)onMoreWithoutHomeAndShare{
+    [self showAppMenuWithoutHomeAndShare];
+}
+
 - (void)configureSearch{
     [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"icon-search"] rightBarButtonItemAction:@selector(onSearch)];
 }

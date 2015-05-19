@@ -60,6 +60,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self configureSearchAndMore];
     if ([_quesgtionFilterView isShow]) {
         [_quesgtionFilterView showSort];
     }
@@ -74,7 +75,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveReloadNotification:) name:kNotificationNameQuestionReloadData object:nil];
     
     [self configureScan];
-    [self configureSearchAndMore];
+    
     
     [self setupUI];
     
