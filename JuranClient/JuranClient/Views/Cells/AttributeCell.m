@@ -64,7 +64,7 @@
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
 //    cell.backgroundColor = [UIColor redColor];
     
-    [(TagCollectionViewCell *)cell setIsSelect:indexPath.row == [_attributeSelected[_indexPath.row] integerValue]];
+//    [(TagCollectionViewCell *)cell setIsSelect:indexPath.row == [_attributeSelected[_indexPath.row] integerValue]];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -73,7 +73,11 @@
 //    [cell fillCellWithData:_attrList[indexPath.row]];
     TagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TagCell" forIndexPath:indexPath];
     [self configureCell:cell forIndexPath:indexPath];
-//    cell.isSelect = indexPath.row == [_attributeSelected[_indexPath.row] integerValue];
+    BOOL isEnable = YES;
+    
+    
+    cell.isEnable = isEnable;
+    cell.isSelect = indexPath.row == [_attributeSelected[_indexPath.row] integerValue];
     return cell;
 }
 
@@ -90,6 +94,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     NSInteger value = [[_attributeSelected objectAtIndex:_indexPath.row] integerValue];
     if (value == indexPath.row) {
         [_attributeSelected replaceObjectAtIndex:_indexPath.row withObject:@(-1)];

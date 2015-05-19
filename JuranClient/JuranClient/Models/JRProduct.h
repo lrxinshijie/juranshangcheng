@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) NSArray *goodsAttributesInfoList;
 @property (nonatomic, strong) NSArray *attributeList;
+@property (nonatomic, strong) NSArray *buyAttrList;
 @property (nonatomic, strong) NSArray *goodsImagesList;
 @property (nonatomic, copy) NSString *priceMax;
 @property (nonatomic, copy) NSString *priceMin;

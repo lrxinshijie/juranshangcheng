@@ -169,7 +169,7 @@
         if (!result) {
             return ;
         }
-        
+
         [self setupFavority];
         
         _attributePriceLabel.text = _product.priceString;
@@ -451,6 +451,7 @@
         cell.indexPath = indexPath;
         cell.attributeSelected = _attributeSelected;
         NSDictionary *dict = _product.attributeList[indexPath.row];
+        cell.product = _product;
         [cell fillCellWithDict:dict];
         
         return cell;
@@ -515,6 +516,11 @@
                     }];
                     [_attributeTableView reloadData];
                 }
+                
+                CGRect frame = _attributeTableView.frame;
+                frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame) + 1;
+                frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
+                _attributeTableView.frame = frame;
                 
                 [self showAttributeView];
             }else{

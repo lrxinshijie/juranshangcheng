@@ -194,6 +194,9 @@
         if (!error) {
             NSArray *attributeList = [data getArrayValueForKey:@"attributeList" defaultValue:nil];
             self.attributeList = attributeList;
+            
+            NSArray *buyAttrList = [data getArrayValueForKey:@"buyAttrList" defaultValue:nil];
+            self.buyAttrList = buyAttrList;
         }
         
         if (finished) {
@@ -201,6 +204,43 @@
         }
         
     }];
+}
+
+- (BOOL)attirbuteIsEnable:(NSArray *)selected fromRow:(NSInteger)fromRow toRow:(NSInteger)toRow{
+    if (self.buyAttrList.count == 0) {
+        return NO;
+    }
+    
+    if (fromRow == toRow) {
+        return YES;
+    }
+    
+    if ([selected[toRow] integerValue] >= 0) {
+        return YES;
+    }
+    
+    NSMutableDictionary *filter = [NSMutableDictionary dictionary];
+    [selected enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSInteger value = [obj integerValue];
+        if (value >= 0) {
+            NSDictionary *dict = self.attributeList[idx];
+            [filter setObject:dict[@"attrList"][value] forKey:dict[@"attrId"]];
+        }
+    }];
+    
+    if (filter.allKeys.count == 0) {
+        return YES;
+    }
+    
+//    NSString *key = self.attributeList[toRow]
+    [_buyAttrList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *buyAttrMap = obj[@"buyAttrMap"];
+        
+        
+    }];
+    
+    
+    return NO;
 }
 
 @end

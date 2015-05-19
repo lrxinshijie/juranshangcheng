@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JRProduct.h"
 
 @interface AttributeCell : UITableViewCell
 
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, strong) NSMutableArray *attributeSelected;
+@property (nonatomic, strong) JRProduct *product;
 
 - (void)fillCellWithDict:(NSDictionary *)dict;
 + (CGFloat)cellHeight;
