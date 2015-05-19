@@ -206,18 +206,23 @@
     }];
 }
 
-- (BOOL)attirbuteIsEnable:(NSArray *)selected fromRow:(NSInteger)fromRow toRow:(NSInteger)toRow{
+- (BOOL)attirbuteIsEnable:(NSArray *)selected fromRow:(NSInteger)fromRow toIndexPath:(NSIndexPath *)toIndexPath{
+    ASLog(@"%@,%d,%d,%d", selected, fromRow, toIndexPath.section, toIndexPath.row);
     if (self.buyAttrList.count == 0) {
         return NO;
     }
     
-    if (fromRow == toRow) {
+    if (fromRow < 0) {
         return YES;
     }
     
-    if ([selected[toRow] integerValue] >= 0) {
+    if (fromRow == toIndexPath.section) {
         return YES;
     }
+    
+//    if ([selected[toIndexPath.section] integerValue] >= 0) {
+//        return YES;
+//    }
     
     NSMutableDictionary *filter = [NSMutableDictionary dictionary];
     [selected enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -232,15 +237,32 @@
         return YES;
     }
     
-//    NSString *key = self.attributeList[toRow]
+    NSString *thisKey = [NSString stringWithFormat:@"%d", [self.attributeList[toIndexPath.section][@"attrId"] integerValue]];
+    NSString *thisValue = self.attributeList[toIndexPath.section][@"attrList"][toIndexPath.row];
+    ASLog(@"value:%@,%@",thisKey, thisValue);
+    __block BOOL retVal = NO;
     [_buyAttrList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *buyAttrMap = obj[@"buyAttrMap"];
+        __block BOOL yesOrNo = YES;
         
+        [filter enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            NSString *vv = [NSString stringWithFormat:@"%d", [key integerValue]];
+            ASLog(@"Equal:%@,%@",obj, buyAttrMap[vv]);
+            if (![obj isEqualToString:buyAttrMap[vv]]) {
+                yesOrNo = NO;
+                *stop = YES;
+            }
+        }];
         
+        if (yesOrNo) {
+            if ([buyAttrMap[thisKey] isEqualToString:thisValue]) {
+                retVal = YES;
+                *stop = YES;
+            }
+        }
     }];
     
-    
-    return NO;
+    return retVal;
 }
 
 @end

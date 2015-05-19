@@ -65,6 +65,8 @@
 
 @property (nonatomic, strong) JRSegmentControl *segCtl;
 
+@property (nonatomic, assign) NSInteger fromRow;
+
 @end
 
 @implementation ProductDetailViewController
@@ -76,6 +78,7 @@
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];
+    _fromRow = -1;
     // Do any additional setup after loading the view from its nib.
 //    _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadPrice:) name:kNotificationNameProudctPriceReloadData object:nil];
@@ -86,6 +89,7 @@
 }
 
 - (void)reloadPrice:(NSNotification *)noti{
+    self.fromRow = [noti.object integerValue];
     
     NSMutableArray *attributeList = [NSMutableArray array];
     [_product.attributeList enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
@@ -313,9 +317,14 @@
     frame = _scrollView.bounds;
     _attributePopView.frame = frame;
     
-    _attributeTableView.tableHeaderView = _attributeHeaderView;
+//    _attributeTableView.tableHeaderView = _attributeHeaderView;
     _attributeTableView.tableFooterView = [[UIView alloc] init];
     _attributeTableView.bounces = NO;
+    
+    frame = _attributeTableView.frame;
+    frame.size.height = 351;
+    frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
+    _attributeTableView.frame = frame;
 }
 
 - (void)showAttributeView{
@@ -377,6 +386,14 @@
     return 1;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if ([tableView isEqual:_attributeTableView]) {
+        return _attributeHeaderView;
+    }
+    
+    return nil;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger count = 0;
     if ([tableView isEqual:_baseTableView]) {
@@ -407,6 +424,8 @@
             return 1;
         }
         return 10;
+    }else if ([tableView isEqual:_attributeTableView]) {
+        return CGRectGetHeight(_attributeHeaderView.frame);
     }else {
         if (_segCtl.selectedIndex == 1) {
             return 10;
@@ -451,6 +470,7 @@
             NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
             cell = (AttributeCell *)[nibs firstObject];
         }
+        cell.changeRow = _fromRow;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.indexPath = indexPath;
         cell.attributeSelected = _attributeSelected;
@@ -521,10 +541,10 @@
                     [_attributeTableView reloadData];
                 }
                 
-                CGRect frame = _attributeTableView.frame;
-                frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame) + 1;
-                frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
-                _attributeTableView.frame = frame;
+//                CGRect frame = _attributeTableView.frame;
+//                frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame) + 1;
+//                frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
+//                _attributeTableView.frame = frame;
                 
                 [self showAttributeView];
             }else{
@@ -536,10 +556,10 @@
                         [_product.attributeList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                             [_attributeSelected addObject:@(-1)];
                         }];
-                        CGRect frame = _attributeTableView.frame;
-                        frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame) + 1;
-                        frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
-                        _attributeTableView.frame = frame;
+//                        CGRect frame = _attributeTableView.frame;
+//                        frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame) + 1;
+//                        frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
+//                        _attributeTableView.frame = frame;
                         [_attributeTableView reloadData];
                         [self showAttributeView];
                     }

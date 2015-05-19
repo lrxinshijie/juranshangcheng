@@ -49,4 +49,6 @@
 
 + (BOOL)isShowPrice;
 - (NSString *)priceString;
+
+- (BOOL)attirbuteIsEnable:(NSArray *)selected fromRow:(NSInteger)fromRow toIndexPath:(NSIndexPath *)toIndexPath;
 @end
