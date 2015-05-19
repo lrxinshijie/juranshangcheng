@@ -47,7 +47,7 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"家装";
     
-    [self configureSearchAndMore];
+    
     [self configureScan];
     
     [self setupUI];
@@ -68,7 +68,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
+    [self configureSearchAndMore];
     if ([_filterView isShow]) {
         [_filterView showSort];
     }

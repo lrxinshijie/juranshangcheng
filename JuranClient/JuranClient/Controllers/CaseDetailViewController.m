@@ -40,7 +40,7 @@
 @property (nonatomic, strong) IBOutlet UITextField *commentTextField;
 
 @property (nonatomic, strong) JRComment *selectComment;
-@property (nonatomic, strong) UITapGestureRecognizer *tapHide;
+//@property (nonatomic, strong) UITapGestureRecognizer *tapHide;
 
 @property (nonatomic, strong) NSMutableDictionary *openStatusDic;
 
@@ -56,16 +56,19 @@
 }
 
 - (void)viewDidLoad {
+    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
+    
+    
     self.openStatusDic = [NSMutableDictionary dictionary];
     
     self.navigationItem.title = @"方案描述";
     [self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"nav-icon-share"] rightBarButtonItemAction:@selector(onShare)];
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:)name:UIKeyboardWillShowNotification object:nil];
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillBeHidden:)name:UIKeyboardWillHideNotification object:nil];
-    self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard)];
+//    self.tapHide = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard)];
     self.keys = @[@"地区", @"楼盘", @"户型", @"风格", @"面积", @"参考价", @"描述"];
     self.values = @[@"", @"", @"", @"", @"", @"", @""];
     self.detailTitleLabel = [self.view labelWithFrame:CGRectMake(15, 0, 100, 44) text:@"描述" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentLeft font:[UIFont systemFontOfSize:15]];
@@ -430,11 +433,11 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    [_tableView addGestureRecognizer:_tapHide];
+//    [_tableView addGestureRecognizer:_tapHide];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    [_tableView removeGestureRecognizer:_tapHide];
+//    [_tableView removeGestureRecognizer:_tapHide];
     
     if (_selectComment && textField.text.length == 0) {
         self.selectComment = nil;

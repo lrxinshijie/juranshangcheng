@@ -163,7 +163,7 @@
     NSDictionary *param = @{@"linkProductId": @(self.linkProductId),
                             @"cityName":@"北京市"
                             };
-    [[ALEngine shareEngine] pathURL:JR_PRODUCT_SELL_STORE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+    [[ALEngine shareEngine] pathURL:JR_PRODUCT_SELL_STORE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyShowErrorDefaultMessage:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             NSArray *stallInfoList = [data getArrayValueForKey:@"stallInfoList" defaultValue:nil];
             self.stallInfoList = [JRStore buildUpWithValueForList:stallInfoList];

@@ -76,6 +76,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self configureMore];
     [self reloadData];
 }
 
@@ -132,6 +133,7 @@
 
 - (IBAction)segmentValueChange:(id)sender{
     self.navigationItem.title = _segment.selectedSegmentIndex == 0?@"我的提问":@"我的回答";
+    
     _currentPage = 1;
     [self loadData];
 }

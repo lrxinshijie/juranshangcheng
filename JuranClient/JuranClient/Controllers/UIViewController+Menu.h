@@ -10,4 +10,7 @@
 
 @interface UIViewController (Menu)
 - (void)showAppMenu:(VoidBlock)shareBlock;
+- (void)showAppMenuWithoutHomeAndShare;
+- (void)showAppMenuWithoutShare;
+- (void)dismissAppMenu;
 @end
