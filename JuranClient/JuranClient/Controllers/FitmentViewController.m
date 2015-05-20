@@ -49,7 +49,7 @@
     
     
     [self configureScan];
-    
+    [self configureSearchAndMore];
     [self setupUI];
     
     __weak typeof(self) weakSelf = self;

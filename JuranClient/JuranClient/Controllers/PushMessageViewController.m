@@ -31,7 +31,7 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     self.navigationItem.title = @"系统消息";
-    [self configureMore];
+    //[self configureMore];
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
@@ -62,7 +62,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self configureMore];
+    //[self configureMore];
 }
 
 - (void)loadData{

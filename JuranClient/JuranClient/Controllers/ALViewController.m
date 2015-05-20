@@ -8,6 +8,7 @@
 
 #import "ALViewController.h"
 #import "MobClick.h"
+#import "KxMenu.h"
 
 @interface ALViewController ()
 
@@ -45,6 +46,8 @@
     [super viewWillDisappear:animated];
     
     [MobClick endLogPageView:NSStringFromClass([self class])];
+    
+    [KxMenu dismissMenu];
 }
 
 - (void)didReceiveMemoryWarning

@@ -484,7 +484,19 @@
     ASLog(@"param:%@",param);
     UINavigationController *navigationController = (UINavigationController *)ApplicationDelegate.tabBarController.selectedViewController;
     NSInteger type = [param getIntValueForKey:@"type" defaultValue:0];
-    if (type == 2){
+    if (type == 1){//首页
+        NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
+        if (vcs.count == 5) {
+            UINavigationController *nav = [vcs objectAtIndex:3];
+            UIViewController *vc = nav.viewControllers.firstObject;
+            if ([vc isKindOfClass:[DiscoverViewController class]]) {
+                if (navigationController.viewControllers.count > 1) {
+                    [navigationController popToRootViewControllerAnimated:NO];
+                }
+                [ApplicationDelegate.tabBarController setSelectedIndex:0];
+            }
+        }
+    }else if (type == 2){
         if ([param.allKeys containsObject:@"id"]) {
             DesignerDetailViewController *dv = [[DesignerDetailViewController alloc] init];
             JRDesigner *designer = [[JRDesigner alloc] init];
@@ -500,18 +512,6 @@
             cv.filterData = filterData;
             cv.hidesBottomBarWhenPushed = YES;
             [navigationController pushViewController:cv animated:YES];
-        }
-    }else if (type == 1){//首页
-        NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
-        if (vcs.count == 5) {
-            UINavigationController *nav = [vcs objectAtIndex:3];
-            UIViewController *vc = nav.viewControllers.firstObject;
-            if ([vc isKindOfClass:[DiscoverViewController class]]) {
-                if (navigationController.viewControllers.count > 1) {
-                    [navigationController popToRootViewControllerAnimated:NO];
-                }
-                [ApplicationDelegate.tabBarController setSelectedIndex:0];
-            }
         }
     }else if (type == 7){
         JRWebViewController *wv = [[JRWebViewController alloc] init];

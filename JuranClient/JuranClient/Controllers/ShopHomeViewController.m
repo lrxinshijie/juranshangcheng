@@ -92,13 +92,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
+    [super viewWillAppear:animated];
     //self.navigationController.navigationBar.clipsToBounds = NO;
     self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     //[self.searchBar removeFromSuperview];
     //self.navigationController.navigationBar.clipsToBounds = YES;
     self.navigationController.navigationBarHidden = NO;

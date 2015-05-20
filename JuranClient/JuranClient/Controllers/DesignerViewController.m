@@ -84,9 +84,13 @@
     self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+        [self configureMore];
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self configureMore];
     if ([_filterView isShow]) {
         [_filterView showSort];
     }

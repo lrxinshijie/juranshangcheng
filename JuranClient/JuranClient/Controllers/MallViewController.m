@@ -50,7 +50,7 @@
     
     [self configureCityTitle:@"请选择"];
     [self configureScan];
-    
+    [self configureSearchAndMore];
     
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.tableHeaderView = _headerView;
