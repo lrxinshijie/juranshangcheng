@@ -44,7 +44,6 @@
     _collectionView.backgroundColor = kViewBackgroundColor;
     [_collectionView registerNib:[UINib nibWithNibName:@"RootMenuCell" bundle:nil] forCellWithReuseIdentifier:@"RootMenuCell"];
     [self configureScan];
-    [self configureSearchAndMore];
     [self setupUI];
 }
 
