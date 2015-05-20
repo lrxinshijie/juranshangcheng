@@ -49,7 +49,6 @@
     
     
     [self configureScan];
-    [self configureSearchAndMore];
     [self setupUI];
     
     __weak typeof(self) weakSelf = self;
@@ -66,9 +65,13 @@
     [_tableView headerBeginRefreshing];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureSearchAndMore];
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self configureSearchAndMore];
     if ([_filterView isShow]) {
         [_filterView showSort];
     }
