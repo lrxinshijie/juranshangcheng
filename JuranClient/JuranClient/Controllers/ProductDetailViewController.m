@@ -78,7 +78,6 @@
     _fromRow = -1;
     // Do any additional setup after loading the view from its nib.
 //    _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadPrice:) name:kNotificationNameProudctPriceReloadData object:nil];
     [self setupUI];
     [self setupAttributeView];
     
@@ -119,41 +118,6 @@
         [_attributeTableView reloadData];
     }];
 }
-
-//- (void)reloadPrice:(NSNotification *)noti{
-//    self.fromRow = [noti.object integerValue];
-//    
-//    NSMutableArray *attributeList = [NSMutableArray array];
-//    [_product.attributeList enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
-//        NSString *attValue = [dict[@"attrList"] objectAtTheIndex:[_attributeSelected[idx] intValue]];
-//        NSInteger attrId = [dict[@"attrId"] integerValue];
-//        
-//        if (attValue.length > 0) {
-//            NSDictionary *row = @{@"attId": @(attrId),
-//                                  @"attValue": attValue ? attValue : @""};
-//            [attributeList addObject:row];
-//        }
-//        
-//    }];
-//    
-//    if (attributeList.count != [_attributeSelected count]) {
-//        [_attributeTableView reloadData];
-//        return;
-//    }
-//    
-//    [self showHUD];
-//    NSDictionary *param = @{@"linkProductId": @(_product.linkProductId),
-//                            @"attributeList": attributeList};
-//    [[ALEngine shareEngine] pathURL:JR_PRODUCT_CHANGE_PRICE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-//        [self hideHUD];
-//        if (!error) {
-//            NSString *price = [data getStringValueForKey:@"goodsprice" defaultValue:@""];
-//            _attributePriceLabel.text = [price isEqual:@""]?@"":[NSString stringWithFormat:@"￥%@",  price];
-//            [_attributeImageView setImageWithURLString:data[@"goodsImage"] Editing:YES];
-//        }
-//        [_attributeTableView reloadData];
-//    }];
-//}
 
 - (void)setupUI{
     _scrollView.contentSize = CGSizeMake(CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)*2);

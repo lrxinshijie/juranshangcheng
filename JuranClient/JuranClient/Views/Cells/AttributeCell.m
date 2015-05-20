@@ -68,19 +68,10 @@
     return [_attrList count];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
-//    cell.backgroundColor = [UIColor redColor];
-    
-//    [(TagCollectionViewCell *)cell setIsSelect:indexPath.row == [_attributeSelected[_indexPath.row] integerValue]];
-}
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-//    TagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([TagCollectionViewCell class]) forIndexPath:indexPath];
-//    [cell fillCellWithData:_attrList[indexPath.row]];
     TagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TagCell" forIndexPath:indexPath];
     [self configureCell:cell forIndexPath:indexPath];
-//    BOOL isEnable = YES;
     BOOL isEnable = [_viewController.product attirbuteIsEnable:_viewController.attributeSelected fromRow:_viewController.fromRow toIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:_indexPath.row]];
     
     cell.isEnable = isEnable;
@@ -116,7 +107,6 @@
     }
     
     [_viewController reloadPrice:_indexPath.row];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProudctPriceReloadData object:@(_indexPath.row)];
 }
 
 + (CGFloat)cellHeight{
