@@ -475,7 +475,7 @@
             
             if (indexPath.section == 0) {
                 if (indexPath.row == 0) {
-                    cell.textLabel.text = @"查看颜色/尺寸";
+                    cell.textLabel.text = @"查看 颜色/尺寸";
                 }else if (indexPath.row == 1){
                     cell.textLabel.text = @"可售门店";
                     _locationView.backgroundColor = [UIColor clearColor];

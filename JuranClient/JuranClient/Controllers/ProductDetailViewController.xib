@@ -221,7 +221,7 @@
                         <action selector="onBack:" destination="-1" eventType="touchUpInside" id="8iG-RH-CVc"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dGR-PK-srs">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dGR-PK-srs">
                     <rect key="frame" x="250" y="23" width="23" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="icon-search.png">
