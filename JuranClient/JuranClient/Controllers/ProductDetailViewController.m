@@ -57,15 +57,12 @@
 @property (nonatomic, strong) IBOutlet UIImageView *attributeImageView;
 @property (nonatomic, strong) IBOutlet UILabel *attributeNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *attributePriceLabel;
-@property (nonatomic, strong) NSMutableArray *attributeSelected;
 
 @property (nonatomic, strong) UITableView *detailTableView;
 @property (nonatomic, strong) ALWebView *webView;
 @property (nonatomic, strong) NSArray *products;
 
 @property (nonatomic, strong) JRSegmentControl *segCtl;
-
-@property (nonatomic, assign) NSInteger fromRow;
 
 @end
 
@@ -88,8 +85,8 @@
     [self loadData];
 }
 
-- (void)reloadPrice:(NSNotification *)noti{
-    self.fromRow = [noti.object integerValue];
+- (void)reloadPrice:(NSInteger)fromRow{
+    self.fromRow = fromRow;
     
     NSMutableArray *attributeList = [NSMutableArray array];
     [_product.attributeList enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
@@ -104,7 +101,8 @@
         
     }];
     
-    if (attributeList.count == 0) {
+    if (attributeList.count != [_attributeSelected count]) {
+        [_attributeTableView reloadData];
         return;
     }
     
@@ -121,6 +119,41 @@
         [_attributeTableView reloadData];
     }];
 }
+
+//- (void)reloadPrice:(NSNotification *)noti{
+//    self.fromRow = [noti.object integerValue];
+//    
+//    NSMutableArray *attributeList = [NSMutableArray array];
+//    [_product.attributeList enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+//        NSString *attValue = [dict[@"attrList"] objectAtTheIndex:[_attributeSelected[idx] intValue]];
+//        NSInteger attrId = [dict[@"attrId"] integerValue];
+//        
+//        if (attValue.length > 0) {
+//            NSDictionary *row = @{@"attId": @(attrId),
+//                                  @"attValue": attValue ? attValue : @""};
+//            [attributeList addObject:row];
+//        }
+//        
+//    }];
+//    
+//    if (attributeList.count != [_attributeSelected count]) {
+//        [_attributeTableView reloadData];
+//        return;
+//    }
+//    
+//    [self showHUD];
+//    NSDictionary *param = @{@"linkProductId": @(_product.linkProductId),
+//                            @"attributeList": attributeList};
+//    [[ALEngine shareEngine] pathURL:JR_PRODUCT_CHANGE_PRICE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+//        [self hideHUD];
+//        if (!error) {
+//            NSString *price = [data getStringValueForKey:@"goodsprice" defaultValue:@""];
+//            _attributePriceLabel.text = [price isEqual:@""]?@"":[NSString stringWithFormat:@"￥%@",  price];
+//            [_attributeImageView setImageWithURLString:data[@"goodsImage"] Editing:YES];
+//        }
+//        [_attributeTableView reloadData];
+//    }];
+//}
 
 - (void)setupUI{
     _scrollView.contentSize = CGSizeMake(CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)*2);
@@ -470,12 +503,10 @@
             NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
             cell = (AttributeCell *)[nibs firstObject];
         }
-        cell.changeRow = _fromRow;
+        cell.viewController = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.indexPath = indexPath;
-        cell.attributeSelected = _attributeSelected;
         NSDictionary *dict = _product.attributeList[indexPath.row];
-        cell.product = _product;
         [cell fillCellWithDict:dict];
         
         return cell;

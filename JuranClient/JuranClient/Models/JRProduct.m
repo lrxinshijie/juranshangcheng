@@ -207,7 +207,9 @@
 }
 
 - (BOOL)attirbuteIsEnable:(NSArray *)selected fromRow:(NSInteger)fromRow toIndexPath:(NSIndexPath *)toIndexPath{
-    ASLog(@"%@,%d,%d,%d", selected, fromRow, toIndexPath.section, toIndexPath.row);
+    NSString *thisKey = [NSString stringWithFormat:@"%d", [self.attributeList[toIndexPath.section][@"attrId"] integerValue]];
+    NSString *thisValue = self.attributeList[toIndexPath.section][@"attrList"][toIndexPath.row];
+    ASLog(@"%@,%d,%@,%@", selected, fromRow, thisKey, thisValue);
     if (self.buyAttrList.count == 0) {
         return NO;
     }
@@ -216,18 +218,19 @@
         return YES;
     }
     
-    if (fromRow == toIndexPath.section) {
-        return YES;
-    }
+//    if (fromRow == toIndexPath.section) {
+//        return YES;
+//    }
     
 //    if ([selected[toIndexPath.section] integerValue] >= 0) {
 //        return YES;
 //    }
     
+
     NSMutableDictionary *filter = [NSMutableDictionary dictionary];
     [selected enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSInteger value = [obj integerValue];
-        if (value >= 0) {
+        if (value >= 0 && ![thisKey isEqualToString:[NSString stringWithFormat:@"%d", [self.attributeList[idx][@"attrId"] integerValue]]]) {
             NSDictionary *dict = self.attributeList[idx];
             [filter setObject:dict[@"attrList"][value] forKey:dict[@"attrId"]];
         }
@@ -237,8 +240,8 @@
         return YES;
     }
     
-    NSString *thisKey = [NSString stringWithFormat:@"%d", [self.attributeList[toIndexPath.section][@"attrId"] integerValue]];
-    NSString *thisValue = self.attributeList[toIndexPath.section][@"attrList"][toIndexPath.row];
+    
+    
     ASLog(@"value:%@,%@",thisKey, thisValue);
     __block BOOL retVal = NO;
     [_buyAttrList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
