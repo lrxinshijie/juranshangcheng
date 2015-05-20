@@ -18,9 +18,14 @@
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray *attrList;
+
 @end
 
 @implementation AttributeCell
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)awakeFromNib {
     // Initialization code
@@ -36,6 +41,19 @@
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"TagCell"];
     
     _sizingCell = [[cellNib instantiateWithOwner:nil options:nil] objectAtIndex:0];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAttribute:) name:kNotificationNameAttributeReloadData object:nil];
+    
+    self.changeRow = -1;
+}
+
+- (void)reloadAttribute:(NSNotification *)noti{
+    self.changeRow = [noti.object integerValue];
+    if (_changeRow == _indexPath.row) {
+        return;
+    }
+    
+    [_collectionView reloadData];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -64,7 +82,7 @@
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
 //    cell.backgroundColor = [UIColor redColor];
     
-    [(TagCollectionViewCell *)cell setIsSelect:indexPath.row == [_attributeSelected[_indexPath.row] integerValue]];
+//    [(TagCollectionViewCell *)cell setIsSelect:indexPath.row == [_attributeSelected[_indexPath.row] integerValue]];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -73,7 +91,11 @@
 //    [cell fillCellWithData:_attrList[indexPath.row]];
     TagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TagCell" forIndexPath:indexPath];
     [self configureCell:cell forIndexPath:indexPath];
-//    cell.isSelect = indexPath.row == [_attributeSelected[_indexPath.row] integerValue];
+//    BOOL isEnable = YES;
+    BOOL isEnable = [_product attirbuteIsEnable:_attributeSelected fromRow:_changeRow toIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:_indexPath.row]];
+    
+    cell.isEnable = isEnable;
+    cell.isSelect = indexPath.row == [_attributeSelected[_indexPath.row] integerValue];
     return cell;
 }
 
@@ -90,6 +112,13 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    TagCollectionViewCell *cell = (TagCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    if (!cell.isEnable) {
+        return;
+    }
+    
     NSInteger value = [[_attributeSelected objectAtIndex:_indexPath.row] integerValue];
     if (value == indexPath.row) {
         [_attributeSelected replaceObjectAtIndex:_indexPath.row withObject:@(-1)];
@@ -97,7 +126,8 @@
         [_attributeSelected replaceObjectAtIndex:_indexPath.row withObject:@(indexPath.row)];
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProudctPriceReloadData object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProudctPriceReloadData object:@(_indexPath.row)];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameAttributeReloadData object:@(_indexPath.row)];
 }
 
 + (CGFloat)cellHeight{

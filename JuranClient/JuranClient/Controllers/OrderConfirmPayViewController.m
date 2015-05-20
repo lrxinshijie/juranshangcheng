@@ -22,6 +22,7 @@
 
 @property (nonatomic, strong) IBOutlet UIButton *aliButton;
 @property (nonatomic, strong) IBOutlet UIButton *wxButton;
+@property (nonatomic, strong) IBOutlet UIView *payView;
 
 @property (nonatomic, assign) BOOL isPayAli;
 
@@ -55,6 +56,16 @@
     _payAmountLabel.text = [NSString stringWithFormat:@"￥%@", _order.waitPayAmount];
     
     self.isPayAli = YES;
+    
+    CGRect frame = _payView.frame;
+    if ([WXApi isWXAppInstalled]) {
+        frame.size.height = 119;
+    }else{
+        frame.size.height = 64;
+    }
+    
+    _payView.frame = frame;
+    
 }
 
 - (IBAction)onSelectPay:(UIButton *)btn{
