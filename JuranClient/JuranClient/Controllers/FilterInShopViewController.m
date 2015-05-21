@@ -43,13 +43,15 @@
                 _dataList = [FilterInShop buildUpWithValueForList:[data objectForKey:@"childrenCats"]];
                 for (FilterInShop *filter in _dataList) {
                     filter.childList = [FilterInShop buildUpWithValueForList:filter.childList];
-                    FilterInShop *all = [[FilterInShop alloc]init];
-                    all.name = @"全部";
-                    all.parentId = filter.parentId;
-                    all.depth = filter.depth;
-                    all.Id = filter.Id;
-                    all.childList = filter.childList;
-                    [filter.childList insertObject:all atIndex:0];
+                    if (filter.childList.count>0) {
+                        FilterInShop *all = [[FilterInShop alloc]init];
+                        all.name = @"全部";
+                        all.parentId = filter.parentId;
+                        all.depth = filter.depth;
+                        all.Id = filter.Id;
+                        all.childList = filter.childList;
+                        [filter.childList insertObject:all atIndex:0];
+                    }
                 }
                 _openSatusList = [[NSMutableArray alloc] init];
                 for (int i=0; i<_dataList.count; i++) {
@@ -123,10 +125,16 @@
     [headerView addSubview:line];
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(295, 16, 11, 6)];
     imageView.backgroundColor = [UIColor whiteColor];
-    if ([[_openSatusList objectAtIndex:section] integerValue]==0) {
-        imageView.image = [UIImage imageNamed:@"filter-icon-dropdown-1.png"];
-    }else{
-        imageView.image = [UIImage imageNamed:@"filter-icon-dropdown-2.png"];
+    if (filters.childList.count>0) {
+        if ([[_openSatusList objectAtIndex:section] integerValue]==0) {
+            imageView.image = [UIImage imageNamed:@"filter-icon-dropdown-1.png"];
+        }else{
+            imageView.image = [UIImage imageNamed:@"filter-icon-dropdown-2.png"];
+        }
+
+    }
+    else {
+        imageView.image = nil;
     }
     [headerView addSubview:imageView];
     return headerView;
@@ -153,12 +161,28 @@
 - (void)headerViewClick:(id)sender {
     UIButton *btn = (UIButton *)sender;
     int section = btn.tag-6666;
-    if ([[_openSatusList objectAtIndex:section] boolValue]) {
-        [_openSatusList replaceObjectAtIndex:section withObject:@(NO)];
+    if ([_dataList[section] childList].count>0) {
+        if ([[_openSatusList objectAtIndex:section] boolValue]) {
+            [_openSatusList replaceObjectAtIndex:section withObject:@(NO)];
+        }else {
+            [_openSatusList replaceObjectAtIndex:section withObject:@(YES)];
+        }
+        [_tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
     }else {
-        [_openSatusList replaceObjectAtIndex:section withObject:@(YES)];
+        FilterInShop *filter = _dataList[section];
+        if (_block) {
+            [self.navigationController popViewControllerAnimated:YES];
+            ProductSelectedFilter *sel = [[ProductSelectedFilter alloc]init];
+            sel.pCategory = [[ProductCategory alloc]init];
+            sel.pCategory.Id = filter.Id;
+            sel.pCategory.parentId = filter.parentId;
+            sel.pCategory.name = filter.name;
+            sel.pCategory.depth = filter.depth;
+            sel.isInShop = YES;
+            sel.shopId = _shopId;
+            _block(sel);
+        }
     }
-    [_tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)setFinishBlock:(FilterSelected)finished{
