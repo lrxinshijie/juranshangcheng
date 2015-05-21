@@ -145,7 +145,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
         }
         if (_readLabel) {
             [_readLabel removeFromSuperview];
-            _countLabel = nil;
+            _readLabel = nil;
         }
     }
 }
