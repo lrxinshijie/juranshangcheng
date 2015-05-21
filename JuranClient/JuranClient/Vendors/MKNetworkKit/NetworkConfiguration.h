@@ -20,12 +20,12 @@
 
 
 /* UAT */
-//#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
-//#define JR_SERVICE  @"http://54.223.161.28:8080"
+#define JR_IMAGE_SERVICE  @"http://image1.juran.cn"
+#define JR_SERVICE  @"http://54.223.161.28:8080"
 
 //SIT内网
-#define JR_SERVICE  @"http://10.199.5.241:8083"
-#define JR_IMAGE_SERVICE  @"http://10.199.5.57:8080"
+//#define JR_SERVICE  @"http://10.199.5.241:8083"
+//#define JR_IMAGE_SERVICE  @"http://10.199.5.57:8080"
 //SIT外网
 //#define JR_SERVICE  @"http://124.193.207.194:8093"
 //#define JR_IMAGE_SERVICE  @"http://124.193.207.194:8081"
