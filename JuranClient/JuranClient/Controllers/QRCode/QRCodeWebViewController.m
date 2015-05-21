@@ -10,7 +10,7 @@
 #import "ALWebView.h"
 
 
-@interface QRCodeWebViewController ()<ALWebViewDelegate>
+@interface QRCodeWebViewController ()<ALWebViewDelegate,UIAlertViewDelegate>
 
 @property (strong, nonatomic) ALWebView * webView;
 
@@ -34,6 +34,8 @@
 
 - (void)webView:(ALWebView *)aWebView didFailLoadWithError:(NSError *)error{
     [self hideHUD];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"此链接不支持跳转，点击确认，返回扫一扫。" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)webViewDidFinishLoad:(ALWebView *)aWebView{
@@ -43,6 +45,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
