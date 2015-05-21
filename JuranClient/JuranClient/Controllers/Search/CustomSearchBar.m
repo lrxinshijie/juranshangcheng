@@ -48,6 +48,13 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
 //用于判断是否需要展示搜索范围列表的属性
 @property (assign, nonatomic) BOOL enabledShow;
 
+//用于记录输入框中本次输入之前的文字
+@property (strong, nonatomic) NSString * oldText;
+//用于区分是UIControlEventEditingChanged的第几次响应，UIControlEventEditingChanged每次输入文字都会触发两次删除触发一次，暂时不知原因。
+
+@property (strong, nonatomic) UILabel * countLabel;
+@property (strong, nonatomic) UILabel * readLabel;
+
 @end
 
 @implementation CustomSearchBar
@@ -89,13 +96,58 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     }];
 //    NSLog(@"%@",self.dataArray_History);
     
-    
     //输入偏左问题
     CGRect frame = _inputTextField.frame;
     frame.size.width  = 15;
     UIView *leftView = [[UIView alloc]initWithFrame:frame];
     _inputTextField.leftViewMode = UITextFieldViewModeAlways;
     _inputTextField.leftView = leftView;
+    [_inputTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    _oldText = @"";
+}
+
+- (void)configTipsIconWithRightBtnStyle:(RightBtnStyle)style
+{
+    if (style == RightBtnStyle_More) {
+        //添加消息通知的小点点
+        if (!_countLabel) {
+            _countLabel = [self labelWithFrame:CGRectMake(300, 30, 18, 16)
+                                          text:[NSString stringWithFormat:@"%d",[JRUser isLogin] && [JRUser currentUser].newPrivateLetterCount?[JRUser currentUser].newPrivateLetterCount:0]
+                                     textColor:[UIColor whiteColor]
+                                 textAlignment:NSTextAlignmentCenter
+                                          font:[UIFont systemFontOfSize:12]];
+            _countLabel.backgroundColor = [UIColor redColor];
+            _countLabel.layer.cornerRadius = _countLabel.bounds.size.height/2;
+            _countLabel.layer.masksToBounds = YES;
+            _countLabel.hidden = [JRUser isLogin] && [JRUser currentUser].newPrivateLetterCount>0 ? NO:YES;
+            [self addSubview:_countLabel];
+        }
+        
+        if (!_readLabel) {
+            _readLabel = [self labelWithFrame:CGRectMake(302, 34, 8, 8)
+                                         text:@""
+                                    textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:1]];
+            _readLabel.backgroundColor = [UIColor redColor];
+            _readLabel.layer.cornerRadius = _readLabel.bounds.size.height/2;
+            _readLabel.layer.masksToBounds = YES;
+            if (_countLabel.hidden) {
+                _readLabel.hidden = [JRUser isLogin] && [JRUser currentUser].newPushMsgCount>0 ? NO:YES;
+            }else {
+                _readLabel.hidden = YES;
+            }
+            [self addSubview:_readLabel];
+        }
+        
+    }else{
+        if (_countLabel) {
+            [_countLabel removeFromSuperview];
+            _countLabel = nil;
+        }
+        if (_readLabel) {
+            [_readLabel removeFromSuperview];
+            _countLabel = nil;
+        }
+    }
 }
 
 - (void)initHistoryDataCompleted:(void(^)(BOOL isFinish))block
@@ -303,10 +355,34 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (range.location == 0) {
+    if ((range.location == 0 && range.length == 0) || (range.location == 0 && range.length == 1)) {
         [self changeListStyleAnimation];
     }
+    if ([string isEqualToString:@""] || string.length == 0) {
+        _oldText = [_oldText substringToIndex:(int)(_oldText.length - 1)];
+    }else{
+        _oldText = [NSString stringWithFormat:@"%@%@",_oldText,string];
+        
+    }
+    
     return YES;
+}
+
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if (![_oldText isEqualToString:@""] || _oldText.length != 0) {
+        return;
+    }
+    
+    
+    if (textField.text.length != 0 && strlen([[textField.text substringToIndex:1] UTF8String]) == 3) {
+        
+        if (textField.text.length <= 1) {
+            [self changeListStyleAnimation];
+        }
+        _oldText = textField.text;
+    }
+
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
@@ -513,6 +589,8 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
         self.initializeStyle = style;
         self.isFirstTimeIn = NO;
     }
+    
+    [self configTipsIconWithRightBtnStyle:style];
     
     self.rightBtnStyle = style;
     
