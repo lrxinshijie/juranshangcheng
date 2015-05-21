@@ -315,6 +315,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     if (self.isHistory) {
         
         self.inputTextField.text = [cell getSearchCellMessage];
+        _oldText = [cell getSearchCellMessage];
         [self changeListStyleAnimation];
         
     }else{
