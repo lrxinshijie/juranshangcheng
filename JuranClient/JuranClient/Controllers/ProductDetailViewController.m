@@ -57,15 +57,12 @@
 @property (nonatomic, strong) IBOutlet UIImageView *attributeImageView;
 @property (nonatomic, strong) IBOutlet UILabel *attributeNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *attributePriceLabel;
-@property (nonatomic, strong) NSMutableArray *attributeSelected;
 
 @property (nonatomic, strong) UITableView *detailTableView;
 @property (nonatomic, strong) ALWebView *webView;
 @property (nonatomic, strong) NSArray *products;
 
 @property (nonatomic, strong) JRSegmentControl *segCtl;
-
-@property (nonatomic, assign) NSInteger fromRow;
 
 @end
 
@@ -81,15 +78,14 @@
     _fromRow = -1;
     // Do any additional setup after loading the view from its nib.
 //    _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadPrice:) name:kNotificationNameProudctPriceReloadData object:nil];
     [self setupUI];
     [self setupAttributeView];
     
     [self loadData];
 }
 
-- (void)reloadPrice:(NSNotification *)noti{
-    self.fromRow = [noti.object integerValue];
+- (void)reloadPrice:(NSInteger)fromRow{
+    self.fromRow = fromRow;
     
     NSMutableArray *attributeList = [NSMutableArray array];
     [_product.attributeList enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
@@ -104,7 +100,8 @@
         
     }];
     
-    if (attributeList.count == 0) {
+    if (attributeList.count != [_attributeSelected count]) {
+        [_attributeTableView reloadData];
         return;
     }
     
@@ -470,12 +467,10 @@
             NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
             cell = (AttributeCell *)[nibs firstObject];
         }
-        cell.changeRow = _fromRow;
+        cell.viewController = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.indexPath = indexPath;
-        cell.attributeSelected = _attributeSelected;
         NSDictionary *dict = _product.attributeList[indexPath.row];
-        cell.product = _product;
         [cell fillCellWithDict:dict];
         
         return cell;

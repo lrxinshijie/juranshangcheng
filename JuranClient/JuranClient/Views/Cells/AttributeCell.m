@@ -10,6 +10,7 @@
 #import "AttributeLabelCell.h"
 #import "CHTCollectionViewWaterfallLayout.h"
 #import "TagCollectionViewCell.h"
+#import "ProductDetailViewController.h"
 
 @interface AttributeCell () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>{
     TagCollectionViewCell *_sizingCell;
@@ -41,20 +42,8 @@
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"TagCell"];
     
     _sizingCell = [[cellNib instantiateWithOwner:nil options:nil] objectAtIndex:0];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAttribute:) name:kNotificationNameAttributeReloadData object:nil];
-    
-    self.changeRow = -1;
 }
 
-- (void)reloadAttribute:(NSNotification *)noti{
-    self.changeRow = [noti.object integerValue];
-    if (_changeRow == _indexPath.row) {
-        return;
-    }
-    
-    [_collectionView reloadData];
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -79,23 +68,14 @@
     return [_attrList count];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
-//    cell.backgroundColor = [UIColor redColor];
-    
-//    [(TagCollectionViewCell *)cell setIsSelect:indexPath.row == [_attributeSelected[_indexPath.row] integerValue]];
-}
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-//    TagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([TagCollectionViewCell class]) forIndexPath:indexPath];
-//    [cell fillCellWithData:_attrList[indexPath.row]];
     TagCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TagCell" forIndexPath:indexPath];
     [self configureCell:cell forIndexPath:indexPath];
-//    BOOL isEnable = YES;
-    BOOL isEnable = [_product attirbuteIsEnable:_attributeSelected fromRow:_changeRow toIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:_indexPath.row]];
+    BOOL isEnable = [_viewController.product attirbuteIsEnable:_viewController.attributeSelected fromRow:_viewController.fromRow toIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:_indexPath.row]];
     
     cell.isEnable = isEnable;
-    cell.isSelect = indexPath.row == [_attributeSelected[_indexPath.row] integerValue];
+    cell.isSelect = indexPath.row == [_viewController.attributeSelected[_indexPath.row] integerValue];
     return cell;
 }
 
@@ -119,15 +99,14 @@
         return;
     }
     
-    NSInteger value = [[_attributeSelected objectAtIndex:_indexPath.row] integerValue];
+    NSInteger value = [[_viewController.attributeSelected objectAtIndex:_indexPath.row] integerValue];
     if (value == indexPath.row) {
-        [_attributeSelected replaceObjectAtIndex:_indexPath.row withObject:@(-1)];
+        [_viewController.attributeSelected replaceObjectAtIndex:_indexPath.row withObject:@(-1)];
     }else{
-        [_attributeSelected replaceObjectAtIndex:_indexPath.row withObject:@(indexPath.row)];
+        [_viewController.attributeSelected replaceObjectAtIndex:_indexPath.row withObject:@(indexPath.row)];
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProudctPriceReloadData object:@(_indexPath.row)];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameAttributeReloadData object:@(_indexPath.row)];
+    [_viewController reloadPrice:_indexPath.row];
 }
 
 + (CGFloat)cellHeight{
