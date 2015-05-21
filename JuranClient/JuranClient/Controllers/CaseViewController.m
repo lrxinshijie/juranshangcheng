@@ -66,7 +66,6 @@
 #else
         [self configureMenu];
 #endif
-        
         [self configureSearch];
     }else{
         self.navigationItem.title = @"搜索结果";
@@ -144,9 +143,13 @@
     return YES;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureMore];
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self configureMore];
     [self showNavBarAnimated:NO];
     if ([_filterView isShow]) {
         [_filterView showSort];

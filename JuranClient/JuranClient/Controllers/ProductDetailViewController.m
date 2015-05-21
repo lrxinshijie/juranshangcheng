@@ -57,7 +57,6 @@
 @property (nonatomic, strong) IBOutlet UIImageView *attributeImageView;
 @property (nonatomic, strong) IBOutlet UILabel *attributeNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *attributePriceLabel;
-@property (nonatomic, strong) NSMutableArray *attributeSelected;
 
 @property (nonatomic, strong) UITableView *detailTableView;
 @property (nonatomic, strong) ALWebView *webView;
@@ -76,16 +75,17 @@
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];
+    _fromRow = -1;
     // Do any additional setup after loading the view from its nib.
 //    _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadPrice:) name:kNotificationNameProudctPriceReloadData object:nil];
     [self setupUI];
     [self setupAttributeView];
     
     [self loadData];
 }
 
-- (void)reloadPrice:(NSNotification *)noti{
+- (void)reloadPrice:(NSInteger)fromRow{
+    self.fromRow = fromRow;
     
     NSMutableArray *attributeList = [NSMutableArray array];
     [_product.attributeList enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
@@ -100,7 +100,8 @@
         
     }];
     
-    if (attributeList.count == 0) {
+    if (attributeList.count != [_attributeSelected count]) {
+        [_attributeTableView reloadData];
         return;
     }
     
@@ -169,7 +170,7 @@
         if (!result) {
             return ;
         }
-        
+
         [self setupFavority];
         
         _attributePriceLabel.text = _product.priceString;
@@ -313,9 +314,14 @@
     frame = _scrollView.bounds;
     _attributePopView.frame = frame;
     
-    _attributeTableView.tableHeaderView = _attributeHeaderView;
+//    _attributeTableView.tableHeaderView = _attributeHeaderView;
     _attributeTableView.tableFooterView = [[UIView alloc] init];
     _attributeTableView.bounces = NO;
+    
+    frame = _attributeTableView.frame;
+    frame.size.height = 351;
+    frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
+    _attributeTableView.frame = frame;
 }
 
 - (void)showAttributeView{
@@ -377,6 +383,14 @@
     return 1;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if ([tableView isEqual:_attributeTableView]) {
+        return _attributeHeaderView;
+    }
+    
+    return nil;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSInteger count = 0;
     if ([tableView isEqual:_baseTableView]) {
@@ -407,6 +421,8 @@
             return 1;
         }
         return 10;
+    }else if ([tableView isEqual:_attributeTableView]) {
+        return CGRectGetHeight(_attributeHeaderView.frame);
     }else {
         if (_segCtl.selectedIndex == 1) {
             return 10;
@@ -451,9 +467,9 @@
             NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
             cell = (AttributeCell *)[nibs firstObject];
         }
+        cell.viewController = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.indexPath = indexPath;
-        cell.attributeSelected = _attributeSelected;
         NSDictionary *dict = _product.attributeList[indexPath.row];
         [cell fillCellWithDict:dict];
         
@@ -475,7 +491,7 @@
             
             if (indexPath.section == 0) {
                 if (indexPath.row == 0) {
-                    cell.textLabel.text = @"查看颜色/尺寸";
+                    cell.textLabel.text = @"查看 颜色/尺寸";
                 }else if (indexPath.row == 1){
                     cell.textLabel.text = @"可售门店";
                     _locationView.backgroundColor = [UIColor clearColor];
@@ -520,6 +536,11 @@
                     [_attributeTableView reloadData];
                 }
                 
+//                CGRect frame = _attributeTableView.frame;
+//                frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame) + 1;
+//                frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
+//                _attributeTableView.frame = frame;
+                
                 [self showAttributeView];
             }else{
                 [self showHUD];
@@ -530,10 +551,10 @@
                         [_product.attributeList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                             [_attributeSelected addObject:@(-1)];
                         }];
-                        CGRect frame = _attributeTableView.frame;
-                        frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame) + 1;
-                        frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
-                        _attributeTableView.frame = frame;
+//                        CGRect frame = _attributeTableView.frame;
+//                        frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame) + 1;
+//                        frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
+//                        _attributeTableView.frame = frame;
                         [_attributeTableView reloadData];
                         [self showAttributeView];
                     }

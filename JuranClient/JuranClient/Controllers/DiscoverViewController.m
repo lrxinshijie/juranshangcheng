@@ -58,6 +58,11 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureSearchAndMore];
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     if ([_quesgtionFilterView isShow]) {
@@ -74,7 +79,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveReloadNotification:) name:kNotificationNameQuestionReloadData object:nil];
     
     [self configureScan];
-    [self configureSearchAndMore];
     
     [self setupUI];
     

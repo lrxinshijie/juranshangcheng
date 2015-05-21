@@ -47,9 +47,8 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"家装";
     
-    [self configureSearchAndMore];
-    [self configureScan];
     
+    [self configureScan];
     [self setupUI];
     
     __weak typeof(self) weakSelf = self;
@@ -66,9 +65,13 @@
     [_tableView headerBeginRefreshing];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureSearchAndMore];
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
     if ([_filterView isShow]) {
         [_filterView showSort];
     }

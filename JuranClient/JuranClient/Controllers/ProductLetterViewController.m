@@ -198,7 +198,7 @@
     if (_shop) {
         productUrl = @"";
     }else {
-        productUrl = [NSString stringWithFormat:@"http://mall.juran.cn/product/%d.htm?ozu_sid=ProductMobile",_product.linkProductId];
+        productUrl = [NSString stringWithFormat:@"http://mall.juran.cn/product/%d.htm",_product.linkProductId];
     }
     NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _product?_product.shopId:_shop.shopId],
                            @"senderName":_senderName,

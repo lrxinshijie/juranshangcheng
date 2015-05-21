@@ -597,7 +597,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     if (style == RightBtnStyle_Scan) {
         
         [self.rightButton setTitle:nil forState:UIControlStateNormal];
-        [self.rightButton setImage:[UIImage imageNamed:@"search_scancode"] forState:UIControlStateNormal];
+        [self.rightButton setImage:[UIImage imageNamed:@"icon-scan"] forState:UIControlStateNormal];
         
     }else if (style == RightBtnStyle_Search){
         

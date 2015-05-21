@@ -36,7 +36,7 @@ typedef enum {
 
 //显示更多按钮
 - (void)showMenuList;
-
+@optional
 //开始编辑
 - (void)customSearchStartWork;
 

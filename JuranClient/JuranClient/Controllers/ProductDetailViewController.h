@@ -12,5 +12,9 @@
 @interface ProductDetailViewController : ALViewController
 
 @property (nonatomic, strong) JRProduct *product;
+@property (nonatomic, strong) NSMutableArray *attributeSelected;
+@property (nonatomic, assign) NSInteger fromRow;
+
+- (void)reloadPrice:(NSInteger)fromRow;
 
 @end
