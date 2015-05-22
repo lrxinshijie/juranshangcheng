@@ -337,16 +337,16 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     }
     
     if (textField.text.length == 0) {
-        self.isHistory = NO;
-    }else{
         self.isHistory = YES;
+    }else{
+        self.isHistory = NO;
     }
     [self showAnimation];
     [self cleanBtnShow];
     [self magnifyingGlassHide];
     self.inputTextField.placeholder = nil;
     [self rightButtonChangeStyleWithKey:RightBtnStyle_Search];
-    [self changeListStyleAnimation];
+//    [self changeListStyleAnimation];
     
     //此处是为了解决BUG添加的代码，目的是吧奇葩的第三方键盘添加在串口上的手势关掉，否则，会出现响应手势收起键盘而不响应本类中的一些触发事件。
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
@@ -472,12 +472,24 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     
     float height = 0.0;
     
-    if (self.dataArray_History.count>0) {
+//    if (self.dataArray_History.count>0) {
+//        
+//        if (self.dataArray_History.count*36+50>200) {
+//            height = 200.0;
+//        }else{
+//            height = self.dataArray_History.count * 36 + 50;
+//        }
+//        
+//    }
+    
+    int tempCount = self.isHistory?self.dataArray_History.count:(self.enabledShow?self.dataArray_SearchRange.count:0);
+    
+    if (tempCount>0) {
         
-        if (self.dataArray_History.count*36+50>200) {
+        if (tempCount*36+50>200) {
             height = 200.0;
         }else{
-            height = self.dataArray_History.count * 36 + 50;
+            height = tempCount * 36 + 50;
         }
         
     }
