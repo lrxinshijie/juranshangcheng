@@ -765,7 +765,7 @@
     self.brandName = brandClass;
     NSDictionary * dict = @{@"brandTypeCode":brandClass,
                             @"pageNo":[NSString stringWithFormat:@"%d",self.pageNo],
-                            @"onePageCount":kOnePageCount
+                            @"onePageCount":[NSString stringWithFormat:@"%d",[kOnePageCount intValue]*2]
                             };
     [[ALEngine shareEngine] pathURL:JR_BRAND_LIST parameters:dict HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [wSelf hideHUD];
