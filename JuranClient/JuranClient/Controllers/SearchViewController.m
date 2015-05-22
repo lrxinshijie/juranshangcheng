@@ -21,6 +21,7 @@
 
 #define kKeywordsButtonTag 3330
 
+
 @interface SearchViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate,UIScrollViewDelegate,CustomSearchBarDelegate>
 {
     NSInteger step;
@@ -36,6 +37,7 @@
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UIView *keywordsFooterView;
 @property (nonatomic, strong) IBOutlet UIView *clearHistoryView;
+@property (nonatomic, strong) CustomSearchBar *customSB;
 
 @end
 
@@ -69,6 +71,9 @@
     self.headerView.hidden = YES;
     [self reloadData];
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = NO;
+    if(_customSB.inputTextField.text && ![_customSB.inputTextField.text isEqual:@""]) {
+        [_customSB.inputTextField becomeFirstResponder];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -100,15 +105,14 @@
     UIButton *btn = [self.view buttonWithFrame:kContentFrameWithoutNavigationBar target:self action:@selector(handleTap:) image:nil];
     [self.view addSubview:btn];
     
-    
-    CustomSearchBar * customSB = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
-    [customSB setSearchButtonType:SearchButtonType_Case];
-    [customSB setEnabled:YES];
-    customSB.delegate = self;
-    customSB.parentVC = self;
-    [customSB rightButtonChangeStyleWithKey:RightBtnStyle_Scan];
-    customSB.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 64);
-    [self.view addSubview:customSB];
+    _customSB = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
+    [_customSB setSearchButtonType:SearchButtonType_Case];
+    [_customSB setEnabled:YES];
+    _customSB.delegate = self;
+    _customSB.parentVC = self;
+    [_customSB rightButtonChangeStyleWithKey:RightBtnStyle_Scan];
+    _customSB.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 64);
+    [self.view addSubview:_customSB];
     
     
     //旧逻辑，为避免引起连锁问题暂时不删除

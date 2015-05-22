@@ -19,7 +19,6 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     BOOL couldClick;
 }
 
-@property (strong, nonatomic) IBOutlet UITextField *inputTextField;
 @property (strong, nonatomic) IBOutlet UIImageView *magnifyingGlass;
 @property (strong, nonatomic) IBOutlet UIButton *cleanButton;
 @property (strong, nonatomic) IBOutlet UIButton *rightButton;
@@ -356,11 +355,13 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if ((range.location == 0 && range.length == 0) || (range.location == 0 && range.length == 1)) {
+    if ((range.location == 0 && range.length == 0 && ![string isEqualToString:@""]) || (range.location == 0 && range.length == 1)) {
         [self changeListStyleAnimation];
     }
     if ([string isEqualToString:@""] || string.length == 0) {
-        _oldText = [_oldText substringToIndex:(int)(_oldText.length - 1)];
+        if (_oldText.length) {
+            _oldText = [_oldText substringToIndex:(int)(_oldText.length - 1)];
+        }
     }else{
         _oldText = [NSString stringWithFormat:@"%@%@",_oldText,string];
         
@@ -371,7 +372,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
 
 - (void)textFieldDidChange:(UITextField *)textField
 {
-    if (![_oldText isEqualToString:@""] || _oldText.length != 0) {
+    if (![_oldText isEqualToString:@""] && _oldText) {
         return;
     }
     
@@ -631,5 +632,4 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     
     [self magnifyingGlassHide];
 }
-
 @end

@@ -66,6 +66,11 @@
     }];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureMore];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return _dataList.count;
 }

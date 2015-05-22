@@ -35,7 +35,6 @@
 @end
 
 @implementation ProductListViewController
-
 - (instancetype)init
 {
     self = [super init];
@@ -59,25 +58,44 @@
     [_tableView headerBeginRefreshing];
 }
 
+
+
 - (void)setupUI{
-    self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
-    [self.searchBar setSearchButtonType:SearchButtonType_Product];
-    self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
-    [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
-    self.searchBar.delegate = self;
-    self.searchBar.parentVC = self;
-    [self.searchBar setSearchButtonType:SearchButtonType_Product];
-    [self.searchBar setEnabled:NO];
+    [self configureGoBackPre];
+    UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 220, 30)];
+    textField.placeholder = @"请输入搜索关键词";
+    textField.background = [UIImage imageNamed:@"search_bar_bg_image"];
+    textField.font = [UIFont systemFontOfSize:14];
+    textField.text = _selectedFilter.keyword;
+    textField.textColor = [UIColor darkGrayColor];
+    self.navigationItem.titleView = textField;
+    CGRect frame = textField.frame;
+    frame.size.width  = 30;
+    UIImageView *leftView = [[UIImageView alloc]imageViewWithFrame:frame image:[UIImage imageNamed:@"search_magnifying_glass"]];
+    leftView.contentMode = UIViewContentModeCenter;
+    textField.leftViewMode = UITextFieldViewModeAlways;
+    textField.leftView = leftView;
+    [textField addTarget:self action:@selector(textFieldClick:) forControlEvents:UIControlEventEditingDidBegin];
+
+//    self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
+//    [self.searchBar setSearchButtonType:SearchButtonType_Product];
+//    self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
+//    [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
+//    self.searchBar.delegate = self;
+//    self.searchBar.parentVC = self;
+//    [self.searchBar setSearchButtonType:SearchButtonType_Product];
+//    [self.searchBar setEnabled:NO];
+    
     
     self.filterView = [[ProductFilterView alloc] initWithDefaultData:_filterData SeletedData:_selectedFilter];
     _filterView.delegate = self;
-    CGRect frame = _filterView.frame;
-    frame.origin.y = CGRectGetMaxY(_searchBar.frame);
-    _filterView.frame = frame;
+//    CGRect frame = _filterView.frame;
+//    frame.origin.y = CGRectGetMaxY(_searchBar.frame);
+//    _filterView.frame = frame;
     //_filterView.frame = CGRectMake(0, 0, kWindowWidth, 44);
     [self.view addSubview:_filterView];
     
-    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterView.frame), kWindowWidth, kWindowHeightWithoutNavigationBar - 40) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterView.frame), kWindowWidth, kWindowHeight - 44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     [self.view addSubview:_tableView];
     [self.view addSubview:self.searchBar];
     __weak typeof(self) weakSelf = self;
@@ -348,7 +366,8 @@
 {
     [super viewWillAppear:animated];
 //    self.navigationController.navigationBar.clipsToBounds = NO;
-    self.navigationController.navigationBarHidden = YES;
+    //self.navigationController.navigationBarHidden = YES;
+    [self configureMore];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -356,7 +375,7 @@
     [super viewWillDisappear:animated];
     //[self.searchBar removeFromSuperview];
 //    self.navigationController.navigationBar.clipsToBounds = YES;
-    self.navigationController.navigationBarHidden = NO;
+    //self.navigationController.navigationBarHidden = NO;
     if ([_filterView isShow]) {
         [_filterView showSort];
     }
@@ -423,7 +442,6 @@
     }
 }
 
-
 - (void)customSearchStartWork {
     if (_filterView.isShow)
         [_filterView showSort];
@@ -438,5 +456,9 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+- (void)textFieldClick:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

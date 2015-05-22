@@ -68,7 +68,22 @@
 #endif
         [self configureSearch];
     }else{
-        self.navigationItem.title = @"搜索结果";
+        //self.navigationItem.title = @"搜索结果";
+        [self configureGoBackPre];
+        UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 220, 30)];
+        textField.placeholder = @"请输入搜索关键词";
+        textField.background = [UIImage imageNamed:@"search_bar_bg_image"];
+        textField.font = [UIFont systemFontOfSize:14];
+        textField.text = _searchKey;
+        textField.textColor = [UIColor darkGrayColor];
+        self.navigationItem.titleView = textField;
+        CGRect frame = textField.frame;
+        frame.size.width  = 30;
+        UIImageView *leftView = [[UIImageView alloc]imageViewWithFrame:frame image:[UIImage imageNamed:@"search_magnifying_glass"]];
+        leftView.contentMode = UIViewContentModeCenter;
+        textField.leftViewMode = UITextFieldViewModeAlways;
+        textField.leftView = leftView;
+        [textField addTarget:self action:@selector(textFieldClick:) forControlEvents:UIControlEventEditingDidBegin];
     }
     
     self.filterView = [[FilterView alloc] initWithType:!_isHome ? FilterViewTypeCaseSearch : FilterViewTypeCase defaultData:_filterData];
@@ -445,6 +460,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)textFieldClick:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

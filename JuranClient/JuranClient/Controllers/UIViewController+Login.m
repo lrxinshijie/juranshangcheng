@@ -68,6 +68,9 @@
     
 }
 
+- (void)configureGoBackPre{
+    [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"nav_backbtn"] leftBarButtonItemAction:@selector(onPreBack)];
+}
 
 - (void)configureScan{
     [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"icon-scan"] leftBarButtonItemAction:@selector(onScan)];
@@ -137,6 +140,11 @@
     [rightView addSubview:readLabel];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightView];
+}
+
+- (void)onPreBack {
+    int count = self.navigationController.viewControllers.count;
+    [self.navigationController popToViewController:self.navigationController.viewControllers[count - 3] animated:YES];
 }
 
 - (void)onScan{

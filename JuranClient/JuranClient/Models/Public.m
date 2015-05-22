@@ -749,7 +749,7 @@
         [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
         [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:3];
         [ApplicationDelegate.tabBarController setSelectedIndex:3];
-    }else if (type == 42){//专题详情：type=42
+    }else if (type == 42){//专题列表：type=42
         [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
         [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:0];
         [ApplicationDelegate.tabBarController setSelectedIndex:3];

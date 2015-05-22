@@ -20,6 +20,7 @@
 - (void)configureScan;
 - (void)configureMore;
 - (void)configureSearchAndMore;
+- (void)configureGoBackPre;
 - (void)showMenu;
 - (void)onSearch;
 @end
