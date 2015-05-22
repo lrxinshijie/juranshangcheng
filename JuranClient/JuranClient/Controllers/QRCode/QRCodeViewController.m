@@ -169,7 +169,9 @@
                 if (!code) {
                     code = val;
                 }
-                [MobClick event:UM_QRScanEvent_Shop attributes:@{k_UM_Shop_Type:[self getStatisticsCodeFrom:val]}];
+                if ([self getStatisticsCodeFrom:val]) {
+                    [MobClick event:UM_QRScanEvent_Shop attributes:@{k_UM_Shop_Type:[self getStatisticsCodeFrom:val]}];
+                }
                 
             }else if ([self needShowWithWebView:val] == 2){
                 //跳转至商品详情页
