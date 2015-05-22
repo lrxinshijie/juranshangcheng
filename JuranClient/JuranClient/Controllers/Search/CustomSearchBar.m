@@ -111,7 +111,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     if (style == RightBtnStyle_More) {
         //添加消息通知的小点点
         if (!_countLabel) {
-            _countLabel = [self labelWithFrame:CGRectMake(300, 30, 18, 16)
+            _countLabel = [self labelWithFrame:CGRectMake(300, 23, 16, 16)
                                           text:[NSString stringWithFormat:@"%d",[JRUser isLogin] && [JRUser currentUser].newPrivateLetterCount?[JRUser currentUser].newPrivateLetterCount:0]
                                      textColor:[UIColor whiteColor]
                                  textAlignment:NSTextAlignmentCenter
@@ -124,7 +124,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
         }
         
         if (!_readLabel) {
-            _readLabel = [self labelWithFrame:CGRectMake(302, 34, 8, 8)
+            _readLabel = [self labelWithFrame:CGRectMake(302, 27, 8, 8)
                                          text:@""
                                     textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:1]];
             _readLabel.backgroundColor = [UIColor redColor];
@@ -145,7 +145,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
         }
         if (_readLabel) {
             [_readLabel removeFromSuperview];
-            _countLabel = nil;
+            _readLabel = nil;
         }
     }
 }
@@ -315,6 +315,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     if (self.isHistory) {
         
         self.inputTextField.text = [cell getSearchCellMessage];
+        _oldText = [cell getSearchCellMessage];
         [self changeListStyleAnimation];
         
     }else{
