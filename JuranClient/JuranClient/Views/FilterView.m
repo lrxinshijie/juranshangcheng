@@ -78,10 +78,10 @@
         [_filterButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         [_filterButton setTitle:@" 筛选" forState:UIControlStateNormal];
         _filterButton.titleLabel.font = [UIFont systemFontOfSize:15];
-        [_filterButton setImage:[UIImage imageNamed:@"case-icon-filter"] forState:UIControlStateNormal];
+        [_filterButton setImage:[UIImage imageNamed:@"icon-product-filter"] forState:UIControlStateNormal];
         [_filterButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_filterButton setTitleColor:kBlueColor forState:UIControlStateSelected];
-        [_filterButton setImage:[UIImage imageNamed:@"menu_shaixuan"] forState:UIControlStateSelected];
+        [_filterButton setImage:[UIImage imageNamed:@"icon-product-filter_sel"] forState:UIControlStateSelected];
         [self addSubview:_filterButton];
         
         UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(width, 0, 1, 44)];
