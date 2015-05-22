@@ -404,7 +404,6 @@
             self.pageNo = 1;
             [self requestDataForBrand:cell.cell_id pageNo:self.pageNo];
         }else if (self.vcStyle == CategaryStyle_Goods){
-            self.parentCodeProduct = cell.cell_id;
             [self requestDataWithRequestID:cell.cell_id city:self.locationButton.titleLabel.text level:2];
         }
         
@@ -429,6 +428,7 @@
 #pragma mark - CustomSecLevelViewDelegate
 - (void)secondLevelView:(CustomSecLevelView *)view didClickAtIndex:(struct SelectLocation)location requestID:(NSString *)rquestID
 {
+    self.parentCodeProduct = rquestID;
     //设置section，在最前边是因为还要调整上次收起的哪一行
     NSUInteger num = view.tag - 9000;
     self.currentSection = num;
@@ -565,7 +565,6 @@
                 
                 [wSelf showHUD];
                 CategaryTableViewCellItem * dataItem = wSelf.dateArray_firstLevel[0];
-                self.parentCodeProduct = dataItem.code;
                 [wSelf requestDataWithRequestID:dataItem.code city:city level:2];
                 [wSelf.fistLevelTableView reloadData];
                 

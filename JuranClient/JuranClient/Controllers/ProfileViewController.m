@@ -81,7 +81,9 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameProfileReloadData object:nil];
-    
+    self.navigationItem.title = @"我";
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_personal_setting"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(onSetting:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
     _user = [JRUser currentUser];
     
 #ifdef kJuranDesigner
@@ -137,9 +139,8 @@
     }else{
         [self refreshUI];
     }
-    self.navigationItem.title = @"我";
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_personal_setting"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(onSetting:)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+
+    [UIApplication sharedApplication].applicationIconBadgeNumber = [JRUser currentUser].newPushMsgCount;
 }
 
 - (void)setupUI{
