@@ -137,8 +137,7 @@
     [self.navigationController pushViewController:pd animated:YES];
     
     if (message.unReadNum > 0) {
-        //[ApplicationDelegate minusBadgeNumber:message.unReadNum];
-        [UIApplication sharedApplication].applicationIconBadgeNumber = message.unReadNum;
+        [ApplicationDelegate minusBadgeNumber:message.unReadNum];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [_tableView headerBeginRefreshing];
         });
