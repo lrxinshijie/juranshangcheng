@@ -169,7 +169,9 @@
                 if (!code) {
                     code = val;
                 }
-                [MobClick event:UM_QRScanEvent_Shop attributes:@{k_UM_Shop_Type:[self getStatisticsCodeFrom:val]}];
+                if ([self getStatisticsCodeFrom:val]) {
+                    [MobClick event:UM_QRScanEvent_Shop attributes:@{k_UM_Shop_Type:[self getStatisticsCodeFrom:val]}];
+                }
                 
             }else if ([self needShowWithWebView:val] == 2){
                 //跳转至商品详情页
@@ -209,9 +211,9 @@
 - (int)needShowWithWebView:(NSString *)str
 {
     //正常环境下
-    NSString * regex_product = @"^http://mall\.juran\.cn/product/([0-9]{1,})\.htm[.ozu_sid=ProductMobile]?$";
-    NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm[.ozu_sid=.+$]?";
-    NSString * regex_shop1 = @"^http://[a-zA-Z]{1,}\.juran\.cn/[.ozu_sid=.+$]?";
+    NSString * regex_product = @"^http://mall\.juran\.cn/product/([0-9]{1,})\.htm(.ozu_sid=ProductMobile)?$";
+    NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm(.ozu_sid=.+$)?";
+    NSString * regex_shop1 = @"^http://[a-zA-Z]{1,}\.juran\.cn/(.ozu_sid=.+$)?";
     
     //SIT环境
 //    NSString * regex_product = @"^http://mall\.juran.o2o.sit\.com/rankings/([0-9]{1,})\.htm$";
