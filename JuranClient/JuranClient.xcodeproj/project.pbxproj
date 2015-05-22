@@ -735,6 +735,7 @@
 		2C5B75C11AEF5F310085FA56 /* icon-grade-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5B75BF1AEF5F310085FA56 /* icon-grade-2@2x.png */; };
 		2C5F3F691B099FC4002D42BC /* RootMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F3F671B099FC4002D42BC /* RootMenuCell.m */; };
 		2C5F3F6A1B099FC4002D42BC /* RootMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5F3F681B099FC4002D42BC /* RootMenuCell.xib */; };
+		2C5F3FBF1B0DECCF002D42BC /* icon-product-filter-sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5F3FBE1B0DECCF002D42BC /* icon-product-filter-sel@2x.png */; };
 		2C602C741ADCE6FD0037105E /* ShopListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C721ADCE6FD0037105E /* ShopListViewController.m */; };
 		2C602C751ADCE6FD0037105E /* ShopListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C731ADCE6FD0037105E /* ShopListViewController.xib */; };
 		2C602C791ADCEA960037105E /* ShopListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C771ADCEA950037105E /* ShopListCell.m */; };
@@ -2339,6 +2340,7 @@
 		2C5F3F661B099FC4002D42BC /* RootMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootMenuCell.h; sourceTree = "<group>"; };
 		2C5F3F671B099FC4002D42BC /* RootMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootMenuCell.m; sourceTree = "<group>"; };
 		2C5F3F681B099FC4002D42BC /* RootMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootMenuCell.xib; sourceTree = "<group>"; };
+		2C5F3FBE1B0DECCF002D42BC /* icon-product-filter-sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-product-filter-sel@2x.png"; path = "Shop/icon-product-filter-sel@2x.png"; sourceTree = "<group>"; };
 		2C602C711ADCE6FD0037105E /* ShopListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopListViewController.h; sourceTree = "<group>"; };
 		2C602C721ADCE6FD0037105E /* ShopListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopListViewController.m; sourceTree = "<group>"; };
 		2C602C731ADCE6FD0037105E /* ShopListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopListViewController.xib; sourceTree = "<group>"; };
@@ -4066,6 +4068,7 @@
 		2C602C7B1ADCECF10037105E /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				2C5F3FBE1B0DECCF002D42BC /* icon-product-filter-sel@2x.png */,
 				373F594D1AFFB0D6005592FF /* icon-product-filter@2x.png */,
 				373F594E1AFFB0D6005592FF /* product-arrow-up@2x.png */,
 				373F594B1AFFA8DB005592FF /* product-arrow-down@2x.png */,
@@ -6662,6 +6665,7 @@
 				2C91E8F51ADB682900B542DC /* NaviStoreListViewController.xib in Resources */,
 				BD5185E31A5D0ED700BE508A /* case_icon_collect@2x.png in Resources */,
 				1F880BE51AEA353200992D64 /* CategaryTableViewCell.xib in Resources */,
+				2C5F3FBF1B0DECCF002D42BC /* icon-product-filter-sel@2x.png in Resources */,
 				BD5186B51A5D0ED700BE508A /* icon_ camera@2x.png in Resources */,
 				2C91E9111ADB754400B542DC /* icon-navi-right-arrow@2x.png in Resources */,
 				37DA110C1A8CDDCC00BC71A6 /* OrderCommentReadViewController.xib in Resources */,
