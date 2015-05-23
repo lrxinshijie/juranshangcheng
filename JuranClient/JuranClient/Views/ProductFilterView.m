@@ -138,8 +138,10 @@
 
 - (void)layoutFrame{
     CGRect frame = _sortLabel.frame;
-    frame.size.width = [_sortLabel.text widthWithFont:_sortLabel.font constrainedToHeight:CGRectGetHeight(_sortLabel.frame)];
-    frame.origin.x = CGRectGetMinX(_sortButton.frame) + (CGRectGetWidth(_sortButton.frame) - CGRectGetWidth(frame))/2.f;
+    CGFloat maxWidth = CGRectGetWidth(_sortButton.frame) - CGRectGetWidth(_sortImageView.frame) - 2;
+    CGFloat width = [_sortLabel.text widthWithFont:_sortLabel.font constrainedToHeight:CGRectGetHeight(_sortLabel.frame)];
+    frame.size.width = width > maxWidth?maxWidth:width;
+    frame.origin.x = CGRectGetMinX(_sortButton.frame) + (CGRectGetWidth(_sortButton.frame) - CGRectGetWidth(frame) - CGRectGetWidth(_sortImageView.frame) - 2)/2.f;
     _sortLabel.frame = frame;
     
     frame = _sortImageView.frame;
@@ -147,8 +149,10 @@
     _sortImageView.frame = frame;
     
     frame = _storeLabel.frame;
-    frame.size.width = [_storeLabel.text widthWithFont:_storeLabel.font constrainedToHeight:CGRectGetHeight(_storeLabel.frame)];
-    frame.origin.x = CGRectGetMinX(_storeButton.frame) + (CGRectGetWidth(_storeButton.frame) - CGRectGetWidth(frame))/2.f;
+    maxWidth = CGRectGetWidth(_storeButton.frame) - CGRectGetWidth(_storeImageView.frame) - 2;
+    width = [_storeLabel.text widthWithFont:_storeLabel.font constrainedToHeight:CGRectGetHeight(_storeLabel.frame)];
+    frame.size.width = width > maxWidth?maxWidth:width;
+    frame.origin.x = CGRectGetMinX(_storeButton.frame) + (CGRectGetWidth(_storeButton.frame) - CGRectGetWidth(frame) - CGRectGetWidth(_storeImageView.frame) - 2)/2.f;
     _storeLabel.frame = frame;
     
     frame = _storeImageView.frame;
@@ -324,6 +328,11 @@
         _storeImageView.image = [UIImage imageNamed:@"product-arrow-down.png"];
     }
     _storeLabel.text = _selectedData.pStore?_selectedData.pStore.storeName:@"选择门店";
+    //排序值
+    if (_selectedData.sort >= 0 && _selectedData.sort < _defaultData.sortList.count) {
+        ProductSort *sort = self.defaultData.sortList[_selectedData.sort];
+        _sortLabel.text = sort.name;
+    }
     
     if (selectedBtn && selectedBtn == _storeButton && _selectedData.pStore) {
         _tableView.tableFooterView = _clearStoreView;
