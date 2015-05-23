@@ -371,8 +371,6 @@
             cell.textLabel.textColor = kBlueColor;
         }
     }
-    
-    
     return cell;
 }
 

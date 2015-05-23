@@ -59,6 +59,7 @@
 #import "InteractionViewController.h"
 #import "AskDetailViewController.h"
 #import "PersonalDataViewController.h"
+#import "MyAskOrAnswerViewController.h"
 
 @implementation Public
 
@@ -623,6 +624,9 @@
         vc.selectedFilter = [[ProductSelectedFilter alloc]init];
         vc.selectedFilter.isInShop = NO;
         vc.selectedFilter.sort = [param getIntegerValueForKey:@"sort" defaultValue:4];
+        //vc.selectedFilter.pStore.storeCode = [param getStringValueForKey:@"storeCode" defaultValue:@""];
+        //vc.selectedFilter.pCategory =
+        
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
     }else if (type == 18){//店铺：type=18
@@ -707,7 +711,7 @@
 #endif
     }else if (type == 29){//会员-问答：type=29
         if ([navigationController checkLogin]) {
-            AskDetailViewController *vc = [[AskDetailViewController alloc]init];
+            MyAskOrAnswerViewController *vc = [[MyAskOrAnswerViewController alloc]init];
             [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
             [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
             [ApplicationDelegate.tabBarController setSelectedIndex:4];
@@ -761,17 +765,18 @@
             [navigationController pushViewController:vc animated:YES];
         }
 #endif
-    }else if (type == 41){//发现-话题列表：type=41
-        [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
-        [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:3];
-        [ApplicationDelegate.tabBarController setSelectedIndex:3];
-    }else if (type == 42){//专题列表：type=42
-        if ([navigationController checkLogin]) {
-            [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
-            [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:0];
-            [ApplicationDelegate.tabBarController setSelectedIndex:3];
-        }
     }
+//    else if (type == 41){//发现-话题列表：type=41
+//        [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
+//        [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:3];
+//        [ApplicationDelegate.tabBarController setSelectedIndex:3];
+//    }else if (type == 42){//专题列表：type=42
+//        if ([navigationController checkLogin]) {
+//            [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
+//            [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:0];
+//            [ApplicationDelegate.tabBarController setSelectedIndex:3];
+//        }
+//    }
 }
 
 + (NSDictionary *)deviceInfo{

@@ -22,6 +22,9 @@
 #import "ShopListViewController.h"
 #import "UIViewController+Menu.h"
 #import "ProductGridCell.h"
+#import "UIAlertView+Blocks.h"
+#import "AppDelegate.h"
+#import "UserLocation.h"
 
 @interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate, ProductFilterViewDelegate,CustomSearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -32,6 +35,8 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) ProductFilterView *filterView;
 @property (strong, nonatomic) CustomSearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UIButton *footerView;
+- (IBAction)onSetLoction:(id)sender;
 @end
 
 @implementation ProductListViewController
@@ -262,7 +267,11 @@
             [self.view addSubview:_emptyView];
         }
     }
-    
+    if (!ApplicationDelegate.gLocation.isSuccessLocation) {
+        [_footerView removeFromSuperview];
+        _footerView.frame = CGRectMake(0, kWindowHeightWithoutNavigationBar-25, kWindowWidth, 25);
+        [self.view addSubview:_footerView];
+    }
     [_tableView reloadData];
     [_collectionView reloadData];
 }
@@ -284,11 +293,11 @@
             [_collectionView removeFromSuperview];
             
             //[self.view addSubview:_tableView];
-            [self.view insertSubview:_tableView belowSubview:_searchBar];
+            [self.view insertSubview:_tableView atIndex:0];
         } else {
             [_tableView removeFromSuperview];
             //[self.view addSubview:_collectionView];
-            [self.view insertSubview:_collectionView belowSubview:_searchBar];
+            [self.view insertSubview:_collectionView atIndex:0];
         }
         [self reloadData];
     }else {
@@ -455,4 +464,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)onSetLoction:(id)sender {
+    if(!ApplicationDelegate.gLocation.isSuccessLocation) {
+        [UIAlertView showWithTitle:@"提示" message:@"访问此类别需要开启定位服务，请在“设置->隐私->定位服务”中开启居然在线的定位~" cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 0) {
+                return;
+            }else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            }
+        }];
+    }
+
+}
 @end
