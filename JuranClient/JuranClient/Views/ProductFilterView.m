@@ -63,7 +63,7 @@
         [self addSubview:_sortButton];
         
         frame = CGRectMake(0, 10, 0, 20);
-        self.sortLabel = [self labelWithFrame:frame text:@"综合排序" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:kSystemFontSize]];
+        self.sortLabel = [self labelWithFrame:frame text:@"排序" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:kSystemFontSize]];
         [self addSubview:_sortLabel];
         
         self.sortImageView = [self imageViewWithFrame:CGRectMake(0, (CGRectGetHeight(self.frame) - 4)/2.f, 7, 4) image:[UIImage imageNamed:@"product-arrow-down.png"]];
