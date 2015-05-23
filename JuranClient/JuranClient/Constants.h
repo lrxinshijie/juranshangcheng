@@ -63,7 +63,7 @@
 #define kNotificationNameOrderPaySuccess @"kNotificationNameOrderPaySuccess"
 
 #define kNotificationNameAttributeReloadData @"kNotificationNameAttributeReloadData"
-
+#define kNotificationNameMsgCenterReloadData @"kNotificationNameMsgCenterReloadData"
 
 #define kBlueColor RGBColor(15, 82, 167)
 

@@ -104,9 +104,9 @@
 {
     [super viewWillAppear:animated];
     if (_vcStyle == CategaryStyle_Goods) {
-        _viewTitle.text = @"商品所在地:北京市";
+        _viewTitle.text = @"北京站";
     }else if (_vcStyle == CategaryStyle_Shop){
-        _viewTitle.text = @"品牌所在地:北京市";
+        _viewTitle.text = @"北京站";
     }
     [self.navigationController setNavigationBarHidden:YES];
     [self.listTableView setContentSize:CGSizeMake(243, 500)];

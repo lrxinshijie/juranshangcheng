@@ -61,7 +61,7 @@
 //    [titleView addSubview:cityButton];
 //    [titleView addSubview:titleLabel];
 //    self.navigationItem.titleView = titleView;
-    self.navigationItem.title = @"当前站点:北京站";
+    self.navigationItem.title = @"北京站";
 }
 
 - (void)onCity:(UIButton *)btn{
@@ -144,7 +144,14 @@
 
 - (void)onPreBack {
     int count = self.navigationController.viewControllers.count;
-    [self.navigationController popToViewController:self.navigationController.viewControllers[count - 3] animated:YES];
+    if (count>2) {
+        if ([self.navigationController.viewControllers[count - 2] isKindOfClass:[SearchViewController class]])
+            [self.navigationController popToViewController:self.navigationController.viewControllers[count - 3] animated:YES];
+        else
+            [self.navigationController popViewControllerAnimated:YES];
+    }else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)onScan{
@@ -216,4 +223,11 @@
     }
 }
 
+- (void)reloadMoreMenu {
+    if (self.navigationController.viewControllers.count>1) {
+        [self configureMore];
+    }else {
+        [self configureSearchAndMore];
+    }
+}
 @end

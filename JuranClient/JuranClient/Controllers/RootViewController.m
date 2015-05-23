@@ -35,6 +35,9 @@
 @end
 
 @implementation RootViewController
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
@@ -44,6 +47,8 @@
     _collectionView.backgroundColor = kViewBackgroundColor;
     [_collectionView registerNib:[UINib nibWithNibName:@"RootMenuCell" bundle:nil] forCellWithReuseIdentifier:@"RootMenuCell"];
     [self configureScan];
+    [self configureSearchAndMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
     [self setupUI];
 }
 
@@ -58,11 +63,6 @@
     
     [self loadMenu];
     [self loadAd];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configureSearchAndMore];
 }
 
 - (void)loadAd{

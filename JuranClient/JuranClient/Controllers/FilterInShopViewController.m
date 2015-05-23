@@ -21,10 +21,17 @@
 
 @implementation FilterInShopViewController
 
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"商品分类";
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
+
     [self loadData];
 }
 
@@ -64,11 +71,6 @@
             [_tableView reloadData];
         }
     }];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configureMore];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -150,7 +152,7 @@
     FilterInShop *filters = [_dataList objectAtIndex:[indexPath section]];
     FilterInShop *filter = [filters.childList objectAtIndex:[indexPath row]];
     if (_block) {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:NO];
         ProductSelectedFilter *sel = [[ProductSelectedFilter alloc]init];
         sel.pCategory = [[ProductCategory alloc]init];
         sel.pCategory.Id = filter.Id;
@@ -176,7 +178,7 @@
     }else {
         FilterInShop *filter = _dataList[section];
         if (_block) {
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController popViewControllerAnimated:NO];
             ProductSelectedFilter *sel = [[ProductSelectedFilter alloc]init];
             sel.pCategory = [[ProductCategory alloc]init];
             sel.pCategory.Id = filter.Id;

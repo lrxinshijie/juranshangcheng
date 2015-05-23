@@ -186,6 +186,8 @@
         [_headerImageView setImage:[UIImage imageNamed:@"unlogin_head.png"]];
         _signedButton.enabled = YES;
         [_signedButton setTitle:@" 签到" forState:UIControlStateNormal];
+        //隐藏签到
+        _signedButton.hidden = YES;
     }else{
         _unLoginLabel.hidden = YES;
 //        _loginNameLabel.hidden = NO;
@@ -197,6 +199,8 @@
         _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _user.newPrivateLetterCount];
         _signedButton.enabled = !_user.isSigned;
         [_signedButton setTitle:_user.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
+        //隐藏签到
+        _signedButton.hidden = YES;
     }
 #ifdef kJuranDesigner
     _privateLetterCountLabel.hidden = YES;
@@ -233,6 +237,7 @@
             if ([data isKindOfClass:[NSDictionary class]]) {
                 [_user buildUpProfileDataWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMsgCenterReloadData object:nil];
                     [self refreshUI];
                 });
             }

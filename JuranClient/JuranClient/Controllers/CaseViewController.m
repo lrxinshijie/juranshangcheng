@@ -42,7 +42,7 @@
 @implementation CaseViewController
 
 - (void)dealloc{
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -70,6 +70,8 @@
     }else{
         //self.navigationItem.title = @"搜索结果";
         [self configureGoBackPre];
+        [self configureMore];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
         UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 220, 30)];
         textField.placeholder = @"请输入搜索关键词";
         textField.background = [UIImage imageNamed:@"search_bar_bg_image"];
@@ -156,11 +158,6 @@
     [self showNavbar];
     
     return YES;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configureMore];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

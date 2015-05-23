@@ -47,13 +47,15 @@
 
 - (void)dealloc{
     _tableView.delegate = nil; _tableView.dataSource = nil;
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
     [self setupUI];
     [_tableView headerBeginRefreshing];
 }
@@ -360,14 +362,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-//    self.navigationController.navigationBar.clipsToBounds = NO;
-    //self.navigationController.navigationBarHidden = YES;
-    [self configureMore];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

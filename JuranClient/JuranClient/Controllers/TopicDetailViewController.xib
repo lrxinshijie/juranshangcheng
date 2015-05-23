@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TopicDetailViewController">
@@ -16,6 +16,7 @@
                 <outlet property="emptyView" destination="Jyk-nV-6IV" id="RDn-Y4-I1a"/>
                 <outlet property="fileImageCountLabel" destination="lgF-hQ-8ch" id="g40-0P-3kh"/>
                 <outlet property="headerView" destination="6cU-BE-Mdy" id="Mc6-R8-uab"/>
+                <outlet property="sendButton" destination="QVB-Za-30k" id="Suu-L2-TEY"/>
                 <outlet property="tableHeaderView" destination="xhM-qk-O9E" id="wDw-US-9Wt"/>
                 <outlet property="timeLabel" destination="gsh-wc-rI1" id="brD-gu-Ae7"/>
                 <outlet property="titleLabel" destination="CfP-oM-e6C" id="jmg-8i-0xA"/>
@@ -95,7 +96,7 @@
                     <rect key="frame" x="253" y="5" width="62" height="39"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="发送" backgroundImage="case-detail-send.png">
+                    <state key="normal" title="评论" backgroundImage="case-detail-send.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>

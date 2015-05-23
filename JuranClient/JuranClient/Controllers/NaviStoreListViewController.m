@@ -231,7 +231,13 @@
 
 - (void)CheckLoctionStatus {
     if(!ApplicationDelegate.gLocation.isSuccessLocation) {
-        [UIAlertView showWithTitle:nil message:@"当前定位服务未开启,请在设置中启用定位服务" cancelButtonTitle:@"知道了" otherButtonTitles:nil tapBlock:nil];
+        [UIAlertView showWithTitle:nil message:@"当前定位服务未开启,请在设置中启用定位服务" cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 0) {
+                return;
+            }else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            }
+        }];
     }
 }
 @end

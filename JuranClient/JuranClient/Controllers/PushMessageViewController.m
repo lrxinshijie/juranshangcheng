@@ -30,8 +30,7 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    self.navigationItem.title = @"系统消息";
-    //[self configureMore];
+    self.navigationItem.title = @"系统通知";
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
@@ -62,7 +61,28 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //[self configureMore];
+    [self loadCenterInfo];
+}
+
+- (void)loadCenterInfo{
+    if (![JRUser isLogin]) {
+        return;
+    }
+#ifndef kJuranDesigner
+    NSString *url = JR_MYCENTERINFO;
+#else
+    NSString *url = JR_GET_DESIGNER_CENTERINFO;
+#endif
+    [[ALEngine shareEngine] pathURL:url parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes",kNetworkParamKeyShowErrorDefaultMessage:@"No"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                [[JRUser currentUser] buildUpProfileDataWithDictionary:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMsgCenterReloadData object:nil];
+                });
+            }
+        }
+    }];
 }
 
 - (void)loadData{

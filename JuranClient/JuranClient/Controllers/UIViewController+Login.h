@@ -23,4 +23,5 @@
 - (void)configureGoBackPre;
 - (void)showMenu;
 - (void)onSearch;
+- (void)reloadMoreMenu;
 @end

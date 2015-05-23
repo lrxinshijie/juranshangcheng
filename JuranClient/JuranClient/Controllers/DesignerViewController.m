@@ -36,6 +36,10 @@
     return self;
 }
 
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -66,7 +70,8 @@
         textField.leftView = leftView;
         [textField addTarget:self action:@selector(textFieldClick:) forControlEvents:UIControlEventEditingDidBegin];
     }
-    
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
     self.filterView = [[FilterView alloc] initWithType:!_isHome ? FilterViewTypeDesignerSearch : FilterViewTypeDesigner defaultData:_filterData];
     _filterView.delegate = self;
     [self.view addSubview:_filterView];
@@ -97,11 +102,6 @@
     self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
     self.fullScreenScroll.delegate = self;
     self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-        [self configureMore];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

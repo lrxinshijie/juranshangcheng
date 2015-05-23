@@ -45,6 +45,9 @@
     // Do any additional setup after loading the view from its nib.
     
     self.navigationItem.title = @"我的订单";
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
+
    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:kNotificationNameOrderReloadData object:nil];
     
@@ -94,11 +97,6 @@
 #else
     [_tableView headerBeginRefreshing];
 #endif
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configureMore];
 }
 
 #ifdef kJuranDesigner

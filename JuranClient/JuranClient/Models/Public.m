@@ -685,10 +685,12 @@
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
     }else if (type == 27){//会员-个人资料：type=27
+        if ([navigationController checkLogin]) {
         PersonalDataViewController *vc = [[PersonalDataViewController alloc]init];
         [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
         [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
         [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
     }else if (type == 28){//会员需求
 #ifndef kJuranDesigner
         if (![navigationController checkLogin:^{
@@ -704,40 +706,54 @@
         [navigationController pushViewController:vc animated:YES];
 #endif
     }else if (type == 29){//会员-问答：type=29
-        AskDetailViewController *vc = [[AskDetailViewController alloc]init];
-        [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
-        [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
-        [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        if ([navigationController checkLogin]) {
+            AskDetailViewController *vc = [[AskDetailViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
     }else if (type == 30){//会员-互动管理：type=30
-        InteractionViewController *vc = [[InteractionViewController alloc]init];
-        [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
-        [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
-        [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        if ([navigationController checkLogin]) {
+            InteractionViewController *vc = [[InteractionViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
     }else if (type == 31){//会员-我的关注：type=31
-        MyFollowViewController *vc = [[MyFollowViewController alloc]init];
-        [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
-        [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
-        [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        if ([navigationController checkLogin]) {
+            MyFollowViewController *vc = [[MyFollowViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
     }else if (type == 32){//会员-我的收藏：type=32
-        MyCollectViewController *vc = [[MyCollectViewController alloc]init];
-        [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
-        [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
-        [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        if ([navigationController checkLogin]) {
+            MyCollectViewController *vc = [[MyCollectViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
     }else if (type == 33){//会员-订单管理：type=33
-        OrderListViewController *vc = [[OrderListViewController alloc]init];
-        [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
-        [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
-        [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        if ([navigationController checkLogin]) {
+            OrderListViewController *vc = [[OrderListViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
     }else if (type == 34){//会员-账户安全：type=34
-        AccountSecurityViewController *vc = [[AccountSecurityViewController alloc]init];
-        [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
-        [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
-        [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        if ([navigationController checkLogin]) {
+            AccountSecurityViewController *vc = [[AccountSecurityViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
     }else if (type == 35){//会员-账户管理：type=35
-        AccountManageViewController *vc = [[AccountManageViewController alloc]init];
-        [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
-        [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
-        [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        if ([navigationController checkLogin]) {
+            AccountManageViewController *vc = [[AccountManageViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
     }else if (type == 40){//扫一扫
 #ifndef kJuranDesigner
         if (![QRBaseViewController isRuning]) {
@@ -750,9 +766,11 @@
         [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:3];
         [ApplicationDelegate.tabBarController setSelectedIndex:3];
     }else if (type == 42){//专题列表：type=42
-        [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
-        [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:0];
-        [ApplicationDelegate.tabBarController setSelectedIndex:3];
+        if ([navigationController checkLogin]) {
+            [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:0];
+            [ApplicationDelegate.tabBarController setSelectedIndex:3];
+        }
     }
 }
 

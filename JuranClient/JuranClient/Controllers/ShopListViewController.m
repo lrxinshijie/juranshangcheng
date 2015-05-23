@@ -46,6 +46,10 @@
     return self;
 }
 
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -58,7 +62,9 @@
 //    [self.searchBar setSearchButtonType:SearchButtonType_Shop];
 //    [self.searchBar setEnabled:NO];
 //    [self.view addSubview:self.searchBar];
-    
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
+
     [self configureGoBackPre];
     UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 220, 30)];
     textField.placeholder = @"请输入搜索关键词";
@@ -91,17 +97,6 @@
 
 - (void)textFieldClick:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self configureMore];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
 }
 
 - (void)showMenuList

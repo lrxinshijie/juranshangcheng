@@ -42,6 +42,9 @@
 @end
 
 @implementation MallViewController
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
@@ -50,7 +53,8 @@
     
     [self configureCityTitle:@"请选择"];
     [self configureScan];
-    
+    [self configureSearchAndMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.tableHeaderView = _headerView;
     _tableView.backgroundColor = RGBColor(237, 237, 237);
@@ -63,11 +67,6 @@
     _productCollectionView.backgroundColor = [UIColor clearColor];
     
     [self loadAd];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configureSearchAndMore];
 }
 
 - (void)loadData{
