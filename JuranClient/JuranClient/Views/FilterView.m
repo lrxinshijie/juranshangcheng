@@ -21,6 +21,7 @@
 @property (nonatomic, assign) NSDictionary *defaultData;
 @property (nonatomic, strong) UINavigationController *filterViewNav;
 @property (nonatomic, assign) FilterViewType type;
+@property (nonatomic, strong) NSDictionary *seletedDic;
 
 @end
 
@@ -137,7 +138,7 @@
         _sortButton.selected = !isHide;
         _tableView.hidden = isHide;
     }];
-    
+    [_tableView reloadData];
 }
 
 - (void)showFilter{
@@ -189,8 +190,13 @@
     }
     
     cell.textLabel.font = [UIFont systemFontOfSize:15];
+    cell.textLabel.textColor = [UIColor blackColor];
     
-    cell.textLabel.text = [[self.sorts objectAtTheIndex:indexPath.row] objectForKey:@"k"];
+    NSString *key = [[self.sorts objectAtTheIndex:indexPath.row] objectForKey:@"k"];
+    cell.textLabel.text = key;
+    if (_seletedDic && [[_seletedDic getStringValueForKey:@"k" defaultValue:@""] isEqualToString:key]) {
+        cell.textLabel.textColor = kBlueColor;
+    }
     
     return cell;
 }
@@ -198,7 +204,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSString *v = [[self.sorts objectAtTheIndex:indexPath.row] objectForKey:@"v"];
+    _seletedDic = [self.sorts objectAtTheIndex:indexPath.row];
+    NSString *v = [_seletedDic objectForKey:@"v"];
     if ([_delegate respondsToSelector:@selector(clickFilterView:actionType:returnData:)]) {
         [_delegate clickFilterView:self actionType:FilterViewActionSort returnData:@{@"order":v}];
     }
@@ -261,7 +268,7 @@
             default:
                 break;
         }
-        
+        _seletedDic = [_sorts firstObject];
     }
     return _sorts;
 }
