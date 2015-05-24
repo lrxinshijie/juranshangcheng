@@ -1355,6 +1355,8 @@
 		A9D654B51A27642800A80253 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654A81A27642800A80253 /* JSONModel+networking.m */; };
 		A9D654B61A27642800A80253 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654AB1A27642800A80253 /* JSONKeyMapper.m */; };
 		A9D654B71A27642800A80253 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654AD1A27642800A80253 /* JSONValueTransformer.m */; };
+		A9E912461B123458004E1C7E /* AttributeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E912451B123458004E1C7E /* AttributeLayout.m */; };
+		A9E912471B123458004E1C7E /* AttributeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E912451B123458004E1C7E /* AttributeLayout.m */; };
 		A9F1F6821AF7C75600A6838D /* NSNumber+ASCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F1F6811AF7C75600A6838D /* NSNumber+ASCategory.m */; };
 		A9F1F6831AF7C75600A6838D /* NSNumber+ASCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F1F6811AF7C75600A6838D /* NSNumber+ASCategory.m */; };
 		A9F1F6871AF7D3C700A6838D /* AttributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F1F6851AF7D3C700A6838D /* AttributeCell.m */; };
@@ -3133,6 +3135,8 @@
 		A9D654AB1A27642800A80253 /* JSONKeyMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKeyMapper.m; sourceTree = "<group>"; };
 		A9D654AC1A27642800A80253 /* JSONValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValueTransformer.h; sourceTree = "<group>"; };
 		A9D654AD1A27642800A80253 /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
+		A9E912441B123458004E1C7E /* AttributeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeLayout.h; sourceTree = "<group>"; };
+		A9E912451B123458004E1C7E /* AttributeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributeLayout.m; sourceTree = "<group>"; };
 		A9F1F6801AF7C75600A6838D /* NSNumber+ASCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+ASCategory.h"; sourceTree = "<group>"; };
 		A9F1F6811AF7C75600A6838D /* NSNumber+ASCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+ASCategory.m"; sourceTree = "<group>"; };
 		A9F1F6841AF7D3C700A6838D /* AttributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeCell.h; sourceTree = "<group>"; };
@@ -5035,6 +5039,8 @@
 				373F59471AFF9F70005592FF /* ProductFilterView.m */,
 				2C8BA71C1B0264FA003F7909 /* MapScrollView.h */,
 				2C8BA71D1B0264FA003F7909 /* MapScrollView.m */,
+				A9E912441B123458004E1C7E /* AttributeLayout.h */,
+				A9E912451B123458004E1C7E /* AttributeLayout.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -7390,6 +7396,7 @@
 				14FB07F71A835BBA00428DE5 /* JROrder.m in Sources */,
 				140C9ECB1ADB5E9F0079391A /* JRShop.m in Sources */,
 				1415F9DA1A5CD1CB003D0C29 /* SearchViewController.m in Sources */,
+				A9E912471B123458004E1C7E /* AttributeLayout.m in Sources */,
 				1415F9DB1A5CD1CB003D0C29 /* UIView+ASCategory.m in Sources */,
 				1415F9DD1A5CD1CB003D0C29 /* ZoomInImageView.m in Sources */,
 				37F0E71E1A7D2735004CCCB2 /* UIView+WebCacheOperation.m in Sources */,
@@ -7739,6 +7746,7 @@
 				371FBEF21A6A379B00635D3D /* WikiCell.m in Sources */,
 				A987EE521A2098AF00CED7CD /* WikiViewController.m in Sources */,
 				37DA110A1A8CDDCC00BC71A6 /* OrderCommentReadViewController.m in Sources */,
+				A9E912461B123458004E1C7E /* AttributeLayout.m in Sources */,
 				3721D0961AA23089008ADB34 /* ContractPreviewViewController.m in Sources */,
 				14C953A91A2DC0E800FE6F8D /* SubjectCell.m in Sources */,
 				37D18DB71A5829EC00B41048 /* CaseImageHeaderView.m in Sources */,

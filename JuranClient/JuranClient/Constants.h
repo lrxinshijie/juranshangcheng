@@ -62,6 +62,8 @@
 #define kNotificationNameOrderReloadData @"kNotificationNameOrderReloadData"
 #define kNotificationNameOrderPaySuccess @"kNotificationNameOrderPaySuccess"
 
+#define kNotificationNameAttributeRowReload @"kNotificationNameAttributeRowReload"
+
 #define kNotificationNameAttributeReloadData @"kNotificationNameAttributeReloadData"
 #define kNotificationNameMsgCenterReloadData @"kNotificationNameMsgCenterReloadData"
 
