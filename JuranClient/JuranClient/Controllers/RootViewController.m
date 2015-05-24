@@ -264,6 +264,7 @@
     UIImage *defaultImage = [UIImage imageWithColor:RGBColor(190, 190, 190) size:CGSizeMake(30, 30)];
     [cell.icon setImageWithURLString:iconImage placeholderImage:defaultImage];
     cell.title.text = name;
+    cell.title.textColor = RGBColor(102, 102, 102);
     return  cell;
 }
 

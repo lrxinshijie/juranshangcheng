@@ -95,6 +95,7 @@
     
     
     self.filterView = [[ProductFilterView alloc] initWithDefaultData:_filterData SeletedData:_selectedFilter];
+    
     _filterView.delegate = self;
 //    CGRect frame = _filterView.frame;
 //    frame.origin.y = CGRectGetMaxY(_searchBar.frame);
@@ -170,7 +171,7 @@
     [param setObject:@"北京市" forKey:@"cityName"];
     [param setObject:@(_currentPage) forKey:@"pageNo"];
     [param setObject:kOnePageCount forKey:@"onePageCount"];
-    [param setObject:@(_selectedFilter.sort) forKey:@"sort"];
+    [param setObject:@(_selectedFilter.pSort.sort) forKey:@"sort"];
     if (_selectedFilter.keyword && _selectedFilter.keyword.length>0) [param setObject:_selectedFilter.keyword forKey:@"keyword"];
     if (_selectedFilter.pMinPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",_selectedFilter.pMinPrice<=_selectedFilter.pMinPrice?_selectedFilter.pMinPrice:_selectedFilter.pMaxPrice] forKey:@"priceMinYuan"];
     if (_selectedFilter.pMaxPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",_selectedFilter.pMinPrice>_selectedFilter.pMinPrice?_selectedFilter.pMinPrice:_selectedFilter.pMaxPrice] forKey:@"priceMaxYuan"];
@@ -277,9 +278,10 @@
 }
 
 - (void)clickProductFilterView:(ProductFilterView *)view returnData:(ProductSelectedFilter *)data IsGrid:(BOOL)isGrid IsFilter:(BOOL)isFilter actionType:(FilterViewAction)action{
+    _selectedFilter.pSort = data.pSort;
+    _selectedFilter.pStore = data.pStore;
     if (isFilter) {
         ProductFilterViewController *vc = [[ProductFilterViewController alloc]init];
-        //_selectedFilter = data;
         vc.selectedFilter = _selectedFilter.copy;
         vc.filterData = _filterData;
         [vc setBlock:^(ProductSelectedFilter *filter) {

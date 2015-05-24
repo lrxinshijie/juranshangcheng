@@ -43,10 +43,10 @@
         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="W1H-9j-QYO">
             <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
             <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-            <color key="backgroundColor" white="0.89427428180000001" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="0.97647058823529409" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <state key="normal">
                 <attributedString key="attributedTitle">
-                    <fragment content="系统未开启定位，开启后获得更多服务               ">
+                    <fragment content="系统未开启定位，开启后获得更多服务                     ">
                         <attributes>
                             <font key="NSFont" size="12" name="STHeitiSC-Light"/>
                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>

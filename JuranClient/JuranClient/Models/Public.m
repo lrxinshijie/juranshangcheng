@@ -623,7 +623,7 @@
         ProductListViewController *vc = [[ProductListViewController alloc]init];
         vc.selectedFilter = [[ProductSelectedFilter alloc]init];
         vc.selectedFilter.isInShop = NO;
-        vc.selectedFilter.sort = [param getIntegerValueForKey:@"sort" defaultValue:4];
+        vc.selectedFilter.pSort.sort = [param getIntegerValueForKey:@"sort" defaultValue:4];
         //vc.selectedFilter.pStore.storeCode = [param getStringValueForKey:@"storeCode" defaultValue:@""];
         //vc.selectedFilter.pCategory =
         

@@ -32,24 +32,6 @@
     NSString *catTreeString;
 }
 
-- (instancetype)initWithKeyword:(NSString *)keyword
-                           Sort:(int)sort
-                          Store:(ProductStore *)store
-                       IsInShop:(BOOL)isInShop
-                         ShopId:(long)shopId
-{
-    self = [super init];
-    if (self) {
-        self.selectedFilter = [[ProductSelectedFilter alloc]init];
-        self.selectedFilter.keyword = keyword;
-        self.selectedFilter.isInShop = isInShop;
-        self.selectedFilter.sort = sort;
-        self.selectedFilter.pStore = store;
-        self.selectedFilter.shopId = shopId;
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

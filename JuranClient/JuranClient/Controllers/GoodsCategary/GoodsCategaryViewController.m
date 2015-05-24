@@ -673,9 +673,6 @@
 //    NSLog(@"%@",msg);
     ProductListViewController *vc = [[ProductListViewController alloc]init];
     vc.selectedFilter = [[ProductSelectedFilter alloc]init];
-    vc.selectedFilter.isInShop = NO;
-    vc.selectedFilter.sort = 9;
-    vc.selectedFilter.keyword = @"";
     vc.selectedFilter.pCategory = [[ProductCategory alloc]init];
     vc.selectedFilter.pCategory.catCode = catCode;
     vc.selectedFilter.pCategory.catName = catName;
@@ -691,9 +688,6 @@
     //品牌
     ProductListViewController *vc = [[ProductListViewController alloc]init];
     vc.selectedFilter = [[ProductSelectedFilter alloc]init];
-    vc.selectedFilter.isInShop = NO;
-    vc.selectedFilter.sort = 9;
-    vc.selectedFilter.keyword = @"";
     vc.selectedFilter.pBrand = [[ProductBrand alloc]init];
     vc.selectedFilter.pBrand.catCode = brandCode;
     vc.selectedFilter.pBrand.brandId = brandID;
