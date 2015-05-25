@@ -31,7 +31,7 @@
     }
     self.nameLabel.text = product.goodsName;
     [self.defaultImageView setImageWithURLString:product.defaultImage Editing:YES];
-    self.priceLabel.text = ApplicationDelegate.gLocation.isSuccessLocation ? [NSString stringWithFormat:@"￥%@", product.onSaleMinPrice] : @"";
+    self.priceLabel.text = [UserLocation isShowPrice] ? [NSString stringWithFormat:@"￥%@", product.onSaleMinPrice] : @"";
     
 }
 
