@@ -247,7 +247,7 @@
 
 - (NSString *)getNumberFrom:(NSString *)str
 {
-    NSRange range = [str rangeOfString:@"[[0-9]{1,}" options:NSRegularExpressionSearch];
+    NSRange range = [str rangeOfString:@"[0-9]{1,}" options:NSRegularExpressionSearch];
     if (range.location != NSNotFound) {
         return [str substringWithRange:range];
     }
