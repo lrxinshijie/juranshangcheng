@@ -88,7 +88,7 @@
         _selectedFilter.pBrand=nil;
     }
     
-    if (_selectedFilter.pCategory && ApplicationDelegate.gLocation.isSuccessLocation) {
+    if (_selectedFilter.pCategory && [UserLocation isShowPrice]) {
         [_conditionArray addObject:@"价格(元)"];
         [_detailArray addObject:@""];
     }else {

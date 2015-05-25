@@ -45,7 +45,7 @@
     if (_product && _product.goodsImagesList && _product.goodsImagesList.count>0) {
         [_photoImageView setImageWithURLString:_product.goodsImagesList[0] Editing:YES];
         _nameLabel.text = _product.goodsName;
-        _priceLabel.text = ApplicationDelegate.gLocation.isSuccessLocation ? _product.priceString : @"";
+        _priceLabel.text = [UserLocation isShowPrice] ? _product.priceString : @"";
         _priceLabel.textColor = kBlueColor;
     }else{
         _productView.hidden = YES;
