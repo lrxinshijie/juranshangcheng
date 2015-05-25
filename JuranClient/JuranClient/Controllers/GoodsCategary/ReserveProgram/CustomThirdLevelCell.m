@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) NSMutableArray * array;
 @property (strong, nonatomic) DataItem * dItem;
+@property (strong, nonatomic) IBOutlet UIView *bgView;
 
 @end
 
@@ -58,8 +59,8 @@
         [button setBackgroundColor:[UIColor clearColor]];
         [button addTarget:self action:@selector(buttonDidSelect:) forControlEvents:UIControlEventTouchUpInside];
         
-        [self.contentView addSubview:label];
-        [self.contentView addSubview:button];
+        [self.bgView addSubview:label];
+        [self.bgView addSubview:button];
         
         [self.array addObject:label];
         [self.array addObject:button];
