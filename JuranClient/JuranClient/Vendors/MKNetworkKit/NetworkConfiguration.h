@@ -113,7 +113,7 @@
 #define JR_PRODUCT_ATTRIBUTE [NSString stringWithFormat:@"%@/goods/getGoodsAttributes.json",JR_SERVICE]
 #define JR_SHOP_PRIVATE_LETTER [NSString stringWithFormat:@"%@/member/sendShopPrivateLetter.json",JR_SERVICE]
 #define JR_PRODUCT_CHANGE_PRICE [NSString stringWithFormat:@"%@/goods/changePriceByAttribute.json",JR_SERVICE]
-
+#define JR_PAY_TYPE [NSString stringWithFormat:@"%@/pay/payType.json",JR_SERVICE]
 
 
 
