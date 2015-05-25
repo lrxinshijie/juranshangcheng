@@ -295,11 +295,11 @@
             [_collectionView removeFromSuperview];
             
             //[self.view addSubview:_tableView];
-            [self.view insertSubview:_tableView atIndex:0];
+            [self.view insertSubview:_tableView atIndex:1];
         } else {
             [_tableView removeFromSuperview];
             //[self.view addSubview:_collectionView];
-            [self.view insertSubview:_collectionView atIndex:0];
+            [self.view insertSubview:_collectionView atIndex:1];
         }
         [self reloadData];
     }else {
