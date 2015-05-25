@@ -23,9 +23,18 @@
         self.defaultImage = [dict getStringValueForKey:@"defaultImage" defaultValue:@""];
         self.originalImg = [dict getStringValueForKey:@"originalImg" defaultValue:@""];
         self.goodsLogo = [dict getStringValueForKey:@"goodsLogo" defaultValue:@""];
+        
         self.goodsName = [dict getStringValueForKey:@"goodsName" defaultValue:@""];
         self.linkProductId = [dict getIntValueForKey:@"linkProductId" defaultValue:0];
         self.shopId = [dict getIntValueForKey:@"shopId" defaultValue:0];
+        
+        if (self.defaultImage.length == 0) {
+            self.defaultImage = self.goodsLogo;
+        }
+        
+        if (self.goodsLogo.length == 0) {
+            self.goodsLogo = self.defaultImage;
+        }
     }
     return self;
 }
