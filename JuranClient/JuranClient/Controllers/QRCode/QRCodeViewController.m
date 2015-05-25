@@ -53,8 +53,9 @@
         
         
     }else{
-        
-        
+        //iOS6暂不处理
+        [self initUI:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
+        [self animation];
         
     }
     
