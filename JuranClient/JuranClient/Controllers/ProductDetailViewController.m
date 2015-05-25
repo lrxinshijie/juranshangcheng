@@ -131,7 +131,6 @@
     _scrollView.contentSize = CGSizeMake(CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)*2);
     _scrollView.backgroundColor = RGBColor(237, 237, 237);
     _scrollView.delegate = self;
-    _nameLabel.textColor = UIColorFromHEX(0x444444);
 
     _imageScrollView.delegate = self;
     _imageScrollView.pagingEnabled = YES;
