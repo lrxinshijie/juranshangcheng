@@ -21,10 +21,11 @@
 #import "JRDesigner.h"
 #import "JRSubject.h"
 #import "CaseCollectionCell.h"
-#import "YIFullScreenScroll.h"
+//#import "YIFullScreenScroll.h"
 #import "UIViewController+ScrollingNavbar.h"
 
-@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, YIFullScreenScrollDelegate, AMScrollingNavbarDelegate, UIScrollViewDelegate>
+//YIFullScreenScrollDelegate,
+@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate,  AMScrollingNavbarDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -146,9 +147,9 @@
         }];
 //    }
     
-    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
-    self.fullScreenScroll.delegate = self;
-    self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
+//    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
+//    self.fullScreenScroll.delegate = self;
+//    self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
 //    self.fullScreenScroll.additionalOffsetYToStartShowing = -44;
 }
 
@@ -227,11 +228,11 @@
     [_emptyView removeFromSuperview];
     _tableView.tableFooterView = [[UIView alloc] init];
     
-    if ([_datas count] > 5) {
-        self.fullScreenScroll.scrollView = [_tableView superview] ? _tableView : _collectionView;
-    }else{
-        self.fullScreenScroll.scrollView = nil;
-    }
+//    if ([_datas count] > 5) {
+//        self.fullScreenScroll.scrollView = [_tableView superview] ? _tableView : _collectionView;
+//    }else{
+//        self.fullScreenScroll.scrollView = nil;
+//    }
     
     if (_datas.count == 0) {
         if (_tableView.superview) {
@@ -291,7 +292,7 @@
 
 - (void)showMenu{
 #ifndef kJuranDesigner
-    [self.fullScreenScroll showUIBarsAnimated:YES];
+   // [self.fullScreenScroll showUIBarsAnimated:YES];
 #endif
     [super showMenu];
 }
@@ -340,7 +341,7 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     
-    [self.fullScreenScroll showUIBarsAnimated:YES];
+   // [self.fullScreenScroll showUIBarsAnimated:YES];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -368,7 +369,7 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     
-    [self.fullScreenScroll showUIBarsAnimated:NO];
+   // [self.fullScreenScroll showUIBarsAnimated:NO];
 }
 
 - (void)EScrollerViewDidClicked:(NSUInteger)index{
@@ -379,6 +380,7 @@
     [Public jumpFromLink:ad.link];
 }
 
+/*
 - (void)fullScreenScrollDidLayoutUIBars:(YIFullScreenScroll *)fullScreenScroll{
 
     
@@ -410,26 +412,26 @@
 //    }
 //    CGFloat y = self.navigationController.navigationBar.frame.origin.y - 20;
     
-    /*
-    CGFloat y = view.contentOffset.y;
-    
-    if (self.navigationController.navigationBar.frame.origin.y == 20) {
-        y = 0;
-    }else if (y > 88) {
-        y = 88;
-    }
-    
-    CGRect frame = _filterView.frame;
-    frame.origin.y = -y;
-    _filterView.frame = frame;
-    
-    CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
-    
-    frame = view.frame;
-    frame.origin.y = CGRectGetMaxY(_filterView.frame);
-    frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
-    view.frame = frame;
-     */
+ 
+//    CGFloat y = view.contentOffset.y;
+//    
+//    if (self.navigationController.navigationBar.frame.origin.y == 20) {
+//        y = 0;
+//    }else if (y > 88) {
+//        y = 88;
+//    }
+//    
+//    CGRect frame = _filterView.frame;
+//    frame.origin.y = -y;
+//    _filterView.frame = frame;
+//    
+//    CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
+//    
+//    frame = view.frame;
+//    frame.origin.y = CGRectGetMaxY(_filterView.frame);
+//    frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
+//    view.frame = frame;
+ 
     
     CGFloat y = -(self.navigationController.navigationBar.frame.origin.y - 20)*2;
     
@@ -452,6 +454,7 @@
     
 //    ASLog(@"size;%f,%f",y, height);
 }
+*/
 
 - (void)didReceiveMemoryWarning
 {
@@ -461,6 +464,53 @@
 
 - (void)textFieldClick:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGRect tableFrame =  _tableView.frame;
+    CGRect filterViewFrame = _filterView.frame;
+    
+    CGFloat pointY = [scrollView.panGestureRecognizer translationInView:_tableView].y;
+    
+    if (pointY < 0) {
+        //隐藏
+        if (filterViewFrame.origin.y <= -44) {
+            
+            filterViewFrame.origin.y = -44;
+            tableFrame.origin.y = 0;
+            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar+44;
+            
+        }else {
+            
+            filterViewFrame.origin.y -= changeHeight;
+            tableFrame.origin.y -= changeHeight;
+            tableFrame.size.height += changeHeight;
+        }
+        
+    }else {
+        //显示
+        if (filterViewFrame.origin.y >= 0) {
+            
+            filterViewFrame.origin.y = 0;
+            tableFrame.origin.y = CGRectGetMaxY(_filterView.frame);
+            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar;
+            
+        }else {
+            
+            filterViewFrame.origin.y += changeHeight;
+            tableFrame.origin.y += changeHeight;
+            tableFrame.size.height -= changeHeight;
+            
+        }
+    }
+    
+    _filterView.frame = filterViewFrame;
+    _tableView.frame = tableFrame;
+    
 }
 
 @end

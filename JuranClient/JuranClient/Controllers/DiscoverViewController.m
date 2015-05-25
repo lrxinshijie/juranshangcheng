@@ -29,6 +29,9 @@
 #import "TopicDetailViewController.h"
 
 @interface DiscoverViewController ()<JRSegmentControlDelegate,UITableViewDataSource, UITableViewDelegate, QuestionFilterViewDelegate, WikiFilterViewControllerDelegate>
+{
+    BOOL _isQuestion;
+}
 
 @property (nonatomic, assign) NSInteger segmentSelectedForInit;
 
@@ -191,6 +194,8 @@
 
 - (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
     
+    _isQuestion = NO;
+    
     if (_datas) {
         [_datas removeAllObjects];
         [_tableView reloadData];
@@ -203,6 +208,9 @@
     }else if (index == 1){
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }else if (index == 2){
+        
+        _isQuestion = YES;
+        
         _questionHeaderView.hidden = NO;
         _tableView.frame = CGRectMake(0, CGRectGetMaxY(_questionHeaderView.frame), kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar - CGRectGetMaxY(_questionHeaderView.frame));
     }else if (index == 3){
@@ -409,6 +417,100 @@
         _wikiFilterViewNav = [Public navigationControllerFromRootViewController:filterViewController];
     }
     return _wikiFilterViewNav;
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGRect tableFrame =  _tableView.frame;
+    CGRect segmentFrame = _segment.frame;
+    
+    CGFloat pointY = [scrollView.panGestureRecognizer translationInView:_tableView].y;
+    
+    if (!_isQuestion) {
+        
+        if (pointY < 0) {
+            //隐藏
+            if (segmentFrame.origin.y <= -40) {
+                
+                segmentFrame.origin.y = -40;
+                tableFrame.origin.y = 0;
+                tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar;
+                
+            }else {
+                
+                segmentFrame.origin.y -= changeHeight;
+                tableFrame.origin.y -= changeHeight;
+                tableFrame.size.height += changeHeight;
+            }
+            
+        }else {
+            //显示
+            if (segmentFrame.origin.y >= 0) {
+                
+                segmentFrame.origin.y = 0;
+                tableFrame.origin.y = 40;
+                tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar - 40;
+                
+            }else {
+
+                segmentFrame.origin.y += changeHeight;
+                tableFrame.origin.y += changeHeight;
+                tableFrame.size.height -= changeHeight;
+                
+            }
+        }
+        
+    }else {
+        
+        //问答
+        
+        CGRect questionHeaderFrame = _questionHeaderView.frame;
+        
+        if (pointY < 0) {
+            //隐藏
+            if (segmentFrame.origin.y <= -84) {
+                
+                segmentFrame.origin.y = -84;
+                questionHeaderFrame.origin.y = -44;
+                tableFrame.origin.y = 36;
+                tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar-36;
+                
+            }else {
+                
+                segmentFrame.origin.y -= changeHeight;
+                questionHeaderFrame.origin.y -= changeHeight;
+                tableFrame.origin.y -= changeHeight;
+                tableFrame.size.height += changeHeight;
+            }
+            
+        }else {
+            //显示
+            if (segmentFrame.origin.y >= 0) {
+                
+                segmentFrame.origin.y = 0;
+                questionHeaderFrame.origin.y = 40;
+                tableFrame.origin.y = 120;
+                tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar - 120;
+                
+            }else {
+
+                segmentFrame.origin.y += changeHeight;
+                questionHeaderFrame.origin.y += changeHeight;
+                tableFrame.origin.y += changeHeight;
+                tableFrame.size.height -= changeHeight;
+                
+            }
+        }
+        
+        _questionHeaderView.frame = questionHeaderFrame;
+        
+    }
+    
+    _segment.frame = segmentFrame;
+    _tableView.frame = tableFrame;
+    
 }
 
 - (void)didReceiveMemoryWarning {

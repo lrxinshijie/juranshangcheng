@@ -12,9 +12,10 @@
 #import "JRDesigner.h"
 #import "JRPhotoScrollViewController.h"
 #import "FilterView.h"
-#import "YIFullScreenScroll.h"
+//#import "YIFullScreenScroll.h"
 
-@interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate, UIScrollViewDelegate, YIFullScreenScrollDelegate>
+//, YIFullScreenScrollDelegate
+@interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -76,7 +77,7 @@
     _filterView.delegate = self;
     [self.view addSubview:_filterView];
     
-    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 44, kWindowWidth, (!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) - 44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 44, kWindowWidth, (!_isHome ? kWindowHeightWithoutNavigationBarAndTabbar : kWindowHeightWithoutNavigationBarAndTabbar) - 44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -99,9 +100,9 @@
     _emptyView.center = _tableView.center;
     [self.view addSubview:_emptyView];
     
-    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
-    self.fullScreenScroll.delegate = self;
-    self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
+//    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
+//    self.fullScreenScroll.delegate = self;
+//    self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -156,11 +157,11 @@
             [_tableView reloadData];
         }
         
-        if ([_datas count] > 5) {
-            self.fullScreenScroll.scrollView = _tableView;
-        }else{
-            self.fullScreenScroll.scrollView = nil;
-        }
+//        if ([_datas count] > 5) {
+//            self.fullScreenScroll.scrollView = _tableView;
+//        }else{
+//            self.fullScreenScroll.scrollView = nil;
+//        }
         
         _emptyView.hidden = _datas.count != 0;
         [_tableView headerEndRefreshing];
@@ -207,9 +208,10 @@
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
     
-    [self.fullScreenScroll showUIBarsAnimated:YES];
+    //[self.fullScreenScroll showUIBarsAnimated:YES];
 }
 
+/*
 - (void)fullScreenScrollDidLayoutUIBars:(YIFullScreenScroll *)fullScreenScroll{
     
 //    CGFloat y = _tableView.contentOffset.y;
@@ -251,8 +253,57 @@
     view.frame = frame;
     
 }
+*/
 
 - (void)textFieldClick:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGRect tableFrame =  _tableView.frame;
+    CGRect filterViewFrame = _filterView.frame;
+    
+    CGFloat pointY = [scrollView.panGestureRecognizer translationInView:_tableView].y;
+    
+    if (pointY < 0) {
+        //隐藏
+        if (filterViewFrame.origin.y <= -44) {
+            
+            filterViewFrame.origin.y = -44;
+            tableFrame.origin.y = 0;
+            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar+44;
+            
+        }else {
+            
+            filterViewFrame.origin.y -= changeHeight;
+            tableFrame.origin.y -= changeHeight;
+            tableFrame.size.height += changeHeight;
+        }
+        
+    }else {
+        //显示
+        if (filterViewFrame.origin.y >= 0) {
+            
+            filterViewFrame.origin.y = 0;
+            tableFrame.origin.y = CGRectGetMaxY(_filterView.frame);
+            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar;
+            
+        }else {
+            
+            filterViewFrame.origin.y += changeHeight;
+            tableFrame.origin.y += changeHeight;
+            tableFrame.size.height -= changeHeight;
+            
+        }
+    }
+    
+    _filterView.frame = filterViewFrame;
+    _tableView.frame = tableFrame;
+    
+}
+
 @end

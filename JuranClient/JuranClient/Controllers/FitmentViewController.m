@@ -5,7 +5,6 @@
 //  Created by 李 久龙 on 15/4/9.
 //  Copyright (c) 2015年 Juran. All rights reserved.
 //
-
 #import "FitmentViewController.h"
 #import "JRCase.h"
 #import "CaseCell.h"
@@ -25,6 +24,9 @@
 #import "DesignerCell.h"
 
 @interface FitmentViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate, YIFullScreenScrollDelegate, JRSegmentControlDelegate>
+{
+    UIView *_filterHeaderView;
+}
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -81,27 +83,32 @@
 }
 
 - (void)setupUI{
+    
+    _filterHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 88)];
+    _filterHeaderView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_filterHeaderView];
+    
     self.segment = [[JRSegmentControl alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 40)];
     _segment.delegate = self;
     _segment.showUnderLine = YES;
     _segment.selectedBackgroundViewXMargin = 8;
     [_segment setTitleList:@[@"案例", @"设计师"]];
-    [self.view addSubview:_segment];
+    [_filterHeaderView addSubview:_segment];
     
     self.filterView = [[FilterView alloc] initWithType:FilterViewTypeCaseWithoutGrid defaultData:self.filterData];
     _filterView.xMargin = CGRectGetHeight(_segment.frame);
     _filterView.frame = CGRectMake(0, CGRectGetMaxY(_segment.frame), kWindowWidth, 44);
     _filterView.delegate = self;
-    [self.view addSubview:_filterView];
+    [_filterHeaderView addSubview:_filterView];
     
     self.designerFilterView = [[FilterView alloc] initWithType:FilterViewTypeDesigner defaultData:self.designerFilterData];
     _designerFilterView.xMargin = CGRectGetHeight(_segment.frame);
     _designerFilterView.frame = _filterView.frame;
     _designerFilterView.delegate = self;
     _designerFilterView.hidden = YES;
-    [self.view addSubview:_designerFilterView];
+    [_filterHeaderView addSubview:_designerFilterView];
     
-    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterView.frame), kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar - CGRectGetMaxY(_filterView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterHeaderView.frame), kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar - CGRectGetMaxY(_filterHeaderView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = RGBColor(236, 236, 236);
@@ -297,6 +304,56 @@
         }
     }
     [self.fullScreenScroll showUIBarsAnimated:YES];
+}
+
+#pragma mark - UISCollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+    CGRect tableFrame =  _tableView.frame;
+    CGRect filterHeaderFrame = _filterHeaderView.frame;
+    
+    CGFloat pointY = [scrollView.panGestureRecognizer translationInView:_tableView].y;
+    
+    if (pointY < 0) {
+        
+        //隐藏
+        if (filterHeaderFrame.origin.y <= -88) {
+            
+            filterHeaderFrame.origin.y = -88;
+            tableFrame.origin.y = 0;
+            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar;
+            
+        }else {
+
+            filterHeaderFrame.origin.y -= changeHeight;
+            tableFrame.origin.y -= changeHeight;
+            tableFrame.size.height += changeHeight;
+        }
+        
+    }else {
+        
+        //显示
+        if (filterHeaderFrame.origin.y >= 0) {
+            
+            filterHeaderFrame.origin.y = 0;
+            tableFrame.origin.y = CGRectGetMaxY(_filterHeaderView.frame);
+            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar - CGRectGetMaxY(_filterHeaderView.frame);
+            
+        }else {
+        
+            filterHeaderFrame.origin.y += changeHeight;
+            tableFrame.origin.y += changeHeight;
+            tableFrame.size.height -= changeHeight;
+            
+        }
+    
+    }
+    
+    _filterHeaderView.frame = filterHeaderFrame;
+    _tableView.frame = tableFrame;
+
 }
 
 - (void)didReceiveMemoryWarning {

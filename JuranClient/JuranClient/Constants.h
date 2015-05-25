@@ -9,6 +9,8 @@
 #ifndef Flipboard_Constants_h
 #define Flipboard_Constants_h
 
+#define changeHeight   2
+
 #define kWindowHeight CGRectGetHeight([UIScreen mainScreen].applicationFrame)
 #define kWindowHeightWithoutNavigationBar (kWindowHeight - 44)
 #define kWindowHeightWithoutNavigationBarAndTabbar (kWindowHeightWithoutNavigationBar - 49)
