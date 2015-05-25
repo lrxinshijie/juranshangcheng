@@ -88,7 +88,7 @@
     _filterHeaderView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_filterHeaderView];
     
-    self.segment = [[JRSegmentControl alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 40)];
+    self.segment = [[JRSegmentControl alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 44)];
     _segment.delegate = self;
     _segment.showUnderLine = YES;
     _segment.selectedBackgroundViewXMargin = 8;
