@@ -113,7 +113,7 @@
         [self addSubview:lineView];
         
         frame = CGRectMake(CGRectGetMaxX(_filterButton.frame), 0, kWindowWidth - CGRectGetMaxX(_filterButton.frame), CGRectGetHeight(self.frame));
-        self.gridButton = [self buttonWithFrame:frame target:self action:@selector(clickButton:) image:[UIImage imageNamed:@"icon-list.png"]];
+        self.gridButton = [self buttonWithFrame:frame target:self action:@selector(clickButton:) image:[UIImage imageNamed:@"icon-grid.png"]];
         [self addSubview:_gridButton];
         
         frame = CGRectMake(0, CGRectGetHeight(self.frame)-1, CGRectGetWidth(self.frame), 1);
@@ -274,7 +274,7 @@
         [self showSort];
     }
     _isFilter = YES;
-    [self.gridButton setImage:[UIImage imageNamed:_isGrid?@"icon-grid.png":@"icon-list.png"] forState:UIControlStateNormal];
+    [self.gridButton setImage:[UIImage imageNamed:_isGrid?@"icon-list.png":@"icon-grid.png"] forState:UIControlStateNormal];
     if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:actionType:)]) {
         [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter actionType:FilterViewActionFilter];
     }
@@ -288,7 +288,7 @@
         [self showSort];
     }
     _isGrid = !_isGrid;
-    [self.gridButton setImage:[UIImage imageNamed:_isGrid?@"icon-grid.png":@"icon-list.png"] forState:UIControlStateNormal];
+    [self.gridButton setImage:[UIImage imageNamed:_isGrid?@"icon-list.png":@"icon-grid.png"] forState:UIControlStateNormal];
     if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:actionType:)]) {
         [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter actionType:FilterViewActionGrid];
     }

@@ -55,7 +55,7 @@
             lineImageView.backgroundColor = RGBColor(213, 213, 213);
             [gridView addSubview:lineImageView];
             
-            self.listButton = [gridView buttonWithFrame:gridView.bounds target:self action:@selector(onList) image:[UIImage imageNamed:@"icon-list"]];
+            self.listButton = [gridView buttonWithFrame:gridView.bounds target:self action:@selector(onList) image:[UIImage imageNamed:@"icon-grid"]];
             [gridView addSubview:_listButton];
             [self addSubview:gridView];
         }
@@ -228,7 +228,7 @@
 - (void)setIsGrid:(BOOL)isGrid{
     _isGrid = isGrid;
     
-    [_listButton setImage:[UIImage imageNamed:_isGrid ? @"icon-grid" : @"icon-list"] forState:UIControlStateNormal];
+    [_listButton setImage:[UIImage imageNamed:_isGrid ? @"icon-list" : @"icon-grid"] forState:UIControlStateNormal];
 }
 
 - (void)onList{
