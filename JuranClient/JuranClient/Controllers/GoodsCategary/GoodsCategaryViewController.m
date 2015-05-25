@@ -41,6 +41,9 @@
 @property (strong, nonatomic) IBOutlet UITableView *listTableView;
 @property (strong, nonatomic) IBOutlet UITableView *fistLevelTableView;
 @property (strong, nonatomic) IBOutlet UILabel *viewTitle;
+@property (strong, nonatomic) IBOutlet UIView *tableLine;
+@property (strong, nonatomic) UIView * tableLineUp;
+@property (assign, nonatomic) int lineY;
 
 @property (strong, nonatomic) NSMutableArray * dateArray_firstLevel;
 @property (strong, nonatomic) NSMutableArray * dataArray_secondLevel;
@@ -103,6 +106,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    _viewTitle.font = [UIFont systemFontOfSize:17 weight:10];
     if (_vcStyle == CategaryStyle_Goods) {
         _viewTitle.text = @"北京站";
     }else if (_vcStyle == CategaryStyle_Shop){
@@ -249,7 +253,42 @@
         }
         return 0;
     }else{
+        //计算竖线的高度和位置，避免遮挡
+        [self calculateLineFrame:self.dateArray_firstLevel.count];
         return self.dateArray_firstLevel.count;
+    }
+}
+
+- (void)calculateLineFrame:(int)cellNum
+{
+    int temp = 51*cellNum;
+    self.lineY = temp+64;
+    CGRect frame = self.tableLine.frame;
+    frame.origin.y = 64+temp;
+    frame.size.height = [UIScreen mainScreen].bounds.size.height-64-temp;
+    self.tableLine.frame = frame;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == _fistLevelTableView) {
+        float temp = scrollView.contentOffset.y;
+        NSLog(@"%f",temp);
+        
+        CGRect frame0 = self.tableLine.frame;
+        frame0.origin.y = self.lineY-temp;
+        frame0.size.height = [UIScreen mainScreen].bounds.size.height-64+temp;
+        self.tableLine.frame = frame0;
+        if (temp<0) {
+            if (!self.tableLineUp) {
+                self.tableLineUp = [[UIView alloc] initWithFrame:CGRectMake(76, 64, 1, 0)];
+                self.tableLineUp.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:207.0/255.0 blue:207.0/255.0 alpha:1.0];
+                [self.view addSubview:self.tableLineUp];
+            }
+            CGRect frame = self.tableLineUp.frame;
+            frame.size.height = -temp;
+            self.tableLineUp.frame = frame;
+        }
     }
 }
 
@@ -331,9 +370,9 @@
             cell.delegate = self;
         }
         [cell dynamicCreateUIWithData:[self.finalDataArray objectAtIndex:indexPath.row]];
-        if (indexPath.row == self.finalDataArray.count-1) {
-            [cell addLine];
-        }
+//        if (indexPath.row == self.finalDataArray.count-1) {
+//            [cell addLine];
+//        }
         
         return cell;
     }else{

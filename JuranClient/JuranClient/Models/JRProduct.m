@@ -181,7 +181,6 @@
         if (finished) {
             finished(error == nil);
         }
-        
     }];
 }
 
@@ -193,7 +192,7 @@
 }
 
 + (BOOL)isShowPrice{
-    return ApplicationDelegate.gLocation.isSuccessLocation;
+    return ApplicationDelegate.gLocation.isSuccessLocation && [ApplicationDelegate.gLocation.cityName isEqual:@"北京市"];
 }
 
 - (void)loadAttributeList:(BOOLBlock)finished{

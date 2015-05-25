@@ -26,4 +26,6 @@ typedef void (^LocationFinished)(UserLocation *loc);
 - (void)GeoCode:(NSString *)cityName Handler:(LocationFinished)finished;
 - (void)ReverseGeoCode:(CLLocation *)location Handler:(LocationFinished)finished;
 
++ (BOOL)isShowPrice;
+
 @end

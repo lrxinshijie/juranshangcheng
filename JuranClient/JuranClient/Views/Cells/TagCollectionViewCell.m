@@ -25,6 +25,8 @@
     UIColor *color = [UIColor darkGrayColor];
     if (_isEnable) {
         color = _isSelect ? kBlueColor : [UIColor blackColor];
+    }else {
+        color = RGBColor(207, 207, 207);
     }
     
     [color setStroke];
