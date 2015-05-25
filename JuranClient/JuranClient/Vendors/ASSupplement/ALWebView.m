@@ -109,7 +109,6 @@
 		_webView.allowsInlineMediaPlayback = tempAllowsInlineMediaPlayback;
 		_webView.mediaPlaybackRequiresUserAction = tempMediaPlaybackRequiresUserAction;
 	}
-
 	_webView.delegate = self;
 	[self addSubview:_webView];
     
@@ -145,7 +144,7 @@
 
 - (void)_initialize {
 	[self reset];
-	
+	_webView.scalesPageToFit = YES;
 	_loadingPage = NO;
 	_shadowsHidden = NO;
 	_consoleEnabled = NO;
