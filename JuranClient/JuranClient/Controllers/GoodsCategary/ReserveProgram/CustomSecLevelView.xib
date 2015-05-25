@@ -75,7 +75,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="r3X-fm-hSE">
-                    <rect key="frame" x="0.0" y="87" width="243" height="8"/>
+                    <rect key="frame" x="5" y="87" width="233" height="8"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>

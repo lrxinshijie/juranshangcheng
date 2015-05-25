@@ -42,7 +42,7 @@
     _titleLabel.frame = frame;
     
     frame = _priceLabel.frame;
-    frame.origin.y = CGRectGetMaxY(_titleLabel.frame) + 3;
+    frame.origin.y = CGRectGetMaxY(_titleLabel.frame) + 10;
     _priceLabel.frame = frame;
 }
 

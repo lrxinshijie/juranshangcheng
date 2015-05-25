@@ -27,6 +27,9 @@
 #import "UserLocation.h"
 
 @interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate, ProductFilterViewDelegate,CustomSearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+{
+    BOOL _isCollection;
+}
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -119,7 +122,7 @@
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-    layout.itemSize = CGSizeMake(145, 210);
+    layout.itemSize = CGSizeMake(144, 217);
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = 10;
     
@@ -292,11 +295,17 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else if(action == FilterViewActionGrid){
         if ([_collectionView superview]) {
+            
+            _isCollection = NO;
+            
             [_collectionView removeFromSuperview];
             
             //[self.view addSubview:_tableView];
             [self.view insertSubview:_tableView atIndex:1];
         } else {
+            
+            _isCollection = YES;
+            
             [_tableView removeFromSuperview];
             //[self.view addSubview:_collectionView];
             [self.view insertSubview:_collectionView atIndex:1];
@@ -320,7 +329,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    return 119;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -470,11 +479,18 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGRect tableFrame =  _tableView.frame;
+    CGFloat pointY;
+    CGRect tableFrame;
     CGRect filterViewFrame = _filterView.frame;
     
-    CGFloat pointY = [scrollView.panGestureRecognizer translationInView:_tableView].y;
-    
+    if (_isCollection) {
+        pointY = [scrollView.panGestureRecognizer translationInView:_collectionView].y;
+        tableFrame =  _collectionView.frame;
+    }else {
+        pointY = [scrollView.panGestureRecognizer translationInView:_tableView].y;
+        tableFrame =  _tableView.frame;
+    }
+
     if (pointY < 0) {
         //隐藏
         if (filterViewFrame.origin.y <= -44) {
@@ -508,8 +524,11 @@
     }
     
     _filterView.frame = filterViewFrame;
-    _tableView.frame = tableFrame;
-    
+    if (_isCollection) {
+        _collectionView.frame = tableFrame;
+    }else {
+        _tableView.frame = tableFrame;
+    }
 }
 
 - (IBAction)onSetLoction:(id)sender {

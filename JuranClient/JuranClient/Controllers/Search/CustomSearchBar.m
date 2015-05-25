@@ -103,6 +103,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     _inputTextField.leftView = leftView;
     [_inputTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     _oldText = @"";
+    
 }
 
 - (void)configTipsIconWithRightBtnStyle:(RightBtnStyle)style
@@ -396,7 +397,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self.inputTextField resignFirstResponder];
-    
+    [self startSearchAtIndex:self.searchType];
     return YES;
 }
 
