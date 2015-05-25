@@ -39,12 +39,10 @@
         height = 36;
     }
     frame.size.height = height;
-    _titleLabel.contentMode = UIViewContentModeTop;
     _titleLabel.frame = frame;
     
     frame = _priceLabel.frame;
     frame.origin.y = CGRectGetMaxY(_titleLabel.frame) + 10;
-    _priceLabel.contentMode = UIViewContentModeTop;
     _priceLabel.frame = frame;
 }
 
