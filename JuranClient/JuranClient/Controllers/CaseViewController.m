@@ -26,6 +26,9 @@
 
 //YIFullScreenScrollDelegate,
 @interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate,  AMScrollingNavbarDelegate, UIScrollViewDelegate>
+{
+    BOOL _isCollection;
+}
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -268,10 +271,12 @@
 - (void)clickFilterView:(FilterView *)view actionType:(FilterViewAction)action returnData:(NSDictionary *)data{
     if (action == FilterViewActionGrid) {
         if ([_collectionView superview]) {
+            _isCollection = NO;
             [_collectionView removeFromSuperview];
             [self.view addSubview:_tableView];
             [self reloadData];
         } else {
+            _isCollection = YES;
             [_tableView removeFromSuperview];
             [self.view addSubview:_collectionView];
             [self reloadData];
@@ -471,10 +476,17 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGRect tableFrame =  _tableView.frame;
+    CGRect tableFrame;
+    CGFloat pointY;
     CGRect filterViewFrame = _filterView.frame;
     
-    CGFloat pointY = [scrollView.panGestureRecognizer translationInView:_tableView].y;
+    if (_isCollection) {
+        tableFrame = _collectionView.frame;
+        pointY = [scrollView.panGestureRecognizer translationInView:_collectionView].y;
+    }else {
+        tableFrame =  _tableView.frame;
+        pointY = [scrollView.panGestureRecognizer translationInView:_tableView].y;
+    }
     
     if (pointY < 0) {
         //隐藏
@@ -509,8 +521,11 @@
     }
     
     _filterView.frame = filterViewFrame;
-    _tableView.frame = tableFrame;
-    
+    if (_isCollection) {
+        _collectionView.frame = tableFrame;
+    }else {
+        _tableView.frame = tableFrame;
+    }
 }
 
 @end
