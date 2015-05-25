@@ -66,11 +66,11 @@
         _sortButton.userInteractionEnabled = YES;
         [_sortButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         [_sortButton setTitle:@" 排序" forState:UIControlStateNormal];
-        _sortButton.titleLabel.font = [UIFont systemFontOfSize:15];
+        _sortButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_sortButton setImage:[UIImage imageNamed:@"case-icon-order"] forState:UIControlStateNormal];
         
-        [_sortButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_sortButton setTitleColor:kBlueColor forState:UIControlStateSelected];
+        [_sortButton setTitleColor:UIColorFromHEX(0x444444) forState:UIControlStateNormal];
+        [_sortButton setTitleColor:UIColorFromHEX(0x0068b7) forState:UIControlStateSelected];
         [_sortButton setImage:[UIImage imageNamed:@"menu_paixu"] forState:UIControlStateSelected];
         [self addSubview:_sortButton];
         
@@ -78,10 +78,10 @@
         _filterButton.frame = CGRectMake(width, 0, width, 44);
         [_filterButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         [_filterButton setTitle:@" 筛选" forState:UIControlStateNormal];
-        _filterButton.titleLabel.font = [UIFont systemFontOfSize:15];
+        _filterButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_filterButton setImage:[UIImage imageNamed:@"icon-product-filter"] forState:UIControlStateNormal];
-        [_filterButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_filterButton setTitleColor:kBlueColor forState:UIControlStateSelected];
+        [_filterButton setTitleColor:UIColorFromHEX(0x444444) forState:UIControlStateNormal];
+        [_filterButton setTitleColor:UIColorFromHEX(0x0068b7) forState:UIControlStateSelected];
         [_filterButton setImage:[UIImage imageNamed:@"icon-product-filter_sel"] forState:UIControlStateSelected];
         [self addSubview:_filterButton];
         
