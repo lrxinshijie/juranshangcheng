@@ -106,6 +106,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    _viewTitle.font = [UIFont systemFontOfSize:17 weight:10];
     if (_vcStyle == CategaryStyle_Goods) {
         _viewTitle.text = @"北京站";
     }else if (_vcStyle == CategaryStyle_Shop){

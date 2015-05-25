@@ -43,6 +43,7 @@
 //@property (nonatomic, strong) UITapGestureRecognizer *tapHide;
 
 @property (nonatomic, strong) NSMutableDictionary *openStatusDic;
+@property (strong, nonatomic) IBOutlet UIButton *btnSend;
 
 - (IBAction)onSend:(id)sender;
 
@@ -385,6 +386,7 @@
 
 - (void)clickCellComment:(CommentCell *)cell{
     self.selectComment = cell.comment;
+    [_btnSend setTitle:@"回复" forState:UIControlStateNormal];
     [_commentTextField becomeFirstResponder];
 }
 
@@ -407,8 +409,11 @@
     _selectComment = selectComment;
     if (_selectComment) {
         _commentTextField.placeholder = [NSString stringWithFormat:@"回复%@:", _selectComment.nickName];
+        [_btnSend setTitle:@"回复" forState:UIControlStateNormal];
+        
     }else{
         _commentTextField.placeholder = @"写评论";
+        [_btnSend setTitle:@"评论" forState:UIControlStateNormal];
     }
 }
 
