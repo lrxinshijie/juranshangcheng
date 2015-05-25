@@ -53,8 +53,9 @@
         
         
     }else{
-        
-        
+        //iOS6暂不处理
+        [self initUI:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
+        [self animation];
         
     }
     
@@ -247,7 +248,7 @@
 
 - (NSString *)getNumberFrom:(NSString *)str
 {
-    NSRange range = [str rangeOfString:@"[[0-9]{1,}" options:NSRegularExpressionSearch];
+    NSRange range = [str rangeOfString:@"[0-9]{1,}" options:NSRegularExpressionSearch];
     if (range.location != NSNotFound) {
         return [str substringWithRange:range];
     }

@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="79" height="72"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4KH-FC-BuE">
-                        <rect key="frame" x="0.0" y="49" width="79" height="18"/>
+                        <rect key="frame" x="0.0" y="47" width="79" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

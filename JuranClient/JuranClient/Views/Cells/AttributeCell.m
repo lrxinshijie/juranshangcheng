@@ -82,6 +82,7 @@
     BOOL isEnable = [_viewController.product attirbuteIsEnable:_viewController.attributeSelected fromRow:_viewController.fromRow toIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:_indexPath.row]];
     
     cell.isEnable = isEnable;
+
     cell.isSelect = indexPath.row == [_viewController.attributeSelected[_indexPath.row] integerValue];
     return cell;
 }

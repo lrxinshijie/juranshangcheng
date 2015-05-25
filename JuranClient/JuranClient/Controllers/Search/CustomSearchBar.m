@@ -97,12 +97,13 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     
     //输入偏左问题
     CGRect frame = _inputTextField.frame;
-    frame.size.width  = 15;
+    frame.size.width  = 30;
     UIView *leftView = [[UIView alloc]initWithFrame:frame];
     _inputTextField.leftViewMode = UITextFieldViewModeAlways;
     _inputTextField.leftView = leftView;
     [_inputTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     _oldText = @"";
+    
 }
 
 - (void)configTipsIconWithRightBtnStyle:(RightBtnStyle)style
@@ -396,7 +397,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self.inputTextField resignFirstResponder];
-    
+    [self startSearchAtIndex:self.searchType];
     return YES;
 }
 

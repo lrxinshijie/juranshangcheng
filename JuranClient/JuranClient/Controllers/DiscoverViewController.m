@@ -41,7 +41,6 @@
 @property (nonatomic, strong) IBOutlet JRSegmentControl *segment;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
-@property (nonatomic, strong) NSMutableDictionary *wikiFilterData;
 @property (nonatomic, strong) UINavigationController *wikiFilterViewNav;
 @property (nonatomic, strong) IBOutlet UIButton *wikiFilterButton;
 

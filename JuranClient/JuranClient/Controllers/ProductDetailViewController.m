@@ -80,7 +80,6 @@
 //    _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAttributeRow:) name:kNotificationNameAttributeRowReload object:nil];
     [self setupUI];
-    [self setupAttributeView];
     
     [self loadData];
 }
@@ -119,7 +118,9 @@
         [self hideHUD];
         if (!error) {
             NSString *price = [data getStringValueForKey:@"goodsprice" defaultValue:@""];
-            _attributePriceLabel.text = [price isEqual:@""]?@"":[NSString stringWithFormat:@"￥%@",  price];
+            _attributePriceLabel.text = [price isEqual:@""]?_product.priceString:[NSString stringWithFormat:@"￥%@",  price];
+            NSString *goodsImage = [data getStringValueForKey:@"goodsImage" defaultValue:@""];
+            goodsImage = [goodsImage isEqual:@""] ? _product.goodsImagesList[0]:goodsImage;
             [_attributeImageView setImageWithURLString:data[@"goodsImage"] Editing:YES];
         }
         [_attributeTableView reloadData];
@@ -159,6 +160,10 @@
     [_scrollView addSubview:_segCtl];
     
     self.webView = [[ALWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segCtl.frame), CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame) - CGRectGetHeight(_navigationView.frame) - 45)];
+    self.webView.scalesPageToFit = YES;//自动对页面进行缩放以适应屏幕
+    self.webView.autoresizesSubviews = NO; //自动调整大小
+    //self.webView.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+    self.webView.autoresizingMask = UIViewAutoresizingNone;
     _webView.opaque = NO;
     _webView.backgroundColor = [UIColor clearColor];
     [_scrollView addSubview:_webView];
@@ -175,13 +180,11 @@
     [self showHUD];
     [_product loadInfo:^(BOOL result) {
         [self hideHUD];
+        [self setupAttributeView];
         if (!result) {
             return ;
         }
-
         [self setupFavority];
-        
-        _attributePriceLabel.text = _product.priceString;
         
         [_shopLogoImageView setImageWithURLString:_product.shopLogo];
         _shopNameLabel.text = _product.shopName;
@@ -307,8 +310,8 @@
 
 - (void)setupAttributeView{
     _attributeNameLabel.text = _product.goodsName;
-    [_attributeImageView setImageWithURLString:_product.goodsLogo];
-//
+    [_attributeImageView setImageWithURLString:_product.goodsImagesList[0]];
+    _attributePriceLabel.text = _product.priceString;
 //    _attributePriceLabel.text = [NSString stringWithFormat:@"￥%@", [@([_product.onSaleMinPrice intValue]) decimalNumberFormatter]];
     
     CGRect frame = _attributeNameLabel.frame;

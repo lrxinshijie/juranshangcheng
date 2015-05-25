@@ -10,6 +10,7 @@
                 <outlet property="fistLevelTableView" destination="gz7-Ny-9ll" id="OJD-aD-EZF"/>
                 <outlet property="listTableView" destination="Txf-8m-0pI" id="SZV-1J-ZvU"/>
                 <outlet property="locationButton" destination="m7O-EO-ghA" id="feP-oV-ifQ"/>
+                <outlet property="tableLine" destination="baH-EC-KVs" id="2iU-JR-ETB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewTitle" destination="6L4-bn-7lv" id="zxt-IL-tHp"/>
             </connections>
@@ -80,12 +81,6 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
-                <view contentMode="scaleToFill" id="baH-EC-KVs" userLabel="line5">
-                    <rect key="frame" x="76" y="64" width="1" height="504"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="0.81176470588235294" green="0.81176470588235294" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
-                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Txf-8m-0pI">
                     <rect key="frame" x="77" y="64" width="243" height="504"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
@@ -98,16 +93,23 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="gz7-Ny-9ll">
                     <rect key="frame" x="0.0" y="64" width="77" height="504"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="voi-ta-z2b"/>
                         <outlet property="delegate" destination="-1" id="f2h-1c-VCa"/>
                     </connections>
                 </tableView>
+                <view contentMode="scaleToFill" id="baH-EC-KVs" userLabel="line5">
+                    <rect key="frame" x="76" y="64" width="1" height="504"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.81176470588235294" green="0.81176470588235294" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="617" y="385"/>
+            <point key="canvasLocation" x="589" y="446"/>
         </view>
     </objects>
     <resources>

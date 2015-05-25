@@ -60,6 +60,8 @@
 #import "AskDetailViewController.h"
 #import "PersonalDataViewController.h"
 #import "MyAskOrAnswerViewController.h"
+#import "ShopHomeViewController.h"
+#import "JRShop.h"
 
 @implementation Public
 
@@ -496,17 +498,17 @@
     NSInteger type = [param getIntValueForKey:@"type" defaultValue:0];
     
     if (type == 1){//首页
-//        NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
-//        if (vcs.count == 5) {
-//            UINavigationController *nav = [vcs objectAtIndex:3];
-//            UIViewController *vc = nav.viewControllers.firstObject;
-//            if ([vc isKindOfClass:[DiscoverViewController class]]) {
-//                if (navigationController.viewControllers.count > 1) {
-//                    [navigationController popToRootViewControllerAnimated:NO];
-//                }
-//                [ApplicationDelegate.tabBarController setSelectedIndex:0];
-//            }
-//        }
+        //        NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
+        //        if (vcs.count == 5) {
+        //            UINavigationController *nav = [vcs objectAtIndex:3];
+        //            UIViewController *vc = nav.viewControllers.firstObject;
+        //            if ([vc isKindOfClass:[DiscoverViewController class]]) {
+        //                if (navigationController.viewControllers.count > 1) {
+        //                    [navigationController popToRootViewControllerAnimated:NO];
+        //                }
+        //                [ApplicationDelegate.tabBarController setSelectedIndex:0];
+        //            }
+        //        }
     }else if (type == 2){
         if ([param.allKeys containsObject:@"id"]) {
             DesignerDetailViewController *dv = [[DesignerDetailViewController alloc] init];
@@ -554,6 +556,7 @@
                     if (navigationController.viewControllers.count > 1) {
                         [navigationController popToRootViewControllerAnimated:NO];
                     }
+                    [[(DiscoverViewController*)vc wikiFilterData]setObject:[param getStringValueForKey:@"catCode2" defaultValue:@""] forKey:@"type"];
                     [(DiscoverViewController*)vc showSegmentWithIndex:1];
                     [ApplicationDelegate.tabBarController setSelectedIndex:3];
                 }
@@ -630,12 +633,21 @@
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
     }else if (type == 18){//店铺：type=18
-        ShopListViewController *vc = [[ShopListViewController alloc]init];
-        vc.cityName = @"北京市";
-        vc.keyword = @"";
-        vc.sort = 9;
-        vc.hidesBottomBarWhenPushed = YES;
-        [navigationController pushViewController:vc animated:YES];
+        if ([param.allKeys containsObject:@"id"]) {
+            NSInteger sId = [param getIntegerValueForKey:@"sort" defaultValue:0];
+            if(sId>0) {
+                ShopHomeViewController *vc = [[ShopHomeViewController alloc]init];
+                vc.shop.shopId = sId;
+                [vc.navigationController pushViewController:vc animated:YES];
+            }
+        }else {
+            ShopListViewController *vc = [[ShopListViewController alloc]init];
+            vc.cityName = @"北京市";
+            vc.keyword = @"";
+            vc.sort = 9;
+            vc.hidesBottomBarWhenPushed = YES;
+            [navigationController pushViewController:vc animated:YES];
+        }
     }else if (type == 19){//门店导航
 #ifndef kJuranDesigner
         NaviStoreListViewController *vc = [[NaviStoreListViewController alloc] init];
@@ -690,10 +702,10 @@
         [navigationController pushViewController:vc animated:YES];
     }else if (type == 27){//会员-个人资料：type=27
         if ([navigationController checkLogin]) {
-        PersonalDataViewController *vc = [[PersonalDataViewController alloc]init];
-        [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
-        [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
-        [ApplicationDelegate.tabBarController setSelectedIndex:4];
+            PersonalDataViewController *vc = [[PersonalDataViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
         }
     }else if (type == 28){//会员需求
 #ifndef kJuranDesigner
@@ -766,17 +778,17 @@
         }
 #endif
     }
-//    else if (type == 41){//发现-话题列表：type=41
-//        [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
-//        [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:3];
-//        [ApplicationDelegate.tabBarController setSelectedIndex:3];
-//    }else if (type == 42){//专题列表：type=42
-//        if ([navigationController checkLogin]) {
-//            [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
-//            [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:0];
-//            [ApplicationDelegate.tabBarController setSelectedIndex:3];
-//        }
-//    }
+    //    else if (type == 41){//发现-话题列表：type=41
+    //        [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
+    //        [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:3];
+    //        [ApplicationDelegate.tabBarController setSelectedIndex:3];
+    //    }else if (type == 42){//专题列表：type=42
+    //        if ([navigationController checkLogin]) {
+    //            [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
+    //            [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:0];
+    //            [ApplicationDelegate.tabBarController setSelectedIndex:3];
+    //        }
+    //    }
 }
 
 + (NSDictionary *)deviceInfo{

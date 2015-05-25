@@ -102,7 +102,6 @@
 
 	_webView = [[UIWebView alloc] initWithFrame:CGRectZero];
 	_webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    _webView.scalesPageToFit = YES;
 
 	if (loadPreviousSettings) {
 		_webView.dataDetectorTypes = tempDataDetectorTypes;
@@ -316,7 +315,8 @@
 	_lastRequest = nil;
     
 	if (!baseURL) {
-		baseURL = [NSURL URLWithString:@"http://localhost/"];
+		//baseURL = [NSURL URLWithString:@"http://localhost/"];
+        baseURL = [NSURL URLWithString:@"http://www.juran.cn/"];
 	}
 	[_webView loadHTMLString:string baseURL:baseURL];
 }
