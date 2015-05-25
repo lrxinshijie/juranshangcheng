@@ -159,6 +159,10 @@
     [_scrollView addSubview:_segCtl];
     
     self.webView = [[ALWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segCtl.frame), CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame) - CGRectGetHeight(_navigationView.frame) - 45)];
+    self.webView.scalesPageToFit = YES;//自动对页面进行缩放以适应屏幕
+    self.webView.autoresizesSubviews = NO; //自动调整大小
+    //self.webView.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+    self.webView.autoresizingMask = UIViewAutoresizingNone;
     _webView.opaque = NO;
     _webView.backgroundColor = [UIColor clearColor];
     [_scrollView addSubview:_webView];
