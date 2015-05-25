@@ -22,6 +22,9 @@
 #import "ShopListViewController.h"
 #import "UIViewController+Menu.h"
 #import "ProductGridCell.h"
+#import "UIAlertView+Blocks.h"
+#import "AppDelegate.h"
+#import "UserLocation.h"
 
 @interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate, ProductFilterViewDelegate,CustomSearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -32,6 +35,8 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) ProductFilterView *filterView;
 @property (strong, nonatomic) CustomSearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UIButton *footerView;
+- (IBAction)onSetLoction:(id)sender;
 @end
 
 @implementation ProductListViewController
@@ -90,6 +95,7 @@
     
     
     self.filterView = [[ProductFilterView alloc] initWithDefaultData:_filterData SeletedData:_selectedFilter];
+    
     _filterView.delegate = self;
 //    CGRect frame = _filterView.frame;
 //    frame.origin.y = CGRectGetMaxY(_searchBar.frame);
@@ -165,7 +171,7 @@
     [param setObject:@"北京市" forKey:@"cityName"];
     [param setObject:@(_currentPage) forKey:@"pageNo"];
     [param setObject:kOnePageCount forKey:@"onePageCount"];
-    [param setObject:@(_selectedFilter.sort) forKey:@"sort"];
+    [param setObject:@(_selectedFilter.pSort.sort) forKey:@"sort"];
     if (_selectedFilter.keyword && _selectedFilter.keyword.length>0) [param setObject:_selectedFilter.keyword forKey:@"keyword"];
     if (_selectedFilter.pMinPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",_selectedFilter.pMinPrice<=_selectedFilter.pMinPrice?_selectedFilter.pMinPrice:_selectedFilter.pMaxPrice] forKey:@"priceMinYuan"];
     if (_selectedFilter.pMaxPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",_selectedFilter.pMinPrice>_selectedFilter.pMinPrice?_selectedFilter.pMinPrice:_selectedFilter.pMaxPrice] forKey:@"priceMaxYuan"];
@@ -262,15 +268,20 @@
             [self.view addSubview:_emptyView];
         }
     }
-    
+    if (!ApplicationDelegate.gLocation.isSuccessLocation) {
+        [_footerView removeFromSuperview];
+        _footerView.frame = CGRectMake(0, kWindowHeightWithoutNavigationBar-25, kWindowWidth, 25);
+        [self.view addSubview:_footerView];
+    }
     [_tableView reloadData];
     [_collectionView reloadData];
 }
 
 - (void)clickProductFilterView:(ProductFilterView *)view returnData:(ProductSelectedFilter *)data IsGrid:(BOOL)isGrid IsFilter:(BOOL)isFilter actionType:(FilterViewAction)action{
+    _selectedFilter.pSort = data.pSort;
+    _selectedFilter.pStore = data.pStore;
     if (isFilter) {
         ProductFilterViewController *vc = [[ProductFilterViewController alloc]init];
-        //_selectedFilter = data;
         vc.selectedFilter = _selectedFilter.copy;
         vc.filterData = _filterData;
         [vc setBlock:^(ProductSelectedFilter *filter) {
@@ -284,11 +295,11 @@
             [_collectionView removeFromSuperview];
             
             //[self.view addSubview:_tableView];
-            [self.view insertSubview:_tableView belowSubview:_searchBar];
+            [self.view insertSubview:_tableView atIndex:0];
         } else {
             [_tableView removeFromSuperview];
             //[self.view addSubview:_collectionView];
-            [self.view insertSubview:_collectionView belowSubview:_searchBar];
+            [self.view insertSubview:_collectionView atIndex:0];
         }
         [self reloadData];
     }else {
@@ -455,7 +466,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -500,6 +510,19 @@
     _filterView.frame = filterViewFrame;
     _tableView.frame = tableFrame;
     
+}
+
+- (IBAction)onSetLoction:(id)sender {
+    if(!ApplicationDelegate.gLocation.isSuccessLocation) {
+        [UIAlertView showWithTitle:@"提示" message:@"访问此类别需要开启定位服务，请在“设置->隐私->定位服务”中开启居然在线的定位~" cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 0) {
+                return;
+            }else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            }
+        }];
+    }
+
 }
 
 @end

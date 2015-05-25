@@ -63,7 +63,13 @@
         [self addSubview:_sortButton];
         
         frame = CGRectMake(0, 10, 0, 20);
-        self.sortLabel = [self labelWithFrame:frame text:@"排序" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:kSystemFontSize]];
+        for (ProductSort *p in defaultData.sortList) {
+            if (seletedData.pSort.sort == p.sort) {
+                seletedData.pSort.name = p.name;
+                break;
+            }
+        }
+        self.sortLabel = [self labelWithFrame:frame text:seletedData.pSort.name textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:kSystemFontSize]];
         [self addSubview:_sortLabel];
         
         self.sortImageView = [self imageViewWithFrame:CGRectMake(0, (CGRectGetHeight(self.frame) - 4)/2.f, 7, 4) image:[UIImage imageNamed:@"product-arrow-down.png"]];
@@ -329,10 +335,7 @@
     }
     _storeLabel.text = _selectedData.pStore?_selectedData.pStore.storeName:@"选择门店";
     //排序值
-    if (_selectedData.sort >= 0 && _selectedData.sort < _defaultData.sortList.count) {
-        ProductSort *sort = self.defaultData.sortList[_selectedData.sort];
-        _sortLabel.text = sort.name;
-    }
+    _sortLabel.text = _selectedData.pSort.name;
     
     if (selectedBtn && selectedBtn == _storeButton && _selectedData.pStore) {
         _tableView.tableFooterView = _clearStoreView;
@@ -370,7 +373,7 @@
     if (selectedBtn == _sortButton) {
         ProductSort *sort = self.defaultData.sortList[indexPath.row];
         cell.textLabel.text = sort.name;
-        if (_selectedData.sort>0 && _selectedData.sort == sort.sort) {
+        if (_selectedData.pSort && _selectedData.pSort.sort == sort.sort) {
             cell.textLabel.textColor = kBlueColor;
         }
     }else if(selectedBtn == _storeButton){
@@ -380,8 +383,6 @@
             cell.textLabel.textColor = kBlueColor;
         }
     }
-    
-    
     return cell;
 }
 
@@ -389,7 +390,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (selectedBtn == _sortButton) {
         ProductSort *sort = self.defaultData.sortList[indexPath.row];
-        _selectedData.sort = sort.sort;
+        _selectedData.pSort = sort;
     }else if(selectedBtn == _storeButton){
         ProductStore *store = self.defaultData.storeList[indexPath.row];
         _selectedData.pStore = store;

@@ -78,10 +78,17 @@
     _fromRow = -1;
     // Do any additional setup after loading the view from its nib.
 //    _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAttributeRow:) name:kNotificationNameAttributeRowReload object:nil];
     [self setupUI];
     [self setupAttributeView];
     
     [self loadData];
+}
+
+- (void)reloadAttributeRow:(NSNotification *)noti{
+    if ([noti.object isKindOfClass:[NSIndexPath class]]) {
+        [_attributeTableView reloadRowsAtIndexPaths:@[noti.object] withRowAnimation:UITableViewRowAnimationNone];
+    }
 }
 
 - (void)reloadPrice:(NSInteger)fromRow{
@@ -442,7 +449,7 @@
     }else if ([tableView isEqual:_detailTableView] && _segCtl.selectedIndex == 2){
         heigth = 100;
     }else if ([tableView isEqual:_attributeTableView]){
-        heigth = [AttributeCell cellHeight];
+        heigth = [_attributeHeights[indexPath.row] floatValue];
     }
     return heigth;
 }
@@ -530,8 +537,10 @@
             if (_product.attributeList) {
                 if (!_attributeSelected) {
                     self.attributeSelected = [NSMutableArray array];
+                    self.attributeHeights = [NSMutableArray array];
                     [_product.attributeList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                         [_attributeSelected addObject:@(-1)];
+                        [_attributeHeights addObject:@([AttributeCell cellHeight])];
                     }];
                     [_attributeTableView reloadData];
                 }
@@ -548,8 +557,10 @@
                     [self hideHUD];
                     if (result) {
                         self.attributeSelected = [NSMutableArray array];
+                        self.attributeHeights = [NSMutableArray array];
                         [_product.attributeList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                             [_attributeSelected addObject:@(-1)];
+                            [_attributeHeights addObject:@([AttributeCell cellHeight])];
                         }];
 //                        CGRect frame = _attributeTableView.frame;
 //                        frame.size.height = _product.attributeList.count * [AttributeCell cellHeight] + CGRectGetHeight(_attributeHeaderView.frame) + 1;

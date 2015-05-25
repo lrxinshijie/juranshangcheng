@@ -72,6 +72,7 @@
     self.searchBar.parentVC = self;
     [self.searchBar setSearchButtonType:SearchButtonType_Product];
     [self.searchBar setEnabled:NO];
+    self.searchBar.inputTextField.placeholder = @"搜索店铺内的商品";
     [self.view addSubview:self.searchBar];
     ////////////////
     [_collectionView registerNib:[UINib nibWithNibName:@"ShopCell" bundle:nil] forCellWithReuseIdentifier:@"ShopCell"];

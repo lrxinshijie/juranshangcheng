@@ -209,8 +209,6 @@
 
 - (IBAction)naviRightClick:(id)sender {
     [self showAppMenu:nil];
-    //    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:nil Sort:9 Store:nil IsInShop:NO ShopId:0];
-    //    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)changeCityClick:(id)sender {
@@ -231,7 +229,7 @@
 
 - (void)CheckLoctionStatus {
     if(!ApplicationDelegate.gLocation.isSuccessLocation) {
-        [UIAlertView showWithTitle:nil message:@"当前定位服务未开启,请在设置中启用定位服务" cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        [UIAlertView showWithTitle:@"提示" message:@"访问此类别需要开启定位服务，请在“设置->隐私->定位服务”中开启居然在线的定位~" cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
             if (buttonIndex == 0) {
                 return;
             }else {

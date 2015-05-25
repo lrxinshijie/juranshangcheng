@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,34 +14,42 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="颜色" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LcA-D1-Q14">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="颜色" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcA-D1-Q14">
                         <rect key="frame" x="15" y="10" width="191" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="191" id="aFh-32-D7A"/>
+                            <constraint firstAttribute="height" constant="21" id="mC7-G5-YDM"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" id="Ik7-sS-HnQ">
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ik7-sS-HnQ">
                         <rect key="frame" x="15" y="36" width="289" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wX0-dH-bKM">
-                            <size key="itemSize" width="60" height="30"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="289" id="om7-Am-ajE"/>
+                        </constraints>
+                        <collectionViewLayout key="collectionViewLayout" id="1Cr-CM-XcG" customClass="AttributeLayout"/>
                         <connections>
                             <outlet property="dataSource" destination="KGk-i7-Jjw" id="pb5-Wb-pcn"/>
                             <outlet property="delegate" destination="KGk-i7-Jjw" id="8S9-xp-Xmr"/>
                         </connections>
                     </collectionView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Ik7-sS-HnQ" secondAttribute="trailing" constant="16" id="AQj-R1-qaA"/>
+                    <constraint firstItem="Ik7-sS-HnQ" firstAttribute="top" secondItem="LcA-D1-Q14" secondAttribute="bottom" constant="5" id="PtS-RB-fsB"/>
+                    <constraint firstItem="LcA-D1-Q14" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="WpS-OX-RfC"/>
+                    <constraint firstAttribute="bottom" secondItem="Ik7-sS-HnQ" secondAttribute="bottom" constant="12" id="Yj9-Nf-Ogf"/>
+                    <constraint firstItem="LcA-D1-Q14" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="jfK-sj-CKD"/>
+                    <constraint firstItem="Ik7-sS-HnQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="mlz-yv-bXK"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectionView" destination="Ik7-sS-HnQ" id="nth-XR-b1f"/>
                 <outlet property="nameLabel" destination="LcA-D1-Q14" id="Yk1-ej-YfK"/>
             </connections>
-            <point key="canvasLocation" x="80" y="201.5"/>
+            <point key="canvasLocation" x="-292" y="72.5"/>
         </tableViewCell>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

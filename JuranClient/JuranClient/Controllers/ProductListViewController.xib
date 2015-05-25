@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductListViewController">
             <connections>
                 <outlet property="emptyView" destination="ET9-yu-WUW" id="NEu-c9-wKF"/>
+                <outlet property="footerView" destination="W1H-9j-QYO" id="GtV-iQ-S7c"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -39,6 +40,32 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="155" y="-3"/>
         </view>
+        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" id="W1H-9j-QYO">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+            <color key="backgroundColor" red="1" green="0.97647058823529409" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <state key="normal">
+                <attributedString key="attributedTitle">
+                    <fragment content="系统未开启定位，开启后获得更多服务                     ">
+                        <attributes>
+                            <font key="NSFont" size="12" name="STHeitiSC-Light"/>
+                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                        </attributes>
+                    </fragment>
+                    <fragment content="设置">
+                        <attributes>
+                            <color key="NSColor" red="0.0" green="0.53725490196078429" blue="0.93451024735552113" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <font key="NSFont" size="12" name="STHeitiSC-Light"/>
+                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                        </attributes>
+                    </fragment>
+                </attributedString>
+            </state>
+            <connections>
+                <action selector="onSetLoction:" destination="-1" eventType="touchUpInside" id="HTB-QT-Wjo"/>
+            </connections>
+            <point key="canvasLocation" x="382" y="712"/>
+        </button>
     </objects>
     <resources>
         <image name="answer_no_data.png" width="94" height="92"/>

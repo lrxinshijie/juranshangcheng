@@ -14,6 +14,7 @@
 @property (nonatomic, strong) JRProduct *product;
 @property (nonatomic, strong) NSMutableArray *attributeSelected;
 @property (nonatomic, assign) NSInteger fromRow;
+@property (nonatomic, strong) NSMutableArray *attributeHeights;
 
 - (void)reloadPrice:(NSInteger)fromRow;
 

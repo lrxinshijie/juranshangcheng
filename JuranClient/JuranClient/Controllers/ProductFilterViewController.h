@@ -23,9 +23,4 @@ typedef void (^FilterSelected)(ProductSelectedFilter *filter);
 
 - (void)setBlock:(FilterSelected)block;
 
-- (instancetype)initWithKeyword:(NSString *)keyword
-                           Sort:(int)sort
-                          Store:(ProductStore *)store
-                       IsInShop:(BOOL)isInShop
-                         ShopId:(long)shopId;
 @end
