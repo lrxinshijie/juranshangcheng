@@ -26,6 +26,8 @@ typedef enum {
 - (void)qrCodeError:(NSError *)error;
 //提示消失的代理
 - (void)qrCodeDismissTips;
+//不可使用相机的提示
+- (void)qrCodeOpenCameraWithError;
 
 @end
 
