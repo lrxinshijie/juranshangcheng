@@ -72,8 +72,8 @@
     [param setObject:@(1) forKey:@"onePageCount"];
     [param setObject:@(filter.pSort.sort) forKey:@"sort"];
     if (filter.keyword && filter.keyword.length>0) [param setObject:filter.keyword forKey:@"keyword"];
-    if (filter.pMinPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice<=filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMinYuan"];
-    if (filter.pMaxPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice>filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMaxYuan"];
+    if (filter.pMinPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice<=filter.pMaxPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMinYuan"];
+    if (filter.pMaxPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice>filter.pMaxPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMaxYuan"];
     if (filter.pBrand) [param setObject:@(filter.pBrand.brandId) forKey:@"brands"];
     if (filter.pStore) [param setObject:filter.pStore.storeCode forKey:@"storeCode"];
     if (filter.pClass) [param setObject:filter.pClass.classCode forKey:@"catCode"];
