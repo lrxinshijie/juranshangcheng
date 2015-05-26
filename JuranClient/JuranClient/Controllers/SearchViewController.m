@@ -71,7 +71,7 @@
     self.headerView.hidden = YES;
     [self reloadData];
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = NO;
-    if(_customSB.inputTextField.text && ![_customSB.inputTextField.text isEqual:@""]) {
+    if(_customSB.inputTextField.text && _foucs) {
         [_customSB.inputTextField becomeFirstResponder];
     }
 }
@@ -80,6 +80,7 @@
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO];
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+    _foucs = YES;
 }
 
 - (void)loadData{
