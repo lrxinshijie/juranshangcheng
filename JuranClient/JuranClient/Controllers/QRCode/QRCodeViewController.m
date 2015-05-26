@@ -53,8 +53,9 @@
         
         
     }else{
-        
-        
+        //iOS6暂不处理
+        [self initUI:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
+        [self animation];
         
     }
     
@@ -167,7 +168,7 @@
                 vcStyle = ChildVCStyle_Shop;
                 code = [self getNumberFrom:val];
                 if (!code) {
-                    code = val;
+                    code = [self getCodeFrom:val];
                 }
                 if ([self getStatisticsCodeFrom:val]) {
                     [MobClick event:UM_QRScanEvent_Shop attributes:@{k_UM_Shop_Type:[self getStatisticsCodeFrom:val]}];
@@ -212,8 +213,8 @@
 {
     //正常环境下
     NSString * regex_product = @"^http://mall\.juran\.cn/product/([0-9]{1,})\.htm(.ozu_sid=ProductMobile)?$";
-    NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm(.ozu_sid=.+$)?";
-    NSString * regex_shop1 = @"^http://[a-zA-Z]{1,}\.juran\.cn/(.ozu_sid=.+$)?";
+    NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm(.ozu_sid=.+)?$";
+    NSString * regex_shop1 = @"^http://[a-zA-Z]{1,}\.juran\.cn(/)?(.ozu_sid=.+)?$";
     
     //SIT环境
 //    NSString * regex_product = @"^http://mall\.juran.o2o.sit\.com/rankings/([0-9]{1,})\.htm$";
@@ -247,9 +248,21 @@
 
 - (NSString *)getNumberFrom:(NSString *)str
 {
-    NSRange range = [str rangeOfString:@"[[0-9]{1,}" options:NSRegularExpressionSearch];
+    NSRange range = [str rangeOfString:@"[0-9]{1,}" options:NSRegularExpressionSearch];
     if (range.location != NSNotFound) {
         return [str substringWithRange:range];
+    }
+    return nil;
+}
+
+- (NSString *)getCodeFrom:(NSString *)str
+{
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[a-zA-Z]{1,}" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSArray * arr = [regex matchesInString:str options:NSMatchingReportCompletion range:NSMakeRange(0, str.length)];
+    if (arr.count >= 2) {
+        NSTextCheckingResult * result = [arr objectAtIndex:1];
+        return [str substringWithRange:result.range];
     }
     return nil;
 }

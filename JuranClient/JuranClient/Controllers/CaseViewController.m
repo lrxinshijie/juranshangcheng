@@ -312,10 +312,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == [_datas count] - 1) {
-        return 275;
+        return 280;
     }
     
-    return 270;
+    return 275;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -494,7 +494,7 @@
             
             filterViewFrame.origin.y = -44;
             tableFrame.origin.y = 0;
-            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar+44;
+            tableFrame.size.height = (!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar);
             
         }else {
             
@@ -509,7 +509,7 @@
             
             filterViewFrame.origin.y = 0;
             tableFrame.origin.y = CGRectGetMaxY(_filterView.frame);
-            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar;
+            tableFrame.size.height = (!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44;
             
         }else {
             

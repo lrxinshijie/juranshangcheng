@@ -48,8 +48,8 @@
     for (JRComment *comment in replys) {
         frame.origin.y = CGRectGetMaxY(frame) + 10;
         TTTAttributedLabel *label = [[TTTAttributedLabel alloc] initWithFrame:frame];
-        label.textColor = [UIColor blackColor];
-        label.font = [UIFont systemFontOfSize:15];
+        label.textColor = UIColorFromHEX(0x555555);
+        label.font = [UIFont systemFontOfSize:13];
         label.backgroundColor = [UIColor clearColor];
         label.numberOfLines = 0;
         NSString *name = [NSString stringWithFormat:@"%@：", comment.nickName];

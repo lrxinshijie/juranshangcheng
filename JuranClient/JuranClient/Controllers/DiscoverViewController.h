@@ -9,7 +9,7 @@
 #import "ALViewController.h"
 
 @interface DiscoverViewController : ALViewController
-
+@property (nonatomic, strong) NSMutableDictionary *wikiFilterData;
 - (void)showSegmentWithIndex:(NSInteger)index;
 
 @end

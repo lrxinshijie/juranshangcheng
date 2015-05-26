@@ -88,7 +88,7 @@
     _filterHeaderView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_filterHeaderView];
     
-    self.segment = [[JRSegmentControl alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 40)];
+    self.segment = [[JRSegmentControl alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 44)];
     _segment.delegate = self;
     _segment.showUnderLine = YES;
     _segment.selectedBackgroundViewXMargin = 8;
@@ -244,7 +244,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_segment.selectedIndex == 0) {
-        return 270 + ((indexPath.row == [_datas count] - 1)?5:0);
+        return 275 + ((indexPath.row == [_datas count] - 1)?5:0);
     }else{
         return 135 + ((indexPath.row == _datas.count - 1)?5:0);
     }

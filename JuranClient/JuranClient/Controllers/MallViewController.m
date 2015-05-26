@@ -126,7 +126,7 @@
     }
     
     if (self.adInfos.count > 0) {
-        self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentCenter];
+        self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentRight];
         _bannerView.delegate = self;
         [_headerView addSubview:_bannerView];
         

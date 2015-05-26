@@ -44,17 +44,17 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag = kButtonTag+i;
         btn.frame = frame;
-        btn.titleLabel.font = [UIFont systemFontOfSize:kSystemFontSize+(_isDesigner?2:0)];
+        btn.titleLabel.font = [UIFont systemFontOfSize:kSystemFontSize+(_isDesigner?1:0)];
         [btn setTitle:title forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(onSelected:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor colorWithRed:35/255.f green:104/255.f blue:182/255.f alpha:1.0f] forState:UIControlStateSelected];
+        [btn setTitleColor:UIColorFromHEX(0x444444) forState:UIControlStateNormal];
+        [btn setTitleColor:UIColorFromHEX(0x0068b7) forState:UIControlStateSelected];
         [self addSubview:btn];
         
         if (_showVerticalSeparator) {
             if (i < _titleList.count - 1) {
                 UIView *line = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(frame), 0, 1, CGRectGetHeight(frame))];
-                line.backgroundColor = RGBColor(229, 229, 229);
+                line.backgroundColor = UIColorFromHEX(0xd8d8d8);
                 [self addSubview:line];
             }
         }
@@ -64,7 +64,7 @@
     
     if (_showUnderLine) {
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame)-1, CGRectGetWidth(self.frame), 1)];
-        line.backgroundColor = RGBColor(229, 229, 229);
+        line.backgroundColor = UIColorFromHEX(0xd8d8d8);
         [self addSubview:line];
     }
     
@@ -72,11 +72,11 @@
     _selectedIndex = 0;
     [selectedBtn setSelected:YES];
     
-    CGRect frame = CGRectMake(_selectedBackgroundViewXMargin, CGRectGetHeight(self.frame) - 2, CGRectGetWidth(selectedBtn.frame)-2*_selectedBackgroundViewXMargin, 2);
+    CGRect frame = CGRectMake(_selectedBackgroundViewXMargin, CGRectGetHeight(self.frame) - 2.5, CGRectGetWidth(selectedBtn.frame)-2*_selectedBackgroundViewXMargin, 2.5);
     _selectedBackgroundView = [[UIView alloc] initWithFrame:frame];
-    _selectedBackgroundView.backgroundColor = [UIColor colorWithRed:35/255.f green:104/255.f blue:182/255.f alpha:1.0f];
+    _selectedBackgroundView.backgroundColor = UIColorFromHEX(0x0068b7);
     _selectedBackgroundView.hidden = _showVerticalSeparator;
-    [self insertSubview:_selectedBackgroundView atIndex:0];
+    [self addSubview:_selectedBackgroundView];
 }
 
 - (void)onSelected:(id)sender{

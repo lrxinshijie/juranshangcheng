@@ -79,6 +79,7 @@
 - (void)configureMore{
      //[self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMore)];
     UIButton *moreButton = [self.view buttonWithFrame:CGRectMake(0, 0, 35, 35) target:self action:@selector(onMore) image:[UIImage imageNamed:@"icon-dot"]];
+    moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, -7);
     UILabel *countLabel = [self.view labelWithFrame:CGRectMake(28, 0, 18, 16)
                                                text:[NSString stringWithFormat:@"%d",[JRUser isLogin] && [JRUser currentUser].newPrivateLetterCount?[JRUser currentUser].newPrivateLetterCount:0]
                                           textColor:[UIColor whiteColor]
