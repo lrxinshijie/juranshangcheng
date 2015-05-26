@@ -273,6 +273,11 @@ static BOOL isRuning = NO;
     [self initChildViewController];
 }
 
+- (void)qrCodeOpenCameraWithError
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - InputCodeViewControllerDelegate
 
 -(void)confirmButtonDidClick:(NSString *)message
