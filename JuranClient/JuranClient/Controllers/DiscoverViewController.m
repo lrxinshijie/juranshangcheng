@@ -231,6 +231,27 @@
     return  _datas.count;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_segment.selectedIndex == 1 || _segment.selectedIndex == 3) {
+        _tableView.separatorColor = UIColorFromHEX(0xd8d8d8);
+        
+        //cellInset
+        if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+        {
+            [cell setSeparatorInset:UIEdgeInsetsZero];
+        }
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+        {
+            [cell setLayoutMargins:UIEdgeInsetsZero];
+        }
+        if([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)])
+        {
+            [cell setPreservesSuperviewLayoutMargins:NO];
+        }
+    }
+}
+
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_segment.selectedIndex == 0) {
         static NSString *CellIdentifier = @"SubjectCell";
@@ -253,9 +274,7 @@
             NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
             cell = (WikiCell *)[nibs firstObject];
         }
-        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-            cell.layoutMargins = UIEdgeInsetsZero;
-        }
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         JRWiki *wiki = [_datas objectAtIndex:indexPath.row];
@@ -282,10 +301,7 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
-        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-            cell.layoutMargins = UIEdgeInsetsZero;
-        }
-
+        
         cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellIndicator.png"]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
