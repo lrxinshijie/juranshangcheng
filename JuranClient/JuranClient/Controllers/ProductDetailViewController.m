@@ -70,6 +70,14 @@
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    _baseTableView.delegate = nil; _baseTableView.dataSource = nil;
+    _attributeTableView.delegate = nil; _attributeTableView.dataSource = nil;
+    _detailTableView.delegate = nil; _detailTableView.dataSource = nil;
+    _webView.delegate = nil;
+    _imageScrollView.delegate = nil;
+    _scrollView.delegate = nil;
+    _segCtl.delegate = nil;
 }
 
 - (void)viewDidLoad {
@@ -80,12 +88,14 @@
 //    _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAttributeRow:) name:kNotificationNameAttributeRowReload object:nil];
     [self setupUI];
-    
+
     [self loadData];
 }
 
 - (void)reloadAttributeRow:(NSNotification *)noti{
     if ([noti.object isKindOfClass:[NSIndexPath class]]) {
+//        NSIndexPath *indexPath = noti.object;
+//        ASLog(@"%d,%d",indexPath.section, indexPath.row);
         [_attributeTableView reloadRowsAtIndexPaths:@[noti.object] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
@@ -119,8 +129,8 @@
         if (!error) {
             NSString *price = [data getStringValueForKey:@"goodsprice" defaultValue:@""];
             _attributePriceLabel.text = [price isEqual:@""]?_product.priceString:[NSString stringWithFormat:@"￥%@",  price];
-            NSString *goodsImage = [data getStringValueForKey:@"goodsImage" defaultValue:@""];
-            goodsImage = [goodsImage isEqual:@""] ? _product.goodsImagesList[0]:goodsImage;
+//            NSString *goodsImage = [data getStringValueForKey:@"goodsImage" defaultValue:@""];
+//            goodsImage = [goodsImage isEqual:@""] ? _product.goodsImagesList[0]:goodsImage;
             [_attributeImageView setImageWithURLString:data[@"goodsImage"] Editing:YES];
         }
         [_attributeTableView reloadData];
@@ -131,6 +141,8 @@
     _scrollView.contentSize = CGSizeMake(CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)*2);
     _scrollView.backgroundColor = RGBColor(237, 237, 237);
     _scrollView.delegate = self;
+    
+    _priceLabel.textColor = UIColorFromHEX(0x0068b7);
 
     _imageScrollView.delegate = self;
     _imageScrollView.pagingEnabled = YES;
@@ -171,21 +183,60 @@
     _priceLabel.hidden = ![JRProduct isShowPrice];
 }
 
+//价格attribute
+- (NSMutableAttributedString *)getAttributeString
+{
+    NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:_product.priceString];
+    NSMutableAttributedString *priceAttriMin = [self getAttributeString:[NSString stringWithFormat:@"￥%@", _product.priceMin]];
+    [attributeStr replaceCharactersInRange:NSMakeRange(0, priceAttriMin.length)
+                      withAttributedString:priceAttriMin];
+    if ([_product.priceString rangeOfString:@"~"].length != 0) {
+        NSMutableAttributedString *priceAttriMax = [self getAttributeString:[NSString stringWithFormat:@"￥%@", _product.priceMax]];
+        [attributeStr replaceCharactersInRange:NSMakeRange(_product.priceMin.length+4, priceAttriMax.length)
+                          withAttributedString:priceAttriMax];
+    }
+    return attributeStr;
+}
+
+- (NSMutableAttributedString *)getAttributeString:(NSString *)string
+{
+    NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:string];
+    NSMutableAttributedString *attributeStr1 = [self attributeString:string
+                                                                font:[UIFont systemFontOfSize:14.f]
+                                                               color:UIColorFromHEX(0x0068b7)
+                                                               range:NSMakeRange(0,1)];
+    [attributeStr replaceCharactersInRange:NSMakeRange(0, attributeStr1.length)
+                      withAttributedString:attributeStr1];
+    NSRange firstPointRange = [string rangeOfString:@"."];
+    if (firstPointRange.length != 0) {
+        NSString *string1 = [string substringFromIndex:1];
+        NSMutableAttributedString *attributeStr2 = [self attributeString:string1
+                                                                    font:[UIFont systemFontOfSize:16.f]
+                                                                   color:UIColorFromHEX(0x0068b7)
+                                                                   range:NSMakeRange(firstPointRange.location+firstPointRange.length-1, 2)];
+        [attributeStr replaceCharactersInRange:NSMakeRange(1, attributeStr2.length) withAttributedString:attributeStr2];
+    }
+    return attributeStr;
+}
+
 - (void)loadData{
     
     [self showHUD];
+    
     [_product loadInfo:^(BOOL result) {
+        
         [self hideHUD];
         [self setupAttributeView];
         if (!result) {
             return ;
         }
+        
         [self setupFavority];
         
         [_shopLogoImageView setImageWithURLString:_product.shopLogo];
         _shopNameLabel.text = _product.shopName;
         _shopScoreLabel.text = [NSString stringWithFormat:@"店铺评分：%@", _product.score];
-        
+
         _nameLabel.text = _product.goodsName;
         CGRect frame = _nameLabel.frame;
         CGFloat height = [_nameLabel.text heightWithFont:_nameLabel.font constrainedToWidth:CGRectGetWidth(frame)];
@@ -195,7 +246,12 @@
         frame.size.height = height;
         _nameLabel.frame = frame;
         
-        _priceLabel.text = _product.priceString;
+        if (_product.priceString.length != 0) {
+            _priceLabel.attributedText = [self getAttributeString];
+        }else {
+            _priceLabel.text = _product.priceString;
+        }
+        
 //        [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-star-active" : @"icon-star"] forState:UIControlStateNormal];
         
         [_imageScrollView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
@@ -209,24 +265,17 @@
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_imageScrollView.frame)*idx, 0, CGRectGetWidth(_imageScrollView.frame), CGRectGetHeight(_imageScrollView.frame))];
             imageView.backgroundColor = RGBColor(237, 237, 237);
             [imageView setImageWithURLString:imageUrl placeholderImage:nil editing:YES];
+            __weak typeof(self) weakSelf = self;
             [imageView setOnTap:^{
-                ProductPhotoBrowserViewController *vc = [[ProductPhotoBrowserViewController alloc] initWithPhotos:_product.goodsImagesList andStartWithPhotoAtIndex:idx];
+                ProductPhotoBrowserViewController *vc = [[ProductPhotoBrowserViewController alloc] initWithPhotos:weakSelf.product.goodsImagesList andStartWithPhotoAtIndex:idx];
                 vc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:vc animated:YES];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
             }];
             [_imageScrollView addSubview:imageView];
         }];
         
         _countLabel.text = [NSString stringWithFormat:@"1/%d", _product.goodsImagesList.count];
     }];
-    
-//    [_product loadShop:^(BOOL result) {
-//        if (result) {
-//            [_shopLogoImageView setImageWithURLString:_product.shopLogo];
-//            _shopNameLabel.text = _product.shopName;
-//            _shopScoreLabel.text = [NSString stringWithFormat:@"店铺评分：%@", _product.score];
-//        }
-//    }];
     
     [_product loadStore:^(BOOL result) {
         if (result) {
@@ -317,9 +366,9 @@
     frame.origin.y = CGRectGetMaxY(_attributeNameLabel.frame) + 3;
     _attributePriceLabel.frame = frame;
     
-    frame = _attributePopView.frame;
-    frame = _scrollView.bounds;
-    _attributePopView.frame = frame;
+//    frame = _attributePopView.frame;
+//    frame = _scrollView.bounds;
+    _attributePopView.frame = _scrollView.bounds;
     
 //    _attributeTableView.tableHeaderView = _attributeHeaderView;
     _attributeTableView.tableFooterView = [[UIView alloc] init];
@@ -483,10 +532,7 @@
         return cell;
     }else {
         static NSString *CellIdentifier = @"Cell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        //if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-        //}
+        UITableViewCell *cell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         
         cell.textLabel.font = [UIFont systemFontOfSize:15];
         cell.textLabel.textColor = UIColorFromHEX(0x444444);
@@ -594,15 +640,6 @@
     
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    if ([scrollView isEqual:_scrollView]) {
-//        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha: (scrollView.contentOffset.y >= 320 ? 1 : 0)];
-//    }
-//    else if ([scrollView isEqual:_baseTableView]){
-//        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:_baseTableView.contentOffset.y/320.0];
-//    }
-}
-
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     if ([scrollView isEqual:_imageScrollView]) {
         _countLabel.text = [NSString stringWithFormat:@"%d/%d", (NSInteger)(scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame) + 1), _product.goodsImagesList.count];
@@ -612,6 +649,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//设置不同颜色
+- (NSMutableAttributedString *)attributeString:(NSString *)string
+                                          font:(UIFont *)font
+                                         color:(UIColor *)color
+                                         range:(NSRange)range
+{
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:string];
+    [attr setAttributes:@{NSForegroundColorAttributeName:color,NSFontAttributeName:font} range:range];
+    return attr;
 }
 
 /*

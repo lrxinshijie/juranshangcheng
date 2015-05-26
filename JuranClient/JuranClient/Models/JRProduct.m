@@ -168,6 +168,10 @@
     }];
 }
 
+- (void)setAttributeList:(NSArray *)attributeList{
+    _attributeList = attributeList;
+}
+
 - (void)loadStore:(BOOLBlock)finished{
     NSDictionary *param = @{@"linkProductId": @(self.linkProductId),
                             @"cityName":@"北京市"
