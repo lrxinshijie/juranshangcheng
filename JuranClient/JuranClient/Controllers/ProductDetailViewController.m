@@ -131,7 +131,6 @@
     _scrollView.contentSize = CGSizeMake(CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)*2);
     _scrollView.backgroundColor = RGBColor(237, 237, 237);
     _scrollView.delegate = self;
-    _nameLabel.textColor = UIColorFromHEX(0x444444);
 
     _imageScrollView.delegate = self;
     _imageScrollView.pagingEnabled = YES;
@@ -160,10 +159,7 @@
     [_scrollView addSubview:_segCtl];
     
     self.webView = [[ALWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segCtl.frame), CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame) - CGRectGetHeight(_navigationView.frame) - 45)];
-    self.webView.scalesPageToFit = YES;//自动对页面进行缩放以适应屏幕
-    self.webView.autoresizesSubviews = NO; //自动调整大小
-    //self.webView.autoresizingMask=(UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
-    self.webView.autoresizingMask = UIViewAutoresizingNone;
+    
     _webView.opaque = NO;
     _webView.backgroundColor = [UIColor clearColor];
     [_scrollView addSubview:_webView];
@@ -269,7 +265,7 @@
 //        if (content.length == 0) {
 //            content = @"商品分享测试";
 //        }
-        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:@"居然有这么好的商品，大家快来看看~" url:self.shareURL];
+        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:@"居然有这么好的商品,大家快来看看" url:self.shareURL];
     }];
 }
 
@@ -302,9 +298,9 @@
 }
 
 - (void)setupFavority{
-    [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-collection-active" : @"icon-collection1"] forState:UIControlStateNormal];
+    [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-collection-active" : @"icon-collection"] forState:UIControlStateNormal];
     [_favorityButton setTitle:_product.type ? @"已收藏" : @"收藏" forState:UIControlStateNormal];
-    _favorityButton.titleEdgeInsets = UIEdgeInsetsMake(30, -20, 0, 0);
+    _favorityButton.titleEdgeInsets = UIEdgeInsetsMake(20, -20, 0, 0);
     _favorityButton.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 20, 0);
 }
 
