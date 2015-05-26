@@ -39,6 +39,33 @@
     [self initUiConfig];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self judgeCamera];
+}
+
+- (void)judgeCamera
+{
+    NSString *mediaType = AVMediaTypeVideo;
+    
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+    
+    if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
+        
+        float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+        NSString * str;
+        if (version >= 8.0) {
+            str = @"您还没有打开相机权限,请前往“设置”->“居然之家”->“相机”打开相机权限";
+        }else{
+            str = @"您还没有打开相机权限,请前往“设置”->“隐私”->“相机”打开相机权限";
+        }
+        
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:str delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        alert.tag = 10000;
+        [alert show];
+    }
+}
 
 
 - (void)initUiConfig
@@ -189,6 +216,7 @@
         }else{
             //不是连接，直接展示
             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Tips" message:val delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            alertView.tag = 10001;
             [alertView show];
             
         }
@@ -307,6 +335,7 @@
     
     if (![_lightDevice hasTorch]) {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"当前设备不支持闪光灯" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil];
+        alert.tag = 10002;
         [alert show];
         return;
     }
@@ -341,9 +370,16 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(qrCodeDismissTips)]) {
-        [self.delegate qrCodeDismissTips];
+    if (alertView.tag == 10001) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(qrCodeDismissTips)]) {
+            [self.delegate qrCodeDismissTips];
+        }
+    }else if (alertView.tag == 10000 || alertView.tag == 10002) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(qrCodeOpenCameraWithError)]) {
+            [self.delegate qrCodeOpenCameraWithError];
+        }
     }
+    
 }
 
 

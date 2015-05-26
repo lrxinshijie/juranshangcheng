@@ -26,6 +26,7 @@
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    _collectionView.delegate = nil; _collectionView.dataSource = nil;
 }
 
 - (void)awakeFromNib {
@@ -61,6 +62,9 @@
     
         
         NSInteger height = _collectionView.collectionViewLayout.collectionViewContentSize.height + 49;
+        if (height < [AttributeCell cellHeight]) {
+            height = [AttributeCell cellHeight];
+        }
         if ([_viewController.attributeHeights[_indexPath.row] integerValue] != height) {
             
             [_viewController.attributeHeights replaceObjectAtIndex:_indexPath.row withObject:@(height)];
