@@ -70,6 +70,14 @@
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    _baseTableView.delegate = nil; _baseTableView.dataSource = nil;
+    _attributeTableView.delegate = nil; _attributeTableView.dataSource = nil;
+    _detailTableView.delegate = nil; _detailTableView.dataSource = nil;
+    _webView.delegate = nil;
+    _imageScrollView.delegate = nil;
+    _scrollView.delegate = nil;
+    _segCtl.delegate = nil;
 }
 
 - (void)viewDidLoad {
@@ -80,12 +88,14 @@
 //    _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAttributeRow:) name:kNotificationNameAttributeRowReload object:nil];
     [self setupUI];
-    
+
     [self loadData];
 }
 
 - (void)reloadAttributeRow:(NSNotification *)noti{
     if ([noti.object isKindOfClass:[NSIndexPath class]]) {
+//        NSIndexPath *indexPath = noti.object;
+//        ASLog(@"%d,%d",indexPath.section, indexPath.row);
         [_attributeTableView reloadRowsAtIndexPaths:@[noti.object] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
@@ -119,8 +129,8 @@
         if (!error) {
             NSString *price = [data getStringValueForKey:@"goodsprice" defaultValue:@""];
             _attributePriceLabel.text = [price isEqual:@""]?_product.priceString:[NSString stringWithFormat:@"￥%@",  price];
-            NSString *goodsImage = [data getStringValueForKey:@"goodsImage" defaultValue:@""];
-            goodsImage = [goodsImage isEqual:@""] ? _product.goodsImagesList[0]:goodsImage;
+//            NSString *goodsImage = [data getStringValueForKey:@"goodsImage" defaultValue:@""];
+//            goodsImage = [goodsImage isEqual:@""] ? _product.goodsImagesList[0]:goodsImage;
             [_attributeImageView setImageWithURLString:data[@"goodsImage"] Editing:YES];
         }
         [_attributeTableView reloadData];
@@ -173,18 +183,21 @@
 - (void)loadData{
     
     [self showHUD];
+    
     [_product loadInfo:^(BOOL result) {
+        
         [self hideHUD];
         [self setupAttributeView];
         if (!result) {
             return ;
         }
+        
         [self setupFavority];
         
         [_shopLogoImageView setImageWithURLString:_product.shopLogo];
         _shopNameLabel.text = _product.shopName;
         _shopScoreLabel.text = [NSString stringWithFormat:@"店铺评分：%@", _product.score];
-        
+
         _nameLabel.text = _product.goodsName;
         CGRect frame = _nameLabel.frame;
         CGFloat height = [_nameLabel.text heightWithFont:_nameLabel.font constrainedToWidth:CGRectGetWidth(frame)];
@@ -208,24 +221,17 @@
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(_imageScrollView.frame)*idx, 0, CGRectGetWidth(_imageScrollView.frame), CGRectGetHeight(_imageScrollView.frame))];
             imageView.backgroundColor = RGBColor(237, 237, 237);
             [imageView setImageWithURLString:imageUrl placeholderImage:nil editing:YES];
+            __weak typeof(self) weakSelf = self;
             [imageView setOnTap:^{
-                ProductPhotoBrowserViewController *vc = [[ProductPhotoBrowserViewController alloc] initWithPhotos:_product.goodsImagesList andStartWithPhotoAtIndex:idx];
+                ProductPhotoBrowserViewController *vc = [[ProductPhotoBrowserViewController alloc] initWithPhotos:weakSelf.product.goodsImagesList andStartWithPhotoAtIndex:idx];
                 vc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:vc animated:YES];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
             }];
             [_imageScrollView addSubview:imageView];
         }];
         
         _countLabel.text = [NSString stringWithFormat:@"1/%d", _product.goodsImagesList.count];
     }];
-    
-//    [_product loadShop:^(BOOL result) {
-//        if (result) {
-//            [_shopLogoImageView setImageWithURLString:_product.shopLogo];
-//            _shopNameLabel.text = _product.shopName;
-//            _shopScoreLabel.text = [NSString stringWithFormat:@"店铺评分：%@", _product.score];
-//        }
-//    }];
     
     [_product loadStore:^(BOOL result) {
         if (result) {
@@ -316,9 +322,9 @@
     frame.origin.y = CGRectGetMaxY(_attributeNameLabel.frame) + 3;
     _attributePriceLabel.frame = frame;
     
-    frame = _attributePopView.frame;
-    frame = _scrollView.bounds;
-    _attributePopView.frame = frame;
+//    frame = _attributePopView.frame;
+//    frame = _scrollView.bounds;
+    _attributePopView.frame = _scrollView.bounds;
     
 //    _attributeTableView.tableHeaderView = _attributeHeaderView;
     _attributeTableView.tableFooterView = [[UIView alloc] init];
@@ -482,10 +488,7 @@
         return cell;
     }else {
         static NSString *CellIdentifier = @"Cell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        //if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-        //}
+        UITableViewCell *cell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         
         cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
@@ -590,15 +593,6 @@
         }
     }
     
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    if ([scrollView isEqual:_scrollView]) {
-//        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha: (scrollView.contentOffset.y >= 320 ? 1 : 0)];
-//    }
-//    else if ([scrollView isEqual:_baseTableView]){
-//        _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:_baseTableView.contentOffset.y/320.0];
-//    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
