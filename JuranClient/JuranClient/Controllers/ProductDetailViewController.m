@@ -131,6 +131,8 @@
     _scrollView.contentSize = CGSizeMake(CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)*2);
     _scrollView.backgroundColor = RGBColor(237, 237, 237);
     _scrollView.delegate = self;
+    
+    _priceLabel.textColor = UIColorFromHEX(0x0068b7);
 
     _imageScrollView.delegate = self;
     _imageScrollView.pagingEnabled = YES;
@@ -171,6 +173,42 @@
     _priceLabel.hidden = ![JRProduct isShowPrice];
 }
 
+//价格attribute
+- (NSMutableAttributedString *)getAttributeString
+{
+    NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:_product.priceString];
+    NSMutableAttributedString *priceAttriMin = [self getAttributeString:[NSString stringWithFormat:@"￥%@", _product.priceMin]];
+    [attributeStr replaceCharactersInRange:NSMakeRange(0, priceAttriMin.length)
+                      withAttributedString:priceAttriMin];
+    if ([_product.priceString rangeOfString:@"~"].length != 0) {
+        NSMutableAttributedString *priceAttriMax = [self getAttributeString:[NSString stringWithFormat:@"￥%@", _product.priceMax]];
+        [attributeStr replaceCharactersInRange:NSMakeRange(_product.priceMin.length+4, priceAttriMax.length)
+                          withAttributedString:priceAttriMax];
+    }
+    return attributeStr;
+}
+
+- (NSMutableAttributedString *)getAttributeString:(NSString *)string
+{
+    NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:string];
+    NSMutableAttributedString *attributeStr1 = [self attributeString:string
+                                                                font:[UIFont systemFontOfSize:14.f]
+                                                               color:UIColorFromHEX(0x0068b7)
+                                                               range:NSMakeRange(0,1)];
+    [attributeStr replaceCharactersInRange:NSMakeRange(0, attributeStr1.length)
+                      withAttributedString:attributeStr1];
+    NSRange firstPointRange = [string rangeOfString:@"."];
+    if (firstPointRange.length != 0) {
+        NSString *string1 = [string substringFromIndex:1];
+        NSMutableAttributedString *attributeStr2 = [self attributeString:string1
+                                                                    font:[UIFont systemFontOfSize:16.f]
+                                                                   color:UIColorFromHEX(0x0068b7)
+                                                                   range:NSMakeRange(firstPointRange.location+firstPointRange.length-1, 2)];
+        [attributeStr replaceCharactersInRange:NSMakeRange(1, attributeStr2.length) withAttributedString:attributeStr2];
+    }
+    return attributeStr;
+}
+
 - (void)loadData{
     
     [self showHUD];
@@ -195,7 +233,12 @@
         frame.size.height = height;
         _nameLabel.frame = frame;
         
-        _priceLabel.text = _product.priceString;
+        if (_product.priceString.length != 0) {
+            _priceLabel.attributedText = [self getAttributeString];
+        }else {
+            _priceLabel.text = _product.priceString;
+        }
+        
 //        [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-star-active" : @"icon-star"] forState:UIControlStateNormal];
         
         [_imageScrollView.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
@@ -612,6 +655,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//设置不同颜色
+- (NSMutableAttributedString *)attributeString:(NSString *)string
+                                          font:(UIFont *)font
+                                         color:(UIColor *)color
+                                         range:(NSRange)range
+{
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:string];
+    [attr setAttributes:@{NSForegroundColorAttributeName:color,NSFontAttributeName:font} range:range];
+    return attr;
 }
 
 /*
