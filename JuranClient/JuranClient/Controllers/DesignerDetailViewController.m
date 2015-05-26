@@ -489,7 +489,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (0 == _segment.selectedIndex) {
-        return 270 + (indexPath.row == (_caseDatas.count - 1)?5:0);
+        return 275 + (indexPath.row == (_caseDatas.count - 1)?5:0);
     }else if (1 == _segment.selectedIndex){
         if (indexPath.row == 0) {
             return self.introductionCell.frame.size.height;
