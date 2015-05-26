@@ -253,9 +253,23 @@
             NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
             cell = (WikiCell *)[nibs firstObject];
         }
-        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-            cell.layoutMargins = UIEdgeInsetsZero;
+        
+        _tableView.separatorColor = UIColorFromHEX(0xd8d8d8);
+        
+        //cellInset
+        if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+        {
+            [cell setSeparatorInset:UIEdgeInsetsZero];
         }
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+        {
+            [cell setLayoutMargins:UIEdgeInsetsZero];
+        }
+        if([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)])
+        {
+            [cell setPreservesSuperviewLayoutMargins:NO];
+        }
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         JRWiki *wiki = [_datas objectAtIndex:indexPath.row];
@@ -282,8 +296,20 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
-        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-            cell.layoutMargins = UIEdgeInsetsZero;
+        _tableView.separatorColor = UIColorFromHEX(0xd8d8d8);
+        
+        //cellInset
+        if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+        {
+            [cell setSeparatorInset:UIEdgeInsetsZero];
+        }
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+        {
+            [cell setLayoutMargins:UIEdgeInsetsZero];
+        }
+        if([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)])
+        {
+            [cell setPreservesSuperviewLayoutMargins:NO];
         }
 
         cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellIndicator.png"]];
