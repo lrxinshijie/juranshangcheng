@@ -623,15 +623,7 @@
     }else if (type == 16){//家装-设计师专访：type=16
         
     }else if (type == 17){//热销商品
-        ProductListViewController *vc = [[ProductListViewController alloc]init];
-        vc.selectedFilter = [[ProductSelectedFilter alloc]init];
-        vc.selectedFilter.isInShop = NO;
-        vc.selectedFilter.pSort.sort = [param getIntegerValueForKey:@"sort" defaultValue:4];
-        //vc.selectedFilter.pStore.storeCode = [param getStringValueForKey:@"storeCode" defaultValue:@""];
-        //vc.selectedFilter.pCategory =
-        
-        vc.hidesBottomBarWhenPushed = YES;
-        [navigationController pushViewController:vc animated:YES];
+
     }else if (type == 18){//店铺：type=18
         if ([param.allKeys containsObject:@"id"]) {
             NSInteger sId = [param getIntegerValueForKey:@"sort" defaultValue:0];
@@ -640,13 +632,6 @@
                 vc.shop.shopId = sId;
                 [vc.navigationController pushViewController:vc animated:YES];
             }
-        }else {
-            ShopListViewController *vc = [[ShopListViewController alloc]init];
-            vc.cityName = @"北京市";
-            vc.keyword = @"";
-            vc.sort = 9;
-            vc.hidesBottomBarWhenPushed = YES;
-            [navigationController pushViewController:vc animated:YES];
         }
     }else if (type == 19){//门店导航
 #ifndef kJuranDesigner
@@ -770,6 +755,33 @@
             [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
             [ApplicationDelegate.tabBarController setSelectedIndex:4];
         }
+    }else if (type == 36){//专题列表：type=36
+        [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
+        [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:0];
+        [ApplicationDelegate.tabBarController setSelectedIndex:3];
+    }else if (type == 37){//店铺列表：type=37
+            ShopListViewController *vc = [[ShopListViewController alloc]init];
+            vc.cityName = @"北京市";
+            vc.keyword = @"";
+            vc.sort = 9;
+            vc.hidesBottomBarWhenPushed = YES;
+            [navigationController pushViewController:vc animated:YES];
+    }else if (type == 38){//商品列表：type=38
+        SearchViewController *search = [[SearchViewController alloc]init];
+        search.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:search animated:NO];
+        
+        ProductListViewController *vc = [[ProductListViewController alloc]init];
+        vc.selectedFilter = [[ProductSelectedFilter alloc]init];
+        vc.selectedFilter.isInShop = NO;
+        vc.selectedFilter.pSort.sort = [param getIntegerValueForKey:@"sort" defaultValue:9];
+//        vc.selectedFilter.pStore.storeCode = [param getStringValueForKey:@"storeCode" defaultValue:@""];
+//        vc.selectedFilter.pCategory =
+        [search.navigationController pushViewController:vc animated:YES];
+    }else if (type == 39){//话题列表：type=39
+        [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
+        [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:3];
+        [ApplicationDelegate.tabBarController setSelectedIndex:3];
     }else if (type == 40){//扫一扫
 #ifndef kJuranDesigner
         if (![QRBaseViewController isRuning]) {
@@ -778,11 +790,12 @@
         }
 #endif
     }
-    //    else if (type == 41){//发现-话题列表：type=41
-    //        [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
-    //        [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:3];
-    //        [ApplicationDelegate.tabBarController setSelectedIndex:3];
-    //    }else if (type == 42){//专题列表：type=42
+//    else if (type == 41){//发现-话题列表：type=41
+//        [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
+//        [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:3];
+//        [ApplicationDelegate.tabBarController setSelectedIndex:3];
+//    }
+    //    else if (type == 42){//专题列表：type=42
     //        if ([navigationController checkLogin]) {
     //            [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
     //            [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:0];

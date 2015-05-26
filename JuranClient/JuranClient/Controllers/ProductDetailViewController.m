@@ -265,7 +265,7 @@
 //        if (content.length == 0) {
 //            content = @"商品分享测试";
 //        }
-        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:@"居然有这么好的商品，大家快来看看~" url:self.shareURL];
+        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:@"居然有这么好的商品,大家快来看看" url:self.shareURL];
     }];
 }
 
@@ -298,7 +298,7 @@
 }
 
 - (void)setupFavority{
-    [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-collection-active" : @"icon-collection1"] forState:UIControlStateNormal];
+    [_favorityButton setImage:[UIImage imageNamed:_product.type ? @"icon-collection-active" : @"icon-collection"] forState:UIControlStateNormal];
     [_favorityButton setTitle:_product.type ? @"已收藏" : @"收藏" forState:UIControlStateNormal];
     _favorityButton.titleEdgeInsets = UIEdgeInsetsMake(30, -20, 0, 0);
     _favorityButton.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 20, 0);
