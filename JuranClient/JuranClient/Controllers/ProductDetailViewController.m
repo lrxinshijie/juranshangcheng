@@ -168,9 +168,9 @@
     //[self.webView setScalesPageToFit:YES];
     self.detailTableView = [self.scrollView tableViewWithFrame:_webView.frame style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _detailTableView.backgroundColor = [UIColor clearColor];
-//    
-//    _attributePriceLabel.hidden = ![JRProduct isShowPrice];
-//    _priceLabel.hidden = ![JRProduct isShowPrice];
+    
+    _attributePriceLabel.hidden = ![JRProduct isShowPrice];
+    _priceLabel.hidden = ![JRProduct isShowPrice];
 }
 
 //价格attribute
