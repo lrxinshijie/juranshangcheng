@@ -7,11 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MallViewController">
             <connections>
+                <outlet property="goodsTitle" destination="RcW-k2-N0a" id="KwI-np-3NX"/>
                 <outlet property="headerView" destination="K05-cx-Ruv" id="AE6-I7-c4b"/>
                 <outlet property="menuView" destination="LDP-qr-Fmg" id="JN0-c4-EgP"/>
                 <outlet property="productCollectionView" destination="aaf-Vu-Prt" id="MDh-SN-4gh"/>
                 <outlet property="productView" destination="Rf3-eQ-hyU" id="gFR-Fk-mNr"/>
                 <outlet property="shopCollectionView" destination="Qaq-5N-d0M" id="AQP-Si-tiP"/>
+                <outlet property="shopTitle" destination="jFS-dW-CMA" id="yIE-Vl-b3N"/>
                 <outlet property="shopView" destination="V7S-O7-v2c" id="kZa-V6-KLu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

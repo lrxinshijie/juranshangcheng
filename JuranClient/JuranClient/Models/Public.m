@@ -62,6 +62,8 @@
 #import "MyAskOrAnswerViewController.h"
 #import "ShopHomeViewController.h"
 #import "JRShop.h"
+#import "JRProduct.h"
+#import "ProductDetailViewController.h"
 
 @implementation Public
 
@@ -623,13 +625,22 @@
     }else if (type == 16){//家装-设计师专访：type=16
         
     }else if (type == 17){//热销商品
-
+        if ([param.allKeys containsObject:@"id"]) {
+            NSInteger sId = [param getIntegerValueForKey:@"id" defaultValue:0];
+            if(sId>0) {
+                ProductDetailViewController *vc = [[ProductDetailViewController alloc]init];
+                vc.product.linkProductId = sId;
+                vc.hidesBottomBarWhenPushed = YES;
+                [vc.navigationController pushViewController:vc animated:YES];
+            }
+        }
     }else if (type == 18){//店铺：type=18
         if ([param.allKeys containsObject:@"id"]) {
-            NSInteger sId = [param getIntegerValueForKey:@"sort" defaultValue:0];
+            NSInteger sId = [param getIntegerValueForKey:@"id" defaultValue:0];
             if(sId>0) {
                 ShopHomeViewController *vc = [[ShopHomeViewController alloc]init];
                 vc.shop.shopId = sId;
+                vc.hidesBottomBarWhenPushed = YES;
                 [vc.navigationController pushViewController:vc animated:YES];
             }
         }
@@ -756,9 +767,18 @@
             [ApplicationDelegate.tabBarController setSelectedIndex:4];
         }
     }else if (type == 36){//专题列表：type=36
-        [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
-        [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:0];
-        [ApplicationDelegate.tabBarController setSelectedIndex:3];
+        NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
+        if (vcs.count == 5) {
+            UINavigationController *nav = [vcs objectAtIndex:3];
+            UIViewController *vc = nav.viewControllers.firstObject;
+            if ([vc isKindOfClass:[DiscoverViewController class]]) {
+                if (navigationController.viewControllers.count > 1) {
+                    [navigationController popToRootViewControllerAnimated:NO];
+                }
+                [(DiscoverViewController*)vc showSegmentWithIndex:0];
+                [ApplicationDelegate.tabBarController setSelectedIndex:3];
+            }
+        }
     }else if (type == 37){//店铺列表：type=37
             ShopListViewController *vc = [[ShopListViewController alloc]init];
             vc.cityName = @"北京市";
@@ -775,13 +795,23 @@
         vc.selectedFilter = [[ProductSelectedFilter alloc]init];
         vc.selectedFilter.isInShop = NO;
         vc.selectedFilter.pSort.sort = [param getIntegerValueForKey:@"sort" defaultValue:9];
-//        vc.selectedFilter.pStore.storeCode = [param getStringValueForKey:@"storeCode" defaultValue:@""];
-//        vc.selectedFilter.pCategory =
+        vc.selectedFilter.pStore.storeCode = [param getStringValueForKey:@"storeCode" defaultValue:@""];
+        vc.selectedFilter.pCategory.urlContent = [param getStringValueForKey:@"urlContent" defaultValue:@""];
+        
         [search.navigationController pushViewController:vc animated:YES];
     }else if (type == 39){//话题列表：type=39
-        [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
-        [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:3];
-        [ApplicationDelegate.tabBarController setSelectedIndex:3];
+        NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
+        if (vcs.count == 5) {
+            UINavigationController *nav = [vcs objectAtIndex:3];
+            UIViewController *vc = nav.viewControllers.firstObject;
+            if ([vc isKindOfClass:[DiscoverViewController class]]) {
+                if (navigationController.viewControllers.count > 1) {
+                    [navigationController popToRootViewControllerAnimated:NO];
+                }
+                [(DiscoverViewController*)vc showSegmentWithIndex:3];
+                [ApplicationDelegate.tabBarController setSelectedIndex:3];
+            }
+        }
     }else if (type == 40){//扫一扫
 #ifndef kJuranDesigner
         if (![QRBaseViewController isRuning]) {

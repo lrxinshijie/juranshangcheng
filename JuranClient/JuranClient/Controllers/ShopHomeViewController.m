@@ -310,7 +310,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     JRProduct *p = _datas[indexPath.row];
     ProductDetailViewController *vc = [[ProductDetailViewController alloc] init];
-    vc.product = p;
+    vc.product = [[JRProduct alloc]init];
+    vc.product.linkProductId = p.linkProductId;
+    vc.product.shopId = p.shopId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
