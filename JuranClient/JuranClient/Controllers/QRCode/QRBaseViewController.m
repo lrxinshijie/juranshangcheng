@@ -242,9 +242,15 @@ static BOOL isRuning = NO;
         
         ShopHomeViewController * shopVC = [[ShopHomeViewController alloc] init];
         JRShop * jrShop = [[JRShop alloc] init];
-        jrShop.shopId = [codeString integerValue];
-        shopVC.shop = jrShop;
-        
+        if ([self isShopId:codeString]) {
+            jrShop.shopId = [codeString integerValue];
+            shopVC.shop = jrShop;
+            shopVC.type = @"shop";
+        }else {
+            jrShop.minisite = codeString;
+            shopVC.shop = jrShop;
+            shopVC.type = @"minisite";
+        }
         [self.navigationController setNavigationBarHidden:self.isPopNavHide];
         [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
         [self.navigationController pushViewController:shopVC animated:YES];
@@ -260,6 +266,12 @@ static BOOL isRuning = NO;
         [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
         [self.navigationController pushViewController:pVC animated:YES];
     }
+}
+
+- (BOOL)isShopId:(NSString*)string{
+    NSScanner* scan = [NSScanner scannerWithString:string];
+    int val;
+    return[scan scanInt:&val] && [scan isAtEnd];
 }
 
 - (void)qrCodeError:(NSError *)error

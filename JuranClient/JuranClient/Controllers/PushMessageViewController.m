@@ -39,7 +39,7 @@
     self.rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 90, 30) target:self action:@selector(setAllReaded:) title:@"全部设置已读" backgroundImage:nil];
     [_rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightButton];
-    
+    self.rightButton.hidden = YES;
     _emptyView.hidden = YES;
     _emptyView.center = _tableView.center;
     [self.view addSubview:_emptyView];
@@ -135,6 +135,14 @@
         if (!error) {
             if (msg) {
                 msg.isUnread = NO;
+                BOOL hasUnread = NO;
+                for (JRPushInfoMsg *msg in _datas) {
+                    if(msg.isUnread) {
+                        hasUnread = YES;
+                        break;
+                    }
+                }
+                self.rightButton.hidden = !hasUnread;
             }else{
                 for (JRPushInfoMsg *msg in _datas) {
                     msg.isUnread = NO;

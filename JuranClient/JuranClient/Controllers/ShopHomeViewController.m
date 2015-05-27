@@ -57,6 +57,14 @@
 @end
 
 @implementation ShopHomeViewController
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _type = @"shop";
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -109,8 +117,8 @@
 
 - (void)loadData{
     NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId],
-                            @"minisite": @"",
-                            @"flag": @"shop"};
+                            @"minisite": _shop.minisite ? _shop.minisite : @"",
+                            @"flag": _type ? _type : @""};
     [self showHUD];
     
     [[ALEngine shareEngine] pathURL:JR_SHOP_FIRSTPAGE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {

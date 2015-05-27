@@ -75,6 +75,7 @@
     
     NSDictionary *param;
     NSString *url;
+    _cityName = ApplicationDelegate.gLocation.cityName;
     if (_naviType == NaviTypeStore) {
         param = @{@"cityName": _cityName};
         url = JR_NAVI_STORE_LIST;
