@@ -54,6 +54,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [_tableViewStore registerNib:[UINib nibWithNibName:@"NaviStoreCell" bundle:nil] forCellReuseIdentifier:@"NaviStoreCell"];
+    _tableViewStore.tableFooterView = [[UIView alloc]init];
     _cityName = @"北京市";
     if(ApplicationDelegate.gLocation.isSuccessLocation)
         _btnChangeCity.hidden = YES;
