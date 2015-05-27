@@ -90,7 +90,7 @@
     
     self.segment = [[JRSegmentControl alloc] initWithFrame:CGRectMake(0, 0, kWindowWidth, 44)];
     _segment.delegate = self;
-    _segment.showUnderLine = YES;
+    _segment.showUnderLine = NO;
     _segment.selectedBackgroundViewXMargin = 8;
     [_segment setTitleList:@[@"案例", @"设计师"]];
     [_filterHeaderView addSubview:_segment];

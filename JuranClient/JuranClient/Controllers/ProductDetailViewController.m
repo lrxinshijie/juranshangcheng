@@ -496,7 +496,7 @@
     if ([tableView isEqual:_baseTableView] && indexPath.section == 1) {
         heigth = CGRectGetHeight(_shopView.frame);
     }else if ([tableView isEqual:_detailTableView] && _segCtl.selectedIndex == 2){
-        heigth = 100;
+        heigth = 119;
     }else if ([tableView isEqual:_attributeTableView]){
         heigth = [_attributeHeights[indexPath.row] floatValue];
     }

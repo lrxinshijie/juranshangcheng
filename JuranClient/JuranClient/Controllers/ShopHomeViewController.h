@@ -12,5 +12,5 @@
 @interface ShopHomeViewController : ALViewController
 
 @property (nonatomic, strong) JRShop *shop;
-
+@property (nonatomic, copy) NSString *type;
 @end
