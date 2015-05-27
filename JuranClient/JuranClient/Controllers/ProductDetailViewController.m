@@ -375,7 +375,7 @@
     _attributeTableView.bounces = NO;
     
     frame = _attributeTableView.frame;
-    frame.size.height = 351;
+    frame.size.height = 355;
     frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
     _attributeTableView.frame = frame;
 }
