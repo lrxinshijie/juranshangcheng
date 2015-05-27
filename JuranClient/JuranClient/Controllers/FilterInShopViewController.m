@@ -120,8 +120,12 @@
     titleButton.frame = headerView.frame;
     FilterInShop *filters = [_dataList objectAtIndex:section];
     [titleButton setTitle:[NSString stringWithFormat:@"%@",filters.name] forState:UIControlStateNormal];
-    titleButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [titleButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    if ([[_openSatusList objectAtIndex:section] boolValue]) {
+        [titleButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    }else {
+        [titleButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    }
+    titleButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     titleButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     titleButton.contentEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
     titleButton.tag = 6666+section;

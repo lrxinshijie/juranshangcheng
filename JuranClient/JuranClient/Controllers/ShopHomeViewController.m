@@ -96,7 +96,6 @@
     self.navigationItem.titleView = self.searchView;
     
     [self loadData];
-    [self loadRecommendData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -127,6 +126,7 @@
             [_shop buildUpWithDictionary:data];
             [self reloadData];
         }
+        [self loadRecommendData];
         [self loadStoreData];
     }];
 }

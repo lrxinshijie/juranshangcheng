@@ -85,8 +85,7 @@
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             self.goodsImagesList = [data getArrayValueForKey:@"goodsImagesList" defaultValue:nil];
-            
-//            self.goodsName = [data getStringValueForKey:@"goodsName" defaultValue:@""];
+            self.goodsName = [data getStringValueForKey:@"goodsName" defaultValue:@""];
             self.priceMax = [data getStringValueForKey:@"priceMax" defaultValue:@""];
             self.priceMin = [data getStringValueForKey:@"priceMin" defaultValue:@""];
             self.type = [data getBoolValueForKey:@"type" defaultValue:NO];
@@ -196,7 +195,11 @@
 }
 
 + (BOOL)isShowPrice{
+#ifndef kJuranDesigner
     return ApplicationDelegate.gLocation.isSuccessLocation && [ApplicationDelegate.gLocation.cityName isEqual:@"北京市"];
+#else
+    return NO;
+#endif
 }
 
 - (void)loadAttributeList:(BOOLBlock)finished{

@@ -536,4 +536,8 @@
     [UIApplication sharedApplication].applicationIconBadgeNumber -= num;
 }
 
+- (void)setBadgeNumber:(NSInteger)num{
+    [UIApplication sharedApplication].applicationIconBadgeNumber = num;
+}
+
 @end

@@ -37,6 +37,7 @@
 #import "MyDemandCopyViewController.h"
 #import "JRServiceViewController.h"
 #import "SettingsViewController.h"
+#import "AppDelegate.h"
 #endif
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -238,6 +239,7 @@
                 [_user buildUpProfileDataWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMsgCenterReloadData object:nil];
+                    [ApplicationDelegate setBadgeNumber:[[JRUser currentUser] newPrivateLetterCount]];
                     [self refreshUI];
                 });
             }

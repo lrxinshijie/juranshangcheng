@@ -34,7 +34,7 @@
 
 - (void)webView:(ALWebView *)aWebView didFailLoadWithError:(NSError *)error{
     [self hideHUD];
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"此链接不支持跳转，点击确认，返回扫一扫。" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"此链接不支持跳转，点击确认，返回扫一扫。" delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:nil];
     [alert show];
 }
 

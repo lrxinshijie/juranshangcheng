@@ -79,6 +79,7 @@
                 [[JRUser currentUser] buildUpProfileDataWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMsgCenterReloadData object:nil];
+                    [ApplicationDelegate setBadgeNumber:[[JRUser currentUser] newPrivateLetterCount]];
                 });
             }
         }

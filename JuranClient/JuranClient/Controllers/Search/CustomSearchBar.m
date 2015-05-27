@@ -97,7 +97,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     
     //输入偏左问题
     CGRect frame = _inputTextField.frame;
-    frame.size.width  = 30;
+    frame.size.width  = 10;
     UIView *leftView = [[UIView alloc]initWithFrame:frame];
     _inputTextField.leftViewMode = UITextFieldViewModeAlways;
     _inputTextField.leftView = leftView;
