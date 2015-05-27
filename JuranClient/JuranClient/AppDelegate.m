@@ -174,6 +174,10 @@
 
 - (void)networkDidLogin:(NSNotification *)notification{
     self.clientId = [APService registrationID];
+    ASLog(@"[APService registrationID] = %@",self.clientId);
+    if ([JRUser isLogin]) {
+        [JRUser refreshToken:nil];
+    }
 }
 
 - (void)jumpToMain{
