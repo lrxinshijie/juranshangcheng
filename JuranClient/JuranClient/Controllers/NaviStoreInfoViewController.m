@@ -227,6 +227,7 @@
     _timeView.frame = frame;
     
     _labelBus.text = [self formatString:_store.busRoute];
+    _labelBus.numberOfLines = 6;
     [_labelBus sizeToFit];
     frame = _timeView.frame;
     frame.origin.y = _timeView.frame.origin.y+_timeView.frame.size.height;
