@@ -55,9 +55,12 @@
     // Do any additional setup after loading the view from its nib.
     [_tableViewStore registerNib:[UINib nibWithNibName:@"NaviStoreCell" bundle:nil] forCellReuseIdentifier:@"NaviStoreCell"];
     _tableViewStore.tableFooterView = [[UIView alloc]init];
-    _cityName = @"北京市";
-    if(ApplicationDelegate.gLocation.isSuccessLocation)
+    if(ApplicationDelegate.gLocation.isSuccessLocation) {
         _btnChangeCity.hidden = YES;
+        _cityName = ApplicationDelegate.gLocation.cityName;
+    }else {
+        _cityName = @"北京市";
+    }
     if (_naviType == NaviTypeStore) {
         self.navigationItem.title = @"门店导航";
     }else {
@@ -76,7 +79,6 @@
     
     NSDictionary *param;
     NSString *url;
-    _cityName = ApplicationDelegate.gLocation.cityName;
     if (_naviType == NaviTypeStore) {
         param = @{@"cityName": _cityName};
         url = JR_NAVI_STORE_LIST;
