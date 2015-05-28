@@ -88,6 +88,8 @@
     [_scrollView addSubview:_telView];
     
     _scrollView.map = _mapView;
+    _mapView.centerCoordinate = _mapCenter;
+    _mapView.zoomLevel = 10;
     [self loadData];
 }
 

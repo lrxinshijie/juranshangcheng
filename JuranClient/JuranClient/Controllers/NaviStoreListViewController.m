@@ -103,7 +103,7 @@
 }
 
 - (void)reloadView {
-    _mapView.zoomLevel = 11;
+    _mapView.zoomLevel = 10;
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
         UserLocation *location = [[UserLocation alloc]init];
         [location GeoCode:ApplicationDelegate.gLocation.cityName Handler:^(UserLocation *loc) {
@@ -223,6 +223,7 @@
     NaviStoreInfoViewController *info = [[NaviStoreInfoViewController alloc]init];
     info.naviType = _naviType;
     info.store = store;
+    info.mapCenter = _mapView.centerCoordinate;
     [self.navigationController pushViewController:info animated:YES];
 }
 
