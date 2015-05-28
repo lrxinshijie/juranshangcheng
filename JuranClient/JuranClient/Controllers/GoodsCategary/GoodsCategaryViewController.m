@@ -42,6 +42,8 @@
 @property (strong, nonatomic) IBOutlet UITableView *fistLevelTableView;
 @property (strong, nonatomic) IBOutlet UILabel *viewTitle;
 @property (strong, nonatomic) IBOutlet UIView *tableLine;
+@property (strong, nonatomic) IBOutlet UIView *headerView;
+
 @property (strong, nonatomic) UIView * tableLineUp;
 @property (assign, nonatomic) int lineY;
 
@@ -76,6 +78,9 @@
 
 @property (strong, nonatomic) NSString * parentCodeProduct;
 
+@property (strong, nonatomic) UILabel * countLabel;
+@property (strong, nonatomic) UILabel * readLabel;
+
 @end
 
 @implementation GoodsCategaryViewController
@@ -100,25 +105,32 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:self.isPopNavHide];
+    //[self.navigationController setNavigationBarHidden:self.isPopNavHide];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    if (_vcStyle == CategaryStyle_Goods) {
-        _viewTitle.text = @"北京站";
-    }else if (_vcStyle == CategaryStyle_Shop){
-        _viewTitle.text = @"北京站";
-    }
-    [self.navigationController setNavigationBarHidden:YES];
+//    [super viewWillAppear:animated];
+//    if (_vcStyle == CategaryStyle_Goods) {
+//        _viewTitle.text = @"北京站";
+//    }else if (_vcStyle == CategaryStyle_Shop){
+//        _viewTitle.text = @"北京站";
+//    }
+    //[self.navigationController setNavigationBarHidden:YES];
     [self.listTableView setContentSize:CGSizeMake(243, 500)];
     
 }
 
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationItem.title = @"北京站";
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
+
     //初始状态没有cell。
     self.cellCount = 0;
     //初始化数组什么的
@@ -131,7 +143,7 @@
         
         [self requestDataWithRequestID:@"-1" city:self.locationButton.titleLabel.text level:1];
     }
-    
+    //[NSNotificationCenter defaultCenter] add
     [self setLocation];
     
     __weak GoodsCategaryViewController * wSelf = self;
