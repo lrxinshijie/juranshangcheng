@@ -61,29 +61,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self loadCenterInfo];
-}
-
-- (void)loadCenterInfo{
-    if (![JRUser isLogin]) {
-        return;
-    }
-#ifndef kJuranDesigner
-    NSString *url = JR_MYCENTERINFO;
-#else
-    NSString *url = JR_GET_DESIGNER_CENTERINFO;
-#endif
-    [[ALEngine shareEngine] pathURL:url parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes",kNetworkParamKeyShowErrorDefaultMessage:@"No"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        if (!error) {
-            if ([data isKindOfClass:[NSDictionary class]]) {
-                [[JRUser currentUser] buildUpProfileDataWithDictionary:data];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMsgCenterReloadData object:nil];
-                    [ApplicationDelegate setBadgeNumber:[[JRUser currentUser] newPrivateLetterCount]];
-                });
-            }
-        }
-    }];
+    [UIViewController loadCenterInfo];
 }
 
 - (void)loadData{

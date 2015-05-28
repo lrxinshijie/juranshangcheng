@@ -149,6 +149,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         ASLog(@"registrationID:%@",[APService registrationID]);
         [JRUser refreshToken:^{
+            [UIViewController loadCenterInfo];
             NSDictionary *param = @{@"imei": [APService registrationID],
                                     @"mac": @"",
                                     @"model": [Public deviceModel],
@@ -395,6 +396,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [UIViewController loadCenterInfo];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -484,12 +486,11 @@
     NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
 
     NSInteger type = [userInfo getIntValueForKey:@"type" defaultValue:0];
-    
+    [UIViewController loadCenterInfo];
     if (type == 2) {
         NSString *link = [userInfo getStringValueForKey:@"link" defaultValue:@""];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameProfileReloadData object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMsgCenterReloadData object:nil];
         
         if ([UIApplication sharedApplication].applicationState == UIApplicationStateInactive) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
