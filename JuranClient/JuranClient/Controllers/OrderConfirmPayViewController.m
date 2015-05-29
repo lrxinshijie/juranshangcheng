@@ -49,7 +49,7 @@
     _avtarImageView.layer.masksToBounds = YES;
     _avtarImageView.layer.cornerRadius = CGRectGetWidth(_avtarImageView.frame) / 2;
     
-    _orderLabel.text = [NSString stringWithFormat:@"订单号：%@", _order.designTid];
+    _orderLabel.text = [NSString stringWithFormat:@"订单号：%@", _order.measureTid];
     [_avtarImageView setImageWithURLString:_order.headUrl];
     _nameLabel.text = _order.decoratorName;
     

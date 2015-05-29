@@ -226,7 +226,7 @@
 }
 
 - (void)reloadMoreMenu {
-    if (self.navigationController.viewControllers.count>1) {
+    if (self.navigationController.viewControllers.count>2) {
         [self configureMore];
     }else {
         [self configureSearchAndMore];
