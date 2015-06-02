@@ -631,7 +631,7 @@
                 ProductDetailViewController *vc = [[ProductDetailViewController alloc]init];
                 vc.product.linkProductId = sId;
                 vc.hidesBottomBarWhenPushed = YES;
-                [vc.navigationController pushViewController:vc animated:YES];
+                [navigationController pushViewController:vc animated:YES];
             }
         }
     }else if (type == 18){//店铺：type=18
@@ -639,9 +639,10 @@
             NSInteger sId = [param getIntegerValueForKey:@"id" defaultValue:0];
             if(sId>0) {
                 ShopHomeViewController *vc = [[ShopHomeViewController alloc]init];
+                vc.shop = [[JRShop alloc]init];
                 vc.shop.shopId = sId;
                 vc.hidesBottomBarWhenPushed = YES;
-                [vc.navigationController pushViewController:vc animated:YES];
+                [navigationController pushViewController:vc animated:YES];
             }
         }
     }else if (type == 19){//门店导航
