@@ -286,7 +286,7 @@
 - (NSString *)getCodeFrom:(NSString *)str
 {
     NSError *error = NULL;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[a-zA-Z]{1,}" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[a-zA-Z\-\_]{1,}" options:NSRegularExpressionCaseInsensitive error:&error];
     NSArray * arr = [regex matchesInString:str options:NSMatchingReportCompletion range:NSMakeRange(0, str.length)];
     if (arr.count >= 2) {
         NSTextCheckingResult * result = [arr objectAtIndex:1];
