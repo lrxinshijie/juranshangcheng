@@ -344,9 +344,7 @@
     filter.shopId = _shop.shopId;
     [filter setFinishBlock:^(ProductSelectedFilter *filter) {
         //获取分类后处理
-        ProductListViewController *vc = [[ProductListViewController alloc] init];
-        vc.selectedFilter = filter;
-        [self.navigationController pushViewController:vc animated:YES];
+        
     }];
     [self.navigationController pushViewController:filter animated:YES];
 }

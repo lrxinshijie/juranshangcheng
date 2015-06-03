@@ -9,6 +9,8 @@
 #import "FilterInShopViewController.h"
 #import "ProductFilterData.h"
 #import "ProductSeletedFilter.h"
+#import "ProductListViewController.h"
+#import "SearchViewController.h"
 
 @interface FilterInShopViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -156,7 +158,7 @@
     FilterInShop *filters = [_dataList objectAtIndex:[indexPath section]];
     FilterInShop *filter = [filters.childList objectAtIndex:[indexPath row]];
     if (_block) {
-        [self.navigationController popViewControllerAnimated:NO];
+        //[self.navigationController popViewControllerAnimated:NO];
         ProductSelectedFilter *sel = [[ProductSelectedFilter alloc]init];
         sel.pCategory = [[ProductCategory alloc]init];
         sel.pCategory.Id = filter.Id;
@@ -165,7 +167,12 @@
         sel.pCategory.depth = filter.depth;
         sel.isInShop = YES;
         sel.shopId = _shopId;
-        _block(sel);
+        //_block(sel);
+        SearchViewController *search = [[SearchViewController alloc]init];
+        [self.navigationController pushViewController:search animated:NO];
+        ProductListViewController *vc = [[ProductListViewController alloc] init];
+        vc.selectedFilter = sel;
+        [search.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -182,7 +189,7 @@
     }else {
         FilterInShop *filter = _dataList[section];
         if (_block) {
-            [self.navigationController popViewControllerAnimated:NO];
+            //[self.navigationController popViewControllerAnimated:NO];
             ProductSelectedFilter *sel = [[ProductSelectedFilter alloc]init];
             sel.pCategory = [[ProductCategory alloc]init];
             sel.pCategory.Id = filter.Id;
@@ -191,7 +198,12 @@
             sel.pCategory.depth = filter.depth;
             sel.isInShop = YES;
             sel.shopId = _shopId;
-            _block(sel);
+            //_block(sel);
+            SearchViewController *search = [[SearchViewController alloc]init];
+            [self.navigationController pushViewController:search animated:NO];
+            ProductListViewController *vc = [[ProductListViewController alloc] init];
+            vc.selectedFilter = sel;
+            [search.navigationController pushViewController:vc animated:YES];
         }
     }
 }

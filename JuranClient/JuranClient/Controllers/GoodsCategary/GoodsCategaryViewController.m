@@ -22,6 +22,7 @@
 #import "ProductListViewController.h"
 #import "ProductFilterData.h"
 #import "ProductSeletedFilter.h"
+#import "SearchViewController.h"
 
 
 @interface GoodsCategaryViewController ()<UITableViewDataSource,UITableViewDelegate,CustomSecLevelViewDelegate,CustomThirdLevelCellDelegate,CustomShopViewDelegate,UIScrollViewDelegate>
@@ -720,6 +721,10 @@
 {
     //商品的
 //    NSLog(@"%@",msg);
+    SearchViewController *search = [[SearchViewController alloc]init];
+    search.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:search animated:NO];
+    
     ProductListViewController *vc = [[ProductListViewController alloc]init];
     vc.selectedFilter = [[ProductSelectedFilter alloc]init];
     vc.selectedFilter.pCategory = [[ProductCategory alloc]init];
@@ -728,12 +733,15 @@
     //传参过来的ParentCode暂时无用，暂不使用。
     vc.selectedFilter.pCategory.parentCode = self.parentCodeProduct;
     vc.selectedFilter.pCategory.urlContent = urlContent;
-    [self.navigationController pushViewController:vc animated:YES];
+    [search.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - CustomShopViewDelegate
 - (void)shopViewItemDidClickWithCode:(NSString *)brandCode Name:(NSString *)brandName ID:(long)brandID
 {
+    SearchViewController *search = [[SearchViewController alloc]init];
+    search.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:search animated:NO];
     //品牌
     ProductListViewController *vc = [[ProductListViewController alloc]init];
     vc.selectedFilter = [[ProductSelectedFilter alloc]init];
@@ -741,7 +749,7 @@
     vc.selectedFilter.pBrand.catCode = brandCode;
     vc.selectedFilter.pBrand.brandId = brandID;
     vc.selectedFilter.pBrand.brandName = brandName;
-    [self.navigationController pushViewController:vc animated:YES];
+    [search.navigationController pushViewController:vc animated:YES];
 }
 
 
