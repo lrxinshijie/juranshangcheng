@@ -53,6 +53,8 @@
 
 #define ApplicationDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
+#define GUIDANCE_LIST @"guidanceList"
+
 #define kNotificationNameProfileReloadData @"kNotificationNameProfileReloadData"
 #define kNotificationNameFriendReloadData @"kNotificationNameFriendReloadData"
 #define kNotificationNamePhotosReloadData @"kNotificationNamePhotosReloadData"

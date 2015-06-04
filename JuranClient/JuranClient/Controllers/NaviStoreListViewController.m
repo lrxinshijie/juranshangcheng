@@ -22,6 +22,7 @@
 #import "GlobalPopupAlert.h"
 #import "UIAlertView+Blocks.h"
 #import "KxMenu.h"
+#import "IndoorGuidanceManager.h"
 
 @interface NaviStoreListViewController ()<BMKMapViewDelegate>
 
@@ -88,7 +89,10 @@
         [self hideHUD];
         if (!error) {
             if ((NSNull *)data != [NSNull null]) {
-                _dataList = [JRStore buildUpWithValueForList:[data objectForKey:@"stallInfoList"]];
+//                _dataList = [JRStore buildUpWithValueForList:[data objectForKey:@"stallInfoList"]];
+                NSArray * arr = [NSArray arrayWithArray:[JRStore buildUpWithValueForList:[data objectForKey:@"stallInfoList"]]];
+                //下边的方法作用是匹配一下可导航门店，用于展示列表上的可导航标示
+                _dataList = [[IndoorGuidanceManager sharedMagager] filterGuidingShopfrom:arr];
             }
             else {
                 _dataList = nil;
@@ -204,10 +208,10 @@
         CLLocation *location = [[CLLocation alloc] initWithLatitude:store.latitude longitude:store.longitude];
         double distance = [ApplicationDelegate.gLocation.location distanceFromLocation:location];
         //CLLocationDistance distance = BMKMetersBetweenMapPoints(pointStore,pointSelf);
-        cell.imageNode.image = [UIImage imageNamed:@"icon-map-node-2.png"];
+        cell.imageNode.hidden = !store.couldGuidance;
         cell.labelDistance.text = [NSString stringWithFormat:@"%.2fkm",distance/1000];
     }else {
-        cell.imageNode.image = nil;
+        cell.imageNode.hidden = YES;
         cell.labelDistance.text = @"";
     }
     return cell;
@@ -217,6 +221,7 @@
     [_tableViewStore deselectRowAtIndexPath:indexPath animated:YES];
     JRStore *store = [_dataList objectAtIndex:[indexPath row]];
     NaviStoreInfoViewController *info = [[NaviStoreInfoViewController alloc]init];
+    info.couldGuide = store.couldGuidance;
     info.naviType = _naviType;
     info.store = store;
     [self.navigationController pushViewController:info animated:YES];

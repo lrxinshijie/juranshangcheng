@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 Juran. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "NaviStoreInfoViewController.h"
 #import <BaiduMapAPI/BMapKit.h>
 #import "JRStore.h"
@@ -15,8 +16,26 @@
 #import "UIViewController+Menu.h"
 #import "MapScrollView.h"
 #import "UIAlertView+Blocks.h"
+#import "LocationUtil.h"
+#import "IndoorGuidanceManager.h"
+#import "GuidanceShopItem.h"
+#import "NavIndoorMapViewController.h"
+#import "ShopHomeViewController.h"
+#import "JRShop.h"
 
-@interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIScrollViewDelegate>
+// 自动开始导航
+#define MAP_MODE_ROUTING        @"0"
+
+// 高亮显示摊位
+#define MAP_MODE_TAN_WEI_HIGHT_LITE @"1"
+
+// 自动开始定位
+#define MAP_MODE_POSTING_ONLY  @"2"
+
+// 只显示地图模式
+#define MAP_MODE_VIEW_ONLY      @"3"
+
+@interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIScrollViewDelegate,IndoorMapViewControllerDelegate,LocationUtilDelegate,UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UIView *mapBottomView;
 @property (strong, nonatomic) IBOutlet UIView *naviControlView;
@@ -38,6 +57,7 @@
 @property (strong, nonatomic) BMKPointAnnotation *selfAnnotation;
 @property (strong, nonatomic) BMKPointAnnotation *storeAnnotation;
 @property (strong, nonatomic) NSMutableArray *availableMaps;
+@property (strong, nonatomic) IBOutlet UIButton *indoorButton;
 
 - (IBAction)leftNaviClick:(id)sender;
 - (IBAction)rightNaviClick:(id)sender;
@@ -61,6 +81,13 @@
     
     _naviControlView.frame = CGRectMake(0, kWindowWidth, kWindowWidth, 52);
     [_scrollView addSubview:_naviControlView];
+    
+    //设置是室内导航还是室内地图
+    if (self.couldGuide) {
+        [self.indoorButton setTitle:@"  室内导航" forState:UIControlStateNormal];
+    }else{
+        [self.indoorButton setTitle:@"  室内地图" forState:UIControlStateNormal];
+    }
     
     CGRect frame = CGRectZero;
     frame = _naviControlView.frame;
@@ -89,6 +116,11 @@
     
     _scrollView.map = _mapView;
     [self loadData];
+    
+    //设置LocationUtilDelegate
+    LocationUtil * locUtil = [LocationUtil defaultInstance];
+    [locUtil setDelegate:self];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -345,10 +377,131 @@
 }
 
 - (IBAction)IndoorNaviClick:(id)sender {
-    NaviStoreIndoorViewController *vc = [[NaviStoreIndoorViewController alloc]init];
-    vc.store = _store;
-    vc.navigationItem.title = [NSString stringWithFormat:@"%@室内地图",_store.storeName];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if (self.couldGuide) {
+        
+        NSLog(@"%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]);
+        NSString * type;
+        BOOL b = [self checkOutUserCurrentLocation];
+        if (self.store.stallCode.length>0) {
+            //有摊位信息
+            if (b) {
+                //可导航，进入导航
+                //有摊位
+                type = @"0";
+            }else{
+                //无摊位
+                type = @"1";
+            }
+        }else{
+            //没有摊位信息
+            if (b) {
+                //有摊位
+                type = @"2";
+            }else{
+                //无摊位
+                type = @"3";
+            }
+        }
+        
+        if ([type isEqualToString:@"0"] || [type isEqualToString:@"2"]) {
+            NavIndoorMapViewController * imvc = [[NavIndoorMapViewController alloc] init];
+            [imvc setStoreCode:self.store.storeCode];
+            [imvc setStallCode:self.store.stallCode];
+            [imvc setType:type];
+            [imvc setIMDelegate:self];
+            [self.navigationController pushViewController:imvc animated:YES];
+
+        }else{
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您当前位置不在支持店铺内，无法使用室内导航" delegate:self cancelButtonTitle:nil otherButtonTitles:@"关闭", @"查看室内地图", nil];
+            alert.tag = 9900;
+            [alert show];
+        }
+        
+    }else{
+    
+        NaviStoreIndoorViewController *vc = [[NaviStoreIndoorViewController alloc]init];
+        vc.store = _store;
+        vc.navigationItem.title = [NSString stringWithFormat:@"%@室内地图",_store.storeName];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 9900) {
+        if (buttonIndex == 0) {
+            //关闭
+        }else{
+            //室内矢量地图
+            NSString * type;
+            if (self.store.stallCode.length>0) {
+                type = @"1";
+            }else{
+                type = @"3";
+            }
+            NavIndoorMapViewController * imvc = [[NavIndoorMapViewController alloc] init];
+            [imvc setStoreCode:self.store.storeCode];
+            if (self.store.stallCode.length>0) {
+                [imvc setStallCode:self.store.stallCode];
+            }
+            [imvc setType:type];
+            [imvc setIMDelegate:self];
+            [self.navigationController pushViewController:imvc animated:YES];
+        }
+    }
+}
+
+//NavIndoorMapViewControllerDelegate  跳转至店铺详情页面
+- (void)showStallCodeDetail:(NSString *)info
+{
+    ShopHomeViewController * shopVC = [[ShopHomeViewController alloc] init];
+    
+    NSRange range = [info rangeOfString:@"id="];
+    NSString * sub = [info substringFromIndex:range.length+range.location];
+    
+    JRShop * jShop = [[JRShop alloc] init];
+    jShop.shopId = [sub integerValue];
+    shopVC.shop = jShop;
+    [self.navigationController pushViewController:shopVC animated:YES];
+}
+
+//LocationUtilDelegate
+- (NSDictionary *)getUserInfo
+{
+    JRUser * user = [JRUser currentUser];
+    //TODO:配置返回数据
+    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"username",user.userName, @"device",[[IndoorGuidanceManager sharedMagager] getDeviceType], @"dpi",[[IndoorGuidanceManager sharedMagager] getResolutionRatio], nil];
+    return dict;
+}
+
+- (BOOL)checkOutUserCurrentLocation
+{
+    
+    NSInteger retCode;
+    NSString * retMsg;
+    NVPoint *center = [[NVPoint alloc] initWithLati:ApplicationDelegate.gLocation.location.coordinate.latitude Lon:ApplicationDelegate.gLocation.location.coordinate.longitude];
+    NSString * str = [[LocationUtil defaultInstance] SynGetNearBuildingList:center storeCode:nil Radius:0 retCode:&retCode retMsg:&retMsg];
+    id result=[NSJSONSerialization JSONObjectWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+    if ([result isKindOfClass:[NSDictionary class]]) {
+        NSDictionary * dict = (NSDictionary *)result;
+        NSArray * array = [dict objectForKey:@"buildings"];
+        for (int i=0; i<array.count; i++) {
+            NSDictionary * tempDict = [array objectAtIndex:i];
+            NSString * idStr = [tempDict objectForKey:@"mid"];
+            if ([idStr isEqualToString:self.store.storeCode]) {
+                int distance = [[tempDict objectForKey:@"distance"] intValue];
+                if (distance <= 200) {
+                    //在可导航范围内
+                    return YES;
+                }else{
+                    //不在可导航范围内
+                    return NO;
+                }
+            }
+        }
+    }
+    return NO;
 }
 
 @end
