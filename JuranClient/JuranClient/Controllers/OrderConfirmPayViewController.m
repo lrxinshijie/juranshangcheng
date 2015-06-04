@@ -49,7 +49,7 @@
     _avtarImageView.layer.masksToBounds = YES;
     _avtarImageView.layer.cornerRadius = CGRectGetWidth(_avtarImageView.frame) / 2;
     
-    _orderLabel.text = [NSString stringWithFormat:@"订单号：%@", _order.designTid];
+    _orderLabel.text = [NSString stringWithFormat:@"订单号：%@", _order.measureTid];
     [_avtarImageView setImageWithURLString:_order.headUrl];
     _nameLabel.text = _order.decoratorName;
     
@@ -57,14 +57,24 @@
     
     self.isPayAli = YES;
     
-    CGRect frame = _payView.frame;
-    if ([WXApi isWXAppInstalled]) {
-        frame.size.height = 119;
-    }else{
-        frame.size.height = 64;
-    }
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_PAY_TYPE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSArray *payTypeDtoList = data[@"payTypeDtoList"];
+            if ([payTypeDtoList isKindOfClass:[NSArray class]] && payTypeDtoList.count <= 1) {
+                CGRect frame = _payView.frame;
+//                if ([WXApi isWXAppInstalled]) {
+//                    frame.size.height = 119;
+//                }else{
+                    frame.size.height = 64;
+//                }
+                
+                _payView.frame = frame;
+            }
+        }
+    }];
     
-    _payView.frame = frame;
     
 }
 

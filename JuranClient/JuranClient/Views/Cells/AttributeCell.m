@@ -26,18 +26,14 @@
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    _collectionView.delegate = nil; _collectionView.dataSource = nil;
 }
 
 - (void)awakeFromNib {
     // Initialization code
-    
+//    _collectionView.bounces = NO;
     _collectionView.backgroundColor = [UIColor clearColor];
-//    UINib *cellNib = [UINib nibWithNibName:@"AttributeLabelCell" bundle:nil];
-//    [_collectionView registerNib:cellNib forCellWithReuseIdentifier:@"AttributeLabelCell"];
-    
-//    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass([TagCollectionViewCell class]) bundle:nil];
-//    [_collectionView registerNib:cellNib forCellWithReuseIdentifier:NSStringFromClass([TagCollectionViewCell class])];
-    
+
     UINib *cellNib = [UINib nibWithNibName:@"TagCollectionViewCell" bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"TagCell"];
     
@@ -61,6 +57,21 @@
     _nameLabel.text = [dict getStringValueForKey:@"attrName" defaultValue:@""];
     self.attrList = [dict getArrayValueForKey:@"attrList" defaultValue:nil];
     [_collectionView reloadData];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    
+        
+        NSInteger height = _collectionView.collectionViewLayout.collectionViewContentSize.height + 49;
+        if (height < [AttributeCell cellHeight]) {
+            height = [AttributeCell cellHeight];
+        }
+        if ([_viewController.attributeHeights[_indexPath.row] integerValue] != height) {
+            
+            [_viewController.attributeHeights replaceObjectAtIndex:_indexPath.row withObject:@(height)];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameAttributeRowReload object:_indexPath];
+        }
+    });
+    
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -75,6 +86,7 @@
     BOOL isEnable = [_viewController.product attirbuteIsEnable:_viewController.attributeSelected fromRow:_viewController.fromRow toIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:_indexPath.row]];
     
     cell.isEnable = isEnable;
+
     cell.isSelect = indexPath.row == [_viewController.attributeSelected[_indexPath.row] integerValue];
     return cell;
 }
@@ -83,12 +95,6 @@
     [self configureCell:_sizingCell forIndexPath:indexPath];
     
     return [_sizingCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    
-//    return CGSizeMake(85, 25);
-//    
-//    NSString *title = _attrList[indexPath.row];
-//    CGSize size = [AttributeLabelCell cellSizeWithTitle:title];
-//    return size;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

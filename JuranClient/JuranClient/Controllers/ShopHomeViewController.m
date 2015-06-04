@@ -57,6 +57,14 @@
 @end
 
 @implementation ShopHomeViewController
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _type = @"shop";
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -72,6 +80,7 @@
     self.searchBar.parentVC = self;
     [self.searchBar setSearchButtonType:SearchButtonType_Product];
     [self.searchBar setEnabled:NO];
+    self.searchBar.inputTextField.placeholder = @"      搜索店铺内的商品";
     [self.view addSubview:self.searchBar];
     ////////////////
     [_collectionView registerNib:[UINib nibWithNibName:@"ShopCell" bundle:nil] forCellWithReuseIdentifier:@"ShopCell"];
@@ -87,7 +96,6 @@
     self.navigationItem.titleView = self.searchView;
     
     [self loadData];
-    [self loadRecommendData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -108,8 +116,8 @@
 
 - (void)loadData{
     NSDictionary *param = @{@"shopId": [NSString stringWithFormat:@"%d", _shop.shopId],
-                            @"minisite": @"",
-                            @"flag": @"shop"};
+                            @"minisite": _shop.minisite ? _shop.minisite : @"",
+                            @"flag": _type ? _type : @""};
     [self showHUD];
     
     [[ALEngine shareEngine] pathURL:JR_SHOP_FIRSTPAGE parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -118,6 +126,7 @@
             [_shop buildUpWithDictionary:data];
             [self reloadData];
         }
+        [self loadRecommendData];
         [self loadStoreData];
     }];
 }
@@ -142,7 +151,7 @@
     _gradeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon-grade-%@.png", _shop.grade.integerValue?@"1":@"2"]];
     _gradeLabel.text = [NSString stringWithFormat:@"店铺评分：%@", _shop.shopDsr];
     _nameLabel.text = _shop.shopName;
-    _collectionImageView.image = [UIImage imageNamed:_shop.isStored?@"icon-collection-active.png":@"icon-collection1.png"];
+    _collectionImageView.image = [UIImage imageNamed:_shop.isStored?@"icon-collection-active.png":@"icon-collection.png"];
     _collectionLabel.text = _shop.isStored?@"已收藏":@"收藏";
     [_collectionView reloadData];
 }
@@ -309,7 +318,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     JRProduct *p = _datas[indexPath.row];
     ProductDetailViewController *vc = [[ProductDetailViewController alloc] init];
-    vc.product = p;
+    vc.product = [[JRProduct alloc]init];
+    vc.product.linkProductId = p.linkProductId;
+    vc.product.shopId = p.shopId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -333,9 +344,7 @@
     filter.shopId = _shop.shopId;
     [filter setFinishBlock:^(ProductSelectedFilter *filter) {
         //获取分类后处理
-        ProductListViewController *vc = [[ProductListViewController alloc] init];
-        vc.selectedFilter = filter;
-        [self.navigationController pushViewController:vc animated:YES];
+        
     }];
     [self.navigationController pushViewController:filter animated:YES];
 }

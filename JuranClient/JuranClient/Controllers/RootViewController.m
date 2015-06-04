@@ -35,6 +35,9 @@
 @end
 
 @implementation RootViewController
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
@@ -44,6 +47,8 @@
     _collectionView.backgroundColor = kViewBackgroundColor;
     [_collectionView registerNib:[UINib nibWithNibName:@"RootMenuCell" bundle:nil] forCellWithReuseIdentifier:@"RootMenuCell"];
     [self configureScan];
+    [self configureSearchAndMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
     [self setupUI];
 }
 
@@ -58,11 +63,6 @@
     
     [self loadMenu];
     [self loadAd];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configureSearchAndMore];
 }
 
 - (void)loadAd{
@@ -199,10 +199,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == [_datas count] - 1) {
-        return 275;
+        return 280;
     }
     
-    return 270;
+    return 275;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -264,6 +264,7 @@
     UIImage *defaultImage = [UIImage imageWithColor:RGBColor(190, 190, 190) size:CGSizeMake(30, 30)];
     [cell.icon setImageWithURLString:iconImage placeholderImage:defaultImage];
     cell.title.text = name;
+    cell.title.textColor = RGBColor(102, 102, 102);
     return  cell;
 }
 

@@ -46,18 +46,40 @@
     return self;
 }
 
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
-    self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
-    [self.searchBar setTextFieldText:_keyword];
-    [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
-    self.searchBar.delegate = self;
-    self.searchBar.parentVC = self;
-    [self.searchBar setSearchButtonType:SearchButtonType_Shop];
-    [self.searchBar setEnabled:NO];
-    [self.view addSubview:self.searchBar];
+//    self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
+//    self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
+//    [self.searchBar setTextFieldText:_keyword];
+//    [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
+//    self.searchBar.delegate = self;
+//    self.searchBar.parentVC = self;
+//    [self.searchBar setSearchButtonType:SearchButtonType_Shop];
+//    [self.searchBar setEnabled:NO];
+//    [self.view addSubview:self.searchBar];
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
+
+    [self configureGoBackPre];
+    UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 220, 30)];
+    textField.placeholder = @"请输入搜索关键词";
+    textField.background = [UIImage imageNamed:@"search_bar_bg_image"];
+    textField.font = [UIFont systemFontOfSize:14];
+    textField.text = _keyword;
+    textField.textColor = [UIColor darkGrayColor];
+    self.navigationItem.titleView = textField;
+    CGRect frame = textField.frame;
+    frame.size.width  = 30;
+    UIImageView *leftView = [[UIImageView alloc]imageViewWithFrame:frame image:[UIImage imageNamed:@"search_magnifying_glass"]];
+    leftView.contentMode = UIViewContentModeCenter;
+    textField.leftViewMode = UITextFieldViewModeAlways;
+    textField.leftView = leftView;
+    [textField addTarget:self action:@selector(textFieldClick:) forControlEvents:UIControlEventEditingDidBegin];
     
     [_tableView registerNib:[UINib nibWithNibName:@"ShopListCell" bundle:nil] forCellReuseIdentifier:@"ShopListCell"];
     __weak typeof(self) weakSelf = self;
@@ -73,20 +95,8 @@
     [_tableView headerBeginRefreshing];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-//    [self.navigationController.navigationBar addSubview:self.searchBar];
-//    self.navigationController.navigationBar.clipsToBounds = NO;
-    self.navigationController.navigationBarHidden = YES;
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-//    [self.searchBar removeFromSuperview];
-//    self.navigationController.navigationBar.clipsToBounds = YES;
-    self.navigationController.navigationBarHidden = NO;
+- (void)textFieldClick:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)showMenuList
@@ -130,7 +140,7 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"cityName": _cityName,
+    NSDictionary *param = @{@"cityName": @"北京市",
                             @"keyword": _keyword,
                             @"sort": @(_sort),
                             @"pageNo": @(_currentPage),

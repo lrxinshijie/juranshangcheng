@@ -39,6 +39,33 @@
     [self initUiConfig];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self judgeCamera];
+}
+
+- (void)judgeCamera
+{
+    NSString *mediaType = AVMediaTypeVideo;
+    
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+    
+    if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
+        
+        float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+        NSString * str;
+        if (version >= 8.0) {
+            str = @"您还没有打开相机权限,请前往“设置”->“居然之家”->“相机”打开相机权限";
+        }else{
+            str = @"您还没有打开相机权限,请前往“设置”->“隐私”->“相机”打开相机权限";
+        }
+        
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:str delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        alert.tag = 10000;
+        [alert show];
+    }
+}
 
 
 - (void)initUiConfig
@@ -53,8 +80,9 @@
         
         
     }else{
-        
-        
+        //iOS6暂不处理
+        [self initUI:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
+        [self animation];
         
     }
     
@@ -148,7 +176,7 @@
         
         
         NSLog(@"%d",[self needShowWithWebView:val]);
-        
+        NSLog(@"%@",val);
         
         //判断是不是连接
         if ([self isURL:val]) {
@@ -166,7 +194,12 @@
                 //跳转至店铺首页
                 vcStyle = ChildVCStyle_Shop;
                 code = [self getNumberFrom:val];
-                [MobClick event:UM_QRScanEvent_Shop attributes:@{k_UM_Shop_Type:[self getStatisticsCodeFrom:val]}];
+                if (!code) {
+                    code = [self getCodeFrom:val];
+                }
+                if ([self getStatisticsCodeFrom:val]) {
+                    [MobClick event:UM_QRScanEvent_Shop attributes:@{k_UM_Shop_Type:[self getStatisticsCodeFrom:val]}];
+                }
                 
             }else if ([self needShowWithWebView:val] == 2){
                 //跳转至商品详情页
@@ -183,6 +216,7 @@
         }else{
             //不是连接，直接展示
             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Tips" message:val delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            alertView.tag = 10001;
             [alertView show];
             
         }
@@ -206,13 +240,13 @@
 - (int)needShowWithWebView:(NSString *)str
 {
     //正常环境下
-//    NSString * regex_product = @"^http://mall\.juran\.cn/product/([0-9]{1,})\.htm.ozu_sid=ProductMobile$";
-//    NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm.ozu_sid=.+$";
-    NSString * regex_shop1 = @"^http://[a-zA-Z]{1,}\.juran\.cn/.ozu_sid=.+$";
+    NSString * regex_product = @"^http://mall\.juran\.cn/product/([0-9]{1,})\.htm(.ozu_sid=ProductMobile)?$";
+    NSString * regex_shop = @"^http://mall\.juran\.cn/shop/([0-9]{1,})\.htm(.ozu_sid=.+)?$";
+    NSString * regex_shop1 = @"^http://[a-zA-Z\-\_]{1,}\.juran\.cn(/)?(.ozu_sid=.+)?$";
     
     //SIT环境
-    NSString * regex_product = @"^http://mall\.juran.o2o.sit\.com/rankings/([0-9]{1,})\.htm$";
-    NSString * regex_shop = @"^http://mall\.juran.o2o.sit\.com/product/([0-9]{1,})\.htm$";
+//    NSString * regex_product = @"^http://mall\.juran.o2o.sit\.com/rankings/([0-9]{1,})\.htm$";
+//    NSString * regex_shop = @"^http://mall\.juran.o2o.sit\.com/product/([0-9]{1,})\.htm$";
     
     //UAT环境
 //    NSString * regex_product = @"^http://mallo2ouat\.juranzhijia\.cn/shop/([0-9]{1,})\.htm$";
@@ -242,9 +276,21 @@
 
 - (NSString *)getNumberFrom:(NSString *)str
 {
-    NSRange range = [str rangeOfString:@"[[0-9]{1,}" options:NSRegularExpressionSearch];
+    NSRange range = [str rangeOfString:@"[0-9]{1,}" options:NSRegularExpressionSearch];
     if (range.location != NSNotFound) {
         return [str substringWithRange:range];
+    }
+    return nil;
+}
+
+- (NSString *)getCodeFrom:(NSString *)str
+{
+    NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[a-zA-Z\-\_]{1,}" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSArray * arr = [regex matchesInString:str options:NSMatchingReportCompletion range:NSMakeRange(0, str.length)];
+    if (arr.count >= 2) {
+        NSTextCheckingResult * result = [arr objectAtIndex:1];
+        return [str substringWithRange:result.range];
     }
     return nil;
 }
@@ -289,6 +335,7 @@
     
     if (![_lightDevice hasTorch]) {
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"当前设备不支持闪光灯" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil];
+        alert.tag = 10002;
         [alert show];
         return;
     }
@@ -323,9 +370,16 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(qrCodeDismissTips)]) {
-        [self.delegate qrCodeDismissTips];
+    if (alertView.tag == 10001) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(qrCodeDismissTips)]) {
+            [self.delegate qrCodeDismissTips];
+        }
+    }else if (alertView.tag == 10000 || alertView.tag == 10002) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(qrCodeOpenCameraWithError)]) {
+            [self.delegate qrCodeOpenCameraWithError];
+        }
     }
+    
 }
 
 

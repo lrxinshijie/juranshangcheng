@@ -37,6 +37,7 @@
 #import "MyDemandCopyViewController.h"
 #import "JRServiceViewController.h"
 #import "SettingsViewController.h"
+#import "AppDelegate.h"
 #endif
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -81,7 +82,9 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReloadDataNotification:) name:kNotificationNameProfileReloadData object:nil];
-    
+    self.navigationItem.title = @"我";
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_personal_setting"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(onSetting:)];
+    self.navigationItem.rightBarButtonItem = rightItem;
     _user = [JRUser currentUser];
     
 #ifdef kJuranDesigner
@@ -137,9 +140,8 @@
     }else{
         [self refreshUI];
     }
-    self.navigationItem.title = @"我";
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithImage:[[UIImage imageNamed:@"icon_personal_setting"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(onSetting:)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+
+    [UIApplication sharedApplication].applicationIconBadgeNumber = [JRUser currentUser].newPushMsgCount;
 }
 
 - (void)setupUI{
@@ -185,6 +187,8 @@
         [_headerImageView setImage:[UIImage imageNamed:@"unlogin_head.png"]];
         _signedButton.enabled = YES;
         [_signedButton setTitle:@" 签到" forState:UIControlStateNormal];
+        //隐藏签到
+        _signedButton.hidden = YES;
     }else{
         _unLoginLabel.hidden = YES;
 //        _loginNameLabel.hidden = NO;
@@ -196,6 +200,8 @@
         _privateLetterCountLabel.text = [NSString stringWithFormat:@"%i", _user.newPrivateLetterCount];
         _signedButton.enabled = !_user.isSigned;
         [_signedButton setTitle:_user.isSigned?@" 已签":@" 签到" forState:UIControlStateNormal];
+        //隐藏签到
+        _signedButton.hidden = YES;
     }
 #ifdef kJuranDesigner
     _privateLetterCountLabel.hidden = YES;
@@ -232,6 +238,8 @@
             if ([data isKindOfClass:[NSDictionary class]]) {
                 [_user buildUpProfileDataWithDictionary:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMsgCenterReloadData object:nil];
+                    [ApplicationDelegate setBadgeNumber:[[JRUser currentUser] newPrivateLetterCount]];
                     [self refreshUI];
                 });
             }

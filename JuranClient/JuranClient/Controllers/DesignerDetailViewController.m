@@ -68,6 +68,10 @@
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -76,17 +80,14 @@
     self.navigationItem.title = _isHomePage?@"我的主页":@"";
     
 #endif
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
     
     personDatas = @[@"毕业院校", @"量房费", @"设计费用", @"从业年限", @"擅长风格"];
     _caseCurrentPage = 1;
     _topicCurrentPage = 1;
     [self setupUI];
     [self loadData];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configureMore];
 }
 
 - (void)setupUI{
@@ -488,7 +489,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (0 == _segment.selectedIndex) {
-        return 270 + (indexPath.row == (_caseDatas.count - 1)?5:0);
+        return 275 + (indexPath.row == (_caseDatas.count - 1)?5:0);
     }else if (1 == _segment.selectedIndex){
         if (indexPath.row == 0) {
             return self.introductionCell.frame.size.height;

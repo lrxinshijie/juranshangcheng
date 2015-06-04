@@ -44,9 +44,9 @@
     frame = _imageGrade.frame;
     frame.origin.x = _labelName.frame.origin.x + _labelName.frame.size.width + 5;
     _imageGrade.frame = frame;
-    if ([shop.grade isEqual:@"0"]) {
+    if ([shop.grade isEqual:@"1"]) {
         _imageGrade.image = [UIImage imageNamed:@"icon-grade-1.png"];
-    }else if ([shop.grade isEqual:@"1"])  {
+    }else if ([shop.grade isEqual:@"0"])  {
         _imageGrade.image = [UIImage imageNamed:@"icon-grade-2.png"];
     }
     _labelMainBrand.text = [NSString stringWithFormat:@"主营品牌:%@",shop.brands];

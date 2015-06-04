@@ -34,21 +34,21 @@
 @end
 
 @implementation MyCollectViewController
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"我的收藏";
-    
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
+
     [self setupUI];
     
     [_collectionView headerBeginRefreshing];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configureMore];
 }
 
 - (void)setupUI{

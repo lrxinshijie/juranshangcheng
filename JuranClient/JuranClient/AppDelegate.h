@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UserLocation *gLocation;
 #endif
 - (void)minusBadgeNumber:(NSInteger)num;
+- (void)setBadgeNumber:(NSInteger)num;
 - (void)jumpToMain;
 
 @end

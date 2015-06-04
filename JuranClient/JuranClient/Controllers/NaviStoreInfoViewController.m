@@ -88,6 +88,8 @@
     [_scrollView addSubview:_telView];
     
     _scrollView.map = _mapView;
+    _mapView.centerCoordinate = _mapCenter;
+    _mapView.zoomLevel = 10;
     [self loadData];
 }
 
@@ -227,6 +229,7 @@
     _timeView.frame = frame;
     
     _labelBus.text = [self formatString:_store.busRoute];
+    _labelBus.numberOfLines = 6;
     [_labelBus sizeToFit];
     frame = _timeView.frame;
     frame.origin.y = _timeView.frame.origin.y+_timeView.frame.size.height;
@@ -325,7 +328,13 @@
 //    action.delegate = self;
 //    [action showInView:self.view];
     if (!ApplicationDelegate.gLocation.isSuccessLocation) {
-        [UIAlertView showWithTitle:nil message:@"当前定位服务未开启,请在设置中启用定位服务" cancelButtonTitle:@"知道了" otherButtonTitles:nil tapBlock:nil];
+        [UIAlertView showWithTitle:@"提示" message:@"访问此类别需要开启定位服务，请在“设置->隐私->定位服务”中开启居然在线的定位~" cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 0) {
+                return;
+            }else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            }
+        }];
         return;
     }
     CLLocationCoordinate2D endCoor = _storeAnnotation.coordinate;

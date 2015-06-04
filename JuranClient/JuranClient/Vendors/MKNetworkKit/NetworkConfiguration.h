@@ -32,7 +32,7 @@
 
 //预生产环境
 //#define JR_SERVICE  @"http://124.202.155.217:81"
-//#define JR_SERVICE  @"http://124.202.155.220:8080"
+//#define JR_SERVICE  @"api.juranzhijia.cn"
 
 /* Production */
 #define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
@@ -113,7 +113,7 @@
 #define JR_PRODUCT_ATTRIBUTE [NSString stringWithFormat:@"%@/goods/getGoodsAttributes.json",JR_SERVICE]
 #define JR_SHOP_PRIVATE_LETTER [NSString stringWithFormat:@"%@/member/sendShopPrivateLetter.json",JR_SERVICE]
 #define JR_PRODUCT_CHANGE_PRICE [NSString stringWithFormat:@"%@/goods/changePriceByAttribute.json",JR_SERVICE]
-
+#define JR_PAY_TYPE [NSString stringWithFormat:@"%@/pay/payType.json",JR_SERVICE]
 
 
 

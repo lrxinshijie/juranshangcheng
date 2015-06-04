@@ -12,6 +12,7 @@
 #import "SearchViewController.h"
 #import "UIViewController+Menu.h"
 #import "QRBaseViewController.h"
+#import "AppDelegate.h"
 
 @interface UIViewController () <UIGestureRecognizerDelegate>
 
@@ -61,13 +62,16 @@
 //    [titleView addSubview:cityButton];
 //    [titleView addSubview:titleLabel];
 //    self.navigationItem.titleView = titleView;
-    self.navigationItem.title = @"当前站点:北京站";
+    self.navigationItem.title = @"北京站";
 }
 
 - (void)onCity:(UIButton *)btn{
     
 }
 
+- (void)configureGoBackPre{
+    [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"nav_backbtn"] leftBarButtonItemAction:@selector(onPreBack)];
+}
 
 - (void)configureScan{
     [self configureLeftBarButtonItemImage:[UIImage imageNamed:@"icon-scan"] leftBarButtonItemAction:@selector(onScan)];
@@ -76,6 +80,7 @@
 - (void)configureMore{
      //[self configureRightBarButtonItemImage:[[ALTheme sharedTheme] imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMore)];
     UIButton *moreButton = [self.view buttonWithFrame:CGRectMake(0, 0, 35, 35) target:self action:@selector(onMore) image:[UIImage imageNamed:@"icon-dot"]];
+    moreButton.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, -7);
     UILabel *countLabel = [self.view labelWithFrame:CGRectMake(28, 0, 18, 16)
                                                text:[NSString stringWithFormat:@"%d",[JRUser isLogin] && [JRUser currentUser].newPrivateLetterCount?[JRUser currentUser].newPrivateLetterCount:0]
                                           textColor:[UIColor whiteColor]
@@ -137,6 +142,18 @@
     [rightView addSubview:readLabel];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightView];
+}
+
+- (void)onPreBack {
+    int count = self.navigationController.viewControllers.count;
+    if (count>2) {
+        if ([self.navigationController.viewControllers[count - 2] isKindOfClass:[SearchViewController class]])
+            [self.navigationController popToViewController:self.navigationController.viewControllers[count - 3] animated:YES];
+        else
+            [self.navigationController popViewControllerAnimated:YES];
+    }else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)onScan{
@@ -208,4 +225,33 @@
     }
 }
 
+- (void)reloadMoreMenu {
+    if (self.navigationController.rootViewController != self) {
+        [self configureMore];
+    }else {
+        [self configureSearchAndMore];
+    }
+}
+
++ (void)loadCenterInfo{
+    if (![JRUser isLogin]) {
+        return;
+    }
+#ifndef kJuranDesigner
+    NSString *url = JR_MYCENTERINFO;
+#else
+    NSString *url = JR_GET_DESIGNER_CENTERINFO;
+#endif
+    [[ALEngine shareEngine] pathURL:url parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes",kNetworkParamKeyShowErrorDefaultMessage:@"No"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if (!error) {
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                [[JRUser currentUser] buildUpProfileDataWithDictionary:data];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMsgCenterReloadData object:nil];
+                    [ApplicationDelegate setBadgeNumber:[[JRUser currentUser] newPrivateLetterCount]];
+                });
+            }
+        }
+    }];
+}
 @end

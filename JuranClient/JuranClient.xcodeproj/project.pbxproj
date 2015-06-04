@@ -369,11 +369,9 @@
 		1415FA8B1A5CD1CB003D0C29 /* AskDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14D973811A32CAE400E771ED /* AskDetailViewController.xib */; };
 		1415FA8C1A5CD1CB003D0C29 /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146CE9C41A47EB0700FAA87F /* TextFieldCell.xib */; };
 		1415FA8D1A5CD1CB003D0C29 /* CaseManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D18DA21A56CC6900B41048 /* CaseManagementViewController.xib */; };
-		1415FA971A5D144B003D0C29 /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1415FA951A5D144B003D0C29 /* libPushSDK-1.8.2.a */; };
 		1415FA981A5D144B003D0C29 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1415FA961A5D144B003D0C29 /* PushConfig.plist */; };
 		1415FA9B1A5D1844003D0C29 /* ALTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 1415FA9A1A5D1844003D0C29 /* ALTheme.m */; };
 		1415FA9C1A5D1844003D0C29 /* ALTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 1415FA9A1A5D1844003D0C29 /* ALTheme.m */; };
-		1415FA9D1A5D1A23003D0C29 /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1415FA951A5D144B003D0C29 /* libPushSDK-1.8.2.a */; };
 		1415FAA01A5D1FD8003D0C29 /* navbar_leftbtn_logo_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1415FA9F1A5D1FD8003D0C29 /* navbar_leftbtn_logo_white@2x.png */; };
 		1415FAA51A5D21DF003D0C29 /* nav-icon-share_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1415FAA21A5D21D7003D0C29 /* nav-icon-share_white@2x.png */; };
 		1415FAA61A5D21E3003D0C29 /* icon-search_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1415FAA11A5D21D7003D0C29 /* icon-search_white@2x.png */; };
@@ -735,6 +733,9 @@
 		2C5B75C11AEF5F310085FA56 /* icon-grade-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5B75BF1AEF5F310085FA56 /* icon-grade-2@2x.png */; };
 		2C5F3F691B099FC4002D42BC /* RootMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F3F671B099FC4002D42BC /* RootMenuCell.m */; };
 		2C5F3F6A1B099FC4002D42BC /* RootMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5F3F681B099FC4002D42BC /* RootMenuCell.xib */; };
+		2C5F3FBF1B0DECCF002D42BC /* icon-product-filter-sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5F3FBE1B0DECCF002D42BC /* icon-product-filter-sel@2x.png */; };
+		2C5F3FC61B104766002D42BC /* product-shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5F3FC51B104766002D42BC /* product-shadow@2x.png */; };
+		2C5F3FE41B134515002D42BC /* libPushSDK-1.8.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5F3FE31B134515002D42BC /* libPushSDK-1.8.3.a */; };
 		2C602C741ADCE6FD0037105E /* ShopListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C721ADCE6FD0037105E /* ShopListViewController.m */; };
 		2C602C751ADCE6FD0037105E /* ShopListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C602C731ADCE6FD0037105E /* ShopListViewController.xib */; };
 		2C602C791ADCEA960037105E /* ShopListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C771ADCEA950037105E /* ShopListCell.m */; };
@@ -1353,6 +1354,8 @@
 		A9D654B51A27642800A80253 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654A81A27642800A80253 /* JSONModel+networking.m */; };
 		A9D654B61A27642800A80253 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654AB1A27642800A80253 /* JSONKeyMapper.m */; };
 		A9D654B71A27642800A80253 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D654AD1A27642800A80253 /* JSONValueTransformer.m */; };
+		A9E912461B123458004E1C7E /* AttributeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E912451B123458004E1C7E /* AttributeLayout.m */; };
+		A9E912471B123458004E1C7E /* AttributeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A9E912451B123458004E1C7E /* AttributeLayout.m */; };
 		A9F1F6821AF7C75600A6838D /* NSNumber+ASCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F1F6811AF7C75600A6838D /* NSNumber+ASCategory.m */; };
 		A9F1F6831AF7C75600A6838D /* NSNumber+ASCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F1F6811AF7C75600A6838D /* NSNumber+ASCategory.m */; };
 		A9F1F6871AF7D3C700A6838D /* AttributeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F1F6851AF7D3C700A6838D /* AttributeCell.m */; };
@@ -1900,7 +1903,6 @@
 		1415FA911A5CD1CB003D0C29 /* JuranDesigner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JuranDesigner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1415FA921A5CD1CB003D0C29 /* JuranDesigner-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "JuranDesigner-Info.plist"; path = "/Users/Sean/Dropbox/Source/hansay/juran/JuranClient/JuranDesigner-Info.plist"; sourceTree = "<absolute>"; };
 		1415FA941A5D144B003D0C29 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
-		1415FA951A5D144B003D0C29 /* libPushSDK-1.8.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.2.a"; sourceTree = "<group>"; };
 		1415FA961A5D144B003D0C29 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		1415FA991A5D1844003D0C29 /* ALTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALTheme.h; sourceTree = "<group>"; };
 		1415FA9A1A5D1844003D0C29 /* ALTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALTheme.m; sourceTree = "<group>"; };
@@ -2339,6 +2341,9 @@
 		2C5F3F661B099FC4002D42BC /* RootMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootMenuCell.h; sourceTree = "<group>"; };
 		2C5F3F671B099FC4002D42BC /* RootMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootMenuCell.m; sourceTree = "<group>"; };
 		2C5F3F681B099FC4002D42BC /* RootMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootMenuCell.xib; sourceTree = "<group>"; };
+		2C5F3FBE1B0DECCF002D42BC /* icon-product-filter-sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-product-filter-sel@2x.png"; path = "Shop/icon-product-filter-sel@2x.png"; sourceTree = "<group>"; };
+		2C5F3FC51B104766002D42BC /* product-shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "product-shadow@2x.png"; path = "Shop/product-shadow@2x.png"; sourceTree = "<group>"; };
+		2C5F3FE31B134515002D42BC /* libPushSDK-1.8.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.3.a"; sourceTree = "<group>"; };
 		2C602C711ADCE6FD0037105E /* ShopListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopListViewController.h; sourceTree = "<group>"; };
 		2C602C721ADCE6FD0037105E /* ShopListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopListViewController.m; sourceTree = "<group>"; };
 		2C602C731ADCE6FD0037105E /* ShopListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopListViewController.xib; sourceTree = "<group>"; };
@@ -3129,6 +3134,8 @@
 		A9D654AB1A27642800A80253 /* JSONKeyMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKeyMapper.m; sourceTree = "<group>"; };
 		A9D654AC1A27642800A80253 /* JSONValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValueTransformer.h; sourceTree = "<group>"; };
 		A9D654AD1A27642800A80253 /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
+		A9E912441B123458004E1C7E /* AttributeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeLayout.h; sourceTree = "<group>"; };
+		A9E912451B123458004E1C7E /* AttributeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributeLayout.m; sourceTree = "<group>"; };
 		A9F1F6801AF7C75600A6838D /* NSNumber+ASCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+ASCategory.h"; sourceTree = "<group>"; };
 		A9F1F6811AF7C75600A6838D /* NSNumber+ASCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+ASCategory.m"; sourceTree = "<group>"; };
 		A9F1F6841AF7D3C700A6838D /* AttributeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributeCell.h; sourceTree = "<group>"; };
@@ -3429,7 +3436,6 @@
 				1415FA221A5CD1CB003D0C29 /* TencentOpenAPI.framework in Frameworks */,
 				1415FA231A5CD1CB003D0C29 /* ShareSDKCoreService.framework in Frameworks */,
 				1415FA241A5CD1CB003D0C29 /* TencentWeiboConnection.framework in Frameworks */,
-				1415FA9D1A5D1A23003D0C29 /* libPushSDK-1.8.2.a in Frameworks */,
 				1415FA251A5CD1CB003D0C29 /* QQConnection.framework in Frameworks */,
 				1415FA261A5CD1CB003D0C29 /* Foundation.framework in Frameworks */,
 				1415FA271A5CD1CB003D0C29 /* AGCommon.framework in Frameworks */,
@@ -3459,6 +3465,7 @@
 				1441A1931A29E436004A038E /* libsqlite3.dylib in Frameworks */,
 				1441A1911A29E42C004A038E /* MessageUI.framework in Frameworks */,
 				1441A16D1A29E3CD004A038E /* WeChatConnection.framework in Frameworks */,
+				2C5F3FE41B134515002D42BC /* libPushSDK-1.8.3.a in Frameworks */,
 				2CC3C5AC1AF1E71C005D3208 /* BaiduMapAPI.framework in Frameworks */,
 				1441A1771A29E3CD004A038E /* libWeChatSDK.a in Frameworks */,
 				1441A1741A29E3CD004A038E /* libSinaWeiboSDK.a in Frameworks */,
@@ -3471,7 +3478,6 @@
 				1441A1721A29E3CD004A038E /* TencentOpenAPI.framework in Frameworks */,
 				1441A1711A29E3CD004A038E /* ShareSDKCoreService.framework in Frameworks */,
 				1441A16C1A29E3CD004A038E /* TencentWeiboConnection.framework in Frameworks */,
-				1415FA971A5D144B003D0C29 /* libPushSDK-1.8.2.a in Frameworks */,
 				1441A1681A29E3CD004A038E /* QQConnection.framework in Frameworks */,
 				A971BC951A20825800C018D6 /* Foundation.framework in Frameworks */,
 				1441A16E1A29E3CD004A038E /* AGCommon.framework in Frameworks */,
@@ -3524,8 +3530,8 @@
 		1415FA931A5D144B003D0C29 /* JPush */ = {
 			isa = PBXGroup;
 			children = (
+				2C5F3FE31B134515002D42BC /* libPushSDK-1.8.3.a */,
 				1415FA941A5D144B003D0C29 /* APService.h */,
-				1415FA951A5D144B003D0C29 /* libPushSDK-1.8.2.a */,
 				1415FA961A5D144B003D0C29 /* PushConfig.plist */,
 			);
 			path = JPush;
@@ -4066,6 +4072,8 @@
 		2C602C7B1ADCECF10037105E /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				2C5F3FC51B104766002D42BC /* product-shadow@2x.png */,
+				2C5F3FBE1B0DECCF002D42BC /* icon-product-filter-sel@2x.png */,
 				373F594D1AFFB0D6005592FF /* icon-product-filter@2x.png */,
 				373F594E1AFFB0D6005592FF /* product-arrow-up@2x.png */,
 				373F594B1AFFA8DB005592FF /* product-arrow-down@2x.png */,
@@ -5029,6 +5037,8 @@
 				373F59471AFF9F70005592FF /* ProductFilterView.m */,
 				2C8BA71C1B0264FA003F7909 /* MapScrollView.h */,
 				2C8BA71D1B0264FA003F7909 /* MapScrollView.m */,
+				A9E912441B123458004E1C7E /* AttributeLayout.h */,
+				A9E912451B123458004E1C7E /* AttributeLayout.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -6662,6 +6672,7 @@
 				2C91E8F51ADB682900B542DC /* NaviStoreListViewController.xib in Resources */,
 				BD5185E31A5D0ED700BE508A /* case_icon_collect@2x.png in Resources */,
 				1F880BE51AEA353200992D64 /* CategaryTableViewCell.xib in Resources */,
+				2C5F3FBF1B0DECCF002D42BC /* icon-product-filter-sel@2x.png in Resources */,
 				BD5186B51A5D0ED700BE508A /* icon_ camera@2x.png in Resources */,
 				2C91E9111ADB754400B542DC /* icon-navi-right-arrow@2x.png in Resources */,
 				37DA110C1A8CDDCC00BC71A6 /* OrderCommentReadViewController.xib in Resources */,
@@ -6896,6 +6907,7 @@
 				BD5186B91A5D0ED700BE508A /* icon_camera3@2x.png in Resources */,
 				BD5187891A5D0ED700BE508A /* nav-user-default@2x.png in Resources */,
 				BD5186451A5D0ED700BE508A /* guide_h_3@2x.png in Resources */,
+				2C5F3FC61B104766002D42BC /* product-shadow@2x.png in Resources */,
 				BD5186411A5D0ED700BE508A /* guide_h_1@2x.png in Resources */,
 				BD51869D1A5D0ED700BE508A /* personal_background@2x.png in Resources */,
 				1FF00FA71AE4B74300D54914 /* third_bg_header_middle@2x.png in Resources */,
@@ -7382,6 +7394,7 @@
 				14FB07F71A835BBA00428DE5 /* JROrder.m in Sources */,
 				140C9ECB1ADB5E9F0079391A /* JRShop.m in Sources */,
 				1415F9DA1A5CD1CB003D0C29 /* SearchViewController.m in Sources */,
+				A9E912471B123458004E1C7E /* AttributeLayout.m in Sources */,
 				1415F9DB1A5CD1CB003D0C29 /* UIView+ASCategory.m in Sources */,
 				1415F9DD1A5CD1CB003D0C29 /* ZoomInImageView.m in Sources */,
 				37F0E71E1A7D2735004CCCB2 /* UIView+WebCacheOperation.m in Sources */,
@@ -7731,6 +7744,7 @@
 				371FBEF21A6A379B00635D3D /* WikiCell.m in Sources */,
 				A987EE521A2098AF00CED7CD /* WikiViewController.m in Sources */,
 				37DA110A1A8CDDCC00BC71A6 /* OrderCommentReadViewController.m in Sources */,
+				A9E912461B123458004E1C7E /* AttributeLayout.m in Sources */,
 				3721D0961AA23089008ADB34 /* ContractPreviewViewController.m in Sources */,
 				14C953A91A2DC0E800FE6F8D /* SubjectCell.m in Sources */,
 				37D18DB71A5829EC00B41048 /* CaseImageHeaderView.m in Sources */,

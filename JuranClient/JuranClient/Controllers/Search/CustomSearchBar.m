@@ -19,7 +19,6 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     BOOL couldClick;
 }
 
-@property (strong, nonatomic) IBOutlet UITextField *inputTextField;
 @property (strong, nonatomic) IBOutlet UIImageView *magnifyingGlass;
 @property (strong, nonatomic) IBOutlet UIButton *cleanButton;
 @property (strong, nonatomic) IBOutlet UIButton *rightButton;
@@ -47,6 +46,13 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
 
 //用于判断是否需要展示搜索范围列表的属性
 @property (assign, nonatomic) BOOL enabledShow;
+
+//用于记录输入框中本次输入之前的文字
+@property (strong, nonatomic) NSString * oldText;
+//用于区分是UIControlEventEditingChanged的第几次响应，UIControlEventEditingChanged每次输入文字都会触发两次删除触发一次，暂时不知原因。
+
+@property (strong, nonatomic) UILabel * countLabel;
+@property (strong, nonatomic) UILabel * readLabel;
 
 @end
 
@@ -89,13 +95,59 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     }];
 //    NSLog(@"%@",self.dataArray_History);
     
-    
     //输入偏左问题
     CGRect frame = _inputTextField.frame;
-    frame.size.width  = 15;
+    frame.size.width  = 10;
     UIView *leftView = [[UIView alloc]initWithFrame:frame];
     _inputTextField.leftViewMode = UITextFieldViewModeAlways;
     _inputTextField.leftView = leftView;
+    [_inputTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    _oldText = @"";
+    
+}
+
+- (void)configTipsIconWithRightBtnStyle:(RightBtnStyle)style
+{
+    if (style == RightBtnStyle_More) {
+        //添加消息通知的小点点
+        if (!_countLabel) {
+            _countLabel = [self labelWithFrame:CGRectMake(300, 23, 16, 16)
+                                          text:[NSString stringWithFormat:@"%d",[JRUser isLogin] && [JRUser currentUser].newPrivateLetterCount?[JRUser currentUser].newPrivateLetterCount:0]
+                                     textColor:[UIColor whiteColor]
+                                 textAlignment:NSTextAlignmentCenter
+                                          font:[UIFont systemFontOfSize:12]];
+            _countLabel.backgroundColor = [UIColor redColor];
+            _countLabel.layer.cornerRadius = _countLabel.bounds.size.height/2;
+            _countLabel.layer.masksToBounds = YES;
+            _countLabel.hidden = [JRUser isLogin] && [JRUser currentUser].newPrivateLetterCount>0 ? NO:YES;
+            [self addSubview:_countLabel];
+        }
+        
+        if (!_readLabel) {
+            _readLabel = [self labelWithFrame:CGRectMake(302, 27, 8, 8)
+                                         text:@""
+                                    textColor:[UIColor whiteColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:1]];
+            _readLabel.backgroundColor = [UIColor redColor];
+            _readLabel.layer.cornerRadius = _readLabel.bounds.size.height/2;
+            _readLabel.layer.masksToBounds = YES;
+            if (_countLabel.hidden) {
+                _readLabel.hidden = [JRUser isLogin] && [JRUser currentUser].newPushMsgCount>0 ? NO:YES;
+            }else {
+                _readLabel.hidden = YES;
+            }
+            [self addSubview:_readLabel];
+        }
+        
+    }else{
+        if (_countLabel) {
+            [_countLabel removeFromSuperview];
+            _countLabel = nil;
+        }
+        if (_readLabel) {
+            [_readLabel removeFromSuperview];
+            _readLabel = nil;
+        }
+    }
 }
 
 - (void)initHistoryDataCompleted:(void(^)(BOOL isFinish))block
@@ -263,6 +315,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     if (self.isHistory) {
         
         self.inputTextField.text = [cell getSearchCellMessage];
+        _oldText = [cell getSearchCellMessage];
         [self changeListStyleAnimation];
         
     }else{
@@ -284,16 +337,16 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     }
     
     if (textField.text.length == 0) {
-        self.isHistory = NO;
-    }else{
         self.isHistory = YES;
+    }else{
+        self.isHistory = NO;
     }
     [self showAnimation];
     [self cleanBtnShow];
     [self magnifyingGlassHide];
     self.inputTextField.placeholder = nil;
     [self rightButtonChangeStyleWithKey:RightBtnStyle_Search];
-    [self changeListStyleAnimation];
+//    [self changeListStyleAnimation];
     
     //此处是为了解决BUG添加的代码，目的是吧奇葩的第三方键盘添加在串口上的手势关掉，否则，会出现响应手势收起键盘而不响应本类中的一些触发事件。
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
@@ -303,10 +356,36 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if (range.location == 0) {
+    if ((range.location == 0 && range.length == 0 && ![string isEqualToString:@""]) || (range.location == 0 && range.length == 1)) {
         [self changeListStyleAnimation];
     }
+    if ([string isEqualToString:@""] || string.length == 0) {
+        if (_oldText.length) {
+            _oldText = [_oldText substringToIndex:(int)(_oldText.length - 1)];
+        }
+    }else{
+        _oldText = [NSString stringWithFormat:@"%@%@",_oldText,string];
+        
+    }
+    
     return YES;
+}
+
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if (![_oldText isEqualToString:@""] && _oldText) {
+        return;
+    }
+    
+    
+    if (textField.text.length != 0 && strlen([[textField.text substringToIndex:1] UTF8String]) == 3) {
+        
+        if (textField.text.length <= 1) {
+            [self changeListStyleAnimation];
+        }
+        _oldText = textField.text;
+    }
+
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
@@ -318,7 +397,7 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self.inputTextField resignFirstResponder];
-    
+    [self startSearchAtIndex:self.searchType];
     return YES;
 }
 
@@ -395,12 +474,24 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     
     float height = 0.0;
     
-    if (self.dataArray_History.count>0) {
+//    if (self.dataArray_History.count>0) {
+//        
+//        if (self.dataArray_History.count*36+50>200) {
+//            height = 200.0;
+//        }else{
+//            height = self.dataArray_History.count * 36 + 50;
+//        }
+//        
+//    }
+    
+    int tempCount = self.isHistory?self.dataArray_History.count:(self.enabledShow?self.dataArray_SearchRange.count:0);
+    
+    if (tempCount>0) {
         
-        if (self.dataArray_History.count*36+50>200) {
+        if (tempCount*36+50>200) {
             height = 200.0;
         }else{
-            height = self.dataArray_History.count * 36 + 50;
+            height = tempCount * 36 + 50;
         }
         
     }
@@ -514,6 +605,8 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
         self.isFirstTimeIn = NO;
     }
     
+    [self configTipsIconWithRightBtnStyle:style];
+    
     self.rightBtnStyle = style;
     
     if (style == RightBtnStyle_Scan) {
@@ -552,5 +645,4 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     
     [self magnifyingGlassHide];
 }
-
 @end

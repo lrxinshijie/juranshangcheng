@@ -11,11 +11,12 @@
 @class ProductClass;
 @class ProductBrand;
 @class ProductStore;
+@class ProductSort;
 
 @interface ProductSelectedFilter : NSObject<NSCopying>
 @property (nonatomic, assign) BOOL isInShop;
-@property (nonatomic, assign) int sort;
-//@property (nonatomic, strong) ProductSort *pSort;
+//@property (nonatomic, assign) int sort;
+@property (nonatomic, strong) ProductSort *pSort;
 @property (nonatomic, copy) NSString *keyword;
 @property (nonatomic, assign) long shopId;
 @property (nonatomic, strong) ProductCategory *pCategory;

@@ -35,6 +35,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -42,6 +47,8 @@
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
     self.navigationItem.title = @"账户管理";
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
 #ifndef kJuranDesigner
     _user = [JRUser currentUser];
 #else
@@ -61,7 +68,6 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self configureMore];
 }
 
 - (void)reloadData{

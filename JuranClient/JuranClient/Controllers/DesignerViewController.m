@@ -12,9 +12,10 @@
 #import "JRDesigner.h"
 #import "JRPhotoScrollViewController.h"
 #import "FilterView.h"
-#import "YIFullScreenScroll.h"
+//#import "YIFullScreenScroll.h"
 
-@interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate, UIScrollViewDelegate, YIFullScreenScrollDelegate>
+//, YIFullScreenScrollDelegate
+@interface DesignerViewController ()<UITableViewDataSource, UITableViewDelegate, FilterViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong)  UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -36,6 +37,10 @@
     return self;
 }
 
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -49,14 +54,30 @@
 #endif
         [self configureSearch];
     } else {
-        self.navigationItem.title = @"搜索结果";
+        //self.navigationItem.title = @"搜索结果";
+        [self configureGoBackPre];
+        UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 220, 30)];
+        textField.placeholder = @"请输入搜索关键词";
+        textField.background = [UIImage imageNamed:@"search_bar_bg_image"];
+        textField.font = [UIFont systemFontOfSize:14];
+        textField.text = _searchKeyWord;
+        textField.textColor = [UIColor darkGrayColor];
+        self.navigationItem.titleView = textField;
+        CGRect frame = textField.frame;
+        frame.size.width  = 30;
+        UIImageView *leftView = [[UIImageView alloc]imageViewWithFrame:frame image:[UIImage imageNamed:@"search_magnifying_glass"]];
+        leftView.contentMode = UIViewContentModeCenter;
+        textField.leftViewMode = UITextFieldViewModeAlways;
+        textField.leftView = leftView;
+        [textField addTarget:self action:@selector(textFieldClick:) forControlEvents:UIControlEventEditingDidBegin];
     }
-    
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
     self.filterView = [[FilterView alloc] initWithType:!_isHome ? FilterViewTypeDesignerSearch : FilterViewTypeDesigner defaultData:_filterData];
     _filterView.delegate = self;
     [self.view addSubview:_filterView];
     
-    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 44, kWindowWidth, (!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) - 44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, 44, kWindowWidth, (!_isHome ? kWindowHeightWithoutNavigationBarAndTabbar : kWindowHeightWithoutNavigationBarAndTabbar) - 44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -79,14 +100,9 @@
     _emptyView.center = _tableView.center;
     [self.view addSubview:_emptyView];
     
-    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
-    self.fullScreenScroll.delegate = self;
-    self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-        [self configureMore];
+//    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
+//    self.fullScreenScroll.delegate = self;
+//    self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -141,11 +157,11 @@
             [_tableView reloadData];
         }
         
-        if ([_datas count] > 5) {
-            self.fullScreenScroll.scrollView = _tableView;
-        }else{
-            self.fullScreenScroll.scrollView = nil;
-        }
+//        if ([_datas count] > 5) {
+//            self.fullScreenScroll.scrollView = _tableView;
+//        }else{
+//            self.fullScreenScroll.scrollView = nil;
+//        }
         
         _emptyView.hidden = _datas.count != 0;
         [_tableView headerEndRefreshing];
@@ -192,9 +208,10 @@
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];
     
-    [self.fullScreenScroll showUIBarsAnimated:YES];
+    //[self.fullScreenScroll showUIBarsAnimated:YES];
 }
 
+/*
 - (void)fullScreenScrollDidLayoutUIBars:(YIFullScreenScroll *)fullScreenScroll{
     
 //    CGFloat y = _tableView.contentOffset.y;
@@ -234,7 +251,59 @@
     frame.origin.y = CGRectGetMaxY(_filterView.frame);
     frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
     view.frame = frame;
+    
+}
+*/
 
+- (void)textFieldClick:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGRect tableFrame =  _tableView.frame;
+    CGRect filterViewFrame = _filterView.frame;
+    
+    CGFloat pointY = [scrollView.panGestureRecognizer translationInView:_tableView].y;
+    
+    if (pointY < 0) {
+        //隐藏
+        if (filterViewFrame.origin.y <= -44) {
+            
+            filterViewFrame.origin.y = -44;
+            tableFrame.origin.y = 0;
+            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar+44;
+            
+        }else {
+            
+            filterViewFrame.origin.y -= changeHeight;
+            tableFrame.origin.y -= changeHeight;
+            tableFrame.size.height += changeHeight;
+        }
+        
+    }else {
+        //显示
+        if (filterViewFrame.origin.y >= 0) {
+            
+            filterViewFrame.origin.y = 0;
+            tableFrame.origin.y = CGRectGetMaxY(_filterView.frame);
+            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar;
+            
+        }else {
+            
+            filterViewFrame.origin.y += changeHeight;
+            tableFrame.origin.y += changeHeight;
+            tableFrame.size.height -= changeHeight;
+            
+        }
+    }
+    
+    _filterView.frame = filterViewFrame;
+    _tableView.frame = tableFrame;
+    
 }
 
 @end

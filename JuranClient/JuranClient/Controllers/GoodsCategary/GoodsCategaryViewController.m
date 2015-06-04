@@ -22,6 +22,7 @@
 #import "ProductListViewController.h"
 #import "ProductFilterData.h"
 #import "ProductSeletedFilter.h"
+#import "SearchViewController.h"
 
 
 @interface GoodsCategaryViewController ()<UITableViewDataSource,UITableViewDelegate,CustomSecLevelViewDelegate,CustomThirdLevelCellDelegate,CustomShopViewDelegate,UIScrollViewDelegate>
@@ -36,11 +37,13 @@
     int cslv_turnLoc;
 }
 
-@property (strong, nonatomic) IBOutlet UIButton *locationButton;
-
 @property (strong, nonatomic) IBOutlet UITableView *listTableView;
 @property (strong, nonatomic) IBOutlet UITableView *fistLevelTableView;
-@property (strong, nonatomic) IBOutlet UILabel *viewTitle;
+@property (strong, nonatomic) IBOutlet UIView *tableLine;
+//@property (strong, nonatomic) IBOutlet UIView *headerView;
+
+@property (strong, nonatomic) UIView * tableLineUp;
+@property (assign, nonatomic) int lineY;
 
 @property (strong, nonatomic) NSMutableArray * dateArray_firstLevel;
 @property (strong, nonatomic) NSMutableArray * dataArray_secondLevel;
@@ -73,6 +76,10 @@
 
 @property (strong, nonatomic) NSString * parentCodeProduct;
 
+@property (strong, nonatomic) UILabel * countLabel;
+@property (strong, nonatomic) UILabel * readLabel;
+@property (copy,nonatomic) NSString *cityName;
+
 @end
 
 @implementation GoodsCategaryViewController
@@ -97,25 +104,33 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:self.isPopNavHide];
+    //[self.navigationController setNavigationBarHidden:self.isPopNavHide];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    if (_vcStyle == CategaryStyle_Goods) {
-        _viewTitle.text = @"商品所在地:北京市";
-    }else if (_vcStyle == CategaryStyle_Shop){
-        _viewTitle.text = @"品牌所在地:北京市";
-    }
-    [self.navigationController setNavigationBarHidden:YES];
+//    [super viewWillAppear:animated];
+//    if (_vcStyle == CategaryStyle_Goods) {
+//        _viewTitle.text = @"北京站";
+//    }else if (_vcStyle == CategaryStyle_Shop){
+//        _viewTitle.text = @"北京站";
+//    }
+    //[self.navigationController setNavigationBarHidden:YES];
     [self.listTableView setContentSize:CGSizeMake(243, 500)];
     
 }
 
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationItem.title = @"北京站";
+    _cityName = @"北京市";
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
+
     //初始状态没有cell。
     self.cellCount = 0;
     //初始化数组什么的
@@ -126,9 +141,9 @@
         
     }else if (self.vcStyle == CategaryStyle_Goods){
         
-        [self requestDataWithRequestID:@"-1" city:self.locationButton.titleLabel.text level:1];
+        [self requestDataWithRequestID:@"-1" city:_cityName level:1];
     }
-    
+    //[NSNotificationCenter defaultCenter] add
     [self setLocation];
     
     __weak GoodsCategaryViewController * wSelf = self;
@@ -151,7 +166,7 @@
 - (void)setLocation
 {
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
-        [self.locationButton setTitle:ApplicationDelegate.gLocation.cityName forState:UIControlStateNormal];
+        //[self.locationButton setTitle:ApplicationDelegate.gLocation.cityName forState:UIControlStateNormal];
     }else{
         
     }
@@ -169,14 +184,14 @@
         __weak GoodsCategaryViewController * wSelf = self;
         [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
             ApplicationDelegate.gLocation.cityName = areaInfo.cityName;
-            [wSelf.locationButton setTitle:ApplicationDelegate.gLocation.cityName forState:UIControlStateNormal];
+            //[wSelf.locationButton setTitle:ApplicationDelegate.gLocation.cityName forState:UIControlStateNormal];
             if (wSelf.vcStyle == CategaryStyle_Shop) {
                 
                 [wSelf requestDataForBrandClass];
                 
             }else if (wSelf.vcStyle == CategaryStyle_Goods){
                 
-                [wSelf requestDataWithRequestID:@"-1" city:wSelf.locationButton.titleLabel.text level:1];
+                [wSelf requestDataWithRequestID:@"-1" city:_cityName level:1];
             }
         }];
         [self.navigationController setNavigationBarHidden:NO];
@@ -249,7 +264,42 @@
         }
         return 0;
     }else{
+        //计算竖线的高度和位置，避免遮挡
+        [self calculateLineFrame:self.dateArray_firstLevel.count];
         return self.dateArray_firstLevel.count;
+    }
+}
+
+- (void)calculateLineFrame:(int)cellNum
+{
+    int temp = 51*cellNum;
+    self.lineY = temp+64;
+    CGRect frame = self.tableLine.frame;
+    frame.origin.y = 64+temp;
+    frame.size.height = [UIScreen mainScreen].bounds.size.height-64-temp;
+    self.tableLine.frame = frame;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == _fistLevelTableView) {
+        float temp = scrollView.contentOffset.y;
+        NSLog(@"%f",temp);
+        
+        CGRect frame0 = self.tableLine.frame;
+        frame0.origin.y = self.lineY-temp;
+        frame0.size.height = [UIScreen mainScreen].bounds.size.height-64+temp;
+        self.tableLine.frame = frame0;
+        if (temp<0) {
+            if (!self.tableLineUp) {
+                self.tableLineUp = [[UIView alloc] initWithFrame:CGRectMake(76, 64, 1, 0)];
+                self.tableLineUp.backgroundColor = [UIColor colorWithRed:207.0/255.0 green:207.0/255.0 blue:207.0/255.0 alpha:1.0];
+                [self.view addSubview:self.tableLineUp];
+            }
+            CGRect frame = self.tableLineUp.frame;
+            frame.size.height = -temp;
+            self.tableLineUp.frame = frame;
+        }
     }
 }
 
@@ -331,9 +381,9 @@
             cell.delegate = self;
         }
         [cell dynamicCreateUIWithData:[self.finalDataArray objectAtIndex:indexPath.row]];
-        if (indexPath.row == self.finalDataArray.count-1) {
-            [cell addLine];
-        }
+//        if (indexPath.row == self.finalDataArray.count-1) {
+//            [cell addLine];
+//        }
         
         return cell;
     }else{
@@ -404,8 +454,7 @@
             self.pageNo = 1;
             [self requestDataForBrand:cell.cell_id pageNo:self.pageNo];
         }else if (self.vcStyle == CategaryStyle_Goods){
-            self.parentCodeProduct = cell.cell_id;
-            [self requestDataWithRequestID:cell.cell_id city:self.locationButton.titleLabel.text level:2];
+            [self requestDataWithRequestID:cell.cell_id city:_cityName level:2];
         }
         
         if (self.old_cell) {
@@ -429,6 +478,7 @@
 #pragma mark - CustomSecLevelViewDelegate
 - (void)secondLevelView:(CustomSecLevelView *)view didClickAtIndex:(struct SelectLocation)location requestID:(NSString *)rquestID
 {
+    self.parentCodeProduct = rquestID;
     //设置section，在最前边是因为还要调整上次收起的哪一行
     NSUInteger num = view.tag - 9000;
     self.currentSection = num;
@@ -503,7 +553,7 @@
         self.old_location = location;
         
         //请求数据
-        [self requestDataWithRequestID:rquestID city:self.locationButton.titleLabel.text level:3];
+        [self requestDataWithRequestID:rquestID city:_cityName level:3];
     }
     
     
@@ -565,7 +615,6 @@
                 
                 [wSelf showHUD];
                 CategaryTableViewCellItem * dataItem = wSelf.dateArray_firstLevel[0];
-                self.parentCodeProduct = dataItem.code;
                 [wSelf requestDataWithRequestID:dataItem.code city:city level:2];
                 [wSelf.fistLevelTableView reloadData];
                 
@@ -672,34 +721,35 @@
 {
     //商品的
 //    NSLog(@"%@",msg);
+    SearchViewController *search = [[SearchViewController alloc]init];
+    search.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:search animated:NO];
+    
     ProductListViewController *vc = [[ProductListViewController alloc]init];
     vc.selectedFilter = [[ProductSelectedFilter alloc]init];
-    vc.selectedFilter.isInShop = NO;
-    vc.selectedFilter.sort = 9;
-    vc.selectedFilter.keyword = @"";
     vc.selectedFilter.pCategory = [[ProductCategory alloc]init];
     vc.selectedFilter.pCategory.catCode = catCode;
     vc.selectedFilter.pCategory.catName = catName;
     //传参过来的ParentCode暂时无用，暂不使用。
     vc.selectedFilter.pCategory.parentCode = self.parentCodeProduct;
     vc.selectedFilter.pCategory.urlContent = urlContent;
-    [self.navigationController pushViewController:vc animated:YES];
+    [search.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - CustomShopViewDelegate
 - (void)shopViewItemDidClickWithCode:(NSString *)brandCode Name:(NSString *)brandName ID:(long)brandID
 {
+    SearchViewController *search = [[SearchViewController alloc]init];
+    search.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:search animated:NO];
     //品牌
     ProductListViewController *vc = [[ProductListViewController alloc]init];
     vc.selectedFilter = [[ProductSelectedFilter alloc]init];
-    vc.selectedFilter.isInShop = NO;
-    vc.selectedFilter.sort = 9;
-    vc.selectedFilter.keyword = @"";
     vc.selectedFilter.pBrand = [[ProductBrand alloc]init];
     vc.selectedFilter.pBrand.catCode = brandCode;
     vc.selectedFilter.pBrand.brandId = brandID;
     vc.selectedFilter.pBrand.brandName = brandName;
-    [self.navigationController pushViewController:vc animated:YES];
+    [search.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -766,7 +816,7 @@
     self.brandName = brandClass;
     NSDictionary * dict = @{@"brandTypeCode":brandClass,
                             @"pageNo":[NSString stringWithFormat:@"%d",self.pageNo],
-                            @"onePageCount":kOnePageCount
+                            @"onePageCount":[NSString stringWithFormat:@"%d",[kOnePageCount intValue]*2]
                             };
     [[ALEngine shareEngine] pathURL:JR_BRAND_LIST parameters:dict HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [wSelf hideHUD];

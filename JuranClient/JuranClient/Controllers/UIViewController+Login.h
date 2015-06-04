@@ -20,6 +20,9 @@
 - (void)configureScan;
 - (void)configureMore;
 - (void)configureSearchAndMore;
+- (void)configureGoBackPre;
 - (void)showMenu;
 - (void)onSearch;
+- (void)reloadMoreMenu;
++ (void)loadCenterInfo;
 @end

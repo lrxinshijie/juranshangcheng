@@ -21,6 +21,7 @@
 @property (nonatomic, assign) NSDictionary *defaultData;
 @property (nonatomic, strong) UINavigationController *filterViewNav;
 @property (nonatomic, assign) FilterViewType type;
+@property (nonatomic, strong) NSDictionary *seletedDic;
 
 @end
 
@@ -54,7 +55,7 @@
             lineImageView.backgroundColor = RGBColor(213, 213, 213);
             [gridView addSubview:lineImageView];
             
-            self.listButton = [gridView buttonWithFrame:gridView.bounds target:self action:@selector(onList) image:[UIImage imageNamed:@"icon-list"]];
+            self.listButton = [gridView buttonWithFrame:gridView.bounds target:self action:@selector(onList) image:[UIImage imageNamed:@"icon-grid"]];
             [gridView addSubview:_listButton];
             [self addSubview:gridView];
         }
@@ -65,11 +66,11 @@
         _sortButton.userInteractionEnabled = YES;
         [_sortButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         [_sortButton setTitle:@" 排序" forState:UIControlStateNormal];
-        _sortButton.titleLabel.font = [UIFont systemFontOfSize:15];
+        _sortButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_sortButton setImage:[UIImage imageNamed:@"case-icon-order"] forState:UIControlStateNormal];
         
-        [_sortButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_sortButton setTitleColor:kBlueColor forState:UIControlStateSelected];
+        [_sortButton setTitleColor:UIColorFromHEX(0x444444) forState:UIControlStateNormal];
+        [_sortButton setTitleColor:UIColorFromHEX(0x0068b7) forState:UIControlStateSelected];
         [_sortButton setImage:[UIImage imageNamed:@"menu_paixu"] forState:UIControlStateSelected];
         [self addSubview:_sortButton];
         
@@ -77,11 +78,11 @@
         _filterButton.frame = CGRectMake(width, 0, width, 44);
         [_filterButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         [_filterButton setTitle:@" 筛选" forState:UIControlStateNormal];
-        _filterButton.titleLabel.font = [UIFont systemFontOfSize:15];
-        [_filterButton setImage:[UIImage imageNamed:@"case-icon-filter"] forState:UIControlStateNormal];
-        [_filterButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_filterButton setTitleColor:kBlueColor forState:UIControlStateSelected];
-        [_filterButton setImage:[UIImage imageNamed:@"menu_shaixuan"] forState:UIControlStateSelected];
+        _filterButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_filterButton setImage:[UIImage imageNamed:@"icon-product-filter"] forState:UIControlStateNormal];
+        [_filterButton setTitleColor:UIColorFromHEX(0x444444) forState:UIControlStateNormal];
+        [_filterButton setTitleColor:UIColorFromHEX(0x0068b7) forState:UIControlStateSelected];
+        [_filterButton setImage:[UIImage imageNamed:@"icon-product-filter_sel"] forState:UIControlStateSelected];
         [self addSubview:_filterButton];
         
         UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(width, 0, 1, 44)];
@@ -137,7 +138,7 @@
         _sortButton.selected = !isHide;
         _tableView.hidden = isHide;
     }];
-    
+    [_tableView reloadData];
 }
 
 - (void)showFilter{
@@ -189,8 +190,13 @@
     }
     
     cell.textLabel.font = [UIFont systemFontOfSize:15];
+    cell.textLabel.textColor = [UIColor blackColor];
     
-    cell.textLabel.text = [[self.sorts objectAtTheIndex:indexPath.row] objectForKey:@"k"];
+    NSString *key = [[self.sorts objectAtTheIndex:indexPath.row] objectForKey:@"k"];
+    cell.textLabel.text = key;
+    if (_seletedDic && [[_seletedDic getStringValueForKey:@"k" defaultValue:@""] isEqualToString:key]) {
+        cell.textLabel.textColor = kBlueColor;
+    }
     
     return cell;
 }
@@ -198,7 +204,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSString *v = [[self.sorts objectAtTheIndex:indexPath.row] objectForKey:@"v"];
+    _seletedDic = [self.sorts objectAtTheIndex:indexPath.row];
+    NSString *v = [_seletedDic objectForKey:@"v"];
     if ([_delegate respondsToSelector:@selector(clickFilterView:actionType:returnData:)]) {
         [_delegate clickFilterView:self actionType:FilterViewActionSort returnData:@{@"order":v}];
     }
@@ -221,7 +228,7 @@
 - (void)setIsGrid:(BOOL)isGrid{
     _isGrid = isGrid;
     
-    [_listButton setImage:[UIImage imageNamed:_isGrid ? @"icon-grid" : @"icon-list"] forState:UIControlStateNormal];
+    [_listButton setImage:[UIImage imageNamed:_isGrid ? @"icon-list" : @"icon-grid"] forState:UIControlStateNormal];
 }
 
 - (void)onList{
@@ -261,7 +268,7 @@
             default:
                 break;
         }
-        
+        _seletedDic = [_sorts firstObject];
     }
     return _sorts;
 }

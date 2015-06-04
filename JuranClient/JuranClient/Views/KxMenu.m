@@ -554,9 +554,8 @@ typedef enum {
                 readLabel.layer.cornerRadius = 4;
                 [itemView addSubview:readLabel];
             }
-            
             if (menuItem.msgNum!=0) {
-                UILabel *numLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, 8, 24, 16)];
+                UILabel *numLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, 8, 18, 18)];
                 numLabel.text = [NSString stringWithFormat:@"%d",menuItem.msgNum] ;
                 numLabel.textColor = [UIColor whiteColor];
                 numLabel.font = [UIFont systemFontOfSize:12];

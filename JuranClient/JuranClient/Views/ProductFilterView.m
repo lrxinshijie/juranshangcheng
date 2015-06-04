@@ -63,7 +63,13 @@
         [self addSubview:_sortButton];
         
         frame = CGRectMake(0, 10, 0, 20);
-        self.sortLabel = [self labelWithFrame:frame text:@"综合排序" textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:kSystemFontSize]];
+        for (ProductSort *p in defaultData.sortList) {
+            if (seletedData.pSort.sort == p.sort) {
+                seletedData.pSort.name = p.name;
+                break;
+            }
+        }
+        self.sortLabel = [self labelWithFrame:frame text:seletedData.pSort.name textColor:[UIColor blackColor] textAlignment:NSTextAlignmentCenter font:[UIFont systemFontOfSize:kSystemFontSize]];
         [self addSubview:_sortLabel];
         
         self.sortImageView = [self imageViewWithFrame:CGRectMake(0, (CGRectGetHeight(self.frame) - 4)/2.f, 7, 4) image:[UIImage imageNamed:@"product-arrow-down.png"]];
@@ -107,7 +113,7 @@
         [self addSubview:lineView];
         
         frame = CGRectMake(CGRectGetMaxX(_filterButton.frame), 0, kWindowWidth - CGRectGetMaxX(_filterButton.frame), CGRectGetHeight(self.frame));
-        self.gridButton = [self buttonWithFrame:frame target:self action:@selector(clickButton:) image:[UIImage imageNamed:@"icon-list.png"]];
+        self.gridButton = [self buttonWithFrame:frame target:self action:@selector(clickButton:) image:[UIImage imageNamed:@"icon-grid.png"]];
         [self addSubview:_gridButton];
         
         frame = CGRectMake(0, CGRectGetHeight(self.frame)-1, CGRectGetWidth(self.frame), 1);
@@ -138,8 +144,10 @@
 
 - (void)layoutFrame{
     CGRect frame = _sortLabel.frame;
-    frame.size.width = [_sortLabel.text widthWithFont:_sortLabel.font constrainedToHeight:CGRectGetHeight(_sortLabel.frame)];
-    frame.origin.x = CGRectGetMinX(_sortButton.frame) + (CGRectGetWidth(_sortButton.frame) - CGRectGetWidth(frame))/2.f;
+    CGFloat maxWidth = CGRectGetWidth(_sortButton.frame) - CGRectGetWidth(_sortImageView.frame) - 2;
+    CGFloat width = [_sortLabel.text widthWithFont:_sortLabel.font constrainedToHeight:CGRectGetHeight(_sortLabel.frame)];
+    frame.size.width = width > maxWidth?maxWidth:width;
+    frame.origin.x = CGRectGetMinX(_sortButton.frame) + (CGRectGetWidth(_sortButton.frame) - CGRectGetWidth(frame) - CGRectGetWidth(_sortImageView.frame) - 2)/2.f;
     _sortLabel.frame = frame;
     
     frame = _sortImageView.frame;
@@ -147,8 +155,10 @@
     _sortImageView.frame = frame;
     
     frame = _storeLabel.frame;
-    frame.size.width = [_storeLabel.text widthWithFont:_storeLabel.font constrainedToHeight:CGRectGetHeight(_storeLabel.frame)];
-    frame.origin.x = CGRectGetMinX(_storeButton.frame) + (CGRectGetWidth(_storeButton.frame) - CGRectGetWidth(frame))/2.f;
+    maxWidth = CGRectGetWidth(_storeButton.frame) - CGRectGetWidth(_storeImageView.frame) - 2;
+    width = [_storeLabel.text widthWithFont:_storeLabel.font constrainedToHeight:CGRectGetHeight(_storeLabel.frame)];
+    frame.size.width = width > maxWidth?maxWidth:width;
+    frame.origin.x = CGRectGetMinX(_storeButton.frame) + (CGRectGetWidth(_storeButton.frame) - CGRectGetWidth(frame) - CGRectGetWidth(_storeImageView.frame) - 2)/2.f;
     _storeLabel.frame = frame;
     
     frame = _storeImageView.frame;
@@ -264,7 +274,7 @@
         [self showSort];
     }
     _isFilter = YES;
-    [self.gridButton setImage:[UIImage imageNamed:_isGrid?@"icon-grid.png":@"icon-list.png"] forState:UIControlStateNormal];
+    [self.gridButton setImage:[UIImage imageNamed:_isGrid?@"icon-list.png":@"icon-grid.png"] forState:UIControlStateNormal];
     if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:actionType:)]) {
         [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter actionType:FilterViewActionFilter];
     }
@@ -278,7 +288,7 @@
         [self showSort];
     }
     _isGrid = !_isGrid;
-    [self.gridButton setImage:[UIImage imageNamed:_isGrid?@"icon-grid.png":@"icon-list.png"] forState:UIControlStateNormal];
+    [self.gridButton setImage:[UIImage imageNamed:_isGrid?@"icon-list.png":@"icon-grid.png"] forState:UIControlStateNormal];
     if ([_delegate respondsToSelector:@selector(clickProductFilterView:returnData:IsGrid:IsFilter:actionType:)]) {
         [_delegate clickProductFilterView:self returnData:_selectedData IsGrid:_isGrid IsFilter:_isFilter actionType:FilterViewActionGrid];
     }
@@ -324,6 +334,8 @@
         _storeImageView.image = [UIImage imageNamed:@"product-arrow-down.png"];
     }
     _storeLabel.text = _selectedData.pStore?_selectedData.pStore.storeName:@"选择门店";
+    //排序值
+    _sortLabel.text = _selectedData.pSort.name;
     
     if (selectedBtn && selectedBtn == _storeButton && _selectedData.pStore) {
         _tableView.tableFooterView = _clearStoreView;
@@ -361,7 +373,7 @@
     if (selectedBtn == _sortButton) {
         ProductSort *sort = self.defaultData.sortList[indexPath.row];
         cell.textLabel.text = sort.name;
-        if (_selectedData.sort>0 && _selectedData.sort == sort.sort) {
+        if (_selectedData.pSort && _selectedData.pSort.sort == sort.sort) {
             cell.textLabel.textColor = kBlueColor;
         }
     }else if(selectedBtn == _storeButton){
@@ -371,8 +383,6 @@
             cell.textLabel.textColor = kBlueColor;
         }
     }
-    
-    
     return cell;
 }
 
@@ -380,7 +390,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (selectedBtn == _sortButton) {
         ProductSort *sort = self.defaultData.sortList[indexPath.row];
-        _selectedData.sort = sort.sort;
+        _selectedData.pSort = sort;
     }else if(selectedBtn == _storeButton){
         ProductStore *store = self.defaultData.storeList[indexPath.row];
         _selectedData.pStore = store;

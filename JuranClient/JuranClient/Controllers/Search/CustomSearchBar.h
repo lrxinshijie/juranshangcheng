@@ -43,7 +43,7 @@ typedef enum {
 @end
 
 @interface CustomSearchBar : UIView
-
+@property (strong, nonatomic) IBOutlet UITextField *inputTextField;
 @property (assign, nonatomic) id<CustomSearchBarDelegate>delegate;
 
 //用于跳转至二维码页面

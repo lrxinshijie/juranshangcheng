@@ -25,6 +25,7 @@
 @property (nonatomic, copy) NSString *shopDsr;
 @property (nonatomic, assign) BOOL isStored;
 @property (nonatomic, copy) NSString *grade;
+@property (nonatomic, copy) NSString *minisite;
 //search
 @property (nonatomic, copy) NSString *brands;
 @property (nonatomic, copy) NSString *logo;

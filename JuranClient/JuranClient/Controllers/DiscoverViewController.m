@@ -29,6 +29,9 @@
 #import "TopicDetailViewController.h"
 
 @interface DiscoverViewController ()<JRSegmentControlDelegate,UITableViewDataSource, UITableViewDelegate, QuestionFilterViewDelegate, WikiFilterViewControllerDelegate>
+{
+    BOOL _isQuestion;
+}
 
 @property (nonatomic, assign) NSInteger segmentSelectedForInit;
 
@@ -38,7 +41,6 @@
 @property (nonatomic, strong) IBOutlet JRSegmentControl *segment;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
-@property (nonatomic, strong) NSMutableDictionary *wikiFilterData;
 @property (nonatomic, strong) UINavigationController *wikiFilterViewNav;
 @property (nonatomic, strong) IBOutlet UIButton *wikiFilterButton;
 
@@ -58,11 +60,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configureSearchAndMore];
-}
-
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     if ([_quesgtionFilterView isShow]) {
@@ -75,7 +72,8 @@
     // Do any additional setup after loading the view from its nib.
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     self.navigationItem.title = @"发现";
-    
+    [self configureSearchAndMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recieveReloadNotification:) name:kNotificationNameQuestionReloadData object:nil];
     
     [self configureScan];
@@ -195,6 +193,8 @@
 
 - (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
     
+    _isQuestion = NO;
+    
     if (_datas) {
         [_datas removeAllObjects];
         [_tableView reloadData];
@@ -207,6 +207,9 @@
     }else if (index == 1){
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     }else if (index == 2){
+        
+        _isQuestion = YES;
+        
         _questionHeaderView.hidden = NO;
         _tableView.frame = CGRectMake(0, CGRectGetMaxY(_questionHeaderView.frame), kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar - CGRectGetMaxY(_questionHeaderView.frame));
     }else if (index == 3){
@@ -226,6 +229,27 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return  _datas.count;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_segment.selectedIndex == 1 || _segment.selectedIndex == 3) {
+        _tableView.separatorColor = UIColorFromHEX(0xd8d8d8);
+        
+        //cellInset
+        if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+        {
+            [cell setSeparatorInset:UIEdgeInsetsZero];
+        }
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+        {
+            [cell setLayoutMargins:UIEdgeInsetsZero];
+        }
+        if([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)])
+        {
+            [cell setPreservesSuperviewLayoutMargins:NO];
+        }
+    }
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -250,9 +274,7 @@
             NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
             cell = (WikiCell *)[nibs firstObject];
         }
-        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-            cell.layoutMargins = UIEdgeInsetsZero;
-        }
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         JRWiki *wiki = [_datas objectAtIndex:indexPath.row];
@@ -279,10 +301,7 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
-        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-            cell.layoutMargins = UIEdgeInsetsZero;
-        }
-
+        
         cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cellIndicator.png"]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -413,6 +432,100 @@
         _wikiFilterViewNav = [Public navigationControllerFromRootViewController:filterViewController];
     }
     return _wikiFilterViewNav;
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGRect tableFrame =  _tableView.frame;
+    CGRect segmentFrame = _segment.frame;
+    
+    CGFloat pointY = [scrollView.panGestureRecognizer translationInView:_tableView].y;
+    
+    if (!_isQuestion) {
+        
+        if (pointY < 0) {
+            //隐藏
+            if (segmentFrame.origin.y <= -40) {
+                
+                segmentFrame.origin.y = -40;
+                tableFrame.origin.y = 0;
+                tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar;
+                
+            }else {
+                
+                segmentFrame.origin.y -= changeHeight;
+                tableFrame.origin.y -= changeHeight;
+                tableFrame.size.height += changeHeight;
+            }
+            
+        }else {
+            //显示
+            if (segmentFrame.origin.y >= 0) {
+                
+                segmentFrame.origin.y = 0;
+                tableFrame.origin.y = 40;
+                tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar - 40;
+                
+            }else {
+
+                segmentFrame.origin.y += changeHeight;
+                tableFrame.origin.y += changeHeight;
+                tableFrame.size.height -= changeHeight;
+                
+            }
+        }
+        
+    }else {
+        
+        //问答
+        
+        CGRect questionHeaderFrame = _questionHeaderView.frame;
+        
+        if (pointY < 0) {
+            //隐藏
+            if (segmentFrame.origin.y <= -84) {
+                
+                segmentFrame.origin.y = -84;
+                questionHeaderFrame.origin.y = -44;
+                tableFrame.origin.y = 36;
+                tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar-36;
+                
+            }else {
+                
+                segmentFrame.origin.y -= changeHeight;
+                questionHeaderFrame.origin.y -= changeHeight;
+                tableFrame.origin.y -= changeHeight;
+                tableFrame.size.height += changeHeight;
+            }
+            
+        }else {
+            //显示
+            if (segmentFrame.origin.y >= 0) {
+                
+                segmentFrame.origin.y = 0;
+                questionHeaderFrame.origin.y = 40;
+                tableFrame.origin.y = 120;
+                tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar - 120;
+                
+            }else {
+
+                segmentFrame.origin.y += changeHeight;
+                questionHeaderFrame.origin.y += changeHeight;
+                tableFrame.origin.y += changeHeight;
+                tableFrame.size.height -= changeHeight;
+                
+            }
+        }
+        
+        _questionHeaderView.frame = questionHeaderFrame;
+        
+    }
+    
+    _segment.frame = segmentFrame;
+    _tableView.frame = tableFrame;
+    
 }
 
 - (void)didReceiveMemoryWarning {

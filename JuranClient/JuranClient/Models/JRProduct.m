@@ -23,9 +23,18 @@
         self.defaultImage = [dict getStringValueForKey:@"defaultImage" defaultValue:@""];
         self.originalImg = [dict getStringValueForKey:@"originalImg" defaultValue:@""];
         self.goodsLogo = [dict getStringValueForKey:@"goodsLogo" defaultValue:@""];
+        
         self.goodsName = [dict getStringValueForKey:@"goodsName" defaultValue:@""];
         self.linkProductId = [dict getIntValueForKey:@"linkProductId" defaultValue:0];
         self.shopId = [dict getIntValueForKey:@"shopId" defaultValue:0];
+        
+        if (self.defaultImage.length == 0) {
+            self.defaultImage = self.goodsLogo;
+        }
+        
+        if (self.goodsLogo.length == 0) {
+            self.goodsLogo = self.defaultImage;
+        }
     }
     return self;
 }
@@ -76,8 +85,7 @@
     [[ALEngine shareEngine] pathURL:JR_PRODUCT_INFO parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
             self.goodsImagesList = [data getArrayValueForKey:@"goodsImagesList" defaultValue:nil];
-            
-//            self.goodsName = [data getStringValueForKey:@"goodsName" defaultValue:@""];
+            self.goodsName = [data getStringValueForKey:@"goodsName" defaultValue:@""];
             self.priceMax = [data getStringValueForKey:@"priceMax" defaultValue:@""];
             self.priceMin = [data getStringValueForKey:@"priceMin" defaultValue:@""];
             self.type = [data getBoolValueForKey:@"type" defaultValue:NO];
@@ -159,6 +167,10 @@
     }];
 }
 
+- (void)setAttributeList:(NSArray *)attributeList{
+    _attributeList = attributeList;
+}
+
 - (void)loadStore:(BOOLBlock)finished{
     NSDictionary *param = @{@"linkProductId": @(self.linkProductId),
                             @"cityName":@"北京市"
@@ -172,7 +184,6 @@
         if (finished) {
             finished(error == nil);
         }
-        
     }];
 }
 
@@ -184,7 +195,11 @@
 }
 
 + (BOOL)isShowPrice{
-    return ApplicationDelegate.gLocation.isSuccessLocation;
+#ifndef kJuranDesigner
+    return ApplicationDelegate.gLocation.isSuccessLocation && [ApplicationDelegate.gLocation.cityName isEqual:@"北京市"];
+#else
+    return NO;
+#endif
 }
 
 - (void)loadAttributeList:(BOOLBlock)finished{
@@ -209,7 +224,7 @@
 - (BOOL)attirbuteIsEnable:(NSArray *)selected fromRow:(NSInteger)fromRow toIndexPath:(NSIndexPath *)toIndexPath{
     NSString *thisKey = [NSString stringWithFormat:@"%d", [self.attributeList[toIndexPath.section][@"attrId"] integerValue]];
     NSString *thisValue = self.attributeList[toIndexPath.section][@"attrList"][toIndexPath.row];
-    ASLog(@"%@,%d,%@,%@", selected, fromRow, thisKey, thisValue);
+//    ASLog(@"%@,%d,%@,%@", selected, fromRow, thisKey, thisValue);
     if (self.buyAttrList.count == 0) {
         return NO;
     }
@@ -242,7 +257,7 @@
     
     
     
-    ASLog(@"value:%@,%@",thisKey, thisValue);
+//    ASLog(@"value:%@,%@",thisKey, thisValue);
     __block BOOL retVal = NO;
     [_buyAttrList enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *buyAttrMap = obj[@"buyAttrMap"];
@@ -250,7 +265,7 @@
         
         [filter enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             NSString *vv = [NSString stringWithFormat:@"%d", [key integerValue]];
-            ASLog(@"Equal:%@,%@",obj, buyAttrMap[vv]);
+//            ASLog(@"Equal:%@,%@",obj, buyAttrMap[vv]);
             if (![obj isEqualToString:buyAttrMap[vv]]) {
                 yesOrNo = NO;
                 *stop = YES;

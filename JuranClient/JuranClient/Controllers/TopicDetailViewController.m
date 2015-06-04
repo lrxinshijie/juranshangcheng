@@ -54,6 +54,7 @@
 @property (nonatomic, strong) NSMutableDictionary *openStatusDic;
 
 @property (nonatomic, strong) UIButton *scrollToTopButton;
+@property (strong, nonatomic) IBOutlet UIButton *sendButton;
 
 @end
 
@@ -533,8 +534,10 @@
     _selectComment = selectComment;
     if (_selectComment) {
         _commentTextField.placeholder = [NSString stringWithFormat:@"回复%@:", _selectComment.nickName];
+        [_sendButton setTitle:@"回复" forState:UIControlStateNormal];
     }else{
         _commentTextField.placeholder = @"写评论";
+        [_sendButton setTitle:@"评论" forState:UIControlStateNormal];
     }
 }
 

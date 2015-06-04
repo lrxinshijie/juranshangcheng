@@ -46,6 +46,9 @@
     if (!dict || ![dict isKindOfClass:[NSDictionary class]]) {
         return ;
     }
+    if (self.shopId==0) {
+        self.shopId = [dict getIntegerValueForKey:@"shopId" defaultValue:0];
+    }
     id shopInfo = dict[@"shopInfo"];
     if (shopInfo && [shopInfo isKindOfClass:[NSDictionary class]]) {
         self.shopLogo = [shopInfo getStringValueForKey:@"shopLogo" defaultValue:@""];

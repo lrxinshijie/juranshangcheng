@@ -9,6 +9,12 @@
 #ifndef Flipboard_Constants_h
 #define Flipboard_Constants_h
 
+/*****************by lsj**********************/
+#define changeHeight   2
+//RGB转换
+#define UIColorFromHEX(hexValue) [UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0 green:((float)((hexValue & 0xFF00) >> 8))/255.0 blue:((float)(hexValue & 0xFF))/255.0 alpha:1.0]
+
+/*******************by custom************************/
 #define kWindowHeight CGRectGetHeight([UIScreen mainScreen].applicationFrame)
 #define kWindowHeightWithoutNavigationBar (kWindowHeight - 44)
 #define kWindowHeightWithoutNavigationBarAndTabbar (kWindowHeightWithoutNavigationBar - 49)
@@ -62,8 +68,10 @@
 #define kNotificationNameOrderReloadData @"kNotificationNameOrderReloadData"
 #define kNotificationNameOrderPaySuccess @"kNotificationNameOrderPaySuccess"
 
-#define kNotificationNameAttributeReloadData @"kNotificationNameAttributeReloadData"
+#define kNotificationNameAttributeRowReload @"kNotificationNameAttributeRowReload"
 
+#define kNotificationNameAttributeReloadData @"kNotificationNameAttributeReloadData"
+#define kNotificationNameMsgCenterReloadData @"kNotificationNameMsgCenterReloadData"
 
 #define kBlueColor RGBColor(15, 82, 167)
 

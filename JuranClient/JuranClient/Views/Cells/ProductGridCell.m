@@ -31,7 +31,7 @@
 - (void)fillCellWithProduct:(JRProduct *)product{
     [_photoImageView setImageWithURLString:product.defaultImage Editing:YES];
     _titleLabel.text = product.goodsName;
-    _priceLabel.text = ApplicationDelegate.gLocation.isSuccessLocation ? [NSString stringWithFormat:@"￥%@",product.onSaleMinPrice] : @"";
+    _priceLabel.text = [UserLocation isShowPrice] ? [NSString stringWithFormat:@"￥%@",product.onSaleMinPrice] : @"";
     
     CGRect frame = _titleLabel.frame;
     CGFloat height = [_titleLabel.text heightWithFont:_titleLabel.font constrainedToWidth:CGRectGetWidth(frame)];
@@ -42,7 +42,7 @@
     _titleLabel.frame = frame;
     
     frame = _priceLabel.frame;
-    frame.origin.y = CGRectGetMaxY(_titleLabel.frame) + 3;
+    frame.origin.y = CGRectGetMaxY(_titleLabel.frame) + 10;
     _priceLabel.frame = frame;
 }
 

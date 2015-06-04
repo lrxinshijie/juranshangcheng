@@ -21,10 +21,14 @@
 #import "JRDesigner.h"
 #import "JRSubject.h"
 #import "CaseCollectionCell.h"
-#import "YIFullScreenScroll.h"
+//#import "YIFullScreenScroll.h"
 #import "UIViewController+ScrollingNavbar.h"
 
-@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, YIFullScreenScrollDelegate, AMScrollingNavbarDelegate, UIScrollViewDelegate>
+//YIFullScreenScrollDelegate,
+@interface CaseViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate, FilterViewDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate,  AMScrollingNavbarDelegate, UIScrollViewDelegate>
+{
+    BOOL _isCollection;
+}
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -42,7 +46,7 @@
 @implementation CaseViewController
 
 - (void)dealloc{
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -68,7 +72,24 @@
 #endif
         [self configureSearch];
     }else{
-        self.navigationItem.title = @"搜索结果";
+        //self.navigationItem.title = @"搜索结果";
+        [self configureGoBackPre];
+        [self configureMore];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
+        UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 220, 30)];
+        textField.placeholder = @"请输入搜索关键词";
+        textField.background = [UIImage imageNamed:@"search_bar_bg_image"];
+        textField.font = [UIFont systemFontOfSize:14];
+        textField.text = _searchKey;
+        textField.textColor = [UIColor darkGrayColor];
+        self.navigationItem.titleView = textField;
+        CGRect frame = textField.frame;
+        frame.size.width  = 30;
+        UIImageView *leftView = [[UIImageView alloc]imageViewWithFrame:frame image:[UIImage imageNamed:@"search_magnifying_glass"]];
+        leftView.contentMode = UIViewContentModeCenter;
+        textField.leftViewMode = UITextFieldViewModeAlways;
+        textField.leftView = leftView;
+        [textField addTarget:self action:@selector(textFieldClick:) forControlEvents:UIControlEventEditingDidBegin];
     }
     
     self.filterView = [[FilterView alloc] initWithType:!_isHome ? FilterViewTypeCaseSearch : FilterViewTypeCase defaultData:_filterData];
@@ -129,9 +150,9 @@
         }];
 //    }
     
-    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
-    self.fullScreenScroll.delegate = self;
-    self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
+//    self.fullScreenScroll = [[YIFullScreenScroll alloc] initWithViewController:self scrollView:self.tableView style:YIFullScreenScrollStyleFacebook];
+//    self.fullScreenScroll.delegate = self;
+//    self.fullScreenScroll.shouldHideTabBarOnScroll = NO;
 //    self.fullScreenScroll.additionalOffsetYToStartShowing = -44;
 }
 
@@ -141,11 +162,6 @@
     [self showNavbar];
     
     return YES;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configureMore];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -215,11 +231,11 @@
     [_emptyView removeFromSuperview];
     _tableView.tableFooterView = [[UIView alloc] init];
     
-    if ([_datas count] > 5) {
-        self.fullScreenScroll.scrollView = [_tableView superview] ? _tableView : _collectionView;
-    }else{
-        self.fullScreenScroll.scrollView = nil;
-    }
+//    if ([_datas count] > 5) {
+//        self.fullScreenScroll.scrollView = [_tableView superview] ? _tableView : _collectionView;
+//    }else{
+//        self.fullScreenScroll.scrollView = nil;
+//    }
     
     if (_datas.count == 0) {
         if (_tableView.superview) {
@@ -255,10 +271,12 @@
 - (void)clickFilterView:(FilterView *)view actionType:(FilterViewAction)action returnData:(NSDictionary *)data{
     if (action == FilterViewActionGrid) {
         if ([_collectionView superview]) {
+            _isCollection = NO;
             [_collectionView removeFromSuperview];
             [self.view addSubview:_tableView];
             [self reloadData];
         } else {
+            _isCollection = YES;
             [_tableView removeFromSuperview];
             [self.view addSubview:_collectionView];
             [self reloadData];
@@ -279,7 +297,7 @@
 
 - (void)showMenu{
 #ifndef kJuranDesigner
-    [self.fullScreenScroll showUIBarsAnimated:YES];
+   // [self.fullScreenScroll showUIBarsAnimated:YES];
 #endif
     [super showMenu];
 }
@@ -294,10 +312,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == [_datas count] - 1) {
-        return 275;
+        return 280;
     }
     
-    return 270;
+    return 275;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -328,7 +346,7 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     
-    [self.fullScreenScroll showUIBarsAnimated:YES];
+   // [self.fullScreenScroll showUIBarsAnimated:YES];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -356,7 +374,7 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     
-    [self.fullScreenScroll showUIBarsAnimated:NO];
+   // [self.fullScreenScroll showUIBarsAnimated:NO];
 }
 
 - (void)EScrollerViewDidClicked:(NSUInteger)index{
@@ -367,6 +385,7 @@
     [Public jumpFromLink:ad.link];
 }
 
+/*
 - (void)fullScreenScrollDidLayoutUIBars:(YIFullScreenScroll *)fullScreenScroll{
 
     
@@ -398,26 +417,26 @@
 //    }
 //    CGFloat y = self.navigationController.navigationBar.frame.origin.y - 20;
     
-    /*
-    CGFloat y = view.contentOffset.y;
-    
-    if (self.navigationController.navigationBar.frame.origin.y == 20) {
-        y = 0;
-    }else if (y > 88) {
-        y = 88;
-    }
-    
-    CGRect frame = _filterView.frame;
-    frame.origin.y = -y;
-    _filterView.frame = frame;
-    
-    CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
-    
-    frame = view.frame;
-    frame.origin.y = CGRectGetMaxY(_filterView.frame);
-    frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
-    view.frame = frame;
-     */
+ 
+//    CGFloat y = view.contentOffset.y;
+//    
+//    if (self.navigationController.navigationBar.frame.origin.y == 20) {
+//        y = 0;
+//    }else if (y > 88) {
+//        y = 88;
+//    }
+//    
+//    CGRect frame = _filterView.frame;
+//    frame.origin.y = -y;
+//    _filterView.frame = frame;
+//    
+//    CGFloat height = self.tabBarController.tabBar.frame.origin.y - (kWindowHeight - 49);
+//    
+//    frame = view.frame;
+//    frame.origin.y = CGRectGetMaxY(_filterView.frame);
+//    frame.size.height = ((!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44) + y + height - 20;
+//    view.frame = frame;
+ 
     
     CGFloat y = -(self.navigationController.navigationBar.frame.origin.y - 20)*2;
     
@@ -440,11 +459,73 @@
     
 //    ASLog(@"size;%f,%f",y, height);
 }
+*/
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)textFieldClick:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGRect tableFrame;
+    CGFloat pointY;
+    CGRect filterViewFrame = _filterView.frame;
+    
+    if (_isCollection) {
+        tableFrame = _collectionView.frame;
+        pointY = [scrollView.panGestureRecognizer translationInView:_collectionView].y;
+    }else {
+        tableFrame =  _tableView.frame;
+        pointY = [scrollView.panGestureRecognizer translationInView:_tableView].y;
+    }
+    
+    if (pointY < 0) {
+        //隐藏
+        if (filterViewFrame.origin.y <= -44) {
+            
+            filterViewFrame.origin.y = -44;
+            tableFrame.origin.y = 0;
+            tableFrame.size.height = (!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar);
+            
+        }else {
+            
+            filterViewFrame.origin.y -= changeHeight;
+            tableFrame.origin.y -= changeHeight;
+            tableFrame.size.height += changeHeight;
+        }
+        
+    }else {
+        //显示
+        if (filterViewFrame.origin.y >= 0) {
+            
+            filterViewFrame.origin.y = 0;
+            tableFrame.origin.y = CGRectGetMaxY(_filterView.frame);
+            tableFrame.size.height = (!_isHome ? kWindowHeightWithoutNavigationBar : kWindowHeightWithoutNavigationBarAndTabbar) -44;
+            
+        }else {
+            
+            filterViewFrame.origin.y += changeHeight;
+            tableFrame.origin.y += changeHeight;
+            tableFrame.size.height -= changeHeight;
+            
+        }
+    }
+    
+    _filterView.frame = filterViewFrame;
+    if (_isCollection) {
+        _collectionView.frame = tableFrame;
+    }else {
+        _tableView.frame = tableFrame;
+    }
 }
 
 @end

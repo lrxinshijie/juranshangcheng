@@ -54,9 +54,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [_tableViewStore registerNib:[UINib nibWithNibName:@"NaviStoreCell" bundle:nil] forCellReuseIdentifier:@"NaviStoreCell"];
-    _cityName = @"北京市";
-    if(ApplicationDelegate.gLocation.isSuccessLocation)
+    _tableViewStore.tableFooterView = [[UIView alloc]init];
+    if(ApplicationDelegate.gLocation.isSuccessLocation) {
         _btnChangeCity.hidden = YES;
+        _cityName = ApplicationDelegate.gLocation.cityName;
+    }else {
+        _cityName = @"北京市";
+    }
     if (_naviType == NaviTypeStore) {
         self.navigationItem.title = @"门店导航";
     }else {
@@ -99,7 +103,7 @@
 }
 
 - (void)reloadView {
-    _mapView.zoomLevel = 11;
+    _mapView.zoomLevel = 10;
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
         UserLocation *location = [[UserLocation alloc]init];
         [location GeoCode:ApplicationDelegate.gLocation.cityName Handler:^(UserLocation *loc) {
@@ -169,6 +173,25 @@
     return 38;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    tableView.separatorColor = UIColorFromHEX(0xd8d8d8);
+    
+    //cellInset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    if([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)])
+    {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NaviStoreCell *cell = (NaviStoreCell *)[tableView dequeueReusableCellWithIdentifier:@"NaviStoreCell"];
     int index = [indexPath row];
@@ -200,6 +223,7 @@
     NaviStoreInfoViewController *info = [[NaviStoreInfoViewController alloc]init];
     info.naviType = _naviType;
     info.store = store;
+    info.mapCenter = _mapView.centerCoordinate;
     [self.navigationController pushViewController:info animated:YES];
 }
 
@@ -209,8 +233,6 @@
 
 - (IBAction)naviRightClick:(id)sender {
     [self showAppMenu:nil];
-    //    ProductFilterViewController *vc = [[ProductFilterViewController alloc]initWithKeyword:nil Sort:9 Store:nil IsInShop:NO ShopId:0];
-    //    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)changeCityClick:(id)sender {
@@ -231,7 +253,13 @@
 
 - (void)CheckLoctionStatus {
     if(!ApplicationDelegate.gLocation.isSuccessLocation) {
-        [UIAlertView showWithTitle:nil message:@"当前定位服务未开启,请在设置中启用定位服务" cancelButtonTitle:@"知道了" otherButtonTitles:nil tapBlock:nil];
+        [UIAlertView showWithTitle:@"提示" message:@"访问此类别需要开启定位服务，请在“设置->隐私->定位服务”中开启居然在线的定位~" cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 0) {
+                return;
+            }else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            }
+        }];
     }
 }
 @end

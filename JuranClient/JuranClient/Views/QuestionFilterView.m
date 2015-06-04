@@ -22,6 +22,9 @@
 @property (nonatomic, strong) UINavigationController *filterViewNav;
 @property (nonatomic, strong) UITableView *tableView;
 
+@property (nonatomic, strong) NSDictionary *sortSelectedDic;
+@property (nonatomic, strong) NSDictionary *filterSelectedDic;
+
 @end
 
 @implementation QuestionFilterView
@@ -58,10 +61,10 @@
         [_filterButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
         [_filterButton setTitle:@" 筛选" forState:UIControlStateNormal];
         _filterButton.titleLabel.font = [UIFont systemFontOfSize:15];
-        [_filterButton setImage:[UIImage imageNamed:@"case-icon-filter"] forState:UIControlStateNormal];
+        [_filterButton setImage:[UIImage imageNamed:@"icon-product-filter"] forState:UIControlStateNormal];
         [_filterButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_filterButton setTitleColor:kBlueColor forState:UIControlStateSelected];
-        [_filterButton setImage:[UIImage imageNamed:@"menu_shaixuan"] forState:UIControlStateSelected];
+        [_filterButton setImage:[UIImage imageNamed:@"icon-product-filter_sel"] forState:UIControlStateSelected];
         [self addSubview:_filterButton];
         
         UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(160, 0, 1, 44)];
@@ -179,11 +182,20 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.textLabel.font = [UIFont systemFontOfSize:15];
+    cell.textLabel.textColor = [UIColor blackColor];
     
     if (selectedBtn == _sortButton) {
-        cell.textLabel.text = [[self.sorts objectAtTheIndex:indexPath.row] objectForKey:@"k"];
+        NSString *key = [[self.sorts objectAtTheIndex:indexPath.row] objectForKey:@"k"];
+        cell.textLabel.text = key;
+        if (_sortSelectedDic && [[_sortSelectedDic getStringValueForKey:@"k" defaultValue:@""] isEqualToString:key]) {
+            cell.textLabel.textColor = kBlueColor;
+        }
     }else if(selectedBtn == _filterButton){
-        cell.textLabel.text = [[self.filters objectAtTheIndex:indexPath.row] objectForKey:@"k"];
+        NSString *key = [[self.filters objectAtTheIndex:indexPath.row] objectForKey:@"k"];
+        cell.textLabel.text = key;
+        if (_filterSelectedDic && [[_filterSelectedDic getStringValueForKey:@"k" defaultValue:@""] isEqualToString:key]) {
+            cell.textLabel.textColor = kBlueColor;
+        }
     }
     
     
@@ -194,10 +206,12 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *data = nil;
     if (selectedBtn == _sortButton) {
-        NSString *v = [[self.sorts objectAtTheIndex:indexPath.row] objectForKey:@"v"];
+        _sortSelectedDic = [self.sorts objectAtTheIndex:indexPath.row];
+        NSString *v = [_sortSelectedDic objectForKey:@"v"];
         data = @{@"questionType":v};
     }else if(selectedBtn == _filterButton){
-        NSString *v = [[self.filters objectAtTheIndex:indexPath.row] objectForKey:@"v"];
+        _filterSelectedDic = [self.filters objectAtTheIndex:indexPath.row];
+        NSString *v = [_filterSelectedDic objectForKey:@"v"];
         data = @{@"status":v};
     }
     

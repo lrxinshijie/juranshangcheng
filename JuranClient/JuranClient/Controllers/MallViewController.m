@@ -38,10 +38,15 @@
 @property (nonatomic, strong) IBOutlet UIView *productView;
 @property (nonatomic, strong) IBOutlet UICollectionView *productCollectionView;
 @property (nonatomic, strong) NSArray *products;
+@property (strong, nonatomic) IBOutlet UILabel *shopTitle;
+@property (strong, nonatomic) IBOutlet UILabel *goodsTitle;
 
 @end
 
 @implementation MallViewController
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
@@ -50,7 +55,8 @@
     
     [self configureCityTitle:@"请选择"];
     [self configureScan];
-    
+    [self configureSearchAndMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBarAndTabBar style:UITableViewStyleGrouped backgroundView:nil dataSource:self delegate:self];
     _tableView.tableHeaderView = _headerView;
     _tableView.backgroundColor = RGBColor(237, 237, 237);
@@ -65,11 +71,6 @@
     [self loadAd];
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configureSearchAndMore];
-}
-
 - (void)loadData{
     NSDictionary *param = @{@"cityName": [Public defaultCityName]};
     [[ALEngine shareEngine] pathURL:JR_MALL_ACTIVITY_SHOP parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
@@ -77,7 +78,7 @@
             [self hideHUD];
             return;
         }
-        
+        _shopTitle.text = [data getStringValueForKey:@"shopTitle" defaultValue:@""];
         NSArray *activeShopList = [data getArrayValueForKey:@"activeShopList" defaultValue:nil];
         
         self.shops = [JRShop buildUpWithValueForList:activeShopList];
@@ -87,6 +88,7 @@
         [[ALEngine shareEngine] pathURL:JR_MALL_ACTIVITY_PRODUCT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
             [self hideHUD];
             if (!error && [data isKindOfClass:[NSDictionary class]]) {
+                _goodsTitle.text = [data getStringValueForKey:@"goodsTitle" defaultValue:@""];
                 NSArray *activeGoodsList = [data getArrayValueForKey:@"activeGoodsList" defaultValue:nil];
                 
                 self.products = [JRProduct buildUpWithValueForList:activeGoodsList];
@@ -127,7 +129,7 @@
     }
     
     if (self.adInfos.count > 0) {
-        self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentCenter];
+        self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentRight];
         _bannerView.delegate = self;
         [_headerView addSubview:_bannerView];
         

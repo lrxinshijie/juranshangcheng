@@ -30,8 +30,7 @@
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     
-    self.navigationItem.title = @"系统消息";
-    //[self configureMore];
+    self.navigationItem.title = @"系统通知";
     self.tableView = [self.view tableViewWithFrame:kContentFrameWithoutNavigationBar style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     self.tableView.backgroundColor = [UIColor colorWithRed:241/255.f green:241/255.f blue:241/255.f alpha:1.f];
     _tableView.tableFooterView = [[UIView alloc] init];
@@ -40,7 +39,7 @@
     self.rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 90, 30) target:self action:@selector(setAllReaded:) title:@"全部设置已读" backgroundImage:nil];
     [_rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightButton];
-    
+    self.rightButton.hidden = YES;
     _emptyView.hidden = YES;
     _emptyView.center = _tableView.center;
     [self.view addSubview:_emptyView];
@@ -62,7 +61,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //[self configureMore];
+    [UIViewController loadCenterInfo];
 }
 
 - (void)loadData{
@@ -115,6 +114,14 @@
         if (!error) {
             if (msg) {
                 msg.isUnread = NO;
+                BOOL hasUnread = NO;
+                for (JRPushInfoMsg *msg in _datas) {
+                    if(msg.isUnread) {
+                        hasUnread = YES;
+                        break;
+                    }
+                }
+                self.rightButton.hidden = !hasUnread;
             }else{
                 for (JRPushInfoMsg *msg in _datas) {
                     msg.isUnread = NO;

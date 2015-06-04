@@ -39,7 +39,9 @@
     [super viewDidLoad];
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadDataNotification:) name:kNotificationNameQuestionReloadData object:nil];
-    
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
+
     if (!_isSearchResult) {
 #ifdef kJuranDesigner
         self.navigationItem.title = @"问答";
@@ -48,7 +50,22 @@
 #endif
         [self configureSearch];
     }else{
-        self.navigationItem.title = @"搜索结果";
+        //self.navigationItem.title = @"搜索结果";
+        [self configureGoBackPre];
+        UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 220, 30)];
+        textField.placeholder = @"请输入搜索关键词";
+        textField.background = [UIImage imageNamed:@"search_bar_bg_image"];
+        textField.font = [UIFont systemFontOfSize:14];
+        textField.text = _searchKeyWord;
+        textField.textColor = [UIColor darkGrayColor];
+        self.navigationItem.titleView = textField;
+        CGRect frame = textField.frame;
+        frame.size.width  = 30;
+        UIImageView *leftView = [[UIImageView alloc]imageViewWithFrame:frame image:[UIImage imageNamed:@"search_magnifying_glass"]];
+        leftView.contentMode = UIViewContentModeCenter;
+        textField.leftViewMode = UITextFieldViewModeAlways;
+        textField.leftView = leftView;
+        [textField addTarget:self action:@selector(textFieldClick:) forControlEvents:UIControlEventEditingDidBegin];
     }
     self.filterView = [[QuestionFilterView alloc] initWithDefaultData:_filterData];
     _filterView.delegate = self;
@@ -85,11 +102,6 @@
     
     [_tableView headerBeginRefreshing];
 
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self configureMore];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -206,6 +218,53 @@
     return _questionCell;
 }
 
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGRect tableFrame =  _tableView.frame;
+    CGRect filterViewFrame = _filterView.frame;
+    
+    CGFloat pointY = [scrollView.panGestureRecognizer translationInView:_tableView].y;
+    
+    if (pointY < 0) {
+        //隐藏
+        if (filterViewFrame.origin.y <= -44) {
+            
+            filterViewFrame.origin.y = -44;
+            tableFrame.origin.y = 0;
+            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar+44;
+            
+        }else {
+            
+            filterViewFrame.origin.y -= changeHeight;
+            tableFrame.origin.y -= changeHeight;
+            tableFrame.size.height += changeHeight;
+        }
+        
+    }else {
+        //显示
+        if (filterViewFrame.origin.y >= 0) {
+            
+            filterViewFrame.origin.y = 0;
+            tableFrame.origin.y = CGRectGetMaxY(_filterView.frame);
+            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar;
+            
+        }else {
+            
+            filterViewFrame.origin.y += changeHeight;
+            tableFrame.origin.y += changeHeight;
+            tableFrame.size.height -= changeHeight;
+            
+        }
+    }
+    
+    _filterView.frame = filterViewFrame;
+    _tableView.frame = tableFrame;
+    
+}
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     startOffsetY = scrollView.contentOffset.y;
 }
@@ -224,4 +283,7 @@
     }
 }
 
+- (void)textFieldClick:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

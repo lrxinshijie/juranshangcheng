@@ -22,8 +22,14 @@
 #import "ShopListViewController.h"
 #import "UIViewController+Menu.h"
 #import "ProductGridCell.h"
+#import "UIAlertView+Blocks.h"
+#import "AppDelegate.h"
+#import "UserLocation.h"
 
 @interface ProductListViewController () <UITableViewDataSource, UITableViewDelegate, ProductFilterViewDelegate,CustomSearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+{
+    BOOL _isCollection;
+}
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -32,10 +38,11 @@
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, strong) ProductFilterView *filterView;
 @property (strong, nonatomic) CustomSearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UIButton *footerView;
+- (IBAction)onSetLoction:(id)sender;
 @end
 
 @implementation ProductListViewController
-
 - (instancetype)init
 {
     self = [super init];
@@ -48,36 +55,58 @@
 
 - (void)dealloc{
     _tableView.delegate = nil; _tableView.dataSource = nil;
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
     [self setupUI];
     [_tableView headerBeginRefreshing];
 }
 
+
+
 - (void)setupUI{
-    self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
-    [self.searchBar setSearchButtonType:SearchButtonType_Product];
-    self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
-    [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
-    self.searchBar.delegate = self;
-    self.searchBar.parentVC = self;
-    [self.searchBar setSearchButtonType:SearchButtonType_Product];
-    [self.searchBar setEnabled:NO];
+    [self configureGoBackPre];
+    UITextField *textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 220, 30)];
+    textField.placeholder = @"请输入搜索关键词";
+    textField.background = [UIImage imageNamed:@"search_bar_bg_image"];
+    textField.font = [UIFont systemFontOfSize:14];
+    textField.text = _selectedFilter.keyword;
+    textField.textColor = [UIColor darkGrayColor];
+    self.navigationItem.titleView = textField;
+    CGRect frame = textField.frame;
+    frame.size.width  = 30;
+    UIImageView *leftView = [[UIImageView alloc]imageViewWithFrame:frame image:[UIImage imageNamed:@"search_magnifying_glass"]];
+    leftView.contentMode = UIViewContentModeCenter;
+    textField.leftViewMode = UITextFieldViewModeAlways;
+    textField.leftView = leftView;
+    [textField addTarget:self action:@selector(textFieldClick:) forControlEvents:UIControlEventEditingDidBegin];
+
+//    self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
+//    [self.searchBar setSearchButtonType:SearchButtonType_Product];
+//    self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
+//    [self.searchBar rightButtonChangeStyleWithKey:RightBtnStyle_More];
+//    self.searchBar.delegate = self;
+//    self.searchBar.parentVC = self;
+//    [self.searchBar setSearchButtonType:SearchButtonType_Product];
+//    [self.searchBar setEnabled:NO];
+    
     
     self.filterView = [[ProductFilterView alloc] initWithDefaultData:_filterData SeletedData:_selectedFilter];
+    
     _filterView.delegate = self;
-    CGRect frame = _filterView.frame;
-    frame.origin.y = CGRectGetMaxY(_searchBar.frame);
-    _filterView.frame = frame;
+//    CGRect frame = _filterView.frame;
+//    frame.origin.y = CGRectGetMaxY(_searchBar.frame);
+//    _filterView.frame = frame;
     //_filterView.frame = CGRectMake(0, 0, kWindowWidth, 44);
     [self.view addSubview:_filterView];
     
-    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterView.frame), kWindowWidth, kWindowHeightWithoutNavigationBar - 40) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetMaxY(_filterView.frame), kWindowWidth, kWindowHeight - 44) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     [self.view addSubview:_tableView];
     [self.view addSubview:self.searchBar];
     __weak typeof(self) weakSelf = self;
@@ -93,7 +122,7 @@
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-    layout.itemSize = CGSizeMake(145, 210);
+    layout.itemSize = CGSizeMake(144, 217);
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = 10;
     
@@ -145,10 +174,10 @@
     [param setObject:@"北京市" forKey:@"cityName"];
     [param setObject:@(_currentPage) forKey:@"pageNo"];
     [param setObject:kOnePageCount forKey:@"onePageCount"];
-    [param setObject:@(_selectedFilter.sort) forKey:@"sort"];
+    [param setObject:@(_selectedFilter.pSort.sort) forKey:@"sort"];
     if (_selectedFilter.keyword && _selectedFilter.keyword.length>0) [param setObject:_selectedFilter.keyword forKey:@"keyword"];
-    if (_selectedFilter.pMinPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",_selectedFilter.pMinPrice<=_selectedFilter.pMinPrice?_selectedFilter.pMinPrice:_selectedFilter.pMaxPrice] forKey:@"priceMinYuan"];
-    if (_selectedFilter.pMaxPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",_selectedFilter.pMinPrice>_selectedFilter.pMinPrice?_selectedFilter.pMinPrice:_selectedFilter.pMaxPrice] forKey:@"priceMaxYuan"];
+    if (_selectedFilter.pMinPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",_selectedFilter.pMinPrice<=_selectedFilter.pMaxPrice?_selectedFilter.pMinPrice:_selectedFilter.pMaxPrice] forKey:@"priceMinYuan"];
+    if (_selectedFilter.pMaxPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",_selectedFilter.pMinPrice>_selectedFilter.pMaxPrice?_selectedFilter.pMinPrice:_selectedFilter.pMaxPrice] forKey:@"priceMaxYuan"];
     if (_selectedFilter.pBrand) [param setObject:@(_selectedFilter.pBrand.brandId) forKey:@"brands"];
     if (_selectedFilter.pStore) [param setObject:_selectedFilter.pStore.storeCode forKey:@"storeCode"];
     if (_selectedFilter.pClass) [param setObject:_selectedFilter.pClass.classCode forKey:@"catCode"];
@@ -242,15 +271,20 @@
             [self.view addSubview:_emptyView];
         }
     }
-    
+    if (!ApplicationDelegate.gLocation.isSuccessLocation) {
+        [_footerView removeFromSuperview];
+        _footerView.frame = CGRectMake(0, kWindowHeightWithoutNavigationBar-25, kWindowWidth, 25);
+        [self.view addSubview:_footerView];
+    }
     [_tableView reloadData];
     [_collectionView reloadData];
 }
 
 - (void)clickProductFilterView:(ProductFilterView *)view returnData:(ProductSelectedFilter *)data IsGrid:(BOOL)isGrid IsFilter:(BOOL)isFilter actionType:(FilterViewAction)action{
+    _selectedFilter.pSort = data.pSort;
+    _selectedFilter.pStore = data.pStore;
     if (isFilter) {
         ProductFilterViewController *vc = [[ProductFilterViewController alloc]init];
-        //_selectedFilter = data;
         vc.selectedFilter = _selectedFilter.copy;
         vc.filterData = _filterData;
         [vc setBlock:^(ProductSelectedFilter *filter) {
@@ -261,14 +295,20 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else if(action == FilterViewActionGrid){
         if ([_collectionView superview]) {
+            
+            _isCollection = NO;
+            
             [_collectionView removeFromSuperview];
             
             //[self.view addSubview:_tableView];
-            [self.view insertSubview:_tableView belowSubview:_searchBar];
+            [self.view insertSubview:_tableView atIndex:1];
         } else {
+            
+            _isCollection = YES;
+            
             [_tableView removeFromSuperview];
             //[self.view addSubview:_collectionView];
-            [self.view insertSubview:_collectionView belowSubview:_searchBar];
+            [self.view insertSubview:_collectionView atIndex:1];
         }
         [self reloadData];
     }else {
@@ -289,7 +329,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    return 119;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -344,19 +384,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-//    self.navigationController.navigationBar.clipsToBounds = NO;
-    self.navigationController.navigationBarHidden = YES;
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     //[self.searchBar removeFromSuperview];
 //    self.navigationController.navigationBar.clipsToBounds = YES;
-    self.navigationController.navigationBarHidden = NO;
+    //self.navigationController.navigationBarHidden = NO;
     if ([_filterView isShow]) {
         [_filterView showSort];
     }
@@ -423,7 +456,6 @@
     }
 }
 
-
 - (void)customSearchStartWork {
     if (_filterView.isShow)
         [_filterView showSort];
@@ -438,5 +470,78 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+- (void)textFieldClick:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat pointY;
+    CGRect tableFrame;
+    CGRect filterViewFrame = _filterView.frame;
+    
+    if (_isCollection) {
+        pointY = [scrollView.panGestureRecognizer translationInView:_collectionView].y;
+        tableFrame =  _collectionView.frame;
+    }else {
+        pointY = [scrollView.panGestureRecognizer translationInView:_tableView].y;
+        tableFrame =  _tableView.frame;
+    }
+
+    if (pointY < 0) {
+        //隐藏
+        if (filterViewFrame.origin.y <= -44) {
+            
+            filterViewFrame.origin.y = -44;
+            tableFrame.origin.y = 0;
+            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar+44;
+            
+        }else {
+            
+            filterViewFrame.origin.y -= changeHeight;
+            tableFrame.origin.y -= changeHeight;
+            tableFrame.size.height += changeHeight;
+        }
+        
+    }else {
+        //显示
+        if (filterViewFrame.origin.y >= 0) {
+            
+            filterViewFrame.origin.y = 0;
+            tableFrame.origin.y = CGRectGetMaxY(_filterView.frame);
+            tableFrame.size.height = kWindowHeightWithoutNavigationBarAndTabbar;
+            
+        }else {
+            
+            filterViewFrame.origin.y += changeHeight;
+            tableFrame.origin.y += changeHeight;
+            tableFrame.size.height -= changeHeight;
+            
+        }
+    }
+    
+    _filterView.frame = filterViewFrame;
+    if (_isCollection) {
+        _collectionView.frame = tableFrame;
+    }else {
+        _tableView.frame = tableFrame;
+    }
+}
+
+- (IBAction)onSetLoction:(id)sender {
+    if(!ApplicationDelegate.gLocation.isSuccessLocation) {
+        [UIAlertView showWithTitle:@"提示" message:@"访问此类别需要开启定位服务，请在“设置->隐私->定位服务”中开启居然在线的定位~" cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 0) {
+                return;
+            }else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            }
+        }];
+    }
+
+}
 
 @end

@@ -9,6 +9,8 @@
 #import "FilterInShopViewController.h"
 #import "ProductFilterData.h"
 #import "ProductSeletedFilter.h"
+#import "ProductListViewController.h"
+#import "SearchViewController.h"
 
 @interface FilterInShopViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -21,10 +23,17 @@
 
 @implementation FilterInShopViewController
 
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"商品分类";
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
+
     [self loadData];
 }
 
@@ -43,13 +52,15 @@
                 _dataList = [FilterInShop buildUpWithValueForList:[data objectForKey:@"childrenCats"]];
                 for (FilterInShop *filter in _dataList) {
                     filter.childList = [FilterInShop buildUpWithValueForList:filter.childList];
-                    FilterInShop *all = [[FilterInShop alloc]init];
-                    all.name = @"全部";
-                    all.parentId = filter.parentId;
-                    all.depth = filter.depth;
-                    all.Id = filter.Id;
-                    all.childList = filter.childList;
-                    [filter.childList insertObject:all atIndex:0];
+                    if (filter.childList.count>0) {
+                        FilterInShop *all = [[FilterInShop alloc]init];
+                        all.name = @"全部";
+                        all.parentId = filter.parentId;
+                        all.depth = filter.depth;
+                        all.Id = filter.Id;
+                        all.childList = filter.childList;
+                        [filter.childList insertObject:all atIndex:0];
+                    }
                 }
                 _openSatusList = [[NSMutableArray alloc] init];
                 for (int i=0; i<_dataList.count; i++) {
@@ -111,8 +122,12 @@
     titleButton.frame = headerView.frame;
     FilterInShop *filters = [_dataList objectAtIndex:section];
     [titleButton setTitle:[NSString stringWithFormat:@"%@",filters.name] forState:UIControlStateNormal];
-    titleButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [titleButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    if ([[_openSatusList objectAtIndex:section] boolValue]) {
+        [titleButton setTitleColor:kBlueColor forState:UIControlStateNormal];
+    }else {
+        [titleButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    }
+    titleButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     titleButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     titleButton.contentEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
     titleButton.tag = 6666+section;
@@ -123,10 +138,16 @@
     [headerView addSubview:line];
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(295, 16, 11, 6)];
     imageView.backgroundColor = [UIColor whiteColor];
-    if ([[_openSatusList objectAtIndex:section] integerValue]==0) {
-        imageView.image = [UIImage imageNamed:@"filter-icon-dropdown-1.png"];
-    }else{
-        imageView.image = [UIImage imageNamed:@"filter-icon-dropdown-2.png"];
+    if (filters.childList.count>0) {
+        if ([[_openSatusList objectAtIndex:section] integerValue]==0) {
+            imageView.image = [UIImage imageNamed:@"filter-icon-dropdown-1.png"];
+        }else{
+            imageView.image = [UIImage imageNamed:@"filter-icon-dropdown-2.png"];
+        }
+
+    }
+    else {
+        imageView.image = nil;
     }
     [headerView addSubview:imageView];
     return headerView;
@@ -137,7 +158,7 @@
     FilterInShop *filters = [_dataList objectAtIndex:[indexPath section]];
     FilterInShop *filter = [filters.childList objectAtIndex:[indexPath row]];
     if (_block) {
-        [self.navigationController popViewControllerAnimated:YES];
+        //[self.navigationController popViewControllerAnimated:NO];
         ProductSelectedFilter *sel = [[ProductSelectedFilter alloc]init];
         sel.pCategory = [[ProductCategory alloc]init];
         sel.pCategory.Id = filter.Id;
@@ -146,19 +167,45 @@
         sel.pCategory.depth = filter.depth;
         sel.isInShop = YES;
         sel.shopId = _shopId;
-        _block(sel);
+        //_block(sel);
+        SearchViewController *search = [[SearchViewController alloc]init];
+        [self.navigationController pushViewController:search animated:NO];
+        ProductListViewController *vc = [[ProductListViewController alloc] init];
+        vc.selectedFilter = sel;
+        [search.navigationController pushViewController:vc animated:YES];
     }
 }
 
 - (void)headerViewClick:(id)sender {
     UIButton *btn = (UIButton *)sender;
     int section = btn.tag-6666;
-    if ([[_openSatusList objectAtIndex:section] boolValue]) {
-        [_openSatusList replaceObjectAtIndex:section withObject:@(NO)];
+    if ([_dataList[section] childList].count>0) {
+        if ([[_openSatusList objectAtIndex:section] boolValue]) {
+            [_openSatusList replaceObjectAtIndex:section withObject:@(NO)];
+        }else {
+            [_openSatusList replaceObjectAtIndex:section withObject:@(YES)];
+        }
+        [_tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
     }else {
-        [_openSatusList replaceObjectAtIndex:section withObject:@(YES)];
+        FilterInShop *filter = _dataList[section];
+        if (_block) {
+            //[self.navigationController popViewControllerAnimated:NO];
+            ProductSelectedFilter *sel = [[ProductSelectedFilter alloc]init];
+            sel.pCategory = [[ProductCategory alloc]init];
+            sel.pCategory.Id = filter.Id;
+            sel.pCategory.parentId = filter.parentId;
+            sel.pCategory.name = filter.name;
+            sel.pCategory.depth = filter.depth;
+            sel.isInShop = YES;
+            sel.shopId = _shopId;
+            //_block(sel);
+            SearchViewController *search = [[SearchViewController alloc]init];
+            [self.navigationController pushViewController:search animated:NO];
+            ProductListViewController *vc = [[ProductListViewController alloc] init];
+            vc.selectedFilter = sel;
+            [search.navigationController pushViewController:vc animated:YES];
+        }
     }
-    [_tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)setFinishBlock:(FilterSelected)finished{

@@ -45,7 +45,7 @@
     if (_product && _product.goodsImagesList && _product.goodsImagesList.count>0) {
         [_photoImageView setImageWithURLString:_product.goodsImagesList[0] Editing:YES];
         _nameLabel.text = _product.goodsName;
-        _priceLabel.text = ApplicationDelegate.gLocation.isSuccessLocation ? _product.priceString : @"";
+        _priceLabel.text = [UserLocation isShowPrice] ? _product.priceString : @"";
         _priceLabel.textColor = kBlueColor;
     }else{
         _productView.hidden = YES;
@@ -194,16 +194,17 @@
         }
     }
     
-    NSString *productUrl;
-    if (_shop) {
-        productUrl = @"";
-    }else {
-        productUrl = [NSString stringWithFormat:@"http://mall.juran.cn/product/%d.htm",_product.linkProductId];
-    }
+//    NSString *productUrl;
+//    if (_shop) {
+//        productUrl = @"";
+//    }else {
+//        productUrl = [NSString stringWithFormat:@"http:\/\/mall.juran.cn\/product\/%d.htm",_product.linkProductId];
+//    }
     NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", _product?_product.shopId:_shop.shopId],
                            @"senderName":_senderName,
+                           @"linkProductId":@(_product.linkProductId),
                            @"mobilePhone":_mobilePhone,
-                           @"memo": [NSString stringWithFormat:@"%@ %@",memo, productUrl]};
+                           @"memo": memo};
     [self showHUD];
     [[ALEngine shareEngine] pathURL:JR_SHOP_PRIVATE_LETTER parameters:param HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         [self hideHUD];

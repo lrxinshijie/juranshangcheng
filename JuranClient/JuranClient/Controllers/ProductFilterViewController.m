@@ -32,24 +32,6 @@
     NSString *catTreeString;
 }
 
-- (instancetype)initWithKeyword:(NSString *)keyword
-                           Sort:(int)sort
-                          Store:(ProductStore *)store
-                       IsInShop:(BOOL)isInShop
-                         ShopId:(long)shopId
-{
-    self = [super init];
-    if (self) {
-        self.selectedFilter = [[ProductSelectedFilter alloc]init];
-        self.selectedFilter.keyword = keyword;
-        self.selectedFilter.isInShop = isInShop;
-        self.selectedFilter.sort = sort;
-        self.selectedFilter.pStore = store;
-        self.selectedFilter.shopId = shopId;
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -106,7 +88,7 @@
         _selectedFilter.pBrand=nil;
     }
     
-    if (_selectedFilter.pCategory && ApplicationDelegate.gLocation.isSuccessLocation) {
+    if (_selectedFilter.pCategory && [UserLocation isShowPrice]) {
         [_conditionArray addObject:@"价格(元)"];
         [_detailArray addObject:@""];
     }else {

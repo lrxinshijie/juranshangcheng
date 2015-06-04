@@ -50,6 +50,20 @@
 #import "MyDemandViewController.h"
 #import "TopicDetailViewController.h"
 #import "JRTopic.h"
+#import "ShopListViewController.h"
+#import "AccountManageViewController.h"
+#import "AccountSecurityViewController.h"
+#import "OrderListViewController.h"
+#import "MyCollectViewController.h"
+#import "MyFollowViewController.h"
+#import "InteractionViewController.h"
+#import "AskDetailViewController.h"
+#import "PersonalDataViewController.h"
+#import "MyAskOrAnswerViewController.h"
+#import "ShopHomeViewController.h"
+#import "JRShop.h"
+#import "JRProduct.h"
+#import "ProductDetailViewController.h"
 
 @implementation Public
 
@@ -484,18 +498,19 @@
     ASLog(@"param:%@",param);
     UINavigationController *navigationController = (UINavigationController *)ApplicationDelegate.tabBarController.selectedViewController;
     NSInteger type = [param getIntValueForKey:@"type" defaultValue:0];
+    
     if (type == 1){//首页
-        NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
-        if (vcs.count == 5) {
-            UINavigationController *nav = [vcs objectAtIndex:3];
-            UIViewController *vc = nav.viewControllers.firstObject;
-            if ([vc isKindOfClass:[DiscoverViewController class]]) {
-                if (navigationController.viewControllers.count > 1) {
-                    [navigationController popToRootViewControllerAnimated:NO];
-                }
-                [ApplicationDelegate.tabBarController setSelectedIndex:0];
-            }
-        }
+        //        NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
+        //        if (vcs.count == 5) {
+        //            UINavigationController *nav = [vcs objectAtIndex:3];
+        //            UIViewController *vc = nav.viewControllers.firstObject;
+        //            if ([vc isKindOfClass:[DiscoverViewController class]]) {
+        //                if (navigationController.viewControllers.count > 1) {
+        //                    [navigationController popToRootViewControllerAnimated:NO];
+        //                }
+        //                [ApplicationDelegate.tabBarController setSelectedIndex:0];
+        //            }
+        //        }
     }else if (type == 2){
         if ([param.allKeys containsObject:@"id"]) {
             DesignerDetailViewController *dv = [[DesignerDetailViewController alloc] init];
@@ -513,18 +528,6 @@
             cv.hidesBottomBarWhenPushed = YES;
             [navigationController pushViewController:cv animated:YES];
         }
-    }else if (type == 7){
-        JRWebViewController *wv = [[JRWebViewController alloc] init];
-        wv.urlString = [param getStringValueForKey:@"url" defaultValue:@""];
-        wv.hidesBottomBarWhenPushed = YES;
-        [navigationController pushViewController:wv animated:YES];
-    }else if (type == 6){
-        SubjectDetailViewController *sd = [[SubjectDetailViewController alloc] init];
-        JRSubject *subject = [[JRSubject alloc] init];
-        subject.key = [param getIntValueForKey:@"id" defaultValue:0];
-        sd.subject = subject;
-        sd.hidesBottomBarWhenPushed = YES;
-        [navigationController pushViewController:sd animated:YES];
     }else if (type == 3){
         if ([param.allKeys containsObject:@"id"]) {
             JRCase *jrCase = [[JRCase alloc] init];
@@ -540,16 +543,6 @@
             cv.hidesBottomBarWhenPushed = YES;
             [navigationController pushViewController:cv animated:YES];
         }
-    }else if (type == 8){
-        //消息列表
-        PushMessageViewController *vc = [[PushMessageViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [navigationController pushViewController:vc animated:YES];
-    }else if (type == 9){
-        //私信列表
-        PrivateMessageViewController *pv = [[PrivateMessageViewController alloc] init];
-        pv.hidesBottomBarWhenPushed = YES;
-        [navigationController pushViewController:pv animated:YES];
     }else if (type == 4){
         if ([param.allKeys containsObject:@"id"]) {
             WikiDetailViewController *vc = [[WikiDetailViewController alloc] init];
@@ -565,6 +558,7 @@
                     if (navigationController.viewControllers.count > 1) {
                         [navigationController popToRootViewControllerAnimated:NO];
                     }
+                    [[(DiscoverViewController*)vc wikiFilterData]setObject:[param getStringValueForKey:@"catCode2" defaultValue:@""] forKey:@"type"];
                     [(DiscoverViewController*)vc showSegmentWithIndex:1];
                     [ApplicationDelegate.tabBarController setSelectedIndex:3];
                 }
@@ -584,6 +578,28 @@
             vc.hidesBottomBarWhenPushed = YES;
             [navigationController pushViewController:vc animated:YES];
         }
+    }else if (type == 6){
+        SubjectDetailViewController *sd = [[SubjectDetailViewController alloc] init];
+        JRSubject *subject = [[JRSubject alloc] init];
+        subject.key = [param getIntValueForKey:@"id" defaultValue:0];
+        sd.subject = subject;
+        sd.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:sd animated:YES];
+    }else if (type == 7){
+        JRWebViewController *wv = [[JRWebViewController alloc] init];
+        wv.urlString = [param getStringValueForKey:@"url" defaultValue:@""];
+        wv.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:wv animated:YES];
+    }else if (type == 8){
+        //消息列表
+        PushMessageViewController *vc = [[PushMessageViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:vc animated:YES];
+    }else if (type == 9){
+        //私信列表
+        PrivateMessageViewController *pv = [[PrivateMessageViewController alloc] init];
+        pv.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:pv animated:YES];
     }else if (type == 10 && [param.allKeys containsObject:@"tid"]){
         OrderDetailViewController *od = [[OrderDetailViewController alloc] init];
         NSInteger tradeType = [param getIntValueForKey:@"tradeType" defaultValue:0];
@@ -606,13 +622,29 @@
         BidListViewController *vc = [[BidListViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
+    }else if (type == 16){//家装-设计师专访：type=16
+        
     }else if (type == 17){//热销商品
-        ProductListViewController *vc = [[ProductListViewController alloc]init];
-        vc.selectedFilter = [[ProductSelectedFilter alloc]init];
-        vc.selectedFilter.isInShop = NO;
-        vc.selectedFilter.sort = [param getIntegerValueForKey:@"sort" defaultValue:4];
-        vc.hidesBottomBarWhenPushed = YES;
-        [navigationController pushViewController:vc animated:YES];
+        if ([param.allKeys containsObject:@"id"]) {
+            NSInteger sId = [param getIntegerValueForKey:@"id" defaultValue:0];
+            if(sId>0) {
+                ProductDetailViewController *vc = [[ProductDetailViewController alloc]init];
+                vc.product.linkProductId = sId;
+                vc.hidesBottomBarWhenPushed = YES;
+                [navigationController pushViewController:vc animated:YES];
+            }
+        }
+    }else if (type == 18){//店铺：type=18
+        if ([param.allKeys containsObject:@"id"]) {
+            NSInteger sId = [param getIntegerValueForKey:@"id" defaultValue:0];
+            if(sId>0) {
+                ShopHomeViewController *vc = [[ShopHomeViewController alloc]init];
+                vc.shop = [[JRShop alloc]init];
+                vc.shop.shopId = sId;
+                vc.hidesBottomBarWhenPushed = YES;
+                [navigationController pushViewController:vc animated:YES];
+            }
+        }
     }else if (type == 19){//门店导航
 #ifndef kJuranDesigner
         NaviStoreListViewController *vc = [[NaviStoreListViewController alloc] init];
@@ -665,6 +697,13 @@
         SearchViewController *vc = [[SearchViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
+    }else if (type == 27){//会员-个人资料：type=27
+        if ([navigationController checkLogin]) {
+            PersonalDataViewController *vc = [[PersonalDataViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
     }else if (type == 28){//会员需求
 #ifndef kJuranDesigner
         if (![navigationController checkLogin:^{
@@ -679,6 +718,101 @@
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
 #endif
+    }else if (type == 29){//会员-问答：type=29
+        if ([navigationController checkLogin]) {
+            MyAskOrAnswerViewController *vc = [[MyAskOrAnswerViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
+    }else if (type == 30){//会员-互动管理：type=30
+        if ([navigationController checkLogin]) {
+            InteractionViewController *vc = [[InteractionViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
+    }else if (type == 31){//会员-我的关注：type=31
+        if ([navigationController checkLogin]) {
+            MyFollowViewController *vc = [[MyFollowViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
+    }else if (type == 32){//会员-我的收藏：type=32
+        if ([navigationController checkLogin]) {
+            MyCollectViewController *vc = [[MyCollectViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
+    }else if (type == 33){//会员-订单管理：type=33
+        if ([navigationController checkLogin]) {
+            OrderListViewController *vc = [[OrderListViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
+    }else if (type == 34){//会员-账户安全：type=34
+        if ([navigationController checkLogin]) {
+            AccountSecurityViewController *vc = [[AccountSecurityViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
+    }else if (type == 35){//会员-账户管理：type=35
+        if ([navigationController checkLogin]) {
+            AccountManageViewController *vc = [[AccountManageViewController alloc]init];
+            [ApplicationDelegate.tabBarController.viewControllers[4] popToRootViewControllerAnimated:NO];
+            [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
+            [ApplicationDelegate.tabBarController setSelectedIndex:4];
+        }
+    }else if (type == 36){//专题列表：type=36
+        NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
+        if (vcs.count == 5) {
+            UINavigationController *nav = [vcs objectAtIndex:3];
+            UIViewController *vc = nav.viewControllers.firstObject;
+            if ([vc isKindOfClass:[DiscoverViewController class]]) {
+                if (navigationController.viewControllers.count > 1) {
+                    [navigationController popToRootViewControllerAnimated:NO];
+                }
+                [(DiscoverViewController*)vc showSegmentWithIndex:0];
+                [ApplicationDelegate.tabBarController setSelectedIndex:3];
+            }
+        }
+    }else if (type == 37){//店铺列表：type=37
+            ShopListViewController *vc = [[ShopListViewController alloc]init];
+            vc.cityName = @"北京市";
+            vc.keyword = @"";
+            vc.sort = 9;
+            vc.hidesBottomBarWhenPushed = YES;
+            [navigationController pushViewController:vc animated:YES];
+    }else if (type == 38){//商品列表：type=38
+        SearchViewController *search = [[SearchViewController alloc]init];
+        search.hidesBottomBarWhenPushed = YES;
+        [navigationController pushViewController:search animated:NO];
+        
+        ProductListViewController *vc = [[ProductListViewController alloc]init];
+        vc.selectedFilter = [[ProductSelectedFilter alloc]init];
+        vc.selectedFilter.isInShop = NO;
+        vc.selectedFilter.pSort.sort = [param getIntegerValueForKey:@"sort" defaultValue:9];
+        vc.selectedFilter.pStore.storeCode = [param getStringValueForKey:@"storeCode" defaultValue:@""];
+        vc.selectedFilter.pCategory.urlContent = [param getStringValueForKey:@"urlContent" defaultValue:@""];
+        
+        [search.navigationController pushViewController:vc animated:YES];
+    }else if (type == 39){//话题列表：type=39
+        NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
+        if (vcs.count == 5) {
+            UINavigationController *nav = [vcs objectAtIndex:3];
+            UIViewController *vc = nav.viewControllers.firstObject;
+            if ([vc isKindOfClass:[DiscoverViewController class]]) {
+                if (navigationController.viewControllers.count > 1) {
+                    [navigationController popToRootViewControllerAnimated:NO];
+                }
+                [(DiscoverViewController*)vc showSegmentWithIndex:3];
+                [ApplicationDelegate.tabBarController setSelectedIndex:3];
+            }
+        }
     }else if (type == 40){//扫一扫
 #ifndef kJuranDesigner
         if (![QRBaseViewController isRuning]) {
@@ -687,6 +821,18 @@
         }
 #endif
     }
+//    else if (type == 41){//发现-话题列表：type=41
+//        [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
+//        [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:3];
+//        [ApplicationDelegate.tabBarController setSelectedIndex:3];
+//    }
+    //    else if (type == 42){//专题列表：type=42
+    //        if ([navigationController checkLogin]) {
+    //            [ApplicationDelegate.tabBarController.viewControllers[3] popToRootViewControllerAnimated:NO];
+    //            [ApplicationDelegate.tabBarController.viewControllers[3] showSegmentWithIndex:0];
+    //            [ApplicationDelegate.tabBarController setSelectedIndex:3];
+    //        }
+    //    }
 }
 
 + (NSDictionary *)deviceInfo{

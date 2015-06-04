@@ -14,7 +14,11 @@
 {
     self = [super init];
     if (self) {
-        _sort = 9;
+        _pSort = [[ProductSort alloc]init];
+        _isInShop = NO;
+        _keyword = @"";
+        _pSort.sort = 9;
+        _pSort.name = @"综合排序";
         _pAttributeDict = [NSMutableDictionary dictionaryWithCapacity:0];
     }
     return self;
@@ -23,7 +27,7 @@
 - (id)copyWithZone:(NSZone *)zone {
     ProductSelectedFilter *theCopy = [[[self class] allocWithZone:zone]init];
     theCopy.isInShop = self.isInShop;
-    theCopy.sort = self.sort;
+    theCopy.pSort = self.pSort.copy;
     theCopy.keyword = self.keyword.copy;
     theCopy.shopId = self.shopId;
     theCopy.pCategory = self.pCategory.copy;
@@ -66,10 +70,10 @@
     [param setObject:@"北京市" forKey:@"cityName"];
     [param setObject:@(1) forKey:@"pageNo"];
     [param setObject:@(1) forKey:@"onePageCount"];
-    [param setObject:@(filter.sort) forKey:@"sort"];
+    [param setObject:@(filter.pSort.sort) forKey:@"sort"];
     if (filter.keyword && filter.keyword.length>0) [param setObject:filter.keyword forKey:@"keyword"];
-    if (filter.pMinPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice<=filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMinYuan"];
-    if (filter.pMaxPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice>filter.pMinPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMaxYuan"];
+    if (filter.pMinPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice<=filter.pMaxPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMinYuan"];
+    if (filter.pMaxPrice>0) [param setObject:[NSString stringWithFormat:@"%ld",filter.pMinPrice>filter.pMaxPrice?filter.pMinPrice:filter.pMaxPrice] forKey:@"priceMaxYuan"];
     if (filter.pBrand) [param setObject:@(filter.pBrand.brandId) forKey:@"brands"];
     if (filter.pStore) [param setObject:filter.pStore.storeCode forKey:@"storeCode"];
     if (filter.pClass) [param setObject:filter.pClass.classCode forKey:@"catCode"];
