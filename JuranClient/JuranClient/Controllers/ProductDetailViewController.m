@@ -375,7 +375,7 @@
     _attributeTableView.bounces = NO;
     
     frame = _attributeTableView.frame;
-    frame.size.height = 351;
+    frame.size.height = 355;
     frame.origin.y = CGRectGetHeight(_attributePopView.frame) - CGRectGetHeight(frame);
     _attributeTableView.frame = frame;
 }
@@ -496,7 +496,7 @@
     if ([tableView isEqual:_baseTableView] && indexPath.section == 1) {
         heigth = CGRectGetHeight(_shopView.frame);
     }else if ([tableView isEqual:_detailTableView] && _segCtl.selectedIndex == 2){
-        heigth = 100;
+        heigth = 119;
     }else if ([tableView isEqual:_attributeTableView]){
         heigth = [_attributeHeights[indexPath.row] floatValue];
     }

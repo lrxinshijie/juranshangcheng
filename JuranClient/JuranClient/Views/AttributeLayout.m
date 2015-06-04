@@ -35,6 +35,10 @@
                 CGRect frame = currentLayoutAttributes.frame;
                 frame.origin.x = origin + maximumSpacing;
                 currentLayoutAttributes.frame = frame;
+            }else{
+                CGRect frame = currentLayoutAttributes.frame;
+                frame.origin.x = 0;
+                currentLayoutAttributes.frame = frame;
             }
         }
         

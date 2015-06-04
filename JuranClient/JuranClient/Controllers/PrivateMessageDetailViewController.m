@@ -52,7 +52,7 @@
     
 #ifndef kJuranDesigner
 //    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"private_message_more"] rightBarButtonItemAction:@selector(onDetail)];
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMenu)];
+    //[self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMenu)];
     
 #endif
     

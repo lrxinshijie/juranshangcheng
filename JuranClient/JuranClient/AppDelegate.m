@@ -106,7 +106,7 @@
 //DEV
 #define kBaiduMapKey @"u47QpGFlx3CgEmRnL0iN33YX"
 //生产
-//#define kBaiduMapKey @"MadY3qvvgFGNqZAqNEmE8nlP";
+//#define kBaiduMapKey @"MadY3qvvgFGNqZAqNEmE8nlP"
 
 
 #endif
@@ -154,6 +154,7 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         ASLog(@"registrationID:%@",[APService registrationID]);
         [JRUser refreshToken:^{
+            [UIViewController loadCenterInfo];
             NSDictionary *param = @{@"imei": [APService registrationID],
                                     @"mac": @"",
                                     @"model": [Public deviceModel],
@@ -250,6 +251,10 @@
 
 - (void)networkDidLogin:(NSNotification *)notification{
     self.clientId = [APService registrationID];
+    ASLog(@"[APService registrationID] = %@",self.clientId);
+    if ([JRUser isLogin]) {
+        [JRUser refreshToken:nil];
+    }
 }
 
 - (void)jumpToMain{
@@ -470,6 +475,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [UIViewController loadCenterInfo];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -559,7 +565,7 @@
     NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
 
     NSInteger type = [userInfo getIntValueForKey:@"type" defaultValue:0];
-    
+    [UIViewController loadCenterInfo];
     if (type == 2) {
         NSString *link = [userInfo getStringValueForKey:@"link" defaultValue:@""];
         
@@ -613,6 +619,10 @@
 
 - (void)minusBadgeNumber:(NSInteger)num{
     [UIApplication sharedApplication].applicationIconBadgeNumber -= num;
+}
+
+- (void)setBadgeNumber:(NSInteger)num{
+    [UIApplication sharedApplication].applicationIconBadgeNumber = num;
 }
 
 @end

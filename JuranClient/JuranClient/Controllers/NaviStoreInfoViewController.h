@@ -9,9 +9,11 @@
 #import "ALViewController.h"
 #import "NaviStoreListViewController.h"
 @class JRStore;
+@class UserLocation;
 
 @interface NaviStoreInfoViewController : ALViewController
 @property (strong, nonatomic) JRStore *store;
 @property (nonatomic, assign) NaviType naviType;
 @property (assign, nonatomic) BOOL couldGuide;
+@property (nonatomic, assign) CLLocationCoordinate2D mapCenter;
 @end

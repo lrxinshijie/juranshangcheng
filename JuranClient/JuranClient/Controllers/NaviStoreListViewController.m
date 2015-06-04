@@ -55,9 +55,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [_tableViewStore registerNib:[UINib nibWithNibName:@"NaviStoreCell" bundle:nil] forCellReuseIdentifier:@"NaviStoreCell"];
-    _cityName = @"北京市";
-    if(ApplicationDelegate.gLocation.isSuccessLocation)
+    _tableViewStore.tableFooterView = [[UIView alloc]init];
+    if(ApplicationDelegate.gLocation.isSuccessLocation) {
         _btnChangeCity.hidden = YES;
+        _cityName = ApplicationDelegate.gLocation.cityName;
+    }else {
+        _cityName = @"北京市";
+    }
     if (_naviType == NaviTypeStore) {
         self.navigationItem.title = @"门店导航";
     }else {
@@ -103,7 +107,7 @@
 }
 
 - (void)reloadView {
-    _mapView.zoomLevel = 11;
+    _mapView.zoomLevel = 10;
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
         UserLocation *location = [[UserLocation alloc]init];
         [location GeoCode:ApplicationDelegate.gLocation.cityName Handler:^(UserLocation *loc) {
@@ -224,6 +228,7 @@
     info.couldGuide = store.couldGuidance;
     info.naviType = _naviType;
     info.store = store;
+    info.mapCenter = _mapView.centerCoordinate;
     [self.navigationController pushViewController:info animated:YES];
 }
 

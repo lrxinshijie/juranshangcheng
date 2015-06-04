@@ -140,7 +140,7 @@
 }
 
 - (void)loadData{
-    NSDictionary *param = @{@"cityName": _cityName,
+    NSDictionary *param = @{@"cityName": @"北京市",
                             @"keyword": _keyword,
                             @"sort": @(_sort),
                             @"pageNo": @(_currentPage),

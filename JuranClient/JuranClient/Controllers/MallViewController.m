@@ -38,6 +38,8 @@
 @property (nonatomic, strong) IBOutlet UIView *productView;
 @property (nonatomic, strong) IBOutlet UICollectionView *productCollectionView;
 @property (nonatomic, strong) NSArray *products;
+@property (strong, nonatomic) IBOutlet UILabel *shopTitle;
+@property (strong, nonatomic) IBOutlet UILabel *goodsTitle;
 
 @end
 
@@ -76,7 +78,7 @@
             [self hideHUD];
             return;
         }
-        
+        _shopTitle.text = [data getStringValueForKey:@"shopTitle" defaultValue:@""];
         NSArray *activeShopList = [data getArrayValueForKey:@"activeShopList" defaultValue:nil];
         
         self.shops = [JRShop buildUpWithValueForList:activeShopList];
@@ -86,6 +88,7 @@
         [[ALEngine shareEngine] pathURL:JR_MALL_ACTIVITY_PRODUCT parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@(NO)} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
             [self hideHUD];
             if (!error && [data isKindOfClass:[NSDictionary class]]) {
+                _goodsTitle.text = [data getStringValueForKey:@"goodsTitle" defaultValue:@""];
                 NSArray *activeGoodsList = [data getArrayValueForKey:@"activeGoodsList" defaultValue:nil];
                 
                 self.products = [JRProduct buildUpWithValueForList:activeGoodsList];

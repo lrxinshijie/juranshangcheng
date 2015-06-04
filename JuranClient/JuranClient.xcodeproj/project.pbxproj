@@ -591,6 +591,8 @@
 		14BF81AD1AEDF4E100D6A10F /* ShopListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C771ADCEA950037105E /* ShopListCell.m */; };
 		14C4872D1A6F7E0C0042A3D6 /* ALNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C4872C1A6F7E0C0042A3D6 /* ALNavigationController.m */; };
 		14C4872E1A6F7E0C0042A3D6 /* ALNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C4872C1A6F7E0C0042A3D6 /* ALNavigationController.m */; };
+		14C7072A1B20299B00529AF2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C707291B20299B00529AF2 /* Accounts.framework */; };
+		14C7072C1B2029AC00529AF2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C7072B1B2029AC00529AF2 /* Social.framework */; };
 		14C855471A2E196B00A15ED9 /* InteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855421A2E196B00A15ED9 /* InteractionViewController.m */; };
 		14C855481A2E196B00A15ED9 /* InteractionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C855431A2E196B00A15ED9 /* InteractionViewController.xib */; };
 		14C855491A2E196B00A15ED9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855451A2E196B00A15ED9 /* SettingsViewController.m */; };
@@ -2159,6 +2161,9 @@
 		14BCD78D1A8605B400825A90 /* order_btn_accessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_btn_accessory@2x.png"; sourceTree = "<group>"; };
 		14C4872B1A6F7E0C0042A3D6 /* ALNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALNavigationController.h; sourceTree = "<group>"; };
 		14C4872C1A6F7E0C0042A3D6 /* ALNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALNavigationController.m; sourceTree = "<group>"; };
+		14C707281B2024EF00529AF2 /* WeiboApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboApiObject.h; sourceTree = "<group>"; };
+		14C707291B20299B00529AF2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		14C7072B1B2029AC00529AF2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		14C855411A2E196B00A15ED9 /* InteractionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractionViewController.h; sourceTree = "<group>"; };
 		14C855421A2E196B00A15ED9 /* InteractionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractionViewController.m; sourceTree = "<group>"; };
 		14C855431A2E196B00A15ED9 /* InteractionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InteractionViewController.xib; sourceTree = "<group>"; };
@@ -3488,6 +3493,8 @@
 				1F78BB471B146F01006979A2 /* libz.dylib in Frameworks */,
 				1F78BB451B146EE1006979A2 /* GLKit.framework in Frameworks */,
 				1F78BB431B146ECA006979A2 /* libbz2.dylib in Frameworks */,
+				14C7072C1B2029AC00529AF2 /* Social.framework in Frameworks */,
+				14C7072A1B20299B00529AF2 /* Accounts.framework in Frameworks */,
 				1441A1971A29E449004A038E /* Security.framework in Frameworks */,
 				A971BC971A20825800C018D6 /* CoreGraphics.framework in Frameworks */,
 				1441A1A11A29E46B004A038E /* SystemConfiguration.framework in Frameworks */,
@@ -3665,6 +3672,7 @@
 		1441A15F1A29E3CD004A038E /* TencentWeiboSDK */ = {
 			isa = PBXGroup;
 			children = (
+				14C707281B2024EF00529AF2 /* WeiboApiObject.h */,
 				1441A1601A29E3CD004A038E /* libTCWeiboSDK.a */,
 				1441A1611A29E3CD004A038E /* WeiboApi.h */,
 			);
@@ -4720,6 +4728,8 @@
 				1F78BB461B146F01006979A2 /* libz.dylib */,
 				1F78BB441B146EE1006979A2 /* GLKit.framework */,
 				1F78BB421B146ECA006979A2 /* libbz2.dylib */,
+				14C7072B1B2029AC00529AF2 /* Social.framework */,
+				14C707291B20299B00529AF2 /* Accounts.framework */,
 				2C91E8EA1ADB64DF00B542DC /* OpenGLES.framework */,
 				2C91E8E61ADB647900B542DC /* CoreLocation.framework */,
 				A94525291AA5F1F9002DFA2A /* CoreText.framework */,
@@ -8235,12 +8245,12 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/IndoorGuidance/MapLib/lib",
 					"$(PROJECT_DIR)/JuranClient/Vendors/IndoorGuidance/Release-iphoneos",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv64";
+				VALID_ARCHS = "armv7 arm64";
 				VERSIONING_SYSTEM = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -8284,11 +8294,12 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/IndoorGuidance/MapLib/lib",
 					"$(PROJECT_DIR)/JuranClient/Vendors/IndoorGuidance/Release-iphoneos",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv64";
+				VALID_ARCHS = "armv7 arm64";
 				VERSIONING_SYSTEM = "";
 				WRAPPER_EXTENSION = app;
 			};

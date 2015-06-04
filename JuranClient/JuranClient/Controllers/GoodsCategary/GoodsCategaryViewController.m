@@ -22,6 +22,7 @@
 #import "ProductListViewController.h"
 #import "ProductFilterData.h"
 #import "ProductSeletedFilter.h"
+#import "SearchViewController.h"
 
 
 @interface GoodsCategaryViewController ()<UITableViewDataSource,UITableViewDelegate,CustomSecLevelViewDelegate,CustomThirdLevelCellDelegate,CustomShopViewDelegate,UIScrollViewDelegate>
@@ -36,12 +37,11 @@
     int cslv_turnLoc;
 }
 
-@property (strong, nonatomic) IBOutlet UIButton *locationButton;
-
 @property (strong, nonatomic) IBOutlet UITableView *listTableView;
 @property (strong, nonatomic) IBOutlet UITableView *fistLevelTableView;
-@property (strong, nonatomic) IBOutlet UILabel *viewTitle;
 @property (strong, nonatomic) IBOutlet UIView *tableLine;
+//@property (strong, nonatomic) IBOutlet UIView *headerView;
+
 @property (strong, nonatomic) UIView * tableLineUp;
 @property (assign, nonatomic) int lineY;
 
@@ -76,6 +76,10 @@
 
 @property (strong, nonatomic) NSString * parentCodeProduct;
 
+@property (strong, nonatomic) UILabel * countLabel;
+@property (strong, nonatomic) UILabel * readLabel;
+@property (copy,nonatomic) NSString *cityName;
+
 @end
 
 @implementation GoodsCategaryViewController
@@ -100,26 +104,33 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:self.isPopNavHide];
+    //[self.navigationController setNavigationBarHidden:self.isPopNavHide];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    _viewTitle.font = [UIFont systemFontOfSize:17 weight:10];
-    if (_vcStyle == CategaryStyle_Goods) {
-        _viewTitle.text = @"北京站";
-    }else if (_vcStyle == CategaryStyle_Shop){
-        _viewTitle.text = @"北京站";
-    }
-    [self.navigationController setNavigationBarHidden:YES];
+//    [super viewWillAppear:animated];
+//    if (_vcStyle == CategaryStyle_Goods) {
+//        _viewTitle.text = @"北京站";
+//    }else if (_vcStyle == CategaryStyle_Shop){
+//        _viewTitle.text = @"北京站";
+//    }
+    //[self.navigationController setNavigationBarHidden:YES];
     [self.listTableView setContentSize:CGSizeMake(243, 500)];
     
 }
 
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationItem.title = @"北京站";
+    _cityName = @"北京市";
+    [self configureMore];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
+
     //初始状态没有cell。
     self.cellCount = 0;
     //初始化数组什么的
@@ -130,9 +141,9 @@
         
     }else if (self.vcStyle == CategaryStyle_Goods){
         
-        [self requestDataWithRequestID:@"-1" city:self.locationButton.titleLabel.text level:1];
+        [self requestDataWithRequestID:@"-1" city:_cityName level:1];
     }
-    
+    //[NSNotificationCenter defaultCenter] add
     [self setLocation];
     
     __weak GoodsCategaryViewController * wSelf = self;
@@ -155,7 +166,7 @@
 - (void)setLocation
 {
     if (ApplicationDelegate.gLocation.isSuccessLocation) {
-        [self.locationButton setTitle:ApplicationDelegate.gLocation.cityName forState:UIControlStateNormal];
+        //[self.locationButton setTitle:ApplicationDelegate.gLocation.cityName forState:UIControlStateNormal];
     }else{
         
     }
@@ -173,14 +184,14 @@
         __weak GoodsCategaryViewController * wSelf = self;
         [vc setFinishBlock:^(JRAreaInfo *areaInfo) {
             ApplicationDelegate.gLocation.cityName = areaInfo.cityName;
-            [wSelf.locationButton setTitle:ApplicationDelegate.gLocation.cityName forState:UIControlStateNormal];
+            //[wSelf.locationButton setTitle:ApplicationDelegate.gLocation.cityName forState:UIControlStateNormal];
             if (wSelf.vcStyle == CategaryStyle_Shop) {
                 
                 [wSelf requestDataForBrandClass];
                 
             }else if (wSelf.vcStyle == CategaryStyle_Goods){
                 
-                [wSelf requestDataWithRequestID:@"-1" city:wSelf.locationButton.titleLabel.text level:1];
+                [wSelf requestDataWithRequestID:@"-1" city:_cityName level:1];
             }
         }];
         [self.navigationController setNavigationBarHidden:NO];
@@ -443,7 +454,7 @@
             self.pageNo = 1;
             [self requestDataForBrand:cell.cell_id pageNo:self.pageNo];
         }else if (self.vcStyle == CategaryStyle_Goods){
-            [self requestDataWithRequestID:cell.cell_id city:self.locationButton.titleLabel.text level:2];
+            [self requestDataWithRequestID:cell.cell_id city:_cityName level:2];
         }
         
         if (self.old_cell) {
@@ -542,7 +553,7 @@
         self.old_location = location;
         
         //请求数据
-        [self requestDataWithRequestID:rquestID city:self.locationButton.titleLabel.text level:3];
+        [self requestDataWithRequestID:rquestID city:_cityName level:3];
     }
     
     
@@ -710,6 +721,10 @@
 {
     //商品的
 //    NSLog(@"%@",msg);
+    SearchViewController *search = [[SearchViewController alloc]init];
+    search.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:search animated:NO];
+    
     ProductListViewController *vc = [[ProductListViewController alloc]init];
     vc.selectedFilter = [[ProductSelectedFilter alloc]init];
     vc.selectedFilter.pCategory = [[ProductCategory alloc]init];
@@ -718,12 +733,15 @@
     //传参过来的ParentCode暂时无用，暂不使用。
     vc.selectedFilter.pCategory.parentCode = self.parentCodeProduct;
     vc.selectedFilter.pCategory.urlContent = urlContent;
-    [self.navigationController pushViewController:vc animated:YES];
+    [search.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - CustomShopViewDelegate
 - (void)shopViewItemDidClickWithCode:(NSString *)brandCode Name:(NSString *)brandName ID:(long)brandID
 {
+    SearchViewController *search = [[SearchViewController alloc]init];
+    search.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:search animated:NO];
     //品牌
     ProductListViewController *vc = [[ProductListViewController alloc]init];
     vc.selectedFilter = [[ProductSelectedFilter alloc]init];
@@ -731,7 +749,7 @@
     vc.selectedFilter.pBrand.catCode = brandCode;
     vc.selectedFilter.pBrand.brandId = brandID;
     vc.selectedFilter.pBrand.brandName = brandName;
-    [self.navigationController pushViewController:vc animated:YES];
+    [search.navigationController pushViewController:vc animated:YES];
 }
 
 

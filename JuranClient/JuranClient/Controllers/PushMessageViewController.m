@@ -39,7 +39,7 @@
     self.rightButton = [self.view buttonWithFrame:CGRectMake(0, 0, 90, 30) target:self action:@selector(setAllReaded:) title:@"全部设置已读" backgroundImage:nil];
     [_rightButton setTitleColor:[[ALTheme sharedTheme] navigationButtonColor] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightButton];
-    
+    self.rightButton.hidden = YES;
     _emptyView.hidden = YES;
     _emptyView.center = _tableView.center;
     [self.view addSubview:_emptyView];
@@ -61,28 +61,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self loadCenterInfo];
-}
-
-- (void)loadCenterInfo{
-    if (![JRUser isLogin]) {
-        return;
-    }
-#ifndef kJuranDesigner
-    NSString *url = JR_MYCENTERINFO;
-#else
-    NSString *url = JR_GET_DESIGNER_CENTERINFO;
-#endif
-    [[ALEngine shareEngine] pathURL:url parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes",kNetworkParamKeyShowErrorDefaultMessage:@"No"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        if (!error) {
-            if ([data isKindOfClass:[NSDictionary class]]) {
-                [[JRUser currentUser] buildUpProfileDataWithDictionary:data];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNameMsgCenterReloadData object:nil];
-                });
-            }
-        }
-    }];
+    [UIViewController loadCenterInfo];
 }
 
 - (void)loadData{
@@ -135,6 +114,14 @@
         if (!error) {
             if (msg) {
                 msg.isUnread = NO;
+                BOOL hasUnread = NO;
+                for (JRPushInfoMsg *msg in _datas) {
+                    if(msg.isUnread) {
+                        hasUnread = YES;
+                        break;
+                    }
+                }
+                self.rightButton.hidden = !hasUnread;
             }else{
                 for (JRPushInfoMsg *msg in _datas) {
                     msg.isUnread = NO;

@@ -63,6 +63,7 @@
 - (IBAction)onLocation:(id)sender{
     NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
     navi.naviType = NaviTypeStall;
+    navi.shopId = _shop.shopId;
     navi.dataList = _shop.stallInfoList;
     navi.navigationItem.title = @"店铺位置";
     [self.viewController.navigationController pushViewController:navi animated:YES];

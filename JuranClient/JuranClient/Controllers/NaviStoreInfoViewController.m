@@ -115,6 +115,8 @@
     [_scrollView addSubview:_telView];
     
     _scrollView.map = _mapView;
+    _mapView.centerCoordinate = _mapCenter;
+    _mapView.zoomLevel = 10;
     [self loadData];
     
     //设置LocationUtilDelegate
@@ -259,6 +261,7 @@
     _timeView.frame = frame;
     
     _labelBus.text = [self formatString:_store.busRoute];
+    _labelBus.numberOfLines = 6;
     [_labelBus sizeToFit];
     frame = _timeView.frame;
     frame.origin.y = _timeView.frame.origin.y+_timeView.frame.size.height;

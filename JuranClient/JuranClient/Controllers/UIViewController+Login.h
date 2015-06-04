@@ -24,4 +24,5 @@
 - (void)showMenu;
 - (void)onSearch;
 - (void)reloadMoreMenu;
++ (void)loadCenterInfo;
 @end
