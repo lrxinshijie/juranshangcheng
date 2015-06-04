@@ -10,6 +10,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "JRStore.h"
 #import "GuidanceShopItem.h"
+#import <sys/sysctl.h>
 
 typedef void (^CheckOutBluetoothBlock)(BOOL isUsable);
 
