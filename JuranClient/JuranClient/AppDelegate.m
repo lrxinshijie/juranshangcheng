@@ -101,7 +101,7 @@
 //DEV
 #define kBaiduMapKey @"u47QpGFlx3CgEmRnL0iN33YX"
 //生产
-//#define kBaiduMapKey @"MadY3qvvgFGNqZAqNEmE8nlP";
+//#define kBaiduMapKey @"MadY3qvvgFGNqZAqNEmE8nlP"
 
 
 #endif
