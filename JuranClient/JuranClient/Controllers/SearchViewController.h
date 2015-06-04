@@ -11,5 +11,5 @@
 @interface SearchViewController : ALViewController
 
 @property (nonatomic, assign) SearchType type;
-
+@property (nonatomic, assign) BOOL foucs;
 @end

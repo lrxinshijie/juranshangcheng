@@ -52,7 +52,19 @@
 
 - (void)configureLeftBarButtonItemImage:(UIImage *)image leftBarButtonItemAction:(SEL)action
 {
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self.view buttonWithFrame:CGRectZero target:self action:action image:image]];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, 40, 40);
+    if ([image isEqual:[UIImage imageNamed:@"nav_backbtn"]]) {
+        //返回按钮
+        [button setImageEdgeInsets:UIEdgeInsetsMake(0, -17, 0, 17)];
+    }else {
+        //scan按钮
+        [button setImageEdgeInsets:UIEdgeInsetsMake(0, -12, 0, 12)];
+    }
+    
+    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    [button setImage:image forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
 - (void)configureRightBarButtonItemImage:(UIImage *)image rightBarButtonItemAction:(SEL)action
