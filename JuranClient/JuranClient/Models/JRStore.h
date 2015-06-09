@@ -16,6 +16,10 @@
 @property(nonatomic, assign)double longitude;
 @property(nonatomic, copy)NSString *stallCode;
 @property(nonatomic, copy)NSString *stallName;
+
+//是否可导航使用
+@property(nonatomic, assign)BOOL couldGuidance;
+
 //info
 @property(nonatomic, copy)NSString *storeAdd;
 @property(nonatomic, copy)NSString *saleTime;

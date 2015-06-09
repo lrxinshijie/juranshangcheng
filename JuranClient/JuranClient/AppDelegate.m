@@ -34,6 +34,10 @@
 #import "DiscoverViewController.h"
 #import "MallViewController.h"
 #import "FitmentViewController.h"
+#import "IndoorGuidanceManager.h"
+#import "sys/utsname.h"
+#import "LocationUtil.h"
+#import "GuidanceShopItem.h"
 #ifndef kJuranDesigner
 #import <BaiduMapAPI/BMKMapManager.h>
 #endif
@@ -41,6 +45,7 @@
 
 //Share SDK
 #define kShareSDKKey @"477b2576a9ca"
+#define IndoorGuideKey @"5572ce86cdc547ac85b8001f5d751426"
 
 #ifdef kJuranDesigner
 
@@ -107,7 +112,7 @@
 #endif
 
 
-@interface AppDelegate () <UINavigationControllerDelegate, WXApiDelegate>
+@interface AppDelegate () <UINavigationControllerDelegate, WXApiDelegate, UIAlertViewDelegate>
 
 @end
 
@@ -169,8 +174,79 @@
     
     [self jumpToMain];
     
+    [self getAndSaveGuideShopList];
+    
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)getAndSaveGuideShopList {
+    //从四维图新请求可导航门店列表
+    
+    NSDictionary * dict = @{@"key":IndoorGuideKey,
+                            @"mac":@"",
+                            @"username":[JRUser currentUser].userName,
+                            @"device":[[IndoorGuidanceManager sharedMagager] getDeviceType],
+                            @"appVersion":[NSString stringWithFormat:@"%@|%@", [Public isDesignerApp] ? @"designer" : @"member", [self bundleVersion]],
+                            @"dpi":[[IndoorGuidanceManager sharedMagager] getResolutionRatio]};
+    
+    __weak AppDelegate * wSelf = self;
+    [[ALEngine shareEngine] pathURL:JR_GUIDANCE_SHOP_LIST parameters:dict HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        if ([data isKindOfClass:[NSDictionary class]]) {
+            if (![[[IndoorGuidanceManager sharedMagager] dictionaryToJson:data] isEqualToString:[[IndoorGuidanceManager sharedMagager] getCache]]) {
+                [[IndoorGuidanceManager sharedMagager] cacheGuidanceList:[[IndoorGuidanceManager sharedMagager] dictionaryToJson:data]];
+            }
+            NSArray * arr = [data objectForKey:@"buildings"];
+            NSMutableArray * temp = [NSMutableArray arrayWithCapacity:0];
+            for (int i=0; i<arr.count; i++) {
+                GuidanceShopItem * gItem = [GuidanceShopItem createGuidanceShopItemWithDictionary:[arr objectAtIndex:i]];
+                [temp addObject:gItem];
+            }
+            [[IndoorGuidanceManager sharedMagager] saveGuidanceShop:temp];
+        }
+
+        [[IndoorGuidanceManager sharedMagager] checkOutBluetooth:^(BOOL isUsable) {
+            
+            NVPoint *center = [[NVPoint alloc] initWithLati:ApplicationDelegate.gLocation.location.coordinate.latitude Lon:ApplicationDelegate.gLocation.location.coordinate.longitude];
+            [[LocationUtil defaultInstance] AsynGetNearBuildingList:center storeCode:nil Radius:0 completion:^(NSString *result, NSInteger retCode, NSString *retMsg) {
+                
+                id str=[NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+                if ([str isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary * dict = (NSDictionary *)str;
+                    NSArray * array = [dict objectForKey:@"buildings"];
+                    for (int i=0; i<array.count; i++) {
+                        BOOL shouldBreak = NO;
+                        NSDictionary * tempDict = [array objectAtIndex:i];
+                        int distance = [[tempDict objectForKey:@"distance"] intValue];
+                        if (distance <= 200) {
+                            NSArray * guideList = [[IndoorGuidanceManager sharedMagager] getGuidanceShop];
+                            for (int j=0; j<guideList.count; j++) {
+                                GuidanceShopItem * item = [guideList objectAtIndex:j];
+                                if ([item.mid isEqualToString:[tempDict objectForKey:@"mid"]] && ApplicationDelegate.gLocation.isSuccessLocation) {
+                                    
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        //没开蓝牙，开启定位，并且当前位置在可导航门店内，提示打开蓝牙
+                                        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"该店面支持室内导航，开启蓝牙后可享受服务" delegate:wSelf cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                                        [alert show];
+                                    });
+                                    shouldBreak = YES;
+                                    break;
+                                }
+                            }
+                        }
+                        if (shouldBreak) {
+                            break;
+                        }
+                    }
+                }
+            }];
+        }];
+    }];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
 }
 
 - (void)networkDidLogin:(NSNotification *)notification{
@@ -383,6 +459,8 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    
+    [[LocationUtil defaultInstance] setDrawing:NO];
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 //    [self clearNotification];
@@ -390,6 +468,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    [[LocationUtil defaultInstance] setDrawing:YES];
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 

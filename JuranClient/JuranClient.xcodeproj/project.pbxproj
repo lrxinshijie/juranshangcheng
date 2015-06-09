@@ -591,6 +591,8 @@
 		14BF81AD1AEDF4E100D6A10F /* ShopListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C602C771ADCEA950037105E /* ShopListCell.m */; };
 		14C4872D1A6F7E0C0042A3D6 /* ALNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C4872C1A6F7E0C0042A3D6 /* ALNavigationController.m */; };
 		14C4872E1A6F7E0C0042A3D6 /* ALNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C4872C1A6F7E0C0042A3D6 /* ALNavigationController.m */; };
+		14C7072A1B20299B00529AF2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C707291B20299B00529AF2 /* Accounts.framework */; };
+		14C7072C1B2029AC00529AF2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C7072B1B2029AC00529AF2 /* Social.framework */; };
 		14C855471A2E196B00A15ED9 /* InteractionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855421A2E196B00A15ED9 /* InteractionViewController.m */; };
 		14C855481A2E196B00A15ED9 /* InteractionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14C855431A2E196B00A15ED9 /* InteractionViewController.xib */; };
 		14C855491A2E196B00A15ED9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14C855451A2E196B00A15ED9 /* SettingsViewController.m */; };
@@ -651,6 +653,7 @@
 		14FE2DED1A384E2700B31FBA /* service.html in Resources */ = {isa = PBXBuildFile; fileRef = 14FE2DEC1A384E2700B31FBA /* service.html */; };
 		14FE2E561A38549200B31FBA /* PrivateMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FE2E541A38549200B31FBA /* PrivateMessageDetailViewController.m */; };
 		14FE2E571A38549200B31FBA /* PrivateMessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FE2E551A38549200B31FBA /* PrivateMessageDetailViewController.xib */; };
+		1F0CE98D1B16EF270044970D /* guideIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F0CE98C1B16EF270044970D /* guideIcon@2x.png */; };
 		1F2A0A8F1ADF65BD00C73784 /* GoodsCategaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A0A841ADF65BD00C73784 /* GoodsCategaryViewController.m */; };
 		1F2A0A901ADF65BD00C73784 /* GoodsCategaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A0A851ADF65BD00C73784 /* GoodsCategaryViewController.xib */; };
 		1F2A0A911ADF65BD00C73784 /* chair@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A0A871ADF65BD00C73784 /* chair@2x.png */; };
@@ -673,6 +676,13 @@
 		1F2D500C1AD7C882005486D2 /* QRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D500A1AD7C882005486D2 /* QRBaseViewController.m */; };
 		1F2D500D1AD7C882005486D2 /* QRBaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D500B1AD7C882005486D2 /* QRBaseViewController.xib */; };
 		1F2D500F1AD7CE38005486D2 /* bottomBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D500E1AD7CE38005486D2 /* bottomBar@2x.png */; };
+		1F62803D1B1C110A00BC298F /* libIndoorMapLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F62803A1B1C110A00BC298F /* libIndoorMapLib.a */; };
+		1F62803E1B1C110A00BC298F /* navmap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F62803C1B1C110A00BC298F /* navmap.bundle */; };
+		1F78BB431B146ECA006979A2 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F78BB421B146ECA006979A2 /* libbz2.dylib */; };
+		1F78BB451B146EE1006979A2 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F78BB441B146EE1006979A2 /* GLKit.framework */; };
+		1F78BB471B146F01006979A2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F78BB461B146F01006979A2 /* libz.dylib */; };
+		1F78BB491B146F29006979A2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F78BB481B146F29006979A2 /* CFNetwork.framework */; };
+		1F78BB4B1B147002006979A2 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F78BB4A1B147002006979A2 /* libstdc++.6.0.9.dylib */; };
 		1F880BD91AEA1E4600992D64 /* CustomBrandView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F880BD81AEA1E4600992D64 /* CustomBrandView.m */; };
 		1F880BDB1AEA1E5A00992D64 /* CustomBrandView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F880BDA1AEA1E5A00992D64 /* CustomBrandView.xib */; };
 		1F880BDD1AEA292D00992D64 /* shopImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F880BDC1AEA292D00992D64 /* shopImage@2x.png */; };
@@ -682,6 +692,8 @@
 		1F880BF11AEA506600992D64 /* ShopViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F880BF01AEA506600992D64 /* ShopViewItem.m */; };
 		1FA1CE901B00503F0040F392 /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1CE8F1B00503F0040F392 /* CustomButton.m */; };
 		1FAC01191AE8E44C0067E12A /* DataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FAC01181AE8E44C0067E12A /* DataItem.m */; };
+		1FAD7DAA1B156B2300DDC4DE /* IndoorGuidanceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD7DA91B156B2300DDC4DE /* IndoorGuidanceManager.m */; };
+		1FAD7DAC1B15712A00DDC4DE /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FAD7DAB1B15712A00DDC4DE /* CoreBluetooth.framework */; };
 		1FB970D91B0994590003FBF6 /* placeholder_brand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FB970D71B0994590003FBF6 /* placeholder_brand@2x.png */; };
 		1FB970DA1B0994590003FBF6 /* placeholder_good@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FB970D81B0994590003FBF6 /* placeholder_good@2x.png */; };
 		1FCD24C01AE5FDD500FF18E9 /* CustomSecLevelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCD24BF1AE5FDD500FF18E9 /* CustomSecLevelView.m */; };
@@ -707,6 +719,7 @@
 		1FD3B8491AD8F878004E849F /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8411AD8F878004E849F /* FMDatabasePool.m */; };
 		1FD3B84A1AD8F878004E849F /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8431AD8F878004E849F /* FMDatabaseQueue.m */; };
 		1FD3B84B1AD8F878004E849F /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3B8461AD8F878004E849F /* FMResultSet.m */; };
+		1FDF35261B15B0AF00A88449 /* GuidanceShopItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF35251B15B0AF00A88449 /* GuidanceShopItem.m */; };
 		1FE1394D1AF8616B001BDF05 /* QRCodeWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1394C1AF8616B001BDF05 /* QRCodeWebViewController.m */; };
 		1FF00FA51AE4B74300D54914 /* third_bg_cell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF00FA11AE4B74300D54914 /* third_bg_cell@2x.png */; };
 		1FF00FA61AE4B74300D54914 /* third_bg_header_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF00FA21AE4B74300D54914 /* third_bg_header_left@2x.png */; };
@@ -2148,6 +2161,9 @@
 		14BCD78D1A8605B400825A90 /* order_btn_accessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "order_btn_accessory@2x.png"; sourceTree = "<group>"; };
 		14C4872B1A6F7E0C0042A3D6 /* ALNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALNavigationController.h; sourceTree = "<group>"; };
 		14C4872C1A6F7E0C0042A3D6 /* ALNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALNavigationController.m; sourceTree = "<group>"; };
+		14C707281B2024EF00529AF2 /* WeiboApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboApiObject.h; sourceTree = "<group>"; };
+		14C707291B20299B00529AF2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		14C7072B1B2029AC00529AF2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		14C855411A2E196B00A15ED9 /* InteractionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractionViewController.h; sourceTree = "<group>"; };
 		14C855421A2E196B00A15ED9 /* InteractionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractionViewController.m; sourceTree = "<group>"; };
 		14C855431A2E196B00A15ED9 /* InteractionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InteractionViewController.xib; sourceTree = "<group>"; };
@@ -2224,6 +2240,7 @@
 		14FE2E531A38549200B31FBA /* PrivateMessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateMessageDetailViewController.h; sourceTree = "<group>"; };
 		14FE2E541A38549200B31FBA /* PrivateMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateMessageDetailViewController.m; sourceTree = "<group>"; };
 		14FE2E551A38549200B31FBA /* PrivateMessageDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateMessageDetailViewController.xib; sourceTree = "<group>"; };
+		1F0CE98C1B16EF270044970D /* guideIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guideIcon@2x.png"; sourceTree = "<group>"; };
 		1F2A0A831ADF65BD00C73784 /* GoodsCategaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCategaryViewController.h; sourceTree = "<group>"; };
 		1F2A0A841ADF65BD00C73784 /* GoodsCategaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCategaryViewController.m; sourceTree = "<group>"; };
 		1F2A0A851ADF65BD00C73784 /* GoodsCategaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodsCategaryViewController.xib; sourceTree = "<group>"; };
@@ -2250,6 +2267,21 @@
 		1F2D500A1AD7C882005486D2 /* QRBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRBaseViewController.m; sourceTree = "<group>"; };
 		1F2D500B1AD7C882005486D2 /* QRBaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRBaseViewController.xib; sourceTree = "<group>"; };
 		1F2D500E1AD7CE38005486D2 /* bottomBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottomBar@2x.png"; sourceTree = "<group>"; };
+		1F6280321B1C110A00BC298F /* Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Api.h; sourceTree = "<group>"; };
+		1F6280331B1C110A00BC298F /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		1F6280341B1C110A00BC298F /* IndoorLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndoorLocationService.h; sourceTree = "<group>"; };
+		1F6280351B1C110A00BC298F /* IndoorMapViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndoorMapViewControllerDelegate.h; sourceTree = "<group>"; };
+		1F6280361B1C110A00BC298F /* LocationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationUtil.h; sourceTree = "<group>"; };
+		1F6280371B1C110A00BC298F /* NavMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavMapViewController.h; sourceTree = "<group>"; };
+		1F6280381B1C110A00BC298F /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		1F62803A1B1C110A00BC298F /* libIndoorMapLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIndoorMapLib.a; sourceTree = "<group>"; };
+		1F62803C1B1C110A00BC298F /* navmap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = navmap.bundle; sourceTree = "<group>"; };
+		1F62803F1B1C57FE00BC298F /* NavIndoorMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavIndoorMapViewController.h; sourceTree = "<group>"; };
+		1F78BB421B146ECA006979A2 /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
+		1F78BB441B146EE1006979A2 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		1F78BB461B146F01006979A2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		1F78BB481B146F29006979A2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		1F78BB4A1B147002006979A2 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		1F880BD71AEA1E4600992D64 /* CustomBrandView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBrandView.h; sourceTree = "<group>"; };
 		1F880BD81AEA1E4600992D64 /* CustomBrandView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBrandView.m; sourceTree = "<group>"; };
 		1F880BDA1AEA1E5A00992D64 /* CustomBrandView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomBrandView.xib; sourceTree = "<group>"; };
@@ -2265,6 +2297,9 @@
 		1FA1CE8F1B00503F0040F392 /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
 		1FAC01171AE8E44C0067E12A /* DataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataItem.h; sourceTree = "<group>"; };
 		1FAC01181AE8E44C0067E12A /* DataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataItem.m; sourceTree = "<group>"; };
+		1FAD7DA81B156B2300DDC4DE /* IndoorGuidanceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndoorGuidanceManager.h; sourceTree = "<group>"; };
+		1FAD7DA91B156B2300DDC4DE /* IndoorGuidanceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndoorGuidanceManager.m; sourceTree = "<group>"; };
+		1FAD7DAB1B15712A00DDC4DE /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		1FB970D71B0994590003FBF6 /* placeholder_brand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder_brand@2x.png"; sourceTree = "<group>"; };
 		1FB970D81B0994590003FBF6 /* placeholder_good@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder_good@2x.png"; sourceTree = "<group>"; };
 		1FCD24BE1AE5FDD500FF18E9 /* CustomSecLevelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSecLevelView.h; sourceTree = "<group>"; };
@@ -2303,6 +2338,8 @@
 		1FD3B8441AD8F878004E849F /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		1FD3B8451AD8F878004E849F /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		1FD3B8461AD8F878004E849F /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		1FDF35241B15B0AF00A88449 /* GuidanceShopItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidanceShopItem.h; sourceTree = "<group>"; };
+		1FDF35251B15B0AF00A88449 /* GuidanceShopItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidanceShopItem.m; sourceTree = "<group>"; };
 		1FE1394B1AF8616B001BDF05 /* QRCodeWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeWebViewController.h; sourceTree = "<group>"; };
 		1FE1394C1AF8616B001BDF05 /* QRCodeWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeWebViewController.m; sourceTree = "<group>"; };
 		1FF00FA11AE4B74300D54914 /* third_bg_cell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "third_bg_cell@2x.png"; sourceTree = "<group>"; };
@@ -3450,6 +3487,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FAD7DAC1B15712A00DDC4DE /* CoreBluetooth.framework in Frameworks */,
+				1F78BB4B1B147002006979A2 /* libstdc++.6.0.9.dylib in Frameworks */,
+				1F78BB491B146F29006979A2 /* CFNetwork.framework in Frameworks */,
+				1F78BB471B146F01006979A2 /* libz.dylib in Frameworks */,
+				1F78BB451B146EE1006979A2 /* GLKit.framework in Frameworks */,
+				1F78BB431B146ECA006979A2 /* libbz2.dylib in Frameworks */,
+				14C7072C1B2029AC00529AF2 /* Social.framework in Frameworks */,
+				14C7072A1B20299B00529AF2 /* Accounts.framework in Frameworks */,
 				1441A1971A29E449004A038E /* Security.framework in Frameworks */,
 				A971BC971A20825800C018D6 /* CoreGraphics.framework in Frameworks */,
 				1441A1A11A29E46B004A038E /* SystemConfiguration.framework in Frameworks */,
@@ -3459,6 +3504,7 @@
 				37F0E6811A7D1B0C004CCCB2 /* ImageIO.framework in Frameworks */,
 				37F0E5CC1A7D1AC6004CCCB2 /* AssetsLibrary.framework in Frameworks */,
 				1441A19D1A29E45E004A038E /* CoreTelephony.framework in Frameworks */,
+				1F62803D1B1C110A00BC298F /* libIndoorMapLib.a in Frameworks */,
 				1441A19B1A29E457004A038E /* libicucore.dylib in Frameworks */,
 				1441A1991A29E450004A038E /* libz.1.2.5.dylib in Frameworks */,
 				1441A1951A29E43D004A038E /* libstdc++.dylib in Frameworks */,
@@ -3626,6 +3672,7 @@
 		1441A15F1A29E3CD004A038E /* TencentWeiboSDK */ = {
 			isa = PBXGroup;
 			children = (
+				14C707281B2024EF00529AF2 /* WeiboApiObject.h */,
 				1441A1601A29E3CD004A038E /* libTCWeiboSDK.a */,
 				1441A1611A29E3CD004A038E /* WeiboApi.h */,
 			);
@@ -3986,6 +4033,59 @@
 				1F2D4FF31AD77F9E005486D2 /* scanIcon_normal@2x.png */,
 			);
 			path = image;
+			sourceTree = "<group>";
+		};
+		1F6280311B1C110900BC298F /* IndoorMapLib */ = {
+			isa = PBXGroup;
+			children = (
+				1F6280321B1C110A00BC298F /* Api.h */,
+				1F6280331B1C110A00BC298F /* constants.h */,
+				1F6280341B1C110A00BC298F /* IndoorLocationService.h */,
+				1F62803F1B1C57FE00BC298F /* NavIndoorMapViewController.h */,
+				1F6280351B1C110A00BC298F /* IndoorMapViewControllerDelegate.h */,
+				1F6280361B1C110A00BC298F /* LocationUtil.h */,
+				1F6280371B1C110A00BC298F /* NavMapViewController.h */,
+				1F6280381B1C110A00BC298F /* Utils.h */,
+			);
+			path = IndoorMapLib;
+			sourceTree = "<group>";
+		};
+		1F6280391B1C110A00BC298F /* Release-iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				1F62803A1B1C110A00BC298F /* libIndoorMapLib.a */,
+			);
+			path = "Release-iphoneos";
+			sourceTree = "<group>";
+		};
+		1F62803B1B1C110A00BC298F /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				1F62803C1B1C110A00BC298F /* navmap.bundle */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		1FAD7CDB1B155FA200DDC4DE /* IndoorGuidance */ = {
+			isa = PBXGroup;
+			children = (
+				1F6280311B1C110900BC298F /* IndoorMapLib */,
+				1F6280391B1C110A00BC298F /* Release-iphoneos */,
+				1F62803B1B1C110A00BC298F /* Resource */,
+			);
+			path = IndoorGuidance;
+			sourceTree = "<group>";
+		};
+		1FAD7DA71B156B2300DDC4DE /* IndoorGuidance */ = {
+			isa = PBXGroup;
+			children = (
+				1FAD7DA81B156B2300DDC4DE /* IndoorGuidanceManager.h */,
+				1FAD7DA91B156B2300DDC4DE /* IndoorGuidanceManager.m */,
+				1FDF35241B15B0AF00A88449 /* GuidanceShopItem.h */,
+				1FDF35251B15B0AF00A88449 /* GuidanceShopItem.m */,
+				1F0CE98C1B16EF270044970D /* guideIcon@2x.png */,
+			);
+			path = IndoorGuidance;
 			sourceTree = "<group>";
 		};
 		1FCD24B81AE5FC3200FF18E9 /* ReserveProgram */ = {
@@ -4622,6 +4722,14 @@
 		A971BC931A20825800C018D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1FAD7DAB1B15712A00DDC4DE /* CoreBluetooth.framework */,
+				1F78BB4A1B147002006979A2 /* libstdc++.6.0.9.dylib */,
+				1F78BB481B146F29006979A2 /* CFNetwork.framework */,
+				1F78BB461B146F01006979A2 /* libz.dylib */,
+				1F78BB441B146EE1006979A2 /* GLKit.framework */,
+				1F78BB421B146ECA006979A2 /* libbz2.dylib */,
+				14C7072B1B2029AC00529AF2 /* Social.framework */,
+				14C707291B20299B00529AF2 /* Accounts.framework */,
 				2C91E8EA1ADB64DF00B542DC /* OpenGLES.framework */,
 				2C91E8E61ADB647900B542DC /* CoreLocation.framework */,
 				A94525291AA5F1F9002DFA2A /* CoreText.framework */,
@@ -4705,6 +4813,7 @@
 		A987ED671A20920500CED7CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1FAD7DA71B156B2300DDC4DE /* IndoorGuidance */,
 				1F2A0A821ADF65BD00C73784 /* GoodsCategary */,
 				A9A413441ADE944100074BB0 /* Product */,
 				2C91E8F01ADB67E000B542DC /* Navi */,
@@ -4856,6 +4965,7 @@
 		A987ED6F1A20920500CED7CD /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				1FAD7CDB1B155FA200DDC4DE /* IndoorGuidance */,
 				A9A4135A1ADE9EEE00074BB0 /* HMSegmentedControl */,
 				2C91E8E31ADB63AA00B542DC /* BaiduMapAPI */,
 				A9C011E11ABC601900DCF9C3 /* IQKeyBoardManager */,
@@ -6549,6 +6659,7 @@
 				BD5186E51A5D0ED700BE508A /* publish_line_selected@2x.png in Resources */,
 				BD5186B31A5D0ED700BE508A /* filter_kind_selected@2x.png in Resources */,
 				1F2A0A901ADF65BD00C73784 /* GoodsCategaryViewController.xib in Resources */,
+				1F0CE98D1B16EF270044970D /* guideIcon@2x.png in Resources */,
 				A9A413581ADE94C800074BB0 /* ProductListViewController.xib in Resources */,
 				BD5186F91A5D0ED700BE508A /* menu_activity_select@2x.png in Resources */,
 				BD5186111A5D0ED700BE508A /* checkbox_checked@2x.png in Resources */,
@@ -6560,6 +6671,7 @@
 				1441A16F1A29E3CD004A038E /* ShareSDKLocalizable.strings in Resources */,
 				2C91E9181ADB790C00B542DC /* NaviStoreCell.xib in Resources */,
 				BD5187851A5D0ED700BE508A /* nav-home-default@2x.png in Resources */,
+				1F62803E1B1C110A00BC298F /* navmap.bundle in Resources */,
 				BD5185E51A5D0ED700BE508A /* case_icon_detail@2x.png in Resources */,
 				BD5187051A5D0ED700BE508A /* menu_qr_select@2x.png in Resources */,
 				14EDB3931A3B519000E5AC77 /* VersionInfoViewController.xib in Resources */,
@@ -7521,6 +7633,7 @@
 				A987EE3C1A2093C900CED7CD /* UIScrollView+MJRefresh.m in Sources */,
 				14A3FDC11A2C9EB7002BEFF4 /* MyDemandViewController.m in Sources */,
 				1441A0611A2987FB004A038E /* JRProfileData.m in Sources */,
+				1FDF35261B15B0AF00A88449 /* GuidanceShopItem.m in Sources */,
 				37F0E6381A7D1AFE004CCCB2 /* MWTapDetectingView.m in Sources */,
 				37F0E6361A7D1AFE004CCCB2 /* MWTapDetectingImageView.m in Sources */,
 				A9C0120C1ABC601900DCF9C3 /* IQSegmentedNextPrevious.m in Sources */,
@@ -7705,6 +7818,7 @@
 				37BA1E6D1AA73F0200A3232C /* ScoreProgress.m in Sources */,
 				1F2D500C1AD7C882005486D2 /* QRBaseViewController.m in Sources */,
 				14587E101A35D5E300D41236 /* DetailAddressViewController.m in Sources */,
+				1FAD7DAA1B156B2300DDC4DE /* IndoorGuidanceManager.m in Sources */,
 				1FF00FAE1AE5020600D54914 /* SecondLevelItem.m in Sources */,
 				14C8554E1A2E1A1600A15ED9 /* InteractionCell.m in Sources */,
 				A98015101AD6B267002CB4C9 /* DiscoverViewController.m in Sources */,
@@ -8128,13 +8242,15 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
 					"$(PROJECT_DIR)/JuranClient/Vendors/UMAnalytics",
 					"$(PROJECT_DIR)/JuranClient/Vendors/AlipaySDK",
+					"$(PROJECT_DIR)/JuranClient/Vendors/IndoorGuidance/MapLib/lib",
+					"$(PROJECT_DIR)/JuranClient/Vendors/IndoorGuidance/Release-iphoneos",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv64";
+				VALID_ARCHS = "armv7 arm64";
 				VERSIONING_SYSTEM = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -8175,12 +8291,15 @@
 					"$(PROJECT_DIR)/JuranClient/Vendors/JPush",
 					"$(PROJECT_DIR)/JuranClient/Vendors/UMAnalytics",
 					"$(PROJECT_DIR)/JuranClient/Vendors/AlipaySDK",
+					"$(PROJECT_DIR)/JuranClient/Vendors/IndoorGuidance/MapLib/lib",
+					"$(PROJECT_DIR)/JuranClient/Vendors/IndoorGuidance/Release-iphoneos",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
-				VALID_ARCHS = "armv7 armv64";
+				VALID_ARCHS = "armv7 arm64";
 				VERSIONING_SYSTEM = "";
 				WRAPPER_EXTENSION = app;
 			};

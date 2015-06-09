@@ -26,6 +26,7 @@
             _longitude = [dict getDoubleValueForKey:@"longitude" defaultValue:0];
             _stallCode = [dict getStringValueForKey:@"stallCode" defaultValue:@""];
             _stallName = [dict getStringValueForKey:@"stallName" defaultValue:@""];
+            _couldGuidance = NO;
         }
     }
     return self;

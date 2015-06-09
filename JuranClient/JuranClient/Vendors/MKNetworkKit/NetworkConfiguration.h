@@ -116,6 +116,9 @@
 #define JR_PAY_TYPE [NSString stringWithFormat:@"%@/pay/payType.json",JR_SERVICE]
 
 
+#define JR_GUIDANCE_SHOP_LIST @"http://smart.navinfo.com:8000/Mall/api/v3/sdk//avaliableBuildings"
+
+
 
 
 
