@@ -138,7 +138,7 @@
 }
 
 - (void)setupUI{
-    _scrollView.contentSize = CGSizeMake(CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)*2);
+    _scrollView.contentSize = CGSizeMake(CGRectGetWidth(_scrollView.frame), (kWindowHeight+20)*2);
     _scrollView.backgroundColor = RGBColor(237, 237, 237);
     _scrollView.delegate = self;
     
@@ -147,7 +147,7 @@
     _imageScrollView.delegate = self;
     _imageScrollView.pagingEnabled = YES;
     
-    self.baseTableView = [self.scrollView tableViewWithFrame:CGRectMake(0, 0, CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
+    self.baseTableView = [self.scrollView tableViewWithFrame:CGRectMake(0, 0, CGRectGetWidth(_scrollView.frame), kWindowHeight+20) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _baseTableView.backgroundColor = [UIColor clearColor];
     _baseTableView.tableHeaderView = _titleView;
     _baseTableView.tableFooterView = _tipsView;
@@ -160,17 +160,17 @@
 //    _tipsView.frame = frame;
     
     CGRect frame = _navigationView.frame;
-    frame.origin.y = CGRectGetHeight(_scrollView.frame);
+    frame.origin.y = kWindowHeight+20;
     _navigationView.frame = frame;
     [_scrollView addSubview:_navigationView];
     
-    self.segCtl = [[JRSegmentControl alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_scrollView.frame) + CGRectGetHeight(_navigationView.frame) + 1, CGRectGetWidth(_scrollView.frame), 44)];
+    self.segCtl = [[JRSegmentControl alloc] initWithFrame:CGRectMake(0, kWindowHeight+20 + CGRectGetHeight(_navigationView.frame) + 1, CGRectGetWidth(_scrollView.frame), 44)];
     _segCtl.titleList = @[@"商品详情", @"商品参数", @"店铺推荐"];
     _segCtl.delegate = self;
     _segCtl.backgroundColor = [UIColor whiteColor];
     [_scrollView addSubview:_segCtl];
     
-    self.webView = [[ALWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segCtl.frame), CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame) - CGRectGetHeight(_navigationView.frame) - 45)];
+    self.webView = [[ALWebView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_segCtl.frame), CGRectGetWidth(_scrollView.frame), kWindowHeight+20 - CGRectGetHeight(_navigationView.frame) - 45)];
     
     _webView.opaque = NO;
     _webView.backgroundColor = [UIColor clearColor];
