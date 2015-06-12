@@ -26,9 +26,11 @@ typedef NS_ENUM(NSInteger, LocationStatusEnum){
 // 正在获取用户当前位置
 -(void)UpdatingToLocation;
 // 获取到用户当前位置
--(void)didUpdateToLocation:(NVPoint *)newLocation;
+-(void)didUpdateToLocation:(NVPoint *)newLocation oldFloorName:(NSString*)floorName;
 // 获取用户位置失败
 -(void)didUpdateToLocationFailue:(NSString*)msg;
+// 停止定位跟随
+-(void)didStopToPosting;
 
 @end
 @interface IndoorLocationService : NSObject
@@ -70,5 +72,12 @@ typedef NS_ENUM(NSInteger, LocationStatusEnum){
  *	@return
  */
 -(NVPoint*)getCurrentIndoorLocation;
+
+/**
+ *	@brief	平稳楼层跳跃
+ *
+ *	@return
+ */
+-(NSString*)decideFloor:(NSString*)inputFloor;
 
 @end

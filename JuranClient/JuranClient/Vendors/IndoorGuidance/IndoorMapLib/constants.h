@@ -12,6 +12,22 @@
 #ifndef BaiduHtml5_constants_h
 #define BaiduHtml5_constants_h
 
+// 是DEMO版本，还是居然之家APP版本
+//#define _DEMO_
+
+//#define _TEST_
+
+#define SEARCH_PARAM_VALUE      @"17"
+
+
+#define BOTTOM_VIEW_HEIGHT      100
+
+// 导航栏高度
+#define NAV_BAR_HEIGHT      64
+
+// 楼层跳跃优化队列个数
+#define Floor_Queue_Length      8
+
 //#define SERVER_URL @"http://1.93.11.172:8888/blserver/service/"
 //#define SERVER_URL @"http://smart.navinfo.com:8000/Mall/api/v2/sdk/"
 //#define SERVER_URL @"http://211.147.91.85/blserver/api/v2/sdk/"
@@ -19,6 +35,11 @@
 //#define SERVER_URL  @"http://1.93.11.172/mall/api/v3/sdk/"
 
 #define SERVER_URL  @"http://smart.navinfo.com:8000/Mall/api/v3/sdk/"
+
+// 在线商铺搜索服务地址
+#define SERVER_ONLINE_SEARCH_URL    @"http://app.juran.cn:81/shop/getBoothByKeyWord.json"
+//#define SERVER_ONLINE_SEARCH_URL    @"http://54.223.161.28:8080/shop/getBoothByKeyWord.json"
+//#define SERVER_ONLINE_SEARCH_URL    @"http://124.193.207.194:8093/shop/getBoothByKeyWord.json"
 
 #define SERVER_LOCATION     @"http://10.8.10.103:1235/PassivePositioningServer/getPassivePosition"
 //#define SERVER_LOCATION     @"http://182.92.222.27:1235/PassivePositioningServer/getPassivePosition"
@@ -124,7 +145,11 @@
 #define SEG_BEACON_ID       @"ibecanid"
 #define SEG_BEACONS         @"ibecans"
 
+//--轨迹上传
+#define SEG_UPLOAD_WIFI_LOCATION      @"uploadWifiLocation"
+
 //--
+#define wifiMeta            @"wifiMeta"
 #define IndoorBiz           @"indoorBiz"
 #define SEG_LAST_UPDATE_TIME    @"lastTime"
 //
@@ -138,8 +163,6 @@
 //-- 促销beacon消息
 #define Notification_Promotion  @"Notification_Promotion"
 
-//--轨迹上传
-#define trackList               @"trackList"
 
 
 #define NATIVE_PAGE_SIZE 10
@@ -183,5 +206,22 @@ typedef NS_ENUM(UInt8, emLocationStatus){
 // 专门用于定位位置的MARK ID
 #define MARK_POSTING_ID     999999
 
+typedef NS_ENUM(UInt8, emMarkType){
+    // 普通
+    MARK_TYPE_COMM = 1,
+    // 定位
+    MARK_TYPE_POSTING,
+    // 促销标记
+    MARK_TYPE_PROMOTION
+};
+
+// 促销标记
+#define MARK_PROMOTION     @"MARK_TYPE_PROMOTION"
+
+// 起始点、终止点标记
+#define MARK_ROUTE          @"MARK_ROUTE"
+
+// 定位标记
+#define MARK_POSTING         @"MARK_POSTING"
 
 #endif

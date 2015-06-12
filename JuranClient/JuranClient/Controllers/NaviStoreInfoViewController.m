@@ -381,6 +381,8 @@
 
 - (IBAction)IndoorNaviClick:(id)sender {
     
+    [self showHUD];
+    
     if (self.couldGuide) {
         
         NSLog(@"%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]);
@@ -406,9 +408,10 @@
                 type = @"3";
             }
         }
-        
+        [self hideHUD];
         if ([type isEqualToString:@"0"] || [type isEqualToString:@"2"]) {
             NavIndoorMapViewController * imvc = [[NavIndoorMapViewController alloc] init];
+            imvc.title = self.store.stallName;
             [imvc setStoreCode:self.store.storeCode];
             [imvc setStallCode:self.store.stallCode];
             [imvc setType:type];
@@ -422,7 +425,7 @@
         }
         
     }else{
-    
+        [self hideHUD];
         NaviStoreIndoorViewController *vc = [[NaviStoreIndoorViewController alloc]init];
         vc.store = _store;
         vc.navigationItem.title = [NSString stringWithFormat:@"%@室内地图",_store.storeName];
@@ -445,6 +448,7 @@
             }
             NavIndoorMapViewController * imvc = [[NavIndoorMapViewController alloc] init];
             [imvc setStoreCode:self.store.storeCode];
+            imvc.title = self.store.storeName;
             if (self.store.stallCode.length>0) {
                 [imvc setStallCode:self.store.stallCode];
             }

@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "constants.h"
 
+@class NVPoint;
 @interface Utils : NSObject
 
 // 判断APP是否第一次启动
@@ -82,5 +83,5 @@
 
 +(void)setCurrentIsMapPage:(BOOL)isMapPage;
 +(BOOL)currentIsMapPage;
-
++(NVPoint*)convertImagePosToNavPos:(double)px y:(double)py;
 @end

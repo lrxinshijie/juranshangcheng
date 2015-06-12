@@ -31,6 +31,8 @@
 /// 计算导航路径
 -(void)autoComputeRoute;
 
+- (void)BackToPreView;
+
 -(void)releaseResource;
 
 @end
