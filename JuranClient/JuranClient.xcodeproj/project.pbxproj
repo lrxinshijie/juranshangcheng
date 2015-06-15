@@ -677,7 +677,6 @@
 		1F2D500D1AD7C882005486D2 /* QRBaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D500B1AD7C882005486D2 /* QRBaseViewController.xib */; };
 		1F2D500F1AD7CE38005486D2 /* bottomBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F2D500E1AD7CE38005486D2 /* bottomBar@2x.png */; };
 		1F62803D1B1C110A00BC298F /* libIndoorMapLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F62803A1B1C110A00BC298F /* libIndoorMapLib.a */; };
-		1F62803E1B1C110A00BC298F /* navmap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F62803C1B1C110A00BC298F /* navmap.bundle */; };
 		1F78BB431B146ECA006979A2 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F78BB421B146ECA006979A2 /* libbz2.dylib */; };
 		1F78BB451B146EE1006979A2 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F78BB441B146EE1006979A2 /* GLKit.framework */; };
 		1F78BB471B146F01006979A2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F78BB461B146F01006979A2 /* libz.dylib */; };
@@ -1095,6 +1094,7 @@
 		37F491F21AD954460068A99B /* ShopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F491F01AD954460068A99B /* ShopCell.m */; };
 		37F491F31AD954460068A99B /* ShopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F491F11AD954460068A99B /* ShopCell.xib */; };
 		37F491F61AD97A440068A99B /* JRShop.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F491F51AD97A440068A99B /* JRShop.m */; };
+		6D6E82231B2E70F400646FB8 /* navmap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6D6E82221B2E70F400646FB8 /* navmap.bundle */; };
 		A90459CE1A27874800F8CD74 /* CaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */; };
 		A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */; };
 		A90459D31A278A6100F8CD74 /* PublishDesignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459D11A278A6100F8CD74 /* PublishDesignViewController.m */; };
@@ -2267,7 +2267,6 @@
 		1F2D500A1AD7C882005486D2 /* QRBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRBaseViewController.m; sourceTree = "<group>"; };
 		1F2D500B1AD7C882005486D2 /* QRBaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRBaseViewController.xib; sourceTree = "<group>"; };
 		1F2D500E1AD7CE38005486D2 /* bottomBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bottomBar@2x.png"; sourceTree = "<group>"; };
-		1F6280321B1C110A00BC298F /* Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Api.h; sourceTree = "<group>"; };
 		1F6280331B1C110A00BC298F /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		1F6280341B1C110A00BC298F /* IndoorLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndoorLocationService.h; sourceTree = "<group>"; };
 		1F6280351B1C110A00BC298F /* IndoorMapViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndoorMapViewControllerDelegate.h; sourceTree = "<group>"; };
@@ -2275,7 +2274,6 @@
 		1F6280371B1C110A00BC298F /* NavMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavMapViewController.h; sourceTree = "<group>"; };
 		1F6280381B1C110A00BC298F /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		1F62803A1B1C110A00BC298F /* libIndoorMapLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIndoorMapLib.a; sourceTree = "<group>"; };
-		1F62803C1B1C110A00BC298F /* navmap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = navmap.bundle; sourceTree = "<group>"; };
 		1F62803F1B1C57FE00BC298F /* NavIndoorMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavIndoorMapViewController.h; sourceTree = "<group>"; };
 		1F78BB421B146ECA006979A2 /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
 		1F78BB441B146EE1006979A2 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
@@ -2723,6 +2721,7 @@
 		37F491F11AD954460068A99B /* ShopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopCell.xib; sourceTree = "<group>"; };
 		37F491F41AD97A440068A99B /* JRShop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRShop.h; sourceTree = "<group>"; };
 		37F491F51AD97A440068A99B /* JRShop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRShop.m; sourceTree = "<group>"; };
+		6D6E82221B2E70F400646FB8 /* navmap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = navmap.bundle; sourceTree = "<group>"; };
 		A90459CB1A27874800F8CD74 /* CaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseDetailViewController.h; sourceTree = "<group>"; };
 		A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseDetailViewController.m; sourceTree = "<group>"; };
 		A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseDetailViewController.xib; sourceTree = "<group>"; };
@@ -4038,7 +4037,6 @@
 		1F6280311B1C110900BC298F /* IndoorMapLib */ = {
 			isa = PBXGroup;
 			children = (
-				1F6280321B1C110A00BC298F /* Api.h */,
 				1F6280331B1C110A00BC298F /* constants.h */,
 				1F6280341B1C110A00BC298F /* IndoorLocationService.h */,
 				1F62803F1B1C57FE00BC298F /* NavIndoorMapViewController.h */,
@@ -4058,20 +4056,12 @@
 			path = "Release-iphoneos";
 			sourceTree = "<group>";
 		};
-		1F62803B1B1C110A00BC298F /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-				1F62803C1B1C110A00BC298F /* navmap.bundle */,
-			);
-			path = Resource;
-			sourceTree = "<group>";
-		};
 		1FAD7CDB1B155FA200DDC4DE /* IndoorGuidance */ = {
 			isa = PBXGroup;
 			children = (
 				1F6280311B1C110900BC298F /* IndoorMapLib */,
 				1F6280391B1C110A00BC298F /* Release-iphoneos */,
-				1F62803B1B1C110A00BC298F /* Resource */,
+				6D6E82211B2E70F400646FB8 /* Resource */,
 			);
 			path = IndoorGuidance;
 			sourceTree = "<group>";
@@ -4448,6 +4438,14 @@
 				2C602C8E1ADE0E200037105E /* FilterInShopViewController.xib */,
 			);
 			name = Shop;
+			sourceTree = "<group>";
+		};
+		6D6E82211B2E70F400646FB8 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				6D6E82221B2E70F400646FB8 /* navmap.bundle */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		A90459DA1A278D7E00F8CD74 /* Case */ = {
@@ -6671,7 +6669,7 @@
 				1441A16F1A29E3CD004A038E /* ShareSDKLocalizable.strings in Resources */,
 				2C91E9181ADB790C00B542DC /* NaviStoreCell.xib in Resources */,
 				BD5187851A5D0ED700BE508A /* nav-home-default@2x.png in Resources */,
-				1F62803E1B1C110A00BC298F /* navmap.bundle in Resources */,
+				6D6E82231B2E70F400646FB8 /* navmap.bundle in Resources */,
 				BD5185E51A5D0ED700BE508A /* case_icon_detail@2x.png in Resources */,
 				BD5187051A5D0ED700BE508A /* menu_qr_select@2x.png in Resources */,
 				14EDB3931A3B519000E5AC77 /* VersionInfoViewController.xib in Resources */,
@@ -8039,8 +8037,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Easyhome E-commerce Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Easyhome E-commerce Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Connection",
@@ -8078,7 +8076,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = JuranDesigner;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1b275692-0cc4-412b-b7ad-19313caa692e";
 				VALID_ARCHS = "armv7 armv64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -8089,8 +8087,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Easyhome E-commerce Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Easyhome E-commerce Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Connection",
@@ -8127,7 +8125,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = JuranDesigner;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1b275692-0cc4-412b-b7ad-19313caa692e";
 				VALID_ARCHS = "armv7 armv64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -8210,8 +8208,8 @@
 		A971BCBE1A20825800C018D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Easyhome E-commerce Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Easyhome E-commerce Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Connection",
@@ -8248,7 +8246,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1b275692-0cc4-412b-b7ad-19313caa692e";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 arm64";
 				VERSIONING_SYSTEM = "";
@@ -8259,8 +8257,8 @@
 		A971BCBF1A20825800C018D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Easyhome E-commerce Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Easyhome E-commerce Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JuranClient/Vendors/ShareSDK/Connection",
@@ -8297,7 +8295,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1b275692-0cc4-412b-b7ad-19313caa692e";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 arm64";
 				VERSIONING_SYSTEM = "";
@@ -8309,8 +8307,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JuranClient.app/JuranClient";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Easyhome E-commerce Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Easyhome E-commerce Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -8324,7 +8322,7 @@
 				);
 				INFOPLIST_FILE = "JuranClientTests/JuranClientTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1b275692-0cc4-412b-b7ad-19313caa692e";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -8334,8 +8332,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JuranClient.app/JuranClient";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jing Mi (JPD8V84W6M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jing Mi (JPD8V84W6M)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Easyhome E-commerce Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Easyhome E-commerce Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -8345,7 +8343,7 @@
 				GCC_PREFIX_HEADER = "JuranClient/JuranClient-Prefix.pch";
 				INFOPLIST_FILE = "JuranClientTests/JuranClientTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1b275692-0cc4-412b-b7ad-19313caa692e";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
