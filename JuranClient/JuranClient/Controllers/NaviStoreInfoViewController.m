@@ -473,12 +473,17 @@
     [self.navigationController pushViewController:shopVC animated:YES];
 }
 
-//LocationUtilDelegate
+#pragma mark -- LocationUtilDelegate
+
 - (NSDictionary *)getUserInfo
 {
     JRUser * user = [JRUser currentUser];
     //TODO:配置返回数据
-    NSDictionary * dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"username",user.userName, @"device",[[IndoorGuidanceManager sharedMagager] getDeviceType], @"dpi",[[IndoorGuidanceManager sharedMagager] getResolutionRatio], nil];
+    NSDictionary *dict = @{@"username":[NSString stringWithFormat:@"%@",user.userName],
+                           @"device":[[IndoorGuidanceManager sharedMagager] getDeviceType],
+                           @"appVersion":[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"],
+                           @"dpi":[[IndoorGuidanceManager sharedMagager] getResolutionRatio]};
+    
     return dict;
 }
 
