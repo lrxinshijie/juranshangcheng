@@ -8250,6 +8250,10 @@
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 arm64";
 				VERSIONING_SYSTEM = "";
+				WARNING_CFLAGS = (
+					"-Wno-format",
+					"-Wno-shorten-64-to-32",
+				);
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -8299,6 +8303,10 @@
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 arm64";
 				VERSIONING_SYSTEM = "";
+				WARNING_CFLAGS = (
+					"-Wno-format",
+					"-Wno-shorten-64-to-32",
+				);
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
