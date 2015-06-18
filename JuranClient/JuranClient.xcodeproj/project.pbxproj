@@ -1094,7 +1094,7 @@
 		37F491F21AD954460068A99B /* ShopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F491F01AD954460068A99B /* ShopCell.m */; };
 		37F491F31AD954460068A99B /* ShopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F491F11AD954460068A99B /* ShopCell.xib */; };
 		37F491F61AD97A440068A99B /* JRShop.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F491F51AD97A440068A99B /* JRShop.m */; };
-		6D6E82231B2E70F400646FB8 /* navmap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6D6E82221B2E70F400646FB8 /* navmap.bundle */; };
+		6D4255C21B328C9C004C597C /* navmap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6D4255C11B328C9C004C597C /* navmap.bundle */; };
 		A90459CE1A27874800F8CD74 /* CaseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */; };
 		A90459CF1A27874800F8CD74 /* CaseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */; };
 		A90459D31A278A6100F8CD74 /* PublishDesignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A90459D11A278A6100F8CD74 /* PublishDesignViewController.m */; };
@@ -2721,7 +2721,7 @@
 		37F491F11AD954460068A99B /* ShopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopCell.xib; sourceTree = "<group>"; };
 		37F491F41AD97A440068A99B /* JRShop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRShop.h; sourceTree = "<group>"; };
 		37F491F51AD97A440068A99B /* JRShop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRShop.m; sourceTree = "<group>"; };
-		6D6E82221B2E70F400646FB8 /* navmap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = navmap.bundle; sourceTree = "<group>"; };
+		6D4255C11B328C9C004C597C /* navmap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = navmap.bundle; sourceTree = "<group>"; };
 		A90459CB1A27874800F8CD74 /* CaseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaseDetailViewController.h; sourceTree = "<group>"; };
 		A90459CC1A27874800F8CD74 /* CaseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaseDetailViewController.m; sourceTree = "<group>"; };
 		A90459CD1A27874800F8CD74 /* CaseDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaseDetailViewController.xib; sourceTree = "<group>"; };
@@ -4443,7 +4443,7 @@
 		6D6E82211B2E70F400646FB8 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				6D6E82221B2E70F400646FB8 /* navmap.bundle */,
+				6D4255C11B328C9C004C597C /* navmap.bundle */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -6669,7 +6669,7 @@
 				1441A16F1A29E3CD004A038E /* ShareSDKLocalizable.strings in Resources */,
 				2C91E9181ADB790C00B542DC /* NaviStoreCell.xib in Resources */,
 				BD5187851A5D0ED700BE508A /* nav-home-default@2x.png in Resources */,
-				6D6E82231B2E70F400646FB8 /* navmap.bundle in Resources */,
+				6D4255C21B328C9C004C597C /* navmap.bundle in Resources */,
 				BD5185E51A5D0ED700BE508A /* case_icon_detail@2x.png in Resources */,
 				BD5187051A5D0ED700BE508A /* menu_qr_select@2x.png in Resources */,
 				14EDB3931A3B519000E5AC77 /* VersionInfoViewController.xib in Resources */,
