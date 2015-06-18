@@ -54,6 +54,9 @@
 // 记录指定建筑的地图数据版本号
 +(BOOL)savePSFVersion:(NSString*)buildingId newVersion:(NSString*)newVersion;
 
++(NSDictionary*)readWifiMeta;
++(BOOL)saveWifiMeta:(NSString*)buildingId wifiMetaJson:(NSString*)wifiMetaJson;
+
 + (NSUInteger) deviceSystemMajorVersion;
 
 #pragma mark 增加或更新居然商场ID与四维图新室内ID的对应关系

@@ -15,7 +15,7 @@
 // 是DEMO版本，还是居然之家APP版本
 //#define _DEMO_
 
-//#define _TEST_
+#define _TEST_
 
 #define SEARCH_PARAM_VALUE      @"17"
 
@@ -137,6 +137,7 @@
 #define SEG_USERNAME        @"username"
 #define SEG_DEVICE          @"device"
 
+#define aroundBuilding      @"aroundBuilding"
 
 #define VERSION_CHECK_METHORD   @"mapVersion"
 
@@ -215,6 +216,14 @@ typedef NS_ENUM(UInt8, emMarkType){
     MARK_TYPE_PROMOTION
 };
 
+
+typedef NS_ENUM(UInt8, emRouteMarkType){
+    // 普通
+    MARK_POINT_END = 1,
+    // 定位
+    MARK_POINT_START
+};
+
 // 促销标记
 #define MARK_PROMOTION     @"MARK_TYPE_PROMOTION"
 
@@ -223,5 +232,9 @@ typedef NS_ENUM(UInt8, emMarkType){
 
 // 定位标记
 #define MARK_POSTING         @"MARK_POSTING"
+
+#define ROUTE_SEL_START_TIP      @"请选择起点"
+#define ROUTE_SEL_END_TIP        @"请选择终点"
+
 
 #endif

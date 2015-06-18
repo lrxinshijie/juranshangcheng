@@ -10,6 +10,8 @@
 
 @protocol LocationUtilDelegate <NSObject>
 
+-(void)GetNearBuildingListFinish:(NSString*)result retCode:(NSInteger)retCode retMsg:(NSString*)retMsg;
+//completion:(void (^)(NSString*result, NSInteger retCode, NSString *retMsg)
 /**
  *	@brief  获取用户相关信息
  *
@@ -68,5 +70,8 @@
 /// 根据用户当前GPS坐标异步获取附近商场列表
 /// 如果center有值，则获取此位置附近商场列表
 -(NSString*)AsynGetNearBuildingList:(NVPoint*)center storeCode:(NSString*)storeCode Radius:(double)radius completion:(void (^)(NSString*result, NSInteger retCode, NSString *retMsg))completion;
+
+/// 由代理方法
+-(void)AsynGetNearBuildingList:(NVPoint*)center storeCode:(NSString*)storeCode Radius:(double)radius;
 
 @end

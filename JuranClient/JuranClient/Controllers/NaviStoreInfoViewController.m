@@ -392,6 +392,10 @@
         
         [[LocationUtil defaultInstance] AsynGetNearBuildingList:center
                                                       storeCode:nil
+                                                         Radius:0];
+        /*
+        [[LocationUtil defaultInstance] AsynGetNearBuildingList:center
+                                                      storeCode:nil
                                                          Radius:0
                                                      completion:^(NSString *result, NSInteger retCode, NSString *retMsg) {
                                                          
@@ -438,7 +442,7 @@
                                                              
                                                          });
                                                          
-                                                     }];
+                                                     }];*/
     }else{
         [self hideHUD];
         NaviStoreIndoorViewController *vc = [[NaviStoreIndoorViewController alloc]init];
@@ -549,6 +553,52 @@
                            @"dpi":[[IndoorGuidanceManager sharedMagager] getResolutionRatio]};
     
     return dict;
+}
+
+-(void)GetNearBuildingListFinish:(NSString*)result
+                         retCode:(NSInteger)retCode
+                          retMsg:(NSString*)retMsg
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[LocationUtil defaultInstance] stopService];
+        
+        if (result) {
+            
+            NSData *resultData = [result dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:resultData
+                                                                 options:NSJSONReadingMutableContainers
+                                                                   error:nil];
+            NSArray *array = [dict objectForKey:@"buildings"];
+            
+            ASLog(@"%@,%@",dict,array);
+            
+            if (array.count > 0) {
+                for (int i=0; i<array.count; i++) {
+                    NSDictionary * tempDict = [array objectAtIndex:i];
+                    NSString * idStr = [tempDict objectForKey:@"mid"];
+                    if ([idStr isEqualToString:self.store.storeCode]) {
+                        int distance = [[tempDict objectForKey:@"distance"] intValue];
+                        if (distance <= 200) {
+                            //在可导航范围内
+                            [self indoorNaviWithUserCurrentLocation:YES];
+                            
+                        }else{
+                            //不在可导航范围内
+                            [self indoorNaviWithUserCurrentLocation:NO];
+                        }
+                    }
+                }
+                
+            }else {
+                //不在可导航范围内
+                [self indoorNaviWithUserCurrentLocation:NO];
+            }
+            
+        }else {
+            //不在可导航范围内
+            [self indoorNaviWithUserCurrentLocation:NO];
+        } 
+    });
 }
 
 @end
