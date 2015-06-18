@@ -385,51 +385,112 @@
     
     if (self.couldGuide) {
         
-        NSLog(@"%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]);
-        NSString * type;
-        BOOL b = [self checkOutUserCurrentLocation];
-        if (self.store.stallCode.length>0) {
-            //有摊位信息
-            if (b) {
-                //可导航，进入导航
-                //有摊位
-                type = @"0";
-            }else{
-                //无摊位
-                type = @"1";
-            }
-        }else{
-            //没有摊位信息
-            if (b) {
-                //有摊位
-                type = @"2";
-            }else{
-                //无摊位
-                type = @"3";
-            }
-        }
-        [self hideHUD];
-        if ([type isEqualToString:@"0"] || [type isEqualToString:@"2"]) {
-            NavIndoorMapViewController * imvc = [[NavIndoorMapViewController alloc] init];
-            imvc.title = self.store.stallName;
-            [imvc setStoreCode:self.store.storeCode];
-            [imvc setStallCode:self.store.stallCode];
-            [imvc setType:type];
-            [imvc setIMDelegate:self];
-            [self.navigationController pushViewController:imvc animated:YES];
-
-        }else{
-            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您当前位置不在支持店铺内，无法使用室内导航" delegate:self cancelButtonTitle:nil otherButtonTitles:@"关闭", @"查看室内地图", nil];
-            alert.tag = 9900;
-            [alert show];
-        }
+        ASLog(@"%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]);
         
+        NVPoint *center = [[NVPoint alloc] initWithLati:ApplicationDelegate.gLocation.location.coordinate.latitude
+                                                    Lon:ApplicationDelegate.gLocation.location.coordinate.longitude];
+        
+        [[LocationUtil defaultInstance] AsynGetNearBuildingList:center
+                                                      storeCode:nil
+                                                         Radius:0
+                                                     completion:^(NSString *result, NSInteger retCode, NSString *retMsg) {
+                                                         
+                                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                                             if (result) {
+                                                                 
+                                                                 NSData *resultData = [result dataUsingEncoding:NSUTF8StringEncoding];
+                                                                 NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:resultData
+                                                                                                                      options:NSJSONReadingMutableContainers
+                                                                                                                        error:nil];
+                                                                 NSArray *array = [dict objectForKey:@"buildings"];
+                                                                 
+                                                                 ASLog(@"%@,%@",dict,array);
+                                                                 
+                                                                 if (array.count > 0) {
+                                                                     for (int i=0; i<array.count; i++) {
+                                                                         NSDictionary * tempDict = [array objectAtIndex:i];
+                                                                         NSString * idStr = [tempDict objectForKey:@"mid"];
+                                                                         if ([idStr isEqualToString:self.store.storeCode]) {
+                                                                             int distance = [[tempDict objectForKey:@"distance"] intValue];
+                                                                             if (distance <= 200) {
+                                                                                 //在可导航范围内
+                                                                                 [self indoorNaviWithUserCurrentLocation:YES];
+                                                                                 
+                                                                             }else{
+                                                                                 //不在可导航范围内
+                                                                                 [self indoorNaviWithUserCurrentLocation:NO];
+                                                                             }
+                                                                         }
+                                                                     }
+                                                                     
+                                                                 }else {
+                                                                     //不在可导航范围内
+                                                                     [self indoorNaviWithUserCurrentLocation:NO];
+                                                                 }
+                                                                 
+                                                             }else {
+                                                                 //不在可导航范围内
+                                                                 [self indoorNaviWithUserCurrentLocation:NO];
+                                                             }
+                                                             
+                                                         });
+                                                         
+                                                     }];
     }else{
         [self hideHUD];
         NaviStoreIndoorViewController *vc = [[NaviStoreIndoorViewController alloc]init];
         vc.store = _store;
         vc.navigationItem.title = [NSString stringWithFormat:@"%@室内地图",_store.storeName];
         [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+/**
+ *  根据用户当前是否可导航，进行室内导航
+ *
+ *  @param canNavi 是否在可导航范围内
+ */
+- (void)indoorNaviWithUserCurrentLocation:(BOOL)canNavi
+{
+    NSString *type;
+    if (self.store.stallCode.length>0) {
+        //有摊位信息
+        if (canNavi) {
+            //可导航，进入导航
+            //有摊位
+            type = @"0";
+        }else{
+            //无摊位
+            type = @"1";
+        }
+    }else{
+        //没有摊位信息
+        if (canNavi) {
+            //有摊位
+            type = @"2";
+        }else{
+            //无摊位
+            type = @"3";
+        }
+    }
+    [self hideHUD];
+    if ([type isEqualToString:@"0"] || [type isEqualToString:@"2"]) {
+        NavIndoorMapViewController * imvc = [[NavIndoorMapViewController alloc] init];
+        imvc.title = self.store.stallName;
+        [imvc setStoreCode:self.store.storeCode];
+        [imvc setStallCode:self.store.stallCode];
+        [imvc setType:type];
+        [imvc setIMDelegate:self];
+        [self.navigationController pushViewController:imvc animated:YES];
+        
+    }else{
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                         message:@"您当前位置不在支持店铺内，无法使用室内导航"
+                                                        delegate:self
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:@"关闭", @"查看室内地图", nil];
+        alert.tag = 9900;
+        [alert show];
     }
 }
 
@@ -485,35 +546,6 @@
                            @"dpi":[[IndoorGuidanceManager sharedMagager] getResolutionRatio]};
     
     return dict;
-}
-
-- (BOOL)checkOutUserCurrentLocation
-{
-    
-    NSInteger retCode;
-    NSString * retMsg;
-    NVPoint *center = [[NVPoint alloc] initWithLati:ApplicationDelegate.gLocation.location.coordinate.latitude Lon:ApplicationDelegate.gLocation.location.coordinate.longitude];
-    NSString * str = [[LocationUtil defaultInstance] SynGetNearBuildingList:center storeCode:nil Radius:0 retCode:&retCode retMsg:&retMsg];
-    id result=[NSJSONSerialization JSONObjectWithData:[str dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-    if ([result isKindOfClass:[NSDictionary class]]) {
-        NSDictionary * dict = (NSDictionary *)result;
-        NSArray * array = [dict objectForKey:@"buildings"];
-        for (int i=0; i<array.count; i++) {
-            NSDictionary * tempDict = [array objectAtIndex:i];
-            NSString * idStr = [tempDict objectForKey:@"mid"];
-            if ([idStr isEqualToString:self.store.storeCode]) {
-                int distance = [[tempDict objectForKey:@"distance"] intValue];
-                if (distance <= 200) {
-                    //在可导航范围内
-                    return YES;
-                }else{
-                    //不在可导航范围内
-                    return NO;
-                }
-            }
-        }
-    }
-    return NO;
 }
 
 @end
