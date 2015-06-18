@@ -52,6 +52,8 @@
 /// 获取单例对象
 + (LocationUtil *)defaultInstance;
 
+-(void)stopService;
+
 /// 从居然获取用户信息
 -(NSDictionary*)getUserInfoFromApp;
 

@@ -396,6 +396,9 @@
                                                      completion:^(NSString *result, NSInteger retCode, NSString *retMsg) {
                                                          
                                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                                             
+                                                             [[LocationUtil defaultInstance] stopService];
+                                                             
                                                              if (result) {
                                                                  
                                                                  NSData *resultData = [result dataUsingEncoding:NSUTF8StringEncoding];
