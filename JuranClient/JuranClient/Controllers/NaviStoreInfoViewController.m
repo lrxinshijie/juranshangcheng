@@ -36,6 +36,7 @@
 #define MAP_MODE_VIEW_ONLY      @"3"
 
 @interface NaviStoreInfoViewController ()<BMKMapViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIScrollViewDelegate,IndoorMapViewControllerDelegate,LocationUtilDelegate,UIAlertViewDelegate>
+
 @property (strong, nonatomic) IBOutlet BMKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UIView *mapBottomView;
 @property (strong, nonatomic) IBOutlet UIView *naviControlView;
@@ -119,10 +120,7 @@
     _mapView.zoomLevel = 10;
     [self loadData];
     
-    //设置LocationUtilDelegate
-    LocationUtil * locUtil = [LocationUtil defaultInstance];
-    [locUtil setDelegate:self];
-    
+    [LocationUtil defaultInstance].delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -390,10 +388,11 @@
         NVPoint *center = [[NVPoint alloc] initWithLati:ApplicationDelegate.gLocation.location.coordinate.latitude
                                                     Lon:ApplicationDelegate.gLocation.location.coordinate.longitude];
         
-        [[LocationUtil defaultInstance] AsynGetNearBuildingList:center
-                                                      storeCode:nil
-                                                         Radius:0];
-        /*
+        /*[_locationUtil AsynGetNearBuildingList:center
+                                     storeCode:nil
+                                        Radius:0];
+         */
+        
         [[LocationUtil defaultInstance] AsynGetNearBuildingList:center
                                                       storeCode:nil
                                                          Radius:0
@@ -442,7 +441,7 @@
                                                              
                                                          });
                                                          
-                                                     }];*/
+                                                     }];
     }else{
         [self hideHUD];
         NaviStoreIndoorViewController *vc = [[NaviStoreIndoorViewController alloc]init];
