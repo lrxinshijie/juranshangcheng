@@ -388,11 +388,12 @@
         NVPoint *center = [[NVPoint alloc] initWithLati:ApplicationDelegate.gLocation.location.coordinate.latitude
                                                     Lon:ApplicationDelegate.gLocation.location.coordinate.longitude];
         
-        /*[_locationUtil AsynGetNearBuildingList:center
-                                     storeCode:nil
-                                        Radius:0];
-         */
+        [LocationUtil defaultInstance].delegate = self;
+        [[LocationUtil defaultInstance] AsynGetNearBuildingList:center
+                                                      storeCode:nil
+                                                         Radius:0];
         
+        /*
         [[LocationUtil defaultInstance] AsynGetNearBuildingList:center
                                                       storeCode:nil
                                                          Radius:0
@@ -441,7 +442,7 @@
                                                              
                                                          });
                                                          
-                                                     }];
+                                                     }];*/
     }else{
         [self hideHUD];
         NaviStoreIndoorViewController *vc = [[NaviStoreIndoorViewController alloc]init];
