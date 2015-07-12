@@ -51,9 +51,11 @@
 }
 
 + (BOOL)isShowPrice {
+#ifndef kJuranDesigner
     if (ApplicationDelegate.gLocation.isSuccessLocation && [ApplicationDelegate.gLocation.cityName isEqual:@"北京市"]) {
         return YES;
     }
+#endif
     return NO;
 }
 @end

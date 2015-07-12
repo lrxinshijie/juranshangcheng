@@ -198,10 +198,12 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
 - (IBAction)rightButtonDidClick:(id)sender {
     
     if (self.rightBtnStyle == RightBtnStyle_Scan) {
+#ifndef kJuranDesigner
         if (![QRBaseViewController isRuning]) {
             QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
             [self.viewController.navigationController pushViewController:vc animated:YES];
         }
+#endif
     }else if (self.rightBtnStyle == RightBtnStyle_Search){
         //默认按照下拉列表中的第一个搜索
         [self hideAnimation];

@@ -271,11 +271,13 @@
             [self.view addSubview:_emptyView];
         }
     }
+#ifndef kJuranDesigner
     if (!ApplicationDelegate.gLocation.isSuccessLocation) {
         [_footerView removeFromSuperview];
         _footerView.frame = CGRectMake(0, kWindowHeightWithoutNavigationBar-25, kWindowWidth, 25);
         [self.view addSubview:_footerView];
     }
+#endif
     [_tableView reloadData];
     [_collectionView reloadData];
 }
@@ -532,6 +534,7 @@
 }
 
 - (IBAction)onSetLoction:(id)sender {
+#ifndef kJuranDesigner
     if(!ApplicationDelegate.gLocation.isSuccessLocation) {
         [UIAlertView showWithTitle:@"提示" message:@"访问此类别需要开启定位服务，请在“设置->隐私->定位服务”中开启居然在线的定位~" cancelButtonTitle:@"确定" otherButtonTitles:nil tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
             if (buttonIndex == 0) {
@@ -541,7 +544,7 @@
             }
         }];
     }
-
+#endif
 }
 
 @end

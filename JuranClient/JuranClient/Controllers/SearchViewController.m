@@ -259,7 +259,10 @@
         [self.navigationController pushViewController:vc animated:YES];
         
     }
+    
+#ifndef kJuranDesigner
     else if (_type == SearchTypeGoods){
+        
         ProductListViewController *vc = [[ProductListViewController alloc]init];
         vc.selectedFilter.keyword = _searchKeyWord;
         vc.selectedFilter.isInShop = NO;
@@ -272,6 +275,8 @@
         [self.navigationController pushViewController:vc animated:YES];
         
     }
+#endif
+    
 }
 
 #pragma mark - Target Action

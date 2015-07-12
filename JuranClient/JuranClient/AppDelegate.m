@@ -36,9 +36,10 @@
 #import "FitmentViewController.h"
 #import "IndoorGuidanceManager.h"
 #import "sys/utsname.h"
-#import "LocationUtil.h"
+
 #import "GuidanceShopItem.h"
 #ifndef kJuranDesigner
+#import "LocationUtil.h"
 #import <BaiduMapAPI/BMKMapManager.h>
 #endif
 #import "UserLocation.h"
@@ -174,12 +175,15 @@
     
     [self jumpToMain];
     
+#ifndef kJuranDesigner
     [self getAndSaveGuideShopList];
+#endif
     
     [self.window makeKeyAndVisible];
     return YES;
 }
 
+#ifndef kJuranDesigner
 - (void)getAndSaveGuideShopList {
     //从四维图新请求可导航门店列表
     
@@ -243,6 +247,8 @@
         }];
     }];
 }
+
+#endif
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -460,15 +466,19 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     
+#ifndef kJuranDesigner
     [[LocationUtil defaultInstance] setDrawing:NO];
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+#endif
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 //    [self clearNotification];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+#ifndef kJuranDesigner
     [[LocationUtil defaultInstance] setDrawing:YES];
+#endif
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 

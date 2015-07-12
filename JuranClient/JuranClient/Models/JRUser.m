@@ -349,6 +349,7 @@
 
 - (void)postPrivateLetterWithUserId:(NSInteger)userId Target:(id)target VC:(UIViewController *)vc{
     if (target) {
+#ifndef kJuranDesigner
         if ([target isKindOfClass:[JRProduct class]]){
             ProductLetterViewController *pv = [[ProductLetterViewController alloc] init];
             pv.product = target;
@@ -358,6 +359,7 @@
             pv.shop = target;
             [vc.navigationController pushViewController:pv animated:YES];
         }
+#endif
     }else{
         [vc showHUD];
         NSDictionary *param = @{@"receiverId": [NSString stringWithFormat:@"%d", userId]

@@ -157,10 +157,12 @@
 }
 
 - (void)onScan{
+#ifndef kJuranDesigner
     if (![QRBaseViewController isRuning]) {
         QRBaseViewController * vc = [[QRBaseViewController alloc] initWithNibName:@"QRBaseViewController" bundle:nil isPopNavHide:NO];
         [self.navigationController pushViewController:vc animated:YES];
     }
+#endif
 }
 
 - (void)onMore{

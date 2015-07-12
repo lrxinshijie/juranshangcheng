@@ -37,8 +37,9 @@
 #import "MyDemandCopyViewController.h"
 #import "JRServiceViewController.h"
 #import "SettingsViewController.h"
-#import "AppDelegate.h"
 #endif
+
+#import "AppDelegate.h"
 
 @interface ProfileViewController ()<UITableViewDataSource, UITableViewDelegate>
 {

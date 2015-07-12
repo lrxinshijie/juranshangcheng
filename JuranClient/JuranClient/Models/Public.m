@@ -44,7 +44,11 @@
 #import "SearchViewController.h"
 #import "DiscoverViewController.h"
 #import "GoodsCategaryViewController.h"
+
+#ifndef kJuranDesigner
 #import "ProductListViewController.h"
+#endif
+
 #import "ProductFilterData.h"
 #import "ProductSeletedFilter.h"
 #import "MyDemandViewController.h"
@@ -624,6 +628,7 @@
         [navigationController pushViewController:vc animated:YES];
     }else if (type == 16){//家装-设计师专访：type=16
         
+#ifndef kJuranDesigner
     }else if (type == 17){//热销商品
         if ([param.allKeys containsObject:@"id"]) {
             NSInteger sId = [param getIntegerValueForKey:@"id" defaultValue:0];
@@ -634,6 +639,7 @@
                 [navigationController pushViewController:vc animated:YES];
             }
         }
+
     }else if (type == 18){//店铺：type=18
         if ([param.allKeys containsObject:@"id"]) {
             NSInteger sId = [param getIntegerValueForKey:@"id" defaultValue:0];
@@ -646,7 +652,7 @@
             }
         }
     }else if (type == 19){//门店导航
-#ifndef kJuranDesigner
+
         NaviStoreListViewController *vc = [[NaviStoreListViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
@@ -685,10 +691,12 @@
                 }
             }
         }
+#ifndef kJuranDesigner
     }else if (type == 23){//商品分类
         GoodsCategaryViewController *vc = [[GoodsCategaryViewController alloc] initWithNibName:@"GoodsCategaryViewController" bundle:nil isPopNavHide:NO style:CategaryStyle_Goods];
         vc.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:vc animated:YES];
+#endif
     }else if (type == 25){//居然服务
         JRServiceViewController *vc = [[JRServiceViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
@@ -739,6 +747,7 @@
             [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
             [ApplicationDelegate.tabBarController setSelectedIndex:4];
         }
+#ifndef kJuranDesigner
     }else if (type == 32){//会员-我的收藏：type=32
         if ([navigationController checkLogin]) {
             MyCollectViewController *vc = [[MyCollectViewController alloc]init];
@@ -746,6 +755,7 @@
             [ApplicationDelegate.tabBarController.viewControllers[4] pushViewController:vc animated:YES];
             [ApplicationDelegate.tabBarController setSelectedIndex:4];
         }
+#endif
     }else if (type == 33){//会员-订单管理：type=33
         if ([navigationController checkLogin]) {
             OrderListViewController *vc = [[OrderListViewController alloc]init];
@@ -781,25 +791,29 @@
             }
         }
     }else if (type == 37){//店铺列表：type=37
+#ifndef kJuranDesigner
             ShopListViewController *vc = [[ShopListViewController alloc]init];
             vc.cityName = @"北京市";
             vc.keyword = @"";
             vc.sort = 9;
             vc.hidesBottomBarWhenPushed = YES;
             [navigationController pushViewController:vc animated:YES];
+#endif
     }else if (type == 38){//商品列表：type=38
         SearchViewController *search = [[SearchViewController alloc]init];
         search.hidesBottomBarWhenPushed = YES;
         [navigationController pushViewController:search animated:NO];
         
+#ifndef kJuranDesigner
         ProductListViewController *vc = [[ProductListViewController alloc]init];
         vc.selectedFilter = [[ProductSelectedFilter alloc]init];
         vc.selectedFilter.isInShop = NO;
         vc.selectedFilter.pSort.sort = [param getIntegerValueForKey:@"sort" defaultValue:9];
         vc.selectedFilter.pStore.storeCode = [param getStringValueForKey:@"storeCode" defaultValue:@""];
         vc.selectedFilter.pCategory.urlContent = [param getStringValueForKey:@"urlContent" defaultValue:@""];
-        
+
         [search.navigationController pushViewController:vc animated:YES];
+#endif
     }else if (type == 39){//话题列表：type=39
         NSArray *vcs = ApplicationDelegate.tabBarController.viewControllers;
         if (vcs.count == 5) {
