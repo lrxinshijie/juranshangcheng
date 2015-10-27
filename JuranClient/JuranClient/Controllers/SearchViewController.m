@@ -33,7 +33,7 @@
 @property (nonatomic, strong) NSString *searchKeyWord;
 
 @property (nonatomic, strong) IBOutlet UITextField *textField;
-@property (nonatomic, strong) UITableView *tableView;
+
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UIView *keywordsFooterView;
 @property (nonatomic, strong) IBOutlet UIView *clearHistoryView;

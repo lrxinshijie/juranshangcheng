@@ -11,6 +11,7 @@
 #import "DesignerViewController.h"
 #import "ProfileViewController.h"
 #import "PublishDesignViewController.h"
+#import "MyCollectViewController.h"
 #import "SubjectViewController.h"
 #import <ShareSDK/ShareSDK.h>
 #import "WeiboSDK.h"
@@ -36,6 +37,7 @@
 #import "FitmentViewController.h"
 #import "IndoorGuidanceManager.h"
 #import "sys/utsname.h"
+#import "LoginViewController.h"
 
 #import "GuidanceShopItem.h"
 #ifndef kJuranDesigner
@@ -344,24 +346,36 @@
     UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
     csNav.tabBarItem = [self setupTabbarItemTitle:@"首页" image:@"icon-nav-home" selected:@"icon-nav-home-active"];
     
-    FitmentViewController *des = [[FitmentViewController alloc] init];
-    UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
-    desNav.tabBarItem = [self setupTabbarItemTitle:@"家装" image:@"icon-nav-finish" selected:@"icon-nav-finish-active"];
+//    FitmentViewController *des = [[FitmentViewController alloc] init];
+//    UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
+//    desNav.tabBarItem = [self setupTabbarItemTitle:@"家装" image:@"icon-nav-finish" selected:@"icon-nav-finish-active"];
     
-    MallViewController *topic = [[MallViewController alloc] init];
-    UINavigationController *topicNav = [Public navigationControllerFromRootViewController:topic];
-    topicNav.tabBarItem = [self setupTabbarItemTitle:@"商城" image:@"icon-nav-mall" selected:@"icon-nav-mall-active"];
+//    MallViewController *topic = [[MallViewController alloc] init];
+//    UINavigationController *topicNav = [Public navigationControllerFromRootViewController:topic];
+//    topicNav.tabBarItem = [self setupTabbarItemTitle:@"商城" image:@"icon-nav-mall" selected:@"icon-nav-mall-active"];
     
-    DiscoverViewController *publish = [[DiscoverViewController alloc] init];
-    UINavigationController *publishNav = [Public navigationControllerFromRootViewController:publish];
-    publishNav.tabBarItem = [self setupTabbarItemTitle:@"发现" image:@"icon-nav-explore" selected:@"icon-nav-explore-active"];
+//    DiscoverViewController *publish = [[DiscoverViewController alloc] init];
+//    UINavigationController *publishNav = [Public navigationControllerFromRootViewController:publish];
+//    publishNav.tabBarItem = [self setupTabbarItemTitle:@"发现" image:@"icon-nav-explore" selected:@"icon-nav-explore-active"];
     
     ProfileViewController *profile = [[ProfileViewController alloc] init];
     UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
-    profileNav.tabBarItem = [self setupTabbarItemTitle:@"我" image:@"icon-nav-profile" selected:@"icon-nav-profile-active"];
+    profileNav.tabBarItem = [self setupTabbarItemTitle:@"个人中心" image:@"icon-nav-profile" selected:@"icon-nav-profile-active"];
+    
+    //我的收藏
+    MyCollectViewController *vc = [[MyCollectViewController alloc] init];
+    UINavigationController *vcNav = [Public navigationControllerFromRootViewController:vc];
+    vcNav.tabBarItem = [self setupTabbarItemTitle:@"我的收藏" image:@"Collection" selected:@"Collection_blue"];
+
+    
     
     self.tabBarController = [[UITabBarController alloc] init];
-    _tabBarController.viewControllers = @[csNav,desNav,topicNav,publishNav,profileNav];
+    //_tabBarController.viewControllers = @[csNav,desNav,topicNav,publishNav,profileNav];
+    
+    
+    //icon_personal_shouchang.png
+    
+    _tabBarController.viewControllers = @[csNav,vcNav,profileNav];
     self.window.rootViewController = _tabBarController;
 
 //    CaseViewController *cs = [[CaseViewController alloc] init];
@@ -392,6 +406,8 @@
 
 }
 #endif
+
+
 
 - (void)setupShareSDK{
 

@@ -58,6 +58,8 @@
                 [self showErrMsg:error];
             }
         }else{
+            NSURL *url=URL;
+            NSLog(@"%@",url);
             [self showErrMsg:error];
         }
         

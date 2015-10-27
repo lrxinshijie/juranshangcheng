@@ -12,4 +12,5 @@
 
 @property (nonatomic, assign) SearchType type;
 @property (nonatomic, assign) BOOL foucs;
+@property (nonatomic, strong) UITableView *tableView;
 @end

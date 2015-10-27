@@ -69,6 +69,12 @@
     
     [_collectionView registerNib:[UINib nibWithNibName:@"CaseCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"CaseCollectionCell"];
     
+    
+    
+   
+    [self checkLogin];
+    
+    
     __weak typeof(self) weakSelf = self;
     [_collectionView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
