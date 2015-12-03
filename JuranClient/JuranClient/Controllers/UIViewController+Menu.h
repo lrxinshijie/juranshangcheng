@@ -12,5 +12,6 @@
 - (void)showAppMenu:(VoidBlock)shareBlock;
 - (void)showAppMenuWithoutHomeAndShare;
 - (void)showAppMenuWithoutShare;
+- (void)showAppMenuWithoutPlate;
 - (void)dismissAppMenu;
 @end

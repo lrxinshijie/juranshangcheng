@@ -45,6 +45,7 @@ typedef enum {
 @interface CustomSearchBar : UIView
 @property (strong, nonatomic) IBOutlet UITextField *inputTextField;
 @property (assign, nonatomic) id<CustomSearchBarDelegate>delegate;
+@property (strong, nonatomic) IBOutlet UIButton *rightButton;
 
 //用于跳转至二维码页面
 @property (assign, nonatomic) id parentVC;

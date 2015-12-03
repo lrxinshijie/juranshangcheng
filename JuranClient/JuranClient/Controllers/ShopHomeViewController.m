@@ -27,6 +27,8 @@
 #import "QuestionViewController.h"
 #import "ShopListViewController.h"
 #import "ProductSeletedFilter.h"
+#import "ShareView.h"
+#import "CommentListViewController.h"
 
 
 @interface ShopHomeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate,CustomSearchBarDelegate>
@@ -71,7 +73,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
-    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"icon-dot"] rightBarButtonItemAction:@selector(onMenu)];
+//    [self configureRightBarButtonItemImage:[UIImage imageNamed:@"menu-icon-share"] rightBarButtonItemAction:@selector(onMenu)];
     ///////////////
     self.searchBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomSearchBar" owner:self options:nil] lastObject];
     self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 64);
@@ -81,6 +83,7 @@
     [self.searchBar setSearchButtonType:SearchButtonType_Product];
     [self.searchBar setEnabled:NO];
     self.searchBar.inputTextField.placeholder = @"      搜索店铺内的商品";
+    //[self.searchBar.rightButton setImage:[UIImage imageNamed:@"menu-icon-share"]  forState:UIControlStateNormal];
     [self.view addSubview:self.searchBar];
     ////////////////
     [_collectionView registerNib:[UINib nibWithNibName:@"ShopCell" bundle:nil] forCellWithReuseIdentifier:@"ShopCell"];
@@ -103,6 +106,7 @@
     [super viewWillAppear:animated];
     //self.navigationController.navigationBar.clipsToBounds = NO;
     self.navigationController.navigationBarHidden = YES;
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -124,10 +128,10 @@
         [self hideHUD];
         if (!error) {
             [_shop buildUpWithDictionary:data];
-            [self reloadData];
+//            [self reloadData];
         }
         [self loadRecommendData];
-        [self loadStoreData];
+//        [self loadStoreData];
     }];
 }
 
@@ -156,9 +160,16 @@
     [_collectionView reloadData];
 }
 
+- (NSString *)shareURL{
+    return [NSString stringWithFormat:@"http://mall.juran.cn/shop/%d.htm",self.shop.shopId];
+}
+
 - (void)showMenuList
 {
-    [self showAppMenu:nil];
+    
+    [[ShareView sharedView] showWithContent:self.shop.shopName image:[Public imageURLString:self.shop.shopLogo] title:self.shop.shopName url:[self shareURL]];
+
+    //[self showAppMenu:nil];
 }
 
 - (void)goBackButtonDidSelect
@@ -197,7 +208,8 @@
 #pragma mark - Target Action
 
 - (void)onMenu{
-    [self showAppMenu:nil];
+    
+    //[self showAppMenu:nil];
 }
 
 - (IBAction)onCollection:(id)sender{
@@ -347,5 +359,14 @@
         
     }];
     [self.navigationController pushViewController:filter animated:YES];
+}
+- (IBAction)btnShopCommentClick:(id)sender {
+    
+    CommentListViewController *com=[[CommentListViewController alloc] init];
+    com.hidesBottomBarWhenPushed=YES;
+    com.relId=_shop.shopId;
+    com.InActionType=ENUM_ShopType;
+    com.shopName=_shop.shopName;
+    [self.navigationController pushViewController:com animated:YES];
 }
 @end

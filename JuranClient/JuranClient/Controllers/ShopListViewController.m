@@ -195,6 +195,7 @@
     ShopHomeViewController *vc = [[ShopHomeViewController alloc]init];
     JRShop *shop = [_dataList objectAtIndex:[indexPath row]];
     vc.shop = shop;
+    vc.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end

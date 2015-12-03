@@ -178,7 +178,7 @@
     [self jumpToMain];
     
 #ifndef kJuranDesigner
-    [self getAndSaveGuideShopList];
+    //[self getAndSaveGuideShopList];
 #endif
     
     [self.window makeKeyAndVisible];
@@ -366,7 +366,6 @@
     MyCollectViewController *vc = [[MyCollectViewController alloc] init];
     UINavigationController *vcNav = [Public navigationControllerFromRootViewController:vc];
     vcNav.tabBarItem = [self setupTabbarItemTitle:@"我的收藏" image:@"Collection" selected:@"Collection_blue"];
-
     
     
     self.tabBarController = [[UITabBarController alloc] init];

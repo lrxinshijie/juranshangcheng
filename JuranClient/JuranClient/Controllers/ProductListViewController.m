@@ -96,7 +96,7 @@
 //    [self.searchBar setSearchButtonType:SearchButtonType_Product];
 //    [self.searchBar setEnabled:NO];
     
-    
+    //[self loadData];
     self.filterView = [[ProductFilterView alloc] initWithDefaultData:_filterData SeletedData:_selectedFilter];
     
     _filterView.delegate = self;
@@ -211,7 +211,7 @@
     
     [[ALEngine shareEngine] pathURL:url parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"No"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            
+           
             //TODO: 接口返回值处理
             //if (_selectedFilter.keyword.length > 0) {
             NSArray *recommendProductsList = [data objectForKey:@"emallGoodsInfoList"];
@@ -228,6 +228,7 @@
                 _filterData.brandList = [ProductBrand buildUpWithValueForList:[data objectForKey:@"sortBrandList"]];
                 _filterData.storeList = [ProductStore buildUpWithValueForList:[data objectForKey:@"appStoreInfoList"]];
                 _filterData.classList = [ProductClass buildUpWithValueForList:[data objectForKey:@"appManagementCategoryList"]];
+               // self.filterView.defaultData=_filterData;
             }else{
                 [_products addObjectsFromArray:products];
             }
@@ -245,6 +246,7 @@
 //                [_tableView addSubview:_emptyView];
 //            }
         }
+      
         
         [self reloadData];
         [_collectionView headerEndRefreshing];

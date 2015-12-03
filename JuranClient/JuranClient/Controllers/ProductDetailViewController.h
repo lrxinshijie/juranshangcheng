@@ -17,5 +17,6 @@
 @property (nonatomic, strong) NSMutableArray *attributeHeights;
 
 - (void)reloadPrice:(NSInteger)fromRow;
+- (IBAction)btnCommentClick:(id)sender;
 
 @end

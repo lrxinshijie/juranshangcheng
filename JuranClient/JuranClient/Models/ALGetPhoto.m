@@ -15,7 +15,7 @@
 @property (nonatomic, assign) UIViewController *viewController;
 @property (nonatomic, strong) ImagesBlock block;
 @property (nonatomic, assign) BOOL allowsEditing;
-@property (nonatomic, assign) BOOL maxNumber;
+@property (nonatomic, assign) NSInteger maxNumber;
 @end
 
 @implementation ALGetPhoto

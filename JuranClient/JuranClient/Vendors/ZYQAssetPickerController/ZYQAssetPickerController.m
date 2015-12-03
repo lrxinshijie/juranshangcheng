@@ -463,7 +463,7 @@ static UIColor *titleColor;
 - (void)setupButtons
 {
     self.navigationItem.rightBarButtonItem =
-    [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil)
+    [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"完成", nil)
                                      style:UIBarButtonItemStylePlain
                                     target:self
                                     action:@selector(finishPickingAssets:)];
@@ -580,8 +580,29 @@ static UIColor *titleColor;
             [vc.delegate assetPickerControllerDidMaximum:vc];
         }
     }
+    BOOL isok=(selectable && _indexPathsForSelectedItems.count < vc.maximumNumberOfSelection);
     
-    return (selectable && _indexPathsForSelectedItems.count < vc.maximumNumberOfSelection);
+    if(selectable)
+    {
+        if(_indexPathsForSelectedItems.count<vc.maximumNumberOfSelection)
+        {
+             isok=YES;
+        }
+        else
+        {
+            isok=NO;
+        }
+    }
+    else
+    {
+        isok=NO;
+    }
+//    if(isok)
+//    {
+//    NSLog(@"isok:%@",isok);
+//    }
+    return  isok;
+    //return (selectable && _indexPathsForSelectedItems.count < vc.maximumNumberOfSelection);
 }
 
 - (void)didSelectAsset:(ALAsset *)asset
@@ -703,6 +724,8 @@ static UIColor *titleColor;
     self.accessoryType          = UITableViewCellAccessoryDisclosureIndicator;
 }
 
+
+
 - (NSString *)accessibilityLabel
 {
     NSString *label = [self.assetsGroup valueForProperty:ALAssetsGroupPropertyName];
@@ -717,7 +740,7 @@ static UIColor *titleColor;
 
 @interface ZYQAssetGroupViewController()
 
-@property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
+@property (nonatomic, strong)  ALAssetsLibrary *assetsLibrary;
 @property (nonatomic, strong) NSMutableArray *groups;
 
 @end
@@ -777,7 +800,7 @@ static UIColor *titleColor;
     if (picker.showCancelButton)
     {
         self.navigationItem.rightBarButtonItem =
-        [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil)
+        [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"完成", nil)
                                          style:UIBarButtonItemStylePlain
                                         target:self
                                         action:@selector(dismiss:)];
@@ -786,8 +809,8 @@ static UIColor *titleColor;
 
 - (void)localize
 {
-    //self.title = NSLocalizedString(@"相簿", nil);
-    self.title = NSLocalizedString(@"Camera Roll", nil);
+    self.title = NSLocalizedString(@"相簿", nil);
+//    self.title = NSLocalizedString(@"Camera Roll", nil);
 }
 
 - (void)setupGroup

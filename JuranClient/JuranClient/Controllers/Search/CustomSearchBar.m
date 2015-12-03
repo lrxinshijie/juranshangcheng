@@ -21,7 +21,6 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
 
 @property (strong, nonatomic) IBOutlet UIImageView *magnifyingGlass;
 @property (strong, nonatomic) IBOutlet UIButton *cleanButton;
-@property (strong, nonatomic) IBOutlet UIButton *rightButton;
 @property (strong, nonatomic) IBOutlet UITableView *listTableView;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 
@@ -80,13 +79,13 @@ typedef void (^InitHistoryDataCompletion)(BOOL isFinish);
     self.dataArray_History = [NSMutableArray arrayWithCapacity:0];
     self.dataArray_SearchRange = [NSMutableArray arrayWithCapacity:0];
 
-    NSDictionary * dict  = [NSDictionary dictionaryWithObjectsAndKeys:@"在作品案例中搜索",@"searchRange",@"",@"count",nil];
+    //NSDictionary * dict  = [NSDictionary dictionaryWithObjectsAndKeys:@"在作品案例中搜索",@"searchRange",@"",@"count",nil];
     NSDictionary * dict1 = [NSDictionary dictionaryWithObjectsAndKeys:@"在商品中搜索",@"searchRange",@"",@"count",nil];
     NSDictionary * dict2 = [NSDictionary dictionaryWithObjectsAndKeys:@"在店铺中搜索",@"searchRange",@"",@"count",nil];
-    NSDictionary * dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"在设计师中搜索",@"searchRange",@"",@"count",nil];
-    NSDictionary * dict4 = [NSDictionary dictionaryWithObjectsAndKeys:@"在答疑解惑中搜索",@"searchRange",@"",@"count",nil];
+//    NSDictionary * dict3 = [NSDictionary dictionaryWithObjectsAndKeys:@"在设计师中搜索",@"searchRange",@"",@"count",nil];
+//    NSDictionary * dict4 = [NSDictionary dictionaryWithObjectsAndKeys:@"在答疑解惑中搜索",@"searchRange",@"",@"count",nil];
     
-    self.dataArray_SearchRange = [NSMutableArray arrayWithArray:@[dict,dict1,dict2,dict3,dict4]];
+    self.dataArray_SearchRange = [NSMutableArray arrayWithArray:@[dict1,dict2]];
     
     self.isReloadHistory = NO;
     self.isHistory = YES;

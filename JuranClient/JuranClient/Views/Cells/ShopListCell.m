@@ -70,7 +70,9 @@
             if (data!=[NSNull null]) {
                 _dataList = [JRStore buildUpWithValueForList:[data objectForKey:@"stallInfoList"]];
             }
-            if (_dataList.count>0) {
+            int count=_dataList.count;
+            //NSArray *array=_dataList;
+            if (count>0) {
                 NaviStoreListViewController *navi = [[NaviStoreListViewController alloc]init];
                 navi.naviType = NaviTypeStall;
                 //navi.dataList = _dataList;

@@ -30,12 +30,25 @@
                    numOfMsg:[JRUser isLogin] && [JRUser currentUser].newPrivateLetterCount?[JRUser currentUser].newPrivateLetterCount:0];
 }
 
+
+
 - (void)showAppMenuWithoutHomeAndShare
 {
     [self createAppMenuHome:NO
                      Notice:YES
                     Message:YES
                    Platform:YES
+                      Share:nil
+                     isRead:[JRUser isLogin] && [JRUser currentUser].newPushMsgCount>0?NO:YES
+                   numOfMsg:[JRUser isLogin] && [JRUser currentUser].newPrivateLetterCount?[JRUser currentUser].newPrivateLetterCount:0];
+}
+
+- (void)showAppMenuWithoutPlate
+{
+    [self createAppMenuHome:YES
+                     Notice:YES
+                    Message:YES
+                   Platform:NO
                       Share:nil
                      isRead:[JRUser isLogin] && [JRUser currentUser].newPushMsgCount>0?NO:YES
                    numOfMsg:[JRUser isLogin] && [JRUser currentUser].newPrivateLetterCount?[JRUser currentUser].newPrivateLetterCount:0];

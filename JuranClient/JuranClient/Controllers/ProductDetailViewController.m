@@ -24,6 +24,7 @@
 #import "ShareView.h"
 #import "UIImageView+Block.h"
 #import "ProductPhotoBrowserViewController.h"
+#import "CommentListViewController.h"
 
 @interface ProductDetailViewController () <UITableViewDelegate, UITableViewDataSource, JRSegmentControlDelegate>
 
@@ -83,11 +84,14 @@
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];
+    
+  
     _fromRow = -1;
     // Do any additional setup after loading the view from its nib.
 //    _navigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAttributeRow:) name:kNotificationNameAttributeRowReload object:nil];
     [self setupUI];
+    
 
     [self loadData];
 }
@@ -135,6 +139,17 @@
         }
         [_attributeTableView reloadData];
     }];
+}
+#pragma 商品评论
+- (IBAction)btnCommentClick:(id)sender {
+    
+    CommentListViewController *com=[[CommentListViewController alloc] init];
+    com.hidesBottomBarWhenPushed=YES;
+    com.relId=self.product.linkProductId;
+    com.InActionType=ENUM_ProductType;
+    com.goodsName=self.product.goodsName;
+
+    [self.navigationController pushViewController:com animated:YES];
 }
 
 - (void)setupUI{
@@ -298,6 +313,8 @@
             [_webView loadHTMLString:_product.pcDesc];
         }
     }];
+    
+    
 }
 
 - (IBAction)onBack:(id)sender{
@@ -309,13 +326,19 @@
 }
 
 - (IBAction)onMore:(id)sender{
-    [self showAppMenu:^{
-        NSString *content = self.product.goodsName;
-//        if (content.length == 0) {
-//            content = @"商品分享测试";
-//        }
-        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:@"居然有这么好的商品,大家快来看看" url:self.shareURL];
-    }];
+    
+    NSString *content = self.product.goodsName;
+  
+    [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:@"居然有这么好的商品,大家快来看看" url:self.shareURL];
+    
+    
+//    [self showAppMenuOnlyShare:^{
+//        NSString *content = self.product.goodsName;
+////        if (content.length == 0) {
+////            content = @"商品分享测试";
+////        }
+//        [[ShareView sharedView] showWithContent:content image:[Public imageURLString:self.product.goodsImagesList[0]] title:@"居然有这么好的商品,大家快来看看" url:self.shareURL];
+//    }];
 }
 
 - (NSString *)shareURL{

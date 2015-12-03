@@ -58,8 +58,7 @@
                 [self showErrMsg:error];
             }
         }else{
-            NSURL *url=URL;
-            NSLog(@"%@",url);
+           ;
             [self showErrMsg:error];
         }
         
@@ -147,8 +146,10 @@
     [imageDict.allKeys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
         
         id data = [imageDict objectForKey:key];
-        if ([data isKindOfClass:[NSData class]]) {
+     
+         if ([data isKindOfClass:[NSData class]]) {
             [op addData:data forKey:key mimeType:@"image/jpeg" fileName:[NSString stringWithFormat:@"%@.jpg",key]];
+
         }else if ([data isKindOfClass:[UIImage class]]){
             [op addData:UIImageJPEGRepresentation(data, 1.0) forKey:key mimeType:@"image/jpeg" fileName:[NSString stringWithFormat:@"%@.jpg",key]];
         }

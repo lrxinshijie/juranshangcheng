@@ -400,9 +400,12 @@
 }
 
 - (void)onMenu{
-    [self showAppMenu:^{
-        [[ShareView sharedView] showWithContent:_topic.theme image:nil title:_topic.theme url:[NSString stringWithFormat:@"http://apph5.juran.cn/topics/%@%@", _topic.topicId, [Public shareEnv]]];
-    }];
+    
+     [[ShareView sharedView] showWithContent:_topic.theme image:nil title:_topic.theme url:[NSString stringWithFormat:@"http://apph5.juran.cn/topics/%@%@", _topic.topicId, [Public shareEnv]]];
+    
+//    [self showAppMenu:^{
+//        [[ShareView sharedView] showWithContent:_topic.theme image:nil title:_topic.theme url:[NSString stringWithFormat:@"http://apph5.juran.cn/topics/%@%@", _topic.topicId, [Public shareEnv]]];
+//    }];
 }
 
 - (void)onShare{

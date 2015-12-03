@@ -21,6 +21,8 @@
 #import "OrderListViewController.h"
 #import "OrderListCopyViewController.h"
 #import "MyCollectViewController.h"
+#import "FeedBackViewController.h"
+#import "MyCommentViewController.h"
 
 #ifdef kJuranDesigner
 #import "RealNameAuthViewController.h"
@@ -112,21 +114,37 @@
                     , @"icon_praise_manage.png"];
     self.navigationItem.title = @"个人中心";
 #else
-    titleArray = @[@"互动管理"
-                    , @"我的关注"
-                    , @"我的收藏"
-                    , @"订单管理"
-                    , @"账户安全"
-                    , @"账户管理"
-                    , @"居然服务"];
+    //7个列表分别改为：个人信息、我的收藏、账户安全、账户管理、问题反馈、客服电话、居然服务
+//    titleArray = @[@"互动管理"
+//                    , @"我的关注"
+//                    , @"我的收藏"
+//                    , @"订单管理"
+//                    , @"账户安全"
+//                    , @"账户管理"
+//                    , @"居然服务"];
+    
+    titleArray = @[@"个人信息"
+                   , @"我的收藏"
+                   ,@"我的点评"
+                   , @"账户安全"
+                   , @"账户管理"
+                   , @"问题反馈"
+                   , @"客服电话"
+                   , @"居然服务"
+                   
+                   ];
     
     imageArray = @[ @"icon_personal_hudong.png"
-                    , @"icon_personal_guanzhu.png"
                     , @"icon_personal_shouchang.png"
+  ,@"icon_personal_comment"
+                    , @"icon_personal_guanzhu.png"
+                    
                     , @"icon_personal_ddgl.png"
                     , @"icon_personal_zhaq"
                     , @"icon_personal_zhgl"
-                    , @"icon_personal_svr"];
+                    , @"icon_personal_svr"
+                    
+                    ];
     //[self configureMenu];
 #endif
                    
@@ -448,66 +466,94 @@
         return;
     }
     switch (indexPath.row) {
+            
         case 1:
         {
-            //互动
-            InteractionViewController *vc = [[InteractionViewController alloc] init];
+            //个人信息  111
+            
+            PersonalDataViewController *vc = [[PersonalDataViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
+
+//            InteractionViewController *vc = [[InteractionViewController alloc] init];
+//            vc.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 2:
         {
-            //        我的关注
+//            //        我的关注
+//            
+//            MyFollowViewController *vc = [[MyFollowViewController alloc] init];
+//            vc.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:vc animated:YES];
             
-            MyFollowViewController *vc = [[MyFollowViewController alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-            break;
-        }
-        case 3:
-        {
             //        我的收藏
             MyCollectViewController *vc = [[MyCollectViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
+        case 3:
+        {
+            MyCommentViewController  *mc=[[MyCommentViewController alloc] init];
+            mc.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:mc  animated:YES];
+            
+            break;
+        }
         
         case 4:{
             //        订单管理
-#ifdef kJuranVersion12
-            OrderListViewController *vc = [[OrderListViewController alloc] init];
-#else
-            OrderListCopyViewController *vc = [[OrderListCopyViewController alloc] init];
-#endif
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-            break;
-        }
-        case 5:
-        {
+//#ifdef kJuranVersion12
+//            OrderListViewController *vc = [[OrderListViewController alloc] init];
+//#else
+//            OrderListCopyViewController *vc = [[OrderListCopyViewController alloc] init];
+//#endif
+//            vc.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:vc animated:YES];
+            
             //        账户安全
             AccountSecurityViewController *vc = [[AccountSecurityViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
-            break;
+            
+                     break;
         }
-        case 6:
+        case 5:
         {
             //        账户管理
             AccountManageViewController *vc = [[AccountManageViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
+
+           
+            break;
+        }
+        case 6:
+        {
+            
+            //问题反馈
+            FeedBackViewController *vc = [[FeedBackViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+           
             break;
         }
         case 7:
         {
+            //客服电话
+            [self loadCustomService];
+            break;
+        }
+        case 8:
+        {
+         
             //        居然服务
             JRServiceViewController *vc = [[JRServiceViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
-            break;
+            
+         
         }
         default:
             break;
@@ -621,6 +667,20 @@
     
 #endif
 }
+
+//JR_CUSTOMER_SERVICE
+- (void)loadCustomService{
+    [self showHUD];
+    [[ALEngine shareEngine] pathURL:JR_CUSTOMER_SERVICE parameters:nil HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+        [self hideHUD];
+        if (!error) {
+            NSString *tel = [data getStringValueForKey:@"telphone" defaultValue:@""];
+            NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",tel];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        }
+    }];
+}
+
 
 - (void)onSetting:(id)sender {
     SettingsViewController *vc = [[SettingsViewController alloc] init];

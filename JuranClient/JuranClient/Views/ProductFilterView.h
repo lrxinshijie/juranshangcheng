@@ -21,6 +21,7 @@
 
 @property (nonatomic, assign) NSInteger xMargin;
 @property (nonatomic, assign) id<ProductFilterViewDelegate> delegate;
+@property (nonatomic, assign) ProductFilterData *defaultData;
 
 -(id)initWithDefaultData:(ProductFilterData *)defaultData SeletedData:(ProductSelectedFilter*)seletedData;
 

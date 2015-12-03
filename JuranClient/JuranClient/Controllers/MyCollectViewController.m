@@ -20,7 +20,7 @@
 #import "ShopHomeViewController.h"
 #import "ProductDetailViewController.h"
 
-@interface MyCollectViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, JRSegmentControlDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface MyCollectViewController ()<  JRSegmentControlDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *datas;
 @property (nonatomic, assign) NSInteger currentPage;
@@ -48,27 +48,27 @@
 
     [self setupUI];
     
-    [_collectionView headerBeginRefreshing];
+    [_tableView headerBeginRefreshing];
 }
 
 - (void)setupUI{
     _segment.showUnderLine = YES;
     _segment.delegate = self;
-    [_segment setTitleList:@[@"案例收藏" ,@"商品收藏", @"店铺收藏"]];
+    [_segment setTitleList:@[@"商品收藏", @"店铺收藏"]];
     
     _collectionView.backgroundColor = RGBColor(237, 237, 237);
     _collectionView.alwaysBounceVertical = YES;
     
     self.tableView = [self.view tableViewWithFrame:CGRectMake(0, CGRectGetHeight(_segment.frame), kWindowWidth, kWindowHeightWithoutNavigationBar - CGRectGetHeight(_segment.frame)) style:UITableViewStylePlain backgroundView:nil dataSource:self delegate:self];
     _tableView.backgroundColor = RGBColor(237, 237, 237);
-    _tableView.hidden = YES;
+    //_tableView.hidden = YES;
     _tableView.tableFooterView = [[UIView alloc] init];
     [_tableView registerNib:[UINib nibWithNibName:@"ProductCollectionCell" bundle:nil] forCellReuseIdentifier:@"ProductCollectionCell"];
     [_tableView registerNib:[UINib nibWithNibName:@"ShopCollectionCell" bundle:nil] forCellReuseIdentifier:@"ShopCollectionCell"];
     [self.view addSubview:_tableView];
     
-    [_collectionView registerNib:[UINib nibWithNibName:@"CaseCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"CaseCollectionCell"];
-    
+//    [_collectionView registerNib:[UINib nibWithNibName:@"CaseCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"CaseCollectionCell"];
+//    
     
     
    
@@ -76,15 +76,15 @@
     
     
     __weak typeof(self) weakSelf = self;
-    [_collectionView addHeaderWithCallback:^{
-        weakSelf.currentPage = 1;
-        [weakSelf loadData];
-    }];
-    
-    [_collectionView addFooterWithCallback:^{
-        weakSelf.currentPage++;
-        [weakSelf loadData];
-    }];
+//    [_collectionView addHeaderWithCallback:^{
+//        weakSelf.currentPage = 1;
+//        [weakSelf loadData];
+//    }];
+//    
+//    [_collectionView addFooterWithCallback:^{
+//        weakSelf.currentPage++;
+//        [weakSelf loadData];
+//    }];
     
     [_tableView addHeaderWithCallback:^{
         weakSelf.currentPage = 1;
@@ -102,23 +102,19 @@
 }
 
 - (NSString *)urlString{
-    if (_segment.selectedIndex == 0) {
-        return JR_FAV_PROJECT;
-    }else if (_segment.selectedIndex == 1){
+     if (_segment.selectedIndex == 0){
         return JR_GOODS_COLLECTION;
-    }else if (_segment.selectedIndex == 2){
+    }else if (_segment.selectedIndex == 1){
         return JR_GET_SHOP_COLLECTION_LIST;
     }
     return @"";
 }
 
 - (NSDictionary*)param{
-    if (_segment.selectedIndex == 0) {
-        return @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": kOnePageCount, @"projectType" : @"01"};
-    }else if (_segment.selectedIndex == 1){
+   if (_segment.selectedIndex == 0){
         return @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": kOnePageCount};
 //        return @{@"cityName": [(AppDelegate*)ApplicationDelegate gLocation].cityName};
-    }else if (_segment.selectedIndex == 2){
+    }else if (_segment.selectedIndex == 1){
         return @{@"pageNo": [NSString stringWithFormat:@"%d", _currentPage],@"onePageCount": kOnePageCount};
 //        return @{@"cityName": [(AppDelegate*)ApplicationDelegate gLocation].cityName};
     }
@@ -132,12 +128,9 @@
         [self hideHUD];
         if (!error) {
             NSMutableArray *rows = nil;
-            if (_segment.selectedIndex == 0) {
-                rows = [JRCase buildUpWithValue:[data objectForKey:@"projectGeneralDtoList"]];
-                
-            }else if (_segment.selectedIndex == 1) {
+           if (_segment.selectedIndex == 0) {
                 rows = [JRProduct buildUpWithValueForCollection:[data objectForKey:@"goodsList"]];
-            }else if (_segment.selectedIndex == 2) {
+            }else if (_segment.selectedIndex == 1) {
                 rows = [JRShop buildUpWithValueForCollection:[data objectForKey:@"shopList"]];
             }
             if (_currentPage > 1) {
@@ -147,37 +140,33 @@
             }
         }
         [self reloadData];
-        [_collectionView headerEndRefreshing];
-        [_collectionView footerEndRefreshing];
+//        [_collectionView headerEndRefreshing];
+//        [_collectionView footerEndRefreshing];
         [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
     }];
 }
 
 - (void)reloadData{
-    if (_segment.selectedIndex == 0) {
-        [_collectionView reloadData];
-    }else{
+   
         [_tableView reloadData];
-    }
+    
     _emptyView.hidden = _datas.count != 0;
 }
 
 #pragma mark - JRSegmentControl
 
 - (void)segmentControl:(JRSegmentControl *)segment changedSelectedIndex:(NSInteger)index{
-    _collectionView.hidden = index != 0;
-    _tableView.hidden = index == 0;
+   // _collectionView.hidden = index != 0;
+    //_tableView.hidden = index == 0;
     if (_datas.count > 0) {
         [_datas removeAllObjects];
-        [_collectionView reloadData];
+        //[_collectionView reloadData];
         [_tableView reloadData];
     }
-    if (index == 0) {
-        [_collectionView headerBeginRefreshing];
-    }else{
+  
         [_tableView headerBeginRefreshing];
-    }
+    
 }
 
 #pragma mark - UITableViewDataSource/Delegate
@@ -187,16 +176,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (_segment.selectedIndex == 1) {
+    if (_segment.selectedIndex == 0) {
         return 100;
-    }else if (_segment.selectedIndex == 2){
+    }else if (_segment.selectedIndex == 1){
         return 60;
     }
     return 44;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (_segment.selectedIndex == 1) {
+    if (_segment.selectedIndex == 0) {
         ProductCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ProductCollectionCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
@@ -205,7 +194,7 @@
         JRProduct *p = [_datas objectAtIndex:indexPath.row];
         [cell fillCellWithValue:p];
         return cell;
-    }else if (_segment.selectedIndex == 2){
+    }else if (_segment.selectedIndex == 1){
         ShopCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ShopCollectionCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
@@ -220,12 +209,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (_segment.selectedIndex == 1) {
+    if (_segment.selectedIndex == 0) {
         JRProduct *p = _datas[indexPath.row];
         ProductDetailViewController *vc = [[ProductDetailViewController alloc] init];
         vc.product = p;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (_segment.selectedIndex == 2){
+    }else if (_segment.selectedIndex == 1){
         ShopHomeViewController *sv = [[ShopHomeViewController alloc] init];
         sv.shop = _datas[indexPath.row];
         [self.navigationController pushViewController:sv animated:YES];

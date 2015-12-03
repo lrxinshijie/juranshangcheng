@@ -8,8 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RootViewController">
             <connections>
                 <outlet property="footerView" destination="vSo-pY-iRi" id="mu3-I5-uhx"/>
-                <outlet property="headerView" destination="sBg-TC-tmv" id="V7n-VN-LLA"/>
-                <outlet property="middleView" destination="2Co-gI-Gqo" id="ap9-Ks-dir"/>
+                <outlet property="middleView" destination="LgJ-Pa-P8r" id="sw6-Pj-IOF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,76 +20,10 @@
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <point key="canvasLocation" x="356" y="280"/>
         </view>
-        <view autoresizesSubviews="NO" contentMode="scaleToFill" id="sBg-TC-tmv">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="308"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Co-gI-Gqo">
-                    <rect key="frame" x="0.0" y="165" width="320" height="163"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jfi-OQ-0wn">
-                            <rect key="frame" x="0.0" y="8" width="160" height="163"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psH-TR-eRd">
-                                    <rect key="frame" x="28" y="-1" width="116" height="121"/>
-                                    <state key="normal">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="btnBuyClick:" destination="-1" eventType="touchUpInside" id="JZW-zT-qgZ"/>
-                                    </connections>
-                                </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Buy.png" translatesAutoresizingMaskIntoConstraints="NO" id="trM-kh-ibJ">
-                                    <rect key="frame" x="63" y="8" width="63" height="63"/>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="买东西" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aec-MM-Y8Q">
-                                    <rect key="frame" x="66" y="83" width="58" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nff-Cs-IHq">
-                            <rect key="frame" x="160" y="8" width="160" height="163"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4p-tW-qCX">
-                                    <rect key="frame" x="2" y="0.0" width="124" height="121"/>
-                                    <state key="normal">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="btnRecommentClick:" destination="-1" eventType="touchUpInside" id="aGf-Af-zoU"/>
-                                    </connections>
-                                </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Consultation.png" translatesAutoresizingMaskIntoConstraints="NO" id="m7O-53-94X">
-                                    <rect key="frame" x="37" y="8" width="63" height="63"/>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="要咨询" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBj-r3-5iu">
-                                    <rect key="frame" x="43" y="83" width="58" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <nil key="simulatedStatusBarMetrics"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-107" y="-339"/>
-        </view>
         <viewController id="8A0-PK-o3h">
             <layoutGuides>
-                <viewControllerLayoutGuide type="top" id="cz6-gu-zPl"/>
-                <viewControllerLayoutGuide type="bottom" id="pLH-Kk-y97"/>
+                <viewControllerLayoutGuide type="top" id="zYY-K0-BFR"/>
+                <viewControllerLayoutGuide type="bottom" id="fnw-yb-xsl"/>
             </layoutGuides>
             <view key="view" contentMode="scaleToFill" id="wC8-dO-NPa">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
@@ -124,7 +57,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Hot.png" translatesAutoresizingMaskIntoConstraints="NO" id="QwV-kW-j1z">
-                    <rect key="frame" x="31" y="20" width="32" height="27"/>
+                    <rect key="frame" x="31" y="20" width="32" height="32"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="热销商品" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i8k-Kl-otf">
                     <rect key="frame" x="23" y="51" width="50" height="21"/>
@@ -142,7 +75,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Navigation.png" translatesAutoresizingMaskIntoConstraints="NO" id="Eug-9A-Tck">
-                    <rect key="frame" x="143" y="20" width="32" height="27"/>
+                    <rect key="frame" x="143" y="20" width="32" height="32"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="门店导航" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYt-64-1LS">
                     <rect key="frame" x="135" y="53" width="50" height="21"/>
@@ -160,7 +93,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Recommend.png" translatesAutoresizingMaskIntoConstraints="NO" id="zSY-p7-A5x">
-                    <rect key="frame" x="247" y="20" width="32" height="27"/>
+                    <rect key="frame" x="247" y="20" width="32" height="32"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="店铺推荐" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Prn-FQ-if5">
                     <rect key="frame" x="240" y="52" width="50" height="21"/>
@@ -178,7 +111,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Famous.png" translatesAutoresizingMaskIntoConstraints="NO" id="5gd-Bw-Pmf">
-                    <rect key="frame" x="31" y="98" width="32" height="27"/>
+                    <rect key="frame" x="31" y="98" width="32" height="32"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="知名品牌" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quA-Go-wS5">
                     <rect key="frame" x="23" y="130" width="50" height="21"/>
@@ -196,7 +129,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="COHO-LIFE.png" translatesAutoresizingMaskIntoConstraints="NO" id="1mz-Zw-3Wj">
-                    <rect key="frame" x="143" y="98" width="32" height="27"/>
+                    <rect key="frame" x="143" y="98" width="32" height="32"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="丽屋超市" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtR-GN-gUS">
                     <rect key="frame" x="135" y="130" width="50" height="21"/>
@@ -214,7 +147,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Service.png" translatesAutoresizingMaskIntoConstraints="NO" id="0BU-x6-011">
-                    <rect key="frame" x="247" y="98" width="32" height="27"/>
+                    <rect key="frame" x="247" y="98" width="32" height="32"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="居然服务" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGd-Ed-RYb">
                     <rect key="frame" x="240" y="130" width="50" height="21"/>
@@ -231,6 +164,65 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-107" y="-55"/>
+        </view>
+        <view contentMode="scaleToFill" id="LgJ-Pa-P8r">
+            <rect key="frame" x="0.0" y="20" width="320" height="132"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahx-cX-eFt">
+                    <rect key="frame" x="0.0" y="8" width="164" height="124"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tNu-kX-lXg">
+                            <rect key="frame" x="28" y="0.0" width="116" height="121"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnBuyClick:" destination="-1" eventType="touchUpInside" id="O2Y-5a-h2I"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Buy.png" translatesAutoresizingMaskIntoConstraints="NO" id="mKI-fI-Yos">
+                            <rect key="frame" x="63" y="8" width="63" height="63"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="商品导览" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AzB-Jx-Vkl">
+                            <rect key="frame" x="59" y="83" width="70" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="znS-nf-nTe">
+                    <rect key="frame" x="160" y="8" width="160" height="124"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3N-D8-DB3">
+                            <rect key="frame" x="2" y="0.0" width="124" height="121"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnRecommentClick:" destination="-1" eventType="touchUpInside" id="xUM-C8-Wjt"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Consultation.png" translatesAutoresizingMaskIntoConstraints="NO" id="TQs-HQ-PaD">
+                            <rect key="frame" x="37" y="8" width="63" height="63"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="咨询建议" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaK-de-SX6">
+                            <rect key="frame" x="33" y="83" width="70" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-350" y="-332"/>
         </view>
     </objects>
     <resources>

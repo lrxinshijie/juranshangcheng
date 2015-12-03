@@ -56,7 +56,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChangeNotification:) name:UITextFieldTextDidChangeNotification object:nil];
     
-    searchOptions = @[@"在作品案例中搜索", @"在设计师中搜索", @"在答疑解惑中搜索", @"在商品中搜索", @"在店铺中搜索"];
+    //searchOptions = @[@"在作品案例中搜索", @"在设计师中搜索", @"在答疑解惑中搜索", @"在商品中搜索", @"在店铺中搜索"];
+    searchOptions = @[@"在商品中搜索", @"在店铺中搜索"];
+
     
     self.navigationItem.title = @"搜索";
     step = 1;
@@ -154,23 +156,41 @@
 {
     _textField.text = keyWord;
     switch (index) {
+//        case 0:
+//            _type = SearchTypeCase;
+//            break;
+//        case 1:
+//            _type = SearchTypeGoods;
+//            break;
+//        case 2:
+//            _type = SearchTypeShop;
+//            break;
+//        case 3:
+//            _type = SearchTypeDesigner;
+//            break;
+//        case 4:
+//            _type = SearchTypeQuestion;
+//            break;
+//        default:
+//            break;
         case 0:
-            _type = SearchTypeCase;
-            break;
-        case 1:
             _type = SearchTypeGoods;
             break;
-        case 2:
+        case 1:
             _type = SearchTypeShop;
             break;
-        case 3:
-            _type = SearchTypeDesigner;
-            break;
-        case 4:
-            _type = SearchTypeQuestion;
-            break;
+//        case 2:
+//            _type = SearchTypeShop;
+//            break;
+//        case 3:
+//            _type = SearchTypeDesigner;
+//            break;
+//        case 4:
+//            _type = SearchTypeQuestion;
+//            break;
         default:
             break;
+
     }
     [self doSearch];
 }

@@ -33,7 +33,7 @@
 @property (nonatomic, assign) BOOL isFilter;
 
 @property (nonatomic, assign) UIView *parentView;
-@property (nonatomic, assign) ProductFilterData *defaultData;
+//@property (nonatomic, assign) ProductFilterData *defaultData;
 @property (nonatomic, strong) ProductSelectedFilter *selectedData;
 @property (nonatomic, strong) UINavigationController *filterViewNav;
 @property (nonatomic, strong) UITableView *tableView;
@@ -354,6 +354,7 @@
     if (selectedBtn == _sortButton) {
         return [self.defaultData.sortList count];
     }else if(selectedBtn == _storeButton){
+        ProductFilterData *data=self.defaultData;
         return [self.defaultData.storeList count];
     }else{
         return 0;

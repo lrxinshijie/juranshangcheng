@@ -26,9 +26,13 @@
 #import "JRShop.h"
 #import "PrivateMessageViewController.h"
 #import "ShopListViewController.h"
+#import "DeviceHardware.h"
+
 
 
 @interface RootViewController () <UITableViewDataSource, UITableViewDelegate, EScrollerViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UISearchBarDelegate>
+{
+}
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datas;
@@ -39,6 +43,8 @@
 @property (nonatomic, strong) IBOutlet UIView *footerView;
 @property (nonatomic, strong) NSArray *iconInfoList;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIView *leftView;
+@property (weak, nonatomic) IBOutlet UIView *rightView;
 
 @property (nonatomic, strong) NSMutableArray *iconInfoMutableList;
 @property (strong, nonatomic) IBOutlet UIView *middleView;
@@ -56,6 +62,7 @@
 - (void)viewDidLoad {
     [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil];
     [super viewDidLoad];
+
     // Do any additional setup after loading the view from its nib.
     // self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav_logo"]];
     
@@ -64,13 +71,26 @@
     //_collectionView.contentSize =  CGSizeMake(0, 0);
     
     [self configureScan];
-    //[self configureSearchAndMore];
+    [self configureMoreForMenu];
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMoreMenu) name:kNotificationNameMsgCenterReloadData object:nil];
     //[self setupUI];
+    
+    _scrollerView=[[UIScrollView alloc] initWithFrame:self.view.frame];
+    _scrollerView.contentSize=CGSizeMake(0, kWindowHeight+20);
+    _headerView=[[UIView alloc] init];
+    [self.view addSubview:_scrollerView];
+    [self loadMenu];
+    [self loadAd];
+    
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [self initUI];
-    
-    
+
 }
 
 
@@ -79,39 +99,41 @@
     
 
     
-    _searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(40, 20, 210, 20)];
+    _searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(30, 20, 210, 20)];
     _searchBar.center=CGPointMake(kWindowWidth/2, 22);
     [self setSearchTextFieldBackgroundColor:RGBColor(237, 237, 237)];
     _searchBar.delegate = self;
     _searchBar.placeholder=@"请输入搜索关键词";
-       //self.navigationItem.titleView=_searchBar;
+      // self.navigationItem.titleView=_searchBar;
     [self.navigationController.navigationBar addSubview:_searchBar];
     //self.navigationController
     
     
-    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 35)];
-    rightView.clipsToBounds = NO;
+//    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 35)];
+//    rightView.clipsToBounds = NO;
+//    
+//    
+//    UIButton *messageButton = [self.view buttonWithFrame:CGRectMake(25, 0, 35, 35) target:self action:@selector(onMsg:) image:[UIImage imageNamed:@"news"]];
+//    
+//    
+//    
+//    [rightView addSubview:messageButton];
+//    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:rightView];
+//    
     
     
-    UIButton *messageButton = [self.view buttonWithFrame:CGRectMake(25, 0, 35, 35) target:self action:@selector(onMsg:) image:[UIImage imageNamed:@"news"]];
     
     
     
-    [rightView addSubview:messageButton];
-    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:rightView];
-    
-    
-    
-    
-    
-    
-    _scrollerView=[[UIScrollView alloc] initWithFrame:self.view.frame];
-    _scrollerView.contentSize=CGSizeMake(0, kWindowHeight+20);
-    [self.view addSubview:_scrollerView];
-    [self loadMenu];
-    [self loadAd];
+  
     //[_collectionView reloadData];
     
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [_searchBar removeFromSuperview];
+    [super viewWillDisappear:animated];
 }
 
 - (void) onMsg:(id)sender
@@ -193,17 +215,26 @@
             }
             if (bannerList.count > 0) {
                 self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
-                self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentRight];
-                _bannerView.delegate = self;
-                [_headerView addSubview:_bannerView];
                 
-                CGRect frame = _menuView.frame;
-                frame.origin.y = CGRectGetMaxY(self.bannerView.frame);
-                _menuView.frame = frame;
-            }else{
-                CGRect frame = _menuView.frame;
-                frame.origin.y = 0;
-                _menuView.frame = frame;
+//                CGFloat height=[UIScreen mainScreen].applicationFrame.size.height;
+                if(CGRectGetHeight([UIScreen mainScreen].applicationFrame)==460)
+                {
+                    self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 120) ImageArray:_adInfos Aligment:PageControlAligmentRight];
+                    _middleView.frame=CGRectMake(0, 91, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar-120-91);
+//                    _leftView.frame=CGRectMake(0, 10, kWindowWidth/2, 40);
+//                    _rightView.frame=CGRectMake(kWindowWidth/2, 90, kWindowWidth/2, 40);
+//
+                }
+                else
+                {
+                    self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentRight];
+                    _middleView.frame=CGRectMake(0, 165, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar-164-165);
+
+                }
+                _bannerView.delegate = self;
+
+                [_headerView addSubview:_bannerView];
+                [_headerView addSubview:_middleView];
             }
             
             //            CGRect frame = _headerView.frame;
@@ -211,12 +242,13 @@
             //            _headerView.frame = frame;
             //_tableView.tableHeaderView = _headerView;
             
+                       _headerView.frame=CGRectMake(0, 0, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar-164);
+                _footerView.frame=CGRectMake(0, _headerView.frame.size.height, kWindowWidth, 164);
+
             
-            _headerView.frame=CGRectMake(0, 0, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar-164);
+            
             
             [_scrollerView addSubview:_headerView];
-            //_footerView.backgroundColor=[UIColor redColor];
-            _footerView.frame=CGRectMake(0, _headerView.frame.size.height, kWindowWidth, 164);
             [_scrollerView addSubview:_footerView];
             
             //            _middleView.frame=CGRectMake(0, 165, kWindowWidth, 163);
@@ -342,6 +374,8 @@
         return 280;
     }
     
+  
+    
     return 275;
 }
 
@@ -407,6 +441,7 @@
     cell.title.textColor = RGBColor(102, 102, 102);
     return  cell;
 }
+
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dict = _iconInfoMutableList[indexPath.row];

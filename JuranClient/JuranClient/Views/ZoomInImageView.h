@@ -11,5 +11,6 @@
 @interface ZoomInImageView : UIImageView
 
 - (void)setImageWithFile:(UIImage*)image;
+@property (nonatomic, strong) NSString *url;
 
 @end

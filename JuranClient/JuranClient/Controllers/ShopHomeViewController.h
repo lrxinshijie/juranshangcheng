@@ -13,4 +13,5 @@
 
 @property (nonatomic, strong) JRShop *shop;
 @property (nonatomic, copy) NSString *type;
+- (IBAction)btnShopCommentClick:(id)sender;
 @end

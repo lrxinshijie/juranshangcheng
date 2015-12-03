@@ -12,7 +12,6 @@
 
 @interface ZoomInImageView()<UIViewControllerTransitioningDelegate, UIActionSheetDelegate>
 
-@property (nonatomic, strong) NSString *url;
 
 @end
 
