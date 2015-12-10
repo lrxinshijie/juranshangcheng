@@ -36,41 +36,41 @@
 
 /* Production */
 #define JR_IMAGE_SERVICE  @"http://image10.juran.cn"
-#define JR_SERVICE  @"http://app.juran.cn:81"
+//#define JR_SERVICE  @"http://app.juran.cn:81"
 
-#define JR_SERVICE_LEIQIANG @"http://10.199.37.66:8080"
-//#define JR_SERVICE  @"http://10.199.37.53:8080"
+//#define JR_SERVICE @"http://10.199.37.66:8080"
+#define JR_SERVICE  @"http://10.199.5.225:8084"
 
 //接口联调环境
 //#define JR_SERVICE  @"http://10.199.38.140:9080"
 
-#define JR_LOGIN [NSString stringWithFormat:@"%@/member/login.json",JR_SERVICE_LEIQIANG]
-#define JR_REGIST_SENDSMS [NSString stringWithFormat:@"%@/member/sendSmsAuth.json",JR_SERVICE_LEIQIANG]
-#define JR_VALIDSMS [NSString stringWithFormat:@"%@/member/validSms.json",JR_SERVICE_LEIQIANG]
-#define JR_REGISTUSER [NSString stringWithFormat:@"%@/member/registUser.json",JR_SERVICE_LEIQIANG]
-#define JR_PROLIST [NSString stringWithFormat:@"%@/design/getprojlist.json",JR_SERVICE_LEIQIANG]
+#define JR_LOGIN [NSString stringWithFormat:@"%@/member/login.json",JR_SERVICE]
+#define JR_REGIST_SENDSMS [NSString stringWithFormat:@"%@/member/sendSmsAuth.json",JR_SERVICE]
+#define JR_VALIDSMS [NSString stringWithFormat:@"%@/member/validSms.json",JR_SERVICE]
+#define JR_REGISTUSER [NSString stringWithFormat:@"%@/member/registUser.json",JR_SERVICE]
+#define JR_PROLIST [NSString stringWithFormat:@"%@/design/getprojlist.json",JR_SERVICE]
 #define JR_GIVEALIKE [NSString stringWithFormat:@"%@/design/givealike.json",JR_SERVICE]
 #define JR_CASE_COMMENT [NSString stringWithFormat:@"%@/design/getComment.json",JR_SERVICE]
 #define JR_PRODETAIL [NSString stringWithFormat:@"%@/design/getprojdetail.json",JR_SERVICE]
-#define JR_DESIGNERLIST [NSString stringWithFormat:@"%@/member/searchDesignerList.json",JR_SERVICE_LEIQIANG]
-#define JR_DESIGNERDETAIL [NSString stringWithFormat:@"%@/member/getDesignerDetail.json",JR_SERVICE_LEIQIANG]
-#define JR_MYCENTERINFO [NSString stringWithFormat:@"%@/member/getMyCenterInfo.json",JR_SERVICE_LEIQIANG]
-#define JR_SIGNIN [NSString stringWithFormat:@"%@/member/signin.json",JR_SERVICE_LEIQIANG]
-#define JR_GETMEMBERDETAIL [NSString stringWithFormat:@"%@/member/getMemberDetail.json",JR_SERVICE_LEIQIANG]
-#define JR_FOLLOWDESIGNER [NSString stringWithFormat:@"%@/member/followDesigner.json",JR_SERVICE_LEIQIANG]
-#define JR_GETFOLLOWLIST [NSString stringWithFormat:@"%@/member/getFollowList.json",JR_SERVICE_LEIQIANG]
-#define JR_UNFOLLOWDESIGNER [NSString stringWithFormat:@"%@/member/unfollowDesigner.json",JR_SERVICE_LEIQIANG]
+#define JR_DESIGNERLIST [NSString stringWithFormat:@"%@/member/searchDesignerList.json",JR_SERVICE]
+#define JR_DESIGNERDETAIL [NSString stringWithFormat:@"%@/member/getDesignerDetail.json",JR_SERVICE]
+#define JR_MYCENTERINFO [NSString stringWithFormat:@"%@/member/getMyCenterInfo.json",JR_SERVICE]
+#define JR_SIGNIN [NSString stringWithFormat:@"%@/member/signin.json",JR_SERVICE]
+#define JR_GETMEMBERDETAIL [NSString stringWithFormat:@"%@/member/getMemberDetail.json",JR_SERVICE]
+#define JR_FOLLOWDESIGNER [NSString stringWithFormat:@"%@/member/followDesigner.json",JR_SERVICE]
+#define JR_GETFOLLOWLIST [NSString stringWithFormat:@"%@/member/getFollowList.json",JR_SERVICE]
+#define JR_UNFOLLOWDESIGNER [NSString stringWithFormat:@"%@/member/unfollowDesigner.json",JR_SERVICE]
 #define JR_MYQUESTION [NSString stringWithFormat:@"%@/QA/myQuestion.json",JR_SERVICE]
 #define JR_MYANSWER [NSString stringWithFormat:@"%@/QA/getMyAnswer.json",JR_SERVICE]
 #define JR_APPLYMEASUER [NSString stringWithFormat:@"%@/trade/applyMeasure.json",JR_SERVICE]
-#define JR_LOGOUT [NSString stringWithFormat:@"%@/member/clearPushInfoOfUser.json",JR_SERVICE_LEIQIANG]
-#define JR_GET_TOKEN_FOR_RESET_PWD [NSString stringWithFormat:@"%@/member/getTokenForResetPwd.json",JR_SERVICE_LEIQIANG]
-#define JR_RESET_PWD [NSString stringWithFormat:@"%@/member/resetPwd.json",JR_SERVICE_LEIQIANG]
-#define JR_PWD_EMAIL [NSString stringWithFormat:@"%@/member/sendFindLoginPwdEmail.json",JR_SERVICE_LEIQIANG]
+#define JR_LOGOUT [NSString stringWithFormat:@"%@/member/clearPushInfoOfUser.json",JR_SERVICE]
+#define JR_GET_TOKEN_FOR_RESET_PWD [NSString stringWithFormat:@"%@/member/getTokenForResetPwd.json",JR_SERVICE]
+#define JR_RESET_PWD [NSString stringWithFormat:@"%@/member/resetPwd.json",JR_SERVICE]
+#define JR_PWD_EMAIL [NSString stringWithFormat:@"%@/member/sendFindLoginPwdEmail.json",JR_SERVICE]
 
 #define JR_GETDEDESIGNERPROLIST [NSString stringWithFormat:@"%@/design/getDeDesignerProjectList.json",JR_SERVICE]
 #define JR_GET_DE_MYTOPIC [NSString stringWithFormat:@"%@/topic/getDeMyTopic.json",JR_SERVICE]
-#define JR_EDIT_MEMBERINFO [NSString stringWithFormat:@"%@/member/editMemberInfo.json",JR_SERVICE_LEIQIANG]
+#define JR_EDIT_MEMBERINFO [NSString stringWithFormat:@"%@/member/editMemberInfo.json",JR_SERVICE]
 #define JR_GET_MYREQUESTLIST [NSString stringWithFormat:@"%@/design/getMyRequestList.json",JR_SERVICE]
 #define JR_GET_QUESTIONDETAIL [NSString stringWithFormat:@"%@/QA/getQuestionDetail.json",JR_SERVICE]
 #define JR_GET_MSG_INFO [NSString stringWithFormat:@"%@/info/get_msg_info.json",JR_SERVICE]
@@ -142,7 +142,7 @@
 #define JR_PRIVATE_LIST [NSString stringWithFormat:@"%@/member/getPrivateLetterList.json",JR_SERVICE]
 #define JR_PRIVATE_DETAIL [NSString stringWithFormat:@"%@/member/getPrivateLetterDetailList.json",JR_SERVICE]
 #define JR_SEARCH_CASE [NSString stringWithFormat:@"%@/search/searchProject2d.json",JR_SERVICE]
-#define JR_UPLOAD_IMAGE [NSString stringWithFormat:@"%@/image/uploadImage.htm",JR_SERVICE_LEIQIANG]
+#define JR_UPLOAD_IMAGE [NSString stringWithFormat:@"%@/image/uploadImage.htm",JR_SERVICE]
 #define JR_SEND_PRIVATE [NSString stringWithFormat:@"%@/member/sendPrivateLetter.json",JR_SERVICE]
 #define JR_APPLY_MEASURE [NSString stringWithFormat:@"%@/trade/applyMeasure.json",JR_SERVICE]
 #define JR_REPLY_LETTER [NSString stringWithFormat:@"%@/member/replyPrivateLetter.json",JR_SERVICE]
@@ -230,14 +230,14 @@
 
 
 //点评
-#define JR_ADDREVIEW [NSString stringWithFormat:@"%@/review/addReview.json",JR_SERVICE_LEIQIANG] //添加点评
-#define JR_ADDREVIEW_REPLAY [NSString stringWithFormat:@"%@/review/addReviewReply.json",JR_SERVICE_LEIQIANG] //添加点评回复
-#define JR_GETREVIEW_PAGE [NSString stringWithFormat:@"%@/review/getReviewPage.json",JR_SERVICE_LEIQIANG] //获取点评列表
+#define JR_ADDREVIEW [NSString stringWithFormat:@"%@/review/addReview.json",JR_SERVICE] //添加点评
+#define JR_ADDREVIEW_REPLAY [NSString stringWithFormat:@"%@/review/addReviewReply.json",JR_SERVICE] //添加点评回复
+#define JR_GETREVIEW_PAGE [NSString stringWithFormat:@"%@/review/getReviewPage.json",JR_SERVICE] //获取点评列表
 
-#define JR_VoteReview [NSString stringWithFormat:@"%@/review/voteReview.json",JR_SERVICE_LEIQIANG] //添加点赞
+#define JR_VoteReview [NSString stringWithFormat:@"%@/review/voteReview.json",JR_SERVICE] //添加点赞
 
-#define JR_DeleteReview [NSString stringWithFormat:@"%@/review/deleteReview.json",JR_SERVICE_LEIQIANG] //删除点评以及回复
-#define JR_SelectReply [NSString stringWithFormat:@"%@/review/getReviewReplyPage.json",JR_SERVICE_LEIQIANG] //根据id 查询所有回复
+#define JR_DeleteReview [NSString stringWithFormat:@"%@/review/deleteReview.json",JR_SERVICE] //删除点评以及回复
+#define JR_SelectReply [NSString stringWithFormat:@"%@/review/getReviewReplyPage.json",JR_SERVICE] //根据id 查询所有回复
 
 
 

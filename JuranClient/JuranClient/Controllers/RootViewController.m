@@ -216,31 +216,28 @@
             if (bannerList.count > 0) {
                 self.adInfos = [JRAdInfo buildUpWithValue:bannerList];
                 
-//                CGFloat height=[UIScreen mainScreen].applicationFrame.size.height;
-                if(CGRectGetHeight([UIScreen mainScreen].applicationFrame)==460)
-                {
-                    self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 120) ImageArray:_adInfos Aligment:PageControlAligmentRight];
-                    _middleView.frame=CGRectMake(0, 91, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar-120-91);
-//                    _leftView.frame=CGRectMake(0, 10, kWindowWidth/2, 40);
-//                    _rightView.frame=CGRectMake(kWindowWidth/2, 90, kWindowWidth/2, 40);
-//
-                }
-                else
-                {
-                    self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentRight];
-                    _middleView.frame=CGRectMake(0, 165, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar-164-165);
-
-                }
-                _bannerView.delegate = self;
-
-                [_headerView addSubview:_bannerView];
-                [_headerView addSubview:_middleView];
+               
             }
             
-            //            CGRect frame = _headerView.frame;
-            //            frame.size.height = CGRectGetMaxY(_menuView.frame);
-            //            _headerView.frame = frame;
-            //_tableView.tableHeaderView = _headerView;
+            if(CGRectGetHeight([UIScreen mainScreen].applicationFrame)==460)
+            {
+                self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 120) ImageArray:_adInfos Aligment:PageControlAligmentRight];
+                _middleView.frame=CGRectMake(0, 91, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar-120-91);
+                
+            }
+            else
+            {
+                self.bannerView = [[EScrollerView alloc] initWithFrameRect:CGRectMake(0, 0, kWindowWidth, 165) ImageArray:_adInfos Aligment:PageControlAligmentRight];
+                _middleView.frame=CGRectMake(0, 165, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar-164-165);
+                
+            }
+            _bannerView.delegate = self;
+            
+            [_headerView addSubview:_bannerView];
+            [_headerView addSubview:_middleView];
+            
+            
+            
             
                        _headerView.frame=CGRectMake(0, 0, kWindowWidth, kWindowHeightWithoutNavigationBarAndTabbar-164);
                 _footerView.frame=CGRectMake(0, _headerView.frame.size.height, kWindowWidth, 164);

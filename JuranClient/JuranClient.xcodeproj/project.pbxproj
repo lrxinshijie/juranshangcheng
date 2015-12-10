@@ -8555,8 +8555,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mi Jing (ZWZELJUV75)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mi Jing (ZWZELJUV75)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8594,7 +8594,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31a7fa7b-5ca9-4d09-969e-0237cb18b809";
+				PROVISIONING_PROFILE = "a371097b-cd4c-4747-8f27-fcec5247e549";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 arm64";
 				VERSIONING_SYSTEM = "";
@@ -8610,8 +8610,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Easyhome E-commerce Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mi Jing (ZWZELJUV75)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mi Jing (ZWZELJUV75)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8649,7 +8649,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31a7fa7b-5ca9-4d09-969e-0237cb18b809";
+				PROVISIONING_PROFILE = "a371097b-cd4c-4747-8f27-fcec5247e549";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 arm64";
 				VERSIONING_SYSTEM = "";

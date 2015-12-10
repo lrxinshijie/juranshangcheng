@@ -206,9 +206,7 @@
     
     [[ALEngine shareEngine] pathURL:JR_VoteReview parameters:param HTTPMethod:kHTTPMethodPost otherParameters:@{kNetworkParamKeyUseToken:@"Yes"} delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
         if (!error) {
-            //            NSString *count= [NSString stringWithFormat:@"%@",[data objectForKey:@"vote"]] ;
-            //                        [cell.btnHou setTitle:count forState:UIControlStateNormal];
-            
+        
             [self loadData];
         }
     }];
@@ -238,24 +236,7 @@
     add.InActionType=_InActionType;
     [self.navigationController pushViewController:add animated:YES];
     
-    
-    
-    
-    //
-    //    if (![self checkLogin:^{
-    //        AddCommentViewController *add=[[AddCommentViewController alloc] init];
-    //        add.hidesBottomBarWhenPushed=YES;
-    //        add.linkProductId=self.linkProductId;
-    //        [self.navigationController pushViewController:add animated:YES];
-    //
-    //    }]) {
-    //        return;
-    //    }
-    
-    //    AddReplyViewController *reply=[[AddReplyViewController alloc] init];
-    //
-    //    reply.hidesBottomBarWhenPushed=YES;
-    //    [self.navigationController pushViewController:reply animated:YES];
+   
 }
 
 

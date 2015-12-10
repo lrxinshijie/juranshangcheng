@@ -7,6 +7,7 @@
 //
 
 #import "MyCommentCell.h"
+#import "ZoomInImageView.h"
 
 @implementation MyCommentCell
 
@@ -79,13 +80,15 @@
         _contentImageView.hidden = NO;
         NSInteger i = 0;
         for (NSString *name in model.imgList) {
-            UIImageView *imgView = (UIImageView*)[_contentImageView viewWithTag:2300 + i];
+            ZoomInImageView *imgView = (ZoomInImageView*)[_contentImageView viewWithTag:2300 + i];
             imgView.hidden = NO;
             imgView.contentMode=UIViewContentModeCenter;
             imgView.clipsToBounds  = YES;
             UIImage  *image = [UIImage imageNamed:@"image_default.png"];
             [imgView setImageWithURLString:name placeholderImage:image];
 //            [imgView setImageWithURLString:name];
+            imgView.url=name;
+
             i++;
         }
         

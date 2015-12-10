@@ -164,7 +164,7 @@
         [btn setTitle:@"取消" forState:UIControlStateNormal];
         self.tableView.frame=CGRectMake(0, CGRectGetHeight(_segment.frame), kWindowWidth, kWindowHeightWithoutNavigationBar - CGRectGetHeight(_segment.frame));
         
-        _footerView.frame=CGRectMake(0, kWindowHeightWithoutNavigationBar-48, kWindowWidth,48 );
+        _footerView.frame=CGRectMake(0, kWindowHeightWithoutNavigationBar-55, kWindowWidth,55 );
         [self.view addSubview:_footerView];
         
         [self.view bringSubviewToFront:_footerView];

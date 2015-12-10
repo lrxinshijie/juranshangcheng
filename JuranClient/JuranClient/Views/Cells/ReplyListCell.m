@@ -43,7 +43,7 @@
     _labContent.backgroundColor = [UIColor clearColor];
     _labContent.numberOfLines = 0;
 //    NSString *name = [NSString stringWithFormat:@"%@",_model.userNickname];
-    
+    _labContent.lineSpacing=8;
     NSString *replyNickname=_model.replyNickname;
     NSString *content=_model.content;
     if(replyNickname!=nil && replyNickname!=NULL && ![replyNickname isEqual:@""])

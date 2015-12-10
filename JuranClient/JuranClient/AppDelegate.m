@@ -176,81 +176,78 @@
     });
     
     [self jumpToMain];
-    
-#ifndef kJuranDesigner
-    //[self getAndSaveGuideShopList];
-#endif
+
     
     [self.window makeKeyAndVisible];
     return YES;
 }
 
-#ifndef kJuranDesigner
-- (void)getAndSaveGuideShopList {
-    //从四维图新请求可导航门店列表
-    
-    NSDictionary * dict = @{@"key":IndoorGuideKey,
-                            @"mac":@"",
-                            @"username":[JRUser currentUser].userName,
-                            @"device":[[IndoorGuidanceManager sharedMagager] getDeviceType],
-                            @"appVersion":[NSString stringWithFormat:@"%@|%@", [Public isDesignerApp] ? @"designer" : @"member", [self bundleVersion]],
-                            @"dpi":[[IndoorGuidanceManager sharedMagager] getResolutionRatio]};
-    
-    __weak AppDelegate * wSelf = self;
-    [[ALEngine shareEngine] pathURL:JR_GUIDANCE_SHOP_LIST parameters:dict HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
-        if ([data isKindOfClass:[NSDictionary class]]) {
-            if (![[[IndoorGuidanceManager sharedMagager] dictionaryToJson:data] isEqualToString:[[IndoorGuidanceManager sharedMagager] getCache]]) {
-                [[IndoorGuidanceManager sharedMagager] cacheGuidanceList:[[IndoorGuidanceManager sharedMagager] dictionaryToJson:data]];
-            }
-            NSArray * arr = [data objectForKey:@"buildings"];
-            NSMutableArray * temp = [NSMutableArray arrayWithCapacity:0];
-            for (int i=0; i<arr.count; i++) {
-                GuidanceShopItem * gItem = [GuidanceShopItem createGuidanceShopItemWithDictionary:[arr objectAtIndex:i]];
-                [temp addObject:gItem];
-            }
-            [[IndoorGuidanceManager sharedMagager] saveGuidanceShop:temp];
-        }
-
-        [[IndoorGuidanceManager sharedMagager] checkOutBluetooth:^(BOOL isUsable) {
-            
-            NVPoint *center = [[NVPoint alloc] initWithLati:ApplicationDelegate.gLocation.location.coordinate.latitude Lon:ApplicationDelegate.gLocation.location.coordinate.longitude];
-            [[LocationUtil defaultInstance] AsynGetNearBuildingList:center storeCode:nil Radius:0 completion:^(NSString *result, NSInteger retCode, NSString *retMsg) {
-                
-                id str=[NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
-                if ([str isKindOfClass:[NSDictionary class]]) {
-                    NSDictionary * dict = (NSDictionary *)str;
-                    NSArray * array = [dict objectForKey:@"buildings"];
-                    for (int i=0; i<array.count; i++) {
-                        BOOL shouldBreak = NO;
-                        NSDictionary * tempDict = [array objectAtIndex:i];
-                        int distance = [[tempDict objectForKey:@"distance"] intValue];
-                        if (distance <= 200) {
-                            NSArray * guideList = [[IndoorGuidanceManager sharedMagager] getGuidanceShop];
-                            for (int j=0; j<guideList.count; j++) {
-                                GuidanceShopItem * item = [guideList objectAtIndex:j];
-                                if ([item.mid isEqualToString:[tempDict objectForKey:@"mid"]] && ApplicationDelegate.gLocation.isSuccessLocation) {
-                                    
-                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                        //没开蓝牙，开启定位，并且当前位置在可导航门店内，提示打开蓝牙
-                                        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"该店面支持室内导航，开启蓝牙后可享受服务" delegate:wSelf cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-                                        [alert show];
-                                    });
-                                    shouldBreak = YES;
-                                    break;
-                                }
-                            }
-                        }
-                        if (shouldBreak) {
-                            break;
-                        }
-                    }
-                }
-            }];
-        }];
-    }];
-}
-
-#endif
+//#ifndef kJuranDesigner
+//- (void)getAndSaveGuideShopList {
+//    //从四维图新请求可导航门店列表
+//    
+//    NSDictionary * dict = @{@"key":IndoorGuideKey,
+//                            @"mac":@"",
+//                            @"username":[JRUser currentUser].userName,
+//                            @"device":[[IndoorGuidanceManager sharedMagager] getDeviceType],
+//                            @"appVersion":[NSString stringWithFormat:@"%@|%@", [Public isDesignerApp] ? @"designer" : @"member", [self bundleVersion]],
+//                            @"dpi":[[IndoorGuidanceManager sharedMagager] getResolutionRatio]};
+//    
+//    __weak AppDelegate * wSelf = self;
+//    [[ALEngine shareEngine] pathURL:JR_GUIDANCE_SHOP_LIST parameters:dict HTTPMethod:kHTTPMethodPost otherParameters:nil delegate:self responseHandler:^(NSError *error, id data, NSDictionary *other) {
+//        if ([data isKindOfClass:[NSDictionary class]]) {
+//            if (![[[IndoorGuidanceManager sharedMagager] dictionaryToJson:data] isEqualToString:[[IndoorGuidanceManager sharedMagager] getCache]]) {
+//                [[IndoorGuidanceManager sharedMagager] cacheGuidanceList:[[IndoorGuidanceManager sharedMagager] dictionaryToJson:data]];
+//            }
+//            NSArray * arr = [data objectForKey:@"buildings"];
+//            NSMutableArray * temp = [NSMutableArray arrayWithCapacity:0];
+//            for (int i=0; i<arr.count; i++) {
+//                GuidanceShopItem * gItem = [GuidanceShopItem createGuidanceShopItemWithDictionary:[arr objectAtIndex:i]];
+//                [temp addObject:gItem];
+//            }
+//            [[IndoorGuidanceManager sharedMagager] saveGuidanceShop:temp];
+//        }
+//
+//        [[IndoorGuidanceManager sharedMagager] checkOutBluetooth:^(BOOL isUsable) {
+//            
+//            NVPoint *center = [[NVPoint alloc] initWithLati:ApplicationDelegate.gLocation.location.coordinate.latitude Lon:ApplicationDelegate.gLocation.location.coordinate.longitude];
+//            [[LocationUtil defaultInstance] AsynGetNearBuildingList:center storeCode:nil Radius:0 completion:^(NSString *result, NSInteger retCode, NSString *retMsg) {
+//                
+//                id str=[NSJSONSerialization JSONObjectWithData:[result dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+//                if ([str isKindOfClass:[NSDictionary class]]) {
+//                    NSDictionary * dict = (NSDictionary *)str;
+//                    NSArray * array = [dict objectForKey:@"buildings"];
+//                    for (int i=0; i<array.count; i++) {
+//                        BOOL shouldBreak = NO;
+//                        NSDictionary * tempDict = [array objectAtIndex:i];
+//                        int distance = [[tempDict objectForKey:@"distance"] intValue];
+//                        if (distance <= 200) {
+//                            NSArray * guideList = [[IndoorGuidanceManager sharedMagager] getGuidanceShop];
+//                            for (int j=0; j<guideList.count; j++) {
+//                                GuidanceShopItem * item = [guideList objectAtIndex:j];
+//                                if ([item.mid isEqualToString:[tempDict objectForKey:@"mid"]] && ApplicationDelegate.gLocation.isSuccessLocation) {
+//                                    
+//                                    dispatch_async(dispatch_get_main_queue(), ^{
+//                                        //没开蓝牙，开启定位，并且当前位置在可导航门店内，提示打开蓝牙
+//                                        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"该店面支持室内导航，开启蓝牙后可享受服务" delegate:wSelf cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+//                                        [alert show];
+//                                    });
+//                                    shouldBreak = YES;
+//                                    break;
+//                                }
+//                            }
+//                        }
+//                        if (shouldBreak) {
+//                            break;
+//                        }
+//                    }
+//                }
+//            }];
+//        }];
+//    }];
+//}
+//
+//#endif
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -289,56 +286,6 @@
     return [[UITabBarItem alloc] initWithTitle:title image:caseImage selectedImage:caseImageSel];
 }
 
-#ifdef kJuranDesigner
-- (void)setupTabbar{
-    CGFloat top = 6;
-    HomeViewController *home = [[HomeViewController alloc] init];
-    UINavigationController *homeNav = [Public navigationControllerFromRootViewController:home];
-    homeNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-home-default" selected:@"nav-home-active"];
-    [homeNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
-//    homeNav.delegate = self;
-    
-    CaseViewController *cs = [[CaseViewController alloc] init];
-    cs.isHome = YES;
-    UINavigationController *csNav = [Public navigationControllerFromRootViewController:cs];
-    csNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-case-default" selected:@"nav-case-active"];
-    [csNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
-//    csNav.delegate = self;
-    
-    DesignerViewController *des = [[DesignerViewController alloc] init];
-    des.isHome = YES;
-    UINavigationController *desNav = [Public navigationControllerFromRootViewController:des];
-    desNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-designer-default" selected:@"nav-designer-active"];
-    [desNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
-//    desNav.delegate = self;
-    
-    WikiOrActivityViewController *wiki = [[WikiOrActivityViewController alloc] init];
-    UINavigationController *wikiNav = [Public navigationControllerFromRootViewController:wiki];
-    wikiNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-wiki-default" selected:@"nav-wiki-active"];
-    [wikiNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
-    
-    ProfileViewController *profile = [[ProfileViewController alloc] init];
-    UINavigationController *profileNav = [Public navigationControllerFromRootViewController:profile];
-    profileNav.tabBarItem = [self setupTabbarItemTitle:@"" image:@"nav-user-default" selected:@"nav-user-active"];
-    [profileNav.tabBarItem setImageInsets:UIEdgeInsetsMake(top, 0, -top, 0)];
-//    profileNav.delegate = self;
-    
-    self.tabBarController = [[UITabBarController alloc] init];
-    UIImage *image = [UIImage imageFromColor:[UIColor blackColor]];
-    [_tabBarController.tabBar setBackgroundImage:image];
-    
-    _tabBarController.viewControllers = @[homeNav,csNav,desNav,wikiNav,profileNav];
-    self.window.rootViewController = _tabBarController;
-    
-//    self.tabBarController = [[LeveyTabBarController alloc] initWithViewControllers:@[homeNav,csNav,desNav,profileNav]];
-//    [_tabBarController.tabBar setBackgroundImage:[UIImage imageFromColor:[[ALTheme sharedTheme] navigationColor]]];
-//    [_tabBarController setTabBarTransparent:YES];
-//    
-//    self.window.rootViewController = _tabBarController;
-    
-    
-}
-#else
 
 - (void)setupTabbar{
 
@@ -404,7 +351,7 @@
 //    self.window.rootViewController = _tabBarController;
 
 }
-#endif
+
 
 
 
@@ -494,7 +441,8 @@
 #ifndef kJuranDesigner
     [[LocationUtil defaultInstance] setDrawing:YES];
 #endif
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+       // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

@@ -13,7 +13,6 @@
 #import "CommentStarView.h"
 
 @interface AddReplyViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UITextField *txtReply;
 - (IBAction)btnSendClick:(id)sender;

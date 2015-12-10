@@ -19,6 +19,7 @@
     int index;
 }
 @property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, weak) UITableView *tableView;
 
 @end
 
